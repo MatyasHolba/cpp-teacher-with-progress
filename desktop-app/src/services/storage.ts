@@ -7,7 +7,9 @@ export const DEFAULT_PROGRESS: UserProgress = {
   checkedBlocks: {},
   notes: {},
   timeSpentPerLesson: {},
+  codingTimePerLesson: {},
   totalSecondsSpent: 0,
+  totalCodingSeconds: 0,
   lastActiveLessonSlug: 'introduction-to-these-tutorials'
 };
 

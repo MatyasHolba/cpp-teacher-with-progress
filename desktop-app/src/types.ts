@@ -1,4 +1,4 @@
-﻿export interface LessonMeta {
+export interface LessonMeta {
   index: number;
   chapterId: string;
   number: string;
@@ -65,8 +65,10 @@ export interface NoteItem {
 export interface UserProgress {
   checkedBlocks: Record<string, boolean>; // blockId -> boolean
   notes: Record<string, NoteItem[]>; // blockId -> NoteItem[]
-  timeSpentPerLesson: Record<string, number>; // slug -> seconds
-  totalSecondsSpent: number;
+  timeSpentPerLesson: Record<string, number>; // slug -> seconds (reading time)
+  codingTimePerLesson?: Record<string, number>; // slug -> seconds (coding/programming time)
+  totalSecondsSpent: number; // total reading seconds
+  totalCodingSeconds?: number; // total coding seconds
   lastActiveLessonSlug: string;
 }
 

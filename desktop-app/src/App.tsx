@@ -73,9 +73,22 @@ export function App() {
     setProgress(prev => ({ ...prev, lastActiveLessonSlug: currentSlug }));
   }, [currentSlug]);
 
-  // Handle active time tracker ticks
-  const handleTimeTick = useCallback((slug: string, deltaSeconds: number) => {
+  // Handle active time tracker ticks (reading vs coding)
+  const handleTimeTick = useCallback((slug: string, deltaSeconds: number, type: 'reading' | 'coding' = 'reading') => {
     setProgress(prev => {
+      if (type === 'coding') {
+        const codingMap = prev.codingTimePerLesson || {};
+        const currentCodingSecs = (codingMap[slug] || 0) + deltaSeconds;
+        return {
+          ...prev,
+          codingTimePerLesson: {
+            ...codingMap,
+            [slug]: currentCodingSecs
+          },
+          totalCodingSeconds: (prev.totalCodingSeconds || 0) + deltaSeconds
+        };
+      }
+
       const currentLessonSecs = (prev.timeSpentPerLesson[slug] || 0) + deltaSeconds;
       return {
         ...prev,
@@ -88,7 +101,16 @@ export function App() {
     });
   }, []);
 
-  const { isActive, idleReason, lessonSeconds, resumeTracking } = useTimeTracker({
+  const {
+    isActive,
+    isCodingMode,
+    idleReason,
+    lessonSeconds,
+    codingSeconds,
+    resumeTracking,
+    startCodingMode,
+    stopCodingMode
+  } = useTimeTracker({
     currentLessonSlug: currentSlug,
     onTick: handleTimeTick
   });
@@ -234,10 +256,15 @@ export function App() {
             checkedBlocks={progress.checkedBlocks}
             notes={progress.notes}
             isActive={isActive}
+            isCodingMode={isCodingMode}
             idleReason={idleReason}
             onResumeTracking={resumeTracking}
+            onStartCodingMode={startCodingMode}
+            onStopCodingMode={stopCodingMode}
             lessonSeconds={lessonSeconds}
+            codingSeconds={codingSeconds}
             totalLessonSeconds={progress.timeSpentPerLesson[currentSlug] || 0}
+            totalCodingSeconds={progress.codingTimePerLesson?.[currentSlug] || 0}
             prevLesson={prevLesson}
             nextLesson={nextLesson}
             onToggleCheck={handleToggleCheck}

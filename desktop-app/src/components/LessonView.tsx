@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LessonData, NoteItem, LessonMeta } from "../types";
 import { BlockItem } from "./BlockItem";
-import { Clock, CheckCheck, ExternalLink, ChevronUp, ChevronDown, ArrowLeft, ArrowRight, Play } from "lucide-react";
+import { Clock, CheckCheck, ExternalLink, ChevronUp, ChevronDown, ArrowLeft, ArrowRight, Play, Code } from "lucide-react";
 import { formatDuration } from "../services/storage";
 
 interface LessonViewProps {
@@ -9,10 +9,15 @@ interface LessonViewProps {
   checkedBlocks: Record<string, boolean>;
   notes: Record<string, NoteItem[]>;
   isActive: boolean;
+  isCodingMode: boolean;
   idleReason: string | null;
   onResumeTracking: () => void;
+  onStartCodingMode: () => void;
+  onStopCodingMode: () => void;
   lessonSeconds: number;
+  codingSeconds: number;
   totalLessonSeconds: number;
+  totalCodingSeconds: number;
   prevLesson?: LessonMeta;
   nextLesson?: LessonMeta;
   onToggleCheck: (blockId: string) => void;
@@ -29,10 +34,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
   checkedBlocks,
   notes,
   isActive,
+  isCodingMode,
   idleReason,
   onResumeTracking,
+  onStartCodingMode,
+  onStopCodingMode,
   lessonSeconds,
+  codingSeconds,
   totalLessonSeconds,
+  totalCodingSeconds,
   prevLesson,
   nextLesson,
   onToggleCheck,
@@ -97,10 +107,22 @@ export const LessonView: React.FC<LessonViewProps> = ({
               className={`w-2 h-2 rounded-full flex-shrink-0 ${isActive ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`}
               title={isActive ? "Aktivní čtení" : "Pozastaveno"}
             />
-            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--bg-app)] text-[var(--text-main)] font-mono text-xs border border-[var(--border-color)]">
+            <div
+              className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--bg-app)] text-[var(--text-main)] font-mono text-xs border border-[var(--border-color)]"
+              title="Čas strávený čtením teorie"
+            >
               <Clock className="w-3 h-3 text-blue-400" />
               <span>{formatDuration(totalLessonSeconds + lessonSeconds)}</span>
             </div>
+            {(totalCodingSeconds + codingSeconds > 0 || isCodingMode) && (
+              <div
+                className={`flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--bg-app)] text-emerald-400 font-mono text-xs border border-emerald-500/30 ${isCodingMode ? 'ring-1 ring-emerald-400 animate-pulse' : ''}`}
+                title="Čas strávený praktickým psaním kódu"
+              >
+                <Code className="w-3 h-3 text-emerald-400" />
+                <span>{formatDuration(totalCodingSeconds + codingSeconds)}</span>
+              </div>
+            )}
             <span className={`text-xs font-bold px-2 py-0.5 rounded ${percentage === 100 ? "text-emerald-400" : "text-[var(--text-main)]"}`}>
               {checkedInThisLesson}/{checkableBlocks.length} ({percentage}%)
             </span>
@@ -119,13 +141,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
           <div className="px-6 pb-3 pt-1 border-t border-[var(--border-color)]">
             <div className="flex items-center gap-4 text-xs">
               <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${
-                isActive
+                isCodingMode
                   ? "bg-emerald-950/40 text-emerald-300 border-emerald-800/50"
+                  : isActive
+                  ? "bg-blue-950/40 text-blue-300 border-blue-800/50"
                   : "bg-amber-950/40 text-amber-300 border-amber-800/50"
               }`}>
-                <span className={`w-2 h-2 rounded-full ${isActive ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`} />
+                <span className={`w-2 h-2 rounded-full ${isCodingMode ? "bg-emerald-400 animate-ping" : isActive ? "bg-blue-400 animate-pulse" : "bg-amber-400"}`} />
                 <span className="font-medium">
-                  {isActive ? "Aktivní čtení" : idleReason === "idle" ? "Pozastaveno (nečinnost)" : "Pozastaveno (okno)"}
+                  {isCodingMode ? "Měření psaní kódu (aktivní)" : isActive ? "Aktivní čtení teorie" : "Studium pozastaveno"}
                 </span>
               </div>
               <div className="flex-1 bg-gray-800 rounded-full h-1.5 overflow-hidden">
@@ -153,29 +177,68 @@ export const LessonView: React.FC<LessonViewProps> = ({
         className="flex-1 overflow-y-auto light-scrollbar py-6 pr-36 relative"
         style={{ background: getOuterBackground() }}
       >
-        {/* Pause Overlay with Backdrop Blur */}
-        {!isActive && (
+        {/* Sleek Minimalist Pause & Coding Overlay */}
+        {(!isActive || isCodingMode) && (
           <div
             onClick={onResumeTracking}
-            className="fixed inset-0 z-40 bg-black/45 backdrop-blur-md flex flex-col items-center justify-center cursor-pointer select-none animate-in fade-in duration-200"
-            title="Kliknutím obnovíte měření času"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center cursor-pointer select-none animate-in fade-in duration-200"
+            title="Kliknutím kamkoliv pokračujete ve čtení"
           >
-            <div className="bg-[var(--bg-header)] border border-[var(--border-color)] px-8 py-6 rounded-2xl shadow-2xl flex flex-col items-center gap-3 text-center max-w-sm mx-4 transform hover:scale-105 transition-transform">
-              <div className="w-14 h-14 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
-                <Play className="w-7 h-7 fill-blue-400 ml-0.5" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-[var(--text-main)]">Studium pozastaveno</h3>
-                <p className="text-xs text-[var(--text-muted)] mt-1">
-                  {idleReason === 'away'
-                    ? 'Opustili jste okno aplikace. Měření času je bezpečně pozastaveno.'
-                    : 'Z důvodu nečinnosti bylo měření času pozastaveno.'}
+            {isCodingMode ? (
+              /* Coding Mode Active Window */
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="bg-[var(--bg-header)]/95 border border-emerald-500/50 px-6 py-5 rounded-2xl shadow-2xl flex flex-col items-center gap-3 text-center max-w-xs mx-4 cursor-default animate-in zoom-in-95 duration-150"
+              >
+                <div className="flex items-center gap-2 text-xs font-bold tracking-wide text-emerald-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>MĚŘENÍ PSANÍ KÓDU</span>
+                </div>
+
+                <div className="text-3xl font-mono font-bold text-[var(--text-main)] py-1 flex items-center gap-2">
+                  <Code className="w-6 h-6 text-emerald-400" />
+                  <span>{formatDuration(totalCodingSeconds + codingSeconds)}</span>
+                </div>
+
+                <p className="text-[11px] text-[var(--text-muted)]">
+                  Čas se počítá, i když píšete kód v jiném okně nebo editoru.
                 </p>
+
+                <button
+                  onClick={onStopCodingMode}
+                  className="mt-1 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/25 cursor-pointer"
+                >
+                  <Play className="w-3.5 h-3.5 fill-white" />
+                  <span>Zpět ke čtení</span>
+                </button>
               </div>
-              <div className="mt-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-500/25 transition-all">
-                Klikněte kamkoliv pro pokračování
+            ) : (
+              /* Simple Minimalist Paused Card */
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="bg-[var(--bg-header)]/90 border border-[var(--border-color)] px-6 py-4 rounded-2xl shadow-xl flex flex-col items-center gap-2.5 text-center max-w-xs mx-4 cursor-default"
+              >
+                <div className="flex items-center gap-2 text-xs font-bold text-[var(--text-muted)]">
+                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+                  <span>POZASTAVENO</span>
+                </div>
+
+                <p className="text-xs text-[var(--text-main)]">
+                  Klikněte kamkoliv pro pokračování ve studiu
+                </p>
+
+                <div className="pt-2 border-t border-[var(--border-color)] w-full">
+                  <button
+                    onClick={onStartCodingMode}
+                    className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-colors cursor-pointer"
+                    title="Spustí počítadlo pro psaní kódu v externím editoru"
+                  >
+                    <Code className="w-3.5 h-3.5" />
+                    <span>Programuji (měřit čas psaní kódu)</span>
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         )}
 
