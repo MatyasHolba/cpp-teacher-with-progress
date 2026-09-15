@@ -1,143 +1,716 @@
 @import "tailwindcss";
 
-/* Custom scrollbars */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+:root {
+  --bg-app: #ffffff;
+  --bg-sidebar: #f3f4f6;
+  --bg-header: #ffffff;
+  --bg-header-alt: #f9fafb;
+  --border-color: #e5e7eb;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --bg-hover: #e5e7eb;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #14171f;
+.theme-dark {
+  --bg-app: #12141a;
+  --bg-sidebar: #1e222b;
+  --bg-header: #181b22;
+  --bg-header-alt: #1e222b;
+  --border-color: #2d3748;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --bg-hover: #374151;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #2b3140;
-  border-radius: 3px;
+.theme-oled {
+  --bg-app: #000000;
+  --bg-sidebar: #050505;
+  --bg-header: #000000;
+  --bg-header-alt: #0a0a0a;
+  --border-color: #1a1a1a;
+  --text-main: #e5e5e5;
+  --text-muted: #737373;
+  --bg-hover: #1f1f1f;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #3e4659;
+.theme-sepia {
+  --bg-app: #f4ecd8;
+  --bg-sidebar: #e8dfc7;
+  --bg-header: #e8dfc7;
+  --bg-header-alt: #dfd5ba;
+  --border-color: #d3c4a2;
+  --text-main: #433422;
+  --text-muted: #79654a;
+  --bg-hover: #d3c4a2;
 }
 
-.light-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.light-scrollbar::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.light-scrollbar::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-.light-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
 }
 
-/* LearnCPP original and enhanced styles inside reader */
-.learncpp-content {
-  font-family: "Open Sans", Arial, sans-serif;
-  color: #333333;
-  font-size: 15px;
+/* ============================================================
+   APP CHROME RESETS â€” Tailwind handles most of the UI chrome
+   ============================================================ */
+
+/* Dark scrollbar for sidebar */
+.custom-scrollbar::-webkit-scrollbar { width: 5px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: #14171f; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #2b3140; border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3e4659; }
+
+/* Light scrollbar for reading pane */
+.light-scrollbar::-webkit-scrollbar { width: 8px; }
+.light-scrollbar::-webkit-scrollbar-track { background: #d6d6d6; }
+.light-scrollbar::-webkit-scrollbar-thumb { background: #aaaaaa; border-radius: 4px; }
+.light-scrollbar::-webkit-scrollbar-thumb:hover { background: #888888; }
+
+/* ============================================================
+   LEARNCPP CONTENT PANE â€” scoped to .lc-reader-pane
+   Replicates exactly what septera-theme.css + learncpp-custom.css
+   would do, but only inside the reader area.
+   ============================================================ */
+
+.lc-reader-pane {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+  font-size: 14px;
+  color: #2d3140;
   line-height: 1.6;
 }
 
-.learncpp-content p {
-  margin-bottom: 1.5em;
+/* --- Paragraphs --- */
+.lc-reader-pane p {
+  margin: 0 0 1em 0;
+  font-size: 14px;
+  color: #2d3140;
+  line-height: 1.6;
 }
 
-.learncpp-content strong {
-  font-weight: 700;
-  color: #222;
-}
+/* --- Headings --- */
+.lc-reader-pane h1 { font-size: 1.8em; font-weight: 700; color: #2d3140; margin: 1em 0 0.5em; line-height: 1.3; }
+.lc-reader-pane h2 { font-size: 1.5em; font-weight: 700; color: #333333; margin: 1.2em 0 0.5em; line-height: 1.3; }
+.lc-reader-pane h3 { font-size: 1.2em; font-weight: 700; color: #2d3140; margin: 1em 0 0.4em; line-height: 1.3; }
+.lc-reader-pane h4, .lc-reader-pane h5, .lc-reader-pane h6 { font-size: 1em; font-weight: 700; color: #2d3140; margin: 0.8em 0 0.3em; }
 
-.learncpp-content a {
-  color: #204a94;
-  text-decoration: none;
-}
+/* --- Links --- */
+.lc-reader-pane a { color: #365da0; text-decoration: none; }
+.lc-reader-pane a:hover { text-decoration: underline; }
 
-.learncpp-content a:hover {
-  text-decoration: underline;
-}
-
-.learncpp-content code:not(pre code) {
-  background-color: #f4f4f4;
-  color: #333;
-  padding: 0.1em 0.3em;
-  font-family: "Monaco", "Consolas", "Courier New", monospace;
+/* --- Inline code --- */
+.lc-reader-pane :not(pre) > code {
+  background-color: #e6e6e6;
+  padding: 1px 4px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px 0px #d4d4d4;
+  font-family: monaco, monacoRegular, Menlo, Consolas, 'Liberation Mono', monospace;
   font-size: 0.9em;
+  color: #2d3140;
 }
 
-/* Callout Note Boxes (cpp-note) */
-.learncpp-content .cpp-note {
-  border-left-width: 4px;
-  padding: 15px 20px;
+/* --- Code blocks --- */
+.lc-reader-pane pre {
+  font-family: monaco, monacoRegular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 12px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1em 0;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  padding: 12px 14px;
+  line-height: 1.5;
+}
+
+/* --- Lists --- */
+.lc-reader-pane ul {
+  padding-left: 2em;
+  margin: 0.5em 0 1em 0;
+  list-style-type: disc;
+}
+.lc-reader-pane ol {
+  padding-left: 2em;
+  margin: 0.5em 0 1em 0;
+  list-style-type: decimal;
+}
+.lc-reader-pane li {
+  margin-bottom: 0.3em;
+  font-size: 14px;
+  color: #2d3140;
+}
+
+/* --- Strong / em --- */
+.lc-reader-pane strong { font-weight: 700; }
+.lc-reader-pane em { font-style: italic; }
+
+/* --- Horizontal rules / dividers --- */
+.lc-reader-pane hr {
+  border: none;
+  border-top: 1px solid #ddd;
   margin: 1.5em 0;
-  border-radius: 0;
 }
 
-.learncpp-content .cpp-note p {
-  margin-bottom: 0.5em;
-}
-.learncpp-content .cpp-note p:last-child {
-  margin-bottom: 0;
+/* --- Blockquotes --- */
+.lc-reader-pane blockquote {
+  border-left: 4px solid #ccc;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  color: #555;
+  background: #fafafa;
 }
 
-.learncpp-content .cpp-note-title {
+/* --- Images --- */
+.lc-reader-pane img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
+
+/* --- General tables --- */
+.lc-reader-pane table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  border: solid 1px #666666 !important;
+  font-size: 14px;
+  width: auto;
+}
+.lc-reader-pane th {
+  background: #888888;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 4px 8px;
+  border: solid 1px #ffffff !important;
+  text-align: left;
+}
+.lc-reader-pane td {
+  padding: 4px 8px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd !important;
+  border-left: 1px solid #666666 !important;
+  border-right: 1px solid #666666 !important;
+  text-align: left;
+  font-size: 14px;
+}
+.lc-reader-pane tr:nth-child(odd) td { background: #f4f4f4; }
+.lc-reader-pane tr:hover td { background: #e2e2e2; }
+
+/* ============================================================
+   CPP-NOTE CALLOUT BOXES â€” exact replication of learncpp-custom.css
+   ============================================================ */
+.lc-reader-pane .cpp-note {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #999;
+  margin: 1em 0;
+  overflow: hidden;
+  clear: both;
+  border-radius: 8px;
+  padding: 0 14px;
+}
+.lc-reader-pane .cpp-lightgraybackground {
+  background-color: #f4f4f4;
+  border: 2px solid #c7c7c7 !important;
+  box-shadow: 0 2px 0px 0px #c7c7c7;
+}
+.lc-reader-pane .cpp-lightgreenbackground {
+  background-color: #dfffdf;
+  border: 2px solid #9cd49c !important;
+  box-shadow: 0 2px 0px 0px #9cd49c;
+}
+.lc-reader-pane .cpp-lightredbackground {
+  background-color: #ffd6d6;
+  border: 2px solid #d89696 !important;
+  box-shadow: 0 2px 0px 0px #d89696;
+}
+.lc-reader-pane .cpp-lightbluebackground {
+  background-color: #dfe7ff;
+  border: 2px solid #9caad4 !important;
+  box-shadow: 0 2px 0px 0px #9caad4;
+}
+.lc-reader-pane .cpp-lightpurplebackground {
+  background-color: #e7dfff;
+  border: 2px solid #c1acff !important;
+  box-shadow: 0 2px 0px 0px #c1acff;
+}
+.lc-reader-pane .cpp-lightyellowbackground {
+  background-color: #ffffdf;
+  border: 2px solid #dad591 !important;
+  box-shadow: 0 2px 0px 0px #dad591;
+}
+
+.lc-reader-pane p.cpp-note-title {
   font-weight: bold;
   margin-bottom: 8px;
-  text-transform: uppercase;
-  font-size: 0.85em;
-  color: #333;
+  font-size: 1.1em;
+}
+.lc-reader-pane .cpp-bottomline {
+  border-bottom: none;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+.lc-reader-pane .cpp-topline {
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
 }
 
-.learncpp-content .cpp-lightgraybackground {
-  border-left-color: #999;
-  background-color: #f0f0f0;
-}
-.learncpp-content .cpp-lightpurplebackground {
-  border-left-color: #9b59b6;
-  background-color: #f5eef8;
-}
-.learncpp-content .cpp-lightgreenbackground {
-  border-left-color: #2ecc71;
-  background-color: #eafaf1;
-}
-.learncpp-content .cpp-lightbluebackground {
-  border-left-color: #3498db;
-  background-color: #ebf5fb;
-}
-.learncpp-content .cpp-lightredbackground {
-  border-left-color: #e74c3c;
-  background-color: #fdedec;
-}
-.learncpp-content .cpp-yellowbackground {
-  border-left-color: #f1c40f;
-  background-color: #fef9e7;
-}
-
-/* Lists and Tables */
-.learncpp-content ul, .learncpp-content ol {
-  padding-left: 2em;
-  margin-bottom: 1.5em;
-}
-
-.learncpp-content li {
-  margin-bottom: 0.5em;
-}
-
-.learncpp-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5em 0;
-}
-
-.learncpp-content th, .learncpp-content td {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-}
-
-.learncpp-content th {
-  background-color: #f9f9f9;
+/* Section headers (cpp-section) */
+.lc-reader-pane .cpp-section,
+.lc-reader-pane .cpp-section-heading {
+  padding: 8px 0 0 0 !important;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em !important;
+  overflow: hidden;
+  letter-spacing: 0.25px;
+  font-size: 18px;
   font-weight: bold;
+  color: #2d3140;
+  border-top: 1px solid #ddd;
 }
+
+/* Quiz question headers */
+.lc-reader-pane .cpp-quiz-question {
+  padding: 8px 0 0 0 !important;
+  margin-bottom: 0.5em !important;
+  overflow: hidden;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2d3140;
+}
+
+/* Section pills (Standard / Optional / Advanced) */
+.lc-reader-pane .cpp-section-pill {
+  color: #FFFFFF;
+  font-size: 0.8em;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 0 6px;
+  margin: 4px 0 4px 4px;
+  display: inline-block;
+  text-align: center;
+}
+.lc-reader-pane .cpp-section-standard { background-color: #6AA3E7; }
+.lc-reader-pane .cpp-section-optional,
+.lc-reader-pane .cpp-section-advanced { background-color: #AAAAAA; }
+
+/* Inline definitions */
+.lc-reader-pane .cpp-definition { font-weight: bold; }
+
+/* Blue gradient highlight */
+.lc-reader-pane .cpp-lightbluegradient {
+  padding: 2px 4px !important;
+  background-image: linear-gradient(90deg, #cceeff, #ffffff 90%);
+}
+
+/* Overflow wrappers */
+.lc-reader-pane .cpp-table-wrapper { display: block; overflow-x: auto; }
+.lc-reader-pane .cpp-image-wrapper { overflow-x: auto; display: block; }
+
+/* cpp-table (blue header style) */
+.lc-reader-pane .cpp-table {
+  margin: 20px 0;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid #64A6F5 !important;
+  box-shadow: 0 2px 0 0 #64A6F5;
+  background-color: #64A6F5;
+}
+.lc-reader-pane .cpp-table th,
+.lc-reader-pane .cpp-table td { border: none !important; padding-right: 20px; }
+.lc-reader-pane .cpp-table th { background-color: #64A6F5; color: #fff; font-size: 16px; }
+.lc-reader-pane .cpp-table tr:nth-child(odd) td { background-color: #edf5ff; }
+.lc-reader-pane .cpp-table tr:hover td { background-color: #deecff; }
+
+/* cpp-article-header */
+.lc-reader-pane .cpp-article-header {
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 0 8px !important;
+  margin: 1em 0;
+  overflow: hidden;
+}
+
+/* Solution / hint boxes */
+.lc-reader-pane div.solution_div,
+.lc-reader-pane .wpsolution {
+  border-left: 3px solid #39348F;
+  padding-left: 8px;
+  margin-bottom: 1em;
+}
+.lc-reader-pane div.quiz {
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 8px;
+}
+.lc-reader-pane div.topline {
+  padding-top: 8px !important;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Wphint (collapsible hints on learncpp) */
+.lc-reader-pane .wphint {
+  margin: 4px 0;
+}
+
+/* ============================================================
+   NAV BUTTONS â€” learncpp-custom.css nav-button style
+   ============================================================ */
+.nav-button {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: rgba(100, 166, 245, 0.1);
+  color: #64a6f5;
+  cursor: pointer;
+  transition: background 0.1s;
+  text-decoration: none;
+}
+.nav-button:hover { background: rgba(100, 166, 245, 0.16); }
+.nav-button-next {
+  background: rgba(13, 204, 130, 0.1);
+  color: #0dcc82;
+}
+.nav-button-next:hover { background: rgba(13, 204, 130, 0.16); }
+.nav-button-icon {
+  width: 46px; height: 46px; margin-right: 10px;
+  line-height: 44px; font-size: 46px; text-align: center; flex-shrink: 0;
+}
+.nav-button-title {
+  margin-bottom: 2px; font-size: 20px; line-height: 20px; font-weight: bold;
+}
+.nav-button-lesson { font-size: 14px; line-height: 20px; padding-top: 4px; }
+.nav-button-lesson-number {
+  display: inline-block; margin-right: 6px; padding: 0 5px;
+  line-height: 20px; border-radius: 4px;
+  background-color: #64a6f5; color: white; font-size: 13px;
+}
+.nav-button-next .nav-button-lesson-number { background-color: #0dcc82; }
+
+/* ============================================================
+   INTERACTIVE TRACKER ADDITIONS
+   ============================================================ */
+
+/* Checked block = green left border + tint */
+.lc-block-checked {
+  background-color: rgba(13, 204, 130, 0.06) !important;
+  border-left: 3px solid #0dcc82;
+  padding-left: 6px !important;
+  margin-left: -9px;
+  transition: background-color 0.3s, border-left-color 0.3s;
+}
+
+/* Floating action buttons (positioned outside the text in the right gutter) */
+.lc-block-wrap { position: relative; }
+.lc-block-actions {
+  position: absolute;
+  left: calc(100% + 46px);
+  top: 0;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity 0.15s ease-in-out;
+}
+.lc-block-actions::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: -10px;
+  bottom: -10px;
+  width: 60px;
+}
+.lc-block-wrap:hover .lc-block-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lc-block-wrap.lc-block-checked .lc-block-actions { opacity: 0.7; }
+.lc-block-wrap.lc-block-checked:hover .lc-block-actions { opacity: 1; }
+
+.lc-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #666;
+  transition: all 0.1s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  font-family: system-ui, sans-serif;
+}
+.lc-action-btn:hover { background: #f0f0f0; color: #222; border-color: #bbb; }
+.lc-action-btn.lc-checked { background: #0dcc82; color: #fff; border-color: #0dcc82; }
+.lc-action-btn.lc-note-active { background: #fff7e0; color: #8a6000; border-color: #e0c060; }
+
+/* Note form */
+.lc-note-form {
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: #fffef0;
+  border: 1px solid #e0c060;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Saved note card */
+.lc-saved-note {
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: #fff9e0;
+  border: 1px solid #e8d87f;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #5a4a00;
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+/* ============================================================
+   DARK MODE OVERRIDES for .lc-reader-pane
+   ============================================================ */
+.dark-mode.lc-reader-pane {
+  background-color: #12141a !important;
+  color: #ccc !important;
+}
+.dark-mode.lc-reader-pane p,
+.dark-mode.lc-reader-pane li,
+.dark-mode.lc-reader-pane h4,
+.dark-mode.lc-reader-pane h5,
+.dark-mode.lc-reader-pane h6 {
+  color: #ccc !important;
+}
+.dark-mode.lc-reader-pane h1,
+.dark-mode.lc-reader-pane h2,
+.dark-mode.lc-reader-pane h3 {
+  color: #e5e7eb !important;
+}
+.dark-mode.lc-reader-pane a {
+  color: #64a6f5 !important;
+}
+.dark-mode.lc-reader-pane .cpp-section,
+.dark-mode.lc-reader-pane .cpp-section-heading,
+.dark-mode.lc-reader-pane .cpp-quiz-question {
+  color: #e5e7eb !important;
+  border-top-color: #374151 !important;
+}
+.dark-mode.lc-reader-pane :not(pre) > code {
+  background-color: #1f2937 !important;
+  color: #e5e7eb !important;
+  box-shadow: 0px 1px 0px 0px #374151 !important;
+}
+.dark-mode.lc-reader-pane pre {
+  background-color: #0f1115 !important;
+  border-color: #1f2937 !important;
+}
+.dark-mode.lc-reader-pane blockquote {
+  background-color: #1f2937 !important;
+  border-left-color: #4b5563 !important;
+  color: #9ca3af !important;
+}
+.dark-mode.lc-reader-pane hr {
+  border-top-color: #374151 !important;
+}
+.dark-mode.lc-reader-pane table {
+  border-color: #374151 !important;
+}
+.dark-mode.lc-reader-pane td {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+}
+.dark-mode.lc-reader-pane tr:nth-child(odd) td {
+  background-color: #111827 !important;
+}
+.dark-mode.lc-reader-pane tr:hover td {
+  background-color: #374151 !important;
+}
+/* Callouts Dark Mode Adjustments */
+.dark-mode.lc-reader-pane .cpp-note {
+  border-color: #4b5563 !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightgraybackground {
+  background-color: #1f2937 !important; border-color: #374151 !important; box-shadow: 0 2px 0px 0px #374151 !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightgreenbackground {
+  background-color: #064e3b !important; border-color: #065f46 !important; box-shadow: 0 2px 0px 0px #065f46 !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightredbackground {
+  background-color: #7f1d1d !important; border-color: #991b1b !important; box-shadow: 0 2px 0px 0px #991b1b !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightbluebackground {
+  background-color: #1e3a8a !important; border-color: #1e40af !important; box-shadow: 0 2px 0px 0px #1e40af !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightpurplebackground {
+  background-color: #4c1d95 !important; border-color: #5b21b6 !important; box-shadow: 0 2px 0px 0px #5b21b6 !important;
+}
+.dark-mode.lc-reader-pane .cpp-lightyellowbackground {
+  background-color: #713f12 !important; border-color: #854d0e !important; box-shadow: 0 2px 0px 0px #854d0e !important;
+}
+.dark-mode.lc-reader-pane div.topline { border-bottom-color: #374151 !important; }
+.dark-mode.lc-reader-pane div.quiz { border-bottom-color: #374151 !important; }
+.dark-mode.lc-reader-pane .cpp-lightbluegradient {
+  background-image: linear-gradient(90deg, #1e3a8a, #12141a 90%) !important;
+}
+/* Checked blocks in dark mode */
+.dark-mode.lc-reader-pane .lc-block-checked {
+  background-color: rgba(13, 204, 130, 0.08) !important;
+  border-left-color: #0dcc82 !important;
+}
+.dark-mode.lc-reader-pane .lc-action-btn {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+  color: #d1d5db !important;
+}
+.dark-mode.lc-reader-pane .lc-action-btn:hover { background: #374151 !important; }
+.dark-mode.lc-reader-pane .lc-action-btn.lc-checked { background: #0dcc82 !important; color: #fff !important; border-color: #0dcc82 !important; }
+.dark-mode.lc-reader-pane .lc-action-btn.lc-note-active { background: #713f12 !important; color: #fef08a !important; border-color: #854d0e !important; }
+.dark-mode.lc-reader-pane .lc-note-form {
+  background: #1f2937 !important; border-color: #854d0e !important;
+}
+.dark-mode.lc-reader-pane .lc-saved-note {
+  background: #1e1e1e !important; border-color: #4b5563 !important; color: #d1d5db !important;
+}
+
+/* ============================================================
+   OLED BLACK PANE OVERRIDES
+   ============================================================ */
+.theme-oled-pane.lc-reader-pane {
+  background-color: #000000 !important;
+  color: #d4d4d8 !important;
+}
+.theme-oled-pane.lc-reader-pane p,
+.theme-oled-pane.lc-reader-pane li,
+.theme-oled-pane.lc-reader-pane h4,
+.theme-oled-pane.lc-reader-pane h5,
+.theme-oled-pane.lc-reader-pane h6 {
+  color: #d4d4d8 !important;
+}
+.theme-oled-pane.lc-reader-pane h1,
+.theme-oled-pane.lc-reader-pane h2,
+.theme-oled-pane.lc-reader-pane h3 {
+  color: #ffffff !important;
+}
+.theme-oled-pane.lc-reader-pane a {
+  color: #38bdf8 !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-section,
+.theme-oled-pane.lc-reader-pane .cpp-section-heading,
+.theme-oled-pane.lc-reader-pane .cpp-quiz-question {
+  color: #ffffff !important;
+  border-top-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane :not(pre) > code {
+  background-color: #18181b !important;
+  color: #38bdf8 !important;
+  box-shadow: 0px 1px 0px 0px #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane pre {
+  background-color: #09090b !important;
+  border-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane blockquote {
+  background-color: #18181b !important;
+  border-left-color: #3f3f46 !important;
+  color: #a1a1aa !important;
+}
+.theme-oled-pane.lc-reader-pane hr {
+  border-top-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane table {
+  border-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane td {
+  background-color: #09090b !important;
+  border-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane tr:nth-child(odd) td {
+  background-color: #121215 !important;
+}
+.theme-oled-pane.lc-reader-pane tr:hover td {
+  background-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-note {
+  border-color: #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightgraybackground {
+  background-color: #09090b !important; border-color: #27272a !important; box-shadow: 0 2px 0px 0px #27272a !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightgreenbackground {
+  background-color: #022c19 !important; border-color: #065f46 !important; box-shadow: 0 2px 0px 0px #065f46 !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightredbackground {
+  background-color: #350808 !important; border-color: #7f1d1d !important; box-shadow: 0 2px 0px 0px #7f1d1d !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightbluebackground {
+  background-color: #081d3d !important; border-color: #1e3a8a !important; box-shadow: 0 2px 0px 0px #1e3a8a !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightpurplebackground {
+  background-color: #1e093d !important; border-color: #5b21b6 !important; box-shadow: 0 2px 0px 0px #5b21b6 !important;
+}
+.theme-oled-pane.lc-reader-pane .cpp-lightyellowbackground {
+  background-color: #2d1803 !important; border-color: #713f12 !important; box-shadow: 0 2px 0px 0px #713f12 !important;
+}
+.theme-oled-pane.lc-reader-pane .lc-action-btn {
+  background: #18181b !important;
+  border-color: #27272a !important;
+  color: #e4e4e7 !important;
+}
+.theme-oled-pane.lc-reader-pane .lc-action-btn:hover { background: #27272a !important; }
+.theme-oled-pane.lc-reader-pane .lc-action-btn.lc-checked { background: #0dcc82 !important; color: #fff !important; border-color: #0dcc82 !important; }
+.theme-oled-pane.lc-reader-pane .lc-note-form {
+  background: #18181b !important; border-color: #713f12 !important;
+}
+.theme-oled-pane.lc-reader-pane .lc-saved-note {
+  background: #09090b !important; border-color: #27272a !important; color: #d4d4d8 !important;
+}
+
+/* ============================================================
+   SEPIA PANE OVERRIDES
+   ============================================================ */
+.theme-sepia-pane.lc-reader-pane {
+  background-color: #f4ecd8 !important;
+  color: #433422 !important;
+}
+.theme-sepia-pane.lc-reader-pane p,
+.theme-sepia-pane.lc-reader-pane li,
+.theme-sepia-pane.lc-reader-pane h4,
+.theme-sepia-pane.lc-reader-pane h5,
+.theme-sepia-pane.lc-reader-pane h6 {
+  color: #433422 !important;
+}
+.theme-sepia-pane.lc-reader-pane h1,
+.theme-sepia-pane.lc-reader-pane h2,
+.theme-sepia-pane.lc-reader-pane h3 {
+  color: #2b1f13 !important;
+}
+.theme-sepia-pane.lc-reader-pane pre {
+  background-color: #ebe0c6 !important;
+  border-color: #d3c4a2 !important;
+  color: #433422 !important;
+}
+.theme-sepia-pane.lc-reader-pane :not(pre) > code {
+  background-color: #e6dcbf !important;
+  color: #433422 !important;
+  box-shadow: 0px 1px 0px 0px #cfc09c !important;
+}
+.theme-sepia-pane.lc-reader-pane .lc-action-btn {
+  background: #fdfaf2 !important;
+  border-color: #d3c4a2 !important;
+  color: #433422 !important;
+}
+.theme-sepia-pane.lc-reader-pane .lc-action-btn:hover { background: #e8dfc7 !important; }
+
+
+
+
+
+

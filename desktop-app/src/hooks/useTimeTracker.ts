@@ -21,42 +21,32 @@ export function useTimeTracker({ currentLessonSlug, onTick }: UseTimeTrackerProp
     setLessonSeconds(0);
   }, [currentLessonSlug]);
 
+  const resumeTracking = () => {
+    lastActivityRef.current = Date.now();
+    setIsActive(true);
+    setIdleReason(null);
+  };
+
   useEffect(() => {
     const handleActivity = () => {
       lastActivityRef.current = Date.now();
-      if (!isActive && idleReason === 'idle') {
-        setIsActive(true);
-        setIdleReason(null);
-      }
-    };
-
-    const handleFocus = () => {
-      lastActivityRef.current = Date.now();
-      setIsActive(true);
-      setIdleReason(null);
     };
 
     const handleBlur = () => {
       setIsActive(false);
-      setIdleReason('blur');
+      setIdleReason('away');
     };
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setIsActive(false);
-        setIdleReason('hidden');
-      } else {
-        lastActivityRef.current = Date.now();
-        setIsActive(true);
-        setIdleReason(null);
+        setIdleReason('away');
       }
     };
 
     window.addEventListener('mousemove', handleActivity);
     window.addEventListener('keydown', handleActivity);
     window.addEventListener('scroll', handleActivity);
-    window.addEventListener('click', handleActivity);
-    window.addEventListener('focus', handleFocus);
     window.addEventListener('blur', handleBlur);
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
@@ -83,8 +73,6 @@ export function useTimeTracker({ currentLessonSlug, onTick }: UseTimeTrackerProp
       window.removeEventListener('mousemove', handleActivity);
       window.removeEventListener('keydown', handleActivity);
       window.removeEventListener('scroll', handleActivity);
-      window.removeEventListener('click', handleActivity);
-      window.removeEventListener('focus', handleFocus);
       window.removeEventListener('blur', handleBlur);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       clearInterval(interval);
@@ -94,6 +82,7 @@ export function useTimeTracker({ currentLessonSlug, onTick }: UseTimeTrackerProp
   return {
     isActive,
     idleReason,
-    lessonSeconds
+    lessonSeconds,
+    resumeTracking
   };
 }

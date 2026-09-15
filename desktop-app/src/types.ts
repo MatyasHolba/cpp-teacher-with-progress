@@ -1,4 +1,4 @@
-export interface LessonMeta {
+﻿export interface LessonMeta {
   index: number;
   chapterId: string;
   number: string;
@@ -75,5 +75,8 @@ export interface SyncSettings {
   repoOwner: string;
   repoName: string;
   mode: 'data-only' | 'full-web';
+  theme?: 'light' | 'dark' | 'oled' | 'sepia';
   lastSyncAt?: string;
 }
+
+

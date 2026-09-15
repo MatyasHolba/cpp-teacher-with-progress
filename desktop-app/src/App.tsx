@@ -3,25 +3,24 @@ import { TOCData, LessonData, UserProgress, SyncSettings, NoteItem } from './typ
 import { Sidebar } from './components/Sidebar';
 import { LessonView } from './components/LessonView';
 import { SettingsModal } from './components/SettingsModal';
-import { PortfolioWidgetModal } from './components/PortfolioWidgetModal';
 import { loadProgress, saveProgress, loadSettings, saveSettings } from './services/storage';
 import { useTimeTracker } from './hooks/useTimeTracker';
 import { Sparkles, Loader2, PanelLeft, PanelLeftClose } from 'lucide-react';
 import { GithubIcon } from './components/GithubIcon';
 
 export function App() {
+  const [progress, setProgress] = useState<UserProgress>(loadProgress);
+  const [settings, setSettings] = useState<SyncSettings>(loadSettings);
+  const activeTheme = settings.theme || "dark";
   const [toc, setToc] = useState<TOCData | null>(null);
   const [currentSlug, setCurrentSlug] = useState<string>('introduction-to-these-tutorials');
   const [currentLesson, setCurrentLesson] = useState<LessonData | null>(null);
   const [isLoadingLesson, setIsLoadingLesson] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const [progress, setProgress] = useState<UserProgress>(loadProgress);
-  const [settings, setSettings] = useState<SyncSettings>(loadSettings);
+  
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
-
   // Load TOC on startup
   useEffect(() => {
     fetch('/content-bundle/toc.json')
@@ -89,7 +88,7 @@ export function App() {
     });
   }, []);
 
-  const { isActive, idleReason, lessonSeconds } = useTimeTracker({
+  const { isActive, idleReason, lessonSeconds, resumeTracking } = useTimeTracker({
     currentLessonSlug: currentSlug,
     onTick: handleTimeTick
   });
@@ -165,7 +164,7 @@ export function App() {
     : undefined;
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#12141a] text-gray-100 font-sans">
+    <div className={`flex h-screen w-screen overflow-hidden bg-[var(--bg-app)] text-[var(--text-main)] font-sans theme-${activeTheme}`}>
       {/* Left Navigation Sidebar */}
       {isSidebarOpen && toc && (
         <Sidebar
@@ -173,61 +172,70 @@ export function App() {
           progress={progress}
           activeLessonSlug={currentSlug}
           onSelectLesson={slug => setCurrentSlug(slug)}
+          onToggleSidebar={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top Navbar */}
-        <div className="h-12 border-b border-gray-800 bg-[#181b22] px-6 flex items-center justify-between select-none flex-shrink-0">
-          <div className="flex items-center gap-3 text-xs text-gray-400">
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="text-gray-400 hover:text-white p-1 rounded hover:bg-gray-700 transition-colors"
-              title={isSidebarOpen ? "Skrýt panel" : "Zobrazit panel"}
-            >
-              {isSidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
-            </button>
-            <span className="text-gray-300 font-medium">C++ Study Book</span>
+        <div className="h-12 border-b border-[var(--border-color)] bg-[var(--bg-header)] px-6 flex items-center justify-between select-none flex-shrink-0">
+          <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
+            {!isSidebarOpen && <button onClick={() => setIsSidebarOpen(true)} className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors" title="Zobrazit panel"><PanelLeft className="w-5 h-5" /></button>}
+            <span className="text-[var(--text-main)] font-medium">C++ Study Book</span>
             <span>/</span>
             <span className="text-blue-400 font-mono">{currentLesson?.number || ''}</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsPortfolioOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold transition-colors"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Portfolio Widget</span>
-            </button>
+                      <div className="flex items-center gap-2">
+              <select
+                value={activeTheme}
+                onChange={(e) => {
+                  const newSettings = { ...settings, theme: e.target.value as any };
+                  setSettings(newSettings);
+                  saveSettings(newSettings);
+                }}
+                className="bg-transparent text-[var(--text-main)] border border-[var(--border-color)] rounded-md px-2 py-1 text-xs outline-none cursor-pointer hover:bg-[var(--bg-hover)]"
+              >
+                <option value="light">☀️ Světlý</option>
+                <option value="dark">🌙 Tmavý</option>
+                <option value="oled">🖤 OLED Black</option>
+                <option value="sepia">☕ Sepia</option>
+              </select>
 
-            <button
-              onClick={() => setIsSettingsOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 text-xs font-medium transition-colors"
-            >
-              <GithubIcon className="w-3.5 h-3.5 text-blue-400" />
-              <span>GitHub Sync</span>
-              {settings.lastSyncAt && (
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title="Synchronizováno" />
-              )}
-            </button>
+              <button
+                onClick={() => setIsSettingsOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-800 hover:bg-[var(--bg-hover)] text-gray-200 border border-gray-700 text-xs font-medium transition-colors"
+              >
+                <GithubIcon className="w-3.5 h-3.5 text-blue-400" />
+                <span>GitHub Sync</span>
+                {settings.lastSyncAt && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title="Synchronizováno" />
+                )}
+              </button>
+            </div>
           </div>
-        </div>
 
         {/* Lesson View or Loading State */}
         {isLoadingLesson ? (
-          <div className="flex-1 flex items-center justify-center text-gray-400 text-sm gap-2">
+          <div className="flex-1 flex items-center justify-center text-[var(--text-muted)] text-sm gap-2">
             <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
             <span>Načítání lekce...</span>
           </div>
         ) : currentLesson ? (
           <LessonView
             lesson={currentLesson}
+            theme={settings.theme || 'dark'}
+            onToggleTheme={() => {
+              const newSettings: SyncSettings = { ...settings, theme: settings.theme === 'light' ? 'dark' : 'light' };
+              setSettings(newSettings);
+              saveSettings(newSettings);
+            }}
             checkedBlocks={progress.checkedBlocks}
             notes={progress.notes}
             isActive={isActive}
             idleReason={idleReason}
+            onResumeTracking={resumeTracking}
             lessonSeconds={lessonSeconds}
             totalLessonSeconds={progress.timeSpentPerLesson[currentSlug] || 0}
             prevLesson={prevLesson}
@@ -257,15 +265,18 @@ export function App() {
       />
 
       {/* Portfolio Widget Modal */}
-      <PortfolioWidgetModal
-        isOpen={isPortfolioOpen}
-        settings={settings}
-        progress={progress}
-        toc={toc}
-        onClose={() => setIsPortfolioOpen(false)}
-      />
+      
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+

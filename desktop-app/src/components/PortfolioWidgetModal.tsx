@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { SyncSettings, UserProgress, TOCData } from '../types';
 import { X, Code2, Copy, Check, ExternalLink, Sparkles } from 'lucide-react';
 import { formatDuration } from '../services/storage';
@@ -28,35 +28,54 @@ export const PortfolioWidgetModal: React.FC<PortfolioWidgetModalProps> = ({
   const totalHours = Math.round((progress.totalSecondsSpent / 3600) * 10) / 10;
   const totalNotes = Object.values(progress.notes).flat().length;
 
-  const owner = settings.repoOwner || 'matyasholba';
-  const repo = settings.repoName || 'cpp-learning-progress';
+  const owner = settings.repoOwner || 'TVUJ_GITHUB';
+  const repo = settings.repoName || 'cpp-myWebsite';
 
-  // Embed code snippet for user's website (e.g. matyasholba.cz)
+  // Dynamic embed code using GitHub raw user content
   const embedCodeSnippet = `<!-- C++ Learning Tracker Portfolio Widget -->
-<div id="cpp-tracker-widget" style="background:#181b22; color:#fff; border-radius:12px; padding:20px; font-family:sans-serif; border:1px solid #2d3140;">
+<div id="cpp-tracker-widget" style="background:#181b22; color:#fff; border-radius:12px; padding:20px; font-family:sans-serif; border:1px solid #2d3140; max-width:400px;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
     <div>
       <h3 style="margin:0; font-size:16px;">🎓 C++ Mastery Progress</h3>
-      <p style="margin:4px 0 0; color:#888; font-size:12px;">Kurz learncpp.com — poctivě proškrtané odstavce & poznámky</p>
+      <p style="margin:4px 0 0; color:#888; font-size:12px;">Kurz learncpp.com</p>
     </div>
     <div style="text-align:right;">
-      <span style="font-size:20px; font-weight:bold; color:#3b82f6;">${percentage}%</span>
-      <div style="font-size:11px; color:#10b981;">⏱ ${totalHours} hodin studia</div>
+      <span id="cpp-percent" style="font-size:20px; font-weight:bold; color:#3b82f6;">--%</span>
+      <div id="cpp-hours" style="font-size:11px; color:#10b981;">⏱ -- hodin</div>
     </div>
   </div>
   <div style="background:#2d3140; height:8px; border-radius:4px; overflow:hidden;">
-    <div style="background:linear-gradient(90deg, #3b82f6, #10b981); width:${percentage}%; height:100%;"></div>
+    <div id="cpp-bar" style="background:linear-gradient(90deg, #3b82f6, #10b981); width:0%; height:100%; transition: width 1s ease-out;"></div>
   </div>
   <div style="display:flex; justify-content:space-between; font-size:11px; color:#888; margin-top:8px;">
-    <span>Splněno: ${totalChecked} z ${totalCheckpoints} úkolů</span>
-    <span>Poznámek: ${totalNotes}</span>
+    <span id="cpp-checked">Splněno: -- / 15873</span>
+    <span id="cpp-notes">Poznámek: --</span>
   </div>
   <div style="margin-top:14px; text-align:center;">
     <a href="https://github.com/${owner}/${repo}" target="_blank" style="color:#60a5fa; text-decoration:none; font-size:12px;">
-      🔍 Zobrazit detailní rozpis a moje poznámky na GitHubu →
+      🔍 Zobrazit detailní rozpis na GitHubu →
     </a>
   </div>
-</div>`;
+</div>
+
+<script>
+  // Dynamické načtení dat z GitHubu
+  fetch("https://raw.githubusercontent.com/${owner}/${repo}/master/tracker-data/progress.json")
+    .then(res => res.json())
+    .then(data => {
+      const checked = Object.values(data.checkedBlocks).filter(Boolean).length;
+      const notesCount = Object.values(data.notes).reduce((acc, arr) => acc + arr.length, 0);
+      const hours = Math.round((data.totalSecondsSpent / 3600) * 10) / 10;
+      const pct = Math.min(100, Math.round((checked / 15873) * 1000) / 10);
+      
+      document.getElementById('cpp-percent').textContent = pct + '%';
+      document.getElementById('cpp-bar').style.width = pct + '%';
+      document.getElementById('cpp-checked').textContent = 'Splněno: ' + checked + ' / 15873';
+      document.getElementById('cpp-hours').textContent = '⏱ ' + hours + ' hodin';
+      document.getElementById('cpp-notes').textContent = 'Poznámek: ' + notesCount;
+    })
+    .catch(err => console.error("Could not load C++ progress:", err));
+</script>`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(embedCodeSnippet);
@@ -65,97 +84,101 @@ export const PortfolioWidgetModal: React.FC<PortfolioWidgetModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-[#181b22] border border-gray-700 rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-150">
+    <div className="fixed inset-0 bg-[var(--bg-header-alt)]lack/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-[var(--bg-app)] border border-[var(--border-color)] rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-150">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800 bg-[#1e222b]">
-          <div className="flex items-center gap-2 text-white font-bold text-base">
+        <div className="flex items-center justify-between p-4 border-b border-[var(--border-color)] bg-[var(--bg-header)]">
+          <div className="flex items-center gap-2 text-[var(--text-main)] font-bold text-base">
             <Sparkles className="w-5 h-5 text-amber-400" />
-            <span>Napojení na Portfolio (matyasholba.cz)</span>
+            <span>Napojení na tvé Portfolio (Dynamický Widget)</span>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white p-1 rounded hover:bg-gray-800 transition-colors"
+            className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-5 space-y-5 text-xs text-gray-300 overflow-y-auto max-h-[80vh]">
+        <div className="p-5 space-y-5 text-xs text-[var(--text-main)] overflow-y-auto max-h-[80vh]">
           {/* Live Preview */}
           <div>
-            <div className="text-gray-400 font-semibold mb-2 flex items-center justify-between">
-              <span>Živý náhled widgetu na tvém webu:</span>
-              <span className="text-[10px] text-emerald-400">Automaticky aktualizováno</span>
+            <div className="text-[var(--text-muted)] font-semibold mb-2 flex items-center justify-between">
+              <span>Náhled widgetu pro tvůj web:</span>
+              <span className="text-[10px] text-emerald-400">Tahá se live přes JSON z GitHubu</span>
             </div>
 
-            <div className="bg-[#12141a] p-4 rounded-xl border border-gray-800 shadow-inner">
+            <div className="bg-[#12141a] p-4 rounded-xl border border-[var(--border-color)] shadow-inner">
               <div className="flex justify-between items-center mb-3">
                 <div>
-                  <h4 className="font-bold text-sm text-white flex items-center gap-1.5">
+                  <h4 className="font-bold text-sm text-[var(--text-main)] flex items-center gap-1.5">
                     <span>🎓 C++ Mastery Progress</span>
                   </h4>
-                  <p className="text-[11px] text-gray-400">learncpp.com — kompletní interaktivní záznam</p>
+                  <p className="text-[11px] text-[var(--text-muted)]">Kurz learncpp.com</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-xl font-bold text-blue-400">{percentage}%</div>
-                  <div className="text-[11px] text-emerald-400 font-medium">⏱ {totalHours} hodin aktivního studia</div>
+                  <div className="text-xl font-bold text-blue-500">{percentage}%</div>
+                  <div className="text-[10px] text-emerald-500">⏱ {totalHours} hodin</div>
                 </div>
               </div>
 
-              <div className="w-full bg-gray-800 rounded-full h-2.5 overflow-hidden mb-2">
-                <div 
-                  className="h-full bg-gradient-to-r from-blue-500 to-emerald-400 rounded-full"
-                  style={{ width: `${Math.max(2, percentage)}%` }}
+              <div className="bg-[var(--bg-hover)] rounded-full h-2 mb-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-blue-500 to-emerald-400 h-full rounded-full"
+                  style={{ width: `${percentage}%` }}
                 />
               </div>
 
-              <div className="flex justify-between items-center text-[10px] text-gray-400 pt-1">
-                <span>Splněno {totalChecked.toLocaleString()} z {totalCheckpoints.toLocaleString()} odstavců & kvízů</span>
-                <span>{totalNotes} vlastních poznámek a kódů</span>
+              <div className="flex justify-between text-[11px] text-[var(--text-muted)] mb-4">
+                <span>Splněno: {totalChecked} / {totalCheckpoints}</span>
+                <span>Poznámek: {totalNotes}</span>
               </div>
-
-              <div className="mt-4 pt-3 border-t border-gray-800/80 flex items-center justify-between">
-                <span className="text-[10px] text-gray-500">Zdroj: GitHub repo {owner}/{repo}</span>
-                <span className="text-[11px] text-blue-400 hover:underline flex items-center gap-1 cursor-pointer">
-                  <span>Prohlédnout poznámky</span>
-                  <ExternalLink className="w-3 h-3" />
-                </span>
+              
+              <div className="text-center">
+                <a href={`https://github.com/${owner}/${repo}`} target="_blank" className="text-blue-400 hover:text-blue-300 transition-colors">
+                  🔍 Zobrazit detailní rozpis na GitHubu →
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Code Snippet to Copy */}
+          <div className="bg-[var(--bg-header-alt)]lue-950/30 border border-blue-900/50 rounded-lg p-3 text-blue-200">
+            <p className="mb-2">
+              <strong className="text-blue-300">Jak to funguje?</strong> Tento kód si zkopíruj a vlož na svůj osobní web (např. do patičky nebo do sekce "O mně"). 
+              Pomocí JavaScriptu se kód automaticky připojí na tvůj GitHub repozitář <code>{owner}/{repo}</code>, stáhne si <code>progress.json</code> a live zobrazí tvůj aktuální postup, aniž bys musel cokoliv přepisovat.
+            </p>
+            <p className="text-[10px] opacity-80 mt-1">
+              Poznámka: `raw.githubusercontent.com` podporuje sdílení dat na jiné weby (CORS), takže žádný další server nepotřebuješ.
+            </p>
+          </div>
+
+          {/* Code Export */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold text-gray-200 flex items-center gap-1.5">
-                <Code2 className="w-4 h-4 text-blue-400" />
-                <span>Kód pro vložení na tvůj web (HTML / JS):</span>
+              <span className="text-[var(--text-muted)] font-semibold flex items-center gap-1.5">
+                <Code2 className="w-4 h-4" /> HTML/JS Kód k vložení na tvůj web
               </span>
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 px-3 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
+                  copied
+                    ? 'bg-emerald-500 text-[var(--text-main)]'
+                    : 'bg-[#2b3140] hover:bg-[#3e4659] text-[var(--text-main)]'
+                }`}
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? 'Zkopírováno!' : 'Zkopírovat kód'}</span>
+                {copied ? 'Zkopírováno!' : 'Kopírovat kód'}
               </button>
             </div>
-
-            <pre className="p-3 bg-gray-950 text-gray-300 rounded-lg font-mono text-[11px] overflow-x-auto border border-gray-800 max-h-48 custom-scrollbar">
-              {embedCodeSnippet}
+            <pre className="bg-[#0b0c10] border border-[var(--border-color)] rounded-xl p-4 text-[10px] text-[var(--text-muted)] overflow-x-auto custom-scrollbar font-mono">
+              <code>{embedCodeSnippet}</code>
             </pre>
-          </div>
-
-          {/* Explanations */}
-          <div className="bg-blue-950/20 border border-blue-900/40 rounded-lg p-3 text-[11px] text-blue-200 space-y-1">
-            <p className="font-semibold">💡 Jak to funguje s tvým portfoliem:</p>
-            <p className="text-blue-300/90">
-              Jakmile v aplikaci klikneš na <strong>„Uložit na GitHub“</strong>, data se ihned nahrají do tvého repozitáře. Tvůj web (nebo tento widget) si data z GitHubu kdykoliv přečte v reálném čase, takže máš na portfoliu vždy aktuální čísla bez nutnosti cokoliv ručně přepisovat!
-            </p>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+
