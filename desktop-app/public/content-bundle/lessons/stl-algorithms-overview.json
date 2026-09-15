@@ -1,0 +1,192 @@
+{
+  "index": 348,
+  "chapterId": "D",
+  "number": "21.4",
+  "title": "21.4 — STL algorithms overview",
+  "url": "https://www.learncpp.com/cpp-tutorial/stl-algorithms-overview/",
+  "slug": "stl-algorithms-overview",
+  "scrapedAt": "2026-09-15T16:31:42.051Z",
+  "totalBlocks": 25,
+  "totalCheckpoints": 23,
+  "blocks": [
+    {
+      "id": "stl-algorithms-overview_b0",
+      "type": "paragraph",
+      "html": "<p>In addition to container classes and iterators, STL also provides a number of generic algorithms for working with the elements of the container classes. These allow you to do things like search, sort, insert, reorder, remove, and copy elements of the container class.</p>",
+      "preview": "In addition to container classes and iterators, STL also provides a number of ge",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b1",
+      "type": "paragraph",
+      "html": "<p>Note that algorithms are implemented as functions that operate using iterators. This means that each algorithm only needs to be implemented once, and it will generally automatically work for all containers that provides a set of iterators (including your custom container classes). While this is very powerful and can lead to the ability to write complex code very quickly, it’s also got a dark side: some combination of algorithms and container types may not work, may cause infinite loops, or may work but be extremely poor performing. So use these at your risk.</p>",
+      "preview": "Note that algorithms are implemented as functions that operate using iterators. ",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b2",
+      "type": "paragraph",
+      "html": "<p>STL provides quite a few algorithms -- we will only touch on some of the more common and easy to use ones here. The rest (and the full details) will be saved for a chapter on STL algorithms.</p>",
+      "preview": "STL provides quite a few algorithms -- we will only touch on some of the more co",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b3",
+      "type": "paragraph",
+      "html": "<p>To use any of the STL algorithms, simply include the algorithm header file.</p>",
+      "preview": "To use any of the STL algorithms, simply include the algorithm header file.",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b4",
+      "type": "paragraph",
+      "html": "<p><strong>min_element and max_element</strong></p>",
+      "preview": "min_element and max_element",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b5",
+      "type": "paragraph",
+      "html": "<p>The <code>std::min_element</code> and <code>std::max_element</code> algorithms find the min and max element in a container class. <code>std::iota</code> generates a contiguous series of values.</p>",
+      "preview": "The std::min_element and std::max_element algorithms find the min and max elemen",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm> // std::min_element and std::max_element\n#include <iostream>\n#include <list>\n#include <numeric> // std::iota\n\nint main()\n{\n    std::list<int> li(6);\n    // Fill li with numbers starting at 0.\n    std::iota(li.begin(), li.end(), 0);\n\n    std::cout << *std::min_element(li.begin(), li.end()) << ' '\n              << *std::max_element(li.begin(), li.end()) << '\\n';\n\t\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // std::min_element and std::max_element\n#include &lt;iostream&gt;\n#include &lt;list&gt;\n#include &lt;numeric&gt; // std::iota\n\nint main()\n{\n    std::list&lt;int&gt; li(6);\n    // Fill li with numbers starting at 0.\n    std::iota(li.begin(), li.end(), 0);\n\n    std::cout &lt;&lt; *std::min_element(li.begin(), li.end()) &lt;&lt; ' '\n              &lt;&lt; *std::max_element(li.begin(), li.end()) &lt;&lt; '\\n';\n\t\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b7",
+      "type": "paragraph",
+      "html": "<p>Prints:</p>",
+      "preview": "Prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b8",
+      "type": "paragraph",
+      "html": "<p>0 5</p>",
+      "preview": "0 5",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b9",
+      "type": "paragraph",
+      "html": "<p><strong>find (and list::insert)</strong></p>",
+      "preview": "find (and list::insert)",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b10",
+      "type": "paragraph",
+      "html": "<p>In this example, we’ll use the <code>std::find()</code> algorithm to find a value in the list class, and then use the list::insert() function to add a new value into the list at that point.</p>",
+      "preview": "In this example, we’ll use the std::find() algorithm to find a value in the list",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <iostream>\n#include <list>\n#include <numeric>\n\nint main()\n{\n    std::list<int> li(6);\n    std::iota(li.begin(), li.end(), 0);\n\n    // Find the value 3 in the list\n    auto it{ std::find(li.begin(), li.end(), 3) };\n    \n    // Insert 8 right before 3.\n    li.insert(it, 8);\n\n    for (int i : li) // for loop with iterators\n        std::cout << i << ' ';\n    \t\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;iostream&gt;\n#include &lt;list&gt;\n#include &lt;numeric&gt;\n\nint main()\n{\n    std::list&lt;int&gt; li(6);\n    std::iota(li.begin(), li.end(), 0);\n\n    // Find the value 3 in the list\n    auto it{ std::find(li.begin(), li.end(), 3) };\n    \n    // Insert 8 right before 3.\n    li.insert(it, 8);\n\n    for (int i : li) // for loop with iterators\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n    \t\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b12",
+      "type": "paragraph",
+      "html": "<p>This prints the values</p>",
+      "preview": "This prints the values",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b13",
+      "type": "output",
+      "text": "0 1 2 8 3 4 5\n",
+      "html": "<pre>0 1 2 8 3 4 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-algorithms-overview_b14",
+      "type": "paragraph",
+      "html": "<p>When a searching algorithm doesn’t find what it was looking for, it returns the end iterator.<br>If we didn’t know for sure that 3 is an element of <code>li</code>, we’d have to check if <code>std::find</code> found it before we use the returned iterator for anything else.</p>",
+      "preview": "When a searching algorithm doesn’t find what it was looking for, it returns the ",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "if (it == li.end())\n{\n  std::cout << \"3 was not found\\n\";\n}\nelse\n{\n  // ...\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (it == li.end())\n{\n  std::cout &lt;&lt; \"3 was not found\\n\";\n}\nelse\n{\n  // ...\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b16",
+      "type": "paragraph",
+      "html": "<p><strong>sort and reverse</strong></p>",
+      "preview": "sort and reverse",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b17",
+      "type": "paragraph",
+      "html": "<p>In this example, we’ll sort a vector and then reverse it.</p>",
+      "preview": "In this example, we’ll sort a vector and then reverse it.",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main()\n{\n    std::vector<int> vect{ 7, -3, 6, 2, -5, 0, 4 };\n\n    // sort the vector\n    std::sort(vect.begin(), vect.end());\n\n    for (int i : vect)\n    {\n        std::cout << i << ' ';\n    }\n\n    std::cout << '\\n';\n\n    // reverse the vector\n    std::reverse(vect.begin(), vect.end());\n\n    for (int i : vect)\n    {\n        std::cout << i << ' ';\n    }\n \t\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n#include &lt;algorithm&gt;\n\nint main()\n{\n    std::vector&lt;int&gt; vect{ 7, -3, 6, 2, -5, 0, 4 };\n\n    // sort the vector\n    std::sort(vect.begin(), vect.end());\n\n    for (int i : vect)\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    // reverse the vector\n    std::reverse(vect.begin(), vect.end());\n\n    for (int i : vect)\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n    }\n \t\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b19",
+      "type": "paragraph",
+      "html": "<p>This produces the result:</p>",
+      "preview": "This produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b20",
+      "type": "output",
+      "text": "-5 -3 0 2 4 6 7\n7 6 4 2 0 -3 -5\n",
+      "html": "<pre>-5 -3 0 2 4 6 7\n7 6 4 2 0 -3 -5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-algorithms-overview_b21",
+      "type": "paragraph",
+      "html": "<p>Alternatively, we could pass a custom comparison function as the third argument to <code>std::sort</code>. There are several comparison functions in the &lt;functional&gt; header which we can use so we don’t have to write our own. We can pass <code>std::greater</code> to <code>std::sort</code> and remove the call to <code>std::reverse</code>. The vector will be sorted from high to low right away.</p>",
+      "preview": "Alternatively, we could pass a custom comparison function as the third argument ",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b22",
+      "type": "paragraph",
+      "html": "<p>Note that <code>std::sort()</code> doesn’t work on list container classes -- the list class provides its own <code>sort()</code> member function, which is much more efficient than the generic version would be.</p>",
+      "preview": "Note that std::sort() doesn’t work on list container classes -- the list class p",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b23",
+      "type": "paragraph",
+      "html": "<p><strong>Conclusion</strong></p>",
+      "preview": "Conclusion",
+      "canCheck": true
+    },
+    {
+      "id": "stl-algorithms-overview_b24",
+      "type": "paragraph",
+      "html": "<p>Although this is just a taste of the algorithms that STL provides, it should suffice to show how easy these are to use in conjunction with iterators and the basic container classes. There are enough other algorithms to fill up a whole chapter!</p>",
+      "preview": "Although this is just a taste of the algorithms that STL provides, it should suf",
+      "canCheck": true
+    }
+  ]
+}

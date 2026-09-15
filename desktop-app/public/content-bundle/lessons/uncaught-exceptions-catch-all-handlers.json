@@ -1,0 +1,259 @@
+{
+  "index": 320,
+  "chapterId": "27",
+  "number": "27.4",
+  "title": "27.4 — Uncaught exceptions and catch-all handlers",
+  "url": "https://www.learncpp.com/cpp-tutorial/uncaught-exceptions-catch-all-handlers/",
+  "slug": "uncaught-exceptions-catch-all-handlers",
+  "scrapedAt": "2026-09-15T16:31:25.461Z",
+  "totalBlocks": 34,
+  "totalCheckpoints": 29,
+  "blocks": [
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b0",
+      "type": "paragraph",
+      "html": "<p>By now, you should have a reasonable idea of how exceptions work. In this lesson, we’ll cover a few more interesting exception cases.</p>",
+      "preview": "By now, you should have a reasonable idea of how exceptions work. In this lesson",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b1",
+      "type": "section",
+      "title": "Uncaught exceptions",
+      "html": "<h3 class=\"cpp-section-heading\">Uncaught exceptions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b2",
+      "type": "paragraph",
+      "html": "<p>When a function throws an exception that it does not handle itself, it is making the assumption that a function somewhere down the call stack will handle the exception. In the following example, mySqrt() assumes someone will handle the exception that it throws -- but what happens if nobody actually does?</p>",
+      "preview": "When a function throws an exception that it does not handle itself, it is making",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b3",
+      "type": "paragraph",
+      "html": "<p>Here’s our square root program again, minus the try block in main():</p>",
+      "preview": "Here’s our square root program again, minus the try block in main():",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <cmath> // for sqrt() function\n\n// A modular square root function\ndouble mySqrt(double x)\n{\n    // If the user entered a negative number, this is an error condition\n    if (x < 0.0)\n        throw \"Can not take sqrt of negative number\"; // throw exception of type const char*\n\n    return std::sqrt(x);\n}\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    double x;\n    std::cin >> x;\n\n    // Look ma, no exception handler!\n    std::cout << \"The sqrt of \" << x << \" is \" << mySqrt(x) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cmath&gt; // for sqrt() function\n\n// A modular square root function\ndouble mySqrt(double x)\n{\n    // If the user entered a negative number, this is an error condition\n    if (x &lt; 0.0)\n        throw \"Can not take sqrt of negative number\"; // throw exception of type const char*\n\n    return std::sqrt(x);\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    double x;\n    std::cin &gt;&gt; x;\n\n    // Look ma, no exception handler!\n    std::cout &lt;&lt; \"The sqrt of \" &lt;&lt; x &lt;&lt; \" is \" &lt;&lt; mySqrt(x) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b5",
+      "type": "paragraph",
+      "html": "<p>Now, let’s say the user enters -4, and mySqrt(-4) raises an exception. Function mySqrt() doesn’t handle the exception, so the program looks to see if some function down the call stack will handle the exception. main() does not have a handler for this exception either, so no handler can be found.</p>",
+      "preview": "Now, let’s say the user enters -4, and mySqrt(-4) raises an exception. Function ",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b6",
+      "type": "paragraph",
+      "html": "<p>When no exception handler for a function can be found, std::terminate() is called, and the application is terminated. In such cases, the call stack may or may not be unwound! If the stack is not unwound, local variables will not be destroyed, and any cleanup expected upon destruction of said variables will not happen!</p>",
+      "preview": "When no exception handler for a function can be found, std::terminate() is calle",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b7",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>The call stack may or may not be unwound if an exception is unhandled.</p><p>If the stack is not unwound, local variables will not be destroyed, which may cause problems if those variables have non-trivial destructors.</p></div>",
+      "preview": "WarningThe call stack may or may not be unwound if an exception is unhandled.If the stack is not unw",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b8",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Although it might seem strange to not unwind the stack in such a case, there is a good reason for not doing so. An unhandled exception is generally something you want to avoid at all costs. If the stack were unwound, then all of the debug information about the state of the stack that led up to the throwing of the unhandled exception would be lost! By not unwinding, we preserve that information, making it easier to determine how an unhandled exception was thrown, and fix it.</p></div>",
+      "preview": "As an aside…Although it might seem strange to not unwind the stack in such a case, there is a good r",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b9",
+      "type": "paragraph",
+      "html": "<p>When an exception is unhandled, the operating system will generally notify you that an unhandled exception error has occurred. How it does this depends on the operating system, but possibilities include printing an error message, popping up an error dialog, or simply crashing. Some OSes are less graceful than others. Generally this is something you want to avoid!</p>",
+      "preview": "When an exception is unhandled, the operating system will generally notify you t",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b10",
+      "type": "section",
+      "title": "Catch-all handlers",
+      "html": "<h3 class=\"cpp-section-heading\">Catch-all handlers</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b11",
+      "type": "paragraph",
+      "html": "<p>And now we find ourselves in a conundrum:</p>",
+      "preview": "And now we find ourselves in a conundrum:",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b12",
+      "type": "list",
+      "html": "<ul><li>Functions can potentially throw exceptions of any data type (including program-defined data types), meaning there is an infinite number of possible exception types to catch.</li><li>If an exception is not caught, your program will terminate immediately (and the stack may not be unwound, so your program may not even clean up after itself properly).</li><li>Adding explicit catch handlers for every possible type is tedious, especially for the ones that are expected to be reached only in exceptional cases!</li></ul>",
+      "preview": "Functions can potentially throw exceptions of any data type (including program-d",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b13",
+      "type": "paragraph",
+      "html": "<p>Fortunately, C++ also provides us with a mechanism to catch all types of exceptions. This is known as a <strong>catch-all handler</strong>. A catch-all handler works just like a normal catch block, except that instead of using a specific type to catch, it uses the ellipses operator (…) as the type to catch. For this reason, the catch-all handler is also sometimes called an “ellipsis catch handler”</p>",
+      "preview": "Fortunately, C++ also provides us with a mechanism to catch all types of excepti",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b14",
+      "type": "paragraph",
+      "html": "<p>If you recall from lesson <a href=\"https://www.learncpp.com/cpp-tutorial/ellipsis-and-why-to-avoid-them/\">20.5 -- Ellipsis (and why to avoid them)</a>, ellipses were previously used to pass arguments of any type to a function. In this context, they represent exceptions of any data type. Here’s an simple example:</p>",
+      "preview": "If you recall from lesson 20.5 -- Ellipsis (and why to avoid them), ellipses wer",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow 5; // throw an int exception\n\t}\n\tcatch (double x)\n\t{\n\t\tstd::cout << \"We caught an exception of type double: \" << x << '\\n';\n\t}\n\tcatch (...) // catch-all handler\n\t{\n\t\tstd::cout << \"We caught an exception of an undetermined type\\n\";\n\t}\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow 5; // throw an int exception\n\t}\n\tcatch (double x)\n\t{\n\t\tstd::cout &lt;&lt; \"We caught an exception of type double: \" &lt;&lt; x &lt;&lt; '\\n';\n\t}\n\tcatch (...) // catch-all handler\n\t{\n\t\tstd::cout &lt;&lt; \"We caught an exception of an undetermined type\\n\";\n\t}\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b16",
+      "type": "paragraph",
+      "html": "<p>Because there is no specific exception handler for type int, the catch-all handler catches this exception. This example produces the following result:</p>",
+      "preview": "Because there is no specific exception handler for type int, the catch-all handl",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b17",
+      "type": "output",
+      "text": "We caught an exception of an undetermined type\n",
+      "html": "<pre>We caught an exception of an undetermined type\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b18",
+      "type": "paragraph",
+      "html": "<p>The catch-all handler must be placed last in the catch block chain. This is to ensure that exceptions can be caught by exception handlers tailored to specific data types if those handlers exist.</p>",
+      "preview": "The catch-all handler must be placed last in the catch block chain. This is to e",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b19",
+      "type": "paragraph",
+      "html": "<p>Often, the catch-all handler block is left empty:</p>",
+      "preview": "Often, the catch-all handler block is left empty:",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "catch(...) {} // ignore any unanticipated exceptions",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">catch(...) {} // ignore any unanticipated exceptions</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b21",
+      "type": "paragraph",
+      "html": "<p>This will catch any unanticipated exceptions, ensuring that stack unwinding occurs up to this point and preventing the program from terminating, but does no specific error handling.</p>",
+      "preview": "This will catch any unanticipated exceptions, ensuring that stack unwinding occu",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b22",
+      "type": "section",
+      "title": "Using the catch-all handler to wrap main()",
+      "html": "<h3 class=\"cpp-section-heading\">Using the catch-all handler to wrap main()</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b23",
+      "type": "paragraph",
+      "html": "<p>One use for the catch-all handler is to wrap the contents of main():</p>",
+      "preview": "One use for the catch-all handler is to wrap the contents of main():",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstruct GameSession\n{\n    // Game session data here\n};\n\nvoid runGame(GameSession&)\n{\n    throw 1;\n}\n\nvoid saveGame(GameSession&)\n{\n    // Save user's game here\n}\n\nint main()\n{\n    GameSession session{};\n\n    try\n    {\n        runGame(session);\n    }\n    catch(...)\n    {\n        std::cerr << \"Abnormal termination\\n\";\n    }\n\n    saveGame(session); // save the user's game (even if catch-all handler was hit)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct GameSession\n{\n    // Game session data here\n};\n\nvoid runGame(GameSession&amp;)\n{\n    throw 1;\n}\n\nvoid saveGame(GameSession&amp;)\n{\n    // Save user's game here\n}\n\nint main()\n{\n    GameSession session{};\n\n    try\n    {\n        runGame(session);\n    }\n    catch(...)\n    {\n        std::cerr &lt;&lt; \"Abnormal termination\\n\";\n    }\n\n    saveGame(session); // save the user's game (even if catch-all handler was hit)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b25",
+      "type": "paragraph",
+      "html": "<p>In this case, if runGame() or any of the functions it calls throws an exception that is not handled, it will be caught by this catch-all handler. The stack will be unwound in an orderly manner (ensuring destruction of local variables). This will also prevent the program from terminating immediately, giving us a chance to print an error of our choosing and save the user’s state before exiting.</p>",
+      "preview": "In this case, if runGame() or any of the functions it calls throws an exception ",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b26",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>If your program uses exceptions, consider using a catch-all handler in main, to help ensure orderly behavior if an unhandled exception occurs.</p><p>If an exception is caught by the catch-all handler, you should assume the program is now in some indeterminate state, perform cleanup immediately, and then terminate.</p></div>",
+      "preview": "TipIf your program uses exceptions, consider using a catch-all handler in main, to help ensure order",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b27",
+      "type": "section",
+      "title": "Debugging unhandled exceptions",
+      "html": "<h3 class=\"cpp-section-heading\">Debugging unhandled exceptions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b28",
+      "type": "paragraph",
+      "html": "<p>Unhandled exceptions are an indication that something unexpected has happened, and we probably want to diagnose why an unhandled exception was thrown in the first place. Many debuggers will (or can be configured to) break on unhandled exceptions, allowing us to view the stack at the point where the unhandled exception was thrown. However, if we have a catch-all handler, then all exceptions are handled, and (because the stack is unwound) we lose useful diagnostic information.</p>",
+      "preview": "Unhandled exceptions are an indication that something unexpected has happened, a",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b29",
+      "type": "paragraph",
+      "html": "<p>Therefore, in debug builds, it can be useful to disable the catch-all handler. We can do this via conditional compilation directives.</p>",
+      "preview": "Therefore, in debug builds, it can be useful to disable the catch-all handler. W",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b30",
+      "type": "paragraph",
+      "html": "<p>Here’s one way to do that:</p>",
+      "preview": "Here’s one way to do that:",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstruct GameSession\n{\n    // Game session data here\n};\n\nvoid runGame(GameSession&)\n{\n    throw 1;\n}\n\nvoid saveGame(GameSession&)\n{\n    // Save user's game here\n}\n\nclass DummyException // a dummy class that can't be instantiated\n{\n    DummyException() = delete;\n}; \n\nint main()\n{\n    GameSession session {}; \n\n    try\n    {\n        runGame(session);\n    }\n#ifndef NDEBUG // if we're in release node\n    catch(...) // compile in the catch-all handler\n    {\n        std::cerr << \"Abnormal termination\\n\";\n    }\n#else // in debug mode, compile in a catch that will never be hit (for syntactic reasons)\n    catch(DummyException)\n    {\n    }\n#endif\n\n    saveGame(session); // save the user's game (even if catch-all handler was hit)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct GameSession\n{\n    // Game session data here\n};\n\nvoid runGame(GameSession&amp;)\n{\n    throw 1;\n}\n\nvoid saveGame(GameSession&amp;)\n{\n    // Save user's game here\n}\n\nclass DummyException // a dummy class that can't be instantiated\n{\n    DummyException() = delete;\n}; \n\nint main()\n{\n    GameSession session {}; \n\n    try\n    {\n        runGame(session);\n    }\n#ifndef NDEBUG // if we're in release node\n    catch(...) // compile in the catch-all handler\n    {\n        std::cerr &lt;&lt; \"Abnormal termination\\n\";\n    }\n#else // in debug mode, compile in a catch that will never be hit (for syntactic reasons)\n    catch(DummyException)\n    {\n    }\n#endif\n\n    saveGame(session); // save the user's game (even if catch-all handler was hit)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b32",
+      "type": "paragraph",
+      "html": "<p>Syntactically, a try block requires at least one associated catch block. So if the catch-all handler is conditionally compiled out, we either need to conditionally compile out the try block, or we need to conditionally compile in another catch block. It’s cleaner to do the latter.</p>",
+      "preview": "Syntactically, a try block requires at least one associated catch block. So if t",
+      "canCheck": true
+    },
+    {
+      "id": "uncaught-exceptions-catch-all-handlers_b33",
+      "type": "paragraph",
+      "html": "<p>For this purpose, we create class <code>DummyException</code> which can’t be instantiated because it has a deleted default constructor and no other constructors. When <code>NDEBUG</code> is defined, we compile-in a catch handler to catch an exception of type <code>DummyException</code>. Since we can’t create a <code>DummyException</code>, this catch handler will never catch anything. Therefore any exceptions that reach this point will not be handled.</p>",
+      "preview": "For this purpose, we create class DummyException which can’t be instantiated bec",
+      "canCheck": true
+    }
+  ]
+}

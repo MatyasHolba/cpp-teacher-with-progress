@@ -1,0 +1,510 @@
+{
+  "index": 250,
+  "chapterId": "20",
+  "number": "20.3",
+  "title": "20.3 — Recursion",
+  "url": "https://www.learncpp.com/cpp-tutorial/recursion/",
+  "slug": "recursion",
+  "scrapedAt": "2026-09-15T16:30:45.819Z",
+  "totalBlocks": 70,
+  "totalCheckpoints": 63,
+  "blocks": [
+    {
+      "id": "recursion_b0",
+      "type": "paragraph",
+      "html": "<p>A <strong>recursive function</strong> in C++ is a function that calls itself. Here is an example of a poorly-written recursive function:</p>",
+      "preview": "A recursive function in C++ is a function that calls itself. Here is an example ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid countDown(int count)\n{\n    std::cout << \"push \" << count << '\\n';\n    countDown(count-1); // countDown() calls itself recursively\n}\n\nint main()\n{\n    countDown(5);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid countDown(int count)\n{\n    std::cout &lt;&lt; \"push \" &lt;&lt; count &lt;&lt; '\\n';\n    countDown(count-1); // countDown() calls itself recursively\n}\n\nint main()\n{\n    countDown(5);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b2",
+      "type": "paragraph",
+      "html": "<p>When countDown(5) is called, “push 5” is printed, and countDown(4) is called. countDown(4) prints “push 4” and calls countDown(3). countDown(3) prints “push 3” and calls countDown(2). The sequence of countDown(n) calling countDown(n-1) is repeated indefinitely, effectively forming the recursive equivalent of an infinite loop.</p>",
+      "preview": "When countDown(5) is called, “push 5” is printed, and countDown(4) is called. co",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b3",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-stack-and-the-heap/\">20.2 -- The stack and the heap</a>, you learned that every function call causes data to be placed on the call stack. Because the countDown() function never returns (it just calls countDown() again), this information is never being popped off the stack! Consequently, at some point, the computer will run out of stack memory, stack overflow will result, and the program will crash or terminate. On the author’s machine, this program counted down to -11732 before terminating!</p>",
+      "preview": "In lesson 20.2 -- The stack and the heap, you learned that every function call c",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b4",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>A <strong>tail call</strong> is a function call that occurs at the tail (end) of a function. Functions with recursive tail calls are fairly easy for the compiler to optimize into an iterative (non-recursive) function. Such a function would not cause the system to run out of stack space in the above example. If you run the above program and it runs forever, this is likely what happened.</p></div>",
+      "preview": "Author’s noteA tail call is a function call that occurs at the tail (end) of a function. Functions w",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b5",
+      "type": "paragraph",
+      "html": "<p><strong>Recursive termination conditions</strong></p>",
+      "preview": "Recursive termination conditions",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b6",
+      "type": "paragraph",
+      "html": "<p>Recursive function calls generally work just like normal function calls. However, the program above illustrates the most important difference with recursive functions: you must include a recursive termination condition, or they will run “forever” (actually, until the call stack runs out of memory). A <strong>recursive termination</strong> is a condition that, when met, will cause the recursive function to stop calling itself.</p>",
+      "preview": "Recursive function calls generally work just like normal function calls. However",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b7",
+      "type": "paragraph",
+      "html": "<p>Recursive termination generally involves using an if statement. Here is our function redesigned with a termination condition (and some extra output):</p>",
+      "preview": "Recursive termination generally involves using an if statement. Here is our func",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid countDown(int count)\n{\n    std::cout << \"push \" << count << '\\n';\n\n    if (count > 1) // termination condition\n        countDown(count-1);\n\n    std::cout << \"pop \" << count << '\\n';\n}\n\nint main()\n{\n    countDown(5);\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid countDown(int count)\n{\n    std::cout &lt;&lt; \"push \" &lt;&lt; count &lt;&lt; '\\n';\n\n    if (count &gt; 1) // termination condition\n        countDown(count-1);\n\n    std::cout &lt;&lt; \"pop \" &lt;&lt; count &lt;&lt; '\\n';\n}\n\nint main()\n{\n    countDown(5);\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b9",
+      "type": "paragraph",
+      "html": "<p>Now when we run our program, countDown() will start by outputting the following:</p>",
+      "preview": "Now when we run our program, countDown() will start by outputting the following:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b10",
+      "type": "output",
+      "text": "push 5\npush 4\npush 3\npush 2\npush 1\n",
+      "html": "<pre>push 5\npush 4\npush 3\npush 2\npush 1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b11",
+      "type": "paragraph",
+      "html": "<p>If you were to look at the call stack at this point, you would see the following:</p>",
+      "preview": "If you were to look at the call stack at this point, you would see the following",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b12",
+      "type": "output",
+      "text": "countDown(1)\ncountDown(2)\ncountDown(3)\ncountDown(4)\ncountDown(5)\nmain()\n",
+      "html": "<pre>countDown(1)\ncountDown(2)\ncountDown(3)\ncountDown(4)\ncountDown(5)\nmain()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b13",
+      "type": "paragraph",
+      "html": "<p>Because of the termination condition, countDown(1) does not call countDown(0) -- instead, the “if statement” does not execute, so it prints “pop 1” and then terminates. At this point, countDown(1) is popped off the stack, and control returns to countDown(2). countDown(2) resumes execution at the point after countDown(1) was called, so it prints “pop 2” and then terminates. The recursive function calls get subsequently popped off the stack until all instances of countDown have been removed.</p>",
+      "preview": "Because of the termination condition, countDown(1) does not call countDown(0) --",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b14",
+      "type": "paragraph",
+      "html": "<p>Thus, this program in total outputs:</p>",
+      "preview": "Thus, this program in total outputs:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b15",
+      "type": "output",
+      "text": "push 5\npush 4\npush 3\npush 2\npush 1\npop 1\npop 2\npop 3\npop 4\npop 5\n",
+      "html": "<pre>push 5\npush 4\npush 3\npush 2\npush 1\npop 1\npop 2\npop 3\npop 4\npop 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b16",
+      "type": "paragraph",
+      "html": "<p>It’s worth noting that the “push” outputs happen in forward order since they occur before the recursive function call. The “pop” outputs occur in reverse order because they occur after the recursive function call, as the functions are being popped off the stack (which happens in the reverse order that they were put on).</p>",
+      "preview": "It’s worth noting that the “push” outputs happen in forward order since they occ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b17",
+      "type": "paragraph",
+      "html": "<p><strong>A more useful example</strong></p>",
+      "preview": "A more useful example",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b18",
+      "type": "paragraph",
+      "html": "<p>Now that we’ve discussed the basic mechanics of recursive function calls, let’s take a look at another recursive function that is slightly more typical:</p>",
+      "preview": "Now that we’ve discussed the basic mechanics of recursive function calls, let’s ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "// return the sum of all the integers between 1 (inclusive) and sumto (inclusive)\n// returns 0 for negative numbers\nint sumTo(int sumto)\n{\n    if (sumto <= 0)\n        return 0; // base case (termination condition) when user passed in an unexpected argument (0 or negative)\n    if (sumto == 1)\n        return 1; // normal base case (termination condition)\n\n    return sumTo(sumto - 1) + sumto; // recursive function call\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// return the sum of all the integers between 1 (inclusive) and sumto (inclusive)\n// returns 0 for negative numbers\nint sumTo(int sumto)\n{\n    if (sumto &lt;= 0)\n        return 0; // base case (termination condition) when user passed in an unexpected argument (0 or negative)\n    if (sumto == 1)\n        return 1; // normal base case (termination condition)\n\n    return sumTo(sumto - 1) + sumto; // recursive function call\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b20",
+      "type": "paragraph",
+      "html": "<p>Recursive programs are often hard to figure out just by looking at them. It’s often instructive to see what happens when we call a recursive function with a particular value. So let’s see what happens when we call this function with parameter sumto = 5.</p>",
+      "preview": "Recursive programs are often hard to figure out just by looking at them. It’s of",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b21",
+      "type": "output",
+      "text": "sumTo(5) called, 5 <= 1 is false, so we return sumTo(4) + 5.\nsumTo(4) called, 4 <= 1 is false, so we return sumTo(3) + 4.\nsumTo(3) called, 3 <= 1 is false, so we return sumTo(2) + 3.\nsumTo(2) called, 2 <= 1 is false, so we return sumTo(1) + 2.\nsumTo(1) called, 1 <= 1 is true, so we return 1.  This is the termination condition.\n",
+      "html": "<pre>sumTo(5) called, 5 &lt;= 1 is false, so we return sumTo(4) + 5.\nsumTo(4) called, 4 &lt;= 1 is false, so we return sumTo(3) + 4.\nsumTo(3) called, 3 &lt;= 1 is false, so we return sumTo(2) + 3.\nsumTo(2) called, 2 &lt;= 1 is false, so we return sumTo(1) + 2.\nsumTo(1) called, 1 &lt;= 1 is true, so we return 1.  This is the termination condition.\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b22",
+      "type": "paragraph",
+      "html": "<p>Now we unwind the call stack (popping each function off the call stack as it returns):</p>",
+      "preview": "Now we unwind the call stack (popping each function off the call stack as it ret",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b23",
+      "type": "output",
+      "text": "sumTo(1) returns 1.\nsumTo(2) returns sumTo(1) + 2, which is 1 + 2 = 3.\nsumTo(3) returns sumTo(2) + 3, which is 3 + 3 = 6.\nsumTo(4) returns sumTo(3) + 4, which is 6 + 4 = 10.\nsumTo(5) returns sumTo(4) + 5, which is 10 + 5 = 15.\n",
+      "html": "<pre>sumTo(1) returns 1.\nsumTo(2) returns sumTo(1) + 2, which is 1 + 2 = 3.\nsumTo(3) returns sumTo(2) + 3, which is 3 + 3 = 6.\nsumTo(4) returns sumTo(3) + 4, which is 6 + 4 = 10.\nsumTo(5) returns sumTo(4) + 5, which is 10 + 5 = 15.\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b24",
+      "type": "paragraph",
+      "html": "<p>At this point, it’s easier to see that we’re adding numbers between 1 and the value passed in (both inclusive).</p>",
+      "preview": "At this point, it’s easier to see that we’re adding numbers between 1 and the va",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b25",
+      "type": "paragraph",
+      "html": "<p>Because recursive functions can be hard to understand by looking at them, good comments are particularly important.</p>",
+      "preview": "Because recursive functions can be hard to understand by looking at them, good c",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b26",
+      "type": "paragraph",
+      "html": "<p>Note that in the above code, we recurse with value <code>sumto - 1</code> rather than <code>--sumto</code>. We do this because <code>operator--</code> has a side effect, and using a variable that has a side effect applied more than once in a given expression will result in undefined behavior. Using <code>sumto - 1</code> avoids side effects, making sumto safe to use more than once in the expression.</p>",
+      "preview": "Note that in the above code, we recurse with value sumto - 1 rather than --sumto",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b27",
+      "type": "paragraph",
+      "html": "<p><strong>Recursive algorithms</strong></p>",
+      "preview": "Recursive algorithms",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b28",
+      "type": "paragraph",
+      "html": "<p>Recursive functions typically solve a problem by first finding the solution to a subset of the problem (recursively), and then modifying that sub-solution to get to a solution. In the above algorithm, sumTo(value) first solves sumTo(value-1), and then adds the value of variable value to find the solution for sumTo(value).</p>",
+      "preview": "Recursive functions typically solve a problem by first finding the solution to a",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b29",
+      "type": "paragraph",
+      "html": "<p>In many recursive algorithms, some inputs produce trivial outputs. For example, sumTo(1) has the trivial output 1 (you can calculate this in your head), and does not benefit from further recursion. Inputs for which an algorithm trivially produces an output is called a <strong>base case</strong>. Base cases act as termination conditions for the algorithm. Base cases can often be identified by considering the output for an input of 0, 1, “”, ”, or null.</p>",
+      "preview": "In many recursive algorithms, some inputs produce trivial outputs. For example, ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b30",
+      "type": "paragraph",
+      "html": "<p><strong>Fibonacci numbers</strong></p>",
+      "preview": "Fibonacci numbers",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b31",
+      "type": "paragraph",
+      "html": "<p>One of the most famous mathematical recursive algorithms is the Fibonacci sequence. Fibonacci sequences appear in many places in nature, such as branching of trees, the spiral of shells, the fruitlets of a pineapple, an uncurling fern frond, and the arrangement of a pine cone.</p>",
+      "preview": "One of the most famous mathematical recursive algorithms is the Fibonacci sequen",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b32",
+      "type": "paragraph",
+      "html": "<p>Here is a picture of a Fibonacci spiral:<br><img src=\"https://www.learncpp.com/images/CppTutorial/Section7/Fibonacci.png\"></p>",
+      "preview": "Here is a picture of a Fibonacci spiral:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b33",
+      "type": "paragraph",
+      "html": "<p>Each of the Fibonacci numbers is the length of the side of the square that the number appears in.</p>",
+      "preview": "Each of the Fibonacci numbers is the length of the side of the square that the n",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b34",
+      "type": "paragraph",
+      "html": "<p>Fibonacci numbers are defined mathematically as:</p>",
+      "preview": "Fibonacci numbers are defined mathematically as:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b35",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td>F(n) =</td><td>0 if n = 0<br>1 if n = 1<br>f(n-1) + f(n-2) if n &gt; 1</td></tr></tbody></table></div>",
+      "preview": "F(n) =0 if n = 01 if n = 1f(n-1) + f(n-2) if n > 1",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b36",
+      "type": "paragraph",
+      "html": "<p>Consequently, it’s rather simple to write a (not very efficient) recursive function to calculate the nth Fibonacci number:</p>",
+      "preview": "Consequently, it’s rather simple to write a (not very efficient) recursive funct",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint fibonacci(int count)\n{\n    if (count == 0)\n        return 0; // base case (termination condition)\n    if (count == 1)\n        return 1; // base case (termination condition)\n    return fibonacci(count-1) + fibonacci(count-2);\n}\n\n// And a main program to display the first 13 Fibonacci numbers\nint main()\n{\n    for (int count { 0 }; count < 13; ++count)\n        std::cout << fibonacci(count) << ' ';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint fibonacci(int count)\n{\n    if (count == 0)\n        return 0; // base case (termination condition)\n    if (count == 1)\n        return 1; // base case (termination condition)\n    return fibonacci(count-1) + fibonacci(count-2);\n}\n\n// And a main program to display the first 13 Fibonacci numbers\nint main()\n{\n    for (int count { 0 }; count &lt; 13; ++count)\n        std::cout &lt;&lt; fibonacci(count) &lt;&lt; ' ';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b38",
+      "type": "paragraph",
+      "html": "<p>Running the program produces the following result:</p>",
+      "preview": "Running the program produces the following result:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b39",
+      "type": "output",
+      "text": "0 1 1 2 3 5 8 13 21 34 55 89 144\n",
+      "html": "<pre>0 1 1 2 3 5 8 13 21 34 55 89 144\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b40",
+      "type": "paragraph",
+      "html": "<p>Which you will note are exactly the numbers that appear in the Fibonacci spiral diagram.</p>",
+      "preview": "Which you will note are exactly the numbers that appear in the Fibonacci spiral ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b41",
+      "type": "paragraph",
+      "html": "<p><strong>Memoization algorithms</strong></p>",
+      "preview": "Memoization algorithms",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b42",
+      "type": "paragraph",
+      "html": "<p>The above recursive Fibonacci algorithm isn’t very efficient, in part because each call to a Fibonacci non-base case results in two more Fibonacci calls. This produces an exponential number of function calls (in fact, the above example calls fibonacci() 1205 times!). There are techniques that can be used to reduce the number of calls necessary. One technique, called <strong>memoization</strong>, caches the results of expensive function calls so the result can be returned when the same input occurs again.</p>",
+      "preview": "The above recursive Fibonacci algorithm isn’t very efficient, in part because ea",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b43",
+      "type": "paragraph",
+      "html": "<p>Here’s a memoized version of the recursive Fibonacci algorithm:</p>",
+      "preview": "Here’s a memoized version of the recursive Fibonacci algorithm:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n\n// h/t to potterman28wxcv for a variant of this code\n// count is now a std::size_t to make indexing the std::vector easier\nint fibonacci(std::size_t count)\n{\n\t// We'll use a static std::vector to cache calculated results\n\tstatic std::vector results{ 0, 1 };\n\n\t// If we've already seen this count, then use the cache'd result\n\tif (count < std::size(results))\n\t\treturn results[count];\n\n\t// Otherwise calculate the new result and add it\n\tresults.push_back(fibonacci(count - 1) + fibonacci(count - 2));\n\treturn results[count];   \n}\n\n// And a main program to display the first 13 Fibonacci numbers\nint main()\n{\n\tfor (int count { 0 }; count < 13; ++count)\n\t\tstd::cout << fibonacci(static_cast<std::size_t>(count)) << ' ';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\n// h/t to potterman28wxcv for a variant of this code\n// count is now a std::size_t to make indexing the std::vector easier\nint fibonacci(std::size_t count)\n{\n\t// We'll use a static std::vector to cache calculated results\n\tstatic std::vector results{ 0, 1 };\n\n\t// If we've already seen this count, then use the cache'd result\n\tif (count &lt; std::size(results))\n\t\treturn results[count];\n\n\t// Otherwise calculate the new result and add it\n\tresults.push_back(fibonacci(count - 1) + fibonacci(count - 2));\n\treturn results[count];   \n}\n\n// And a main program to display the first 13 Fibonacci numbers\nint main()\n{\n\tfor (int count { 0 }; count &lt; 13; ++count)\n\t\tstd::cout &lt;&lt; fibonacci(static_cast&lt;std::size_t&gt;(count)) &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b45",
+      "type": "paragraph",
+      "html": "<p>This memoized version makes 35 function calls, which is much better than the 1205 of the original algorithm.</p>",
+      "preview": "This memoized version makes 35 function calls, which is much better than the 120",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b46",
+      "type": "paragraph",
+      "html": "<p><strong>Recursive vs iterative</strong></p>",
+      "preview": "Recursive vs iterative",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b47",
+      "type": "paragraph",
+      "html": "<p>One question that is often asked about recursive functions is, “Why use a recursive function if you can do many of the same tasks iteratively (using a <em>for loop</em> or <em>while loop</em>)?”. It turns out that you can always solve a recursive problem iteratively -- however, for non-trivial problems, the recursive version is often much simpler to write (and read). For example, while it’s possible to write the Fibonacci function iteratively, it’s a little more difficult! (Try it!)</p>",
+      "preview": "One question that is often asked about recursive functions is, “Why use a recurs",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b48",
+      "type": "paragraph",
+      "html": "<p>Iterative functions (those using a for-loop or while-loop) are almost always more efficient than their recursive counterparts. This is because every time you call a function there is some amount of overhead that takes place in pushing and popping stack frames. Iterative functions avoid this overhead.</p>",
+      "preview": "Iterative functions (those using a for-loop or while-loop) are almost always mor",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b49",
+      "type": "paragraph",
+      "html": "<p>That’s not to say iterative functions are always a better choice. Sometimes the recursive implementation of a function is so much cleaner and easier to follow that incurring a little extra overhead is more than worth it for the benefit in maintainability, particularly if the algorithm doesn’t need to recurse too many times to find a solution.</p>",
+      "preview": "That’s not to say iterative functions are always a better choice. Sometimes the ",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b50",
+      "type": "paragraph",
+      "html": "<p>In general, recursion is a good choice when most of the following are true:</p>",
+      "preview": "In general, recursion is a good choice when most of the following are true:",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b51",
+      "type": "list",
+      "html": "<ul><li>The recursive code is much simpler to implement.</li><li>The recursion depth can be limited (e.g. there’s no way to provide an input that will cause it to recurse down 100,000 levels).</li><li>The iterative version of the algorithm requires managing a stack of data.</li><li>This isn’t a performance-critical section of code.</li></ul>",
+      "preview": "The recursive code is much simpler to implement.The recursion depth can be limit",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b52",
+      "type": "paragraph",
+      "html": "<p>However, if the recursive algorithm is simpler to implement, it may make sense to start recursively and then optimize to an iterative algorithm later.</p>",
+      "preview": "However, if the recursive algorithm is simpler to implement, it may make sense t",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b53",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Generally favor iteration over recursion, except when recursion really makes sense.</p></div>",
+      "preview": "Best practiceGenerally favor iteration over recursion, except when recursion really makes sense.",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b54",
+      "type": "paragraph",
+      "html": "<p><strong>Quiz time</strong></p>",
+      "preview": "Quiz time",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b55",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>A factorial of an integer N (written N!) is defined as the product (multiplication) of all the numbers between 1 and N (0! = 1). Write a recursive function called factorial that returns the factorial of the input. Test it with the first 7 factorials.</li></ol>",
+      "preview": "A factorial of an integer N (written N!) is defined as the product (multiplicati",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b56",
+      "type": "paragraph",
+      "html": "<p>Hint: Remember that (x * y) = (y * x), so the product of all the numbers between 1 and N is the same as the product of all the numbers between N and 1.</p>",
+      "preview": "Hint: Remember that (x * y) = (y * x), so the product of all the numbers between",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b57",
+      "type": "paragraph",
+      "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint factorial(int n)\n{\n\tif (n &lt;= 0)\n\t\treturn 1;\n\n\treturn factorial(n - 1) * n;\n}\n\nint main()\n{\n\tfor (int count { 0 }; count &lt; 7; ++count)\n\t\tstd::cout &lt;&lt; factorial(count) &lt;&lt; '\\n';\n}</code></pre></div>",
+      "preview": "#include <iostream> int factorial(int n) { if (n <= 0) return 1; return factoria",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b58",
+      "type": "list",
+      "html": "<ol start=\"2\"><li>Write a recursive function that takes an integer as input and returns the sum of each individual digit in the integer (e.g. 357 = 3 + 5 + 7 = 15). Print the answer for input 93427 (which is 25). Assume the input values are positive.</li></ol>",
+      "preview": "Write a recursive function that takes an integer as input and returns the sum of",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b59",
+      "type": "paragraph",
+      "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint sumDigits(int x)\n{\n\tif (x &lt; 10)\n\t\treturn x;\n\n\treturn sumDigits(x / 10) + x % 10;\n}\n\nint main()\n{\n\tstd::cout &lt;&lt; sumDigits(93427);\n}</code></pre></div>",
+      "preview": "#include <iostream> int sumDigits(int x) { if (x < 10) return x; return sumDigit",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b60",
+      "type": "paragraph",
+      "html": "<p>3a) This one is slightly trickier. Write a program that asks the user to enter a positive integer, and then uses a recursive function to print out the binary representation for that number. Use method 1 from lesson <a href=\"https://www.learncpp.com/cpp-tutorial/converting-integers-between-binary-and-decimal-representation/\">O.4 -- Converting integers between binary and decimal representation</a>.</p>",
+      "preview": "3a) This one is slightly trickier. Write a program that asks the user to enter a",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b61",
+      "type": "paragraph",
+      "html": "<p>Hint: Using method 1, we want to print the bits in reverse order. This means your print statement should be <em>after</em> the recursive call.</p>",
+      "preview": "Hint: Using method 1, we want to print the bits in reverse order. This means you",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b62",
+      "type": "paragraph",
+      "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// h/t to reader Gapo for this solution\nvoid printBinary(int x)\n{\n        // Termination case\n\tif (x == 0)\n\t\treturn;\n\t\n\t// Recurse to the next bit\n\tprintBinary(x / 2);\n\n\t// Print out the remainders (in reverse order)\n\tstd::cout &lt;&lt; x % 2;\n}\n\nint main()\n{\n\tint x;\n\tstd::cout &lt;&lt; \"Enter a positive integer: \";\n\tstd::cin &gt;&gt; x;\n\n\tprintBinary(x);\n}</code></pre></div>",
+      "preview": "#include <iostream> // h/t to reader Gapo for this solution void printBinary(int",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b63",
+      "type": "paragraph",
+      "html": "<p>3b) Extra credit: Update your code from 3a to handle the case where the user may enter 0 or a negative number.</p>",
+      "preview": "3b) Extra credit: Update your code from 3a to handle the case where the user may",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b64",
+      "type": "paragraph",
+      "html": "<p>Here’s a sample output (assuming 32-bit integers):</p>",
+      "preview": "Here’s a sample output (assuming 32-bit integers):",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b65",
+      "type": "output",
+      "text": "Enter an integer: -15\n11111111111111111111111111110001\n",
+      "html": "<pre>Enter an integer: -15\n11111111111111111111111111110001\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "recursion_b66",
+      "type": "paragraph",
+      "html": "<p>Hint: Your printBinary() function doesn’t actually need to handle negative numbers. If you pass it a positive value with the same binary representation as the negative number, it will produce the correct output.</p>",
+      "preview": "Hint: Your printBinary() function doesn’t actually need to handle negative numbe",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b67",
+      "type": "paragraph",
+      "html": "<div class=\"wphint\" id=\"cpp_hint_id_0\" style=\"display:none;margin-bottom:1em\">Hint: Converting between signed and unsigned does not change the binary representation, just the way the value is interpreted. For example, signed integer <code>-15</code> has binary representation <code>11111111111111111111111111110001</code>, the same as unsigned integer <code>4294967281</code>.</div>",
+      "preview": "Hint: Converting between signed and unsigned does not change the binary represen",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b68",
+      "type": "paragraph",
+      "html": "<div class=\"wphint\" id=\"cpp_hint_id_1\" style=\"display:none;margin-bottom:1em\">Hint: A signed value can be positive or negative, but an unsigned value is always positive…</div>",
+      "preview": "Hint: A signed value can be positive or negative, but an unsigned value is alway",
+      "canCheck": true
+    },
+    {
+      "id": "recursion_b69",
+      "type": "paragraph",
+      "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader Donlod for this solution\n#include &lt;iostream&gt;\n\nvoid printBinary(unsigned int n)\n{\n\tif (n &gt; 1) // we only recurse if n &gt; 1, so this is our termination case for n == 0\n\t{\n\t\tprintBinary(n / 2);\n\t}\n\n\tstd::cout &lt;&lt; n % 2;\n}\n\nint main()\n{\n\tint x{};\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tstd::cin &gt;&gt; x;\n\n\tprintBinary(static_cast&lt;unsigned int&gt;(x));\n}</code></pre><p>As the hints note, converting between signed and unsigned does not change the binary representation, just the way the value is interpreted. Therefore, if we capture the user’s input in a signed int, and then convert that to an unsigned int, we will get a value that is always positive but has the same binary representation as the signed value the user entered. That way, our function only has to handle positive numbers.</p></div>",
+      "preview": "// h/t to reader Donlod for this solution #include <iostream> void printBinary(u",
+      "canCheck": true
+    }
+  ]
+}

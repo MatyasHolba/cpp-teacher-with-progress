@@ -1,0 +1,349 @@
+{
+  "index": 308,
+  "chapterId": "25",
+  "number": "25.11",
+  "title": "25.11 — Printing inherited classes using operator<<",
+  "url": "https://www.learncpp.com/cpp-tutorial/printing-inherited-classes-using-operator/",
+  "slug": "printing-inherited-classes-using-operator",
+  "scrapedAt": "2026-09-15T16:31:18.311Z",
+  "totalBlocks": 47,
+  "totalCheckpoints": 39,
+  "blocks": [
+    {
+      "id": "printing-inherited-classes-using-operator_b0",
+      "type": "paragraph",
+      "html": "<p>Consider the following program that makes use of a virtual function:</p>",
+      "preview": "Consider the following program that makes use of a virtual function:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\tvirtual void print() const { std::cout << \"Base\";  }\n};\n\nclass Derived : public Base\n{\npublic:\n\tvoid print() const override { std::cout << \"Derived\"; }\n};\n\nint main()\n{\n\tDerived d{};\n\tBase& b{ d };\n\tb.print(); // will call Derived::print()\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\tvirtual void print() const { std::cout &lt;&lt; \"Base\";  }\n};\n\nclass Derived : public Base\n{\npublic:\n\tvoid print() const override { std::cout &lt;&lt; \"Derived\"; }\n};\n\nint main()\n{\n\tDerived d{};\n\tBase&amp; b{ d };\n\tb.print(); // will call Derived::print()\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b2",
+      "type": "paragraph",
+      "html": "<p>By now, you should be comfortable with the fact that b.print() will call Derived::print() (because b is referencing a Derived class object, Base::print() is a virtual function, and Derived::print() is an override).</p>",
+      "preview": "By now, you should be comfortable with the fact that b.print() will call Derived",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b3",
+      "type": "paragraph",
+      "html": "<p>While calling member functions like this to do output is okay, this style of function doesn’t mix well with std::cout:</p>",
+      "preview": "While calling member functions like this to do output is okay, this style of fun",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tDerived d{};\n\tBase& b{ d };\n\n\tstd::cout << \"b is a \";\n\tb.print(); // messy, we have to break our print statement to call this function\n\tstd::cout << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tDerived d{};\n\tBase&amp; b{ d };\n\n\tstd::cout &lt;&lt; \"b is a \";\n\tb.print(); // messy, we have to break our print statement to call this function\n\tstd::cout &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b5",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll look at how to override operator&lt;&lt; for classes using inheritance, so that we can use operator&lt;&lt; as expected, like this:</p>",
+      "preview": "In this lesson, we’ll look at how to override operator<< for classes using inher",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::cout << \"b is a \" << b << '\\n'; // much better",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::cout &lt;&lt; \"b is a \" &lt;&lt; b &lt;&lt; '\\n'; // much better</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b7",
+      "type": "section",
+      "title": "The challenges with operator<<",
+      "html": "<h3 class=\"cpp-section-heading\">The challenges with operator&lt;&lt;</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b8",
+      "type": "paragraph",
+      "html": "<p>Let’s start by overloading operator&lt;&lt; in the typical way:</p>",
+      "preview": "Let’s start by overloading operator<< in the typical way:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\tvirtual void print() const { std::cout << \"Base\"; }\n\n\tfriend std::ostream& operator<<(std::ostream& out, const Base& b)\n\t{\n\t\tout << \"Base\";\n\t\treturn out;\n\t}\n};\n\nclass Derived : public Base\n{\npublic:\n\tvoid print() const override { std::cout << \"Derived\"; }\n\n\tfriend std::ostream& operator<<(std::ostream& out, const Derived& d)\n\t{\n\t\tout << \"Derived\";\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout << b << '\\n';\n\n\tDerived d{};\n\tstd::cout << d << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\tvirtual void print() const { std::cout &lt;&lt; \"Base\"; }\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Base&amp; b)\n\t{\n\t\tout &lt;&lt; \"Base\";\n\t\treturn out;\n\t}\n};\n\nclass Derived : public Base\n{\npublic:\n\tvoid print() const override { std::cout &lt;&lt; \"Derived\"; }\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Derived&amp; d)\n\t{\n\t\tout &lt;&lt; \"Derived\";\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout &lt;&lt; b &lt;&lt; '\\n';\n\n\tDerived d{};\n\tstd::cout &lt;&lt; d &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b10",
+      "type": "paragraph",
+      "html": "<p>Because there is no need for virtual function resolution here, this program works as we’d expect, and prints:</p>",
+      "preview": "Because there is no need for virtual function resolution here, this program work",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b11",
+      "type": "output",
+      "text": "Base\nDerived\n",
+      "html": "<pre>Base\nDerived\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b12",
+      "type": "paragraph",
+      "html": "<p>Now, consider the following main() function instead:</p>",
+      "preview": "Now, consider the following main() function instead:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Derived d{};\n    Base& bref{ d };\n    std::cout << bref << '\\n';\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived d{};\n    Base&amp; bref{ d };\n    std::cout &lt;&lt; bref &lt;&lt; '\\n';\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b14",
+      "type": "paragraph",
+      "html": "<p>This program prints:</p>",
+      "preview": "This program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b15",
+      "type": "output",
+      "text": "Base\n",
+      "html": "<pre>Base\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b16",
+      "type": "paragraph",
+      "html": "<p>That’s probably not what we were expecting. This happens because our version of operator&lt;&lt; that handles Base objects isn’t virtual, so std::cout &lt;&lt; bref calls the version of operator&lt;&lt; that handles Base objects rather than Derived objects.</p>",
+      "preview": "That’s probably not what we were expecting. This happens because our version of ",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b17",
+      "type": "paragraph",
+      "html": "<p>Therein lies the challenge.</p>",
+      "preview": "Therein lies the challenge.",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b18",
+      "type": "section",
+      "title": "Can we make operator<< virtual?",
+      "html": "<h3 class=\"cpp-section-heading\">Can we make operator&lt;&lt; virtual?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b19",
+      "type": "paragraph",
+      "html": "<p>If this issue is that operator&lt;&lt; isn’t virtual, can’t we simply make it virtual?</p>",
+      "preview": "If this issue is that operator<< isn’t virtual, can’t we simply make it virtual?",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b20",
+      "type": "paragraph",
+      "html": "<p>The short answer is no. There are a number of reasons for this.</p>",
+      "preview": "The short answer is no. There are a number of reasons for this.",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b21",
+      "type": "paragraph",
+      "html": "<p>First, only member functions can be virtualized -- this makes sense, since only classes can inherit from other classes, and there’s no way to override a function that lives outside of a class (you can overload non-member functions, but not override them). Because we typically implement operator&lt;&lt; as a friend, and friends aren’t considered member functions, a friend version of operator&lt;&lt; is ineligible to be virtualized. (For a review of why we implement operator&lt;&lt; this way, please revisit lesson <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-operators-using-member-functions/\">21.5 -- Overloading operators using member functions</a>).</p>",
+      "preview": "First, only member functions can be virtualized -- this makes sense, since only ",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b22",
+      "type": "paragraph",
+      "html": "<p>Second, even if we could virtualize operator&lt;&lt; there’s the problem that the function parameters for Base::operator&lt;&lt; and Derived::operator&lt;&lt; differ (the Base version would take a Base parameter and the Derived version would take a Derived parameter). Consequently, the Derived version wouldn’t be considered an override of the Base version, and thus be ineligible for virtual function resolution.</p>",
+      "preview": "Second, even if we could virtualize operator<< there’s the problem that the func",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b23",
+      "type": "paragraph",
+      "html": "<p>So what’s a programmer to do?</p>",
+      "preview": "So what’s a programmer to do?",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b24",
+      "type": "section",
+      "title": "A solution",
+      "html": "<h3 class=\"cpp-section-heading\">A solution</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b25",
+      "type": "paragraph",
+      "html": "<p>The answer, as it turns out, is surprisingly simple.</p>",
+      "preview": "The answer, as it turns out, is surprisingly simple.",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b26",
+      "type": "paragraph",
+      "html": "<p>First, we set up <code>operator&lt;&lt;</code> as a friend in our base class as usual. But rather than have <code>operator&lt;&lt;</code> determine what to print, we will instead have it call a normal member function that <em>can</em> be virtualized! This virtual function will do the work of determining what to print for each class.</p>",
+      "preview": "First, we set up operator<< as a friend in our base class as usual. But rather t",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b27",
+      "type": "paragraph",
+      "html": "<p>In this first solution, our virtual member function (which we call <code>identify()</code>) returns a <code>std::string</code>, which is printed by <code>Base::operator&lt;&lt;</code>:</p>",
+      "preview": "In this first solution, our virtual member function (which we call identify()) r",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\t// Here's our overloaded operator<<\n\tfriend std::ostream& operator<<(std::ostream& out, const Base& b)\n\t{\n\t\t// Call virtual function identify() to get the string to be printed\n\t\tout << b.identify();\n\t\treturn out;\n\t}\n\n\t// We'll rely on member function identify() to return the string to be printed\n\t// Because identify() is a normal member function, it can be virtualized\n\tvirtual std::string identify() const\n\t{\n\t\treturn \"Base\";\n\t}\n};\n\nclass Derived : public Base\n{\npublic:\n\t// Here's our override identify() function to handle the Derived case\n\tstd::string identify() const override\n\t{\n\t\treturn \"Derived\";\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout << b << '\\n';\n\n\tDerived d{};\n\tstd::cout << d << '\\n'; // note that this works even with no operator<< that explicitly handles Derived objects\n\n\tBase& bref{ d };\n\tstd::cout << bref << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\t// Here's our overloaded operator&lt;&lt;\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Base&amp; b)\n\t{\n\t\t// Call virtual function identify() to get the string to be printed\n\t\tout &lt;&lt; b.identify();\n\t\treturn out;\n\t}\n\n\t// We'll rely on member function identify() to return the string to be printed\n\t// Because identify() is a normal member function, it can be virtualized\n\tvirtual std::string identify() const\n\t{\n\t\treturn \"Base\";\n\t}\n};\n\nclass Derived : public Base\n{\npublic:\n\t// Here's our override identify() function to handle the Derived case\n\tstd::string identify() const override\n\t{\n\t\treturn \"Derived\";\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout &lt;&lt; b &lt;&lt; '\\n';\n\n\tDerived d{};\n\tstd::cout &lt;&lt; d &lt;&lt; '\\n'; // note that this works even with no operator&lt;&lt; that explicitly handles Derived objects\n\n\tBase&amp; bref{ d };\n\tstd::cout &lt;&lt; bref &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b29",
+      "type": "paragraph",
+      "html": "<p>This prints the expected result:</p>",
+      "preview": "This prints the expected result:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b30",
+      "type": "output",
+      "text": "Base\nDerived\nDerived\n",
+      "html": "<pre>Base\nDerived\nDerived\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b31",
+      "type": "paragraph",
+      "html": "<p>Let’s examine how this works in more detail.</p>",
+      "preview": "Let’s examine how this works in more detail.",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b32",
+      "type": "paragraph",
+      "html": "<p>In the case of <code>Base b</code>, <code>operator&lt;&lt;</code> is called with parameter <code>b</code> referencing the Base object. Virtual function call <code>b.identify()</code> thus resolves to <code>Base::identify()</code>, which returns “Base” to be printed. Nothing too special here.</p>",
+      "preview": "In the case of Base b, operator<< is called with parameter b referencing the Bas",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b33",
+      "type": "paragraph",
+      "html": "<p>In the case of <code>Derived d</code>, the compiler first looks to see if there’s an <code>operator&lt;&lt;</code> that takes a Derived object. There isn’t one, because we didn’t define one. Next the compiler looks to see if there’s an <code>operator&lt;&lt;</code> that takes a Base object. There is, so the compiler does an implicit upcast of our Derived object to a Base&amp; and calls the function (we could have done this upcast ourselves, but the compiler is helpful in this regard). Because parameter <code>b</code> is referencing a Derived object, virtual function call <code>b.identify()</code> resolves to <code>Derived::identify()</code>, which returns “Derived” to be printed.</p>",
+      "preview": "In the case of Derived d, the compiler first looks to see if there’s an operator",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b34",
+      "type": "paragraph",
+      "html": "<p>Note that we don’t need to define an <code>operator&lt;&lt;</code> for each derived class! The version that handles Base objects works just fine for both Base objects and any class derived from Base!</p>",
+      "preview": "Note that we don’t need to define an operator<< for each derived class! The vers",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b35",
+      "type": "paragraph",
+      "html": "<p>The third case proceeds as a mix of the first two. First, the compiler matches variable bref with <code>operator&lt;&lt;</code> that takes a Base reference. Because parameter <code>b</code> is referencing a Derived object, <code>b.identify()</code> resolves to <code>Derived::identify()</code>, which returns “Derived”.</p>",
+      "preview": "The third case proceeds as a mix of the first two. First, the compiler matches v",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b36",
+      "type": "paragraph",
+      "html": "<p>Problem solved.</p>",
+      "preview": "Problem solved.",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b37",
+      "type": "section",
+      "title": "A more flexible solution",
+      "html": "<h3 class=\"cpp-section-heading\">A more flexible solution</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b38",
+      "type": "paragraph",
+      "html": "<p>The above solution works great, but has two potential shortcomings:</p>",
+      "preview": "The above solution works great, but has two potential shortcomings:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b39",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>It makes the assumption that the desired output can be represented as a single std::string.</li><li>Our <code>identify()</code> member function does not have access to the stream object.</li></ol>",
+      "preview": "It makes the assumption that the desired output can be represented as a single s",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b40",
+      "type": "paragraph",
+      "html": "<p>The latter is problematic in cases where we need a stream object, such as when we want to print the value of a member variable that has an overloaded operator&lt;&lt;.</p>",
+      "preview": "The latter is problematic in cases where we need a stream object, such as when w",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b41",
+      "type": "paragraph",
+      "html": "<p>Fortunately, it’s straightforward to modify the above example to resolve both of these issues. In the previous version, virtual function <code>identify()</code> returned a string to be printed by <code>Base::operator&lt;&lt;</code>. In this version, we’ll instead define virtual member function <code>print()</code> and delegate responsibility for printing <em>directly</em> to that function.</p>",
+      "preview": "Fortunately, it’s straightforward to modify the above example to resolve both of",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b42",
+      "type": "paragraph",
+      "html": "<p>Here’s an example that illustrates the idea:</p>",
+      "preview": "Here’s an example that illustrates the idea:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b43",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\t// Here's our overloaded operator<<\n\tfriend std::ostream& operator<<(std::ostream& out, const Base& b)\n\t{\n\t\t// Delegate printing responsibility for printing to virtual member function print()\n\t\treturn b.print(out);\n\t}\n\n\t// We'll rely on member function print() to do the actual printing\n\t// Because print() is a normal member function, it can be virtualized\n\tvirtual std::ostream& print(std::ostream& out) const\n\t{\n\t\tout << \"Base\";\n\t\treturn out;\n\t}\n};\n\n// Some class or struct with an overloaded operator<<\nstruct Employee\n{\n\tstd::string name{};\n\tint id{};\n\n\tfriend std::ostream& operator<<(std::ostream& out, const Employee& e)\n\t{\n\t\tout << \"Employee(\" << e.name << \", \" << e.id << \")\";\n\t\treturn out;\n\t}\n};\n\nclass Derived : public Base\n{\nprivate:\n\tEmployee m_e{}; // Derived now has an Employee member\n\npublic:\n\tDerived(const Employee& e)\n\t\t: m_e{ e }\n\t{\n\t}\n\n\t// Here's our override print() function to handle the Derived case\n\tstd::ostream& print(std::ostream& out) const override\n\t{\n\t\tout << \"Derived: \";\n\n\t\t// Print the Employee member using the stream object\n\t\tout << m_e;\n\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout << b << '\\n';\n\n\tDerived d{ Employee{\"Jim\", 4}};\n\tstd::cout << d << '\\n'; // note that this works even with no operator<< that explicitly handles Derived objects\n\n\tBase& bref{ d };\n\tstd::cout << bref << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\t// Here's our overloaded operator&lt;&lt;\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Base&amp; b)\n\t{\n\t\t// Delegate printing responsibility for printing to virtual member function print()\n\t\treturn b.print(out);\n\t}\n\n\t// We'll rely on member function print() to do the actual printing\n\t// Because print() is a normal member function, it can be virtualized\n\tvirtual std::ostream&amp; print(std::ostream&amp; out) const\n\t{\n\t\tout &lt;&lt; \"Base\";\n\t\treturn out;\n\t}\n};\n\n// Some class or struct with an overloaded operator&lt;&lt;\nstruct Employee\n{\n\tstd::string name{};\n\tint id{};\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Employee&amp; e)\n\t{\n\t\tout &lt;&lt; \"Employee(\" &lt;&lt; e.name &lt;&lt; \", \" &lt;&lt; e.id &lt;&lt; \")\";\n\t\treturn out;\n\t}\n};\n\nclass Derived : public Base\n{\nprivate:\n\tEmployee m_e{}; // Derived now has an Employee member\n\npublic:\n\tDerived(const Employee&amp; e)\n\t\t: m_e{ e }\n\t{\n\t}\n\n\t// Here's our override print() function to handle the Derived case\n\tstd::ostream&amp; print(std::ostream&amp; out) const override\n\t{\n\t\tout &lt;&lt; \"Derived: \";\n\n\t\t// Print the Employee member using the stream object\n\t\tout &lt;&lt; m_e;\n\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tBase b{};\n\tstd::cout &lt;&lt; b &lt;&lt; '\\n';\n\n\tDerived d{ Employee{\"Jim\", 4}};\n\tstd::cout &lt;&lt; d &lt;&lt; '\\n'; // note that this works even with no operator&lt;&lt; that explicitly handles Derived objects\n\n\tBase&amp; bref{ d };\n\tstd::cout &lt;&lt; bref &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b44",
+      "type": "paragraph",
+      "html": "<p>This outputs:</p>",
+      "preview": "This outputs:",
+      "canCheck": true
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b45",
+      "type": "output",
+      "text": "Base\nDerived: Employee(Jim, 4)\nDerived: Employee(Jim, 4)\n",
+      "html": "<pre>Base\nDerived: Employee(Jim, 4)\nDerived: Employee(Jim, 4)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "printing-inherited-classes-using-operator_b46",
+      "type": "paragraph",
+      "html": "<p>In this version, <code>Base::operator&lt;&lt;</code> doesn’t do any printing itself. Instead, it just calls virtual member function <code>print()</code> and passes it the stream object. The <code>print()</code> function then uses this stream object to do its own printing. <code>Base::print()</code> uses the stream object to print “Base”. More interestingly, <code>Derived::print()</code> uses the stream object to print both “Derived: ” and to call <code>Employee::operator&lt;&lt;</code> to print the value of member <code>m_e</code>. The latter would have been more challenging to do in the prior example!</p>",
+      "preview": "In this version, Base::operator<< doesn’t do any printing itself. Instead, it ju",
+      "canCheck": true
+    }
+  ]
+}

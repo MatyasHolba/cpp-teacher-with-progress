@@ -1,0 +1,252 @@
+{
+  "index": 322,
+  "chapterId": "27",
+  "number": "27.6",
+  "title": "27.6 — Rethrowing exceptions",
+  "url": "https://www.learncpp.com/cpp-tutorial/rethrowing-exceptions/",
+  "slug": "rethrowing-exceptions",
+  "scrapedAt": "2026-09-15T16:31:26.546Z",
+  "totalBlocks": 33,
+  "totalCheckpoints": 31,
+  "blocks": [
+    {
+      "id": "rethrowing-exceptions_b0",
+      "type": "paragraph",
+      "html": "<p>Occasionally you may run into a case where you want to catch an exception, but not want to (or have the ability to) fully handle it at the point where you catch it. This is common when you want to log an error, but pass the issue along to the caller to actually handle.</p>",
+      "preview": "Occasionally you may run into a case where you want to catch an exception, but n",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b1",
+      "type": "paragraph",
+      "html": "<p>When a function can use a return code, this is simple. Consider the following example:</p>",
+      "preview": "When a function can use a return code, this is simple. Consider the following ex",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "Database* createDatabase(std::string filename)\n{\n    Database* d {};\n\n    try\n    {\n        d = new Database{};\n        d->open(filename); // assume this throws an int exception on failure\n        return d;\n    }\n    catch (int exception)\n    {\n        // Database creation failed\n        delete d;\n        // Write an error to some global logfile\n        g_log.logError(\"Creation of Database failed\");\n    }\n\n    return nullptr;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Database* createDatabase(std::string filename)\n{\n    Database* d {};\n\n    try\n    {\n        d = new Database{};\n        d-&gt;open(filename); // assume this throws an int exception on failure\n        return d;\n    }\n    catch (int exception)\n    {\n        // Database creation failed\n        delete d;\n        // Write an error to some global logfile\n        g_log.logError(\"Creation of Database failed\");\n    }\n\n    return nullptr;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b3",
+      "type": "paragraph",
+      "html": "<p>In the above code snippet, the function is tasked with creating a Database object, opening the database, and returning the Database object. In the case where something goes wrong (e.g. the wrong filename is passed in), the exception handler logs an error, and then reasonably returns a null pointer.</p>",
+      "preview": "In the above code snippet, the function is tasked with creating a Database objec",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b4",
+      "type": "paragraph",
+      "html": "<p>Now consider the following function:</p>",
+      "preview": "Now consider the following function:",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d->getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        // However, we haven't actually handled this error\n        // So what do we do here?\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d-&gt;getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        // However, we haven't actually handled this error\n        // So what do we do here?\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b6",
+      "type": "paragraph",
+      "html": "<p>In the case where this function succeeds, it returns an integer value -- any integer value could be a valid value.</p>",
+      "preview": "In the case where this function succeeds, it returns an integer value -- any int",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b7",
+      "type": "paragraph",
+      "html": "<p>But what about the case where something goes wrong with getIntValue()? In that case, getIntValue() will throw an integer exception, which will be caught by the catch block in getIntValueFromDatabase(), which will log the error. But then how do we tell the caller of getIntValueFromDatabase() that something went wrong? Unlike the top example, there isn’t a good return code we can use here (because any integer return value could be a valid one).</p>",
+      "preview": "But what about the case where something goes wrong with getIntValue()? In that c",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b8",
+      "type": "paragraph",
+      "html": "<p><strong>Throwing a new exception</strong></p>",
+      "preview": "Throwing a new exception",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b9",
+      "type": "paragraph",
+      "html": "<p>One obvious solution is to throw a new exception.</p>",
+      "preview": "One obvious solution is to throw a new exception.",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d->getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        // Throw char exception 'q' up the stack to be handled by caller\n        throw 'q'; \n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d-&gt;getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        // Throw char exception 'q' up the stack to be handled by caller\n        throw 'q'; \n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b11",
+      "type": "paragraph",
+      "html": "<p>In the example above, the program catches the int exception from getIntValue(), logs the error, and then throws a new exception with char value ‘q’. Although it may seem weird to throw an exception from a catch block, this is allowed. Remember, only exceptions thrown within a try block are eligible to be caught. This means that an exception thrown within a catch block will not be caught by the catch block it’s in. Instead, it will be propagated up the stack to the caller.</p>",
+      "preview": "In the example above, the program catches the int exception from getIntValue(), ",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b12",
+      "type": "paragraph",
+      "html": "<p>The exception thrown from the catch block can be an exception of any type -- it doesn’t need to be the same type as the exception that was just caught.</p>",
+      "preview": "The exception thrown from the catch block can be an exception of any type -- it ",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b13",
+      "type": "paragraph",
+      "html": "<p><strong>Rethrowing an exception (the wrong way)</strong></p>",
+      "preview": "Rethrowing an exception (the wrong way)",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b14",
+      "type": "paragraph",
+      "html": "<p>Another option is to rethrow the same exception. One way to do this is as follows:</p>",
+      "preview": "Another option is to rethrow the same exception. One way to do this is as follow",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d->getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        throw exception;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d-&gt;getIntValue(table, key); // throws int exception on failure\n    }\n    catch (int exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        throw exception;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b16",
+      "type": "paragraph",
+      "html": "<p>Although this works, this method has a couple of downsides. First, this doesn’t throw the exact same exception as the one that is caught -- rather, it throws a copy-initialized copy of variable exception. Although the compiler is free to elide the copy, it may not, so this could be less performant.</p>",
+      "preview": "Although this works, this method has a couple of downsides. First, this doesn’t ",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b17",
+      "type": "paragraph",
+      "html": "<p>But significantly, consider what happens in the following case:</p>",
+      "preview": "But significantly, consider what happens in the following case:",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d->getIntValue(table, key); // throws Derived exception on failure\n    }\n    catch (Base& exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        throw exception; // Danger: this throws a Base object, not a Derived object\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getIntValueFromDatabase(Database* d, std::string table, std::string key)\n{\n    assert(d);\n\n    try\n    {\n        return d-&gt;getIntValue(table, key); // throws Derived exception on failure\n    }\n    catch (Base&amp; exception)\n    {\n        // Write an error to some global logfile\n        g_log.logError(\"getIntValueFromDatabase failed\");\n\n        throw exception; // Danger: this throws a Base object, not a Derived object\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b19",
+      "type": "paragraph",
+      "html": "<p>In this case, getIntValue() throws a Derived object, but the catch block is catching a Base reference. This is fine, as we know we can have a Base reference to a Derived object. However, when we throw an exception, the thrown exception is copy-initialized from variable exception. Variable exception has type Base, so the copy-initialized exception also has type Base (not Derived!). In other words, our Derived object has been sliced!</p>",
+      "preview": "In this case, getIntValue() throws a Derived object, but the catch block is catc",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b20",
+      "type": "paragraph",
+      "html": "<p>You can see this in the following program:</p>",
+      "preview": "You can see this in the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nclass Base\n{\npublic:\n    Base() {}\n    virtual void print() { std::cout << \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n    void print() override { std::cout << \"Derived\"; }\n};\n\nint main()\n{\n    try\n    {\n        try\n        {\n            throw Derived{};\n        }\n        catch (Base& b)\n        {\n            std::cout << \"Caught Base b, which is actually a \";\n            b.print();\n            std::cout << '\\n';\n            throw b; // the Derived object gets sliced here\n        }\n    }\n    catch (Base& b)\n    {\n        std::cout << \"Caught Base b, which is actually a \";\n        b.print();\n        std::cout << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    Base() {}\n    virtual void print() { std::cout &lt;&lt; \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n    void print() override { std::cout &lt;&lt; \"Derived\"; }\n};\n\nint main()\n{\n    try\n    {\n        try\n        {\n            throw Derived{};\n        }\n        catch (Base&amp; b)\n        {\n            std::cout &lt;&lt; \"Caught Base b, which is actually a \";\n            b.print();\n            std::cout &lt;&lt; '\\n';\n            throw b; // the Derived object gets sliced here\n        }\n    }\n    catch (Base&amp; b)\n    {\n        std::cout &lt;&lt; \"Caught Base b, which is actually a \";\n        b.print();\n        std::cout &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b22",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b23",
+      "type": "output",
+      "text": "Caught Base b, which is actually a Derived\nCaught Base b, which is actually a Base\n",
+      "html": "<pre>Caught Base b, which is actually a Derived\nCaught Base b, which is actually a Base\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "rethrowing-exceptions_b24",
+      "type": "paragraph",
+      "html": "<p>The fact that the second line indicates that Base is actually a Base rather than a Derived proves that the Derived object was sliced.</p>",
+      "preview": "The fact that the second line indicates that Base is actually a Base rather than",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b25",
+      "type": "paragraph",
+      "html": "<p><strong>Rethrowing an exception (the right way)</strong></p>",
+      "preview": "Rethrowing an exception (the right way)",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b26",
+      "type": "paragraph",
+      "html": "<p>Fortunately, C++ provides a way to rethrow the exact same exception as the one that was just caught. To do so, simply use the throw keyword from within the catch block (with no associated variable), like so:</p>",
+      "preview": "Fortunately, C++ provides a way to rethrow the exact same exception as the one t",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nclass Base\n{\npublic:\n    Base() {}\n    virtual void print() { std::cout << \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n    void print() override { std::cout << \"Derived\"; }\n};\n\nint main()\n{\n    try\n    {\n        try\n        {\n            throw Derived{};\n        }\n        catch (Base& b)\n        {\n            std::cout << \"Caught Base b, which is actually a \";\n            b.print();\n            std::cout << '\\n';\n            throw; // note: We're now rethrowing the object here\n        }\n    }\n    catch (Base& b)\n    {\n        std::cout << \"Caught Base b, which is actually a \";\n        b.print();\n        std::cout << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    Base() {}\n    virtual void print() { std::cout &lt;&lt; \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n    void print() override { std::cout &lt;&lt; \"Derived\"; }\n};\n\nint main()\n{\n    try\n    {\n        try\n        {\n            throw Derived{};\n        }\n        catch (Base&amp; b)\n        {\n            std::cout &lt;&lt; \"Caught Base b, which is actually a \";\n            b.print();\n            std::cout &lt;&lt; '\\n';\n            throw; // note: We're now rethrowing the object here\n        }\n    }\n    catch (Base&amp; b)\n    {\n        std::cout &lt;&lt; \"Caught Base b, which is actually a \";\n        b.print();\n        std::cout &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b28",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b29",
+      "type": "output",
+      "text": "Caught Base b, which is actually a Derived\nCaught Base b, which is actually a Derived\n",
+      "html": "<pre>Caught Base b, which is actually a Derived\nCaught Base b, which is actually a Derived\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "rethrowing-exceptions_b30",
+      "type": "paragraph",
+      "html": "<p>This throw keyword that doesn’t appear to throw anything in particular actually re-throws the exact same exception that was just caught. No copies are made, meaning we don’t have to worry about performance killing copies or slicing.</p>",
+      "preview": "This throw keyword that doesn’t appear to throw anything in particular actually ",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b31",
+      "type": "paragraph",
+      "html": "<p>If rethrowing an exception is required, this method should be preferred over the alternatives.</p>",
+      "preview": "If rethrowing an exception is required, this method should be preferred over the",
+      "canCheck": true
+    },
+    {
+      "id": "rethrowing-exceptions_b32",
+      "type": "callout",
+      "calloutType": "rule",
+      "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>When rethrowing the same exception, use the throw keyword by itself</p></div>",
+      "preview": "RuleWhen rethrowing the same exception, use the throw keyword by itself",
+      "canCheck": true
+    }
+  ]
+}

@@ -1,0 +1,606 @@
+{
+  "index": 29,
+  "chapterId": "2",
+  "number": "2.5",
+  "title": "2.5 — Introduction to local scope",
+  "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/",
+  "slug": "introduction-to-local-scope",
+  "scrapedAt": "2026-09-15T16:28:50.997Z",
+  "totalBlocks": 82,
+  "totalCheckpoints": 71,
+  "blocks": [
+    {
+      "id": "introduction-to-local-scope_b0",
+      "type": "section",
+      "title": "Local variables",
+      "html": "<h3 class=\"cpp-section-heading\">Local variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b1",
+      "type": "paragraph",
+      "html": "<p>Variables defined inside the body of a function are called <strong>local variables</strong> (as opposed to <em>global variables</em>, which we’ll discuss in a future chapter):</p>",
+      "preview": "Variables defined inside the body of a function are called local variables (as o",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{\n    int z{ x + y }; // z is a local variable\n\n    return z;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    int z{ x + y }; // z is a local variable\n\n    return z;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b3",
+      "type": "paragraph",
+      "html": "<p>Function parameters are also generally considered to be local variables, and we will include them as such:</p>",
+      "preview": "Function parameters are also generally considered to be local variables, and we ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y) // function parameters x and y are local variables\n{\n    int z{ x + y };\n\n    return z;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y) // function parameters x and y are local variables\n{\n    int z{ x + y };\n\n    return z;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b5",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll take a look at some properties of local variables in more detail.</p>",
+      "preview": "In this lesson, we’ll take a look at some properties of local variables in more ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b6",
+      "type": "section",
+      "title": "Local variable lifetime",
+      "html": "<h3 class=\"cpp-section-heading\">Local variable lifetime</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b7",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/\">1.3 -- Introduction to objects and variables</a>, we discussed how a variable definition such as <code>int x;</code> causes the variable to be instantiated when this statement is executed. Function parameters are created and initialized when the function is entered, and variables within the function body are created and initialized at the point of definition.</p>",
+      "preview": "In lesson 1.3 -- Introduction to objects and variables, we discussed how a varia",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b8",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y) // x and y created and initialized here\n{ \n    int z{ x + y };   // z created and initialized here\n\n    return z;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y) // x and y created and initialized here\n{ \n    int z{ x + y };   // z created and initialized here\n\n    return z;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b10",
+      "type": "paragraph",
+      "html": "<p>The natural follow-up question is, “so when is an instantiated variable destroyed?”. Local variables are destroyed in the opposite order of creation at the end of the set of curly braces in which it is defined (or for a function parameter, at the end of the function).</p>",
+      "preview": "The natural follow-up question is, “so when is an instantiated variable destroye",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{ \n    int z{ x + y };\n\n    return z;\n} // z, y, and x destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{ \n    int z{ x + y };\n\n    return z;\n} // z, y, and x destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b12",
+      "type": "paragraph",
+      "html": "<p>Much like a person’s lifetime is defined to be the time between their birth and death, an object’s <strong>lifetime</strong> is defined to be the time between its creation and destruction. Note that variable creation and destruction happen when the program is running (called runtime), not at compile time. Therefore, lifetime is a runtime property.</p>",
+      "preview": "Much like a person’s lifetime is defined to be the time between their birth and ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b13",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The above rules around creation, initialization, and destruction are guarantees. That is, objects must be created and initialized no later than the point of definition, and destroyed no earlier than the end of the set of the curly braces in which they are defined (or, for function parameters, at the end of the function).</p><p>In actuality, the C++ specification gives compilers a lot of flexibility to determine when local variables are created and destroyed. Objects may be created earlier, or destroyed later for optimization purposes. Most often, local variables are created when the function is entered, and destroyed in the opposite order of creation when the function is exited. We’ll discuss this in more detail in a future lesson, when we talk about the call stack.</p></div>",
+      "preview": "For advanced readersThe above rules around creation, initialization, and destruction are guarantees.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b14",
+      "type": "paragraph",
+      "html": "<p>Here’s a slightly more complex program demonstrating the lifetime of a variable named <code>x</code>:</p>",
+      "preview": "Here’s a slightly more complex program demonstrating the lifetime of a variable ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid doSomething()\n{\n    std::cout << \"Hello!\\n\";\n}\n\nint main()\n{\n    int x{ 0 };    // x's lifetime begins here\n\n    doSomething(); // x is still alive during this function call\n\n    return 0;\n} // x's lifetime ends here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid doSomething()\n{\n    std::cout &lt;&lt; \"Hello!\\n\";\n}\n\nint main()\n{\n    int x{ 0 };    // x's lifetime begins here\n\n    doSomething(); // x is still alive during this function call\n\n    return 0;\n} // x's lifetime ends here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b16",
+      "type": "paragraph",
+      "html": "<p>In the above program, the lifetime of <code>x</code> runs from the point of definition to the end of function <code>main</code>. This includes the time spent during the execution of function <code>doSomething</code>.</p>",
+      "preview": "In the above program, the lifetime of x runs from the point of definition to the",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b17",
+      "type": "section",
+      "title": "What happens when an object is destroyed?",
+      "html": "<h3 class=\"cpp-section-heading\">What happens when an object is destroyed?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b18",
+      "type": "paragraph",
+      "html": "<p>In most cases, nothing. The destroyed object simply becomes invalid.</p>",
+      "preview": "In most cases, nothing. The destroyed object simply becomes invalid.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b19",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>If the object is a class type object, prior to destruction, a special function called a destructor is invoked. In many cases, the destructor does nothing, in which case no cost is incurred. We introduce destructors in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-destructors/\">15.4 -- Introduction to destructors</a>.</p></div>",
+      "preview": "For advanced readersIf the object is a class type object, prior to destruction, a special function c",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b20",
+      "type": "paragraph",
+      "html": "<p>Any use of an object after it has been destroyed will result in undefined behavior.</p>",
+      "preview": "Any use of an object after it has been destroyed will result in undefined behavi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b21",
+      "type": "paragraph",
+      "html": "<p>At some point after destruction, the memory used by the object will be <strong>deallocated</strong> (freed up for reuse).</p>",
+      "preview": "At some point after destruction, the memory used by the object will be deallocat",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b22",
+      "type": "section",
+      "title": "Local scope (block scope)",
+      "html": "<h3 class=\"cpp-section-heading\">Local scope (block scope)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b23",
+      "type": "paragraph",
+      "html": "<p>An identifier’s <strong>scope</strong> determines where the identifier can be seen and used within the source code. When an identifier can be seen and used, we say it is <strong>in scope</strong>. When an identifier can not be seen, we can not use it, and we say it is <strong>out of scope</strong>. Scope is a compile-time property, and trying to use an identifier when it is not in scope will result in a compile error.</p>",
+      "preview": "An identifier’s scope determines where the identifier can be seen and used withi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b24",
+      "type": "paragraph",
+      "html": "<p>The identifier of a local variable has local scope. An identifier with <strong>local scope</strong> (technically called <strong>block scope</strong>) is usable from the point of definition to the end of the innermost pair of curly braces containing the identifier (or for function parameters, at the end of the function). This ensures local variables cannot be used before the point of definition (even if the compiler opts to create them before then) or after they are destroyed. Local variables defined in one function are also not in scope in other functions that are called.</p>",
+      "preview": "The identifier of a local variable has local scope. An identifier with local sco",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b25",
+      "type": "paragraph",
+      "html": "<p>Here’s a program demonstrating the scope of a variable named <code>x</code>:</p>",
+      "preview": "Here’s a program demonstrating the scope of a variable named x:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n// x is not in scope anywhere in this function\nvoid doSomething()\n{\n    std::cout << \"Hello!\\n\";\n}\n\nint main()\n{\n    // x can not be used here because it's not in scope yet\n\n    int x{ 0 }; // x enters scope here and can now be used within this function\n\n    doSomething();\n\n    return 0;\n} // x goes out of scope here and can no longer be used",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// x is not in scope anywhere in this function\nvoid doSomething()\n{\n    std::cout &lt;&lt; \"Hello!\\n\";\n}\n\nint main()\n{\n    // x can not be used here because it's not in scope yet\n\n    int x{ 0 }; // x enters scope here and can now be used within this function\n\n    doSomething();\n\n    return 0;\n} // x goes out of scope here and can no longer be used</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b27",
+      "type": "paragraph",
+      "html": "<p>In the above program, variable <code>x</code> enters scope at the point of definition. <code>x</code> goes out of scope at the end of the innermost pair of curly braces containing the identifier, which is the closing curly brace of function <code>main()</code>. Note that variable <code>x</code> is not in scope anywhere inside of function <code>doSomething</code>. The fact that function <code>main</code> calls function <code>doSomething</code> is irrelevant in this context.</p>",
+      "preview": "In the above program, variable x enters scope at the point of definition. x goes",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b28",
+      "type": "section",
+      "title": "“Out of scope” vs “going out of scope”",
+      "html": "<h3 class=\"cpp-section-heading\">“Out of scope” vs “going out of scope”</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b29",
+      "type": "paragraph",
+      "html": "<p>The terms “out of scope” and “going out of scope” can be confusing to new programmers.</p>",
+      "preview": "The terms “out of scope” and “going out of scope” can be confusing to new progra",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b30",
+      "type": "paragraph",
+      "html": "<p>An identifier is out of scope anywhere it cannot be accessed within the code. In the example above, the identifier <code>x</code> is in scope from its point of definition to the end of the <code>main</code> function. The identifier <code>x</code> is out of scope outside of that code region.</p>",
+      "preview": "An identifier is out of scope anywhere it cannot be accessed within the code. In",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b31",
+      "type": "paragraph",
+      "html": "<p>The term “going out of scope” is typically applied to objects rather than identifiers. We say an object goes out of scope at the end of the scope (the end curly brace) in which the object was instantiated. In the example above, the object named <code>x</code> goes out of scope at the end of the function <code>main</code>.</p>",
+      "preview": "The term “going out of scope” is typically applied to objects rather than identi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b32",
+      "type": "paragraph",
+      "html": "<p>A local variable’s lifetime ends at the point where it goes out of scope, so local variables are destroyed at this point.</p>",
+      "preview": "A local variable’s lifetime ends at the point where it goes out of scope, so loc",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b33",
+      "type": "paragraph",
+      "html": "<p>Note that not all types of variables are destroyed when they go out of scope. We’ll see examples of these in future lessons.</p>",
+      "preview": "Note that not all types of variables are destroyed when they go out of scope. We",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b34",
+      "type": "section",
+      "title": "Another example",
+      "html": "<h3 class=\"cpp-section-heading\">Another example</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b35",
+      "type": "paragraph",
+      "html": "<p>Here’s a slightly more complex example. Remember, lifetime is a runtime property, and scope is a compile-time property, so although we are talking about both in the same program, they are enforced at different points.</p>",
+      "preview": "Here’s a slightly more complex example. Remember, lifetime is a runtime property",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint add(int x, int y) // x and y are created and enter scope here\n{\n    // x and y are usable only within add()\n    return x + y;\n} // y and x go out of scope and are destroyed here\n\nint main()\n{\n    int a{ 5 }; // a is created, initialized, and enters scope here\n    int b{ 6 }; // b is created, initialized, and enters scope here\n\n    // a and b are usable only within main()\n\n    std::cout << add(a, b) << '\\n'; // calls add(5, 6), where x=5 and y=6\n\n    return 0;\n} // b and a go out of scope and are destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y) // x and y are created and enter scope here\n{\n    // x and y are usable only within add()\n    return x + y;\n} // y and x go out of scope and are destroyed here\n\nint main()\n{\n    int a{ 5 }; // a is created, initialized, and enters scope here\n    int b{ 6 }; // b is created, initialized, and enters scope here\n\n    // a and b are usable only within main()\n\n    std::cout &lt;&lt; add(a, b) &lt;&lt; '\\n'; // calls add(5, 6), where x=5 and y=6\n\n    return 0;\n} // b and a go out of scope and are destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b37",
+      "type": "paragraph",
+      "html": "<p>Parameters <code>x</code> and <code>y</code> are created when the <code>add</code> function is called, can only be seen/used within function <code>add</code>, and are destroyed at the end of <code>add</code>. Variables <code>a</code> and <code>b</code> are created within function <code>main</code>, can only be seen/used within function <code>main</code>, and are destroyed at the end of <code>main</code>.</p>",
+      "preview": "Parameters x and y are created when the add function is called, can only be seen",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b38",
+      "type": "paragraph",
+      "html": "<p>To enhance your understanding of how all this fits together, let’s trace through this program in a little more detail. The following happens, in order:</p>",
+      "preview": "To enhance your understanding of how all this fits together, let’s trace through",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b39",
+      "type": "list",
+      "html": "<ul><li>Execution starts at the top of <code>main</code>.</li><li><code>main</code> variable <code>a</code> is created and given value <code>5</code>.</li><li><code>main</code> variable <code>b</code> is created and given value <code>6</code>.</li><li>Function <code>add</code> is called with argument values <code>5</code> and <code>6</code>.</li><li><code>add</code> parameters <code>x</code> and <code>y</code> are created and initialized with values <code>5</code> and <code>6</code> respectively.</li><li>The expression <code>x + y</code> is evaluated to produce the value <code>11</code>.</li><li><code>add</code> copies the value <code>11</code> back to caller <code>main</code>.</li><li><code>add</code> parameters <code>y</code> and <code>x</code> are destroyed.</li><li><code>main</code> prints <code>11</code> to the console.</li><li><code>main</code> returns <code>0</code> to the operating system.</li><li><code>main</code> variables <code>b</code> and <code>a</code> are destroyed.</li></ul>",
+      "preview": "Execution starts at the top of main.main variable a is created and given value 5",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b40",
+      "type": "paragraph",
+      "html": "<p>And we’re done.</p>",
+      "preview": "And we’re done.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b41",
+      "type": "paragraph",
+      "html": "<p>Note that if function <code>add</code> were to be called twice, parameters <code>x</code> and <code>y</code> would be created and destroyed twice -- once for each call. In a program with lots of functions and function calls, variables are created and destroyed often.</p>",
+      "preview": "Note that if function add were to be called twice, parameters x and y would be c",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b42",
+      "type": "section",
+      "title": "Functional separation",
+      "html": "<h3 class=\"cpp-section-heading\">Functional separation</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b43",
+      "type": "paragraph",
+      "html": "<p>In the above example, it’s easy to see that variables <code>a</code> and <code>b</code> are different variables from <code>x</code> and <code>y</code>.</p>",
+      "preview": "In the above example, it’s easy to see that variables a and b are different vari",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b44",
+      "type": "paragraph",
+      "html": "<p>Now consider the following similar program:</p>",
+      "preview": "Now consider the following similar program:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b45",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint add(int x, int y) // add's x and y are created and enter scope here\n{\n    // add's x and y are visible/usable within this function only\n    return x + y;\n} // add's y and x go out of scope and are destroyed here\n\nint main()\n{\n    int x{ 5 }; // main's x is created, initialized, and enters scope here\n    int y{ 6 }; // main's y is created, initialized, and enters scope here\n\n    // main's x and y are usable within this function only\n    std::cout << add(x, y) << '\\n'; // calls function add() with x=5 and y=6\n\n    return 0;\n} // main's y and x go out of scope and are destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y) // add's x and y are created and enter scope here\n{\n    // add's x and y are visible/usable within this function only\n    return x + y;\n} // add's y and x go out of scope and are destroyed here\n\nint main()\n{\n    int x{ 5 }; // main's x is created, initialized, and enters scope here\n    int y{ 6 }; // main's y is created, initialized, and enters scope here\n\n    // main's x and y are usable within this function only\n    std::cout &lt;&lt; add(x, y) &lt;&lt; '\\n'; // calls function add() with x=5 and y=6\n\n    return 0;\n} // main's y and x go out of scope and are destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b46",
+      "type": "paragraph",
+      "html": "<p>In this example, all we’ve done is change the names of variables <code>a</code> and <code>b</code> inside of function <code>main</code> to <code>x</code> and <code>y</code>. This program compiles and runs identically, even though functions <code>main</code> and <code>add</code> both have variables named <code>x</code> and <code>y</code>. Why does this work?</p>",
+      "preview": "In this example, all we’ve done is change the names of variables a and b inside ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b47",
+      "type": "paragraph",
+      "html": "<p>First, we need to recognize that even though functions <code>main</code> and <code>add</code> both have variables named <code>x</code> and <code>y</code>, these variables are distinct. The <code>x</code> and <code>y</code> in function <code>main</code> have nothing to do with the <code>x</code> and <code>y</code> in function <code>add</code> -- they just happen to share the same names.</p>",
+      "preview": "First, we need to recognize that even though functions main and add both have va",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b48",
+      "type": "paragraph",
+      "html": "<p>Second, when inside of function <code>main</code>, the names <code>x</code> and <code>y</code> refer to main’s locally scoped variables <code>x</code> and <code>y</code>. Those variables can only be seen (and used) inside of <code>main</code>. Similarly, when inside function <code>add</code>, the names <code>x</code> and <code>y</code> refer to function parameters <code>x</code> and <code>y</code>, which can only be seen (and used) inside of <code>add</code>.</p>",
+      "preview": "Second, when inside of function main, the names x and y refer to main’s locally ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b49",
+      "type": "paragraph",
+      "html": "<p>In short, neither <code>add</code> nor <code>main</code> know that the other function has variables with the same names. Because the scopes don’t overlap, it’s always clear to the compiler which <code>x</code> and <code>y</code> are being referred to at any time.</p>",
+      "preview": "In short, neither add nor main know that the other function has variables with t",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b50",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Names used for function parameters or variables declared in a function body are only visible within the function that declares them. This means local variables within a function can be named without regard for the names of variables in other functions. This helps keep functions independent.</p></div>",
+      "preview": "Key insightNames used for function parameters or variables declared in a function body are only visi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b51",
+      "type": "paragraph",
+      "html": "<p>We’ll talk more about local scope, and other kinds of scope, in a future chapter.</p>",
+      "preview": "We’ll talk more about local scope, and other kinds of scope, in a future chapter",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b52",
+      "type": "section",
+      "title": "Where to define local variables",
+      "html": "<h3 class=\"cpp-section-heading\">Where to define local variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b53",
+      "type": "paragraph",
+      "html": "<p>In modern C++, the best practice is that local variables inside the function body should be defined as close to their first use as reasonable:</p>",
+      "preview": "In modern C++, the best practice is that local variables inside the function bod",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b54",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Enter an integer: \";\n\tint x{};       // x defined here\n\tstd::cin >> x; // and used here\n\n\tstd::cout << \"Enter another integer: \";\n\tint y{};       // y defined here\n\tstd::cin >> y; // and used here\n\n\tint sum{ x + y }; // sum can be initialized with intended value\n\tstd::cout << \"The sum is: \" << sum << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint x{};       // x defined here\n\tstd::cin &gt;&gt; x; // and used here\n\n\tstd::cout &lt;&lt; \"Enter another integer: \";\n\tint y{};       // y defined here\n\tstd::cin &gt;&gt; y; // and used here\n\n\tint sum{ x + y }; // sum can be initialized with intended value\n\tstd::cout &lt;&lt; \"The sum is: \" &lt;&lt; sum &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b55",
+      "type": "paragraph",
+      "html": "<p>In the above example, each variable is defined just before it is first used. There’s no need to be strict about this -- if you prefer to swap lines 5 and 6, that’s fine.</p>",
+      "preview": "In the above example, each variable is defined just before it is first used. The",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b56",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Define your local variables as close to their first use as reasonable.</p></div>",
+      "preview": "Best practiceDefine your local variables as close to their first use as reasonable.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b57",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Due to the limitations of older, more primitive compilers, the C language used to require all local variables be defined at the top of the function. The equivalent C++ program using that style would look like this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tint x{}, y{}, sum{}; // how are these used?\n\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tstd::cin &gt;&gt; x;\n\n\tstd::cout &lt;&lt; \"Enter another integer: \";\n\tstd::cin &gt;&gt; y;\n\n\tsum = x + y;\n\tstd::cout &lt;&lt; \"The sum is: \" &lt;&lt; sum &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre><p>This style is suboptimal for several reasons:</p><ul><li>The intended use of these variables isn’t apparent at the point of definition. You have to scan through the entire function to determine where and how each variable is used.</li><li>The intended initialization value may not be available at the top of the function (e.g. we can’t initialize <code>sum</code> to its intended value because we don’t know the value of <code>x</code> and <code>y</code> yet).</li><li>There may be many lines between a variable’s initializer and its first use. If we don’t remember what value it was initialized with, we will have to scroll back to the top of the function, which is distracting.</li></ul><p>This restriction was lifted in the C99 language standard.</p></div>",
+      "preview": "As an aside…Due to the limitations of older, more primitive compilers, the C language used to requir",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b58",
+      "type": "section",
+      "title": "When to use function parameters vs Local variables",
+      "html": "<h3 class=\"cpp-section-heading\">When to use function parameters vs Local variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b59",
+      "type": "paragraph",
+      "html": "<p>Because function parameters and local variable can both be used within the body of a function, new programmers sometimes struggle to understand when each should be used. A function parameter should be used when the caller will pass in the initialization value as an argument. A local variable should be used otherwise.</p>",
+      "preview": "Because function parameters and local variable can both be used within the body ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b60",
+      "type": "paragraph",
+      "html": "<p>Using a function parameter when you should use a local variable leads to code looking like this:</p>",
+      "preview": "Using a function parameter when you should use a local variable leads to code lo",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint getValueFromUser(int val) // val is a function parameter\n{\n    std::cout << \"Enter a value: \";\n    std::cin >> val;\n    return val;\n}\n\nint main()\n{\n    int x {};\n    int num { getValueFromUser(x) }; // main must pass x as an argument\n\n    std::cout << \"You entered \" << num << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser(int val) // val is a function parameter\n{\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; val;\n    return val;\n}\n\nint main()\n{\n    int x {};\n    int num { getValueFromUser(x) }; // main must pass x as an argument\n\n    std::cout &lt;&lt; \"You entered \" &lt;&lt; num &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b62",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>getValueFromUser()</code> has defined <code>val</code> as a function parameter. Because of this, <code>main()</code> must define <code>x</code> so that it has something to pass as an argument. However, the actual value of <code>x</code> is never used, and the value that <code>val</code> is initialized with is never used. Making the caller define and pass a variable that is never used adds needless complexity.</p>",
+      "preview": "In the above example, getValueFromUser() has defined val as a function parameter",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b63",
+      "type": "paragraph",
+      "html": "<p>The correct way to write this would be as follows:</p>",
+      "preview": "The correct way to write this would be as follows:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b64",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint getValueFromUser()\n{\n    int val {}; // val is a local variable\n    std::cout << \"Enter a value: \";\n    std::cin >> val;\n    return val;\n}\n\nint main()\n{\n    int num { getValueFromUser() }; // main does not need to pass anything\n\n    std::cout << \"You entered \" << num << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n    int val {}; // val is a local variable\n    std::cout &lt;&lt; \"Enter a value: \";\n    std::cin &gt;&gt; val;\n    return val;\n}\n\nint main()\n{\n    int num { getValueFromUser() }; // main does not need to pass anything\n\n    std::cout &lt;&lt; \"You entered \" &lt;&lt; num &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b65",
+      "type": "paragraph",
+      "html": "<p>In this example, <code>val</code> is now a local variable. <code>main()</code> is now simpler because it does not need to define or pass a variable to call <code>getValueFromUser()</code>.</p>",
+      "preview": "In this example, val is now a local variable. main() is now simpler because it d",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b66",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When a variable is needed within a function:</p><ul><li>Use a function parameter when the caller will pass in the initialization value for the variable as an argument.</li><li>Use a local variable otherwise.</li></ul></div>",
+      "preview": "Best practiceWhen a variable is needed within a function:Use a function parameter when the caller wi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b67",
+      "type": "section",
+      "title": "Introduction to temporary objects",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"temporaries\"></a>Introduction to temporary objects <a href=\"#temporaries\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b68",
+      "type": "paragraph",
+      "html": "<p>A <strong>temporary object</strong> (also sometimes called an <strong>anonymous object</strong>) is an unnamed object that is used to hold a value that is only needed for a short period of time. Temporary objects are generated by the compiler when they are needed.</p>",
+      "preview": "A temporary object (also sometimes called an anonymous object) is an unnamed obj",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b69",
+      "type": "paragraph",
+      "html": "<p>There are many different ways that temporary values can be created, but here’s a common one:</p>",
+      "preview": "There are many different ways that temporary values can be created, but here’s a",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b70",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;\n\n\treturn input; // return the value of input back to the caller\n}\n\nint main()\n{\n\tstd::cout << getValueFromUser() << '\\n'; // where does the returned value get stored?\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;\n\n\treturn input; // return the value of input back to the caller\n}\n\nint main()\n{\n\tstd::cout &lt;&lt; getValueFromUser() &lt;&lt; '\\n'; // where does the returned value get stored?\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b71",
+      "type": "paragraph",
+      "html": "<p>In the above program, the function <code>getValueFromUser()</code> returns the value stored in local variable <code>input</code> back to the caller. Because <code>input</code> will be destroyed at the end of the function, the caller receives a copy of the value so that it has a value it can use even after <code>input</code> is destroyed.</p>",
+      "preview": "In the above program, the function getValueFromUser() returns the value stored i",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b72",
+      "type": "paragraph",
+      "html": "<p>But where is the value that is copied back to the caller stored? We haven’t defined any variables in <code>main()</code>. The answer is that the return value is stored in a temporary object. This temporary object is then passed to <code>std::cout</code> to be printed.</p>",
+      "preview": "But where is the value that is copied back to the caller stored? We haven’t defi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b73",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Return by value returns a temporary object (that holds a copy of the return value) to the caller.</p></div>",
+      "preview": "Key insightReturn by value returns a temporary object (that holds a copy of the return value) to the",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b74",
+      "type": "paragraph",
+      "html": "<p>Temporary objects have no scope at all (this makes sense, since scope is a property of an identifier, and temporary objects have no identifier).</p>",
+      "preview": "Temporary objects have no scope at all (this makes sense, since scope is a prope",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b75",
+      "type": "paragraph",
+      "html": "<p>Temporary objects are destroyed at the end of the full expression in which they are created. This means temporary objects are always destroyed before the next statement executes.</p>",
+      "preview": "Temporary objects are destroyed at the end of the full expression in which they ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b76",
+      "type": "paragraph",
+      "html": "<p>In our example above, the temporary object created to hold the return value of <code>getValueFromUser()</code> is destroyed after <code>std::cout &lt;&lt; getValueFromUser() &lt;&lt; '\\n'</code> executes.</p>",
+      "preview": "In our example above, the temporary object created to hold the return value of g",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b77",
+      "type": "paragraph",
+      "html": "<p>In the case where a temporary object is used to initialize a variable, the initialization happens before the destruction of the temporary.</p>",
+      "preview": "In the case where a temporary object is used to initialize a variable, the initi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b78",
+      "type": "paragraph",
+      "html": "<p>In modern C++ (especially since C++17), the compiler has many tricks to avoid generating temporaries where previously it would have needed to. For example, when we use a return value to initialize a variable, this would normally result in the creation of a temporary holding the return value, and then using the temporary to initialize the variable. However, in modern C++, the compiler will often skip creating the temporary and just initialize the variable directly with the return value.</p>",
+      "preview": "In modern C++ (especially since C++17), the compiler has many tricks to avoid ge",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b79",
+      "type": "paragraph",
+      "html": "<p>Similarly, in the above example, since the return value of <code>getValueFromUser()</code> is immediately output, the compiler can skip creation and destruction of the temporary in <code>main()</code>, and use the return value of <code>getValueFromUser()</code> to directly initialize the parameter of <code>operator&lt;&lt;</code>.</p>",
+      "preview": "Similarly, in the above example, since the return value of getValueFromUser() is",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-local-scope_b80",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-local-scope_b81",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>What does the following program print?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid doIt(int x)\n{\n    int y{ 4 };\n    std::cout &lt;&lt; \"doIt: x = \" &lt;&lt; x &lt;&lt; \" y = \" &lt;&lt; y &lt;&lt; '\\n';\n\n    x = 3;\n    std::cout &lt;&lt; \"doIt: x = \" &lt;&lt; x &lt;&lt; \" y = \" &lt;&lt; y &lt;&lt; '\\n';\n}\n\nint main()\n{\n    int x{ 1 };\n    int y{ 2 };\n\n    std::cout &lt;&lt; \"main: x = \" &lt;&lt; x &lt;&lt; \" y = \" &lt;&lt; y &lt;&lt; '\\n';\n\n    doIt(x);\n\n    std::cout &lt;&lt; \"main: x = \" &lt;&lt; x &lt;&lt; \" y = \" &lt;&lt; y &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre>main: x = 1 y = 2\ndoIt: x = 1 y = 4\ndoIt: x = 3 y = 4\nmain: x = 1 y = 2\n</pre><p>Here’s what happens in this program:</p><ul><li>execution starts at the top of <code>main</code></li><li><code>main</code>‘s variable <code>x</code> is created and initialized with value <code>1</code></li><li><code>main</code>‘s variable <code>y</code> is created and initialized with value <code>2</code></li><li><code>std::cout</code> prints <code>main: x = 1 y = 2</code></li><li><code>doIt</code> is called with argument <code>1</code></li><li><code>doIt</code>‘s parameter <code>x</code> is created and initialized with value <code>1</code></li><li><code>doIt</code>’s variable <code>y</code> is created and initialized with value <code>4</code></li><li><code>doIt</code> prints <code>doIt: x = 1 y = 4</code></li><li><code>doIt</code>‘s variable <code>x</code> is assigned the new value <code>3</code></li><li><code>std::cout</code> prints <code>doIt: x = 3 y = 4</code></li><li><code>doIt</code>‘s <code>y</code> and <code>x</code> are destroyed</li><li><code>std::cout</code> prints <code>main: x = 1 y = 2</code></li><li><code>main</code> returns <code>0</code> to the operating system</li><li><code>main</code>‘s <code>y</code> and <code>x</code> are destroyed</li></ul><p>Note that even though <code>doIt</code>‘s variables <code>x</code> and <code>y</code> had their values initialized or assigned to something different than <code>main</code>‘s, <code>main</code>‘s <code>x</code> and <code>y</code> were unaffected because they are different variables.</p></div><p></p></div>",
+      "preview": "Question #1What does the following program print?#include <iostream> void doIt(i",
+      "canCheck": true
+    }
+  ]
+}

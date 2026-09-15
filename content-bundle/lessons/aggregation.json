@@ -1,0 +1,347 @@
+{
+  "index": 282,
+  "chapterId": "23",
+  "number": "23.3",
+  "title": "23.3 — Aggregation",
+  "url": "https://www.learncpp.com/cpp-tutorial/aggregation/",
+  "slug": "aggregation",
+  "scrapedAt": "2026-09-15T16:31:02.972Z",
+  "totalBlocks": 47,
+  "totalCheckpoints": 40,
+  "blocks": [
+    {
+      "id": "aggregation_b0",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/composition/\">23.2 -- Composition</a>, we noted that object composition is the process of creating complex objects from simpler ones. We also talked about one type of object composition, called composition. In a composition relationship, the whole object is responsible for the existence of the part.</p>",
+      "preview": "In the previous lesson 23.2 -- Composition, we noted that object composition is ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b1",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll take a look at the other subtype of object composition, called aggregation.</p>",
+      "preview": "In this lesson, we’ll take a look at the other subtype of object composition, ca",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b2",
+      "type": "section",
+      "title": "Aggregation",
+      "html": "<h3 class=\"cpp-section-heading\">Aggregation</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b3",
+      "type": "paragraph",
+      "html": "<p>To qualify as an <strong>aggregation</strong>, a whole object and its parts must have the following relationship:</p>",
+      "preview": "To qualify as an aggregation, a whole object and its parts must have the followi",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b4",
+      "type": "list",
+      "html": "<ul><li>The part (member) is part of the object (class)</li><li>The part (member) can (if desired) belong to more than one object (class) at a time</li><li>The part (member) does <em>not</em> have its existence managed by the object (class)</li><li>The part (member) does not know about the existence of the object (class)</li></ul>",
+      "preview": "The part (member) is part of the object (class)The part (member) can (if desired",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b5",
+      "type": "paragraph",
+      "html": "<p>Like a composition, an aggregation is still a part-whole relationship, where the parts are contained within the whole, and it is a unidirectional relationship. However, unlike a composition, parts can belong to more than one object at a time, and the whole object is not responsible for the existence and lifespan of the parts. When an aggregation is created, the aggregation is not responsible for creating the parts. When an aggregation is destroyed, the aggregation is not responsible for destroying the parts.</p>",
+      "preview": "Like a composition, an aggregation is still a part-whole relationship, where the",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b6",
+      "type": "paragraph",
+      "html": "<p>For example, consider the relationship between a person and their home address. In this example, for simplicity, we’ll say every person has an address. However, that address can belong to more than one person at a time: for example, to both you and your roommate or significant other. However, that address isn’t managed by the person -- the address probably existed before the person got there, and will exist after the person is gone. Additionally, a person knows what address they live at, but the addresses don’t know what people live there. Therefore, this is an aggregate relationship.</p>",
+      "preview": "For example, consider the relationship between a person and their home address. ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b7",
+      "type": "paragraph",
+      "html": "<p>Alternatively, consider a car and an engine. A car engine is part of the car. And although the engine belongs to the car, it can belong to other things as well, like the person who owns the car. The car is not responsible for the creation or destruction of the engine. And while the car knows it has an engine (it has to in order to get anywhere) the engine doesn’t know it’s part of the car.</p>",
+      "preview": "Alternatively, consider a car and an engine. A car engine is part of the car. An",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b8",
+      "type": "paragraph",
+      "html": "<p>When it comes to modeling physical objects, the use of the term “destroyed” can be a little dicey. One might argue, “If a meteor fell out of the sky and crushed the car, wouldn’t the car parts all be destroyed too?” Yes, of course. But that’s the fault of the meteor. The important point is that the car is not responsible for destruction of its parts (but an external force might be).</p>",
+      "preview": "When it comes to modeling physical objects, the use of the term “destroyed” can ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b9",
+      "type": "paragraph",
+      "html": "<p>We can say that aggregation models “has-a” relationships (a department has teachers, the car has an engine).</p>",
+      "preview": "We can say that aggregation models “has-a” relationships (a department has teach",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b10",
+      "type": "paragraph",
+      "html": "<p>Similar to a composition, the parts of an aggregation can be singular or multiplicative.</p>",
+      "preview": "Similar to a composition, the parts of an aggregation can be singular or multipl",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b11",
+      "type": "section",
+      "title": "Implementing aggregations",
+      "html": "<h3 class=\"cpp-section-heading\">Implementing aggregations</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b12",
+      "type": "paragraph",
+      "html": "<p>Because aggregations are similar to compositions in that they are both part-whole relationships, they are implemented almost identically, and the difference between them is mostly semantic. In a composition, we typically add our parts to the composition using normal member variables (or pointers where the allocation and deallocation process is handled by the composition class).</p>",
+      "preview": "Because aggregations are similar to compositions in that they are both part-whol",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b13",
+      "type": "paragraph",
+      "html": "<p>In an aggregation, we also add parts as member variables. However, these member variables are typically either references or pointers that are used to point at objects that have been created outside the scope of the class. Consequently, an aggregation usually either takes the objects it is going to point to as constructor parameters, or it begins empty and the subobjects are added later via access functions or operators.</p>",
+      "preview": "In an aggregation, we also add parts as member variables. However, these member ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b14",
+      "type": "paragraph",
+      "html": "<p>Because these parts exist outside of the scope of the class, when the class is destroyed, the pointer or reference member variable will be destroyed (but not deleted). Consequently, the parts themselves will still exist.</p>",
+      "preview": "Because these parts exist outside of the scope of the class, when the class is d",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b15",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at a Teacher and Department example in more detail. In this example, we’re going to make a couple of simplifications: First, the department will only hold one teacher. Second, the teacher will be unaware of what department they’re part of.</p>",
+      "preview": "Let’s take a look at a Teacher and Department example in more detail. In this ex",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Teacher\n{\nprivate:\n  std::string m_name{};\n\npublic:\n  Teacher(std::string_view name)\n      : m_name{ name }\n  {\n  }\n\n  const std::string& getName() const { return m_name; }\n};\n\nclass Department\n{\nprivate:\n  const Teacher& m_teacher; // This dept holds only one teacher for simplicity, but it could hold many teachers\n\npublic:\n  Department(const Teacher& teacher)\n      : m_teacher{ teacher }\n  {\n  }\n};\n\nint main()\n{\n  // Create a teacher outside the scope of the Department\n  Teacher bob{ \"Bob\" }; // create a teacher\n\n  {\n    // Create a department and use the constructor parameter to pass\n    // the teacher to it.\n    Department department{ bob };\n\n  } // department goes out of scope here and is destroyed\n\n  // bob still exists here, but the department doesn't\n\n  std::cout << bob.getName() << \" still exists!\\n\";\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Teacher\n{\nprivate:\n  std::string m_name{};\n\npublic:\n  Teacher(std::string_view name)\n      : m_name{ name }\n  {\n  }\n\n  const std::string&amp; getName() const { return m_name; }\n};\n\nclass Department\n{\nprivate:\n  const Teacher&amp; m_teacher; // This dept holds only one teacher for simplicity, but it could hold many teachers\n\npublic:\n  Department(const Teacher&amp; teacher)\n      : m_teacher{ teacher }\n  {\n  }\n};\n\nint main()\n{\n  // Create a teacher outside the scope of the Department\n  Teacher bob{ \"Bob\" }; // create a teacher\n\n  {\n    // Create a department and use the constructor parameter to pass\n    // the teacher to it.\n    Department department{ bob };\n\n  } // department goes out of scope here and is destroyed\n\n  // bob still exists here, but the department doesn't\n\n  std::cout &lt;&lt; bob.getName() &lt;&lt; \" still exists!\\n\";\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b17",
+      "type": "paragraph",
+      "html": "<p>In this case, <code>bob</code> is created independently of <code>department</code>, and then passed into <code>department</code>‘s constructor. When <code>department</code> is destroyed, the <code>m_teacher</code> reference is destroyed, but the teacher itself is not destroyed, so it still exists until it is independently destroyed later in <code>main()</code>.</p>",
+      "preview": "In this case, bob is created independently of department, and then passed into d",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b18",
+      "type": "section",
+      "title": "Pick the right relationship for what you’re modeling",
+      "html": "<h3 class=\"cpp-section-heading\">Pick the right relationship for what you’re modeling</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b19",
+      "type": "paragraph",
+      "html": "<p>Although it might seem a little silly in the above example that the Teachers don’t know what Department they’re working for, that may be totally fine in the context of a given program. When you’re determining what kind of relationship to implement, implement the simplest relationship that meets your needs, not the one that seems like it would fit best in a real-life context.</p>",
+      "preview": "Although it might seem a little silly in the above example that the Teachers don",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b20",
+      "type": "paragraph",
+      "html": "<p>For example, if you’re writing a body shop simulator, you may want to implement a car and engine as an aggregation, so the engine can be removed and put on a shelf somewhere for later. However, if you’re writing a racing simulation, you may want to implement a car and an engine as a composition, since the engine will never exist outside of the car in that context.</p>",
+      "preview": "For example, if you’re writing a body shop simulator, you may want to implement ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b21",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Implement the simplest relationship type that meets the needs of your program, not what seems right in real-life.</p></div>",
+      "preview": "Best practiceImplement the simplest relationship type that meets the needs of your program, not what",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b22",
+      "type": "section",
+      "title": "Summarizing composition and aggregation",
+      "html": "<h3 class=\"cpp-section-heading\">Summarizing composition and aggregation</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b23",
+      "type": "paragraph",
+      "html": "<p>Compositions:</p>",
+      "preview": "Compositions:",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b24",
+      "type": "list",
+      "html": "<ul><li>Typically use normal member variables</li><li>Can use pointer members if the class handles object allocation/deallocation itself</li><li>Responsible for creation/destruction of parts</li></ul>",
+      "preview": "Typically use normal member variablesCan use pointer members if the class handle",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b25",
+      "type": "paragraph",
+      "html": "<p>Aggregations:</p>",
+      "preview": "Aggregations:",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b26",
+      "type": "list",
+      "html": "<ul><li>Typically use pointer or reference members that point to or reference objects that live outside the scope of the aggregate class</li><li>Not responsible for creating/destroying parts</li></ul>",
+      "preview": "Typically use pointer or reference members that point to or reference objects th",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b27",
+      "type": "paragraph",
+      "html": "<p>It is worth noting that the concepts of composition and aggregation can be mixed freely within the same class. It is entirely possible to write a class that is responsible for the creation/destruction of some parts but not others. For example, our Department class could have a name and a Teacher. The name would probably be added to the Department by composition, and would be created and destroyed with the Department. On the other hand, the Teacher would be added to the department by aggregation, and created/destroyed independently.</p>",
+      "preview": "It is worth noting that the concepts of composition and aggregation can be mixed",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b28",
+      "type": "paragraph",
+      "html": "<p>While aggregations can be extremely useful, they are also potentially more dangerous, because aggregations do not handle deallocation of their parts. Deallocations are left to an external party to do. If the external party no longer has a pointer or reference to the abandoned parts, or if it simply forgets to do the cleanup (assuming the class will handle that), then memory will be leaked.</p>",
+      "preview": "While aggregations can be extremely useful, they are also potentially more dange",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b29",
+      "type": "paragraph",
+      "html": "<p>For this reason, compositions should be favored over aggregations.</p>",
+      "preview": "For this reason, compositions should be favored over aggregations.",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b30",
+      "type": "section",
+      "title": "A few warnings/errata",
+      "html": "<h3 class=\"cpp-section-heading\">A few warnings/errata</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b31",
+      "type": "paragraph",
+      "html": "<p>For a variety of historical and contextual reasons, unlike a composition, the definition of an aggregation is not precise -- so you may see other reference material define it differently from the way we do. That’s fine, just be aware.</p>",
+      "preview": "For a variety of historical and contextual reasons, unlike a composition, the de",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b32",
+      "type": "paragraph",
+      "html": "<p>One final note: In the lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-structs-members-and-member-selection/\">13.7 -- Introduction to structs, members, and member selection</a>, we defined aggregate data types (such as structs and classes) as data types that group multiple variables together. You may also run across the term <def>aggregate class</def> in your C++ journeys, which is defined as a struct or class that has no provided constructors, destructors, or overloaded assignment, has all public members, and does not use inheritance -- essentially a plain-old-data struct. Despite the similarities in naming, aggregates and aggregation are different and should not be confused.</p>",
+      "preview": "One final note: In the lesson 13.7 -- Introduction to structs, members, and memb",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b33",
+      "type": "section",
+      "title": "std::reference_wrapper",
+      "html": "<h3 class=\"cpp-section-heading\">std::reference_wrapper</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b34",
+      "type": "paragraph",
+      "html": "<p>In the <code>Department</code>/<code>Teacher</code> example above, we used a reference in the <code>Department</code> to store the <code>Teacher</code>. This works fine if there is only one <code>Teacher</code>, but what if a Department has multiple Teachers? We’d like to store those Teachers in a list of some kind (e.g. a <code>std::vector</code>) but fixed arrays and the various standard library lists can’t hold references (because list elements must be assignable, and references can’t be reassigned).</p>",
+      "preview": "In the Department/Teacher example above, we used a reference in the Department t",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::vector<const Teacher&> m_teachers{}; // Illegal",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector&lt;const Teacher&amp;&gt; m_teachers{}; // Illegal</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b36",
+      "type": "paragraph",
+      "html": "<p>Instead of references, we could use pointers, but that would open the possibility to store or pass null pointers. In the <code>Department</code>/<code>Teacher</code> example, we don’t want to allow null pointers. To solve this, there’s <code>std::reference_wrapper</code>.</p>",
+      "preview": "Instead of references, we could use pointers, but that would open the possibilit",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b37",
+      "type": "paragraph",
+      "html": "<p>Essentially, <code>std::reference_wrapper</code> is a class that acts like a reference, but also allows assignment and copying, so it’s compatible with lists like <code>std::vector</code>.</p>",
+      "preview": "Essentially, std::reference_wrapper is a class that acts like a reference, but a",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b38",
+      "type": "paragraph",
+      "html": "<p>The good news is that you don’t really need to understand how it works to use it. All you need to know are three things:</p>",
+      "preview": "The good news is that you don’t really need to understand how it works to use it",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b39",
+      "type": "list",
+      "html": "<ol start=\"1\"><li><code>std::reference_wrapper</code> lives in the &lt;functional&gt; header.</li><li>When you create your <code>std::reference_wrapper</code> wrapped object, the object can’t be an anonymous object (since anonymous objects have expression scope, and this would leave the reference dangling).</li><li>When you want to get your object back out of <code>std::reference_wrapper</code>, you use the <code>get()</code> member function.</li></ol>",
+      "preview": "std::reference_wrapper lives in the <functional> header.When you create your std",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b40",
+      "type": "paragraph",
+      "html": "<p>Here’s an example using <code>std::reference_wrapper</code> in a <code>std::vector</code>:</p>",
+      "preview": "Here’s an example using std::reference_wrapper in a std::vector:",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <functional> // std::reference_wrapper\n#include <iostream>\n#include <vector>\n#include <string>\n\nint main()\n{\n  std::string tom{ \"Tom\" };\n  std::string berta{ \"Berta\" };\n\n  std::vector<std::reference_wrapper<std::string>> names{ tom, berta }; // these strings are stored by reference, not value\n\n  std::string jim{ \"Jim\" };\n\n  names.emplace_back(jim);\n\n  for (auto name : names)\n  {\n    // Use the get() member function to get the referenced string.\n    name.get() += \" Beam\";\n  }\n\n  std::cout << jim << '\\n'; // prints Jim Beam\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt; // std::reference_wrapper\n#include &lt;iostream&gt;\n#include &lt;vector&gt;\n#include &lt;string&gt;\n\nint main()\n{\n  std::string tom{ \"Tom\" };\n  std::string berta{ \"Berta\" };\n\n  std::vector&lt;std::reference_wrapper&lt;std::string&gt;&gt; names{ tom, berta }; // these strings are stored by reference, not value\n\n  std::string jim{ \"Jim\" };\n\n  names.emplace_back(jim);\n\n  for (auto name : names)\n  {\n    // Use the get() member function to get the referenced string.\n    name.get() += \" Beam\";\n  }\n\n  std::cout &lt;&lt; jim &lt;&lt; '\\n'; // prints Jim Beam\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b42",
+      "type": "paragraph",
+      "html": "<p>To create a vector of const references, we’d have to add const before the <code>std::string</code> like so</p>",
+      "preview": "To create a vector of const references, we’d have to add const before the std::s",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b43",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Vector of const references to std::string\nstd::vector<std::reference_wrapper<const std::string>> names{ tom, berta };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Vector of const references to std::string\nstd::vector&lt;std::reference_wrapper&lt;const std::string&gt;&gt; names{ tom, berta };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b44",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "aggregation_b45",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Would you be more likely to implement the following as a composition or an aggregation?<br>a) A ball that has a color<br>b) An employer that is employing multiple people<br>c) The departments in a university<br>d) Your age<br>e) A bag of marbles</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>a) Composition: Color is an intrinsic property of a ball.<br>b) Aggregation: An employer doesn’t start with any employees and hopefully doesn’t destroy all its employees when it goes bankrupt.<br>c) Composition: Departments can’t exist in absence of a university.<br>d) Composition: Your age is an intrinsic property of you.<br>e) Aggregation: The bag and the marbles inside have independent existences.</p></div><p></p></div>",
+      "preview": "Question #1Would you be more likely to implement the following as a composition ",
+      "canCheck": true
+    },
+    {
+      "id": "aggregation_b46",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>Update the <code>Department</code>/<code>Teacher</code> example so the <code>Department</code> can handle multiple Teachers. The following code should execute:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// ...\n\nint main()\n{\n  // Create a teacher outside the scope of the Department\n  Teacher t1{ \"Bob\" };\n  Teacher t2{ \"Frank\" };\n  Teacher t3{ \"Beth\" };\n\n  {\n    // Create a department and add some Teachers to it\n    Department department{}; // create an empty Department\n\n    department.add(t1);\n    department.add(t2);\n    department.add(t3);\n\n    std::cout &lt;&lt; department;\n\n  } // department goes out of scope here and is destroyed\n\n  std::cout &lt;&lt; t1.getName() &lt;&lt; \" still exists!\\n\";\n  std::cout &lt;&lt; t2.getName() &lt;&lt; \" still exists!\\n\";\n  std::cout &lt;&lt; t3.getName() &lt;&lt; \" still exists!\\n\";\n\n  return 0;\n}</code></pre><p>This should print:</p><pre>Department: Bob Frank Beth\nBob still exists!\nFrank still exists!\nBeth still exists!\n</pre><p><a class=\"hint_link_show\" href=\"javascript:void(0)\" onclick=\"cppHintToggle(document.getElementById('cpp_hint_id_0'),this,'Show Hint','')\">Show Hint</a></p><div class=\"wphint\" id=\"cpp_hint_id_0\" style=\"display:none;margin-bottom:1em\">Hint: Store the teachers in a <code>std::vector</code><p></p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector&lt;std::reference_wrapper&lt;const Teacher&gt;&gt; m_teachers{};</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt; // std::reference_wrapper\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n#include &lt;vector&gt;\n\nclass Teacher\n{\nprivate:\n  std::string m_name{};\n\npublic:\n  Teacher(std::string_view name)\n      : m_name{ name }\n  {\n  }\n\n  const std::string&amp; getName() const { return m_name; }\n};\n\nclass Department\n{\nprivate:\n  std::vector&lt;std::reference_wrapper&lt;const Teacher&gt;&gt; m_teachers{};\n\npublic:\n  Department() = default;\n\n  // Pass by regular reference. The user of the Department class shouldn't care\n  // about how it's implemented.\n  void add(const Teacher&amp; teacher)\n  {\n    m_teachers.emplace_back(teacher);\n  }\n\n  friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Department&amp; department)\n  {\n    out &lt;&lt; \"Department: \";\n\n    for (const auto&amp; teacher : department.m_teachers)\n    {\n      out &lt;&lt; teacher.get().getName() &lt;&lt; ' ';\n    }\n\n    out &lt;&lt; '\\n';\n\n    return out;\n  }\n};\n\nint main()\n{\n  // Create a teacher outside the scope of the Department\n  Teacher t1{ \"Bob\" };\n  Teacher t2{ \"Frank\" };\n  Teacher t3{ \"Beth\" };\n\n  {\n    // Create a department and add some Teachers to it\n    Department department{}; // create an empty Department\n\n    department.add(t1);\n    department.add(t2);\n    department.add(t3);\n\n    std::cout &lt;&lt; department;\n\n  } // department goes out of scope here and is destroyed\n\n  std::cout &lt;&lt; t1.getName() &lt;&lt; \" still exists!\\n\";\n  std::cout &lt;&lt; t2.getName() &lt;&lt; \" still exists!\\n\";\n  std::cout &lt;&lt; t3.getName() &lt;&lt; \" still exists!\\n\";\n\n  return 0;\n}</code></pre></div></div>",
+      "preview": "Question #2Update the Department/Teacher example so the Department can handle mu",
+      "canCheck": true
+    }
+  ]
+}

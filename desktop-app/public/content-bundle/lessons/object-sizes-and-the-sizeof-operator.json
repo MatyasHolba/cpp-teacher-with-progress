@@ -1,0 +1,316 @@
+{
+  "index": 52,
+  "chapterId": "4",
+  "number": "4.3",
+  "title": "4.3 — Object sizes and the sizeof operator",
+  "url": "https://www.learncpp.com/cpp-tutorial/object-sizes-and-the-sizeof-operator/",
+  "slug": "object-sizes-and-the-sizeof-operator",
+  "scrapedAt": "2026-09-15T16:29:02.756Z",
+  "totalBlocks": 42,
+  "totalCheckpoints": 36,
+  "blocks": [
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b0",
+      "type": "section",
+      "title": "Object sizes",
+      "html": "<h3 class=\"cpp-section-heading\">Object sizes</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b1",
+      "type": "paragraph",
+      "html": "<p>As you learned in the lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/\">4.1 -- Introduction to fundamental data types</a>, memory on modern machines is typically organized into byte-sized units, with each byte of memory having a unique address. Up to this point, it has been useful to think of memory as a bunch of cubbyholes or mailboxes where we can put and retrieve information, and variables as names for accessing those cubbyholes or mailboxes.</p>",
+      "preview": "As you learned in the lesson 4.1 -- Introduction to fundamental data types, memo",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b2",
+      "type": "paragraph",
+      "html": "<p>However, this analogy is not quite correct in one regard -- most objects actually take up more than 1 byte of memory. A single object may use 1, 2, 4, 8, or even more consecutive memory addresses. The amount of memory that an object uses is based on its data type.</p>",
+      "preview": "However, this analogy is not quite correct in one regard -- most objects actuall",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b3",
+      "type": "paragraph",
+      "html": "<p>Because we typically access memory through variable names (and not directly via memory addresses), the compiler is able to hide the details of how many bytes a given object uses from us. When we access some variable <code>x</code> in our source code, the compiler knows how many bytes of data need to be retrieved (based on the type of variable <code>x</code>), and will output the appropriate machine language code to handle that detail for us.</p>",
+      "preview": "Because we typically access memory through variable names (and not directly via ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b4",
+      "type": "paragraph",
+      "html": "<p>Even so, there are several reasons it is useful to know how much memory an object uses.</p>",
+      "preview": "Even so, there are several reasons it is useful to know how much memory an objec",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b5",
+      "type": "paragraph",
+      "html": "<p>First, the more memory an object uses, the more information it can hold.</p>",
+      "preview": "First, the more memory an object uses, the more information it can hold.",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b6",
+      "type": "paragraph",
+      "html": "<p>A single bit can hold 2 possible values, a 0, or a 1:</p>",
+      "preview": "A single bit can hold 2 possible values, a 0, or a 1:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b7",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>bit 0</th></tr><tr><td>0</td></tr><tr><td>1</td></tr></tbody></table></div>",
+      "preview": "bit 001",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b8",
+      "type": "paragraph",
+      "html": "<p>2 bits can hold 4 possible values:</p>",
+      "preview": "2 bits can hold 4 possible values:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b9",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>bit 0</th><th>bit 1</th></tr><tr><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td></tr></tbody></table></div>",
+      "preview": "bit 0bit 100011011",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b10",
+      "type": "paragraph",
+      "html": "<p>3 bits can hold 8 possible values:</p>",
+      "preview": "3 bits can hold 8 possible values:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b11",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>bit 0</th><th>bit 1</th><th>bit 2</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></tbody></table></div>",
+      "preview": "bit 0bit 1bit 2000001010011100101110111",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b12",
+      "type": "paragraph",
+      "html": "<p>To generalize, an object with <em>n</em> bits (where n is an integer) can hold 2<sup>n</sup> (2 to the power of n, also commonly written 2^n) unique values. Therefore, with an 8-bit byte, a byte-sized object can hold 2<sup>8</sup> (256) different values. An object that uses 2 bytes can hold 2^16 (65536) different values!</p>",
+      "preview": "To generalize, an object with n bits (where n is an integer) can hold 2n (2 to t",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b13",
+      "type": "paragraph",
+      "html": "<p>Thus, the size of the object puts a limit on the amount of unique values it can store -- objects that utilize more bytes can store a larger number of unique values. We will explore this further when we talk more about integers.</p>",
+      "preview": "Thus, the size of the object puts a limit on the amount of unique values it can ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b14",
+      "type": "paragraph",
+      "html": "<p>Second, computers have a finite amount of free memory. Every time we define an object, a small portion of that free memory is used for as long as the object is in existence. Because modern computers have a lot of memory, this impact is usually negligible. However, for programs that need a large amount of objects or data (e.g. a game that is rendering millions of polygons), the difference between using 1 byte and 8 byte objects can be significant.</p>",
+      "preview": "Second, computers have a finite amount of free memory. Every time we define an o",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b15",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>New programmers often focus too much on optimizing their code to use as little memory as possible. In most cases, this makes a negligible difference. Focus on writing maintainable code, and optimize only when and where the benefit will be substantive.</p></div>",
+      "preview": "Key insightNew programmers often focus too much on optimizing their code to use as little memory as ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b16",
+      "type": "section",
+      "title": "Fundamental data type sizes",
+      "html": "<h3 class=\"cpp-section-heading\">Fundamental data type sizes</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b17",
+      "type": "paragraph",
+      "html": "<p>The obvious next question is “how much memory do objects of a given data type use?”. Perhaps surprisingly, the C++ standard does not define the exact size (in bits) of any of the fundamental types.</p>",
+      "preview": "The obvious next question is “how much memory do objects of a given data type us",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b18",
+      "type": "paragraph",
+      "html": "<p>Instead, the standard says the following:</p>",
+      "preview": "Instead, the standard says the following:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b19",
+      "type": "list",
+      "html": "<ul><li>An object must occupy at least 1 byte (so that each object has a distinct memory address).</li><li>A byte must be at least 8 bits.</li><li>The integral types <code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, and <code>long long</code> have a minimum size of 8, 16, 16, 32, and 64 bits respectively.</li><li><code>char</code> and <code>char8_t</code> are exactly 1 byte (at least 8 bits).</li></ul>",
+      "preview": "An object must occupy at least 1 byte (so that each object has a distinct memory",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b20",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>When we talk about the size of a type, we really mean the size of an instantiated object of that type.</p></div>",
+      "preview": "NomenclatureWhen we talk about the size of a type, we really mean the size of an instantiated object",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b21",
+      "type": "paragraph",
+      "html": "<p>In this tutorial series, we will present a simplified view, by making some reasonable assumptions that are generally true for modern architectures:</p>",
+      "preview": "In this tutorial series, we will present a simplified view, by making some reaso",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b22",
+      "type": "list",
+      "html": "<ul><li>A byte is 8 bits.</li><li>Memory is byte addressable (we can access every byte of memory independently).</li><li>Floating point support is IEEE-754 compliant.</li><li>We are on a 32-bit or 64-bit architecture.</li></ul>",
+      "preview": "A byte is 8 bits.Memory is byte addressable (we can access every byte of memory ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b23",
+      "type": "paragraph",
+      "html": "<p>Given the above assumptions, we can reasonably state the following:</p>",
+      "preview": "Given the above assumptions, we can reasonably state the following:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b24",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Category</th><th>Type</th><th>Minimum Size</th><th>Typical Size</th></tr><tr><td>Boolean</td><td>bool</td><td>1 byte</td><td>1 byte</td></tr><tr><td>Character</td><td>char</td><td>1 byte (exactly)</td><td>1 byte</td></tr><tr><td></td><td>wchar_t</td><td>1 byte</td><td>2 or 4 bytes</td></tr><tr><td></td><td>char8_t</td><td>1 byte</td><td>1 byte</td></tr><tr><td></td><td>char16_t</td><td>2 bytes</td><td>2 bytes</td></tr><tr><td></td><td>char32_t</td><td>4 bytes</td><td>4 bytes</td></tr><tr><td>Integral</td><td>short</td><td>2 bytes</td><td>2 bytes</td></tr><tr><td></td><td>int</td><td>2 bytes</td><td>4 bytes</td></tr><tr><td></td><td>long</td><td>4 bytes</td><td>4 or 8 bytes</td></tr><tr><td></td><td>long long</td><td>8 bytes</td><td>8 bytes</td></tr><tr><td>Floating point</td><td>float</td><td>4 bytes</td><td>4 bytes</td></tr><tr><td></td><td>double</td><td>8 bytes</td><td>8 bytes</td></tr><tr><td></td><td>long double</td><td>8 bytes</td><td>8, 12, or 16 bytes</td></tr><tr><td>Pointer</td><td>std::nullptr_t</td><td>4 bytes</td><td>4 or 8 bytes</td></tr></tbody></table></div>",
+      "preview": "CategoryTypeMinimum SizeTypical SizeBooleanbool1 byte1 byteCharacterchar1 byte (",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b25",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>For maximum portability, you shouldn’t assume that objects are larger than the specified minimum size.</p><p>Alternatively, if you want to assume that a type has some non-minimum size (e.g. that an int is at least <code>4</code> bytes), you can use <code>static_assert</code> to have the compiler fail a build if it is compiled on an architecture where this assumption is not true. We cover how to do this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/assert-and-static_assert/#static_assert\">9.6 -- Assert and static_assert</a>.</p></div>",
+      "preview": "TipFor maximum portability, you shouldn’t assume that objects are larger than the specified minimum ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b26",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>You can find more information about what the C++ standard says about the minimum size of various types <a href=\"https://en.cppreference.com/w/cpp/language/types\">here</a>.</p></div>",
+      "preview": "Related contentYou can find more information about what the C++ standard says about the minimum size",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b27",
+      "type": "section",
+      "title": "The sizeof operator",
+      "html": "<h3 class=\"cpp-section-heading\">The sizeof operator</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b28",
+      "type": "paragraph",
+      "html": "<p>In order to determine the size of data types on a particular machine, C++ provides an operator named <code>sizeof</code>. The <strong>sizeof operator</strong> is a unary operator that takes either a type or a variable, and returns the size of an object of that type (in bytes). You can compile and run the following program to find out how large some of your data types are:</p>",
+      "preview": "In order to determine the size of data types on a particular machine, C++ provid",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iomanip> // for std::setw (which sets the width of the subsequent output)\n#include <iostream>\n#include <climits> // for CHAR_BIT\n\nint main()\n{\n    std::cout << \"A byte is \" << CHAR_BIT << \" bits\\n\\n\";\n\n    std::cout << std::left; // left justify output\n\n    std::cout << std::setw(16) << \"bool:\" << sizeof(bool) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"char:\" << sizeof(char) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"short:\" << sizeof(short) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"int:\" << sizeof(int) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"long:\" << sizeof(long) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"long long:\" << sizeof(long long) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"float:\" << sizeof(float) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"double:\" << sizeof(double) << \" bytes\\n\";\n    std::cout << std::setw(16) << \"long double:\" << sizeof(long double) << \" bytes\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iomanip&gt; // for std::setw (which sets the width of the subsequent output)\n#include &lt;iostream&gt;\n#include &lt;climits&gt; // for CHAR_BIT\n\nint main()\n{\n    std::cout &lt;&lt; \"A byte is \" &lt;&lt; CHAR_BIT &lt;&lt; \" bits\\n\\n\";\n\n    std::cout &lt;&lt; std::left; // left justify output\n\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"bool:\" &lt;&lt; sizeof(bool) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"char:\" &lt;&lt; sizeof(char) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"short:\" &lt;&lt; sizeof(short) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"int:\" &lt;&lt; sizeof(int) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"long:\" &lt;&lt; sizeof(long) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"long long:\" &lt;&lt; sizeof(long long) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"float:\" &lt;&lt; sizeof(float) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"double:\" &lt;&lt; sizeof(double) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; std::setw(16) &lt;&lt; \"long double:\" &lt;&lt; sizeof(long double) &lt;&lt; \" bytes\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b30",
+      "type": "paragraph",
+      "html": "<p>Here is the output from the author’s machine:</p>",
+      "preview": "Here is the output from the author’s machine:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b31",
+      "type": "output",
+      "text": "bool:           1 bytes\nchar:           1 bytes\nshort:          2 bytes\nint:            4 bytes\nlong:           4 bytes\nlong long:      8 bytes\nfloat:          4 bytes\ndouble:         8 bytes\nlong double:    8 bytes\n",
+      "html": "<pre>bool:           1 bytes\nchar:           1 bytes\nshort:          2 bytes\nint:            4 bytes\nlong:           4 bytes\nlong long:      8 bytes\nfloat:          4 bytes\ndouble:         8 bytes\nlong double:    8 bytes\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b32",
+      "type": "paragraph",
+      "html": "<p>Your results may vary based on compiler, computer architecture, OS, compilation settings (32-bit vs 64-bit), etc…</p>",
+      "preview": "Your results may vary based on compiler, computer architecture, OS, compilation ",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b33",
+      "type": "paragraph",
+      "html": "<p>Trying to use <code>sizeof</code> on an incomplete type (such as <code>void</code>) will result in a compilation error.</p>",
+      "preview": "Trying to use sizeof on an incomplete type (such as void) will result in a compi",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b34",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For gcc users</p><p>If you have not disabled compiler extensions, gcc allows <code>sizeof(void)</code> to return 1 instead of producing a diagnostic (<a href=\"https://gcc.gnu.org/onlinedocs/gcc-4.4.2/gcc/Pointer-Arith.html#Pointer-Arith\">Pointer-Arith</a>). We show how to disable compiler extensions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-compiler-extensions/\">0.10 -- Configuring your compiler: Compiler extensions</a>.</p></div>",
+      "preview": "For gcc usersIf you have not disabled compiler extensions, gcc allows sizeof(void) to return 1 inste",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b35",
+      "type": "paragraph",
+      "html": "<p>You can also use the <code>sizeof</code> operator on a variable name:</p>",
+      "preview": "You can also use the sizeof operator on a variable name:",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int x{};\n    std::cout << \"x is \" << sizeof(x) << \" bytes\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{};\n    std::cout &lt;&lt; \"x is \" &lt;&lt; sizeof(x) &lt;&lt; \" bytes\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b37",
+      "type": "output",
+      "text": "x is 4 bytes\n",
+      "html": "<pre>x is 4 bytes\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b38",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p><code>sizeof</code> does not include dynamically allocated memory used by an object. We discuss dynamic memory allocation in a future lesson.</p></div>",
+      "preview": "For advanced readerssizeof does not include dynamically allocated memory used by an object. We discu",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b39",
+      "type": "section",
+      "title": "Fundamental data type performance",
+      "html": "<h3 class=\"cpp-section-heading\">Fundamental data type performance</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b40",
+      "type": "paragraph",
+      "html": "<p>On modern machines, objects of the fundamental data types are fast, so performance while using or copying these types should generally not be a concern.</p>",
+      "preview": "On modern machines, objects of the fundamental data types are fast, so performan",
+      "canCheck": true
+    },
+    {
+      "id": "object-sizes-and-the-sizeof-operator_b41",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>You might assume that types that use less memory would be faster than types that use more memory. This is not always true. CPUs are often optimized to process data of a certain size (e.g. 32 bits), and types that match that size may be processed quicker. On such a machine, a 32-bit int could be faster than a 16-bit short or an 8-bit char.</p></div>",
+      "preview": "As an aside…You might assume that types that use less memory would be faster than types that use mor",
+      "canCheck": true
+    }
+  ]
+}

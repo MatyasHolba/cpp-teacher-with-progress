@@ -1,0 +1,136 @@
+{
+  "index": 180,
+  "chapterId": "13",
+  "number": "13.15",
+  "title": "13.15 — Alias templates",
+  "url": "https://www.learncpp.com/cpp-tutorial/alias-templates/",
+  "slug": "alias-templates",
+  "scrapedAt": "2026-09-15T16:30:09.493Z",
+  "totalBlocks": 17,
+  "totalCheckpoints": 16,
+  "blocks": [
+    {
+      "id": "alias-templates_b0",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/\">10.7 -- Typedefs and type aliases</a>, we discussed how type aliases let us define an alias for an existing type.</p>",
+      "preview": "In lesson 10.7 -- Typedefs and type aliases, we discussed how type aliases let u",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b1",
+      "type": "paragraph",
+      "html": "<p>Creating a type alias for a class template where all template arguments are explicitly specified works just like a normal type alias:</p>",
+      "preview": "Creating a type alias for a class template where all template arguments are expl",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\ntemplate <typename T>\nvoid print(const Pair<T>& p)\n{\n    std::cout << p.first << ' ' << p.second << '\\n';\n}\n\nint main()\n{\n    using Point = Pair<int>; // create normal type alias\n    Point p { 1, 2 };        // compiler replaces this with Pair<int>\n\n    print(p);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\ntemplate &lt;typename T&gt;\nvoid print(const Pair&lt;T&gt;&amp; p)\n{\n    std::cout &lt;&lt; p.first &lt;&lt; ' ' &lt;&lt; p.second &lt;&lt; '\\n';\n}\n\nint main()\n{\n    using Point = Pair&lt;int&gt;; // create normal type alias\n    Point p { 1, 2 };        // compiler replaces this with Pair&lt;int&gt;\n\n    print(p);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b3",
+      "type": "paragraph",
+      "html": "<p>Such aliases can be defined locally (e.g. inside a function) or globally.</p>",
+      "preview": "Such aliases can be defined locally (e.g. inside a function) or globally.",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b4",
+      "type": "section",
+      "title": "Alias templates",
+      "html": "<h3 class=\"cpp-section-heading\">Alias templates</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "alias-templates_b5",
+      "type": "paragraph",
+      "html": "<p>In other cases, we might want a type alias for a template class where not all of the template arguments are defined as part of the alias (and will instead be provided by the user of the type alias). To do this, we can define an <strong>alias template</strong>, which is a template that can be used to instantiate type aliases. Just like type aliases do not define distinct types, alias templates do not define distinct types.</p>",
+      "preview": "In other cases, we might want a type alias for a template class where not all of",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b6",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of how this works:</p>",
+      "preview": "Here’s an example of how this works:",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\n// Here's our alias template\n// Alias templates must be defined in global scope\ntemplate <typename T>\nusing Coord = Pair<T>; // Coord is an alias for Pair<T>\n\n// Our print function template needs to know that Coord's template parameter T is a type template parameter\ntemplate <typename T>\nvoid print(const Coord<T>& c)\n{\n    std::cout << c.first << ' ' << c.second << '\\n';\n}\n\nint main()\n{\n    Coord<int> p1 { 1, 2 }; // Pre C++-20: We must explicitly specify all type template argument\n    Coord p2 { 1, 2 };      // In C++20, we can use alias template deduction to deduce the template arguments in cases where CTAD works\n\n    std::cout << p1.first << ' ' << p1.second << '\\n';\n    print(p2);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\n// Here's our alias template\n// Alias templates must be defined in global scope\ntemplate &lt;typename T&gt;\nusing Coord = Pair&lt;T&gt;; // Coord is an alias for Pair&lt;T&gt;\n\n// Our print function template needs to know that Coord's template parameter T is a type template parameter\ntemplate &lt;typename T&gt;\nvoid print(const Coord&lt;T&gt;&amp; c)\n{\n    std::cout &lt;&lt; c.first &lt;&lt; ' ' &lt;&lt; c.second &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Coord&lt;int&gt; p1 { 1, 2 }; // Pre C++-20: We must explicitly specify all type template argument\n    Coord p2 { 1, 2 };      // In C++20, we can use alias template deduction to deduce the template arguments in cases where CTAD works\n\n    std::cout &lt;&lt; p1.first &lt;&lt; ' ' &lt;&lt; p1.second &lt;&lt; '\\n';\n    print(p2);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b8",
+      "type": "paragraph",
+      "html": "<p>In this example, we’re defining an alias template named <code>Coord</code> as an alias for <code>Pair&lt;T&gt;</code>, where type template parameter <code>T</code> will be defined by the user of the Coord alias. <code>Coord</code> is the alias template, and <code>Coord&lt;T&gt;</code> is the instantiated type alias for <code>Pair&lt;T&gt;</code>. Once defined, we can use <code>Coord</code> where we would use <code>Pair</code>, and <code>Coord&lt;T&gt;</code> where we would use <code>Pair&lt;T&gt;</code>.</p>",
+      "preview": "In this example, we’re defining an alias template named Coord as an alias for Pa",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b9",
+      "type": "paragraph",
+      "html": "<p>There are a couple of things worth noting about this example.</p>",
+      "preview": "There are a couple of things worth noting about this example.",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b10",
+      "type": "paragraph",
+      "html": "<p>First, unlike normal type aliases (which can be defined inside a block), alias templates must be defined in the global scope (as all templates must).</p>",
+      "preview": "First, unlike normal type aliases (which can be defined inside a block), alias t",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b11",
+      "type": "paragraph",
+      "html": "<p>Second, prior to C++20, we must explicitly specify the template arguments when we instantiate an object using an alias template. As of C++20, we can use <strong>alias template deduction</strong>, which will deduce the type of the template arguments from an initializer in cases where the aliased type would work with CTAD.</p>",
+      "preview": "Second, prior to C++20, we must explicitly specify the template arguments when w",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b12",
+      "type": "paragraph",
+      "html": "<p>Third, because CTAD doesn’t work on function parameters, when we use an alias template as a function parameter, we must explicitly define the template arguments used by the alias template. In other words, we do this:</p>",
+      "preview": "Third, because CTAD doesn’t work on function parameters, when we use an alias te",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T>\nvoid print(const Coord<T>& c)\n{\n    std::cout << c.first << ' ' << c.second << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nvoid print(const Coord&lt;T&gt;&amp; c)\n{\n    std::cout &lt;&lt; c.first &lt;&lt; ' ' &lt;&lt; c.second &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b14",
+      "type": "paragraph",
+      "html": "<p>Not this:</p>",
+      "preview": "Not this:",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "void print(const Coord& c) // won't work, missing template arguments\n{\n    std::cout << c.first << ' ' << c.second << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void print(const Coord&amp; c) // won't work, missing template arguments\n{\n    std::cout &lt;&lt; c.first &lt;&lt; ' ' &lt;&lt; c.second &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "alias-templates_b16",
+      "type": "paragraph",
+      "html": "<p>This is no different than if we’d used <code>Pair</code> or <code>Pair&lt;T&gt;</code> instead of <code>Coord</code> or <code>Coord&lt;T&gt;</code>.</p>",
+      "preview": "This is no different than if we’d used Pair or Pair<T> instead of Coord or Coord",
+      "canCheck": true
+    }
+  ]
+}

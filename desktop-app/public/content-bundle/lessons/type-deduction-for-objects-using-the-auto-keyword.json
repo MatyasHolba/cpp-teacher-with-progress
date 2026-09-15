@@ -1,0 +1,469 @@
+{
+  "index": 131,
+  "chapterId": "10",
+  "number": "10.8",
+  "title": "10.8 — Type deduction for objects using the auto keyword",
+  "url": "https://www.learncpp.com/cpp-tutorial/type-deduction-for-objects-using-the-auto-keyword/",
+  "slug": "type-deduction-for-objects-using-the-auto-keyword",
+  "scrapedAt": "2026-09-15T16:29:44.097Z",
+  "totalBlocks": 62,
+  "totalCheckpoints": 56,
+  "blocks": [
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b0",
+      "type": "paragraph",
+      "html": "<p>There’s a subtle redundancy lurking in this simple variable definition:</p>",
+      "preview": "There’s a subtle redundancy lurking in this simple variable definition:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "double d{ 5.0 };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double d{ 5.0 };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b2",
+      "type": "paragraph",
+      "html": "<p>In C++, we are required to provide an explicit type for all objects. Thus, we’ve specified that variable <code>d</code> is of type double.</p>",
+      "preview": "In C++, we are required to provide an explicit type for all objects. Thus, we’ve",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b3",
+      "type": "paragraph",
+      "html": "<p>However, the literal value <code>5.0</code> used to initialize <code>d</code> also has type double (implicitly determined via the format of the literal).</p>",
+      "preview": "However, the literal value 5.0 used to initialize d also has type double (implic",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b4",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss how literal types are determined in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literals</a>.</p></div>",
+      "preview": "Related contentWe discuss how literal types are determined in lesson 5.2 -- Literals.",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b5",
+      "type": "paragraph",
+      "html": "<p>In cases where we want a variable and its initializer to have the same type, we’re effectively providing the same type information twice.</p>",
+      "preview": "In cases where we want a variable and its initializer to have the same type, we’",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b6",
+      "type": "section",
+      "title": "Type deduction for initialized variables",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction for initialized variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b7",
+      "type": "paragraph",
+      "html": "<p><strong>Type deduction</strong> (also sometimes called <strong>type inference</strong>) is a feature that allows the compiler to deduce the type of an object from the object’s initializer. When defining a variable, type deduction can be invoked by using the <code>auto</code> keyword can be used in place of the variable’s type:</p>",
+      "preview": "Type deduction (also sometimes called type inference) is a feature that allows t",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    auto d { 5.0 }; // 5.0 is a double literal, so d will be deduced as a double\n    auto i { 1 + 2 }; // 1 + 2 evaluates to an int, so i will be deduced as an int\n    auto x { i }; // i is an int, so x will be deduced as an int\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    auto d { 5.0 }; // 5.0 is a double literal, so d will be deduced as a double\n    auto i { 1 + 2 }; // 1 + 2 evaluates to an int, so i will be deduced as an int\n    auto x { i }; // i is an int, so x will be deduced as an int\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b9",
+      "type": "paragraph",
+      "html": "<p>In the first case, because <code>5.0</code> is a double literal, the compiler will deduce that variable <code>d</code> should be of type <code>double</code>. In the second case, the expression <code>1 + 2</code> yields an int result, so variable <code>i</code> will be of type <code>int</code>. In the third case, <code>i</code> was previously deduced to be of type <code>int</code>, so <code>x</code> will also be deduced to be of type <code>int</code>.</p>",
+      "preview": "In the first case, because 5.0 is a double literal, the compiler will deduce tha",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b10",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Prior to C++17, <code>auto d{ 5.0 };</code> would deduce <code>d</code> to be of type <code>std::initializer_list&lt;double&gt;</code> rather than <code>double</code>. This was fixed in C++17, and many compilers (such as gcc and Clang) have back-ported this change to previous language standards.</p><p>If you are using C++14 or older, and the above example doesn’t compile on your compiler, use copy initialization with <code>auto</code> instead (<code>auto d = 5.0</code>).</p></div>",
+      "preview": "WarningPrior to C++17, auto d{ 5.0 }; would deduce d to be of type std::initializer_list<double> rat",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b11",
+      "type": "paragraph",
+      "html": "<p>Because function calls are valid expressions, we can even use type deduction when our initializer is a non-void function call:</p>",
+      "preview": "Because function calls are valid expressions, we can even use type deduction whe",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{\n    return x + y;\n}\n\nint main()\n{\n    auto sum { add(5, 6) }; // add() returns an int, so sum's type will be deduced as an int\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    return x + y;\n}\n\nint main()\n{\n    auto sum { add(5, 6) }; // add() returns an int, so sum's type will be deduced as an int\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b13",
+      "type": "paragraph",
+      "html": "<p>The <code>add()</code> function returns an <code>int</code> value, so the compiler will deduce that variable <code>sum</code> should have type <code>int</code>.</p>",
+      "preview": "The add() function returns an int value, so the compiler will deduce that variab",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b14",
+      "type": "paragraph",
+      "html": "<p>Literal suffixes can be used in combination with type deduction to specify a particular type:</p>",
+      "preview": "Literal suffixes can be used in combination with type deduction to specify a par",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    auto a { 1.23f }; // f suffix causes a to be deduced to float\n    auto b { 5u };    // u suffix causes b to be deduced to unsigned int\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    auto a { 1.23f }; // f suffix causes a to be deduced to float\n    auto b { 5u };    // u suffix causes b to be deduced to unsigned int\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b16",
+      "type": "paragraph",
+      "html": "<p>Variables using type deduction may also use other specifiers/qualifiers, such as <code>const</code> or <code>constexpr</code>:</p>",
+      "preview": "Variables using type deduction may also use other specifiers/qualifiers, such as",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int a { 5 };            // a is an int\n\n    const auto b { 5 };     // b is a const int\n    constexpr auto c { 5 }; // c is a constexpr int\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int a { 5 };            // a is an int\n\n    const auto b { 5 };     // b is a const int\n    constexpr auto c { 5 }; // c is a constexpr int\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b18",
+      "type": "section",
+      "title": "Type deduction must have something to deduce from",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction must have something to deduce from</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b19",
+      "type": "paragraph",
+      "html": "<p>Type deduction will not work for objects that either do not have initializers or have empty initializers. It also will not work when the initializer has type <code>void</code> (or any other incomplete type). Thus, the following is not valid:</p>",
+      "preview": "Type deduction will not work for objects that either do not have initializers or",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid foo()\n{\n}\n\nint main()\n{\n    auto a;           // The compiler is unable to deduce the type of a\n    auto b { };       // The compiler is unable to deduce the type of b\n    auto c { foo() }; // Invalid: c can't have type incomplete type void\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid foo()\n{\n}\n\nint main()\n{\n    auto a;           // The compiler is unable to deduce the type of a\n    auto b { };       // The compiler is unable to deduce the type of b\n    auto c { foo() }; // Invalid: c can't have type incomplete type void\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b21",
+      "type": "paragraph",
+      "html": "<p>Although using type deduction for fundamental data types only saves a few (if any) keystrokes, in future lessons we will see examples where the types get complex and lengthy (and in some cases, can be hard to figure out). In those cases, using <code>auto</code> can save a lot of typing (and typos).</p>",
+      "preview": "Although using type deduction for fundamental data types only saves a few (if an",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b22",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>The type deduction rules for pointers and references are a bit more complex. We discuss these in <a href=\"https://www.learncpp.com/cpp-tutorial/type-deduction-with-pointers-references-and-const/\">12.14 -- Type deduction with pointers, references, and const</a>.</p></div>",
+      "preview": "Related contentThe type deduction rules for pointers and references are a bit more complex. We discu",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b23",
+      "type": "section",
+      "title": "Type deduction drops const from the deduced type",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction drops <code>const</code> from the deduced type</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b24",
+      "type": "paragraph",
+      "html": "<p>In most cases, type deduction will drop the <code>const</code> from deduced types. For example:</p>",
+      "preview": "In most cases, type deduction will drop the const from deduced types. For exampl",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int a { 5 }; // a has type const int\n    auto b { a };      // b has type int (const dropped)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int a { 5 }; // a has type const int\n    auto b { a };      // b has type int (const dropped)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b26",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>a</code> has type <code>const int</code>, but when deducing a type for variable <code>b</code> using <code>a</code> as the initializer, type deduction deduces the type as <code>int</code>, not <code>const int</code>.</p>",
+      "preview": "In the above example, a has type const int, but when deducing a type for variabl",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b27",
+      "type": "paragraph",
+      "html": "<p>If you want a deduced type to be const, you must supply the <code>const</code> yourself as part of the definition:</p>",
+      "preview": "If you want a deduced type to be const, you must supply the const yourself as pa",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int a { 5 };  // a has type const int\n    const auto b { a }; // b has type const int (const dropped but reapplied)\n\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int a { 5 };  // a has type const int\n    const auto b { a }; // b has type const int (const dropped but reapplied)\n\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b29",
+      "type": "paragraph",
+      "html": "<p>In this example, the type deduced from <code>a</code> will be <code>int</code> (the <code>const</code> is dropped), but because we’ve re-added a <code>const</code> qualifier during the definition of variable <code>b</code>, variable <code>b</code> will have type <code>const int</code>.</p>",
+      "preview": "In this example, the type deduced from a will be int (the const is dropped), but",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b30",
+      "type": "section",
+      "title": "Type deduction for string literals",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction for string literals</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b31",
+      "type": "paragraph",
+      "html": "<p>For historical reasons, string literals in C++ have a strange type. Therefore, the following probably won’t work as expected:</p>",
+      "preview": "For historical reasons, string literals in C++ have a strange type. Therefore, t",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto s { \"Hello, world\" }; // s will be type const char*, not std::string",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto s { \"Hello, world\" }; // s will be type const char*, not std::string</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b33",
+      "type": "paragraph",
+      "html": "<p>If you want the type deduced from a string literal to be <code>std::string</code> or <code>std::string_view</code>, you’ll need to use the <code>s</code> or <code>sv</code> literal suffixes (introduced in lessons <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 -- Introduction to std::string</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring_view/\">5.8 -- Introduction to std::string_view</a>):</p>",
+      "preview": "If you want the type deduced from a string literal to be std::string or std::str",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string>\n#include <string_view>\n\nint main()\n{\n    using namespace std::literals; // easiest way to access the s and sv suffixes\n\n    auto s1 { \"goo\"s };  // \"goo\"s is a std::string literal, so s1 will be deduced as a std::string\n    auto s2 { \"moo\"sv }; // \"moo\"sv is a std::string_view literal, so s2 will be deduced as a std::string_view\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n    using namespace std::literals; // easiest way to access the s and sv suffixes\n\n    auto s1 { \"goo\"s };  // \"goo\"s is a std::string literal, so s1 will be deduced as a std::string\n    auto s2 { \"moo\"sv }; // \"moo\"sv is a std::string_view literal, so s2 will be deduced as a std::string_view\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b35",
+      "type": "paragraph",
+      "html": "<p>But in such cases, it may be better to not use type deduction.</p>",
+      "preview": "But in such cases, it may be better to not use type deduction.",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b36",
+      "type": "section",
+      "title": "Type deduction and constexpr",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction and constexpr</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b37",
+      "type": "paragraph",
+      "html": "<p>Because <code>constexpr</code> is not part of the type system, it cannot be deduced as part of type deduction. However, a <code>constexpr</code> variable is implicitly const, and this const will be dropped during type deduction (and can be readded if desired):</p>",
+      "preview": "Because constexpr is not part of the type system, it cannot be deduced as part o",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    constexpr double a { 3.4 };  // a has type const double (constexpr not part of type, const is implicit)\n\n    auto b { a };                // b has type double (const dropped)\n    const auto c { a };          // c has type const double (const dropped but reapplied)\n    constexpr auto d { a };      // d has type const double (const dropped but implicitly reapplied by constexpr)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    constexpr double a { 3.4 };  // a has type const double (constexpr not part of type, const is implicit)\n\n    auto b { a };                // b has type double (const dropped)\n    const auto c { a };          // c has type const double (const dropped but reapplied)\n    constexpr auto d { a };      // d has type const double (const dropped but implicitly reapplied by constexpr)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b39",
+      "type": "section",
+      "title": "Type deduction benefits and downsides",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction benefits and downsides</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b40",
+      "type": "paragraph",
+      "html": "<p>Type deduction is not only convenient, but also has a number of other benefits.</p>",
+      "preview": "Type deduction is not only convenient, but also has a number of other benefits.",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b41",
+      "type": "paragraph",
+      "html": "<p>First, if two or more variables are defined on sequential lines, the names of the variables will be lined up, helping to increase readability:</p>",
+      "preview": "First, if two or more variables are defined on sequential lines, the names of th",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b42",
+      "type": "code",
+      "language": "cpp",
+      "code": "// harder to read\nint a { 5 };\ndouble b { 6.7 };\n\n// easier to read\nauto c { 5 };\nauto d { 6.7 };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// harder to read\nint a { 5 };\ndouble b { 6.7 };\n\n// easier to read\nauto c { 5 };\nauto d { 6.7 };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b43",
+      "type": "paragraph",
+      "html": "<p>Second, type deduction only works on variables that have initializers, so if you are in the habit of using type deduction, it can help avoid unintentionally uninitialized variables:</p>",
+      "preview": "Second, type deduction only works on variables that have initializers, so if you",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "int x; // oops, we forgot to initialize x, but the compiler may not complain\nauto y; // the compiler will error out because it can't deduce a type for y",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x; // oops, we forgot to initialize x, but the compiler may not complain\nauto y; // the compiler will error out because it can't deduce a type for y</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b45",
+      "type": "paragraph",
+      "html": "<p>Third, you are guaranteed that there will be no unintended performance-impacting conversions:</p>",
+      "preview": "Third, you are guaranteed that there will be no unintended performance-impacting",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b46",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::string_view getString();   // some function that returns a std::string_view\n\nstd::string s1 { getString() }; // bad: expensive conversion from std::string_view to std::string (assuming you didn't want this)\nauto s2 { getString() };        // good: no conversion required",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string_view getString();   // some function that returns a std::string_view\n\nstd::string s1 { getString() }; // bad: expensive conversion from std::string_view to std::string (assuming you didn't want this)\nauto s2 { getString() };        // good: no conversion required</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b47",
+      "type": "paragraph",
+      "html": "<p>Type deduction also has a few downsides.</p>",
+      "preview": "Type deduction also has a few downsides.",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b48",
+      "type": "paragraph",
+      "html": "<p>First, type deduction obscures an object’s type information in the code. Although a good IDE should be able to show you the deduced type (e.g. when hovering a variable), it’s still a bit easier to make type-based mistakes when using type deduction.</p>",
+      "preview": "First, type deduction obscures an object’s type information in the code. Althoug",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b49",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b50",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto y { 5 }; // oops, we wanted a double here but we accidentally provided an int literal",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto y { 5 }; // oops, we wanted a double here but we accidentally provided an int literal</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b51",
+      "type": "paragraph",
+      "html": "<p>In the above code, if we’d explicitly specified <code>y</code> as type double, <code>y</code> would have been a double even though we accidentally provided an int literal initializer. With type deduction, <code>y</code> will be deduced to be of type int.</p>",
+      "preview": "In the above code, if we’d explicitly specified y as type double, y would have b",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b52",
+      "type": "paragraph",
+      "html": "<p>Here’s another example:</p>",
+      "preview": "Here’s another example:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b53",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n     auto x { 3 };\n     auto y { 2 };\n\n     std::cout << x / y << '\\n'; // oops, we wanted floating point division here\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n     auto x { 3 };\n     auto y { 2 };\n\n     std::cout &lt;&lt; x / y &lt;&lt; '\\n'; // oops, we wanted floating point division here\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b54",
+      "type": "paragraph",
+      "html": "<p>In this example, it’s less clear that we’re getting an integer division rather than a floating-point division.</p>",
+      "preview": "In this example, it’s less clear that we’re getting an integer division rather t",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b55",
+      "type": "paragraph",
+      "html": "<p>Similar cases occur when a variable is <code>unsigned</code>. Since we don’t want to mix signed and unsigned values, explicitly knowing that a variable has an unsigned type is generally something that shouldn’t be obscured.</p>",
+      "preview": "Similar cases occur when a variable is unsigned. Since we don’t want to mix sign",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b56",
+      "type": "paragraph",
+      "html": "<p>Second, if the type of an initializer changes, the type of a variable using type deduction will also change, perhaps unexpectedly. Consider:</p>",
+      "preview": "Second, if the type of an initializer changes, the type of a variable using type",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto sum { add(5, 6) + gravity };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto sum { add(5, 6) + gravity };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b58",
+      "type": "paragraph",
+      "html": "<p>If the return type of <code>add</code> changes from int to double, or <code>gravity</code> changes from int to double, <code>sum</code> will also change type from int to double.</p>",
+      "preview": "If the return type of add changes from int to double, or gravity changes from in",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b59",
+      "type": "paragraph",
+      "html": "<p>Overall, the modern consensus is that type deduction is generally safe to use for objects, and that doing so can help make your code more readable by de-emphasizing type information so the logic of your code stands out better.</p>",
+      "preview": "Overall, the modern consensus is that type deduction is generally safe to use fo",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b60",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use type deduction for your variables when the type of the object doesn’t matter.</p><p>Favor an explicit type when you require a specific type that differs from the type of the initializer, or when your object is used in a context where making the type obvious is useful.</p></div>",
+      "preview": "Best practiceUse type deduction for your variables when the type of the object doesn’t matter.Favor ",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-objects-using-the-auto-keyword_b61",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>In future lessons, we’ll continue to use explicit types instead of type deduction when we feel showing the type information is helpful to understanding a concept or example.</p></div>",
+      "preview": "Author’s noteIn future lessons, we’ll continue to use explicit types instead of type deduction when ",
+      "canCheck": true
+    }
+  ]
+}

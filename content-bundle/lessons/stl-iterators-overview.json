@@ -1,0 +1,255 @@
+{
+  "index": 347,
+  "chapterId": "D",
+  "number": "21.3",
+  "title": "21.3 — STL iterators overview",
+  "url": "https://www.learncpp.com/cpp-tutorial/stl-iterators-overview/",
+  "slug": "stl-iterators-overview",
+  "scrapedAt": "2026-09-15T16:31:41.554Z",
+  "totalBlocks": 34,
+  "totalCheckpoints": 30,
+  "blocks": [
+    {
+      "id": "stl-iterators-overview_b0",
+      "type": "paragraph",
+      "html": "<p>An <strong>Iterator</strong> is an object that can traverse (iterate over) a container class without the user having to know how the container is implemented. With many classes (particularly lists and the associative classes), iterators are the primary way elements of these classes are accessed.</p>",
+      "preview": "An Iterator is an object that can traverse (iterate over) a container class with",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b1",
+      "type": "paragraph",
+      "html": "<p>An iterator is best visualized as a pointer to a given element in the container, with a set of overloaded operators to provide a set of well-defined functions:</p>",
+      "preview": "An iterator is best visualized as a pointer to a given element in the container,",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b2",
+      "type": "list",
+      "html": "<ul><li><strong>Operator*</strong> -- Dereferencing the iterator returns the element that the iterator is currently pointing at.</li><li><strong>Operator++</strong> -- Moves the iterator to the next element in the container. Most iterators also provide <code>Operator--</code> to move to the previous element.</li><li><strong>Operator== and Operator!=</strong> -- Basic comparison operators to determine if two iterators point to the same element. To compare the values that two iterators are pointing at, dereference the iterators first, and then use a comparison operator.</li><li><strong>Operator=</strong> -- Assign the iterator to a new position (typically the start or end of the container’s elements). To assign the value of the element the iterator is pointing at, dereference the iterator first, then use the assign operator.</li></ul>",
+      "preview": "Operator* -- Dereferencing the iterator returns the element that the iterator is",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b3",
+      "type": "paragraph",
+      "html": "<p>Each container includes four basic member functions for use with Operator=:</p>",
+      "preview": "Each container includes four basic member functions for use with Operator=:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b4",
+      "type": "list",
+      "html": "<ul><li><strong>begin()</strong> returns an iterator representing the beginning of the elements in the container.</li><li><strong>end()</strong> returns an iterator representing the element just past the end of the elements.</li><li><strong>cbegin()</strong> returns a const (read-only) iterator representing the beginning of the elements in the container.</li><li><strong>cend()</strong> returns a const (read-only) iterator representing the element just past the end of the elements.</li></ul>",
+      "preview": "begin() returns an iterator representing the beginning of the elements in the co",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b5",
+      "type": "paragraph",
+      "html": "<p>It might seem weird that end() doesn’t point to the last element in the list, but this is done primarily to make looping easy: iterating over the elements can continue until the iterator reaches end(), and then you know you’re done.</p>",
+      "preview": "It might seem weird that end() doesn’t point to the last element in the list, bu",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b6",
+      "type": "paragraph",
+      "html": "<p>Finally, all containers provide (at least) two types of iterators:</p>",
+      "preview": "Finally, all containers provide (at least) two types of iterators:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b7",
+      "type": "list",
+      "html": "<ul><li><strong>container::iterator</strong> provides a read/write iterator</li><li><strong>container::const_iterator</strong> provides a read-only iterator</li></ul>",
+      "preview": "container::iterator provides a read/write iteratorcontainer::const_iterator prov",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b8",
+      "type": "paragraph",
+      "html": "<p>Lets take a look at some examples of using iterators.</p>",
+      "preview": "Lets take a look at some examples of using iterators.",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b9",
+      "type": "paragraph",
+      "html": "<p><strong>Iterating through a vector</strong></p>",
+      "preview": "Iterating through a vector",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector<int> vect;\n    for (int count=0; count < 6; ++count)\n        vect.push_back(count);\n\n    std::vector<int>::const_iterator it; // declare a read-only iterator\n    it = vect.cbegin(); // assign it to the start of the vector\n    while (it != vect.cend()) // while it hasn't reach the end\n    {\n        std::cout << *it << ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector&lt;int&gt; vect;\n    for (int count=0; count &lt; 6; ++count)\n        vect.push_back(count);\n\n    std::vector&lt;int&gt;::const_iterator it; // declare a read-only iterator\n    it = vect.cbegin(); // assign it to the start of the vector\n    while (it != vect.cend()) // while it hasn't reach the end\n    {\n        std::cout &lt;&lt; *it &lt;&lt; ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b11",
+      "type": "paragraph",
+      "html": "<p>This prints the following:</p>",
+      "preview": "This prints the following:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b12",
+      "type": "output",
+      "text": "0 1 2 3 4 5\n",
+      "html": "<pre>0 1 2 3 4 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-iterators-overview_b13",
+      "type": "paragraph",
+      "html": "<p><strong>Iterating through a list</strong></p>",
+      "preview": "Iterating through a list",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b14",
+      "type": "paragraph",
+      "html": "<p>Now let’s do the same thing with a list:</p>",
+      "preview": "Now let’s do the same thing with a list:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <list>\n\nint main()\n{\n\n    std::list<int> li;\n    for (int count=0; count < 6; ++count)\n        li.push_back(count);\n\n    std::list<int>::const_iterator it; // declare an iterator\n    it = li.cbegin(); // assign it to the start of the list\n    while (it != li.cend()) // while it hasn't reach the end\n    {\n        std::cout << *it << ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;list&gt;\n\nint main()\n{\n\n    std::list&lt;int&gt; li;\n    for (int count=0; count &lt; 6; ++count)\n        li.push_back(count);\n\n    std::list&lt;int&gt;::const_iterator it; // declare an iterator\n    it = li.cbegin(); // assign it to the start of the list\n    while (it != li.cend()) // while it hasn't reach the end\n    {\n        std::cout &lt;&lt; *it &lt;&lt; ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b16",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b17",
+      "type": "output",
+      "text": "0 1 2 3 4 5\n",
+      "html": "<pre>0 1 2 3 4 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-iterators-overview_b18",
+      "type": "paragraph",
+      "html": "<p>Note the code is almost identical to the vector case, even though vectors and lists have almost completely different internal implementations!</p>",
+      "preview": "Note the code is almost identical to the vector case, even though vectors and li",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b19",
+      "type": "paragraph",
+      "html": "<p><strong>Iterating through a set</strong></p>",
+      "preview": "Iterating through a set",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b20",
+      "type": "paragraph",
+      "html": "<p>In the following example, we’re going to create a set from 6 numbers and use an iterator to print the values in the set:</p>",
+      "preview": "In the following example, we’re going to create a set from 6 numbers and use an ",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <set>\n\nint main()\n{\n    std::set<int> myset;\n    myset.insert(7);\n    myset.insert(2);\n    myset.insert(-6);\n    myset.insert(8);\n    myset.insert(1);\n    myset.insert(-4);\n\n    std::set<int>::const_iterator it; // declare an iterator\n    it = myset.cbegin(); // assign it to the start of the set\n    while (it != myset.cend()) // while it hasn't reach the end\n    {\n        std::cout << *it << ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;set&gt;\n\nint main()\n{\n    std::set&lt;int&gt; myset;\n    myset.insert(7);\n    myset.insert(2);\n    myset.insert(-6);\n    myset.insert(8);\n    myset.insert(1);\n    myset.insert(-4);\n\n    std::set&lt;int&gt;::const_iterator it; // declare an iterator\n    it = myset.cbegin(); // assign it to the start of the set\n    while (it != myset.cend()) // while it hasn't reach the end\n    {\n        std::cout &lt;&lt; *it &lt;&lt; ' '; // print the value of the element it points to\n        ++it; // and iterate to the next element\n    }\n\n    std::cout &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b22",
+      "type": "paragraph",
+      "html": "<p>This program produces the following result:</p>",
+      "preview": "This program produces the following result:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b23",
+      "type": "output",
+      "text": "-6 -4 1 2 7 8\n",
+      "html": "<pre>-6 -4 1 2 7 8\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-iterators-overview_b24",
+      "type": "paragraph",
+      "html": "<p>Note that although populating the set differs from the way we populate the vector and list, the code used to iterate through the elements of the set was essentially identical.</p>",
+      "preview": "Note that although populating the set differs from the way we populate the vecto",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b25",
+      "type": "paragraph",
+      "html": "<p><strong>Iterating through a map</strong></p>",
+      "preview": "Iterating through a map",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b26",
+      "type": "paragraph",
+      "html": "<p>This one is a little trickier. Maps and multimaps take pairs of elements (defined as a std::pair). We use the make_pair() helper function to easily create pairs. std::pair allows access to the elements of the pair via the first and second members. In our map, we use first as the key, and second as the value.</p>",
+      "preview": "This one is a little trickier. Maps and multimaps take pairs of elements (define",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <map>\n#include <string>\n\nint main()\n{\n\tstd::map<int, std::string> mymap;\n\tmymap.insert(std::make_pair(4, \"apple\"));\n\tmymap.insert(std::make_pair(2, \"orange\"));\n\tmymap.insert(std::make_pair(1, \"banana\"));\n\tmymap.insert(std::make_pair(3, \"grapes\"));\n\tmymap.insert(std::make_pair(6, \"mango\"));\n\tmymap.insert(std::make_pair(5, \"peach\"));\n\n\tauto it{ mymap.cbegin() }; // declare a const iterator and assign to start of vector\n\twhile (it != mymap.cend()) // while it hasn't reach the end\n\t{\n\t\tstd::cout << it->first << '=' << it->second << ' '; // print the value of the element it points to\n\t\t++it; // and iterate to the next element\n\t}\n\n\tstd::cout << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;map&gt;\n#include &lt;string&gt;\n\nint main()\n{\n\tstd::map&lt;int, std::string&gt; mymap;\n\tmymap.insert(std::make_pair(4, \"apple\"));\n\tmymap.insert(std::make_pair(2, \"orange\"));\n\tmymap.insert(std::make_pair(1, \"banana\"));\n\tmymap.insert(std::make_pair(3, \"grapes\"));\n\tmymap.insert(std::make_pair(6, \"mango\"));\n\tmymap.insert(std::make_pair(5, \"peach\"));\n\n\tauto it{ mymap.cbegin() }; // declare a const iterator and assign to start of vector\n\twhile (it != mymap.cend()) // while it hasn't reach the end\n\t{\n\t\tstd::cout &lt;&lt; it-&gt;first &lt;&lt; '=' &lt;&lt; it-&gt;second &lt;&lt; ' '; // print the value of the element it points to\n\t\t++it; // and iterate to the next element\n\t}\n\n\tstd::cout &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b28",
+      "type": "paragraph",
+      "html": "<p>This program produces the result:</p>",
+      "preview": "This program produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b29",
+      "type": "output",
+      "text": "1=banana 2=orange 3=grapes 4=apple 5=peach 6=mango\n",
+      "html": "<pre>1=banana 2=orange 3=grapes 4=apple 5=peach 6=mango\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stl-iterators-overview_b30",
+      "type": "paragraph",
+      "html": "<p>Notice here how easy iterators make it to step through each of the elements of the container. You don’t have to care at all how map stores its data!</p>",
+      "preview": "Notice here how easy iterators make it to step through each of the elements of t",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b31",
+      "type": "paragraph",
+      "html": "<p><strong>Conclusion</strong></p>",
+      "preview": "Conclusion",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b32",
+      "type": "paragraph",
+      "html": "<p>Iterators provide an easy way to step through the elements of a container class without having to understand how the container class is implemented. When combined with STL’s algorithms and the member functions of the container classes, iterators become even more powerful. In the next lesson, you’ll see an example of using an iterator to insert elements into a list (which doesn’t provide an overloaded operator[] to access its elements directly).</p>",
+      "preview": "Iterators provide an easy way to step through the elements of a container class ",
+      "canCheck": true
+    },
+    {
+      "id": "stl-iterators-overview_b33",
+      "type": "paragraph",
+      "html": "<p>One point worth noting: Iterators must be implemented on a per-class basis, because the iterator does need to know how a class is implemented. Thus iterators are always tied to specific container classes.</p>",
+      "preview": "One point worth noting: Iterators must be implemented on a per-class basis, beca",
+      "canCheck": true
+    }
+  ]
+}

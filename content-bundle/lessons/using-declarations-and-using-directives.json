@@ -1,0 +1,804 @@
+{
+  "index": 98,
+  "chapterId": "7",
+  "number": "7.13",
+  "title": "7.13 — Using declarations and using directives",
+  "url": "https://www.learncpp.com/cpp-tutorial/using-declarations-and-using-directives/",
+  "slug": "using-declarations-and-using-directives",
+  "scrapedAt": "2026-09-15T16:29:27.203Z",
+  "totalBlocks": 109,
+  "totalCheckpoints": 100,
+  "blocks": [
+    {
+      "id": "using-declarations-and-using-directives_b0",
+      "type": "paragraph",
+      "html": "<p>You’ve probably seen this program in a lot of textbooks and tutorials:</p>",
+      "preview": "You’ve probably seen this program in a lot of textbooks and tutorials:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nusing namespace std;\n\nint main()\n{\n    cout << \"Hello world!\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nusing namespace std;\n\nint main()\n{\n    cout &lt;&lt; \"Hello world!\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b2",
+      "type": "paragraph",
+      "html": "<p>If you see this, run. Your textbook or tutorial are probably out of date. In this lesson, we’ll explore why.</p>",
+      "preview": "If you see this, run. Your textbook or tutorial are probably out of date. In thi",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b3",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Some IDEs will also auto-populate new C++ projects with a similar program (so you can compile something immediately, rather than starting from a blank file).</p></div>",
+      "preview": "TipSome IDEs will also auto-populate new C++ projects with a similar program (so you can compile som",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b4",
+      "type": "section",
+      "title": "A short history lesson",
+      "html": "<h3 class=\"cpp-section-heading\">A short history lesson</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b5",
+      "type": "paragraph",
+      "html": "<p>Back before C++ had support for namespaces, all of the names that are now in the <code>std</code> namespace were in the global namespace. This caused naming collisions between program identifiers and standard library identifiers. Programs that worked under one version of C++ might have a naming conflict with a newer version of C++.</p>",
+      "preview": "Back before C++ had support for namespaces, all of the names that are now in the",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b6",
+      "type": "paragraph",
+      "html": "<p>In 1995, namespaces were standardized, and all of the functionality from the standard library was moved out of the global namespace and into namespace <code>std</code>. This change broke older code that was still using names without <code>std::</code>.</p>",
+      "preview": "In 1995, namespaces were standardized, and all of the functionality from the sta",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b7",
+      "type": "paragraph",
+      "html": "<p>As anyone who has worked on a large codebase knows, any change to a codebase (no matter how trivial) risks breaking the program. Updating every name that was now moved into the <code>std</code> namespace to use the <code>std::</code> prefix was a massive risk. A solution was requested.</p>",
+      "preview": "As anyone who has worked on a large codebase knows, any change to a codebase (no",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b8",
+      "type": "paragraph",
+      "html": "<p>Fast forward to today -- if you’re using the standard library a lot, typing <code>std::</code> before everything you use from the standard library can become repetitive, and in some cases, can make your code harder to read.</p>",
+      "preview": "Fast forward to today -- if you’re using the standard library a lot, typing std:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b9",
+      "type": "paragraph",
+      "html": "<p>C++ provides some solutions to both of these problems, in the form of using-statements.</p>",
+      "preview": "C++ provides some solutions to both of these problems, in the form of using-stat",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b10",
+      "type": "paragraph",
+      "html": "<p>But first, let’s define two terms.</p>",
+      "preview": "But first, let’s define two terms.",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b11",
+      "type": "section",
+      "title": "Qualified and unqualified names",
+      "html": "<h3 class=\"cpp-section-heading\">Qualified and unqualified names</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b12",
+      "type": "paragraph",
+      "html": "<p>A name can be either qualified or unqualified.</p>",
+      "preview": "A name can be either qualified or unqualified.",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b13",
+      "type": "paragraph",
+      "html": "<p>A <strong>qualified name</strong> is a name that includes an associated scope. Most often, names are qualified with a namespace using the scope resolution operator (::). For example:</p>",
+      "preview": "A qualified name is a name that includes an associated scope. Most often, names ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::cout // identifier cout is qualified by namespace std\n::foo // identifier foo is qualified by the global namespace",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::cout // identifier cout is qualified by namespace std\n::foo // identifier foo is qualified by the global namespace</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b15",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>A name can also be qualified by a class name using the scope resolution operator (::), or by a class object using the member selection operators (. or -&gt;). For example:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class C; // some class\n\nC::s_member; // s_member is qualified by class C\nobj.x; // x is qualified by class object obj\nptr-&gt;y; // y is qualified by pointer to class object ptr</code></pre></div>",
+      "preview": "For advanced readersA name can also be qualified by a class name using the scope resolution operator",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b16",
+      "type": "paragraph",
+      "html": "<p>An <strong>unqualified name</strong> is a name that does not include a scoping qualifier. For example, <code>cout</code> and <code>x</code> are unqualified names, as they do not include an associated scope.</p>",
+      "preview": "An unqualified name is a name that does not include a scoping qualifier. For exa",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b17",
+      "type": "section",
+      "title": "Using-declarations",
+      "html": "<h3 class=\"cpp-section-heading\">Using-declarations</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b18",
+      "type": "paragraph",
+      "html": "<p>One way to reduce the repetition of typing <code>std::</code> over and over is to utilize a using-declaration statement. A <strong>using declaration</strong> allows us to use an unqualified name (with no scope) as an alias for a qualified name.</p>",
+      "preview": "One way to reduce the repetition of typing std:: over and over is to utilize a u",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b19",
+      "type": "paragraph",
+      "html": "<p>Here’s our basic Hello world program, using a using-declaration on line 5:</p>",
+      "preview": "Here’s our basic Hello world program, using a using-declaration on line 5:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n   using std::cout; // this using declaration tells the compiler that cout should resolve to std::cout\n   cout << \"Hello world!\\n\"; // so no std:: prefix is needed here!\n\n   return 0;\n} // the using declaration expires at the end of the current scope",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n   using std::cout; // this using declaration tells the compiler that cout should resolve to std::cout\n   cout &lt;&lt; \"Hello world!\\n\"; // so no std:: prefix is needed here!\n\n   return 0;\n} // the using declaration expires at the end of the current scope</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b21",
+      "type": "paragraph",
+      "html": "<p>The using-declaration <code>using std::cout;</code> tells the compiler that we’re going to be using the object <code>cout</code> from the <code>std</code> namespace. So whenever it sees <code>cout</code>, it will assume that we mean <code>std::cout</code>. If there’s a naming conflict between <code>std::cout</code> and some other use of <code>cout</code> that is visible from within <code>main()</code>, <code>std::cout</code> will be preferred. Therefore on line 6, we can type <code>cout</code> instead of <code>std::cout</code>.</p>",
+      "preview": "The using-declaration using std::cout; tells the compiler that we’re going to be",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b22",
+      "type": "paragraph",
+      "html": "<p>This doesn’t save much effort in this trivial example, but if you are using <code>cout</code> many times inside of a function, a using-declaration can make your code more readable. Note that you will need a separate using-declaration for each name (e.g. one for <code>std::cout</code>, one for <code>std::cin</code>, etc…).</p>",
+      "preview": "This doesn’t save much effort in this trivial example, but if you are using cout",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b23",
+      "type": "paragraph",
+      "html": "<p>The using-declaration is active from the point of declaration to the end of the scope in which it is declared.</p>",
+      "preview": "The using-declaration is active from the point of declaration to the end of the ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b24",
+      "type": "paragraph",
+      "html": "<p>Although using-declarations are less explicit than using the <code>std::</code> prefix, they are generally considered safe and acceptable to use in source (.cpp) files, with one exception that we’ll discuss below.</p>",
+      "preview": "Although using-declarations are less explicit than using the std:: prefix, they ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b25",
+      "type": "section",
+      "title": "Using-directives",
+      "html": "<h3 class=\"cpp-section-heading\">Using-directives</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b26",
+      "type": "paragraph",
+      "html": "<p>Another way to simplify things is to use a using-directive. A <strong>using directive</strong> allows <em>all</em> identifiers in a given namespace to be referenced without qualification from the scope of the using-directive.</p>",
+      "preview": "Another way to simplify things is to use a using-directive. A using directive al",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b27",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>For technical reasons, using-directives do not actually introduce new meanings for names into the current scope -- instead they introduce new meanings for names into an outer scope (more details about which outer scope is picked can be found <a href=\"https://quuxplusone.github.io/blog/2020/12/21/using-directive/\">here</a>).</p></div>",
+      "preview": "For advanced readersFor technical reasons, using-directives do not actually introduce new meanings f",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b28",
+      "type": "paragraph",
+      "html": "<p>Here’s our Hello world program again, with a using-directive on line 5:</p>",
+      "preview": "Here’s our Hello world program again, with a using-directive on line 5:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n   using namespace std; // all names from std namespace now accessible without qualification\n   cout << \"Hello world!\\n\"; // so no std:: prefix is needed here\n\n   return 0;\n} // the using-directive ends at the end of the current scope",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n   using namespace std; // all names from std namespace now accessible without qualification\n   cout &lt;&lt; \"Hello world!\\n\"; // so no std:: prefix is needed here\n\n   return 0;\n} // the using-directive ends at the end of the current scope</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b30",
+      "type": "paragraph",
+      "html": "<p>The using-directive <code>using namespace std;</code> tells the compiler that all of the names in the <code>std</code> namespace should be accessible without qualification in the current scope (in this case, of function <code>main()</code>). When we then use unqualified identifier <code>cout</code>, it will resolve to <code>std::cout</code>.</p>",
+      "preview": "The using-directive using namespace std; tells the compiler that all of the name",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b31",
+      "type": "paragraph",
+      "html": "<p>Using-directives are the solution that was provided for old pre-namespace codebases that used unqualified names for standard library functionality. Rather than having to manually update every unqualified name to a qualified name (which was risky), a single using-directive (<code>using namespace std;</code>) could be placed at the top of each file, and all of the names that had been moved to the <code>std</code> namespace could still be used unqualified.</p>",
+      "preview": "Using-directives are the solution that was provided for old pre-namespace codeba",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b32",
+      "type": "section",
+      "title": "Problems with using-directives (a.k.a. why you should avoid “using namespace std;”)",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"avoidUsingNamespace\"></a>Problems with using-directives (a.k.a. why you should avoid “using namespace std;”) <a href=\"#avoidUsingNamespace\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b33",
+      "type": "paragraph",
+      "html": "<p>In modern C++, using-directives generally offer little benefit (saving some typing) compared to the risk. This is due to two factors:</p>",
+      "preview": "In modern C++, using-directives generally offer little benefit (saving some typi",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b34",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Using-directives allow unqualified access to <em>all</em> of the names from a namespace (potentially including lots of names you’ll never use).</li><li>Using-directives do not prefer names from the namespace identified by the using-directive over other names.</li></ol>",
+      "preview": "Using-directives allow unqualified access to all of the names from a namespace (",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b35",
+      "type": "paragraph",
+      "html": "<p>The end result is that the possibility for naming collisions to occur increases significantly (especially if you import the <code>std</code> namespace).</p>",
+      "preview": "The end result is that the possibility for naming collisions to occur increases ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b36",
+      "type": "paragraph",
+      "html": "<p>First, let’s take a look at an illustrative example where using-directives cause a naming collision:</p>",
+      "preview": "First, let’s take a look at an illustrative example where using-directives cause",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace A\n{\n\tint x { 10 };\n}\n\nnamespace B\n{\n\tint x{ 20 };\n}\n\nint main()\n{\n\tusing namespace A;\n\tusing namespace B;\n\n\tstd::cout << x << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace A\n{\n\tint x { 10 };\n}\n\nnamespace B\n{\n\tint x{ 20 };\n}\n\nint main()\n{\n\tusing namespace A;\n\tusing namespace B;\n\n\tstd::cout &lt;&lt; x &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b38",
+      "type": "paragraph",
+      "html": "<p>In the above example, the compiler is unable to determine whether the <code>x</code> in <code>main</code> refers to <code>A::x</code> or <code>B::x</code>. In this case, it will fail to compile with an “ambiguous symbol” error. We could resolve this by removing one of the using-directives, employing a using-declaration instead, or qualifying <code>x</code> (as <code>A::x</code> or <code>B::x</code>).</p>",
+      "preview": "In the above example, the compiler is unable to determine whether the x in main ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b39",
+      "type": "paragraph",
+      "html": "<p>Here’s another more subtle example:</p>",
+      "preview": "Here’s another more subtle example:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream> // imports the declaration of std::cout\n\nint cout() // declares our own \"cout\" function\n{\n    return 5;\n}\n\nint main()\n{\n    using namespace std; // makes std::cout accessible as \"cout\"\n    cout << \"Hello, world!\\n\"; // uh oh!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout\n\nint cout() // declares our own \"cout\" function\n{\n    return 5;\n}\n\nint main()\n{\n    using namespace std; // makes std::cout accessible as \"cout\"\n    cout &lt;&lt; \"Hello, world!\\n\"; // uh oh!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b41",
+      "type": "paragraph",
+      "html": "<p>In this example, the compiler is unable to determine whether our unqualified use of <code>cout</code> means <code>std::cout</code> or the <code>cout</code> function we’ve defined, and again will fail to compile with an “ambiguous symbol” error. Although this example is trivial, if we had explicitly prefixed <code>std::cout</code> like this:</p>",
+      "preview": "In this example, the compiler is unable to determine whether our unqualified use",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b42",
+      "type": "code",
+      "language": "cpp",
+      "code": "    std::cout << \"Hello, world!\\n\"; // tell the compiler we mean std::cout",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; \"Hello, world!\\n\"; // tell the compiler we mean std::cout</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b43",
+      "type": "paragraph",
+      "html": "<p>or used a using-declaration instead of a using-directive:</p>",
+      "preview": "or used a using-declaration instead of a using-directive:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "    using std::cout; // tell the compiler that cout means std::cout\n    cout << \"Hello, world!\\n\"; // so this means std::cout",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    using std::cout; // tell the compiler that cout means std::cout\n    cout &lt;&lt; \"Hello, world!\\n\"; // so this means std::cout</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b45",
+      "type": "paragraph",
+      "html": "<p>then our program wouldn’t have any issues in the first place. And while you’re probably not likely to write a function named “cout”, there are hundreds of other names in the <code>std</code> namespace just waiting to collide with your names.</p>",
+      "preview": "then our program wouldn’t have any issues in the first place. And while you’re p",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b46",
+      "type": "paragraph",
+      "html": "<p>Even if a using-directive does not cause naming collisions today, it makes your code more vulnerable to future collisions. For example, if your code includes a using-directive for some library that is then updated, all of the new names introduced in the updated library are now candidates for naming collisions with your existing code.</p>",
+      "preview": "Even if a using-directive does not cause naming collisions today, it makes your ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b47",
+      "type": "paragraph",
+      "html": "<p>For example, the following program compiles and runs fine:</p>",
+      "preview": "For example, the following program compiles and runs fine:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b48",
+      "type": "paragraph",
+      "html": "<p>FooLib.h (part of some third-party library):</p>",
+      "preview": "FooLib.h (part of some third-party library):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b49",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef FOOLIB\n#define FOOLIB\n\nnamespace Foo\n{\n    int a { 20 };\n}\n\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef FOOLIB\n#define FOOLIB\n\nnamespace Foo\n{\n    int a { 20 };\n}\n\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b50",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b51",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <FooLib.h> // a third-party library we installed outside our project directory, thus angled brackets used\n\nvoid print()\n{\n    std::cout << \"Hello\\n\";\n}\n\nint main()\n{\n    using namespace Foo; // Because we're lazy and want to access Foo:: qualified names without typing the Foo:: prefix\n\n    std::cout << a << '\\n'; // uses Foo::a\n    print(); // calls ::print()\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;FooLib.h&gt; // a third-party library we installed outside our project directory, thus angled brackets used\n\nvoid print()\n{\n    std::cout &lt;&lt; \"Hello\\n\";\n}\n\nint main()\n{\n    using namespace Foo; // Because we're lazy and want to access Foo:: qualified names without typing the Foo:: prefix\n\n    std::cout &lt;&lt; a &lt;&lt; '\\n'; // uses Foo::a\n    print(); // calls ::print()\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b52",
+      "type": "paragraph",
+      "html": "<p>Now let’s say you update FooLib to a new version, and FooLib.h changes to this:</p>",
+      "preview": "Now let’s say you update FooLib to a new version, and FooLib.h changes to this:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b53",
+      "type": "paragraph",
+      "html": "<p>FooLib.h (updated):</p>",
+      "preview": "FooLib.h (updated):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b54",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef FOOLIB\n#define FOOLIB\n\nnamespace Foo\n{\n    int a { 20 };\n    void print() { std::cout << \"Timmah!\"; } // This function added\n}\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef FOOLIB\n#define FOOLIB\n\nnamespace Foo\n{\n    int a { 20 };\n    void print() { std::cout &lt;&lt; \"Timmah!\"; } // This function added\n}\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b55",
+      "type": "paragraph",
+      "html": "<p>Your main.cpp hasn’t changed, but it will no longer compile! This is because our using-directive causes <code>Foo::print()</code> to be accessible as just <code>print()</code>, and it is now ambiguous whether the call to <code>print()</code> means <code>::print()</code> or <code>Foo::print()</code>.</p>",
+      "preview": "Your main.cpp hasn’t changed, but it will no longer compile! This is because our",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b56",
+      "type": "paragraph",
+      "html": "<p>There is a more insidious version of this problem that can occur as well. The updated library may introduce a function that not only has the same name, but is actually a better match for some function call. In such a case, the compiler may decide to prefer the new function instead, and the behavior of your program will change unexpectedly and silently.</p>",
+      "preview": "There is a more insidious version of this problem that can occur as well. The up",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b57",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b58",
+      "type": "paragraph",
+      "html": "<p>Foolib.h (part of some third-party library):</p>",
+      "preview": "Foolib.h (part of some third-party library):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b59",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef FOOLIB_H\n#define FOOLIB_H\n\nnamespace Foo\n{\n    int a { 20 };\n}\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef FOOLIB_H\n#define FOOLIB_H\n\nnamespace Foo\n{\n    int a { 20 };\n}\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b60",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <Foolib.h> // a third-party library we installed outside our project directory, thus angled brackets used\n\nint get(long)\n{\n    return 1;\n}\n\nint main()\n{\n    using namespace Foo; // Because we're lazy and want to access Foo:: qualified names without typing the Foo:: prefix\n    std::cout << a << '\\n'; // uses Foo::a\n\n    std::cout << get(0) << '\\n'; // calls ::get(long)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;Foolib.h&gt; // a third-party library we installed outside our project directory, thus angled brackets used\n\nint get(long)\n{\n    return 1;\n}\n\nint main()\n{\n    using namespace Foo; // Because we're lazy and want to access Foo:: qualified names without typing the Foo:: prefix\n    std::cout &lt;&lt; a &lt;&lt; '\\n'; // uses Foo::a\n\n    std::cout &lt;&lt; get(0) &lt;&lt; '\\n'; // calls ::get(long)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b62",
+      "type": "paragraph",
+      "html": "<p>This program runs and prints <code>1</code>.</p>",
+      "preview": "This program runs and prints 1.",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b63",
+      "type": "paragraph",
+      "html": "<p>Now, let’s say we update the Foolib library, which includes an updated Foolib.h that looks like this:</p>",
+      "preview": "Now, let’s say we update the Foolib library, which includes an updated Foolib.h ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b64",
+      "type": "paragraph",
+      "html": "<p>Foolib.h (updated):</p>",
+      "preview": "Foolib.h (updated):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b65",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef FOOLIB_H\n#define FOOLIB_H\n\nnamespace Foo\n{\n    int a { 20 };\n\n    int get(int) { return 2; } // new function added\n}\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef FOOLIB_H\n#define FOOLIB_H\n\nnamespace Foo\n{\n    int a { 20 };\n\n    int get(int) { return 2; } // new function added\n}\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b66",
+      "type": "paragraph",
+      "html": "<p>Once again, our <code>main.cpp</code> file hasn’t changed at all, but this program now compiles, runs, and prints <code>2</code>!</p>",
+      "preview": "Once again, our main.cpp file hasn’t changed at all, but this program now compil",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b67",
+      "type": "paragraph",
+      "html": "<p>When the compiler encounters a function call, it has to determine what function definition it should match the function call with. In selecting a function from a set of potentially matching functions, it will prefer a function that requires no argument conversions over a function that requires argument conversions. Because the literal <code>0</code> is an integer, C++ will prefer to match <code>print(0)</code> with the newly introduced <code>print(int)</code> (no conversions) over <code>print(long)</code> (which requires a conversion from <code>int</code> to <code>long</code>). That causes an unexpected change to our program behavior.</p>",
+      "preview": "When the compiler encounters a function call, it has to determine what function ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b68",
+      "type": "paragraph",
+      "html": "<p>In this case, the change in behavior is fairly obvious. But in a more complex program, where the returned value isn’t just printed, this issue could be very difficult to discover.</p>",
+      "preview": "In this case, the change in behavior is fairly obvious. But in a more complex pr",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b69",
+      "type": "paragraph",
+      "html": "<p>This would not have happened if we’d used a using-declaration or explicit scope qualifier.</p>",
+      "preview": "This would not have happened if we’d used a using-declaration or explicit scope ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b70",
+      "type": "paragraph",
+      "html": "<p>Finally, the lack of explicit scope prefixes make it harder for a reader to tell what functions are part of a library and what’s part of your program. For example, if we use a using-directive:</p>",
+      "preview": "Finally, the lack of explicit scope prefixes make it harder for a reader to tell",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b71",
+      "type": "code",
+      "language": "cpp",
+      "code": "using namespace NS;\n\nint main()\n{\n    foo(); // is this foo a user-defined function, or part of the NS library?\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">using namespace NS;\n\nint main()\n{\n    foo(); // is this foo a user-defined function, or part of the NS library?\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b72",
+      "type": "paragraph",
+      "html": "<p>It’s unclear whether the call to <code>foo()</code> is actually a call to <code>NS::foo()</code> or to a <code>foo()</code> that is a user-defined function. Modern IDEs should be able to disambiguate this for you when you hover over a name, but having to hover over each name just to see where it comes from is tedious.</p>",
+      "preview": "It’s unclear whether the call to foo() is actually a call to NS::foo() or to a f",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b73",
+      "type": "paragraph",
+      "html": "<p>Without the using-directive, it’s much clearer:</p>",
+      "preview": "Without the using-directive, it’s much clearer:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b74",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    NS::foo(); // clearly part of the NS library\n    foo(); // likely a user-defined function\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    NS::foo(); // clearly part of the NS library\n    foo(); // likely a user-defined function\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b75",
+      "type": "paragraph",
+      "html": "<p>In this version, the call to <code>NS::foo()</code> is clearly a library call. The call to plain <code>foo()</code> is probably a call to a user-defined function (some libraries, including certain standard library headers, do put names into the global namespace, so it’s not a guarantee).</p>",
+      "preview": "In this version, the call to NS::foo() is clearly a library call. The call to pl",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b76",
+      "type": "section",
+      "title": "The scope of using-statements",
+      "html": "<h3 class=\"cpp-section-heading\">The scope of using-statements</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b77",
+      "type": "paragraph",
+      "html": "<p>If a using-declaration or using-directive is used within a block, the names are applicable to just that block (it follows normal block scoping rules). This is a good thing, as it reduces the chances for naming collisions to occur to just within that block.</p>",
+      "preview": "If a using-declaration or using-directive is used within a block, the names are ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b78",
+      "type": "paragraph",
+      "html": "<p>If a using-declaration or using-directive is used in a namespace (including the global namespace), the names are applicable to the entire rest of the file (they have file scope).</p>",
+      "preview": "If a using-declaration or using-directive is used in a namespace (including the ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b79",
+      "type": "section",
+      "title": "Do not use using-statements in header files, or before an #include directive",
+      "html": "<h3 class=\"cpp-section-heading\">Do not use using-statements in header files, or before an #include directive</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b80",
+      "type": "paragraph",
+      "html": "<p>A good rule of thumb is that using-statements should not be placed anywhere where they might have an impact on code in a different file. Nor should they be placed anywhere where another file’s code might be able to impact them.</p>",
+      "preview": "A good rule of thumb is that using-statements should not be placed anywhere wher",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b81",
+      "type": "paragraph",
+      "html": "<p>More specifically, this means using-statements should not be used in header files, nor before an #include directive.</p>",
+      "preview": "More specifically, this means using-statements should not be used in header file",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b82",
+      "type": "paragraph",
+      "html": "<p>For example, if you placed a using-statement in the global namespace of a header file, then every other file that #included that header would also get that using-statement. That’s clearly bad. This also applies to namespaces inside header files, for the same reason.</p>",
+      "preview": "For example, if you placed a using-statement in the global namespace of a header",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b83",
+      "type": "paragraph",
+      "html": "<p>But what about using-statements within functions defined inside header files? Surely that can’t be bad since the scope of the using-statement is contained to the function, right? Even that’s a no. And it’s a no for the same reason that we shouldn’t use using-statements before an #include directive.</p>",
+      "preview": "But what about using-statements within functions defined inside header files? Su",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b84",
+      "type": "paragraph",
+      "html": "<p>It turns out that the behavior of using-statements is dependent on what identifiers have already been introduced. This makes them order-dependent, as their function may change if the identifiers that have been introduced before them change.</p>",
+      "preview": "It turns out that the behavior of using-statements is dependent on what identifi",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b85",
+      "type": "paragraph",
+      "html": "<p>We will illustrate this with an example:</p>",
+      "preview": "We will illustrate this with an example:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b86",
+      "type": "paragraph",
+      "html": "<p>FooInt.h:</p>",
+      "preview": "FooInt.h:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b87",
+      "type": "code",
+      "language": "cpp",
+      "code": "namespace Foo\n{\n    void print(int)\n    {\n        std::cout << \"print(int)\\n\" << std::endl;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace Foo\n{\n    void print(int)\n    {\n        std::cout &lt;&lt; \"print(int)\\n\" &lt;&lt; std::endl;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b88",
+      "type": "paragraph",
+      "html": "<p>FooDouble.h:</p>",
+      "preview": "FooDouble.h:",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b89",
+      "type": "code",
+      "language": "cpp",
+      "code": "namespace Foo\n{\n    void print(double)\n    {\n        std::cout << \"print(double)\\n\" << std::endl;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace Foo\n{\n    void print(double)\n    {\n        std::cout &lt;&lt; \"print(double)\\n\" &lt;&lt; std::endl;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b90",
+      "type": "paragraph",
+      "html": "<p>main.cpp (okay):</p>",
+      "preview": "main.cpp (okay):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b91",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n#include \"FooDouble.h\"\n#include \"FooInt.h\"\n\nusing Foo::print; // print means Foo::print\n\nint main()\n{\n    print(5);  // Calls Foo::print(int)\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n#include \"FooDouble.h\"\n#include \"FooInt.h\"\n\nusing Foo::print; // print means Foo::print\n\nint main()\n{\n    print(5);  // Calls Foo::print(int)\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b92",
+      "type": "paragraph",
+      "html": "<p>When run, this program calls <code>Foo::print(int)</code>, which prints <code>print(int)</code>.</p>",
+      "preview": "When run, this program calls Foo::print(int), which prints print(int).",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b93",
+      "type": "paragraph",
+      "html": "<p>Now let’s change main.cpp slightly.</p>",
+      "preview": "Now let’s change main.cpp slightly.",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b94",
+      "type": "paragraph",
+      "html": "<p>main.cpp (bad):</p>",
+      "preview": "main.cpp (bad):",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b95",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n#include \"FooDouble.h\"\n\nusing Foo::print; // we moved the using-statement here, before the #include directive\n#include \"FooInt.h\"\n\nint main()\n{\n    print(5);  // Calls Foo::print(double)\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n#include \"FooDouble.h\"\n\nusing Foo::print; // we moved the using-statement here, before the #include directive\n#include \"FooInt.h\"\n\nint main()\n{\n    print(5);  // Calls Foo::print(double)\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b96",
+      "type": "paragraph",
+      "html": "<p>All we’ve done is move <code>using Foo::print;</code> before <code>#include \"FooInt.h\"</code>. And our program now prints <code>print(double)</code>! Regardless of why this happens, you’ll likely agree that this is the kind of behavior we want to avoid!</p>",
+      "preview": "All we’ve done is move using Foo::print; before #include \"FooInt.h\". And our pro",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b97",
+      "type": "paragraph",
+      "html": "<p>So then to loop back around, the reason we shouldn’t use using-statements in functions that are defined in header files is the same reason -- we can’t control which other headers might be #included before our header, and it’s possible those headers might do something that alters the way our using-statement behaves!</p>",
+      "preview": "So then to loop back around, the reason we shouldn’t use using-statements in fun",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b98",
+      "type": "paragraph",
+      "html": "<p>The only place it is truly safe to use using-statements is in our source (.cpp) files, after all the #includes.</p>",
+      "preview": "The only place it is truly safe to use using-statements is in our source (.cpp) ",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b99",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>This example uses a concept we haven’t covered yet called “function overloading” (we cover this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Introduction to function overloading</a>). All you need to know for this example is that two functions in the same scope can have the same name so long as the parameters of each are distinct. Since <code>int</code> and <code>double</code> are distinct types, there is no issue having both <code>Foo::print(int)</code> and <code>Foo::print(double)</code> living side-by-side.</p><p>In the working version, when the compiler encounters <code>using Foo::print</code>, it has already seen both <code>Foo::print(int)</code> and <code>Foo::print(double)</code>, so it makes both available to be called as just <code>print()</code>. Since <code>Foo::print(int)</code> is a better match than <code>Foo::print(double)</code>, it calls <code>Foo::print(int)</code>.</p><p>In the bad version, when the compiler encounters <code>using Foo::print</code>, it has only seen a declaration for <code>Foo::print(double)</code>, so it only makes <code>Foo::print(double)</code> available to be called unqualified. So when we call <code>print(5)</code> only <code>Foo::print(double)</code> is even eligible to be matched. Thus <code>Foo::print(double)</code> is the one that gets called!</p></div>",
+      "preview": "For advanced readersThis example uses a concept we haven’t covered yet called “function overloading”",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b100",
+      "type": "section",
+      "title": "Cancelling or replacing a using-statement",
+      "html": "<h3 class=\"cpp-section-heading\">Cancelling or replacing a using-statement</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b101",
+      "type": "paragraph",
+      "html": "<p>Once a using-statement has been declared, there’s no way to cancel or replace it with a different using-statement within the scope in which it was declared.</p>",
+      "preview": "Once a using-statement has been declared, there’s no way to cancel or replace it",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b102",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    using namespace Foo;\n\n    // there's no way to cancel the \"using namespace Foo\" here!\n    // there's also no way to replace \"using namespace Foo\" with a different using statement\n\n    return 0;\n} // using namespace Foo ends here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    using namespace Foo;\n\n    // there's no way to cancel the \"using namespace Foo\" here!\n    // there's also no way to replace \"using namespace Foo\" with a different using statement\n\n    return 0;\n} // using namespace Foo ends here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b103",
+      "type": "paragraph",
+      "html": "<p>The best you can do is intentionally limit the scope of the using-statement from the outset using the block scoping rules.</p>",
+      "preview": "The best you can do is intentionally limit the scope of the using-statement from",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b104",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    {\n        using namespace Foo;\n        // calls to Foo:: stuff here\n    } // using namespace Foo expires\n \n    {\n        using namespace Goo;\n        // calls to Goo:: stuff here\n    } // using namespace Goo expires\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    {\n        using namespace Foo;\n        // calls to Foo:: stuff here\n    } // using namespace Foo expires\n \n    {\n        using namespace Goo;\n        // calls to Goo:: stuff here\n    } // using namespace Goo expires\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b105",
+      "type": "paragraph",
+      "html": "<p>Of course, all of this headache can be avoided by explicitly using the scope resolution operator (::) in the first place.</p>",
+      "preview": "Of course, all of this headache can be avoided by explicitly using the scope res",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b106",
+      "type": "section",
+      "title": "Best practices for using-statements",
+      "html": "<h3 class=\"cpp-section-heading\">Best practices for using-statements</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-declarations-and-using-directives_b107",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer explicit namespace qualifiers over using-statements.</p><p>Avoid using-directives altogether (except <code>using namespace std::literals</code> to access the <code>s</code> and <code>sv</code> literal suffixes). Using-declarations are okay in .cpp files, after the #include directives. Do not use using-statements in header files (especially in the global namespace of header files).</p></div>",
+      "preview": "Best practicePrefer explicit namespace qualifiers over using-statements.Avoid using-directives altog",
+      "canCheck": true
+    },
+    {
+      "id": "using-declarations-and-using-directives_b108",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>The <code>using</code> keyword is also used to define type aliases, which are unrelated to using-statements. We cover type aliases in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/\">10.7 -- Typedefs and type aliases</a>.</p></div>",
+      "preview": "Related contentThe using keyword is also used to define type aliases, which are unrelated to using-s",
+      "canCheck": true
+    }
+  ]
+}

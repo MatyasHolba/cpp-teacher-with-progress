@@ -1,0 +1,207 @@
+{
+  "index": 47,
+  "chapterId": "3",
+  "number": "3.9",
+  "title": "3.9 — Using an integrated debugger: The call stack",
+  "url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-the-call-stack/",
+  "slug": "using-an-integrated-debugger-the-call-stack",
+  "scrapedAt": "2026-09-15T16:29:00.122Z",
+  "totalBlocks": 27,
+  "totalCheckpoints": 26,
+  "blocks": [
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b0",
+      "type": "paragraph",
+      "html": "<p>Modern debuggers contain one more debugging information window that can be very useful in debugging your program, and that is the call stack window.</p>",
+      "preview": "Modern debuggers contain one more debugging information window that can be very ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b1",
+      "type": "paragraph",
+      "html": "<p>When your program calls a function, you already know that it bookmarks the current location, makes the function call, and then returns. How does it know where to return to? The answer is that it keeps track in the call stack.</p>",
+      "preview": "When your program calls a function, you already know that it bookmarks the curre",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b2",
+      "type": "paragraph",
+      "html": "<p>The <strong>call stack</strong> is a list of all the active functions that have been called to get to the current point of execution. The call stack includes an entry for each function called, as well as which line of code will be returned to when the function returns. Whenever a new function is called, that function is added to the top of the call stack. When the current function returns to the caller, it is removed from the top of the call stack, and control returns to the function just below it.</p>",
+      "preview": "The call stack is a list of all the active functions that have been called to ge",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b3",
+      "type": "paragraph",
+      "html": "<p>The <strong>call stack window</strong> is a debugger window that shows the current call stack. If you don’t see the call stack window, you will need to tell the IDE to show it.</p>",
+      "preview": "The call stack window is a debugger window that shows the current call stack. If",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b4",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Visual Studio users</p><p>In Visual Studio, the call stack window can be found via <em>Debug menu &gt; Windows &gt; Call Stack</em>. Note that you have to be in a debug session to activate this window.</p></div>",
+      "preview": "For Visual Studio usersIn Visual Studio, the call stack window can be found via Debug menu > Windows",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b5",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>In Code::Blocks, the call stack window can be found via <em>Debug menu &gt; Debugging windows &gt; Call stack</em>.</p></div>",
+      "preview": "For Code::Blocks usersIn Code::Blocks, the call stack window can be found via Debug menu > Debugging",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b6",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For VS Code users</p><p>In VS Code, the call stack window appears in debug mode, docked on the left.</p></div>",
+      "preview": "For VS Code usersIn VS Code, the call stack window appears in debug mode, docked on the left.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b7",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at the call stack using a sample program:</p>",
+      "preview": "Let’s take a look at the call stack using a sample program:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid a()\n{\n\tstd::cout << \"a() called\\n\";\n}\n\nvoid b()\n{\n\tstd::cout << \"b() called\\n\";\n\ta();\n}\n\nint main()\n{\n\ta();\n\tb();\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid a()\n{\n\tstd::cout &lt;&lt; \"a() called\\n\";\n}\n\nvoid b()\n{\n\tstd::cout &lt;&lt; \"b() called\\n\";\n\ta();\n}\n\nint main()\n{\n\ta();\n\tb();\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b9",
+      "type": "paragraph",
+      "html": "<p>Put breakpoints on lines 5 and 10 of this program, and then start debugging mode. Because function <em>a</em> is called first, the breakpoint on line 5 will be hit first.</p>",
+      "preview": "Put breakpoints on lines 5 and 10 of this program, and then start debugging mode",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b10",
+      "type": "paragraph",
+      "html": "<p>At this point, you should see something like this:</p>",
+      "preview": "At this point, you should see something like this:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b11",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS-CallStack1-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b12",
+      "type": "paragraph",
+      "html": "<p>Your IDE may exhibit some differences:</p>",
+      "preview": "Your IDE may exhibit some differences:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b13",
+      "type": "list",
+      "html": "<ul><li>The format of your function names and line numbers may be different</li><li>Your line numbers may be slightly different (off by 1)</li><li>Instead of <em>[External Code]</em> you may see a bunch of other crazily named functions.</li></ul>",
+      "preview": "The format of your function names and line numbers may be differentYour line num",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b14",
+      "type": "paragraph",
+      "html": "<p>These differences are inconsequential.</p>",
+      "preview": "These differences are inconsequential.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b15",
+      "type": "paragraph",
+      "html": "<p>What’s relevant here is the top two lines. From the bottom up, we can see that function <em>main</em> was called first, and then that function <em>a</em> was called next.</p>",
+      "preview": "What’s relevant here is the top two lines. From the bottom up, we can see that f",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b16",
+      "type": "paragraph",
+      "html": "<p>The <em>line 5</em> next to function <em>a</em> shows us where the current point of execution is (which matches the execution marker in the code window). The <em>line 17</em> on the second line indicates the line that will be returned to when control returns to function <em>main</em>.</p>",
+      "preview": "The line 5 next to function a shows us where the current point of execution is (",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b17",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>The line numbers after the function names show the next line to be executed in each function.</p><p>Since the top entry on the call stack represents the currently executing function, the line number here shows the next line that will execute when execution resumes. The remaining entries in the call stack represent functions that will be returned to at some point, so the line number for these represent the next statement that will execute after the function is returned to.</p></div>",
+      "preview": "TipThe line numbers after the function names show the next line to be executed in each function.Sinc",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b18",
+      "type": "paragraph",
+      "html": "<p>Now, choose the <em>continue</em> debug command to advance execution to the next breakpoint, which will be on line 10. The call stack should update to reflect the new situation:</p>",
+      "preview": "Now, choose the continue debug command to advance execution to the next breakpoi",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b19",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS-CallStack2-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b20",
+      "type": "paragraph",
+      "html": "<p>You’ll notice that function <em>b</em> is now the top line of the call stack, reflecting the fact that function <em>b</em> is the function that is actively being executed. Note that function <em>a</em> is no longer represented on the call stack. This is because function <em>a</em> was removed from the call stack when it returned.</p>",
+      "preview": "You’ll notice that function b is now the top line of the call stack, reflecting ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b21",
+      "type": "paragraph",
+      "html": "<p>Choose the <em>continue</em> debug command one more time, and we’ll hit the breakpoint on line 5 again (because function <em>b</em> calls function <em>a</em>). The call stack will look like this:</p>",
+      "preview": "Choose the continue debug command one more time, and we’ll hit the breakpoint on",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b22",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS-CallStack3-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b23",
+      "type": "paragraph",
+      "html": "<p>There are now three functions on the call stack: (from bottom to top) <em>main</em>, which called function <em>b</em>, which called function <em>a</em>.</p>",
+      "preview": "There are now three functions on the call stack: (from bottom to top) main, whic",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b24",
+      "type": "paragraph",
+      "html": "<p>The call stack is useful in conjunction with breakpoints, when your breakpoint is hit and you want to know what functions were called to get to that specific point in the code.</p>",
+      "preview": "The call stack is useful in conjunction with breakpoints, when your breakpoint i",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b25",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-the-call-stack_b26",
+      "type": "paragraph",
+      "html": "<p>Congratulations, you now know the basics of using an integrated debugger! Using stepping, breakpoints, watches, and the call stack window, you now have the fundamentals to be able to debug almost any problem. Like many things, becoming good at using a debugger takes some practice and some trial and error. But again, we’ll reiterate the point that the time devoted to learning how to use an integrated debugger effectively will be repaid many times over in time saved debugging your programs!</p>",
+      "preview": "Congratulations, you now know the basics of using an integrated debugger! Using ",
+      "canCheck": true
+    }
+  ]
+}

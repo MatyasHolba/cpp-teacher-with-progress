@@ -1,0 +1,597 @@
+{
+  "index": 198,
+  "chapterId": "14",
+  "number": "14.16",
+  "title": "14.16 — Converting constructors and the explicit keyword",
+  "url": "https://www.learncpp.com/cpp-tutorial/converting-constructors-and-the-explicit-keyword/",
+  "slug": "converting-constructors-and-the-explicit-keyword",
+  "scrapedAt": "2026-09-15T16:30:18.873Z",
+  "totalBlocks": 81,
+  "totalCheckpoints": 72,
+  "blocks": [
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b0",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicit type conversion</a>, we introduced type conversion and the concept of implicit type conversion, where the compiler will implicitly convert a value of one type to a value of another type as needed if such a conversion exists.</p>",
+      "preview": "In lesson 10.1 -- Implicit type conversion, we introduced type conversion and th",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b1",
+      "type": "paragraph",
+      "html": "<p>This allows us to do things like this:</p>",
+      "preview": "This allows us to do things like this:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDouble(double d) // has a double parameter\n{\n    std::cout << d;\n}\n\nint main()\n{\n    printDouble(5); // we're supplying an int argument\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDouble(double d) // has a double parameter\n{\n    std::cout &lt;&lt; d;\n}\n\nint main()\n{\n    printDouble(5); // we're supplying an int argument\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b3",
+      "type": "paragraph",
+      "html": "<p>In the above example, our <code>printDouble</code> function has a <code>double</code> parameter, but we’re passing in an argument of type <code>int</code>. Because the type of the parameter and the type of the argument do not match, the compiler will see if it can implicitly convert the type of the argument to the type of the parameter. In this case, using the numeric conversion rules, int value <code>5</code> will be converted to double value <code>5.0</code> and because we’re passing by value, parameter <code>d</code> will be copy initialized with this value.</p>",
+      "preview": "In the above example, our printDouble function has a double parameter, but we’re",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b4",
+      "type": "section",
+      "title": "User-defined conversions",
+      "html": "<h3 class=\"cpp-section-heading\">User-defined conversions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b5",
+      "type": "paragraph",
+      "html": "<p>Now consider the following similar example:</p>",
+      "preview": "Now consider the following similar example:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x{};\npublic:\n    Foo(int x)\n        : m_x{ x }\n    {\n    }\n\n    int getX() const { return m_x; }\n};\n\nvoid printFoo(Foo f) // has a Foo parameter\n{\n    std::cout << f.getX();\n}\n\nint main()\n{\n    printFoo(5); // we're supplying an int argument\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x{};\npublic:\n    Foo(int x)\n        : m_x{ x }\n    {\n    }\n\n    int getX() const { return m_x; }\n};\n\nvoid printFoo(Foo f) // has a Foo parameter\n{\n    std::cout &lt;&lt; f.getX();\n}\n\nint main()\n{\n    printFoo(5); // we're supplying an int argument\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b7",
+      "type": "paragraph",
+      "html": "<p>In this version, <code>printFoo</code> has a <code>Foo</code> parameter but we’re passing in an argument of type <code>int</code>. Because these types do not match, the compiler will try to implicitly convert int value <code>5</code> into a <code>Foo</code> object so the function can be called.</p>",
+      "preview": "In this version, printFoo has a Foo parameter but we’re passing in an argument o",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b8",
+      "type": "paragraph",
+      "html": "<p>Unlike the first example, where our parameter and argument types were both fundamental types (and thus can be converted using the built-in numeric promotion/conversion rules), in this case, one of our types is a program-defined type. The C++ standard doesn’t have specific rules that tell the compiler how to convert values to (or from) a program-defined type.</p>",
+      "preview": "Unlike the first example, where our parameter and argument types were both funda",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b9",
+      "type": "paragraph",
+      "html": "<p>Instead, the compiler will look to see if we have defined some function that it can use to perform such a conversion. Such a function is called a <strong>user-defined conversion</strong>.</p>",
+      "preview": "Instead, the compiler will look to see if we have defined some function that it ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b10",
+      "type": "section",
+      "title": "Converting constructors",
+      "html": "<h3 class=\"cpp-section-heading\">Converting constructors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b11",
+      "type": "paragraph",
+      "html": "<p>In the above example, the compiler will find a function that lets it convert int value <code>5</code> into a <code>Foo</code> object. That function is the <code>Foo(int)</code> constructor.</p>",
+      "preview": "In the above example, the compiler will find a function that lets it convert int",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b12",
+      "type": "paragraph",
+      "html": "<p>Up to this point, we’ve typically used constructors to explicitly construct objects:</p>",
+      "preview": "Up to this point, we’ve typically used constructors to explicitly construct obje",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo x { 5 }; // Explicitly convert int value 5 to a Foo",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo x { 5 }; // Explicitly convert int value 5 to a Foo</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b14",
+      "type": "paragraph",
+      "html": "<p>Think about what this does: we’re providing an <code>int</code> value (<code>5</code>) and getting a <code>Foo</code> object in return.</p>",
+      "preview": "Think about what this does: we’re providing an int value (5) and getting a Foo o",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b15",
+      "type": "paragraph",
+      "html": "<p>In the context of a function call, we’re trying to solve the same problem:</p>",
+      "preview": "In the context of a function call, we’re trying to solve the same problem:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "    printFoo(5); // Implicitly convert int value 5 into a Foo",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    printFoo(5); // Implicitly convert int value 5 into a Foo</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b17",
+      "type": "paragraph",
+      "html": "<p>We’re providing an <code>int</code> value (<code>5</code>), and we want a <code>Foo</code> object in return. The <code>Foo(int)</code> constructor was designed for exactly that!</p>",
+      "preview": "We’re providing an int value (5), and we want a Foo object in return. The Foo(in",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b18",
+      "type": "paragraph",
+      "html": "<p>So in this case, when <code>printFoo(5)</code> is called, parameter <code>f</code> is copy initialized using the <code>Foo(int)</code> constructor with <code>5</code> as an argument!</p>",
+      "preview": "So in this case, when printFoo(5) is called, parameter f is copy initialized usi",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b19",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Prior to C++17, when <code>printFoo(5)</code> is called, <code>5</code> is implicitly converted to a temporary <code>Foo</code> using the <code>Foo(int)</code> constructor. This temporary <code>Foo</code> is then copy constructed into parameter <code>f</code>.</p><p>In C++17 onward, the copy is mandatorily elided. Parameter <code>f</code> is copy initialized with value <code>5</code>, and no call to the copy constructor is required (and it will work even if the copy constructor is deleted).</p></div>",
+      "preview": "As an aside…Prior to C++17, when printFoo(5) is called, 5 is implicitly converted to a temporary Foo",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b20",
+      "type": "paragraph",
+      "html": "<p>A constructor that can be used to perform an implicit conversion is called a <strong>converting constructor</strong>. By default, all constructors are converting constructors.</p>",
+      "preview": "A constructor that can be used to perform an implicit conversion is called a con",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b21",
+      "type": "section",
+      "title": "Only one user-defined conversion may be applied",
+      "html": "<h3 class=\"cpp-section-heading\">Only one user-defined conversion may be applied</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b22",
+      "type": "paragraph",
+      "html": "<p>Now consider the following example:</p>",
+      "preview": "Now consider the following example:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Employee\n{\nprivate:\n    std::string m_name{};\n\npublic:\n    Employee(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n};\n\nvoid printEmployee(Employee e) // has an Employee parameter\n{\n    std::cout << e.getName();\n}\n\nint main()\n{\n    printEmployee(\"Joe\"); // we're supplying an string literal argument\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Employee\n{\nprivate:\n    std::string m_name{};\n\npublic:\n    Employee(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n};\n\nvoid printEmployee(Employee e) // has an Employee parameter\n{\n    std::cout &lt;&lt; e.getName();\n}\n\nint main()\n{\n    printEmployee(\"Joe\"); // we're supplying an string literal argument\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b24",
+      "type": "paragraph",
+      "html": "<p>In this version, we’ve swapped out our <code>Foo</code> class for an <code>Employee</code> class. <code>printEmployee</code> has an <code>Employee</code> parameter, and we’re passing in a C-style string literal. And we have a converting constructor: <code>Employee(std::string_view)</code>.</p>",
+      "preview": "In this version, we’ve swapped out our Foo class for an Employee class. printEmp",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b25",
+      "type": "paragraph",
+      "html": "<p>You might be surprised to find that this version doesn’t compile. The reason is simple: only one user-defined conversion may be applied to perform an implicit conversion, and this example requires two. First, our C-style string literal has to be converted to a <code>std::string_view</code> (using a <code>std::string_view</code> converting constructor), and then our <code>std::string_view</code> has to be converted into an <code>Employee</code> (using the <code>Employee(std::string_view)</code> converting constructor).</p>",
+      "preview": "You might be surprised to find that this version doesn’t compile. The reason is ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b26",
+      "type": "paragraph",
+      "html": "<p>There are two ways to make this example work:</p>",
+      "preview": "There are two ways to make this example work:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b27",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Use a <code>std::string_view</code> literal:</li></ol>",
+      "preview": "Use a std::string_view literal:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    using namespace std::literals;\n    printEmployee( \"Joe\"sv); // now a std::string_view literal\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    using namespace std::literals;\n    printEmployee( \"Joe\"sv); // now a std::string_view literal\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b29",
+      "type": "paragraph",
+      "html": "<p>This works because only one user-defined conversion is now required (from <code>std::string_view</code> to <code>Employee</code>).</p>",
+      "preview": "This works because only one user-defined conversion is now required (from std::s",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b30",
+      "type": "list",
+      "html": "<ol start=\"2\"><li>Explicitly construct an <code>Employee</code> rather than implicitly create one:</li></ol>",
+      "preview": "Explicitly construct an Employee rather than implicitly create one:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    printEmployee(Employee{ \"Joe\" });\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    printEmployee(Employee{ \"Joe\" });\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b32",
+      "type": "paragraph",
+      "html": "<p>This also works because only one user-defined conversion is now required (from the string literal to the <code>std::string_view</code> used to initialize the <code>Employee</code> object). Passing our explicitly constructed <code>Employee</code> object to the function does not require a second conversion to take place.</p>",
+      "preview": "This also works because only one user-defined conversion is now required (from t",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b33",
+      "type": "paragraph",
+      "html": "<p>This latter example brings up a useful technique: it is trivial to convert an implicit conversion into an explicit definition. We’ll see more examples of this later in this lesson.</p>",
+      "preview": "This latter example brings up a useful technique: it is trivial to convert an im",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b34",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>An implicit conversion can be trivially converted into an explicit definition by using direct list initialization (or direct initialization).</p></div>",
+      "preview": "Key insightAn implicit conversion can be trivially converted into an explicit definition by using di",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b35",
+      "type": "section",
+      "title": "When converting constructors go wrong",
+      "html": "<h3 class=\"cpp-section-heading\">When converting constructors go wrong</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b36",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Dollars\n{\nprivate:\n    int m_dollars{};\n\npublic:\n    Dollars(int d)\n        : m_dollars{ d }\n    {\n    }\n\n    int getDollars() const { return m_dollars; }\n};\n\nvoid print(Dollars d)\n{\n    std::cout << \"$\" << d.getDollars();\n}\n\nint main()\n{\n    print(5);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Dollars\n{\nprivate:\n    int m_dollars{};\n\npublic:\n    Dollars(int d)\n        : m_dollars{ d }\n    {\n    }\n\n    int getDollars() const { return m_dollars; }\n};\n\nvoid print(Dollars d)\n{\n    std::cout &lt;&lt; \"$\" &lt;&lt; d.getDollars();\n}\n\nint main()\n{\n    print(5);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b38",
+      "type": "paragraph",
+      "html": "<p>When we call <code>print(5)</code>, the <code>Dollars(int)</code> converting constructor will be used to convert <code>5</code> into a <code>Dollars</code> object. Thus, this program prints:</p>",
+      "preview": "When we call print(5), the Dollars(int) converting constructor will be used to c",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b39",
+      "type": "output",
+      "text": "$5\n",
+      "html": "<pre>$5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b40",
+      "type": "paragraph",
+      "html": "<p>Although this may have been the caller’s intent, it’s hard to tell because the caller did not provide any indication that this is what they actually wanted. It’s entirely possible that the caller assumed this would print <code>5</code>, and did not expect the compiler to silently and implicitly convert our <code>int</code> value to a <code>Dollars</code> object so that it could satisfy this function call.</p>",
+      "preview": "Although this may have been the caller’s intent, it’s hard to tell because the c",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b41",
+      "type": "paragraph",
+      "html": "<p>While this example is trivial, in a larger and more complex program, it’s fairly easy to be surprised by the compiler performing some implicit conversion that you did not expect, resulting in unexpected behavior at runtime.</p>",
+      "preview": "While this example is trivial, in a larger and more complex program, it’s fairly",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b42",
+      "type": "paragraph",
+      "html": "<p>It would be better if our <code>print(Dollars)</code> function could only be called with a <code>Dollars</code> object, not any value that can be implicitly converted to a <code>Dollars</code> (especially a fundamental type like <code>int</code>). This would reduce the possibility of inadvertent errors.</p>",
+      "preview": "It would be better if our print(Dollars) function could only be called with a Do",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b43",
+      "type": "section",
+      "title": "The explicit keyword",
+      "html": "<h3 class=\"cpp-section-heading\">The explicit keyword</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b44",
+      "type": "paragraph",
+      "html": "<p>To address such issues, we can use the <strong>explicit</strong> keyword to tell the compiler that a constructor should not be used as a converting constructor.</p>",
+      "preview": "To address such issues, we can use the explicit keyword to tell the compiler tha",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b45",
+      "type": "paragraph",
+      "html": "<p>Making a constructor <code>explicit</code> has two notable consequences:</p>",
+      "preview": "Making a constructor explicit has two notable consequences:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b46",
+      "type": "list",
+      "html": "<ul><li>An explicit constructor cannot be used to do copy initialization or copy list initialization.</li><li>An explicit constructor cannot be used to do implicit conversions (since this uses copy initialization or copy list initialization).</li></ul>",
+      "preview": "An explicit constructor cannot be used to do copy initialization or copy list in",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b47",
+      "type": "paragraph",
+      "html": "<p>Let’s update the <code>Dollars(int)</code> constructor from the prior example to be an explicit constructor:</p>",
+      "preview": "Let’s update the Dollars(int) constructor from the prior example to be an explic",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b48",
+      "type": "code",
+      "language": "cpp",
+      "code": " #include <iostream>\n\nclass Dollars\n{\nprivate:\n    int m_dollars{};\n\npublic:\n    explicit Dollars(int d) // now explicit\n        : m_dollars{ d }\n    {\n    }\n\n    int getDollars() const { return m_dollars; }\n};\n\nvoid print(Dollars d)\n{\n    std::cout << \"$\" << d.getDollars();\n}\n\nint main()\n{\n    print(5); // compilation error because Dollars(int) is explicit\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> #include &lt;iostream&gt;\n\nclass Dollars\n{\nprivate:\n    int m_dollars{};\n\npublic:\n    explicit Dollars(int d) // now explicit\n        : m_dollars{ d }\n    {\n    }\n\n    int getDollars() const { return m_dollars; }\n};\n\nvoid print(Dollars d)\n{\n    std::cout &lt;&lt; \"$\" &lt;&lt; d.getDollars();\n}\n\nint main()\n{\n    print(5); // compilation error because Dollars(int) is explicit\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b49",
+      "type": "paragraph",
+      "html": "<p>Because the compiler can no longer use <code>Dollars(int)</code> as a converting constructor, it can not find a way to convert <code>5</code> to a <code>Dollars</code>. Consequently, it will generate a compilation error.</p>",
+      "preview": "Because the compiler can no longer use Dollars(int) as a converting constructor,",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b50",
+      "type": "paragraph",
+      "html": "<p>For constructors with a separate declaration (inside the class) and definition (outside the class), the <code>explicit</code> keyword is used only on the declaration.</p>",
+      "preview": "For constructors with a separate declaration (inside the class) and definition (",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b51",
+      "type": "section",
+      "title": "Explicit constructors can be used for direct and direct list initialization",
+      "html": "<h3 class=\"cpp-section-heading\">Explicit constructors can be used for direct and direct list initialization</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b52",
+      "type": "paragraph",
+      "html": "<p>An explicit constructor can still be used for direct and direct list initialization:</p>",
+      "preview": "An explicit constructor can still be used for direct and direct list initializat",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b53",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Assume Dollars(int) is explicit\nint main()\n{\n    Dollars d1(5); // ok\n    Dollars d2{5}; // ok\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Assume Dollars(int) is explicit\nint main()\n{\n    Dollars d1(5); // ok\n    Dollars d2{5}; // ok\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b54",
+      "type": "paragraph",
+      "html": "<p>Now, let’s go back to our prior example, where we made our <code>Dollars(int)</code> constructor explicit, and therefore the following generated a compilation error:</p>",
+      "preview": "Now, let’s go back to our prior example, where we made our Dollars(int) construc",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b55",
+      "type": "code",
+      "language": "cpp",
+      "code": "    print(5); // compilation error because Dollars(int) is explicit",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    print(5); // compilation error because Dollars(int) is explicit</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b56",
+      "type": "paragraph",
+      "html": "<p>What if we actually want to call <code>print()</code> with <code>int</code> value <code>5</code> but the constructor is explicit? The workaround is simple: instead of having the compiler implicitly convert <code>5</code> into a <code>Dollars</code> that can be passed to <code>print()</code>, we can explicitly define the <code>Dollars</code> object ourselves:</p>",
+      "preview": "What if we actually want to call print() with int value 5 but the constructor is",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "    print(Dollars{5}); // ok: explicitly create a Dollars",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    print(Dollars{5}); // ok: explicitly create a Dollars</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b58",
+      "type": "paragraph",
+      "html": "<p>This is allowed because we can still use explicit constructors to list initialize objects. And since we’ve now explicitly constructed a <code>Dollars</code>, the argument type matches the parameter type, so no conversion is required!</p>",
+      "preview": "This is allowed because we can still use explicit constructors to list initializ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b59",
+      "type": "paragraph",
+      "html": "<p>This not only compiles and runs, it also better documents our intent, as it is explicit about the fact that we meant to call this function with a <code>Dollars</code> object.</p>",
+      "preview": "This not only compiles and runs, it also better documents our intent, as it is e",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b60",
+      "type": "paragraph",
+      "html": "<p>Note that <code>static_cast</code> returns an object that is direct-initialized, so it will consider explicit constructors while performing the conversion:</p>",
+      "preview": "Note that static_cast returns an object that is direct-initialized, so it will c",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "    print(static_cast<Dollars>(5)); // ok: static_cast will use explicit constructors",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    print(static_cast&lt;Dollars&gt;(5)); // ok: static_cast will use explicit constructors</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b62",
+      "type": "section",
+      "title": "Return by value and explicit constructors",
+      "html": "<h3 class=\"cpp-section-heading\">Return by value and explicit constructors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b63",
+      "type": "paragraph",
+      "html": "<p>When we return a value from a function, if that value does not match the return type of the function, an implicit conversion will occur. Just like with pass by value, such conversions cannot use explicit constructors.</p>",
+      "preview": "When we return a value from a function, if that value does not match the return ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b64",
+      "type": "paragraph",
+      "html": "<p>The following programs shows a few variations in return values, and their results:</p>",
+      "preview": "The following programs shows a few variations in return values, and their result",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b65",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Foo\n{\npublic:\n    explicit Foo() // note: explicit (just for sake of example)\n    {\n    }\n\n    explicit Foo(int x) // note: explicit\n    {\n    }\n};\n\nFoo getFoo()\n{\n    // explicit Foo() cases\n    return Foo{ };   // ok\n    return { };      // error: can't implicitly convert initializer list to Foo\n\n    // explicit Foo(int) cases\n    return 5;        // error: can't implicitly convert int to Foo\n    return Foo{ 5 }; // ok\n    return { 5 };    // error: can't implicitly convert initializer list to Foo\n}\n\nint main()\n{\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\npublic:\n    explicit Foo() // note: explicit (just for sake of example)\n    {\n    }\n\n    explicit Foo(int x) // note: explicit\n    {\n    }\n};\n\nFoo getFoo()\n{\n    // explicit Foo() cases\n    return Foo{ };   // ok\n    return { };      // error: can't implicitly convert initializer list to Foo\n\n    // explicit Foo(int) cases\n    return 5;        // error: can't implicitly convert int to Foo\n    return Foo{ 5 }; // ok\n    return { 5 };    // error: can't implicitly convert initializer list to Foo\n}\n\nint main()\n{\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b66",
+      "type": "paragraph",
+      "html": "<p>Perhaps surprisingly, <code>return { 5 }</code> is considered a conversion.</p>",
+      "preview": "Perhaps surprisingly, return { 5 } is considered a conversion.",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b67",
+      "type": "section",
+      "title": "Best practices for use of explicit",
+      "html": "<h3 class=\"cpp-section-heading\">Best practices for use of <code>explicit</code></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b68",
+      "type": "paragraph",
+      "html": "<p>The modern best practice is to make any constructor that will accept a single argument <code>explicit</code> by default. This includes constructors with multiple parameters where most or all of them have default values. This will disallow the compiler from using that constructor for implicit conversions. If an implicit conversion is required, only non-explicit constructors will be considered. If no non-explicit constructor can be found to perform the conversion, the compiler will error.</p>",
+      "preview": "The modern best practice is to make any constructor that will accept a single ar",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b69",
+      "type": "paragraph",
+      "html": "<p>If such a conversion is actually desired in a particular case, it is trivial to convert the implicit conversion into an explicit definition using direct list initialization.</p>",
+      "preview": "If such a conversion is actually desired in a particular case, it is trivial to ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b70",
+      "type": "paragraph",
+      "html": "<p>The following <strong>should not</strong> be made explicit:</p>",
+      "preview": "The following should not be made explicit:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b71",
+      "type": "list",
+      "html": "<ul><li>Copy (and move) constructors (as these do not perform conversions).</li></ul>",
+      "preview": "Copy (and move) constructors (as these do not perform conversions).",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b72",
+      "type": "paragraph",
+      "html": "<p>The following <strong>are typically not</strong> made explicit:</p>",
+      "preview": "The following are typically not made explicit:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b73",
+      "type": "list",
+      "html": "<ul><li>Default constructors with no parameters (as these are only used to convert <code>{}</code> to a default object, not something we typically need to restrict).</li><li>Constructors that only accept multiple arguments (as these are typically not a candidate for conversions anyway).</li></ul>",
+      "preview": "Default constructors with no parameters (as these are only used to convert {} to",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b74",
+      "type": "paragraph",
+      "html": "<p>However, if you prefer, the above can be marked as explicit to prevent implicit conversions with empty and multiple-argument lists.</p>",
+      "preview": "However, if you prefer, the above can be marked as explicit to prevent implicit ",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b75",
+      "type": "paragraph",
+      "html": "<p>The following <strong>should usually</strong> be made explicit:</p>",
+      "preview": "The following should usually be made explicit:",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b76",
+      "type": "list",
+      "html": "<ul><li>Constructors that take a single argument.</li></ul>",
+      "preview": "Constructors that take a single argument.",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b77",
+      "type": "paragraph",
+      "html": "<p>There are some occasions when it does make sense to make a single-argument constructor non-explicit. This can be useful when all of the following are true:</p>",
+      "preview": "There are some occasions when it does make sense to make a single-argument const",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b78",
+      "type": "list",
+      "html": "<ul><li>The constructed object is semantically equivalent to the argument value.</li><li>The conversion is performant.</li></ul>",
+      "preview": "The constructed object is semantically equivalent to the argument value.The conv",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b79",
+      "type": "paragraph",
+      "html": "<p>For example, the <code>std::string_view</code> constructor that accepts a C-style string argument is not explicit, because there is unlikely to be a case when we wouldn’t be okay with a C-style string being treated as a <code>std::string_view</code> instead. Conversely, the <code>std::string</code> constructor that takes a <code>std::string_view</code> is marked as explicit, because while a <code>std::string</code> value is semantically equivalent to a <code>std::string_view</code> value, constructing a <code>std::string</code> is not performant.</p>",
+      "preview": "For example, the std::string_view constructor that accepts a C-style string argu",
+      "canCheck": true
+    },
+    {
+      "id": "converting-constructors-and-the-explicit-keyword_b80",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Make any constructor that accepts a single argument <code>explicit</code> by default. If an implicit conversion between types is both semantically equivalent and performant, you can consider making the constructor non-explicit.</p><p>Do not make copy or move constructors explicit, as these do not perform conversions.</p></div>",
+      "preview": "Best practiceMake any constructor that accepts a single argument explicit by default. If an implicit",
+      "canCheck": true
+    }
+  ]
+}

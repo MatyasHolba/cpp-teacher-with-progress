@@ -1,0 +1,318 @@
+{
+  "index": 268,
+  "chapterId": "21",
+  "number": "21.13",
+  "title": "21.13 — Shallow vs. deep copying",
+  "url": "https://www.learncpp.com/cpp-tutorial/shallow-vs-deep-copying/",
+  "slug": "shallow-vs-deep-copying",
+  "scrapedAt": "2026-09-15T16:30:55.701Z",
+  "totalBlocks": 42,
+  "totalCheckpoints": 37,
+  "blocks": [
+    {
+      "id": "shallow-vs-deep-copying_b0",
+      "type": "section",
+      "title": "Shallow copying",
+      "html": "<h3 class=\"cpp-section-heading\">Shallow copying</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "shallow-vs-deep-copying_b1",
+      "type": "paragraph",
+      "html": "<p>Because C++ does not know much about your class, the default copy constructor and default assignment operators it provides use a copying method known as a memberwise copy (also known as a <strong>shallow copy</strong>). This means that C++ copies each member of the class individually (using the assignment operator for overloaded operator=, and direct initialization for the copy constructor). When classes are simple (e.g. do not contain any dynamically allocated memory), this works very well.</p>",
+      "preview": "Because C++ does not know much about your class, the default copy constructor an",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b2",
+      "type": "paragraph",
+      "html": "<p>For example, let’s take a look at our Fraction class:</p>",
+      "preview": "For example, let’s take a look at our Fraction class:",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert>\n#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    friend std::ostream& operator<<(std::ostream& out, const Fraction& f1);\n};\n \nstd::ostream& operator<<(std::ostream& out, const Fraction& f1)\n{\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\treturn out;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1);\n};\n \nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n{\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b4",
+      "type": "paragraph",
+      "html": "<p>The default copy constructor and default assignment operator provided by the compiler for this class look something like this:</p>",
+      "preview": "The default copy constructor and default assignment operator provided by the com",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert>\n#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    // Possible implementation of implicit copy constructor\n    Fraction(const Fraction& f)\n        : m_numerator{ f.m_numerator }\n        , m_denominator{ f.m_denominator }\n    {\n    }\n\n    // Possible implementation of implicit assignment operator\n    Fraction& operator= (const Fraction& fraction)\n    {\n        // self-assignment guard\n        if (this == &fraction)\n            return *this;\n \n        // do the copy\n        m_numerator = fraction.m_numerator;\n        m_denominator = fraction.m_denominator;\n \n        // return the existing object so we can chain this operator\n        return *this;\n    }\n\n    friend std::ostream& operator<<(std::ostream& out, const Fraction& f1)\n    {\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\treturn out;\n    }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    // Possible implementation of implicit copy constructor\n    Fraction(const Fraction&amp; f)\n        : m_numerator{ f.m_numerator }\n        , m_denominator{ f.m_denominator }\n    {\n    }\n\n    // Possible implementation of implicit assignment operator\n    Fraction&amp; operator= (const Fraction&amp; fraction)\n    {\n        // self-assignment guard\n        if (this == &amp;fraction)\n            return *this;\n \n        // do the copy\n        m_numerator = fraction.m_numerator;\n        m_denominator = fraction.m_denominator;\n \n        // return the existing object so we can chain this operator\n        return *this;\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n    {\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n    }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b6",
+      "type": "paragraph",
+      "html": "<p>Note that because these default versions work just fine for copying this class, there’s really no reason to write our own version of these functions in this case.</p>",
+      "preview": "Note that because these default versions work just fine for copying this class, ",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b7",
+      "type": "paragraph",
+      "html": "<p>However, when designing classes that handle dynamically allocated memory, memberwise (shallow) copying can get us in a lot of trouble! This is because shallow copies of a pointer just copy the address of the pointer -- it does not allocate any memory or copy the contents being pointed to!</p>",
+      "preview": "However, when designing classes that handle dynamically allocated memory, member",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b8",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at an example of this:</p>",
+      "preview": "Let’s take a look at an example of this:",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cstring> // for strlen()\n#include <cassert> // for assert()\n\nclass MyString\n{\nprivate:\n    char* m_data{};\n    int m_length{};\n \npublic:\n    MyString(const char* source = \"\" )\n    {\n        assert(source); // make sure source isn't a null string\n\n        // Find the length of the string\n        // Plus one character for a terminator\n        m_length = std::strlen(source) + 1;\n        \n        // Allocate a buffer equal to this length\n        m_data = new char[m_length];\n        \n        // Copy the parameter string into our internal buffer\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = source[i];\n    }\n \n    ~MyString() // destructor\n    {\n        // We need to deallocate our string\n        delete[] m_data;\n    }\n \n    char* getString() { return m_data; }\n    int getLength() { return m_length; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstring&gt; // for strlen()\n#include &lt;cassert&gt; // for assert()\n\nclass MyString\n{\nprivate:\n    char* m_data{};\n    int m_length{};\n \npublic:\n    MyString(const char* source = \"\" )\n    {\n        assert(source); // make sure source isn't a null string\n\n        // Find the length of the string\n        // Plus one character for a terminator\n        m_length = std::strlen(source) + 1;\n        \n        // Allocate a buffer equal to this length\n        m_data = new char[m_length];\n        \n        // Copy the parameter string into our internal buffer\n        for (int i{ 0 }; i &lt; m_length; ++i)\n            m_data[i] = source[i];\n    }\n \n    ~MyString() // destructor\n    {\n        // We need to deallocate our string\n        delete[] m_data;\n    }\n \n    char* getString() { return m_data; }\n    int getLength() { return m_length; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b10",
+      "type": "paragraph",
+      "html": "<p>The above is a simple string class that allocates memory to hold a string that we pass in. Note that we have not defined a copy constructor or overloaded assignment operator. Consequently, C++ will provide a default copy constructor and default assignment operator that do a shallow copy. The copy constructor will look something like this:</p>",
+      "preview": "The above is a simple string class that allocates memory to hold a string that w",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "MyString::MyString(const MyString& source)\n    : m_length { source.m_length }\n    , m_data { source.m_data }\n{\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">MyString::MyString(const MyString&amp; source)\n    : m_length { source.m_length }\n    , m_data { source.m_data }\n{\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b12",
+      "type": "paragraph",
+      "html": "<p>Note that m_data is just a shallow pointer copy of source.m_data, meaning they now both point to the same thing.</p>",
+      "preview": "Note that m_data is just a shallow pointer copy of source.m_data, meaning they n",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b13",
+      "type": "paragraph",
+      "html": "<p>Now, consider the following snippet of code:</p>",
+      "preview": "Now, consider the following snippet of code:",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    MyString hello{ \"Hello, world!\" };\n    {\n        MyString copy{ hello }; // use default copy constructor\n    } // copy is a local variable, so it gets destroyed here.  The destructor deletes copy's string, which leaves hello with a dangling pointer\n\n    std::cout << hello.getString() << '\\n'; // this will have undefined behavior\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    MyString hello{ \"Hello, world!\" };\n    {\n        MyString copy{ hello }; // use default copy constructor\n    } // copy is a local variable, so it gets destroyed here.  The destructor deletes copy's string, which leaves hello with a dangling pointer\n\n    std::cout &lt;&lt; hello.getString() &lt;&lt; '\\n'; // this will have undefined behavior\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b15",
+      "type": "paragraph",
+      "html": "<p>While this code looks harmless enough, it contains an insidious problem that will cause the program to exhibit undefined behavior!</p>",
+      "preview": "While this code looks harmless enough, it contains an insidious problem that wil",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b16",
+      "type": "paragraph",
+      "html": "<p>Let’s break down this example line by line:</p>",
+      "preview": "Let’s break down this example line by line:",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "    MyString hello{ \"Hello, world!\" };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    MyString hello{ \"Hello, world!\" };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b18",
+      "type": "paragraph",
+      "html": "<p>This line is harmless enough. This calls the MyString constructor, which allocates some memory, sets hello.m_data to point to it, and then copies the string “Hello, world!” into it.</p>",
+      "preview": "This line is harmless enough. This calls the MyString constructor, which allocat",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "    MyString copy{ hello }; // use default copy constructor",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    MyString copy{ hello }; // use default copy constructor</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b20",
+      "type": "paragraph",
+      "html": "<p>This line seems harmless enough as well, but it’s actually the source of our problem! When this line is evaluated, C++ will use the default copy constructor (because we haven’t provided our own). This copy constructor will do a shallow copy, initializing copy.m_data to the same address of hello.m_data. As a result, copy.m_data and hello.m_data are now both pointing to the same piece of memory!</p>",
+      "preview": "This line seems harmless enough as well, but it’s actually the source of our pro",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "} // copy gets destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">} // copy gets destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b22",
+      "type": "paragraph",
+      "html": "<p>When copy goes out of scope, the MyString destructor is called on copy. The destructor deletes the dynamically allocated memory that both copy.m_data and hello.m_data are pointing to! Consequently, by deleting copy, we’ve also (inadvertently) affected hello. Variable copy then gets destroyed, but hello.m_data is left pointing to the deleted (invalid) memory!</p>",
+      "preview": "When copy goes out of scope, the MyString destructor is called on copy. The dest",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "    std::cout << hello.getString() << '\\n'; // this will have undefined behavior",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; hello.getString() &lt;&lt; '\\n'; // this will have undefined behavior</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b24",
+      "type": "paragraph",
+      "html": "<p>Now you can see why this program has undefined behavior. We deleted the string that hello was pointing to, and now we are trying to print the value of memory that is no longer allocated.</p>",
+      "preview": "Now you can see why this program has undefined behavior. We deleted the string t",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b25",
+      "type": "paragraph",
+      "html": "<p>The root of this problem is the shallow copy done by the copy constructor -- doing a shallow copy on pointer values in a copy constructor or overloaded assignment operator is almost always asking for trouble.</p>",
+      "preview": "The root of this problem is the shallow copy done by the copy constructor -- doi",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b26",
+      "type": "section",
+      "title": "Deep copying",
+      "html": "<h3 class=\"cpp-section-heading\">Deep copying</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "shallow-vs-deep-copying_b27",
+      "type": "paragraph",
+      "html": "<p>One answer to this problem is to do a deep copy on any non-null pointers being copied. A <strong>deep copy</strong> allocates memory for the copy and then copies the actual value, so that the copy lives in distinct memory from the source. This way, the copy and source are distinct and will not affect each other in any way. Doing deep copies requires that we write our own copy constructors and overloaded assignment operators.</p>",
+      "preview": "One answer to this problem is to do a deep copy on any non-null pointers being c",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b28",
+      "type": "paragraph",
+      "html": "<p>Let’s go ahead and show how this is done for our MyString class:</p>",
+      "preview": "Let’s go ahead and show how this is done for our MyString class:",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "// assumes m_data is initialized\nvoid MyString::deepCopy(const MyString& source)\n{\n    // first we need to deallocate any value that this string is holding!\n    delete[] m_data;\n\n    // because m_length is not a pointer, we can shallow copy it\n    m_length = source.m_length;\n\n    // m_data is a pointer, so we need to deep copy it if it is non-null\n    if (source.m_data)\n    {\n        // allocate memory for our copy\n        m_data = new char[m_length];\n\n        // do the copy\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = source.m_data[i];\n    }\n    else\n        m_data = nullptr;\n}\n\n// Copy constructor\nMyString::MyString(const MyString& source)\n{\n    deepCopy(source);\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// assumes m_data is initialized\nvoid MyString::deepCopy(const MyString&amp; source)\n{\n    // first we need to deallocate any value that this string is holding!\n    delete[] m_data;\n\n    // because m_length is not a pointer, we can shallow copy it\n    m_length = source.m_length;\n\n    // m_data is a pointer, so we need to deep copy it if it is non-null\n    if (source.m_data)\n    {\n        // allocate memory for our copy\n        m_data = new char[m_length];\n\n        // do the copy\n        for (int i{ 0 }; i &lt; m_length; ++i)\n            m_data[i] = source.m_data[i];\n    }\n    else\n        m_data = nullptr;\n}\n\n// Copy constructor\nMyString::MyString(const MyString&amp; source)\n{\n    deepCopy(source);\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b30",
+      "type": "paragraph",
+      "html": "<p>As you can see, this is quite a bit more involved than a simple shallow copy! First, we have to check to make sure source even has a string (line 11). If it does, then we allocate enough memory to hold a copy of that string (line 14). Finally, we have to manually copy the string (lines 17 and 18).</p>",
+      "preview": "As you can see, this is quite a bit more involved than a simple shallow copy! Fi",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b31",
+      "type": "paragraph",
+      "html": "<p>Now let’s do the overloaded assignment operator. The overloaded assignment operator is slightly trickier:</p>",
+      "preview": "Now let’s do the overloaded assignment operator. The overloaded assignment opera",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Assignment operator\nMyString& MyString::operator=(const MyString& source)\n{\n    // check for self-assignment\n    if (this != &source)\n    {\n        // now do the deep copy\n        deepCopy(source);\n    }\n\n    return *this;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Assignment operator\nMyString&amp; MyString::operator=(const MyString&amp; source)\n{\n    // check for self-assignment\n    if (this != &amp;source)\n    {\n        // now do the deep copy\n        deepCopy(source);\n    }\n\n    return *this;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b33",
+      "type": "paragraph",
+      "html": "<p>Note that our assignment operator is very similar to our copy constructor, but there are three major differences:</p>",
+      "preview": "Note that our assignment operator is very similar to our copy constructor, but t",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b34",
+      "type": "list",
+      "html": "<ul><li>We added a self-assignment check.</li><li>We return *this so we can chain the assignment operator.</li><li>We need to explicitly deallocate any value that the string is already holding (so we don’t have a memory leak when m_data is reallocated later). This is handled inside deepCopy().</li></ul>",
+      "preview": "We added a self-assignment check.We return *this so we can chain the assignment ",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b35",
+      "type": "paragraph",
+      "html": "<p>When the overloaded assignment operator is called, the item being assigned to may already contain a previous value, which we need to make sure we clean up before we assign memory for new values. For non-dynamically allocated variables (which are a fixed size), we don’t have to bother because the new value just overwrites the old one. However, for dynamically allocated variables, we need to explicitly deallocate any old memory before we allocate any new memory. If we don’t, the code will not crash, but we will have a memory leak that will eat away our free memory every time we do an assignment!</p>",
+      "preview": "When the overloaded assignment operator is called, the item being assigned to ma",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b36",
+      "type": "section",
+      "title": "The rule of three",
+      "html": "<h3 class=\"cpp-section-heading\">The rule of three</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "shallow-vs-deep-copying_b37",
+      "type": "paragraph",
+      "html": "<p>Remember the rule of three? If a class requires a user-defined destructor, copy constructor, or copy assignment operator, then it probably requires all three. This is why. If we’re user-defining any of these functions, it’s probably because we’re dealing with dynamic memory allocation. We need the copy constructor and copy assignment to handle deep copies, and the destructor to deallocate memory.</p>",
+      "preview": "Remember the rule of three? If a class requires a user-defined destructor, copy ",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b38",
+      "type": "section",
+      "title": "A better solution",
+      "html": "<h3 class=\"cpp-section-heading\">A better solution</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "shallow-vs-deep-copying_b39",
+      "type": "paragraph",
+      "html": "<p>Classes in the standard library that deal with dynamic memory, such as std::string and std::vector, handle all of their memory management, and have overloaded copy constructors and assignment operators that do proper deep copying. So instead of doing your own memory management, you can just initialize or assign them like normal fundamental variables! That makes these classes simpler to use, less error-prone, and you don’t have to spend time writing your own overloaded functions!</p>",
+      "preview": "Classes in the standard library that deal with dynamic memory, such as std::stri",
+      "canCheck": true
+    },
+    {
+      "id": "shallow-vs-deep-copying_b40",
+      "type": "section",
+      "title": "Summary",
+      "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "shallow-vs-deep-copying_b41",
+      "type": "list",
+      "html": "<ul><li>The default copy constructor and default assignment operators do shallow copies, which is fine for classes that contain no dynamically allocated variables.</li><li>Classes with dynamically allocated variables need to have a copy constructor and assignment operator that do a deep copy.</li><li>Favor using classes in the standard library over doing your own memory management.</li></ul>",
+      "preview": "The default copy constructor and default assignment operators do shallow copies,",
+      "canCheck": true
+    }
+  ]
+}

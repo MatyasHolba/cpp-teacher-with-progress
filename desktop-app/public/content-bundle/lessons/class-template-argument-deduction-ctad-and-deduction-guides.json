@@ -1,0 +1,307 @@
+{
+  "index": 179,
+  "chapterId": "13",
+  "number": "13.14",
+  "title": "13.14 — Class template argument deduction (CTAD) and deduction guides",
+  "url": "https://www.learncpp.com/cpp-tutorial/class-template-argument-deduction-ctad-and-deduction-guides/",
+  "slug": "class-template-argument-deduction-ctad-and-deduction-guides",
+  "scrapedAt": "2026-09-15T16:30:08.998Z",
+  "totalBlocks": 40,
+  "totalCheckpoints": 35,
+  "blocks": [
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b0",
+      "type": "section",
+      "title": "Class template argument deduction (CTAD) C++17",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"CTAD\"></a>Class template argument deduction (CTAD) <span class=\"cpp-section-pill cpp-section-standard\">C++17</span> <a href=\"#CTAD\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b1",
+      "type": "paragraph",
+      "html": "<p>Starting in C++17, when instantiating an object from a class template, the compiler can deduce the template types from the types of the object’s initializer (this is called <strong>class template argument deduction</strong> or <strong>CTAD</strong> for short). For example:</p>",
+      "preview": "Starting in C++17, when instantiating an object from a class template, the compi",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <utility> // for std::pair\n\nint main()\n{\n    std::pair<int, int> p1{ 1, 2 }; // explicitly specify class template std::pair<int, int> (C++11 onward)\n    std::pair p2{ 1, 2 };           // CTAD used to deduce std::pair<int, int> from the initializers (C++17)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::pair\n\nint main()\n{\n    std::pair&lt;int, int&gt; p1{ 1, 2 }; // explicitly specify class template std::pair&lt;int, int&gt; (C++11 onward)\n    std::pair p2{ 1, 2 };           // CTAD used to deduce std::pair&lt;int, int&gt; from the initializers (C++17)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b3",
+      "type": "paragraph",
+      "html": "<p>CTAD is only performed if no template argument list is present. Therefore, both of the following are errors:</p>",
+      "preview": "CTAD is only performed if no template argument list is present. Therefore, both ",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <utility> // for std::pair\n\nint main()\n{\n    std::pair<> p1 { 1, 2 };    // error: too few template arguments, both arguments not deduced\n    std::pair<int> p2 { 3, 4 }; // error: too few template arguments, second argument not deduced\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::pair\n\nint main()\n{\n    std::pair&lt;&gt; p1 { 1, 2 };    // error: too few template arguments, both arguments not deduced\n    std::pair&lt;int&gt; p2 { 3, 4 }; // error: too few template arguments, second argument not deduced\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b5",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Many future lessons on this site make use of CTAD. If you’re compiling these examples using the C++14 standard (or older), you’ll get an error about missing template arguments. You’ll need to explicitly add such arguments to the example to make it compile.</p></div>",
+      "preview": "Author’s noteMany future lessons on this site make use of CTAD. If you’re compiling these examples u",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b6",
+      "type": "paragraph",
+      "html": "<p>Since CTAD is a form of type deduction, we can use literal suffixes to change the deduced type:</p>",
+      "preview": "Since CTAD is a form of type deduction, we can use literal suffixes to change th",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <utility> // for std::pair\n\nint main()\n{\n    std::pair p1 { 3.4f, 5.6f }; // deduced to pair<float, float>\n    std::pair p2 { 1u, 2u };     // deduced to pair<unsigned int, unsigned int>\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::pair\n\nint main()\n{\n    std::pair p1 { 3.4f, 5.6f }; // deduced to pair&lt;float, float&gt;\n    std::pair p2 { 1u, 2u };     // deduced to pair&lt;unsigned int, unsigned int&gt;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b8",
+      "type": "section",
+      "title": "Template argument deduction guides C++17",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"DeductionGuide\"></a>Template argument deduction guides <span class=\"cpp-section-pill cpp-section-standard\">C++17</span> <a href=\"#DeductionGuide\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b9",
+      "type": "paragraph",
+      "html": "<p>In most cases, CTAD works right out of the box. However, in certain cases, the compiler may need a little extra help understanding how to deduce the template arguments properly.</p>",
+      "preview": "In most cases, CTAD works right out of the box. However, in certain cases, the c",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b10",
+      "type": "paragraph",
+      "html": "<p>You may be surprised to find that the following program (which is almost identical to the example that uses <code>std::pair</code> above) doesn’t compile in C++17 (only):</p>",
+      "preview": "You may be surprised to find that the following program (which is almost identic",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "// define our own Pair type\ntemplate <typename T, typename U>\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\nint main()\n{\n    Pair<int, int> p1{ 1, 2 }; // ok: we're explicitly specifying the template arguments\n    Pair p2{ 1, 2 };           // compile error in C++17 (okay in C++20)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// define our own Pair type\ntemplate &lt;typename T, typename U&gt;\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\nint main()\n{\n    Pair&lt;int, int&gt; p1{ 1, 2 }; // ok: we're explicitly specifying the template arguments\n    Pair p2{ 1, 2 };           // compile error in C++17 (okay in C++20)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b12",
+      "type": "paragraph",
+      "html": "<p>If you compile this in C++17, you’ll likely get some error about “class template argument deduction failed” or “cannot deduce template arguments” or “No viable constructor or deduction guide”. This is because in C++17, CTAD doesn’t know how to deduce the template arguments for aggregate class templates. To address this, we can provide the compiler with a <strong>deduction guide</strong>, which tells the compiler how to deduce the template arguments for a given class template.</p>",
+      "preview": "If you compile this in C++17, you’ll likely get some error about “class template",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b13",
+      "type": "paragraph",
+      "html": "<p>Here’s the same program with a deduction guide:</p>",
+      "preview": "Here’s the same program with a deduction guide:",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T, typename U>\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\n// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and U should deduce to Pair<T, U>\ntemplate <typename T, typename U>\nPair(T, U) -> Pair<T, U>;\n    \nint main()\n{\n    Pair<int, int> p1{ 1, 2 }; // explicitly specify class template Pair<int, int> (C++11 onward)\n    Pair p2{ 1, 2 };           // CTAD used to deduce Pair<int, int> from the initializers (C++17)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T, typename U&gt;\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\n// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and U should deduce to Pair&lt;T, U&gt;\ntemplate &lt;typename T, typename U&gt;\nPair(T, U) -&gt; Pair&lt;T, U&gt;;\n    \nint main()\n{\n    Pair&lt;int, int&gt; p1{ 1, 2 }; // explicitly specify class template Pair&lt;int, int&gt; (C++11 onward)\n    Pair p2{ 1, 2 };           // CTAD used to deduce Pair&lt;int, int&gt; from the initializers (C++17)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b15",
+      "type": "paragraph",
+      "html": "<p>This example should compile under C++17.</p>",
+      "preview": "This example should compile under C++17.",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b16",
+      "type": "paragraph",
+      "html": "<p>The deduction guide for our <code>Pair</code> class is pretty simple, but let’s take a closer look at how it works.</p>",
+      "preview": "The deduction guide for our Pair class is pretty simple, but let’s take a closer",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and U should deduce to Pair<T, U>\ntemplate <typename T, typename U>\nPair(T, U) -> Pair<T, U>;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and U should deduce to Pair&lt;T, U&gt;\ntemplate &lt;typename T, typename U&gt;\nPair(T, U) -&gt; Pair&lt;T, U&gt;;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b18",
+      "type": "paragraph",
+      "html": "<p>First, we use the same template type definition as in our <code>Pair</code> class. This makes sense, because if our deduction guide is going to tell the compiler how to deduce the types for a <code>Pair&lt;T, U&gt;</code>, we have to define what <code>T</code> and <code>U</code> are (template types). Second, on the right hand side of the arrow, we have the type that we’re helping the compiler to deduce. In this case, we want the compiler to be able to deduce template arguments for objects of type <code>Pair&lt;T, U&gt;</code>, so that’s exactly what we put here. Finally, on the left side of the arrow, we tell the compiler what kind of declaration to look for. In this case, we’re telling it to look for a declaration of some object named <code>Pair</code> with two arguments (one of type <code>T</code>, the other of type <code>U</code>). We could also write this as <code>Pair(T t, U u)</code> (where <code>t</code> and <code>u</code> are the names of the parameters, but since we don’t use <code>t</code> and <code>u</code>, we don’t need to give them names).</p>",
+      "preview": "First, we use the same template type definition as in our Pair class. This makes",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b19",
+      "type": "paragraph",
+      "html": "<p>Putting it all together, we’re telling the compiler that if it sees a declaration of a <code>Pair</code> with two arguments (of types <code>T</code> and <code>U</code> respectively), it should deduce the type to be a <code>Pair&lt;T, U&gt;</code>.</p>",
+      "preview": "Putting it all together, we’re telling the compiler that if it sees a declaratio",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b20",
+      "type": "paragraph",
+      "html": "<p>So when the compiler sees the definition <code>Pair p2{ 1, 2 };</code> in our program, it will say, “oh, this is a declaration of a <code>Pair</code> and there are two arguments of type <code>int</code> and <code>int</code>, so using the deduction guide, I should deduce this to be a <code>Pair&lt;int, int&gt;</code>“.</p>",
+      "preview": "So when the compiler sees the definition Pair p2{ 1, 2 }; in our program, it wil",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b21",
+      "type": "paragraph",
+      "html": "<p>Here’s a similar example for a Pair that takes a single template type:</p>",
+      "preview": "Here’s a similar example for a Pair that takes a single template type:",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b22",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T>\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\n// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and T should deduce to Pair<T>\ntemplate <typename T>\nPair(T, T) -> Pair<T>;\n\nint main()\n{\n    Pair<int> p1{ 1, 2 }; // explicitly specify class template Pair<int> (C++11 onward)\n    Pair p2{ 1, 2 };      // CTAD used to deduce Pair<int> from the initializers (C++17)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nstruct Pair\n{\n    T first{};\n    T second{};\n};\n\n// Here's a deduction guide for our Pair (needed in C++17 only)\n// Pair objects initialized with arguments of type T and T should deduce to Pair&lt;T&gt;\ntemplate &lt;typename T&gt;\nPair(T, T) -&gt; Pair&lt;T&gt;;\n\nint main()\n{\n    Pair&lt;int&gt; p1{ 1, 2 }; // explicitly specify class template Pair&lt;int&gt; (C++11 onward)\n    Pair p2{ 1, 2 };      // CTAD used to deduce Pair&lt;int&gt; from the initializers (C++17)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b23",
+      "type": "paragraph",
+      "html": "<p>In this case, our deduction guide maps a <code>Pair(T, T)</code> (a <code>Pair</code> with two arguments of type <code>T</code>) to a <code>Pair&lt;T&gt;</code>.</p>",
+      "preview": "In this case, our deduction guide maps a Pair(T, T) (a Pair with two arguments o",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b24",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>C++20 added the ability for the compiler to automatically generate deduction guides for aggregates, so deduction guides should only need to be provided for C++17 compatibility.</p><p>Because of this, the version of <code>Pair</code> without the deduction guides should compile in C++20.</p><p><code>std::pair</code> (and other standard library template types) come with pre-defined deduction guides, which is why our example above that uses <code>std::pair</code> compiles fine in C++17 without us having to provide deduction guides ourselves.</p></div>",
+      "preview": "TipC++20 added the ability for the compiler to automatically generate deduction guides for aggregate",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b25",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Non-aggregates don’t need deduction guides in C++17 because the presence of a constructor serves the same purpose.</p></div>",
+      "preview": "For advanced readersNon-aggregates don’t need deduction guides in C++17 because the presence of a co",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b26",
+      "type": "section",
+      "title": "Type template parameters with default values",
+      "html": "<h3 class=\"cpp-section-heading\">Type template parameters with default values</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b27",
+      "type": "paragraph",
+      "html": "<p>Just like function parameters can have default arguments, template parameters can be given default values. These will be used when the template parameter isn’t explicitly specified and can’t be deduced.</p>",
+      "preview": "Just like function parameters can have default arguments, template parameters ca",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b28",
+      "type": "paragraph",
+      "html": "<p>Here’s a modification of our <code>Pair&lt;T, U&gt;</code> class template program above, with type template parameters <code>T</code> and <code>U</code> defaulted to type <code>int</code>:</p>",
+      "preview": "Here’s a modification of our Pair<T, U> class template program above, with type ",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T=int, typename U=int> // default T and U to type int\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\ntemplate <typename T, typename U>\nPair(T, U) -> Pair<T, U>;\n\nint main()\n{\n    Pair<int, int> p1{ 1, 2 }; // explicitly specify class template Pair<int, int> (C++11 onward)\n    Pair p2{ 1, 2 };           // CTAD used to deduce Pair<int, int> from the initializers (C++17)\n\n    Pair p3;                   // uses default Pair<int, int>\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T=int, typename U=int&gt; // default T and U to type int\nstruct Pair\n{\n    T first{};\n    U second{};\n};\n\ntemplate &lt;typename T, typename U&gt;\nPair(T, U) -&gt; Pair&lt;T, U&gt;;\n\nint main()\n{\n    Pair&lt;int, int&gt; p1{ 1, 2 }; // explicitly specify class template Pair&lt;int, int&gt; (C++11 onward)\n    Pair p2{ 1, 2 };           // CTAD used to deduce Pair&lt;int, int&gt; from the initializers (C++17)\n\n    Pair p3;                   // uses default Pair&lt;int, int&gt;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b30",
+      "type": "paragraph",
+      "html": "<p>Our definition for <code>p3</code> does not explicitly specify types for the type template parameters, nor is there an initializer for these types to be deduced from. Therefore, the compiler will use the types specified in the defaults, which means <code>p3</code> will be of type <code>Pair&lt;int, int&gt;</code>.</p>",
+      "preview": "Our definition for p3 does not explicitly specify types for the type template pa",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b31",
+      "type": "section",
+      "title": "CTAD doesn’t work with non-static member initialization",
+      "html": "<h3 class=\"cpp-section-heading\">CTAD doesn’t work with non-static member initialization</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b32",
+      "type": "paragraph",
+      "html": "<p>When initializing the member of a class type using non-static member initialization, CTAD will not work in this context. All template arguments must be explicitly specified:</p>",
+      "preview": "When initializing the member of a class type using non-static member initializat",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <utility> // for std::pair\n\nstruct Foo\n{\n    std::pair<int, int> p1{ 1, 2 }; // ok, template arguments explicitly specified\n    std::pair p2{ 1, 2 };           // compile error, CTAD can't be used in this context\n};\n\nint main()\n{\n    std::pair p3{ 1, 2 };           // ok, CTAD can be used here\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::pair\n\nstruct Foo\n{\n    std::pair&lt;int, int&gt; p1{ 1, 2 }; // ok, template arguments explicitly specified\n    std::pair p2{ 1, 2 };           // compile error, CTAD can't be used in this context\n};\n\nint main()\n{\n    std::pair p3{ 1, 2 };           // ok, CTAD can be used here\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b34",
+      "type": "section",
+      "title": "CTAD doesn’t work with function parameters",
+      "html": "<h3 class=\"cpp-section-heading\">CTAD doesn’t work with function parameters</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b35",
+      "type": "paragraph",
+      "html": "<p>CTAD stands for class template <em>argument</em> deduction, not class template <em>parameter</em> deduction, so it will only deduce the type of template arguments, not template parameters.</p>",
+      "preview": "CTAD stands for class template argument deduction, not class template parameter ",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b36",
+      "type": "paragraph",
+      "html": "<p>Therefore, CTAD can’t be used in function parameters.</p>",
+      "preview": "Therefore, CTAD can’t be used in function parameters.",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <utility>\n\nvoid print(std::pair p) // compile error, CTAD can't be used here\n{\n    std::cout << p.first << ' ' << p.second << '\\n';\n}\n\nint main()\n{\n    std::pair p { 1, 2 }; // p deduced to std::pair<int, int>\n    print(p);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;utility&gt;\n\nvoid print(std::pair p) // compile error, CTAD can't be used here\n{\n    std::cout &lt;&lt; p.first &lt;&lt; ' ' &lt;&lt; p.second &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::pair p { 1, 2 }; // p deduced to std::pair&lt;int, int&gt;\n    print(p);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b38",
+      "type": "paragraph",
+      "html": "<p>In such cases, you should use a template instead:</p>",
+      "preview": "In such cases, you should use a template instead:",
+      "canCheck": true
+    },
+    {
+      "id": "class-template-argument-deduction-ctad-and-deduction-guides_b39",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <utility>\n\ntemplate <typename T, typename U>\nvoid print(std::pair<T, U> p)\n{\n    std::cout << p.first << ' ' << p.second << '\\n';\n}\n\nint main()\n{\n    std::pair p { 1, 2 }; // p deduced to std::pair<int, int>\n    print(p);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;utility&gt;\n\ntemplate &lt;typename T, typename U&gt;\nvoid print(std::pair&lt;T, U&gt; p)\n{\n    std::cout &lt;&lt; p.first &lt;&lt; ' ' &lt;&lt; p.second &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::pair p { 1, 2 }; // p deduced to std::pair&lt;int, int&gt;\n    print(p);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    }
+  ]
+}

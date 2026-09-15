@@ -1,0 +1,324 @@
+{
+  "index": 265,
+  "chapterId": "21",
+  "number": "21.10",
+  "title": "21.10 — Overloading the parenthesis operator",
+  "url": "https://www.learncpp.com/cpp-tutorial/overloading-the-parenthesis-operator/",
+  "slug": "overloading-the-parenthesis-operator",
+  "scrapedAt": "2026-09-15T16:30:54.187Z",
+  "totalBlocks": 42,
+  "totalCheckpoints": 35,
+  "blocks": [
+    {
+      "id": "overloading-the-parenthesis-operator_b0",
+      "type": "paragraph",
+      "html": "<p>All of the overloaded operators you have seen so far let you define the type of the operator’s parameters, but not the number of parameters (which is fixed based on the type of the operator). For example, operator== always takes two parameters, whereas operator! always takes one. The parenthesis operator (operator()) is a particularly interesting operator in that it allows you to vary both the type AND number of parameters it takes.</p>",
+      "preview": "All of the overloaded operators you have seen so far let you define the type of ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b1",
+      "type": "paragraph",
+      "html": "<p>There are two things to keep in mind: first, the parenthesis operator must be implemented as a member function. Second, in non-object-oriented C++, the () operator is used to call functions. In the case of classes, operator() is just a normal operator that calls a function (named operator()) like any other overloaded operator.</p>",
+      "preview": "There are two things to keep in mind: first, the parenthesis operator must be im",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b2",
+      "type": "section",
+      "title": "An example",
+      "html": "<h3 class=\"cpp-section-heading\">An example</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b3",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at an example that lends itself to overloading this operator:</p>",
+      "preview": "Let’s take a look at an example that lends itself to overloading this operator:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Matrix\n{\nprivate:\n    double data[4][4]{};\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Matrix\n{\nprivate:\n    double data[4][4]{};\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b5",
+      "type": "paragraph",
+      "html": "<p>Matrices are a key component of linear algebra, and are often used to do geometric modeling and 3D computer graphics work. In this case, all you need to recognize is that the Matrix class is a 4 by 4 two-dimensional array of doubles.</p>",
+      "preview": "Matrices are a key component of linear algebra, and are often used to do geometr",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b6",
+      "type": "paragraph",
+      "html": "<p>In the lesson on <a href=\"https://www.learncpp.com/cpp-tutorial/98-overloading-the-subscript-operator/\">overloading the subscript operator</a>, you learned that we could overload operator[] to provide direct access to a private one-dimensional array. However, in this case, we want access to a private two-dimensional array. Prior to C++23, operator[] is limited to a single parameter, and therefore is not sufficient to let us directly index a two-dimensional array.</p>",
+      "preview": "In the lesson on overloading the subscript operator, you learned that we could o",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b7",
+      "type": "paragraph",
+      "html": "<p>However, because the () operator can take as many parameters as we want it to have, we can declare a version of operator() that takes two integer index parameters, and use it to access our two-dimensional array. Here is an example of this:</p>",
+      "preview": "However, because the () operator can take as many parameters as we want it to ha",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert> // for assert()\n\nclass Matrix\n{\nprivate:\n    double m_data[4][4]{};\n\npublic:\n    double& operator()(int row, int col);\n    double operator()(int row, int col) const; // for const objects\n};\n\ndouble& Matrix::operator()(int row, int col)\n{\n    assert(row >= 0 && row < 4);\n    assert(col >= 0 && col < 4);\n\n    return m_data[row][col];\n}\n\ndouble Matrix::operator()(int row, int col) const\n{\n    assert(row >= 0 && row < 4);\n    assert(col >= 0 && col < 4);\n\n    return m_data[row][col];\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt; // for assert()\n\nclass Matrix\n{\nprivate:\n    double m_data[4][4]{};\n\npublic:\n    double&amp; operator()(int row, int col);\n    double operator()(int row, int col) const; // for const objects\n};\n\ndouble&amp; Matrix::operator()(int row, int col)\n{\n    assert(row &gt;= 0 &amp;&amp; row &lt; 4);\n    assert(col &gt;= 0 &amp;&amp; col &lt; 4);\n\n    return m_data[row][col];\n}\n\ndouble Matrix::operator()(int row, int col) const\n{\n    assert(row &gt;= 0 &amp;&amp; row &lt; 4);\n    assert(col &gt;= 0 &amp;&amp; col &lt; 4);\n\n    return m_data[row][col];\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b9",
+      "type": "paragraph",
+      "html": "<p>Now we can declare a Matrix and access its elements like this:</p>",
+      "preview": "Now we can declare a Matrix and access its elements like this:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    Matrix matrix;\n    matrix(1, 2) = 4.5;\n    std::cout << matrix(1, 2) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Matrix matrix;\n    matrix(1, 2) = 4.5;\n    std::cout &lt;&lt; matrix(1, 2) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b11",
+      "type": "paragraph",
+      "html": "<p>which produces the result:</p>",
+      "preview": "which produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b12",
+      "type": "output",
+      "text": "4.5\n",
+      "html": "<pre>4.5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b13",
+      "type": "paragraph",
+      "html": "<p>Now, let’s overload the () operator again, this time in a way that takes no parameters at all:</p>",
+      "preview": "Now, let’s overload the () operator again, this time in a way that takes no para",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert> // for assert()\nclass Matrix\n{\nprivate:\n    double m_data[4][4]{};\n\npublic:\n    double& operator()(int row, int col);\n    double operator()(int row, int col) const;\n    void operator()();\n};\n\ndouble& Matrix::operator()(int row, int col)\n{\n    assert(row >= 0 && row < 4);\n    assert(col >= 0 && col < 4);\n\n    return m_data[row][col];\n}\n\ndouble Matrix::operator()(int row, int col) const\n{\n    assert(row >= 0 && row < 4);\n    assert(col >= 0 && col < 4);\n\n    return m_data[row][col];\n}\n\nvoid Matrix::operator()()\n{\n    // reset all elements of the matrix to 0.0\n    for (int row{ 0 }; row < 4; ++row)\n    {\n        for (int col{ 0 }; col < 4; ++col)\n        {\n            m_data[row][col] = 0.0;\n        }\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt; // for assert()\nclass Matrix\n{\nprivate:\n    double m_data[4][4]{};\n\npublic:\n    double&amp; operator()(int row, int col);\n    double operator()(int row, int col) const;\n    void operator()();\n};\n\ndouble&amp; Matrix::operator()(int row, int col)\n{\n    assert(row &gt;= 0 &amp;&amp; row &lt; 4);\n    assert(col &gt;= 0 &amp;&amp; col &lt; 4);\n\n    return m_data[row][col];\n}\n\ndouble Matrix::operator()(int row, int col) const\n{\n    assert(row &gt;= 0 &amp;&amp; row &lt; 4);\n    assert(col &gt;= 0 &amp;&amp; col &lt; 4);\n\n    return m_data[row][col];\n}\n\nvoid Matrix::operator()()\n{\n    // reset all elements of the matrix to 0.0\n    for (int row{ 0 }; row &lt; 4; ++row)\n    {\n        for (int col{ 0 }; col &lt; 4; ++col)\n        {\n            m_data[row][col] = 0.0;\n        }\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b15",
+      "type": "paragraph",
+      "html": "<p>And here’s our new example:</p>",
+      "preview": "And here’s our new example:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    Matrix matrix{};\n    matrix(1, 2) = 4.5;\n    matrix(); // erase matrix\n    std::cout << matrix(1, 2) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Matrix matrix{};\n    matrix(1, 2) = 4.5;\n    matrix(); // erase matrix\n    std::cout &lt;&lt; matrix(1, 2) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b17",
+      "type": "paragraph",
+      "html": "<p>which produces the result:</p>",
+      "preview": "which produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b18",
+      "type": "output",
+      "text": "0\n",
+      "html": "<pre>0\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b19",
+      "type": "paragraph",
+      "html": "<p>Because the () operator is so flexible, it can be tempting to use it for many different purposes. However, this is strongly discouraged, since the () symbol does not really give any indication of what the operator is doing. In our example above, it would be better to have written the erase functionality as a function called clear() or erase(), as <code>matrix.erase()</code> is easier to understand than <code>matrix()</code> (which could do anything!).</p>",
+      "preview": "Because the () operator is so flexible, it can be tempting to use it for many di",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b20",
+      "type": "paragraph",
+      "html": "<p>Note: As of C++23, you can use <code>operator[]</code> with multiple indices. This works just like <code>operator()</code> does above.</p>",
+      "preview": "Note: As of C++23, you can use operator[] with multiple indices. This works just",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b21",
+      "type": "section",
+      "title": "Having fun with functors",
+      "html": "<h3 class=\"cpp-section-heading\">Having fun with functors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b22",
+      "type": "paragraph",
+      "html": "<p>Operator() is also commonly overloaded to implement <strong>functors</strong> (or <strong>function object</strong>), which are classes that operate like functions. The advantage of a functor over a normal function is that functors can store data in member variables (since they are classes).</p>",
+      "preview": "Operator() is also commonly overloaded to implement functors (or function object",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b23",
+      "type": "paragraph",
+      "html": "<p>Here’s a simple functor:</p>",
+      "preview": "Here’s a simple functor:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Accumulator\n{\nprivate:\n    int m_counter{ 0 };\n\npublic:\n    int operator() (int i) { return (m_counter += i); }\n\n    void reset() { m_counter = 0; } // optional \n};\n\nint main()\n{\n    Accumulator acc{};\n    std::cout << acc(1) << '\\n'; // prints 1\n    std::cout << acc(3) << '\\n'; // prints 4\n\n    Accumulator acc2{};\n    std::cout << acc2(10) << '\\n'; // prints 10\n    std::cout << acc2(20) << '\\n'; // prints 30\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Accumulator\n{\nprivate:\n    int m_counter{ 0 };\n\npublic:\n    int operator() (int i) { return (m_counter += i); }\n\n    void reset() { m_counter = 0; } // optional \n};\n\nint main()\n{\n    Accumulator acc{};\n    std::cout &lt;&lt; acc(1) &lt;&lt; '\\n'; // prints 1\n    std::cout &lt;&lt; acc(3) &lt;&lt; '\\n'; // prints 4\n\n    Accumulator acc2{};\n    std::cout &lt;&lt; acc2(10) &lt;&lt; '\\n'; // prints 10\n    std::cout &lt;&lt; acc2(20) &lt;&lt; '\\n'; // prints 30\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b25",
+      "type": "paragraph",
+      "html": "<p>Note that using our Accumulator looks just like making a normal function call, but our Accumulator object is storing an accumulated value.</p>",
+      "preview": "Note that using our Accumulator looks just like making a normal function call, b",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b26",
+      "type": "paragraph",
+      "html": "<p>The nice thing about functors is that we can instantiate as many separate functor objects as we need, and use them all simultaneously. Functors can also have other member functions (e.g. <code>reset()</code>) that do convenient things.</p>",
+      "preview": "The nice thing about functors is that we can instantiate as many separate functo",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b27",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b28",
+      "type": "paragraph",
+      "html": "<p>Operator() is sometimes overloaded with two parameters to index multidimensional arrays, or to retrieve a subset of a one dimensional array (with the two parameters defining the subset to return). Anything else is probably better written as a member function with a more descriptive name.</p>",
+      "preview": "Operator() is sometimes overloaded with two parameters to index multidimensional",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b29",
+      "type": "paragraph",
+      "html": "<p>Operator() is also often overloaded to create functors. Although simple functors (such as the example above) are fairly easily understood, functors are typically used in more advanced programming topics, and deserve their own lesson.</p>",
+      "preview": "Operator() is also often overloaded to create functors. Although simple functors",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b30",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b31",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Write a class named MyString that holds a <code>std::string</code>. Overload <code>operator&lt;&lt;</code> to output the string. Overload <code>operator()</code> to return the substring that starts at the index of the first parameter (as a <code>MyString</code>). The length of the substring should be defined by the second parameter.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass MyString\n{\nprivate:\n\tstd::string m_string{};\n\npublic:\n\tMyString(std::string_view string = {})\n\t\t:m_string{ string }\n\t{\n\t}\n\n\tMyString operator()(int start, int length)\n\t{\n\t\tassert(start &gt;= 0);\n\t\tassert(start + length &lt;= static_cast&lt;int&gt;(m_string.length()) &amp;&amp; \"MyString::operator(int, int): Substring is out of range\");\n\n\t\treturn MyString { m_string.substr(\n\t\t\tstatic_cast&lt;std::string::size_type&gt;(start),\n\t\t\tstatic_cast&lt;std::string::size_type&gt;(length)\n\t\t\t)};\n\t}\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const MyString&amp; s)\n\t{\n\t\tout &lt;&lt; s.m_string;\n\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tMyString s{ \"Hello, world!\" };\n\tstd::cout &lt;&lt; s(7, 5) &lt;&lt; '\\n'; // start at index 7 and return 5 characters\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b32",
+      "type": "paragraph",
+      "html": "<p>The following code should run:</p>",
+      "preview": "The following code should run:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    MyString s { \"Hello, world!\" };\n    std::cout << s(7, 5) << '\\n'; // start at index 7 and return 5 characters\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    MyString s { \"Hello, world!\" };\n    std::cout &lt;&lt; s(7, 5) &lt;&lt; '\\n'; // start at index 7 and return 5 characters\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b34",
+      "type": "paragraph",
+      "html": "<p>This should print</p>",
+      "preview": "This should print",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b35",
+      "type": "output",
+      "text": "world\n",
+      "html": "<pre>world\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b36",
+      "type": "paragraph",
+      "html": "<p>Hint: You can use <a href=\"https://en.cppreference.com/w/cpp/string/basic_string/substr\"><code>std::string::substr</code></a> to get a substring of a std::string.</p>",
+      "preview": "Hint: You can use std::string::substr to get a substring of a std::string.",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b37",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "This quiz question is extra credit.",
+      "hintHtml": "",
+      "solutionHtml": "",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b38",
+      "type": "quiz",
+      "questionTitle": "> Step #1",
+      "questionHtml": "Why is the above inefficient if we don’t need to modify the returned substring?",
+      "hintHtml": "",
+      "solutionHtml": "<p>Inside our <code>operator()</code>, <code>std::string::substr</code> returns a <code>std::string</code>, which means when we call it, we’re making a copy of part of the source string. Our overloaded <code>operator()</code> uses this to construct a new <code>MyString</code>, which contains a <code>std::string</code> member, which makes another copy. We then return this <code>MyString</code> to the caller, which makes a third copy. The compiler will probably optimize some of these copies out of existence, but at least one <code>std::string</code> (containing the resulting substring) must be kept.</p><p>We only need a copy of the substring in cases where we intend to modify the substring, or when the substring will outlive the original string. This isn’t typically the case, so we’re making expensive copies that we typically won’t need.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b39",
+      "type": "quiz",
+      "questionTitle": "> Step #2",
+      "questionHtml": "What might we do instead?",
+      "hintHtml": "",
+      "solutionHtml": "<p><code>std::string_view</code> is capable of viewing a substring of an existing string without making a copy. If our <code>operator()</code> were to return a <code>std::string_view</code>, then the caller could use the <code>std::string_view</code> when that suffices, or convert it to a <code>std::string</code> or <code>MyString</code> if they need to modify or persist the substring.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b40",
+      "type": "quiz",
+      "questionTitle": "> Step #3",
+      "questionHtml": "Update <code>operator()</code> from the prior quiz solution to return the substring as a <code>std::string_view</code> instead.",
+      "hintHtml": "Hint: Creating <code>std::string_view</code> temporaries is okay, as long as they are views of <code>m_string</code>.",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass MyString\n{\nprivate:\n\tstd::string m_string{};\n\npublic:\n\tMyString(std::string_view string = {})\n\t\t:m_string{ string }\n\t{\n\t}\n\n\tstd::string_view operator()(int start, int length)\n\t{\n\t\tassert(start &gt;= 0);\n\t\tassert(start + length &lt;= static_cast&lt;int&gt;(m_string.length()) &amp;&amp; \"MyString::operator(int, int): Substring is out of range\");\n\n\t\t// Create a std::string_view of m_string, so we can use std::string_view::substr() instead of std::string::substr()\n\t\treturn std::string_view{ m_string }.substr(\n\t\t\tstatic_cast&lt;std::string_view::size_type&gt;(start),\n\t\t\tstatic_cast&lt;std::string_view::size_type&gt;(length)\n\t\t);\n\t}\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const MyString&amp; s)\n\t{\n\t\tout &lt;&lt; s.m_string;\n\n\t\treturn out;\n\t}\n};\n\nint main()\n{\n\tMyString s{ \"Hello, world!\" };\n\tstd::cout &lt;&lt; s(7, 5) &lt;&lt; '\\n'; // start at index 7 and return 5 characters\n\n\treturn 0;\n}</code></pre><p>Let’s explore <code>return std::string_view{ m_string }.substr();</code> further. First, we’re creating a temporary <code>std::string_view</code> of <code>m_string</code>, which is inexpensive and lets us access <code>std::string_view</code> member functions. Next, we call <code>std::string_view::substr</code> on this temporary to get our substring (as a non-null-terminated view of <code>m_string</code>). We then return this view to the caller. Since the <code>std::string_view</code> we return to the caller is still a view of <code>m_string</code> (which is still in scope), our returned <code>std::string_view</code> is not dangling.</p><p>The end result is we create 3 <code>std::string_view</code> instead of 3 <code>std::string</code>, which is more efficient.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-parenthesis-operator_b41",
+      "type": "paragraph",
+      "html": "<p>Hint: <code>std::string::substr()</code> returns a <code>std::string</code>. <code>std::string_view::substr()</code> returns a <code>std::string_view</code>. Be very careful not to return a dangling <code>std::string_view!</code>.</p>",
+      "preview": "Hint: std::string::substr() returns a std::string. std::string_view::substr() re",
+      "canCheck": true
+    }
+  ]
+}

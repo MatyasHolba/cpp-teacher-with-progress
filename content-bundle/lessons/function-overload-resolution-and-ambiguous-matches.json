@@ -1,0 +1,545 @@
+{
+  "index": 136,
+  "chapterId": "11",
+  "number": "11.3",
+  "title": "11.3 — Function overload resolution and ambiguous matches",
+  "url": "https://www.learncpp.com/cpp-tutorial/function-overload-resolution-and-ambiguous-matches/",
+  "slug": "function-overload-resolution-and-ambiguous-matches",
+  "scrapedAt": "2026-09-15T16:29:46.579Z",
+  "totalBlocks": 73,
+  "totalCheckpoints": 67,
+  "blocks": [
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b0",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/\">11.2 -- Function overload differentiation</a>), we discussed which attributes of a function are used to differentiate overloaded functions from each other. If an overloaded function is not properly differentiated from the other overloads of the same name, then the compiler will issue a compile error.</p>",
+      "preview": "In the previous lesson (11.2 -- Function overload differentiation), we discussed",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b1",
+      "type": "paragraph",
+      "html": "<p>However, having a set of differentiated overloaded functions is only half of the picture. When any function call is made, the compiler must also ensure that a matching function declaration can be found.</p>",
+      "preview": "However, having a set of differentiated overloaded functions is only half of the",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b2",
+      "type": "paragraph",
+      "html": "<p>With non-overloaded functions (functions with unique names), there is only one function that can potentially match a function call. That function either matches (or can be made to match after type conversions are applied), or it doesn’t (and a compile error results). With overloaded functions, there can be many functions that can potentially match a function call. Since a function call can only resolve to one of them, the compiler has to determine which overloaded function is the best match. The process of matching function calls to a specific overloaded function is called <strong>overload resolution</strong>.</p>",
+      "preview": "With non-overloaded functions (functions with unique names), there is only one f",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b3",
+      "type": "paragraph",
+      "html": "<p>In simple cases where the type of the function arguments and type of the function parameters match exactly, this is (usually) straightforward:</p>",
+      "preview": "In simple cases where the type of the function arguments and type of the functio",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid print(int x)\n{\n     std::cout << x << '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     print(5); // 5 is an int, so this matches print(int)\n     print(6.7); // 6.7 is a double, so this matches print(double)\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int x)\n{\n     std::cout &lt;&lt; x &lt;&lt; '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout &lt;&lt; d &lt;&lt; '\\n';\n}\n\nint main()\n{\n     print(5); // 5 is an int, so this matches print(int)\n     print(6.7); // 6.7 is a double, so this matches print(double)\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b5",
+      "type": "paragraph",
+      "html": "<p>But what happens in cases where the argument types in the function call don’t exactly match the parameter types in any of the overloaded functions? For example:</p>",
+      "preview": "But what happens in cases where the argument types in the function call don’t ex",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid print(int x)\n{\n     std::cout << x << '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     print('a'); // char does not match int or double, so what happens?\n     print(5L); // long does not match int or double, so what happens?\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int x)\n{\n     std::cout &lt;&lt; x &lt;&lt; '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout &lt;&lt; d &lt;&lt; '\\n';\n}\n\nint main()\n{\n     print('a'); // char does not match int or double, so what happens?\n     print(5L); // long does not match int or double, so what happens?\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b7",
+      "type": "paragraph",
+      "html": "<p>Just because there is no exact match here doesn’t mean a match can’t be found -- after all, a <code>char</code> or <code>long</code> can be implicitly type converted to an <code>int</code> or a <code>double</code>. But which is the best conversion to make in each case?</p>",
+      "preview": "Just because there is no exact match here doesn’t mean a match can’t be found --",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b8",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll explore how the compiler matches a given function call to a specific overloaded function.</p>",
+      "preview": "In this lesson, we’ll explore how the compiler matches a given function call to ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b9",
+      "type": "section",
+      "title": "Resolving overloaded function calls",
+      "html": "<h3 class=\"cpp-section-heading\">Resolving overloaded function calls</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b10",
+      "type": "paragraph",
+      "html": "<p>When a function call is made to an overloaded function, the compiler steps through a sequence of rules to determine which (if any) of the overloaded functions is the best match (we’ll cover these steps in the next section below).</p>",
+      "preview": "When a function call is made to an overloaded function, the compiler steps throu",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b11",
+      "type": "paragraph",
+      "html": "<p>At each step, the compiler applies a bunch of different type conversions to the argument(s) in the function call. For each conversion applied, the compiler checks if any of the overloaded functions are now a match. After all the different type conversions have been applied and checked for matches, the step is done. The result will be one of three possible outcomes:</p>",
+      "preview": "At each step, the compiler applies a bunch of different type conversions to the ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b12",
+      "type": "list",
+      "html": "<ul><li>No matching functions were found. The compiler moves to the next step in the sequence.</li><li>A single matching function was found. This function is considered to be the best match. The matching process is now complete, and subsequent steps are not executed.</li><li>More than one matching function was found. The compiler will issue an ambiguous match compile error. We’ll discuss this case further in a bit.</li></ul>",
+      "preview": "No matching functions were found. The compiler moves to the next step in the seq",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b13",
+      "type": "paragraph",
+      "html": "<p>If the compiler reaches the end of the entire sequence without finding a match, it will generate a compile error that no matching overloaded function could be found for the function call.</p>",
+      "preview": "If the compiler reaches the end of the entire sequence without finding a match, ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b14",
+      "type": "section",
+      "title": "The argument matching sequence",
+      "html": "<h3 class=\"cpp-section-heading\">The argument matching sequence</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b15",
+      "type": "paragraph",
+      "html": "<p>Step 1) The compiler tries to find an exact match. This happens in two phases. First, the compiler will see if there is an overloaded function where the type of the arguments in the function call exactly matches the type of the parameters in the overloaded functions. For example:</p>",
+      "preview": "Step 1) The compiler tries to find an exact match. This happens in two phases. F",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(0);   // exact match with foo(int)\n    foo(3.4); // exact match with foo(double)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(0);   // exact match with foo(int)\n    foo(3.4); // exact match with foo(double)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b17",
+      "type": "paragraph",
+      "html": "<p>Because the <code>0</code> in the function call <code>foo(0)</code> is an int, the compiler will look to see if a <code>foo(int)</code> overload has been declared. Since it has, the compiler determines that <code>foo(int)</code> is an exact match.</p>",
+      "preview": "Because the 0 in the function call foo(0) is an int, the compiler will look to s",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b18",
+      "type": "paragraph",
+      "html": "<p>Second, the compiler will apply a number of trivial conversions to the arguments in the function call. The <strong>trivial conversions</strong> are a set of specific conversion rules that will modify types (without modifying the value) for purposes of finding a match. These include:</p>",
+      "preview": "Second, the compiler will apply a number of trivial conversions to the arguments",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b19",
+      "type": "list",
+      "html": "<ul><li>lvalue to rvalue conversions</li><li>qualification conversions (e.g. non-const to const)</li><li>non-reference to reference conversions</li></ul>",
+      "preview": "lvalue to rvalue conversionsqualification conversions (e.g. non-const to const)n",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b20",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(const int)\n{\n}\n\nvoid foo(const double&) // double& is a reference to a double\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // x trivially converted from int to const int\n\n    double d { 2.3 };\n    foo(d); // d trivially converted from double to const double& (non-ref to ref conversion)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(const int)\n{\n}\n\nvoid foo(const double&amp;) // double&amp; is a reference to a double\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // x trivially converted from int to const int\n\n    double d { 2.3 };\n    foo(d); // d trivially converted from double to const double&amp; (non-ref to ref conversion)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b22",
+      "type": "paragraph",
+      "html": "<p>In the above example, we’ve called <code>foo(x)</code>, where <code>x</code> is an <code>int</code>. The compiler will trivially convert <code>x</code> from an <code>int</code> into a <code>const int</code>, which then matches <code>foo(const int)</code>. We’ve also called <code>foo(d)</code>, where <code>d</code> is a <code>double</code>. The compiler will trivially convert <code>d</code> from a <code>double</code> to a <code>const double&amp;</code>, which then matches <code>foo(const double&amp;)</code>.</p>",
+      "preview": "In the above example, we’ve called foo(x), where x is an int. The compiler will ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b23",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover references in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue references</a>.</p></div>",
+      "preview": "Related contentWe cover references in lesson 12.3 -- Lvalue references.",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b24",
+      "type": "paragraph",
+      "html": "<p>Matches made via the trivial conversions are considered exact matches. This means the following program results in an ambiguous match:</p>",
+      "preview": "Matches made via the trivial conversions are considered exact matches. This mean",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(int)\n{\n}\n\nvoid foo(const int&) // int& is a reference to a int\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // ambiguous match with foo(int) and foo(const int&)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(const int&amp;) // int&amp; is a reference to a int\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // ambiguous match with foo(int) and foo(const int&amp;)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b26",
+      "type": "paragraph",
+      "html": "<p>Step 2) If no exact match is found, the compiler tries to find a match by applying numeric promotion to the argument(s). In lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicit type conversion</a>), we covered how certain narrow integral and floating point types can be automatically promoted to wider types, such as <code>int</code> or <code>double</code>. If, after numeric promotion, a match is found, the function call is resolved.</p>",
+      "preview": "Step 2) If no exact match is found, the compiler tries to find a match by applyi",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b27",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo('a');  // promoted to match foo(int)\n    foo(true); // promoted to match foo(int)\n    foo(4.5f); // promoted to match foo(double)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo('a');  // promoted to match foo(int)\n    foo(true); // promoted to match foo(int)\n    foo(4.5f); // promoted to match foo(double)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b29",
+      "type": "paragraph",
+      "html": "<p>For <code>foo('a')</code>, because an exact match for <code>foo(char)</code> could not be found in the prior step, the compiler promotes the char <code>'a'</code> to an <code>int</code>, and looks for a match. This matches <code>foo(int)</code>, so the function call resolves to <code>foo(int)</code>.</p>",
+      "preview": "For foo('a'), because an exact match for foo(char) could not be found in the pri",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b30",
+      "type": "paragraph",
+      "html": "<p>Step 3) If no match is found via numeric promotion, the compiler tries to find a match by applying numeric conversions (<a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a>) to the arguments.</p>",
+      "preview": "Step 3) If no match is found via numeric promotion, the compiler tries to find a",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b31",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string> // for std::string\n\nvoid foo(double)\n{\n}\n\nvoid foo(std::string)\n{\n}\n\nint main()\n{\n    foo('a'); // 'a' converted to match foo(double)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt; // for std::string\n\nvoid foo(double)\n{\n}\n\nvoid foo(std::string)\n{\n}\n\nint main()\n{\n    foo('a'); // 'a' converted to match foo(double)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b33",
+      "type": "paragraph",
+      "html": "<p>In this case, because there is no <code>foo(char)</code> (exact match), and no <code>foo(int)</code> (promotion match), the <code>'a'</code> is numerically converted to a double and matched with <code>foo(double)</code>.</p>",
+      "preview": "In this case, because there is no foo(char) (exact match), and no foo(int) (prom",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b34",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Matches made by applying numeric promotions take precedence over any matches made by applying numeric conversions.</p></div>",
+      "preview": "Key insightMatches made by applying numeric promotions take precedence over any matches made by appl",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b35",
+      "type": "paragraph",
+      "html": "<p>Step 4) If no match is found via numeric conversion, the compiler tries to find a match through any user-defined conversions. Although we haven’t covered user-defined conversions yet, certain types (e.g. classes) can define conversions to other types that can be implicitly invoked. Here’s an example, just to illustrate the point:</p>",
+      "preview": "Step 4) If no match is found via numeric conversion, the compiler tries to find ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "// We haven't covered classes yet, so don't worry if this doesn't make sense\nclass X // this defines a new type called X\n{\npublic:\n    operator int() { return 0; } // Here's a user-defined conversion from X to int\n};\n\nvoid foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    X x; // Here, we're creating an object of type X (named x)\n    foo(x); // x is converted to type int using the user-defined conversion from X to int\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// We haven't covered classes yet, so don't worry if this doesn't make sense\nclass X // this defines a new type called X\n{\npublic:\n    operator int() { return 0; } // Here's a user-defined conversion from X to int\n};\n\nvoid foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    X x; // Here, we're creating an object of type X (named x)\n    foo(x); // x is converted to type int using the user-defined conversion from X to int\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b37",
+      "type": "paragraph",
+      "html": "<p>In this example, the compiler will first check whether an exact match to <code>foo(X)</code> exists. We haven’t defined one. Next the compiler will check whether <code>x</code> can be numerically promoted, which it can’t. The compiler will then check if <code>x</code> can be numerically converted, which it also can’t. Finally, the compiler will then look for any user-defined conversions. Because we’ve defined a user-defined conversion from <code>X</code> to <code>int</code>, the compiler will convert <code>X</code> to an <code>int</code> to match <code>foo(int)</code>.</p>",
+      "preview": "In this example, the compiler will first check whether an exact match to foo(X) ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b38",
+      "type": "paragraph",
+      "html": "<p>After applying a user-defined conversion, the compiler may apply additional implicit promotions or conversions to find a match. So if our user-defined conversion had been to type <code>char</code> instead of <code>int</code>, the compiler would have used the user-defined conversion to <code>char</code> and then promoted the result into an <code>int</code> to match.</p>",
+      "preview": "After applying a user-defined conversion, the compiler may apply additional impl",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b39",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss how to create user-defined conversions for class types (by overloading the typecast operators) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-typecasts/\">21.11 -- Overloading typecasts</a>.</p></div>",
+      "preview": "Related contentWe discuss how to create user-defined conversions for class types (by overloading the",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b40",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The constructor of a class also acts as a user-defined conversion from other types to that class type, and can be used during this step to find matching functions.</p></div>",
+      "preview": "For advanced readersThe constructor of a class also acts as a user-defined conversion from other typ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b41",
+      "type": "paragraph",
+      "html": "<p>Step 5) If no match is found via user-defined conversion, the compiler will look for a matching function that uses ellipsis.</p>",
+      "preview": "Step 5) If no match is found via user-defined conversion, the compiler will look",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b42",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover ellipses in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/ellipsis-and-why-to-avoid-them/\">20.5 -- Ellipsis (and why to avoid them)</a>.</p></div>",
+      "preview": "Related contentWe cover ellipses in lesson 20.5 -- Ellipsis (and why to avoid them).",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b43",
+      "type": "paragraph",
+      "html": "<p>Step 6) If no matches have been found by this point, the compiler gives up and will issue a compile error about not being able to find a matching function.</p>",
+      "preview": "Step 6) If no matches have been found by this point, the compiler gives up and w",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b44",
+      "type": "section",
+      "title": "Ambiguous matches",
+      "html": "<h3 class=\"cpp-section-heading\">Ambiguous matches</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b45",
+      "type": "paragraph",
+      "html": "<p>With non-overloaded functions, each function call will either resolve to a function, or no match will be found and the compiler will issue a compile error:</p>",
+      "preview": "With non-overloaded functions, each function call will either resolve to a funct",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b46",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo()\n{\n}\n\nint main()\n{\n     foo(); // okay: match found\n     goo(); // compile error: no match found\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo()\n{\n}\n\nint main()\n{\n     foo(); // okay: match found\n     goo(); // compile error: no match found\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b47",
+      "type": "paragraph",
+      "html": "<p>With overloaded functions, there is a third possible outcome: an <code>ambiguous match</code> may be found. An <strong>ambiguous match</strong> occurs when the compiler finds two or more functions that can be made to match in the same step. When this occurs, the compiler will stop matching and issue a compile error stating that it has found an ambiguous function call.</p>",
+      "preview": "With overloaded functions, there is a third possible outcome: an ambiguous match",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b48",
+      "type": "paragraph",
+      "html": "<p>Since every overloaded function must be differentiated in order to compile, you might be wondering how it is possible that a function call could result in more than one match. Let’s take a look at an example that illustrates this:</p>",
+      "preview": "Since every overloaded function must be differentiated in order to compile, you ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b49",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(5L); // 5L is type long\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(5L); // 5L is type long\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b50",
+      "type": "paragraph",
+      "html": "<p>Since literal <code>5L</code> is of type <code>long</code>, the compiler will first look to see if it can find an exact match for <code>foo(long)</code>, but it will not find one. Next, the compiler will try numeric promotion, but values of type <code>long</code> can’t be promoted, so there is no match here either.</p>",
+      "preview": "Since literal 5L is of type long, the compiler will first look to see if it can ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b51",
+      "type": "paragraph",
+      "html": "<p>Following that, the compiler will try to find a match by applying numeric conversions to the <code>long</code> argument. In the process of checking all the numeric conversion rules, the compiler will find two potential matches. If the <code>long</code> argument is numerically converted into an <code>int</code>, then the function call will match <code>foo(int)</code>. If the <code>long</code> argument is instead converted into a <code>double</code>, then it will match <code>foo(double)</code> instead. Since two possible matches via numeric conversion have been found, the function call is considered ambiguous.</p>",
+      "preview": "Following that, the compiler will try to find a match by applying numeric conver",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b52",
+      "type": "paragraph",
+      "html": "<p>On Visual Studio 2019, this results in the following error message:</p>",
+      "preview": "On Visual Studio 2019, this results in the following error message:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b53",
+      "type": "output",
+      "text": "error C2668: 'foo': ambiguous call to overloaded function\nmessage : could be 'void foo(double)'\nmessage : or       'void foo(int)'\nmessage : while trying to match the argument list '(long)'\n",
+      "html": "<pre>error C2668: 'foo': ambiguous call to overloaded function\nmessage : could be 'void foo(double)'\nmessage : or       'void foo(int)'\nmessage : while trying to match the argument list '(long)'\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b54",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>If the compiler finds multiple matches in a given step, an ambiguous function call will result. This means no match from a given step is considered to be better than any other match from the same step.</p></div>",
+      "preview": "Key insightIf the compiler finds multiple matches in a given step, an ambiguous function call will r",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b55",
+      "type": "paragraph",
+      "html": "<p>Here’s another example that yields ambiguous matches:</p>",
+      "preview": "Here’s another example that yields ambiguous matches:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b56",
+      "type": "code",
+      "language": "cpp",
+      "code": "void foo(unsigned int)\n{\n}\n\nvoid foo(float)\n{\n}\n\nint main()\n{ \n    foo(0);       // int can be numerically converted to unsigned int or to float\n    foo(3.14159); // double can be numerically converted to unsigned int or to float\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(unsigned int)\n{\n}\n\nvoid foo(float)\n{\n}\n\nint main()\n{ \n    foo(0);       // int can be numerically converted to unsigned int or to float\n    foo(3.14159); // double can be numerically converted to unsigned int or to float\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b57",
+      "type": "paragraph",
+      "html": "<p>Although you might expect <code>0</code> to resolve to <code>foo(unsigned int)</code> and <code>3.14159</code> to resolve to <code>foo(float)</code>, both of these calls result in an ambiguous match. The <code>int</code> value <code>0</code> can be numerically converted to either an <code>unsigned int</code> or a <code>float</code>, so either overload matches equally well, and the result is an ambiguous function call.</p>",
+      "preview": "Although you might expect 0 to resolve to foo(unsigned int) and 3.14159 to resol",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b58",
+      "type": "paragraph",
+      "html": "<p>The same applies for the conversion of a <code>double</code> to either a <code>float</code> or <code>unsigned int</code>. Both are numeric conversions, so either overload matches equally well, and the result is again ambiguous.</p>",
+      "preview": "The same applies for the conversion of a double to either a float or unsigned in",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b59",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Default arguments can also cause ambiguous matches. We cover such cases in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/default-arguments/\">11.5 -- Default arguments</a>.</p></div>",
+      "preview": "For advanced readersDefault arguments can also cause ambiguous matches. We cover such cases in lesso",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b60",
+      "type": "section",
+      "title": "Resolving ambiguous matches",
+      "html": "<h3 class=\"cpp-section-heading\">Resolving ambiguous matches</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b61",
+      "type": "paragraph",
+      "html": "<p>Because ambiguous matches are a compile-time error, an ambiguous match needs to be disambiguated before your program will compile. There are a few ways to resolve ambiguous matches:</p>",
+      "preview": "Because ambiguous matches are a compile-time error, an ambiguous match needs to ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b62",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Often, the best way is simply to define a new overloaded function that takes parameters of exactly the type you are trying to call the function with. Then C++ will be able to find an exact match for the function call.</li><li>Alternatively, explicitly cast the ambiguous argument(s) to match the type of the function you want to call. For example, to have <code>foo(0)</code> match <code>foo(unsigned int)</code> in the above example, you would do this:</li></ol>",
+      "preview": "Often, the best way is simply to define a new overloaded function that takes par",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b63",
+      "type": "code",
+      "language": "cpp",
+      "code": "int x{ 0 };\nfoo(static_cast<unsigned int>(x)); // will call foo(unsigned int)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x{ 0 };\nfoo(static_cast&lt;unsigned int&gt;(x)); // will call foo(unsigned int)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b64",
+      "type": "list",
+      "html": "<ol start=\"3\"><li>If your argument is a literal, you can use the literal suffix to ensure your literal is interpreted as the correct type:</li></ol>",
+      "preview": "If your argument is a literal, you can use the literal suffix to ensure your lit",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b65",
+      "type": "code",
+      "language": "cpp",
+      "code": "foo(0u); // will call foo(unsigned int) since 'u' suffix is unsigned int, so this is now an exact match",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">foo(0u); // will call foo(unsigned int) since 'u' suffix is unsigned int, so this is now an exact match</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b66",
+      "type": "paragraph",
+      "html": "<p>The list of the most used suffixes can be found in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literals</a>.</p>",
+      "preview": "The list of the most used suffixes can be found in lesson 5.2 -- Literals.",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b67",
+      "type": "section",
+      "title": "Matching for functions with multiple arguments",
+      "html": "<h3 class=\"cpp-section-heading\">Matching for functions with multiple arguments</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b68",
+      "type": "paragraph",
+      "html": "<p>If there are multiple arguments, the compiler applies the matching rules to each argument in turn. The function chosen is the one for which each argument matches at least as well as all the other functions, with at least one argument matching better than all the other functions. In other words, the function chosen must provide a better match than all the other candidate functions for at least one parameter, and no worse for all of the other parameters.</p>",
+      "preview": "If there are multiple arguments, the compiler applies the matching rules to each",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b69",
+      "type": "paragraph",
+      "html": "<p>In the case that such a function is found, it is clearly and unambiguously the best choice. If no such function can be found, the call will be considered ambiguous (or a non-match).</p>",
+      "preview": "In the case that such a function is found, it is clearly and unambiguously the b",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b70",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b71",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid print(char, int)\n{\n\tstd::cout << 'a' << '\\n';\n}\n\nvoid print(char, double)\n{\n\tstd::cout << 'b' << '\\n';\n}\n\nvoid print(char, float)\n{\n\tstd::cout << 'c' << '\\n';\n}\n\nint main()\n{\n\tprint('x', 'a');\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(char, int)\n{\n\tstd::cout &lt;&lt; 'a' &lt;&lt; '\\n';\n}\n\nvoid print(char, double)\n{\n\tstd::cout &lt;&lt; 'b' &lt;&lt; '\\n';\n}\n\nvoid print(char, float)\n{\n\tstd::cout &lt;&lt; 'c' &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tprint('x', 'a');\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-resolution-and-ambiguous-matches_b72",
+      "type": "paragraph",
+      "html": "<p>In the above program, all functions match the first argument exactly. However, the top function matches the second parameter via promotion, whereas the other functions require a conversion. Therefore, <code>print(char, int)</code> is unambiguously the best match.</p>",
+      "preview": "In the above program, all functions match the first argument exactly. However, t",
+      "canCheck": true
+    }
+  ]
+}

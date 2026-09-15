@@ -1,0 +1,535 @@
+{
+  "index": 286,
+  "chapterId": "23",
+  "number": "23.7",
+  "title": "23.7 — std::initializer_list",
+  "url": "https://www.learncpp.com/cpp-tutorial/stdinitializer_list/",
+  "slug": "stdinitializer_list",
+  "scrapedAt": "2026-09-15T16:31:05.113Z",
+  "totalBlocks": 72,
+  "totalCheckpoints": 61,
+  "blocks": [
+    {
+      "id": "stdinitializer_list_b0",
+      "type": "paragraph",
+      "html": "<p>Consider a fixed array of integers in C++:</p>",
+      "preview": "Consider a fixed array of integers in C++:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[5];",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[5];</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b2",
+      "type": "paragraph",
+      "html": "<p>If we want to initialize this array with values, we can do so directly via the initializer list syntax:</p>",
+      "preview": "If we want to initialize this array with values, we can do so directly via the i",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tint array[] { 5, 4, 3, 2, 1 }; // initializer list\n\tfor (auto i : array)\n\t\tstd::cout << i << ' ';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tint array[] { 5, 4, 3, 2, 1 }; // initializer list\n\tfor (auto i : array)\n\t\tstd::cout &lt;&lt; i &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b4",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b5",
+      "type": "output",
+      "text": "5 4 3 2 1\n",
+      "html": "<pre>5 4 3 2 1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b6",
+      "type": "paragraph",
+      "html": "<p>This also works for dynamically allocated arrays:</p>",
+      "preview": "This also works for dynamically allocated arrays:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tauto* array{ new int[5]{ 5, 4, 3, 2, 1 } }; // initializer list\n\tfor (int count{ 0 }; count < 5; ++count)\n\t\tstd::cout << array[count] << ' ';\n\tdelete[] array;\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tauto* array{ new int[5]{ 5, 4, 3, 2, 1 } }; // initializer list\n\tfor (int count{ 0 }; count &lt; 5; ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\tdelete[] array;\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b8",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson, we introduced the concept of container classes, and showed an example of an IntArray class that holds an array of integers:</p>",
+      "preview": "In the previous lesson, we introduced the concept of container classes, and show",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert> // for assert()\n#include <iostream>\n \nclass IntArray\n{\nprivate:\n    int m_length{};\n    int* m_data{};\n \npublic:\n    IntArray() = default;\n \n    IntArray(int length)\n        : m_length{ length }\n\t, m_data{ new int[static_cast<std::size_t>(length)] {} }\n    {\n    }\n \n    ~IntArray()\n    {\n        delete[] m_data;\n        // we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway\n    }\n \n    int& operator[](int index)\n    {\n        assert(index >= 0 && index < m_length);\n        return m_data[index];\n    }\n \n    int getLength() const { return m_length; }\n};\n\nint main()\n{\n\t// What happens if we try to use an initializer list with this container class?\n\tIntArray array { 5, 4, 3, 2, 1 }; // this line doesn't compile\n\tfor (int count{ 0 }; count < 5; ++count)\n\t\tstd::cout << array[count] << ' ';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt; // for assert()\n#include &lt;iostream&gt;\n \nclass IntArray\n{\nprivate:\n    int m_length{};\n    int* m_data{};\n \npublic:\n    IntArray() = default;\n \n    IntArray(int length)\n        : m_length{ length }\n\t, m_data{ new int[static_cast&lt;std::size_t&gt;(length)] {} }\n    {\n    }\n \n    ~IntArray()\n    {\n        delete[] m_data;\n        // we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway\n    }\n \n    int&amp; operator[](int index)\n    {\n        assert(index &gt;= 0 &amp;&amp; index &lt; m_length);\n        return m_data[index];\n    }\n \n    int getLength() const { return m_length; }\n};\n\nint main()\n{\n\t// What happens if we try to use an initializer list with this container class?\n\tIntArray array { 5, 4, 3, 2, 1 }; // this line doesn't compile\n\tfor (int count{ 0 }; count &lt; 5; ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b10",
+      "type": "paragraph",
+      "html": "<p>This code won’t compile, because the IntArray class doesn’t have a constructor that knows what to do with an initializer list. As a result, we’re left initializing our array elements individually:</p>",
+      "preview": "This code won’t compile, because the IntArray class doesn’t have a constructor t",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n\tIntArray array(5);\n\tarray[0] = 5;\n\tarray[1] = 4;\n\tarray[2] = 3;\n\tarray[3] = 2;\n\tarray[4] = 1;\n\n\tfor (int count{ 0 }; count < 5; ++count)\n\t\tstd::cout << array[count] << ' ';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tIntArray array(5);\n\tarray[0] = 5;\n\tarray[1] = 4;\n\tarray[2] = 3;\n\tarray[3] = 2;\n\tarray[4] = 1;\n\n\tfor (int count{ 0 }; count &lt; 5; ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b12",
+      "type": "paragraph",
+      "html": "<p>That’s not so great.</p>",
+      "preview": "That’s not so great.",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b13",
+      "type": "section",
+      "title": "Class initialization using std::initializer_list",
+      "html": "<h3 class=\"cpp-section-heading\">Class initialization using std::initializer_list</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b14",
+      "type": "paragraph",
+      "html": "<p>When a compiler sees an initializer list, it automatically converts it into an object of type std::initializer_list. Therefore, if we create a constructor that takes a std::initializer_list parameter, we can create objects using the initializer list as an input.</p>",
+      "preview": "When a compiler sees an initializer list, it automatically converts it into an o",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b15",
+      "type": "paragraph",
+      "html": "<p>std::initializer_list lives in the <code>&lt;initializer_list&gt;</code> header.</p>",
+      "preview": "std::initializer_list lives in the <initializer_list> header.",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b16",
+      "type": "paragraph",
+      "html": "<p>There are a few things to know about std::initializer_list. Much like std::array or std::vector, you have to tell std::initializer_list what type of data the list holds using angled brackets, unless you initialize the std::initializer_list right away. Therefore, you’ll almost never see a plain std::initializer_list. Instead, you’ll see something like <code>std::initializer_list&lt;int&gt;</code> or <code>std::initializer_list&lt;std::string&gt;</code>.</p>",
+      "preview": "There are a few things to know about std::initializer_list. Much like std::array",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b17",
+      "type": "paragraph",
+      "html": "<p>Second, std::initializer_list has a (misnamed) size() function which returns the number of elements in the list. This is useful when we need to know the length of the list passed in.</p>",
+      "preview": "Second, std::initializer_list has a (misnamed) size() function which returns the",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b18",
+      "type": "paragraph",
+      "html": "<p>Third, std::initializer_list is often passed by value. Much like std::string_view, std::initializer_list is a view. Copying a std::initializer_list does not copy the elements in the list.</p>",
+      "preview": "Third, std::initializer_list is often passed by value. Much like std::string_vie",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b19",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at updating our IntArray class with a constructor that takes a std::initializer_list.</p>",
+      "preview": "Let’s take a look at updating our IntArray class with a constructor that takes a",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm> // for std::copy\n#include <cassert> // for assert()\n#include <initializer_list> // for std::initializer_list\n#include <iostream>\n\nclass IntArray\n{\nprivate:\n\tint m_length {};\n\tint* m_data{};\n\npublic:\n\tIntArray() = default;\n\n\tIntArray(int length)\n\t\t: m_length{ length }\n\t\t, m_data{ new int[static_cast<std::size_t>(length)] {} }\n\t{\n\n\t}\n\n\tIntArray(std::initializer_list<int> list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast<int>(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}\n\n\t~IntArray()\n\t{\n\t\tdelete[] m_data;\n\t\t// we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway\n\t}\n\n\tIntArray(const IntArray&) = delete; // to avoid shallow copies\n\tIntArray& operator=(const IntArray& list) = delete; // to avoid shallow copies\n\n\tint& operator[](int index)\n\t{\n\t\tassert(index >= 0 && index < m_length);\n\t\treturn m_data[index];\n\t}\n\n\tint getLength() const { return m_length; }\n};\n\nint main()\n{\n\tIntArray array{ 5, 4, 3, 2, 1 }; // initializer list\n\tfor (int count{ 0 }; count < array.getLength(); ++count)\n\t\tstd::cout << array[count] << ' ';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::copy\n#include &lt;cassert&gt; // for assert()\n#include &lt;initializer_list&gt; // for std::initializer_list\n#include &lt;iostream&gt;\n\nclass IntArray\n{\nprivate:\n\tint m_length {};\n\tint* m_data{};\n\npublic:\n\tIntArray() = default;\n\n\tIntArray(int length)\n\t\t: m_length{ length }\n\t\t, m_data{ new int[static_cast&lt;std::size_t&gt;(length)] {} }\n\t{\n\n\t}\n\n\tIntArray(std::initializer_list&lt;int&gt; list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast&lt;int&gt;(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}\n\n\t~IntArray()\n\t{\n\t\tdelete[] m_data;\n\t\t// we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway\n\t}\n\n\tIntArray(const IntArray&amp;) = delete; // to avoid shallow copies\n\tIntArray&amp; operator=(const IntArray&amp; list) = delete; // to avoid shallow copies\n\n\tint&amp; operator[](int index)\n\t{\n\t\tassert(index &gt;= 0 &amp;&amp; index &lt; m_length);\n\t\treturn m_data[index];\n\t}\n\n\tint getLength() const { return m_length; }\n};\n\nint main()\n{\n\tIntArray array{ 5, 4, 3, 2, 1 }; // initializer list\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b21",
+      "type": "paragraph",
+      "html": "<p>This produces the expected result:</p>",
+      "preview": "This produces the expected result:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b22",
+      "type": "output",
+      "text": "5 4 3 2 1\n",
+      "html": "<pre>5 4 3 2 1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b23",
+      "type": "paragraph",
+      "html": "<p>It works! Now, let’s explore this in more detail.</p>",
+      "preview": "It works! Now, let’s explore this in more detail.",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b24",
+      "type": "paragraph",
+      "html": "<p>Here’s our IntArray constructor that takes a <code>std::initializer_list&lt;int&gt;</code>.</p>",
+      "preview": "Here’s our IntArray constructor that takes a std::initializer_list<int>.",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "\tIntArray(std::initializer_list<int> list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast<int>(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tIntArray(std::initializer_list&lt;int&gt; list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast&lt;int&gt;(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b26",
+      "type": "paragraph",
+      "html": "<p>On line 1: As noted above, we have to use angled brackets to denote what type of element we expect inside the list. In this case, because this is an IntArray, we’d expect the list to be filled with int. Note that we don’t pass the list by const reference. Much like std::string_view, std::initializer_list is very lightweight and copies tend to be cheaper than an indirection.</p>",
+      "preview": "On line 1: As noted above, we have to use angled brackets to denote what type of",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b27",
+      "type": "paragraph",
+      "html": "<p>On line 2: We delegate allocating memory for the IntArray to the other constructor via a delegating constructor (to reduce redundant code). This other constructor needs to know the length of the array, so we pass it list.size(), which contains the number of elements in the list. Note that list.size() returns a size_t (which is unsigned) so we need to cast to a signed int here.</p>",
+      "preview": "On line 2: We delegate allocating memory for the IntArray to the other construct",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b28",
+      "type": "paragraph",
+      "html": "<p>The body of the constructor is reserved for copying the elements from the list into our IntArray class. The easiest way to do this is to use <code>std::copy()</code>, which lives in the &lt;algorithm&gt; header.</p>",
+      "preview": "The body of the constructor is reserved for copying the elements from the list i",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b29",
+      "type": "section",
+      "title": "Accessing elements of a std::initializer_list",
+      "html": "<h3 class=\"cpp-section-heading\">Accessing elements of a std::initializer_list</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b30",
+      "type": "paragraph",
+      "html": "<p>In some cases, you may want access to each element of the std:initializer_list before copying that element into the internal array (e.g. to sanity check values, or modify those values somehow).</p>",
+      "preview": "In some cases, you may want access to each element of the std:initializer_list b",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b31",
+      "type": "paragraph",
+      "html": "<p>For some inexplicable reason, std::initializer_list does not provide access to the elements of the list via subscripting (operator[]). The omission has been noted many times to the standards committee and never addressed.</p>",
+      "preview": "For some inexplicable reason, std::initializer_list does not provide access to t",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b32",
+      "type": "paragraph",
+      "html": "<p>However, there are a number of easy workarounds:</p>",
+      "preview": "However, there are a number of easy workarounds:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b33",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>You can use a range-based for loop to iterate over the elements of the list.</li><li>Another way is to use the <code>begin()</code> member function to get an iterator to the <code>std::initializer_list</code>. Because this iterator is a random-access iterator, the iterators can be indexed:</li></ol>",
+      "preview": "You can use a range-based for loop to iterate over the elements of the list.Anot",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "\tIntArray(std::initializer_list<int> list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast<int>(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tfor (std::size_t count{}; count < list.size(); ++count)\n\t\t{\n\t\t\tm_data[count] = list.begin()[count];\n\t\t}\n\t}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tIntArray(std::initializer_list&lt;int&gt; list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast&lt;int&gt;(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tfor (std::size_t count{}; count &lt; list.size(); ++count)\n\t\t{\n\t\t\tm_data[count] = list.begin()[count];\n\t\t}\n\t}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b35",
+      "type": "section",
+      "title": "List initialization prefers list constructors over non-list constructors",
+      "html": "<h3 class=\"cpp-section-heading\">List initialization prefers list constructors over non-list constructors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b36",
+      "type": "paragraph",
+      "html": "<p>Non-empty initializer lists will always favor a matching initializer_list constructor over other potentially matching constructors. Consider:</p>",
+      "preview": "Non-empty initializer lists will always favor a matching initializer_list constr",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "IntArray a1(5);   // uses IntArray(int), allocates an array of size 5\nIntArray a2{ 5 }; // uses IntArray<std::initializer_list<int>, allocates array of size 1",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">IntArray a1(5);   // uses IntArray(int), allocates an array of size 5\nIntArray a2{ 5 }; // uses IntArray&lt;std::initializer_list&lt;int&gt;, allocates array of size 1</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b38",
+      "type": "paragraph",
+      "html": "<p>The <code>a1</code> case uses direct initialization (which doesn’t consider list constructors), so this definition will call <code>IntArray(int)</code>, allocating an array of size 5.</p>",
+      "preview": "The a1 case uses direct initialization (which doesn’t consider list constructors",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b39",
+      "type": "paragraph",
+      "html": "<p>The <code>a2</code> case uses list initialization (which favors list constructors). Both <code>IntArray(int)</code> and <code>IntArray(std::initializer_list&lt;int&gt;)</code> are possible matches here, but since list constructors are favored, <code>IntArray(std::initializer_list&lt;int&gt;)</code> will be called, allocating an array of size 1 (with that element having value 5)</p>",
+      "preview": "The a2 case uses list initialization (which favors list constructors). Both IntA",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b40",
+      "type": "paragraph",
+      "html": "<p>This is why our delegating constructor above uses direct initialization when delegating:</p>",
+      "preview": "This is why our delegating constructor above uses direct initialization when del",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "\tIntArray(std::initializer_list<int> list)\n\t\t: IntArray(static_cast<int>(list.size())) // uses direct init",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tIntArray(std::initializer_list&lt;int&gt; list)\n\t\t: IntArray(static_cast&lt;int&gt;(list.size())) // uses direct init</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b42",
+      "type": "paragraph",
+      "html": "<p>That ensures we delegate to the <code>IntArray(int)</code> version. If we had delegated using list initialization instead, the constructor would try to delegate to itself, which will cause a compile error.</p>",
+      "preview": "That ensures we delegate to the IntArray(int) version. If we had delegated using",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b43",
+      "type": "paragraph",
+      "html": "<p>The same happens to std::vector and other container classes that have both a list constructor and a constructor with a similar type of parameter</p>",
+      "preview": "The same happens to std::vector and other container classes that have both a lis",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::vector<int> array(5); // Calls std::vector::vector(std::vector::size_type), 5 value-initialized elements: 0 0 0 0 0\nstd::vector<int> array{ 5 }; // Calls std::vector::vector(std::initializer_list<int>), 1 element: 5",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector&lt;int&gt; array(5); // Calls std::vector::vector(std::vector::size_type), 5 value-initialized elements: 0 0 0 0 0\nstd::vector&lt;int&gt; array{ 5 }; // Calls std::vector::vector(std::initializer_list&lt;int&gt;), 1 element: 5</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b45",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>List initialization favors matching list constructors over matching non-list constructors.</p></div>",
+      "preview": "Key insightList initialization favors matching list constructors over matching non-list constructors",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b46",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When initializing a container that has a list constructor:</p><ul><li>Use brace initialization when intending to call the list constructor (e.g. because your initializers are element values)</li><li>Use direct initialization when intending to call a non-list constructor (e.g. because your initializers are not element values).</li></ul></div>",
+      "preview": "Best practiceWhen initializing a container that has a list constructor:Use brace initialization when",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b47",
+      "type": "section",
+      "title": "Adding list constructors to an existing class is dangerous",
+      "html": "<h3 class=\"cpp-section-heading\">Adding list constructors to an existing class is dangerous</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b48",
+      "type": "paragraph",
+      "html": "<p>Because list initialization favors list constructors, adding a list constructor to an existing class that did not previously have one can cause existing programs to silently change behavior.</p>",
+      "preview": "Because list initialization favors list constructors, adding a list constructor ",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b49",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b50",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <initializer_list> // for std::initializer_list\n#include <iostream>\n\nclass Foo\n{\npublic:\n\tFoo(int, int)\n\t{\n\t\tstd::cout << \"Foo(int, int)\" << '\\n';\n\t}\n};\n\nint main()\n{\n\tFoo f1{ 1, 2 }; // calls Foo(int, int)\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;initializer_list&gt; // for std::initializer_list\n#include &lt;iostream&gt;\n\nclass Foo\n{\npublic:\n\tFoo(int, int)\n\t{\n\t\tstd::cout &lt;&lt; \"Foo(int, int)\" &lt;&lt; '\\n';\n\t}\n};\n\nint main()\n{\n\tFoo f1{ 1, 2 }; // calls Foo(int, int)\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b51",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b52",
+      "type": "output",
+      "text": "Foo(int, int)\n",
+      "html": "<pre>Foo(int, int)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b53",
+      "type": "paragraph",
+      "html": "<p>Now let’s add a list constructor to this class:</p>",
+      "preview": "Now let’s add a list constructor to this class:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b54",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <initializer_list> // for std::initializer_list\n#include <iostream>\n\nclass Foo\n{\npublic:\n\tFoo(int, int)\n\t{\n\t\tstd::cout << \"Foo(int, int)\" << '\\n';\n\t}\n\n\t// We've added a list constructor\n\tFoo(std::initializer_list<int>)\n\t{\n\t\tstd::cout << \"Foo(std::initializer_list<int>)\" << '\\n';\n\t}\n\n};\n\nint main()\n{\n\t// note that the following statement has not changed\n\tFoo f1{ 1, 2 }; // now calls Foo(std::initializer_list<int>)\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;initializer_list&gt; // for std::initializer_list\n#include &lt;iostream&gt;\n\nclass Foo\n{\npublic:\n\tFoo(int, int)\n\t{\n\t\tstd::cout &lt;&lt; \"Foo(int, int)\" &lt;&lt; '\\n';\n\t}\n\n\t// We've added a list constructor\n\tFoo(std::initializer_list&lt;int&gt;)\n\t{\n\t\tstd::cout &lt;&lt; \"Foo(std::initializer_list&lt;int&gt;)\" &lt;&lt; '\\n';\n\t}\n\n};\n\nint main()\n{\n\t// note that the following statement has not changed\n\tFoo f1{ 1, 2 }; // now calls Foo(std::initializer_list&lt;int&gt;)\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b55",
+      "type": "paragraph",
+      "html": "<p>Although we’ve made no other changes to the program, this program now prints:</p>",
+      "preview": "Although we’ve made no other changes to the program, this program now prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b56",
+      "type": "output",
+      "text": "Foo(std::initializer_list<int>)\n",
+      "html": "<pre>Foo(std::initializer_list&lt;int&gt;)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b57",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Adding a list constructor to an existing class that did not have one may break existing programs.</p></div>",
+      "preview": "WarningAdding a list constructor to an existing class that did not have one may break existing progr",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b58",
+      "type": "section",
+      "title": "Class assignment using std::initializer_list",
+      "html": "<h3 class=\"cpp-section-heading\">Class assignment using std::initializer_list</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b59",
+      "type": "paragraph",
+      "html": "<p>You can also use std::initializer_list to assign new values to a class by overloading the assignment operator to take a std::initializer_list parameter. This works analogously to the above. We’ll show an example of how to do this in the quiz solution below.</p>",
+      "preview": "You can also use std::initializer_list to assign new values to a class by overlo",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b60",
+      "type": "paragraph",
+      "html": "<p>Note that if you implement a constructor that takes a std::initializer_list, you should ensure you do at least one of the following:</p>",
+      "preview": "Note that if you implement a constructor that takes a std::initializer_list, you",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b61",
+      "type": "list",
+      "html": "<ol><li>Provide an overloaded list assignment operator</li><li>Provide a proper deep-copying copy assignment operator</li><li>Delete the copy assignment operator</li></ol>",
+      "preview": "Provide an overloaded list assignment operatorProvide a proper deep-copying copy",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b62",
+      "type": "paragraph",
+      "html": "<p>Here’s why: consider the following class (which doesn’t have any of these things), along with a list assignment statement:</p>",
+      "preview": "Here’s why: consider the following class (which doesn’t have any of these things",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b63",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm> // for std::copy()\n#include <cassert>   // for assert()\n#include <initializer_list> // for std::initializer_list\n#include <iostream>\n\nclass IntArray\n{\nprivate:\n\tint m_length{};\n\tint* m_data{};\n\npublic:\n\tIntArray() = default;\n\n\tIntArray(int length)\n\t\t: m_length{ length }\n\t\t, m_data{ new int[static_cast<std::size_t>(length)] {} }\n\t{\n\n\t}\n\n\tIntArray(std::initializer_list<int> list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast<int>(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}\n\n\t~IntArray()\n\t{\n\t\tdelete[] m_data;\n\t}\n\n//\tIntArray(const IntArray&) = delete; // to avoid shallow copies\n//\tIntArray& operator=(const IntArray& list) = delete; // to avoid shallow copies\n\n\tint& operator[](int index)\n\t{\n\t\tassert(index >= 0 && index < m_length);\n\t\treturn m_data[index];\n\t}\n\n\tint getLength() const { return m_length; }\n};\n\nint main()\n{\n\tIntArray array{};\n\tarray = { 1, 3, 5, 7, 9, 11 }; // Here's our list assignment statement\n\n\tfor (int count{ 0 }; count < array.getLength(); ++count)\n\t\tstd::cout << array[count] << ' '; // undefined behavior\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::copy()\n#include &lt;cassert&gt;   // for assert()\n#include &lt;initializer_list&gt; // for std::initializer_list\n#include &lt;iostream&gt;\n\nclass IntArray\n{\nprivate:\n\tint m_length{};\n\tint* m_data{};\n\npublic:\n\tIntArray() = default;\n\n\tIntArray(int length)\n\t\t: m_length{ length }\n\t\t, m_data{ new int[static_cast&lt;std::size_t&gt;(length)] {} }\n\t{\n\n\t}\n\n\tIntArray(std::initializer_list&lt;int&gt; list) // allow IntArray to be initialized via list initialization\n\t\t: IntArray(static_cast&lt;int&gt;(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}\n\n\t~IntArray()\n\t{\n\t\tdelete[] m_data;\n\t}\n\n//\tIntArray(const IntArray&amp;) = delete; // to avoid shallow copies\n//\tIntArray&amp; operator=(const IntArray&amp; list) = delete; // to avoid shallow copies\n\n\tint&amp; operator[](int index)\n\t{\n\t\tassert(index &gt;= 0 &amp;&amp; index &lt; m_length);\n\t\treturn m_data[index];\n\t}\n\n\tint getLength() const { return m_length; }\n};\n\nint main()\n{\n\tIntArray array{};\n\tarray = { 1, 3, 5, 7, 9, 11 }; // Here's our list assignment statement\n\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' '; // undefined behavior\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b64",
+      "type": "paragraph",
+      "html": "<p>First, the compiler will note that an assignment function taking a std::initializer_list doesn’t exist. Next it will look for other assignment functions it could use, and discover the implicitly provided copy assignment operator. However, this function can only be used if it can convert the initializer list into an IntArray. Because { 1, 3, 5, 7, 9, 11 } is a std::initializer_list, the compiler will use the list constructor to convert the initializer list into a temporary IntArray. Then it will call the implicit assignment operator, which will shallow copy the temporary IntArray into our array object.</p>",
+      "preview": "First, the compiler will note that an assignment function taking a std::initiali",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b65",
+      "type": "paragraph",
+      "html": "<p>At this point, both the temporary IntArray’s m_data and array-&gt;m_data point to the same address (due to the shallow copy). You can already see where this is going.</p>",
+      "preview": "At this point, both the temporary IntArray’s m_data and array->m_data point to t",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b66",
+      "type": "paragraph",
+      "html": "<p>At the end of the assignment statement, the temporary IntArray is destroyed. That calls the destructor, which deletes the temporary IntArray’s m_data. This leaves array-&gt;m_data as a dangling pointer. When you try to use array-&gt;m_data for any purpose (including when array goes out of scope and the destructor goes to delete m_data), you’ll get undefined behavior.</p>",
+      "preview": "At the end of the assignment statement, the temporary IntArray is destroyed. Tha",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b67",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you provide list construction, it’s a good idea to provide list assignment as well.</p></div>",
+      "preview": "Best practiceIf you provide list construction, it’s a good idea to provide list assignment as well.",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b68",
+      "type": "section",
+      "title": "Summary",
+      "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b69",
+      "type": "paragraph",
+      "html": "<p>Implementing a constructor that takes a std::initializer_list parameter allows us to use list initialization with our custom classes. We can also use std::initializer_list to implement other functions that need to use an initializer list, such as an assignment operator.</p>",
+      "preview": "Implementing a constructor that takes a std::initializer_list parameter allows u",
+      "canCheck": true
+    },
+    {
+      "id": "stdinitializer_list_b70",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdinitializer_list_b71",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Using the IntArray class above, implement an overloaded assignment operator that takes an initializer list.</p><p>The following code should run:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tIntArray array { 5, 4, 3, 2, 1 }; // initializer list\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\tarray = { 1, 3, 5, 7, 9, 11 };\n\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre><p>This should print:</p><pre>5 4 3 2 1 \n1 3 5 7 9 11\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::copy()\n#include &lt;cassert&gt;   // for assert()\n#include &lt;initializer_list&gt; // for std::initializer_list\n#include &lt;iostream&gt;\n\nclass IntArray\n{\nprivate:\n\tint m_length {};\n\tint* m_data {};\n\npublic:\n\tIntArray() = default;\n\n\tIntArray(int length)\n\t\t: m_length{ length }\n\t\t, m_data{ new int[static_cast&lt;std::size_t&gt;(length)] {} }\n\t{\n\n\t}\n\n\tIntArray(std::initializer_list&lt;int&gt; list) : // allow IntArray to be initialized via list initialization\n\t\tIntArray(static_cast&lt;int&gt;(list.size())) // use delegating constructor to set up initial array\n\t{\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\t}\n\n\t~IntArray()\n\t{\n\t\tdelete[] m_data;\n\t\t// we don't need to set m_data to null or m_length to 0 here, since the object will be destroyed immediately after this function anyway\n\t}\n\n\tIntArray(const IntArray&amp;) = delete; // to avoid shallow copies\n\tIntArray&amp; operator=(const IntArray&amp; list) = delete; // to avoid shallow copies\n\n\tIntArray&amp; operator=(std::initializer_list&lt;int&gt; list)\n\t{\n\t\t// If the new list is a different size, reallocate it\n\t\tint length { static_cast&lt;int&gt;(list.size()) };\n\t\tif (length != m_length)\n\t\t{\n\t\t\tdelete[] m_data;\n\t\t\tm_length = length;\n\t\t\tm_data = new int[list.size()]{};\n\t\t}\n\n\t\t// Now initialize our array from the list\n\t\tstd::copy(list.begin(), list.end(), m_data);\n\n\t\treturn *this;\n\t}\n\n\tint&amp; operator[](int index)\n\t{\n\t\tassert(index &gt;= 0 &amp;&amp; index &lt; m_length);\n\t\treturn m_data[index];\n\t}\n\n\tint getLength() const { return m_length; }\n};\n\nint main()\n{\n\tIntArray array { 5, 4, 3, 2, 1 }; // initializer list\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\tarray = { 1, 3, 5, 7, 9, 11 };\n\n\tfor (int count{ 0 }; count &lt; array.getLength(); ++count)\n\t\tstd::cout &lt;&lt; array[count] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre></div></div>",
+      "preview": "Question #1Using the IntArray class above, implement an overloaded assignment op",
+      "canCheck": true
+    }
+  ]
+}

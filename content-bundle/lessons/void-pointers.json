@@ -1,0 +1,210 @@
+{
+  "index": 247,
+  "chapterId": "19",
+  "number": "19.5",
+  "title": "19.5 — Void pointers",
+  "url": "https://www.learncpp.com/cpp-tutorial/void-pointers/",
+  "slug": "void-pointers",
+  "scrapedAt": "2026-09-15T16:30:44.149Z",
+  "totalBlocks": 27,
+  "totalCheckpoints": 22,
+  "blocks": [
+    {
+      "id": "void-pointers_b0",
+      "type": "paragraph",
+      "html": "<p>The <strong>void pointer</strong>, also known as the generic pointer, is a special type of pointer that can be pointed at objects of any data type! A void pointer is declared like a normal pointer, using the void keyword as the pointer’s type:</p>",
+      "preview": "The void pointer, also known as the generic pointer, is a special type of pointe",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "void* ptr {}; // ptr is a void pointer",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void* ptr {}; // ptr is a void pointer</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b2",
+      "type": "paragraph",
+      "html": "<p>A void pointer can point to objects of any data type:</p>",
+      "preview": "A void pointer can point to objects of any data type:",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "int nValue {};\nfloat fValue {};\n\nstruct Something\n{\n    int n;\n    float f;\n};\n\nSomething sValue {};\n\nvoid* ptr {};\nptr = &nValue; // valid\nptr = &fValue; // valid\nptr = &sValue; // valid",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int nValue {};\nfloat fValue {};\n\nstruct Something\n{\n    int n;\n    float f;\n};\n\nSomething sValue {};\n\nvoid* ptr {};\nptr = &amp;nValue; // valid\nptr = &amp;fValue; // valid\nptr = &amp;sValue; // valid</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b4",
+      "type": "paragraph",
+      "html": "<p>However, because the void pointer does not know what type of object it is pointing to, dereferencing a void pointer is illegal. Instead, the void pointer must first be cast to another pointer type before the dereference can be performed.</p>",
+      "preview": "However, because the void pointer does not know what type of object it is pointi",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "int value{ 5 };\nvoid* voidPtr{ &value };\n\n// std::cout << *voidPtr << '\\n'; // illegal: dereference of void pointer\n\nint* intPtr{ static_cast<int*>(voidPtr) }; // however, if we cast our void pointer to an int pointer...\n\nstd::cout << *intPtr << '\\n'; // then we can dereference the result",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int value{ 5 };\nvoid* voidPtr{ &amp;value };\n\n// std::cout &lt;&lt; *voidPtr &lt;&lt; '\\n'; // illegal: dereference of void pointer\n\nint* intPtr{ static_cast&lt;int*&gt;(voidPtr) }; // however, if we cast our void pointer to an int pointer...\n\nstd::cout &lt;&lt; *intPtr &lt;&lt; '\\n'; // then we can dereference the result</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b6",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b7",
+      "type": "output",
+      "text": "5\n",
+      "html": "<pre>5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "void-pointers_b8",
+      "type": "paragraph",
+      "html": "<p>The next obvious question is: If a void pointer doesn’t know what it’s pointing to, how do we know what to cast it to? Ultimately, that is up to you to keep track of.</p>",
+      "preview": "The next obvious question is: If a void pointer doesn’t know what it’s pointing ",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b9",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of a void pointer in use:</p>",
+      "preview": "Here’s an example of a void pointer in use:",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cassert>\n#include <iostream>\n\nenum class Type\n{\n    tInt, // note: we can't use \"int\" here because it's a keyword, so we'll use \"tInt\" instead\n    tFloat,\n    tCString\n};\n\nvoid printValue(void* ptr, Type type)\n{\n    switch (type)\n    {\n    case Type::tInt:\n        std::cout << *static_cast<int*>(ptr) << '\\n'; // cast to int pointer and perform indirection\n        break;\n    case Type::tFloat:\n        std::cout << *static_cast<float*>(ptr) << '\\n'; // cast to float pointer and perform indirection\n        break;\n    case Type::tCString:\n        std::cout << static_cast<char*>(ptr) << '\\n'; // cast to char pointer (no indirection)\n        // std::cout will treat char* as a C-style string\n        // if we were to perform indirection through the result, then we'd just print the single char that ptr is pointing to\n        break;\n    default:\n        std::cerr << \"printValue(): invalid type provided\\n\"; \n        assert(false && \"type not found\");\n        break;\n    }\n}\n\nint main()\n{\n    int nValue{ 5 };\n    float fValue{ 7.5f };\n    char szValue[]{ \"Mollie\" };\n\n    printValue(&nValue, Type::tInt);\n    printValue(&fValue, Type::tFloat);\n    printValue(szValue, Type::tCString);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n\nenum class Type\n{\n    tInt, // note: we can't use \"int\" here because it's a keyword, so we'll use \"tInt\" instead\n    tFloat,\n    tCString\n};\n\nvoid printValue(void* ptr, Type type)\n{\n    switch (type)\n    {\n    case Type::tInt:\n        std::cout &lt;&lt; *static_cast&lt;int*&gt;(ptr) &lt;&lt; '\\n'; // cast to int pointer and perform indirection\n        break;\n    case Type::tFloat:\n        std::cout &lt;&lt; *static_cast&lt;float*&gt;(ptr) &lt;&lt; '\\n'; // cast to float pointer and perform indirection\n        break;\n    case Type::tCString:\n        std::cout &lt;&lt; static_cast&lt;char*&gt;(ptr) &lt;&lt; '\\n'; // cast to char pointer (no indirection)\n        // std::cout will treat char* as a C-style string\n        // if we were to perform indirection through the result, then we'd just print the single char that ptr is pointing to\n        break;\n    default:\n        std::cerr &lt;&lt; \"printValue(): invalid type provided\\n\"; \n        assert(false &amp;&amp; \"type not found\");\n        break;\n    }\n}\n\nint main()\n{\n    int nValue{ 5 };\n    float fValue{ 7.5f };\n    char szValue[]{ \"Mollie\" };\n\n    printValue(&amp;nValue, Type::tInt);\n    printValue(&amp;fValue, Type::tFloat);\n    printValue(szValue, Type::tCString);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b11",
+      "type": "paragraph",
+      "html": "<p>This program prints:</p>",
+      "preview": "This program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b12",
+      "type": "output",
+      "text": "5\n7.5\nMollie\n",
+      "html": "<pre>5\n7.5\nMollie\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "void-pointers_b13",
+      "type": "section",
+      "title": "Void pointer miscellany",
+      "html": "<h3 class=\"cpp-section-heading\">Void pointer miscellany</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "void-pointers_b14",
+      "type": "paragraph",
+      "html": "<p>Void pointers can be set to a null value:</p>",
+      "preview": "Void pointers can be set to a null value:",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "void* ptr{ nullptr }; // ptr is a void pointer that is currently a null pointer",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void* ptr{ nullptr }; // ptr is a void pointer that is currently a null pointer</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b16",
+      "type": "paragraph",
+      "html": "<p>Because a void pointer does not know what type of object it is pointing to, deleting a void pointer will result in undefined behavior. If you need to delete a void pointer, <code>static_cast</code> it back to the appropriate type first.</p>",
+      "preview": "Because a void pointer does not know what type of object it is pointing to, dele",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b17",
+      "type": "paragraph",
+      "html": "<p>It is not possible to do pointer arithmetic on a void pointer. This is because pointer arithmetic requires the pointer to know what size object it is pointing to, so it can increment or decrement the pointer appropriately.</p>",
+      "preview": "It is not possible to do pointer arithmetic on a void pointer. This is because p",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b18",
+      "type": "paragraph",
+      "html": "<p>Note that there is no such thing as a void reference. This is because a void reference would be of type void &amp;, and would not know what type of value it referenced.</p>",
+      "preview": "Note that there is no such thing as a void reference. This is because a void ref",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b19",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "void-pointers_b20",
+      "type": "paragraph",
+      "html": "<p>In general, it is a good idea to avoid using void pointers unless absolutely necessary, as they effectively allow you to avoid type checking. This allows you to inadvertently do things that make no sense, and the compiler won’t complain about it. For example, the following would be valid:</p>",
+      "preview": "In general, it is a good idea to avoid using void pointers unless absolutely nec",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "    int nValue{ 5 };\n    printValue(&nValue, Type::tCString);",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int nValue{ 5 };\n    printValue(&amp;nValue, Type::tCString);</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b22",
+      "type": "paragraph",
+      "html": "<p>But who knows what the result would actually be!</p>",
+      "preview": "But who knows what the result would actually be!",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b23",
+      "type": "paragraph",
+      "html": "<p>Although the above function seems like a neat way to make a single function handle multiple data types, C++ actually offers a much better way to do the same thing (via function overloading) that retains type checking to help prevent misuse. Many other places where void pointers would once be used to handle multiple data types are now better done using templates, which also offer strong type checking.</p>",
+      "preview": "Although the above function seems like a neat way to make a single function hand",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b24",
+      "type": "paragraph",
+      "html": "<p>However, very occasionally, you may still find a reasonable use for the void pointer. Just make sure there isn’t a better (safer) way to do the same thing using other language mechanisms first!</p>",
+      "preview": "However, very occasionally, you may still find a reasonable use for the void poi",
+      "canCheck": true
+    },
+    {
+      "id": "void-pointers_b25",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "void-pointers_b26",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "What’s the difference between a void pointer and a null pointer?",
+      "hintHtml": "",
+      "solutionHtml": "A void pointer is a pointer that can point to any type of object, but does not know what type of object it points to. A void pointer must be explicitly cast into another type of pointer to perform indirection. A null pointer is a pointer that does not point to an address. A void pointer can be a null pointer.<p></p><p>Thus, a void pointer refers to the type of the pointer, whereas a null pointer refers to the value (address) of the pointer.</p>",
+      "canCheck": true
+    }
+  ]
+}

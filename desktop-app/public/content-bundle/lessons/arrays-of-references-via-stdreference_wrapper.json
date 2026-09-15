@@ -1,0 +1,194 @@
+{
+  "index": 229,
+  "chapterId": "17",
+  "number": "17.5",
+  "title": "17.5 — Arrays of references via std::reference_wrapper",
+  "url": "https://www.learncpp.com/cpp-tutorial/arrays-of-references-via-stdreference_wrapper/",
+  "slug": "arrays-of-references-via-stdreference_wrapper",
+  "scrapedAt": "2026-09-15T16:30:34.863Z",
+  "totalBlocks": 25,
+  "totalCheckpoints": 22,
+  "blocks": [
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b0",
+      "type": "paragraph",
+      "html": "<p>In the prior lesson, we mentioned that arrays can have elements of any object type. This includes objects with fundamental types (e.g. int) and objects with compound types (e.g. pointer to int).</p>",
+      "preview": "In the prior lesson, we mentioned that arrays can have elements of any object ty",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n#include <vector>\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n\n    [[maybe_unused]] std::array valarr { x, y };   // an array of int values\n    [[maybe_unused]] std::vector ptrarr { &x, &y }; // a vector of int pointers\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n\n    [[maybe_unused]] std::array valarr { x, y };   // an array of int values\n    [[maybe_unused]] std::vector ptrarr { &amp;x, &amp;y }; // a vector of int pointers\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b2",
+      "type": "paragraph",
+      "html": "<p>However, because references are not objects, you cannot make an array of references. The elements of an array must also be assignable, and references can’t be reseated.</p>",
+      "preview": "However, because references are not objects, you cannot make an array of referen",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n\n    [[maybe_unused]] std::array<int&, 2> refarr { x, y }; // compile error: cannot define array of references\n\n    int& ref1 { x };\n    int& ref2 { y };\n    [[maybe_unused]] std::array valarr { ref1, ref2 }; // ok: this is actually a std::array<int, 2>, not an array of references\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n\n    [[maybe_unused]] std::array&lt;int&amp;, 2&gt; refarr { x, y }; // compile error: cannot define array of references\n\n    int&amp; ref1 { x };\n    int&amp; ref2 { y };\n    [[maybe_unused]] std::array valarr { ref1, ref2 }; // ok: this is actually a std::array&lt;int, 2&gt;, not an array of references\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b4",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll use <code>std::array</code> in the examples, but this is equally applicable to all array types.</p>",
+      "preview": "In this lesson, we’ll use std::array in the examples, but this is equally applic",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b5",
+      "type": "paragraph",
+      "html": "<p>However, if you want an array of references, there is a workaround.</p>",
+      "preview": "However, if you want an array of references, there is a workaround.",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b6",
+      "type": "section",
+      "title": "std::reference_wrapper",
+      "html": "<h3 class=\"cpp-section-heading\">std::reference_wrapper</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b7",
+      "type": "paragraph",
+      "html": "<p><code>std::reference_wrapper</code> is a standard library class template that lives in the &lt;functional&gt; header. It takes a type template argument T, and then behaves like a modifiable lvalue reference to T.</p>",
+      "preview": "std::reference_wrapper is a standard library class template that lives in the <f",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b8",
+      "type": "paragraph",
+      "html": "<p>There are a few things worth noting about <code>std::reference_wrapper</code>:</p>",
+      "preview": "There are a few things worth noting about std::reference_wrapper:",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b9",
+      "type": "list",
+      "html": "<ul><li><code>Operator=</code> will reseat a <code>std::reference_wrapper</code> (change which object is being referenced).</li><li><code>std::reference_wrapper&lt;T&gt;</code> will implicitly convert to <code>T&amp;</code>.</li><li>The <code>get()</code> member function can be used to get a <code>T&amp;</code>. This is useful when we want to update the value of the object being referenced.</li></ul>",
+      "preview": "Operator= will reseat a std::reference_wrapper (change which object is being ref",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b10",
+      "type": "paragraph",
+      "html": "<p>Here’s a simple example:</p>",
+      "preview": "Here’s a simple example:",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <functional> // for std::reference_wrapper\n#include <iostream>\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n    int z { 3 };\n\n    std::array<std::reference_wrapper<int>, 3> arr { x, y, z };\n    \n    arr[1].get() = 5; // modify the object in array element 1\n\n    std::cout << arr[1] << y << '\\n'; // show that we modified arr[1] and y, prints 55\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;functional&gt; // for std::reference_wrapper\n#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 1 };\n    int y { 2 };\n    int z { 3 };\n\n    std::array&lt;std::reference_wrapper&lt;int&gt;, 3&gt; arr { x, y, z };\n    \n    arr[1].get() = 5; // modify the object in array element 1\n\n    std::cout &lt;&lt; arr[1] &lt;&lt; y &lt;&lt; '\\n'; // show that we modified arr[1] and y, prints 55\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b12",
+      "type": "paragraph",
+      "html": "<p>This example prints the following:</p>",
+      "preview": "This example prints the following:",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b13",
+      "type": "output",
+      "text": "55\n",
+      "html": "<pre>55\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b14",
+      "type": "paragraph",
+      "html": "<p>Note that we must use <code>arr[1].get() = 5</code> and not <code>arr[1] = 5</code>. The latter is ambiguous, as the compiler can’t tell if we intend to reseat the <code>std::reference_wrapper&lt;int&gt;</code> to value 5 (something that is illegal anyway) or change the value being referenced. Using <code>get()</code> disambiguates this.</p>",
+      "preview": "Note that we must use arr[1].get() = 5 and not arr[1] = 5. The latter is ambiguo",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b15",
+      "type": "paragraph",
+      "html": "<p>When printing <code>arr[1]</code>, the compiler will realize it can’t print a <code>std::reference_wrapper&lt;int&gt;</code>, so it will implicitly convert it to an <code>int&amp;</code>, which it can print. So we don’t need to use <code>get()</code> here.</p>",
+      "preview": "When printing arr[1], the compiler will realize it can’t print a std::reference_",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b16",
+      "type": "section",
+      "title": "std::ref and std::cref",
+      "html": "<h3 class=\"cpp-section-heading\"><code>std::ref</code> and <code>std::cref</code></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b17",
+      "type": "paragraph",
+      "html": "<p>Prior to C++17, CTAD (class template argument deduction) didn’t exist, so all template arguments for a class type needed to be listed explicitly. Thus, to create a <code>std::reference_wrapper&lt;int&gt;</code>, you could do either of these:</p>",
+      "preview": "Prior to C++17, CTAD (class template argument deduction) didn’t exist, so all te",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "    int x { 5 };\n\n    std::reference_wrapper<int> ref1 { x };        // C++11\n    auto ref2 { std::reference_wrapper<int>{ x }}; // C++11",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int x { 5 };\n\n    std::reference_wrapper&lt;int&gt; ref1 { x };        // C++11\n    auto ref2 { std::reference_wrapper&lt;int&gt;{ x }}; // C++11</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b19",
+      "type": "paragraph",
+      "html": "<p>Between the long name and having to explicitly list the template arguments, creating many such reference wrappers could be a pain.</p>",
+      "preview": "Between the long name and having to explicitly list the template arguments, crea",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b20",
+      "type": "paragraph",
+      "html": "<p>To make things easier, the <code>std::ref()</code> and <code>std::cref()</code> functions were provided as shortcuts to create <code>std::reference_wrapper</code> and <code>const std::reference_wrapper</code> wrapped objects. Note that these functions can be used with <code>auto</code> to avoid having to explicitly specify the template argument.</p>",
+      "preview": "To make things easier, the std::ref() and std::cref() functions were provided as",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "    int x { 5 };\n    auto ref { std::ref(x) };   // C++11, deduces to std::reference_wrapper<int>\n    auto cref { std::cref(x) }; // C++11, deduces to std::reference_wrapper<const int>",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int x { 5 };\n    auto ref { std::ref(x) };   // C++11, deduces to std::reference_wrapper&lt;int&gt;\n    auto cref { std::cref(x) }; // C++11, deduces to std::reference_wrapper&lt;const int&gt;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b22",
+      "type": "paragraph",
+      "html": "<p>Of course, now that we have CTAD in C++17, we can also do this:</p>",
+      "preview": "Of course, now that we have CTAD in C++17, we can also do this:",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "    std::reference_wrapper ref1 { x };        // C++17\n    auto ref2 { std::reference_wrapper{ x }}; // C++17",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::reference_wrapper ref1 { x };        // C++17\n    auto ref2 { std::reference_wrapper{ x }}; // C++17</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "arrays-of-references-via-stdreference_wrapper_b24",
+      "type": "paragraph",
+      "html": "<p>But since <code>std::ref()</code> and <code>std::cref()</code> are shorter to type, they are still widely used to create <code>std::reference_wrapper</code> objects.</p>",
+      "preview": "But since std::ref() and std::cref() are shorter to type, they are still widely ",
+      "canCheck": true
+    }
+  ]
+}

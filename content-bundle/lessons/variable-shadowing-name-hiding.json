@@ -1,0 +1,201 @@
+{
+  "index": 90,
+  "chapterId": "7",
+  "number": "7.5",
+  "title": "7.5 — Variable shadowing (name hiding)",
+  "url": "https://www.learncpp.com/cpp-tutorial/variable-shadowing-name-hiding/",
+  "slug": "variable-shadowing-name-hiding",
+  "scrapedAt": "2026-09-15T16:29:23.147Z",
+  "totalBlocks": 26,
+  "totalCheckpoints": 19,
+  "blocks": [
+    {
+      "id": "variable-shadowing-name-hiding_b0",
+      "type": "paragraph",
+      "html": "<p>Each block defines its own scope region. So what happens when we have a variable inside a nested block that has the same name as a variable in an outer block? When this happens, the nested variable “hides” the outer variable in areas where they are both in scope. This is called <strong>name hiding</strong> or <strong>shadowing</strong>.</p>",
+      "preview": "Each block defines its own scope region. So what happens when we have a variable",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b1",
+      "type": "section",
+      "title": "Shadowing of local variables",
+      "html": "<h3 class=\"cpp-section-heading\">Shadowing of local variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{ // outer block\n    int apples { 5 }; // here's the outer block apples\n\n    { // nested block\n        // apples refers to outer block apples here\n        std::cout << apples << '\\n'; // print value of outer block apples\n\n        int apples{ 0 }; // define apples in the scope of the nested block\n\n        // apples now refers to the nested block apples\n        // the outer block apples is temporarily hidden\n\n        apples = 10; // this assigns value 10 to nested block apples, not outer block apples\n\n        std::cout << apples << '\\n'; // print value of nested block apples\n    } // nested block apples destroyed\n\n\n    std::cout << apples << '\\n'; // prints value of outer block apples\n\n    return 0;\n} // outer block apples destroyed",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{ // outer block\n    int apples { 5 }; // here's the outer block apples\n\n    { // nested block\n        // apples refers to outer block apples here\n        std::cout &lt;&lt; apples &lt;&lt; '\\n'; // print value of outer block apples\n\n        int apples{ 0 }; // define apples in the scope of the nested block\n\n        // apples now refers to the nested block apples\n        // the outer block apples is temporarily hidden\n\n        apples = 10; // this assigns value 10 to nested block apples, not outer block apples\n\n        std::cout &lt;&lt; apples &lt;&lt; '\\n'; // print value of nested block apples\n    } // nested block apples destroyed\n\n\n    std::cout &lt;&lt; apples &lt;&lt; '\\n'; // prints value of outer block apples\n\n    return 0;\n} // outer block apples destroyed</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b3",
+      "type": "paragraph",
+      "html": "<p>If you run this program, it prints:</p>",
+      "preview": "If you run this program, it prints:",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b4",
+      "type": "output",
+      "text": "5\n10\n5\n",
+      "html": "<pre>5\n10\n5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b5",
+      "type": "paragraph",
+      "html": "<p>In the above program, we first declare a variable named <code>apples</code> in the outer block. This variable is visible within the inner block, which we can see by printing its value (<code>5</code>). Then we declare a different variable (also named <code>apples</code>) in the nested block. From this point to the end of the block, the name <code>apples</code> refers to the nested block <code>apples</code>, not the outer block <code>apples</code>.</p>",
+      "preview": "In the above program, we first declare a variable named apples in the outer bloc",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b6",
+      "type": "paragraph",
+      "html": "<p>Thus, when we assign value <code>10</code> to <code>apples</code>, we’re assigning it to the nested block <code>apples</code>. After printing this value (<code>10</code>), the nested block ends and nested block <code>apples</code> is destroyed. The existence and value of outer block <code>apples</code> is not affected, and we prove this by printing the value of outer block <code>apples</code> (<code>5</code>).</p>",
+      "preview": "Thus, when we assign value 10 to apples, we’re assigning it to the nested block ",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b7",
+      "type": "paragraph",
+      "html": "<p>Note that if the nested block <code>apples</code> had not been defined, the name <code>apples</code> in the nested block would still refer to the outer block <code>apples</code>, so the assignment of value <code>10</code> to <code>apples</code> would have applied to the outer block <code>apples</code>:</p>",
+      "preview": "Note that if the nested block apples had not been defined, the name apples in th",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{ // outer block\n    int apples{5}; // here's the outer block apples\n\n    { // nested block\n        // apples refers to outer block apples here\n        std::cout << apples << '\\n'; // print value of outer block apples\n\n        // no inner block apples defined in this example\n\n        apples = 10; // this applies to outer block apples\n\n        std::cout << apples << '\\n'; // print value of outer block apples\n    } // outer block apples retains its value even after we leave the nested block\n\n    std::cout << apples << '\\n'; // prints value of outer block apples\n\n    return 0;\n} // outer block apples destroyed",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{ // outer block\n    int apples{5}; // here's the outer block apples\n\n    { // nested block\n        // apples refers to outer block apples here\n        std::cout &lt;&lt; apples &lt;&lt; '\\n'; // print value of outer block apples\n\n        // no inner block apples defined in this example\n\n        apples = 10; // this applies to outer block apples\n\n        std::cout &lt;&lt; apples &lt;&lt; '\\n'; // print value of outer block apples\n    } // outer block apples retains its value even after we leave the nested block\n\n    std::cout &lt;&lt; apples &lt;&lt; '\\n'; // prints value of outer block apples\n\n    return 0;\n} // outer block apples destroyed</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b9",
+      "type": "paragraph",
+      "html": "<p>The above program prints:</p>",
+      "preview": "The above program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b10",
+      "type": "output",
+      "text": "5\n10\n10\n",
+      "html": "<pre>5\n10\n10\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b11",
+      "type": "paragraph",
+      "html": "<p>When inside the nested block, there’s no way to directly access the shadowed variable from the outer block.</p>",
+      "preview": "When inside the nested block, there’s no way to directly access the shadowed var",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b12",
+      "type": "section",
+      "title": "Shadowing of global variables",
+      "html": "<h3 class=\"cpp-section-heading\">Shadowing of global variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b13",
+      "type": "paragraph",
+      "html": "<p>Similar to how variables in a nested block can shadow variables in an outer block, local variables with the same name as a global variable will shadow the global variable wherever the local variable is in scope:</p>",
+      "preview": "Similar to how variables in a nested block can shadow variables in an outer bloc",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nint value { 5 }; // global variable\n\nvoid foo()\n{\n    std::cout << \"global variable value: \" << value << '\\n'; // value is not shadowed here, so this refers to the global value\n}\n\nint main()\n{\n    int value { 7 }; // hides the global variable value (wherever local variable value is in scope)\n\n    ++value; // increments local value, not global value\n\n    std::cout << \"local variable value: \" << value << '\\n';\n\n    foo();\n\n    return 0;\n} // local value is destroyed",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint value { 5 }; // global variable\n\nvoid foo()\n{\n    std::cout &lt;&lt; \"global variable value: \" &lt;&lt; value &lt;&lt; '\\n'; // value is not shadowed here, so this refers to the global value\n}\n\nint main()\n{\n    int value { 7 }; // hides the global variable value (wherever local variable value is in scope)\n\n    ++value; // increments local value, not global value\n\n    std::cout &lt;&lt; \"local variable value: \" &lt;&lt; value &lt;&lt; '\\n';\n\n    foo();\n\n    return 0;\n} // local value is destroyed</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b15",
+      "type": "paragraph",
+      "html": "<p>This code prints:</p>",
+      "preview": "This code prints:",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b16",
+      "type": "output",
+      "text": "local variable value: 8\nglobal variable value: 5\n",
+      "html": "<pre>local variable value: 8\nglobal variable value: 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b17",
+      "type": "paragraph",
+      "html": "<p>However, because global variables are part of the global namespace, we can use the scope operator (::) with no prefix to tell the compiler we mean the global variable instead of the local variable.</p>",
+      "preview": "However, because global variables are part of the global namespace, we can use t",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nint value { 5 }; // global variable\n\nint main()\n{\n    int value { 7 }; // hides the global variable value\n    ++value; // increments local value, not global value\n\n    --(::value); // decrements global value, not local value (parenthesis added for readability)\n\n    std::cout << \"local variable value: \" << value << '\\n';\n    std::cout << \"global variable value: \" << ::value << '\\n';\n\n    return 0;\n} // local value is destroyed",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint value { 5 }; // global variable\n\nint main()\n{\n    int value { 7 }; // hides the global variable value\n    ++value; // increments local value, not global value\n\n    --(::value); // decrements global value, not local value (parenthesis added for readability)\n\n    std::cout &lt;&lt; \"local variable value: \" &lt;&lt; value &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"global variable value: \" &lt;&lt; ::value &lt;&lt; '\\n';\n\n    return 0;\n} // local value is destroyed</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b19",
+      "type": "paragraph",
+      "html": "<p>This code prints:</p>",
+      "preview": "This code prints:",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b20",
+      "type": "output",
+      "text": "local variable value: 8\nglobal variable value: 4\n",
+      "html": "<pre>local variable value: 8\nglobal variable value: 4\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b21",
+      "type": "section",
+      "title": "Avoid variable shadowing",
+      "html": "<h3 class=\"cpp-section-heading\">Avoid variable shadowing</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b22",
+      "type": "paragraph",
+      "html": "<p>Shadowing of local variables should generally be avoided, as it can lead to inadvertent errors where the wrong variable is used or modified. Some compilers will issue a warning when a variable is shadowed.</p>",
+      "preview": "Shadowing of local variables should generally be avoided, as it can lead to inad",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b23",
+      "type": "paragraph",
+      "html": "<p>For the same reason that we recommend avoiding shadowing local variables, we recommend avoiding shadowing global variables as well. This is trivially avoidable if all of your global names use a “g_” prefix.</p>",
+      "preview": "For the same reason that we recommend avoiding shadowing local variables, we rec",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b24",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid variable shadowing.</p></div>",
+      "preview": "Best practiceAvoid variable shadowing.",
+      "canCheck": true
+    },
+    {
+      "id": "variable-shadowing-name-hiding_b25",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For gcc users</p><p>GCC and Clang support the flag <code>-Wshadow</code> that will generate warnings if a variable is shadowed. There are several subvariants of this flag (<code>-Wshadow=global</code>, <code>-Wshadow=local</code>, and <code>-Wshadow=compatible-local</code>. Consult the <a href=\"https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html\">GCC documentation</a> for an explanation of the differences.</p><p>Visual Studio has such warnings enabled by default.</p></div>",
+      "preview": "For gcc usersGCC and Clang support the flag -Wshadow that will generate warnings if a variable is sh",
+      "canCheck": true
+    }
+  ]
+}

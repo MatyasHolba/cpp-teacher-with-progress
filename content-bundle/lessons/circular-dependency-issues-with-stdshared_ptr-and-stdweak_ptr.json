@@ -1,0 +1,392 @@
+{
+  "index": 278,
+  "chapterId": "22",
+  "number": "22.7",
+  "title": "22.7 — Circular dependency issues with std::shared_ptr, and std::weak_ptr",
+  "url": "https://www.learncpp.com/cpp-tutorial/circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr/",
+  "slug": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr",
+  "scrapedAt": "2026-09-15T16:31:00.870Z",
+  "totalBlocks": 53,
+  "totalCheckpoints": 41,
+  "blocks": [
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b0",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson, we saw how std::shared_ptr allowed us to have multiple smart pointers co-owning the same resource. However, in certain cases, this can become problematic. Consider the following case, where the shared pointers in two separate objects each point at the other object:</p>",
+      "preview": "In the previous lesson, we saw how std::shared_ptr allowed us to have multiple s",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n#include <string>\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::shared_ptr<Person> m_partner; // initially created empty\n\npublic:\n\t\t\n\tPerson(const std::string &name): m_name(name)\n\t{ \n\t\tstd::cout << m_name << \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout << m_name << \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr<Person> &p1, std::shared_ptr<Person> &p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1->m_partner = p2;\n\t\tp2->m_partner = p1;\n\n\t\tstd::cout << p1->m_name << \" is now partnered with \" << p2->m_name << '\\n';\n\n\t\treturn true;\n\t}\n};\n\nint main()\n{\n\tauto lucy { std::make_shared<Person>(\"Lucy\") }; // create a Person named \"Lucy\"\n\tauto ricky { std::make_shared<Person>(\"Ricky\") }; // create a Person named \"Ricky\"\n\n\tpartnerUp(lucy, ricky); // Make \"Lucy\" point to \"Ricky\" and vice-versa\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n#include &lt;string&gt;\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::shared_ptr&lt;Person&gt; m_partner; // initially created empty\n\npublic:\n\t\t\n\tPerson(const std::string &amp;name): m_name(name)\n\t{ \n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr&lt;Person&gt; &amp;p1, std::shared_ptr&lt;Person&gt; &amp;p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1-&gt;m_partner = p2;\n\t\tp2-&gt;m_partner = p1;\n\n\t\tstd::cout &lt;&lt; p1-&gt;m_name &lt;&lt; \" is now partnered with \" &lt;&lt; p2-&gt;m_name &lt;&lt; '\\n';\n\n\t\treturn true;\n\t}\n};\n\nint main()\n{\n\tauto lucy { std::make_shared&lt;Person&gt;(\"Lucy\") }; // create a Person named \"Lucy\"\n\tauto ricky { std::make_shared&lt;Person&gt;(\"Ricky\") }; // create a Person named \"Ricky\"\n\n\tpartnerUp(lucy, ricky); // Make \"Lucy\" point to \"Ricky\" and vice-versa\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b2",
+      "type": "paragraph",
+      "html": "<p>In the above example, we dynamically allocate two Persons, “Lucy” and “Ricky” using make_shared() (to ensure lucy and ricky are destroyed at the end of main()). Then we partner them up. This sets the std::shared_ptr inside “Lucy” to point at “Ricky”, and the std::shared_ptr inside “Ricky” to point at “Lucy”. Shared pointers are meant to be shared, so it’s fine that both the lucy shared pointer and Rick’s m_partner shared pointer both point at “Lucy” (and vice-versa).</p>",
+      "preview": "In the above example, we dynamically allocate two Persons, “Lucy” and “Ricky” us",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b3",
+      "type": "paragraph",
+      "html": "<p>However, this program doesn’t execute as expected:</p>",
+      "preview": "However, this program doesn’t execute as expected:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b4",
+      "type": "output",
+      "text": "Lucy created\nRicky created\nLucy is now partnered with Ricky\n",
+      "html": "<pre>Lucy created\nRicky created\nLucy is now partnered with Ricky\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b5",
+      "type": "paragraph",
+      "html": "<p>And that’s it. No deallocations took place. Uh oh. What happened?</p>",
+      "preview": "And that’s it. No deallocations took place. Uh oh. What happened?",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b6",
+      "type": "paragraph",
+      "html": "<p>After partnerUp() is called, there are two shared pointers pointing to “Ricky” (ricky, and Lucy’s m_partner) and two shared pointers pointing to “Lucy” (lucy, and Ricky’s m_partner).</p>",
+      "preview": "After partnerUp() is called, there are two shared pointers pointing to “Ricky” (",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b7",
+      "type": "paragraph",
+      "html": "<p>At the end of main(), the ricky shared pointer goes out of scope first. When that happens, ricky checks if there are any other shared pointers that co-own the Person “Ricky”. There are (Lucy’s m_partner). Because of this, it doesn’t deallocate “Ricky” (if it did, then Lucy’s m_partner would end up as a dangling pointer). At this point, we now have one shared pointer to “Ricky” (Lucy’s m_partner) and two shared pointers to “Lucy” (lucy, and Ricky’s m_partner).</p>",
+      "preview": "At the end of main(), the ricky shared pointer goes out of scope first. When tha",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b8",
+      "type": "paragraph",
+      "html": "<p>Next the lucy shared pointer goes out of scope, and the same thing happens. The shared pointer lucy checks if there are any other shared pointers co-owning the Person “Lucy”. There are (Ricky’s m_partner), so “Lucy” isn’t deallocated. At this point, there is one shared pointer to “Lucy” (Ricky’s m_partner) and one shared pointer to “Ricky” (Lucy’s m_partner).</p>",
+      "preview": "Next the lucy shared pointer goes out of scope, and the same thing happens. The ",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b9",
+      "type": "paragraph",
+      "html": "<p>Then the program ends -- and neither Person “Lucy” or “Ricky” have been deallocated! Essentially, “Lucy” ends up keeping “Ricky” from being destroyed, and “Ricky” ends up keeping “Lucy” from being destroyed.</p>",
+      "preview": "Then the program ends -- and neither Person “Lucy” or “Ricky” have been dealloca",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b10",
+      "type": "paragraph",
+      "html": "<p>It turns out that this can happen any time shared pointers form a circular reference.</p>",
+      "preview": "It turns out that this can happen any time shared pointers form a circular refer",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b11",
+      "type": "section",
+      "title": "Circular references",
+      "html": "<h3 class=\"cpp-section-heading\">Circular references</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b12",
+      "type": "paragraph",
+      "html": "<p>A <strong>Circular reference</strong> (also called a <strong>cyclical reference</strong> or a <strong>cycle</strong>) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop. The references do not need to be actual C++ references -- they can be pointers, unique IDs, or any other means of identifying specific objects.</p>",
+      "preview": "A Circular reference (also called a cyclical reference or a cycle) is a series o",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b13",
+      "type": "paragraph",
+      "html": "<p>In the context of shared pointers, the references will be pointers.</p>",
+      "preview": "In the context of shared pointers, the references will be pointers.",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b14",
+      "type": "paragraph",
+      "html": "<p>This is exactly what we see in the case above: “Lucy” points at “Ricky”, and “Ricky” points at “Lucy”. With three pointers, you’d get the same thing when A points at B, B points at C, and C points at A. The practical effect of having shared pointers form a cycle is that each object ends up keeping the next object alive -- with the last object keeping the first object alive. Thus, no objects in the series can be deallocated because they all think some other object still needs it!</p>",
+      "preview": "This is exactly what we see in the case above: “Lucy” points at “Ricky”, and “Ri",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b15",
+      "type": "section",
+      "title": "A reductive case",
+      "html": "<h3 class=\"cpp-section-heading\">A reductive case</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b16",
+      "type": "paragraph",
+      "html": "<p>It turns out, this cyclical reference issue can even happen with a single std::shared_ptr -- a std::shared_ptr referencing the object that contains it is still a cycle (just a reductive one). Although it’s fairly unlikely that this would ever happen in practice, we’ll show you for additional comprehension:</p>",
+      "preview": "It turns out, this cyclical reference issue can even happen with a single std::s",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tstd::shared_ptr<Resource> m_ptr {}; // initially created empty\n\t\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tauto ptr1 { std::make_shared<Resource>() };\n\n\tptr1->m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tstd::shared_ptr&lt;Resource&gt; m_ptr {}; // initially created empty\n\t\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tauto ptr1 { std::make_shared&lt;Resource&gt;() };\n\n\tptr1-&gt;m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b18",
+      "type": "paragraph",
+      "html": "<p>In the above example, when ptr1 goes out of scope, the Resource is not deallocated because the Resource’s m_ptr is sharing the Resource. At that point, the only way for the Resource to be released would be to set m_ptr to something else (so nothing is sharing the Resource any longer). But we can’t access m_ptr because ptr1 is out of scope, so we no longer have a way to do this. The Resource has become a memory leak.</p>",
+      "preview": "In the above example, when ptr1 goes out of scope, the Resource is not deallocat",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b19",
+      "type": "paragraph",
+      "html": "<p>Thus, the program prints:</p>",
+      "preview": "Thus, the program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b20",
+      "type": "output",
+      "text": "Resource acquired\n",
+      "html": "<pre>Resource acquired\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b21",
+      "type": "paragraph",
+      "html": "<p>and that’s it.</p>",
+      "preview": "and that’s it.",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b22",
+      "type": "section",
+      "title": "So what is std::weak_ptr for anyway?",
+      "html": "<h3 class=\"cpp-section-heading\">So what is std::weak_ptr for anyway?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b23",
+      "type": "paragraph",
+      "html": "<p>std::weak_ptr was designed to solve the “cyclical ownership” problem described above. A std::weak_ptr is an observer -- it can observe and access the same object as a std::shared_ptr (or other std::weak_ptrs) but it is not considered an owner. Remember, when a std::shared pointer goes out of scope, it only considers whether other std::shared_ptr are co-owning the object. std::weak_ptr does not count!</p>",
+      "preview": "std::weak_ptr was designed to solve the “cyclical ownership” problem described a",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b24",
+      "type": "paragraph",
+      "html": "<p>Let’s solve our Person-al issue using a std::weak_ptr:</p>",
+      "preview": "Let’s solve our Person-al issue using a std::weak_ptr:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <memory> // for std::shared_ptr and std::weak_ptr\n#include <string>\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::weak_ptr<Person> m_partner; // note: This is now a std::weak_ptr\n\npublic:\n\t\t\n\tPerson(const std::string &name): m_name(name)\n\t{ \n\t\tstd::cout << m_name << \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout << m_name << \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr<Person> &p1, std::shared_ptr<Person> &p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1->m_partner = p2;\n\t\tp2->m_partner = p1;\n\n\t\tstd::cout << p1->m_name << \" is now partnered with \" << p2->m_name << '\\n';\n\n\t\treturn true;\n\t}\n};\n\nint main()\n{\n\tauto lucy { std::make_shared<Person>(\"Lucy\") };\n\tauto ricky { std::make_shared<Person>(\"Ricky\") };\n\n\tpartnerUp(lucy, ricky);\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr and std::weak_ptr\n#include &lt;string&gt;\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::weak_ptr&lt;Person&gt; m_partner; // note: This is now a std::weak_ptr\n\npublic:\n\t\t\n\tPerson(const std::string &amp;name): m_name(name)\n\t{ \n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr&lt;Person&gt; &amp;p1, std::shared_ptr&lt;Person&gt; &amp;p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1-&gt;m_partner = p2;\n\t\tp2-&gt;m_partner = p1;\n\n\t\tstd::cout &lt;&lt; p1-&gt;m_name &lt;&lt; \" is now partnered with \" &lt;&lt; p2-&gt;m_name &lt;&lt; '\\n';\n\n\t\treturn true;\n\t}\n};\n\nint main()\n{\n\tauto lucy { std::make_shared&lt;Person&gt;(\"Lucy\") };\n\tauto ricky { std::make_shared&lt;Person&gt;(\"Ricky\") };\n\n\tpartnerUp(lucy, ricky);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b26",
+      "type": "paragraph",
+      "html": "<p>This code behaves properly:</p>",
+      "preview": "This code behaves properly:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b27",
+      "type": "output",
+      "text": "Lucy created\nRicky created\nLucy is now partnered with Ricky\nRicky destroyed\nLucy destroyed\n",
+      "html": "<pre>Lucy created\nRicky created\nLucy is now partnered with Ricky\nRicky destroyed\nLucy destroyed\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b28",
+      "type": "paragraph",
+      "html": "<p>Functionally, it works almost identically to the problematic example. However, now when ricky goes out of scope, it sees that there are no other std::shared_ptr pointing at “Ricky” (the std::weak_ptr from “Lucy” doesn’t count). Therefore, it will deallocate “Ricky”. The same occurs for lucy.</p>",
+      "preview": "Functionally, it works almost identically to the problematic example. However, n",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b29",
+      "type": "section",
+      "title": "Using std::weak_ptr",
+      "html": "<h3 class=\"cpp-section-heading\">Using std::weak_ptr</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b30",
+      "type": "paragraph",
+      "html": "<p>One downside of std::weak_ptr is that std::weak_ptr are not directly usable (they have no operator-&gt;). To use a std::weak_ptr, you must first convert it into a std::shared_ptr. Then you can use the std::shared_ptr. To convert a std::weak_ptr into a std::shared_ptr, you can use the lock() member function. Here’s the above example, updated to show this off:</p>",
+      "preview": "One downside of std::weak_ptr is that std::weak_ptr are not directly usable (the",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <memory> // for std::shared_ptr and std::weak_ptr\n#include <string>\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::weak_ptr<Person> m_partner; // note: This is now a std::weak_ptr\n\npublic:\n\n\tPerson(const std::string &name) : m_name(name)\n\t{\n\t\tstd::cout << m_name << \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout << m_name << \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr<Person> &p1, std::shared_ptr<Person> &p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1->m_partner = p2;\n\t\tp2->m_partner = p1;\n\n\t\tstd::cout << p1->m_name << \" is now partnered with \" << p2->m_name << '\\n';\n\n\t\treturn true;\n\t}\n\n\tstd::shared_ptr<Person> getPartner() const { return m_partner.lock(); } // use lock() to convert weak_ptr to shared_ptr\n\tconst std::string& getName() const { return m_name; }\n};\n\nint main()\n{\n\tauto lucy { std::make_shared<Person>(\"Lucy\") };\n\tauto ricky { std::make_shared<Person>(\"Ricky\") };\n\n\tpartnerUp(lucy, ricky);\n\n\tauto partner = ricky->getPartner(); // get shared_ptr to Ricky's partner\n\tstd::cout << ricky->getName() << \"'s partner is: \" << partner->getName() << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr and std::weak_ptr\n#include &lt;string&gt;\n\nclass Person\n{\n\tstd::string m_name;\n\tstd::weak_ptr&lt;Person&gt; m_partner; // note: This is now a std::weak_ptr\n\npublic:\n\n\tPerson(const std::string &amp;name) : m_name(name)\n\t{\n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" created\\n\";\n\t}\n\t~Person()\n\t{\n\t\tstd::cout &lt;&lt; m_name &lt;&lt; \" destroyed\\n\";\n\t}\n\n\tfriend bool partnerUp(std::shared_ptr&lt;Person&gt; &amp;p1, std::shared_ptr&lt;Person&gt; &amp;p2)\n\t{\n\t\tif (!p1 || !p2)\n\t\t\treturn false;\n\n\t\tp1-&gt;m_partner = p2;\n\t\tp2-&gt;m_partner = p1;\n\n\t\tstd::cout &lt;&lt; p1-&gt;m_name &lt;&lt; \" is now partnered with \" &lt;&lt; p2-&gt;m_name &lt;&lt; '\\n';\n\n\t\treturn true;\n\t}\n\n\tstd::shared_ptr&lt;Person&gt; getPartner() const { return m_partner.lock(); } // use lock() to convert weak_ptr to shared_ptr\n\tconst std::string&amp; getName() const { return m_name; }\n};\n\nint main()\n{\n\tauto lucy { std::make_shared&lt;Person&gt;(\"Lucy\") };\n\tauto ricky { std::make_shared&lt;Person&gt;(\"Ricky\") };\n\n\tpartnerUp(lucy, ricky);\n\n\tauto partner = ricky-&gt;getPartner(); // get shared_ptr to Ricky's partner\n\tstd::cout &lt;&lt; ricky-&gt;getName() &lt;&lt; \"'s partner is: \" &lt;&lt; partner-&gt;getName() &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b32",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b33",
+      "type": "output",
+      "text": "Lucy created\nRicky created\nLucy is now partnered with Ricky\nRicky's partner is: Lucy\nRicky destroyed\nLucy destroyed\n",
+      "html": "<pre>Lucy created\nRicky created\nLucy is now partnered with Ricky\nRicky's partner is: Lucy\nRicky destroyed\nLucy destroyed\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b34",
+      "type": "paragraph",
+      "html": "<p>We don’t have to worry about circular dependencies with std::shared_ptr variable “partner” since it’s just a local variable inside the function. It will eventually go out of scope at the end of the function and the reference count will be decremented by 1.</p>",
+      "preview": "We don’t have to worry about circular dependencies with std::shared_ptr variable",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b35",
+      "type": "section",
+      "title": "Avoiding dangling pointers with std::weak_ptr",
+      "html": "<h3 class=\"cpp-section-heading\">Avoiding dangling pointers with std::weak_ptr</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b36",
+      "type": "paragraph",
+      "html": "<p>Consider the case where a normal “dumb” pointer is holding the address of some object, and then that object is destroyed. Such a pointer is dangling, and dereferencing the pointer will lead to undefined behavior. And unfortunately, there is no way for us to determine whether a pointer holding a non-null address is dangling or not. This is a large part of the reason dumb pointers are dangerous.</p>",
+      "preview": "Consider the case where a normal “dumb” pointer is holding the address of some o",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b37",
+      "type": "paragraph",
+      "html": "<p>Because std::weak_ptr won’t keep an owned resource alive, it’s similarly possible for a std::weak_ptr to be left pointing to a resource that has been deallocated by a std::shared_ptr. However, std::weak_ptr has a neat trick up its sleeve -- because it has access to the reference count for an object, it can determine if it is pointing to a valid object or not! If the reference count is non-zero, the resource is still valid. If the reference count is zero, then the resource has been destroyed.</p>",
+      "preview": "Because std::weak_ptr won’t keep an owned resource alive, it’s similarly possibl",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b38",
+      "type": "paragraph",
+      "html": "<p>The easiest way to test whether a std::weak_ptr is valid is to use the <code>expired()</code> member function, which returns <code>true</code> if the std::weak_ptr is pointing to an invalid object, and <code>false</code> otherwise.</p>",
+      "preview": "The easiest way to test whether a std::weak_ptr is valid is to use the expired()",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b39",
+      "type": "paragraph",
+      "html": "<p>Here’s a simple example showing this difference in behavior:</p>",
+      "preview": "Here’s a simple example showing this difference in behavior:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "// h/t to reader Waldo for an early version of this example\n#include <iostream>\n#include <memory>\n\nclass Resource\n{\npublic:\n\tResource() { std::cerr << \"Resource acquired\\n\"; }\n\t~Resource() { std::cerr << \"Resource destroyed\\n\"; }\n};\n\n// Returns a std::weak_ptr to an invalid object\nstd::weak_ptr<Resource> getWeakPtr()\n{\n\tauto ptr{ std::make_shared<Resource>() };\n\treturn std::weak_ptr<Resource>{ ptr };\n} // ptr goes out of scope, Resource destroyed\n\n// Returns a dumb pointer to an invalid object\nResource* getDumbPtr()\n{\n\tauto ptr{ std::make_unique<Resource>() };\n\treturn ptr.get();\n} // ptr goes out of scope, Resource destroyed\n\nint main()\n{\n\tauto dumb{ getDumbPtr() };\n\tstd::cout << \"Our dumb ptr is: \" << ((dumb == nullptr) ? \"nullptr\\n\" : \"non-null\\n\");\n\n\tauto weak{ getWeakPtr() };\n\tstd::cout << \"Our weak ptr is: \" << ((weak.expired()) ? \"expired\\n\" : \"valid\\n\");\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader Waldo for an early version of this example\n#include &lt;iostream&gt;\n#include &lt;memory&gt;\n\nclass Resource\n{\npublic:\n\tResource() { std::cerr &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cerr &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\n// Returns a std::weak_ptr to an invalid object\nstd::weak_ptr&lt;Resource&gt; getWeakPtr()\n{\n\tauto ptr{ std::make_shared&lt;Resource&gt;() };\n\treturn std::weak_ptr&lt;Resource&gt;{ ptr };\n} // ptr goes out of scope, Resource destroyed\n\n// Returns a dumb pointer to an invalid object\nResource* getDumbPtr()\n{\n\tauto ptr{ std::make_unique&lt;Resource&gt;() };\n\treturn ptr.get();\n} // ptr goes out of scope, Resource destroyed\n\nint main()\n{\n\tauto dumb{ getDumbPtr() };\n\tstd::cout &lt;&lt; \"Our dumb ptr is: \" &lt;&lt; ((dumb == nullptr) ? \"nullptr\\n\" : \"non-null\\n\");\n\n\tauto weak{ getWeakPtr() };\n\tstd::cout &lt;&lt; \"Our weak ptr is: \" &lt;&lt; ((weak.expired()) ? \"expired\\n\" : \"valid\\n\");\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b41",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b42",
+      "type": "output",
+      "text": "Resource acquired\nResource destroyed\nOur dumb ptr is: non-null\nResource acquired\nResource destroyed\nOur weak ptr is: expired\n",
+      "html": "<pre>Resource acquired\nResource destroyed\nOur dumb ptr is: non-null\nResource acquired\nResource destroyed\nOur weak ptr is: expired\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b43",
+      "type": "paragraph",
+      "html": "<p>Both <code>getDumbPtr()</code> and <code>getWeakPtr()</code> use a smart pointer to allocate a Resource -- this smart pointer ensures that the allocated Resource will be destroyed at the end of the function. When <code>getDumbPtr()</code> returns a Resource*, it returns a dangling pointer (because std::unique_ptr destroyed the Resource at the end of the function). When <code>getWeakPtr()</code> returns a std::weak_ptr, that std::weak_ptr is similarly pointing to an invalid object (because std::shared_ptr destroyed the Resource at the end of the function).</p>",
+      "preview": "Both getDumbPtr() and getWeakPtr() use a smart pointer to allocate a Resource --",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b44",
+      "type": "paragraph",
+      "html": "<p>Inside main(), we first test whether the returned dumb pointer is <code>nullptr</code>. Because the dumb pointer is still holding the address of the deallocated resource, this test fails. There is no way for <code>main()</code> to tell whether this pointer is dangling or not. In this case, because it is a dangling pointer, if we were to dereference this pointer, undefined behavior would result.</p>",
+      "preview": "Inside main(), we first test whether the returned dumb pointer is nullptr. Becau",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b45",
+      "type": "paragraph",
+      "html": "<p>Next, we test whether <code>weak.expired()</code> is <code>true</code>. Because the reference count for the object being pointed to by <code>weak</code> is <code>0</code> (because the object being pointed to was already destroyed), this resolves to <code>true</code>. The code in <code>main()</code> can thus tell that <code>weak</code> is pointing to an invalid object, and we can conditionalize our code as appropriate!</p>",
+      "preview": "Next, we test whether weak.expired() is true. Because the reference count for th",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b46",
+      "type": "paragraph",
+      "html": "<p>Note that if a std::weak_ptr is expired, then we shouldn’t call <code>lock()</code> on it, because the object being pointed to has already been destroyed, so there is no object to share. If you do call <code>lock()</code> on an expired std::weak_ptr, it will return a std::shared_ptr to <code>nullptr</code>.</p>",
+      "preview": "Note that if a std::weak_ptr is expired, then we shouldn’t call lock() on it, be",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b47",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b48",
+      "type": "paragraph",
+      "html": "<p>std::shared_ptr can be used when you need multiple smart pointers that can co-own a resource. The resource will be deallocated when the last std::shared_ptr goes out of scope. std::weak_ptr can be used when you want a smart pointer that can see and use a shared resource, but does not participate in the ownership of that resource.</p>",
+      "preview": "std::shared_ptr can be used when you need multiple smart pointers that can co-ow",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b49",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b50",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Here is the program again for ease of reference:",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr and std::weak_ptr\n\nclass Resource\n{\npublic:\n\tstd::weak_ptr&lt;Resource&gt; m_ptr {}; // use std::weak_ptr so m_ptr doesn't keep the Resource alive\n\t\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tauto ptr1 { std::make_shared&lt;Resource&gt;() };\n\n\tptr1-&gt;m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b51",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Fix the program presented in the section “A reductive case” so that the Resource is properly deallocated. Do not alter the code in <code>main()</code>.</li></ol>",
+      "preview": "Fix the program presented in the section “A reductive case” so that the Resource",
+      "canCheck": true
+    },
+    {
+      "id": "circular-dependency-issues-with-stdshared_ptr-and-stdweak_ptr_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tstd::shared_ptr<Resource> m_ptr {}; // initially created empty\n\t\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tauto ptr1 { std::make_shared<Resource>() };\n\n\tptr1->m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tstd::shared_ptr&lt;Resource&gt; m_ptr {}; // initially created empty\n\t\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tauto ptr1 { std::make_shared&lt;Resource&gt;() };\n\n\tptr1-&gt;m_ptr = ptr1; // m_ptr is now sharing the Resource that contains it\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    }
+  ]
+}

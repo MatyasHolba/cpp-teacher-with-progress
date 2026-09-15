@@ -1,0 +1,265 @@
+{
+  "index": 256,
+  "chapterId": "21",
+  "number": "21.1",
+  "title": "21.1 — Introduction to operator overloading",
+  "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-operator-overloading/",
+  "slug": "introduction-to-operator-overloading",
+  "scrapedAt": "2026-09-15T16:30:48.905Z",
+  "totalBlocks": 35,
+  "totalCheckpoints": 35,
+  "blocks": [
+    {
+      "id": "introduction-to-operator-overloading_b0",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Introduction to function overloading</a>, you learned about function overloading, which provides a mechanism to create and resolve function calls to multiple functions with the same name, so long as each function has a unique function prototype. This allows you to create variations of a function to work with different data types, without having to think up a unique name for each variant.</p>",
+      "preview": "In lesson 11.1 -- Introduction to function overloading, you learned about functi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b1",
+      "type": "paragraph",
+      "html": "<p>In C++, operators are implemented as functions. By using function overloading on the operator functions, you can define your own versions of the operators that work with different data types (including classes that you’ve written). Using function overloading to overload operators is called <strong>operator overloading</strong>.</p>",
+      "preview": "In C++, operators are implemented as functions. By using function overloading on",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b2",
+      "type": "paragraph",
+      "html": "<p>In this chapter, we’ll examine topics related to operator overloading.</p>",
+      "preview": "In this chapter, we’ll examine topics related to operator overloading.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b3",
+      "type": "paragraph",
+      "html": "<p><strong>Operators as functions</strong></p>",
+      "preview": "Operators as functions",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b4",
+      "type": "paragraph",
+      "html": "<p>Consider the following example:</p>",
+      "preview": "Consider the following example:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "int x { 2 };\nint y { 3 };\nstd::cout << x + y << '\\n';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x { 2 };\nint y { 3 };\nstd::cout &lt;&lt; x + y &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b6",
+      "type": "paragraph",
+      "html": "<p>The compiler comes with a built-in version of the plus operator (+) for integer operands -- this function adds integers x and y together and returns an integer result. When you see the expression <code>x + y</code>, you can translate this in your head to the function call <code>operator+(x, y)</code> (where operator+ is the name of the function).</p>",
+      "preview": "The compiler comes with a built-in version of the plus operator (+) for integer ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b7",
+      "type": "paragraph",
+      "html": "<p>Now consider this similar snippet:</p>",
+      "preview": "Now consider this similar snippet:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "double z { 2.0 };\ndouble w { 3.0 };\nstd::cout << w + z << '\\n';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double z { 2.0 };\ndouble w { 3.0 };\nstd::cout &lt;&lt; w + z &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b9",
+      "type": "paragraph",
+      "html": "<p>The compiler also comes with a built-in version of the plus operator (+) for double operands. Expression w + z becomes function call <code>operator+(w, z)</code>, and function overloading is used to determine that the compiler should be calling the double version of this function instead of the integer version.</p>",
+      "preview": "The compiler also comes with a built-in version of the plus operator (+) for dou",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b10",
+      "type": "paragraph",
+      "html": "<p>Now consider what happens if we try to add two objects of a program-defined class:</p>",
+      "preview": "Now consider what happens if we try to add two objects of a program-defined clas",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "Mystring string1 { \"Hello, \" };\nMystring string2 { \"World!\" };\nstd::cout << string1 + string2 << '\\n';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Mystring string1 { \"Hello, \" };\nMystring string2 { \"World!\" };\nstd::cout &lt;&lt; string1 + string2 &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b12",
+      "type": "paragraph",
+      "html": "<p>What would you expect to happen in this case? The intuitive expected result is that the string “Hello, World!” would be printed on the screen. However, because Mystring is a program-defined type, the compiler does not have a built-in version of the plus operator that it can use for Mystring operands. So in this case, it will give us an error. In order to make it work like we want, we’d need to write an overloaded function to tell the compiler how the + operator should work with two operands of type Mystring. We’ll look at how to do this in the next lesson.</p>",
+      "preview": "What would you expect to happen in this case? The intuitive expected result is t",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b13",
+      "type": "paragraph",
+      "html": "<p><strong>Resolving overloaded operators</strong></p>",
+      "preview": "Resolving overloaded operators",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b14",
+      "type": "paragraph",
+      "html": "<p>When evaluating an expression containing an operator, the compiler uses the following rules:</p>",
+      "preview": "When evaluating an expression containing an operator, the compiler uses the foll",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b15",
+      "type": "list",
+      "html": "<ul><li>If <em>all</em> of the operands are fundamental data types, the compiler will call a built-in routine if one exists. If one does not exist, the compiler will produce a compiler error.</li><li>If <em>any</em> of the operands are program-defined types (e.g. one of your classes, or an enum type), the compiler will use the function overload resolution algorithm (described in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-resolution-and-ambiguous-matches/\">11.3 -- Function overload resolution and ambiguous matches</a>) to see if it can find an overloaded operator that is an unambiguous best match. This may involve implicitly converting one or more operands to match the parameter types of an overloaded operator. It may also involve implicitly converting program-defined types into fundamental types (via an overloaded typecast, which we’ll cover later in this chapter) so that it can match a built-in operator. If no match can be found (or an ambiguous match is found), the compiler will error.</li></ul>",
+      "preview": "If all of the operands are fundamental data types, the compiler will call a buil",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b16",
+      "type": "paragraph",
+      "html": "<p><strong>What are the limitations on operator overloading?</strong></p>",
+      "preview": "What are the limitations on operator overloading?",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b17",
+      "type": "paragraph",
+      "html": "<p>First, almost any existing operator in C++ can be overloaded. The exceptions are: conditional (?:), sizeof, scope (::), member selector (.), pointer member selector (.*), typeid, and the casting operators.</p>",
+      "preview": "First, almost any existing operator in C++ can be overloaded. The exceptions are",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b18",
+      "type": "paragraph",
+      "html": "<p>Second, you can only overload the operators that exist. You can not create new operators or rename existing operators. For example, you could not create an <code>operator**</code> to do exponents.</p>",
+      "preview": "Second, you can only overload the operators that exist. You can not create new o",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b19",
+      "type": "paragraph",
+      "html": "<p>Third, at least one of the operands in an overloaded operator must be a user-defined type. This means you could overload <code>operator+(int, Mystring)</code>, but not <code>operator+(int, double)</code>.</p>",
+      "preview": "Third, at least one of the operands in an overloaded operator must be a user-def",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b20",
+      "type": "paragraph",
+      "html": "<p>Because standard library classes are considered to be user-defined, this means you could define <code>operator+(double, std::string)</code>. However, this is not a good idea because a future language standard could define this overload, which could break any programs that used your overload. Thus a best practice is that your overloaded operators should operate on at least one program-defined type. This guarantees that a future language standard won’t potentially break your programs.</p>",
+      "preview": "Because standard library classes are considered to be user-defined, this means y",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b21",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>An overloaded operator should operate on at least one program-defined type (either as a parameter of the function, or the implicit object).</p></div>",
+      "preview": "Best practiceAn overloaded operator should operate on at least one program-defined type (either as a",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b22",
+      "type": "paragraph",
+      "html": "<p>Fourth, it is not possible to change the number of operands an operator supports.</p>",
+      "preview": "Fourth, it is not possible to change the number of operands an operator supports",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b23",
+      "type": "paragraph",
+      "html": "<p>Finally, all operators keep their default precedence and associativity (regardless of what they’re used for) and this can not be changed.</p>",
+      "preview": "Finally, all operators keep their default precedence and associativity (regardle",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b24",
+      "type": "paragraph",
+      "html": "<p>Some new programmers attempt to overload the bitwise XOR operator (^) to do exponentiation. However, in C++, operator^ has a lower precedence level than the basic arithmetic operators, which causes expressions to evaluate incorrectly.</p>",
+      "preview": "Some new programmers attempt to overload the bitwise XOR operator (^) to do expo",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b25",
+      "type": "paragraph",
+      "html": "<p>In basic mathematics, exponentiation is resolved before basic arithmetic, so 4 + 3 ^ 2 resolves as 4 + (3 ^ 2) =&gt; 4 + 9 =&gt; 13.<br>However, in C++, the arithmetic operators have higher precedence than operator^, so 4 + 3 ^ 2 resolves as (4 + 3) ^ 2 =&gt; 7 ^ 2 =&gt; 49.</p>",
+      "preview": "In basic mathematics, exponentiation is resolved before basic arithmetic, so 4 +",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b26",
+      "type": "paragraph",
+      "html": "<p>You’d need to explicitly parenthesize the exponent portion (e.g. 4 + (3 ^ 2)) every time you used it for this to work properly, which isn’t intuitive, and is potentially error-prone.</p>",
+      "preview": "You’d need to explicitly parenthesize the exponent portion (e.g. 4 + (3 ^ 2)) ev",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b27",
+      "type": "paragraph",
+      "html": "<p>Because of this precedence issue, it’s generally a good idea to use operators only in an analogous way to their original intent.</p>",
+      "preview": "Because of this precedence issue, it’s generally a good idea to use operators on",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b28",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When overloading operators, it’s best to keep the function of the operators as close to the original intent of the operators as possible.</p></div>",
+      "preview": "Best practiceWhen overloading operators, it’s best to keep the function of the operators as close to",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b29",
+      "type": "paragraph",
+      "html": "<p>Furthermore, because operators don’t have descriptive names, it’s not always clear what they are intended to do. For example, operator+ might be a reasonable choice for a string class to do concatenation of strings. But what about operator-? What would you expect that to do? It’s unclear.</p>",
+      "preview": "Furthermore, because operators don’t have descriptive names, it’s not always cle",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b30",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If the meaning of an overloaded operator is not clear and intuitive, use a named function instead.</p></div>",
+      "preview": "Best practiceIf the meaning of an overloaded operator is not clear and intuitive, use a named functi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b31",
+      "type": "paragraph",
+      "html": "<p>Finally, overloaded operators should return values in the way that is consistent with the original operators. Operators that do not modify their operands (e.g. arithmetic operators) should generally return results by value. Operators that modify their leftmost operand (e.g. pre-increment, any of the assignment operators) should generally return the leftmost operand by reference.</p>",
+      "preview": "Finally, overloaded operators should return values in the way that is consistent",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b32",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Operators that do not modify their operands (e.g. arithmetic operators) should generally return results by value.</p><p>Operators that modify their leftmost operand (e.g. pre-increment, any of the assignment operators) should generally return the leftmost operand by reference.</p></div>",
+      "preview": "Best practiceOperators that do not modify their operands (e.g. arithmetic operators) should generall",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b33",
+      "type": "paragraph",
+      "html": "<p>Within those confines, you will still find plenty of useful functionality to overload for your custom classes! You can overload the + operator to concatenate your program-defined string class, or add two Fraction class objects together. You can overload the &lt;&lt; operator to make it easy to print your class to the screen (or a file). You can overload the equality operator (==) to compare two class objects. This makes operator overloading one of the most useful features in C++ -- simply because it allows you to work with your classes in a more intuitive way.</p>",
+      "preview": "Within those confines, you will still find plenty of useful functionality to ove",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-operator-overloading_b34",
+      "type": "paragraph",
+      "html": "<p>In the upcoming lessons, we’ll take a deeper look at overloading different kinds of operators.</p>",
+      "preview": "In the upcoming lessons, we’ll take a deeper look at overloading different kinds",
+      "canCheck": true
+    }
+  ]
+}

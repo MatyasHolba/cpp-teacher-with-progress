@@ -1,0 +1,119 @@
+{
+  "index": 284,
+  "chapterId": "23",
+  "number": "23.5",
+  "title": "23.5 — Dependencies",
+  "url": "https://www.learncpp.com/cpp-tutorial/dependencies/",
+  "slug": "dependencies",
+  "scrapedAt": "2026-09-15T16:31:03.970Z",
+  "totalBlocks": 15,
+  "totalCheckpoints": 15,
+  "blocks": [
+    {
+      "id": "dependencies_b0",
+      "type": "paragraph",
+      "html": "<p>So far, we’ve explored 3 types of relationships: composition, aggregation, and association. We’ve saved the simplest one for last: dependencies.</p>",
+      "preview": "So far, we’ve explored 3 types of relationships: composition, aggregation, and a",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b1",
+      "type": "paragraph",
+      "html": "<p>In casual conversation, we use the term dependency to indicate that an object is reliant upon another object for a given task. For example, if you break your foot, you are dependent on crutches to get around (but not otherwise). Flowers are dependent upon bees to pollinate them, in order to grow fruit or propagate (but not otherwise).</p>",
+      "preview": "In casual conversation, we use the term dependency to indicate that an object is",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b2",
+      "type": "paragraph",
+      "html": "<p>A <strong>dependency</strong> occurs when one object invokes another object’s functionality in order to accomplish some specific task. This is a weaker relationship than an association, but still, any change to object being depended upon may break functionality in the (dependent) caller. A dependency is always a unidirectional relationship.</p>",
+      "preview": "A dependency occurs when one object invokes another object’s functionality in or",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b3",
+      "type": "paragraph",
+      "html": "<p>A good example of a dependency that you’ve already seen many times is std::ostream. Our classes that use std::ostream use it in order to accomplish the task of printing something to the console, but not otherwise.</p>",
+      "preview": "A good example of a dependency that you’ve already seen many times is std::ostre",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b4",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n \nclass Point\n{\nprivate:\n    double m_x{};\n    double m_y{};\n    double m_z{};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0): m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    friend std::ostream& operator<< (std::ostream& out, const Point& point); // Point has a dependency on std::ostream here\n};\n \nstd::ostream& operator<< (std::ostream& out, const Point& point)\n{\n    // Since operator<< is a friend of the Point class, we can access Point's members directly.\n    out << \"Point(\" << point.m_x << \", \" << point.m_y << \", \" << point.m_z << ')';\n \n    return out;\n}\n \nint main()\n{\n    Point point1 { 2.0, 3.0, 4.0 };\n \n    std::cout << point1; // the program has a dependency on std::cout here\n \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Point\n{\nprivate:\n    double m_x{};\n    double m_y{};\n    double m_z{};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0): m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Point&amp; point); // Point has a dependency on std::ostream here\n};\n \nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Point&amp; point)\n{\n    // Since operator&lt;&lt; is a friend of the Point class, we can access Point's members directly.\n    out &lt;&lt; \"Point(\" &lt;&lt; point.m_x &lt;&lt; \", \" &lt;&lt; point.m_y &lt;&lt; \", \" &lt;&lt; point.m_z &lt;&lt; ')';\n \n    return out;\n}\n \nint main()\n{\n    Point point1 { 2.0, 3.0, 4.0 };\n \n    std::cout &lt;&lt; point1; // the program has a dependency on std::cout here\n \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b6",
+      "type": "paragraph",
+      "html": "<p>In the above code, Point isn’t directly related to std::ostream, but it has a dependency on std::ostream since operator&lt;&lt; uses std::ostream to print the Point to the console.</p>",
+      "preview": "In the above code, Point isn’t directly related to std::ostream, but it has a de",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b7",
+      "type": "paragraph",
+      "html": "<p><strong>Dependencies vs Association in C++</strong></p>",
+      "preview": "Dependencies vs Association in C++",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b8",
+      "type": "paragraph",
+      "html": "<p>There’s typically some confusion about what differentiates a dependency from an association.</p>",
+      "preview": "There’s typically some confusion about what differentiates a dependency from an ",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b9",
+      "type": "paragraph",
+      "html": "<p>In C++, associations are a relationship where one class keeps a direct or indirect “link” to the associated class as a member. For example, a Doctor class has an array of pointers to its Patients as a member. You can always ask the Doctor who its patients are. The Driver class holds the id of the Car the driver object owns as an integer member. The Driver always knows what Car is associated with it.</p>",
+      "preview": "In C++, associations are a relationship where one class keeps a direct or indire",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b10",
+      "type": "paragraph",
+      "html": "<p>Dependencies typically are not members. Rather, the object being depended on is typically instantiated as needed (like opening a file to write data to), or passed into a function as a parameter (like std::ostream in the overloaded operator&lt;&lt; above).</p>",
+      "preview": "Dependencies typically are not members. Rather, the object being depended on is ",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b11",
+      "type": "paragraph",
+      "html": "<p><strong>Humor break</strong></p>",
+      "preview": "Humor break",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b12",
+      "type": "paragraph",
+      "html": "<p>Dependencies (courtesy of our friends at <a href=\"https://xkcd.com/754/\">xkcd</a>):</p>",
+      "preview": "Dependencies (courtesy of our friends at xkcd):",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b13",
+      "type": "paragraph",
+      "html": "<p><img src=\"https://imgs.xkcd.com/comics/dependencies.png\"></p>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "dependencies_b14",
+      "type": "paragraph",
+      "html": "<p>Of course, you and I know that this is actually a reflexive association!</p>",
+      "preview": "Of course, you and I know that this is actually a reflexive association!",
+      "canCheck": true
+    }
+  ]
+}

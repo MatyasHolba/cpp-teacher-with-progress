@@ -1,0 +1,268 @@
+{
+  "index": 158,
+  "chapterId": "12",
+  "number": "12.9",
+  "title": "12.9 — Pointers and const",
+  "url": "https://www.learncpp.com/cpp-tutorial/pointers-and-const/",
+  "slug": "pointers-and-const",
+  "scrapedAt": "2026-09-15T16:29:57.918Z",
+  "totalBlocks": 35,
+  "totalCheckpoints": 31,
+  "blocks": [
+    {
+      "id": "pointers-and-const_b0",
+      "type": "paragraph",
+      "html": "<p>Consider the following code snippet:</p>",
+      "preview": "Consider the following code snippet:",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x { 5 };\n    int* ptr { &x }; // ptr is a normal (non-const) pointer\n\n    int y { 6 };\n    ptr = &y; // we can point at another value\n\n    *ptr = 7; // we can change the value at the address being held\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 5 };\n    int* ptr { &amp;x }; // ptr is a normal (non-const) pointer\n\n    int y { 6 };\n    ptr = &amp;y; // we can point at another value\n\n    *ptr = 7; // we can change the value at the address being held\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b2",
+      "type": "paragraph",
+      "html": "<p>With normal (non-const) pointers, we can change both what the pointer is pointing at (by assigning the pointer a new address to hold) or change the value at the address being held (by assigning a new value to the dereferenced pointer).</p>",
+      "preview": "With normal (non-const) pointers, we can change both what the pointer is pointin",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b3",
+      "type": "paragraph",
+      "html": "<p>However, what happens if the value we want to point at is const?</p>",
+      "preview": "However, what happens if the value we want to point at is const?",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int x { 5 }; // x is now const\n    int* ptr { &x };   // compile error: cannot convert from const int* to int*\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x { 5 }; // x is now const\n    int* ptr { &amp;x };   // compile error: cannot convert from const int* to int*\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b5",
+      "type": "paragraph",
+      "html": "<p>The above snippet won’t compile -- we can’t set a normal pointer to point at a const variable. This makes sense: a const variable is one whose value cannot be changed. Allowing the programmer to set a non-const pointer to a const value would allow the programmer to dereference the pointer and change the value. That would violate the const-ness of the variable.</p>",
+      "preview": "The above snippet won’t compile -- we can’t set a normal pointer to point at a c",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b6",
+      "type": "section",
+      "title": "Pointer to const value",
+      "html": "<h3 class=\"cpp-section-heading\">Pointer to const value</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "pointers-and-const_b7",
+      "type": "paragraph",
+      "html": "<p>A <strong>pointer to a const value</strong> (sometimes called a <code>pointer to const</code> for short) is a (non-const) pointer that points to a constant value.</p>",
+      "preview": "A pointer to a const value (sometimes called a pointer to const for short) is a ",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b8",
+      "type": "paragraph",
+      "html": "<p>To declare a pointer to a const value, use the <code>const</code> keyword before the pointer’s data type:</p>",
+      "preview": "To declare a pointer to a const value, use the const keyword before the pointer’",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // okay: ptr is pointing to a \"const int\"\n\n    *ptr = 6; // not allowed: we can't change a const value\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &amp;x }; // okay: ptr is pointing to a \"const int\"\n\n    *ptr = 6; // not allowed: we can't change a const value\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b10",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>ptr</code> points to a <code>const int</code>. Because the data type being pointed to is const, the value being pointed to can’t be changed.</p>",
+      "preview": "In the above example, ptr points to a const int. Because the data type being poi",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b11",
+      "type": "paragraph",
+      "html": "<p>However, because a pointer to const is not const itself (it just points to a const value), we can change what the pointer is pointing at by assigning the pointer a new address:</p>",
+      "preview": "However, because a pointer to const is not const itself (it just points to a con",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // ptr points to const int x\n\n    const int y{ 6 };\n    ptr = &y; // okay: ptr now points at const int y\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &amp;x }; // ptr points to const int x\n\n    const int y{ 6 };\n    ptr = &amp;y; // okay: ptr now points at const int y\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b13",
+      "type": "paragraph",
+      "html": "<p>Just like a reference to const, a pointer to const can point to non-const variables too. A pointer to const treats the value being pointed to as constant, regardless of whether the object at that address was initially defined as const or not:</p>",
+      "preview": "Just like a reference to const, a pointer to const can point to non-const variab",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x{ 5 }; // non-const\n    const int* ptr { &x }; // ptr points to a \"const int\"\n\n    *ptr = 6;  // not allowed: ptr points to a \"const int\" so we can't change the value through ptr\n    x = 6; // allowed: the value is still non-const when accessed through non-const identifier x\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 }; // non-const\n    const int* ptr { &amp;x }; // ptr points to a \"const int\"\n\n    *ptr = 6;  // not allowed: ptr points to a \"const int\" so we can't change the value through ptr\n    x = 6; // allowed: the value is still non-const when accessed through non-const identifier x\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b15",
+      "type": "section",
+      "title": "Const pointers",
+      "html": "<h3 class=\"cpp-section-heading\">Const pointers</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "pointers-and-const_b16",
+      "type": "paragraph",
+      "html": "<p>We can also make a pointer itself constant. A <strong>const pointer</strong> is a pointer whose address can not be changed after initialization.</p>",
+      "preview": "We can also make a pointer itself constant. A const pointer is a pointer whose a",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b17",
+      "type": "paragraph",
+      "html": "<p>To declare a const pointer, use the <code>const</code> keyword after the asterisk in the pointer declaration:</p>",
+      "preview": "To declare a const pointer, use the const keyword after the asterisk in the poin",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x{ 5 };\n    int* const ptr { &x }; // const after the asterisk means this is a const pointer\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int* const ptr { &amp;x }; // const after the asterisk means this is a const pointer\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b19",
+      "type": "paragraph",
+      "html": "<p>In the above case, <code>ptr</code> is a const pointer to a (non-const) int value.</p>",
+      "preview": "In the above case, ptr is a const pointer to a (non-const) int value.",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b20",
+      "type": "paragraph",
+      "html": "<p>Just like a normal const variable, a const pointer must be initialized upon definition, and this value can’t be changed via assignment:</p>",
+      "preview": "Just like a normal const variable, a const pointer must be initialized upon defi",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x{ 5 };\n    int y{ 6 };\n\n    int* const ptr { &x }; // okay: the const pointer is initialized to the address of x\n    ptr = &y; // error: once initialized, a const pointer can not be changed.\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int y{ 6 };\n\n    int* const ptr { &amp;x }; // okay: the const pointer is initialized to the address of x\n    ptr = &amp;y; // error: once initialized, a const pointer can not be changed.\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b22",
+      "type": "paragraph",
+      "html": "<p>However, because the <em>value</em> being pointed to is non-const, it is possible to change the value being pointed to via dereferencing the const pointer:</p>",
+      "preview": "However, because the value being pointed to is non-const, it is possible to chan",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x{ 5 };\n    int* const ptr { &x }; // ptr will always point to x\n\n    *ptr = 6; // okay: the value being pointed to is non-const\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int* const ptr { &amp;x }; // ptr will always point to x\n\n    *ptr = 6; // okay: the value being pointed to is non-const\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b24",
+      "type": "section",
+      "title": "Const pointer to a const value",
+      "html": "<h3 class=\"cpp-section-heading\">Const pointer to a const value</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "pointers-and-const_b25",
+      "type": "paragraph",
+      "html": "<p>Finally, it is possible to declare a <strong>const pointer to a const value</strong> by using the <code>const</code> keyword both before the type and after the asterisk:</p>",
+      "preview": "Finally, it is possible to declare a const pointer to a const value by using the",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int value { 5 };\n    const int* const ptr { &value }; // a const pointer to a const value\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int value { 5 };\n    const int* const ptr { &amp;value }; // a const pointer to a const value\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b27",
+      "type": "paragraph",
+      "html": "<p>A const pointer to a const value can not have its address changed, nor can the value it is pointing to be changed through the pointer. It can only be dereferenced to get the value it is pointing at.</p>",
+      "preview": "A const pointer to a const value can not have its address changed, nor can the v",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b28",
+      "type": "section",
+      "title": "Pointer and const recap",
+      "html": "<h3 class=\"cpp-section-heading\">Pointer and const recap</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "pointers-and-const_b29",
+      "type": "paragraph",
+      "html": "<p>To summarize, you only need to remember 4 rules, and they are pretty logical:</p>",
+      "preview": "To summarize, you only need to remember 4 rules, and they are pretty logical:",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b30",
+      "type": "list",
+      "html": "<ul><li>A non-const pointer (e.g. <code>int* ptr</code>) can be assigned another address to change what it is pointing at.</li><li>A const pointer (e.g. <code>int* const ptr</code>) always points to the same address, and this address can not be changed.</li></ul>",
+      "preview": "A non-const pointer (e.g. int* ptr) can be assigned another address to change wh",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b31",
+      "type": "list",
+      "html": "<ul><li>A pointer to a non-const value (e.g. <code>int* ptr</code>) can change the value it is pointing to. These can not point to a const value.</li><li>A pointer to a const value (e.g. <code>const int* ptr</code>) treats the value as const when accessed through the pointer, and thus can not change the value it is pointing to. These can be pointed to const or non-const l-values (but not r-values, which don’t have an address).</li></ul>",
+      "preview": "A pointer to a non-const value (e.g. int* ptr) can change the value it is pointi",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b32",
+      "type": "paragraph",
+      "html": "<p>Keeping the declaration syntax straight can be a bit challenging:</p>",
+      "preview": "Keeping the declaration syntax straight can be a bit challenging:",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b33",
+      "type": "list",
+      "html": "<ul><li>A <code>const</code> before the asterisk (e.g. <code>const int* ptr</code>) is associated with the type being pointed to. Therefore, this is a pointer to a const value, and the value cannot be modified through the pointer.</li><li>A <code>const</code> after the asterisk (e.g. <code>int* const ptr</code>) is associated with the pointer itself. Therefore, this pointer cannot be assigned a new address.</li></ul>",
+      "preview": "A const before the asterisk (e.g. const int* ptr) is associated with the type be",
+      "canCheck": true
+    },
+    {
+      "id": "pointers-and-const_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int v{ 5 };\n   \n    int* ptr0 { &v };             // points to an \"int\" but is not const itself.  We can modify the value or the address.\n    const int* ptr1 { &v };       // points to a \"const int\" but is not const itself.  We can only modify the address.\n    int* const ptr2 { &v };       // points to an \"int\" and is const itself.   We can only modify the value.\n    const int* const ptr3 { &v }; // points to a \"const int\" and is const itself.  We can't modify the value nor the address.\n\n    // if the const is on the left side of the *, the const belongs to the value\n    // if the const is on the right side of the *, the const belongs to the pointer\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int v{ 5 };\n   \n    int* ptr0 { &amp;v };             // points to an \"int\" but is not const itself.  We can modify the value or the address.\n    const int* ptr1 { &amp;v };       // points to a \"const int\" but is not const itself.  We can only modify the address.\n    int* const ptr2 { &amp;v };       // points to an \"int\" and is const itself.   We can only modify the value.\n    const int* const ptr3 { &amp;v }; // points to a \"const int\" and is const itself.  We can't modify the value nor the address.\n\n    // if the const is on the left side of the *, the const belongs to the value\n    // if the const is on the right side of the *, the const belongs to the pointer\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    }
+  ]
+}

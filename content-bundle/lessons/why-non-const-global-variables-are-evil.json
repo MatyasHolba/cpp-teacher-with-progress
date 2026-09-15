@@ -1,0 +1,491 @@
+{
+  "index": 93,
+  "chapterId": "7",
+  "number": "7.8",
+  "title": "7.8 — Why (non-const) global variables are evil",
+  "url": "https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/",
+  "slug": "why-non-const-global-variables-are-evil",
+  "scrapedAt": "2026-09-15T16:29:24.688Z",
+  "totalBlocks": 66,
+  "totalCheckpoints": 60,
+  "blocks": [
+    {
+      "id": "why-non-const-global-variables-are-evil_b0",
+      "type": "paragraph",
+      "html": "<p>If you were to ask a veteran programmer for <em>one</em> piece of advice on good programming practices, after some thought, the most likely answer would be, “Avoid global variables!”. And with good reason: global variables are one of the most historically abused concepts in the language. Although they may seem harmless in small academic programs, they are often problematic in larger ones.</p>",
+      "preview": "If you were to ask a veteran programmer for one piece of advice on good programm",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b1",
+      "type": "paragraph",
+      "html": "<p>New programmers are often tempted to use lots of global variables, because they are easy to work with, especially when many calls to different functions are involved (passing data through function parameters is a pain). However, this is generally a bad idea. Many developers believe non-const global variables should be avoided completely!</p>",
+      "preview": "New programmers are often tempted to use lots of global variables, because they ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b2",
+      "type": "paragraph",
+      "html": "<p>But before we go into why, we should make a clarification. When developers tell you that global variables are evil, they’re usually not talking about <em>all</em> global variables. They’re mostly talking about non-const global variables.</p>",
+      "preview": "But before we go into why, we should make a clarification. When developers tell ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b3",
+      "type": "section",
+      "title": "Why (non-const) global variables are evil",
+      "html": "<h3 class=\"cpp-section-heading\">Why (non-const) global variables are evil</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b4",
+      "type": "paragraph",
+      "html": "<p>By far the biggest reason non-const global variables are dangerous is because their values can be changed by <em>any</em> function that is called, and there is no easy way for the programmer to know that this will happen. Consider the following program:</p>",
+      "preview": "By far the biggest reason non-const global variables are dangerous is because th",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint g_mode; // declare global variable (will be zero-initialized by default)\n\nvoid doSomething()\n{\n    g_mode = 2; // set the global g_mode variable to 2\n}\n\nint main()\n{\n    g_mode = 1; // note: this sets the global g_mode variable to 1.  It does not declare a local g_mode variable!\n\n    doSomething();\n\n    // Programmer still expects g_mode to be 1\n    // But doSomething changed it to 2!\n\n    if (g_mode == 1)\n    {\n        std::cout << \"No threat detected.\\n\";\n    }\n    else\n    {\n        std::cout << \"Launching nuclear missiles...\\n\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint g_mode; // declare global variable (will be zero-initialized by default)\n\nvoid doSomething()\n{\n    g_mode = 2; // set the global g_mode variable to 2\n}\n\nint main()\n{\n    g_mode = 1; // note: this sets the global g_mode variable to 1.  It does not declare a local g_mode variable!\n\n    doSomething();\n\n    // Programmer still expects g_mode to be 1\n    // But doSomething changed it to 2!\n\n    if (g_mode == 1)\n    {\n        std::cout &lt;&lt; \"No threat detected.\\n\";\n    }\n    else\n    {\n        std::cout &lt;&lt; \"Launching nuclear missiles...\\n\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b6",
+      "type": "paragraph",
+      "html": "<p>Note that the programmer set variable <code>g_mode</code> to <em>1</em>, and then called <code>doSomething()</code>. Unless the programmer had explicit knowledge that <code>doSomething()</code> was going to change the value of <code>g_mode</code>, he or she was probably not expecting <code>doSomething()</code> to change the value! Consequently, the rest of <code>main()</code> doesn’t work like the programmer expects (and the world is obliterated).</p>",
+      "preview": "Note that the programmer set variable g_mode to 1, and then called doSomething()",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b7",
+      "type": "paragraph",
+      "html": "<p>In short, global variables make the program’s state unpredictable. Every function call becomes potentially dangerous, and the programmer has no easy way of knowing which ones are dangerous and which ones aren’t! Local variables are much safer because other functions can not affect them directly.</p>",
+      "preview": "In short, global variables make the program’s state unpredictable. Every functio",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b8",
+      "type": "paragraph",
+      "html": "<p>There are plenty of other good reasons not to use non-const globals.</p>",
+      "preview": "There are plenty of other good reasons not to use non-const globals.",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b9",
+      "type": "paragraph",
+      "html": "<p>With global variables, it’s not uncommon to find a piece of code that looks like this:</p>",
+      "preview": "With global variables, it’s not uncommon to find a piece of code that looks like",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "void someFunction()\n{\n    // useful code\n\n    if (g_mode == 4)\n    {\n        // do something good\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction()\n{\n    // useful code\n\n    if (g_mode == 4)\n    {\n        // do something good\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b11",
+      "type": "paragraph",
+      "html": "<p>After debugging, you determine that your program isn’t working correctly because <code>g_mode</code> has value <code>3</code>, not <em>4</em>. How do you fix it? Now you need to find all of the places <code>g_mode</code> could possibly be set to <code>3</code>, and trace through how it got set in the first place. It’s possible this may be in a totally unrelated piece of code!</p>",
+      "preview": "After debugging, you determine that your program isn’t working correctly because",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b12",
+      "type": "paragraph",
+      "html": "<p>One of the key reasons to declare local variables as close to where they are used as possible is because doing so minimizes the amount of code you need to look through to understand what the variable does. Global variables are at the opposite end of the spectrum -- because they can be accessed anywhere, you might have to look through the entire program to understand their usage. In small programs, this might not be an issue. In large ones, it will be.</p>",
+      "preview": "One of the key reasons to declare local variables as close to where they are use",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b13",
+      "type": "paragraph",
+      "html": "<p>For example, you might find <code>g_mode</code> is referenced 442 times in your program. Unless <code>g_mode</code> is well documented, you’ll potentially have to look through every use of <code>g_mode</code> to understand how it’s being used in different cases, what its valid values are, and what its overall function is.</p>",
+      "preview": "For example, you might find g_mode is referenced 442 times in your program. Unle",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b14",
+      "type": "paragraph",
+      "html": "<p>Global variables also make your program less modular and less flexible. A function that utilizes nothing but its parameters and has no side effects is perfectly modular. Modularity helps both in understanding what a program does, as well as with reusability. Global variables reduce modularity significantly.</p>",
+      "preview": "Global variables also make your program less modular and less flexible. A functi",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b15",
+      "type": "paragraph",
+      "html": "<p>In particular, avoid using global variables for important “decision-point” variables (e.g. variables you’d use in a conditional statement, like variable <code>g_mode</code> in the example above). Your program isn’t likely to break if a global variable holding an informational value changes (e.g. like the user’s name). It is much more likely to break if you change a global variable that impacts <em>how</em> your program actually functions.</p>",
+      "preview": "In particular, avoid using global variables for important “decision-point” varia",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b16",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use local variables instead of global variables whenever possible.</p></div>",
+      "preview": "Best practiceUse local variables instead of global variables whenever possible.",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b17",
+      "type": "section",
+      "title": "The initialization order problem of global variables",
+      "html": "<h3 class=\"cpp-section-heading\">The initialization order problem of global variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b18",
+      "type": "paragraph",
+      "html": "<p>Initialization of static variables (which includes global variables) happens as part of program startup, before execution of the <code>main</code> function. This proceeds in two phases.</p>",
+      "preview": "Initialization of static variables (which includes global variables) happens as ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b19",
+      "type": "paragraph",
+      "html": "<p>The first phase is called <strong>static initialization</strong>. Static initialization proceeds in two phases:</p>",
+      "preview": "The first phase is called static initialization. Static initialization proceeds ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b20",
+      "type": "list",
+      "html": "<ul><li>Global variables with constexpr initializers (including literals) are initialized to those values. This is called <strong>constant initialization</strong>.</li><li>Global variables without initializers are zero-initialized. Zero-initialization is considered to be a form of static-initialization since <code>0</code> is a constexpr value.</li></ul>",
+      "preview": "Global variables with constexpr initializers (including literals) are initialize",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b21",
+      "type": "paragraph",
+      "html": "<p>The second phase is called <strong>dynamic initialization</strong>. This phase is more complex and nuanced, but the gist of it is that global variables with non-constexpr initializers are initialized.</p>",
+      "preview": "The second phase is called dynamic initialization. This phase is more complex an",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b22",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of a non-constexpr initializer:</p>",
+      "preview": "Here’s an example of a non-constexpr initializer:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "int init()\n{\n    return 5;\n}\n\nint g_something{ init() }; // non-constexpr initialization",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int init()\n{\n    return 5;\n}\n\nint g_something{ init() }; // non-constexpr initialization</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b24",
+      "type": "paragraph",
+      "html": "<p>Within a single file, for each phase, global variables are generally initialized in order of definition (there are a few exceptions to this rule for the dynamic initialization phase). Given this, you need to be careful not to have variables dependent on the initialization value of other variables that won’t be initialized until later. For example:</p>",
+      "preview": "Within a single file, for each phase, global variables are generally initialized",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint initX();  // forward declaration\nint initY();  // forward declaration\n\nint g_x{ initX() }; // g_x is initialized first\nint g_y{ initY() };\n\nint initX()\n{\n    return g_y; // g_y isn't initialized when this is called\n}\n\nint initY()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout << g_x << ' ' << g_y << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint initX();  // forward declaration\nint initY();  // forward declaration\n\nint g_x{ initX() }; // g_x is initialized first\nint g_y{ initY() };\n\nint initX()\n{\n    return g_y; // g_y isn't initialized when this is called\n}\n\nint initY()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; g_x &lt;&lt; ' ' &lt;&lt; g_y &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b26",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b27",
+      "type": "output",
+      "text": "0 5\n",
+      "html": "<pre>0 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b28",
+      "type": "paragraph",
+      "html": "<p>Much more of a problem, the order in which static objects are initialized across different translation units is ambiguous.</p>",
+      "preview": "Much more of a problem, the order in which static objects are initialized across",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b29",
+      "type": "paragraph",
+      "html": "<p>Given two files, <em>a.cpp</em> and <em>b.cpp</em>, either could have its global variables initialized first. If some variable with static duration in <em>a.cpp</em> is initialized with a static duration variable defined in <em>b.cpp</em>, there’s a 50% chance that the variable in <em>b.cpp</em> won’t be initialized yet.</p>",
+      "preview": "Given two files, a.cpp and b.cpp, either could have its global variables initial",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b30",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>The ambiguity in the order that objects with static storage duration in different translation units are initialized is often called the <a href=\"https://en.cppreference.com/w/cpp/language/siof\">static initialization order fiasco</a>.</p></div>",
+      "preview": "NomenclatureThe ambiguity in the order that objects with static storage duration in different transl",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b31",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Avoid initializing objects with static duration using other objects with static duration from a different translation unit.</p><p>Dynamic initialization of global variables is also susceptible to initialization order issues and should be avoided whenever possible.</p></div>",
+      "preview": "WarningAvoid initializing objects with static duration using other objects with static duration from",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b32",
+      "type": "section",
+      "title": "So what are very good reasons to use non-const global variables?",
+      "html": "<h3 class=\"cpp-section-heading\">So what are very good reasons to use non-const global variables?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b33",
+      "type": "paragraph",
+      "html": "<p>There aren’t many. In most cases, using local variables and passing them as arguments to other functions is preferable. But in some cases, judicious use of non-const global variables <em>can</em> actually reduce program complexity, and in these rare cases, their use may be better than the alternatives.</p>",
+      "preview": "There aren’t many. In most cases, using local variables and passing them as argu",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b34",
+      "type": "paragraph",
+      "html": "<p>A good example is a log file, where you can dump error or debug information. It probably makes sense to define this as a global, because you’re likely to only have one such log in a program and it will likely be used everywhere in your program. Another good example would be a random number generator (we show an example of this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Global random numbers (Random.h)</a>).</p>",
+      "preview": "A good example is a log file, where you can dump error or debug information. It ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b35",
+      "type": "paragraph",
+      "html": "<p>For what it’s worth, the std::cout and std::cin objects are implemented as global variables (inside the <em>std</em> namespace).</p>",
+      "preview": "For what it’s worth, the std::cout and std::cin objects are implemented as globa",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b36",
+      "type": "paragraph",
+      "html": "<p>As a rule of thumb, any use of a global variable should meet at least the following two criteria: There should only ever be one of the thing the variable represents in your program, and its use should be ubiquitous throughout your program.</p>",
+      "preview": "As a rule of thumb, any use of a global variable should meet at least the follow",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b37",
+      "type": "paragraph",
+      "html": "<p>Many new programmers make the mistake of thinking that something can be implemented as a global because only one is needed <em>right now</em>. For example, you might think that because you’re implementing a single player game, you only need one player. But what happens later when you want to add a multiplayer mode (versus or hotseat)?</p>",
+      "preview": "Many new programmers make the mistake of thinking that something can be implemen",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b38",
+      "type": "section",
+      "title": "Protecting yourself from global destruction",
+      "html": "<h3 class=\"cpp-section-heading\">Protecting yourself from global destruction</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b39",
+      "type": "paragraph",
+      "html": "<p>If you do find a good use for a non-const global variable, a few useful bits of advice will minimize the amount of trouble you can get into. This advice isn’t only for non-const global variables, but can help with all global variables.</p>",
+      "preview": "If you do find a good use for a non-const global variable, a few useful bits of ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b40",
+      "type": "paragraph",
+      "html": "<p>First, prefix all non-namespaced global variables with “g” or “g_”, or better yet, put them in a namespace (discussed in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/user-defined-namespaces-and-the-scope-resolution-operator/\">7.2 -- User-defined namespaces and the scope resolution operator</a>), to reduce the chance of naming collisions.</p>",
+      "preview": "First, prefix all non-namespaced global variables with “g” or “g_”, or better ye",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b41",
+      "type": "paragraph",
+      "html": "<p>For example, instead of:</p>",
+      "preview": "For example, instead of:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b42",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nconstexpr double gravity { 9.8 }; // risk of collision with some other global variable named gravity\n\nint main()\n{\n    std::cout << gravity << '\\n'; // unclear if this is a local or global variable from the name\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconstexpr double gravity { 9.8 }; // risk of collision with some other global variable named gravity\n\nint main()\n{\n    std::cout &lt;&lt; gravity &lt;&lt; '\\n'; // unclear if this is a local or global variable from the name\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b43",
+      "type": "paragraph",
+      "html": "<p>Do this:</p>",
+      "preview": "Do this:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 }; // will not collide with other global variables named gravity\n}\n\nint main()\n{\n    std::cout << constants::gravity << '\\n'; // clear this is a global variable (since namespaces are global)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 }; // will not collide with other global variables named gravity\n}\n\nint main()\n{\n    std::cout &lt;&lt; constants::gravity &lt;&lt; '\\n'; // clear this is a global variable (since namespaces are global)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b45",
+      "type": "paragraph",
+      "html": "<p>Second, instead of allowing direct access to the global variable, it’s a better practice to “encapsulate” the variable. Make sure the variable can only be accessed from within the file it’s declared in, e.g. by making the variable static or const, then provide external global “access functions” to work with the variable. These functions can ensure proper usage is maintained (e.g. do input validation, range checking, etc…). Also, if you ever decide to change the underlying implementation (e.g. move from one database to another), you only have to update the access functions instead of every piece of code that uses the global variable directly.</p>",
+      "preview": "Second, instead of allowing direct access to the global variable, it’s a better ",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b46",
+      "type": "paragraph",
+      "html": "<p>For example, instead of this:</p>",
+      "preview": "For example, instead of this:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b47",
+      "type": "paragraph",
+      "html": "<p>constants.cpp:</p>",
+      "preview": "constants.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b48",
+      "type": "code",
+      "language": "cpp",
+      "code": "namespace constants\n{\n    extern const double gravity { 9.8 }; // has external linkage, can be accessed by other files\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace constants\n{\n    extern const double gravity { 9.8 }; // has external linkage, can be accessed by other files\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b49",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b50",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace constants\n{\n    extern const double gravity; // forward declaration\n}\n\nint main()\n{\n    std::cout << constants::gravity << '\\n'; // direct access to global variable\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    extern const double gravity; // forward declaration\n}\n\nint main()\n{\n    std::cout &lt;&lt; constants::gravity &lt;&lt; '\\n'; // direct access to global variable\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b51",
+      "type": "paragraph",
+      "html": "<p>Do this:</p>",
+      "preview": "Do this:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b52",
+      "type": "paragraph",
+      "html": "<p>contants.cpp:</p>",
+      "preview": "contants.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b53",
+      "type": "code",
+      "language": "cpp",
+      "code": "namespace constants\n{\n    constexpr double gravity { 9.8 }; // has internal linkage, is accessible only within this file\n}\n\ndouble getGravity() // has external linkage, can be accessed by other files\n{\n    // We could add logic here if needed later\n    // or change the implementation transparently to the callers\n    return constants::gravity;\n} ",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace constants\n{\n    constexpr double gravity { 9.8 }; // has internal linkage, is accessible only within this file\n}\n\ndouble getGravity() // has external linkage, can be accessed by other files\n{\n    // We could add logic here if needed later\n    // or change the implementation transparently to the callers\n    return constants::gravity;\n} </code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b54",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b55",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ndouble getGravity(); // forward declaration\n\nint main()\n{\n    std::cout << getGravity() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ndouble getGravity(); // forward declaration\n\nint main()\n{\n    std::cout &lt;&lt; getGravity() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b56",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Global <code>const</code> variables have internal linkage by default, <code>gravity</code> doesn’t need to be <code>static</code>.</p></div>",
+      "preview": "A reminderGlobal const variables have internal linkage by default, gravity doesn’t need to be static",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b57",
+      "type": "paragraph",
+      "html": "<p>Third, when writing an otherwise standalone function that uses the global variable, don’t use the variable directly in your function body. Pass it in as an argument instead. That way, if your function ever needs to use a different value for some circumstance, you can simply vary the argument. This helps maintain modularity.</p>",
+      "preview": "Third, when writing an otherwise standalone function that uses the global variab",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b58",
+      "type": "paragraph",
+      "html": "<p>Instead of:</p>",
+      "preview": "Instead of:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b59",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function is only useful for calculating your instant velocity based on the global gravity\ndouble instantVelocity(int time)\n{\n    return constants::gravity * time;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5) << '\\n';\n\n    return 0;\n\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function is only useful for calculating your instant velocity based on the global gravity\ndouble instantVelocity(int time)\n{\n    return constants::gravity * time;\n}\n\nint main()\n{\n    std::cout &lt;&lt; instantVelocity(5) &lt;&lt; '\\n';\n\n    return 0;\n\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b60",
+      "type": "paragraph",
+      "html": "<p>Do this:</p>",
+      "preview": "Do this:",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function can calculate the instant velocity for any gravity value (more useful)\ndouble instantVelocity(int time, double gravity)\n{\n    return gravity * time;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5, constants::gravity) << '\\n'; // pass our constant to the function as a parameter\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function can calculate the instant velocity for any gravity value (more useful)\ndouble instantVelocity(int time, double gravity)\n{\n    return gravity * time;\n}\n\nint main()\n{\n    std::cout &lt;&lt; instantVelocity(5, constants::gravity) &lt;&lt; '\\n'; // pass our constant to the function as a parameter\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b62",
+      "type": "section",
+      "title": "A C++ joke",
+      "html": "<h3 class=\"cpp-section-heading\">A C++ joke</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b63",
+      "type": "paragraph",
+      "html": "<p>What’s the best naming prefix for a global variable?</p>",
+      "preview": "What’s the best naming prefix for a global variable?",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b64",
+      "type": "paragraph",
+      "html": "<p>Answer: //</p>",
+      "preview": "Answer: //",
+      "canCheck": true
+    },
+    {
+      "id": "why-non-const-global-variables-are-evil_b65",
+      "type": "paragraph",
+      "html": "<p>This joke is worth all the comments.</p>",
+      "preview": "This joke is worth all the comments.",
+      "canCheck": true
+    }
+  ]
+}

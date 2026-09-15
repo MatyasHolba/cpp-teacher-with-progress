@@ -1,0 +1,270 @@
+{
+  "index": 135,
+  "chapterId": "11",
+  "number": "11.2",
+  "title": "11.2 — Function overload differentiation",
+  "url": "https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/",
+  "slug": "function-overload-differentiation",
+  "scrapedAt": "2026-09-15T16:29:46.074Z",
+  "totalBlocks": 35,
+  "totalCheckpoints": 28,
+  "blocks": [
+    {
+      "id": "function-overload-differentiation_b0",
+      "type": "paragraph",
+      "html": "<p>In the prior lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Introduction to function overloading</a>), we introduced the concept of function overloading, which allows us to create multiple functions with the same name, so long as each identically named function has different parameter types (or the functions can be otherwise differentiated).</p>",
+      "preview": "In the prior lesson (11.1 -- Introduction to function overloading), we introduce",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b1",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll take a closer look at how overloaded functions are differentiated. Overloaded functions that are not properly differentiated will cause the compiler to issue a compile error.</p>",
+      "preview": "In this lesson, we’ll take a closer look at how overloaded functions are differe",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b2",
+      "type": "section",
+      "title": "How overloaded functions are differentiated",
+      "html": "<h3 class=\"cpp-section-heading\">How overloaded functions are differentiated</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b3",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Function property</th><th>Used for differentiation</th><th>Notes</th></tr><tr><td>Number of parameters</td><td>Yes</td><td></td></tr><tr><td>Type of parameters</td><td>Yes</td><td>Excludes typedefs, type aliases, and const qualifier on value parameters. Includes ellipses.</td></tr><tr><td>Return type</td><td>No</td><td></td></tr></tbody></table></div>",
+      "preview": "Function propertyUsed for differentiationNotesNumber of parametersYesType of par",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b4",
+      "type": "paragraph",
+      "html": "<p>Note that a function’s return type is not used to differentiate overloaded functions. We’ll discuss this more in a bit.</p>",
+      "preview": "Note that a function’s return type is not used to differentiate overloaded funct",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b5",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>For member functions, additional function-level qualifiers are also considered:</p><div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Function-level qualifier</th><th>Used for overloading</th></tr><tr><td>const or volatile</td><td>Yes</td></tr><tr><td>Ref-qualifiers</td><td>Yes</td></tr></tbody></table></div><p>As an example, a const member function can be differentiated from an otherwise identical non-const member function (even if they share the same set of parameters).</p></div>",
+      "preview": "For advanced readersFor member functions, additional function-level qualifiers are also considered:F",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b6",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover ellipses in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/ellipsis-and-why-to-avoid-them/\">20.5 -- Ellipsis (and why to avoid them)</a>.</p></div>",
+      "preview": "Related contentWe cover ellipses in lesson 20.5 -- Ellipsis (and why to avoid them).",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b7",
+      "type": "section",
+      "title": "Overloading based on number of parameters",
+      "html": "<h3 class=\"cpp-section-heading\">Overloading based on number of parameters</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b8",
+      "type": "paragraph",
+      "html": "<p>An overloaded function is differentiated so long as each overloaded function has a different number of parameters. For example:</p>",
+      "preview": "An overloaded function is differentiated so long as each overloaded function has",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{\n    return x + y;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    return x + y;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b10",
+      "type": "paragraph",
+      "html": "<p>The compiler can easily tell that a function call with two integer parameters should go to <code>add(int, int)</code> and a function call with three integer parameters should go to <code>add(int, int, int)</code>.</p>",
+      "preview": "The compiler can easily tell that a function call with two integer parameters sh",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b11",
+      "type": "section",
+      "title": "Overloading based on type of parameters",
+      "html": "<h3 class=\"cpp-section-heading\">Overloading based on type of parameters</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b12",
+      "type": "paragraph",
+      "html": "<p>A function can also be differentiated so long as each overloaded function’s list of parameter types is distinct. For example, all of the following overloads are differentiated:</p>",
+      "preview": "A function can also be differentiated so long as each overloaded function’s list",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y); // integer version\ndouble add(double x, double y); // floating point version\ndouble add(int x, double y); // mixed version\ndouble add(double x, int y); // mixed version",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y); // integer version\ndouble add(double x, double y); // floating point version\ndouble add(int x, double y); // mixed version\ndouble add(double x, int y); // mixed version</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b14",
+      "type": "paragraph",
+      "html": "<p>Because type aliases (or typedefs) are not distinct types, overloaded functions using type aliases are not distinct from overloads using the aliased type. For example, all of the following overloads are not differentiated (and will result in a compile error):</p>",
+      "preview": "Because type aliases (or typedefs) are not distinct types, overloaded functions ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "typedef int Height; // typedef\nusing Age = int; // type alias\n\nvoid print(int value);\nvoid print(Age value); // not differentiated from print(int)\nvoid print(Height value); // not differentiated from print(int)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">typedef int Height; // typedef\nusing Age = int; // type alias\n\nvoid print(int value);\nvoid print(Age value); // not differentiated from print(int)\nvoid print(Height value); // not differentiated from print(int)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b16",
+      "type": "paragraph",
+      "html": "<p>For parameters passed by value, the const qualifier is also not considered. Therefore, the following functions are not considered to be differentiated:</p>",
+      "preview": "For parameters passed by value, the const qualifier is also not considered. Ther",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "void print(int);\nvoid print(const int); // not differentiated from print(int)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void print(int);\nvoid print(const int); // not differentiated from print(int)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b18",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>We haven’t covered ellipsis yet, but ellipsis parameters are considered to be a unique type of parameter:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int x, int y);\nvoid foo(int x, ...); // differentiated from foo(int, int)</code></pre><p>Thus a call to <code>foo(4, 5)</code> will match to <code>foo(int, int)</code>, not <code>foo(int, ...)</code>.</p></div>",
+      "preview": "For advanced readersWe haven’t covered ellipsis yet, but ellipsis parameters are considered to be a ",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b19",
+      "type": "section",
+      "title": "The return type of a function is not considered for differentiation",
+      "html": "<h3 class=\"cpp-section-heading\">The return type of a function is not considered for differentiation</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b20",
+      "type": "paragraph",
+      "html": "<p>A function’s return type is not considered when differentiating overloaded functions.</p>",
+      "preview": "A function’s return type is not considered when differentiating overloaded funct",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b21",
+      "type": "paragraph",
+      "html": "<p>Consider the case where you want to write a function that returns a random number, but you need a version that will return an int, and another version that will return a double. You might be tempted to do this:</p>",
+      "preview": "Consider the case where you want to write a function that returns a random numbe",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b22",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getRandomValue();\ndouble getRandomValue();",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getRandomValue();\ndouble getRandomValue();</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b23",
+      "type": "paragraph",
+      "html": "<p>On Visual Studio 2019, this results in the following compiler error:</p>",
+      "preview": "On Visual Studio 2019, this results in the following compiler error:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b24",
+      "type": "output",
+      "text": "error C2556: 'double getRandomValue(void)': overloaded function differs only by return type from 'int getRandomValue(void)'\n",
+      "html": "<pre>error C2556: 'double getRandomValue(void)': overloaded function differs only by return type from 'int getRandomValue(void)'\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b25",
+      "type": "paragraph",
+      "html": "<p>This makes sense. If you were the compiler, and you saw this statement:</p>",
+      "preview": "This makes sense. If you were the compiler, and you saw this statement:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "getRandomValue();",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">getRandomValue();</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b27",
+      "type": "paragraph",
+      "html": "<p>Which of the two overloaded functions would you call? It’s not clear.</p>",
+      "preview": "Which of the two overloaded functions would you call? It’s not clear.",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b28",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>This was an intentional choice, as it ensures the behavior of a function call can be determined independently from the rest of the expression, making understanding complex expressions much simpler. Put another way, we can always determine which version of a function will be called based solely on the arguments in the function call. If return values were used for differentiation, then we wouldn’t have an easy syntactic way to tell which overload of a function was being called -- we’d also have to understand how the return value was being used, which requires a lot more analysis.</p></div>",
+      "preview": "As an aside…This was an intentional choice, as it ensures the behavior of a function call can be det",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b29",
+      "type": "paragraph",
+      "html": "<p>The best way to address this is to give the functions different names:</p>",
+      "preview": "The best way to address this is to give the functions different names:",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b30",
+      "type": "code",
+      "language": "cpp",
+      "code": "int getRandomInt();\ndouble getRandomDouble();",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int getRandomInt();\ndouble getRandomDouble();</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b31",
+      "type": "section",
+      "title": "Type signature",
+      "html": "<h3 class=\"cpp-section-heading\">Type signature</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b32",
+      "type": "paragraph",
+      "html": "<p>A function’s <strong>type signature</strong> (generally called a <strong>signature</strong>) is defined as the parts of the function header that are used for differentiation of the function. In C++, this includes the function name, number of parameters, parameter type, and function-level qualifiers. It notably does <em>not</em> include the return type.</p>",
+      "preview": "A function’s type signature (generally called a signature) is defined as the par",
+      "canCheck": true
+    },
+    {
+      "id": "function-overload-differentiation_b33",
+      "type": "section",
+      "title": "Name mangling",
+      "html": "<h3 class=\"cpp-section-heading\">Name mangling</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-overload-differentiation_b34",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>When the compiler compiles a function, it performs <strong>name mangling</strong>, which means the compiled name of the function is altered (“mangled”) based on various criteria, such as the number and type of parameters, so that the linker has unique names to work with.</p><p>For example, a function with prototype <code>int fcn()</code> might compile to mangled name <code>__fcn_v</code>, whereas <code>int fcn(int)</code> might compile to mangled name <code>__fcn_i</code>. So while in the source code, the two overloaded functions share the name <code>fcn()</code>, in compiled code, the mangled names are unique (<code>__fcn_v</code> vs <code>__fcn_i</code>).</p><p>There is no standardization on how names should be mangled, so different compilers will produce different mangled names.</p></div>",
+      "preview": "As an aside…When the compiler compiles a function, it performs name mangling, which means the compil",
+      "canCheck": true
+    }
+  ]
+}

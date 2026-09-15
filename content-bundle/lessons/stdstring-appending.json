@@ -1,0 +1,125 @@
+{
+  "index": 354,
+  "chapterId": "D",
+  "number": "22.6",
+  "title": "22.6 — std::string appending",
+  "url": "https://www.learncpp.com/cpp-tutorial/stdstring-appending/",
+  "slug": "stdstring-appending",
+  "scrapedAt": "2026-09-15T16:31:45.125Z",
+  "totalBlocks": 16,
+  "totalCheckpoints": 16,
+  "blocks": [
+    {
+      "id": "stdstring-appending_b0",
+      "type": "paragraph",
+      "html": "<p><strong>Appending</strong></p>",
+      "preview": "Appending",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b1",
+      "type": "paragraph",
+      "html": "<p>Appending strings to the end of an existing string is easy using either operator+=, append(), or push_back().</p>",
+      "preview": "Appending strings to the end of an existing string is easy using either operator",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b2",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::operator+= (const string&amp; str)</b><br><b>string&amp; string::append (const string&amp; str)</b><br><p></p><ul><li>Both functions append the characters of str to the string.</li><li>Both functions return *this so they can be “chained”.</li><li>Both functions throw a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"one\"};\n\nsString += std::string{\" two\"};\n\nstd::string sThree{\" three\"};\nsString.append(sThree);\n\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>one two three\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::operator+= (const string& str)string& string::append (const stri",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b3",
+      "type": "paragraph",
+      "html": "<p>There’s also a flavor of append() that can append a substring:</p>",
+      "preview": "There’s also a flavor of append() that can append a substring:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b4",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::append (const string&amp; str, size_type index, size_type num)</b><p></p><ul><li>This function appends num characters from str, starting at index, to the string.</li><li>Returns *this so it can be “chained”.</li><li>Throws an out_of_range if index is out of bounds</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"one \"};\n\nconst std::string sTemp{\"twothreefour\"};\nsString.append(sTemp, 3, 5); // append substring of sTemp starting at index 3 of length 5\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>one three\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::append (const string& str, size_type index, size_type num)This f",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b5",
+      "type": "paragraph",
+      "html": "<p>Operator+= and append() also have versions that work on C-style strings:</p>",
+      "preview": "Operator+= and append() also have versions that work on C-style strings:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b6",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::operator+= (const char* str)</b><br><b>string&amp; string::append (const char* str)</b><br><p></p><ul><li>Both functions append the characters of str to the string.</li><li>Both functions return *this so they can be “chained”.</li><li>Both functions throw a length_error exception if the result exceeds the maximum number of characters.</li><li>str should not be NULL.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"one\"};\n\nsString += \" two\";\nsString.append(\" three\");\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>one two three\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::operator+= (const char* str)string& string::append (const char* ",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b7",
+      "type": "paragraph",
+      "html": "<p>There is an additional flavor of append() that works on C-style strings:</p>",
+      "preview": "There is an additional flavor of append() that works on C-style strings:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b8",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::append (const char* str, size_type len)</b><br><p></p><ul><li>Appends the first len characters of str to the string.</li><li>Returns *this so they can be “chained”.</li><li>Throw a length_error exception if the result exceeds the maximum number of characters.</li><li>Ignores special characters (including ”)</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"one \"};\n\nsString.append(\"threefour\", 5);\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>one three\n</pre><p>This function is dangerous and its use is not recommended.</p></td></tr></tbody></table></div>",
+      "preview": "string& string::append (const char* str, size_type len)Appends the first len cha",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b9",
+      "type": "paragraph",
+      "html": "<p>There is also a set of functions that append characters. Note that the name of the non-operator function to append a character is push_back(), not append()!</p>",
+      "preview": "There is also a set of functions that append characters. Note that the name of t",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b10",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::operator+= (char c)</b><br><b>void string::push_back (char c)</b><br><p></p><ul><li>Both functions append the character c to the string.</li><li>Operator += returns *this so it can be “chained”.</li><li>Both functions throw a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"one\"};\n\nsString += ' ';\nsString.push_back('2');\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>one 2\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::operator+= (char c)void string::push_back (char c)Both functions",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b11",
+      "type": "paragraph",
+      "html": "<p>Now you might be wondering why the name of the function is push_back() and not append(). This follows a naming convention used for stacks, where push_back() is the function that adds a single item to the end of the stack. If you envision a string as a stack of characters, using push_back() to add a single character to the end makes sense. However, the lack of an append() function is inconsistent in my view!</p>",
+      "preview": "Now you might be wondering why the name of the function is push_back() and not a",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b12",
+      "type": "paragraph",
+      "html": "<p>It turns out there is an append() function for characters, that looks like this:</p>",
+      "preview": "It turns out there is an append() function for characters, that looks like this:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b13",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::append (size_type num, char c)</b><br><p></p><ul><li>Adds num occurrences of the character c to the string</li><li>Returns *this so it can be “chained”.</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string sString{\"aaa\"};\n\nsString.append(4, 'b');\nstd::cout &lt;&lt; sString &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>aaabbbb\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::append (size_type num, char c)Adds num occurrences of the charac",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b14",
+      "type": "paragraph",
+      "html": "<p>There’s one final flavor of append() that works with iterators:</p>",
+      "preview": "There’s one final flavor of append() that works with iterators:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-appending_b15",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::append (InputIterator start, InputIterator end)</b><br><p></p><ul><li>Appends all characters from the range [start, end) (including start up to but not including end)</li><li>Returns *this so it can be “chained”.</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li></ul></td></tr></tbody></table></div>",
+      "preview": "string& string::append (InputIterator start, InputIterator end)Appends all chara",
+      "canCheck": true
+    }
+  ]
+}

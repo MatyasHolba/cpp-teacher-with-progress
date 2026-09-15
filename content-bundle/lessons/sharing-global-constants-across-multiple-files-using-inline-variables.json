@@ -1,0 +1,411 @@
+{
+  "index": 95,
+  "chapterId": "7",
+  "number": "7.10",
+  "title": "7.10 — Sharing global constants across multiple files (using inline variables)",
+  "url": "https://www.learncpp.com/cpp-tutorial/sharing-global-constants-across-multiple-files-using-inline-variables/",
+  "slug": "sharing-global-constants-across-multiple-files-using-inline-variables",
+  "scrapedAt": "2026-09-15T16:29:25.683Z",
+  "totalBlocks": 55,
+  "totalCheckpoints": 52,
+  "blocks": [
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b0",
+      "type": "paragraph",
+      "html": "<p>In some applications, certain symbolic constants may need to be used throughout your code (not just in one location). These can include physics or mathematical constants that don’t change (e.g. pi or Avogadro’s number), or application-specific “tuning” values (e.g. friction or gravity coefficients). Instead of redefining these constants in every file that needs them (a violation of the “Don’t Repeat Yourself” rule), it’s better to declare them once in a central location and use them wherever needed. That way, if you ever need to change them, you only need to change them in one place, and those changes can be propagated out.</p>",
+      "preview": "In some applications, certain symbolic constants may need to be used throughout ",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b1",
+      "type": "paragraph",
+      "html": "<p>This lesson discusses the most common ways to do this.</p>",
+      "preview": "This lesson discusses the most common ways to do this.",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b2",
+      "type": "section",
+      "title": "Global constants as internal variables",
+      "html": "<h3 class=\"cpp-section-heading\">Global constants as internal variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b3",
+      "type": "paragraph",
+      "html": "<p>Prior to C++17, the following is the easiest and most common solution:</p>",
+      "preview": "Prior to C++17, the following is the easiest and most common solution:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b4",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Create a header file to hold these constants</li><li>Inside this header file, define a namespace (discussed in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/user-defined-namespaces-and-the-scope-resolution-operator/\">7.2 -- User-defined namespaces and the scope resolution operator</a>)</li><li>Add all your constants inside the namespace (make sure they’re <em>constexpr</em>)</li><li>#include the header file wherever you need it</li></ol>",
+      "preview": "Create a header file to hold these constantsInside this header file, define a na",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b5",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b6",
+      "type": "paragraph",
+      "html": "<p>constants.h:</p>",
+      "preview": "constants.h:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\n// Define your own namespace to hold constants\nnamespace constants\n{\n    // Global constants have internal linkage by default\n    constexpr double pi { 3.14159 };\n    constexpr double avogadro { 6.0221413e23 };\n    constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n    // ... other related constants\n}\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\n// Define your own namespace to hold constants\nnamespace constants\n{\n    // Global constants have internal linkage by default\n    constexpr double pi { 3.14159 };\n    constexpr double avogadro { 6.0221413e23 };\n    constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n    // ... other related constants\n}\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b8",
+      "type": "paragraph",
+      "html": "<p>Then use the scope resolution operator (::) with the namespace name to the left, and your variable name to the right in order to access your constants in .cpp files:</p>",
+      "preview": "Then use the scope resolution operator (::) with the namespace name to the left,",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b9",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include \"constants.h\" // include a copy of each constant in this file\n\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a radius: \";\n    double radius{};\n    std::cin >> radius;\n\n    std::cout << \"The circumference is: \" << 2 * radius * constants::pi << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"constants.h\" // include a copy of each constant in this file\n\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a radius: \";\n    double radius{};\n    std::cin &gt;&gt; radius;\n\n    std::cout &lt;&lt; \"The circumference is: \" &lt;&lt; 2 * radius * constants::pi &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b11",
+      "type": "paragraph",
+      "html": "<p>When this header gets #included into a .cpp file, each of these variables defined in the header will be copied into that code file at the point of inclusion. Because these variables live outside of a function, they’re treated as global variables within the file they are included into, which is why you can use them anywhere in that file.</p>",
+      "preview": "When this header gets #included into a .cpp file, each of these variables define",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b12",
+      "type": "paragraph",
+      "html": "<p>Because const globals have internal linkage, each .cpp file gets an independent version of the global variable that the linker can’t see. In most cases, because these are constexpr, the compiler will simply optimize the variables away.</p>",
+      "preview": "Because const globals have internal linkage, each .cpp file gets an independent ",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b13",
+      "type": "paragraph",
+      "html": "<p>While this is simple (and fine for smaller programs), every time <em>constants.h</em> gets #included into a different code file, each of these variables is copied into the including code file. Therefore, if constants.h gets included into 20 different code files, each of these variables is duplicated 20 times. Header guards won’t stop this from happening, as they only prevent a header from being included more than once into a single including file, not from being included one time into multiple different code files. This introduces two challenges:</p>",
+      "preview": "While this is simple (and fine for smaller programs), every time constants.h get",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b14",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Changing a single constant value would require recompiling every file that includes the constants header, which can lead to lengthy rebuild times for larger projects.</li><li>If the constants are large in size and can’t be optimized away, this can use a lot of memory.</li></ol>",
+      "preview": "Changing a single constant value would require recompiling every file that inclu",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b15",
+      "type": "paragraph",
+      "html": "<p>Advantages:</p>",
+      "preview": "Advantages:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b16",
+      "type": "list",
+      "html": "<ul><li>Works prior to C++17.</li><li>Can be used in constant expressions in any translation unit that includes them.</li></ul>",
+      "preview": "Works prior to C++17.Can be used in constant expressions in any translation unit",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b17",
+      "type": "paragraph",
+      "html": "<p>Downsides:</p>",
+      "preview": "Downsides:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b18",
+      "type": "list",
+      "html": "<ul><li>Changing anything in the header file requires recompiling files including the header.</li><li>Each translation unit including the header gets its own copy of the variable.</li></ul>",
+      "preview": "Changing anything in the header file requires recompiling files including the he",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b19",
+      "type": "section",
+      "title": "Global constants as external variables",
+      "html": "<h3 class=\"cpp-section-heading\">Global constants as external variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b20",
+      "type": "paragraph",
+      "html": "<p>If you’re actively changing values or adding new constants, the prior solution might be problematic, at least until things settle.</p>",
+      "preview": "If you’re actively changing values or adding new constants, the prior solution m",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b21",
+      "type": "paragraph",
+      "html": "<p>One way to avoid these problems is by turning these constants into external variables, since we can then have a single variable (initialized once) that is shared across all files. In this method, we’ll define the constants in a .cpp file (to ensure the definitions only exist in one place), and put forward declarations in the header (which will be included by other files).</p>",
+      "preview": "One way to avoid these problems is by turning these constants into external vari",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b22",
+      "type": "paragraph",
+      "html": "<p>constants.cpp:</p>",
+      "preview": "constants.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include \"constants.h\"\n\nnamespace constants\n{\n    // We use extern to ensure these have external linkage\n    extern constexpr double pi { 3.14159 };\n    extern constexpr double avogadro { 6.0221413e23 };\n    extern constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"constants.h\"\n\nnamespace constants\n{\n    // We use extern to ensure these have external linkage\n    extern constexpr double pi { 3.14159 };\n    extern constexpr double avogadro { 6.0221413e23 };\n    extern constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b24",
+      "type": "paragraph",
+      "html": "<p>constants.h:</p>",
+      "preview": "constants.h:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\nnamespace constants\n{\n    // Since the actual variables are inside a namespace, the forward declarations need to be inside a namespace as well\n    // We can't forward declare variables as constexpr, but we can forward declare them as (runtime) const\n    extern const double pi;\n    extern const double avogadro;\n    extern const double myGravity;\n}\n\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\nnamespace constants\n{\n    // Since the actual variables are inside a namespace, the forward declarations need to be inside a namespace as well\n    // We can't forward declare variables as constexpr, but we can forward declare them as (runtime) const\n    extern const double pi;\n    extern const double avogadro;\n    extern const double myGravity;\n}\n\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b26",
+      "type": "paragraph",
+      "html": "<p>Use in the code file stays the same:</p>",
+      "preview": "Use in the code file stays the same:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b27",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include \"constants.h\" // include all the forward declarations\n\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a radius: \";\n    double radius{};\n    std::cin >> radius;\n\n    std::cout << \"The circumference is: \" << 2 * radius * constants::pi << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"constants.h\" // include all the forward declarations\n\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a radius: \";\n    double radius{};\n    std::cin &gt;&gt; radius;\n\n    std::cout &lt;&lt; \"The circumference is: \" &lt;&lt; 2 * radius * constants::pi &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b29",
+      "type": "paragraph",
+      "html": "<p>Now the symbolic constants will get instantiated only once (in <em>constants.cpp</em>) instead of in each code file where <em>constants.h</em> is #included, and all uses of these constants will be linked to the version instantiated in <em>constants.cpp</em>. Any changes made to <em>constants.cpp</em> will require recompiling only <em>constants.cpp</em>.</p>",
+      "preview": "Now the symbolic constants will get instantiated only once (in constants.cpp) in",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b30",
+      "type": "paragraph",
+      "html": "<p>However, there are a couple of downsides to this method. First, because only the variable definitions are constexpr (the forward declarations aren’t, and can’t be), these constants are constant expressions only within the file they are actually defined in (<em>constants.cpp</em>). In other files, the compiler will only see the forward declaration, which doesn’t define a constexpr value (and must be resolved by the linker). This means outside of the file where they are defined, these variables can’t be used in a constant expression. Second, because constant expressions can typically be optimized more than runtime expressions, the compiler may not be able to optimize these as much.</p>",
+      "preview": "However, there are a couple of downsides to this method. First, because only the",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b31",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>In order for variables to be usable in compile-time contexts, such as array sizes, the compiler has to see the variable’s definition (not just a forward declaration).</p></div>",
+      "preview": "Key insightIn order for variables to be usable in compile-time contexts, such as array sizes, the co",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b32",
+      "type": "paragraph",
+      "html": "<p>Because the compiler compiles each source file individually, it can only see variable definitions that appear in the source file being compiled (which includes any included headers). For example, variable definitions in <em>constants.cpp</em> are not visible when the compiler compiles <em>main.cpp</em>. For this reason, constexpr variables cannot be separated into header and source file, they have to be defined in the header file.</p>",
+      "preview": "Because the compiler compiles each source file individually, it can only see var",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b33",
+      "type": "paragraph",
+      "html": "<p>Given the above downsides, prefer defining your constants in a header file (either per the prior section, or per the next section). If you find that the values for your constants are changing a lot (e.g. because you are tuning the program) and this is leading to long compilation times, you can temporarily move just the offending constants into a .cpp file (using this method) as needed.</p>",
+      "preview": "Given the above downsides, prefer defining your constants in a header file (eith",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b34",
+      "type": "paragraph",
+      "html": "<p>Advantages:</p>",
+      "preview": "Advantages:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b35",
+      "type": "list",
+      "html": "<ul><li>Works prior to C++17.</li><li>Only one copy of each variable is required.</li><li>Only requires recompilation of one file if the value of a constant changes.</li></ul>",
+      "preview": "Works prior to C++17.Only one copy of each variable is required.Only requires re",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b36",
+      "type": "paragraph",
+      "html": "<p>Disadvantages:</p>",
+      "preview": "Disadvantages:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b37",
+      "type": "list",
+      "html": "<ul><li>Forward declarations and variable definitions are in separate files, and must be kept in sync.</li><li>Variables not usable in constant expressions outside of the file in which they are defined.</li></ul>",
+      "preview": "Forward declarations and variable definitions are in separate files, and must be",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b38",
+      "type": "section",
+      "title": "Global constants as inline variables C++17",
+      "html": "<h3 class=\"cpp-section-heading\">Global constants as inline variables <span class=\"cpp-section-pill cpp-section-standard\">C++17</span></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b39",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/inline-functions-and-variables/\">7.9 -- Inline functions and variables</a>, we covered inline variables, which are variables that can have more than one definition, so long as those definitions are identical. By making our constexpr variables inline, we can define them in a header file and then #include them into any .cpp file that requires them. This avoids both ODR violations and the downside of duplicated variables.</p>",
+      "preview": "In lesson 7.9 -- Inline functions and variables, we covered inline variables, wh",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b40",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Constexpr functions are implicitly inline, but constexpr variables are not implicitly inline. If you want an inline constexpr variable, you must explicitly mark it as <code>inline</code>.</p></div>",
+      "preview": "A reminderConstexpr functions are implicitly inline, but constexpr variables are not implicitly inli",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b41",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Inline variables have external linkage by default, so that they are visible to the linker. This is necessary so the linker can de-duplicate the definitions.</p><p>Non-inline constexpr variables have internal linkage. If included into multiple translation units, each translation unit will get its own copy of the variable. This is not an ODR violation because they are not exposed to the linker.</p></div>",
+      "preview": "Key insightInline variables have external linkage by default, so that they are visible to the linker",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b42",
+      "type": "paragraph",
+      "html": "<p>constants.h:</p>",
+      "preview": "constants.h:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b43",
+      "type": "code",
+      "language": "cpp",
+      "code": "#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\n// define your own namespace to hold constants\nnamespace constants\n{\n    inline constexpr double pi { 3.14159 }; // note: now inline constexpr\n    inline constexpr double avogadro { 6.0221413e23 };\n    inline constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n    // ... other related constants\n}\n#endif",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef CONSTANTS_H\n#define CONSTANTS_H\n\n// define your own namespace to hold constants\nnamespace constants\n{\n    inline constexpr double pi { 3.14159 }; // note: now inline constexpr\n    inline constexpr double avogadro { 6.0221413e23 };\n    inline constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet\n    // ... other related constants\n}\n#endif</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b44",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b45",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include \"constants.h\"\n\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a radius: \";\n    double radius{};\n    std::cin >> radius;\n\n    std::cout << \"The circumference is: \" << 2 * radius * constants::pi << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"constants.h\"\n\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a radius: \";\n    double radius{};\n    std::cin &gt;&gt; radius;\n\n    std::cout &lt;&lt; \"The circumference is: \" &lt;&lt; 2 * radius * constants::pi &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b46",
+      "type": "paragraph",
+      "html": "<p>We can include <code>constants.h</code> into as many code files as we want, but these variables will only be instantiated once and shared across all code files.</p>",
+      "preview": "We can include constants.h into as many code files as we want, but these variabl",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b47",
+      "type": "paragraph",
+      "html": "<p>This method does retain the downside of requiring every file that includes the constants header be recompiled if any constant value is changed.</p>",
+      "preview": "This method does retain the downside of requiring every file that includes the c",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b48",
+      "type": "paragraph",
+      "html": "<p>Advantages:</p>",
+      "preview": "Advantages:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b49",
+      "type": "list",
+      "html": "<ul><li>Can be used in constant expressions in any translation unit that includes them.</li><li>Only one copy of each variable is required.</li></ul>",
+      "preview": "Can be used in constant expressions in any translation unit that includes them.O",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b50",
+      "type": "paragraph",
+      "html": "<p>Downsides:</p>",
+      "preview": "Downsides:",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b51",
+      "type": "list",
+      "html": "<ul><li>Only works in C++17 onward.</li><li>Changing anything in the header file requires recompiling files including the header.</li></ul>",
+      "preview": "Only works in C++17 onward.Changing anything in the header file requires recompi",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b52",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you need global constants and your compiler is C++17 capable, prefer defining inline constexpr global variables in a header file.</p></div>",
+      "preview": "Best practiceIf you need global constants and your compiler is C++17 capable, prefer defining inline",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b53",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Use <code>std::string_view</code> for <code>constexpr</code> strings. We cover this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring_view/\">5.8 -- Introduction to std::string_view</a>.</p></div>",
+      "preview": "A reminderUse std::string_view for constexpr strings. We cover this in lesson 5.8 -- Introduction to",
+      "canCheck": true
+    },
+    {
+      "id": "sharing-global-constants-across-multiple-files-using-inline-variables_b54",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We summarize the scope, duration, and linkage of various kinds of variables in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/scope-duration-and-linkage-summary/\">7.12 -- Scope, duration, and linkage summary</a>.</p></div>",
+      "preview": "Related contentWe summarize the scope, duration, and linkage of various kinds of variables in lesson",
+      "canCheck": true
+    }
+  ]
+}

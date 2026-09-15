@@ -1,0 +1,623 @@
+{
+  "index": 44,
+  "chapterId": "3",
+  "number": "3.6",
+  "title": "3.6 — Using an integrated debugger: Stepping",
+  "url": "https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-stepping/",
+  "slug": "using-an-integrated-debugger-stepping",
+  "scrapedAt": "2026-09-15T16:28:58.579Z",
+  "totalBlocks": 84,
+  "totalCheckpoints": 77,
+  "blocks": [
+    {
+      "id": "using-an-integrated-debugger-stepping_b0",
+      "type": "paragraph",
+      "html": "<p>When you run your program, execution begins at the top of the <em>main</em> function, and then proceeds sequentially statement by statement, until the program ends. At any point in time while your program is running, the program is keeping track of a lot of things: the value of the variables you’re using, which functions have been called (so that when those functions return, the program will know where to go back to), and the current point of execution within the program (so it knows which statement to execute next). All of this tracked information is called your <strong>program state</strong> (or just <em>state</em>, for short).</p>",
+      "preview": "When you run your program, execution begins at the top of the main function, and",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b1",
+      "type": "paragraph",
+      "html": "<p>In previous lessons, we explored various ways to alter your code to help with debugging, including printing diagnostic information or using a logger. These are simple methods for examining the state of a program while it is running. Although these can be effective if used properly, they still have downsides: they require altering your code, which takes time and can introduce new bugs, and they clutter your code, making the existing code harder to understand.</p>",
+      "preview": "In previous lessons, we explored various ways to alter your code to help with de",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b2",
+      "type": "paragraph",
+      "html": "<p>Behind the techniques we’ve shown so far is an unstated assumption: that once we run the code, it will run to completion (only pausing to accept input) with no opportunity for us to intervene and inspect the results of the program at whatever point we want.</p>",
+      "preview": "Behind the techniques we’ve shown so far is an unstated assumption: that once we",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b3",
+      "type": "paragraph",
+      "html": "<p>However, what if we were able to remove this assumption? Fortunately, most modern IDEs come with an integrated tool called a debugger that is designed to do exactly this.</p>",
+      "preview": "However, what if we were able to remove this assumption? Fortunately, most moder",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b4",
+      "type": "section",
+      "title": "The debugger",
+      "html": "<h3 class=\"cpp-section-heading\">The debugger</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b5",
+      "type": "paragraph",
+      "html": "<p>A <strong>debugger</strong> is a computer program that allows the programmer to control how another program executes and examine the program state while that program is running. For example, the programmer can use a debugger to execute a program line by line, examining the value of variables along the way. By comparing the actual value of variables to what is expected, or watching the path of execution through the code, the debugger can help immensely in tracking down semantic (logic) errors.</p>",
+      "preview": "A debugger is a computer program that allows the programmer to control how anoth",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b6",
+      "type": "paragraph",
+      "html": "<p>The power behind the debugger is twofold: the ability to precisely control execution of the program, and the ability to view (and modify, if desired) the program’s state.</p>",
+      "preview": "The power behind the debugger is twofold: the ability to precisely control execu",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b7",
+      "type": "paragraph",
+      "html": "<p>Initially, debuggers (such as <a href=\"https://en.wikipedia.org/wiki/Gdb\">gdb</a>) were separate programs that had command-line interfaces, where the programmer had to type arcane commands to make them work. Later debuggers (such as early versions of Borland’s <a href=\"https://en.wikipedia.org/wiki/Turbo_Debugger\">turbo debugger</a>) were still separate programs, but supplied a “graphical” front end to make working with them easier. These days, many modern IDEs have an <strong>integrated debugger</strong> -- that is, a debugger that uses the same interface as the code editor, so you can debug using the same environment that you use to write your code (rather than having to switch programs).</p>",
+      "preview": "Initially, debuggers (such as gdb) were separate programs that had command-line ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b8",
+      "type": "paragraph",
+      "html": "<p>While integrated debuggers are highly convenient and recommended for beginners, command line debuggers are well supported and still commonly used in environments that do not support graphical interfaces (e.g. embedded systems).</p>",
+      "preview": "While integrated debuggers are highly convenient and recommended for beginners, ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b9",
+      "type": "paragraph",
+      "html": "<p>Nearly all modern debuggers contain the same standard set of basic features -- however, there is little consistency in terms of how the menus to access these features are arranged, and even less consistency in the keyboard shortcuts. Although our examples will use screenshots from Microsoft Visual Studio (and we’ll cover how to do everything in Code::Blocks as well), you should have little trouble figuring out how to access each feature we discuss no matter which IDE you are using.</p>",
+      "preview": "Nearly all modern debuggers contain the same standard set of basic features -- h",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b10",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Debugger keyboard shortcuts will only work if the IDE/integrated debugger is the active window.</p></div>",
+      "preview": "TipDebugger keyboard shortcuts will only work if the IDE/integrated debugger is the active window.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b11",
+      "type": "paragraph",
+      "html": "<p>The remainder of this chapter will be spent learning how to use the debugger.</p>",
+      "preview": "The remainder of this chapter will be spent learning how to use the debugger.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b12",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Don’t neglect learning to use a debugger. As your programs get more complicated, the amount of time you spend learning to use the integrated debugger effectively will pale in comparison to amount of time you save finding and fixing issues.</p></div>",
+      "preview": "TipDon’t neglect learning to use a debugger. As your programs get more complicated, the amount of ti",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b13",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Before proceeding with this lesson (and subsequent lessons related to using a debugger), make sure your project is compiled using a debug build configuration (see <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-build-configurations/\">0.9 -- Configuring your compiler: Build configurations</a> for more information).</p><p>If you’re compiling your project using a release configuration instead, the functionality of the debugger may not work correctly (e.g. when you try to step into your program, it will just run the program instead).</p></div>",
+      "preview": "WarningBefore proceeding with this lesson (and subsequent lessons related to using a debugger), make",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b14",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>If you’re using Code::Blocks, your debugger may or may not be set up correctly. Let’s check.</p><p>First, go to <em>Settings menu &gt; Debugger…</em>. Next, open the <em>GDB/CDB debugger</em> tree on the left, and choose <em>Default</em>. A dialog should open that looks something like this:</p><div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/CB-DebuggingSetup-min.png\" alt=\"\"></div><p>If you see a big red bar where the “Executable path” should be, then you need to locate your debugger. To do so, click the <em>…</em> button to the right of the <em>Executable path</em> field. Next, find the “gdb32.exe” file on your system -- mine was in <em>C:\\Program Files (x86)\\CodeBlocks\\MinGW\\bin\\gdb32.exe</em>. Then click <em>OK</em>.</p></div>",
+      "preview": "For Code::Blocks usersIf you’re using Code::Blocks, your debugger may or may not be set up correctly",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b15",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>There have been reports that the Code::Blocks integrated debugger (GDB) can have issues recognizing some file paths that contain spaces or non-English characters in them. If the debugger appears to be malfunctioning as you go through these lessons, that could be a reason why.</p></div>",
+      "preview": "For Code::Blocks usersThere have been reports that the Code::Blocks integrated debugger (GDB) can ha",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b16",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For VS Code users</p><p>To set up debugging, press <em>Ctrl+Shift+P</em> and select “C/C++: Add Debug Configuration”, followed by “C/C++: g++ build and debug active file”. This should create and open the <code>launch.json</code> configuration file. Change the “stopAtEntry” to true:<br><code>\"stopAtEntry\": true,</code></p><p>Then open <em>main.cpp</em> and start debugging by pressing <em>F5</em> or by pressing <em>Ctrl+Shift+P</em> and selecting “Debug: Start Debugging and Stop on Entry”.</p></div>",
+      "preview": "For VS Code usersTo set up debugging, press Ctrl+Shift+P and select “C/C++: Add Debug Configuration”",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b17",
+      "type": "section",
+      "title": "Stepping",
+      "html": "<h3 class=\"cpp-section-heading\">Stepping</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b18",
+      "type": "paragraph",
+      "html": "<p>We’re going to start our exploration of the debugger by first examining some of the debugging tools that allow us to control the way a program executes.</p>",
+      "preview": "We’re going to start our exploration of the debugger by first examining some of ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b19",
+      "type": "paragraph",
+      "html": "<p><strong>Stepping</strong> is the name for a set of related debugger features that let us execute (step through) our code statement by statement.</p>",
+      "preview": "Stepping is the name for a set of related debugger features that let us execute ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b20",
+      "type": "paragraph",
+      "html": "<p>There are a number of related stepping commands that we’ll cover in turn.</p>",
+      "preview": "There are a number of related stepping commands that we’ll cover in turn.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b21",
+      "type": "section",
+      "title": "Step into",
+      "html": "<h3 class=\"cpp-section-heading\">Step into</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b22",
+      "type": "paragraph",
+      "html": "<p>The <strong>step into</strong> command executes the next statement in the normal execution path of the program, and then pauses execution of the program so we can examine the program’s state using the debugger. If the statement being executed contains a function call, <em>step into</em> causes the program to jump to the top of the function being called, where it will pause.</p>",
+      "preview": "The step into command executes the next statement in the normal execution path o",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b23",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at a very simple program:</p>",
+      "preview": "Let’s take a look at a very simple program:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printValue(int value)\n{\n    std::cout << value << '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b25",
+      "type": "paragraph",
+      "html": "<p>Let’s debug this program using the <em>step into</em> command.</p>",
+      "preview": "Let’s debug this program using the step into command.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b26",
+      "type": "paragraph",
+      "html": "<p>First, locate and then execute the <em>step into</em> debug command once.</p>",
+      "preview": "First, locate and then execute the step into debug command once.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b27",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Visual Studio users</p><p>In Visual Studio, the <em>step into</em> command can be accessed via <em>Debug menu &gt; Step Into</em>, or by pressing the F11 shortcut key.</p></div>",
+      "preview": "For Visual Studio usersIn Visual Studio, the step into command can be accessed via Debug menu > Step",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b28",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>In Code::Blocks, the <em>step into</em> command can be accessed via <em>Debug menu &gt; Step into</em>, or by pressing the Shift-F7 shortcut combo.</p></div>",
+      "preview": "For Code::Blocks usersIn Code::Blocks, the step into command can be accessed via Debug menu > Step i",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b29",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For VS Code users</p><p>In VS Code, the <em>step into</em> command can be accessed via <em>Run &gt; Step Into</em>.</p></div>",
+      "preview": "For VS Code usersIn VS Code, the step into command can be accessed via Run > Step Into.",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b30",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For other compilers / IDEs</p><p>If using a different IDE, you’ll likely find the <em>step into</em> command under a Debug or Run menu.</p></div>",
+      "preview": "For other compilers / IDEsIf using a different IDE, you’ll likely find the step into command under a",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b31",
+      "type": "paragraph",
+      "html": "<p>When your program isn’t running and you execute the first debug command, you may see quite a few things happen:</p>",
+      "preview": "When your program isn’t running and you execute the first debug command, you may",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b32",
+      "type": "list",
+      "html": "<ul><li>The program will recompile if needed.</li><li>The program will begin to run. Because our application is a console program, a console output window should open. It will be empty because we haven’t output anything yet.</li><li>Your IDE may open some diagnostic windows, which may have names such as “Diagnostic Tools”, “Call Stack”, and “Watch”. We’ll cover what some of these are later -- for now you can ignore them.</li></ul>",
+      "preview": "The program will recompile if needed.The program will begin to run. Because our ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b33",
+      "type": "paragraph",
+      "html": "<p>Because we did a <em>step into</em>, you should now see some kind of marker appear to the left of the opening brace of function <em>main</em> (line 9). In Visual Studio, this marker is a yellow arrow (Code::Blocks uses a yellow triangle). If you are using a different IDE, you should see something that serves the same purpose.</p>",
+      "preview": "Because we did a step into, you should now see some kind of marker appear to the",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b34",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line9-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b35",
+      "type": "paragraph",
+      "html": "<p>This arrow marker indicates that the line being pointed to will be executed next. In this case, the debugger is telling us that the next line to be executed is the opening brace of function <em>main</em> (line 9).</p>",
+      "preview": "This arrow marker indicates that the line being pointed to will be executed next",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b36",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> (using the appropriate command for your IDE, listed above) to execute the opening brace, and the arrow will move to the next statement (line 10).</p>",
+      "preview": "Choose step into (using the appropriate command for your IDE, listed above) to e",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b37",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line10-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b38",
+      "type": "paragraph",
+      "html": "<p>This means the next line that will be executed is the call to function <em>printValue</em>.</p>",
+      "preview": "This means the next line that will be executed is the call to function printValu",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b39",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> again. Because this statement contains a function call to <em>printValue</em>, we step into the function, and the arrow will move to the top of the body of <em>printValue</em> (line 4).</p>",
+      "preview": "Choose step into again. Because this statement contains a function call to print",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b40",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line4-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b41",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> again to execute the opening brace of function <em>printValue</em>, which will advance the arrow to line 5.</p>",
+      "preview": "Choose step into again to execute the opening brace of function printValue, whic",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b42",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line5-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b43",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> yet again, which will execute the statement <code>std::cout &lt;&lt; value &lt;&lt; '\\n'</code> and move the arrow to line 6.</p>",
+      "preview": "Choose step into yet again, which will execute the statement std::cout << value ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b44",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>The version of operator&lt;&lt; used for output is implemented as a function. As a result, your IDE may step into the implementation of the operator&lt;&lt; function instead.</p><p>If this happens, you’ll see your IDE open a new code file, and the arrow marker will move to the top of a function named operator&lt;&lt; (this is part of the standard library). Close the code file that just opened, then find and execute <em>step out</em> debug command (instructions are below under the “step out” section, if you need help).</p></div>",
+      "preview": "WarningThe version of operator<< used for output is implemented as a function. As a result, your IDE",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b45",
+      "type": "paragraph",
+      "html": "<p>Now because <code>std::cout &lt;&lt; value &lt;&lt; '\\n'</code> has executed, we should see the value <em>5</em> appear in the console window.</p>",
+      "preview": "Now because std::cout << value << '\\n' has executed, we should see the value 5 a",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b46",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>In a prior lesson, we mentioned that std::cout is buffered, which means there may be a delay between when you ask std::cout to print a value, and when it actually does. Because of this, you may not see the value 5 appear at this point. To ensure that all output from std::cout is output immediately, you can temporarily add the following statement to the top of your main() function:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::cout &lt;&lt; std::unitbuf; // enable automatic flushing for std::cout (for debugging)</code></pre><p>For performance reasons, this statement should be removed or commented out after debugging.</p><p>If you don’t want to continually add/remove/comment/uncomment the above, you can wrap the statement in a conditional compilation preprocessor directive (covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/\">2.10 -- Introduction to the preprocessor</a>):</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifdef DEBUG\nstd::cout &lt;&lt; std::unitbuf; // enable automatic flushing for std::cout (for debugging)\n#endif</code></pre><p>You’ll need to make sure the DEBUG preprocessor macro is defined, either somewhere above this statement, or as part of your compiler settings.</p></div>",
+      "preview": "TipIn a prior lesson, we mentioned that std::cout is buffered, which means there may be a delay betw",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b47",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> again to execute the closing brace of function <em>printValue</em>. At this point, <em>printValue</em> has finished executing and control is returned to <em>main</em>.</p>",
+      "preview": "Choose step into again to execute the closing brace of function printValue. At t",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b48",
+      "type": "paragraph",
+      "html": "<p>You will note that the arrow is again pointing to <em>printValue</em>!</p>",
+      "preview": "You will note that the arrow is again pointing to printValue!",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b49",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line10-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b50",
+      "type": "paragraph",
+      "html": "<p>While you might think that the debugger intends to call <em>printValue</em> again, in actuality the debugger is just letting you know that it is returning from the function call.</p>",
+      "preview": "While you might think that the debugger intends to call printValue again, in act",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b51",
+      "type": "paragraph",
+      "html": "<p>Choose <em>step into</em> three more times. At this point, we have executed all the lines in our program, so we are done. Some debuggers will terminate the debugging session automatically at this point, others may not. If your debugger does not, you may need to find a “Stop Debugging” command in your menus (in Visual Studio, this is under <em>Debug &gt; Stop Debugging</em>).</p>",
+      "preview": "Choose step into three more times. At this point, we have executed all the lines",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b52",
+      "type": "paragraph",
+      "html": "<p>Note that <em>Stop Debugging</em> can be used at any point in the debugging process to end the debugging session.</p>",
+      "preview": "Note that Stop Debugging can be used at any point in the debugging process to en",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b53",
+      "type": "paragraph",
+      "html": "<p>Congratulations, you’ve now stepped through a program and watched every line execute!</p>",
+      "preview": "Congratulations, you’ve now stepped through a program and watched every line exe",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b54",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>In future lessons, we’ll explore other debugger commands, some of which may not be available unless the debugger is already running. If the desired debugging command is not available, <em>step into</em> your code to start the debugger and try again.</p></div>",
+      "preview": "TipIn future lessons, we’ll explore other debugger commands, some of which may not be available unle",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b55",
+      "type": "section",
+      "title": "Step over",
+      "html": "<h3 class=\"cpp-section-heading\">Step over</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b56",
+      "type": "paragraph",
+      "html": "<p>Like <em>step into</em>, The <strong>step over</strong> command executes the next statement in the normal execution path of the program. However, whereas <em>step into</em> will enter function calls and execute them line by line, <em>step over</em> will execute an entire function without stopping and return control to you after the function has been executed.</p>",
+      "preview": "Like step into, The step over command executes the next statement in the normal ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b57",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Visual Studio users</p><p>In Visual Studio, the <em>step over</em> command can be accessed via <em>Debug menu &gt; Step Over</em>, or by pressing the F10 shortcut key.</p></div>",
+      "preview": "For Visual Studio usersIn Visual Studio, the step over command can be accessed via Debug menu > Step",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b58",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>In Code::Blocks, the <em>step over</em> command is called <em>Next line</em> instead, and can be accessed via <em>Debug menu &gt; Next line</em>, or by pressing the F7 shortcut key.</p></div>",
+      "preview": "For Code::Blocks usersIn Code::Blocks, the step over command is called Next line instead, and can be",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b59",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For VS Code users</p><p>In VS Code, the <em>step over</em> command can be accessed via <em>Run &gt; Step Over</em>, or by pressing the <em>F10</em> shortcut key.</p></div>",
+      "preview": "For VS Code usersIn VS Code, the step over command can be accessed via Run > Step Over, or by pressi",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b60",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at an example where we step over the function call to <em>printValue</em>:</p>",
+      "preview": "Let’s take a look at an example where we step over the function call to printVal",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printValue(int value)\n{\n    std::cout << value << '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b62",
+      "type": "paragraph",
+      "html": "<p>First, use <em>step into</em> on your program until the execution marker is on line 10:</p>",
+      "preview": "First, use step into on your program until the execution marker is on line 10:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b63",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line10-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b64",
+      "type": "paragraph",
+      "html": "<p>Now, choose <em>step over</em>. The debugger will execute the function (which prints the value <em>5</em> in the console output window) and then return control to you on the next statement (line 12).</p>",
+      "preview": "Now, choose step over. The debugger will execute the function (which prints the ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b65",
+      "type": "paragraph",
+      "html": "<p>The <em>step over</em> command provides a convenient way to skip functions when you are sure they already work or are not interested in debugging them right now.</p>",
+      "preview": "The step over command provides a convenient way to skip functions when you are s",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b66",
+      "type": "section",
+      "title": "Step out",
+      "html": "<h3 class=\"cpp-section-heading\">Step out</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b67",
+      "type": "paragraph",
+      "html": "<p>Unlike the other two stepping commands, <strong>Step out</strong> does not just execute the next line of code. Instead, it executes all remaining code in the function currently being executed, and then returns control to you when the function has returned.</p>",
+      "preview": "Unlike the other two stepping commands, Step out does not just execute the next ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b68",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Visual Studio users</p><p>In Visual Studio, the <em>step out</em> command can be accessed via <em>Debug menu &gt; Step Out</em>, or by pressing the Shift-F11 shortcut combo.</p></div>",
+      "preview": "For Visual Studio usersIn Visual Studio, the step out command can be accessed via Debug menu > Step ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b69",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Code::Blocks users</p><p>In Code::Blocks, the <em>step out</em> command can be accessed via <em>Debug menu &gt; Step out</em>, or by pressing the ctrl-F7 shortcut combo.</p></div>",
+      "preview": "For Code::Blocks usersIn Code::Blocks, the step out command can be accessed via Debug menu > Step ou",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b70",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For VS Code users</p><p>In VS Code, the <em>step out</em> command can be accessed via <em>Run &gt; Step Out</em>, or by pressing the <em>shift+F11</em> shortcut combo.</p></div>",
+      "preview": "For VS Code usersIn VS Code, the step out command can be accessed via Run > Step Out, or by pressing",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b71",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at an example of this using the same program as above:</p>",
+      "preview": "Let’s take a look at an example of this using the same program as above:",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b72",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printValue(int value)\n{\n    std::cout << value << '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printValue(5);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b73",
+      "type": "paragraph",
+      "html": "<p><em>Step into</em> the program until you are inside function <em>printValue</em>, with the execution marker on line 4.</p>",
+      "preview": "Step into the program until you are inside function printValue, with the executi",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b74",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line4-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b75",
+      "type": "paragraph",
+      "html": "<p>Then choose <em>step out</em>. You will notice the value <em>5</em> appears in the output window, and the debugger returns control to you after the function has terminated (on line 10).</p>",
+      "preview": "Then choose step out. You will notice the value 5 appears in the output window, ",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b76",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter3/VS2019-StepInto-Line10-min.png\" alt=\"\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b77",
+      "type": "paragraph",
+      "html": "<p>This command is most useful when you’ve accidentally stepped into a function that you don’t want to debug.</p>",
+      "preview": "This command is most useful when you’ve accidentally stepped into a function tha",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b78",
+      "type": "section",
+      "title": "A step too far",
+      "html": "<h3 class=\"cpp-section-heading\">A step too far</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b79",
+      "type": "paragraph",
+      "html": "<p>When stepping through a program, you can normally only step forward. It’s very easy to accidentally step past (overstep) the place you wanted to examine.</p>",
+      "preview": "When stepping through a program, you can normally only step forward. It’s very e",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b80",
+      "type": "paragraph",
+      "html": "<p>If you step past your intended destination, the usual thing to do is stop debugging and restart debugging again, being a little more careful not to pass your target this time.</p>",
+      "preview": "If you step past your intended destination, the usual thing to do is stop debugg",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b81",
+      "type": "section",
+      "title": "Step back",
+      "html": "<h3 class=\"cpp-section-heading\">Step back</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b82",
+      "type": "paragraph",
+      "html": "<p>Some debuggers (such as Visual Studio Enterprise Edition and <a href=\"https://github.com/rr-debugger/rr\">rr</a>) have introduced a stepping capability generally referred to as <em>step back</em> or <em>reverse debugging</em>. The goal of a <em>step back</em> is to rewind the last step, so you can return the program to a prior state. This can be useful if you overstep, or if you want to re-examine a statement that just executed.</p>",
+      "preview": "Some debuggers (such as Visual Studio Enterprise Edition and rr) have introduced",
+      "canCheck": true
+    },
+    {
+      "id": "using-an-integrated-debugger-stepping_b83",
+      "type": "paragraph",
+      "html": "<p>Implementing <em>step back</em> requires a great deal of sophistication on the part of the debugger (because it has to keep track of a separate program state for each step). Because of the complexity, this capability isn’t standardized yet, and varies by debugger. As of the time of writing (Jan 2019), neither Visual Studio Community edition nor the latest version of Code::Blocks support this capability. Hopefully at some point in the future, it will trickle down into these products and be available for wider use.</p>",
+      "preview": "Implementing step back requires a great deal of sophistication on the part of th",
+      "canCheck": true
+    }
+  ]
+}

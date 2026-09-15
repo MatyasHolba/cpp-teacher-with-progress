@@ -1,0 +1,162 @@
+{
+  "index": 263,
+  "chapterId": "21",
+  "number": "21.8",
+  "title": "21.8 — Overloading the increment and decrement operators",
+  "url": "https://www.learncpp.com/cpp-tutorial/overloading-the-increment-and-decrement-operators/",
+  "slug": "overloading-the-increment-and-decrement-operators",
+  "scrapedAt": "2026-09-15T16:30:53.165Z",
+  "totalBlocks": 21,
+  "totalCheckpoints": 19,
+  "blocks": [
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b0",
+      "type": "paragraph",
+      "html": "<p>Overloading the increment (<code>++</code>) and decrement (<code>--</code>) operators is pretty straightforward, with one small exception. There are actually two versions of the increment and decrement operators: a prefix increment and decrement (e.g. <code>++x; --y;</code>) and a postfix increment and decrement (e.g. <code>x++; y--;</code>).</p>",
+      "preview": "Overloading the increment (++) and decrement (--) operators is pretty straightfo",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b1",
+      "type": "paragraph",
+      "html": "<p>Because the increment and decrement operators are both unary operators and they modify their operands, they’re best overloaded as member functions. We’ll tackle the prefix versions first because they’re the most straightforward.</p>",
+      "preview": "Because the increment and decrement operators are both unary operators and they ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b2",
+      "type": "paragraph",
+      "html": "<p><strong>Overloading prefix increment and decrement</strong></p>",
+      "preview": "Overloading prefix increment and decrement",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b3",
+      "type": "paragraph",
+      "html": "<p>Prefix increment and decrement are overloaded exactly the same as any normal unary operator. We’ll do this one by example:</p>",
+      "preview": "Prefix increment and decrement are overloaded exactly the same as any normal una",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit& operator++();\n    Digit& operator--();\n\n    friend std::ostream& operator<< (std::ostream& out, const Digit& d);\n};\n\nDigit& Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\nDigit& Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\nstd::ostream& operator<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 8 };\n\n    std::cout << digit;\n    std::cout << ++digit;\n    std::cout << ++digit;\n    std::cout << --digit;\n    std::cout << --digit;\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit&amp; operator++();\n    Digit&amp; operator--();\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d);\n};\n\nDigit&amp; Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\nDigit&amp; Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d)\n{\n\tout &lt;&lt; d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 8 };\n\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; ++digit;\n    std::cout &lt;&lt; ++digit;\n    std::cout &lt;&lt; --digit;\n    std::cout &lt;&lt; --digit;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b5",
+      "type": "paragraph",
+      "html": "<p>Our Digit class holds a number between 0 and 9. We’ve overloaded increment and decrement so they increment/decrement the digit, wrapping around if the digit is incremented/decremented out of range.</p>",
+      "preview": "Our Digit class holds a number between 0 and 9. We’ve overloaded increment and d",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b6",
+      "type": "paragraph",
+      "html": "<p>This example prints:</p>",
+      "preview": "This example prints:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b7",
+      "type": "output",
+      "text": "89098\n",
+      "html": "<pre>89098\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b8",
+      "type": "paragraph",
+      "html": "<p>Note that we return *this. The overloaded increment and decrement operators return the current implicit object so multiple operators can be “chained” together.</p>",
+      "preview": "Note that we return *this. The overloaded increment and decrement operators retu",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b9",
+      "type": "paragraph",
+      "html": "<p><strong>Overloading postfix increment and decrement</strong></p>",
+      "preview": "Overloading postfix increment and decrement",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b10",
+      "type": "paragraph",
+      "html": "<p>Normally, functions can be overloaded when they have the same name but a different number and/or different type of parameters. However, consider the case of the prefix and postfix increment and decrement operators. Both have the same name (eg. operator++), are unary, and take one parameter of the same type. So how it is possible to differentiate the two when overloading?</p>",
+      "preview": "Normally, functions can be overloaded when they have the same name but a differe",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b11",
+      "type": "paragraph",
+      "html": "<p>The C++ language specification has a special case that provides the answer: the compiler looks to see if the overloaded operator has an int parameter. If the overloaded operator has an int parameter, the operator is a postfix overload. If the overloaded operator has no parameter, the operator is a prefix overload.</p>",
+      "preview": "The C++ language specification has a special case that provides the answer: the ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b12",
+      "type": "paragraph",
+      "html": "<p>Here is the above Digit class with both prefix and postfix overloads:</p>",
+      "preview": "Here is the above Digit class with both prefix and postfix overloads:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit& operator++(); // prefix has no parameter\n    Digit& operator--(); // prefix has no parameter\n\n    Digit operator++(int); // postfix has an int parameter\n    Digit operator--(int); // postfix has an int parameter\n\n    friend std::ostream& operator<< (std::ostream& out, const Digit& d);\n};\n\n// No parameter means this is prefix operator++\nDigit& Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\n// No parameter means this is prefix operator--\nDigit& Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\n// int parameter means this is postfix operator++\nDigit Digit::operator++(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to increment this digit\n    ++(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\n// int parameter means this is postfix operator--\nDigit Digit::operator--(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to decrement this digit\n    --(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\nstd::ostream& operator<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 5 };\n\n    std::cout << digit;\n    std::cout << ++digit; // calls Digit::operator++();\n    std::cout << digit++; // calls Digit::operator++(int);\n    std::cout << digit;\n    std::cout << --digit; // calls Digit::operator--();\n    std::cout << digit--; // calls Digit::operator--(int);\n    std::cout << digit;\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit&amp; operator++(); // prefix has no parameter\n    Digit&amp; operator--(); // prefix has no parameter\n\n    Digit operator++(int); // postfix has an int parameter\n    Digit operator--(int); // postfix has an int parameter\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d);\n};\n\n// No parameter means this is prefix operator++\nDigit&amp; Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\n// No parameter means this is prefix operator--\nDigit&amp; Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\n// int parameter means this is postfix operator++\nDigit Digit::operator++(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to increment this digit\n    ++(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\n// int parameter means this is postfix operator--\nDigit Digit::operator--(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to decrement this digit\n    --(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d)\n{\n\tout &lt;&lt; d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 5 };\n\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; ++digit; // calls Digit::operator++();\n    std::cout &lt;&lt; digit++; // calls Digit::operator++(int);\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; --digit; // calls Digit::operator--();\n    std::cout &lt;&lt; digit--; // calls Digit::operator--(int);\n    std::cout &lt;&lt; digit;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b14",
+      "type": "paragraph",
+      "html": "<p>This prints</p>",
+      "preview": "This prints",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b15",
+      "type": "output",
+      "text": "5667665\n",
+      "html": "<pre>5667665\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b16",
+      "type": "paragraph",
+      "html": "<p>There are a few interesting things going on here. First, note that we’ve distinguished the prefix from the postfix operators by providing an integer dummy parameter on the postfix version. Second, because the dummy parameter is not used in the function implementation, we have not even given it a name. This tells the compiler to treat this variable as a placeholder, which means it won’t warn us that we declared a variable but never used it.</p>",
+      "preview": "There are a few interesting things going on here. First, note that we’ve disting",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b17",
+      "type": "paragraph",
+      "html": "<p>Third, note that the prefix and postfix operators do the same job -- they both increment or decrement the object. The difference between the two is in the value they return. The overloaded prefix operators return the object after it has been incremented or decremented. Consequently, overloading these is fairly straightforward. We simply increment or decrement our member variables, and then return *this.</p>",
+      "preview": "Third, note that the prefix and postfix operators do the same job -- they both i",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b18",
+      "type": "paragraph",
+      "html": "<p>The postfix operators, on the other hand, need to return the state of the object <em>before</em> it is incremented or decremented. This leads to a bit of a conundrum -- if we increment or decrement the object, we won’t be able to return the state of the object before it was incremented or decremented. On the other hand, if we return the state of the object before we increment or decrement it, the increment or decrement will never be called.</p>",
+      "preview": "The postfix operators, on the other hand, need to return the state of the object",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b19",
+      "type": "paragraph",
+      "html": "<p>The typical way this problem is solved is to use a temporary variable that holds the value of the object before it is incremented or decremented. Then the object itself can be incremented or decremented. And finally, the temporary variable is returned to the caller. In this way, the caller receives a copy of the object before it was incremented or decremented, but the object itself is incremented or decremented. Note that this means the return value of the overloaded operator must be a non-reference, because we can’t return a reference to a local variable that will be destroyed when the function exits. Also note that this means the postfix operators are typically less efficient than the prefix operators because of the added overhead of instantiating a temporary variable and returning by value instead of reference.</p>",
+      "preview": "The typical way this problem is solved is to use a temporary variable that holds",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-the-increment-and-decrement-operators_b20",
+      "type": "paragraph",
+      "html": "<p>Finally, note that we’ve written the post-increment and post-decrement in such a way that it calls the pre-increment and pre-decrement to do most of the work. This cuts down on duplicate code, and makes our class easier to modify in the future.</p>",
+      "preview": "Finally, note that we’ve written the post-increment and post-decrement in such a",
+      "canCheck": true
+    }
+  ]
+}

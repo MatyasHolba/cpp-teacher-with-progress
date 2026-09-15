@@ -1,0 +1,623 @@
+{
+  "index": 201,
+  "chapterId": "15",
+  "number": "15.1",
+  "title": "15.1 — The hidden “this” pointer and member function chaining",
+  "url": "https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/",
+  "slug": "the-hidden-this-pointer-and-member-function-chaining",
+  "scrapedAt": "2026-09-15T16:30:20.509Z",
+  "totalBlocks": 84,
+  "totalCheckpoints": 73,
+  "blocks": [
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b0",
+      "type": "paragraph",
+      "html": "<p>One of the questions about classes that new programmers often ask is, “When a member function is called, how does C++ keep track of which object it was called on?”.</p>",
+      "preview": "One of the questions about classes that new programmers often ask is, “When a me",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b1",
+      "type": "paragraph",
+      "html": "<p>First, let’s define a simple class to work with. This class encapsulates an integer value, and provides some access functions to get and set that value:</p>",
+      "preview": "First, let’s define a simple class to work with. This class encapsulates an inte",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Simple\n{\nprivate:\n    int m_id{};\n \npublic:\n    Simple(int id)\n        : m_id{ id }\n    {\n    }\n\n    int getID() const { return m_id; }\n    void setID(int id) { m_id = id; }\n\n    void print() const { std::cout << m_id; }\n};\n\nint main()\n{\n    Simple simple{1};\n    simple.setID(2);\n\n    simple.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Simple\n{\nprivate:\n    int m_id{};\n \npublic:\n    Simple(int id)\n        : m_id{ id }\n    {\n    }\n\n    int getID() const { return m_id; }\n    void setID(int id) { m_id = id; }\n\n    void print() const { std::cout &lt;&lt; m_id; }\n};\n\nint main()\n{\n    Simple simple{1};\n    simple.setID(2);\n\n    simple.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b3",
+      "type": "paragraph",
+      "html": "<p>As you would expect, this program produces the result:</p>",
+      "preview": "As you would expect, this program produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b4",
+      "type": "output",
+      "text": "2\n",
+      "html": "<pre>2\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b5",
+      "type": "paragraph",
+      "html": "<p>Somehow, when we call <code>simple.setID(2);</code>, C++ knows that function <code>setID()</code> should operate on object <code>simple</code>, and that <code>m_id</code> actually refers to <code>simple.m_id</code>.</p>",
+      "preview": "Somehow, when we call simple.setID(2);, C++ knows that function setID() should o",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b6",
+      "type": "paragraph",
+      "html": "<p>The answer is that C++ utilizes a hidden pointer named <code>this</code>! In this lesson, we’ll take a look at <code>this</code> in more detail.</p>",
+      "preview": "The answer is that C++ utilizes a hidden pointer named this! In this lesson, we’",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b7",
+      "type": "section",
+      "title": "The hidden this pointer",
+      "html": "<h3 class=\"cpp-section-heading\">The hidden <code>this</code> pointer</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b8",
+      "type": "paragraph",
+      "html": "<p>Inside every member function, the keyword <strong>this</strong> is a const pointer that holds the address of the current implicit object.</p>",
+      "preview": "Inside every member function, the keyword this is a const pointer that holds the",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b9",
+      "type": "paragraph",
+      "html": "<p>Most of the time, we don’t mention <code>this</code> explicitly, but just to prove we can:</p>",
+      "preview": "Most of the time, we don’t mention this explicitly, but just to prove we can:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Simple\n{\nprivate:\n    int m_id{};\n\npublic:\n    Simple(int id)\n        : m_id{ id }\n    {\n    }\n\n    int getID() const { return m_id; }\n    void setID(int id) { m_id = id; }\n\n    void print() const { std::cout << this->m_id; } // use `this` pointer to access the implicit object and operator-> to select member m_id\n};\n\nint main()\n{\n    Simple simple{ 1 };\n    simple.setID(2);\n    \n    simple.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Simple\n{\nprivate:\n    int m_id{};\n\npublic:\n    Simple(int id)\n        : m_id{ id }\n    {\n    }\n\n    int getID() const { return m_id; }\n    void setID(int id) { m_id = id; }\n\n    void print() const { std::cout &lt;&lt; this-&gt;m_id; } // use `this` pointer to access the implicit object and operator-&gt; to select member m_id\n};\n\nint main()\n{\n    Simple simple{ 1 };\n    simple.setID(2);\n    \n    simple.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b11",
+      "type": "paragraph",
+      "html": "<p>This works identically to prior example, and prints:</p>",
+      "preview": "This works identically to prior example, and prints:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b12",
+      "type": "output",
+      "text": "2\n",
+      "html": "<pre>2\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b13",
+      "type": "paragraph",
+      "html": "<p>Note that the <code>print()</code> member functions from the prior two examples do exactly the same thing:</p>",
+      "preview": "Note that the print() member functions from the prior two examples do exactly th",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "    void print() const { std::cout << m_id; }       // implicit use of this\n    void print() const { std::cout << this->m_id; } // explicit use of this",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    void print() const { std::cout &lt;&lt; m_id; }       // implicit use of this\n    void print() const { std::cout &lt;&lt; this-&gt;m_id; } // explicit use of this</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b15",
+      "type": "paragraph",
+      "html": "<p>It turns out that the former is shorthand for the latter. When we compile our programs, the compiler will implicitly prefix any member referencing the implicit object with <code>this-&gt;</code>. This helps keep our code more concise and prevents the redundancy from having to explicitly write <code>this-&gt;</code> over and over.</p>",
+      "preview": "It turns out that the former is shorthand for the latter. When we compile our pr",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b16",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>We use <code>-&gt;</code> to select a member from a pointer to an object. <code>this-&gt;m_id</code> is the equivalent of <code>(*this).m_id</code>.</p><p>We cover <code>operator-&gt;</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/member-selection-with-pointers-and-references/\">13.12 -- Member selection with pointers and references</a>.</p></div>",
+      "preview": "A reminderWe use -> to select a member from a pointer to an object. this->m_id is the equivalent of ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b17",
+      "type": "section",
+      "title": "How is this set?",
+      "html": "<h3 class=\"cpp-section-heading\">How is <code>this</code> set?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b18",
+      "type": "paragraph",
+      "html": "<p>Let’s take a closer look at this function call:</p>",
+      "preview": "Let’s take a closer look at this function call:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "    simple.setID(2);",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    simple.setID(2);</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b20",
+      "type": "paragraph",
+      "html": "<p>Although the call to function <code>setID(2)</code> looks like it only has one argument, it actually has two! When compiled, the compiler rewrites the expression <code>simple.setID(2);</code> as follows:</p>",
+      "preview": "Although the call to function setID(2) looks like it only has one argument, it a",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Simple::setID(&simple, 2); // note that simple has been changed from an object prefix to a function argument!",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Simple::setID(&amp;simple, 2); // note that simple has been changed from an object prefix to a function argument!</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b22",
+      "type": "paragraph",
+      "html": "<p>Note that this is now just a standard function call, and the object <code>simple</code> (which was formerly an object prefix) is now passed by address as an argument to the function.</p>",
+      "preview": "Note that this is now just a standard function call, and the object simple (whic",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b23",
+      "type": "paragraph",
+      "html": "<p>But that’s only half of the answer. Since the function call now has an added argument, the member function definition also needs to be modified to accept (and use) this argument as a parameter. Here’s our original member function definition for <code>setID()</code>:</p>",
+      "preview": "But that’s only half of the answer. Since the function call now has an added arg",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "    void setID(int id) { m_id = id; }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    void setID(int id) { m_id = id; }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b25",
+      "type": "paragraph",
+      "html": "<p>How the compiler rewrites functions is an implementation-specific detail, but the end-result is something like this:</p>",
+      "preview": "How the compiler rewrites functions is an implementation-specific detail, but th",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "    static void setID(Simple* const this, int id) { this->m_id = id; }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    static void setID(Simple* const this, int id) { this-&gt;m_id = id; }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b27",
+      "type": "paragraph",
+      "html": "<p>Note that our <code>setId</code> function has a new leftmost parameter named <code>this</code>, which is a const pointer (meaning it cannot be re-pointed, but the contents of the pointer can be modified). The <code>m_id</code> member has also been rewritten as <code>this-&gt;m_id</code>, utilizing the <code>this</code> pointer.</p>",
+      "preview": "Note that our setId function has a new leftmost parameter named this, which is a",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b28",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>In this context, the <code>static</code> keyword means the function is not associated with objects of the class, but instead is treated as if it were a normal function inside the scope region of the class. We cover static member functions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/static-member-functions/\">15.7 -- Static member functions</a>.</p></div>",
+      "preview": "For advanced readersIn this context, the static keyword means the function is not associated with ob",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b29",
+      "type": "paragraph",
+      "html": "<p>Putting it all together:</p>",
+      "preview": "Putting it all together:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b30",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>When we call <code>simple.setID(2)</code>, the compiler actually calls <code>Simple::setID(&amp;simple, 2)</code>, and <code>simple</code> is passed by address to the function.</li><li>The function has a hidden parameter named <code>this</code> which receives the address of <code>simple</code>.</li><li>Member variables inside setID() are prefixed with <code>this-&gt;</code>, which points to <code>simple</code>. So when the compiler evaluates <code>this-&gt;m_id</code>, it’s actually resolving to <code>simple.m_id</code>.</li></ol>",
+      "preview": "When we call simple.setID(2), the compiler actually calls Simple::setID(&simple,",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b31",
+      "type": "paragraph",
+      "html": "<p>The good news is that all of this happens automatically, and it doesn’t really matter whether you remember how it works or not. All you need to remember is that all non-static member functions have a <code>this</code> pointer that refers to the object the function was called on.</p>",
+      "preview": "The good news is that all of this happens automatically, and it doesn’t really m",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b32",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>All non-static member functions have a <code>this</code> const pointer that holds the address of the implicit object.</p></div>",
+      "preview": "Key insightAll non-static member functions have a this const pointer that holds the address of the i",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b33",
+      "type": "section",
+      "title": "this always points to the object being operated on",
+      "html": "<h3 class=\"cpp-section-heading\"><code>this</code> always points to the object being operated on</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b34",
+      "type": "paragraph",
+      "html": "<p>New programmers are sometimes confused about how many <code>this</code> pointers exist. Each member function has a single <code>this</code> pointer parameter that points to the implicit object. Consider:</p>",
+      "preview": "New programmers are sometimes confused about how many this pointers exist. Each ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Simple a{1}; // this = &a inside the Simple constructor\n    Simple b{2}; // this = &b inside the Simple constructor\n    a.setID(3); // this = &a inside member function setID()\n    b.setID(4); // this = &b inside member function setID()\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Simple a{1}; // this = &amp;a inside the Simple constructor\n    Simple b{2}; // this = &amp;b inside the Simple constructor\n    a.setID(3); // this = &amp;a inside member function setID()\n    b.setID(4); // this = &amp;b inside member function setID()\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b36",
+      "type": "paragraph",
+      "html": "<p>Note that the <code>this</code> pointer alternately holds the address of object <code>a</code> or <code>b</code> depending on whether we’ve called a member function on object <code>a</code> or <code>b</code>.</p>",
+      "preview": "Note that the this pointer alternately holds the address of object a or b depend",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b37",
+      "type": "paragraph",
+      "html": "<p>Because <code>this</code> is just a function parameter (and not a member), it does not make instances of your class larger memory-wise.</p>",
+      "preview": "Because this is just a function parameter (and not a member), it does not make i",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b38",
+      "type": "section",
+      "title": "Explicitly referencing this",
+      "html": "<h3 class=\"cpp-section-heading\">Explicitly referencing <code>this</code></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b39",
+      "type": "paragraph",
+      "html": "<p>Most of the time, you won’t need to explicitly reference the <code>this</code> pointer. However, there are a few occasions where doing so can be useful:</p>",
+      "preview": "Most of the time, you won’t need to explicitly reference the this pointer. Howev",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b40",
+      "type": "paragraph",
+      "html": "<p>First, if you have a member function that has a parameter with the same name as a data member, you can disambiguate them by using <code>this</code>:</p>",
+      "preview": "First, if you have a member function that has a parameter with the same name as ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "struct Something\n{\n    int data{}; // not using m_ prefix because this is a struct\n\n    void setData(int data)\n    {\n        this->data = data; // this->data is the member, data is the local parameter\n    }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Something\n{\n    int data{}; // not using m_ prefix because this is a struct\n\n    void setData(int data)\n    {\n        this-&gt;data = data; // this-&gt;data is the member, data is the local parameter\n    }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b42",
+      "type": "paragraph",
+      "html": "<p>This <code>Something</code> class has a member named <code>data</code>. The function parameter of <code>setData()</code> is also named <code>data</code>. Within the <code>setData()</code> function, <code>data</code> refers to the function parameter (because the function parameter shadows the data member), so if we want to reference the <code>data</code> member, we use <code>this-&gt;data</code>.</p>",
+      "preview": "This Something class has a member named data. The function parameter of setData(",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b43",
+      "type": "paragraph",
+      "html": "<p>Some developers prefer to explicitly add <code>this-&gt;</code> to all class members to make it clear that they are referencing a member. We recommend that you avoid doing so, as it tends to make your code less readable for little benefit. Using the “m_” prefix is a more concise way to differentiate private member variables from non-member (local) variables.</p>",
+      "preview": "Some developers prefer to explicitly add this-> to all class members to make it ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b44",
+      "type": "section",
+      "title": "Returning *this",
+      "html": "<h3 class=\"cpp-section-heading\">Returning <code>*this</code></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b45",
+      "type": "paragraph",
+      "html": "<p>Second, it can sometimes be useful to have a member function return the implicit object as a return value. The primary reason to do this is to allow member functions to be “chained” together, so several member functions can be called on the same object in a single expression! This is called <strong>function chaining</strong> (or <strong>method chaining</strong>).</p>",
+      "preview": "Second, it can sometimes be useful to have a member function return the implicit",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b46",
+      "type": "paragraph",
+      "html": "<p>Consider this common example where you’re outputting several bits of text using <code>std::cout</code>:</p>",
+      "preview": "Consider this common example where you’re outputting several bits of text using ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b47",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::cout << \"Hello, \" << userName;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::cout &lt;&lt; \"Hello, \" &lt;&lt; userName;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b48",
+      "type": "paragraph",
+      "html": "<p>The compiler evaluates the above snippet like this:</p>",
+      "preview": "The compiler evaluates the above snippet like this:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b49",
+      "type": "code",
+      "language": "cpp",
+      "code": "(std::cout << \"Hello, \") << userName;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">(std::cout &lt;&lt; \"Hello, \") &lt;&lt; userName;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b50",
+      "type": "paragraph",
+      "html": "<p>First, <code>operator&lt;&lt;</code> uses <code>std::cout</code> and the string literal <code>\"Hello, \"</code> to print <code>\"Hello, \"</code> to the console. However, since this is part of an expression, <code>operator&lt;&lt;</code> also needs to return a value (or <code>void</code>). If <code>operator&lt;&lt;</code> returned <code>void</code>, you’d end up with this as the partially evaluated expression:</p>",
+      "preview": "First, operator<< uses std::cout and the string literal \"Hello, \" to print \"Hell",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b51",
+      "type": "code",
+      "language": "cpp",
+      "code": "void{} << userName;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void{} &lt;&lt; userName;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b52",
+      "type": "paragraph",
+      "html": "<p>which clearly doesn’t make any sense (and the compiler would throw an error). Instead, <code>operator&lt;&lt;</code> returns the stream object that was passed in, which in this case is <code>std::cout</code>. That way, after the first <code>operator&lt;&lt;</code> has been evaluated, we get:</p>",
+      "preview": "which clearly doesn’t make any sense (and the compiler would throw an error). In",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b53",
+      "type": "code",
+      "language": "cpp",
+      "code": "(std::cout) << userName;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">(std::cout) &lt;&lt; userName;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b54",
+      "type": "paragraph",
+      "html": "<p>which then prints the user’s name.</p>",
+      "preview": "which then prints the user’s name.",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b55",
+      "type": "paragraph",
+      "html": "<p>This way, we only need to specify <code>std::cout</code> once, and then we can chain as many pieces of text together using <code>operator&lt;&lt;</code> as we want. Each call to <code>operator&lt;&lt;</code> returns <code>std::cout</code> so the next call to <code>operator&lt;&lt;</code> uses <code>std::cout</code> as the left operand.</p>",
+      "preview": "This way, we only need to specify std::cout once, and then we can chain as many ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b56",
+      "type": "paragraph",
+      "html": "<p>We can implement this kind of behavior in our member functions too. Consider the following class:</p>",
+      "preview": "We can implement this kind of behavior in our member functions too. Consider the",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n\n    void add(int value) { m_value += value; }\n    void sub(int value) { m_value -= value; }\n    void mult(int value) { m_value *= value; }\n\n    int getValue() const { return m_value; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n\n    void add(int value) { m_value += value; }\n    void sub(int value) { m_value -= value; }\n    void mult(int value) { m_value *= value; }\n\n    int getValue() const { return m_value; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b58",
+      "type": "paragraph",
+      "html": "<p>If you wanted to add 5, subtract 3, and multiply by 4, you’d have to do this:</p>",
+      "preview": "If you wanted to add 5, subtract 3, and multiply by 4, you’d have to do this:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b59",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    Calc calc{};\n    calc.add(5); // returns void\n    calc.sub(3); // returns void\n    calc.mult(4); // returns void\n\n    std::cout << calc.getValue() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Calc calc{};\n    calc.add(5); // returns void\n    calc.sub(3); // returns void\n    calc.mult(4); // returns void\n\n    std::cout &lt;&lt; calc.getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b60",
+      "type": "paragraph",
+      "html": "<p>However, if we make each function return <code>*this</code> by reference, we can chain the calls together. Here is the new version of <code>Calc</code> with “chainable” functions:</p>",
+      "preview": "However, if we make each function return *this by reference, we can chain the ca",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n    Calc& add(int value) { m_value += value; return *this; }\n    Calc& sub(int value) { m_value -= value; return *this; }\n    Calc& mult(int value) { m_value *= value; return *this; }\n\n    int getValue() const { return m_value; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n    Calc&amp; add(int value) { m_value += value; return *this; }\n    Calc&amp; sub(int value) { m_value -= value; return *this; }\n    Calc&amp; mult(int value) { m_value *= value; return *this; }\n\n    int getValue() const { return m_value; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b62",
+      "type": "paragraph",
+      "html": "<p>Note that <code>add()</code>, <code>sub()</code> and <code>mult()</code> are now returning <code>*this</code> by reference. Consequently, this allows us to do the following:</p>",
+      "preview": "Note that add(), sub() and mult() are now returning *this by reference. Conseque",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b63",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    Calc calc{};\n    calc.add(5).sub(3).mult(4); // method chaining\n\n    std::cout << calc.getValue() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Calc calc{};\n    calc.add(5).sub(3).mult(4); // method chaining\n\n    std::cout &lt;&lt; calc.getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b64",
+      "type": "paragraph",
+      "html": "<p>We have effectively condensed three lines into one expression! Let’s take a closer look at how this works.</p>",
+      "preview": "We have effectively condensed three lines into one expression! Let’s take a clos",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b65",
+      "type": "paragraph",
+      "html": "<p>First, <code>calc.add(5)</code> is called, which adds <code>5</code> to <code>m_value</code>. <code>add()</code> then returns a reference to <code>*this</code>, which is a reference to implicit object <code>calc</code>, so <code>calc</code> will be the object used in the subsequent evaluation. Next <code>calc.sub(3)</code> evaluates, which subtracts <code>3</code> from <code>m_value</code> and again returns <code>calc</code>. Finally, <code>calc.mult(4)</code> multiplies <code>m_value</code> by <code>4</code> and returns <code>calc</code>, which isn’t used further, and is thus ignored.</p>",
+      "preview": "First, calc.add(5) is called, which adds 5 to m_value. add() then returns a refe",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b66",
+      "type": "paragraph",
+      "html": "<p>Since each function modified <code>calc</code> as it was executed, the <code>m_value</code> of <code>calc</code> now contains the value (((0 + 5) - 3) * 4), which is <code>8</code>.</p>",
+      "preview": "Since each function modified calc as it was executed, the m_value of calc now co",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b67",
+      "type": "paragraph",
+      "html": "<p>This is probably the most common explicit use of <code>this</code>, and is one you should consider whenever it makes sense to have chainable member functions.</p>",
+      "preview": "This is probably the most common explicit use of this, and is one you should con",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b68",
+      "type": "paragraph",
+      "html": "<p>Because <code>this</code> always points to the implicit object, we don’t need to check whether it is a null pointer before dereferencing it.</p>",
+      "preview": "Because this always points to the implicit object, we don’t need to check whethe",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b69",
+      "type": "section",
+      "title": "Resetting a class back to default state",
+      "html": "<h3 class=\"cpp-section-heading\">Resetting a class back to default state</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b70",
+      "type": "paragraph",
+      "html": "<p>If your class has a default constructor, you may be interested in providing a way to return an existing object back to its default state.</p>",
+      "preview": "If your class has a default constructor, you may be interested in providing a wa",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b71",
+      "type": "paragraph",
+      "html": "<p>As noted in previous lessons (<a href=\"https://www.learncpp.com/cpp-tutorial/delegating-constructors/\">14.12 -- Delegating constructors</a>), constructors are only for initialization of new objects, and should not be called directly. Doing so will result in unexpected behavior.</p>",
+      "preview": "As noted in previous lessons (14.12 -- Delegating constructors), constructors ar",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b72",
+      "type": "paragraph",
+      "html": "<p>The best way to reset a class back to a default state is to create a <code>reset()</code> member function, have that function create a new object (using the default constructor), and then assign that new object to the current implicit object, like this:</p>",
+      "preview": "The best way to reset a class back to a default state is to create a reset() mem",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b73",
+      "type": "code",
+      "language": "cpp",
+      "code": "    void reset()\n    {\n        *this = {}; // value initialize a new object and overwrite the implicit object\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    void reset()\n    {\n        *this = {}; // value initialize a new object and overwrite the implicit object\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b74",
+      "type": "paragraph",
+      "html": "<p>Here’s a full program demonstrating this <code>reset()</code> function in action:</p>",
+      "preview": "Here’s a full program demonstrating this reset() function in action:",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b75",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n    Calc& add(int value) { m_value += value; return *this; }\n    Calc& sub(int value) { m_value -= value; return *this; }\n    Calc& mult(int value) { m_value *= value; return *this; }\n\n    int getValue() const { return m_value; }\n\n    void reset() { *this = {}; }\n};\n\n\nint main()\n{\n    Calc calc{};\n    calc.add(5).sub(3).mult(4);\n\n    std::cout << calc.getValue() << '\\n'; // prints 8\n\n    calc.reset();\n    \n    std::cout << calc.getValue() << '\\n'; // prints 0\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Calc\n{\nprivate:\n    int m_value{};\n\npublic:\n    Calc&amp; add(int value) { m_value += value; return *this; }\n    Calc&amp; sub(int value) { m_value -= value; return *this; }\n    Calc&amp; mult(int value) { m_value *= value; return *this; }\n\n    int getValue() const { return m_value; }\n\n    void reset() { *this = {}; }\n};\n\n\nint main()\n{\n    Calc calc{};\n    calc.add(5).sub(3).mult(4);\n\n    std::cout &lt;&lt; calc.getValue() &lt;&lt; '\\n'; // prints 8\n\n    calc.reset();\n    \n    std::cout &lt;&lt; calc.getValue() &lt;&lt; '\\n'; // prints 0\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b76",
+      "type": "section",
+      "title": "this and const objects",
+      "html": "<h3 class=\"cpp-section-heading\"><code>this</code> and const objects</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b77",
+      "type": "paragraph",
+      "html": "<p>For non-const member functions, <code>this</code> is a const pointer to a non-const value (meaning <code>this</code> cannot be pointed at something else, but the object pointing to may be modified). With const member functions, <code>this</code> is a const pointer to a const value (meaning the pointer cannot be pointed at something else, nor may the object being pointed to be modified).</p>",
+      "preview": "For non-const member functions, this is a const pointer to a non-const value (me",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b78",
+      "type": "paragraph",
+      "html": "<p>The errors generated from attempting to call a non-const member function on a const object can be a little cryptic:</p>",
+      "preview": "The errors generated from attempting to call a non-const member function on a co",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b79",
+      "type": "output",
+      "text": "error C2662: 'int Something::getValue(void)': cannot convert 'this' pointer from 'const Something' to 'Something &'\nerror: passing 'const Something' as 'this' argument discards qualifiers [-fpermissive]\n",
+      "html": "<pre>error C2662: 'int Something::getValue(void)': cannot convert 'this' pointer from 'const Something' to 'Something &amp;'\nerror: passing 'const Something' as 'this' argument discards qualifiers [-fpermissive]\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b80",
+      "type": "paragraph",
+      "html": "<p>When we call a non-const member function on a const object, the implicit <code>this</code> function parameter is a const pointer to a <em>non-const</em> object. But the argument has type const pointer to a <em>const</em> object. Converting a pointer to a const object into a pointer to a non-const object requires discarding the const qualifier, which cannot be done implicitly. The compiler error generated by some compilers reflects the compiler complaining about being asked to perform such a conversion.</p>",
+      "preview": "When we call a non-const member function on a const object, the implicit this fu",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b81",
+      "type": "section",
+      "title": "Why this a pointer and not a reference",
+      "html": "<h3 class=\"cpp-section-heading\">Why <code>this</code> a pointer and not a reference</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b82",
+      "type": "paragraph",
+      "html": "<p>Since the <code>this</code> pointer always points to the implicit object (and can never be a null pointer unless we’ve done something to cause undefined behavior), you may be wondering why <code>this</code> is a pointer instead of a reference. The answer is simple: when <code>this</code> was added to C++, references didn’t exist yet.</p>",
+      "preview": "Since the this pointer always points to the implicit object (and can never be a ",
+      "canCheck": true
+    },
+    {
+      "id": "the-hidden-this-pointer-and-member-function-chaining_b83",
+      "type": "paragraph",
+      "html": "<p>If <code>this</code> were added to the C++ language today, it would undoubtedly be a reference instead of a pointer. In other more modern C++-like languages, such as Java and C#, <code>this</code> is implemented as a reference.</p>",
+      "preview": "If this were added to the C++ language today, it would undoubtedly be a referenc",
+      "canCheck": true
+    }
+  ]
+}

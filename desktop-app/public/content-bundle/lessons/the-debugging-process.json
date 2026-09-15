@@ -1,0 +1,161 @@
+{
+  "index": 40,
+  "chapterId": "3",
+  "number": "3.2",
+  "title": "3.2 — The debugging process",
+  "url": "https://www.learncpp.com/cpp-tutorial/the-debugging-process/",
+  "slug": "the-debugging-process",
+  "scrapedAt": "2026-09-15T16:28:56.568Z",
+  "totalBlocks": 21,
+  "totalCheckpoints": 20,
+  "blocks": [
+    {
+      "id": "the-debugging-process_b0",
+      "type": "paragraph",
+      "html": "<p>Let’s say you’ve written a program, and it’s not working correctly -- the code compiles fine, but when you run it, you’re getting an incorrect result. You must have a semantic error somewhere. How can you find it? If you’ve been following best practices by writing a little bit of code and then testing it, you may have a good idea where your error is. Or you may have no clue at all.</p>",
+      "preview": "Let’s say you’ve written a program, and it’s not working correctly -- the code c",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b1",
+      "type": "paragraph",
+      "html": "<p>All bugs stem from a simple premise: Something that you thought was correct, isn’t. Actually figuring out where that error is can be challenging. In this lesson, we’ll outline the general process of debugging a program.</p>",
+      "preview": "All bugs stem from a simple premise: Something that you thought was correct, isn",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b2",
+      "type": "paragraph",
+      "html": "<p>Because we haven’t covered that many C++ topics yet, our example programs in this chapter are going to be pretty basic. That may make some of the techniques we’re showing here seem excessive. However, keep in mind that these techniques are designed to be used with larger, more complex programs, and will be of more use in such a setting (which is where you need them most).</p>",
+      "preview": "Because we haven’t covered that many C++ topics yet, our example programs in thi",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b3",
+      "type": "section",
+      "title": "A general approach to debugging",
+      "html": "<h3 class=\"cpp-section-heading\">A general approach to debugging</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-debugging-process_b4",
+      "type": "paragraph",
+      "html": "<p>Once a problem has been identified, debugging the problem generally consists of six steps:</p>",
+      "preview": "Once a problem has been identified, debugging the problem generally consists of ",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b5",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Find the root cause of the problem (usually the line of code that’s not working). We’ll discuss some strategies on how to do this in the next lesson.</li><li>Ensure you understand why the issue is occurring.</li><li>Determine how you’ll fix the issue.</li><li>Repair the issue causing the problem.</li><li>Retest to ensure the problem has been fixed.</li><li>Retest to ensure no new problems have emerged.</li></ol>",
+      "preview": "Find the root cause of the problem (usually the line of code that’s not working)",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b6",
+      "type": "paragraph",
+      "html": "<p>Let’s use a real-life analogy here. Let’s say one evening, you go to get some ice from the ice dispenser in your freezer. You put your cup up to the dispenser, press the lever, and … nothing comes out. Uh oh. You’ve discovered some kind of defect. What would you do? You’d probably start an investigation to see if you could identify the root cause of the issue.</p>",
+      "preview": "Let’s use a real-life analogy here. Let’s say one evening, you go to get some ic",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b7",
+      "type": "paragraph",
+      "html": "<p><strong>Find the root cause:</strong> Since you hear the ice dispenser trying to deliver ice, it’s probably not the ice delivery mechanism itself. So you open the freezer, and examine the ice tray. No ice. Is that the root cause of the issue? No, it’s another symptom. After further examination, you determine that the ice maker does not appear to be making ice. Is the problem the ice maker or something else? The freezer is still cold, the water line isn’t clogged, and everything else seems to be working, so you conclude that the root cause is that the ice maker is non-functional.</p>",
+      "preview": "Find the root cause: Since you hear the ice dispenser trying to deliver ice, it’",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b8",
+      "type": "paragraph",
+      "html": "<p><strong>Understand the problem:</strong> This is simple in this case. A broken ice maker won’t make ice.</p>",
+      "preview": "Understand the problem: This is simple in this case. A broken ice maker won’t ma",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b9",
+      "type": "paragraph",
+      "html": "<p><strong>Determine a fix:</strong> At this point, you have several options for a fix: You could work around the issue (buy bags of ice from the store). You could try to diagnose the ice-maker further, to see if there’s a part that can be repaired. You could buy a new ice maker and install it in place of the current one. Or you could buy a new freezer. You decide to buy a new ice maker.</p>",
+      "preview": "Determine a fix: At this point, you have several options for a fix: You could wo",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b10",
+      "type": "paragraph",
+      "html": "<p><strong>Repair the issue:</strong> Once the ice maker has arrived, you install it.</p>",
+      "preview": "Repair the issue: Once the ice maker has arrived, you install it.",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b11",
+      "type": "paragraph",
+      "html": "<p><strong>Retest:</strong> After turning the electricity back on and waiting overnight, your new ice maker starts making ice. No new issues are discovered.</p>",
+      "preview": "Retest: After turning the electricity back on and waiting overnight, your new ic",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b12",
+      "type": "paragraph",
+      "html": "<p>Now let’s apply this process to our simple program from the previous lesson:</p>",
+      "preview": "Now let’s apply this process to our simple program from the previous lesson:",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint add(int x, int y) // this function is supposed to perform addition\n{\n    return x - y; // but it doesn't due to the wrong operator being used\n}\n\nint main()\n{\n    std::cout << \"5 + 3 = \" << add(5, 3) << '\\n'; // should produce 8, but produces 2\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y) // this function is supposed to perform addition\n{\n    return x - y; // but it doesn't due to the wrong operator being used\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"5 + 3 = \" &lt;&lt; add(5, 3) &lt;&lt; '\\n'; // should produce 8, but produces 2\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b14",
+      "type": "paragraph",
+      "html": "<p>This code is nice in one regard: the bug is very apparent, because the wrong answer gets printed to the screen via line 10. That gives us a starting point for our investigation.</p>",
+      "preview": "This code is nice in one regard: the bug is very apparent, because the wrong ans",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b15",
+      "type": "paragraph",
+      "html": "<p><strong>Find the root cause:</strong> On line 10, we can see that we’re passing in literals for arguments (5 and 3), so there is no room for error there. Since the inputs to function <em>add</em> are correct, but the output isn’t, it’s pretty apparent that function <em>add</em> must be producing the wrong value. The only statement in function <em>add</em> is the return statement, which must be the culprit. We’ve found the problem line. Now that we know where to focus our attention, noticing that we’re subtracting instead of adding is something you’re likely to find via inspection.</p>",
+      "preview": "Find the root cause: On line 10, we can see that we’re passing in literals for a",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b16",
+      "type": "paragraph",
+      "html": "<p><strong>Understand the problem:</strong> In this case, it’s obvious why the wrong value is being generated -- we’re using the wrong operator.</p>",
+      "preview": "Understand the problem: In this case, it’s obvious why the wrong value is being ",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b17",
+      "type": "paragraph",
+      "html": "<p><strong>Determine a fix:</strong> We’ll simply change <em>operator-</em> to <em>operator+</em>.</p>",
+      "preview": "Determine a fix: We’ll simply change operator- to operator+.",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b18",
+      "type": "paragraph",
+      "html": "<p><strong>Repair the issue:</strong> This is actually changing <em>operator-</em> to <em>operator+</em> and ensuring the program recompiles.</p>",
+      "preview": "Repair the issue: This is actually changing operator- to operator+ and ensuring ",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b19",
+      "type": "paragraph",
+      "html": "<p><strong>Retest:</strong> After implementing the change, rerunning the program will indicate that our program now produces the correct value of 8. For this simple program, that’s all the testing that’s needed.</p>",
+      "preview": "Retest: After implementing the change, rerunning the program will indicate that ",
+      "canCheck": true
+    },
+    {
+      "id": "the-debugging-process_b20",
+      "type": "paragraph",
+      "html": "<p>This example is trivial, but illustrates the basic process you’ll go through when diagnosing any program.</p>",
+      "preview": "This example is trivial, but illustrates the basic process you’ll go through whe",
+      "canCheck": true
+    }
+  ]
+}

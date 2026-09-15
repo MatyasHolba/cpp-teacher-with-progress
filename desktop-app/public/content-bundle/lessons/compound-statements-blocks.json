@@ -1,0 +1,179 @@
+{
+  "index": 86,
+  "chapterId": "7",
+  "number": "7.1",
+  "title": "7.1 — Compound statements (blocks)",
+  "url": "https://www.learncpp.com/cpp-tutorial/compound-statements-blocks/",
+  "slug": "compound-statements-blocks",
+  "scrapedAt": "2026-09-15T16:29:21.105Z",
+  "totalBlocks": 23,
+  "totalCheckpoints": 18,
+  "blocks": [
+    {
+      "id": "compound-statements-blocks_b0",
+      "type": "paragraph",
+      "html": "<p>A <strong>compound statement</strong> (also called a <strong>block</strong>, or <strong>block statement</strong>) is a group of <em>zero or more statements</em> that is treated by the compiler as if it were a single statement.</p>",
+      "preview": "A compound statement (also called a block, or block statement) is a group of zer",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b1",
+      "type": "paragraph",
+      "html": "<p>Blocks begin with a <code>{</code> symbol, end with a <code>}</code> symbol, with the statements to be executed being placed in between. Blocks can be used anywhere a single statement is allowed. No semicolon is needed at the end of a block.</p>",
+      "preview": "Blocks begin with a { symbol, end with a } symbol, with the statements to be exe",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b2",
+      "type": "paragraph",
+      "html": "<p>You have already seen an example of blocks when writing functions, as the function body is a block:</p>",
+      "preview": "You have already seen an example of blocks when writing functions, as the functi",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{ // start block\n    return x + y;\n} // end block (no semicolon)\n\nint main()\n{ // start block\n\n    // multiple statements\n    int value {}; // this is initialization, not a block\n    add(3, 4);\n\n    return 0;\n\n} // end block (no semicolon)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{ // start block\n    return x + y;\n} // end block (no semicolon)\n\nint main()\n{ // start block\n\n    // multiple statements\n    int value {}; // this is initialization, not a block\n    add(3, 4);\n\n    return 0;\n\n} // end block (no semicolon)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b4",
+      "type": "section",
+      "title": "Blocks inside other blocks",
+      "html": "<h3 class=\"cpp-section-heading\">Blocks inside other blocks</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "compound-statements-blocks_b5",
+      "type": "paragraph",
+      "html": "<p>Although functions can’t be nested inside other functions, blocks <em>can be</em> nested inside other blocks:</p>",
+      "preview": "Although functions can’t be nested inside other functions, blocks can be nested ",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{ // block\n    return x + y;\n} // end block\n\nint main()\n{ // outer block\n\n    // multiple statements\n    int value {};\n\n    { // inner/nested block\n        add(3, 4);\n    } // end inner/nested block\n\n    return 0;\n\n} // end outer block",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{ // block\n    return x + y;\n} // end block\n\nint main()\n{ // outer block\n\n    // multiple statements\n    int value {};\n\n    { // inner/nested block\n        add(3, 4);\n    } // end inner/nested block\n\n    return 0;\n\n} // end outer block</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b7",
+      "type": "paragraph",
+      "html": "<p>When blocks are nested, the enclosing block is typically called the <strong>outer block</strong> and the enclosed block is called the <strong>inner block</strong> or <strong>nested block</strong>.</p>",
+      "preview": "When blocks are nested, the enclosing block is typically called the outer block ",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b8",
+      "type": "section",
+      "title": "Using blocks to execute multiple statements conditionally",
+      "html": "<h3 class=\"cpp-section-heading\">Using blocks to execute multiple statements conditionally</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "compound-statements-blocks_b9",
+      "type": "paragraph",
+      "html": "<p>One of the most common use cases for blocks is in conjunction with <code>if statements</code>. By default, an <code>if statement</code> executes a single statement if the condition evaluates to <code>true</code>. However, we can replace this single statement with a block of statements if we want multiple statements to execute when the condition evaluates to <code>true</code>.</p>",
+      "preview": "One of the most common use cases for blocks is in conjunction with if statements",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b10",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{ // start of outer block\n    std::cout << \"Enter an integer: \";\n    int value {};\n    std::cin >> value;\n    \n    if (value >= 0)\n    { // start of nested block\n        std::cout << value << \" is a positive integer (or zero)\\n\";\n        std::cout << \"Double this number is \" << value * 2 << '\\n';\n    } // end of nested block\n    else\n    { // start of another nested block\n        std::cout << value << \" is a negative integer\\n\";\n        std::cout << \"The positive of this number is \" << -value << '\\n';\n    } // end of another nested block\n\n    return 0;\n} // end of outer block",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{ // start of outer block\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int value {};\n    std::cin &gt;&gt; value;\n    \n    if (value &gt;= 0)\n    { // start of nested block\n        std::cout &lt;&lt; value &lt;&lt; \" is a positive integer (or zero)\\n\";\n        std::cout &lt;&lt; \"Double this number is \" &lt;&lt; value * 2 &lt;&lt; '\\n';\n    } // end of nested block\n    else\n    { // start of another nested block\n        std::cout &lt;&lt; value &lt;&lt; \" is a negative integer\\n\";\n        std::cout &lt;&lt; \"The positive of this number is \" &lt;&lt; -value &lt;&lt; '\\n';\n    } // end of another nested block\n\n    return 0;\n} // end of outer block</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b12",
+      "type": "paragraph",
+      "html": "<p>If the user enters the number 3, this program prints:</p>",
+      "preview": "If the user enters the number 3, this program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b13",
+      "type": "output",
+      "text": "Enter an integer: 3\n3 is a positive integer (or zero)\nDouble this number is 6\n",
+      "html": "<pre>Enter an integer: 3\n3 is a positive integer (or zero)\nDouble this number is 6\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "compound-statements-blocks_b14",
+      "type": "paragraph",
+      "html": "<p>If the user enters the number -4, this program prints:</p>",
+      "preview": "If the user enters the number -4, this program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b15",
+      "type": "output",
+      "text": "Enter an integer: -4\n-4 is a negative integer\nThe positive of this number is 4\n",
+      "html": "<pre>Enter an integer: -4\n-4 is a negative integer\nThe positive of this number is 4\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "compound-statements-blocks_b16",
+      "type": "section",
+      "title": "Block nesting levels",
+      "html": "<h3 class=\"cpp-section-heading\">Block nesting levels</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "compound-statements-blocks_b17",
+      "type": "paragraph",
+      "html": "<p>It is even possible to put blocks inside of blocks inside of blocks:</p>",
+      "preview": "It is even possible to put blocks inside of blocks inside of blocks:",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{ // block 1, nesting level 1\n    std::cout << \"Enter an integer: \";\n    int value {};\n    std::cin >> value;\n    \n    if (value >  0)\n    { // block 2, nesting level 2\n        if ((value % 2) == 0)\n        { // block 3, nesting level 3\n            std::cout << value << \" is positive and even\\n\";\n        }\n        else\n        { // block 4, also nesting level 3\n            std::cout << value << \" is positive and odd\\n\";\n        }\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{ // block 1, nesting level 1\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int value {};\n    std::cin &gt;&gt; value;\n    \n    if (value &gt;  0)\n    { // block 2, nesting level 2\n        if ((value % 2) == 0)\n        { // block 3, nesting level 3\n            std::cout &lt;&lt; value &lt;&lt; \" is positive and even\\n\";\n        }\n        else\n        { // block 4, also nesting level 3\n            std::cout &lt;&lt; value &lt;&lt; \" is positive and odd\\n\";\n        }\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b19",
+      "type": "paragraph",
+      "html": "<p>The <strong>nesting level</strong> (also called the <strong>nesting depth</strong>) of a function is the maximum number of nested blocks you can be inside at any point in the function (including the outer block). In the above function, there are 4 blocks, but the nesting level is 3 since in this program you can never be inside more than 3 blocks at any point.</p>",
+      "preview": "The nesting level (also called the nesting depth) of a function is the maximum n",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b20",
+      "type": "paragraph",
+      "html": "<p>The C++ standard says that C++ compilers should support 256 levels of nesting -- however not all do (e.g. as of the time of writing, Visual Studio supports fewer).</p>",
+      "preview": "The C++ standard says that C++ compilers should support 256 levels of nesting --",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b21",
+      "type": "paragraph",
+      "html": "<p>It’s a good idea to keep your nesting level to 3 or less. Just as overly-long functions are good candidates for refactoring (breaking into smaller functions), overly-nested blocks are hard to read and are good candidates for refactoring (with the most-nested blocks becoming separate functions).</p>",
+      "preview": "It’s a good idea to keep your nesting level to 3 or less. Just as overly-long fu",
+      "canCheck": true
+    },
+    {
+      "id": "compound-statements-blocks_b22",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Keep the nesting level of your functions to 3 or less. If your function has a need for more nested levels, consider refactoring your function into sub-functions.</p></div>",
+      "preview": "Best practiceKeep the nesting level of your functions to 3 or less. If your function has a need for ",
+      "canCheck": true
+    }
+  ]
+}

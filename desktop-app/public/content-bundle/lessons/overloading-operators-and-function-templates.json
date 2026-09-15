@@ -1,0 +1,304 @@
+{
+  "index": 269,
+  "chapterId": "21",
+  "number": "21.14",
+  "title": "21.14 — Overloading operators and function templates",
+  "url": "https://www.learncpp.com/cpp-tutorial/overloading-operators-and-function-templates/",
+  "slug": "overloading-operators-and-function-templates",
+  "scrapedAt": "2026-09-15T16:30:56.196Z",
+  "totalBlocks": 40,
+  "totalCheckpoints": 33,
+  "blocks": [
+    {
+      "id": "overloading-operators-and-function-templates_b0",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-instantiation/\">11.7 -- Function template instantiation</a>, we discussed how the compiler will use function templates to instantiate functions, which are then compiled. We also noted that these functions may not compile, if the code in the function template tries to perform some operation that the actual type doesn’t support (such as adding integer value <code>1</code> to a <code>std::string</code>).</p>",
+      "preview": "In lesson 11.7 -- Function template instantiation, we discussed how the compiler",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b1",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll take a look at a few examples where our instantiated functions won’t compile because our actual class types don’t support those operators, and show how we can define those operators so that the instantiated functions will then compile.</p>",
+      "preview": "In this lesson, we’ll take a look at a few examples where our instantiated funct",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b2",
+      "type": "section",
+      "title": "Operators, function calls, and function templates",
+      "html": "<h3 class=\"cpp-section-heading\">Operators, function calls, and function templates</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b3",
+      "type": "paragraph",
+      "html": "<p>First, let’s create a simple class:</p>",
+      "preview": "First, let’s create a simple class:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Cents\n{\nprivate:\n    int m_cents{};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream& operator<< (std::ostream& ostr, const Cents& c)\n    {\n        ostr << c.m_cents;\n        return ostr;\n    }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Cents\n{\nprivate:\n    int m_cents{};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; ostr, const Cents&amp; c)\n    {\n        ostr &lt;&lt; c.m_cents;\n        return ostr;\n    }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b5",
+      "type": "paragraph",
+      "html": "<p>and define a <code>max</code> function template:</p>",
+      "preview": "and define a max function template:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T>\nconst T& max(const T& x, const T& y)\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nconst T&amp; max(const T&amp; x, const T&amp; y)\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b7",
+      "type": "paragraph",
+      "html": "<p>Now, let’s see what happens when we try to call <code>max()</code> with object of type <code>Cents</code>:</p>",
+      "preview": "Now, let’s see what happens when we try to call max() with object of type Cents:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n    int m_cents{};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream& operator<< (std::ostream& ostr, const Cents& c)\n    {\n        ostr << c.m_cents;\n        return ostr;\n    }\n};\n\ntemplate <typename T>\nconst T& max(const T& x, const T& y)\n{\n    return (x < y) ? y : x;\n}\n\nint main()\n{\n    Cents nickel{ 5 };\n    Cents dime{ 10 };\n\n    Cents bigger { max(nickel, dime) };\n    std::cout << bigger << \" is bigger\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n    int m_cents{};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; ostr, const Cents&amp; c)\n    {\n        ostr &lt;&lt; c.m_cents;\n        return ostr;\n    }\n};\n\ntemplate &lt;typename T&gt;\nconst T&amp; max(const T&amp; x, const T&amp; y)\n{\n    return (x &lt; y) ? y : x;\n}\n\nint main()\n{\n    Cents nickel{ 5 };\n    Cents dime{ 10 };\n\n    Cents bigger { max(nickel, dime) };\n    std::cout &lt;&lt; bigger &lt;&lt; \" is bigger\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b9",
+      "type": "paragraph",
+      "html": "<p>C++ will create a template instance for max() that looks like this:</p>",
+      "preview": "C++ will create a template instance for max() that looks like this:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b10",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <>\nconst Cents& max(const Cents& x, const Cents& y)\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;&gt;\nconst Cents&amp; max(const Cents&amp; x, const Cents&amp; y)\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b11",
+      "type": "paragraph",
+      "html": "<p>And then it will try to compile this function. See the problem here? C++ has no idea how to evaluate <code>x &lt; y</code> when <code>x</code> and <code>y</code> are of type <code>Cents</code>! Consequently, this will produce a compile error.</p>",
+      "preview": "And then it will try to compile this function. See the problem here? C++ has no ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b12",
+      "type": "paragraph",
+      "html": "<p>To get around this problem, simply overload <code>operator&lt;</code> for any class we wish to use <code>max</code> with:</p>",
+      "preview": "To get around this problem, simply overload operator< for any class we wish to u",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n    \n    friend bool operator< (const Cents& c1, const Cents& c2)\n    {\n        return (c1.m_cents < c2.m_cents);\n    }\n\n    friend std::ostream& operator<< (std::ostream& ostr, const Cents& c)\n    {\n        ostr << c.m_cents;\n        return ostr;\n    }\n};\n\ntemplate <typename T>\nconst T& max(const T& x, const T& y)\n{\n    return (x < y) ? y : x;\n}\n\nint main()\n{\n    Cents nickel{ 5 };\n    Cents dime { 10 };\n\n    Cents bigger { max(nickel, dime) };\n    std::cout << bigger << \" is bigger\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n    \n    friend bool operator&lt; (const Cents&amp; c1, const Cents&amp; c2)\n    {\n        return (c1.m_cents &lt; c2.m_cents);\n    }\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; ostr, const Cents&amp; c)\n    {\n        ostr &lt;&lt; c.m_cents;\n        return ostr;\n    }\n};\n\ntemplate &lt;typename T&gt;\nconst T&amp; max(const T&amp; x, const T&amp; y)\n{\n    return (x &lt; y) ? y : x;\n}\n\nint main()\n{\n    Cents nickel{ 5 };\n    Cents dime { 10 };\n\n    Cents bigger { max(nickel, dime) };\n    std::cout &lt;&lt; bigger &lt;&lt; \" is bigger\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b14",
+      "type": "paragraph",
+      "html": "<p>This works as expected, and prints:</p>",
+      "preview": "This works as expected, and prints:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b15",
+      "type": "output",
+      "text": "10 is bigger\n",
+      "html": "<pre>10 is bigger\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b16",
+      "type": "section",
+      "title": "Another example",
+      "html": "<h3 class=\"cpp-section-heading\">Another example</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b17",
+      "type": "paragraph",
+      "html": "<p>Let’s do one more example of a function template not working because of missing overloaded operators.</p>",
+      "preview": "Let’s do one more example of a function template not working because of missing ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b18",
+      "type": "paragraph",
+      "html": "<p>The following function template will calculate the average of a number of objects in an array:</p>",
+      "preview": "The following function template will calculate the average of a number of object",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count < numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nint main()\n{\n    int intArray[] { 5, 3, 2, 1, 4 };\n    std::cout << average(intArray, 5) << '\\n';\n\n    double doubleArray[] { 3.12, 3.45, 9.23, 6.34 };\n    std::cout << average(doubleArray, 4) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count &lt; numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nint main()\n{\n    int intArray[] { 5, 3, 2, 1, 4 };\n    std::cout &lt;&lt; average(intArray, 5) &lt;&lt; '\\n';\n\n    double doubleArray[] { 3.12, 3.45, 9.23, 6.34 };\n    std::cout &lt;&lt; average(doubleArray, 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b20",
+      "type": "paragraph",
+      "html": "<p>This produces the values:</p>",
+      "preview": "This produces the values:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b21",
+      "type": "output",
+      "text": "3\n5.535\n",
+      "html": "<pre>3\n5.535\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b22",
+      "type": "paragraph",
+      "html": "<p>As you can see, it works great for built-in types!</p>",
+      "preview": "As you can see, it works great for built-in types!",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b23",
+      "type": "paragraph",
+      "html": "<p>Now let’s see what happens when we call this function on our <code>Cents</code> class:</p>",
+      "preview": "Now let’s see what happens when we call this function on our Cents class:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count < numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout << average(centsArray, 4) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count &lt; numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout &lt;&lt; average(centsArray, 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b25",
+      "type": "paragraph",
+      "html": "<p>The compiler goes berserk and produces a ton of error messages! The first error message will be something like this:</p>",
+      "preview": "The compiler goes berserk and produces a ton of error messages! The first error ",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b26",
+      "type": "output",
+      "text": "error C2679: binary << : no operator found which takes a right-hand operand of type Cents (or there is no acceptable conversion)\n",
+      "html": "<pre>error C2679: binary &lt;&lt; : no operator found which takes a right-hand operand of type Cents (or there is no acceptable conversion)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b27",
+      "type": "paragraph",
+      "html": "<p>Remember that <code>average()</code> returns a <code>Cents</code> object, and we are trying to stream that object to <code>std::cout</code> using <code>operator&lt;&lt;</code>. However, we haven’t defined the <code>operator&lt;&lt;</code> for our <code>Cents</code> class yet. Let’s do that:</p>",
+      "preview": "Remember that average() returns a Cents object, and we are trying to stream that",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count < numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream& operator<< (std::ostream& out, const Cents& cents)\n    {\n        out << cents.m_cents << \" cents \";\n        return out;\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout << average(centsArray, 4) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count &lt; numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Cents&amp; cents)\n    {\n        out &lt;&lt; cents.m_cents &lt;&lt; \" cents \";\n        return out;\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout &lt;&lt; average(centsArray, 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b29",
+      "type": "paragraph",
+      "html": "<p>If we compile again, we will get another error:</p>",
+      "preview": "If we compile again, we will get another error:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b30",
+      "type": "output",
+      "text": "error C2676: binary += : Cents does not define this operator or a conversion to a type acceptable to the predefined operator",
+      "html": "<pre>error C2676: binary += : Cents does not define this operator or a conversion to a type acceptable to the predefined operator</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b31",
+      "type": "paragraph",
+      "html": "<p>This error is actually being caused by the function template instance created when we call <code>average(const Cents*, int)</code>. Remember that when we call a templated function, the compiler “stencils” out a copy of the function where the template type parameters (the placeholder types) have been replaced with the actual types in the function call. Here is the function template instance for <code>average()</code> when <code>T</code> is a <code>Cents</code> object:</p>",
+      "preview": "This error is actually being caused by the function template instance created wh",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <>\nCents average(const Cents* myArray, int numValues)\n{\n    Cents sum { 0 };\n    for (int count { 0 }; count < numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;&gt;\nCents average(const Cents* myArray, int numValues)\n{\n    Cents sum { 0 };\n    for (int count { 0 }; count &lt; numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b33",
+      "type": "paragraph",
+      "html": "<p>The reason we are getting an error message is because of the following line:</p>",
+      "preview": "The reason we are getting an error message is because of the following line:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "        sum += myArray[count];",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">        sum += myArray[count];</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b35",
+      "type": "paragraph",
+      "html": "<p>In this case, <code>sum</code> is a <code>Cents</code> object, but we have not defined <code>operator+=</code> for <code>Cents</code> objects! We will need to define this function in order for <code>average()</code> to be able to work with <code>Cents</code>. Looking forward, we can see that <code>average()</code> also uses the <code>operator/=</code>, so we will go ahead and define that as well:</p>",
+      "preview": "In this case, sum is a Cents object, but we have not defined operator+= for Cent",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count < numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream& operator<< (std::ostream& out, const Cents& cents)\n    {\n        out << cents.m_cents << \" cents \";\n        return out;\n    }\n\n    Cents& operator+= (const Cents &cents)\n    {\n        m_cents += cents.m_cents;\n        return *this;\n    }\n\n    Cents& operator/= (int x)\n    {\n        m_cents /= x;\n        return *this;\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout << average(centsArray, 4) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nT average(const T* myArray, int numValues)\n{\n    T sum { 0 };\n    for (int count { 0 }; count &lt; numValues; ++count)\n        sum += myArray[count];\n\n    sum /= numValues;\n    return sum;\n}\n\nclass Cents\n{\nprivate:\n    int m_cents {};\npublic:\n    Cents(int cents)\n        : m_cents { cents }\n    {\n    }\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Cents&amp; cents)\n    {\n        out &lt;&lt; cents.m_cents &lt;&lt; \" cents \";\n        return out;\n    }\n\n    Cents&amp; operator+= (const Cents &amp;cents)\n    {\n        m_cents += cents.m_cents;\n        return *this;\n    }\n\n    Cents&amp; operator/= (int x)\n    {\n        m_cents /= x;\n        return *this;\n    }\n};\n\nint main()\n{\n    Cents centsArray[] { Cents { 5 }, Cents { 10 }, Cents { 15 }, Cents { 14 } };\n    std::cout &lt;&lt; average(centsArray, 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b37",
+      "type": "paragraph",
+      "html": "<p>Finally, our code will compile and run! Here is the result:</p>",
+      "preview": "Finally, our code will compile and run! Here is the result:",
+      "canCheck": true
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b38",
+      "type": "output",
+      "text": "11 cents\n",
+      "html": "<pre>11 cents\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "overloading-operators-and-function-templates_b39",
+      "type": "paragraph",
+      "html": "<p>Note that we didn’t have to modify <code>average()</code> at all to make it work with objects of type <code>Cents</code>. We simply had to define the operators used to implement <code>average()</code> for the <code>Cents</code> class, and the compiler took care of the rest!</p>",
+      "preview": "Note that we didn’t have to modify average() at all to make it work with objects",
+      "canCheck": true
+    }
+  ]
+}

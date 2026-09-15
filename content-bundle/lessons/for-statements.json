@@ -1,0 +1,786 @@
+{
+  "index": 110,
+  "chapterId": "8",
+  "number": "8.10",
+  "title": "8.10 — For statements",
+  "url": "https://www.learncpp.com/cpp-tutorial/for-statements/",
+  "slug": "for-statements",
+  "scrapedAt": "2026-09-15T16:29:33.298Z",
+  "totalBlocks": 106,
+  "totalCheckpoints": 84,
+  "blocks": [
+    {
+      "id": "for-statements_b0",
+      "type": "paragraph",
+      "html": "<p>By far, the most utilized loop statement in C++ is the for-statement. The <strong>for statement</strong> (also called a <strong>for loop</strong>) is preferred when we have an obvious loop variable because it lets us easily and concisely define, initialize, test, and change the value of loop variables.</p>",
+      "preview": "By far, the most utilized loop statement in C++ is the for-statement. The for st",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b1",
+      "type": "paragraph",
+      "html": "<p>As of C++11, there are two different kinds of for-loops. We’ll cover the classic for-statement in this lesson, and the newer range-based for-statement in a future lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/\">16.8 -- Range-based for loops (for-each)</a>) once we’ve covered some other prerequisite topics.</p>",
+      "preview": "As of C++11, there are two different kinds of for-loops. We’ll cover the classic",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b2",
+      "type": "paragraph",
+      "html": "<p>The for-statement looks pretty simple in abstract:</p>",
+      "preview": "The for-statement looks pretty simple in abstract:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b3",
+      "type": "output",
+      "text": "for (init-statement; condition; end-expression)\n   statement;\n",
+      "html": "<pre>for (init-statement; condition; end-expression)\n   statement;\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b4",
+      "type": "paragraph",
+      "html": "<p>The easiest way to initially understand how a for-statement works is to convert it into an equivalent while-statement:</p>",
+      "preview": "The easiest way to initially understand how a for-statement works is to convert ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b5",
+      "type": "output",
+      "text": "{ // note the block here\n    init-statement; // used to define variables used in the loop\n    while (condition)\n    {\n        statement; \n        end-expression; // used to modify the loop variable prior to reassessment of the condition\n    }\n} // variables defined inside the loop go out of scope here\n",
+      "html": "<pre>{ // note the block here\n    init-statement; // used to define variables used in the loop\n    while (condition)\n    {\n        statement; \n        end-expression; // used to modify the loop variable prior to reassessment of the condition\n    }\n} // variables defined inside the loop go out of scope here\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b6",
+      "type": "section",
+      "title": "Evaluation of for-statements",
+      "html": "<h3 class=\"cpp-section-heading\">Evaluation of for-statements</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b7",
+      "type": "paragraph",
+      "html": "<p>A for-statement is evaluated in 3 parts:</p>",
+      "preview": "A for-statement is evaluated in 3 parts:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b8",
+      "type": "paragraph",
+      "html": "<p>First, the init-statement is executed. This only happens once when the loop is initiated. The init-statement is typically used for variable definition and initialization. These variables have “loop scope”, which really just is a form of block scope where these variables exist from the point of definition through the end of the loop statement. In our while-loop equivalent, you can see that the init-statement is inside a block that contains the loop, so the variables defined in the init-statement go out of scope when the block containing the loop ends.</p>",
+      "preview": "First, the init-statement is executed. This only happens once when the loop is i",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b9",
+      "type": "paragraph",
+      "html": "<p>Second, with each loop iteration, the condition is evaluated. If this evaluates to <code>true</code>, the statement is executed. If this evaluates to <code>false</code>, the loop terminates and execution continues with the next statement beyond the loop.</p>",
+      "preview": "Second, with each loop iteration, the condition is evaluated. If this evaluates ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b10",
+      "type": "paragraph",
+      "html": "<p>Finally, after the statement is executed, the end-expression is evaluated. Typically, this expression is used to increment or decrement the loop variables defined in the init-statement. After the end-expression has been evaluated, execution returns to the second step (and the condition is evaluated again).</p>",
+      "preview": "Finally, after the statement is executed, the end-expression is evaluated. Typic",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b11",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The order of execution for the different parts of a for-statement is as follows:</p><ul><li>Init-statement</li><li>Condition (if this is false, the loop terminates here).</li><li>Loop body</li><li>End-expression (then jumps back to condition)</li></ul><p>Note that the end-expression executes <em>after</em> the loop statement, and then the condition is re-evaluated.</p></div>",
+      "preview": "Key insightThe order of execution for the different parts of a for-statement is as follows:Init-stat",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b12",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at a sample for-loop and discuss how it works:</p>",
+      "preview": "Let’s take a look at a sample for-loop and discuss how it works:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 1 }; i <= 10; ++i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 1 }; i &lt;= 10; ++i)\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b14",
+      "type": "paragraph",
+      "html": "<p>First, we declare a loop variable named <code>i</code>, and initialize it with the value <code>1</code>.</p>",
+      "preview": "First, we declare a loop variable named i, and initialize it with the value 1.",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b15",
+      "type": "paragraph",
+      "html": "<p>Second, <code>i &lt;= 10</code> is evaluated, and since <code>i</code> is <code>1</code>, this evaluates to <code>true</code>. Consequently, the statement executes, which prints <code>1</code> and a space.</p>",
+      "preview": "Second, i <= 10 is evaluated, and since i is 1, this evaluates to true. Conseque",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b16",
+      "type": "paragraph",
+      "html": "<p>Finally, <code>++i</code> is evaluated, which increments <code>i</code> to <code>2</code>. Then the loop goes back to the second step.</p>",
+      "preview": "Finally, ++i is evaluated, which increments i to 2. Then the loop goes back to t",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b17",
+      "type": "paragraph",
+      "html": "<p>Now, <code>i&lt;= 10</code> is evaluated again. Since <code>i</code> has value <code>2</code>, this evaluates to <code>true</code>, so the loop iterates again. The statement prints <code>2</code> and a space, and <code>i</code> is incremented to <code>3</code>. The loop continues to iterate until eventually <code>i</code> is incremented to <code>11</code>, at which point <code>i &lt;= 10</code> evaluates to<code>false</code>, and the loop exits.</p>",
+      "preview": "Now, i<= 10 is evaluated again. Since i has value 2, this evaluates to true, so ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b18",
+      "type": "paragraph",
+      "html": "<p>Consequently, this program prints the result:</p>",
+      "preview": "Consequently, this program prints the result:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b19",
+      "type": "output",
+      "text": "1 2 3 4 5 6 7 8 9 10\n",
+      "html": "<pre>1 2 3 4 5 6 7 8 9 10\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b20",
+      "type": "paragraph",
+      "html": "<p>For the sake of example, let’s convert the above for-loop into an equivalent while-loop:</p>",
+      "preview": "For the sake of example, let’s convert the above for-loop into an equivalent whi",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    { // the block here ensures block scope for i\n        int i{ 1 }; // our init-statement\n        while (i <= 10) // our condition\n        {\n            std::cout << i << ' '; // our statement\n            ++i; // our end-expression\n        }\n    }\n\n    std::cout << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    { // the block here ensures block scope for i\n        int i{ 1 }; // our init-statement\n        while (i &lt;= 10) // our condition\n        {\n            std::cout &lt;&lt; i &lt;&lt; ' '; // our statement\n            ++i; // our end-expression\n        }\n    }\n\n    std::cout &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b22",
+      "type": "paragraph",
+      "html": "<p>That doesn’t look so bad, does it? Note that the outer braces are necessary here, because <code>i</code> goes out of scope when the loop ends.</p>",
+      "preview": "That doesn’t look so bad, does it? Note that the outer braces are necessary here",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b23",
+      "type": "paragraph",
+      "html": "<p>For-loops can be hard for new programmers to read -- however, experienced programmers love them because they are a very compact way to do loops with a counter, with all of the necessary information about the loop variables, loop conditions, and loop variable modifiers presented up front. This helps reduce errors.</p>",
+      "preview": "For-loops can be hard for new programmers to read -- however, experienced progra",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b24",
+      "type": "section",
+      "title": "More for-loop examples",
+      "html": "<h3 class=\"cpp-section-heading\">More for-loop examples</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b25",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of a function that uses a for-loop to calculate integer exponents:</p>",
+      "preview": "Here’s an example of a function that uses a for-loop to calculate integer expone",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cstdint> // for fixed-width integers\n\n// returns the value base ^ exponent -- watch out for overflow!\nstd::int64_t pow(int base, int exponent)\n{\n    std::int64_t total{ 1 };\n\n    for (int i{ 0 }; i < exponent; ++i)\n        total *= base;\n\n    return total;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt; // for fixed-width integers\n\n// returns the value base ^ exponent -- watch out for overflow!\nstd::int64_t pow(int base, int exponent)\n{\n    std::int64_t total{ 1 };\n\n    for (int i{ 0 }; i &lt; exponent; ++i)\n        total *= base;\n\n    return total;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b27",
+      "type": "paragraph",
+      "html": "<p>This function returns the value base^exponent (base to the exponent power).</p>",
+      "preview": "This function returns the value base^exponent (base to the exponent power).",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b28",
+      "type": "paragraph",
+      "html": "<p>This is a straightforward incrementing for-loop, with <code>i</code> looping from <code>0</code> up to (but excluding) <code>exponent</code>.</p>",
+      "preview": "This is a straightforward incrementing for-loop, with i looping from 0 up to (bu",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b29",
+      "type": "paragraph",
+      "html": "<p>In all cases, total is initialized to <code>1</code>.<br>If <code>exponent</code> is 0, the for-loop will execute 0 times. <code>total</code> (with value <code>1</code>) is returned, which is equivalent to <code>base^0</code>.<br>If <code>exponent</code> is 1, the for-loop will execute 1 time. <code>total</code> (with value <code>1</code>) is multiplied by <code>base</code>, so it is now has value <code>base</code>, which is equivalent to <code>base^1</code>, which is then returned.<br>If <code>exponent</code> is 2, the for-loop will execute 2 times. <code>total</code> (with value <code>1</code>) is multiplied by <code>base</code> twice, so it now has value <code>base * base</code>, which is equivalent to <code>base^2</code>, which is then returned.</p>",
+      "preview": "In all cases, total is initialized to 1.If exponent is 0, the for-loop will exec",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b30",
+      "type": "paragraph",
+      "html": "<p>Although most for-loops increment the loop variable by 1, we can decrement it as well:</p>",
+      "preview": "Although most for-loops increment the loop variable by 1, we can decrement it as",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 9 }; i >= 0; --i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 9 }; i &gt;= 0; --i)\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b32",
+      "type": "paragraph",
+      "html": "<p>This prints the result:</p>",
+      "preview": "This prints the result:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b33",
+      "type": "output",
+      "text": "9 8 7 6 5 4 3 2 1 0\n",
+      "html": "<pre>9 8 7 6 5 4 3 2 1 0\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b34",
+      "type": "paragraph",
+      "html": "<p>Alternately, we can change the value of our loop variable by more than 1 with each iteration:</p>",
+      "preview": "Alternately, we can change the value of our loop variable by more than 1 with ea",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 0 }; i <= 10; i += 2) // increment by 2 each iteration\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 0 }; i &lt;= 10; i += 2) // increment by 2 each iteration\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b36",
+      "type": "paragraph",
+      "html": "<p>This prints the result:</p>",
+      "preview": "This prints the result:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b37",
+      "type": "output",
+      "text": "0 2 4 6 8 10\n",
+      "html": "<pre>0 2 4 6 8 10\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b38",
+      "type": "section",
+      "title": "The perils of operator!= in for-loop conditions",
+      "html": "<h3 class=\"cpp-section-heading\">The perils of <code>operator!=</code> in for-loop conditions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b39",
+      "type": "paragraph",
+      "html": "<p>When writing a loop condition involving a value, we can often write the condition in many different ways. The following two loops execute identically:</p>",
+      "preview": "When writing a loop condition involving a value, we can often write the conditio",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // uses <\n         std::cout << i;\n\n    for (int i { 0 }; i != 10; ++i) // uses !=\n         std::cout << i;\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i { 0 }; i &lt; 10; ++i) // uses &lt;\n         std::cout &lt;&lt; i;\n\n    for (int i { 0 }; i != 10; ++i) // uses !=\n         std::cout &lt;&lt; i;\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b41",
+      "type": "paragraph",
+      "html": "<p>So which should we prefer? The former is the better choice, as it will terminate even if <code>i</code> jumps over the value <code>10</code>, whereas the latter will not. The following example demonstrates this:</p>",
+      "preview": "So which should we prefer? The former is the better choice, as it will terminate",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b42",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // uses <, still terminates\n    {\n         std::cout << i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n    for (int i { 0 }; i != 10; ++i) // uses !=, infinite loop\n    {\n         std::cout << i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n     return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i { 0 }; i &lt; 10; ++i) // uses &lt;, still terminates\n    {\n         std::cout &lt;&lt; i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n    for (int i { 0 }; i != 10; ++i) // uses !=, infinite loop\n    {\n         std::cout &lt;&lt; i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n     return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b43",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid <code>operator!=</code> when doing numeric comparisons in the for-loop condition. Prefer <code>operator&lt;</code> or <code>operator&lt;=</code> where possible.</p></div>",
+      "preview": "Best practiceAvoid operator!= when doing numeric comparisons in the for-loop condition. Prefer opera",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b44",
+      "type": "section",
+      "title": "Off-by-one errors",
+      "html": "<h3 class=\"cpp-section-heading\">Off-by-one errors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b45",
+      "type": "paragraph",
+      "html": "<p>One of the biggest problems that new programmers have with for-loops (and other loops that utilize counters) are off-by-one errors. <strong>Off-by-one errors</strong> occur when the loop iterates one too many or one too few times to produce the desired result.</p>",
+      "preview": "One of the biggest problems that new programmers have with for-loops (and other ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b46",
+      "type": "paragraph",
+      "html": "<p>Here’s an example:</p>",
+      "preview": "Here’s an example:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b47",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    // oops, we used operator< instead of operator<=\n    for (int i{ 1 }; i < 5; ++i)\n    {\n        std::cout << i << ' ';\n    }\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // oops, we used operator&lt; instead of operator&lt;=\n    for (int i{ 1 }; i &lt; 5; ++i)\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b48",
+      "type": "paragraph",
+      "html": "<p>This program is supposed to print <code>1 2 3 4 5</code>, but it only prints <code>1 2 3 4</code> because we used the wrong relational operator.</p>",
+      "preview": "This program is supposed to print 1 2 3 4 5, but it only prints 1 2 3 4 because ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b49",
+      "type": "paragraph",
+      "html": "<p>Although the most common cause for these errors is using the wrong relational operator, they can sometimes occur by using pre-increment or pre-decrement instead of post-increment or post-decrement, or vice-versa.</p>",
+      "preview": "Although the most common cause for these errors is using the wrong relational op",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b50",
+      "type": "section",
+      "title": "Omitted expressions",
+      "html": "<h3 class=\"cpp-section-heading\">Omitted expressions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b51",
+      "type": "paragraph",
+      "html": "<p>It is possible to write <em>for loops</em> that omit any or all of the statements or expressions. For example, in the following example, we’ll omit the init-statement and end-expression, leaving only the condition:</p>",
+      "preview": "It is possible to write for loops that omit any or all of the statements or expr",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int i{ 0 };\n    for ( ; i < 10; ) // no init-statement or end-expression\n    {\n        std::cout << i << ' ';\n        ++i;\n    }\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int i{ 0 };\n    for ( ; i &lt; 10; ) // no init-statement or end-expression\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n        ++i;\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b53",
+      "type": "paragraph",
+      "html": "<p>This <em>for loop</em> produces the result:</p>",
+      "preview": "This for loop produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b54",
+      "type": "output",
+      "text": "0 1 2 3 4 5 6 7 8 9\n",
+      "html": "<pre>0 1 2 3 4 5 6 7 8 9\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b55",
+      "type": "paragraph",
+      "html": "<p>Rather than having the <em>for loop</em> do the initialization and incrementing, we’ve done it manually. We have done so purely for academic purposes in this example, but there are cases where not defining a loop variable (because you already have one) or not incrementing it in the end-expression (because you’re incrementing it some other way) is desired.</p>",
+      "preview": "Rather than having the for loop do the initialization and incrementing, we’ve do",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b56",
+      "type": "paragraph",
+      "html": "<p>Although you do not see it very often, it is worth noting that the following example produces an infinite loop:</p>",
+      "preview": "Although you do not see it very often, it is worth noting that the following exa",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "for (;;)\n    statement;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">for (;;)\n    statement;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b58",
+      "type": "paragraph",
+      "html": "<p>The above example is equivalent to:</p>",
+      "preview": "The above example is equivalent to:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b59",
+      "type": "code",
+      "language": "cpp",
+      "code": "while (true)\n    statement;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">while (true)\n    statement;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b60",
+      "type": "paragraph",
+      "html": "<p>This might be a little unexpected, as you’d probably expect an omitted condition-expression to be treated as <code>false</code>. However, the C++ standard explicitly (and inconsistently) defines that an omitted condition-expression in a for-loop should be treated as <code>true</code>.</p>",
+      "preview": "This might be a little unexpected, as you’d probably expect an omitted condition",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b61",
+      "type": "paragraph",
+      "html": "<p>We recommend avoiding this form of the for loop altogether and using <code>while (true)</code> instead.</p>",
+      "preview": "We recommend avoiding this form of the for loop altogether and using while (true",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b62",
+      "type": "section",
+      "title": "For-loops with multiple counters",
+      "html": "<h3 class=\"cpp-section-heading\">For-loops with multiple counters</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b63",
+      "type": "paragraph",
+      "html": "<p>Although for-loops typically iterate over only one variable, sometimes for-loops need to work with multiple variables. To assist with this, the programmer can define multiple variables in the init-statement, and can make use of the comma operator to change the value of multiple variables in the end-expression:</p>",
+      "preview": "Although for-loops typically iterate over only one variable, sometimes for-loops",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b64",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    for (int x{ 0 }, y{ 9 }; x < 10; ++x, --y)\n        std::cout << x << ' ' << y << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int x{ 0 }, y{ 9 }; x &lt; 10; ++x, --y)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b65",
+      "type": "paragraph",
+      "html": "<p>This loop defines and initializes two new variables: <code>x</code> and <code>y</code>. It iterates <code>x</code> over the range <code>0</code> to <code>9</code>, and after each iteration <code>x</code> is incremented and <code>y</code> is decremented.</p>",
+      "preview": "This loop defines and initializes two new variables: x and y. It iterates x over",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b66",
+      "type": "paragraph",
+      "html": "<p>This program produces the result:</p>",
+      "preview": "This program produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b67",
+      "type": "output",
+      "text": "0 9\n1 8\n2 7\n3 6\n4 5\n5 4\n6 3\n7 2\n8 1\n9 0\n",
+      "html": "<pre>0 9\n1 8\n2 7\n3 6\n4 5\n5 4\n6 3\n7 2\n8 1\n9 0\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b68",
+      "type": "paragraph",
+      "html": "<p>This is about the only place in C++ where defining multiple variables in the same statement, and use of the comma operator is considered an acceptable practice.</p>",
+      "preview": "This is about the only place in C++ where defining multiple variables in the sam",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b69",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover the comma operator in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-comma-operator/\">6.5 -- The comma operator</a>.</p></div>",
+      "preview": "Related contentWe cover the comma operator in lesson 6.5 -- The comma operator.",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b70",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Defining multiple variables (in the init-statement) and using the comma operator (in the end-expression) is acceptable inside a for-statement.</p></div>",
+      "preview": "Best practiceDefining multiple variables (in the init-statement) and using the comma operator (in th",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b71",
+      "type": "section",
+      "title": "Nested for-loops",
+      "html": "<h3 class=\"cpp-section-heading\">Nested for-loops</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b72",
+      "type": "paragraph",
+      "html": "<p>Like other types of loops, for-loops can be nested inside other loops. In the following example, we’re nesting a for-loop inside another for-loop:</p>",
+      "preview": "Like other types of loops, for-loops can be nested inside other loops. In the fo",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b73",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tfor (char c{ 'a' }; c <= 'e'; ++c) // outer loop on letters\n\t{\n\t\tstd::cout << c; // print our letter first\n\t\t\n\t\tfor (int i{ 0 }; i < 3; ++i) // inner loop on all numbers\n\t\t\tstd::cout << i;\n\n\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tfor (char c{ 'a' }; c &lt;= 'e'; ++c) // outer loop on letters\n\t{\n\t\tstd::cout &lt;&lt; c; // print our letter first\n\t\t\n\t\tfor (int i{ 0 }; i &lt; 3; ++i) // inner loop on all numbers\n\t\t\tstd::cout &lt;&lt; i;\n\n\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b74",
+      "type": "paragraph",
+      "html": "<p>For each iteration of the outer loop, the inner loop runs in its entirety. Consequently, the output is:</p>",
+      "preview": "For each iteration of the outer loop, the inner loop runs in its entirety. Conse",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b75",
+      "type": "output",
+      "text": "a012\nb012\nc012\nd012\ne012\n",
+      "html": "<pre>a012\nb012\nc012\nd012\ne012\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b76",
+      "type": "paragraph",
+      "html": "<p>Here’s some more detail on what’s happening here. The outer loop runs first, and char <code>c</code> is initialized to <code>'a'</code>. Then <code>c &lt;= 'e'</code> is evaluated, which is <code>true</code>, so the loop body executes. Since <code>c</code> is set to <code>'a'</code>, this first prints <code>a</code>. Next the inner loop executes entirely (which prints <code>0</code>, <code>1</code>, and <code>2</code>). Then a newline is printed. Now the outer loop body is finished, so the outer loop returns to the top, <code>c</code> is incremented to <code>'b'</code>, and the loop condition is re-evaluated. Since the loop condition is still <code>true</code> the next iteration of the outer loop begins. This prints <code>b012\\n</code>. And so on.</p>",
+      "preview": "Here’s some more detail on what’s happening here. The outer loop runs first, and",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b77",
+      "type": "section",
+      "title": "Variables used only inside a loop should be defined inside the loop",
+      "html": "<h3 class=\"cpp-section-heading\">Variables used only inside a loop should be defined inside the loop</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b78",
+      "type": "paragraph",
+      "html": "<p>New programmers often think that creating variables is expensive, so that it is better to create a variable once (and then assign values to it) than create it many times (and use initialization). That leads to loops that look like some variation of the following:</p>",
+      "preview": "New programmers often think that creating variables is expensive, so that it is ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b79",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int i {}; // i defined outside loop\n    for (i = 0; i < 10; ++i) // i assigned value\n    {\n        std::cout << i << ' ';        \n    }\n\n    // i can still be accessed here\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int i {}; // i defined outside loop\n    for (i = 0; i &lt; 10; ++i) // i assigned value\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';        \n    }\n\n    // i can still be accessed here\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b80",
+      "type": "paragraph",
+      "html": "<p>However, creating a variable has no cost -- it is the initialization that has a cost, and there is typically no cost difference between initialization and assignment. The above example makes <code>i</code> available beyond the loop. Unless using a variable beyond the loop is required, defining a variable outside the loop is likely to have two consequences:</p>",
+      "preview": "However, creating a variable has no cost -- it is the initialization that has a ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b81",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>It makes our program more complex, as we have to read more code to see where the variable is used.</li><li>It may actually be slower because the compiler may not be able to optimize a variable with a larger scope as effectively.</li></ol>",
+      "preview": "It makes our program more complex, as we have to read more code to see where the",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b82",
+      "type": "paragraph",
+      "html": "<p>Consistent with our best practice to define variables in the smallest reasonable scope possible, a variable that is only used within a loop should be defined inside the loop rather than outside.</p>",
+      "preview": "Consistent with our best practice to define variables in the smallest reasonable",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b83",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Variables used only inside a loop should be defined inside the scope of the loop.</p></div>",
+      "preview": "Best practiceVariables used only inside a loop should be defined inside the scope of the loop.",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b84",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b85",
+      "type": "paragraph",
+      "html": "<p>For-statements are the most commonly used loop in the C++ language because they place all of the necessary information about loop variables, loop condition, and loop variable modifies at the top of the loops, which helps reduce errors. Even though its syntax is typically a bit confusing to new programmers, you will see for-loops so often that you will understand them in no time at all!</p>",
+      "preview": "For-statements are the most commonly used loop in the C++ language because they ",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b86",
+      "type": "paragraph",
+      "html": "<p>For-statements excel when you have a counter variable. If you do not have a counter, a while-statement is probably a better choice.</p>",
+      "preview": "For-statements excel when you have a counter variable. If you do not have a coun",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b87",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer for-loops over while-loops when there is an obvious loop variable.<br>Prefer while-loops over for-loops when there is no obvious loop variable.</p></div>",
+      "preview": "Best practicePrefer for-loops over while-loops when there is an obvious loop variable.Prefer while-l",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b88",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b89",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Write a for-loop that prints every even number from 0 to 20.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">for (int i{ 0 }; i &lt;= 20; i += 2)\n    std::cout &lt;&lt; i &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b90",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "Write a function named <code>sumTo()</code> that takes an integer parameter named value, and returns the sum of all the numbers from 1 to value.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int sumTo(int value)\n{\n    int total{ 0 };\n    for (int i{ 1 }; i &lt;= value; ++i)\n        total += i;\n\n    return total;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b91",
+      "type": "paragraph",
+      "html": "<p>For example, <code>sumTo(5)</code> should return 15, which is 1 + 2 + 3 + 4 + 5.</p>",
+      "preview": "For example, sumTo(5) should return 15, which is 1 + 2 + 3 + 4 + 5.",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b92",
+      "type": "paragraph",
+      "html": "<p>Hint: Use a non-loop variable to accumulate the sum as you iterate from 1 to the input value, much like the <code>pow()</code> example above uses the total variable to accumulate the return value each iteration.</p>",
+      "preview": "Hint: Use a non-loop variable to accumulate the sum as you iterate from 1 to the",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b93",
+      "type": "quiz",
+      "questionTitle": "Question #3",
+      "questionHtml": "What’s wrong with the following for loop?",
+      "hintHtml": "",
+      "solutionHtml": "<p>This for-loop executes as long as <code>i &gt;= 0</code>. In other words, it runs until <code>i</code> is negative. However, because <code>i</code> is unsigned, <code>i</code> can never go negative. Consequently, this loop will run for-ever (ha ha)! Generally, it’s a good idea to avoid looping on unsigned variables unless necessary.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b94",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Print all numbers from 9 to 0\nfor (unsigned int i{ 9 }; i >= 0; --i)\n    std::cout << i<< ' ';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Print all numbers from 9 to 0\nfor (unsigned int i{ 9 }; i &gt;= 0; --i)\n    std::cout &lt;&lt; i&lt;&lt; ' ';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b95",
+      "type": "quiz",
+      "questionTitle": "Question #4",
+      "questionHtml": "<a href=\"https://en.m.wikipedia.org/wiki/Fizz_buzz\">Fizz Buzz</a> is a simple math game used to teach children about divisibility. It is also sometimes used as an interview question to assess basic programming skills.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader Waldo for suggesting this quiz\n#include &lt;iostream&gt;\n\nvoid fizzbuzz(int count)\n{\n\tfor (int i{ 1 }; i &lt;= count; ++i)\n\t{\n\t\tif (i % 3 == 0 &amp;&amp; i % 5 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"fizzbuzz\\n\";\n\t\t}\n\t\telse if (i % 3 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"fizz\\n\";\n\t\t}\n\t\telse if (i % 5 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"buzz\\n\";\n\t\t}\n\t\telse\n\t\t{\n\t\t\tstd::cout &lt;&lt; i &lt;&lt; '\\n';\n\t\t}\n\t} // end for loop\n}\n\nint main()\n{\n\tfizzbuzz(15);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b96",
+      "type": "paragraph",
+      "html": "<p>The rules of the game are simple: Starting at 1, and counting upward, replace any number divisible only by three with the word “fizz”, any number only divisible by five with the word “buzz”, and any number divisible by both 3 and 5 with the word “fizzbuzz”.</p>",
+      "preview": "The rules of the game are simple: Starting at 1, and counting upward, replace an",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b97",
+      "type": "paragraph",
+      "html": "<p>Implement this game inside a function named <code>fizzbuzz()</code> that takes a parameter determining what number to count up to. Use a for-loop and a single if-else chain (meaning you can use as many else-if as you like).</p>",
+      "preview": "Implement this game inside a function named fizzbuzz() that takes a parameter de",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b98",
+      "type": "paragraph",
+      "html": "<p>The output of <code>fizzbuzz(15)</code> should match the following:</p>",
+      "preview": "The output of fizzbuzz(15) should match the following:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b99",
+      "type": "output",
+      "text": "1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n",
+      "html": "<pre>1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b100",
+      "type": "quiz",
+      "questionTitle": "Question #5",
+      "questionHtml": "Modify the FizzBuzz program you wrote in the previous quiz to add the rule that numbers divisible by seven should be replaced with “pop”. Run the program for 150 iterations.",
+      "hintHtml": "Hint: Use a boolean variable to keep track of whether a number has matched one of the conditions.",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader Waldo for suggesting this quiz\n#include &lt;iostream&gt;\n\nvoid fizzbuzz(int count)\n{\n\tfor (int i{ 1 }; i &lt;= count; ++i)\n\t{\n\t\tbool printed{ false };\n\t\tif (i % 3 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"fizz\";\n\t\t\tprinted = true;\n\t\t}\n\t\tif (i % 5 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"buzz\";\n\t\t\tprinted = true;\n\t\t}\n\t\tif (i % 7 == 0)\n\t\t{\n\t\t\tstd::cout &lt;&lt; \"pop\";\n\t\t\tprinted = true;\n\t\t}\n\n\t\tif (!printed)\n\t\t\tstd::cout &lt;&lt; i;\n\n\t\tstd::cout &lt;&lt; '\\n';\n\t} // end for loop\n}\n\nint main()\n{\n\tfizzbuzz(150);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b101",
+      "type": "paragraph",
+      "html": "<p>In this version, using an if/else chain to explicitly cover every possible combination of words will result in a function that is too long. Optimize your function so only 4 if-statements are used: one for each of the non-compound words (“fizz”, “buzz”, “pop”), and one for the case where a number is printed.</p>",
+      "preview": "In this version, using an if/else chain to explicitly cover every possible combi",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b102",
+      "type": "paragraph",
+      "html": "<p>Here are some snippets of the expected output:</p>",
+      "preview": "Here are some snippets of the expected output:",
+      "canCheck": true
+    },
+    {
+      "id": "for-statements_b103",
+      "type": "output",
+      "text": "4\nbuzz\nfizz\npop\n8\n",
+      "html": "<pre>4\nbuzz\nfizz\npop\n8\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b104",
+      "type": "output",
+      "text": "19\nbuzz\nfizzpop\n22\n",
+      "html": "<pre>19\nbuzz\nfizzpop\n22\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "for-statements_b105",
+      "type": "output",
+      "text": "104\nfizzbuzzpop\n106\n",
+      "html": "<pre>104\nfizzbuzzpop\n106\n</pre>",
+      "canCheck": false
+    }
+  ]
+}

@@ -1,0 +1,712 @@
+{
+  "index": 253,
+  "chapterId": "20",
+  "number": "20.6",
+  "title": "20.6 — Introduction to lambdas (anonymous functions)",
+  "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/",
+  "slug": "introduction-to-lambdas-anonymous-functions",
+  "scrapedAt": "2026-09-15T16:30:47.388Z",
+  "totalBlocks": 97,
+  "totalCheckpoints": 80,
+  "blocks": [
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b0",
+      "type": "paragraph",
+      "html": "<p>Consider this snippet of code that we introduced in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/\">18.3 -- Introduction to standard library algorithms</a>:</p>",
+      "preview": "Consider this snippet of code that we introduced in lesson 18.3 -- Introduction ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\n// Our function will return true if the element matches\nbool containsNut(std::string_view str)\n{\n    // std::string_view::find returns std::string_view::npos if it doesn't find\n    // the substring. Otherwise it returns the index where the substring occurs\n    // in str.\n    return str.find(\"nut\") != std::string_view::npos;\n}\n\nint main()\n{\n    constexpr std::array<std::string_view, 4> arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n    // Scan our array to see if any elements contain the \"nut\" substring\n    auto found{ std::find_if(arr.begin(), arr.end(), containsNut) };\n\n    if (found == arr.end())\n    {\n        std::cout << \"No nuts\\n\";\n    }\n    else\n    {\n        std::cout << \"Found \" << *found << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\n// Our function will return true if the element matches\nbool containsNut(std::string_view str)\n{\n    // std::string_view::find returns std::string_view::npos if it doesn't find\n    // the substring. Otherwise it returns the index where the substring occurs\n    // in str.\n    return str.find(\"nut\") != std::string_view::npos;\n}\n\nint main()\n{\n    constexpr std::array&lt;std::string_view, 4&gt; arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n    // Scan our array to see if any elements contain the \"nut\" substring\n    auto found{ std::find_if(arr.begin(), arr.end(), containsNut) };\n\n    if (found == arr.end())\n    {\n        std::cout &lt;&lt; \"No nuts\\n\";\n    }\n    else\n    {\n        std::cout &lt;&lt; \"Found \" &lt;&lt; *found &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b2",
+      "type": "paragraph",
+      "html": "<p>This code searches through an array of strings looking for the first element that contains the substring “nut”. Thus, it produces the result:</p>",
+      "preview": "This code searches through an array of strings looking for the first element tha",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b3",
+      "type": "output",
+      "text": "Found walnut\n",
+      "html": "<pre>Found walnut\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b4",
+      "type": "paragraph",
+      "html": "<p>And while it works, it could be improved.</p>",
+      "preview": "And while it works, it could be improved.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b5",
+      "type": "paragraph",
+      "html": "<p>The root of the issue here is that <code>std::find_if</code> requires that we pass it a function pointer. Because of that, we are forced to define a function that’s only going to be used once, that must be given a name, and that must be put in the global scope (because functions can’t be nested!). The function is also so short, it’s almost easier to discern what it does from the one line of code than from the name and comments.</p>",
+      "preview": "The root of the issue here is that std::find_if requires that we pass it a funct",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b6",
+      "type": "section",
+      "title": "Lambdas are anonymous functions",
+      "html": "<h3 class=\"cpp-section-heading\">Lambdas are anonymous functions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b7",
+      "type": "paragraph",
+      "html": "<p>A <strong>lambda expression</strong> (also called a <strong>lambda</strong> or <strong>closure</strong>) allows us to define an anonymous function inside another function. The nesting is important, as it allows us both to avoid namespace naming pollution, and to define the function as close to where it is used as possible (providing additional context).</p>",
+      "preview": "A lambda expression (also called a lambda or closure) allows us to define an ano",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b8",
+      "type": "paragraph",
+      "html": "<p>The syntax for lambdas is one of the weirder things in C++, and takes a bit of getting used to. Lambdas take the form:</p>",
+      "preview": "The syntax for lambdas is one of the weirder things in C++, and takes a bit of g",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b9",
+      "type": "output",
+      "text": "[ captureClause ] ( parameters ) -> returnType\n{\n    statements;\n}\n",
+      "html": "<pre>[ captureClause ] ( parameters ) -&gt; returnType\n{\n    statements;\n}\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b10",
+      "type": "list",
+      "html": "<ul><li>The capture clause can be empty if no captures are needed.</li><li>The parameter list can be empty if no parameters are required. It can also be omitted entirely unless a return type is specified.</li><li>The return type is optional, and if omitted, <code>auto</code> will be assumed (thus using type deduction used to determine the return type). While we previously noted that type deduction for function return types should be avoided, in this context, it’s fine to use (because these functions are typically so trivial).</li></ul>",
+      "preview": "The capture clause can be empty if no captures are needed.The parameter list can",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b11",
+      "type": "paragraph",
+      "html": "<p>Also note that lambdas (being anonymous) have no name, so we don’t need to provide one.</p>",
+      "preview": "Also note that lambdas (being anonymous) have no name, so we don’t need to provi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b12",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>This means a trivial lambda definition looks like this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  [] {}; // a lambda with an omitted return type, no captures, and omitted parameters.\n\n  return 0;\n}</code></pre></div>",
+      "preview": "As an aside…This means a trivial lambda definition looks like this:#include <iostream> int main() { ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b13",
+      "type": "paragraph",
+      "html": "<p>Let’s rewrite the above example using a lambda:</p>",
+      "preview": "Let’s rewrite the above example using a lambda:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  constexpr std::array<std::string_view, 4> arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  // Define the function right where we use it.\n  auto found{ std::find_if(arr.begin(), arr.end(),\n                           [](std::string_view str) // here's our lambda, no capture clause\n                           {\n                             return str.find(\"nut\") != std::string_view::npos;\n                           }) };\n\n  if (found == arr.end())\n  {\n    std::cout << \"No nuts\\n\";\n  }\n  else\n  {\n    std::cout << \"Found \" << *found << '\\n';\n  }\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n  constexpr std::array&lt;std::string_view, 4&gt; arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  // Define the function right where we use it.\n  auto found{ std::find_if(arr.begin(), arr.end(),\n                           [](std::string_view str) // here's our lambda, no capture clause\n                           {\n                             return str.find(\"nut\") != std::string_view::npos;\n                           }) };\n\n  if (found == arr.end())\n  {\n    std::cout &lt;&lt; \"No nuts\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Found \" &lt;&lt; *found &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b15",
+      "type": "paragraph",
+      "html": "<p>This works just like the function pointer case, and produces an identical result:</p>",
+      "preview": "This works just like the function pointer case, and produces an identical result",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b16",
+      "type": "output",
+      "text": "Found walnut\n",
+      "html": "<pre>Found walnut\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b17",
+      "type": "paragraph",
+      "html": "<p>Note how similar our lambda is to our <code>containsNut</code> function. They both have identical parameters and function bodies. The lambda has no capture clause (we’ll explain what a capture clause is in the next lesson) because it doesn’t need one. And we’ve omitted the trailing return type in the lambda (for conciseness), but since <code>operator!=</code> returns a <code>bool</code>, our lambda will return a <code>bool</code> too.</p>",
+      "preview": "Note how similar our lambda is to our containsNut function. They both have ident",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b18",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Following the best practice of defining things in the smallest scope and closest to first use, lambdas are preferred over normal functions when we need a trivial, one-off function to pass as an argument to some other function.</p></div>",
+      "preview": "Best practiceFollowing the best practice of defining things in the smallest scope and closest to fir",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b19",
+      "type": "section",
+      "title": "Type of a lambda",
+      "html": "<h3 class=\"cpp-section-heading\">Type of a lambda</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b20",
+      "type": "paragraph",
+      "html": "<p>In the above example, we defined a lambda right where it was needed. This use of a lambda is sometimes called a <strong>function literal</strong>.</p>",
+      "preview": "In the above example, we defined a lambda right where it was needed. This use of",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b21",
+      "type": "paragraph",
+      "html": "<p>However, writing a lambda in the same line as it’s used can sometimes make code harder to read. Much like we can initialize a variable with a literal value (or a function pointer) for use later, we can also initialize a lambda variable with a lambda definition and then use it later. A named lambda along with a good function name can make code easier to read.</p>",
+      "preview": "However, writing a lambda in the same line as it’s used can sometimes make code ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b22",
+      "type": "paragraph",
+      "html": "<p>For example, in the following snippet, we’re using <code>std::all_of</code> to check if all elements of an array are even:</p>",
+      "preview": "For example, in the following snippet, we’re using std::all_of to check if all e",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Bad: We have to read the lambda to understand what's happening.\nreturn std::all_of(array.begin(), array.end(), [](int i){ return ((i % 2) == 0); });",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Bad: We have to read the lambda to understand what's happening.\nreturn std::all_of(array.begin(), array.end(), [](int i){ return ((i % 2) == 0); });</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b24",
+      "type": "paragraph",
+      "html": "<p>We can improve the readability of this as follows:</p>",
+      "preview": "We can improve the readability of this as follows:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Good: Instead, we can store the lambda in a named variable and pass it to the function.\nauto isEven{\n  [](int i)\n  {\n    return (i % 2) == 0;\n  }\n};\n\nreturn std::all_of(array.begin(), array.end(), isEven);",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Good: Instead, we can store the lambda in a named variable and pass it to the function.\nauto isEven{\n  [](int i)\n  {\n    return (i % 2) == 0;\n  }\n};\n\nreturn std::all_of(array.begin(), array.end(), isEven);</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b26",
+      "type": "paragraph",
+      "html": "<p>Note how well the last line reads: “return whether <em>all of</em> the elements in the <em>array</em> are <em>even</em>”</p>",
+      "preview": "Note how well the last line reads: “return whether all of the elements in the ar",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b27",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Storing a lambda in a variable provides a way for us to give the lambda a useful name, which can help make our code more readable.</p><p>Storing a lambda in a variable also provides us with a way to use that lambda more than once.</p></div>",
+      "preview": "Key insightStoring a lambda in a variable provides a way for us to give the lambda a useful name, wh",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b28",
+      "type": "paragraph",
+      "html": "<p>But what is the type of lambda <code>isEven</code>?</p>",
+      "preview": "But what is the type of lambda isEven?",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b29",
+      "type": "paragraph",
+      "html": "<p>As it turns out, lambdas don’t have a type that we can explicitly use. When we write a lambda, the compiler generates a unique type just for the lambda that is not exposed to us.</p>",
+      "preview": "As it turns out, lambdas don’t have a type that we can explicitly use. When we w",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b30",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>In actuality, lambdas aren’t functions (which is part of how they avoid the limitation of C++ not supporting nested functions). They’re a special kind of object called a functor. Functors are objects that contain an overloaded <code>operator()</code> that make them callable like a function.</p></div>",
+      "preview": "For advanced readersIn actuality, lambdas aren’t functions (which is part of how they avoid the limi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b31",
+      "type": "paragraph",
+      "html": "<p>Although we don’t know the type of a lambda, there are several ways of storing a lambda for use post-definition. If the lambda has an empty capture clause (nothing between the hard brackets []), we can use a regular function pointer. <code>std::function</code> or type deduction via the <code>auto</code> keyword will also work (even if the lambda has a non-empty capture clause).</p>",
+      "preview": "Although we don’t know the type of a lambda, there are several ways of storing a",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <functional>\n\nint main()\n{\n  // A regular function pointer. Only works with an empty capture clause (empty []).\n  double (*addNumbers1)(double, double){\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers1(1, 2);\n\n  // Using std::function. The lambda could have a non-empty capture clause (discussed next lesson).\n  std::function addNumbers2{ // note: pre-C++17, use std::function<double(double, double)> instead\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers2(3, 4);\n\n  // Using auto. Stores the lambda with its real type.\n  auto addNumbers3{\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers3(5, 6);\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\n\nint main()\n{\n  // A regular function pointer. Only works with an empty capture clause (empty []).\n  double (*addNumbers1)(double, double){\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers1(1, 2);\n\n  // Using std::function. The lambda could have a non-empty capture clause (discussed next lesson).\n  std::function addNumbers2{ // note: pre-C++17, use std::function&lt;double(double, double)&gt; instead\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers2(3, 4);\n\n  // Using auto. Stores the lambda with its real type.\n  auto addNumbers3{\n    [](double a, double b) {\n      return a + b;\n    }\n  };\n\n  addNumbers3(5, 6);\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b33",
+      "type": "paragraph",
+      "html": "<p>The only way of using the lambda’s actual type is by means of <code>auto</code>. <code>auto</code> also has the benefit of having no overhead compared to <code>std::function</code>.</p>",
+      "preview": "The only way of using the lambda’s actual type is by means of auto. auto also ha",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b34",
+      "type": "paragraph",
+      "html": "<p>What if we want to pass a lambda to a function? There are 4 options:</p>",
+      "preview": "What if we want to pass a lambda to a function? There are 4 options:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <functional>\n#include <iostream>\n\n// Case 1: use a `std::function` parameter\nvoid repeat1(int repetitions, const std::function<void(int)>& fn)\n{\n    for (int i{ 0 }; i < repetitions; ++i)\n        fn(i);\n}\n\n// Case 2: use a function template with a type template parameter\ntemplate <typename T>\nvoid repeat2(int repetitions, const T& fn)\n{\n    for (int i{ 0 }; i < repetitions; ++i)\n        fn(i);\n}\n\n// Case 3: use the abbreviated function template syntax (C++20)\nvoid repeat3(int repetitions, const auto& fn)\n{\n    for (int i{ 0 }; i < repetitions; ++i)\n        fn(i);\n}\n\n// Case 4: use function pointer (only for lambda with no captures)\nvoid repeat4(int repetitions, void (*fn)(int))\n{\n    for (int i{ 0 }; i < repetitions; ++i)\n        fn(i);   \n}\n\nint main()\n{\n    auto lambda = [](int i)\n    {\n        std::cout << i << '\\n';\n    };\n\n    repeat1(3, lambda);\n    repeat2(3, lambda);\n    repeat3(3, lambda);\n    repeat4(3, lambda);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\n#include &lt;iostream&gt;\n\n// Case 1: use a `std::function` parameter\nvoid repeat1(int repetitions, const std::function&lt;void(int)&gt;&amp; fn)\n{\n    for (int i{ 0 }; i &lt; repetitions; ++i)\n        fn(i);\n}\n\n// Case 2: use a function template with a type template parameter\ntemplate &lt;typename T&gt;\nvoid repeat2(int repetitions, const T&amp; fn)\n{\n    for (int i{ 0 }; i &lt; repetitions; ++i)\n        fn(i);\n}\n\n// Case 3: use the abbreviated function template syntax (C++20)\nvoid repeat3(int repetitions, const auto&amp; fn)\n{\n    for (int i{ 0 }; i &lt; repetitions; ++i)\n        fn(i);\n}\n\n// Case 4: use function pointer (only for lambda with no captures)\nvoid repeat4(int repetitions, void (*fn)(int))\n{\n    for (int i{ 0 }; i &lt; repetitions; ++i)\n        fn(i);   \n}\n\nint main()\n{\n    auto lambda = [](int i)\n    {\n        std::cout &lt;&lt; i &lt;&lt; '\\n';\n    };\n\n    repeat1(3, lambda);\n    repeat2(3, lambda);\n    repeat3(3, lambda);\n    repeat4(3, lambda);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b36",
+      "type": "paragraph",
+      "html": "<p>In case 1, our function parameter is a <code>std::function</code>. This is nice because we can explicitly see what the parameters and return type of the <code>std::function</code> are. However, this requires the lambda to be implicitly converted whenever the function is called, which adds some overhead. This method also has the benefit of being separable into a declaration (in a header) and a definition (in a .cpp file) if that’s desirable.</p>",
+      "preview": "In case 1, our function parameter is a std::function. This is nice because we ca",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b37",
+      "type": "paragraph",
+      "html": "<p>In case 2, we’re using a function template with type template parameter <code>T</code>. When the function is called, a function will be instantiated where <code>T</code> matches the actual type of the lambda. This is more efficient, but the parameters and return type of <code>T</code> are not obvious.</p>",
+      "preview": "In case 2, we’re using a function template with type template parameter T. When ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b38",
+      "type": "paragraph",
+      "html": "<p>In case 3, we use C++20’s <code>auto</code> to invoke the abbreviated function template syntax. This generates a function template identical to case 2.</p>",
+      "preview": "In case 3, we use C++20’s auto to invoke the abbreviated function template synta",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b39",
+      "type": "paragraph",
+      "html": "<p>In case 4, the function parameter is a function pointer. Since a lambda with no captures will implicitly convert to a function pointer, we can pass a lambda with no captures to this function.</p>",
+      "preview": "In case 4, the function parameter is a function pointer. Since a lambda with no ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b40",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When storing a lambda in a variable, use <code>auto</code> as the variable’s type.</p><p>When passing a lambda to a function:</p><ul><li>If C++20 capable, use <code>auto</code> as the parameter’s type.</li><li>Otherwise, use a function with a type template parameter or <code>std::function</code> parameter (or a function pointer if the lambda has no captures).</li></ul></div>",
+      "preview": "Best practiceWhen storing a lambda in a variable, use auto as the variable’s type.When passing a lam",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b41",
+      "type": "section",
+      "title": "Generic lambdas",
+      "html": "<h3 class=\"cpp-section-heading\">Generic lambdas</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b42",
+      "type": "paragraph",
+      "html": "<p>For the most part, lambda parameters work by the same rules as regular function parameters.</p>",
+      "preview": "For the most part, lambda parameters work by the same rules as regular function ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b43",
+      "type": "paragraph",
+      "html": "<p>One notable exception is that since C++14 we’re allowed to use <code>auto</code> for parameters (note: in C++20, regular functions are able to use <code>auto</code> for parameters too). When a lambda has one or more <code>auto</code> parameter, the compiler will infer what parameter types are needed from the calls to the lambda.</p>",
+      "preview": "One notable exception is that since C++14 we’re allowed to use auto for paramete",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b44",
+      "type": "paragraph",
+      "html": "<p>Because lambdas with one or more <code>auto</code> parameter can potentially work with a wide variety of types, they are called <strong>generic lambdas</strong>.</p>",
+      "preview": "Because lambdas with one or more auto parameter can potentially work with a wide",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b45",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>When used in the context of a lambda, <code>auto</code> is just a shorthand for a template parameter.</p></div>",
+      "preview": "For advanced readersWhen used in the context of a lambda, auto is just a shorthand for a template pa",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b46",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at a generic lambda:</p>",
+      "preview": "Let’s take a look at a generic lambda:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b47",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  constexpr std::array months{ // pre-C++17 use std::array<const char*, 12>\n    \"January\",\n    \"February\",\n    \"March\",\n    \"April\",\n    \"May\",\n    \"June\",\n    \"July\",\n    \"August\",\n    \"September\",\n    \"October\",\n    \"November\",\n    \"December\"\n  };\n\n  // Search for two consecutive months that start with the same letter.\n  const auto sameLetter{ std::adjacent_find(months.begin(), months.end(),\n                                      [](const auto& a, const auto& b) {\n                                        return a[0] == b[0];\n                                      }) };\n\n  // Make sure that two months were found.\n  if (sameLetter != months.end())\n  {\n    // std::next returns the next iterator after sameLetter\n    std::cout << *sameLetter << \" and \" << *std::next(sameLetter)\n              << \" start with the same letter\\n\";\n  }\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n  constexpr std::array months{ // pre-C++17 use std::array&lt;const char*, 12&gt;\n    \"January\",\n    \"February\",\n    \"March\",\n    \"April\",\n    \"May\",\n    \"June\",\n    \"July\",\n    \"August\",\n    \"September\",\n    \"October\",\n    \"November\",\n    \"December\"\n  };\n\n  // Search for two consecutive months that start with the same letter.\n  const auto sameLetter{ std::adjacent_find(months.begin(), months.end(),\n                                      [](const auto&amp; a, const auto&amp; b) {\n                                        return a[0] == b[0];\n                                      }) };\n\n  // Make sure that two months were found.\n  if (sameLetter != months.end())\n  {\n    // std::next returns the next iterator after sameLetter\n    std::cout &lt;&lt; *sameLetter &lt;&lt; \" and \" &lt;&lt; *std::next(sameLetter)\n              &lt;&lt; \" start with the same letter\\n\";\n  }\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b48",
+      "type": "paragraph",
+      "html": "<p>Output:</p>",
+      "preview": "Output:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b49",
+      "type": "output",
+      "text": "June and July start with the same letter\n",
+      "html": "<pre>June and July start with the same letter\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b50",
+      "type": "paragraph",
+      "html": "<p>In the above example, we use <code>auto</code> parameters to capture our strings by <code>const</code> reference. Because all string types allow access to their individual characters via <code>operator[]</code>, we don’t need to care whether the user is passing in a <code>std::string</code>, C-style string, or something else. This allows us to write a lambda that could accept any of these, meaning if we change the type of <code>months</code> later, we won’t have to rewrite the lambda.</p>",
+      "preview": "In the above example, we use auto parameters to capture our strings by const ref",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b51",
+      "type": "paragraph",
+      "html": "<p>However, <code>auto</code> isn’t always the best choice. Consider:</p>",
+      "preview": "However, auto isn’t always the best choice. Consider:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  constexpr std::array months{ // pre-C++17 use std::array<const char*, 12>\n    \"January\",\n    \"February\",\n    \"March\",\n    \"April\",\n    \"May\",\n    \"June\",\n    \"July\",\n    \"August\",\n    \"September\",\n    \"October\",\n    \"November\",\n    \"December\"\n  };\n\n  // Count how many months consist of 5 letters\n  const auto fiveLetterMonths{ std::count_if(months.begin(), months.end(),\n                                       [](std::string_view str) {\n                                         return str.length() == 5;\n                                       }) };\n\n  std::cout << \"There are \" << fiveLetterMonths << \" months with 5 letters\\n\";\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n  constexpr std::array months{ // pre-C++17 use std::array&lt;const char*, 12&gt;\n    \"January\",\n    \"February\",\n    \"March\",\n    \"April\",\n    \"May\",\n    \"June\",\n    \"July\",\n    \"August\",\n    \"September\",\n    \"October\",\n    \"November\",\n    \"December\"\n  };\n\n  // Count how many months consist of 5 letters\n  const auto fiveLetterMonths{ std::count_if(months.begin(), months.end(),\n                                       [](std::string_view str) {\n                                         return str.length() == 5;\n                                       }) };\n\n  std::cout &lt;&lt; \"There are \" &lt;&lt; fiveLetterMonths &lt;&lt; \" months with 5 letters\\n\";\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b53",
+      "type": "paragraph",
+      "html": "<p>Output:</p>",
+      "preview": "Output:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b54",
+      "type": "output",
+      "text": "There are 2 months with 5 letters\n",
+      "html": "<pre>There are 2 months with 5 letters\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b55",
+      "type": "paragraph",
+      "html": "<p>In this example, using <code>auto</code> would infer a type of <code>const char*</code>. C-style strings aren’t easy to work with (apart from using <code>operator[]</code>). In this case, we prefer to explicitly define the parameter as a <code>std::string_view</code>, which allows us to work with the underlying data much more easily (e.g. we can ask the string view for its length, even if the user passed in a C-style array).</p>",
+      "preview": "In this example, using auto would infer a type of const char*. C-style strings a",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b56",
+      "type": "section",
+      "title": "Constexpr lambdas",
+      "html": "<h3 class=\"cpp-section-heading\">Constexpr lambdas</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b57",
+      "type": "paragraph",
+      "html": "<p>As of C++17, lambdas are implicitly constexpr if the result satisfies the requirements of a constant expression. This generally requires two things:</p>",
+      "preview": "As of C++17, lambdas are implicitly constexpr if the result satisfies the requir",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b58",
+      "type": "list",
+      "html": "<ul><li>The lambda must either have no captures, or all captures must be constexpr.</li><li>The functions called by the lambda must be constexpr. Note that many standard library algorithms and math functions weren’t made constexpr until C++20 or C++23.</li></ul>",
+      "preview": "The lambda must either have no captures, or all captures must be constexpr.The f",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b59",
+      "type": "paragraph",
+      "html": "<p>In the above example, our lambda would not be implicitly constexpr in C++17 but it would be in C++20 (as <code>std::count_if</code> was made constexpr in C++20). This means in C++20 we can make <code>fiveLetterMonths</code> constexpr:</p>",
+      "preview": "In the above example, our lambda would not be implicitly constexpr in C++17 but ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b60",
+      "type": "code",
+      "language": "cpp",
+      "code": "  constexpr auto fiveLetterMonths{ std::count_if(months.begin(), months.end(),\n                                       [](std::string_view str) {\n                                         return str.length() == 5;\n                                       }) };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">  constexpr auto fiveLetterMonths{ std::count_if(months.begin(), months.end(),\n                                       [](std::string_view str) {\n                                         return str.length() == 5;\n                                       }) };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b61",
+      "type": "section",
+      "title": "Generic lambdas and static variables",
+      "html": "<h3 class=\"cpp-section-heading\">Generic lambdas and static variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b62",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-instantiation/\">11.7 -- Function template instantiation</a>, we discussed that when a function template contains a static local variable, each function instantiated from that template will receive its own independent static local variable. This may cause issues if that is not expected.</p>",
+      "preview": "In lesson 11.7 -- Function template instantiation, we discussed that when a func",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b63",
+      "type": "paragraph",
+      "html": "<p>Generic lambdas work the same way: a unique lambda will be generated for each different type that <code>auto</code> resolves to.</p>",
+      "preview": "Generic lambdas work the same way: a unique lambda will be generated for each di",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b64",
+      "type": "paragraph",
+      "html": "<p>The following example shows how one generic lambda turns into two distinct lambdas:</p>",
+      "preview": "The following example shows how one generic lambda turns into two distinct lambd",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b65",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  // Print a value and count how many times @print has been called.\n  auto print{\n    [](auto value) {\n      static int callCount{ 0 };\n      std::cout << callCount++ << \": \" << value << '\\n';\n    }\n  };\n\n  print(\"hello\"); // 0: hello\n  print(\"world\"); // 1: world\n\n  print(1); // 0: 1\n  print(2); // 1: 2\n\n  print(\"ding dong\"); // 2: ding dong\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n  // Print a value and count how many times @print has been called.\n  auto print{\n    [](auto value) {\n      static int callCount{ 0 };\n      std::cout &lt;&lt; callCount++ &lt;&lt; \": \" &lt;&lt; value &lt;&lt; '\\n';\n    }\n  };\n\n  print(\"hello\"); // 0: hello\n  print(\"world\"); // 1: world\n\n  print(1); // 0: 1\n  print(2); // 1: 2\n\n  print(\"ding dong\"); // 2: ding dong\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b66",
+      "type": "paragraph",
+      "html": "<p>Output</p>",
+      "preview": "Output",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b67",
+      "type": "output",
+      "text": "0: hello\n1: world\n0: 1\n1: 2\n2: ding dong\n",
+      "html": "<pre>0: hello\n1: world\n0: 1\n1: 2\n2: ding dong\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b68",
+      "type": "paragraph",
+      "html": "<p>In the above example, we define a lambda and then call it with two different parameters (a string literal parameter, and an integer parameter). This generates two different versions of the lambda (one with a string literal parameter, and one with an integer parameter).</p>",
+      "preview": "In the above example, we define a lambda and then call it with two different par",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b69",
+      "type": "paragraph",
+      "html": "<p>Most of the time, this is inconsequential. However, note that if the generic lambda uses static duration variables, those variables are not shared between the generated lambdas.</p>",
+      "preview": "Most of the time, this is inconsequential. However, note that if the generic lam",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b70",
+      "type": "paragraph",
+      "html": "<p>We can see this in the example above, where each type (string literals and integers) has its own unique count! Although we only wrote the lambda once, two lambdas were generated -- and each has its own version of <code>callCount</code>. To have a shared counter between the two generated lambdas, we’d have to define a global variable or a <code>static</code> local variable outside of the lambda. As you know from previous lessons, both global- and static local variables can cause problems and make it more difficult to understand code. We’ll be able to avoid those variables after talking about lambda captures in the next lesson.</p>",
+      "preview": "We can see this in the example above, where each type (string literals and integ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b71",
+      "type": "section",
+      "title": "Return type deduction and trailing return types",
+      "html": "<h3 class=\"cpp-section-heading\">Return type deduction and trailing return types</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b72",
+      "type": "paragraph",
+      "html": "<p>If return type deduction is used, a lambda’s return type is deduced from the <code>return</code>-statements inside the lambda, and all return statements in the lambda must return the same type (otherwise the compiler won’t know which one to prefer).</p>",
+      "preview": "If return type deduction is used, a lambda’s return type is deduced from the ret",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b73",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b74",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n  auto divide{ [](int x, int y, bool intDivision) { // note: no specified return type\n    if (intDivision)\n      return x / y; // return type is int\n    else\n      return static_cast<double>(x) / y; // ERROR: return type doesn't match previous return type\n  } };\n\n  std::cout << divide(3, 2, true) << '\\n';\n  std::cout << divide(3, 2, false) << '\\n';\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  auto divide{ [](int x, int y, bool intDivision) { // note: no specified return type\n    if (intDivision)\n      return x / y; // return type is int\n    else\n      return static_cast&lt;double&gt;(x) / y; // ERROR: return type doesn't match previous return type\n  } };\n\n  std::cout &lt;&lt; divide(3, 2, true) &lt;&lt; '\\n';\n  std::cout &lt;&lt; divide(3, 2, false) &lt;&lt; '\\n';\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b75",
+      "type": "paragraph",
+      "html": "<p>This produces a compile error because the return type of the first return statement (int) doesn’t match the return type of the second return statement (double).</p>",
+      "preview": "This produces a compile error because the return type of the first return statem",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b76",
+      "type": "paragraph",
+      "html": "<p>In the case where we’re returning different types, we have two options:</p>",
+      "preview": "In the case where we’re returning different types, we have two options:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b77",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Do explicit casts to make all the return types match, or</li><li>explicitly specify a return type for the lambda, and let the compiler do implicit conversions.</li></ol>",
+      "preview": "Do explicit casts to make all the return types match, orexplicitly specify a ret",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b78",
+      "type": "paragraph",
+      "html": "<p>The second case is usually the better choice:</p>",
+      "preview": "The second case is usually the better choice:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b79",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n  // note: explicitly specifying this returns a double\n  auto divide{ [](int x, int y, bool intDivision) -> double {\n    if (intDivision)\n      return x / y; // will do an implicit conversion of result to double\n    else\n      return static_cast<double>(x) / y;\n  } };\n\n  std::cout << divide(3, 2, true) << '\\n';\n  std::cout << divide(3, 2, false) << '\\n';\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  // note: explicitly specifying this returns a double\n  auto divide{ [](int x, int y, bool intDivision) -&gt; double {\n    if (intDivision)\n      return x / y; // will do an implicit conversion of result to double\n    else\n      return static_cast&lt;double&gt;(x) / y;\n  } };\n\n  std::cout &lt;&lt; divide(3, 2, true) &lt;&lt; '\\n';\n  std::cout &lt;&lt; divide(3, 2, false) &lt;&lt; '\\n';\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b80",
+      "type": "paragraph",
+      "html": "<p>That way, if you ever decide to change the return type, you (usually) only need to change the lambda’s return type, and not touch the lambda body.</p>",
+      "preview": "That way, if you ever decide to change the return type, you (usually) only need ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b81",
+      "type": "section",
+      "title": "Standard library function objects",
+      "html": "<h3 class=\"cpp-section-heading\">Standard library function objects</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b82",
+      "type": "paragraph",
+      "html": "<p>For common operations (e.g. addition, negation, or comparison) you don’t need to write your own lambdas, because the standard library comes with many basic callable objects that can be used instead. These are defined in the <a href=\"https://en.cppreference.com/w/cpp/utility/functional#Operator_function_objects\">&lt;functional&gt;</a> header.</p>",
+      "preview": "For common operations (e.g. addition, negation, or comparison) you don’t need to",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b83",
+      "type": "paragraph",
+      "html": "<p>In the following example:</p>",
+      "preview": "In the following example:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b84",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n\nbool greater(int a, int b)\n{\n  // Order @a before @b if @a is greater than @b.\n  return a > b;\n}\n\nint main()\n{\n  std::array arr{ 13, 90, 99, 5, 40, 80 };\n\n  // Pass greater to std::sort\n  std::sort(arr.begin(), arr.end(), greater);\n\n  for (int i : arr)\n  {\n    std::cout << i << ' ';\n  }\n\n  std::cout << '\\n';\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nbool greater(int a, int b)\n{\n  // Order @a before @b if @a is greater than @b.\n  return a &gt; b;\n}\n\nint main()\n{\n  std::array arr{ 13, 90, 99, 5, 40, 80 };\n\n  // Pass greater to std::sort\n  std::sort(arr.begin(), arr.end(), greater);\n\n  for (int i : arr)\n  {\n    std::cout &lt;&lt; i &lt;&lt; ' ';\n  }\n\n  std::cout &lt;&lt; '\\n';\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b85",
+      "type": "paragraph",
+      "html": "<p>Output</p>",
+      "preview": "Output",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b86",
+      "type": "output",
+      "text": "99 90 80 40 13 5\n",
+      "html": "<pre>99 90 80 40 13 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b87",
+      "type": "paragraph",
+      "html": "<p>Instead of converting our <code>greater</code> function to a lambda (which would obscure its meaning a bit), we can instead use <code>std::greater</code>:</p>",
+      "preview": "Instead of converting our greater function to a lambda (which would obscure its ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b88",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <functional> // for std::greater\n\nint main()\n{\n  std::array arr{ 13, 90, 99, 5, 40, 80 };\n\n  // Pass std::greater to std::sort\n  std::sort(arr.begin(), arr.end(), std::greater{}); // note: need curly braces to instantiate object\n\n  for (int i : arr)\n  {\n    std::cout << i << ' ';\n  }\n\n  std::cout << '\\n';\n\n  return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;functional&gt; // for std::greater\n\nint main()\n{\n  std::array arr{ 13, 90, 99, 5, 40, 80 };\n\n  // Pass std::greater to std::sort\n  std::sort(arr.begin(), arr.end(), std::greater{}); // note: need curly braces to instantiate object\n\n  for (int i : arr)\n  {\n    std::cout &lt;&lt; i &lt;&lt; ' ';\n  }\n\n  std::cout &lt;&lt; '\\n';\n\n  return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b89",
+      "type": "paragraph",
+      "html": "<p>Output</p>",
+      "preview": "Output",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b90",
+      "type": "output",
+      "text": "99 90 80 40 13 5\n",
+      "html": "<pre>99 90 80 40 13 5\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b91",
+      "type": "section",
+      "title": "Conclusion",
+      "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b92",
+      "type": "paragraph",
+      "html": "<p>Lambdas and the algorithm library may seem unnecessarily complicated when compared to a solution that uses a loop. However, this combination can allow some very powerful operations in just a few lines of code, and can be more readable than writing your own loops. On top of that, the algorithm library features powerful and easy-to-use parallelism, which you won’t get with loops. Upgrading source code that uses library functions is easier than upgrading code that uses loops.</p>",
+      "preview": "Lambdas and the algorithm library may seem unnecessarily complicated when compar",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b93",
+      "type": "paragraph",
+      "html": "<p>Lambdas are great, but they don’t replace regular functions for all cases. Prefer regular functions for non-trivial and reusable cases.</p>",
+      "preview": "Lambdas are great, but they don’t replace regular functions for all cases. Prefe",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b94",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b95",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Create a <code>struct Student</code> that stores the name and points of a student. Create an array of students and use <a href=\"https://en.cppreference.com/w/cpp/algorithm/max_element\"><code>std::max_element</code></a> to find the student with the most points, then print that student’s name. <code>std::max_element</code> takes the <code>begin</code> and <code>end</code> of a list, and a function that takes 2 parameters and returns <code>true</code> if the first argument is less than the second.</p><p>Given the following array</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::array&lt;Student, 8&gt; arr{\n  { { \"Albert\", 3 },\n    { \"Ben\", 5 },\n    { \"Christine\", 2 },\n    { \"Dan\", 8 }, // Dan has the most points (8).\n    { \"Enchilada\", 4 },\n    { \"Francis\", 1 },\n    { \"Greg\", 3 },\n    { \"Hagrid\", 5 } }\n};</code></pre><p>your program should print</p><pre>Dan is the best student\n</pre><p><a class=\"hint_link_show\" href=\"javascript:void(0)\" onclick=\"cppHintToggle(document.getElementById('cpp_hint_id_0'),this,'Show Hint','')\">Show Hint</a></p><div class=\"wphint\" id=\"cpp_hint_id_0\" style=\"display:none;margin-bottom:1em\">Hint:<p></p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Student\n{\n  std::string_view name{};\n  int points{};\n};\n\nint main()\n{\n  constexpr std::array&lt;Student, 8&gt; arr{\n    { { \"Albert\", 3 },\n      { \"Ben\", 5 },\n      { \"Christine\", 2 },\n      { \"Dan\", 8 },\n      { \"Enchilada\", 4 },\n      { \"Francis\", 1 },\n      { \"Greg\", 3 },\n      { \"Hagrid\", 5 } }\n  };\n\n  const auto best{\n    std::max_element(arr.begin(), arr.end(), /* lambda */) // returns an iterator\n  };\n\n  std::cout &lt;&lt; best-&gt;name &lt;&lt; \" is the best student\\n\"; // must dereference iterator to get element\n\n  return 0;\n}</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Student\n{\n  std::string_view name{};\n  int points{};\n};\n\nint main()\n{\n  constexpr std::array&lt;Student, 8&gt; arr{\n    { { \"Albert\", 3 },\n      { \"Ben\", 5 },\n      { \"Christine\", 2 },\n      { \"Dan\", 8 },\n      { \"Enchilada\", 4 },\n      { \"Francis\", 1 },\n      { \"Greg\", 3 },\n      { \"Hagrid\", 5 } }\n  };\n\n  const auto best { // returns an iterator\n    std::max_element(arr.begin(), arr.end(), [](const auto&amp; a, const auto&amp; b) {\n      return a.points &lt; b.points;\n    })\n  };\n\n  std::cout &lt;&lt; best-&gt;name &lt;&lt; \" is the best student\\n\"; // must dereference iterator to get element\n\n  return 0;\n}</code></pre></div></div>",
+      "preview": "Question #1Create a struct Student that stores the name and points of a student.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-lambdas-anonymous-functions_b96",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>Use <code>std::sort</code> and a lambda in the following code to sort the seasons by ascending average temperature.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Season\n{\n  std::string_view name{};\n  double averageTemperature{};\n};\n\nint main()\n{\n  std::array&lt;Season, 4&gt; seasons{\n    { { \"Spring\", 285.0 },\n      { \"Summer\", 296.0 },\n      { \"Fall\", 288.0 },\n      { \"Winter\", 263.0 } }\n  };\n\n  /*\n   * Use std::sort here\n   */\n\n  for (const auto&amp; season : seasons)\n  {\n    std::cout &lt;&lt; season.name &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre><p>The program should print</p><pre>Winter\nSpring\nFall\nSummer\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Season\n{\n  std::string_view name{};\n  double averageTemperature{};\n};\n\nint main()\n{\n  std::array&lt;Season, 4&gt; seasons{\n    { { \"Spring\", 285.0 },\n      { \"Summer\", 296.0 },\n      { \"Fall\", 288.0 },\n      { \"Winter\", 263.0 } }\n  };\n\n  // We can compare averageTemperature of the two arguments to\n  // sort the array.\n  std::sort(seasons.begin(), seasons.end(),\n            [](const auto&amp; a, const auto&amp; b) {\n              return a.averageTemperature &lt; b.averageTemperature;\n            });\n\n  for (const auto&amp; season : seasons)\n  {\n    std::cout &lt;&lt; season.name &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre></div></div>",
+      "preview": "Question #2Use std::sort and a lambda in the following code to sort the seasons ",
+      "canCheck": true
+    }
+  ]
+}

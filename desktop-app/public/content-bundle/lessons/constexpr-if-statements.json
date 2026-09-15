@@ -1,0 +1,136 @@
+{
+  "index": 104,
+  "chapterId": "8",
+  "number": "8.4",
+  "title": "8.4 — Constexpr if statements",
+  "url": "https://www.learncpp.com/cpp-tutorial/constexpr-if-statements/",
+  "slug": "constexpr-if-statements",
+  "scrapedAt": "2026-09-15T16:29:30.235Z",
+  "totalBlocks": 17,
+  "totalCheckpoints": 15,
+  "blocks": [
+    {
+      "id": "constexpr-if-statements_b0",
+      "type": "paragraph",
+      "html": "<p>Normally, the conditional of an if-statement is evaluated at runtime.</p>",
+      "preview": "Normally, the conditional of an if-statement is evaluated at runtime.",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b1",
+      "type": "paragraph",
+      "html": "<p>However, consider the case where the conditional is a constant expression, such as in the following example:</p>",
+      "preview": "However, consider the case where the conditional is a constant expression, such ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\t// reminder: low-precision floating point literals of the same type can be tested for equality\n\tif (gravity == 9.8) // constant expression, always true\n\t\tstd::cout << \"Gravity is normal.\\n\";   // will always be executed\n\telse\n\t\tstd::cout << \"We are not on Earth.\\n\"; // will never be executed\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\t// reminder: low-precision floating point literals of the same type can be tested for equality\n\tif (gravity == 9.8) // constant expression, always true\n\t\tstd::cout &lt;&lt; \"Gravity is normal.\\n\";   // will always be executed\n\telse\n\t\tstd::cout &lt;&lt; \"We are not on Earth.\\n\"; // will never be executed\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b3",
+      "type": "paragraph",
+      "html": "<p>Because <code>gravity</code> is constexpr and initialized with value <code>9.8</code>, the conditional <code>gravity == 9.8</code> must evaluate to <code>true</code>. As a result, the else-statement will never be executed.</p>",
+      "preview": "Because gravity is constexpr and initialized with value 9.8, the conditional gra",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b4",
+      "type": "paragraph",
+      "html": "<p>Evaluating a constexpr conditional at runtime is wasteful (since the result will never vary). It is also wasteful to compile code into the executable that can never be executed.</p>",
+      "preview": "Evaluating a constexpr conditional at runtime is wasteful (since the result will",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b5",
+      "type": "section",
+      "title": "Constexpr if statements C++17",
+      "html": "<h3 class=\"cpp-section-heading\">Constexpr if statements <span class=\"cpp-section-pill cpp-section-standard\">C++17</span></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-if-statements_b6",
+      "type": "paragraph",
+      "html": "<p>C++17 introduces the <strong>constexpr if statement</strong>, which requires the conditional to be a constant expression. The conditional of a constexpr-if-statement will be evaluated at compile-time.</p>",
+      "preview": "C++17 introduces the constexpr if statement, which requires the conditional to b",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b7",
+      "type": "paragraph",
+      "html": "<p>If the constexpr conditional evaluates to <code>true</code>, the entire if-else will be replaced by the true-statement. If the constexpr conditional evaluates to <code>false</code>, the entire if-else will be replaced by the false-statement (if it exists) or nothing (if there is no else).</p>",
+      "preview": "If the constexpr conditional evaluates to true, the entire if-else will be repla",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b8",
+      "type": "paragraph",
+      "html": "<p>To use a constexpr-if-statement, we add the <code>constexpr</code> keyword after the <code>if</code>:</p>",
+      "preview": "To use a constexpr-if-statement, we add the constexpr keyword after the if:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\tif constexpr (gravity == 9.8) // now using constexpr if\n\t\tstd::cout << \"Gravity is normal.\\n\";\n\telse\n\t\tstd::cout << \"We are not on Earth.\\n\";\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\tif constexpr (gravity == 9.8) // now using constexpr if\n\t\tstd::cout &lt;&lt; \"Gravity is normal.\\n\";\n\telse\n\t\tstd::cout &lt;&lt; \"We are not on Earth.\\n\";\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b10",
+      "type": "paragraph",
+      "html": "<p>When the above code is compiled, the compiler will evaluate the conditional at compile time, see that it is always <code>true</code>, and keep only the single statement <code>std::cout &lt;&lt; \"Gravity is normal.\\n\";</code>.</p>",
+      "preview": "When the above code is compiled, the compiler will evaluate the conditional at c",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b11",
+      "type": "paragraph",
+      "html": "<p>In other words, it will compile this:</p>",
+      "preview": "In other words, it will compile this:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\tstd::cout << \"Gravity is normal.\\n\";\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tconstexpr double gravity{ 9.8 };\n\n\tstd::cout &lt;&lt; \"Gravity is normal.\\n\";\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b13",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Favor constexpr if statements over non-constexpr if statements when the conditional is a constant expression.</p></div>",
+      "preview": "Best practiceFavor constexpr if statements over non-constexpr if statements when the conditional is ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b14",
+      "type": "section",
+      "title": "Modern compilers and if statements with constexpr conditionals C++17",
+      "html": "<h3 class=\"cpp-section-heading\">Modern compilers and if statements with constexpr conditionals <span class=\"cpp-section-pill cpp-section-standard\">C++17</span></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-if-statements_b15",
+      "type": "paragraph",
+      "html": "<p>For optimization purposes, modern compilers will generally treat non-constexpr if-statements that have constexpr conditionals as if they were constexpr-if-statements. However, they are not required to do so.</p>",
+      "preview": "For optimization purposes, modern compilers will generally treat non-constexpr i",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-if-statements_b16",
+      "type": "paragraph",
+      "html": "<p>A compiler that encounters a non-constexpr if-statement with a constexpr conditional may issue a warning advising you to use <code>if constexpr</code> instead. This will ensure that compile-time evaluation will occur (even if optimizations are disabled).</p>",
+      "preview": "A compiler that encounters a non-constexpr if-statement with a constexpr conditi",
+      "canCheck": true
+    }
+  ]
+}

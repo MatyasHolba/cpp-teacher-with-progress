@@ -1,0 +1,272 @@
+{
+  "index": 312,
+  "chapterId": "26",
+  "number": "26.3",
+  "title": "26.3 — Function template specialization",
+  "url": "https://www.learncpp.com/cpp-tutorial/function-template-specialization/",
+  "slug": "function-template-specialization",
+  "scrapedAt": "2026-09-15T16:31:20.460Z",
+  "totalBlocks": 36,
+  "totalCheckpoints": 31,
+  "blocks": [
+    {
+      "id": "function-template-specialization_b0",
+      "type": "paragraph",
+      "html": "<p>When instantiating a function template for a given type, the compiler stencils out a copy of the templated function and replaces the template type parameters with the actual types used in the variable declaration. This means a particular function will have the same implementation details for each instanced type (just using different types). While most of the time this is exactly what you want, occasionally there are cases where it is useful to implement a templated function slightly differently for a specific data type.</p>",
+      "preview": "When instantiating a function template for a given type, the compiler stencils o",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b1",
+      "type": "section",
+      "title": "Using a non-template function",
+      "html": "<h3 class=\"cpp-section-heading\">Using a non-template function</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-template-specialization_b2",
+      "type": "paragraph",
+      "html": "<p>Consider the following example:</p>",
+      "preview": "Consider the following example:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nvoid print(const T& t)\n{\n    std::cout << t << '\\n';\n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nvoid print(const T&amp; t)\n{\n    std::cout &lt;&lt; t &lt;&lt; '\\n';\n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b4",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b5",
+      "type": "output",
+      "text": "5\n6.7\n",
+      "html": "<pre>5\n6.7\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "function-template-specialization_b6",
+      "type": "paragraph",
+      "html": "<p>Now, let’s say we want double values (and only double values) to output in scientific notation.</p>",
+      "preview": "Now, let’s say we want double values (and only double values) to output in scien",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b7",
+      "type": "paragraph",
+      "html": "<p>One way to get different behavior for a given type is to define a non-template function:</p>",
+      "preview": "One way to get different behavior for a given type is to define a non-template f",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nvoid print(const T& t)\n{\n    std::cout << t << '\\n';\n}\n\nvoid print(double d)\n{\n    std::cout << std::scientific << d << '\\n';\n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nvoid print(const T&amp; t)\n{\n    std::cout &lt;&lt; t &lt;&lt; '\\n';\n}\n\nvoid print(double d)\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; d &lt;&lt; '\\n';\n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b9",
+      "type": "paragraph",
+      "html": "<p>When the compiler goes to resolve <code>print(6.7)</code>, it will see that <code>print(double)</code> has already been defined by us, and use that instead of instantiating a version from <code>print(const T&amp;)</code>.</p>",
+      "preview": "When the compiler goes to resolve print(6.7), it will see that print(double) has",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b10",
+      "type": "paragraph",
+      "html": "<p>This produces the result:</p>",
+      "preview": "This produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b11",
+      "type": "output",
+      "text": "5\n6.700000e+000\n",
+      "html": "<pre>5\n6.700000e+000\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "function-template-specialization_b12",
+      "type": "paragraph",
+      "html": "<p>One nice thing about defining functions this way is that the non-template function doesn’t need to have the same signature as the function template. Note that <code>print(const T&amp;)</code> uses pass by const reference, whereas <code>print(double)</code> uses pass by value.</p>",
+      "preview": "One nice thing about defining functions this way is that the non-template functi",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b13",
+      "type": "paragraph",
+      "html": "<p>Generally, prefer to define a non-template function if that option is available.</p>",
+      "preview": "Generally, prefer to define a non-template function if that option is available.",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b14",
+      "type": "section",
+      "title": "Function template specialization",
+      "html": "<h3 class=\"cpp-section-heading\">Function template specialization</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-template-specialization_b15",
+      "type": "paragraph",
+      "html": "<p>Another way to achieve a similar result is to use explicit template specialization. <strong>Explicit template specialization</strong> (often shortened to <strong>template specialization</strong>) is a feature that allows us to explicitly define different implementations of a template for specific types or values. When all of the template parameters are specialized, it is called a <strong>full specialization</strong>. When only some of the template parameters are specialized, it is called a <strong>partial specialization</strong>.</p>",
+      "preview": "Another way to achieve a similar result is to use explicit template specializati",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b16",
+      "type": "paragraph",
+      "html": "<p>Let’s create a specialization of <code>print&lt;T&gt;</code> when <code>T</code> is a <code>double</code>:</p>",
+      "preview": "Let’s create a specialization of print<T> when T is a double:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n// Here's our primary template (must come first)\ntemplate <typename T>\nvoid print(const T& t)\n{\n    std::cout << t << '\\n';\n}\n\n// A full specialization of primary template print<T> for type double\n// Full specializations are not implicitly inline, so make this inline if put in header file\ntemplate<>                          // template parameter declaration containing no template parameters \nvoid print<double>(const double& d) // specialized for type double\n{\n    std::cout << std::scientific << d << '\\n'; \n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Here's our primary template (must come first)\ntemplate &lt;typename T&gt;\nvoid print(const T&amp; t)\n{\n    std::cout &lt;&lt; t &lt;&lt; '\\n';\n}\n\n// A full specialization of primary template print&lt;T&gt; for type double\n// Full specializations are not implicitly inline, so make this inline if put in header file\ntemplate&lt;&gt;                          // template parameter declaration containing no template parameters \nvoid print&lt;double&gt;(const double&amp; d) // specialized for type double\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; d &lt;&lt; '\\n'; \n}\n\nint main()\n{\n    print(5);\n    print(6.7);\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b18",
+      "type": "paragraph",
+      "html": "<p>In order to specialize a template, the compiler first must have seen a declaration for the primary template. The primary template in the example above is <code>print&lt;T&gt;(const T&amp;)</code>.</p>",
+      "preview": "In order to specialize a template, the compiler first must have seen a declarati",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b19",
+      "type": "paragraph",
+      "html": "<p>Now, let’s take a closer look at our function template specialization:</p>",
+      "preview": "Now, let’s take a closer look at our function template specialization:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "template<>                          // template parameter declaration containing no template parameters \nvoid print<double>(const double& d) // specialized for type double",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template&lt;&gt;                          // template parameter declaration containing no template parameters \nvoid print&lt;double&gt;(const double&amp; d) // specialized for type double</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b21",
+      "type": "paragraph",
+      "html": "<p>First, we need a template parameter declaration so the compiler knows we’re doing something related to templates. However, in this case, we don’t actually need any template parameters, so we use an empty pair of angled brackets. Since we have no template parameters in the specialization, this is a full specialization.</p>",
+      "preview": "First, we need a template parameter declaration so the compiler knows we’re doin",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b22",
+      "type": "paragraph",
+      "html": "<p>On the next line, <code>print&lt;double&gt;</code> tells the compiler that we’re specializing the <code>print</code> primary template function for type <code>double</code>. The specialization must have the same signature as the primary template (except the specialization substitutes <code>double</code> anywhere the primary template uses <code>T</code>). Because the primary template has a parameter of type <code>const T&amp;</code>, the specialization must have a parameter of type <code>const double&amp;</code>. The specialization cannot use pass-by-value when the primary template uses pass-by-reference (or vice-versa).</p>",
+      "preview": "On the next line, print<double> tells the compiler that we’re specializing the p",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b23",
+      "type": "paragraph",
+      "html": "<p>This example prints the same result as above.</p>",
+      "preview": "This example prints the same result as above.",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b24",
+      "type": "paragraph",
+      "html": "<p>Note that if a matching non-template function and a matching template function specialization both exist, the non-template function will take precedence. Also, full specializations are not implicitly inline, so if you define one in a header file, make sure you <code>inline</code> it to avoid ODR violations.</p>",
+      "preview": "Note that if a matching non-template function and a matching template function s",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b25",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Full specializations are not implicitly inline (partial specializations are implicitly inline). If you put a full specialization in a header file, it should be marked as <code>inline</code> so that it does not cause ODR violations when included into multiple translation units.</p></div>",
+      "preview": "WarningFull specializations are not implicitly inline (partial specializations are implicitly inline",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b26",
+      "type": "paragraph",
+      "html": "<p>Just like normal functions, function template specializations can be deleted (using <code>= delete</code>) if you want any function calls that resolve to the specialization to produce a compilation error.</p>",
+      "preview": "Just like normal functions, function template specializations can be deleted (us",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b27",
+      "type": "paragraph",
+      "html": "<p>In general, you should avoid function template specializations in favor of non-template functions whenever possible.</p>",
+      "preview": "In general, you should avoid function template specializations in favor of non-t",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b28",
+      "type": "section",
+      "title": "Function template specialization for member functions?",
+      "html": "<h3 class=\"cpp-section-heading\">Function template specialization for member functions?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-template-specialization_b29",
+      "type": "paragraph",
+      "html": "<p>Now consider the following class template:</p>",
+      "preview": "Now consider the following class template:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b30",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 };\n\n    // Print out some values\n    i.print();\n    d.print();\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 };\n\n    // Print out some values\n    i.print();\n    d.print();\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b31",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "5\n6.7",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">5\n6.7</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b33",
+      "type": "paragraph",
+      "html": "<p>Let’s say we again want to create a version of the <code>print()</code> function that prints doubles in scientific notation. However, this time <code>print()</code> is a member function, so we can’t define a non-member function. So how might we do this?</p>",
+      "preview": "Let’s say we again want to create a version of the print() function that prints ",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b34",
+      "type": "paragraph",
+      "html": "<p>Although it may seem like we need to use function template specialization here, that’s the wrong tool. Note that <code>i.print()</code> calls <code>Storage&lt;int&gt;::print()</code> and <code>d.print()</code> calls <code>Storage&lt;double&gt;::print()</code>. Therefore, if we want to change the behavior of this function when <code>T</code> is a double, we need to specialize <code>Storage&lt;double&gt;::print()</code>, which is a class template specialization, not a function template specialization!</p>",
+      "preview": "Although it may seem like we need to use function template specialization here, ",
+      "canCheck": true
+    },
+    {
+      "id": "function-template-specialization_b35",
+      "type": "paragraph",
+      "html": "<p>So how might we do that? We’ll cover class template specialization in the next lesson.</p>",
+      "preview": "So how might we do that? We’ll cover class template specialization in the next l",
+      "canCheck": true
+    }
+  ]
+}

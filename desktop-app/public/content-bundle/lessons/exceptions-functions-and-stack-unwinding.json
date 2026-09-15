@@ -1,0 +1,312 @@
+{
+  "index": 319,
+  "chapterId": "27",
+  "number": "27.3",
+  "title": "27.3 — Exceptions, functions, and stack unwinding",
+  "url": "https://www.learncpp.com/cpp-tutorial/exceptions-functions-and-stack-unwinding/",
+  "slug": "exceptions-functions-and-stack-unwinding",
+  "scrapedAt": "2026-09-15T16:31:24.948Z",
+  "totalBlocks": 42,
+  "totalCheckpoints": 40,
+  "blocks": [
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b0",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson on <a href=\"https://www.learncpp.com/cpp-tutorial/basic-exception-handling/\">27.2 -- Basic exception handling</a>, we explained how throw, try, and catch work together to enable exception handling. In this lesson, we’ll talk about how exception handling interacts with functions.</p>",
+      "preview": "In the previous lesson on 27.2 -- Basic exception handling, we explained how thr",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b1",
+      "type": "paragraph",
+      "html": "<p><strong>Throwing exceptions from a called function</strong></p>",
+      "preview": "Throwing exceptions from a called function",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b2",
+      "type": "paragraph",
+      "html": "<p>In the prior lesson, we noted, “a try block detects any exceptions that are thrown by statements within the try block”. In the corresponding examples, our throw statements were placed within a try block, and caught by an associated catch block, all within the same function. Having to both throw and catch exceptions within a single function is of limited value.</p>",
+      "preview": "In the prior lesson, we noted, “a try block detects any exceptions that are thro",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b3",
+      "type": "paragraph",
+      "html": "<p>Of more interest is what happens if a statement inside a try block is a function call, and the called function throws an exception. Will the try block detect an exception thrown by a function that is called from within the try block?</p>",
+      "preview": "Of more interest is what happens if a statement inside a try block is a function",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b4",
+      "type": "paragraph",
+      "html": "<p>The answer, fortunately, is yes!</p>",
+      "preview": "The answer, fortunately, is yes!",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b5",
+      "type": "paragraph",
+      "html": "<p>One of the most useful properties of exception handling is that the throw statements do NOT have to be placed directly inside a try block. Instead, exceptions can be thrown from anywhere in a function, and those exceptions can be caught by the try block of the caller (or the caller’s caller, etc…). When an exception is caught in this manner, execution jumps from the point where the exception is thrown to the catch block handling the exception.</p>",
+      "preview": "One of the most useful properties of exception handling is that the throw statem",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b6",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Try blocks catch exceptions not only from statements within the try block, but also from functions that are called within the try block.</p></div>",
+      "preview": "Key insightTry blocks catch exceptions not only from statements within the try block, but also from ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b7",
+      "type": "paragraph",
+      "html": "<p>This allows us to use exception handling in a much more modular fashion. We’ll demonstrate this by rewriting the square root program from the previous lesson to use a modular function.</p>",
+      "preview": "This allows us to use exception handling in a much more modular fashion. We’ll d",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cmath> // for sqrt() function\n#include <iostream>\n\n// A modular square root function\ndouble mySqrt(double x)\n{\n    // If the user entered a negative number, this is an error condition\n    if (x < 0.0)\n        throw \"Can not take sqrt of negative number\"; // throw exception of type const char*\n\n    return std::sqrt(x);\n}\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    double x {};\n    std::cin >> x;\n\n    try // Look for exceptions that occur within try block and route to attached catch block(s)\n    {\n        double d = mySqrt(x);\n        std::cout << \"The sqrt of \" << x << \" is \" << d << '\\n';\n    }\n    catch (const char* exception) // catch exceptions of type const char*\n    {\n        std::cerr << \"Error: \" << exception << std::endl;\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cmath&gt; // for sqrt() function\n#include &lt;iostream&gt;\n\n// A modular square root function\ndouble mySqrt(double x)\n{\n    // If the user entered a negative number, this is an error condition\n    if (x &lt; 0.0)\n        throw \"Can not take sqrt of negative number\"; // throw exception of type const char*\n\n    return std::sqrt(x);\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    double x {};\n    std::cin &gt;&gt; x;\n\n    try // Look for exceptions that occur within try block and route to attached catch block(s)\n    {\n        double d = mySqrt(x);\n        std::cout &lt;&lt; \"The sqrt of \" &lt;&lt; x &lt;&lt; \" is \" &lt;&lt; d &lt;&lt; '\\n';\n    }\n    catch (const char* exception) // catch exceptions of type const char*\n    {\n        std::cerr &lt;&lt; \"Error: \" &lt;&lt; exception &lt;&lt; std::endl;\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b9",
+      "type": "paragraph",
+      "html": "<p>In this program, we’ve taken the code that checks for an exception and calculates the square root and put it inside a modular function called mySqrt(). We’ve then called this mySqrt() function from inside a try block. Let’s verify that it still works as expected:</p>",
+      "preview": "In this program, we’ve taken the code that checks for an exception and calculate",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b10",
+      "type": "output",
+      "text": "Enter a number: -4\nError: Can not take sqrt of negative number\n",
+      "html": "<pre>Enter a number: -4\nError: Can not take sqrt of negative number\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b11",
+      "type": "paragraph",
+      "html": "<p>It does! When the exception is thrown within mySqrt(), there is no handler in mySqrt() to handle the exception. However, the call to mySqrt() (in main()) is within a try block that has an associated matching exception handler. Therefore execution jumps from the throw statement in mySqrt() to the top of the catch block in main() and then resumes.</p>",
+      "preview": "It does! When the exception is thrown within mySqrt(), there is no handler in my",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b12",
+      "type": "paragraph",
+      "html": "<p>The most interesting part of the above program is that the mySqrt() function can throw an exception, but does not handle this exception itself! This essentially means mySqrt() is willing to say, “Hey, there’s a problem!”, but is unwilling to handle the problem itself. It is, in essence, delegating the responsibility for handling the exception to its caller (the equivalent of how using a return code passes the responsibility of handling an error back to a function’s caller).</p>",
+      "preview": "The most interesting part of the above program is that the mySqrt() function can",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b13",
+      "type": "paragraph",
+      "html": "<p>At this point, some of you are probably wondering why it’s a good idea to pass errors back to the caller. Why not just make MySqrt() handle its own error? The problem is that different applications may want to handle errors in different ways. A console application may want to print a text message. A windows application may want to pop up an error dialog. In one application, this may be a fatal error, and in another application it may not be. By passing the error out of the function, each application can handle an error from mySqrt() in a way that is the most context appropriate for it! Ultimately, this keeps mySqrt() as modular as possible, and the error handling can be placed in the less-modular parts of the code.</p>",
+      "preview": "At this point, some of you are probably wondering why it’s a good idea to pass e",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b14",
+      "type": "paragraph",
+      "html": "<p><strong>Exception handling and stack unwinding</strong></p>",
+      "preview": "Exception handling and stack unwinding",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b15",
+      "type": "paragraph",
+      "html": "<p>In this section, we’ll take a look at how exception handling actually works when multiple functions are involved.</p>",
+      "preview": "In this section, we’ll take a look at how exception handling actually works when",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b16",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>Before proceeding, see lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-stack-and-the-heap/\">20.2 -- The stack and the heap</a> if you need a refresher on call stacks and stack unwinding.</p></div>",
+      "preview": "Related contentBefore proceeding, see lesson 20.2 -- The stack and the heap if you need a refresher ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b17",
+      "type": "paragraph",
+      "html": "<p>When an exception is thrown, the program first looks to see if the exception can be handled immediately inside the current function (meaning the exception was thrown within a try block inside the current function, and there is a corresponding catch block associated). If the current function can handle the exception, it does so.</p>",
+      "preview": "When an exception is thrown, the program first looks to see if the exception can",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b18",
+      "type": "paragraph",
+      "html": "<p>If not, the program next checks whether the function’s caller (the next function up the call stack) can handle the exception. In order for the function’s caller to handle the exception, the call to the current function must be inside a try block, and a matching catch block must be associated. If no match is found, then the caller’s caller (two functions up the call stack) is checked. Similarly, in order for the caller’s caller to handle the exception, the call to the caller must be inside a try block, and a matching catch block must be associated.</p>",
+      "preview": "If not, the program next checks whether the function’s caller (the next function",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b19",
+      "type": "paragraph",
+      "html": "<p>The process of checking each function up the call stack continues until either a handler is found, or all of the functions on the call stack have been checked and no handler can be found.</p>",
+      "preview": "The process of checking each function up the call stack continues until either a",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b20",
+      "type": "paragraph",
+      "html": "<p>If a matching exception handler is found, then execution jumps from the point where the exception is thrown to the top of the matching catch block. This requires unwinding the stack (removing the current function from the call stack) as many times as necessary to make the function handling the exception the top function on the call stack.</p>",
+      "preview": "If a matching exception handler is found, then execution jumps from the point wh",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b21",
+      "type": "paragraph",
+      "html": "<p>If no matching exception handler is found, the stack may or may not be unwound. We will talk more about this case in the next lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/uncaught-exceptions-catch-all-handlers/\">27.4 -- Uncaught exceptions and catch-all handlers</a>).</p>",
+      "preview": "If no matching exception handler is found, the stack may or may not be unwound. ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b22",
+      "type": "paragraph",
+      "html": "<p>When the current function is removed from the call stack, all local variables are destroyed as usual, but no value is returned.</p>",
+      "preview": "When the current function is removed from the call stack, all local variables ar",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b23",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Unwinding the stack destroys local variables in the functions that are unwound (which is good, because it ensures their destructors execute).</p></div>",
+      "preview": "Key insightUnwinding the stack destroys local variables in the functions that are unwound (which is ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b24",
+      "type": "paragraph",
+      "html": "<p><strong>Another stack unwinding example</strong></p>",
+      "preview": "Another stack unwinding example",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b25",
+      "type": "paragraph",
+      "html": "<p>To illustrate the above, let’s take a look at a more complex example, using a larger stack. Although this program is long, it’s pretty simple: main() calls A(), A() calls B(), B() calls C(), C() calls D(), and D() throws an exception.</p>",
+      "preview": "To illustrate the above, let’s take a look at a more complex example, using a la",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid D() // called by C()\n{\n    std::cout << \"Start D\\n\";\n    std::cout << \"D throwing int exception\\n\";\n\n    throw - 1;\n\n    std::cout << \"End D\\n\"; // skipped over\n}\n\nvoid C() // called by B()\n{\n    std::cout << \"Start C\\n\";\n    D();\n    std::cout << \"End C\\n\";\n}\n\nvoid B() // called by A()\n{\n    std::cout << \"Start B\\n\";\n\n    try\n    {\n        C();\n    }\n    catch (double) // not caught: exception type mismatch\n    {\n        std::cerr << \"B caught double exception\\n\";\n    }\n\n    try\n    {\n    }\n    catch (int) // not caught: exception not thrown within try\n    {\n        std::cerr << \"B caught int exception\\n\";\n    }\n\n    std::cout << \"End B\\n\";\n}\n\nvoid A() // called by main()\n{\n    std::cout << \"Start A\\n\";\n\n    try\n    {\n        B();\n    }\n    catch (int) // exception caught here and handled\n    {\n        std::cerr << \"A caught int exception\\n\";\n    }\n    catch (double) // not called because exception was handled by prior catch block\n    {\n        std::cerr << \"A caught double exception\\n\";\n    }\n\n    // execution continues here after the exception is handled\n    std::cout << \"End A\\n\";\n}\n\nint main()\n{\n    std::cout << \"Start main\\n\";\n\n    try\n    {\n        A();\n    }\n    catch (int) // not called because exception was handled by A\n    {\n        std::cerr << \"main caught int exception\\n\";\n    }\n    std::cout << \"End main\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid D() // called by C()\n{\n    std::cout &lt;&lt; \"Start D\\n\";\n    std::cout &lt;&lt; \"D throwing int exception\\n\";\n\n    throw - 1;\n\n    std::cout &lt;&lt; \"End D\\n\"; // skipped over\n}\n\nvoid C() // called by B()\n{\n    std::cout &lt;&lt; \"Start C\\n\";\n    D();\n    std::cout &lt;&lt; \"End C\\n\";\n}\n\nvoid B() // called by A()\n{\n    std::cout &lt;&lt; \"Start B\\n\";\n\n    try\n    {\n        C();\n    }\n    catch (double) // not caught: exception type mismatch\n    {\n        std::cerr &lt;&lt; \"B caught double exception\\n\";\n    }\n\n    try\n    {\n    }\n    catch (int) // not caught: exception not thrown within try\n    {\n        std::cerr &lt;&lt; \"B caught int exception\\n\";\n    }\n\n    std::cout &lt;&lt; \"End B\\n\";\n}\n\nvoid A() // called by main()\n{\n    std::cout &lt;&lt; \"Start A\\n\";\n\n    try\n    {\n        B();\n    }\n    catch (int) // exception caught here and handled\n    {\n        std::cerr &lt;&lt; \"A caught int exception\\n\";\n    }\n    catch (double) // not called because exception was handled by prior catch block\n    {\n        std::cerr &lt;&lt; \"A caught double exception\\n\";\n    }\n\n    // execution continues here after the exception is handled\n    std::cout &lt;&lt; \"End A\\n\";\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Start main\\n\";\n\n    try\n    {\n        A();\n    }\n    catch (int) // not called because exception was handled by A\n    {\n        std::cerr &lt;&lt; \"main caught int exception\\n\";\n    }\n    std::cout &lt;&lt; \"End main\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b27",
+      "type": "paragraph",
+      "html": "<p>Take a look at this program in more detail, and see if you can figure out what gets printed and what doesn’t when it is run. The answer follows:</p>",
+      "preview": "Take a look at this program in more detail, and see if you can figure out what g",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b28",
+      "type": "output",
+      "text": "Start main\nStart A\nStart B\nStart C\nStart D\nD throwing int exception\nA caught int exception\nEnd A\nEnd main\n",
+      "html": "<pre>Start main\nStart A\nStart B\nStart C\nStart D\nD throwing int exception\nA caught int exception\nEnd A\nEnd main\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b29",
+      "type": "paragraph",
+      "html": "<p>Let’s examine what happens in this case. The printing of all the “Start” statements is straightforward and doesn’t warrant further explanation. Function D() prints “D throwing int exception” and then throws an int exception. This is where things start to get interesting.</p>",
+      "preview": "Let’s examine what happens in this case. The printing of all the “Start” stateme",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b30",
+      "type": "paragraph",
+      "html": "<p>Because D() doesn’t handle the exception itself, its callers (the functions up the call stack) are checked to see if one of them can handle the exception. Function C() doesn’t handle any exceptions, so no match is found there.</p>",
+      "preview": "Because D() doesn’t handle the exception itself, its callers (the functions up t",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b31",
+      "type": "paragraph",
+      "html": "<p>Function B() has two separate try blocks. The try block containing the call to C() has a handler for exceptions of type double, but that does not match our exception of type int (and exceptions do not do type conversion), so no match is found. The empty try block does have an exception handler for exceptions of type int, but this catch block is not considered a match because the call to C() is not within the associated try block.</p>",
+      "preview": "Function B() has two separate try blocks. The try block containing the call to C",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b32",
+      "type": "paragraph",
+      "html": "<p>A() also has a try block, and the call to B() is within it, so the program looks to see if there is a catch handler for int exceptions. There is! Consequently, A() handles the exception, and prints “A caught int exception”.</p>",
+      "preview": "A() also has a try block, and the call to B() is within it, so the program looks",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b33",
+      "type": "paragraph",
+      "html": "<p>Because the exception has now been handled, control continues normally after the catch blocks within A(). This means A() prints “End A” and then terminates normally.</p>",
+      "preview": "Because the exception has now been handled, control continues normally after the",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b34",
+      "type": "paragraph",
+      "html": "<p>Control returns to main(). Although main() has an exception handler for int, our exception has already been handled by A(), so the catch block within main() does not get executed. main() simply prints “End main” and then terminates normally.</p>",
+      "preview": "Control returns to main(). Although main() has an exception handler for int, our",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b35",
+      "type": "paragraph",
+      "html": "<p>There are quite a few interesting principles illustrated by this program:</p>",
+      "preview": "There are quite a few interesting principles illustrated by this program:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b36",
+      "type": "paragraph",
+      "html": "<p>First, the immediate caller of a function that throws an exception doesn’t have to handle the exception if it doesn’t want to. In this case, C() didn’t handle the exception thrown by D(). It delegated that responsibility to one of its callers up the stack.</p>",
+      "preview": "First, the immediate caller of a function that throws an exception doesn’t have ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b37",
+      "type": "paragraph",
+      "html": "<p>Second, if a try block doesn’t have a catch handler for the type of exception being thrown, stack unwinding occurs just as if there were no try block at all. In this case, B() didn’t handle the exception either because it didn’t have the right kind of catch block.</p>",
+      "preview": "Second, if a try block doesn’t have a catch handler for the type of exception be",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b38",
+      "type": "paragraph",
+      "html": "<p>Third, if a function has a matching catch block but the call to the current function did not occur within the associated try block, that catch block isn’t used. We also saw this in B().</p>",
+      "preview": "Third, if a function has a matching catch block but the call to the current func",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b39",
+      "type": "paragraph",
+      "html": "<p>Finally, once a matching catch block executes, control flow proceeds as normal, starting with the first statement after the last catch block. This was demonstrated by A() handling the error, then continuing with “End A”, and then returning back to the caller. By the time the program got back to main(), the exception had been thrown and handled already -- main() had no idea there even was an exception at all!</p>",
+      "preview": "Finally, once a matching catch block executes, control flow proceeds as normal, ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b40",
+      "type": "paragraph",
+      "html": "<p>As you can see, stack unwinding provides us with some very useful behavior -- if a function does not want to handle an exception, it doesn’t have to. The exception will propagate up the stack until it finds someone who will! This allows us to decide where in the call stack is the most appropriate place to handle any errors that may occur.</p>",
+      "preview": "As you can see, stack unwinding provides us with some very useful behavior -- if",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-functions-and-stack-unwinding_b41",
+      "type": "paragraph",
+      "html": "<p>In the next lesson, we’ll take a look at what happens when you don’t capture an exception, and a method to prevent that from happening.</p>",
+      "preview": "In the next lesson, we’ll take a look at what happens when you don’t capture an ",
+      "canCheck": true
+    }
+  ]
+}

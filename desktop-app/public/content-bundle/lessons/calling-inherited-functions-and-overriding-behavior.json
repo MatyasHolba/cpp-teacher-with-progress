@@ -1,0 +1,387 @@
+{
+  "index": 294,
+  "chapterId": "24",
+  "number": "24.7",
+  "title": "24.7 — Calling inherited functions and overriding behavior",
+  "url": "https://www.learncpp.com/cpp-tutorial/calling-inherited-functions-and-overriding-behavior/",
+  "slug": "calling-inherited-functions-and-overriding-behavior",
+  "scrapedAt": "2026-09-15T16:31:10.168Z",
+  "totalBlocks": 52,
+  "totalCheckpoints": 44,
+  "blocks": [
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b0",
+      "type": "paragraph",
+      "html": "<p>By default, derived classes inherit all of the behaviors defined in a base class. In this lesson, we’ll examine in more detail how member functions are selected, as well as how we can leverage this to change behaviors in a derived class.</p>",
+      "preview": "By default, derived classes inherit all of the behaviors defined in a base class",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b1",
+      "type": "paragraph",
+      "html": "<p>When a member function is called on a derived class object, the compiler first looks to see if any function with that name exists in the derived class. If so, all overloaded functions with that name are considered, and the function overload resolution process is used to determine whether there is a best match. If not, the compiler walks up the inheritance chain, checking each parent class in turn in the same way.</p>",
+      "preview": "When a member function is called on a derived class object, the compiler first l",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b2",
+      "type": "paragraph",
+      "html": "<p>Put another way, the compiler will select the best matching function from the most-derived class with at least one function with that name.</p>",
+      "preview": "Put another way, the compiler will select the best matching function from the mo",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b3",
+      "type": "section",
+      "title": "Calling a base class function",
+      "html": "<h3 class=\"cpp-section-heading\">Calling a base class function</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b4",
+      "type": "paragraph",
+      "html": "<p>First, let’s explore what happens when the derived class has no matching function, but the base class does:</p>",
+      "preview": "First, let’s explore what happens when the derived class has no matching functio",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b6",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b7",
+      "type": "output",
+      "text": "Base::identify()\nBase::identify()\n",
+      "html": "<pre>Base::identify()\nBase::identify()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b8",
+      "type": "paragraph",
+      "html": "<p>When <code>base.identify()</code> is called, the compiler looks to see if a function named <code>identify()</code> has been defined in class <code>Base</code>. It has, so the compiler looks to see if it is a match. It is, so it is called</p>",
+      "preview": "When base.identify() is called, the compiler looks to see if a function named id",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b9",
+      "type": "paragraph",
+      "html": "<p>When <code>derived.identify()</code> is called, the compiler looks to see if a function named <code>identify()</code> has been defined in the <code>Derived</code> class. It hasn’t. So it moves to the parent class (in this case, <code>Base</code>), and tries again there. <code>Base</code> has defined an <code>identify()</code> function, so it uses that one. In other words, <code>Base::identify()</code> was used because <code>Derived::identify()</code> doesn’t exist.</p>",
+      "preview": "When derived.identify() is called, the compiler looks to see if a function named",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b10",
+      "type": "paragraph",
+      "html": "<p>This means that if the behavior provided by a base class is sufficient, we can simply use the base class behavior.</p>",
+      "preview": "This means that if the behavior provided by a base class is sufficient, we can s",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b11",
+      "type": "section",
+      "title": "Redefining behaviors",
+      "html": "<h3 class=\"cpp-section-heading\">Redefining behaviors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b12",
+      "type": "paragraph",
+      "html": "<p>However, if we had defined <code>Derived::identify()</code> in the <code>Derived</code> class, it would have been used instead.</p>",
+      "preview": "However, if we had defined Derived::identify() in the Derived class, it would ha",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b13",
+      "type": "paragraph",
+      "html": "<p>This means that we can make functions work differently with our derived classes by redefining them in the derived class!</p>",
+      "preview": "This means that we can make functions work differently with our derived classes ",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b14",
+      "type": "paragraph",
+      "html": "<p>For example, let’s say we want <code>derived.identify()</code> to print <code>Derived::identify()</code>. We can simply add function <code>identify()</code> in the <code>Derived</code> class so it returns the correct response when we call function <code>identify()</code> with a <code>Derived</code> object.</p>",
+      "preview": "For example, let’s say we want derived.identify() to print Derived::identify(). ",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b15",
+      "type": "paragraph",
+      "html": "<p>To modify the way a function defined in a base class works in the derived class, simply redefine the function in the derived class.</p>",
+      "preview": "To modify the way a function defined in a base class works in the derived class,",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const { std::cout << \"Derived::identify()\\n\"; }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const { std::cout &lt;&lt; \"Derived::identify()\\n\"; }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b17",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b18",
+      "type": "output",
+      "text": "Base::identify()\nDerived::identify()\n",
+      "html": "<pre>Base::identify()\nDerived::identify()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b19",
+      "type": "paragraph",
+      "html": "<p>Note that when you redefine a function in the derived class, the derived function does not inherit the access specifier of the function with the same name in the base class. It uses whatever access specifier it is defined under in the derived class. Therefore, a function that is defined as private in the base class can be redefined as public in the derived class, or vice-versa!</p>",
+      "preview": "Note that when you redefine a function in the derived class, the derived functio",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\nprivate:\n\tvoid print() const \n\t{\n\t\tstd::cout << \"Base\";\n\t}\n};\n \nclass Derived : public Base\n{\npublic:\n\tvoid print() const \n\t{\n\t\tstd::cout << \"Derived \";\n\t}\n};\n \n \nint main()\n{\n\tDerived derived {};\n\tderived.print(); // calls derived::print(), which is public\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\nprivate:\n\tvoid print() const \n\t{\n\t\tstd::cout &lt;&lt; \"Base\";\n\t}\n};\n \nclass Derived : public Base\n{\npublic:\n\tvoid print() const \n\t{\n\t\tstd::cout &lt;&lt; \"Derived \";\n\t}\n};\n \n \nint main()\n{\n\tDerived derived {};\n\tderived.print(); // calls derived::print(), which is public\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b21",
+      "type": "section",
+      "title": "Adding to existing functionality",
+      "html": "<h3 class=\"cpp-section-heading\">Adding to existing functionality</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b22",
+      "type": "paragraph",
+      "html": "<p>Sometimes we don’t want to completely replace a base class function, but instead want to add additional functionality to it when called with a derived object. In the above example, note that <code>Derived::identify()</code> completely hides <code>Base::identify()</code>! This may not be what we want. It is possible to have our derived function call the base version of the function of the same name (in order to reuse code) and then add additional functionality to it.</p>",
+      "preview": "Sometimes we don’t want to completely replace a base class function, but instead",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b23",
+      "type": "paragraph",
+      "html": "<p>To have a derived function call a base function of the same name, simply do a normal function call, but prefix the function with the scope qualifier of the base class. For example:</p>",
+      "preview": "To have a derived function call a base function of the same name, simply do a no",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout << \"Derived::identify()\\n\";\n        Base::identify(); // note call to Base::identify() here\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout &lt;&lt; \"Derived::identify()\\n\";\n        Base::identify(); // note call to Base::identify() here\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b25",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b26",
+      "type": "output",
+      "text": "Base::identify()\nDerived::identify()\nBase::identify()\n",
+      "html": "<pre>Base::identify()\nDerived::identify()\nBase::identify()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b27",
+      "type": "paragraph",
+      "html": "<p>When <code>derived.identify()</code> is executed, it resolves to <code>Derived::identify()</code>. After printing <code>Derived::identify()</code>, it then calls <code>Base::identify()</code>, which prints <code>Base::identify()</code>.</p>",
+      "preview": "When derived.identify() is executed, it resolves to Derived::identify(). After p",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b28",
+      "type": "paragraph",
+      "html": "<p>This should be pretty straightforward. Why do we need to use the scope resolution operator (::)? If we had defined <code>Derived::identify()</code> like this:</p>",
+      "preview": "This should be pretty straightforward. Why do we need to use the scope resolutio",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout << \"Derived::identify()\\n\";\n        identify(); // no scope resolution results in self-call and infinite recursion\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout &lt;&lt; \"Derived::identify()\\n\";\n        identify(); // no scope resolution results in self-call and infinite recursion\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b30",
+      "type": "paragraph",
+      "html": "<p>Calling function <code>identify()</code> without a scope resolution qualifier would default to the <code>identify()</code> in the current class, which would be <code>Derived::identify()</code>. This would cause <code>Derived::identify()</code> to call itself, which would lead to an infinite recursion!</p>",
+      "preview": "Calling function identify() without a scope resolution qualifier would default t",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b31",
+      "type": "paragraph",
+      "html": "<p>There’s one bit of trickiness that we can run into when trying to call friend functions in base classes, such as <code>operator&lt;&lt;</code>. Because friend functions of the base class aren’t actually part of the base class, using the scope resolution qualifier won’t work. Instead, we need a way to make our <code>Derived</code> class temporarily look like the <code>Base</code> class so that the right version of the function can be called.</p>",
+      "preview": "There’s one bit of trickiness that we can run into when trying to call friend fu",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b32",
+      "type": "paragraph",
+      "html": "<p>Fortunately, that’s easy to do, using <code>static_cast</code>. Here’s an example:</p>",
+      "preview": "Fortunately, that’s easy to do, using static_cast. Here’s an example:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n\tfriend std::ostream& operator<< (std::ostream& out, const Base&)\n\t{\n\t\tout << \"In Base\\n\";\n\t\treturn out;\n\t}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n \tfriend std::ostream& operator<< (std::ostream& out, const Derived& d)\n\t{\n\t\tout << \"In Derived\\n\";\n\t\t// static_cast Derived to a Base object, so we call the right version of operator<<\n\t\tout << static_cast<const Base&>(d); \n\t\treturn out;\n    }\n};\n\nint main()\n{\n    Derived derived {};\n\n    std::cout << derived << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n\tfriend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Base&amp;)\n\t{\n\t\tout &lt;&lt; \"In Base\\n\";\n\t\treturn out;\n\t}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n \tfriend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Derived&amp; d)\n\t{\n\t\tout &lt;&lt; \"In Derived\\n\";\n\t\t// static_cast Derived to a Base object, so we call the right version of operator&lt;&lt;\n\t\tout &lt;&lt; static_cast&lt;const Base&amp;&gt;(d); \n\t\treturn out;\n    }\n};\n\nint main()\n{\n    Derived derived {};\n\n    std::cout &lt;&lt; derived &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b34",
+      "type": "paragraph",
+      "html": "<p>Because a <code>Derived</code> is-a Base, we can <code>static_cast</code> our <code>Derived</code> object into a <code>Base</code> reference, so that the appropriate version of <code>operator&lt;&lt;</code> that uses a <code>Base</code> is called.</p>",
+      "preview": "Because a Derived is-a Base, we can static_cast our Derived object into a Base r",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b35",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b36",
+      "type": "output",
+      "text": "In Derived\nIn Base\n",
+      "html": "<pre>In Derived\nIn Base\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b37",
+      "type": "section",
+      "title": "Overload resolution in derived classes",
+      "html": "<h3 class=\"cpp-section-heading\">Overload resolution in derived classes</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b38",
+      "type": "paragraph",
+      "html": "<p>As noted at the top of the lesson, the compiler will select the best matching function from the most-derived class with at least one function with that name.</p>",
+      "preview": "As noted at the top of the lesson, the compiler will select the best matching fu",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b39",
+      "type": "paragraph",
+      "html": "<p>First, let’s take a look at a simple case where we have overloaded member functions:</p>",
+      "preview": "First, let’s take a look at a simple case where we have overloaded member functi",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b41",
+      "type": "paragraph",
+      "html": "<p>For the call <code>d.print(5)</code>, the compiler doesn’t find a function named <code>print()</code> in <code>Derived</code>, so it checks <code>Base</code> where it finds two functions with that name. It uses the function overload resolution process to determine that <code>Base::print(int)</code> is a better match than <code>Base::print(double)</code>. Therefore, <code>Base::print(int)</code> gets called, just like we’d expect.</p>",
+      "preview": "For the call d.print(5), the compiler doesn’t find a function named print() in D",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b42",
+      "type": "paragraph",
+      "html": "<p>Now let’s look at a case that doesn’t behave like we might expect:</p>",
+      "preview": "Now let’s look at a case that doesn’t behave like we might expect:",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b43",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(double) { std::cout << \"Derived::print(double)\"; } // this function added\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(double), not Base::print(int)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; } // this function added\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(double), not Base::print(int)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b44",
+      "type": "paragraph",
+      "html": "<p>For the call <code>d.print(5)</code>, the compiler finds one function named <code>print()</code> in <code>Derived</code>, therefore it will only consider functions in <code>Derived</code> when trying to determine what function to resolve to. This function is also the best matching function in <code>Derived</code> for this function call. Therefore, this calls <code>Derived::print(double)</code>.</p>",
+      "preview": "For the call d.print(5), the compiler finds one function named print() in Derive",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b45",
+      "type": "paragraph",
+      "html": "<p>Since <code>Base::print(int)</code> has a parameter that is a better match for int argument <code>5</code> than <code>Derived::print(double)</code>, you may have been expecting this function call to resolve to <code>Base::print(int)</code>. But because <code>d</code> is a <code>Derived</code>, there is at least one <code>print()</code> function in <code>Derived</code>, and <code>Derived</code> is more derived than <code>Base</code>, the functions in <code>Base</code> are not even considered.</p>",
+      "preview": "Since Base::print(int) has a parameter that is a better match for int argument 5",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b46",
+      "type": "paragraph",
+      "html": "<p>So what if we actually want <code>d.print(5)</code> to resolve to <code>Base::print(int)</code>? One not-great way is to define a <code>Derived::print(int)</code>:</p>",
+      "preview": "So what if we actually want d.print(5) to resolve to Base::print(int)? One not-g",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b47",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(int n) { Base::print(n); } // works but not great, as we have to define \n    void print(double) { std::cout << \"Derived::print(double)\"; }\n};\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(int), which calls Base::print(int)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(int n) { Base::print(n); } // works but not great, as we have to define \n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; }\n};\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(int), which calls Base::print(int)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b48",
+      "type": "paragraph",
+      "html": "<p>While this works, it’s not great, as we have to add a function to <code>Derived</code> for every overload we want to fall through to <code>Base</code>. That could be a lot of extra functions that essentially just route calls to <code>Base</code>.</p>",
+      "preview": "While this works, it’s not great, as we have to add a function to Derived for ev",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b49",
+      "type": "paragraph",
+      "html": "<p>A better option is to use a using-declaration in <code>Derived</code> to make all <code>Base</code> functions with a certain name visible from within <code>Derived</code>:</p>",
+      "preview": "A better option is to use a using-declaration in Derived to make all Base functi",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b50",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    using Base::print; // make all Base::print() functions eligible for overload resolution\n    void print(double) { std::cout << \"Derived::print(double)\"; }\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int), which is the best matching function visible in Derived\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    using Base::print; // make all Base::print() functions eligible for overload resolution\n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; }\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int), which is the best matching function visible in Derived\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "calling-inherited-functions-and-overriding-behavior_b51",
+      "type": "paragraph",
+      "html": "<p>By putting the using-declaration <code>using Base::print;</code> inside <code>Derived</code>, we are telling the compiler that all <code>Base</code> functions named <code>print</code> should be visible in <code>Derived</code>, which will cause them to be eligible for overload resolution. As a result, <code>Base::print(int)</code> is selected over <code>Derived::print(double)</code>.</p>",
+      "preview": "By putting the using-declaration using Base::print; inside Derived, we are telli",
+      "canCheck": true
+    }
+  ]
+}

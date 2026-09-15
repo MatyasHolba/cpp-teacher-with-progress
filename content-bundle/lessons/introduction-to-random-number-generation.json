@@ -1,0 +1,705 @@
+{
+  "index": 113,
+  "chapterId": "8",
+  "number": "8.13",
+  "title": "8.13 — Introduction to random number generation",
+  "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/",
+  "slug": "introduction-to-random-number-generation",
+  "scrapedAt": "2026-09-15T16:29:34.793Z",
+  "totalBlocks": 98,
+  "totalCheckpoints": 80,
+  "blocks": [
+    {
+      "id": "introduction-to-random-number-generation_b0",
+      "type": "paragraph",
+      "html": "<p>The ability to generate random numbers can be useful in certain kinds of programs, particularly in games, statistical modelling programs, and cryptographic applications that need to encrypt and decrypt things. Take games for example -- without random events, monsters would always attack you the same way, you’d always find the same treasure, the dungeon layout would never change, etc… and that would not make for a very good game.</p>",
+      "preview": "The ability to generate random numbers can be useful in certain kinds of program",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b1",
+      "type": "paragraph",
+      "html": "<p>In real life, we often produce randomization by doing things like flipping a coin, rolling a dice, or shuffling a deck of cards. These events aren’t actually random, but involve so many physical variables (e.g. gravity, friction, air resistance, momentum, etc…) that they become almost impossible to predict or control, and (unless you’re a magician) produce results that are for all intents and purposes random.</p>",
+      "preview": "In real life, we often produce randomization by doing things like flipping a coi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b2",
+      "type": "paragraph",
+      "html": "<p>However, computers aren’t designed to take advantage of physical variables -- your computer can’t toss a coin, throw a dice, or shuffle real cards. Modern computers live in a controlled electrical world where everything is binary (0 or 1) and there is no in-between. By their very nature, computers are designed to produce results that are as predictable as possible. When you tell the computer to calculate 2 + 2, you <em>always</em> want the answer to be 4. Not 3 or 5 on occasion.</p>",
+      "preview": "However, computers aren’t designed to take advantage of physical variables -- yo",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b3",
+      "type": "paragraph",
+      "html": "<p>Consequently, computers are generally incapable of generating truly random numbers (at least through software). Instead, modern programs typically <em>simulate</em> randomness using an algorithm.</p>",
+      "preview": "Consequently, computers are generally incapable of generating truly random numbe",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b4",
+      "type": "paragraph",
+      "html": "<p>In this lesson, we’ll cover a lot of the theory behind how random numbers are generated in programs, and introduce some terminology we’ll use in future lessons.</p>",
+      "preview": "In this lesson, we’ll cover a lot of the theory behind how random numbers are ge",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b5",
+      "type": "section",
+      "title": "Algorithms and state",
+      "html": "<h3 class=\"cpp-section-heading\">Algorithms and state</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b6",
+      "type": "paragraph",
+      "html": "<p>First, let’s take a detour through the concepts of algorithms and states.</p>",
+      "preview": "First, let’s take a detour through the concepts of algorithms and states.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b7",
+      "type": "paragraph",
+      "html": "<p>An <strong>algorithm</strong> is a finite sequence of instructions that can be followed to solve some problem or produce some useful result.</p>",
+      "preview": "An algorithm is a finite sequence of instructions that can be followed to solve ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b8",
+      "type": "paragraph",
+      "html": "<p>For example, let’s say your boss gives you a small text file containing a bunch of unsorted names (one per line), and asks you to sort the list. Since the list is small, and you don’t expect to do this often, you decide to sort it by hand. There are multiple ways to sort a list, but you might do something like this:</p>",
+      "preview": "For example, let’s say your boss gives you a small text file containing a bunch ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b9",
+      "type": "list",
+      "html": "<ul><li>Create a new empty list to hold the sorted results</li><li>Scan the list of unsorted names to find the name that comes first alphabetically</li><li>Cut that name out of the unsorted list and paste it at the bottom of the sorted list</li><li>Repeat the previous two steps until there are no more names on the unsorted list</li></ul>",
+      "preview": "Create a new empty list to hold the sorted resultsScan the list of unsorted name",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b10",
+      "type": "paragraph",
+      "html": "<p>The above set of steps describes a sorting algorithm (using natural language). By nature, algorithms are reusable -- if your boss asks you to sort another list tomorrow, you can just apply the same algorithm to the new list.</p>",
+      "preview": "The above set of steps describes a sorting algorithm (using natural language). B",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b11",
+      "type": "paragraph",
+      "html": "<p>Because computers can execute instructions and manipulate data much more quickly than we can, algorithms are often written using programming languages, allowing us to automate tasks. In C++, algorithms are typically implemented as reusable functions.</p>",
+      "preview": "Because computers can execute instructions and manipulate data much more quickly",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b12",
+      "type": "paragraph",
+      "html": "<p>Here’s a simple algorithm for generating a sequence of numbers where each successive number is incremented by 1:</p>",
+      "preview": "Here’s a simple algorithm for generating a sequence of numbers where each succes",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint plusOne()\n{\n    static int s_state { 3 }; // only initialized the first time this function is called\n\n    // Generate the next number\n\n    ++s_state;      // first we modify the state\n    return s_state; // then we use the new state to generate the next number in the sequence\n}\n\nint main()\n{\n    std::cout << plusOne() << '\\n';\n    std::cout << plusOne() << '\\n';\n    std::cout << plusOne() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint plusOne()\n{\n    static int s_state { 3 }; // only initialized the first time this function is called\n\n    // Generate the next number\n\n    ++s_state;      // first we modify the state\n    return s_state; // then we use the new state to generate the next number in the sequence\n}\n\nint main()\n{\n    std::cout &lt;&lt; plusOne() &lt;&lt; '\\n';\n    std::cout &lt;&lt; plusOne() &lt;&lt; '\\n';\n    std::cout &lt;&lt; plusOne() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b14",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b15",
+      "type": "output",
+      "text": "4\n5\n6\n",
+      "html": "<pre>4\n5\n6\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b16",
+      "type": "paragraph",
+      "html": "<p>This algorithm is pretty simple. The first time we call <code>plusOne()</code>, <code>s_state</code> is initialized to value <code>3</code>. Then the next number in the output sequence is generated and returned.</p>",
+      "preview": "This algorithm is pretty simple. The first time we call plusOne(), s_state is in",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b17",
+      "type": "paragraph",
+      "html": "<p>An algorithm is considered to be <strong>stateful</strong> if it retains some information across calls. Conversely, a <strong>stateless</strong> algorithm does not store any information (and must be given all the information it needs to work with whenever it is called). Our <code>plusOne()</code> function is stateful, in that it uses the static variable <code>s_state</code> to store the last number that was generated. When applied to algorithms, the term <strong>state</strong> refers to the current values held in stateful variables (those retained across calls).</p>",
+      "preview": "An algorithm is considered to be stateful if it retains some information across ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b18",
+      "type": "paragraph",
+      "html": "<p>To generate the next number in the sequence, our algorithm uses a two step process:</p>",
+      "preview": "To generate the next number in the sequence, our algorithm uses a two step proce",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b19",
+      "type": "list",
+      "html": "<ul><li>First, the current state (initialized from the start value, or preserved from the prior call) is modified to produce a new state.</li><li>Then, the next number in the sequence is generated from the new state.</li></ul>",
+      "preview": "First, the current state (initialized from the start value, or preserved from th",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b20",
+      "type": "paragraph",
+      "html": "<p>Our algorithm is considered <strong>deterministic</strong>, meaning that for a given input (the value provided for <code>start</code>), it will always produce the same output sequence.</p>",
+      "preview": "Our algorithm is considered deterministic, meaning that for a given input (the v",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b21",
+      "type": "section",
+      "title": "Pseudo-random number generators (PRNGs)",
+      "html": "<h3 class=\"cpp-section-heading\">Pseudo-random number generators (PRNGs)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b22",
+      "type": "paragraph",
+      "html": "<p>To simulate randomness, programs typically use a pseudo-random number generator. A <strong>pseudo-random number generator (PRNG)</strong> is an algorithm that generates a sequence of numbers whose properties simulate a sequence of random numbers.</p>",
+      "preview": "To simulate randomness, programs typically use a pseudo-random number generator.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b23",
+      "type": "paragraph",
+      "html": "<p>It’s easy to write a basic PRNG algorithm. Here’s a short PRNG example that generates 100 16-bit pseudo-random numbers:</p>",
+      "preview": "It’s easy to write a basic PRNG algorithm. Here’s a short PRNG example that gene",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n// For illustrative purposes only, don't use this\nunsigned int LCG16() // our PRNG\n{\n    static unsigned int s_state{ 0 }; // only initialized the first time this function is called\n\n    // Generate the next number\n\n    // We modify the state using large constants and intentional overflow to make it hard\n    // for someone to casually determine what the next number in the sequence will be.\n\n    s_state = 8253729 * s_state + 2396403; // first we modify the state\n    return s_state % 32768; // then we use the new state to generate the next number in the sequence\n}\n\nint main()\n{\n    // Print 100 random numbers\n    for (int count{ 1 }; count <= 100; ++count)\n    {\n        std::cout << LCG16() << '\\t';\n\n        // If we've printed 10 numbers, start a new row\n        if (count % 10 == 0)\n            std::cout << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// For illustrative purposes only, don't use this\nunsigned int LCG16() // our PRNG\n{\n    static unsigned int s_state{ 0 }; // only initialized the first time this function is called\n\n    // Generate the next number\n\n    // We modify the state using large constants and intentional overflow to make it hard\n    // for someone to casually determine what the next number in the sequence will be.\n\n    s_state = 8253729 * s_state + 2396403; // first we modify the state\n    return s_state % 32768; // then we use the new state to generate the next number in the sequence\n}\n\nint main()\n{\n    // Print 100 random numbers\n    for (int count{ 1 }; count &lt;= 100; ++count)\n    {\n        std::cout &lt;&lt; LCG16() &lt;&lt; '\\t';\n\n        // If we've printed 10 numbers, start a new row\n        if (count % 10 == 0)\n            std::cout &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b25",
+      "type": "paragraph",
+      "html": "<p>The result of this program is:</p>",
+      "preview": "The result of this program is:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b26",
+      "type": "output",
+      "text": "4339\t838\t25337\t15372\t6783\t2642\t6021\t19992\t14859\t26462\t\n25105\t13860\t28567\t6762\t17053\t29744\t15139\t9078\t14633\t2108\t\n7343\t642\t17845\t29256\t5179\t14222\t26689\t12884\t8647\t17050\t\n8397\t18528\t17747\t9126\t28505\t13420\t32479\t23218\t21477\t30328\t\n20075\t26558\t20081\t3716\t13303\t19146\t24317\t31888\t12163\t982\t\n1417\t16540\t16655\t4834\t16917\t23208\t26779\t30702\t5281\t19124\t\n9767\t13050\t32045\t4288\t31155\t17414\t31673\t11468\t25407\t11026\t\n4165\t7896\t25291\t26654\t15057\t26340\t30807\t31530\t31581\t1264\t\n9187\t25654\t20969\t30972\t25967\t9026\t15989\t17160\t15611\t14414\t\n16641\t25364\t10887\t9050\t22925\t22816\t11795\t25702\t2073\t9516\t\n",
+      "html": "<pre>4339\t838\t25337\t15372\t6783\t2642\t6021\t19992\t14859\t26462\t\n25105\t13860\t28567\t6762\t17053\t29744\t15139\t9078\t14633\t2108\t\n7343\t642\t17845\t29256\t5179\t14222\t26689\t12884\t8647\t17050\t\n8397\t18528\t17747\t9126\t28505\t13420\t32479\t23218\t21477\t30328\t\n20075\t26558\t20081\t3716\t13303\t19146\t24317\t31888\t12163\t982\t\n1417\t16540\t16655\t4834\t16917\t23208\t26779\t30702\t5281\t19124\t\n9767\t13050\t32045\t4288\t31155\t17414\t31673\t11468\t25407\t11026\t\n4165\t7896\t25291\t26654\t15057\t26340\t30807\t31530\t31581\t1264\t\n9187\t25654\t20969\t30972\t25967\t9026\t15989\t17160\t15611\t14414\t\n16641\t25364\t10887\t9050\t22925\t22816\t11795\t25702\t2073\t9516\t\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b27",
+      "type": "paragraph",
+      "html": "<p>Each number appears to be pretty random with respect to the previous one.</p>",
+      "preview": "Each number appears to be pretty random with respect to the previous one.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b28",
+      "type": "paragraph",
+      "html": "<p>Notice how similar <code>LCG16()</code> is to our <code>plusOne()</code> example above! The state is initially set to value <code>0</code>. Then to produce the next number in the output sequence, the current state is modified (by applying some mathematical operations) to produce a new state, and the next number in the sequence is generated from that new state.</p>",
+      "preview": "Notice how similar LCG16() is to our plusOne() example above! The state is initi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b29",
+      "type": "paragraph",
+      "html": "<p>As it turns out, this particular algorithm isn’t very good as a random number generator (note how each result alternates between even and odd -- that’s not very random!). But most PRNGs work similarly to <code>LCG16()</code> -- they just typically use more state variables and more complex mathematical operations in order to generate better quality results.</p>",
+      "preview": "As it turns out, this particular algorithm isn’t very good as a random number ge",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b30",
+      "type": "section",
+      "title": "Seeding a PRNG",
+      "html": "<h3 class=\"cpp-section-heading\">Seeding a PRNG</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b31",
+      "type": "paragraph",
+      "html": "<p>The sequence of “random numbers” generated by a PRNG is not random at all. Just like our <code>plusOne()</code> function, <code>LCG16()</code> is also deterministic. Given some initial state value (such as <code>0</code>), a PRNG will generate the same sequence of numbers each time. If you run the above program 3 times, you’ll see it generates the same sequence of values each time.</p>",
+      "preview": "The sequence of “random numbers” generated by a PRNG is not random at all. Just ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b32",
+      "type": "paragraph",
+      "html": "<p>In order to generate different output sequences, the initial state of a PRNG needs to be varied. The value (or set of values) used to set the initial state of a PRNG is called a <strong>random seed</strong> (or <strong>seed</strong> for short). When the initial state of a PRNG has been set using a seed, we say it has been <strong>seeded</strong>.</p>",
+      "preview": "In order to generate different output sequences, the initial state of a PRNG nee",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b33",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Because the initial state of the PRNG is set from the seed value(s), all of the values that a PRNG will produce are deterministically calculated from the seed value(s).</p></div>",
+      "preview": "Key insightBecause the initial state of the PRNG is set from the seed value(s), all of the values th",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b34",
+      "type": "paragraph",
+      "html": "<p>The seed value is typically provided by the program using the PRNG. Here’s a sample program that requests a seed value from the user and then generates 10 random numbers using that seed value (using our <code>LCG16()</code> function).</p>",
+      "preview": "The seed value is typically provided by the program using the PRNG. Here’s a sam",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nunsigned int g_state{ 0 };\n\nvoid seedPRNG(unsigned int seed)\n{\n    g_state = seed;\n}\n\n// For illustrative purposes only, don't use this\nunsigned int LCG16() // our PRNG\n{\n    // We modify the state using large constants and intentional overflow to make it hard\n    // for someone to casually determine what the next number in the sequence will be.\n\n    g_state = 8253729 * g_state + 2396403; // first we modify the state\n    return g_state % 32768; // then we use the new state to generate the next number in the sequence\n}\n\nvoid print10()\n{\n    // Print 10 random numbers\n    for (int count{ 1 }; count <= 10; ++count)\n    {\n        std::cout << LCG16() << '\\t';\n    }   \n\n    std::cout << '\\n';\n}\n\nint main()\n{\n    unsigned int x {};\n    std::cout << \"Enter a seed value: \";\n    std::cin >> x;\n\n    seedPRNG(x); // seed our PRNG\n    print10();   // generate 10 random values\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nunsigned int g_state{ 0 };\n\nvoid seedPRNG(unsigned int seed)\n{\n    g_state = seed;\n}\n\n// For illustrative purposes only, don't use this\nunsigned int LCG16() // our PRNG\n{\n    // We modify the state using large constants and intentional overflow to make it hard\n    // for someone to casually determine what the next number in the sequence will be.\n\n    g_state = 8253729 * g_state + 2396403; // first we modify the state\n    return g_state % 32768; // then we use the new state to generate the next number in the sequence\n}\n\nvoid print10()\n{\n    // Print 10 random numbers\n    for (int count{ 1 }; count &lt;= 10; ++count)\n    {\n        std::cout &lt;&lt; LCG16() &lt;&lt; '\\t';\n    }   \n\n    std::cout &lt;&lt; '\\n';\n}\n\nint main()\n{\n    unsigned int x {};\n    std::cout &lt;&lt; \"Enter a seed value: \";\n    std::cin &gt;&gt; x;\n\n    seedPRNG(x); // seed our PRNG\n    print10();   // generate 10 random values\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b36",
+      "type": "paragraph",
+      "html": "<p>Here are 3 sample runs from this:</p>",
+      "preview": "Here are 3 sample runs from this:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b37",
+      "type": "output",
+      "text": "Enter a seed value: 7\n10458\t3853\t16032\t17299\t10726\t32153\t19116\t7455\t242\t549\t\n",
+      "html": "<pre>Enter a seed value: 7\n10458\t3853\t16032\t17299\t10726\t32153\t19116\t7455\t242\t549\t\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b38",
+      "type": "output",
+      "text": "Enter a seed value: 7\n10458\t3853\t16032\t17299\t10726\t32153\t19116\t7455\t242\t549\t\n",
+      "html": "<pre>Enter a seed value: 7\n10458\t3853\t16032\t17299\t10726\t32153\t19116\t7455\t242\t549\t\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b39",
+      "type": "output",
+      "text": "Enter a seed value: 9876\n24071\t18138\t27917\t23712\t8595\t18406\t23449\t26796\t31519\t7922\t\n",
+      "html": "<pre>Enter a seed value: 9876\n24071\t18138\t27917\t23712\t8595\t18406\t23449\t26796\t31519\t7922\t\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b40",
+      "type": "paragraph",
+      "html": "<p>Notice that when we provide the same seed value, we get the same output sequence. If we provide a different seed value, we get a different output sequence.</p>",
+      "preview": "Notice that when we provide the same seed value, we get the same output sequence",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b41",
+      "type": "section",
+      "title": "Seed quality and underseeding",
+      "html": "<h3 class=\"cpp-section-heading\">Seed quality and underseeding</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b42",
+      "type": "paragraph",
+      "html": "<p>If we want the program to produce different randomized numbers each time it is run, then we need some way to vary the seed each time the program is run. Asking the user to provide a seed value isn’t great, since they can just enter the same value each time. The program really needs some way to generate a randomized seed value each time it is run. Unfortunately, we can’t use a PRNG to generate a random seed, because we need a randomized seed to generate random numbers. Instead, we’ll typically use a seed generation algorithm that is designed to produce seed values. We’ll discuss (and implement) such algorithms in the next lesson.</p>",
+      "preview": "If we want the program to produce different randomized numbers each time it is r",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b43",
+      "type": "paragraph",
+      "html": "<p>The theoretical maximum number of unique sequences that a PRNG can generate is determined by the number of bits in the PRNG’s state. For example, a PRNG with 128 bits of state can theoretically generate up to 2^128 (340,282,366,920,938,463,463,374,607,431,768,211,456) unique output sequences. That’s a lot!</p>",
+      "preview": "The theoretical maximum number of unique sequences that a PRNG can generate is d",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b44",
+      "type": "paragraph",
+      "html": "<p>However, which output sequence is <em>actually</em> generated depends on the initial state of the PRNG, which is determined by the seed. Therefore, practically speaking, the number of unique output sequences a PRNG can <em>actually</em> generate is limited by the number of unique seed values the program using the PRNG can provide. For example, if a particular seed generation algorithm can only generate 4 different seed values, then the PRNG will only be able to generate at most 4 different output sequences.</p>",
+      "preview": "However, which output sequence is actually generated depends on the initial stat",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b45",
+      "type": "paragraph",
+      "html": "<p>If a PRNG is not provided with enough bits of quality seed data, we say that it is <strong>underseeded</strong>. An underseeded PRNG may begin to produce randomized results whose quality is compromised in some way -- and the more severe the underseeding, the more the quality of the results will suffer.</p>",
+      "preview": "If a PRNG is not provided with enough bits of quality seed data, we say that it ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b46",
+      "type": "paragraph",
+      "html": "<p>For example, an underseeded PRNG may exhibit any of the following issues:</p>",
+      "preview": "For example, an underseeded PRNG may exhibit any of the following issues:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b47",
+      "type": "list",
+      "html": "<ul><li>The random sequences generated by consecutive runs may have a high correlation to each other.</li><li>On the generation of the Nth random number, some values will never be able to be generated. For example, a Mersenne Twister that is underseeded in a particular way will never generate the values 7 or 13 as its first output.</li><li>Someone may be able to guess the seed based on the initial random value produced (or the first few random values). That would allow them to then generate all future random numbers that are going to be produced by the generator. This may allow them to cheat or game the system.</li></ul>",
+      "preview": "The random sequences generated by consecutive runs may have a high correlation t",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b48",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>An ideal seed should have the following characteristics:</p><ul><li>The seed should contain at least as many bits as the state of the PRNG, so that every bit in the state of the PRNG can be initialized by an independent bit in the seed.</li><li>Each bit in the seed should be independently randomized.</li><li>The seed should contain a good mix of 0 and 1s distributed across all of the bits.</li><li>There should be no bits in the seed that are always 0 or always 1. These “stuck bits” do not provide any value.</li><li>The seed should have a low correlation with previously generated seeds.</li></ul><p>In practice, we may compromise on some of these characteristics. Some PRNGs have huge states (e.g. the state of a Mersenne Twister has 19937 bits), and generating quality seeds that large can be difficult. As a result, PRNGs with large states are often designed to be resilient to being seeded with fewer bits. Stuck bits are also common. For example, if we use the system clock as part of our seed, we’ll end up with some number of stuck bits, as the bits that represent larger time units (e.g. years) are effectively stuck.</p></div>",
+      "preview": "For advanced readersAn ideal seed should have the following characteristics:The seed should contain ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b49",
+      "type": "paragraph",
+      "html": "<p>Developers who aren’t familiar with proper seeding practices will often try to initialize a PRNG using a single 32-bit or 64-bit value (unfortunately, the design of C++’s standard Random library inadvertently encourages this). This will generally result in a significantly underseeded PRNG.</p>",
+      "preview": "Developers who aren’t familiar with proper seeding practices will often try to i",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b50",
+      "type": "paragraph",
+      "html": "<p>Seeding a PRNG with 64 bytes of quality seed data (less if the PRNGs state is smaller) is typically good enough to facilitate the generation of 8-byte random values for non-sensitive uses (e.g. not statistical simulations or cryptography).</p>",
+      "preview": "Seeding a PRNG with 64 bytes of quality seed data (less if the PRNGs state is sm",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b51",
+      "type": "section",
+      "title": "What makes a good PRNG? (optional reading)",
+      "html": "<h3 class=\"cpp-section-heading\">What makes a good PRNG? (optional reading)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b52",
+      "type": "paragraph",
+      "html": "<p>In order to be a good PRNG, the PRNG needs to exhibit a number of properties:</p>",
+      "preview": "In order to be a good PRNG, the PRNG needs to exhibit a number of properties:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b53",
+      "type": "list",
+      "html": "<ul><li>The PRNG should generate each number with approximately the same probability.</li></ul>",
+      "preview": "The PRNG should generate each number with approximately the same probability.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b54",
+      "type": "paragraph",
+      "html": "<p>This is called distribution uniformity. If some numbers are generated more often than others, the result of the program that uses the PRNG will be biased! To check distribution uniformity, we can use a histogram. A histogram is a graph that tracks how many times each number has been generated. Since our histograms are text-based, we’ll use a * symbol to represent each time a given number was generated.</p>",
+      "preview": "This is called distribution uniformity. If some numbers are generated more often",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b55",
+      "type": "paragraph",
+      "html": "<p>Consider a PRNG that generates numbers between 1 and 6. If we generate 36 numbers, a PRNG with distribution uniformity should generate a histogram that looks something like this:</p>",
+      "preview": "Consider a PRNG that generates numbers between 1 and 6. If we generate 36 number",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b56",
+      "type": "output",
+      "text": "1|******\n2|******\n3|******\n4|******\n5|******\n6|******\n",
+      "html": "<pre>1|******\n2|******\n3|******\n4|******\n5|******\n6|******\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b57",
+      "type": "paragraph",
+      "html": "<p>A PRNG that is biased in some way will generate a histogram that is uneven, like this:</p>",
+      "preview": "A PRNG that is biased in some way will generate a histogram that is uneven, like",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b58",
+      "type": "output",
+      "text": "1|***\n2|******\n3|******\n4|******\n5|******\n6|*********\n",
+      "html": "<pre>1|***\n2|******\n3|******\n4|******\n5|******\n6|*********\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b59",
+      "type": "paragraph",
+      "html": "<p>or this:</p>",
+      "preview": "or this:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b60",
+      "type": "output",
+      "text": "1|****\n2|********\n3|******\n4|********\n5|******\n6|****\n",
+      "html": "<pre>1|****\n2|********\n3|******\n4|********\n5|******\n6|****\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b61",
+      "type": "paragraph",
+      "html": "<p>or maybe even this:</p>",
+      "preview": "or maybe even this:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b62",
+      "type": "output",
+      "text": "1|*******\n2|********\n3|*******\n4|********\n5|\n6|******\n",
+      "html": "<pre>1|*******\n2|********\n3|*******\n4|********\n5|\n6|******\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b63",
+      "type": "paragraph",
+      "html": "<p>Let’s say you’re trying to write a random item generator for a game. When a monster is killed, your code generates a random number between 1 and 6, and if the result is a 6, the monster will drop a rare item instead of a common one. You would expect a 1 in 6 chance of this happening. But if the underlying PRNG is not uniform, and generates a lot more 6s than it should (like the second histogram above), your players will end up getting more rare items than you’d intended, possibly trivializing the difficulty of your game, or messing up your in-game economy.</p>",
+      "preview": "Let’s say you’re trying to write a random item generator for a game. When a mons",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b64",
+      "type": "paragraph",
+      "html": "<p>Finding PRNG algorithms that produce uniform results is difficult.</p>",
+      "preview": "Finding PRNG algorithms that produce uniform results is difficult.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b65",
+      "type": "list",
+      "html": "<ul><li>The method by which the next number in the sequence is generated shouldn’t be predictable.</li></ul>",
+      "preview": "The method by which the next number in the sequence is generated shouldn’t be pr",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b66",
+      "type": "paragraph",
+      "html": "<p>For example, consider the following PRNG algorithm: <code>return ++num</code>. This PRNG is perfectly uniform, but it is also completely predictable -- and not very useful as a sequence of random numbers!</p>",
+      "preview": "For example, consider the following PRNG algorithm: return ++num. This PRNG is p",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b67",
+      "type": "paragraph",
+      "html": "<p>Even sequences of numbers that seem random to the eye (such as the output of <code>LCG16()</code> above) may be trivially predictable by someone who is motivated. By examining just a few numbers generated from the <code>LCG16()</code> function above, it is possible to determine which constants are used (<code>8253729</code> and <code>2396403</code>) to modify the state. Once that is known, it becomes trivial to calculate all of the future numbers that will be generated from this PRNG.</p>",
+      "preview": "Even sequences of numbers that seem random to the eye (such as the output of LCG",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b68",
+      "type": "paragraph",
+      "html": "<p>Now, imagine you’re running a betting website where users can bet $100. Your website then generates a random number between 0 and 32767. If the number is greater than 20000, the customer wins and you return double the bet. Otherwise, they lose and you keep the bet. Since the customer wins only 12767/32767 (39%) of the time, your website should make tons of money, right? However, if customers are able to determine which numbers will be generated next, then they can strategically place bets so they always (or usually) win. Congrats, now you get to file for bankruptcy!</p>",
+      "preview": "Now, imagine you’re running a betting website where users can bet $100. Your web",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b69",
+      "type": "list",
+      "html": "<ul><li>The PRNG should have a good dimensional distribution of numbers.</li></ul>",
+      "preview": "The PRNG should have a good dimensional distribution of numbers.",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b70",
+      "type": "paragraph",
+      "html": "<p>This means the PRNG should return numbers across the entire range of possible results at random. For example, the PRNG should generate low numbers, middle numbers, high numbers, even numbers, and odd numbers seemingly at random.</p>",
+      "preview": "This means the PRNG should return numbers across the entire range of possible re",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b71",
+      "type": "paragraph",
+      "html": "<p>A PRNG that returned all low numbers, then all high numbers may be uniform and non-predictable, but it’s still going to lead to biased results, particularly if the number of random numbers you actually use is small.</p>",
+      "preview": "A PRNG that returned all low numbers, then all high numbers may be uniform and n",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b72",
+      "type": "list",
+      "html": "<ul><li>The PRNG should have a high period for all seeds</li></ul>",
+      "preview": "The PRNG should have a high period for all seeds",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b73",
+      "type": "paragraph",
+      "html": "<p>All PRNGs are periodic, which means that at some point the sequence of numbers generated will begin to repeat itself. The length of the sequence before a PRNG begins to repeat itself is known as the <strong>period</strong>.</p>",
+      "preview": "All PRNGs are periodic, which means that at some point the sequence of numbers g",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b74",
+      "type": "paragraph",
+      "html": "<p>For example, here are the first 100 numbers generated from a PRNG with poor periodicity:</p>",
+      "preview": "For example, here are the first 100 numbers generated from a PRNG with poor peri",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b75",
+      "type": "output",
+      "text": "112\t9\t130\t97\t64\t31\t152\t119\t86\t53\t\n20\t141\t108\t75\t42\t9\t130\t97\t64\t31\t\n152\t119\t86\t53\t20\t141\t108\t75\t42\t9\t\n130\t97\t64\t31\t152\t119\t86\t53\t20\t141\t\n108\t75\t42\t9\t130\t97\t64\t31\t152\t119\t\n86\t53\t20\t141\t108\t75\t42\t9\t130\t97\t\n64\t31\t152\t119\t86\t53\t20\t141\t108\t75\t\n42\t9\t130\t97\t64\t31\t152\t119\t86\t53\t\n20\t141\t108\t75\t42\t9\t130\t97\t64\t31\t\n152\t119\t86\t53\t20\t141\t108\t75\t42\t9\n",
+      "html": "<pre>112\t9\t130\t97\t64\t31\t152\t119\t86\t53\t\n20\t141\t108\t75\t42\t9\t130\t97\t64\t31\t\n152\t119\t86\t53\t20\t141\t108\t75\t42\t9\t\n130\t97\t64\t31\t152\t119\t86\t53\t20\t141\t\n108\t75\t42\t9\t130\t97\t64\t31\t152\t119\t\n86\t53\t20\t141\t108\t75\t42\t9\t130\t97\t\n64\t31\t152\t119\t86\t53\t20\t141\t108\t75\t\n42\t9\t130\t97\t64\t31\t152\t119\t86\t53\t\n20\t141\t108\t75\t42\t9\t130\t97\t64\t31\t\n152\t119\t86\t53\t20\t141\t108\t75\t42\t9\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b76",
+      "type": "paragraph",
+      "html": "<p>You will note that it generated 9 as the 2nd number, again as the 16th number, and then every 14 numbers after that. This PRNG is stuck generating the following sequence repeatedly: 9-130-97-64-31-152-119-86-53-20-141-108-75-42-(repeat).</p>",
+      "preview": "You will note that it generated 9 as the 2nd number, again as the 16th number, a",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b77",
+      "type": "paragraph",
+      "html": "<p>This happens because PRNGs are deterministic. Once the state of a PRNG is identical to a prior state, the PRNG will start producing the same sequence of outputs it has produced before -- resulting in a loop.</p>",
+      "preview": "This happens because PRNGs are deterministic. Once the state of a PRNG is identi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b78",
+      "type": "paragraph",
+      "html": "<p>A good PRNG should have a long period for <em>all</em> seed numbers. Designing an algorithm that meets this property can be extremely difficult -- many PRNGs have long periods only for some seeds and not others. If the user happens to pick a seed that results in a state with a short period, then the PRNG won’t do a good job if many random numbers are needed.</p>",
+      "preview": "A good PRNG should have a long period for all seed numbers. Designing an algorit",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b79",
+      "type": "list",
+      "html": "<ul><li>The PRNG should be efficient</li></ul>",
+      "preview": "The PRNG should be efficient",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b80",
+      "type": "paragraph",
+      "html": "<p>Most PRNGs have a state size of less than 4096 bytes, so total memory usage typically isn’t a concern. However, the larger the internal state, the more likely the PRNG is to be underseeded, and the slower the initial seeding will be (since there’s more state to initialize).</p>",
+      "preview": "Most PRNGs have a state size of less than 4096 bytes, so total memory usage typi",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b81",
+      "type": "paragraph",
+      "html": "<p>Second, to generate the next number in sequence, a PRNG has to mix up its internal state by applying various mathematical operations. How much time this takes can vary significantly by PRNG and also by architecture (some PRNGs perform better on certain architectures than others). This doesn’t matter if you only generate random numbers periodically, but can have a huge impact if you need lots of randomness.</p>",
+      "preview": "Second, to generate the next number in sequence, a PRNG has to mix up its intern",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b82",
+      "type": "section",
+      "title": "There are many different kinds of PRNG algorithms",
+      "html": "<h3 class=\"cpp-section-heading\">There are many different kinds of PRNG algorithms</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b83",
+      "type": "paragraph",
+      "html": "<p>Over the years, many different kinds of PRNG algorithms have been developed (Wikipedia has a good list <a href=\"https://en.wikipedia.org/wiki/List_of_random_number_generators\">here</a>). Every PRNG algorithm has strengths and weaknesses that might make it more or less suitable for a particular application, so selecting the right algorithm for your application is important.</p>",
+      "preview": "Over the years, many different kinds of PRNG algorithms have been developed (Wik",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b84",
+      "type": "paragraph",
+      "html": "<p>Many PRNGs are now considered relatively poor by modern standards -- and there’s no reason to use a PRNG that doesn’t perform well when it’s just as easy to use one that does.</p>",
+      "preview": "Many PRNGs are now considered relatively poor by modern standards -- and there’s",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b85",
+      "type": "section",
+      "title": "Randomization in C++",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"random\"></a>Randomization in C++ <a href=\"#random\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b86",
+      "type": "paragraph",
+      "html": "<p>The randomization capabilities in C++ are accessible via the <code>&lt;random&gt;</code> header of the standard library. Within the random library, there are 6 PRNG families available for use (as of C++20):</p>",
+      "preview": "The randomization capabilities in C++ are accessible via the <random> header of ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b87",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Type name</th><th>Family</th><th>Period</th><th>State size*</th><th>Performance</th><th>Quality</th><th>Should I use this?</th></tr><tr><td>minstd_rand<br>minstd_rand0</td><td>Linear congruential generator</td><td>2^31</td><td>4 bytes</td><td>Bad</td><td>Awful</td><td>No</td></tr><tr><td>mt19937<br>mt19937_64</td><td>Mersenne twister</td><td>2^19937</td><td>2500 bytes</td><td>Decent</td><td>Decent</td><td>Probably (see next section)</td></tr><tr><td>ranlux24<br>ranlux48</td><td>Subtract and carry</td><td>10^171</td><td>96 bytes</td><td>Awful</td><td>Good</td><td>No</td></tr><tr><td>knuth_b</td><td>Shuffled linear congruential generator</td><td>2^31</td><td>1028 bytes</td><td>Awful</td><td>Bad</td><td>No</td></tr><tr><td>default_random_engine</td><td>Any of above (implementation defined)</td><td>Varies</td><td>Varies</td><td>?</td><td>?</td><td>No<sup>2</sup></td></tr><tr><td>rand()</td><td>Linear congruential generator</td><td>2^31</td><td>4 bytes</td><td>Bad</td><td>Awful</td><td>No<sup>no</sup></td></tr></tbody></table></div>",
+      "preview": "Type nameFamilyPeriodState size*PerformanceQualityShould I use this?minstd_randm",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b88",
+      "type": "paragraph",
+      "html": "<p>There is zero reason to use <code>knuth_b</code>, <code>default_random_engine</code>, or <code>rand()</code> (which is a random number generator provided for compatibility with C).</p>",
+      "preview": "There is zero reason to use knuth_b, default_random_engine, or rand() (which is ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b89",
+      "type": "paragraph",
+      "html": "<p>As of C++20, the Mersenne Twister algorithm is the only PRNG that ships with C++ that has both decent performance and quality.</p>",
+      "preview": "As of C++20, the Mersenne Twister algorithm is the only PRNG that ships with C++",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b90",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>A test called <a href=\"http://pracrand.sourceforge.net/\">PracRand</a> is often used to assess the performance and quality of PRNGs (to determine whether they have different kinds of biases). You may also see references to SmallCrush, Crush or BigCrush -- these are other tests that are sometimes used for the same purpose.</p><p>If you want to see what the output of Pracrand looks like, <a href=\"https://arvid.io/2018/06/30/on-cxx-random-number-generator-quality/\">this website</a> has output for all of the PRNGs that C++ supports as of C++20.</p></div>",
+      "preview": "For advanced readersA test called PracRand is often used to assess the performance and quality of PR",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b91",
+      "type": "section",
+      "title": "So we should use Mersenne Twister, right?",
+      "html": "<h3 class=\"cpp-section-heading\">So we should use Mersenne Twister, right?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "introduction-to-random-number-generation_b92",
+      "type": "paragraph",
+      "html": "<p>Probably. For most applications, Mersenne Twister is fine, both in terms of performance and quality.</p>",
+      "preview": "Probably. For most applications, Mersenne Twister is fine, both in terms of perf",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b93",
+      "type": "paragraph",
+      "html": "<p>However, it’s worth noting that by modern PRNG standards, Mersenne Twister is <a href=\"https://en.wikipedia.org/wiki/Mersenne_Twister#Characteristics\">a bit outdated</a>. The biggest issue with Mersenne Twister is that its results can be predicted after seeing 624 generated numbers, making it non-suitable for any application that requires non-predictability.</p>",
+      "preview": "However, it’s worth noting that by modern PRNG standards, Mersenne Twister is a ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b94",
+      "type": "paragraph",
+      "html": "<p>If you are developing an application that requires the highest quality random results (e.g. a statistical simulation), the fastest results, or one where non-predictability is important (e.g. cryptography), you’ll need to use a 3rd party library.</p>",
+      "preview": "If you are developing an application that requires the highest quality random re",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b95",
+      "type": "paragraph",
+      "html": "<p>Popular choices as of the time of writing:</p>",
+      "preview": "Popular choices as of the time of writing:",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b96",
+      "type": "list",
+      "html": "<ul><li>The <a href=\"https://prng.di.unimi.it/\">Xoshiro family</a> and <a href=\"https://github.com/wangyi-fudan/wyhash\">Wyrand</a> for non-cryptographic PRNGs.</li><li>The <a href=\"https://cr.yp.to/chacha.html\">Chacha family</a> for cryptographic (non-predictable) PRNGs.</li></ul>",
+      "preview": "The Xoshiro family and Wyrand for non-cryptographic PRNGs.The Chacha family for ",
+      "canCheck": true
+    },
+    {
+      "id": "introduction-to-random-number-generation_b97",
+      "type": "paragraph",
+      "html": "<p>Okay, now that your eyes are probably bleeding, that’s enough theory. Let’s discuss how to actually generate random numbers with Mersenne Twister in C++.</p>",
+      "preview": "Okay, now that your eyes are probably bleeding, that’s enough theory. Let’s disc",
+      "canCheck": true
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "index": 300,
+  "chapterId": "25",
+  "number": "25.3",
+  "title": "25.3 — The override and final specifiers, and covariant return types",
+  "url": "https://www.learncpp.com/cpp-tutorial/the-override-and-final-specifiers-and-covariant-return-types/",
+  "slug": "the-override-and-final-specifiers-and-covariant-return-types",
+  "scrapedAt": "2026-09-15T16:31:13.351Z",
+  "totalBlocks": 40,
+  "totalCheckpoints": 34,
+  "blocks": [
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b0",
+      "type": "paragraph",
+      "html": "<p>To address some common challenges with inheritance, C++ has two inheritance-related identifiers: <code>override</code> and <code>final</code>. Note that these identifiers are not keywords -- they are normal words that have special meaning only when used in certain contexts. The C++ standard calls them “identifiers with special meaning”, but they are often referred to as “specifiers”.</p>",
+      "preview": "To address some common challenges with inheritance, C++ has two inheritance-rela",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b1",
+      "type": "paragraph",
+      "html": "<p>Although final isn’t used very much, override is a fantastic addition that you should use regularly. In this lesson, we’ll take a look at both, as well as one exception to the rule that virtual function override return types must match.</p>",
+      "preview": "Although final isn’t used very much, override is a fantastic addition that you s",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b2",
+      "type": "section",
+      "title": "The override specifier",
+      "html": "<h3 class=\"cpp-section-heading\">The override specifier</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b3",
+      "type": "paragraph",
+      "html": "<p>As we mentioned in the previous lesson, a derived class virtual function is only considered an override if its signature and return types match exactly. That can lead to inadvertent issues, where a function that was intended to be an override actually isn’t.</p>",
+      "preview": "As we mentioned in the previous lesson, a derived class virtual function is only",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b4",
+      "type": "paragraph",
+      "html": "<p>Consider the following example:</p>",
+      "preview": "Consider the following example:",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName1(int x) { return \"A\"; }\n\tvirtual std::string_view getName2(int x) { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tvirtual std::string_view getName1(short x) { return \"B\"; } // note: parameter is a short\n\tvirtual std::string_view getName2(int x) const { return \"B\"; } // note: function is const\n};\n\nint main()\n{\n\tB b{};\n\tA& rBase{ b };\n\tstd::cout << rBase.getName1(1) << '\\n';\n\tstd::cout << rBase.getName2(2) << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName1(int x) { return \"A\"; }\n\tvirtual std::string_view getName2(int x) { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tvirtual std::string_view getName1(short x) { return \"B\"; } // note: parameter is a short\n\tvirtual std::string_view getName2(int x) const { return \"B\"; } // note: function is const\n};\n\nint main()\n{\n\tB b{};\n\tA&amp; rBase{ b };\n\tstd::cout &lt;&lt; rBase.getName1(1) &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; rBase.getName2(2) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b6",
+      "type": "paragraph",
+      "html": "<p>Because rBase is an A reference to a B object, the intention here is to use virtual functions to access B::getName1() and B::getName2(). However, because B::getName1() takes a different parameter (a short instead of an int), it’s not considered an override of A::getName1(). More insidiously, because B::getName2() is const and A::getName2() isn’t, B::getName2() isn’t considered an override of A::getName2().</p>",
+      "preview": "Because rBase is an A reference to a B object, the intention here is to use virt",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b7",
+      "type": "paragraph",
+      "html": "<p>Consequently, this program prints:</p>",
+      "preview": "Consequently, this program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b8",
+      "type": "output",
+      "text": "A\nA\n",
+      "html": "<pre>A\nA\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b9",
+      "type": "paragraph",
+      "html": "<p>In this particular case, because A and B just print their names, it’s fairly easy to see that we messed up our overrides, and that the wrong virtual function is being called. However, in a more complicated program, where the functions have behaviors or return values that aren’t printed, such issues can be very difficult to debug.</p>",
+      "preview": "In this particular case, because A and B just print their names, it’s fairly eas",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b10",
+      "type": "paragraph",
+      "html": "<p>To help address the issue of functions that are meant to be overrides but aren’t, the <code>override</code> specifier can be applied to any virtual function to tell the compiler to enforce that the function is an override. The <code>override</code> specifier is placed at the end of a member function declaration (in the same place where a function-level <code>const</code> goes). If a member function is <code>const</code> and an override, the <code>const</code> must come before <code>override</code>.</p>",
+      "preview": "To help address the issue of functions that are meant to be overrides but aren’t",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b11",
+      "type": "paragraph",
+      "html": "<p>If a function marked as <code>override</code> does not override a base class function (or is applied to a non-virtual function), the compiler will flag the function as an error.</p>",
+      "preview": "If a function marked as override does not override a base class function (or is ",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName1(int x) { return \"A\"; }\n\tvirtual std::string_view getName2(int x) { return \"A\"; }\n\tvirtual std::string_view getName3(int x) { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tstd::string_view getName1(short int x) override { return \"B\"; } // compile error, function is not an override\n\tstd::string_view getName2(int x) const override { return \"B\"; } // compile error, function is not an override\n\tstd::string_view getName3(int x) override { return \"B\"; } // okay, function is an override of A::getName3(int)\n\n};\n\nint main()\n{\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName1(int x) { return \"A\"; }\n\tvirtual std::string_view getName2(int x) { return \"A\"; }\n\tvirtual std::string_view getName3(int x) { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tstd::string_view getName1(short int x) override { return \"B\"; } // compile error, function is not an override\n\tstd::string_view getName2(int x) const override { return \"B\"; } // compile error, function is not an override\n\tstd::string_view getName3(int x) override { return \"B\"; } // okay, function is an override of A::getName3(int)\n\n};\n\nint main()\n{\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b13",
+      "type": "paragraph",
+      "html": "<p>The above program produces two compile errors: one for B::getName1(), and one for B::getName2(), because neither override a prior function. B::getName3() does override A::getName3(), so no error is produced for that line.</p>",
+      "preview": "The above program produces two compile errors: one for B::getName1(), and one fo",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b14",
+      "type": "paragraph",
+      "html": "<p>Because there is no performance penalty for using the override specifier and it helps ensure you’ve actually overridden the function you think you have, all virtual override functions should be tagged using the override specifier. Additionally, because the override specifier implies virtual, there’s no need to tag functions using the override specifier with the virtual keyword.</p>",
+      "preview": "Because there is no performance penalty for using the override specifier and it ",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b15",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use the virtual keyword on virtual functions in a base class.</p><p>Use the override specifier (but not the virtual keyword) on override functions in derived classes. This includes virtual destructors.</p></div>",
+      "preview": "Best practiceUse the virtual keyword on virtual functions in a base class.Use the override specifier",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b16",
+      "type": "callout",
+      "calloutType": "rule",
+      "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>If a member function is both <code>const</code> and an <code>override</code>, the <code>const</code> must be listed first. <code>const override</code> is correct, <code>override const</code> is not.</p></div>",
+      "preview": "RuleIf a member function is both const and an override, the const must be listed first. const overri",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b17",
+      "type": "section",
+      "title": "The final specifier",
+      "html": "<h3 class=\"cpp-section-heading\">The final specifier</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b18",
+      "type": "paragraph",
+      "html": "<p>There may be cases where you don’t want someone to be able to override a virtual function, or inherit from a class. The final specifier can be used to tell the compiler to enforce this. If the user tries to override a function or inherit from a class that has been specified as final, the compiler will give a compile error.</p>",
+      "preview": "There may be cases where you don’t want someone to be able to override a virtual",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b19",
+      "type": "paragraph",
+      "html": "<p>In the case where we want to restrict the user from overriding a function, the <strong>final specifier</strong> is used in the same place the override specifier is, like so:</p>",
+      "preview": "In the case where we want to restrict the user from overriding a function, the f",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\t// note use of final specifier on following line -- that makes this function not able to be overridden in derived classes\n\tstd::string_view getName() const override final { return \"B\"; } // okay, overrides A::getName()\n};\n\nclass C : public B\n{\npublic:\n\tstd::string_view getName() const override { return \"C\"; } // compile error: overrides B::getName(), which is final\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\t// note use of final specifier on following line -- that makes this function not able to be overridden in derived classes\n\tstd::string_view getName() const override final { return \"B\"; } // okay, overrides A::getName()\n};\n\nclass C : public B\n{\npublic:\n\tstd::string_view getName() const override { return \"C\"; } // compile error: overrides B::getName(), which is final\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b21",
+      "type": "paragraph",
+      "html": "<p>In the above code, B::getName() overrides A::getName(), which is fine. But B::getName() has the final specifier, which means that any further overrides of that function should be considered an error. And indeed, C::getName() tries to override B::getName() (the override specifier here isn’t relevant, it’s just there for good practice), so the compiler will give a compile error.</p>",
+      "preview": "In the above code, B::getName() overrides A::getName(), which is fine. But B::ge",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b22",
+      "type": "paragraph",
+      "html": "<p>In the case where we want to prevent inheriting from a class, the final specifier is applied after the class name:</p>",
+      "preview": "In the case where we want to prevent inheriting from a class, the final specifie",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B final : public A // note use of final specifier here\n{\npublic:\n\tstd::string_view getName() const override { return \"B\"; }\n};\n\nclass C : public B // compile error: cannot inherit from final class\n{\npublic:\n\tstd::string_view getName() const override { return \"C\"; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B final : public A // note use of final specifier here\n{\npublic:\n\tstd::string_view getName() const override { return \"B\"; }\n};\n\nclass C : public B // compile error: cannot inherit from final class\n{\npublic:\n\tstd::string_view getName() const override { return \"C\"; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b24",
+      "type": "paragraph",
+      "html": "<p>In the above example, class B is declared final. Thus, when C tries to inherit from B, the compiler will give a compile error.</p>",
+      "preview": "In the above example, class B is declared final. Thus, when C tries to inherit f",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b25",
+      "type": "section",
+      "title": "Covariant return types",
+      "html": "<h3 class=\"cpp-section-heading\">Covariant return types</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b26",
+      "type": "paragraph",
+      "html": "<p>There is one special case in which a derived class virtual function override can have a different return type than the base class and still be considered a matching override. If the return type of a virtual function is a pointer or a reference to some class, override functions can return a pointer or a reference to a derived class. These are called <strong>covariant return types</strong>. Here is an example:</p>",
+      "preview": "There is one special case in which a derived class virtual function override can",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string_view>\n\nclass Base\n{\npublic:\n\t// This version of getThis() returns a pointer to a Base class\n\tvirtual Base* getThis() { std::cout << \"called Base::getThis()\\n\"; return this; }\n\tvoid printType() { std::cout << \"returned a Base\\n\"; }\n};\n\nclass Derived : public Base\n{\npublic:\n\t// Normally override functions have to return objects of the same type as the base function\n\t// However, because Derived is derived from Base, it's okay to return Derived* instead of Base*\n\tDerived* getThis() override { std::cout << \"called Derived::getThis()\\n\";  return this; }\n\tvoid printType() { std::cout << \"returned a Derived\\n\"; }\n};\n\nint main()\n{\n\tDerived d{};\n\tBase* b{ &d };\n\td.getThis()->printType(); // calls Derived::getThis(), returns a Derived*, calls Derived::printType\n\tb->getThis()->printType(); // calls Derived::getThis(), returns a Base*, calls Base::printType\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass Base\n{\npublic:\n\t// This version of getThis() returns a pointer to a Base class\n\tvirtual Base* getThis() { std::cout &lt;&lt; \"called Base::getThis()\\n\"; return this; }\n\tvoid printType() { std::cout &lt;&lt; \"returned a Base\\n\"; }\n};\n\nclass Derived : public Base\n{\npublic:\n\t// Normally override functions have to return objects of the same type as the base function\n\t// However, because Derived is derived from Base, it's okay to return Derived* instead of Base*\n\tDerived* getThis() override { std::cout &lt;&lt; \"called Derived::getThis()\\n\";  return this; }\n\tvoid printType() { std::cout &lt;&lt; \"returned a Derived\\n\"; }\n};\n\nint main()\n{\n\tDerived d{};\n\tBase* b{ &amp;d };\n\td.getThis()-&gt;printType(); // calls Derived::getThis(), returns a Derived*, calls Derived::printType\n\tb-&gt;getThis()-&gt;printType(); // calls Derived::getThis(), returns a Base*, calls Base::printType\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b28",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b29",
+      "type": "output",
+      "text": "called Derived::getThis()\nreturned a Derived\ncalled Derived::getThis()\nreturned a Base\n",
+      "html": "<pre>called Derived::getThis()\nreturned a Derived\ncalled Derived::getThis()\nreturned a Base\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b30",
+      "type": "paragraph",
+      "html": "<p>One interesting note about covariant return types: C++ can’t dynamically select types, so you’ll always get the type that matches the actual version of the function being called.</p>",
+      "preview": "One interesting note about covariant return types: C++ can’t dynamically select ",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b31",
+      "type": "paragraph",
+      "html": "<p>In the above example, we first call d.getThis(). Since d is a Derived, this calls Derived::getThis(), which returns a <code>Derived*</code>. This <code>Derived*</code> is then used to call non-virtual function Derived::printType().</p>",
+      "preview": "In the above example, we first call d.getThis(). Since d is a Derived, this call",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b32",
+      "type": "paragraph",
+      "html": "<p>Now the interesting case. We then call b-&gt;getThis(). Variable b is a Base pointer to a Derived object. Base::getThis() is a virtual function, so this calls Derived::getThis(). Although Derived::getThis() returns a <code>Derived*</code>, because Base version of the function returns a <code>Base*</code>, the returned Derived* is upcast to a <code>Base*</code>. Because Base::printType() is non-virtual, Base::printType() is called.</p>",
+      "preview": "Now the interesting case. We then call b->getThis(). Variable b is a Base pointe",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b33",
+      "type": "paragraph",
+      "html": "<p>In other words, in the above example, you only get a <code>Derived*</code> if you call getThis() with an object that is typed as a Derived object in the first place.</p>",
+      "preview": "In other words, in the above example, you only get a Derived* if you call getThi",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b34",
+      "type": "paragraph",
+      "html": "<p>Note that if printType() were virtual instead of non-virtual, the result of b-&gt;getThis() (an object of type <code>Base*</code>) would have undergone virtual function resolution, and Derived::printType() would have been called.</p>",
+      "preview": "Note that if printType() were virtual instead of non-virtual, the result of b->g",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b35",
+      "type": "paragraph",
+      "html": "<p>Covariant return types are often used in cases where a virtual member function returns a pointer or reference to the class containing the member function (e.g. Base::getThis() returns a <code>Base*</code>, and Derived::getThis() returns a <code>Derived*</code>). However, this isn’t strictly necessary. Covariant return types can be used in any case where the return type of the override member function is derived from the return type of the base virtual member function.</p>",
+      "preview": "Covariant return types are often used in cases where a virtual member function r",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b36",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b37",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "What does the following program output?",
+      "hintHtml": "",
+      "solutionHtml": "<pre>BB\nAA\nAB\n</pre><p>In all cases, because <code>get()</code> has a covariant return type, the return type of <code>get()</code> will be the return type of the <code>get()</code> member function of the implicit object.</p><p>Case 1 is straightforward. In both statements, <code>d.get()</code> calls <code>D::get()</code>, which returns <code>m_b</code>. Because <code>get()</code> is being called on <code>d</code>, which is of type <code>D</code>, the return type of <code>D::get()</code> is used, which is type <code>B&amp;</code>. The calls to <code>print()</code> and <code>vprint()</code> resolve to <code>B::print()</code> and <code>B::vprint()</code> respectively.</p><p>Case 2 is also straightforward. In both statements, <code>c.get()</code> calls <code>C::get()</code>, which returns <code>m_a</code>. Because <code>get()</code> is being called on <code>c</code>, which is of type <code>C</code>, the return type of <code>C::get()</code> is used, which is type <code>A&amp;</code>. The calls to <code>print()</code> and <code>vprint()</code> resolve to <code>A::print()</code> and <code>A::vprint()</code> respectively.</p><p>Case 3 is the interesting one. <code>ref</code> is a <code>C&amp;</code> referencing a <code>D</code>. <code>ref.get()</code> is a virtual function, so <code>ref.get()</code> virtually resolves to <code>D::get()</code>, which returns <code>m_b</code>. However, <code>get()</code> has a covariant return type, so the return type of <code>get()</code> is determined by the type of the implicit object that <code>get()</code> is called on. Since <code>ref</code> is a <code>C&amp;</code>, the return type of <code>C::get()</code> is used, which means the return type of <code>ref.get()</code> is <code>A&amp;</code> (referencing object <code>m_b</code>, which is a <code>B</code>).</p><p>Because the return type of <code>ref.get()</code> is an <code>A&amp;</code>, non-virtual function call <code>ref.get().print()</code> resolves to <code>A::print()</code>.</p><p>When virtual function <code>ref.get().vprint()</code> is called, virtual function resolution is used. Although the return type of <code>ref.get()</code> is an <code>A&amp;</code>, the object being reference is actually a <code>B</code>. Therefore, <code>B::vprint()</code> is called.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass A\n{\npublic:\n    void print()\n    {\n        std::cout << \"A\";\n    }\n    virtual void vprint()\n    {\n        std::cout << \"A\";\n    }\n};\nclass B : public A\n{\npublic:\n    void print()\n    {\n        std::cout << \"B\";\n    }\n    void vprint() override\n    {\n        std::cout << \"B\";\n    }\n};\n\n\nclass C\n{\nprivate:\n    A m_a{};\n\npublic:\n    virtual A& get()\n    {\n        return m_a;\n    }\n};\n\nclass D : public C\n{\nprivate:\n    B m_b{};\n\npublic:\n    B& get() override // covariant return type\n    {\n        return m_b;\n    }\n};\n\nint main()\n{\n    // case 1\n    D d {};\n    d.get().print();\n    d.get().vprint();\n    std::cout << '\\n';\n \n    // case 2\n    C c {};\n    c.get().print();\n    c.get().vprint();\n    std::cout << '\\n';\n\n    // case 3\n    C& ref{ d };\n    ref.get().print();\n    ref.get().vprint();\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass A\n{\npublic:\n    void print()\n    {\n        std::cout &lt;&lt; \"A\";\n    }\n    virtual void vprint()\n    {\n        std::cout &lt;&lt; \"A\";\n    }\n};\nclass B : public A\n{\npublic:\n    void print()\n    {\n        std::cout &lt;&lt; \"B\";\n    }\n    void vprint() override\n    {\n        std::cout &lt;&lt; \"B\";\n    }\n};\n\n\nclass C\n{\nprivate:\n    A m_a{};\n\npublic:\n    virtual A&amp; get()\n    {\n        return m_a;\n    }\n};\n\nclass D : public C\n{\nprivate:\n    B m_b{};\n\npublic:\n    B&amp; get() override // covariant return type\n    {\n        return m_b;\n    }\n};\n\nint main()\n{\n    // case 1\n    D d {};\n    d.get().print();\n    d.get().vprint();\n    std::cout &lt;&lt; '\\n';\n \n    // case 2\n    C c {};\n    c.get().print();\n    c.get().vprint();\n    std::cout &lt;&lt; '\\n';\n\n    // case 3\n    C&amp; ref{ d };\n    ref.get().print();\n    ref.get().vprint();\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "the-override-and-final-specifiers-and-covariant-return-types_b39",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "When would we use function overloading vs function overriding?",
+      "hintHtml": "",
+      "solutionHtml": "<p>Function overloading is used when we need a member or non-member function to behave differently when passed parameters of different types.</p><p>Function overriding is used when we need a member function to behave differently when the implicit object is a derived class.</p>",
+      "canCheck": true
+    }
+  ]
+}

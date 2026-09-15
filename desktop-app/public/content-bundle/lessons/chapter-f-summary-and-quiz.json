@@ -1,0 +1,51 @@
+{
+  "index": 149,
+  "chapterId": "F",
+  "number": "F.X",
+  "title": "F.X — Chapter F summary and quiz",
+  "url": "https://www.learncpp.com/cpp-tutorial/chapter-f-summary-and-quiz/",
+  "slug": "chapter-f-summary-and-quiz",
+  "scrapedAt": "2026-09-15T16:29:53.857Z",
+  "totalBlocks": 5,
+  "totalCheckpoints": 4,
+  "blocks": [
+    {
+      "id": "chapter-f-summary-and-quiz_b0",
+      "type": "paragraph",
+      "html": "<p>A <strong>constexpr</strong> function is a function that is allowed to be called in a constant expression. To make a function a constexpr function, we simply use the <code>constexpr</code> keyword in front of the return type. Constexpr functions are only guaranteed to be evaluated at compile-time when used in a context that requires a constant expression. Otherwise they may be evaluated at compile-time (if eligible) or runtime. Constexpr functions are implicitly inline, and the compiler must see the full definition of the constexpr function to call it at compile-time.</p>",
+      "preview": "A constexpr function is a function that is allowed to be called in a constant ex",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-f-summary-and-quiz_b1",
+      "type": "paragraph",
+      "html": "<p>A <strong>consteval function</strong> is a function that must evaluate at compile-time. Consteval functions otherwise follow the same rules as constexpr functions.</p>",
+      "preview": "A consteval function is a function that must evaluate at compile-time. Consteval",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-f-summary-and-quiz_b2",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-f-summary-and-quiz_b3",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Add <code>const</code> and/or <code>constexpr</code> to the following program:",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// This function should not be made constexpr because output and input can only be done at runtime.\n// The versions of `operator&lt;&lt;` and `operator&gt;&gt;` that do output and input don't support constexpr.\ndouble getTowerHeight()\n{\n\tstd::cout &lt;&lt; \"Enter the height of the tower in meters: \";\n\tdouble towerHeight{};\n\tstd::cin &gt;&gt; towerHeight;\n\treturn towerHeight;\n}\n\n// Returns height from ground after \"seconds\" seconds\n// This function is made constepxr because it just calculates a value from its inputs and return it.\n// Arithmetic can be done at compile-time, and no non-constexpr functions are called.\n// Reminder: A constexpr function can be evaluated at compile-time or runtime.\n//   If its arguments are constexpr, it can be called at compile-time.\n//   In this case, it's called at runtime because the argument for towerHeight isn't constexpr.\n// If a function can be made constexpr, it should be.\n// Remember: function parameters are not constexpr, even in a constexpr function\nconstexpr double calculateBallHeight(double towerHeight, int seconds)\n{\n\tconstexpr double gravity{ 9.8 }; // constexpr because it's a compile-time constant\n\n\t// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0\n\t// These variables can't be constexpr since their initializers aren't constant expressions\n\tconst double distanceFallen{ (gravity * (seconds * seconds)) / 2.0 };\n\tconst double currentHeight{ towerHeight - distanceFallen };\n\n\treturn currentHeight;\n}\n\n// This function should not be made constexpr because output and input can only be done at runtime.\n// The versions of `operator&lt;&lt;` and `operator&gt;&gt;` that do output and input don't support constexpr.\nvoid printBallHeight(double ballHeight, int seconds)\n{\n\tif (ballHeight &gt; 0.0)\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is at height: \" &lt;&lt; ballHeight &lt;&lt; \" meters\\n\";\n\telse\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is on the ground.\\n\";\n}\n\n// This function should not be made constexpr because output and input can only be done at runtime.\n// The versions of `operator&lt;&lt;` and `operator&gt;&gt;` that do output and input don't support constexpr.\nvoid printCalculatedBallHeight(double towerHeight, int seconds)\n{\n\t// height can only be const (not constexpr) because its initializer is not a constant expression\n\tconst double ballHeight{ calculateBallHeight(towerHeight, seconds) };\n\tprintBallHeight(ballHeight, seconds);\n}\n\nint main()\n{\n\t// towerHeight can only be const (not constexpr) because its initializer is not a constant expression\n\tconst double towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-f-summary-and-quiz_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\n// gets tower height from user and returns it\ndouble getTowerHeight()\n{\n\tstd::cout << \"Enter the height of the tower in meters: \";\n\tdouble towerHeight{};\n\tstd::cin >> towerHeight;\n\treturn towerHeight;\n}\n\n// Returns ball height from ground after \"seconds\" seconds\ndouble calculateBallHeight(double towerHeight, int seconds)\n{\n\tdouble gravity{ 9.8 };\n\n\t// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0\n\tdouble distanceFallen{ (gravity * (seconds * seconds)) / 2.0 };\n\tdouble currentHeight{ towerHeight - distanceFallen };\n\n\treturn currentHeight;\n}\n\n// Prints ball height above ground\nvoid printBallHeight(double ballHeight, int seconds)\n{\n\tif (ballHeight > 0.0)\n\t\tstd::cout << \"At \" << seconds << \" seconds, the ball is at height: \" << ballHeight << \" meters\\n\";\n\telse\n\t\tstd::cout << \"At \" << seconds << \" seconds, the ball is on the ground.\\n\";\n}\n\n// Calculates the current ball height and then prints it\n// This is a helper function to make it easier to do this\nvoid printCalculatedBallHeight(double towerHeight, int seconds)\n{\n\tdouble ballHeight{ calculateBallHeight(towerHeight, seconds) };\n\tprintBallHeight(ballHeight, seconds);\n}\n\nint main()\n{\n\tdouble towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// gets tower height from user and returns it\ndouble getTowerHeight()\n{\n\tstd::cout &lt;&lt; \"Enter the height of the tower in meters: \";\n\tdouble towerHeight{};\n\tstd::cin &gt;&gt; towerHeight;\n\treturn towerHeight;\n}\n\n// Returns ball height from ground after \"seconds\" seconds\ndouble calculateBallHeight(double towerHeight, int seconds)\n{\n\tdouble gravity{ 9.8 };\n\n\t// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0\n\tdouble distanceFallen{ (gravity * (seconds * seconds)) / 2.0 };\n\tdouble currentHeight{ towerHeight - distanceFallen };\n\n\treturn currentHeight;\n}\n\n// Prints ball height above ground\nvoid printBallHeight(double ballHeight, int seconds)\n{\n\tif (ballHeight &gt; 0.0)\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is at height: \" &lt;&lt; ballHeight &lt;&lt; \" meters\\n\";\n\telse\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is on the ground.\\n\";\n}\n\n// Calculates the current ball height and then prints it\n// This is a helper function to make it easier to do this\nvoid printCalculatedBallHeight(double towerHeight, int seconds)\n{\n\tdouble ballHeight{ calculateBallHeight(towerHeight, seconds) };\n\tprintBallHeight(ballHeight, seconds);\n}\n\nint main()\n{\n\tdouble towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    }
+  ]
+}

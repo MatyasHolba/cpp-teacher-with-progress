@@ -1,0 +1,404 @@
+{
+  "index": 228,
+  "chapterId": "17",
+  "number": "17.4",
+  "title": "17.4 — std::array of class types, and brace elision",
+  "url": "https://www.learncpp.com/cpp-tutorial/stdarray-of-class-types-and-brace-elision/",
+  "slug": "stdarray-of-class-types-and-brace-elision",
+  "scrapedAt": "2026-09-15T16:30:34.359Z",
+  "totalBlocks": 53,
+  "totalCheckpoints": 44,
+  "blocks": [
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b0",
+      "type": "paragraph",
+      "html": "<p>A <code>std::array</code> isn’t limited to elements of fundamental types. Rather, the elements of a <code>std::array</code> can be any object type, including compound types. This means you can create a <code>std::array</code> of pointers, or a <code>std::array</code> of structs (or classes)</p>",
+      "preview": "A std::array isn’t limited to elements of fundamental types. Rather, the element",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b1",
+      "type": "paragraph",
+      "html": "<p>However, initializing a <code>std::array</code> of structs or classes tends to trip new programmers up, so we’re going to spend a lesson explicitly covering this topic.</p>",
+      "preview": "However, initializing a std::array of structs or classes tends to trip new progr",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b2",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>We’ll use structs to illustrate our points in this lesson. The material applies equally well to classes.</p></div>",
+      "preview": "Author’s noteWe’ll use structs to illustrate our points in this lesson. The material applies equally",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b3",
+      "type": "section",
+      "title": "Defining and assigning to a std::array of structs",
+      "html": "<h3 class=\"cpp-section-heading\">Defining and assigning to a <code>std::array</code> of structs</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b4",
+      "type": "paragraph",
+      "html": "<p>Let’s start with a simple struct:</p>",
+      "preview": "Let’s start with a simple struct:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "struct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b6",
+      "type": "paragraph",
+      "html": "<p>Defining a <code>std::array</code> of <code>House</code> and assigning elements works just like you’d expect:</p>",
+      "preview": "Defining a std::array of House and assigning elements works just like you’d expe",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    std::array<House, 3> houses{};\n\n    houses[0] = { 13, 1, 7 };\n    houses[1] = { 14, 2, 5 };\n    houses[2] = { 15, 2, 4 };\n\n    for (const auto& house : houses)\n    {\n        std::cout << \"House number \" << house.number\n                  << \" has \" << (house.stories * house.roomsPerStory)\n                  << \" rooms.\\n\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    std::array&lt;House, 3&gt; houses{};\n\n    houses[0] = { 13, 1, 7 };\n    houses[1] = { 14, 2, 5 };\n    houses[2] = { 15, 2, 4 };\n\n    for (const auto&amp; house : houses)\n    {\n        std::cout &lt;&lt; \"House number \" &lt;&lt; house.number\n                  &lt;&lt; \" has \" &lt;&lt; (house.stories * house.roomsPerStory)\n                  &lt;&lt; \" rooms.\\n\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b8",
+      "type": "paragraph",
+      "html": "<p>The above outputs the following:</p>",
+      "preview": "The above outputs the following:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b9",
+      "type": "output",
+      "text": "House number 13 has 7 rooms.\nHouse number 14 has 10 rooms.\nHouse number 15 has 8 rooms.\n",
+      "html": "<pre>House number 13 has 7 rooms.\nHouse number 14 has 10 rooms.\nHouse number 15 has 8 rooms.\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b10",
+      "type": "section",
+      "title": "Initializing a std::array of structs",
+      "html": "<h3 class=\"cpp-section-heading\">Initializing a <code>std::array</code> of structs</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b11",
+      "type": "paragraph",
+      "html": "<p>Initializing an array of structs also works just like you’d expect, so long as you are explicit about the element type:</p>",
+      "preview": "Initializing an array of structs also works just like you’d expect, so long as y",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    constexpr std::array houses { // use CTAD to deduce template arguments <House, 3>\n            House{ 13, 1, 7 },\n            House{ 14, 2, 5 },\n            House{ 15, 2, 4 }\n        };\n\n    for (const auto& house : houses)\n    {\n        std::cout << \"House number \" << house.number\n            << \" has \" << (house.stories * house.roomsPerStory)\n            << \" rooms.\\n\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    constexpr std::array houses { // use CTAD to deduce template arguments &lt;House, 3&gt;\n            House{ 13, 1, 7 },\n            House{ 14, 2, 5 },\n            House{ 15, 2, 4 }\n        };\n\n    for (const auto&amp; house : houses)\n    {\n        std::cout &lt;&lt; \"House number \" &lt;&lt; house.number\n            &lt;&lt; \" has \" &lt;&lt; (house.stories * house.roomsPerStory)\n            &lt;&lt; \" rooms.\\n\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b13",
+      "type": "paragraph",
+      "html": "<p>In the above example, we’re using CTAD to deduce the type of the <code>std::array</code> as <code>std::array&lt;House, 3&gt;</code>. We then provide 3 <code>House</code> objects as initializers, which works just fine.</p>",
+      "preview": "In the above example, we’re using CTAD to deduce the type of the std::array as s",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b14",
+      "type": "section",
+      "title": "Initialization without explicitly specifying the element type for each initializer",
+      "html": "<h3 class=\"cpp-section-heading\">Initialization without explicitly specifying the element type for each initializer</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b15",
+      "type": "paragraph",
+      "html": "<p>In the above example, you’ll note that each initializer requires us to list the element type:</p>",
+      "preview": "In the above example, you’ll note that each initializer requires us to list the ",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "    constexpr std::array houses {\n            House{ 13, 1, 7 }, // we mention House here\n            House{ 14, 2, 5 }, // and here\n            House{ 15, 2, 4 }  // and here\n        };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    constexpr std::array houses {\n            House{ 13, 1, 7 }, // we mention House here\n            House{ 14, 2, 5 }, // and here\n            House{ 15, 2, 4 }  // and here\n        };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b17",
+      "type": "paragraph",
+      "html": "<p>But we did not have to do the same in the assignment case:</p>",
+      "preview": "But we did not have to do the same in the assignment case:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "    // The compiler knows that each element of houses is a House\n    // so it will implicitly convert the right hand side of each assignment to a House\n    houses[0] = { 13, 1, 7 };\n    houses[1] = { 14, 2, 5 };\n    houses[2] = { 15, 2, 4 };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    // The compiler knows that each element of houses is a House\n    // so it will implicitly convert the right hand side of each assignment to a House\n    houses[0] = { 13, 1, 7 };\n    houses[1] = { 14, 2, 5 };\n    houses[2] = { 15, 2, 4 };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b19",
+      "type": "paragraph",
+      "html": "<p>So you might think to try something like this:</p>",
+      "preview": "So you might think to try something like this:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "    // doesn't work\n    constexpr std::array<House, 3> houses { // we're telling the compiler that each element is a House\n            { 13, 1, 7 }, // but not mentioning it here\n            { 14, 2, 5 },\n            { 15, 2, 4 } \n        };",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    // doesn't work\n    constexpr std::array&lt;House, 3&gt; houses { // we're telling the compiler that each element is a House\n            { 13, 1, 7 }, // but not mentioning it here\n            { 14, 2, 5 },\n            { 15, 2, 4 } \n        };</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b21",
+      "type": "paragraph",
+      "html": "<p>Perhaps surprisingly, this doesn’t work. Let’s explore why.</p>",
+      "preview": "Perhaps surprisingly, this doesn’t work. Let’s explore why.",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b22",
+      "type": "paragraph",
+      "html": "<p>A <code>std::array</code> is defined as a struct that contains a single C-style array member (whose name is implementation defined), like this:</p>",
+      "preview": "A std::array is defined as a struct that contains a single C-style array member ",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "template<typename T, std::size_t N>\nstruct array\n{\n    T implementation_defined_name[N]; // a C-style array with N elements of type T\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template&lt;typename T, std::size_t N&gt;\nstruct array\n{\n    T implementation_defined_name[N]; // a C-style array with N elements of type T\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b24",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>We haven’t covered C-style arrays yet, but for the purposes of this lesson, all you need to know is that <code>T implementation_defined_name[N];</code> is a fixed-size array of N elements of type T (just like <code>std::array&lt;T, N&gt; implementation_defined_name;</code>).</p><p>We cover C-style arrays in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/\">17.7 -- Introduction to C-style arrays</a>.</p></div>",
+      "preview": "Author’s noteWe haven’t covered C-style arrays yet, but for the purposes of this lesson, all you nee",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b25",
+      "type": "paragraph",
+      "html": "<p>So when we try to initialize <code>houses</code> per the above, the compiler interprets the initialization like this:</p>",
+      "preview": "So when we try to initialize houses per the above, the compiler interprets the i",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Doesn't work\nconstexpr std::array<House, 3> houses { // initializer for houses\n    { 13, 1, 7 }, // initializer for C-style array member with implementation_defined_name\n    { 14, 2, 5 }, // ?\n    { 15, 2, 4 }  // ?\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Doesn't work\nconstexpr std::array&lt;House, 3&gt; houses { // initializer for houses\n    { 13, 1, 7 }, // initializer for C-style array member with implementation_defined_name\n    { 14, 2, 5 }, // ?\n    { 15, 2, 4 }  // ?\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b27",
+      "type": "paragraph",
+      "html": "<p>The compiler will interpret <code>{ 13, 1, 7 }</code> as the initializer for the first member of <code>houses</code>, which is the C-style array with the implementation defined name. This will initialize the C-style array element 0 with <code>{ 13, 1, 7 }</code> and the rest of the members will be zero-initialized. Then the compiler will discover we’ve provided two more initialization values (<code>{ 14, 2, 7 }</code> and <code>{ 15, 2, 5 }</code>) and produce a compilation error telling us that we’ve provided too many initialization values.</p>",
+      "preview": "The compiler will interpret { 13, 1, 7 } as the initializer for the first member",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b28",
+      "type": "paragraph",
+      "html": "<p>The correct way to initialize the above is to add an extra set of braces as follows:</p>",
+      "preview": "The correct way to initialize the above is to add an extra set of braces as foll",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "// This works as expected\nconstexpr std::array<House, 3> houses { // initializer for houses\n    { // extra set of braces to initialize the C-style array member with implementation_defined_name\n        { 13, 4, 30 }, // initializer for array element 0\n        { 14, 3, 10 }, // initializer for array element 1\n        { 15, 3, 40 }, // initializer for array element 2\n     }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// This works as expected\nconstexpr std::array&lt;House, 3&gt; houses { // initializer for houses\n    { // extra set of braces to initialize the C-style array member with implementation_defined_name\n        { 13, 4, 30 }, // initializer for array element 0\n        { 14, 3, 10 }, // initializer for array element 1\n        { 15, 3, 40 }, // initializer for array element 2\n     }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b30",
+      "type": "paragraph",
+      "html": "<p>Note the extra set of braces that are required (to begin initialization of the C-style array member inside the <code>std::array </code>struct). Within those braces, we can then initialize each element individually, each inside its own set of braces.</p>",
+      "preview": "Note the extra set of braces that are required (to begin initialization of the C",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b31",
+      "type": "paragraph",
+      "html": "<p>This is why you’ll see <code>std::array</code> initializers with an extra set of braces when the element type requires a list of values and we are not explicitly providing the element type as part of the initializer.</p>",
+      "preview": "This is why you’ll see std::array initializers with an extra set of braces when ",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b32",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>When initializing a <code>std::array</code> with a struct, class, or array and not providing the element type with each initializer, you’ll need an extra pair of braces so that the compiler will properly interpret what to initialize.</p><p>This is an artifact of aggregate initialization, and other standard library container types (that use list constructors) do not require the double braces in these cases.</p></div>",
+      "preview": "Key insightWhen initializing a std::array with a struct, class, or array and not providing the eleme",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b33",
+      "type": "paragraph",
+      "html": "<p>Here’s a full example:</p>",
+      "preview": "Here’s a full example:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    constexpr std::array<House, 3> houses {{ // note double braces\n        { 13, 1, 7 },\n        { 14, 2, 5 },\n        { 15, 2, 4 }\n    }};\n\n    for (const auto& house : houses)\n    {\n        std::cout << \"House number \" << house.number\n                  << \" has \" << (house.stories * house.roomsPerStory)\n                  << \" rooms.\\n\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nstruct House\n{\n    int number{};\n    int stories{};\n    int roomsPerStory{};\n};\n\nint main()\n{\n    constexpr std::array&lt;House, 3&gt; houses {{ // note double braces\n        { 13, 1, 7 },\n        { 14, 2, 5 },\n        { 15, 2, 4 }\n    }};\n\n    for (const auto&amp; house : houses)\n    {\n        std::cout &lt;&lt; \"House number \" &lt;&lt; house.number\n                  &lt;&lt; \" has \" &lt;&lt; (house.stories * house.roomsPerStory)\n                  &lt;&lt; \" rooms.\\n\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b35",
+      "type": "section",
+      "title": "Brace elision for aggregates",
+      "html": "<h3 class=\"cpp-section-heading\">Brace elision for aggregates</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b36",
+      "type": "paragraph",
+      "html": "<p>Given the explanation above, you may be wondering why the above case requires double braces, but all other cases we’ve seen only require single braces:</p>",
+      "preview": "Given the explanation above, you may be wondering why the above case requires do",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    constexpr std::array<int, 5> arr { 1, 2, 3, 4, 5 }; // single braces\n\n    for (const auto n : arr)\n        std::cout << n << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    constexpr std::array&lt;int, 5&gt; arr { 1, 2, 3, 4, 5 }; // single braces\n\n    for (const auto n : arr)\n        std::cout &lt;&lt; n &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b38",
+      "type": "paragraph",
+      "html": "<p>It turns out that you can supply double braces for such arrays:</p>",
+      "preview": "It turns out that you can supply double braces for such arrays:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b39",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    constexpr std::array<int, 5> arr {{ 1, 2, 3, 4, 5 }}; // double braces\n\n    for (const auto n : arr)\n        std::cout << n << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    constexpr std::array&lt;int, 5&gt; arr {{ 1, 2, 3, 4, 5 }}; // double braces\n\n    for (const auto n : arr)\n        std::cout &lt;&lt; n &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b40",
+      "type": "paragraph",
+      "html": "<p>However, aggregates in C++ support a concept called <strong>brace elision</strong>, which lays out some rules for when multiple braces may be omitted. Generally, you can omit braces when initializing a <code>std::array</code> with scalar (single) values, or when initializing with class types or arrays where the type is explicitly named with each element.</p>",
+      "preview": "However, aggregates in C++ support a concept called brace elision, which lays ou",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b41",
+      "type": "paragraph",
+      "html": "<p>There is no harm in always initializing <code>std::array</code> with double braces, as it avoids having to think about whether brace-elision is applicable in a specific case or not. Alternatively, you can try to single-brace init, and the compiler will generally complain if it can’t figure it out. In that case, you can quickly add an extra set of braces.</p>",
+      "preview": "There is no harm in always initializing std::array with double braces, as it avo",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b42",
+      "type": "section",
+      "title": "Another example",
+      "html": "<h3 class=\"cpp-section-heading\">Another example</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b43",
+      "type": "paragraph",
+      "html": "<p>Here’s one more example where we initialize a <code>std::array</code> with <code>Student</code> structs.</p>",
+      "preview": "Here’s one more example where we initialize a std::array with Student structs.",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <array>\n#include <iostream>\n#include <string_view>\n\n// Each student has an id and a name\nstruct Student\n{\n\tint id{};\n\tstd::string_view name{};\n};\n\n// Our array of 3 students (single braced since we mention Student with each initializer)\nconstexpr std::array students{ Student{0, \"Alex\"}, Student{ 1, \"Joe\" }, Student{ 2, \"Bob\" } };\n\nconst Student* findStudentById(int id)\n{\n\t// Look through all the students\n\tfor (auto& s : students)\n\t{\n\t\t// Return student with matching id\n\t\tif (s.id == id) return &s;\n\t}\n\n\t// No matching id found\n\treturn nullptr;\n}\n\nint main()\n{\n\tconstexpr std::string_view nobody { \"nobody\" };\n\n\tconst Student* s1 { findStudentById(1) };\n\tstd::cout << \"You found: \" << (s1 ? s1->name : nobody) << '\\n';\n\n\tconst Student* s2 { findStudentById(3) };\n\tstd::cout << \"You found: \" << (s2 ? s2->name : nobody) << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\n// Each student has an id and a name\nstruct Student\n{\n\tint id{};\n\tstd::string_view name{};\n};\n\n// Our array of 3 students (single braced since we mention Student with each initializer)\nconstexpr std::array students{ Student{0, \"Alex\"}, Student{ 1, \"Joe\" }, Student{ 2, \"Bob\" } };\n\nconst Student* findStudentById(int id)\n{\n\t// Look through all the students\n\tfor (auto&amp; s : students)\n\t{\n\t\t// Return student with matching id\n\t\tif (s.id == id) return &amp;s;\n\t}\n\n\t// No matching id found\n\treturn nullptr;\n}\n\nint main()\n{\n\tconstexpr std::string_view nobody { \"nobody\" };\n\n\tconst Student* s1 { findStudentById(1) };\n\tstd::cout &lt;&lt; \"You found: \" &lt;&lt; (s1 ? s1-&gt;name : nobody) &lt;&lt; '\\n';\n\n\tconst Student* s2 { findStudentById(3) };\n\tstd::cout &lt;&lt; \"You found: \" &lt;&lt; (s2 ? s2-&gt;name : nobody) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b45",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b46",
+      "type": "output",
+      "text": "You found: Joe\nYou found: nobody\n",
+      "html": "<pre>You found: Joe\nYou found: nobody\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b47",
+      "type": "paragraph",
+      "html": "<p>Note that because <code>std::array students</code> is constexpr, our <code>findStudentById()</code> function must return a const pointer, which means our <code>Student</code> pointers in <code>main()</code> must also be const.</p>",
+      "preview": "Note that because std::array students is constexpr, our findStudentById() functi",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b48",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b49",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Define a struct named <code>Item</code> that contains two members: <code>std::string_view name</code> and <code>int gold</code>. Define a <code>std::array</code> and initialize it with 4 Item objects. Use CTAD to deduce the element type and array size.",
+      "hintHtml": "Hint: You will need to explicitly specify the element type for each initializer.",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Item\n{\n    std::string_view name {};\n    int gold {};\n};\n\ntemplate &lt;std::size_t N&gt;\nvoid printStore(const std::array&lt;Item, N&gt;&amp; arr)\n{\n    for (const auto&amp; item: arr)\n    {\n        std::cout &lt;&lt; \"A \" &lt;&lt; item.name &lt;&lt; \" costs \" &lt;&lt; item.gold &lt;&lt; \" gold.\\n\";\n    }\n}\n\nint main()\n{\n    constexpr std::array store { // CTAD, single braces due to brace elision\n        Item { \"sword\",    5 },\n        Item { \"dagger\",   3 },\n        Item { \"club\",     2 },\n        Item { \"spear\",    7 } };\n    printStore(store);\n    \n    return 0;\n}</code></pre><p>Because we are explicitly specifying the element type for each initializer, we can use CTAD and single braces (due to brace elision) here.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b50",
+      "type": "paragraph",
+      "html": "<p>The program should print the following:</p>",
+      "preview": "The program should print the following:",
+      "canCheck": true
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b51",
+      "type": "output",
+      "text": "A sword costs 5 gold.\nA dagger costs 3 gold.\nA club costs 2 gold.\nA spear costs 7 gold.\n",
+      "html": "<pre>A sword costs 5 gold.\nA dagger costs 3 gold.\nA club costs 2 gold.\nA spear costs 7 gold.\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdarray-of-class-types-and-brace-elision_b52",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "Update your solution to quiz 1 to not explicitly specify the element type for each initializer.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Item\n{\n    std::string_view name {};\n    int gold {};\n};\n\ntemplate &lt;std::size_t N&gt;\nvoid printStore(const std::array&lt;Item, N&gt;&amp; arr)\n{\n    for (const auto&amp; item: arr)\n    {\n        std::cout &lt;&lt; \"A \" &lt;&lt; item.name &lt;&lt; \" costs \" &lt;&lt; item.gold &lt;&lt; \" gold.\\n\";\n    }\n}\n\nint main()\n{\n    constexpr std::array&lt;Item, 4&gt; store {{ // No CTAD, must use double braces\n        { \"sword\",    5 },\n        { \"dagger\",   3 },\n        { \"club\",     2 },\n        { \"spear\",    7 }\n    }};\n    printStore(store);\n    \n    return 0;\n}</code></pre><p>Because we are not explicitly specifying the element type for each initializer, we can’t use CTAD nor brace elision. That means we must use double-braces.</p>",
+      "canCheck": true
+    }
+  ]
+}

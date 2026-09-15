@@ -1,0 +1,240 @@
+{
+  "index": 351,
+  "chapterId": "D",
+  "number": "22.3",
+  "title": "22.3 — std::string length and capacity",
+  "url": "https://www.learncpp.com/cpp-tutorial/stdstring-length-and-capacity/",
+  "slug": "stdstring-length-and-capacity",
+  "scrapedAt": "2026-09-15T16:31:43.619Z",
+  "totalBlocks": 32,
+  "totalCheckpoints": 29,
+  "blocks": [
+    {
+      "id": "stdstring-length-and-capacity_b0",
+      "type": "paragraph",
+      "html": "<p>Once you’ve created strings, it’s often useful to know how long they are. This is where length and capacity operations come into play. We’ll also discuss various ways to convert std::string back into C-style strings, so you can use them with functions that expect strings of type char*.</p>",
+      "preview": "Once you’ve created strings, it’s often useful to know how long they are. This i",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b1",
+      "type": "paragraph",
+      "html": "<p><strong>Length of a string</strong></p>",
+      "preview": "Length of a string",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b2",
+      "type": "paragraph",
+      "html": "<p>The length of the string is quite simple -- it’s the number of characters in the string. There are two identical functions for determining string length:</p>",
+      "preview": "The length of the string is quite simple -- it’s the number of characters in the",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b3",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>size_type string::length() const</b><br><b>size_type string::size() const</b><p></p><ul><li>Both of these functions return the current number of characters in the string, excluding the null terminator.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s { \"012345678\" };\nstd::cout &lt;&lt; s.length() &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>9\n</pre></td></tr></tbody></table></div>",
+      "preview": "size_type string::length() constsize_type string::size() constBoth of these func",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b4",
+      "type": "paragraph",
+      "html": "<p>Although it’s possible to use length() to determine whether a string has any characters or not, it’s more efficient to use the empty() function:</p>",
+      "preview": "Although it’s possible to use length() to determine whether a string has any cha",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b5",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>bool string::empty() const</b><p></p><ul><li>Returns true if the string has no characters, false otherwise.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string string1 { \"Not Empty\" };\nstd::cout &lt;&lt; (string1.empty() ? \"true\" : \"false\") &lt;&lt; '\\n';\nstd::string string2; // empty\nstd::cout &lt;&lt; (string2.empty() ? \"true\" : \"false\")  &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>false\ntrue\n</pre></td></tr></tbody></table></div>",
+      "preview": "bool string::empty() constReturns true if the string has no characters, false ot",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b6",
+      "type": "paragraph",
+      "html": "<p>There is one more size-related function that you will probably never use, but we’ll include it here for completeness:</p>",
+      "preview": "There is one more size-related function that you will probably never use, but we",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b7",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>size_type string::max_size() const</b><p></p><ul><li>Returns the maximum number of characters that a string is allowed to have.</li><li>This value will vary depending on operating system and system architecture.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s { \"MyString\" };\nstd::cout &lt;&lt; s.max_size() &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>4294967294\n</pre></td></tr></tbody></table></div>",
+      "preview": "size_type string::max_size() constReturns the maximum number of characters that ",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b8",
+      "type": "paragraph",
+      "html": "<p><strong>Capacity of a string</strong></p>",
+      "preview": "Capacity of a string",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b9",
+      "type": "paragraph",
+      "html": "<p>The capacity of a string reflects how much memory the string allocated to hold its contents. This value is measured in string characters, excluding the NULL terminator. For example, a string with capacity 8 could hold 8 characters.</p>",
+      "preview": "The capacity of a string reflects how much memory the string allocated to hold i",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b10",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>size_type string::capacity() const</b><p></p><ul><li>Returns the number of characters a string can hold without reallocation.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s { \"01234567\" };\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>Length: 8\nCapacity: 15\n</pre></td></tr></tbody></table></div>",
+      "preview": "size_type string::capacity() constReturns the number of characters a string can ",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b11",
+      "type": "paragraph",
+      "html": "<p>Note that the capacity is higher than the length of the string! Although our string was length 8, the string actually allocated enough memory for 15 characters! Why was this done?</p>",
+      "preview": "Note that the capacity is higher than the length of the string! Although our str",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b12",
+      "type": "paragraph",
+      "html": "<p>The important thing to recognize here is that if a user wants to put more characters into a string than the string has capacity for, the string has to be reallocated to a larger capacity. For example, if a string had both length and capacity of 8, then adding any characters to the string would force a reallocation. By making the capacity larger than the actual string, this gives the user some buffer room to expand the string before reallocation needs to be done.</p>",
+      "preview": "The important thing to recognize here is that if a user wants to put more charac",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b13",
+      "type": "paragraph",
+      "html": "<p>As it turns out, reallocation is bad for several reasons:</p>",
+      "preview": "As it turns out, reallocation is bad for several reasons:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b14",
+      "type": "paragraph",
+      "html": "<p>First, reallocating a string is comparatively expensive. First, new memory has to be allocated. Then each character in the string has to be copied to the new memory. This can take a long time if the string is big. Finally, the old memory has to be deallocated. If you are doing many reallocations, this process can slow your program down significantly.</p>",
+      "preview": "First, reallocating a string is comparatively expensive. First, new memory has t",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b15",
+      "type": "paragraph",
+      "html": "<p>Second, whenever a string is reallocated, the contents of the string change to a new memory address. This means all references, pointers, and iterators to the string become invalid!</p>",
+      "preview": "Second, whenever a string is reallocated, the contents of the string change to a",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b16",
+      "type": "paragraph",
+      "html": "<p>Note that it’s not always the case that strings will be allocated with capacity greater than length. Consider the following program:</p>",
+      "preview": "Note that it’s not always the case that strings will be allocated with capacity ",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::string s { \"0123456789abcde\" };\nstd::cout << \"Length: \" << s.length() << '\\n';\nstd::cout << \"Capacity: \" << s.capacity() << '\\n';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s { \"0123456789abcde\" };\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b18",
+      "type": "paragraph",
+      "html": "<p>This program outputs:</p>",
+      "preview": "This program outputs:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b19",
+      "type": "output",
+      "text": "Length: 15\nCapacity: 15\n",
+      "html": "<pre>Length: 15\nCapacity: 15\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdstring-length-and-capacity_b20",
+      "type": "paragraph",
+      "html": "<p>(Results may vary depending on compiler).</p>",
+      "preview": "(Results may vary depending on compiler).",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b21",
+      "type": "paragraph",
+      "html": "<p>Let’s add one character to the string and watch the capacity change:</p>",
+      "preview": "Let’s add one character to the string and watch the capacity change:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b22",
+      "type": "code",
+      "language": "cpp",
+      "code": "std::string s(\"0123456789abcde\");\nstd::cout << \"Length: \" << s.length() << '\\n';\nstd::cout << \"Capacity: \" << s.capacity() << '\\n';\n\n// Now add a new character\ns += \"f\";\nstd::cout << \"Length: \" << s.length() << '\\n';\nstd::cout << \"Capacity: \" << s.capacity() << '\\n';",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s(\"0123456789abcde\");\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';\n\n// Now add a new character\ns += \"f\";\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b23",
+      "type": "paragraph",
+      "html": "<p>This produces the result:</p>",
+      "preview": "This produces the result:",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b24",
+      "type": "output",
+      "text": "Length: 15\nCapacity: 15\nLength: 16\nCapacity: 31\n",
+      "html": "<pre>Length: 15\nCapacity: 15\nLength: 16\nCapacity: 31\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdstring-length-and-capacity_b25",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>void string::reserve()</b><br><b>void string::reserve(size_type unSize)</b><p></p><ul><li>The second flavor of this function sets the capacity of the string to at least unSize (it can be greater). Note that this may require a reallocation to occur.</li><li>If the first flavor of the function is called, or the second flavor is called with unSize less than the current capacity, the function will try to shrink the capacity to match the length. This request to shrink the capacity may be ignored, depending on implementation.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string s { \"01234567\" };\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';\n\ns.reserve(200);\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';\n\ns.reserve();\nstd::cout &lt;&lt; \"Length: \" &lt;&lt; s.length() &lt;&lt; '\\n';\nstd::cout &lt;&lt; \"Capacity: \" &lt;&lt; s.capacity() &lt;&lt; '\\n';</code></pre><p>Output:</p><pre>Length: 8\nCapacity: 15\nLength: 8\nCapacity: 207\nLength: 8\nCapacity: 207\n</pre></td></tr></tbody></table></div>",
+      "preview": "void string::reserve()void string::reserve(size_type unSize)The second flavor of",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b26",
+      "type": "paragraph",
+      "html": "<p>This example shows two interesting things. First, although we requested a capacity of 200, we actually got a capacity of 207. The capacity is always guaranteed to be at least as large as your request, but may be larger. We then requested the capacity change to fit the string. This request was ignored, as the capacity did not change.</p>",
+      "preview": "This example shows two interesting things. First, although we requested a capaci",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b27",
+      "type": "paragraph",
+      "html": "<p>If you know in advance that you’re going to be constructing a large string by doing lots of string operations that will add to the size of the string, you can avoid having the string reallocated multiple times by reserving enough capacity from the outset:</p>",
+      "preview": "If you know in advance that you’re going to be constructing a large string by do",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <cstdlib> // for rand() and srand()\n#include <ctime> // for time()\n\nint main()\n{\n    std::srand(std::time(nullptr)); // seed random number generator\n\n    std::string s{}; // length 0\n    s.reserve(64); // reserve 64 characters\n\n    // Fill string up with random lower case characters\n    for (int count{ 0 }; count < 64; ++count)\n        s += 'a' + std::rand() % 26;\n\n    std::cout << s;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;cstdlib&gt; // for rand() and srand()\n#include &lt;ctime&gt; // for time()\n\nint main()\n{\n    std::srand(std::time(nullptr)); // seed random number generator\n\n    std::string s{}; // length 0\n    s.reserve(64); // reserve 64 characters\n\n    // Fill string up with random lower case characters\n    for (int count{ 0 }; count &lt; 64; ++count)\n        s += 'a' + std::rand() % 26;\n\n    std::cout &lt;&lt; s;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b29",
+      "type": "paragraph",
+      "html": "<p>The result of this program will change each time, but here’s the output from one execution:</p>",
+      "preview": "The result of this program will change each time, but here’s the output from one",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-length-and-capacity_b30",
+      "type": "output",
+      "text": "wzpzujwuaokbakgijqdawvzjqlgcipiiuuxhyfkdppxpyycvytvyxwqsbtielxpy\n",
+      "html": "<pre>wzpzujwuaokbakgijqdawvzjqlgcipiiuuxhyfkdppxpyycvytvyxwqsbtielxpy\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "stdstring-length-and-capacity_b31",
+      "type": "paragraph",
+      "html": "<p>Rather than having to reallocate s multiple times, we set the capacity once and then fill the string up. This can make a huge difference in performance when constructing large strings via concatenation.</p>",
+      "preview": "Rather than having to reallocate s multiple times, we set the capacity once and ",
+      "canCheck": true
+    }
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "index": 175,
+  "chapterId": "13",
+  "number": "13.10",
+  "title": "13.10 — Passing and returning structs",
+  "url": "https://www.learncpp.com/cpp-tutorial/passing-and-returning-structs/",
+  "slug": "passing-and-returning-structs",
+  "scrapedAt": "2026-09-15T16:30:06.950Z",
+  "totalBlocks": 54,
+  "totalCheckpoints": 45,
+  "blocks": [
+    {
+      "id": "passing-and-returning-structs_b0",
+      "type": "paragraph",
+      "html": "<p>Consider an employee represented by 3 loose variables:</p>",
+      "preview": "Consider an employee represented by 3 loose variables:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int id { 1 };\n    int age { 24 };\n    double wage { 52400.0 };\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int id { 1 };\n    int age { 24 };\n    double wage { 52400.0 };\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b2",
+      "type": "paragraph",
+      "html": "<p>If we want to pass this employee to a function, we have to pass three variables:</p>",
+      "preview": "If we want to pass this employee to a function, we have to pass three variables:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printEmployee(int id, int age, double wage)\n{\n    std::cout << \"ID:   \" << id << '\\n';\n    std::cout << \"Age:  \" << age << '\\n';\n    std::cout << \"Wage: \" << wage << '\\n';\n}\n\nint main()\n{\n    int id { 1 };\n    int age { 24 };\n    double wage { 52400.0 };\n\n    printEmployee(id, age, wage);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printEmployee(int id, int age, double wage)\n{\n    std::cout &lt;&lt; \"ID:   \" &lt;&lt; id &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Age:  \" &lt;&lt; age &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Wage: \" &lt;&lt; wage &lt;&lt; '\\n';\n}\n\nint main()\n{\n    int id { 1 };\n    int age { 24 };\n    double wage { 52400.0 };\n\n    printEmployee(id, age, wage);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b4",
+      "type": "paragraph",
+      "html": "<p>While passing 3 individual employee variables isn’t that bad, consider a function where we need to pass 10 or 12 employee variables. Passing each variable independently would be time consuming and error prone. Additionally, if we ever add a new attribute to our employee (e.g. name), we now have to modify all the functions declarations, definitions, and function calls to accept the new parameter and argument!</p>",
+      "preview": "While passing 3 individual employee variables isn’t that bad, consider a functio",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b5",
+      "type": "section",
+      "title": "Passing structs (by reference)",
+      "html": "<h3 class=\"cpp-section-heading\">Passing structs (by reference)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b6",
+      "type": "paragraph",
+      "html": "<p>A big advantage of using structs over individual variables is that we can pass the entire struct to a function that needs to work with the members. Structs are generally passed by reference (typically by const reference) to avoid making copies.</p>",
+      "preview": "A big advantage of using structs over individual variables is that we can pass t",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nvoid printEmployee(const Employee& employee) // note pass by reference here\n{\n    std::cout << \"ID:   \" << employee.id << '\\n';\n    std::cout << \"Age:  \" << employee.age << '\\n';\n    std::cout << \"Wage: \" << employee.wage << '\\n';\n}\n\nint main()\n{\n    Employee joe { 14, 32, 24.15 };\n    Employee frank { 15, 28, 18.27 };\n\n    // Print Joe's information\n    printEmployee(joe);\n\n    std::cout << '\\n';\n\n    // Print Frank's information\n    printEmployee(frank);\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nvoid printEmployee(const Employee&amp; employee) // note pass by reference here\n{\n    std::cout &lt;&lt; \"ID:   \" &lt;&lt; employee.id &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Age:  \" &lt;&lt; employee.age &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Wage: \" &lt;&lt; employee.wage &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Employee joe { 14, 32, 24.15 };\n    Employee frank { 15, 28, 18.27 };\n\n    // Print Joe's information\n    printEmployee(joe);\n\n    std::cout &lt;&lt; '\\n';\n\n    // Print Frank's information\n    printEmployee(frank);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b8",
+      "type": "paragraph",
+      "html": "<p>In the above example, we pass an entire <code>Employee</code> to <code>printEmployee()</code> (twice, once for <code>joe</code> and once for <code>frank</code>).</p>",
+      "preview": "In the above example, we pass an entire Employee to printEmployee() (twice, once",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b9",
+      "type": "paragraph",
+      "html": "<p>The above program outputs:</p>",
+      "preview": "The above program outputs:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b10",
+      "type": "output",
+      "text": "ID:   14\nAge:  32\nWage: 24.15\n\nID:   15\nAge:  28\nWage: 18.27\n",
+      "html": "<pre>ID:   14\nAge:  32\nWage: 24.15\n\nID:   15\nAge:  28\nWage: 18.27\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b11",
+      "type": "paragraph",
+      "html": "<p>Because we are passing the entire struct object (rather than individual members), we only need one parameter no matter how many members the struct object has. And, in the future, if we ever decide to add new members to our <code>Employee</code> struct, we will not have to change the function declaration or function call! The new member will automatically be included.</p>",
+      "preview": "Because we are passing the entire struct object (rather than individual members)",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b12",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk about when to pass structs by value vs reference in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-const-lvalue-reference/\">12.6 -- Pass by const lvalue reference</a>.</p></div>",
+      "preview": "Related contentWe talk about when to pass structs by value vs reference in lesson 12.6 -- Pass by co",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b13",
+      "type": "section",
+      "title": "Passing temporary structs",
+      "html": "<h3 class=\"cpp-section-heading\">Passing temporary structs</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b14",
+      "type": "paragraph",
+      "html": "<p>In the prior example, we created Employee variable <code>joe</code> prior to passing it to the <code>printEmployee()</code> function. This allows us to give the Employee variable a name, which can be useful for documentation purposes. But it also requires two statements (one to create <code>joe</code>, one to use <code>joe</code>).</p>",
+      "preview": "In the prior example, we created Employee variable joe prior to passing it to th",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b15",
+      "type": "paragraph",
+      "html": "<p>In cases where we only use a variable once, having to give the variable a name and separate the creation and use of that variable can increase complexity. In such cases, it may be preferable to use a temporary object instead. A temporary object is not a variable, so it does not have an identifier.</p>",
+      "preview": "In cases where we only use a variable once, having to give the variable a name a",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b16",
+      "type": "paragraph",
+      "html": "<p>Here’s the same example as above, but we’ve replaced variables <code>joe</code> and <code>frank</code> with temporary objects:</p>",
+      "preview": "Here’s the same example as above, but we’ve replaced variables joe and frank wit",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nvoid printEmployee(const Employee& employee) // note pass by reference here\n{\n    std::cout << \"ID:   \" << employee.id << '\\n';\n    std::cout << \"Age:  \" << employee.age << '\\n';\n    std::cout << \"Wage: \" << employee.wage << '\\n';\n}\n\nint main()\n{\n    // Print Joe's information\n    printEmployee(Employee { 14, 32, 24.15 }); // construct a temporary Employee to pass to function (type explicitly specified) (preferred)\n\n    std::cout << '\\n';\n\n    // Print Frank's information\n    printEmployee({ 15, 28, 18.27 }); // construct a temporary Employee to pass to function (type deduced from parameter)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nvoid printEmployee(const Employee&amp; employee) // note pass by reference here\n{\n    std::cout &lt;&lt; \"ID:   \" &lt;&lt; employee.id &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Age:  \" &lt;&lt; employee.age &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Wage: \" &lt;&lt; employee.wage &lt;&lt; '\\n';\n}\n\nint main()\n{\n    // Print Joe's information\n    printEmployee(Employee { 14, 32, 24.15 }); // construct a temporary Employee to pass to function (type explicitly specified) (preferred)\n\n    std::cout &lt;&lt; '\\n';\n\n    // Print Frank's information\n    printEmployee({ 15, 28, 18.27 }); // construct a temporary Employee to pass to function (type deduced from parameter)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b18",
+      "type": "paragraph",
+      "html": "<p>We can create a temporary <code>Employee</code> in two ways. In the first call, we use the syntax <code>Employee { 14, 32, 24.15 }</code>. This tells the compiler to create an <code>Employee</code> object and initialize it with the provided initializers. This is the preferred syntax because it makes clear what kind of temporary object we are creating, and there is no way for the compiler to misinterpret our intentions.</p>",
+      "preview": "We can create a temporary Employee in two ways. In the first call, we use the sy",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b19",
+      "type": "paragraph",
+      "html": "<p>In the second call, we use the syntax <code>{ 15, 28, 18.27 }</code>. The compiler is smart enough to understand that the provided arguments must be converted to an <code>Employee</code> so that the function call will succeed. Note that this form is considered an implicit conversion, so it will not work in cases where only explicit conversions are acceptable.</p>",
+      "preview": "In the second call, we use the syntax { 15, 28, 18.27 }. The compiler is smart e",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b20",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk more about class type temporary objects and conversions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/temporary-class-objects/\">14.13 -- Temporary class objects</a>.</p></div>",
+      "preview": "Related contentWe talk more about class type temporary objects and conversions in lesson 14.13 -- Te",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b21",
+      "type": "paragraph",
+      "html": "<p>A few more things about temporary objects: they are created and initialized at the point of definition, and are destroyed at the end of the full expression in which they are created. And evaluation of a temporary object is an rvalue expression, it can only be used in places where rvalues are accepted. When a temporary object is used as a function argument, it will only bind to parameters that accept rvalues. This includes pass by value and pass by const reference, and excludes pass by non-const reference and pass by address.</p>",
+      "preview": "A few more things about temporary objects: they are created and initialized at t",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b22",
+      "type": "section",
+      "title": "Returning structs",
+      "html": "<h3 class=\"cpp-section-heading\">Returning structs</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b23",
+      "type": "paragraph",
+      "html": "<p>Consider the case where we have a function that needs to return a point in 3-dimensional Cartesian space. Such a point has 3 attributes: an x-coordinate, a y-coordinate, and a z-coordinate. But functions can only return one value. So how do we return all 3 coordinates back the user?</p>",
+      "preview": "Consider the case where we have a function that needs to return a point in 3-dim",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b24",
+      "type": "paragraph",
+      "html": "<p>One common way is to return a struct:</p>",
+      "preview": "One common way is to return a struct:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstruct Point3d\n{\n    double x { 0.0 };\n    double y { 0.0 };\n    double z { 0.0 };\n};\n\nPoint3d getZeroPoint()\n{\n    // We can create a variable and return the variable (we'll improve this below)\n    Point3d temp { 0.0, 0.0, 0.0 };\n    return temp;\n}\n\nint main()\n{\n    Point3d zero{ getZeroPoint() };\n\n    if (zero.x == 0.0 && zero.y == 0.0 && zero.z == 0.0)\n        std::cout << \"The point is zero\\n\";\n    else\n        std::cout << \"The point is not zero\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Point3d\n{\n    double x { 0.0 };\n    double y { 0.0 };\n    double z { 0.0 };\n};\n\nPoint3d getZeroPoint()\n{\n    // We can create a variable and return the variable (we'll improve this below)\n    Point3d temp { 0.0, 0.0, 0.0 };\n    return temp;\n}\n\nint main()\n{\n    Point3d zero{ getZeroPoint() };\n\n    if (zero.x == 0.0 &amp;&amp; zero.y == 0.0 &amp;&amp; zero.z == 0.0)\n        std::cout &lt;&lt; \"The point is zero\\n\";\n    else\n        std::cout &lt;&lt; \"The point is not zero\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b26",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b27",
+      "type": "output",
+      "text": "The point is zero\n",
+      "html": "<pre>The point is zero\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b28",
+      "type": "paragraph",
+      "html": "<p>Structs defined inside functions are usually returned by value, so as not to return a dangling reference.</p>",
+      "preview": "Structs defined inside functions are usually returned by value, so as not to ret",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b29",
+      "type": "paragraph",
+      "html": "<p>In the <code>getZeroPoint()</code> function above, we create a new named object (<code>temp</code>) just so we could return it:</p>",
+      "preview": "In the getZeroPoint() function above, we create a new named object (temp) just s",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b30",
+      "type": "code",
+      "language": "cpp",
+      "code": "Point3d getZeroPoint()\n{\n    // We can create a variable and return the variable (we'll improve this below)\n    Point3d temp { 0.0, 0.0, 0.0 };\n    return temp;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point3d getZeroPoint()\n{\n    // We can create a variable and return the variable (we'll improve this below)\n    Point3d temp { 0.0, 0.0, 0.0 };\n    return temp;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b31",
+      "type": "paragraph",
+      "html": "<p>The name of the object (<code>temp</code>) doesn’t really provide any documentation value here.</p>",
+      "preview": "The name of the object (temp) doesn’t really provide any documentation value her",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b32",
+      "type": "paragraph",
+      "html": "<p>We can make our function slightly better by returning a temporary (unnamed/anonymous) object instead:</p>",
+      "preview": "We can make our function slightly better by returning a temporary (unnamed/anony",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "Point3d getZeroPoint()\n{\n    return Point3d { 0.0, 0.0, 0.0 }; // return an unnamed Point3d\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point3d getZeroPoint()\n{\n    return Point3d { 0.0, 0.0, 0.0 }; // return an unnamed Point3d\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b34",
+      "type": "paragraph",
+      "html": "<p>In this case, a temporary <code>Point3d</code> is constructed, copied back to the caller, and then destroyed at the end of the expression. Note how much cleaner this is (one line vs two, and no need to understand whether <code>temp</code> is used more than once).</p>",
+      "preview": "In this case, a temporary Point3d is constructed, copied back to the caller, and",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b35",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss anonymous objects in more detail in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/temporary-class-objects/\">14.13 -- Temporary class objects</a>.</p></div>",
+      "preview": "Related contentWe discuss anonymous objects in more detail in lesson 14.13 -- Temporary class object",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b36",
+      "type": "section",
+      "title": "Deducing the return type",
+      "html": "<h3 class=\"cpp-section-heading\">Deducing the return type</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b37",
+      "type": "paragraph",
+      "html": "<p>In the case where the function has an explicit return type (e.g. <code>Point3d</code>), we can even omit the type in the return statement:</p>",
+      "preview": "In the case where the function has an explicit return type (e.g. Point3d), we ca",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "Point3d getZeroPoint()\n{\n    // We already specified the type at the function declaration\n    // so we don't need to do so here again\n    return { 0.0, 0.0, 0.0 }; // return an unnamed Point3d\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point3d getZeroPoint()\n{\n    // We already specified the type at the function declaration\n    // so we don't need to do so here again\n    return { 0.0, 0.0, 0.0 }; // return an unnamed Point3d\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b39",
+      "type": "paragraph",
+      "html": "<p>This is considered to be an implicit conversion.</p>",
+      "preview": "This is considered to be an implicit conversion.",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b40",
+      "type": "paragraph",
+      "html": "<p>Also note that since in this case we’re returning all zero values, we can use empty braces to return a value-initialized Point3d:</p>",
+      "preview": "Also note that since in this case we’re returning all zero values, we can use em",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "Point3d getZeroPoint()\n{\n    // We can use empty curly braces to value-initialize all members\n    return {};\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point3d getZeroPoint()\n{\n    // We can use empty curly braces to value-initialize all members\n    return {};\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b42",
+      "type": "section",
+      "title": "Structs are an important building block",
+      "html": "<h3 class=\"cpp-section-heading\">Structs are an important building block</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b43",
+      "type": "paragraph",
+      "html": "<p>While structs are useful in and of themselves, classes (which are the heart of C++ and object oriented programming) build directly on top of the concepts we’ve introduced here. Having a good understanding of structs (especially data members, member selection, and default member initialization) will make your transition to classes that much easier.</p>",
+      "preview": "While structs are useful in and of themselves, classes (which are the heart of C",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b44",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b45",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "You are running a website, and you are trying to calculate your advertising revenue. Write a program that allows you to enter 3 pieces of data:",
+      "hintHtml": "Hint: If you store the percentage as an integer, you’ll also need to divide by 100 when you calculate how much you made for the day.",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// First we need to define our Advertising struct\nstruct Advertising\n{\n    int adsShown {};\n    double clickThroughRatePercentage {};\n    double averageEarningsPerClick {};\n};\n\nAdvertising getAdvertising()\n{\n    Advertising temp {};\n    std::cout &lt;&lt; \"How many ads were shown today? \";\n    std::cin &gt;&gt; temp.adsShown;\n    std::cout &lt;&lt; \"What percentage of ads were clicked on by users? \";\n    std::cin &gt;&gt; temp.clickThroughRatePercentage;\n    std::cout &lt;&lt; \"What was the average earnings per click? \";\n    std::cin &gt;&gt; temp.averageEarningsPerClick;\n\n    return temp;\n}\n\nvoid printAdvertising(const Advertising&amp; ad)\n{\n    std::cout &lt;&lt; \"Number of ads shown: \" &lt;&lt; ad.adsShown &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Click through rate: \" &lt;&lt; ad.clickThroughRatePercentage &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Average earnings per click: $\" &lt;&lt; ad.averageEarningsPerClick &lt;&lt; '\\n';\n\n    // The following line is split up to reduce the length\n    // We need to divide ad.clickThroughRatePercentage by 100 because it's a percent of 100, not a multiplier\n    std::cout &lt;&lt; \"Total Earnings: $\"\n        &lt;&lt; (ad.adsShown * ad.clickThroughRatePercentage / 100 * ad.averageEarningsPerClick) &lt;&lt; '\\n';\n}\n\nint main()\n{\n    // Declare an Advertising struct variable\n    Advertising ad{ getAdvertising() };\n    printAdvertising(ad);\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b46",
+      "type": "list",
+      "html": "<ul><li>How many ads were watched.</li><li>What percentage of users clicked on an ad.</li><li>The average earnings per clicked ad.</li></ul>",
+      "preview": "How many ads were watched.What percentage of users clicked on an ad.The average ",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b47",
+      "type": "paragraph",
+      "html": "<p>Store those 3 values in a struct. Pass that struct to another function that prints each of the values. The print function should also print how much you made for that day (multiply the 3 fields together).</p>",
+      "preview": "Store those 3 values in a struct. Pass that struct to another function that prin",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b48",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "Create a struct to hold a fraction. The struct should have an integer numerator and an integer denominator member.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Fraction\n{\n    int numerator{ 0 };\n    int denominator{ 1 };\n};\n\nFraction getFraction()\n{\n    Fraction temp{};\n    std::cout &lt;&lt; \"Enter a value for numerator: \";\n    std::cin &gt;&gt; temp.numerator;\n    std::cout &lt;&lt; \"Enter a value for denominator: \";\n    std::cin &gt;&gt; temp.denominator;\n    std::cout &lt;&lt; '\\n';\n\n    return temp;\n}\n\nconstexpr Fraction multiply(const Fraction&amp; f1, const Fraction&amp; f2)\n{\n    return { f1.numerator * f2.numerator, f1.denominator * f2.denominator };\n}\n\nvoid printFraction(const Fraction&amp; f)\n{\n    std::cout &lt;&lt; f.numerator &lt;&lt; '/' &lt;&lt; f.denominator &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Fraction f1{ getFraction() };\n    Fraction f2{ getFraction() };\n\n    std::cout &lt;&lt; \"Your fractions multiplied together: \";\n\n    printFraction(multiply(f1, f2));\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b49",
+      "type": "paragraph",
+      "html": "<p>Write a function to read in a Fraction from the user, and use it to read-in two fraction objects. Write another function to multiply two Fractions together and return the result as a Fraction (you don’t need to reduce the fraction). Write another function that prints a fraction.</p>",
+      "preview": "Write a function to read in a Fraction from the user, and use it to read-in two ",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b50",
+      "type": "paragraph",
+      "html": "<p>Your program’s output should match the following:</p>",
+      "preview": "Your program’s output should match the following:",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b51",
+      "type": "output",
+      "text": "Enter a value for the numerator: 1\nEnter a value for the denominator: 2\n\nEnter a value for the numerator: 3\nEnter a value for the denominator: 4\n\nYour fractions multiplied together: 3/8\n",
+      "html": "<pre>Enter a value for the numerator: 1\nEnter a value for the denominator: 2\n\nEnter a value for the numerator: 3\nEnter a value for the denominator: 4\n\nYour fractions multiplied together: 3/8\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "passing-and-returning-structs_b52",
+      "type": "paragraph",
+      "html": "<p>When multiplying two fractions together, the resulting numerator is the product of the two numerators, and the resulting denominator is the product of the two denominators.</p>",
+      "preview": "When multiplying two fractions together, the resulting numerator is the product ",
+      "canCheck": true
+    },
+    {
+      "id": "passing-and-returning-structs_b53",
+      "type": "quiz",
+      "questionTitle": "Question #3",
+      "questionHtml": "In the solution to the prior quiz question, why does <code>getFraction()</code> return by value instead of by reference?",
+      "hintHtml": "",
+      "solutionHtml": "<p>Because our <code>temp</code> Fraction is a local variable, it will go out of scope at the end of the function. If we were to return <code>temp</code> as reference, we’d return a dangling reference back to the caller.</p>",
+      "canCheck": true
+    }
+  ]
+}

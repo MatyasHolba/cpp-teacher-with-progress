@@ -1,0 +1,288 @@
+{
+  "index": 99,
+  "chapterId": "7",
+  "number": "7.14",
+  "title": "7.14 — Unnamed and inline namespaces",
+  "url": "https://www.learncpp.com/cpp-tutorial/unnamed-and-inline-namespaces/",
+  "slug": "unnamed-and-inline-namespaces",
+  "scrapedAt": "2026-09-15T16:29:27.708Z",
+  "totalBlocks": 38,
+  "totalCheckpoints": 31,
+  "blocks": [
+    {
+      "id": "unnamed-and-inline-namespaces_b0",
+      "type": "paragraph",
+      "html": "<p>C++ supports two variants of namespaces that are worth at least knowing about. We won’t build on these, so consider this lesson optional for now.</p>",
+      "preview": "C++ supports two variants of namespaces that are worth at least knowing about. W",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b1",
+      "type": "section",
+      "title": "Unnamed (anonymous) namespaces",
+      "html": "<h3 class=\"cpp-section-heading\">Unnamed (anonymous) namespaces</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b2",
+      "type": "paragraph",
+      "html": "<p>An <strong>unnamed namespace</strong> (also called an <strong>anonymous namespace</strong>) is a namespace that is defined without a name, like so:</p>",
+      "preview": "An unnamed namespace (also called an anonymous namespace) is a namespace that is",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace // unnamed namespace\n{\n    void doSomething() // can only be accessed in this file\n    {\n        std::cout << \"v1\\n\";\n    }\n}\n\nint main()\n{\n    doSomething(); // we can call doSomething() without a namespace prefix\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace // unnamed namespace\n{\n    void doSomething() // can only be accessed in this file\n    {\n        std::cout &lt;&lt; \"v1\\n\";\n    }\n}\n\nint main()\n{\n    doSomething(); // we can call doSomething() without a namespace prefix\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b4",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b5",
+      "type": "output",
+      "text": "v1\n",
+      "html": "<pre>v1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b6",
+      "type": "paragraph",
+      "html": "<p>All content declared in an unnamed namespace is treated as if it is part of the parent namespace. So even though function <code>doSomething()</code> is defined in the unnamed namespace, the function itself is accessible from the parent namespace (which in this case is the global namespace), which is why we can call <code>doSomething()</code> from <code>main()</code> without any qualifiers.</p>",
+      "preview": "All content declared in an unnamed namespace is treated as if it is part of the ",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b7",
+      "type": "paragraph",
+      "html": "<p>This might make unnamed namespaces seem useless. But the other effect of unnamed namespaces is that all identifiers inside an unnamed namespace are treated as if they have internal linkage, which means that the content of an unnamed namespace can’t be seen outside of the file in which the unnamed namespace is defined.</p>",
+      "preview": "This might make unnamed namespaces seem useless. But the other effect of unnamed",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b8",
+      "type": "paragraph",
+      "html": "<p>For functions, this is effectively the same as defining all functions in the unnamed namespace as static functions. The following program is effectively identical to the one above:</p>",
+      "preview": "For functions, this is effectively the same as defining all functions in the unn",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nstatic void doSomething() // can only be accessed in this file\n{\n    std::cout << \"v1\\n\";\n}\n\nint main()\n{\n    doSomething(); // we can call doSomething() without a namespace prefix\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstatic void doSomething() // can only be accessed in this file\n{\n    std::cout &lt;&lt; \"v1\\n\";\n}\n\nint main()\n{\n    doSomething(); // we can call doSomething() without a namespace prefix\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b10",
+      "type": "paragraph",
+      "html": "<p>Unnamed namespaces are typically used when you have a lot of content that you want to ensure stays local to a given translation unit, as it’s easier to cluster such content in a single unnamed namespace than individually mark all declarations as <code>static</code>. Unnamed namespaces will also keep program-defined types (something we’ll discuss in a later lesson) local to the translation unit, something for which there is no alternative equivalent mechanism to do.</p>",
+      "preview": "Unnamed namespaces are typically used when you have a lot of content that you wa",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b11",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>If you’re hardcore, you can take the opposite approach -- put all content that isn’t explicitly meant to be exported/external in an unnamed namespace.</p></div>",
+      "preview": "TipIf you’re hardcore, you can take the opposite approach -- put all content that isn’t explicitly m",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b12",
+      "type": "paragraph",
+      "html": "<p>Unnamed namespaces should generally not be used in header files. <a href=\"https://wiki.sei.cmu.edu/confluence/display/cplusplus/DCL59-CPP.+Do+not+define+an+unnamed+namespace+in+a+header+file\">SEI CERT (rule DCL59-CPP)</a> has some good examples as to why.</p>",
+      "preview": "Unnamed namespaces should generally not be used in header files. SEI CERT (rule ",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b13",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer unnamed namespaces when you have content you want to keep local to a translation unit.</p><p>Avoid unnamed namespaces in header files.</p></div>",
+      "preview": "Best practicePrefer unnamed namespaces when you have content you want to keep local to a translation",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b14",
+      "type": "section",
+      "title": "Inline namespaces",
+      "html": "<h3 class=\"cpp-section-heading\">Inline namespaces</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b15",
+      "type": "paragraph",
+      "html": "<p>Now consider the following program:</p>",
+      "preview": "Now consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid doSomething()\n{\n    std::cout << \"v1\\n\";\n}\n\nint main()\n{\n    doSomething();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid doSomething()\n{\n    std::cout &lt;&lt; \"v1\\n\";\n}\n\nint main()\n{\n    doSomething();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b17",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b18",
+      "type": "output",
+      "text": "v1\n",
+      "html": "<pre>v1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b19",
+      "type": "paragraph",
+      "html": "<p>Pretty straightforward, right?</p>",
+      "preview": "Pretty straightforward, right?",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b20",
+      "type": "paragraph",
+      "html": "<p>But let’s say you’re not happy with <code>doSomething()</code>, and you want to improve it in some way that changes how it behaves. But if you do this, you risk breaking existing programs using the older version. How do you handle this?</p>",
+      "preview": "But let’s say you’re not happy with doSomething(), and you want to improve it in",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b21",
+      "type": "paragraph",
+      "html": "<p>One way would be to create a new version of the function with a different name. But over the course of many changes, you could end up with a whole set of almost-identically named functions (<code>doSomething</code>, <code>doSomething_v2</code>, <code>doSomething_v3</code>, etc…).</p>",
+      "preview": "One way would be to create a new version of the function with a different name. ",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b22",
+      "type": "paragraph",
+      "html": "<p>An alternative is to use an inline namespace. An <strong>inline namespace</strong> is a namespace that is typically used to version content. Much like an unnamed namespace, anything declared inside an inline namespace is considered part of the parent namespace. However, unlike unnamed namespaces, inline namespaces don’t affect linkage.</p>",
+      "preview": "An alternative is to use an inline namespace. An inline namespace is a namespace",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b23",
+      "type": "paragraph",
+      "html": "<p>To define an inline namespace, we use the <code>inline</code> keyword:</p>",
+      "preview": "To define an inline namespace, we use the inline keyword:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\ninline namespace V1 // declare an inline namespace named V1\n{\n    void doSomething()\n    {\n        std::cout << \"V1\\n\";\n    }\n}\n\nnamespace V2 // declare a normal namespace named V2\n{\n    void doSomething()\n    {\n        std::cout << \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V1)\n \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ninline namespace V1 // declare an inline namespace named V1\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V1\\n\";\n    }\n}\n\nnamespace V2 // declare a normal namespace named V2\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V1)\n \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b25",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b26",
+      "type": "output",
+      "text": "V1\nV2\nV1\n",
+      "html": "<pre>V1\nV2\nV1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b27",
+      "type": "paragraph",
+      "html": "<p>In the above example, callers to <code>doSomething()</code> will get the V1 (the inline version) of <code>doSomething()</code>. Callers who want to use the newer version can explicitly call <code>V2::doSomething()</code>. This preserves the function of existing programs while allowing newer programs to take advantage of newer/better variations.</p>",
+      "preview": "In the above example, callers to doSomething() will get the V1 (the inline versi",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b28",
+      "type": "paragraph",
+      "html": "<p>Alternatively, if you want to push the newer version:</p>",
+      "preview": "Alternatively, if you want to push the newer version:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout << \"V1\\n\";\n    }\n}\n\ninline namespace V2 // declare an inline namespace named V2\n{\n    void doSomething()\n    {\n        std::cout << \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V2)\n \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V1\\n\";\n    }\n}\n\ninline namespace V2 // declare an inline namespace named V2\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V2)\n \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b30",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b31",
+      "type": "output",
+      "text": "V1\nV2\nV2\n",
+      "html": "<pre>V1\nV2\nV2\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b32",
+      "type": "paragraph",
+      "html": "<p>In this example, all callers to <code>doSomething()</code> will get the v2 version by default (the newer and better version). Users who still want the older version of <code>doSomething()</code> can explicitly call <code>V1::doSomething()</code> to access the old behavior. This means existing programs who want the V1 version will need to globally replace <code>doSomething</code> with <code>V1::doSomething</code>, but this typically won’t be problematic if the functions are well named.</p>",
+      "preview": "In this example, all callers to doSomething() will get the v2 version by default",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b33",
+      "type": "section",
+      "title": "Mixing inline and unnamed namespaces Optional",
+      "html": "<h3 class=\"cpp-section-heading\">Mixing inline and unnamed namespaces <span class=\"cpp-section-pill cpp-section-optional\">Optional</span></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b34",
+      "type": "paragraph",
+      "html": "<p>A namespace can be both inline and unnamed:</p>",
+      "preview": "A namespace can be both inline and unnamed:",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout << \"V1\\n\";\n    }\n}\n\ninline namespace // declare an inline unnamed namespace\n{\n    void doSomething() // has internal linkage\n    {\n        std::cout << \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    // there is no V2 in this example, so we can't use V2:: as a namespace prefix\n\n    doSomething(); // calls the inline version of doSomething() (which is the anonymous one)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V1\\n\";\n    }\n}\n\ninline namespace // declare an inline unnamed namespace\n{\n    void doSomething() // has internal linkage\n    {\n        std::cout &lt;&lt; \"V2\\n\";\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    // there is no V2 in this example, so we can't use V2:: as a namespace prefix\n\n    doSomething(); // calls the inline version of doSomething() (which is the anonymous one)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b36",
+      "type": "paragraph",
+      "html": "<p>However, in such cases, it’s probably better to nest an anonymous namespace inside an inline namespace. This has the same effect (all functions inside the anonymous namespace have internal linkage by default) but still gives you an explicit namespace name you can use:</p>",
+      "preview": "However, in such cases, it’s probably better to nest an anonymous namespace insi",
+      "canCheck": true
+    },
+    {
+      "id": "unnamed-and-inline-namespaces_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout << \"V1\\n\";\n    }\n}\n\ninline namespace V2 // declare an inline namespace named V2\n{\n    namespace // unnamed namespace\n    {\n        void doSomething() // has internal linkage\n        {\n            std::cout << \"V2\\n\";\n        }\n\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V2)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace V1 // declare a normal namespace named V1\n{\n    void doSomething()\n    {\n        std::cout &lt;&lt; \"V1\\n\";\n    }\n}\n\ninline namespace V2 // declare an inline namespace named V2\n{\n    namespace // unnamed namespace\n    {\n        void doSomething() // has internal linkage\n        {\n            std::cout &lt;&lt; \"V2\\n\";\n        }\n\n    }\n}\n\nint main()\n{\n    V1::doSomething(); // calls the V1 version of doSomething()\n    V2::doSomething(); // calls the V2 version of doSomething()\n\n    doSomething(); // calls the inline version of doSomething() (which is V2)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    }
+  ]
+}

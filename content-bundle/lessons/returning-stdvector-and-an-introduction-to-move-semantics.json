@@ -1,0 +1,369 @@
+{
+  "index": 216,
+  "chapterId": "16",
+  "number": "16.5",
+  "title": "16.5 — Returning std::vector, and an introduction to move semantics",
+  "url": "https://www.learncpp.com/cpp-tutorial/returning-stdvector-and-an-introduction-to-move-semantics/",
+  "slug": "returning-stdvector-and-an-introduction-to-move-semantics",
+  "scrapedAt": "2026-09-15T16:30:28.146Z",
+  "totalBlocks": 50,
+  "totalCheckpoints": 44,
+  "blocks": [
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b0",
+      "type": "paragraph",
+      "html": "<p>When we need to pass a <code>std::vector</code> to a function, we pass it by (const) reference so that we do not make an expensive copy of the array data.</p>",
+      "preview": "When we need to pass a std::vector to a function, we pass it by (const) referenc",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b1",
+      "type": "paragraph",
+      "html": "<p>Therefore, you will probably be surprised to find that it is okay to return a <code>std::vector</code> by value.</p>",
+      "preview": "Therefore, you will probably be surprised to find that it is okay to return a st",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b2",
+      "type": "paragraph",
+      "html": "<p>Say whaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat?</p>",
+      "preview": "Say whaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat?",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b3",
+      "type": "section",
+      "title": "Copy semantics",
+      "html": "<h3 class=\"cpp-section-heading\">Copy semantics</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b4",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    std::vector arr2 { arr1 };          // copies arr1 into arr2\n\n    arr1[0] = 6; // We can continue to use arr1\n    arr2[0] = 7; // and we can continue to use arr2\n\n    std::cout << arr1[0] << arr2[0] << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    std::vector arr2 { arr1 };          // copies arr1 into arr2\n\n    arr1[0] = 6; // We can continue to use arr1\n    arr2[0] = 7; // and we can continue to use arr2\n\n    std::cout &lt;&lt; arr1[0] &lt;&lt; arr2[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b6",
+      "type": "paragraph",
+      "html": "<p>When <code>arr2</code> is initialized with <code>arr1</code>, the copy constructor of <code>std::vector</code> is called, which copies <code>arr1</code> into <code>arr2</code>.</p>",
+      "preview": "When arr2 is initialized with arr1, the copy constructor of std::vector is calle",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b7",
+      "type": "paragraph",
+      "html": "<p>Making a copy is the only reasonable thing to do in this case, as we need both <code>arr1</code> and <code>arr2</code> to live on independently. This example ends up making two copies, one for each initialization.</p>",
+      "preview": "Making a copy is the only reasonable thing to do in this case, as we need both a",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b8",
+      "type": "paragraph",
+      "html": "<p>The term <strong>copy semantics</strong> refers to the rules that determine how copies of objects are made. When we say a type supports copy semantics, we mean that objects of that type are copyable, because the rules for making such copies have been defined. When we say copy semantics are being invoked, that means we’ve done something that will make a copy of an object.</p>",
+      "preview": "The term copy semantics refers to the rules that determine how copies of objects",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b9",
+      "type": "paragraph",
+      "html": "<p>For class types, copy semantics are typically implemented via the copy constructor (and copy assignment operator), which defines how objects of that type are copied. Typically this results in each data member of the class type being copied. In the prior example, the statement <code>std::vector arr2 { arr1 };</code> invokes copy semantics, resulting in a call to the copy constructor of <code>std::vector</code>, which then makes a copy of each data member of <code>arr1</code> into <code>arr2</code>. The end result is that <code>arr1</code> is equivalent to (but independent from) <code>arr2</code>.</p>",
+      "preview": "For class types, copy semantics are typically implemented via the copy construct",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b10",
+      "type": "section",
+      "title": "When copy semantics is not optimal",
+      "html": "<h3 class=\"cpp-section-heading\">When copy semantics is not optimal</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b11",
+      "type": "paragraph",
+      "html": "<p>Now consider this related example:</p>",
+      "preview": "Now consider this related example:",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n\nstd::vector<int> generate() // return by value\n{\n    // We're intentionally using a named object here so mandatory copy elision doesn't apply\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    return arr1;\n}\n\nint main()\n{\n    std::vector arr2 { generate() }; // the return value of generate() dies at the end of the expression\n\n    // There is no way to use the return value of generate() here\n    arr2[0] = 7; // we only have access to arr2\n\n    std::cout << arr2[0] << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nstd::vector&lt;int&gt; generate() // return by value\n{\n    // We're intentionally using a named object here so mandatory copy elision doesn't apply\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    return arr1;\n}\n\nint main()\n{\n    std::vector arr2 { generate() }; // the return value of generate() dies at the end of the expression\n\n    // There is no way to use the return value of generate() here\n    arr2[0] = 7; // we only have access to arr2\n\n    std::cout &lt;&lt; arr2[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b13",
+      "type": "paragraph",
+      "html": "<p>When <code>arr2</code> is initialized this time, it is being initialized using a temporary object returned from function <code>generate()</code>. Unlike the prior case, where the initializer was an lvalue that could be used in future statements, in this case, the temporary object is an rvalue will be destroyed at the end of the initialization expression. The temporary object can’t be used beyond that point. Because the temporary (and its data) will be destroyed at the end of the expression, we need some way to get the data out of the temporary and into <code>arr2</code>.</p>",
+      "preview": "When arr2 is initialized this time, it is being initialized using a temporary ob",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b14",
+      "type": "paragraph",
+      "html": "<p>The usual thing to do here is the same as in the previous example: use copy semantics and make a potentially expensive copy. That way <code>arr2</code> gets its own copy of the data that can be used even after the temporary (and its data) is destroyed.</p>",
+      "preview": "The usual thing to do here is the same as in the previous example: use copy sema",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b15",
+      "type": "paragraph",
+      "html": "<p>However, what makes this case different than the previous example is that the temporary is going to be destroyed anyway. After initialization is complete, the temporary doesn’t need its data any more (which is why we can destroy it). We don’t need two sets of data to exist simultaneously. In such cases, making a potentially expensive copy and then destroying the original data is suboptimal.</p>",
+      "preview": "However, what makes this case different than the previous example is that the te",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b16",
+      "type": "section",
+      "title": "Introduction to move semantics",
+      "html": "<h3 class=\"cpp-section-heading\">Introduction to move semantics</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b17",
+      "type": "paragraph",
+      "html": "<p>Instead, what if there was a way for <code>arr2</code> to “steal” the temporary’s data instead of copying it? <code>arr2</code> would then be the new owner of the data, and no copy of the data would need to be made. When ownership of data is transferred from one object to another, we say that data has been <strong>moved</strong>. The cost of such a move is typically trivial (usually just two or three pointer assignments, which is way faster than copying an array of data!).</p>",
+      "preview": "Instead, what if there was a way for arr2 to “steal” the temporary’s data instea",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b18",
+      "type": "paragraph",
+      "html": "<p>As an added benefit, when the temporary was then destroyed at the end of the expression, it would no longer have any data to destroy, so we wouldn’t have to pay that cost either.</p>",
+      "preview": "As an added benefit, when the temporary was then destroyed at the end of the exp",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b19",
+      "type": "paragraph",
+      "html": "<p>This is the essence of <strong>move semantics</strong>, which refers to the rules that determine how the data from one object is moved to another object. When move semantics is invoked, any data member that can be moved is moved, and any data member that can’t be moved is copied. The ability to move data instead of copying it can make move semantics more efficient than copy semantics, especially when we can replace an expensive copy with an inexpensive move.</p>",
+      "preview": "This is the essence of move semantics, which refers to the rules that determine ",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b20",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Move semantics is an optimization that allows us, under certain circumstances, to inexpensively transfer ownership of some data members from one object to another object (rather than making a more expensive copy).</p><p>Data members that can’t be moved are copied instead.</p></div>",
+      "preview": "Key insightMove semantics is an optimization that allows us, under certain circumstances, to inexpen",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b21",
+      "type": "section",
+      "title": "How move semantics is invoked",
+      "html": "<h3 class=\"cpp-section-heading\">How move semantics is invoked</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b22",
+      "type": "paragraph",
+      "html": "<p>Normally, when an object is being initialized with (or assigned) an object of the same type, copy semantics will be used (assuming the copy isn’t elided).</p>",
+      "preview": "Normally, when an object is being initialized with (or assigned) an object of th",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b23",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We covered copy elision in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Class initialization and copy elision</a>.</p></div>",
+      "preview": "Related contentWe covered copy elision in lesson 14.15 -- Class initialization and copy elision.",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b24",
+      "type": "paragraph",
+      "html": "<p>However, when all of the following are true, move semantics will be invoked instead:</p>",
+      "preview": "However, when all of the following are true, move semantics will be invoked inst",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b25",
+      "type": "list",
+      "html": "<ul><li>The type of the object supports move semantics.</li><li>The object is being initialized with (or assigned) an rvalue (temporary) object of the same type.</li><li>The move isn’t elided.</li></ul>",
+      "preview": "The type of the object supports move semantics.The object is being initialized w",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b26",
+      "type": "paragraph",
+      "html": "<p>Here’s the sad news: not that many types support move semantics. However, <code>std::vector</code> and <code>std::string</code> both do!</p>",
+      "preview": "Here’s the sad news: not that many types support move semantics. However, std::v",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b27",
+      "type": "paragraph",
+      "html": "<p>We’ll dig into how move semantics works in more detail in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>. For now, it’s enough to know what move semantics is, and which types are move-capable.</p>",
+      "preview": "We’ll dig into how move semantics works in more detail in chapter 22. For now, i",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b28",
+      "type": "section",
+      "title": "We can return move-capable types like std::vector by value",
+      "html": "<h3 class=\"cpp-section-heading\">We can return move-capable types like <code>std::vector</code> by value</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b29",
+      "type": "paragraph",
+      "html": "<p>Because return by value returns an rvalue, if the returned type supports move semantics, then the returned value can be moved instead of copied into the destination object. This makes return by value extremely inexpensive for these types!</p>",
+      "preview": "Because return by value returns an rvalue, if the returned type supports move se",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b30",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>We can return move-capable types (like <code>std::vector</code> and <code>std::string</code>) by value. Such types will inexpensively move their values instead of making an expensive copy.</p><p>Such types should still be passed by const reference.</p></div>",
+      "preview": "Key insightWe can return move-capable types (like std::vector and std::string) by value. Such types ",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b31",
+      "type": "section",
+      "title": "Wait, wait, wait. Expensive-to-copy types shouldn’t be passed by value, but if they are move-capable they can be returned by value?",
+      "html": "<h3 class=\"cpp-section-heading\">Wait, wait, wait. Expensive-to-copy types shouldn’t be passed by value, but if they are move-capable they can be returned by value?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b32",
+      "type": "paragraph",
+      "html": "<p>Correct.</p>",
+      "preview": "Correct.",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b33",
+      "type": "paragraph",
+      "html": "<p>This following discussion is optional, but may help you understand why this is the case.</p>",
+      "preview": "This following discussion is optional, but may help you understand why this is t",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b34",
+      "type": "paragraph",
+      "html": "<p>One of the most common things we do in C++ is pass a value to some function, and get a different value back. When the passed values are class types, that process involves 4 steps:</p>",
+      "preview": "One of the most common things we do in C++ is pass a value to some function, and",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b35",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Construct the value to be passed.</li><li>Actually pass the value to the function.</li><li>Construct the value to be returned.</li><li>Actually pass the return value back to the caller.</li></ol>",
+      "preview": "Construct the value to be passed.Actually pass the value to the function.Constru",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b36",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of the above process using <code>std::vector</code>:</p>",
+      "preview": "Here’s an example of the above process using std::vector:",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <vector>\n\nstd::vector<int> doSomething(std::vector<int> v2)\n{\n    std::vector v3 { v2[0] + v2[0] }; // 3 -- construct value to be returned to caller\n    return v3; // 4 -- actually return value\n}\n\nint main()\n{\n    std::vector v1 { 5 }; // 1 -- construct value to be passed to function\n    std::cout << doSomething(v1)[0] << '\\n'; // 2 -- actually pass value\n\n    std::cout << v1[0] << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nstd::vector&lt;int&gt; doSomething(std::vector&lt;int&gt; v2)\n{\n    std::vector v3 { v2[0] + v2[0] }; // 3 -- construct value to be returned to caller\n    return v3; // 4 -- actually return value\n}\n\nint main()\n{\n    std::vector v1 { 5 }; // 1 -- construct value to be passed to function\n    std::cout &lt;&lt; doSomething(v1)[0] &lt;&lt; '\\n'; // 2 -- actually pass value\n\n    std::cout &lt;&lt; v1[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b38",
+      "type": "paragraph",
+      "html": "<p>First, let’s assume <code>std::vector</code> is not move-capable. In that case, the above program makes 4 copies:</p>",
+      "preview": "First, let’s assume std::vector is not move-capable. In that case, the above pro",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b39",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Constructing the value to be passed copies the initializer list into <code>v1</code></li><li>Actually passing the value to the function copies argument <code>v1</code> into function parameter <code>v2</code>.</li><li>Constructing the value to be returned copies the initializer into <code>v3</code></li><li>Actually returning the value to the caller copies <code>v3</code> back to the caller.</li></ol>",
+      "preview": "Constructing the value to be passed copies the initializer list into v1Actually ",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b40",
+      "type": "paragraph",
+      "html": "<p>Now let’s talk about how we might optimize the above. We have many tools at our disposal here: pass by reference or address, elision, move semantics, and out parameters.</p>",
+      "preview": "Now let’s talk about how we might optimize the above. We have many tools at our ",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b41",
+      "type": "paragraph",
+      "html": "<p>We can’t optimize copies 1 and 3 at all. We need a <code>std::vector</code> to pass to the function, and we need a <code>std::vector</code> to return -- these objects have to be constructed. <code>std::vector</code> is an owner of its data, so it necessarily makes a copy of its initializer.</p>",
+      "preview": "We can’t optimize copies 1 and 3 at all. We need a std::vector to pass to the fu",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b42",
+      "type": "paragraph",
+      "html": "<p>What we can affect is copies 2 and 4.</p>",
+      "preview": "What we can affect is copies 2 and 4.",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b43",
+      "type": "paragraph",
+      "html": "<p>Copy 2 is made because we’re passing by value from the caller to the called function. What other options do we have?</p>",
+      "preview": "Copy 2 is made because we’re passing by value from the caller to the called func",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b44",
+      "type": "list",
+      "html": "<ul><li>Can we pass by reference or address? Yes. We are guaranteed that the argument will exist for the entire function call -- the caller does not have to worry about the passed object unexpectedly going out of scope.</li><li>Can this copy be elided? No. Elision only works when we’re making a redundant copy or move. There’s no redundant copy or move here.</li><li>Can we use an out parameter here? No. We’re passing a value to the function, not getting a value back.</li><li>Can we use move semantics here? No. The argument is an lvalue. If we moved data from <code>v1</code> to <code>v2</code>, <code>v1</code> would become an empty vector, and subsequently printing <code>v1[0]</code> would lead to undefined behavior.</li></ul>",
+      "preview": "Can we pass by reference or address? Yes. We are guaranteed that the argument wi",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b45",
+      "type": "paragraph",
+      "html": "<p>Clearly pass by const reference is our best option here, as it avoids the copy, avoids null pointer issues, and works with both lvalue and rvalue arguments.</p>",
+      "preview": "Clearly pass by const reference is our best option here, as it avoids the copy, ",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b46",
+      "type": "paragraph",
+      "html": "<p>Copy 4 is made because we’re passing by value from the called function back to the caller. What other options do we have here?</p>",
+      "preview": "Copy 4 is made because we’re passing by value from the called function back to t",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b47",
+      "type": "list",
+      "html": "<ul><li>Can we return by reference or address? No. The object we’re returning is created as a local variable inside the function, and will be destroyed when the function returns. Returning a reference or pointer will result in the caller receiving a dangling pointer or reference.</li><li>Can this copy be elided? Yes, possibly. If the compiler is smart, it will realize that we’re constructing an object in the scope of the called function and returning it. By rewriting the code (under the as-if rule) so that <code>v3</code> is constructed in the scope of the caller instead, we can avoid the copy that would otherwise be made when returning. However, we are reliant upon the compiler realizing it can do this, so it is not guaranteed.</li><li>Can we use an out parameter here? Yes. Instead of constructing <code>v3</code> as a local variable, we can construct an empty <code>std::vector</code> object in the scope of the caller, and pass it to the function by non-const reference. The function can then fill this parameter with data. When the function returns, this object will still exist. This avoids the copy, but also has some significant downsides and constraints: ugly calling semantics, doesn’t work with objects that don’t support assignment, and it is challenging to write such functions that can work with both lvalue and rvalue arguments.</li><li>Can we use move semantics here? Yes. <code>v3</code> is going to be destroyed when the function returns, so instead of copying <code>v3</code> back to the caller, we can use move semantics to move its data to the caller, avoiding the copy.</li></ul>",
+      "preview": "Can we return by reference or address? No. The object we’re returning is created",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b48",
+      "type": "paragraph",
+      "html": "<p>Elision is the best option here, but whether it happens is out of our control. The next best option for move-capable types is move semantics, which can be used in cases where the compiler doesn’t elide the copy. And for move-capable types, move semantics is invoked automatically when returning by value.</p>",
+      "preview": "Elision is the best option here, but whether it happens is out of our control. T",
+      "canCheck": true
+    },
+    {
+      "id": "returning-stdvector-and-an-introduction-to-move-semantics_b49",
+      "type": "paragraph",
+      "html": "<p>To summarize, for move-capable types, we prefer to pass by const reference, and return by value.</p>",
+      "preview": "To summarize, for move-capable types, we prefer to pass by const reference, and ",
+      "canCheck": true
+    }
+  ]
+}

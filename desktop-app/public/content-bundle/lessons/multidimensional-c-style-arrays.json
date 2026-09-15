@@ -1,0 +1,512 @@
+{
+  "index": 236,
+  "chapterId": "17",
+  "number": "17.12",
+  "title": "17.12 — Multidimensional C-style Arrays",
+  "url": "https://www.learncpp.com/cpp-tutorial/multidimensional-c-style-arrays/",
+  "slug": "multidimensional-c-style-arrays",
+  "scrapedAt": "2026-09-15T16:30:38.500Z",
+  "totalBlocks": 69,
+  "totalCheckpoints": 57,
+  "blocks": [
+    {
+      "id": "multidimensional-c-style-arrays_b0",
+      "type": "paragraph",
+      "html": "<p>Consider a game like <a href=\"https://en.wikipedia.org/wiki/Tic-tac-toe\">Tic-tac-toe</a>. The standard board for this game is a 3×3 grid, with players taking turns placing ‘X’ and ‘O’ symbols. The first to get three symbols in a row wins.</p>",
+      "preview": "Consider a game like Tic-tac-toe. The standard board for this game is a 3×3 grid",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b1",
+      "type": "paragraph",
+      "html": "<p>While you could store the board data as 9 individual variables, we know that when you have multiple instances of an element, it’s better to use an array:</p>",
+      "preview": "While you could store the board data as 9 individual variables, we know that whe",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "int ttt[9]; // a C-style array of ints (value 0 = empty, 1 = player 1, 2 = player 2)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int ttt[9]; // a C-style array of ints (value 0 = empty, 1 = player 1, 2 = player 2)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b3",
+      "type": "paragraph",
+      "html": "<p>This defines a C-style array with 9 elements arranged sequentially in memory. We can imagine these elements laid out as a single row of values, like this:</p>",
+      "preview": "This defines a C-style array with 9 elements arranged sequentially in memory. We",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b4",
+      "type": "output",
+      "text": "// ttt[0] ttt[1] ttt[2] ttt[3] ttt[4] ttt[5] ttt[6] ttt[7] ttt[8]\n",
+      "html": "<pre>// ttt[0] ttt[1] ttt[2] ttt[3] ttt[4] ttt[5] ttt[6] ttt[7] ttt[8]\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b5",
+      "type": "paragraph",
+      "html": "<p>The <strong>dimension</strong> of an array is the number of indices needed to select an element. An array containing only a single dimension is called a <strong>single-dimensional array</strong> or a <strong>one-dimensional array</strong> (sometimes abbreviated as a <strong>1d array</strong>). <code>ttt</code> above is an example of a one-dimensional array, as elements can be selected with a single index (e.g. <code>ttt[2]</code>).</p>",
+      "preview": "The dimension of an array is the number of indices needed to select an element. ",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b6",
+      "type": "paragraph",
+      "html": "<p>But note that our one-dimensional array doesn’t look much like our tic-tac-toe board, which exists in two dimensions. We can do better.</p>",
+      "preview": "But note that our one-dimensional array doesn’t look much like our tic-tac-toe b",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b7",
+      "type": "section",
+      "title": "Two-dimensional arrays",
+      "html": "<h3 class=\"cpp-section-heading\">Two-dimensional arrays</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b8",
+      "type": "paragraph",
+      "html": "<p>In previous lessons, we noted that the elements of an array can be of any object type. This means the element type of an array can be another array! Defining such an array is simple:</p>",
+      "preview": "In previous lessons, we noted that the elements of an array can be of any object",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "int a[3][5]; // a 3-element array of 5-element arrays of int",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int a[3][5]; // a 3-element array of 5-element arrays of int</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b10",
+      "type": "paragraph",
+      "html": "<p>An array of arrays is called a <strong>two-dimensional array</strong> (sometimes abbreviated as a <strong>2d array</strong>) because it has two subscripts.</p>",
+      "preview": "An array of arrays is called a two-dimensional array (sometimes abbreviated as a",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b11",
+      "type": "paragraph",
+      "html": "<p>With a two-dimensional array, it is convenient to think of the first (left) subscript as selecting the row, and the second (right) subscript as selecting the column. Conceptually, we can imagine this two-dimensional array laid out as follows:</p>",
+      "preview": "With a two-dimensional array, it is convenient to think of the first (left) subs",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b12",
+      "type": "output",
+      "text": "// col 0    col 1    col 2    col 3    col 4\n// a[0][0]  a[0][1]  a[0][2]  a[0][3]  a[0][4]  row 0\n// a[1][0]  a[1][1]  a[1][2]  a[1][3]  a[1][4]  row 1\n// a[2][0]  a[2][1]  a[2][2]  a[2][3]  a[2][4]  row 2\n",
+      "html": "<pre>// col 0    col 1    col 2    col 3    col 4\n// a[0][0]  a[0][1]  a[0][2]  a[0][3]  a[0][4]  row 0\n// a[1][0]  a[1][1]  a[1][2]  a[1][3]  a[1][4]  row 1\n// a[2][0]  a[2][1]  a[2][2]  a[2][3]  a[2][4]  row 2\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b13",
+      "type": "paragraph",
+      "html": "<p>To access the elements of a two-dimensional array, we simply use two subscripts:</p>",
+      "preview": "To access the elements of a two-dimensional array, we simply use two subscripts:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "a[2][3] = 7; // a[row][col], where row = 2 and col = 3",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">a[2][3] = 7; // a[row][col], where row = 2 and col = 3</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b15",
+      "type": "paragraph",
+      "html": "<p>Thus, for a Tic-tac-toe board, we can define a 2d array like this:</p>",
+      "preview": "Thus, for a Tic-tac-toe board, we can define a 2d array like this:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "int ttt[3][3];",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int ttt[3][3];</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b17",
+      "type": "paragraph",
+      "html": "<p>And now we have a 3×3 grid of elements that we can easily manipulate using row and column indices!</p>",
+      "preview": "And now we have a 3×3 grid of elements that we can easily manipulate using row a",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b18",
+      "type": "section",
+      "title": "Multidimensional arrays",
+      "html": "<h3 class=\"cpp-section-heading\">Multidimensional arrays</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b19",
+      "type": "paragraph",
+      "html": "<p>Arrays with more than one dimension are called <strong>multidimensional arrays</strong>.</p>",
+      "preview": "Arrays with more than one dimension are called multidimensional arrays.",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b20",
+      "type": "paragraph",
+      "html": "<p>C++ even supports multidimensional arrays with more than 2 dimensions:</p>",
+      "preview": "C++ even supports multidimensional arrays with more than 2 dimensions:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "int threedee[4][4][4]; // a 4x4x4 array (an array of 4 arrays of 4 arrays of 4 ints)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int threedee[4][4][4]; // a 4x4x4 array (an array of 4 arrays of 4 arrays of 4 ints)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b22",
+      "type": "paragraph",
+      "html": "<p>For example, the terrain in Minecraft is divided into 16x16x16 blocks (called chunk sections).</p>",
+      "preview": "For example, the terrain in Minecraft is divided into 16x16x16 blocks (called ch",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b23",
+      "type": "paragraph",
+      "html": "<p>Arrays with dimensions higher than 3 are supported, but rare.</p>",
+      "preview": "Arrays with dimensions higher than 3 are supported, but rare.",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b24",
+      "type": "section",
+      "title": "How 2d arrays are laid out in memory",
+      "html": "<h3 class=\"cpp-section-heading\">How 2d arrays are laid out in memory</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b25",
+      "type": "paragraph",
+      "html": "<p>Memory is linear (1-dimensional), so multidimensional arrays are actually stored as a sequential list of elements.</p>",
+      "preview": "Memory is linear (1-dimensional), so multidimensional arrays are actually stored",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b26",
+      "type": "paragraph",
+      "html": "<p>There are two possible ways for the following array to be stored in memory:</p>",
+      "preview": "There are two possible ways for the following array to be stored in memory:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "// col 0   col 1   col 2   col 3   col 4\n// [0][0]  [0][1]  [0][2]  [0][3]  [0][4]  row 0\n// [1][0]  [1][1]  [1][2]  [1][3]  [1][4]  row 1\n// [2][0]  [2][1]  [2][2]  [2][3]  [2][4]  row 2",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// col 0   col 1   col 2   col 3   col 4\n// [0][0]  [0][1]  [0][2]  [0][3]  [0][4]  row 0\n// [1][0]  [1][1]  [1][2]  [1][3]  [1][4]  row 1\n// [2][0]  [2][1]  [2][2]  [2][3]  [2][4]  row 2</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b28",
+      "type": "paragraph",
+      "html": "<p>C++ uses <strong>row-major order</strong>, where elements are sequentially placed in memory row-by-row, ordered from left to right, top to bottom:</p>",
+      "preview": "C++ uses row-major order, where elements are sequentially placed in memory row-b",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b29",
+      "type": "output",
+      "text": "[0][0] [0][1] [0][2] [0][3] [0][4] [1][0] [1][1] [1][2] [1][3] [1][4] [2][0] [2][1] [2][2] [2][3] [2][4]\n",
+      "html": "<pre>[0][0] [0][1] [0][2] [0][3] [0][4] [1][0] [1][1] [1][2] [1][3] [1][4] [2][0] [2][1] [2][2] [2][3] [2][4]\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b30",
+      "type": "paragraph",
+      "html": "<p>Some other languages (like Fortran) use <strong>column-major order</strong>, elements are sequentially placed in memory column-by-column, from top to bottom, left to right:</p>",
+      "preview": "Some other languages (like Fortran) use column-major order, elements are sequent",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b31",
+      "type": "output",
+      "text": "[0][0] [1][0] [2][0] [0][1] [1][1] [2][1] [0][2] [1][2] [2][2] [0][3] [1][3] [2][3] [0][4] [1][4] [2][4]\n",
+      "html": "<pre>[0][0] [1][0] [2][0] [0][1] [1][1] [2][1] [0][2] [1][2] [2][2] [0][3] [1][3] [2][3] [0][4] [1][4] [2][4]\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b32",
+      "type": "paragraph",
+      "html": "<p>In C++, when initializing an array, elements are initialized in row-major order. And when traversing an array, it is most efficient to access elements in the order they are laid out in memory.</p>",
+      "preview": "In C++, when initializing an array, elements are initialized in row-major order.",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b33",
+      "type": "section",
+      "title": "Initializing two-dimensional arrays",
+      "html": "<h3 class=\"cpp-section-heading\">Initializing two-dimensional arrays</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b34",
+      "type": "paragraph",
+      "html": "<p>To initialize a two-dimensional array, it is easiest to use nested braces, with each set of numbers representing a row:</p>",
+      "preview": "To initialize a two-dimensional array, it is easiest to use nested braces, with ",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[3][5]\n{\n  { 1, 2, 3, 4, 5 },     // row 0\n  { 6, 7, 8, 9, 10 },    // row 1\n  { 11, 12, 13, 14, 15 } // row 2\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[3][5]\n{\n  { 1, 2, 3, 4, 5 },     // row 0\n  { 6, 7, 8, 9, 10 },    // row 1\n  { 11, 12, 13, 14, 15 } // row 2\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b36",
+      "type": "paragraph",
+      "html": "<p>Although some compilers will let you omit the inner braces, we highly recommend you include them anyway for readability purposes.</p>",
+      "preview": "Although some compilers will let you omit the inner braces, we highly recommend ",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b37",
+      "type": "paragraph",
+      "html": "<p>When using inner braces, missing initializers will be value-initialized:</p>",
+      "preview": "When using inner braces, missing initializers will be value-initialized:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[3][5]\n{\n  { 1, 2 },          // row 0 = 1, 2, 0, 0, 0\n  { 6, 7, 8 },       // row 1 = 6, 7, 8, 0, 0\n  { 11, 12, 13, 14 } // row 2 = 11, 12, 13, 14, 0\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[3][5]\n{\n  { 1, 2 },          // row 0 = 1, 2, 0, 0, 0\n  { 6, 7, 8 },       // row 1 = 6, 7, 8, 0, 0\n  { 11, 12, 13, 14 } // row 2 = 11, 12, 13, 14, 0\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b39",
+      "type": "paragraph",
+      "html": "<p>An initialized multidimensional array can omit (only) the leftmost length specification:</p>",
+      "preview": "An initialized multidimensional array can omit (only) the leftmost length specif",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[][5]\n{\n  { 1, 2, 3, 4, 5 },\n  { 6, 7, 8, 9, 10 },\n  { 11, 12, 13, 14, 15 }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[][5]\n{\n  { 1, 2, 3, 4, 5 },\n  { 6, 7, 8, 9, 10 },\n  { 11, 12, 13, 14, 15 }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b41",
+      "type": "paragraph",
+      "html": "<p>In such cases, the compiler can do the math to figure out what the leftmost length is from the number of initializers.</p>",
+      "preview": "In such cases, the compiler can do the math to figure out what the leftmost leng",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b42",
+      "type": "paragraph",
+      "html": "<p>Omitting non-leftmost dimensions is not allowed:</p>",
+      "preview": "Omitting non-leftmost dimensions is not allowed:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b43",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[][] \n{\n  { 1, 2, 3, 4 },\n  { 5, 6, 7, 8 }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[][] \n{\n  { 1, 2, 3, 4 },\n  { 5, 6, 7, 8 }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b44",
+      "type": "paragraph",
+      "html": "<p>Just like normal arrays, multidimensional arrays can still be initialized to 0 as follows:</p>",
+      "preview": "Just like normal arrays, multidimensional arrays can still be initialized to 0 a",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b45",
+      "type": "code",
+      "language": "cpp",
+      "code": "int array[3][5] {};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[3][5] {};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b46",
+      "type": "section",
+      "title": "Two-dimensional arrays and loops",
+      "html": "<h3 class=\"cpp-section-heading\">Two-dimensional arrays and loops</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b47",
+      "type": "paragraph",
+      "html": "<p>With a one-dimensional array, we can use a single loop to iterate through all of the elements in the array:</p>",
+      "preview": "With a one-dimensional array, we can use a single loop to iterate through all of",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b48",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int arr[] { 1, 2, 3, 4, 5 };\n\n    // for-loop with index\n    for (std::size_t i{0}; i < std::size(arr); ++i)\n        std::cout << arr[i] << ' ';\n\n    std::cout << '\\n';\n\n    // range-based for-loop\n    for (auto e: arr)\n        std::cout << e << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int arr[] { 1, 2, 3, 4, 5 };\n\n    // for-loop with index\n    for (std::size_t i{0}; i &lt; std::size(arr); ++i)\n        std::cout &lt;&lt; arr[i] &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    // range-based for-loop\n    for (auto e: arr)\n        std::cout &lt;&lt; e &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b49",
+      "type": "paragraph",
+      "html": "<p>With a two-dimensional array, we need two loops: one to select the row, and another to select the column.</p>",
+      "preview": "With a two-dimensional array, we need two loops: one to select the row, and anot",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b50",
+      "type": "paragraph",
+      "html": "<p>And with two loops, we also need to determine which loop will be the outer loop, and which will be the inner loop. It is most efficient to access elements in the order they are laid out in memory. Since C++ uses row-major order, the row selector should be the outer loop, and the column selector should be the inner loop.</p>",
+      "preview": "And with two loops, we also need to determine which loop will be the outer loop,",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b51",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int arr[3][4] { \n        { 1, 2, 3, 4 },\n        { 5, 6, 7, 8 },\n        { 9, 10, 11, 12 }};\n\n    // double for-loop with indices\n    for (std::size_t row{0}; row < std::size(arr); ++row) // std::size(arr) returns the number of rows\n    {\n        for (std::size_t col{0}; col < std::size(arr[0]); ++col) // std::size(arr[0]) returns the number of columns\n            std::cout << arr[row][col] << ' ';\n\n        std::cout << '\\n';\n    }\n\n    // double range-based for-loop\n    for (const auto& arow: arr)   // get each array row\n    {\n        for (const auto& e: arow) // get each element of the row\n            std::cout << e << ' ';\n\n        std::cout << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int arr[3][4] { \n        { 1, 2, 3, 4 },\n        { 5, 6, 7, 8 },\n        { 9, 10, 11, 12 }};\n\n    // double for-loop with indices\n    for (std::size_t row{0}; row &lt; std::size(arr); ++row) // std::size(arr) returns the number of rows\n    {\n        for (std::size_t col{0}; col &lt; std::size(arr[0]); ++col) // std::size(arr[0]) returns the number of columns\n            std::cout &lt;&lt; arr[row][col] &lt;&lt; ' ';\n\n        std::cout &lt;&lt; '\\n';\n    }\n\n    // double range-based for-loop\n    for (const auto&amp; arow: arr)   // get each array row\n    {\n        for (const auto&amp; e: arow) // get each element of the row\n            std::cout &lt;&lt; e &lt;&lt; ' ';\n\n        std::cout &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b52",
+      "type": "section",
+      "title": "A two-dimensional array example",
+      "html": "<h3 class=\"cpp-section-heading\">A two-dimensional array example</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b53",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at a practical example of a two-dimensional array:</p>",
+      "preview": "Let’s take a look at a practical example of a two-dimensional array:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b54",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    constexpr int numRows{ 10 };\n    constexpr int numCols{ 10 };\n\n    // Declare a 10x10 array\n    int product[numRows][numCols]{};\n\n    // Calculate a multiplication table\n    // We don't need to calc row and col 0 since mult by 0 always is 0\n    for (std::size_t row{ 1 }; row < numRows; ++row)\n    {\n        for (std::size_t col{ 1 }; col < numCols; ++col)\n        {\n            product[row][col] = static_cast<int>(row * col);\n        }\n     }\n\n    for (std::size_t row{ 1 }; row < numRows; ++row)\n    {\n        for (std::size_t col{ 1 }; col < numCols; ++col)\n        {\n            std::cout << product[row][col] << '\\t';\n        }\n\n        std::cout << '\\n';\n     }\n\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    constexpr int numRows{ 10 };\n    constexpr int numCols{ 10 };\n\n    // Declare a 10x10 array\n    int product[numRows][numCols]{};\n\n    // Calculate a multiplication table\n    // We don't need to calc row and col 0 since mult by 0 always is 0\n    for (std::size_t row{ 1 }; row &lt; numRows; ++row)\n    {\n        for (std::size_t col{ 1 }; col &lt; numCols; ++col)\n        {\n            product[row][col] = static_cast&lt;int&gt;(row * col);\n        }\n     }\n\n    for (std::size_t row{ 1 }; row &lt; numRows; ++row)\n    {\n        for (std::size_t col{ 1 }; col &lt; numCols; ++col)\n        {\n            std::cout &lt;&lt; product[row][col] &lt;&lt; '\\t';\n        }\n\n        std::cout &lt;&lt; '\\n';\n     }\n\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b55",
+      "type": "paragraph",
+      "html": "<p>This program calculates and prints a multiplication table for all values between 1 and 9 (inclusive). Note that when printing the table, the for loops start from 1 instead of 0. This is to omit printing the 0 column and 0 row, which would just be a bunch of 0s! Here is the output:</p>",
+      "preview": "This program calculates and prints a multiplication table for all values between",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b56",
+      "type": "output",
+      "text": "1    2    3    4    5    6    7    8    9\n2    4    6    8    10   12   14   16   18\n3    6    9    12   15   18   21   24   27\n4    8    12   16   20   24   28   32   36\n5    10   15   20   25   30   35   40   45\n6    12   18   24   30   36   42   48   54\n7    14   21   28   35   42   49   56   63\n8    16   24   32   40   48   56   64   72\n9    18   27   36   45   54   63   72   81\n",
+      "html": "<pre>1    2    3    4    5    6    7    8    9\n2    4    6    8    10   12   14   16   18\n3    6    9    12   15   18   21   24   27\n4    8    12   16   20   24   28   32   36\n5    10   15   20   25   30   35   40   45\n6    12   18   24   30   36   42   48   54\n7    14   21   28   35   42   49   56   63\n8    16   24   32   40   48   56   64   72\n9    18   27   36   45   54   63   72   81\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b57",
+      "type": "section",
+      "title": "Cartesian coordinates vs Array indices",
+      "html": "<h3 class=\"cpp-section-heading\">Cartesian coordinates vs Array indices</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b58",
+      "type": "paragraph",
+      "html": "<p>In geometry, the <a href=\"https://en.wikipedia.org/wiki/Cartesian_coordinate_system\">Cartesian coordinate system</a> is often used to describe the position of objects. In two dimensions, we have two coordinate axes, conventionally named “x” and “y”. “x” is the horizontal axis, and “y” is the vertical axis.</p>",
+      "preview": "In geometry, the Cartesian coordinate system is often used to describe the posit",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b59",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Cartesian-coordinate-system-min.png\" alt=\"Cartesian Coordinate System Diagram\"></div>",
+      "preview": "",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b60",
+      "type": "paragraph",
+      "html": "<p>In two dimensions, the Cartesian position of an object can be described as an { x, y } pair, where x-coordinate and y-coordinate are values indicating how far to the right of the x-axis and how far above the y-axis an object is positioned. Sometimes the y-axis is flipped (so that the y-coordinate describes how far below the y-axis something is).</p>",
+      "preview": "In two dimensions, the Cartesian position of an object can be described as an { ",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b61",
+      "type": "paragraph",
+      "html": "<p>Now let’s take a look at our 2d array layout in C++:</p>",
+      "preview": "Now let’s take a look at our 2d array layout in C++:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b62",
+      "type": "code",
+      "language": "cpp",
+      "code": "// col 0   col 1   col 2   col 3   col 4\n// [0][0]  [0][1]  [0][2]  [0][3]  [0][4]  row 0\n// [1][0]  [1][1]  [1][2]  [1][3]  [1][4]  row 1\n// [2][0]  [2][1]  [2][2]  [2][3]  [2][4]  row 2",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// col 0   col 1   col 2   col 3   col 4\n// [0][0]  [0][1]  [0][2]  [0][3]  [0][4]  row 0\n// [1][0]  [1][1]  [1][2]  [1][3]  [1][4]  row 1\n// [2][0]  [2][1]  [2][2]  [2][3]  [2][4]  row 2</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b63",
+      "type": "paragraph",
+      "html": "<p>This is also a two-dimensional coordinate system, where the position of an element can be described as [row][col] (where the col-axis is flipped).</p>",
+      "preview": "This is also a two-dimensional coordinate system, where the position of an eleme",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b64",
+      "type": "paragraph",
+      "html": "<p>While each of these coordinate systems is fairly easy to understand independently, converting from Cartesian { x, y } to Array indices [row][col] is a bit counter-intuitive.</p>",
+      "preview": "While each of these coordinate systems is fairly easy to understand independentl",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b65",
+      "type": "paragraph",
+      "html": "<p>The key insight is that the x-coordinate in a Cartesian system describes which <em>column</em> is being selected in the array indexing system. Conversely, the y-coordinate describes which <em>row</em> is being selected. Therefore, an { x, y } Cartesian coordinate translates to an [y][x] array coordinate, which is backwards from what we might expect!</p>",
+      "preview": "The key insight is that the x-coordinate in a Cartesian system describes which c",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b66",
+      "type": "paragraph",
+      "html": "<p>This leads to 2d loops that look like this:</p>",
+      "preview": "This leads to 2d loops that look like this:",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b67",
+      "type": "code",
+      "language": "cpp",
+      "code": "    for (std::size_t y{0}; y < std::size(arr); ++y) // outer loop is rows / y\n    {\n        for (std::size_t x{0}; x < std::size(arr[0]); ++x) // inner loop is columns / x\n            std::cout << arr[y][x] << ' '; // index with y (row) first, then x (col)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    for (std::size_t y{0}; y &lt; std::size(arr); ++y) // outer loop is rows / y\n    {\n        for (std::size_t x{0}; x &lt; std::size(arr[0]); ++x) // inner loop is columns / x\n            std::cout &lt;&lt; arr[y][x] &lt;&lt; ' '; // index with y (row) first, then x (col)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "multidimensional-c-style-arrays_b68",
+      "type": "paragraph",
+      "html": "<p>Note that in this case, we index the array as <code>a[y][x]</code>, which is probably backwards from the alphabetic ordering you were expecting.</p>",
+      "preview": "Note that in this case, we index the array as a[y][x], which is probably backwar",
+      "canCheck": true
+    }
+  ]
+}

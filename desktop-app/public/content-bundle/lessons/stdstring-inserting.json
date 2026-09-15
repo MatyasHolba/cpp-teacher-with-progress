@@ -1,0 +1,90 @@
+{
+  "index": 355,
+  "chapterId": "D",
+  "number": "22.7",
+  "title": "22.7 — std::string inserting",
+  "url": "https://www.learncpp.com/cpp-tutorial/stdstring-inserting/",
+  "slug": "stdstring-inserting",
+  "scrapedAt": "2026-09-15T16:31:45.637Z",
+  "totalBlocks": 11,
+  "totalCheckpoints": 11,
+  "blocks": [
+    {
+      "id": "stdstring-inserting_b0",
+      "type": "paragraph",
+      "html": "<p><strong>Inserting</strong></p>",
+      "preview": "Inserting",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b1",
+      "type": "paragraph",
+      "html": "<p>Inserting characters into an existing string can be done via the insert() function.</p>",
+      "preview": "Inserting characters into an existing string can be done via the insert() functi",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b2",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::insert (size_type index, const string&amp; str)</b><br><b>string&amp; string::insert (size_type index, const char* str)</b><p></p><ul><li>Both functions insert the characters of str into the string at index</li><li>Both function return *this so they can be “chained”.</li><li>Both functions throw out_of_range if index is invalid</li><li>Both functions throw a length_error exception if the result exceeds the maximum number of characters.</li><li>In the C-style string version, str must not be NULL.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">string sString(\"aaaa\");\ncout &lt;&lt; sString &lt;&lt; endl;\n\nsString.insert(2, string(\"bbbb\"));\ncout &lt;&lt; sString &lt;&lt; endl;\n\nsString.insert(4, \"cccc\");\ncout &lt;&lt; sString &lt;&lt; endl;</code></pre><p>Output:</p><pre>aaaa\naabbbbaa\naabbccccbbaa\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::insert (size_type index, const string& str)string& string::inser",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b3",
+      "type": "paragraph",
+      "html": "<p>Here’s a crazy version of insert() that allows you to insert a substring into a string at an arbitrary index:</p>",
+      "preview": "Here’s a crazy version of insert() that allows you to insert a substring into a ",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b4",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::insert (size_type index, const string&amp; str, size_type startindex, size_type num)</b><p></p><ul><li>This function inserts num characters str, starting from startindex, into the string at index.</li><li>Returns *this so it can be “chained”.</li><li>Throws an out_of_range if index or startindex is out of bounds</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">string sString(\"aaaa\");\n\nconst string sInsert(\"01234567\");\nsString.insert(2, sInsert, 3, 4); // insert substring of sInsert from index [3,7) into sString at index 2\ncout &lt;&lt; sString &lt;&lt; endl;</code></pre><p>Output:</p><pre>aa3456aa\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::insert (size_type index, const string& str, size_type startindex",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b5",
+      "type": "paragraph",
+      "html": "<p>There is a flavor of insert() that inserts the first portion of a C-style string:</p>",
+      "preview": "There is a flavor of insert() that inserts the first portion of a C-style string",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b6",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::insert(size_type index, const char* str, size_type len)</b><p></p><ul><li>Inserts len characters of str into the string at index</li><li>Returns *this so it can be “chained”.</li><li>Throws an out_of_range exception if the index is invalid</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li><li>Ignores special characters (such as ”)</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">string sString(\"aaaa\");\n\nsString.insert(2, \"bcdef\", 3);\ncout &lt;&lt; sString &lt;&lt; endl;</code></pre><p>Output:</p><pre>aabcdaa\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::insert(size_type index, const char* str, size_type len)Inserts l",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b7",
+      "type": "paragraph",
+      "html": "<p>There’s also a flavor of insert() that inserts the same character multiple times:</p>",
+      "preview": "There’s also a flavor of insert() that inserts the same character multiple times",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b8",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>string&amp; string::insert(size_type index, size_type num, char c)</b><p></p><ul><li>Inserts num instances of char c into the string at index</li><li>Returns *this so it can be “chained”.</li><li>Throws an out_of_range exception if the index is invalid</li><li>Throws a length_error exception if the result exceeds the maximum number of characters.</li></ul><p>Sample code:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">string sString(\"aaaa\");\n\nsString.insert(2, 4, 'c');\ncout &lt;&lt; sString &lt;&lt; endl;</code></pre><p>Output:</p><pre>aaccccaa\n</pre></td></tr></tbody></table></div>",
+      "preview": "string& string::insert(size_type index, size_type num, char c)Inserts num instan",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b9",
+      "type": "paragraph",
+      "html": "<p>And finally, the insert() function also has three different versions that use iterators:</p>",
+      "preview": "And finally, the insert() function also has three different versions that use it",
+      "canCheck": true
+    },
+    {
+      "id": "stdstring-inserting_b10",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td><b>void insert(iterator it, size_type num, char c)</b><br><b>iterator string::insert(iterator it, char c)</b><br><b>void string::insert(iterator it, InputIterator begin, InputIterator end)</b><p></p><ul><li>The first function inserts num instances of the character c before the iterator it.</li><li>The second inserts a single character c before the iterator it, and returns an iterator to the position of the character inserted.</li><li>The third inserts all characters between [begin,end) before the iterator it.</li><li>All functions throw a length_error exception if the result exceeds the maximum number of characters.</li></ul></td></tr></tbody></table></div>",
+      "preview": "void insert(iterator it, size_type num, char c)iterator string::insert(iterator ",
+      "canCheck": true
+    }
+  ]
+}

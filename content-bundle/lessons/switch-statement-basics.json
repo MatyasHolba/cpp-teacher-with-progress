@@ -1,0 +1,490 @@
+{
+  "index": 105,
+  "chapterId": "8",
+  "number": "8.5",
+  "title": "8.5 — Switch statement basics",
+  "url": "https://www.learncpp.com/cpp-tutorial/switch-statement-basics/",
+  "slug": "switch-statement-basics",
+  "scrapedAt": "2026-09-15T16:29:30.749Z",
+  "totalBlocks": 66,
+  "totalCheckpoints": 56,
+  "blocks": [
+    {
+      "id": "switch-statement-basics_b0",
+      "type": "paragraph",
+      "html": "<p>Although it is possible to chain many if-else-statements together, this is both difficult to read and inefficient. Consider the following program:</p>",
+      "preview": "Although it is possible to chain many if-else-statements together, this is both ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    if (x == 1)\n        std::cout << \"One\";\n    else if (x == 2)\n        std::cout << \"Two\";\n    else if (x == 3)\n        std::cout << \"Three\";\n    else\n        std::cout << \"Unknown\";\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    if (x == 1)\n        std::cout &lt;&lt; \"One\";\n    else if (x == 2)\n        std::cout &lt;&lt; \"Two\";\n    else if (x == 3)\n        std::cout &lt;&lt; \"Three\";\n    else\n        std::cout &lt;&lt; \"Unknown\";\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b2",
+      "type": "paragraph",
+      "html": "<p>Variable <code>x</code> in <code>printDigitName()</code> will be evaluated up to three times depending on the value passed in (which is inefficient), and the reader has to be sure that it is <code>x</code> being evaluated each time (not some other variable).</p>",
+      "preview": "Variable x in printDigitName() will be evaluated up to three times depending on ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b3",
+      "type": "paragraph",
+      "html": "<p>Because testing a variable or expression for equality against a set of different values is common, C++ provides an alternative conditional statement called a switch-statement that is specialized for this purpose. Here is the same program as above using a switch:</p>",
+      "preview": "Because testing a variable or expression for equality against a set of different",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n    case 1:\n        std::cout << \"One\";\n        return;\n    case 2:\n        std::cout << \"Two\";\n        return;\n    case 3:\n        std::cout << \"Three\";\n        return;\n    default:\n        std::cout << \"Unknown\";\n        return;\n    }\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n    case 1:\n        std::cout &lt;&lt; \"One\";\n        return;\n    case 2:\n        std::cout &lt;&lt; \"Two\";\n        return;\n    case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n    default:\n        std::cout &lt;&lt; \"Unknown\";\n        return;\n    }\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b5",
+      "type": "paragraph",
+      "html": "<p>The idea behind a <strong>switch statement</strong> is simple: an expression (sometimes called the condition) is evaluated to produce a value.</p>",
+      "preview": "The idea behind a switch statement is simple: an expression (sometimes called th",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b6",
+      "type": "paragraph",
+      "html": "<p>Then one of the following occurs:</p>",
+      "preview": "Then one of the following occurs:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b7",
+      "type": "list",
+      "html": "<ul><li>If the expression’s value is equal to the value after any of the case-labels, the statements after the matching case-label are executed.</li><li>If no matching value can be found and a default label exists, the statements after the default label are executed.</li><li>If no matching value can be found and there is no default label, the switch is skipped.</li></ul>",
+      "preview": "If the expression’s value is equal to the value after any of the case-labels, th",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b8",
+      "type": "paragraph",
+      "html": "<p>Let’s examine each of these concepts in more detail.</p>",
+      "preview": "Let’s examine each of these concepts in more detail.",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b9",
+      "type": "section",
+      "title": "Starting a switch",
+      "html": "<h3 class=\"cpp-section-heading\">Starting a switch</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b10",
+      "type": "paragraph",
+      "html": "<p>We start a switch-statement by using the <code>switch</code> keyword, followed by parentheses with the conditional expression that we would like to evaluate inside. Often the expression is just a single variable, but it can be any valid expression.</p>",
+      "preview": "We start a switch-statement by using the switch keyword, followed by parentheses",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b11",
+      "type": "paragraph",
+      "html": "<p>The condition in a switch must evaluate to an integral type (see lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-fundamental-data-types/\">4.1 -- Introduction to fundamental data types</a> if you need a reminder which fundamental types are considered integral types) or an enumerated type (covered in future lessons <a href=\"https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/\">13.2 -- Unscoped enumerations</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/scoped-enumerations-enum-classes/\">13.6 -- Scoped enumerations (enum classes)</a>), or be convertible to one. Expressions that evaluate to floating point types, strings, and most other non-integral types may not be used here.</p>",
+      "preview": "The condition in a switch must evaluate to an integral type (see lesson 4.1 -- I",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b12",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Why does the switch type only allow for integral (or enumerated) types? The answer is because switch statements are designed to be highly optimized. Historically, the most common way for compilers to implement switch statements is via <a href=\"https://en.wikipedia.org/wiki/Branch_table\">Jump tables</a> -- and jump tables only work with integral values.</p><p>For those of you already familiar with arrays, a jump table works much like an array, an integral value is used as the array index to “jump” directly to a result. This can be much more efficient than doing a bunch of sequential comparisons.</p><p>Of course, compilers don’t have to implement switches using jump tables, and sometimes they don’t. There is technically no reason that C++ couldn’t relax the restriction so that other types could be used as well, they just haven’t done so yet (as of C++23).</p></div>",
+      "preview": "For advanced readersWhy does the switch type only allow for integral (or enumerated) types? The answ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b13",
+      "type": "paragraph",
+      "html": "<p>Following the conditional expression, we declare a block. Inside the block, we use labels to define all of the values we want to test for equality. There are two kinds of labels used with switch statements, which we’ll discuss subsequently.</p>",
+      "preview": "Following the conditional expression, we declare a block. Inside the block, we u",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b14",
+      "type": "section",
+      "title": "Case labels",
+      "html": "<h3 class=\"cpp-section-heading\">Case labels</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b15",
+      "type": "paragraph",
+      "html": "<p>The first kind of label is the <strong>case label</strong>, which is declared using the <code>case</code> keyword and followed by a constant expression. The constant expression must either match the type of the condition or must be convertible to that type.</p>",
+      "preview": "The first kind of label is the case label, which is declared using the case keyw",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b16",
+      "type": "paragraph",
+      "html": "<p>If the value of the conditional expression equals the expression after a <code>case label</code>, execution begins at the first statement after that <code>case label</code> and then continues sequentially.</p>",
+      "preview": "If the value of the conditional expression equals the expression after a case la",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b17",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of the condition matching a <code>case label</code>:</p>",
+      "preview": "Here’s an example of the condition matching a case label:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 2\n    {\n    case 1:\n        std::cout << \"One\";\n        return;\n    case 2: // which matches the case statement here\n        std::cout << \"Two\"; // so execution starts here\n        return; // and then we return to the caller\n    case 3:\n        std::cout << \"Three\";\n        return;\n    default:\n        std::cout << \"Unknown\";\n        return;\n    }\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 2\n    {\n    case 1:\n        std::cout &lt;&lt; \"One\";\n        return;\n    case 2: // which matches the case statement here\n        std::cout &lt;&lt; \"Two\"; // so execution starts here\n        return; // and then we return to the caller\n    case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n    default:\n        std::cout &lt;&lt; \"Unknown\";\n        return;\n    }\n}\n\nint main()\n{\n    printDigitName(2);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b19",
+      "type": "paragraph",
+      "html": "<p>This code prints:</p>",
+      "preview": "This code prints:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b20",
+      "type": "output",
+      "text": "Two\n",
+      "html": "<pre>Two\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b21",
+      "type": "paragraph",
+      "html": "<p>In the above program, <code>x</code> is evaluated to produce value <code>2</code>. Because there is a case label with value <code>2</code>, execution jumps to the statement underneath that matching case label. The program prints <code>Two</code>, and then the <code>return statement</code> is executed, which returns back to the caller.</p>",
+      "preview": "In the above program, x is evaluated to produce value 2. Because there is a case",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b22",
+      "type": "paragraph",
+      "html": "<p>There is no practical limit to the number of case labels you can have, but all case labels in a switch must be unique. That is, you can not do this:</p>",
+      "preview": "There is no practical limit to the number of case labels you can have, but all c",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "switch (x)\n{\ncase 54:\ncase 54:  // error: already used value 54!\ncase '6': // error: '6' converts to integer value 54, which is already used\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">switch (x)\n{\ncase 54:\ncase 54:  // error: already used value 54!\ncase '6': // error: '6' converts to integer value 54, which is already used\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b24",
+      "type": "paragraph",
+      "html": "<p>If the conditional expression does not match any of the case labels, no cases are executed. We’ll show an example of this shortly.</p>",
+      "preview": "If the conditional expression does not match any of the case labels, no cases ar",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b25",
+      "type": "section",
+      "title": "The default label",
+      "html": "<h3 class=\"cpp-section-heading\">The default label</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b26",
+      "type": "paragraph",
+      "html": "<p>The second kind of label is the <strong>default label</strong> (often called the <strong>default case</strong>), which is declared using the <code>default</code> keyword. If the conditional expression does not match any case label and a default label exists, execution begins at the first statement after the default label.</p>",
+      "preview": "The second kind of label is the default label (often called the default case), w",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b27",
+      "type": "paragraph",
+      "html": "<p>Here’s an example of the condition matching the default label:</p>",
+      "preview": "Here’s an example of the condition matching the default label:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b28",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 5\n    {\n    case 1:\n        std::cout << \"One\";\n        return;\n    case 2:\n        std::cout << \"Two\";\n        return;\n    case 3:\n        std::cout << \"Three\";\n        return;\n    default: // which does not match to any case labels\n        std::cout << \"Unknown\"; // so execution starts here\n        return; // and then we return to the caller\n    }\n}\n\nint main()\n{\n    printDigitName(5);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 5\n    {\n    case 1:\n        std::cout &lt;&lt; \"One\";\n        return;\n    case 2:\n        std::cout &lt;&lt; \"Two\";\n        return;\n    case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n    default: // which does not match to any case labels\n        std::cout &lt;&lt; \"Unknown\"; // so execution starts here\n        return; // and then we return to the caller\n    }\n}\n\nint main()\n{\n    printDigitName(5);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b29",
+      "type": "paragraph",
+      "html": "<p>This code prints:</p>",
+      "preview": "This code prints:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b30",
+      "type": "output",
+      "text": "Unknown\n",
+      "html": "<pre>Unknown\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b31",
+      "type": "paragraph",
+      "html": "<p>The default label is optional, and there can only be one default label per switch statement. By convention, the default case is placed last in the switch block.</p>",
+      "preview": "The default label is optional, and there can only be one default label per switc",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b32",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Place the default case last in the switch block.</p></div>",
+      "preview": "Best practicePlace the default case last in the switch block.",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b33",
+      "type": "section",
+      "title": "No matching case label and no default case",
+      "html": "<h3 class=\"cpp-section-heading\">No matching case label and no default case</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b34",
+      "type": "paragraph",
+      "html": "<p>If the value of the conditional expression does not match any of the case labels, and no default case has been provided, then no cases inside the switch are executed. Execution continues after the end of the switch block.</p>",
+      "preview": "If the value of the conditional expression does not match any of the case labels",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 5\n    {\n    case 1:\n        std::cout << \"One\";\n        return;\n    case 2:\n        std::cout << \"Two\";\n        return;\n    case 3:\n        std::cout << \"Three\";\n        return;\n    // no matching case exists and there is no default case\n    }\n\n    // so execution continues here\n    std::cout << \"Hello\";\n}\n\nint main()\n{\n    printDigitName(5);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    switch (x) // x is evaluated to produce value 5\n    {\n    case 1:\n        std::cout &lt;&lt; \"One\";\n        return;\n    case 2:\n        std::cout &lt;&lt; \"Two\";\n        return;\n    case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n    // no matching case exists and there is no default case\n    }\n\n    // so execution continues here\n    std::cout &lt;&lt; \"Hello\";\n}\n\nint main()\n{\n    printDigitName(5);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b36",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>x</code> evalutes to <code>5</code>, but there is no case label matching <code>5</code>, nor is there a default case. As a result, no cases execute. Execution continues after the switch block, printing <code>Hello</code>.</p>",
+      "preview": "In the above example, x evalutes to 5, but there is no case label matching 5, no",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b37",
+      "type": "section",
+      "title": "Taking a break",
+      "html": "<h3 class=\"cpp-section-heading\">Taking a break</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b38",
+      "type": "paragraph",
+      "html": "<p>In the above examples, we used return-statements to stop execution of the statements after our labels. However, this also exits the entire function.</p>",
+      "preview": "In the above examples, we used return-statements to stop execution of the statem",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b39",
+      "type": "paragraph",
+      "html": "<p>A <strong>break statement</strong> (declared using the <code>break</code> keyword) tells the compiler that we are done executing statements within the switch, and that execution should continue with the statement after the end of the switch block. This allows us to exit a switch-statement without exiting the entire function.</p>",
+      "preview": "A break statement (declared using the break keyword) tells the compiler that we ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b40",
+      "type": "paragraph",
+      "html": "<p>Here’s a slightly modified example rewritten using <code>break</code> instead of <code>return</code>:</p>",
+      "preview": "Here’s a slightly modified example rewritten using break instead of return:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid printDigitName(int x)\n{\n    switch (x) // x evaluates to 3\n    {\n    case 1:\n        std::cout << \"One\";\n        break;\n    case 2:\n        std::cout << \"Two\";\n        break;\n    case 3:\n        std::cout << \"Three\"; // execution starts here\n        break; // jump to the end of the switch block\n    default:\n        std::cout << \"Unknown\";\n        break;\n    }\n\n    // execution continues here\n    std::cout << \" Ah-Ah-Ah!\";\n}\n\nint main()\n{\n    printDigitName(3);\n    std::cout << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printDigitName(int x)\n{\n    switch (x) // x evaluates to 3\n    {\n    case 1:\n        std::cout &lt;&lt; \"One\";\n        break;\n    case 2:\n        std::cout &lt;&lt; \"Two\";\n        break;\n    case 3:\n        std::cout &lt;&lt; \"Three\"; // execution starts here\n        break; // jump to the end of the switch block\n    default:\n        std::cout &lt;&lt; \"Unknown\";\n        break;\n    }\n\n    // execution continues here\n    std::cout &lt;&lt; \" Ah-Ah-Ah!\";\n}\n\nint main()\n{\n    printDigitName(3);\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b42",
+      "type": "paragraph",
+      "html": "<p>The above example prints:</p>",
+      "preview": "The above example prints:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b43",
+      "type": "output",
+      "text": "Three Ah-Ah-Ah!\n",
+      "html": "<pre>Three Ah-Ah-Ah!\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b44",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Each set of statements underneath a label should end in a break-statement or a return-statement. This includes the statements underneath the last label in the switch.</p></div>",
+      "preview": "Best practiceEach set of statements underneath a label should end in a break-statement or a return-s",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b45",
+      "type": "paragraph",
+      "html": "<p>So what happens if you don’t end a set of statements under a label with a <code>break</code> or <code>return</code>? We’ll explore that topic, and others, in the next lesson.</p>",
+      "preview": "So what happens if you don’t end a set of statements under a label with a break ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b46",
+      "type": "section",
+      "title": "Labels are conventionally not indented",
+      "html": "<h3 class=\"cpp-section-heading\">Labels are conventionally not indented</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b47",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/\">2.9 -- Naming collisions and an introduction to namespaces</a>, we noted that code is typically indented one level to help identify that it’s part of a nested scope region. Since the curly braces of the switch defines a new scope region, we’d normally indent everything inside the curly braces one level.</p>",
+      "preview": "In lesson 2.9 -- Naming collisions and an introduction to namespaces, we noted t",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b48",
+      "type": "paragraph",
+      "html": "<p>A label, on the other hand, does not define a nested scope. Therefore, the code following a label is conventionally not indented.</p>",
+      "preview": "A label, on the other hand, does not define a nested scope. Therefore, the code ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b49",
+      "type": "paragraph",
+      "html": "<p>However, if we indent both the labels and the subsequent statements to the same level, we end up with something like this:</p>",
+      "preview": "However, if we indent both the labels and the subsequent statements to the same ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b50",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Unreadable version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n        case 1:\n        std::cout << \"One\";\n        return;\n        case 2:\n        std::cout << \"Two\";\n        return;\n        case 3:\n        std::cout << \"Three\";\n        return;\n        default:\n        std::cout << \"Unknown\";\n        return;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Unreadable version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n        case 1:\n        std::cout &lt;&lt; \"One\";\n        return;\n        case 2:\n        std::cout &lt;&lt; \"Two\";\n        return;\n        case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n        default:\n        std::cout &lt;&lt; \"Unknown\";\n        return;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b51",
+      "type": "paragraph",
+      "html": "<p>This makes it really hard to determine where each case starts and ends.</p>",
+      "preview": "This makes it really hard to determine where each case starts and ends.",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b52",
+      "type": "paragraph",
+      "html": "<p>We have two choices here. First, we can indent the statements following the labels anyway:</p>",
+      "preview": "We have two choices here. First, we can indent the statements following the labe",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b53",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Acceptable but not preferred version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n        case 1: // indented from switch block\n            std::cout << \"One\"; // indented from label (misleading)\n            return;\n        case 2:\n            std::cout << \"Two\";\n            return;\n        case 3:\n            std::cout << \"Three\";\n            return;\n        default:\n            std::cout << \"Unknown\";\n            return;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Acceptable but not preferred version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n        case 1: // indented from switch block\n            std::cout &lt;&lt; \"One\"; // indented from label (misleading)\n            return;\n        case 2:\n            std::cout &lt;&lt; \"Two\";\n            return;\n        case 3:\n            std::cout &lt;&lt; \"Three\";\n            return;\n        default:\n            std::cout &lt;&lt; \"Unknown\";\n            return;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b54",
+      "type": "paragraph",
+      "html": "<p>While this is certainly more readable than the prior version, it implies that the statements beneath each label are in a nested scope, which is not the case (we’ll see examples of this in the next lesson, where a variable we define in one case can be used in another case). This formatting is considered acceptable (as it is readable), but it is not preferred.</p>",
+      "preview": "While this is certainly more readable than the prior version, it implies that th",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b55",
+      "type": "paragraph",
+      "html": "<p>Conventionally, labels are simply not indented:</p>",
+      "preview": "Conventionally, labels are simply not indented:",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b56",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Preferred version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n    case 1: // not indented from switch statement\n        std::cout << \"One\";\n        return;\n    case 2:\n        std::cout << \"Two\";\n        return;\n    case 3:\n        std::cout << \"Three\";\n        return;\n    default:\n        std::cout << \"Unknown\";\n        return;\n    }\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Preferred version\nvoid printDigitName(int x)\n{\n    switch (x)\n    {\n    case 1: // not indented from switch statement\n        std::cout &lt;&lt; \"One\";\n        return;\n    case 2:\n        std::cout &lt;&lt; \"Two\";\n        return;\n    case 3:\n        std::cout &lt;&lt; \"Three\";\n        return;\n    default:\n        std::cout &lt;&lt; \"Unknown\";\n        return;\n    }\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b57",
+      "type": "paragraph",
+      "html": "<p>This makes it easy to identify each label. And because the statements are only indented one level from the switch block, it correctly implies that the statements are all part of the scope of the switch block.</p>",
+      "preview": "This makes it easy to identify each label. And because the statements are only i",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b58",
+      "type": "paragraph",
+      "html": "<p>In future lessons, we’ll encounter other types of labels -- these are also conventionally not indented for the same reason.</p>",
+      "preview": "In future lessons, we’ll encounter other types of labels -- these are also conve",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b59",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer not to indent labels. This allows them to stand out from the surrounding code without implying that they are defining a nested scope region.</p></div>",
+      "preview": "Best practicePrefer not to indent labels. This allows them to stand out from the surrounding code wi",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b60",
+      "type": "section",
+      "title": "Switch vs if-else",
+      "html": "<h3 class=\"cpp-section-heading\">Switch vs if-else</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "switch-statement-basics_b61",
+      "type": "paragraph",
+      "html": "<p>Switch statements are best used when there is a single expression (with a non-boolean integral type or an enumerated type) we want to evaluate for equality against a small number of values. If the number of case labels gets too large, the switch can be hard to read.</p>",
+      "preview": "Switch statements are best used when there is a single expression (with a non-bo",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b62",
+      "type": "paragraph",
+      "html": "<p>Compared to the equivalent if-else statements, a switch-statement can be more readable, makes it clearer that it is the same expression being tested for equality in each case, and has the advantage of only evaluating the expression once (making it more efficient).</p>",
+      "preview": "Compared to the equivalent if-else statements, a switch-statement can be more re",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b63",
+      "type": "paragraph",
+      "html": "<p>However, if-else is significantly more flexible. Some cases where if or if-else is typically better:</p>",
+      "preview": "However, if-else is significantly more flexible. Some cases where if or if-else ",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b64",
+      "type": "list",
+      "html": "<ul><li>Testing an expression for comparisons other than equality (e.g. <code>x &gt; 5</code>)</li><li>Testing multiple conditions (e.g. <code>x == 5 &amp;&amp; y == 6</code>)</li><li>Determining whether a value is within a range (e.g. <code>x &gt;= 5 &amp;&amp; x &lt;= 10</code>)</li><li>The expression has a type that switch doesn’t support (e.g. <code>d == 4.0</code>).</li><li>The expression evaluates to a <code>bool</code>.</li></ul>",
+      "preview": "Testing an expression for comparisons other than equality (e.g. x > 5)Testing mu",
+      "canCheck": true
+    },
+    {
+      "id": "switch-statement-basics_b65",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer a switch-statement over if-else statements when testing a single expression (with a non-boolean integral type or an enumerated type) for equality against a small set of values.</p></div>",
+      "preview": "Best practicePrefer a switch-statement over if-else statements when testing a single expression (wit",
+      "canCheck": true
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "index": 271,
+  "chapterId": "21",
+  "number": "21.y",
+  "title": "21.y — Chapter 21 project",
+  "url": "https://www.learncpp.com/cpp-tutorial/chapter-21-project/",
+  "slug": "chapter-21-project",
+  "scrapedAt": "2026-09-15T16:30:57.237Z",
+  "totalBlocks": 98,
+  "totalCheckpoints": 88,
+  "blocks": [
+    {
+      "id": "chapter-21-project_b0",
+      "type": "paragraph",
+      "html": "<p>A tip o’ the hat to reader Avtem for conceiving of and collaborating on this project.</p>",
+      "preview": "A tip o’ the hat to reader Avtem for conceiving of and collaborating on this pro",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b1",
+      "type": "section",
+      "title": "Project time",
+      "html": "<h3 class=\"cpp-section-heading\">Project time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b2",
+      "type": "paragraph",
+      "html": "<p>Let’s implement the classic game <a href=\"https://en.wikipedia.org/wiki/15_puzzle\">15 Puzzle</a>!</p>",
+      "preview": "Let’s implement the classic game 15 Puzzle!",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b3",
+      "type": "paragraph",
+      "html": "<p>In 15 Puzzle, you begin with a randomized 4×4 grid of tiles. 15 of the tiles have numbers 1 through 15. One tile is missing.</p>",
+      "preview": "In 15 Puzzle, you begin with a randomized 4×4 grid of tiles. 15 of the tiles hav",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b4",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b5",
+      "type": "output",
+      "text": "     15   1   4\n  2   5   9  12\n  7   8  11  14\n 10  13   6   3\n",
+      "html": "<pre>     15   1   4\n  2   5   9  12\n  7   8  11  14\n 10  13   6   3\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b6",
+      "type": "paragraph",
+      "html": "<p>In this puzzle, the missing tile is in the upper-left corner.</p>",
+      "preview": "In this puzzle, the missing tile is in the upper-left corner.",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b7",
+      "type": "paragraph",
+      "html": "<p>Each turn of the game, you pick one of the tiles that is adjacent to the missing tile, and slide it into the spot occupied by the missing tile.</p>",
+      "preview": "Each turn of the game, you pick one of the tiles that is adjacent to the missing",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b8",
+      "type": "paragraph",
+      "html": "<p>The goal of the game is to slide tiles around until they are in numerical order, with the missing tile in the bottom right corner:</p>",
+      "preview": "The goal of the game is to slide tiles around until they are in numerical order,",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b9",
+      "type": "output",
+      "text": "  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15   \n",
+      "html": "<pre>  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15   \n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b10",
+      "type": "paragraph",
+      "html": "<p>You can play a few rounds <a href=\"https://15puzzle.netlify.app/\">on this site</a>. It will help you to understand how this game works and how it should be implemented.</p>",
+      "preview": "You can play a few rounds on this site. It will help you to understand how this ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b11",
+      "type": "paragraph",
+      "html": "<p>In our version of the game, each turn the user will enter a single letter command. There are 5 valid commands:</p>",
+      "preview": "In our version of the game, each turn the user will enter a single letter comman",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b12",
+      "type": "list",
+      "html": "<ul><li>w - slide tile up</li><li>a - slide tile left</li><li>s - slide tile down</li><li>d - slide tile right</li><li>q - quit game</li></ul>",
+      "preview": "w - slide tile upa - slide tile lefts - slide tile downd - slide tile rightq - q",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b13",
+      "type": "paragraph",
+      "html": "<p>Because this is going to be a longer program, we’ll develop it in stages.</p>",
+      "preview": "Because this is going to be a longer program, we’ll develop it in stages.",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b14",
+      "type": "paragraph",
+      "html": "<p>One more thing: at each step, we’ll present two things: a <em>goal</em> and <em>tasks</em>. The goal defines the outcome that the step is trying to achieve, along with any additional relevant information. The tasks provide detail and hints about how to implement the goal.</p>",
+      "preview": "One more thing: at each step, we’ll present two things: a goal and tasks. The go",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b15",
+      "type": "paragraph",
+      "html": "<p>The tasks will initially be hidden from view, to encourage you to see if you can complete each step using just the goal and sample output or sample program. If you are unsure how to start, or are feeling stuck, you can unhide the tasks. They should help get you moving forward.</p>",
+      "preview": "The tasks will initially be hidden from view, to encourage you to see if you can",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b16",
+      "type": "quiz",
+      "questionTitle": "> Step #1",
+      "questionHtml": "Because this is going to be a bigger program, let’s start with a design exercise.",
+      "hintHtml": "",
+      "solutionHtml": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Helper class/Namespace</th><th>What does this help with?</th><th>Members (type)</th></tr><tr><td>class Point</td><td>Indexing the game board tiles</td><td>int x-axis and y-axis coordinates</td></tr><tr><td>class Direction</td><td>Make working with Directional commands easier and more intuitive</td><td>enum direction</td></tr></tbody></table></div><ul><li><code>class Point</code>: Accessing a specific tile in our 2d array of tiles will require 2 indices. We can think of these as { x-axis, y-axis } index pairs. This Point class implements such an index pair, to make it easy to pass or return a pair of indices.</li><li><code>class Direction</code>: The user will be entering single-letter (char) commands on the keyboard to slide tiles in cardinal directions (e.g. <code>'w'</code>=up, <code>'a'</code>=left). Converting these char commands into a Direction object (representing a cardinal direction) will make our code more intuitive and prevent our code from being littered with char literals (<code>Direction::left</code> is more meaningful than <code>'a'</code>).</li></ul>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b17",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>If you don’t have much experience designing programs up-front, you may find this a bit difficult. That’s expected. It’s less important that you get it right, and more important that you participate and learn.</p><p>We will go into more detail on all of these items in subsequent steps, so if you are feeling completely lost, feel free to skip this step.</p></div>",
+      "preview": "Author’s noteIf you don’t have much experience designing programs up-front, you may find this a bit ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b18",
+      "type": "paragraph",
+      "html": "<p>Goal: Document the key requirements for this program, and plan how your program will be structured at a high level. We will do this in three parts.</p>",
+      "preview": "Goal: Document the key requirements for this program, and plan how your program ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b19",
+      "type": "paragraph",
+      "html": "<p>A) What are the top-level things that your program needs to do? Here are a few to get you started:</p>",
+      "preview": "A) What are the top-level things that your program needs to do? Here are a few t",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b20",
+      "type": "paragraph",
+      "html": "<p>Board things:</p>",
+      "preview": "Board things:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b21",
+      "type": "list",
+      "html": "<ul><li>Display the game board</li><li>…</li></ul>",
+      "preview": "Display the game board…",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b22",
+      "type": "paragraph",
+      "html": "<p>User things:</p>",
+      "preview": "User things:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b23",
+      "type": "list",
+      "html": "<ul><li>Get commands from user</li><li>…</li></ul>",
+      "preview": "Get commands from user…",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b24",
+      "type": "paragraph",
+      "html": "<p>B) What primary classes or namespaces will you use to implement the items outlined in Step 1? Also, what will your main() function do?</p>",
+      "preview": "B) What primary classes or namespaces will you use to implement the items outlin",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b25",
+      "type": "paragraph",
+      "html": "<p>You can create a diagram, or use two tables like this:</p>",
+      "preview": "You can create a diagram, or use two tables like this:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b26",
+      "type": "paragraph",
+      "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Primary class/namespace/main</th><th>Implements top-level items</th><th>Members</th></tr><tr><td>class Board</td><td>Display the game board<br>…</td><td>…</td></tr><tr><td>function main</td><td>Main game logic loop<br>…</td><td>…</td></tr></tbody></table></div>",
+      "preview": "Primary class/namespace/mainImplements top-level itemsMembersclass BoardDisplay ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b27",
+      "type": "paragraph",
+      "html": "<p>C) (extra credit) Can you think of any helper classes or capabilities that will make implementing the above easier or more cohesive?</p>",
+      "preview": "C) (extra credit) Can you think of any helper classes or capabilities that will ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b28",
+      "type": "paragraph",
+      "html": "<p>If you had a hard time with this exercise, that’s okay. The goal here was mainly to get you thinking about what you’re going to do before you start doing it.</p>",
+      "preview": "If you had a hard time with this exercise, that’s okay. The goal here was mainly",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b29",
+      "type": "paragraph",
+      "html": "<p>Now, it’s time to get implementing!</p>",
+      "preview": "Now, it’s time to get implementing!",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b30",
+      "type": "quiz",
+      "questionTitle": "> Step #2",
+      "questionHtml": "Goal: Be able to display individual tiles on the screen.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n\n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nint main()\n{\n    Tile tile1{ 10 };\n    Tile tile2{ 8 };\n    Tile tile3{ 0 }; // the missing tile\n    Tile tile4{ 1 };\n\n    std::cout &lt;&lt; \"0123456789ABCDEF\\n\"; // to make it easy to see how many spaces are in the next line\n    std::cout &lt;&lt; tile1 &lt;&lt; tile2 &lt;&lt; tile3 &lt;&lt; tile4 &lt;&lt; '\\n';\n\n    std::cout &lt;&lt; std::boolalpha &lt;&lt; tile1.isEmpty() &lt;&lt; ' ' &lt;&lt; tile3.isEmpty() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Tile 2 has number: \" &lt;&lt; tile2.getNum() &lt;&lt; \"\\nTile 4 has number: \" &lt;&lt; tile4.getNum() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b31",
+      "type": "paragraph",
+      "html": "<p>Our game board is a 4×4 grid of tiles that can slide around. Therefore, it will be useful to have a <code>Tile</code> class that represents one of the numbered tiles on our 4×4 grid or the missing tile. Each tile should be able to:</p>",
+      "preview": "Our game board is a 4×4 grid of tiles that can slide around. Therefore, it will ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b32",
+      "type": "list",
+      "html": "<ul><li>Be given a number or be set as the missing tile</li><li>Determine whether it is the missing tile.</li><li>Draw to the console with the appropriate spacing (so the tiles will line up when the board is displayed). See the sample output below for an example indicating how tiles should be spaced.</li></ul>",
+      "preview": "Be given a number or be set as the missing tileDetermine whether it is the missi",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b33",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_0'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b34",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_0\" style=\"display:none\"><p>Our <code>Tile</code> class should have this functionality:</p><ul><li>A default constructor.</li><li>A constructor that lets us create a Tile with a display value. Because we are not using <code>0</code> as a display value, we can use value <code>0</code> to identify our missing tile.</li><li>A <code>getNum()</code> access function that returns the value held by the tile.</li><li>An <code>isEmpty()</code> member function that returns a bool indicating whether the current tile is the missing tile.</li><li>An overloaded <code>operator&lt;&lt;</code> that will display the value held by the tile.</li></ul></div>",
+      "preview": "Our Tile class should have this functionality:A default constructor.A constructo",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b35",
+      "type": "paragraph",
+      "html": "<p>The following code should compile and produce the output result you can see below the code:</p>",
+      "preview": "The following code should compile and produce the output result you can see belo",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Tile tile1{ 10 };\n    Tile tile2{ 8 };\n    Tile tile3{ 0 }; // the missing tile\n    Tile tile4{ 1 };\n\n    std::cout << \"0123456789ABCDEF\\n\"; // to make it easy to see how many spaces are in the next line\n    std::cout << tile1 << tile2 << tile3 << tile4 << '\\n';\n    \n    std::cout << std::boolalpha << tile1.isEmpty() << ' ' << tile3.isEmpty() << '\\n';\n    std::cout << \"Tile 2 has number: \" << tile2.getNum() << \"\\nTile 4 has number: \" << tile4.getNum() << '\\n';\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Tile tile1{ 10 };\n    Tile tile2{ 8 };\n    Tile tile3{ 0 }; // the missing tile\n    Tile tile4{ 1 };\n\n    std::cout &lt;&lt; \"0123456789ABCDEF\\n\"; // to make it easy to see how many spaces are in the next line\n    std::cout &lt;&lt; tile1 &lt;&lt; tile2 &lt;&lt; tile3 &lt;&lt; tile4 &lt;&lt; '\\n';\n    \n    std::cout &lt;&lt; std::boolalpha &lt;&lt; tile1.isEmpty() &lt;&lt; ' ' &lt;&lt; tile3.isEmpty() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Tile 2 has number: \" &lt;&lt; tile2.getNum() &lt;&lt; \"\\nTile 4 has number: \" &lt;&lt; tile4.getNum() &lt;&lt; '\\n';\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b37",
+      "type": "paragraph",
+      "html": "<p>Expected output (pay attention to the white spaces):</p>",
+      "preview": "Expected output (pay attention to the white spaces):",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b38",
+      "type": "output",
+      "text": "0123456789ABCDEF\n 10   8       1 \nfalse true\nTile 2 has number: 8\nTile 4 has number: 1\n",
+      "html": "<pre>0123456789ABCDEF\n 10   8       1 \nfalse true\nTile 2 has number: 8\nTile 4 has number: 1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b39",
+      "type": "quiz",
+      "questionTitle": "> Step #3",
+      "questionHtml": "Goal: Create a solved board (4×4 grid of tiles) and display it on the screen.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n    \n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\nprivate:\n    static constexpr int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    Board board{};\n    std::cout &lt;&lt; board;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b40",
+      "type": "paragraph",
+      "html": "<p>Define a <code>Board</code> class that will represent 4×4 grid of tiles. A newly created <code>Board</code> object should be in the solved state. To display the board, first print <code>g_consoleLines</code> (defined in code snippet below) empty lines and then print the board itself. Doing so will ensure that any prior output is pushed out of view so that only the current board is visible on the console.</p>",
+      "preview": "Define a Board class that will represent 4×4 grid of tiles. A newly created Boar",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b41",
+      "type": "paragraph",
+      "html": "<p>Why initiate the board in the solved state? When you buy a physical version of these puzzles, the puzzles typically start in the solved state -- you have to manually mix them up (by sliding tiles around) before trying to solve them. We will mimic that process in our program (we’ll do the mixing up in a future step).</p>",
+      "preview": "Why initiate the board in the solved state? When you buy a physical version of t",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b42",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_1'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b43",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_1\" style=\"display:none\"><p>The <code>Board</code> class should have the following functionality:</p><ul><li>A <code>constexpr</code> symbolic constant, set to the size of the grid (you can assume the grid is square).</li><li>A two-dimentional array of <code>Tile</code> objects, which will hold our 16 numbers. These should start in the solved state.</li><li>A default constructor.</li><li>An overloaded <code>operator&lt;&lt;</code> which will print N blank lines (where N = the value of <code>g_consoleLines</code>) and then draw the board to the console.</li></ul></div>",
+      "preview": "The Board class should have the following functionality:A constexpr symbolic con",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b44",
+      "type": "paragraph",
+      "html": "<p>The following program should run:</p>",
+      "preview": "The following program should run:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b45",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\n// Your code goes here\n\nint main()\n{\n    Board board{};\n    std::cout << board;\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\n// Your code goes here\n\nint main()\n{\n    Board board{};\n    std::cout &lt;&lt; board;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b46",
+      "type": "paragraph",
+      "html": "<p>and output the following:</p>",
+      "preview": "and output the following:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b47",
+      "type": "output",
+      "text": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\n",
+      "html": "<pre>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b48",
+      "type": "quiz",
+      "questionTitle": "> Step #4",
+      "questionHtml": "Goal: In this step, we’ll allow the user to repeatedly input game commands, handle invalid input, and implement the quit game command.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;limits&gt;\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nnamespace UserInput\n{\n    bool isValidCommand(char ch)\n    {\n        return ch == 'w'\n            || ch == 'a'\n            || ch == 's'\n            || ch == 'd'\n            || ch == 'q';\n    }\n\n    void ignoreLine()\n    {\n        std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n    }\n\n    char getCharacter()\n    {\n        char operation{};\n        std::cin &gt;&gt; operation;\n        ignoreLine(); // remove any extraneous input\n        return operation;\n    }\n\n    char getCommandFromUser()\n    {\n        char ch{};\n        while (!isValidCommand(ch))\n            ch = getCharacter();\n\n        return ch;\n    }\n};\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n    \n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\nprivate:\n    static constexpr int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    Board board{};\n    std::cout &lt;&lt; board;\n\n    while (true)\n    {\n        char ch{ UserInput::getCommandFromUser() };\n\n        // If we reach the line below, \"ch\" will ALWAYS be a correct command!\n        std::cout &lt;&lt; \"Valid command: \" &lt;&lt; ch &lt;&lt; '\\n';\n        \n        // Handle non-direction commands\n        if (ch == 'q')\n        {\n            std::cout &lt;&lt; \"\\n\\nBye!\\n\\n\";\n            return 0;\n        }\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b49",
+      "type": "paragraph",
+      "html": "<p>These are the 5 commands our game will support (each of which will be input as a single character):</p>",
+      "preview": "These are the 5 commands our game will support (each of which will be input as a",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b50",
+      "type": "list",
+      "html": "<ul><li>‘w’ - slide tile up</li><li>‘a’ - slide tile left</li><li>‘s’ - slide tile down</li><li>‘d’ - slide tile right</li><li>‘q’ - quit game</li></ul>",
+      "preview": "‘w’ - slide tile up‘a’ - slide tile left‘s’ - slide tile down‘d’ - slide tile ri",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b51",
+      "type": "paragraph",
+      "html": "<p>When the user runs the game, the following should occur:</p>",
+      "preview": "When the user runs the game, the following should occur:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b52",
+      "type": "list",
+      "html": "<ul><li>The (solved) board should be printed to the console.</li><li>The program should repeatedly get valid game commands from the user. If the user enters an invalid command or extraneous input, ignore it.</li></ul>",
+      "preview": "The (solved) board should be printed to the console.The program should repeatedl",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b53",
+      "type": "paragraph",
+      "html": "<p>For each valid game command:</p>",
+      "preview": "For each valid game command:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b54",
+      "type": "list",
+      "html": "<ul><li>Print <code>\"Valid command: \"</code> and the character the user input.</li><li>If the command is the quit command, also print <code>\"\\n\\nBye!\\n\\n\"</code> and then quit the app.</li></ul>",
+      "preview": "Print \"Valid command: \" and the character the user input.If the command is the q",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b55",
+      "type": "paragraph",
+      "html": "<p>Because our user input routines do not need to maintain any state, implement them inside a namespace named <code>UserInput</code>.</p>",
+      "preview": "Because our user input routines do not need to maintain any state, implement the",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b56",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_2'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b57",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_2\" style=\"display:none\"><p>Implement the <code>UserInput</code> namespace:</p><ul><li>Create a function named <code>getCommandFromUser()</code>. Read in a single character from the user. If the character is not a valid game command, clear any additional extraneous input, and read in another character from the user. Repeat until a valid game command is entered. Return the valid command to the caller.</li><li>Create as many helper functions as you need.</li></ul><p>In main():</p><ul><li>Implement an infinite loop. Inside the loop, fetch a valid game command, and then handle the commands per the above requirements.</li></ul></div>",
+      "preview": "Implement the UserInput namespace:Create a function named getCommandFromUser(). ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b58",
+      "type": "paragraph",
+      "html": "<p>The output of the program should match the following:</p>",
+      "preview": "The output of the program should match the following:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b59",
+      "type": "output",
+      "text": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\nw\nValid command: w\na\nValid command: a\ns\nValid command: s\nd\nValid command: d\nf\ng\nh\nValid command: q\n\n\nBye!\n\n\n",
+      "html": "<pre>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\nw\nValid command: w\na\nValid command: a\ns\nValid command: s\nd\nValid command: d\nf\ng\nh\nValid command: q\n\n\nBye!\n\n\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b60",
+      "type": "quiz",
+      "questionTitle": "> Step #5",
+      "questionHtml": "Goal: Implement a helper class that will make it easier for us to handle directional commands.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include \"Random.h\"\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nclass Direction\n{\npublic:\n    enum Type\n    {\n        up,\n        down,\n        left,\n        right,\n        maxDirections,\n    };\n\n    Direction(Type type)\n        :m_type(type)\n    {\n    }\n\n    Type getType() const\n    {\n        return m_type;\n    }\n\n    Direction operator-() const\n    {\n        switch (m_type)\n        {\n        case up:    return Direction{ down };\n        case down:  return Direction{ up };\n        case left:  return Direction{ right };\n        case right: return Direction{ left };\n        default:    break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ up };\n    }\n \n    static Direction getRandomDirection()\n    {\n        Type random{ static_cast&lt;Type&gt;(Random::get(0, Type::maxDirections - 1)) };\n        return Direction{ random };\n    }\n\nprivate:\n    Type m_type{};\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Direction dir)\n{\n    switch (dir.getType())\n    {\n    case Direction::up:     return (stream &lt;&lt; \"up\");\n    case Direction::down:   return (stream &lt;&lt; \"down\");\n    case Direction::left:   return (stream &lt;&lt; \"left\");\n    case Direction::right:  return (stream &lt;&lt; \"right\");\n    default:                break;\n    }\n\n    assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n    return (stream &lt;&lt; \"unknown direction\");\n}\n\nnamespace UserInput\n{\n    bool isValidCommand(char ch)\n    {\n        return ch == 'w'\n            || ch == 'a'\n            || ch == 's'\n            || ch == 'd'\n            || ch == 'q';\n    }\n\n    void ignoreLine()\n    {\n        std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n    }\n\n    char getCharacter()\n    {\n        char operation{};\n        std::cin &gt;&gt; operation;\n        ignoreLine(); // remove any extraneous input\n        return operation;\n    }\n\n    char getCommandFromUser()\n    {\n        char ch{};\n        while (!isValidCommand(ch))\n            ch = getCharacter();\n\n        return ch;\n    }\n\n    Direction charToDirection(char ch)\n    {\n        switch (ch)\n        {\n        case 'w': return Direction{ Direction::up };\n        case 's': return Direction{ Direction::down };\n        case 'a': return Direction{ Direction::left };\n        case 'd': return Direction{ Direction::right };\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ Direction::up };\n    }\n};\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n    \n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    static void printEmptyLines(int count)\n    {\n        for (int i = 0; i &lt; count; ++i)\n            std::cout &lt;&lt; '\\n';\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\nprivate:\n    static constexpr int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    Board board{};\n    std::cout &lt;&lt; board;\n\n    std::cout &lt;&lt; \"Generating random direction... \" &lt;&lt; Direction::getRandomDirection() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Generating random direction... \" &lt;&lt; Direction::getRandomDirection() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Generating random direction... \" &lt;&lt; Direction::getRandomDirection() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Generating random direction... \" &lt;&lt; Direction::getRandomDirection() &lt;&lt; \"\\n\\n\";\n\n    std::cout &lt;&lt; \"Enter a command: \";\n    while (true)\n    {\n        char ch{ UserInput::getCommandFromUser() };\n\n        // Handle non-direction commands\n        if (ch == 'q')\n        {\n            std::cout &lt;&lt; \"\\n\\nBye!\\n\\n\";\n            return 0;\n        }\n\n        // Handle direction commands\n        Direction dir{ UserInput::charToDirection(ch) };\n\n        std::cout &lt;&lt; \"You entered direction: \" &lt;&lt; dir &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b61",
+      "type": "paragraph",
+      "html": "<p>After implementing the prior step, we can accept commands from the user (as characters ‘w’, ‘a’, ‘s’, ‘d’, and ‘q’). These characters are essentially magic numbers in our code. While it’s fine to handle these commands in our <code>UserInput</code> namespace and function <code>main()</code>, we don’t want to propagate them throughout our whole program. For example, the <code>Board</code> class should have no knowledge of what ‘s’ means.</p>",
+      "preview": "After implementing the prior step, we can accept commands from the user (as char",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b62",
+      "type": "paragraph",
+      "html": "<p>Implement a helper class named <code>Direction</code>, which will allow us to create objects that represent the cardinal directions (up, left, down, or right). <code>operator-</code> should return the opposite direction, and <code>operator&lt;&lt;</code> should print the direction to the console. We will also need a member function that will return a Direction object containing a random direction. Lastly, add a function to namespace <code>UserInput</code> that converts a directional game command (‘w’, ‘a’, ‘s’, or ‘d’) to a Direction object.</p>",
+      "preview": "Implement a helper class named Direction, which will allow us to create objects ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b63",
+      "type": "paragraph",
+      "html": "<p>The more we can use <code>Direction</code> instead of directional game commands, the easier our code will be to read and understand.</p>",
+      "preview": "The more we can use Direction instead of directional game commands, the easier o",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b64",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_3'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b65",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_3\" style=\"display:none\"><p>Implement the class <code>Direction</code>, which has:</p><ul><li>A public nested enum named <code>Type</code> with enumerators <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code>, and <code>maxDirections</code>.</li><li>A private member that stores the actual direction.</li><li>A single argument constructor which allows us to initialize a <code>Direction</code> with a <code>Type</code> initializer.</li><li>An overloaded <code>operator-</code>, which takes a Direction and returns the opposite Direction.</li><li>An overloaded <code>operator&lt;&lt;</code>, which outputs the Direction name to the console.</li><li>A static function that returns a Direction with a randomized <code>Type</code>. You can use the <code>Random::get()</code> function from the <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">“Random.h”</a> header to generate a random number.</li></ul><p>Also, in the <code>UserInput</code> namespace, add the following:</p><ul><li>A function that will convert a directional game command (character) to a Direction object.</li></ul></div>",
+      "preview": "Implement the class Direction, which has:A public nested enum named Type with en",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b66",
+      "type": "paragraph",
+      "html": "<p>Finally, modify the program you wrote in the prior step so that the output matches the following:</p>",
+      "preview": "Finally, modify the program you wrote in the prior step so that the output match",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b67",
+      "type": "output",
+      "text": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\nGenerating random direction... up\nGenerating random direction... down\nGenerating random direction... up\nGenerating random direction... left\n\nEnter a command: w\nYou entered direction: up\na\nYou entered direction: left\ns\nYou entered direction: down\nd\nYou entered direction: right\nq\n\n\nBye!\n\n\n",
+      "html": "<pre>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  1   2   3   4\n  5   6   7   8\n  9  10  11  12\n 13  14  15\nGenerating random direction... up\nGenerating random direction... down\nGenerating random direction... up\nGenerating random direction... left\n\nEnter a command: w\nYou entered direction: up\na\nYou entered direction: left\ns\nYou entered direction: down\nd\nYou entered direction: right\nq\n\n\nBye!\n\n\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b68",
+      "type": "quiz",
+      "questionTitle": "> Step #6",
+      "questionHtml": "Goal: Implement a helper class that will make it easier for us to index the tiles in our game board.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include \"Random.h\"\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nclass Direction\n{\npublic:\n    enum Type\n    {\n        up,\n        down,\n        left,\n        right,\n        maxDirections,\n    };\n\n    Direction(Type type)\n        :m_type(type)\n    {\n    }\n\n    Type getType() const\n    {\n        return m_type;\n    }\n\n    Direction operator-() const\n    {\n        switch (m_type)\n        {\n        case up:    return Direction{ down };\n        case down:  return Direction{ up };\n        case left:  return Direction{ right };\n        case right: return Direction{ left };\n        default:    break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ up };\n    }\n\n    static Direction getRandomDirection()\n    {\n        Type random{ static_cast&lt;Type&gt;(Random::get(0, Type::maxDirections - 1)) };\n        return Direction{ random };\n    }\n\nprivate:\n    Type m_type{};\n};\n\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Direction dir)\n{\n    switch (dir.getType())\n    {\n    case Direction::up:     return (stream &lt;&lt; \"up\");\n    case Direction::down:   return (stream &lt;&lt; \"down\");\n    case Direction::left:   return (stream &lt;&lt; \"left\");\n    case Direction::right:  return (stream &lt;&lt; \"right\");\n    default:                break;\n    }\n\n    assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n    return (stream &lt;&lt; \"unknown direction\");\n}\n\nstruct Point\n{\n    int x{};\n    int y{};\n\n    friend bool operator==(Point p1, Point p2)\n    {\n        return p1.x == p2.x &amp;&amp; p1.y == p2.y;\n    }\n\n    friend bool operator!=(Point p1, Point p2)\n    {\n        return !(p1 == p2);\n    }\n\n    Point getAdjacentPoint(Direction dir) const\n    {\n        switch (dir.getType())\n        {\n        case Direction::up:     return Point{ x,     y - 1 };\n        case Direction::down:   return Point{ x,     y + 1 };\n        case Direction::left:   return Point{ x - 1, y };\n        case Direction::right:  return Point{ x + 1, y };\n        default:                break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return *this;\n    }\n};\n\nnamespace UserInput\n{\n    bool isValidCommand(char ch)\n    {\n        return ch == 'w'\n            || ch == 'a'\n            || ch == 's'\n            || ch == 'd'\n            || ch == 'q';\n    }\n\n    void ignoreLine()\n    {\n        std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n    }\n\n    char getCharacter()\n    {\n        char operation{};\n        std::cin &gt;&gt; operation;\n        ignoreLine(); // remove any extraneous input\n        return operation;\n    }\n\n    char getCommandFromUser()\n    {\n        char ch{};\n        while (!isValidCommand(ch))\n            ch = getCharacter();\n\n        return ch;\n    }\n\n    Direction charToDirection(char ch)\n    {\n        switch (ch)\n        {\n        case 'w': return Direction{ Direction::up };\n        case 's': return Direction{ Direction::down };\n        case 'a': return Direction{ Direction::left };\n        case 'd': return Direction{ Direction::right };\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ Direction::up };\n    }\n};\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n    \n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    static void printEmptyLines(int count)\n    {\n        for (int i = 0; i &lt; count; ++i)\n            std::cout &lt;&lt; '\\n';\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\nprivate:\n    static constexpr int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    std::cout &lt;&lt; std::boolalpha;\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::up)    == Point{ 1, 0 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::down)  == Point{ 1, 2 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::left)  == Point{ 0, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::right) == Point{ 2, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 } != Point{ 2, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 } != Point{ 1, 2 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; !(Point{ 1, 1 } != Point{ 1, 1 }) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b69",
+      "type": "paragraph",
+      "html": "<p>Our game board is a 4×4 grid of <code>Tile</code>, which we store in two-dimensional array member <code>m_tiles</code> of the <code>Board</code> class. We will access a given tile using its {x, y} coordinates. For example, the top left tile has coordinate {0, 0}. The tile to the right of that has coordinate {1, 0} (x becomes 1, y stays 0). The tile one down from that has coordinate {1, 1}.</p>",
+      "preview": "Our game board is a 4×4 grid of Tile, which we store in two-dimensional array me",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b70",
+      "type": "paragraph",
+      "html": "<p>Since we’ll be working with coordinates a lot, create a helper class named <code>Point</code> that stores an {x, y} pair of coordinates. We should be able to compare two Point objects for equality and inequality. Also implement a member function named <code>getAdjacentPoint</code> that takes a Direction object as a parameter and returns the Point in that direction. For example, <code>Point{1, 1}.getAdjacentPoint(Direction::right)</code> == <code>Point{2, 1}</code>.</p>",
+      "preview": "Since we’ll be working with coordinates a lot, create a helper class named Point",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b71",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_4'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b72",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_4\" style=\"display:none\"><p>Implement a struct named <code>Point</code>. This should contain:</p><ul><li>Two public data members to store the x-axis and y-axis coordinates.</li><li>An overloaded <code>operator==</code> and <code>operator!=</code> to compare two sets of coordinates.</li><li>A const member function <code>Point getAdjacentPoint(Direction)</code> that returns the Point in the direction of the Direction parameter. We do not need to do any validity checking here.</li></ul><p>We’re using a struct instead of a class here because Point is simple bundle of data that would benefit little from being encapsulated.</p></div>",
+      "preview": "Implement a struct named Point. This should contain:Two public data members to s",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b73",
+      "type": "paragraph",
+      "html": "<p>Save your <code>main()</code> function from the prior step, as you’ll need it again in the next step.</p>",
+      "preview": "Save your main() function from the prior step, as you’ll need it again in the ne",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b74",
+      "type": "paragraph",
+      "html": "<p>The following code should run and print <code>true</code> for every test-case:</p>",
+      "preview": "The following code should run and print true for every test-case:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b75",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Your code goes here\n\n// Note: save your main() from the prior step, as you'll need it again in the next step\nint main()\n{\n    std::cout << std::boolalpha;\n    std::cout << (Point{ 1, 1 }.getAdjacentPoint(Direction::up)    == Point{ 1, 0 }) << '\\n';\n    std::cout << (Point{ 1, 1 }.getAdjacentPoint(Direction::down)  == Point{ 1, 2 }) << '\\n';\n    std::cout << (Point{ 1, 1 }.getAdjacentPoint(Direction::left)  == Point{ 0, 1 }) << '\\n';\n    std::cout << (Point{ 1, 1 }.getAdjacentPoint(Direction::right) == Point{ 2, 1 }) << '\\n';\n    std::cout << (Point{ 1, 1 } != Point{ 2, 1 }) << '\\n';\n    std::cout << (Point{ 1, 1 } != Point{ 1, 2 }) << '\\n';\n    std::cout << !(Point{ 1, 1 } != Point{ 1, 1 }) << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Your code goes here\n\n// Note: save your main() from the prior step, as you'll need it again in the next step\nint main()\n{\n    std::cout &lt;&lt; std::boolalpha;\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::up)    == Point{ 1, 0 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::down)  == Point{ 1, 2 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::left)  == Point{ 0, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 }.getAdjacentPoint(Direction::right) == Point{ 2, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 } != Point{ 2, 1 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; (Point{ 1, 1 } != Point{ 1, 2 }) &lt;&lt; '\\n';\n    std::cout &lt;&lt; !(Point{ 1, 1 } != Point{ 1, 1 }) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b76",
+      "type": "quiz",
+      "questionTitle": "> Step #7",
+      "questionHtml": "Goal: Add the ability for players to slide the tiles on the board.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include \"Random.h\"\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nclass Direction\n{\npublic:\n    enum Type\n    {\n        up,\n        down,\n        left,\n        right,\n        maxDirections,\n    };\n\n    Direction(Type type)\n        :m_type(type)\n    {\n    }\n\n    Type getType() const\n    {\n        return m_type;\n    }\n\n    Direction operator-() const\n    {\n        switch (m_type)\n        {\n        case up:    return Direction{ down };\n        case down:  return Direction{ up };\n        case left:  return Direction{ right };\n        case right: return Direction{ left };\n        default:    break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ up };\n    }\n\n    static Direction getRandomDirection()\n    {\n        Type random{ static_cast&lt;Type&gt;(Random::get(0, Type::maxDirections - 1)) };\n        return Direction{ random };\n    }\n\nprivate:\n    Type m_type{};\n};\n\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Direction dir)\n{\n    switch (dir.getType())\n    {\n    case Direction::up:     return (stream &lt;&lt; \"up\");\n    case Direction::down:   return (stream &lt;&lt; \"down\");\n    case Direction::left:   return (stream &lt;&lt; \"left\");\n    case Direction::right:  return (stream &lt;&lt; \"right\");\n    default:                break;\n    }\n\n    assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n    return (stream &lt;&lt; \"unknown direction\");\n}\n\nstruct Point\n{\n    int x{};\n    int y{};\n\n    friend bool operator==(Point p1, Point p2)\n    {\n        return p1.x == p2.x &amp;&amp; p1.y == p2.y;\n    }\n\n    friend bool operator!=(Point p1, Point p2)\n    {\n        return !(p1 == p2);\n    }\n\n    Point getAdjacentPoint(Direction dir) const\n    {\n        switch (dir.getType())\n        {\n        case Direction::up:     return Point{ x,     y - 1 };\n        case Direction::down:   return Point{ x,     y + 1 };\n        case Direction::left:   return Point{ x - 1, y };\n        case Direction::right:  return Point{ x + 1, y };\n        default:                break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return *this;\n    }\n};\n\nnamespace UserInput\n{\n    bool isValidCommand(char ch)\n    {\n        return ch == 'w'\n            || ch == 'a'\n            || ch == 's'\n            || ch == 'd'\n            || ch == 'q';\n    }\n\n    void ignoreLine()\n    {\n        std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n    }\n\n    char getCharacter()\n    {\n        char operation{};\n        std::cin &gt;&gt; operation;\n        ignoreLine(); // remove any extraneous input\n        return operation;\n    }\n\n    char getCommandFromUser()\n    {\n        char ch{};\n        while (!isValidCommand(ch))\n            ch = getCharacter();\n\n        return ch;\n    }\n\n    Direction charToDirection(char ch)\n    {\n        switch (ch)\n        {\n        case 'w': return Direction{ Direction::up };\n        case 's': return Direction{ Direction::down };\n        case 'a': return Direction{ Direction::left };\n        case 'd': return Direction{ Direction::right };\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ Direction::up };\n    }\n};\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n\n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    static void printEmptyLines(int count)\n    {\n        for (int i = 0; i &lt; count; ++i)\n            std::cout &lt;&lt; '\\n';\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\n    Point getEmptyTilePos() const\n    {\n        for (int y = 0; y &lt; s_size; ++y)\n            for (int x = 0; x &lt; s_size; ++x)\n                if (m_tiles[y][x].isEmpty())\n                    return { x,y };\n\n        assert(0 &amp;&amp; \"There is no empty tile in the board!!!\");\n        return { -1,-1 };\n    }\n\n    static bool isValidTilePos(Point pt)\n    {\n        return (pt.x &gt;= 0 &amp;&amp; pt.x &lt; s_size)\n            &amp;&amp; (pt.y &gt;= 0 &amp;&amp; pt.y &lt; s_size);\n    }\n\n    void swapTiles(Point pt1, Point pt2)\n    {\n        std::swap(m_tiles[pt1.y][pt1.x], m_tiles[pt2.y][pt2.x]);\n    }\n\n    // returns true if user moved successfully\n    bool moveTile(Direction dir)\n    {\n        Point emptyTile{ getEmptyTilePos() };\n        Point adj{ emptyTile.getAdjacentPoint(-dir) };\n\n        if (!isValidTilePos(adj))\n            return false;\n\n        swapTiles(adj, emptyTile);\n        return true;\n    }\n\nprivate:\n    static const int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    Board board{};\n    std::cout &lt;&lt; board;\n\n    std::cout &lt;&lt; \"Enter a command: \";\n    while (true)\n    {\n        char ch{ UserInput::getCommandFromUser() };\n\n        // Handle non-direction commands\n        if (ch == 'q')\n        {\n            std::cout &lt;&lt; \"\\n\\nBye!\\n\\n\";\n            return 0;\n        }\n\n        // Handle direction commands\n        Direction dir{ UserInput::charToDirection(ch) };\n\n        bool userMoved { board.moveTile(dir) };\n        if (userMoved)\n            std::cout &lt;&lt; board;\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b77",
+      "type": "paragraph",
+      "html": "<p>First, we should take a closer look at how sliding tiles actually works:</p>",
+      "preview": "First, we should take a closer look at how sliding tiles actually works:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b78",
+      "type": "paragraph",
+      "html": "<p>Given a puzzle state that looks like this:</p>",
+      "preview": "Given a puzzle state that looks like this:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b79",
+      "type": "output",
+      "text": "     15   1   4\n  2   5   9  12\n  7   8  11  14\n 10  13   6   3\n",
+      "html": "<pre>     15   1   4\n  2   5   9  12\n  7   8  11  14\n 10  13   6   3\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b80",
+      "type": "paragraph",
+      "html": "<p>When the user enters ‘w’ on the keyboard, the only tile that can go up is tile <code>2</code>.</p>",
+      "preview": "When the user enters ‘w’ on the keyboard, the only tile that can go up is tile 2",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b81",
+      "type": "paragraph",
+      "html": "<p>After moving the tile, the board looks like this:</p>",
+      "preview": "After moving the tile, the board looks like this:",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b82",
+      "type": "output",
+      "text": "  2  15   1   4\n      5   9  12\n  7   8  11  14\n 10  13   6   3\n",
+      "html": "<pre>  2  15   1   4\n      5   9  12\n  7   8  11  14\n 10  13   6   3\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b83",
+      "type": "paragraph",
+      "html": "<p>So, essentially what happened is we swapped the empty tile with tile <code>2</code>.</p>",
+      "preview": "So, essentially what happened is we swapped the empty tile with tile 2.",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b84",
+      "type": "paragraph",
+      "html": "<p>Let’s generalize this procedure. When the user enters a directional command, we need to:</p>",
+      "preview": "Let’s generalize this procedure. When the user enters a directional command, we ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b85",
+      "type": "list",
+      "html": "<ul><li>Locate the empty tile.</li><li>From the empty tile, find the adjacent tile that is in the direction opposite of the direction the user entered.</li><li>If the adjacent tile is valid (it’s not off the grid), swap the empty tile and adjacent tile.</li><li>If the adjacent tile is not valid, do nothing.</li></ul>",
+      "preview": "Locate the empty tile.From the empty tile, find the adjacent tile that is in the",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b86",
+      "type": "paragraph",
+      "html": "<p>Implement this by adding a member function <code>moveTile(Direction)</code> to the class <code>Board</code>. Add this to your game loop from step 5. If the user successfully slides a tile, the game should redraw the updated board.</p>",
+      "preview": "Implement this by adding a member function moveTile(Direction) to the class Boar",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b87",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_5'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b88",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_5\" style=\"display:none\"><p>Implement the following member functions in our <code>Board</code> class:</p><ul><li>A function which returns a bool indicating whether a given Point is valid (within our Board).</li><li>A function that finds and returns the position of empty tile as a <code>Point</code>. We could just keep track of where the empty tile is, but that introduces a class invariant, and finding the empty tile whenever we need it isn’t that expensive.</li><li>A function that will swap two tiles given their Point indices.</li><li>A <code>moveTile(Direction dir)</code> function that will try to move a tile in a given direction and will return <code>true</code> if it succeeds. This function should implement the procedure outlined above.</li></ul><p>Modify the <code>main()</code> from step 5 so that <code>moveTile()</code> is called if a directional command is entered. If the move was successful, redraw the board.</p></div>",
+      "preview": "Implement the following member functions in our Board class:A function which ret",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b89",
+      "type": "quiz",
+      "questionTitle": "> Step #8",
+      "questionHtml": "Goal: In this step, we’ll finish our game. Randomize the initial state of the game board. Also, detect when user wins, so after that we can print a win message and quit the game.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include \"Random.h\"\n\n// Increase amount of new lines if your board isn't\n// at the very bottom of the console\nconstexpr int g_consoleLines{ 25 };\n\nclass Direction\n{\npublic:\n    enum Type\n    {\n        up,\n        down,\n        left,\n        right,\n        maxDirections,\n    };\n\n    Direction(Type type)\n        :m_type(type)\n    {\n    }\n    Type getType() const\n    {\n        return m_type;\n    }\n\n    Direction operator-() const\n    {\n        switch (m_type)\n        {\n        case up:    return Direction{ down };\n        case down:  return Direction{ up };\n        case left:  return Direction{ right };\n        case right: return Direction{ left };\n        default:    break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ up };\n    }\n\n    static Direction getRandomDirection()\n    {\n        Type random{ static_cast&lt;Type&gt;(Random::get(0, Type::maxDirections - 1)) };\n        return Direction{ random };\n    }\n\nprivate:\n    Type m_type{};\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Direction dir)\n{\n    switch (dir.getType())\n    {\n    case Direction::up:     return (stream &lt;&lt; \"up\");\n    case Direction::down:   return (stream &lt;&lt; \"down\");\n    case Direction::left:   return (stream &lt;&lt; \"left\");\n    case Direction::right:  return (stream &lt;&lt; \"right\");\n    default:                break;\n    }\n\n    assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n    return (stream &lt;&lt; \"unknown direction\");\n}\n\nstruct Point\n{\n    int x{};\n    int y{};\n\n    friend bool operator==(Point p1, Point p2)\n    {\n        return p1.x == p2.x &amp;&amp; p1.y == p2.y;\n    }\n\n    friend bool operator!=(Point p1, Point p2)\n    {\n        return !(p1 == p2);\n    }\n\n    Point getAdjacentPoint(Direction dir) const\n    {\n        switch (dir.getType())\n        {\n        case Direction::up:     return Point{ x,     y - 1 };\n        case Direction::down:   return Point{ x,     y + 1 };\n        case Direction::left:   return Point{ x - 1, y };\n        case Direction::right:  return Point{ x + 1, y };\n        default:                break;\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return *this;\n    }\n};\n\nnamespace UserInput\n{\n    bool isValidCommand(char ch)\n    {\n        return ch == 'w'\n            || ch == 'a'\n            || ch == 's'\n            || ch == 'd'\n            || ch == 'q';\n    }\n\n    void ignoreLine()\n    {\n        std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n    }\n\n    char getCharacter()\n    {\n        char operation{};\n        std::cin &gt;&gt; operation;\n        ignoreLine(); // remove any extraneous input\n        return operation;\n    }\n\n    char getCommandFromUser()\n    {\n        char ch{};\n        while (!isValidCommand(ch))\n            ch = getCharacter();\n\n        return ch;\n    }\n\n    Direction charToDirection(char ch)\n    {\n        switch (ch)\n        {\n        case 'w': return Direction{ Direction::up };\n        case 's': return Direction{ Direction::down };\n        case 'a': return Direction{ Direction::left };\n        case 'd': return Direction{ Direction::right };\n        }\n\n        assert(0 &amp;&amp; \"Unsupported direction was passed!\");\n        return Direction{ Direction::up };\n    }\n};\n\nclass Tile\n{\npublic:\n    Tile() = default;\n    explicit Tile(int number)\n        :m_num(number)\n    {\n    }\n\n    bool isEmpty() const\n    {\n        return m_num == 0;\n    }\n\n    int getNum() const { return m_num; }\n\nprivate:\n    int m_num { 0 };\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, Tile tile)\n{\n    if (tile.getNum() &gt; 9) // if two digit number\n        stream &lt;&lt; \" \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() &gt; 0) // if one digit number\n        stream &lt;&lt; \"  \" &lt;&lt; tile.getNum() &lt;&lt; \" \";\n    else if (tile.getNum() == 0) // if empty spot\n        stream &lt;&lt; \"    \";\n    return stream;\n}\n\nclass Board\n{\npublic:\n\n    Board() = default;\n\n    static void printEmptyLines(int count)\n    {\n        for (int i = 0; i &lt; count; ++i)\n            std::cout &lt;&lt; '\\n';\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Board&amp; board)\n    {\n        // Before drawing always print some empty lines\n        // so that only one board appears at a time\n        // and it's always shown at the bottom of the window\n        // because console window scrolls automatically when there is no\n        // enough space. \n        for (int i = 0; i &lt; g_consoleLines; ++i)\n            std::cout &lt;&lt; '\\n';\n\n        for (int y = 0; y &lt; s_size; ++y)\n        {\n            for (int x = 0; x &lt; s_size; ++x)\n                stream &lt;&lt; board.m_tiles[y][x];\n            stream &lt;&lt; '\\n';\n        }\n\n        return stream;\n    }\n\n    Point getEmptyTilePos() const\n    {\n        for (int y = 0; y &lt; s_size; ++y)\n            for (int x = 0; x &lt; s_size; ++x)\n                if (m_tiles[y][x].isEmpty())\n                    return { x,y };\n\n        assert(0 &amp;&amp; \"There is no empty tile in the board!!!\");\n        return { -1,-1 };\n    }\n\n    static bool isValidTilePos(Point pt)\n    {\n        return (pt.x &gt;= 0 &amp;&amp; pt.x &lt; s_size)\n            &amp;&amp; (pt.y &gt;= 0 &amp;&amp; pt.y &lt; s_size);\n    }\n\n    void swapTiles(Point pt1, Point pt2)\n    {\n        std::swap(m_tiles[pt1.y][pt1.x], m_tiles[pt2.y][pt2.x]);\n    }\n\n    // Compare two boards to see if they are equal\n    friend bool operator==(const Board&amp; f1, const Board&amp; f2)\n    {\n        for (int y = 0; y &lt; s_size; ++y)\n            for (int x = 0; x &lt; s_size; ++x)\n                if (f1.m_tiles[y][x].getNum() != f2.m_tiles[y][x].getNum())\n                    return false;\n\n        return true;\n    }\n\n    // returns true if user moved successfully\n    bool moveTile(Direction dir)\n    {\n        Point emptyTile{ getEmptyTilePos() };\n        Point adj{ emptyTile.getAdjacentPoint(-dir) };\n\n        if (!isValidTilePos(adj))\n            return false;\n\n        swapTiles(adj, emptyTile);\n        return true;\n    }\n\n    bool playerWon() const\n    {\n        static Board s_solved{};  // generate a solved board\n        return s_solved == *this; // player wins if current board == solved board\n    }\n\n    void randomize()\n    {\n        // Move empty tile randomly 1000 times\n        // (just like you would do in real life)\n        for (int i = 0; i &lt; 1000; )\n        {\n            // If we are able to successfully move a tile, count this\n            if (moveTile(Direction::getRandomDirection()))\n                ++i;\n        }\n    }\n\nprivate:\n    static const int s_size { 4 };\n    Tile m_tiles[s_size][s_size]{\n        Tile{ 1 }, Tile { 2 }, Tile { 3 } , Tile { 4 },\n        Tile { 5 } , Tile { 6 }, Tile { 7 }, Tile { 8 },\n        Tile { 9 }, Tile { 10 }, Tile { 11 }, Tile { 12 },\n        Tile { 13 }, Tile { 14 }, Tile { 15 }, Tile { 0 } };\n};\n\nint main()\n{\n    Board board{};\n    board.randomize();\n    std::cout &lt;&lt; board;\n\n    while (!board.playerWon())\n    {\n        char ch{ UserInput::getCommandFromUser() };\n\n        // Handle non-direction commands\n        if (ch == 'q')\n        {\n            std::cout &lt;&lt; \"\\n\\nBye!\\n\\n\";\n            return 0;\n        }\n\n        // Handle direction commands\n        Direction dir{ UserInput::charToDirection(ch) };\n\n        bool userMoved{ board.moveTile(dir) };\n        if (userMoved)\n            std::cout &lt;&lt; board;\n    }\n\n    std::cout &lt;&lt; \"\\n\\nYou won!\\n\\n\";\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b90",
+      "type": "paragraph",
+      "html": "<p>We need to be careful about <em>how</em> we randomize our puzzle, because not every puzzle is solvable. For example, there is no way to solve this puzzle:</p>",
+      "preview": "We need to be careful about how we randomize our puzzle, because not every puzzl",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b91",
+      "type": "output",
+      "text": "  1   2   3   4 \n  5   6   7   8\n  9  10  11  12\n 13  15  14\n",
+      "html": "<pre>  1   2   3   4 \n  5   6   7   8\n  9  10  11  12\n 13  15  14\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "chapter-21-project_b92",
+      "type": "paragraph",
+      "html": "<p>If we just blindly randomize the numbers in the puzzle, there is a chance that we will generate such an unsolvable puzzle. With a physical version of the puzzle, we’d randomize the puzzle by sliding tiles in random directions until the tiles were sufficiently mixed. The solution for such a randomized puzzle is to slide each tile in the opposite direction that it was slid to randomize it in the first place. Thus, randomizing puzzles this way always generates a solvable puzzle.</p>",
+      "preview": "If we just blindly randomize the numbers in the puzzle, there is a chance that w",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b93",
+      "type": "paragraph",
+      "html": "<p>We can have our program randomize the board in the same way.</p>",
+      "preview": "We can have our program randomize the board in the same way.",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b94",
+      "type": "paragraph",
+      "html": "<p>Once the user has solved the puzzle, the program should print <code>\"\\n\\nYou won!\\n\\n\"</code> and then exit normally.</p>",
+      "preview": "Once the user has solved the puzzle, the program should print \"\\n\\nYou won!\\n\\n\"",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b95",
+      "type": "paragraph",
+      "html": "<p><a class=\"tasks_link_show\" href=\"javascript:void(0)\" onclick=\"cppTasksToggle(document.getElementById('cpp_tasks_id_6'),this,'Show Tasks','Hide Tasks')\">Show Tasks</a></p>",
+      "preview": "Show Tasks",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b96",
+      "type": "paragraph",
+      "html": "<div class=\"wptasks\" id=\"cpp_tasks_id_6\" style=\"display:none\"><ul><li>Add a <code>randomize()</code> member function to the <code>Board</code> class which randomizes the tiles in the game board. Pick a random direction and if the adjacent point is valid, then slide a tile in that direction. Doing this 1000 times should be sufficient to mix up the board.</li><li>Implement operator== in <code>Board</code> class which will compare if tiles of two given boards are identical.</li><li>Add <code>playerWon()</code> member function to the <code>Board</code> class that will return true if the current game board is solved. You can use the <code>operator==</code> you implemented to compare the current game board against a solved game board. Remember that <code>Board</code> objects start in the solved state, so if you need a solved game board, just value initialize a <code>Board</code> object!</li><li>Update your main() function to integrate randomize() and playerWon().</li></ul></div>",
+      "preview": "Add a randomize() member function to the Board class which randomizes the tiles ",
+      "canCheck": true
+    },
+    {
+      "id": "chapter-21-project_b97",
+      "type": "paragraph",
+      "html": "<p>Here is the full solution for our 15 puzzle game:</p>",
+      "preview": "Here is the full solution for our 15 puzzle game:",
+      "canCheck": true
+    }
+  ]
+}

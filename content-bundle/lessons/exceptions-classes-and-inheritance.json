@@ -1,0 +1,614 @@
+{
+  "index": 321,
+  "chapterId": "27",
+  "number": "27.5",
+  "title": "27.5 — Exceptions, classes, and inheritance",
+  "url": "https://www.learncpp.com/cpp-tutorial/exceptions-classes-and-inheritance/",
+  "slug": "exceptions-classes-and-inheritance",
+  "scrapedAt": "2026-09-15T16:31:25.982Z",
+  "totalBlocks": 83,
+  "totalCheckpoints": 72,
+  "blocks": [
+    {
+      "id": "exceptions-classes-and-inheritance_b0",
+      "type": "paragraph",
+      "html": "<p><strong>Exceptions and member functions</strong></p>",
+      "preview": "Exceptions and member functions",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b1",
+      "type": "paragraph",
+      "html": "<p>Up to this point in the tutorial, you’ve only seen exceptions used in non-member functions. However, exceptions are equally useful in member functions, and even more so in overloaded operators. Consider the following overloaded [] operator as part of a simple integer array class:</p>",
+      "preview": "Up to this point in the tutorial, you’ve only seen exceptions used in non-member",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "int& IntArray::operator[](const int index)\n{\n    return m_data[index];\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    return m_data[index];\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b3",
+      "type": "paragraph",
+      "html": "<p>Although this function will work great as long as index is a valid array index, this function is sorely lacking in some good error checking. We could add an assert statement to ensure the index is valid:</p>",
+      "preview": "Although this function will work great as long as index is a valid array index, ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "int& IntArray::operator[](const int index)\n{\n    assert (index >= 0 && index < getLength());\n    return m_data[index];\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    assert (index &gt;= 0 &amp;&amp; index &lt; getLength());\n    return m_data[index];\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b5",
+      "type": "paragraph",
+      "html": "<p>Now if the user passes in an invalid index, the program will cause an assertion error. Unfortunately, because overloaded operators have specific requirements as to the number and type of parameter(s) they can take and return, there is no flexibility for passing back error codes or Boolean values to the caller to handle. However, since exceptions do not change the signature of a function, they can be put to great use here. Here’s an example:</p>",
+      "preview": "Now if the user passes in an invalid index, the program will cause an assertion ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "int& IntArray::operator[](const int index)\n{\n    if (index < 0 || index >= getLength())\n        throw index;\n\n    return m_data[index];\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    if (index &lt; 0 || index &gt;= getLength())\n        throw index;\n\n    return m_data[index];\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b7",
+      "type": "paragraph",
+      "html": "<p>Now, if the user passes in an invalid index, operator[] will throw an int exception.</p>",
+      "preview": "Now, if the user passes in an invalid index, operator[] will throw an int except",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b8",
+      "type": "section",
+      "title": "When constructors fail",
+      "html": "<h3 class=\"cpp-section-heading\">When constructors fail</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b9",
+      "type": "paragraph",
+      "html": "<p>Constructors are another area of classes in which exceptions can be very useful. If a constructor must fail for some reason (e.g. the user passed in invalid input), simply throw an exception to indicate the object failed to create. In such a case, the object’s construction is aborted, and all class members (which have already been created and initialized prior to the body of the constructor executing) are destructed as per usual.</p>",
+      "preview": "Constructors are another area of classes in which exceptions can be very useful.",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b10",
+      "type": "paragraph",
+      "html": "<p>However, the class’s destructor is never called (because the object never finished construction). Because the destructor never executes, you can’t rely on said destructor to clean up any resources that have already been allocated.</p>",
+      "preview": "However, the class’s destructor is never called (because the object never finish",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b11",
+      "type": "paragraph",
+      "html": "<p>This leads to the question of what we should do if we’ve allocated resources in our constructor and then an exception occurs prior to the constructor finishing. How do we ensure the resources that we’ve already allocated get cleaned up properly? One way would be to wrap any code that can fail in a try block, use a corresponding catch block to catch the exception and do any necessary cleanup, and then rethrow the exception (a topic we’ll discuss in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/rethrowing-exceptions/\">27.6 -- Rethrowing exceptions</a>). However, this adds a lot of clutter, and it’s easy to get wrong, particularly if your class allocates multiple resources.</p>",
+      "preview": "This leads to the question of what we should do if we’ve allocated resources in ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b12",
+      "type": "paragraph",
+      "html": "<p>Fortunately, there is a better way. Taking advantage of the fact that class members are destructed even if the constructor fails, if you do the resource allocations inside the members of the class (rather than in the constructor itself), then those members can clean up after themselves when they are destructed.</p>",
+      "preview": "Fortunately, there is a better way. Taking advantage of the fact that class memb",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b13",
+      "type": "paragraph",
+      "html": "<p>Here’s an example:</p>",
+      "preview": "Here’s an example:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Member\n{\npublic:\n\tMember()\n\t{\n\t\tstd::cerr << \"Member allocated some resources\\n\";\n\t}\n\n\t~Member()\n\t{\n\t\tstd::cerr << \"Member cleaned up\\n\";\n\t}\n};\n\nclass A\n{\nprivate:\n\tint m_x {};\n\tMember m_member;\n\npublic:\n\tA(int x) : m_x{x}\n\t{\n\t\tif (x <= 0)\n\t\t\tthrow 1;\n\t}\n\t\n\t~A()\n\t{\n\t\tstd::cerr << \"~A\\n\"; // should not be called\n\t}\n};\n\n\nint main()\n{\n\ttry\n\t{\n\t\tA a{0};\n\t}\n\tcatch (int)\n\t{\n\t\tstd::cerr << \"Oops\\n\";\n\t}\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Member\n{\npublic:\n\tMember()\n\t{\n\t\tstd::cerr &lt;&lt; \"Member allocated some resources\\n\";\n\t}\n\n\t~Member()\n\t{\n\t\tstd::cerr &lt;&lt; \"Member cleaned up\\n\";\n\t}\n};\n\nclass A\n{\nprivate:\n\tint m_x {};\n\tMember m_member;\n\npublic:\n\tA(int x) : m_x{x}\n\t{\n\t\tif (x &lt;= 0)\n\t\t\tthrow 1;\n\t}\n\t\n\t~A()\n\t{\n\t\tstd::cerr &lt;&lt; \"~A\\n\"; // should not be called\n\t}\n};\n\n\nint main()\n{\n\ttry\n\t{\n\t\tA a{0};\n\t}\n\tcatch (int)\n\t{\n\t\tstd::cerr &lt;&lt; \"Oops\\n\";\n\t}\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b15",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b16",
+      "type": "output",
+      "text": "Member allocated some resources\nMember cleaned up\nOops\n",
+      "html": "<pre>Member allocated some resources\nMember cleaned up\nOops\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b17",
+      "type": "paragraph",
+      "html": "<p>In the above program, when class A throws an exception, all of the members of A are destructed. m_member’s destructor is called, providing an opportunity to clean up any resources that it allocated.</p>",
+      "preview": "In the above program, when class A throws an exception, all of the members of A ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b18",
+      "type": "paragraph",
+      "html": "<p>This is part of the reason that RAII (covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 -- Destructors</a>) is advocated so highly -- even in exceptional circumstances, classes that implement RAII are able to clean up after themselves.</p>",
+      "preview": "This is part of the reason that RAII (covered in lesson 19.3 -- Destructors) is ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b19",
+      "type": "paragraph",
+      "html": "<p>However, creating a custom class like Member to manage a resource allocation isn’t efficient. Fortunately, the C++ standard library comes with RAII-compliant classes to manage common resource types, such as files (std::fstream, covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/basic-file-io/\">28.6 -- Basic file I/O</a>) and dynamic memory (std::unique_ptr and the other smart pointers, covered in <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/\">22.1 -- Introduction to smart pointers and move semantics</a>).</p>",
+      "preview": "However, creating a custom class like Member to manage a resource allocation isn",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b20",
+      "type": "paragraph",
+      "html": "<p>For example, instead of this:</p>",
+      "preview": "For example, instead of this:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Foo\nprivate:\n    int* ptr; // Foo will handle allocation/deallocation",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nprivate:\n    int* ptr; // Foo will handle allocation/deallocation</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b22",
+      "type": "paragraph",
+      "html": "<p>Do this:</p>",
+      "preview": "Do this:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Foo\nprivate:\n    std::unique_ptr<int> ptr; // std::unique_ptr will handle allocation/deallocation",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nprivate:\n    std::unique_ptr&lt;int&gt; ptr; // std::unique_ptr will handle allocation/deallocation</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b24",
+      "type": "paragraph",
+      "html": "<p>In the former case, if Foo’s constructor were to fail after ptr had allocated its dynamic memory, Foo would be responsible for cleanup, which can be challenging. In the latter case, if Foo’s constructor were to fail after ptr has allocated its dynamic memory, ptr’s destructor would execute and return that memory to the system. Foo doesn’t have to do any explicit cleanup when resource handling is delegated to RAII-compliant members!</p>",
+      "preview": "In the former case, if Foo’s constructor were to fail after ptr had allocated it",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b25",
+      "type": "section",
+      "title": "Exception classes",
+      "html": "<h3 class=\"cpp-section-heading\">Exception classes</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b26",
+      "type": "paragraph",
+      "html": "<p>One of the major problems with using basic data types (such as int) as exception types is that they are inherently vague. An even bigger problem is disambiguation of what an exception means when there are multiple statements or function calls within a try block.</p>",
+      "preview": "One of the major problems with using basic data types (such as int) as exception",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "// Using the IntArray overloaded operator[] above\n\ntry\n{\n    int* value{ new int{ array[index1] + array[index2]} };\n}\ncatch (int value)\n{\n    // What are we catching here?\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Using the IntArray overloaded operator[] above\n\ntry\n{\n    int* value{ new int{ array[index1] + array[index2]} };\n}\ncatch (int value)\n{\n    // What are we catching here?\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b28",
+      "type": "paragraph",
+      "html": "<p>In this example, if we were to catch an int exception, what does that really tell us? Was one of the array indexes out of bounds? Did operator+ cause integer overflow? Did operator new fail because it ran out of memory? Unfortunately, in this case, there’s just no easy way to disambiguate. While we can throw const char* exceptions to solve the problem of identifying WHAT went wrong, this still does not provide us the ability to handle exceptions from various sources differently.</p>",
+      "preview": "In this example, if we were to catch an int exception, what does that really tel",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b29",
+      "type": "paragraph",
+      "html": "<p>One way to solve this problem is to use exception classes. An <strong>exception class</strong> is just a normal class that is designed specifically to be thrown as an exception. Let’s design a simple exception class to be used with our IntArray class:</p>",
+      "preview": "One way to solve this problem is to use exception classes. An exception class is",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b30",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string>\n#include <string_view>\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string&amp; getError() const { return m_error; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b31",
+      "type": "paragraph",
+      "html": "<p>Here’s a full program using this class:</p>",
+      "preview": "Here’s a full program using this class:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException{ \"Invalid index\" };\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] }; // out of range subscript\n\t}\n\tcatch (const ArrayException& exception)\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.getError() << \")\\n\";\n\t}\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string&amp; getError() const { return m_error; }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException{ \"Invalid index\" };\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] }; // out of range subscript\n\t}\n\tcatch (const ArrayException&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.getError() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b33",
+      "type": "paragraph",
+      "html": "<p>Using such a class, we can have the exception return a description of the problem that occurred, which provides context for what went wrong. And since ArrayException is its own unique type, we can specifically catch exceptions thrown by the array class and treat them differently from other exceptions if we wish.</p>",
+      "preview": "Using such a class, we can have the exception return a description of the proble",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b34",
+      "type": "paragraph",
+      "html": "<p>Note that exception handlers should catch class exception objects by reference instead of by value. This prevents the compiler from making a copy of the exception at the point where it is caught, which can be expensive when the exception is a class object, and prevents object slicing when dealing with derived exception classes (which we’ll talk about in a moment). Catching exceptions by pointer should generally be avoided unless you have a specific reason to do so.</p>",
+      "preview": "Note that exception handlers should catch class exception objects by reference i",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b35",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Exceptions of a fundamental type can be caught by value since they are cheap to copy.<br>Exceptions of a class type should be caught by (const) reference to prevent expensive copying and slicing.</p></div>",
+      "preview": "Best practiceExceptions of a fundamental type can be caught by value since they are cheap to copy.Ex",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b36",
+      "type": "section",
+      "title": "Exceptions and inheritance",
+      "html": "<h3 class=\"cpp-section-heading\">Exceptions and inheritance</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b37",
+      "type": "paragraph",
+      "html": "<p>Since it’s possible to throw classes as exceptions, and classes can be derived from other classes, we need to consider what happens when we use inherited classes as exceptions. As it turns out, exception handlers will not only match classes of a specific type, they’ll also match classes derived from that specific type as well! Consider the following example:</p>",
+      "preview": "Since it’s possible to throw classes as exceptions, and classes can be derived f",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n\n    return 0;\n}\t",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n\n    return 0;\n}\t</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b39",
+      "type": "paragraph",
+      "html": "<p>In the above example we throw an exception of type Derived. However, the output of this program is:</p>",
+      "preview": "In the above example we throw an exception of type Derived. However, the output ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b40",
+      "type": "output",
+      "text": "caught Base\n",
+      "html": "<pre>caught Base\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b41",
+      "type": "paragraph",
+      "html": "<p>What happened?</p>",
+      "preview": "What happened?",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b42",
+      "type": "paragraph",
+      "html": "<p>First, as mentioned above, derived classes will be caught by handlers for the base type. Because Derived is derived from Base, Derived is-a Base (they have an is-a relationship). Second, when C++ is attempting to find a handler for a raised exception, it does so sequentially. Consequently, the first thing C++ does is check whether the exception handler for Base matches the Derived exception. Because Derived is-a Base, the answer is yes, and it executes the catch block for type Base! The catch block for Derived is never even tested in this case.</p>",
+      "preview": "First, as mentioned above, derived classes will be caught by handlers for the ba",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b43",
+      "type": "paragraph",
+      "html": "<p>In order to make this example work as expected, we need to flip the order of the catch blocks:</p>",
+      "preview": "In order to make this example work as expected, we need to flip the order of the",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n\n    return 0;\n}\t",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n\n    return 0;\n}\t</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b45",
+      "type": "paragraph",
+      "html": "<p>This way, the Derived handler will get first shot at catching objects of type Derived (before the handler for Base can). Objects of type Base will not match the Derived handler (Derived is-a Base, but Base is not a Derived), and thus will “fall through” to the Base handler.</p>",
+      "preview": "This way, the Derived handler will get first shot at catching objects of type De",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b46",
+      "type": "callout",
+      "calloutType": "rule",
+      "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Handlers for derived exception classes should be listed before those for base classes.</p></div>",
+      "preview": "RuleHandlers for derived exception classes should be listed before those for base classes.",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b47",
+      "type": "paragraph",
+      "html": "<p>The ability to use a handler to catch exceptions of derived types using a handler for the base class turns out to be exceedingly useful.</p>",
+      "preview": "The ability to use a handler to catch exceptions of derived types using a handle",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b48",
+      "type": "section",
+      "title": "std::exception",
+      "html": "<h3 class=\"cpp-section-heading\">std::exception</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b49",
+      "type": "paragraph",
+      "html": "<p>Many of the classes and operators in the standard library throw exception classes on failure. For example, operator new can throw std::bad_alloc if it is unable to allocate enough memory. A failed dynamic_cast will throw std::bad_cast. And so on. As of C++20, there are 28 different exception classes that can be thrown, with more being added in each subsequent language standard.</p>",
+      "preview": "Many of the classes and operators in the standard library throw exception classe",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b50",
+      "type": "paragraph",
+      "html": "<p>The good news is that all of these exception classes are derived from a single class called <strong>std::exception</strong> (defined in the &lt;exception&gt; header). std::exception is a small interface class designed to serve as a base class to any exception thrown by the C++ standard library.</p>",
+      "preview": "The good news is that all of these exception classes are derived from a single c",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b51",
+      "type": "paragraph",
+      "html": "<p>Much of the time, when an exception is thrown by the standard library, we won’t care whether it’s a bad allocation, a bad cast, or something else. We just care that something catastrophic went wrong and now our program is exploding. Thanks to std::exception, we can set up an exception handler to catch exceptions of type std::exception, and we’ll end up catching std::exception and all of the derived exceptions together in one place. Easy!</p>",
+      "preview": "Much of the time, when an exception is thrown by the standard library, we won’t ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cstddef> // for std::size_t\n#include <exception> // for std::exception\n#include <iostream>\n#include <limits>\n#include <string> // for this example\n\nint main()\n{\n    try\n    {\n        // Your code using standard library goes here\n        // We'll trigger one of these exceptions intentionally for the sake of the example\n        std::string s;\n        s.resize(std::numeric_limits<std::size_t>::max()); // will trigger a std::length_error or allocation exception\n    }\n    // This handler will catch std::exception and all the derived exceptions too\n    catch (const std::exception& exception)\n    {\n        std::cerr << \"Standard exception: \" << exception.what() << '\\n';\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstddef&gt; // for std::size_t\n#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include &lt;string&gt; // for this example\n\nint main()\n{\n    try\n    {\n        // Your code using standard library goes here\n        // We'll trigger one of these exceptions intentionally for the sake of the example\n        std::string s;\n        s.resize(std::numeric_limits&lt;std::size_t&gt;::max()); // will trigger a std::length_error or allocation exception\n    }\n    // This handler will catch std::exception and all the derived exceptions too\n    catch (const std::exception&amp; exception)\n    {\n        std::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b53",
+      "type": "paragraph",
+      "html": "<p>On the author’s machine, the above program prints:</p>",
+      "preview": "On the author’s machine, the above program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b54",
+      "type": "output",
+      "text": "Standard exception: string too long\n",
+      "html": "<pre>Standard exception: string too long\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b55",
+      "type": "paragraph",
+      "html": "<p>The above example should be pretty straightforward. The one thing worth noting is that std::exception has a virtual member function named <strong>what()</strong> that returns a C-style string description of the exception. Most derived classes override the what() function to change the message. Note that this string is meant to be used for descriptive text only -- do not use it for comparisons, as it is not guaranteed to be the same across compilers.</p>",
+      "preview": "The above example should be pretty straightforward. The one thing worth noting i",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b56",
+      "type": "paragraph",
+      "html": "<p>Sometimes we’ll want to handle a specific type of exception differently. In this case, we can add a handler for that specific type, and let all the others “fall through” to the base handler. Consider:</p>",
+      "preview": "Sometimes we’ll want to handle a specific type of exception differently. In this",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "try\n{\n     // code using standard library goes here\n}\n// This handler will catch std::length_error (and any exceptions derived from it) here\ncatch (const std::length_error& exception)\n{\n    std::cerr << \"You ran out of memory!\" << '\\n';\n}\n// This handler will catch std::exception (and any exception derived from it) that fall\n// through here\ncatch (const std::exception& exception)\n{\n    std::cerr << \"Standard exception: \" << exception.what() << '\\n';\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">try\n{\n     // code using standard library goes here\n}\n// This handler will catch std::length_error (and any exceptions derived from it) here\ncatch (const std::length_error&amp; exception)\n{\n    std::cerr &lt;&lt; \"You ran out of memory!\" &lt;&lt; '\\n';\n}\n// This handler will catch std::exception (and any exception derived from it) that fall\n// through here\ncatch (const std::exception&amp; exception)\n{\n    std::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b58",
+      "type": "paragraph",
+      "html": "<p>In this example, exceptions of type std::length_error will be caught by the first handler and handled there. Exceptions of type std::exception and all of the other derived classes will be caught by the second handler.</p>",
+      "preview": "In this example, exceptions of type std::length_error will be caught by the firs",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b59",
+      "type": "paragraph",
+      "html": "<p>Such inheritance hierarchies allow us to use specific handlers to target specific derived exception classes, or to use base class handlers to catch the whole hierarchy of exceptions. This allows us a fine degree of control over what kind of exceptions we want to handle while ensuring we don’t have to do too much work to catch “everything else” in a hierarchy.</p>",
+      "preview": "Such inheritance hierarchies allow us to use specific handlers to target specifi",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b60",
+      "type": "section",
+      "title": "Using the standard exceptions directly",
+      "html": "<h3 class=\"cpp-section-heading\">Using the standard exceptions directly</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b61",
+      "type": "paragraph",
+      "html": "<p>Nothing throws a std::exception directly, and neither should you. However, you should feel free to throw the other standard exception classes in the standard library if they adequately represent your needs. You can find a list of all the standard exceptions on <a href=\"http://en.cppreference.com/w/cpp/error/exception\">cppreference</a>.</p>",
+      "preview": "Nothing throws a std::exception directly, and neither should you. However, you s",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b62",
+      "type": "paragraph",
+      "html": "<p>std::runtime_error (included as part of the stdexcept header) is a popular choice, because it has a generic name, and its constructor takes a customizable message:</p>",
+      "preview": "std::runtime_error (included as part of the stdexcept header) is a popular choic",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b63",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <stdexcept> // for std::runtime_error\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow std::runtime_error(\"Bad things happened\");\n\t}\n\t// This handler will catch std::exception and all the derived exceptions too\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Standard exception: \" << exception.what() << '\\n';\n\t}\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;stdexcept&gt; // for std::runtime_error\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow std::runtime_error(\"Bad things happened\");\n\t}\n\t// This handler will catch std::exception and all the derived exceptions too\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b64",
+      "type": "paragraph",
+      "html": "<p>This prints:</p>",
+      "preview": "This prints:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b65",
+      "type": "output",
+      "text": "Standard exception: Bad things happened\n",
+      "html": "<pre>Standard exception: Bad things happened\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b66",
+      "type": "section",
+      "title": "Deriving your own classes from std::exception or std::runtime_error",
+      "html": "<h3 class=\"cpp-section-heading\">Deriving your own classes from std::exception or std::runtime_error</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b67",
+      "type": "paragraph",
+      "html": "<p>You can, of course, derive your own classes from std::exception, and override the virtual what() const member function. Here’s the same program as above, with ArrayException derived from std::exception:</p>",
+      "preview": "You can, of course, derive your own classes from std::exception, and override th",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b68",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <string>\n#include <string_view>\n\nclass ArrayException : public std::exception\n{\nprivate:\n\tstd::string m_error{}; // handle our own string\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{error}\n\t{\n\t}\n\n\t// std::exception::what() returns a const char*, so we must as well\n\tconst char* what() const noexcept override { return m_error.c_str(); }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3] {}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\t\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException& exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.what() << \")\\n\";\n\t}\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Some other std::exception occurred (\" << exception.what() << \")\\n\";\n\t}\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException : public std::exception\n{\nprivate:\n\tstd::string m_error{}; // handle our own string\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{error}\n\t{\n\t}\n\n\t// std::exception::what() returns a const char*, so we must as well\n\tconst char* what() const noexcept override { return m_error.c_str(); }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3] {}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\t\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException&amp; exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Some other std::exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b69",
+      "type": "paragraph",
+      "html": "<p>Note that virtual function what() has specifier noexcept (which means the function promises not to throw exceptions itself). Therefore, our override should also have specifier noexcept.</p>",
+      "preview": "Note that virtual function what() has specifier noexcept (which means the functi",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b70",
+      "type": "paragraph",
+      "html": "<p>Because std::runtime_error already has string handling capabilities, it’s also a popular base class for derived exception classes. std::runtime_error can take a C-style string parameter, or a <code>const std::string&amp;</code> parameter.</p>",
+      "preview": "Because std::runtime_error already has string handling capabilities, it’s also a",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b71",
+      "type": "paragraph",
+      "html": "<p>Here’s the same example derived from std::runtime_error instead:</p>",
+      "preview": "Here’s the same example derived from std::runtime_error instead:",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b72",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <stdexcept> // for std::runtime_error\n#include <string>\n\nclass ArrayException : public std::runtime_error\n{\npublic:\n\t// std::runtime_error takes either a null-terminated const char* or a const std::string&.\n\t// We will follow their lead and take a const std::string&\n\tArrayException(const std::string& error)\n\t\t: std::runtime_error{ error } // std::runtime_error will handle the string\n\t{\n\t}\n\n\n        // no need to override what() since we can just use std::runtime_error::what()\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException& exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.what() << \")\\n\";\n\t}\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Some other std::exception occurred (\" << exception.what() << \")\\n\";\n\t}\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;stdexcept&gt; // for std::runtime_error\n#include &lt;string&gt;\n\nclass ArrayException : public std::runtime_error\n{\npublic:\n\t// std::runtime_error takes either a null-terminated const char* or a const std::string&amp;.\n\t// We will follow their lead and take a const std::string&amp;\n\tArrayException(const std::string&amp; error)\n\t\t: std::runtime_error{ error } // std::runtime_error will handle the string\n\t{\n\t}\n\n\n        // no need to override what() since we can just use std::runtime_error::what()\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException&amp; exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Some other std::exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b73",
+      "type": "paragraph",
+      "html": "<p>It’s up to you whether you want create your own standalone exception classes, use the standard exception classes, or derive your own exception classes from std::exception or std::runtime_error. All are valid approaches depending on your aims.</p>",
+      "preview": "It’s up to you whether you want create your own standalone exception classes, us",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b74",
+      "type": "section",
+      "title": "The lifetime of exceptions",
+      "html": "<h3 class=\"cpp-section-heading\">The lifetime of exceptions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b75",
+      "type": "paragraph",
+      "html": "<p>When an exception is thrown, the object being thrown is typically a temporary or local variable that has been allocated on the stack. However, the process of exception handling may unwind the function, causing all variables local to the function to be destroyed. So how does the exception object being thrown survive stack unwinding?</p>",
+      "preview": "When an exception is thrown, the object being thrown is typically a temporary or",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b76",
+      "type": "paragraph",
+      "html": "<p>When an exception is thrown, the compiler makes a copy of the exception object to some piece of unspecified memory (outside of the call stack) reserved for handling exceptions. That way, the exception object is persisted regardless of whether or how many times the stack is unwound. The exception is guaranteed to exist until the exception has been handled.</p>",
+      "preview": "When an exception is thrown, the compiler makes a copy of the exception object t",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b77",
+      "type": "paragraph",
+      "html": "<p>This means that the objects being thrown generally need to be copyable (even if the stack is not actually unwound). Smart compilers may be able to perform a move instead, or elide the copy altogether in specific circumstances.</p>",
+      "preview": "This means that the objects being thrown generally need to be copyable (even if ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b78",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Exception objects need to be copyable.</p></div>",
+      "preview": "TipException objects need to be copyable.",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b79",
+      "type": "paragraph",
+      "html": "<p>Here’s an example showing what happens when we try to throw a Derived object that is not copyable:</p>",
+      "preview": "Here’s an example showing what happens when we try to throw a Derived object tha",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b80",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived() {}\n\n    Derived(const Derived&) = delete; // not copyable\n};\n\nint main()\n{\n    Derived d{};\n\n    try\n    {\n        throw d; // compile error: Derived copy constructor was deleted\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived() {}\n\n    Derived(const Derived&amp;) = delete; // not copyable\n};\n\nint main()\n{\n    Derived d{};\n\n    try\n    {\n        throw d; // compile error: Derived copy constructor was deleted\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b81",
+      "type": "paragraph",
+      "html": "<p>When this program is compiled, the compiler will complain that the Derived copy constructor is not available, and halt compilation.</p>",
+      "preview": "When this program is compiled, the compiler will complain that the Derived copy ",
+      "canCheck": true
+    },
+    {
+      "id": "exceptions-classes-and-inheritance_b82",
+      "type": "paragraph",
+      "html": "<p>Exception objects should not keep pointers or references to stack-allocated objects. If a thrown exception results in stack unwinding (causing the destruction of stack-allocated objects), these pointers or references may be left dangling.</p>",
+      "preview": "Exception objects should not keep pointers or references to stack-allocated obje",
+      "canCheck": true
+    }
+  ]
+}

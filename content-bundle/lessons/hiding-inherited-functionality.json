@@ -1,0 +1,196 @@
+{
+  "index": 295,
+  "chapterId": "24",
+  "number": "24.8",
+  "title": "24.8 — Hiding inherited functionality",
+  "url": "https://www.learncpp.com/cpp-tutorial/hiding-inherited-functionality/",
+  "slug": "hiding-inherited-functionality",
+  "scrapedAt": "2026-09-15T16:31:10.714Z",
+  "totalBlocks": 25,
+  "totalCheckpoints": 24,
+  "blocks": [
+    {
+      "id": "hiding-inherited-functionality_b0",
+      "type": "paragraph",
+      "html": "<p><strong>Changing an inherited member’s access level</strong></p>",
+      "preview": "Changing an inherited member’s access level",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b1",
+      "type": "paragraph",
+      "html": "<p>C++ gives us the ability to change an inherited member’s access specifier in the derived class. This is done by using a <em>using declaration</em> to identify the (scoped) base class member that is having its access changed in the derived class, under the new access specifier.</p>",
+      "preview": "C++ gives us the ability to change an inherited member’s access specifier in the",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b2",
+      "type": "paragraph",
+      "html": "<p>For example, consider the following Base:</p>",
+      "preview": "For example, consider the following Base:",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\nprivate:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\nprotected:\n    void printValue() const { std::cout << m_value; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\nprivate:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\nprotected:\n    void printValue() const { std::cout &lt;&lt; m_value; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b4",
+      "type": "paragraph",
+      "html": "<p>Because Base::printValue() has been declared as protected, it can only be called by Base or its derived classes. The public can not access it.</p>",
+      "preview": "Because Base::printValue() has been declared as protected, it can only be called",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b5",
+      "type": "paragraph",
+      "html": "<p>Let’s define a Derived class that changes the access specifier of printValue() to public:</p>",
+      "preview": "Let’s define a Derived class that changes the access specifier of printValue() t",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    // Base::printValue was inherited as protected, so the public has no access\n    // But we're changing it to public via a using declaration\n    using Base::printValue; // note: no parenthesis here\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    // Base::printValue was inherited as protected, so the public has no access\n    // But we're changing it to public via a using declaration\n    using Base::printValue; // note: no parenthesis here\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b7",
+      "type": "paragraph",
+      "html": "<p>This means that this code will now work:</p>",
+      "preview": "This means that this code will now work:",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Derived derived { 7 };\n\n    // printValue is public in Derived, so this is okay\n    derived.printValue(); // prints 7\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived derived { 7 };\n\n    // printValue is public in Derived, so this is okay\n    derived.printValue(); // prints 7\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b9",
+      "type": "paragraph",
+      "html": "<p>You can only change the access specifiers of base members the derived class would normally be able to access. Therefore, you can never change the access specifier of a base member from private to protected or public, because derived classes do not have access to private members of the base class.</p>",
+      "preview": "You can only change the access specifiers of base members the derived class woul",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b10",
+      "type": "paragraph",
+      "html": "<p><strong>Hiding functionality</strong></p>",
+      "preview": "Hiding functionality",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b11",
+      "type": "paragraph",
+      "html": "<p>In C++, it is not possible to remove or restrict functionality from a base class other than by modifying the source code. However, in a derived class, it is possible to hide functionality that exists in the base class, so that it can not be accessed through the derived class. This can be done simply by changing the relevant access specifier.</p>",
+      "preview": "In C++, it is not possible to remove or restrict functionality from a base class",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b12",
+      "type": "paragraph",
+      "html": "<p>For example, we can make a public member private:</p>",
+      "preview": "For example, we can make a public member private:",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\tint m_value{};\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::m_value;\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout << derived.m_value; // error: m_value is private in Derived\n\n\tBase& base{ derived };\n\tstd::cout << base.m_value; // okay: m_value is public in Base\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\tint m_value{};\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::m_value;\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout &lt;&lt; derived.m_value; // error: m_value is private in Derived\n\n\tBase&amp; base{ derived };\n\tstd::cout &lt;&lt; base.m_value; // okay: m_value is public in Base\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b14",
+      "type": "paragraph",
+      "html": "<p>This allowed us to take a poorly designed base class and encapsulate its data in our derived class. Alternatively, instead of inheriting Base’s members publicly and making m_value private by overriding its access specifier, we could have inherited Base privately, which would have caused all of Base’s member to be inherited privately in the first place.</p>",
+      "preview": "This allowed us to take a poorly designed base class and encapsulate its data in",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b15",
+      "type": "paragraph",
+      "html": "<p>However, it is worth noting that while m_value is private in the Derived class, it is still public in the Base class. Therefore the encapsulation of m_value in Derived can still be subverted by casting to Base&amp; and directly accessing the member.</p>",
+      "preview": "However, it is worth noting that while m_value is private in the Derived class, ",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b16",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>For the same reason, if a Base class has a public virtual function, and the Derived class changes the access specifier to private, the public can still access the private Derived function by casting a Derived object to a Base&amp; and calling the virtual function. The compiler will allow this because the function is public in Base. However, because the object is actually a Derived, virtual function resolution will resolve to (and call) the (private) Derived version of the function. Access controls are not enforced at runtime.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass A\n{\npublic:\n    virtual void fun()\n    {\n        std::cout &lt;&lt; \"public A::fun()\\n\";\n    }\n};\n\nclass B : public A\n{\nprivate:\n    virtual void fun()\n    {\n         std::cout &lt;&lt; \"private B::fun()\\n\";\n   }\n};\n\nint main()\n{\n    B b {};\n    b.fun();                  // compile error: not allowed as B::fun() is private\n    static_cast&lt;A&amp;&gt;(b).fun(); // okay: A::fun() is public, resolves to private B::fun() at runtime\n\n    return 0;\n}</code></pre></div>",
+      "preview": "For advanced readersFor the same reason, if a Base class has a public virtual function, and the Deri",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b17",
+      "type": "paragraph",
+      "html": "<p>Perhaps surprisingly, given a set of overloaded functions in the base class, there is no way to change the access specifier for a single overload. You can only change them all:</p>",
+      "preview": "Perhaps surprisingly, given a set of overloaded functions in the base class, the",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    int m_value{};\n\n    int getValue() const { return m_value; }\n    int getValue(int) const { return m_value; }\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::getValue; // make ALL getValue functions private\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout << derived.getValue();  // error: getValue() is private in Derived\n\tstd::cout << derived.getValue(5); // error: getValue(int) is private in Derived\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    int m_value{};\n\n    int getValue() const { return m_value; }\n    int getValue(int) const { return m_value; }\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::getValue; // make ALL getValue functions private\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout &lt;&lt; derived.getValue();  // error: getValue() is private in Derived\n\tstd::cout &lt;&lt; derived.getValue(5); // error: getValue(int) is private in Derived\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b19",
+      "type": "section",
+      "title": "Deleting functions in the derived class",
+      "html": "<h3 class=\"cpp-section-heading\">Deleting functions in the derived class</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "hiding-inherited-functionality_b20",
+      "type": "paragraph",
+      "html": "<p>You can also mark member functions as deleted in the derived class, which ensures they can’t be called at all through a derived object:</p>",
+      "preview": "You can also mark member functions as deleted in the derived class, which ensure",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nclass Base\n{\nprivate:\n\tint m_value {};\n\npublic:\n\tBase(int value)\n\t\t: m_value { value }\n\t{\n\t}\n\n\tint getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n\tDerived(int value)\n\t\t: Base { value }\n\t{\n\t}\n\n\n\tint getValue() const = delete; // mark this function as inaccessible\n};\n\nint main()\n{\n\tDerived derived { 7 };\n\n\t// The following won't work because getValue() has been deleted!\n\tstd::cout << derived.getValue();\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\nprivate:\n\tint m_value {};\n\npublic:\n\tBase(int value)\n\t\t: m_value { value }\n\t{\n\t}\n\n\tint getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n\tDerived(int value)\n\t\t: Base { value }\n\t{\n\t}\n\n\n\tint getValue() const = delete; // mark this function as inaccessible\n};\n\nint main()\n{\n\tDerived derived { 7 };\n\n\t// The following won't work because getValue() has been deleted!\n\tstd::cout &lt;&lt; derived.getValue();\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b22",
+      "type": "paragraph",
+      "html": "<p>In the above example, we’ve marked the getValue() function as deleted. This means that the compiler will complain when we try to call the derived version of the function. Note that the Base version of getValue() is still accessible though. We can call Base::getValue() in one of two ways:</p>",
+      "preview": "In the above example, we’ve marked the getValue() function as deleted. This mean",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b23",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n\tDerived derived { 7 };\n\n\t// We can call the Base::getValue() function directly\n\tstd::cout << derived.Base::getValue();\n\n\t// Or we can upcast Derived to a Base reference and getValue() will resolve to Base::getValue()\n\tstd::cout << static_cast<Base&>(derived).getValue();\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tDerived derived { 7 };\n\n\t// We can call the Base::getValue() function directly\n\tstd::cout &lt;&lt; derived.Base::getValue();\n\n\t// Or we can upcast Derived to a Base reference and getValue() will resolve to Base::getValue()\n\tstd::cout &lt;&lt; static_cast&lt;Base&amp;&gt;(derived).getValue();\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "hiding-inherited-functionality_b24",
+      "type": "paragraph",
+      "html": "<p>If using the casting method, we cast to a Base&amp; rather than a Base to avoid making a copy of the Base portion of <code>derived</code>.</p>",
+      "preview": "If using the casting method, we cast to a Base& rather than a Base to avoid maki",
+      "canCheck": true
+    }
+  ]
+}

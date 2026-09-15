@@ -1,0 +1,455 @@
+{
+  "index": 304,
+  "chapterId": "25",
+  "number": "25.7",
+  "title": "25.7 — Pure virtual functions, abstract base classes, and interface classes",
+  "url": "https://www.learncpp.com/cpp-tutorial/pure-virtual-functions-abstract-base-classes-and-interface-classes/",
+  "slug": "pure-virtual-functions-abstract-base-classes-and-interface-classes",
+  "scrapedAt": "2026-09-15T16:31:16.172Z",
+  "totalBlocks": 61,
+  "totalCheckpoints": 57,
+  "blocks": [
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b0",
+      "type": "paragraph",
+      "html": "<p><strong>Pure virtual (abstract) functions and abstract base classes</strong></p>",
+      "preview": "Pure virtual (abstract) functions and abstract base classes",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b1",
+      "type": "paragraph",
+      "html": "<p>So far, all of the virtual functions we have written have a body (a definition). However, C++ allows you to create a special kind of virtual function called a <strong>pure virtual function</strong> (or <strong>abstract function</strong>) that has no body at all! A pure virtual function simply acts as a placeholder that is meant to be redefined by derived classes.</p>",
+      "preview": "So far, all of the virtual functions we have written have a body (a definition).",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b2",
+      "type": "paragraph",
+      "html": "<p>To create a pure virtual function, rather than define a body for the function, we simply assign the function the value 0.</p>",
+      "preview": "To create a pure virtual function, rather than define a body for the function, w",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\n\nclass Base\n{\npublic:\n    std::string_view sayHi() const { return \"Hi\"; } // a normal non-virtual function    \n\n    virtual std::string_view getName() const { return \"Base\"; } // a normal virtual function\n\n    virtual int getValue() const = 0; // a pure virtual function\n\n    int doSomething() = 0; // Compile error: can not set non-virtual functions to 0\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass Base\n{\npublic:\n    std::string_view sayHi() const { return \"Hi\"; } // a normal non-virtual function    \n\n    virtual std::string_view getName() const { return \"Base\"; } // a normal virtual function\n\n    virtual int getValue() const = 0; // a pure virtual function\n\n    int doSomething() = 0; // Compile error: can not set non-virtual functions to 0\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b4",
+      "type": "paragraph",
+      "html": "<p>When we add a pure virtual function to our class, we are effectively saying, “it is up to the derived classes to implement this function”.</p>",
+      "preview": "When we add a pure virtual function to our class, we are effectively saying, “it",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b5",
+      "type": "paragraph",
+      "html": "<p>Using a pure virtual function has two main consequences: First, any class with one or more pure virtual functions becomes an <strong>abstract base class</strong>, which means that it can not be instantiated! Consider what would happen if we could create an instance of Base:</p>",
+      "preview": "Using a pure virtual function has two main consequences: First, any class with o",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Base base {}; // We can't instantiate an abstract base class, but for the sake of example, pretend this was allowed\n    base.getValue(); // what would this do?\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Base base {}; // We can't instantiate an abstract base class, but for the sake of example, pretend this was allowed\n    base.getValue(); // what would this do?\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b7",
+      "type": "paragraph",
+      "html": "<p>Because there’s no definition for getValue(), what would base.getValue() resolve to?</p>",
+      "preview": "Because there’s no definition for getValue(), what would base.getValue() resolve",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b8",
+      "type": "paragraph",
+      "html": "<p>Second, any derived class must define a body for this function, or that derived class will be considered an abstract base class as well.</p>",
+      "preview": "Second, any derived class must define a body for this function, or that derived ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b9",
+      "type": "paragraph",
+      "html": "<p><strong>A pure virtual function example</strong></p>",
+      "preview": "A pure virtual function example",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b10",
+      "type": "paragraph",
+      "html": "<p>Let’s take a look at an example of a pure virtual function in action. In a previous lesson, we wrote a simple Animal base class and derived a Cat and a Dog class from it. Here’s the code as we left it:</p>",
+      "preview": "Let’s take a look at an example of a pure virtual function in action. In a previ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string>\n#include <string_view>\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n    \n    virtual ~Animal() = default;\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const override { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const override { return \"Woof\"; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n    \n    virtual ~Animal() = default;\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const override { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const override { return \"Woof\"; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b12",
+      "type": "paragraph",
+      "html": "<p>We’ve prevented people from allocating objects of type Animal by making the constructor protected. However, it is still possible to create derived classes that do not redefine function speak().</p>",
+      "preview": "We’ve prevented people from allocating objects of type Animal by making the cons",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b13",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow : public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    // We forgot to redefine speak\n};\n\nint main()\n{\n    Cow cow{\"Betsy\"};\n    std::cout << cow.getName() << \" says \" << cow.speak() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow : public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    // We forgot to redefine speak\n};\n\nint main()\n{\n    Cow cow{\"Betsy\"};\n    std::cout &lt;&lt; cow.getName() &lt;&lt; \" says \" &lt;&lt; cow.speak() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b15",
+      "type": "paragraph",
+      "html": "<p>This will print:</p>",
+      "preview": "This will print:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b16",
+      "type": "output",
+      "text": "Betsy says ???\n",
+      "html": "<pre>Betsy says ???\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b17",
+      "type": "paragraph",
+      "html": "<p>What happened? We forgot to redefine function speak(), so cow.Speak() resolved to Animal.speak(), which isn’t what we wanted.</p>",
+      "preview": "What happened? We forgot to redefine function speak(), so cow.Speak() resolved t",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b18",
+      "type": "paragraph",
+      "html": "<p>A better solution to this problem is to use a pure virtual function:</p>",
+      "preview": "A better solution to this problem is to use a pure virtual function:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string>\n#include <string_view>\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b20",
+      "type": "paragraph",
+      "html": "<p>There are a couple of things to note here. First, speak() is now a pure virtual function. This means Animal is now an abstract base class, and can not be instantiated. Consequently, we do not need to make the constructor protected any longer (though it doesn’t hurt). Second, because our Cow class was derived from Animal, but we did not define Cow::speak(), Cow is also an abstract base class. Now when we try to compile this code:</p>",
+      "preview": "There are a couple of things to note here. First, speak() is now a pure virtual ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow: public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    // We forgot to redefine speak\n};\n\nint main()\n{\n    Cow cow{ \"Betsy\" };\n    std::cout << cow.getName() << \" says \" << cow.speak() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow: public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    // We forgot to redefine speak\n};\n\nint main()\n{\n    Cow cow{ \"Betsy\" };\n    std::cout &lt;&lt; cow.getName() &lt;&lt; \" says \" &lt;&lt; cow.speak() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b22",
+      "type": "paragraph",
+      "html": "<p>The compiler will give us an error because Cow is an abstract base class and we can not create instances of abstract base classes:</p>",
+      "preview": "The compiler will give us an error because Cow is an abstract base class and we ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b23",
+      "type": "output",
+      "text": "prog.cc:35:9: error: variable type 'Cow' is an abstract class\n   35 |     Cow cow{ \"Betsy\" };\n      |         ^\nprog.cc:17:30: note: unimplemented pure virtual method 'speak' in 'Cow'\n   17 |     virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n      |                              ^\n",
+      "html": "<pre>prog.cc:35:9: error: variable type 'Cow' is an abstract class\n   35 |     Cow cow{ \"Betsy\" };\n      |         ^\nprog.cc:17:30: note: unimplemented pure virtual method 'speak' in 'Cow'\n   17 |     virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n      |                              ^\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b24",
+      "type": "paragraph",
+      "html": "<p>This tells us that we will only be able to instantiate Cow if Cow provides a body for speak().</p>",
+      "preview": "This tells us that we will only be able to instantiate Cow if Cow provides a bod",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b25",
+      "type": "paragraph",
+      "html": "<p>Let’s go ahead and do that:</p>",
+      "preview": "Let’s go ahead and do that:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow: public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal(name)\n    {\n    }\n\n    std::string_view speak() const override { return \"Moo\"; }\n};\n\nint main()\n{\n    Cow cow{ \"Betsy\" };\n    std::cout << cow.getName() << \" says \" << cow.speak() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is now a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nclass Cow: public Animal\n{\npublic:\n    Cow(std::string_view name)\n        : Animal(name)\n    {\n    }\n\n    std::string_view speak() const override { return \"Moo\"; }\n};\n\nint main()\n{\n    Cow cow{ \"Betsy\" };\n    std::cout &lt;&lt; cow.getName() &lt;&lt; \" says \" &lt;&lt; cow.speak() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b27",
+      "type": "paragraph",
+      "html": "<p>Now this program will compile and print:</p>",
+      "preview": "Now this program will compile and print:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b28",
+      "type": "output",
+      "text": "Betsy says Moo\n",
+      "html": "<pre>Betsy says Moo\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b29",
+      "type": "paragraph",
+      "html": "<p>A pure virtual function is useful when we have a function that we want to put in the base class, but only the derived classes know what it should return. A pure virtual function makes it so the base class can not be instantiated, and the derived classes are forced to define these functions before they can be instantiated. This helps ensure the derived classes do not forget to redefine functions that the base class was expecting them to.</p>",
+      "preview": "A pure virtual function is useful when we have a function that we want to put in",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b30",
+      "type": "paragraph",
+      "html": "<p>Just like with normal virtual functions, pure virtual functions can be called using a reference (or pointer) to a base class:</p>",
+      "preview": "Just like with normal virtual functions, pure virtual functions can be called us",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    Cow cow{ \"Betsy\" };\n    Animal& a{ cow };\n\n    std::cout << a.speak(); // resolves to Cow::speak(), prints \"Moo\"\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Cow cow{ \"Betsy\" };\n    Animal&amp; a{ cow };\n\n    std::cout &lt;&lt; a.speak(); // resolves to Cow::speak(), prints \"Moo\"\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b32",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>a.speak()</code> resolves to <code>Cow::speak()</code> via virtual function resolution.</p>",
+      "preview": "In the above example, a.speak() resolves to Cow::speak() via virtual function re",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b33",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Any class with pure virtual functions should also have a virtual destructor.</p></div>",
+      "preview": "A reminderAny class with pure virtual functions should also have a virtual destructor.",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b34",
+      "type": "paragraph",
+      "html": "<p><strong>Pure virtual functions with definitions</strong></p>",
+      "preview": "Pure virtual functions with definitions",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b35",
+      "type": "paragraph",
+      "html": "<p>It turns out that we can create pure virtual functions that have definitions:</p>",
+      "preview": "It turns out that we can create pure virtual functions that have definitions:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b36",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string>\n#include <string_view>\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string& getName() { return m_name; }\n    virtual std::string_view speak() const = 0; // The = 0 means this function is pure virtual\n    \n    virtual ~Animal() = default;\n};\n\nstd::string_view Animal::speak() const  // even though it has a definition\n{\n    return \"buzz\";\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\n    const std::string&amp; getName() { return m_name; }\n    virtual std::string_view speak() const = 0; // The = 0 means this function is pure virtual\n    \n    virtual ~Animal() = default;\n};\n\nstd::string_view Animal::speak() const  // even though it has a definition\n{\n    return \"buzz\";\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b37",
+      "type": "paragraph",
+      "html": "<p>In this case, speak() is still considered a pure virtual function because of the “= 0” (even though it has been given a definition) and Animal is still considered an abstract base class (and thus can’t be instantiated). Any class that inherits from Animal needs to provide its own definition for speak() or it will also be considered an abstract base class.</p>",
+      "preview": "In this case, speak() is still considered a pure virtual function because of the",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b38",
+      "type": "paragraph",
+      "html": "<p>When providing a definition for a pure virtual function, the definition must be provided separately (not inline).</p>",
+      "preview": "When providing a definition for a pure virtual function, the definition must be ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b39",
+      "type": "callout",
+      "calloutType": "tip",
+      "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For Visual Studio users</p><p>Visual Studio allows pure virtual function declarations to be definitions, for example:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">virtual std::string_view speak() const = 0\n{\n  return \"buzz\";\n}</code></pre><p>This is non-conforming with the C++ standard, and cannot be disabled.</p></div>",
+      "preview": "For Visual Studio usersVisual Studio allows pure virtual function declarations to be definitions, fo",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b40",
+      "type": "paragraph",
+      "html": "<p>This paradigm can be useful when you want your base class to provide a default implementation for a function, but still force any derived classes to provide their own implementation. However, if the derived class is happy with the default implementation provided by the base class, it can simply call the base class implementation directly. For example:</p>",
+      "preview": "This paradigm can be useful when you want your base class to provide a default i",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name(name)\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nstd::string_view Animal::speak() const\n{\n    return \"buzz\"; // some default implementation\n}\n\nclass Dragonfly: public Animal\n{\n\npublic:\n    Dragonfly(std::string_view name)\n        : Animal{name}\n    {\n    }\n\n    std::string_view speak() const override// this class is no longer abstract because we defined this function\n    {\n        return Animal::speak(); // use Animal's default implementation\n    }\n};\n\nint main()\n{\n    Dragonfly dfly{\"Sally\"};\n    std::cout << dfly.getName() << \" says \" << dfly.speak() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal // This Animal is an abstract base class\n{\nprotected:\n    std::string m_name {};\n\npublic:\n    Animal(std::string_view name)\n        : m_name(name)\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const = 0; // note that speak is a pure virtual function\n    \n    virtual ~Animal() = default;\n};\n\nstd::string_view Animal::speak() const\n{\n    return \"buzz\"; // some default implementation\n}\n\nclass Dragonfly: public Animal\n{\n\npublic:\n    Dragonfly(std::string_view name)\n        : Animal{name}\n    {\n    }\n\n    std::string_view speak() const override// this class is no longer abstract because we defined this function\n    {\n        return Animal::speak(); // use Animal's default implementation\n    }\n};\n\nint main()\n{\n    Dragonfly dfly{\"Sally\"};\n    std::cout &lt;&lt; dfly.getName() &lt;&lt; \" says \" &lt;&lt; dfly.speak() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b42",
+      "type": "paragraph",
+      "html": "<p>The above code prints:</p>",
+      "preview": "The above code prints:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b43",
+      "type": "output",
+      "text": "Sally says buzz\n",
+      "html": "<pre>Sally says buzz\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b44",
+      "type": "paragraph",
+      "html": "<p>This capability isn’t used very commonly.</p>",
+      "preview": "This capability isn’t used very commonly.",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b45",
+      "type": "paragraph",
+      "html": "<p>A destructor can be made pure virtual, but must be given a definition so that it can be called when a derived object is destructed.</p>",
+      "preview": "A destructor can be made pure virtual, but must be given a definition so that it",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b46",
+      "type": "paragraph",
+      "html": "<p><strong>Interface classes</strong></p>",
+      "preview": "Interface classes",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b47",
+      "type": "paragraph",
+      "html": "<p>An <strong>interface class</strong> is a class that has no member variables, and where <em>all</em> of the functions are pure virtual! Interfaces are useful when you want to define the functionality that derived classes must implement, but leave the details of how the derived class implements that functionality entirely up to the derived class.</p>",
+      "preview": "An interface class is a class that has no member variables, and where all of the",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b48",
+      "type": "paragraph",
+      "html": "<p>Interface classes are often named beginning with an I. Here’s a sample interface class:</p>",
+      "preview": "Interface classes are often named beginning with an I. Here’s a sample interface",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b49",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\n\nclass IErrorLog\n{\npublic:\n    virtual bool openLog(std::string_view filename) = 0;\n    virtual bool closeLog() = 0;\n\n    virtual bool writeError(std::string_view errorMessage) = 0;\n\n    virtual ~IErrorLog() {} // make a virtual destructor in case we delete an IErrorLog pointer, so the proper derived destructor is called\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass IErrorLog\n{\npublic:\n    virtual bool openLog(std::string_view filename) = 0;\n    virtual bool closeLog() = 0;\n\n    virtual bool writeError(std::string_view errorMessage) = 0;\n\n    virtual ~IErrorLog() {} // make a virtual destructor in case we delete an IErrorLog pointer, so the proper derived destructor is called\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b50",
+      "type": "paragraph",
+      "html": "<p>Any class inheriting from IErrorLog must provide implementations for all three functions in order to be instantiated. You could derive a class named FileErrorLog, where openLog() opens a file on disk, closeLog() closes the file, and writeError() writes the message to the file. You could derive another class called ScreenErrorLog, where openLog() and closeLog() do nothing, and writeError() prints the message in a pop-up message box on the screen.</p>",
+      "preview": "Any class inheriting from IErrorLog must provide implementations for all three f",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b51",
+      "type": "paragraph",
+      "html": "<p>Now, let’s say you need to write some code that uses an error log. If you write your code so it includes FileErrorLog or ScreenErrorLog directly, then you’re effectively stuck using that kind of error log (at least without recoding your program). For example, the following function effectively forces callers of mySqrt() to use a FileErrorLog, which may or may not be what they want.</p>",
+      "preview": "Now, let’s say you need to write some code that uses an error log. If you write ",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cmath> // for sqrt()\n\ndouble mySqrt(double value, FileErrorLog& log)\n{\n    if (value < 0.0)\n    {\n        log.writeError(\"Tried to take square root of value less than 0\");\n        return 0.0;\n    }\n\n    return std::sqrt(value);\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cmath&gt; // for sqrt()\n\ndouble mySqrt(double value, FileErrorLog&amp; log)\n{\n    if (value &lt; 0.0)\n    {\n        log.writeError(\"Tried to take square root of value less than 0\");\n        return 0.0;\n    }\n\n    return std::sqrt(value);\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b53",
+      "type": "paragraph",
+      "html": "<p>A much better way to implement this function is to use IErrorLog instead:</p>",
+      "preview": "A much better way to implement this function is to use IErrorLog instead:",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b54",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <cmath> // for sqrt()\ndouble mySqrt(double value, IErrorLog& log)\n{\n    if (value < 0.0)\n    {\n        log.writeError(\"Tried to take square root of value less than 0\");\n        return 0.0;\n    }\n\n    return std::sqrt(value);\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cmath&gt; // for sqrt()\ndouble mySqrt(double value, IErrorLog&amp; log)\n{\n    if (value &lt; 0.0)\n    {\n        log.writeError(\"Tried to take square root of value less than 0\");\n        return 0.0;\n    }\n\n    return std::sqrt(value);\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b55",
+      "type": "paragraph",
+      "html": "<p>Now the caller can pass in <em>any</em> class that conforms to the IErrorLog interface. If they want the error to go to a file, they can pass in an instance of FileErrorLog. If they want it to go to the screen, they can pass in an instance of ScreenErrorLog. Or if they want to do something you haven’t even thought of, such as sending an email to someone when there’s an error, they can derive a new class from IErrorLog (e.g. EmailErrorLog) and use an instance of that! By using IErrorLog, your function becomes more independent and flexible.</p>",
+      "preview": "Now the caller can pass in any class that conforms to the IErrorLog interface. I",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b56",
+      "type": "paragraph",
+      "html": "<p>Don’t forget to include a virtual destructor for your interface classes, so that the proper derived destructor will be called if a pointer to the interface is deleted.</p>",
+      "preview": "Don’t forget to include a virtual destructor for your interface classes, so that",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b57",
+      "type": "paragraph",
+      "html": "<p>Interface classes have become extremely popular because they are easy to use, easy to extend, and easy to maintain. In fact, some modern languages, such as Java and C#, have added an “interface” keyword that allows programmers to directly define an interface class without having to explicitly mark all of the member functions as abstract. Furthermore, although Java and C# will not let you use multiple inheritance on normal classes, they will let you multiple inherit as many interfaces as you like. Because interfaces have no data and no function bodies, they avoid a lot of the traditional problems with multiple inheritance while still providing much of the flexibility.</p>",
+      "preview": "Interface classes have become extremely popular because they are easy to use, ea",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b58",
+      "type": "paragraph",
+      "html": "<p><strong>Pure virtual functions and the virtual table</strong></p>",
+      "preview": "Pure virtual functions and the virtual table",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b59",
+      "type": "paragraph",
+      "html": "<p>For consistency, abstract classes still have virtual tables. A constructor or destructor of an abstract class can call a virtual function, and it needs to resolve to the proper function (in the same class, since the derived classes either haven’t been constructed yet or have already been destroyed).</p>",
+      "preview": "For consistency, abstract classes still have virtual tables. A constructor or de",
+      "canCheck": true
+    },
+    {
+      "id": "pure-virtual-functions-abstract-base-classes-and-interface-classes_b60",
+      "type": "paragraph",
+      "html": "<p>The virtual table entry for a class with a pure virtual function will generally either contain a null pointer, or point to a generic function that prints an error (sometimes this function is named __purecall).</p>",
+      "preview": "The virtual table entry for a class with a pure virtual function will generally ",
+      "canCheck": true
+    }
+  ]
+}

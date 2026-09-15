@@ -1,0 +1,429 @@
+{
+  "index": 239,
+  "chapterId": "18",
+  "number": "18.1",
+  "title": "18.1 — Sorting an array using selection sort",
+  "url": "https://www.learncpp.com/cpp-tutorial/sorting-an-array-using-selection-sort/",
+  "slug": "sorting-an-array-using-selection-sort",
+  "scrapedAt": "2026-09-15T16:30:40.080Z",
+  "totalBlocks": 59,
+  "totalCheckpoints": 52,
+  "blocks": [
+    {
+      "id": "sorting-an-array-using-selection-sort_b0",
+      "type": "section",
+      "title": "A case for sorting",
+      "html": "<h3 class=\"cpp-section-heading\">A case for sorting</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b1",
+      "type": "paragraph",
+      "html": "<p>Sorting an array is the process of arranging all of the elements in the array in a particular order. There are many different cases in which sorting an array can be useful. For example, your email program generally displays emails in order of time received, because more recent emails are typically considered more relevant. When you go to your contact list, the names are typically in alphabetical order, because it’s easier to find the name you are looking for that way. Both of these presentations involve sorting data before presentation.</p>",
+      "preview": "Sorting an array is the process of arranging all of the elements in the array in",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b2",
+      "type": "paragraph",
+      "html": "<p>Sorting an array can make searching an array more efficient, not only for humans, but also for computers. For example, consider the case where we want to know whether a name appears in a list of names. In order to see whether a name was on the list, we’d have to check every element in the array to see if the name appears. For an array with many elements, searching through them all can be expensive.</p>",
+      "preview": "Sorting an array can make searching an array more efficient, not only for humans",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b3",
+      "type": "paragraph",
+      "html": "<p>However, now assume our array of names is sorted alphabetically. In this case, we only need to search up to the point where we encounter a name that is alphabetically greater than the one we are looking for. At that point, if we haven’t found the name, we know it doesn’t exist in the rest of the array, because all of the names we haven’t looked at in the array are guaranteed to be alphabetically greater!</p>",
+      "preview": "However, now assume our array of names is sorted alphabetically. In this case, w",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b4",
+      "type": "paragraph",
+      "html": "<p>It turns out that there are even better algorithms to search sorted arrays. Using a simple algorithm, we can search a sorted array containing 1,000,000 elements using only 20 comparisons! The downside is, of course, that sorting an array is comparatively expensive, and it often isn’t worth sorting an array in order to make searching fast unless you’re going to be searching it many times.</p>",
+      "preview": "It turns out that there are even better algorithms to search sorted arrays. Usin",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b5",
+      "type": "paragraph",
+      "html": "<p>In some cases, sorting an array can make searching unnecessary. Consider another example where we want to find the best test score. If the array is unsorted, we have to look through every element in the array to find the greatest test score. If the list is sorted, the best test score will be in the first or last position (depending on whether we sorted in ascending or descending order), so we don’t need to search at all!</p>",
+      "preview": "In some cases, sorting an array can make searching unnecessary. Consider another",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b6",
+      "type": "section",
+      "title": "How sorting works",
+      "html": "<h3 class=\"cpp-section-heading\">How sorting works</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b7",
+      "type": "paragraph",
+      "html": "<p>Sorting is generally performed by repeatedly comparing pairs of array elements, and swapping them if they meet some predefined criteria. The order in which these elements are compared differs depending on which sorting algorithm is used. The criteria depends on how the list will be sorted (e.g. in ascending or descending order).</p>",
+      "preview": "Sorting is generally performed by repeatedly comparing pairs of array elements, ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b8",
+      "type": "paragraph",
+      "html": "<p>To swap two elements, we can use the std::swap() function from the C++ standard library, which is defined in the utility header.</p>",
+      "preview": "To swap two elements, we can use the std::swap() function from the C++ standard ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <utility>\n\nint main()\n{\n    int x{ 2 };\n    int y{ 4 };\n    std::cout << \"Before swap: x = \" << x << \", y = \" << y << '\\n';\n    std::swap(x, y); // swap the values of x and y\n    std::cout << \"After swap:  x = \" << x << \", y = \" << y << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;utility&gt;\n\nint main()\n{\n    int x{ 2 };\n    int y{ 4 };\n    std::cout &lt;&lt; \"Before swap: x = \" &lt;&lt; x &lt;&lt; \", y = \" &lt;&lt; y &lt;&lt; '\\n';\n    std::swap(x, y); // swap the values of x and y\n    std::cout &lt;&lt; \"After swap:  x = \" &lt;&lt; x &lt;&lt; \", y = \" &lt;&lt; y &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b10",
+      "type": "paragraph",
+      "html": "<p>This program prints:</p>",
+      "preview": "This program prints:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b11",
+      "type": "output",
+      "text": "Before swap: x = 2, y = 4\nAfter swap:  x = 4, y = 2\n",
+      "html": "<pre>Before swap: x = 2, y = 4\nAfter swap:  x = 4, y = 2\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b12",
+      "type": "paragraph",
+      "html": "<p>Note that after the swap, the values of x and y have been interchanged!</p>",
+      "preview": "Note that after the swap, the values of x and y have been interchanged!",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b13",
+      "type": "section",
+      "title": "Selection sort",
+      "html": "<h3 class=\"cpp-section-heading\">Selection sort</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b14",
+      "type": "paragraph",
+      "html": "<p>There are many ways to sort an array. Selection sort is probably the easiest sort to understand, which makes it a good candidate for teaching even though it is one of the slower sorts.</p>",
+      "preview": "There are many ways to sort an array. Selection sort is probably the easiest sor",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b15",
+      "type": "paragraph",
+      "html": "<p>Selection sort performs the following steps to sort an array from smallest to largest:</p>",
+      "preview": "Selection sort performs the following steps to sort an array from smallest to la",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b16",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Starting at array index 0, search the entire array to find the smallest value</li><li>Swap the smallest value found in the array with the value at index 0</li><li>Repeat steps 1 &amp; 2 starting from the next index</li></ol>",
+      "preview": "Starting at array index 0, search the entire array to find the smallest valueSwa",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b17",
+      "type": "paragraph",
+      "html": "<p>In other words, we’re going to find the smallest element in the array, and swap it into the first position. Then we’re going to find the next smallest element, and swap it into the second position. This process will be repeated until we run out of elements.</p>",
+      "preview": "In other words, we’re going to find the smallest element in the array, and swap ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b18",
+      "type": "paragraph",
+      "html": "<p>Here is an example of this algorithm working on 5 elements. Let’s start with a sample array:</p>",
+      "preview": "Here is an example of this algorithm working on 5 elements. Let’s start with a s",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b19",
+      "type": "paragraph",
+      "html": "<p>{ 30, 50, 20, 10, 40 }</p>",
+      "preview": "{ 30, 50, 20, 10, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b20",
+      "type": "paragraph",
+      "html": "<p>First, we find the smallest element, starting from index 0:</p>",
+      "preview": "First, we find the smallest element, starting from index 0:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b21",
+      "type": "paragraph",
+      "html": "<p>{ 30, 50, 20, <strong>10</strong>, 40 }</p>",
+      "preview": "{ 30, 50, 20, 10, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b22",
+      "type": "paragraph",
+      "html": "<p>We then swap this with the element at index 0:</p>",
+      "preview": "We then swap this with the element at index 0:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b23",
+      "type": "paragraph",
+      "html": "<p>{ <strong>10</strong>, 50, 20, <strong>30</strong>, 40 }</p>",
+      "preview": "{ 10, 50, 20, 30, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b24",
+      "type": "paragraph",
+      "html": "<p>Now that the first element is sorted, we can ignore it. Now, we find the smallest element, starting from index 1:</p>",
+      "preview": "Now that the first element is sorted, we can ignore it. Now, we find the smalles",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b25",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, 50, <strong>20</strong>, 30, 40 }</p>",
+      "preview": "{ 10, 50, 20, 30, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b26",
+      "type": "paragraph",
+      "html": "<p>And swap it with the element in index 1:</p>",
+      "preview": "And swap it with the element in index 1:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b27",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <strong>20</strong>, <strong>50</strong>, 30, 40 }</p>",
+      "preview": "{ 10, 20, 50, 30, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b28",
+      "type": "paragraph",
+      "html": "<p>Now we can ignore the first two elements. Find the smallest element starting at index 2:</p>",
+      "preview": "Now we can ignore the first two elements. Find the smallest element starting at ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b29",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, 50, <strong>30</strong>, 40 }</p>",
+      "preview": "{ 10, 20, 50, 30, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b30",
+      "type": "paragraph",
+      "html": "<p>And swap it with the element in index 2:</p>",
+      "preview": "And swap it with the element in index 2:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b31",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, <strong>30</strong>, <strong>50</strong>, 40 }</p>",
+      "preview": "{ 10, 20, 30, 50, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b32",
+      "type": "paragraph",
+      "html": "<p>Find the smallest element starting at index 3:</p>",
+      "preview": "Find the smallest element starting at index 3:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b33",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, <em>30</em>, 50, <strong>40</strong> }</p>",
+      "preview": "{ 10, 20, 30, 50, 40 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b34",
+      "type": "paragraph",
+      "html": "<p>And swap it with the element in index 3:</p>",
+      "preview": "And swap it with the element in index 3:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b35",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, <em>30</em>, <strong>40</strong>, <strong>50</strong> }</p>",
+      "preview": "{ 10, 20, 30, 40, 50 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b36",
+      "type": "paragraph",
+      "html": "<p>Finally, find the smallest element starting at index 4:</p>",
+      "preview": "Finally, find the smallest element starting at index 4:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b37",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, <em>30</em>, <em>40</em>, <strong>50</strong> }</p>",
+      "preview": "{ 10, 20, 30, 40, 50 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b38",
+      "type": "paragraph",
+      "html": "<p>And swap it with the element in index 4 (which doesn’t do anything):</p>",
+      "preview": "And swap it with the element in index 4 (which doesn’t do anything):",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b39",
+      "type": "paragraph",
+      "html": "<p>{ <em>10</em>, <em>20</em>, <em>30</em>, <em>40</em>, <strong>50</strong> }</p>",
+      "preview": "{ 10, 20, 30, 40, 50 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b40",
+      "type": "paragraph",
+      "html": "<p>Done!</p>",
+      "preview": "Done!",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b41",
+      "type": "paragraph",
+      "html": "<p>{ 10, 20, 30, 40, 50 }</p>",
+      "preview": "{ 10, 20, 30, 40, 50 }",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b42",
+      "type": "paragraph",
+      "html": "<p>Note that the last comparison will always be with itself (which is redundant), so we can actually stop 1 element before the end of the array.</p>",
+      "preview": "Note that the last comparison will always be with itself (which is redundant), s",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b43",
+      "type": "section",
+      "title": "Selection sort in C++",
+      "html": "<h3 class=\"cpp-section-heading\">Selection sort in C++</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b44",
+      "type": "paragraph",
+      "html": "<p>Here’s how this algorithm is implemented in C++:</p>",
+      "preview": "Here’s how this algorithm is implemented in C++:",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b45",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n#include <iterator>\n#include <utility>\n\nint main()\n{\n\tint array[]{ 30, 50, 20, 10, 40 };\n\tconstexpr int length{ static_cast<int>(std::size(array)) };\n\n\t// Step through each element of the array\n\t// (except the last one, which will already be sorted by the time we get there)\n\tfor (int startIndex{ 0 }; startIndex < length - 1; ++startIndex)\n\t{\n\t\t// smallestIndex is the index of the smallest element we’ve encountered this iteration\n\t\t// Start by assuming the smallest element is the first element of this iteration\n\t\tint smallestIndex{ startIndex };\n\n\t\t// Then look for a smaller element in the rest of the array\n\t\tfor (int currentIndex{ startIndex + 1 }; currentIndex < length; ++currentIndex)\n\t\t{\n\t\t\t// If we've found an element that is smaller than our previously found smallest\n\t\t\tif (array[currentIndex] < array[smallestIndex])\n\t\t\t\t// then keep track of it\n\t\t\t\tsmallestIndex = currentIndex;\n\t\t}\n\n\t\t// smallestIndex is now the index of the smallest element in the remaining array\n                // swap our start element with our smallest element (this sorts it into the correct place)\n\t\tstd::swap(array[startIndex], array[smallestIndex]);\n\t}\n\n\t// Now that the whole array is sorted, print our sorted array as proof it works\n\tfor (int index{ 0 }; index < length; ++index)\n\t\tstd::cout << array[index] << ' ';\n\n\tstd::cout << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;iterator&gt;\n#include &lt;utility&gt;\n\nint main()\n{\n\tint array[]{ 30, 50, 20, 10, 40 };\n\tconstexpr int length{ static_cast&lt;int&gt;(std::size(array)) };\n\n\t// Step through each element of the array\n\t// (except the last one, which will already be sorted by the time we get there)\n\tfor (int startIndex{ 0 }; startIndex &lt; length - 1; ++startIndex)\n\t{\n\t\t// smallestIndex is the index of the smallest element we’ve encountered this iteration\n\t\t// Start by assuming the smallest element is the first element of this iteration\n\t\tint smallestIndex{ startIndex };\n\n\t\t// Then look for a smaller element in the rest of the array\n\t\tfor (int currentIndex{ startIndex + 1 }; currentIndex &lt; length; ++currentIndex)\n\t\t{\n\t\t\t// If we've found an element that is smaller than our previously found smallest\n\t\t\tif (array[currentIndex] &lt; array[smallestIndex])\n\t\t\t\t// then keep track of it\n\t\t\t\tsmallestIndex = currentIndex;\n\t\t}\n\n\t\t// smallestIndex is now the index of the smallest element in the remaining array\n                // swap our start element with our smallest element (this sorts it into the correct place)\n\t\tstd::swap(array[startIndex], array[smallestIndex]);\n\t}\n\n\t// Now that the whole array is sorted, print our sorted array as proof it works\n\tfor (int index{ 0 }; index &lt; length; ++index)\n\t\tstd::cout &lt;&lt; array[index] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b46",
+      "type": "paragraph",
+      "html": "<p>The most confusing part of this algorithm is the loop inside of another loop (called a <strong>nested loop</strong>). The outside loop (startIndex) iterates through each element one by one. For each iteration of the outer loop, the inner loop (currentIndex) is used to find the smallest element in the remaining array (starting from startIndex+1). smallestIndex keeps track of the index of the smallest element found by the inner loop. Then smallestIndex is swapped with startIndex. Finally, the outer loop (startIndex) advances one element, and the process is repeated.</p>",
+      "preview": "The most confusing part of this algorithm is the loop inside of another loop (ca",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b47",
+      "type": "paragraph",
+      "html": "<p>Hint: If you’re having trouble figuring out how the above program works, it can be helpful to work through a sample case on a piece of paper. Write the starting (unsorted) array elements horizontally at the top of the paper. Draw arrows indicating which elements startIndex, currentIndex, and smallestIndex are indexing. Manually trace through the program and redraw the arrows as the indices change. For each iteration of the outer loop, start a new line showing the current state of the array.</p>",
+      "preview": "Hint: If you’re having trouble figuring out how the above program works, it can ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b48",
+      "type": "paragraph",
+      "html": "<p>Sorting names works using the same algorithm. Just change the array type from int to std::string, and initialize with the appropriate values.</p>",
+      "preview": "Sorting names works using the same algorithm. Just change the array type from in",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b49",
+      "type": "section",
+      "title": "std::sort",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"stdsort\"></a>std::sort <a href=\"#stdsort\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b50",
+      "type": "paragraph",
+      "html": "<p>Because sorting arrays is so common, the C++ standard library includes a sorting function named <code>std::sort</code>. <code>std::sort</code> lives in the &lt;algorithm&gt; header, and can be invoked on an array like so:</p>",
+      "preview": "Because sorting arrays is so common, the C++ standard library includes a sorting",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b51",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm> // for std::sort\n#include <iostream>\n#include <iterator> // for std::size\n\nint main()\n{\n\tint array[]{ 30, 50, 20, 10, 40 };\n\n\tstd::sort(std::begin(array), std::end(array));\n\n\tfor (int i{ 0 }; i < static_cast<int>(std::size(array)); ++i)\n\t\tstd::cout << array[i] << ' ';\n\n\tstd::cout << '\\n';\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::sort\n#include &lt;iostream&gt;\n#include &lt;iterator&gt; // for std::size\n\nint main()\n{\n\tint array[]{ 30, 50, 20, 10, 40 };\n\n\tstd::sort(std::begin(array), std::end(array));\n\n\tfor (int i{ 0 }; i &lt; static_cast&lt;int&gt;(std::size(array)); ++i)\n\t\tstd::cout &lt;&lt; array[i] &lt;&lt; ' ';\n\n\tstd::cout &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b52",
+      "type": "paragraph",
+      "html": "<p>By default, std::sort sorts in ascending order using operator&lt; to compare pairs of elements and swapping them if necessary (much like our selection sort example does above).</p>",
+      "preview": "By default, std::sort sorts in ascending order using operator< to compare pairs ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b53",
+      "type": "paragraph",
+      "html": "<p>We’ll talk more about <code>std::sort</code> in a future chapter.</p>",
+      "preview": "We’ll talk more about std::sort in a future chapter.",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b54",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b55",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Manually show how selection sort works on the following array: { 30, 60, 20, 50, 40, 10 }. Show the array after each swap that takes place.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>30 60 20 50 40 10<br><strong>10</strong> 60 20 50 40 <strong>30</strong><br>10 <strong>20</strong> <strong>60</strong> 50 40 30<br>10 20 <strong>30</strong> 50 40 <strong>60</strong><br>10 20 30 <strong>40</strong> <strong>50</strong> 60<br>10 20 30 40 <strong>50</strong> 60 (self-swap)<br>10 20 30 40 50 <strong>60</strong> (self-swap)</p></div><p></p></div>",
+      "preview": "Question #1Manually show how selection sort works on the following array: { 30, ",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b56",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>Rewrite the selection sort code above to sort in descending order (largest numbers first). Although this may seem complex, it is actually surprisingly simple.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>Simply change:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">        if (array[currentIndex] &lt; array[smallestIndex])</code></pre><p>to:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">        if (array[currentIndex] &gt; array[smallestIndex])</code></pre><p>smallestIndex should probably be renamed largestIndex as well.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;iterator&gt; // for std::size\n#include &lt;utility&gt;\n\nint main()\n{\n    int array[]{ 30, 50, 20, 10, 40 };\n    constexpr int length{ static_cast&lt;int&gt;(std::size(array)) }; // C++17\n//  constexpr int length{ sizeof(array) / sizeof(array[0]) }; // use instead if not C++17 capable\n\n    // Step through each element of the array except the last\n    for (int startIndex{ 0 }; startIndex &lt; length - 1; ++startIndex)\n    {\n        // largestIndex is the index of the largest element we've encountered so far.\n        int largestIndex{ startIndex };\n\n        // Search through every element starting at startIndex + 1\n        for (int currentIndex{ startIndex + 1 }; currentIndex &lt; length; ++currentIndex)\n        {\n            // If the current element is larger than our previously found largest\n            if (array[currentIndex] &gt; array[largestIndex])\n                // This is the new largest number for this iteration\n                largestIndex = currentIndex;\n        }\n\n        // Swap our start element with our largest element\n        std::swap(array[startIndex], array[largestIndex]);\n    }\n\n    // Now print our sorted array as proof it works\n    for (int index{ 0 }; index &lt; length; ++index)\n        std::cout &lt;&lt; array[index] &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div></div>",
+      "preview": "Question #2Rewrite the selection sort code above to sort in descending order (la",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b57",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #3</p><p>This one is going to be difficult, so put your game face on.</p><p>Another simple sort is called “bubble sort”. Bubble sort works by comparing adjacent pairs of elements, and swapping them if the criteria is met, so that elements “bubble” to the end of the array. Although there are quite a few ways to optimize bubble sort, in this quiz we’ll stick with the unoptimized version here because it’s simplest.</p><p>Unoptimized bubble sort performs the following steps to sort an array from smallest to largest:<br>A) Compare array element 0 with array element 1. If element 0 is larger, swap it with element 1.<br>B) Now do the same for elements 1 and 2, and every subsequent pair of elements until you hit the end of the array. At this point, the last element in the array will be sorted.<br>C) Repeat the first two steps again until the array is sorted.</p><p>Write code that bubble sorts the following array according to the rules above:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int array[]{ 6, 3, 2, 9, 7, 1, 5, 4, 8 };</code></pre><p>Print the sorted array elements at the end of your program.</p><p>Hint: If we’re able to sort one element per iteration, that means we’ll need to iterate roughly as many times as there are numbers in our array to guarantee that the whole array is sorted.<br>Hint: When comparing pairs of elements, be careful of your array’s range.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;iterator&gt; // for std::size\n#include &lt;utility&gt;\n\nint main()\n{\n    int array[]{ 6, 3, 2, 9, 7, 1, 5, 4, 8 };\n    constexpr int length{ static_cast&lt;int&gt;(std::size(array)) }; // C++17\n//  constexpr int length{ sizeof(array) / sizeof(array[0]) }; // use instead if not C++17 capable\n\n    // Step through each element of the array (except the last, which will already be sorted by the time we get to it)\n    for (int iteration{ 0 }; iteration &lt; length-1; ++iteration)\n    {\n        // Search through all elements up to the end of the array - 1\n        // The last element has no pair to compare against\n        for (int currentIndex{ 0 }; currentIndex &lt; length - 1; ++currentIndex)\n        {\n            // If the current element is larger than the element after it, swap them\n            if (array[currentIndex] &gt; array[currentIndex+1])\n                std::swap(array[currentIndex], array[currentIndex + 1]);\n        }\n    }\n\n    // Now print our sorted array as proof it works\n    for (int index{ 0 }; index &lt; length; ++index)\n        std::cout &lt;&lt; array[index] &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div></div>",
+      "preview": "Question #3This one is going to be difficult, so put your game face on.Another s",
+      "canCheck": true
+    },
+    {
+      "id": "sorting-an-array-using-selection-sort_b58",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #4</p><p>Add two optimizations to the bubble sort algorithm you wrote in the previous quiz question:</p><ul><li>Notice how with each iteration of bubble sort, the biggest number remaining gets bubbled to the end of the array. After the first iteration, the last array element is sorted. After the second iteration, the second to last array element is sorted too. And so on… With each iteration, we don’t need to recheck elements that we know are already sorted. Change your loop to not re-check elements that are already sorted.</li><li>If we go through an entire iteration without doing a swap, then we know the array must already be sorted. Implement a check to determine whether any swaps were made this iteration, and if not, terminate the loop early. If the loop was terminated early, print on which iteration the sort ended early.</li></ul><p>Your output should match this:</p><pre>Early termination on iteration 6\n1 2 3 4 5 6 7 8 9\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;iterator&gt; // for std::size\n#include &lt;utility&gt;\n\nint main()\n{\n    int array[]{ 6, 3, 2, 9, 7, 1, 5, 4, 8 };\n    constexpr int length{ static_cast&lt;int&gt;(std::size(array)) }; // C++17\n//  constexpr int length{ sizeof(array) / sizeof(array[0]) }; // use instead if not C++17 capable\n\n    // Step through each element of the array except the last\n    for (int iteration{ 0 }; iteration &lt; length-1; ++iteration)\n    {\n        // Account for the fact that the last element is already sorted with each subsequent iteration\n        // so our array \"ends\" one element sooner\n        int endOfArrayIndex{ length - iteration };\n\n        bool swapped{ false }; // Keep track of whether any elements were swapped this iteration\n\n        // Search through all elements up to the end of the array - 1\n        // The last element has no pair to compare against\n        for (int currentIndex{ 0 }; currentIndex &lt; endOfArrayIndex - 1; ++currentIndex)\n        {\n            // If the current element is larger than the element after it\n            if (array[currentIndex] &gt; array[currentIndex + 1])\n            {\n                // Swap them\n                std::swap(array[currentIndex], array[currentIndex + 1]);\n                swapped = true;\n            }\n        }\n\n        // If we haven't swapped any elements this iteration, we're done early\n        if (!swapped)\n        {\n            // iteration is 0 based, but counting iterations is 1-based.  So add 1 here to adjust.\n            std::cout &lt;&lt; \"Early termination on iteration: \" &lt;&lt; iteration+1 &lt;&lt; '\\n';\n            break;\n        }\n    }\n\n    // Now print our sorted array as proof it works\n    for (int index{ 0 }; index &lt; length; ++index)\n        std::cout &lt;&lt; array[index] &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div></div>",
+      "preview": "Question #4Add two optimizations to the bubble sort algorithm you wrote in the p",
+      "canCheck": true
+    }
+  ]
+}

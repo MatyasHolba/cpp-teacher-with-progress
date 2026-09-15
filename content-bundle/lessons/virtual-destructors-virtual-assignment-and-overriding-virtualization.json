@@ -1,0 +1,250 @@
+{
+  "index": 301,
+  "chapterId": "25",
+  "number": "25.4",
+  "title": "25.4 — Virtual destructors, virtual assignment, and overriding virtualization",
+  "url": "https://www.learncpp.com/cpp-tutorial/virtual-destructors-virtual-assignment-and-overriding-virtualization/",
+  "slug": "virtual-destructors-virtual-assignment-and-overriding-virtualization",
+  "scrapedAt": "2026-09-15T16:31:14.590Z",
+  "totalBlocks": 33,
+  "totalCheckpoints": 27,
+  "blocks": [
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b0",
+      "type": "section",
+      "title": "Virtual destructors",
+      "html": "<h3 class=\"cpp-section-heading\">Virtual destructors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b1",
+      "type": "paragraph",
+      "html": "<p>Although C++ provides a default destructor for your classes if you do not provide one yourself, it is sometimes the case that you will want to provide your own destructor (particularly if the class needs to deallocate memory). You should <em>always</em> make your destructors virtual if you’re dealing with inheritance. Consider the following example:</p>",
+      "preview": "Although C++ provides a default destructor for your classes if you do not provid",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b2",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nclass Base\n{\npublic:\n    ~Base() // note: not virtual\n    {\n        std::cout << \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    ~Derived() // note: not virtual (your compiler may warn you about this)\n    {\n        std::cout << \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    ~Base() // note: not virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    ~Derived() // note: not virtual (your compiler may warn you about this)\n    {\n        std::cout &lt;&lt; \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b3",
+      "type": "paragraph",
+      "html": "<p>Note: If you compile the above example, your compiler may warn you about the non-virtual destructor (which is intentional for this example). You may need to disable the compiler flag that treats warnings as errors to proceed.</p>",
+      "preview": "Note: If you compile the above example, your compiler may warn you about the non",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b4",
+      "type": "paragraph",
+      "html": "<p>Because base is a Base pointer, when base is deleted, the program looks to see if the Base destructor is virtual. It’s not, so it assumes it only needs to call the Base destructor. We can see this in the fact that the above example prints:</p>",
+      "preview": "Because base is a Base pointer, when base is deleted, the program looks to see i",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b5",
+      "type": "output",
+      "text": "Calling ~Base()\n",
+      "html": "<pre>Calling ~Base()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b6",
+      "type": "paragraph",
+      "html": "<p>However, we really want the delete function to call Derived’s destructor (which will call Base’s destructor in turn), otherwise m_array will not be deleted. We do this by making Base’s destructor virtual:</p>",
+      "preview": "However, we really want the delete function to call Derived’s destructor (which ",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nclass Base\n{\npublic:\n    virtual ~Base() // note: virtual\n    {\n        std::cout << \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    virtual ~Derived() // note: virtual\n    {\n        std::cout << \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    virtual ~Base() // note: virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    virtual ~Derived() // note: virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b8",
+      "type": "paragraph",
+      "html": "<p>Now this program produces the following result:</p>",
+      "preview": "Now this program produces the following result:",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b9",
+      "type": "output",
+      "text": "Calling ~Derived()\nCalling ~Base()\n",
+      "html": "<pre>Calling ~Derived()\nCalling ~Base()\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b10",
+      "type": "callout",
+      "calloutType": "rule",
+      "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Whenever you are dealing with inheritance, you should make any explicit destructors virtual.</p></div>",
+      "preview": "RuleWhenever you are dealing with inheritance, you should make any explicit destructors virtual.",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b11",
+      "type": "paragraph",
+      "html": "<p>As with normal virtual member functions, if a base class function is virtual, all derived overrides will be considered virtual regardless of whether they are specified as such. It is not necessary to create an empty derived class destructor just to mark it as virtual.</p>",
+      "preview": "As with normal virtual member functions, if a base class function is virtual, al",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b12",
+      "type": "paragraph",
+      "html": "<p>Note that if you want your base class to have a virtual destructor that is otherwise empty, you can define your destructor this way:</p>",
+      "preview": "Note that if you want your base class to have a virtual destructor that is other",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "    virtual ~Base() = default; // generate a virtual default destructor",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    virtual ~Base() = default; // generate a virtual default destructor</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b14",
+      "type": "section",
+      "title": "Virtual assignment",
+      "html": "<h3 class=\"cpp-section-heading\">Virtual assignment</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b15",
+      "type": "paragraph",
+      "html": "<p>It is possible to make the assignment operator virtual. However, unlike the destructor case where virtualization is always a good idea, virtualizing the assignment operator really opens up a bag full of worms and gets into some advanced topics outside of the scope of this tutorial. Consequently, we are going to recommend you leave your assignments non-virtual for now, in the interest of simplicity.</p>",
+      "preview": "It is possible to make the assignment operator virtual. However, unlike the dest",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b16",
+      "type": "section",
+      "title": "Ignoring virtualization",
+      "html": "<h3 class=\"cpp-section-heading\">Ignoring virtualization</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b17",
+      "type": "paragraph",
+      "html": "<p>Very rarely you may want to ignore the virtualization of a function. For example, consider the following code:</p>",
+      "preview": "Very rarely you may want to ignore the virtualization of a function. For example",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b18",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <string_view>\nclass Base\n{\npublic:\n    virtual ~Base() = default;\n    virtual std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\nclass Base\n{\npublic:\n    virtual ~Base() = default;\n    virtual std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b19",
+      "type": "paragraph",
+      "html": "<p>There may be cases where you want a Base pointer to a Derived object to call Base::getName() instead of Derived::getName(). To do so, simply use the scope resolution operator:</p>",
+      "preview": "There may be cases where you want a Base pointer to a Derived object to call Bas",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b20",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\nint main()\n{\n    Derived derived {};\n    const Base& base { derived };\n\n    // Calls Base::getName() instead of the virtualized Derived::getName()\n    std::cout << base.Base::getName() << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint main()\n{\n    Derived derived {};\n    const Base&amp; base { derived };\n\n    // Calls Base::getName() instead of the virtualized Derived::getName()\n    std::cout &lt;&lt; base.Base::getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b21",
+      "type": "paragraph",
+      "html": "<p>You probably won’t use this very often, but it’s good to know it’s at least possible.</p>",
+      "preview": "You probably won’t use this very often, but it’s good to know it’s at least poss",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b22",
+      "type": "section",
+      "title": "Should we make all destructors virtual?",
+      "html": "<h3 class=\"cpp-section-heading\">Should we make all destructors virtual?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b23",
+      "type": "paragraph",
+      "html": "<p>This is a common question asked by new programmers. As noted in the top example, if the base class destructor isn’t marked as virtual, then the program is at risk for leaking memory if a programmer later deletes a base class pointer that is pointing to a derived object. One way to avoid this is to mark all your destructors as virtual. But should you?</p>",
+      "preview": "This is a common question asked by new programmers. As noted in the top example,",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b24",
+      "type": "paragraph",
+      "html": "<p>It’s easy to say yes, so that way you can later use any class as a base class -- but there’s a performance penalty for doing so (a virtual pointer added to every instance of your class). So you have to balance that cost, as well as your intent.</p>",
+      "preview": "It’s easy to say yes, so that way you can later use any class as a base class --",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b25",
+      "type": "paragraph",
+      "html": "<p>We’d suggest the following: If a class isn’t explicitly designed to be a base class, then it’s generally better to have no virtual members and no virtual destructor. The class can still be used via composition. If a class is designed to be used as a base class and/or has any virtual functions, then it should always have a virtual destructor.</p>",
+      "preview": "We’d suggest the following: If a class isn’t explicitly designed to be a base cl",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b26",
+      "type": "paragraph",
+      "html": "<p>If the decision is made to have a class not be inheritable, then the next question is whether it’s possible to enforce this.</p>",
+      "preview": "If the decision is made to have a class not be inheritable, then the next questi",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b27",
+      "type": "paragraph",
+      "html": "<p>Conventional wisdom (as initially put forth by Herb Sutter, a highly regarded C++ guru) has suggested avoiding the non-virtual destructor memory leak situation as follows, “A base class destructor should be either public and virtual, or protected and non-virtual.” A base class with a protected destructor can’t be deleted using a base class pointer, which prevents deleting a derived class object through a base class pointer.</p>",
+      "preview": "Conventional wisdom (as initially put forth by Herb Sutter, a highly regarded C+",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b28",
+      "type": "paragraph",
+      "html": "<p>Unfortunately, this also prevents <em>any</em> use of the base class destructor by the public. That means:</p>",
+      "preview": "Unfortunately, this also prevents any use of the base class destructor by the pu",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b29",
+      "type": "list",
+      "html": "<ul><li>We shouldn’t dynamically allocate base class objects by we have no conventional way to delete them (there are non-conventional workarounds, but yuck).</li><li>We can’t even statically allocate base class objects because the destructor isn’t accessible when they go out of scope.</li></ul>",
+      "preview": "We shouldn’t dynamically allocate base class objects by we have no conventional ",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b30",
+      "type": "paragraph",
+      "html": "<p>In other words, using this method, to make the derived class safe, we have to make the base class practically unusable by itself.</p>",
+      "preview": "In other words, using this method, to make the derived class safe, we have to ma",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b31",
+      "type": "paragraph",
+      "html": "<p>Now that the <code>final</code> specifier has been introduced into the language, our recommendations are as follows:</p>",
+      "preview": "Now that the final specifier has been introduced into the language, our recommen",
+      "canCheck": true
+    },
+    {
+      "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b32",
+      "type": "list",
+      "html": "<ul><li>If you intend your class to be inherited from, make sure your destructor is virtual and public.</li><li>If you do not intend your class to be inherited from, mark your class as final. This will prevent other classes from inheriting from it in the first place, without imposing any other use restrictions on the class itself.</li></ul>",
+      "preview": "If you intend your class to be inherited from, make sure your destructor is virt",
+      "canCheck": true
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "index": 153,
+  "chapterId": "12",
+  "number": "12.4",
+  "title": "12.4 — Lvalue references to const",
+  "url": "https://www.learncpp.com/cpp-tutorial/lvalue-references-to-const/",
+  "slug": "lvalue-references-to-const",
+  "scrapedAt": "2026-09-15T16:29:55.884Z",
+  "totalBlocks": 46,
+  "totalCheckpoints": 40,
+  "blocks": [
+    {
+      "id": "lvalue-references-to-const_b0",
+      "type": "paragraph",
+      "html": "<p>In the previous lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue references</a>), we discussed how an lvalue reference can only bind to a modifiable lvalue. This means the following is illegal:</p>",
+      "preview": "In the previous lesson (12.3 -- Lvalue references), we discussed how an lvalue r",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int x { 5 }; // x is a non-modifiable (const) lvalue\n    int& ref { x }; // error: ref can not bind to non-modifiable lvalue\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x { 5 }; // x is a non-modifiable (const) lvalue\n    int&amp; ref { x }; // error: ref can not bind to non-modifiable lvalue\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b2",
+      "type": "paragraph",
+      "html": "<p>This is disallowed because it would allow us to modify a const variable (<code>x</code>) through the non-const reference (<code>ref</code>).</p>",
+      "preview": "This is disallowed because it would allow us to modify a const variable (x) thro",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b3",
+      "type": "paragraph",
+      "html": "<p>But what if we want to have a const variable we want to create a reference to? A normal lvalue reference (to a non-const value) won’t do.</p>",
+      "preview": "But what if we want to have a const variable we want to create a reference to? A",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b4",
+      "type": "section",
+      "title": "Lvalue reference to const",
+      "html": "<h3 class=\"cpp-section-heading\">Lvalue reference to const</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b5",
+      "type": "paragraph",
+      "html": "<p>By using the <code>const</code> keyword when declaring an lvalue reference, we tell an lvalue reference to treat the object it is referencing as const. Such a reference is called an <strong>lvalue reference to a const value</strong> (sometimes called a <strong>reference to const</strong> or a <strong>const reference</strong>).</p>",
+      "preview": "By using the const keyword when declaring an lvalue reference, we tell an lvalue",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b6",
+      "type": "paragraph",
+      "html": "<p>Lvalue references to const can bind to non-modifiable lvalues:</p>",
+      "preview": "Lvalue references to const can bind to non-modifiable lvalues:",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    const int x { 5 };    // x is a non-modifiable lvalue\n    const int& ref { x }; // okay: ref is a an lvalue reference to a const value\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x { 5 };    // x is a non-modifiable lvalue\n    const int&amp; ref { x }; // okay: ref is a an lvalue reference to a const value\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b8",
+      "type": "paragraph",
+      "html": "<p>Because lvalue references to const treat the object they are referencing as const, they can be used to access but not modify the value being referenced:</p>",
+      "preview": "Because lvalue references to const treat the object they are referencing as cons",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    const int x { 5 };    // x is a non-modifiable lvalue\n    const int& ref { x }; // okay: ref is a an lvalue reference to a const value\n\n    std::cout << ref << '\\n'; // okay: we can access the const object\n    ref = 6;                  // error: we can not modify an object through a const reference\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    const int x { 5 };    // x is a non-modifiable lvalue\n    const int&amp; ref { x }; // okay: ref is a an lvalue reference to a const value\n\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // okay: we can access the const object\n    ref = 6;                  // error: we can not modify an object through a const reference\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b10",
+      "type": "section",
+      "title": "Initializing an lvalue reference to const with a modifiable lvalue",
+      "html": "<h3 class=\"cpp-section-heading\">Initializing an lvalue reference to const with a modifiable lvalue</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b11",
+      "type": "paragraph",
+      "html": "<p>Lvalue references to const can also bind to modifiable lvalues. In such a case, the object being referenced is treated as const when accessed through the reference (even though the underlying object is non-const):</p>",
+      "preview": "Lvalue references to const can also bind to modifiable lvalues. In such a case, ",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int x { 5 };          // x is a modifiable lvalue\n    const int& ref { x }; // okay: we can bind a const reference to a modifiable lvalue\n\n    std::cout << ref << '\\n'; // okay: we can access the object through our const reference\n    ref = 7;                  // error: we can not modify an object through a const reference\n\n    x = 6;                // okay: x is a modifiable lvalue, we can still modify it through the original identifier\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 5 };          // x is a modifiable lvalue\n    const int&amp; ref { x }; // okay: we can bind a const reference to a modifiable lvalue\n\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // okay: we can access the object through our const reference\n    ref = 7;                  // error: we can not modify an object through a const reference\n\n    x = 6;                // okay: x is a modifiable lvalue, we can still modify it through the original identifier\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b13",
+      "type": "paragraph",
+      "html": "<p>In the above program, we bind const reference <code>ref</code> to modifiable lvalue <code>x</code>. We can then use <code>ref</code> to access <code>x</code>, but because <code>ref</code> is const, we can not modify the value of <code>x</code> through <code>ref</code>. However, we still can modify the value of <code>x</code> directly (using the identifier <code>x</code>).</p>",
+      "preview": "In the above program, we bind const reference ref to modifiable lvalue x. We can",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b14",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Favor <code>lvalue references to const</code> over <code>lvalue references to non-const</code> unless you need to modify the object being referenced.</p></div>",
+      "preview": "Best practiceFavor lvalue references to const over lvalue references to non-const unless you need to",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b15",
+      "type": "section",
+      "title": "Initializing an lvalue reference to const with an rvalue",
+      "html": "<h3 class=\"cpp-section-heading\">Initializing an lvalue reference to const with an rvalue</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b16",
+      "type": "paragraph",
+      "html": "<p>Perhaps surprisingly, lvalues references to const can also bind to rvalues:</p>",
+      "preview": "Perhaps surprisingly, lvalues references to const can also bind to rvalues:",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    const int& ref { 5 }; // okay: 5 is an rvalue\n\n    std::cout << ref << '\\n'; // prints 5\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    const int&amp; ref { 5 }; // okay: 5 is an rvalue\n\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // prints 5\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b18",
+      "type": "paragraph",
+      "html": "<p>When this happens, a temporary object is created and initialized with the rvalue, and the reference to const is bound to that temporary object.</p>",
+      "preview": "When this happens, a temporary object is created and initialized with the rvalue",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b19",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We covered temporary objects in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Introduction to local scope</a>.</p></div>",
+      "preview": "Related contentWe covered temporary objects in lesson 2.5 -- Introduction to local scope.",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b20",
+      "type": "section",
+      "title": "Initializing an lvalue reference to const with a value of a different type",
+      "html": "<h3 class=\"cpp-section-heading\">Initializing an lvalue reference to const with a value of a different type</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b21",
+      "type": "paragraph",
+      "html": "<p>Lvalue references to const can even bind to values of a different type, so long as those values can be implicitly converted to the reference type:</p>",
+      "preview": "Lvalue references to const can even bind to values of a different type, so long ",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b22",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    // case 1\n    const double& r1 { 5 };  // temporary double initialized with value 5, r1 binds to temporary\n\n    std::cout << r1 << '\\n'; // prints 5\n\n    // case 2\n    char c { 'a' };\n    const int& r2 { c };     // temporary int initialized with value 'a', r2 binds to temporary\n\n    std::cout << r2 << '\\n'; // prints 97 (since r2 is a reference to int)\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // case 1\n    const double&amp; r1 { 5 };  // temporary double initialized with value 5, r1 binds to temporary\n\n    std::cout &lt;&lt; r1 &lt;&lt; '\\n'; // prints 5\n\n    // case 2\n    char c { 'a' };\n    const int&amp; r2 { c };     // temporary int initialized with value 'a', r2 binds to temporary\n\n    std::cout &lt;&lt; r2 &lt;&lt; '\\n'; // prints 97 (since r2 is a reference to int)\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b23",
+      "type": "paragraph",
+      "html": "<p>In case 1, a temporary object of type <code>double</code> is created and initialized with int value <code>5</code>. Then <code>const double&amp; r1</code> is bound to that temporary double object.</p>",
+      "preview": "In case 1, a temporary object of type double is created and initialized with int",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b24",
+      "type": "paragraph",
+      "html": "<p>In case 2, a temporary object of type <code>int</code> is created and initialized with char value <code>a</code>. Then <code>const int&amp; r2</code> is bound to that temporary int object.</p>",
+      "preview": "In case 2, a temporary object of type int is created and initialized with char v",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b25",
+      "type": "paragraph",
+      "html": "<p>In both cases, the type of the reference and the type of the temporary match.</p>",
+      "preview": "In both cases, the type of the reference and the type of the temporary match.",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b26",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>If you try to bind a const lvalue reference to a value of a different type, the compiler will create a temporary object of the same type as the reference, initialize it using the value, and then bind the reference to the temporary.</p></div>",
+      "preview": "Key insightIf you try to bind a const lvalue reference to a value of a different type, the compiler ",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b27",
+      "type": "paragraph",
+      "html": "<p>Also note that when we print <code>r2</code> it prints as an int rather than a char. This is because <code>r2</code> is a reference to an int object (the temporary int that was created), not to char <code>c</code>.</p>",
+      "preview": "Also note that when we print r2 it prints as an int rather than a char. This is ",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b28",
+      "type": "paragraph",
+      "html": "<p>Although it may seem strange to allow this, we’ll see examples where this is useful in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-const-lvalue-reference/\">12.6 -- Pass by const lvalue reference</a>.</p>",
+      "preview": "Although it may seem strange to allow this, we’ll see examples where this is use",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b29",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>We normally assume that a reference is identical to the object it is bound to -- but this assumption is broken when a reference is bound to a temporary copy of the object or a temporary resulting from the conversion of the object instead. Any modifications subsequently made to the original object will not be seen by the reference (as it is referencing a different object), and vice-versa.</p><p>Here’s a silly example showing this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    short bombs { 1 };         // I can has bomb! (note: type is short)\n    \n    const int&amp; you { bombs };  // You can has bomb too (note: type is int&amp;)\n    --bombs;                   // Bomb all gone\n\n    if (you)                   // You still has?\n    {\n        std::cout &lt;&lt; \"Bombs away!  Goodbye, cruel world.\\n\"; // Para bailar la bomba\n    }\n\n    return 0;\n}</code></pre><p>In the above example, <code>bombs</code> is a <code>short</code> and <code>you</code> is a <code>const int&amp;</code>. Because <code>you</code> can only bind to an <code>int</code> object, when <code>you</code> is initialized with <code>bombs</code>, the compiler will implicitly convert <code>bombs</code> to an <code>int</code>, which results in the creation of a temporary <code>int</code> object (with value <code>1</code>). <code>you</code> ends up bound to this temporary object rather than <code>bombs</code>.</p><p>When <code>bombs</code> is decremented, <code>you</code> is not affected because it is referencing a different object. So although we expect <code>if (you)</code> to evaluate to <code>false</code>, it actually evaluates to <code>true</code>.</p><p>If you would stop blowing up the world, that would be great.</p></div>",
+      "preview": "WarningWe normally assume that a reference is identical to the object it is bound to -- but this ass",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b30",
+      "type": "section",
+      "title": "Const references bound to temporary objects extend the lifetime of the temporary object",
+      "html": "<h3 class=\"cpp-section-heading\">Const references bound to temporary objects extend the lifetime of the temporary object</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b31",
+      "type": "paragraph",
+      "html": "<p>Temporary objects are normally destroyed at the end of the expression in which they are created.</p>",
+      "preview": "Temporary objects are normally destroyed at the end of the expression in which t",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b32",
+      "type": "paragraph",
+      "html": "<p>Given the statement <code>const int&amp; ref { 5 };</code>, consider what would happen instead if the temporary object created to hold rvalue <code>5</code> was destroyed at the end of the expression that initializes <code>ref</code>. Reference <code>ref</code> would be left dangling (referencing an object that had been destroyed), and we’d get undefined behavior when we tried to access <code>ref</code>.</p>",
+      "preview": "Given the statement const int& ref { 5 };, consider what would happen instead if",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b33",
+      "type": "paragraph",
+      "html": "<p>To avoid dangling references in such cases, C++ has a special rule: When a const lvalue reference is <em>directly</em> bound to a temporary object, the lifetime of the temporary object is extended to match the lifetime of the reference.</p>",
+      "preview": "To avoid dangling references in such cases, C++ has a special rule: When a const",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b34",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    const int& ref { 5 }; // The temporary object holding value 5 has its lifetime extended to match ref\n\n    std::cout << ref << '\\n'; // Therefore, we can safely use it here\n\n    return 0;\n} // Both ref and the temporary object die here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    const int&amp; ref { 5 }; // The temporary object holding value 5 has its lifetime extended to match ref\n\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // Therefore, we can safely use it here\n\n    return 0;\n} // Both ref and the temporary object die here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b35",
+      "type": "paragraph",
+      "html": "<p>In the above example, when <code>ref</code> is initialized with rvalue <code>5</code>, a temporary object is created and <code>ref</code> is bound to that temporary object. The lifetime of the temporary object matches the lifetime of <code>ref</code>. Thus, we can safely print the value of <code>ref</code> in the next statement. Then both <code>ref</code> and the temporary object go out of scope and are destroyed at the end of the block.</p>",
+      "preview": "In the above example, when ref is initialized with rvalue 5, a temporary object ",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b36",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Lvalue references can only bind to modifiable lvalues.</p><p>Lvalue references to const can bind to modifiable lvalues, non-modifiable lvalues, and rvalues. This makes them a much more flexible type of reference.</p></div>",
+      "preview": "Key insightLvalue references can only bind to modifiable lvalues.Lvalue references to const can bind",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b37",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Lifetime extension only works when a const reference is directly bound to a temporary. Temporaries returned from a function (even ones returned by const reference) are not eligible for lifetime extension.</p><p>We show an example of this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/return-by-reference-and-return-by-address/\">12.12 -- Return by reference and return by address</a>.</p><p>For class type rvalues, binding a reference to a member will extend the lifetime of the entire object.</p></div>",
+      "preview": "For advanced readersLifetime extension only works when a const reference is directly bound to a temp",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b38",
+      "type": "paragraph",
+      "html": "<p>So why does C++ allow a const reference to bind to an rvalue anyway? We’ll answer that question in the next lesson!</p>",
+      "preview": "So why does C++ allow a const reference to bind to an rvalue anyway? We’ll answe",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b39",
+      "type": "section",
+      "title": "Constexpr lvalue references Optional",
+      "html": "<h3 class=\"cpp-section-heading\">Constexpr lvalue references <span class=\"cpp-section-pill cpp-section-optional\">Optional</span></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "lvalue-references-to-const_b40",
+      "type": "paragraph",
+      "html": "<p>When applied to a reference, <code>constexpr</code> allows the reference to be used in a constant expression. Constexpr references have a particular limitation: they can only be bound to objects with static duration (either globals or static locals). This is because the compiler knows where static objects will be instantiated in memory, so it can treat that address as a compile-time constant.</p>",
+      "preview": "When applied to a reference, constexpr allows the reference to be used in a cons",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b41",
+      "type": "paragraph",
+      "html": "<p>A constexpr reference cannot bind to a (non-static) local variable. This is because the address of local variables is not known until the function they are defined within is actually called.</p>",
+      "preview": "A constexpr reference cannot bind to a (non-static) local variable. This is beca",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b42",
+      "type": "code",
+      "language": "cpp",
+      "code": "int g_x { 5 };\n\nint main()\n{\n    [[maybe_unused]] constexpr int& ref1 { g_x }; // ok, can bind to global\n\n    static int s_x { 6 };\n    [[maybe_unused]] constexpr int& ref2 { s_x }; // ok, can bind to static local\n\n    int x { 6 };\n    [[maybe_unused]] constexpr int& ref3 { x }; // compile error: can't bind to non-static object\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int g_x { 5 };\n\nint main()\n{\n    [[maybe_unused]] constexpr int&amp; ref1 { g_x }; // ok, can bind to global\n\n    static int s_x { 6 };\n    [[maybe_unused]] constexpr int&amp; ref2 { s_x }; // ok, can bind to static local\n\n    int x { 6 };\n    [[maybe_unused]] constexpr int&amp; ref3 { x }; // compile error: can't bind to non-static object\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b43",
+      "type": "paragraph",
+      "html": "<p>When defining a constexpr reference to a const variable, we need to apply both <code>constexpr</code> (which applies to the reference) and <code>const</code> (which applies to the type being referenced).</p>",
+      "preview": "When defining a constexpr reference to a const variable, we need to apply both c",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    static const int s_x { 6 }; // a const int\n    [[maybe_unused]] constexpr const int& ref2 { s_x }; // needs both constexpr and const\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    static const int s_x { 6 }; // a const int\n    [[maybe_unused]] constexpr const int&amp; ref2 { s_x }; // needs both constexpr and const\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "lvalue-references-to-const_b45",
+      "type": "paragraph",
+      "html": "<p>Given these limitations, constexpr references typically don’t see much use.</p>",
+      "preview": "Given these limitations, constexpr references typically don’t see much use.",
+      "canCheck": true
+    }
+  ]
+}

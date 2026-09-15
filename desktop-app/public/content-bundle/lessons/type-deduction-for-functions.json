@@ -1,0 +1,362 @@
+{
+  "index": 132,
+  "chapterId": "10",
+  "number": "10.9",
+  "title": "10.9 — Type deduction for functions",
+  "url": "https://www.learncpp.com/cpp-tutorial/type-deduction-for-functions/",
+  "slug": "type-deduction-for-functions",
+  "scrapedAt": "2026-09-15T16:29:44.594Z",
+  "totalBlocks": 48,
+  "totalCheckpoints": 42,
+  "blocks": [
+    {
+      "id": "type-deduction-for-functions_b0",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{\n    return x + y;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    return x + y;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b2",
+      "type": "paragraph",
+      "html": "<p>When this function is compiled, the compiler will determine that <code>x + y</code>evaluates to an <code>int</code>, then ensure that type of the return value matches the declared return type of the function (or that the return value type can be converted to the declared return type).</p>",
+      "preview": "When this function is compiled, the compiler will determine that x + yevaluates ",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b3",
+      "type": "section",
+      "title": "Return type deduction with auto",
+      "html": "<h3 class=\"cpp-section-heading\">Return type deduction with <code>auto</code></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b4",
+      "type": "paragraph",
+      "html": "<p>Since the compiler already has to deduce the return type from the return statement (to ensure that the value can be converted to the function’s declared return type), in C++14, the <code>auto</code> keyword was extended to do function return type deduction. This works by using the <code>auto</code> keyword in place of the function’s return type.</p>",
+      "preview": "Since the compiler already has to deduce the return type from the return stateme",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b5",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto add(int x, int y)\n{\n    return x + y;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto add(int x, int y)\n{\n    return x + y;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b7",
+      "type": "paragraph",
+      "html": "<p>Because the return statement is returning an <code>int</code> value, the compiler will deduce that the return type of this function is <code>int</code>.</p>",
+      "preview": "Because the return statement is returning an int value, the compiler will deduce",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b8",
+      "type": "paragraph",
+      "html": "<p>When using an <code>auto</code> return type, all return statements within the function must return values of the same type, otherwise an error will result. For example:</p>",
+      "preview": "When using an auto return type, all return statements within the function must r",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b9",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto someFcn(bool b)\n{\n    if (b)\n        return 5; // return type int\n    else\n        return 6.7; // return type double\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto someFcn(bool b)\n{\n    if (b)\n        return 5; // return type int\n    else\n        return 6.7; // return type double\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b10",
+      "type": "paragraph",
+      "html": "<p>In the above function, the two return statements return values of different types, so the compiler will give an error.</p>",
+      "preview": "In the above function, the two return statements return values of different type",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b11",
+      "type": "paragraph",
+      "html": "<p>If such a case is desired for some reason, you can either explicitly specify a return type for your function (in which case the compiler will try to implicitly convert any non-matching return expressions to the explicit return type), or you can explicitly convert all of your return statements to the same type. In the example above, the latter could be done by changing <code>5</code> to <code>5.0</code>, but <code>static_cast</code> can also be used for non-literal types.</p>",
+      "preview": "If such a case is desired for some reason, you can either explicitly specify a r",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b12",
+      "type": "section",
+      "title": "Benefits of return type deduction",
+      "html": "<h3 class=\"cpp-section-heading\">Benefits of return type deduction</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b13",
+      "type": "paragraph",
+      "html": "<p>The biggest advantage of return type deduction is that having the compiler deduce the function’s return type negates the risk of a mismatched return type (preventing unexpected conversions).</p>",
+      "preview": "The biggest advantage of return type deduction is that having the compiler deduc",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b14",
+      "type": "paragraph",
+      "html": "<p>This can be particularly useful when a function’s return type is fragile (cases where return type is likely to change if the implementation changes). In such cases, being explicit about the return type means having to update all relevant return types when an impacting change is made to the implementation. If we’re lucky, the compiler will error until we update the relevant return types. If we’re not lucky, we’ll get implicit conversions where we don’t desire them.</p>",
+      "preview": "This can be particularly useful when a function’s return type is fragile (cases ",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b15",
+      "type": "paragraph",
+      "html": "<p>In other cases, the return type of a function may either be long and complex, or not be that obvious. In such cases, <code>auto</code> can be used to simplify:</p>",
+      "preview": "In other cases, the return type of a function may either be long and complex, or",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b16",
+      "type": "code",
+      "language": "cpp",
+      "code": "// let compiler determine the return type of unsigned short + char\nauto add(unsigned short x, char y)\n{\n    return x + y;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// let compiler determine the return type of unsigned short + char\nauto add(unsigned short x, char y)\n{\n    return x + y;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b17",
+      "type": "paragraph",
+      "html": "<p>We discuss this case a bit more (and how to express the actual return type of such a function) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates-with-multiple-template-types/\">11.8 -- Function templates with multiple template types</a>.</p>",
+      "preview": "We discuss this case a bit more (and how to express the actual return type of su",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b18",
+      "type": "section",
+      "title": "Downsides of return type deduction",
+      "html": "<h3 class=\"cpp-section-heading\">Downsides of return type deduction</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b19",
+      "type": "paragraph",
+      "html": "<p>There are two major downsides to return type deduction:</p>",
+      "preview": "There are two major downsides to return type deduction:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b20",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Functions that use an <code>auto</code> return type must be fully defined before they can be used (a forward declaration is not sufficient). For example:</li></ol>",
+      "preview": "Functions that use an auto return type must be fully defined before they can be ",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nauto foo();\n\nint main()\n{\n    std::cout << foo() << '\\n'; // the compiler has only seen a forward declaration at this point\n\n    return 0;\n}\n\nauto foo()\n{\n    return 5;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nauto foo();\n\nint main()\n{\n    std::cout &lt;&lt; foo() &lt;&lt; '\\n'; // the compiler has only seen a forward declaration at this point\n\n    return 0;\n}\n\nauto foo()\n{\n    return 5;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b22",
+      "type": "paragraph",
+      "html": "<p>On the author’s machine, this gives the following compile error:</p>",
+      "preview": "On the author’s machine, this gives the following compile error:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b23",
+      "type": "output",
+      "text": "error C3779: 'foo': a function that returns 'auto' cannot be used before it is defined.\n",
+      "html": "<pre>error C3779: 'foo': a function that returns 'auto' cannot be used before it is defined.\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b24",
+      "type": "paragraph",
+      "html": "<p>This makes sense: a forward declaration does not have enough information for the compiler to deduce the function’s return type. This means normal functions that return <code>auto</code> are typically only callable from within the file in which they are defined.</p>",
+      "preview": "This makes sense: a forward declaration does not have enough information for the",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b25",
+      "type": "list",
+      "html": "<ol start=\"2\"><li>When using type deduction with objects, the initializer is always present as part of the same statement, so it’s usually not overly burdensome to determine what type will be deduced. With type deduction for functions, that is not the case -- the function’s prototype gives no indication as to what type the function actually returns. A good programming IDE should make clear what the deduced type of the function is, but in absence of having that available, a user would actually have to dig into the function body itself to determine what type the function returned. The odds of mistakes being made are higher. Generally we prefer to be explicit about types that are part of an interface (a function’s declaration is an interface).</li></ol>",
+      "preview": "When using type deduction with objects, the initializer is always present as par",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b26",
+      "type": "paragraph",
+      "html": "<p>Unlike type deduction for objects, there isn’t as much consensus on best practices for function return type deduction. We recommend generally avoiding return type deduction for functions.</p>",
+      "preview": "Unlike type deduction for objects, there isn’t as much consensus on best practic",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b27",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer explicit return types over return type deduction (except in cases where the return type is unimportant, difficult to express, or fragile).</p></div>",
+      "preview": "Best practicePrefer explicit return types over return type deduction (except in cases where the retu",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b28",
+      "type": "section",
+      "title": "Trailing return type syntax",
+      "html": "<h3 class=\"cpp-section-heading\">Trailing return type syntax</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b29",
+      "type": "paragraph",
+      "html": "<p>The <code>auto</code> keyword can also be used to declare functions using a <strong>trailing return syntax</strong>, where the return type is specified after the rest of the function prototype.</p>",
+      "preview": "The auto keyword can also be used to declare functions using a trailing return s",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b30",
+      "type": "paragraph",
+      "html": "<p>Consider the following function:</p>",
+      "preview": "Consider the following function:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b31",
+      "type": "code",
+      "language": "cpp",
+      "code": "int add(int x, int y)\n{\n  return (x + y);\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n  return (x + y);\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b32",
+      "type": "paragraph",
+      "html": "<p>Using the trailing return syntax, this could be equivalently written as:</p>",
+      "preview": "Using the trailing return syntax, this could be equivalently written as:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto add(int x, int y) -> int\n{\n  return (x + y);\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto add(int x, int y) -&gt; int\n{\n  return (x + y);\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b34",
+      "type": "paragraph",
+      "html": "<p>In this case, <code>auto</code> does not perform type deduction -- it is just part of the syntax to use a trailing return type.</p>",
+      "preview": "In this case, auto does not perform type deduction -- it is just part of the syn",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b35",
+      "type": "paragraph",
+      "html": "<p>Why would you want to use this? Here are some reasons:</p>",
+      "preview": "Why would you want to use this? Here are some reasons:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b36",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>For functions with complex return types, a trailing return type can make the function easier to read:</li></ol>",
+      "preview": "For functions with complex return types, a trailing return type can make the fun",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b37",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <type_traits> // for std::common_type\n\nstd::common_type_t<int, double> compare(int, double);         // harder to read (where is the name of the function in this mess?)\nauto compare(int, double) -> std::common_type_t<int, double>; // easier to read (we don't have to read the return type unless we care)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;type_traits&gt; // for std::common_type\n\nstd::common_type_t&lt;int, double&gt; compare(int, double);         // harder to read (where is the name of the function in this mess?)\nauto compare(int, double) -&gt; std::common_type_t&lt;int, double&gt;; // easier to read (we don't have to read the return type unless we care)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b38",
+      "type": "list",
+      "html": "<ol start=\"2\"><li>The trailing return type syntax can be used to align the names of your functions, which makes consecutive function declarations easier to read:</li></ol>",
+      "preview": "The trailing return type syntax can be used to align the names of your functions",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b39",
+      "type": "code",
+      "language": "cpp",
+      "code": "auto add(int x, int y) -> int;\nauto divide(double x, double y) -> double;\nauto printSomething() -> void;\nauto generateSubstring(const std::string &s, int start, int len) -> std::string;",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto add(int x, int y) -&gt; int;\nauto divide(double x, double y) -&gt; double;\nauto printSomething() -&gt; void;\nauto generateSubstring(const std::string &amp;s, int start, int len) -&gt; std::string;</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b40",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><ol start=\"3\"><li>If we have a function whose return type must be deduced based on the type of the function parameters, a normal return type will not suffice, because the compiler has not yet seen the parameters at that point.</li></ol><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;type_traits&gt;\n// note: decltype(x) evaluates to the type of x\n\nstd::common_type_t&lt;decltype(x), decltype(y)&gt; add(int x, double y);         // Compile error: compiler hasn't seen definitions of x and y yet\nauto add(int x, double y) -&gt; std::common_type_t&lt;decltype(x), decltype(y)&gt;; // ok</code></pre><ol start=\"4\"><li>The trailing return syntax is also required for some advanced features of C++, such as lambdas (which we cover in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/\">20.6 -- Introduction to lambdas (anonymous functions)</a>).</li></ol></div>",
+      "preview": "For advanced readersIf we have a function whose return type must be deduced based on the type of the",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b41",
+      "type": "paragraph",
+      "html": "<p>For now, we recommend the continued use of the traditional function return syntax except in situations that require the trailing return syntax.</p>",
+      "preview": "For now, we recommend the continued use of the traditional function return synta",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b42",
+      "type": "section",
+      "title": "Type deduction can’t be used for function parameter types",
+      "html": "<h3 class=\"cpp-section-heading\">Type deduction can’t be used for function parameter types</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "type-deduction-for-functions_b43",
+      "type": "paragraph",
+      "html": "<p>Many new programmers who learn about type deduction try something like this:</p>",
+      "preview": "Many new programmers who learn about type deduction try something like this:",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b44",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid addAndPrint(auto x, auto y)\n{\n    std::cout << x + y << '\\n';\n}\n\nint main()\n{\n    addAndPrint(2, 3); // case 1: call addAndPrint with int parameters\n    addAndPrint(4.5, 6.7); // case 2: call addAndPrint with double parameters\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid addAndPrint(auto x, auto y)\n{\n    std::cout &lt;&lt; x + y &lt;&lt; '\\n';\n}\n\nint main()\n{\n    addAndPrint(2, 3); // case 1: call addAndPrint with int parameters\n    addAndPrint(4.5, 6.7); // case 2: call addAndPrint with double parameters\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b45",
+      "type": "paragraph",
+      "html": "<p>Unfortunately, type deduction doesn’t work for function parameters, and prior to C++20, the above program won’t compile (you’ll get an error about function parameters not being able to have an auto type).</p>",
+      "preview": "Unfortunately, type deduction doesn’t work for function parameters, and prior to",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b46",
+      "type": "paragraph",
+      "html": "<p>In C++20, the <code>auto</code> keyword was extended so that the above program will compile and function correctly -- however, <code>auto</code> is not invoking type deduction in this case. Rather, it is triggering a different feature called <code>function templates</code> that was designed to actually handle such cases.</p>",
+      "preview": "In C++20, the auto keyword was extended so that the above program will compile a",
+      "canCheck": true
+    },
+    {
+      "id": "type-deduction-for-functions_b47",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We introduce function templates in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates/\">11.6 -- Function templates</a>, and discuss use of <code>auto</code> in the context of function templates in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates-with-multiple-template-types/\">11.8 -- Function templates with multiple template types</a>.</p></div>",
+      "preview": "Related contentWe introduce function templates in lesson 11.6 -- Function templates, and discuss use",
+      "canCheck": true
+    }
+  ]
+}

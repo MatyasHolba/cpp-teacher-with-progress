@@ -1,0 +1,598 @@
+{
+  "index": 192,
+  "chapterId": "14",
+  "number": "14.10",
+  "title": "14.10 — Constructor member initializer lists",
+  "url": "https://www.learncpp.com/cpp-tutorial/constructor-member-initializer-lists/",
+  "slug": "constructor-member-initializer-lists",
+  "scrapedAt": "2026-09-15T16:30:15.776Z",
+  "totalBlocks": 80,
+  "totalCheckpoints": 68,
+  "blocks": [
+    {
+      "id": "constructor-member-initializer-lists_b0",
+      "type": "paragraph",
+      "html": "<p>This lesson continues our introduction of constructors from lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 -- Introduction to constructors</a>.</p>",
+      "preview": "This lesson continues our introduction of constructors from lesson 14.9 -- Intro",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b1",
+      "type": "section",
+      "title": "Member initialization via a member initialization list",
+      "html": "<h3 class=\"cpp-section-heading\">Member initialization via a member initialization list</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b2",
+      "type": "paragraph",
+      "html": "<p>To have a constructor initialize members, we do so using a <strong>member initializer list</strong> (often called a “member initialization list”). Do not confuse this with the similarly named “initializer list” that is used to initialize aggregates with a list of values.</p>",
+      "preview": "To have a constructor initialize members, we do so using a member initializer li",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b3",
+      "type": "paragraph",
+      "html": "<p>Member initialization lists are something that is best learned by example. In the following example, our <code>Foo(int, int)</code> constructor has been updated to use a member initializer list to initialize <code>m_x</code>, and <code>m_y</code>:</p>",
+      "preview": "Member initialization lists are something that is best learned by example. In th",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x {};\n    int m_y {};\n\npublic:\n    Foo(int x, int y)\n        : m_x { x }, m_y { y } // here's our member initialization list\n    {\n        std::cout << \"Foo(\" << x << \", \" << y << \") constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo{ 6, 7 };\n    foo.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x {};\n    int m_y {};\n\npublic:\n    Foo(int x, int y)\n        : m_x { x }, m_y { y } // here's our member initialization list\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; x &lt;&lt; \", \" &lt;&lt; y &lt;&lt; \") constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo{ 6, 7 };\n    foo.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b5",
+      "type": "paragraph",
+      "html": "<p>The member initializer list is defined after the constructor parameters. It begins with a colon (:), and then lists each member to initialize along with the initialization value for that variable, separated by a comma. You must use a direct form of initialization here (preferably using braces, but parentheses works as well) -- using copy initialization (with an equals) does not work here. Also note that the member initializer list does not end in a semicolon.</p>",
+      "preview": "The member initializer list is defined after the constructor parameters. It begi",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b6",
+      "type": "paragraph",
+      "html": "<p>This program produces the following output:</p>",
+      "preview": "This program produces the following output:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b7",
+      "type": "output",
+      "text": "Foo(6, 7) constructed\nFoo(6, 7)\n",
+      "html": "<pre>Foo(6, 7) constructed\nFoo(6, 7)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b8",
+      "type": "paragraph",
+      "html": "<p>When <code>foo</code> is instantiated, the members in the initialization list are initialized with the specified initialization values. In this case, the member initializer list initializes <code>m_x</code> to the value of <code>x</code> (which is <code>6</code>), and <code>m_y</code> to the value of <code>y</code> (which is <code>7</code>). Then the body of the constructor runs.</p>",
+      "preview": "When foo is instantiated, the members in the initialization list are initialized",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b9",
+      "type": "paragraph",
+      "html": "<p>When the <code>print()</code> member function is called, you can see that <code>m_x</code> still has value <code>6</code> and <code>m_y</code> still has value <code>7</code>.</p>",
+      "preview": "When the print() member function is called, you can see that m_x still has value",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b10",
+      "type": "section",
+      "title": "Member initializer list formatting",
+      "html": "<h3 class=\"cpp-section-heading\">Member initializer list formatting</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b11",
+      "type": "paragraph",
+      "html": "<p>C++ provides a lot of freedom to format your member initializer lists as you prefer, as it doesn’t care where you put your colon, commas, or whitespace.</p>",
+      "preview": "C++ provides a lot of freedom to format your member initializer lists as you pre",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b12",
+      "type": "paragraph",
+      "html": "<p>The following styles are all valid (and you’re likely to see all three in practice):</p>",
+      "preview": "The following styles are all valid (and you’re likely to see all three in practi",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo(int x, int y) : m_x { x }, m_y { y }\n    {\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo(int x, int y) : m_x { x }, m_y { y }\n    {\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b14",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo(int x, int y) :\n        m_x { x },\n        m_y { y }\n    {\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo(int x, int y) :\n        m_x { x },\n        m_y { y }\n    {\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo(int x, int y)\n        : m_x { x }\n        , m_y { y }\n    {\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo(int x, int y)\n        : m_x { x }\n        , m_y { y }\n    {\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b16",
+      "type": "paragraph",
+      "html": "<p>Our recommendation is to use the third style above:</p>",
+      "preview": "Our recommendation is to use the third style above:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b17",
+      "type": "list",
+      "html": "<ul><li>Put the colon on the line after the constructor name, as this cleanly separates the member initializer list from the function prototype.</li><li>Indent your member initializer list, to make it easier to see the function names.</li></ul>",
+      "preview": "Put the colon on the line after the constructor name, as this cleanly separates ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b18",
+      "type": "paragraph",
+      "html": "<p>If the member initialization list is short/trivial, all initializers can go on one line:</p>",
+      "preview": "If the member initialization list is short/trivial, all initializers can go on o",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo(int x, int y)\n        : m_x { x }, m_y { y }\n    {\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo(int x, int y)\n        : m_x { x }, m_y { y }\n    {\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b20",
+      "type": "paragraph",
+      "html": "<p>Otherwise (or if you prefer), each member and initializer pair can be placed on a separate line (starting with a comma to maintain alignment):</p>",
+      "preview": "Otherwise (or if you prefer), each member and initializer pair can be placed on ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "    Foo(int x, int y)\n        : m_x { x }\n        , m_y { y }\n    {\n    }",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    Foo(int x, int y)\n        : m_x { x }\n        , m_y { y }\n    {\n    }</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b22",
+      "type": "section",
+      "title": "Member initialization order",
+      "html": "<h3 class=\"cpp-section-heading\">Member initialization order</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b23",
+      "type": "paragraph",
+      "html": "<p>Because the C++ standard says so, the members in a member initializer list are always initialized in the order in which they are defined inside the class (not in the order they are defined in the member initializer list).</p>",
+      "preview": "Because the C++ standard says so, the members in a member initializer list are a",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b24",
+      "type": "paragraph",
+      "html": "<p>In the above example, because <code>m_x</code> is defined before <code>m_y</code> in the class definition, <code>m_x</code> will be initialized first (even if it is not listed first in the member initializer list).</p>",
+      "preview": "In the above example, because m_x is defined before m_y in the class definition,",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b25",
+      "type": "paragraph",
+      "html": "<p>Because we intuitively expect variables to be initialized left to right, this can cause subtle errors to occur. Consider the following example:</p>",
+      "preview": "Because we intuitively expect variables to be initialized left to right, this ca",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <algorithm> // for std::max\n#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x{};\n    int m_y{};\n\npublic:\n    Foo(int x, int y)\n        : m_y { std::max(x, y) }, m_x { m_y } // issue on this line\n    {\n    }\n\n    void print() const\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6, 7 };\n    foo.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::max\n#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x{};\n    int m_y{};\n\npublic:\n    Foo(int x, int y)\n        : m_y { std::max(x, y) }, m_x { m_y } // issue on this line\n    {\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6, 7 };\n    foo.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b27",
+      "type": "paragraph",
+      "html": "<p>In the above example, our intent is to calculate the larger of the initialization values passed in (via <code>std::max(x, y)</code> and then use this value to initialize both <code>m_x</code> and <code>m_y</code>. However, on the author’s machine, the following result is printed:</p>",
+      "preview": "In the above example, our intent is to calculate the larger of the initializatio",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b28",
+      "type": "output",
+      "text": "Foo(-858993460, 7)\n",
+      "html": "<pre>Foo(-858993460, 7)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b29",
+      "type": "paragraph",
+      "html": "<p>What happened? Even though <code>m_y</code> is listed first in the member initialization list, because <code>m_x</code> is defined first in the class, <code>m_x</code> gets initialized first. And <code>m_x</code> gets initialized to the value of <code>m_y</code>, which hasn’t been initialized yet. Finally, <code>m_y</code> gets initialized to the greater of the initialization values.</p>",
+      "preview": "What happened? Even though m_y is listed first in the member initialization list",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b30",
+      "type": "paragraph",
+      "html": "<p>To help prevent such errors, members in the member initializer list should be listed in the order in which they are defined in the class. Some compilers will issue a warning if members are initialized out of order.</p>",
+      "preview": "To help prevent such errors, members in the member initializer list should be li",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b31",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Member variables in a member initializer list should be listed in order that they are defined in the class.</p></div>",
+      "preview": "Best practiceMember variables in a member initializer list should be listed in order that they are d",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b32",
+      "type": "paragraph",
+      "html": "<p>It’s also a good idea to avoid initializing members using the value of other members (if possible). That way, even if you do make a mistake in the initialization order, it shouldn’t matter because there are no dependencies between initialization values.</p>",
+      "preview": "It’s also a good idea to avoid initializing members using the value of other mem",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b33",
+      "type": "section",
+      "title": "Member initializer list vs default member initializers",
+      "html": "<h3 class=\"cpp-section-heading\">Member initializer list vs default member initializers</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b34",
+      "type": "paragraph",
+      "html": "<p>Members can be initialized in a few different ways:</p>",
+      "preview": "Members can be initialized in a few different ways:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b35",
+      "type": "list",
+      "html": "<ul><li>If a member is listed in the member initializer list, that initialization value is used</li><li>Otherwise, if the member has a default member initializer, that initialization value is used</li><li>Otherwise, the member is default-initialized.</li></ul>",
+      "preview": "If a member is listed in the member initializer list, that initialization value ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b36",
+      "type": "paragraph",
+      "html": "<p>This means that if a member has both a default member initializer and is listed in the member initializer list for the constructor, the member initializer list value takes precedence.</p>",
+      "preview": "This means that if a member has both a default member initializer and is listed ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b37",
+      "type": "paragraph",
+      "html": "<p>Here’s an example showing all three initialization methods:</p>",
+      "preview": "Here’s an example showing all three initialization methods:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x {};    // default member initializer (will be ignored)\n    int m_y { 2 }; // default member initializer (will be used)\n    int m_z;      // no initializer\n\npublic:\n    Foo(int x)\n        : m_x { x } // member initializer list\n    {\n        std::cout << \"Foo constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \", \" << m_z << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6 };\n    foo.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x {};    // default member initializer (will be ignored)\n    int m_y { 2 }; // default member initializer (will be used)\n    int m_z;      // no initializer\n\npublic:\n    Foo(int x)\n        : m_x { x } // member initializer list\n    {\n        std::cout &lt;&lt; \"Foo constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \", \" &lt;&lt; m_z &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6 };\n    foo.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b39",
+      "type": "paragraph",
+      "html": "<p>On the author’s machine, this output:</p>",
+      "preview": "On the author’s machine, this output:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b40",
+      "type": "output",
+      "text": "Foo constructed\nFoo(6, 2, -858993460)\n",
+      "html": "<pre>Foo constructed\nFoo(6, 2, -858993460)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b41",
+      "type": "paragraph",
+      "html": "<p>Here’s what’s happening. When <code>foo</code> is constructed, only <code>m_x</code> appears in the member initializer list, so <code>m_x</code> is first initialized to <code>6</code>. <code>m_y</code> is not in the member initialization list, but it does have a default member initializer, so it is initialized to <code>2</code>. <code>m_z</code> is neither in the member initialization list, nor does it have a default member initializer, so it is default-initialized (which for fundamental types, means it is left uninitialized). Thus, when we print the value of <code>m_z</code>, we get undefined behavior.</p>",
+      "preview": "Here’s what’s happening. When foo is constructed, only m_x appears in the member",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b42",
+      "type": "section",
+      "title": "Constructor function bodies",
+      "html": "<h3 class=\"cpp-section-heading\">Constructor function bodies</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b43",
+      "type": "paragraph",
+      "html": "<p>The bodies of constructors functions are most often left empty. This is because we primarily use constructor for initialization, which is done via the member initializer list. If that is all we need to do, then we don’t need any statements in the body of the constructor.</p>",
+      "preview": "The bodies of constructors functions are most often left empty. This is because ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b44",
+      "type": "paragraph",
+      "html": "<p>However, because the statements in the body of the constructor execute after the member initializer list has executed, we can add statements to do any other setup tasks required. In the above examples, we print something to the console to show that the constructor executed, but we could do other things like open a file or database, allocate memory, etc…</p>",
+      "preview": "However, because the statements in the body of the constructor execute after the",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b45",
+      "type": "paragraph",
+      "html": "<p>New programmers sometimes use the body of the constructor to assign values to members:</p>",
+      "preview": "New programmers sometimes use the body of the constructor to assign values to me",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b46",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x { 0 };\n    int m_y { 1 };\n\npublic:\n    Foo(int x, int y)\n    {\n        m_x = x; // incorrect: this is an assignment, not an initialization\n        m_y = y; // incorrect: this is an assignment, not an initialization\n    }\n\n    void print() const\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6, 7 };\n    foo.print();\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x { 0 };\n    int m_y { 1 };\n\npublic:\n    Foo(int x, int y)\n    {\n        m_x = x; // incorrect: this is an assignment, not an initialization\n        m_y = y; // incorrect: this is an assignment, not an initialization\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo { 6, 7 };\n    foo.print();\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b47",
+      "type": "paragraph",
+      "html": "<p>Although in this simple case this will produce the expected result, in case where members are required to be initialized (such as for data members that are const or references) assignment will not work.</p>",
+      "preview": "Although in this simple case this will produce the expected result, in case wher",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b48",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Once the member initializer list has finished executing, the object is considered initialized. Once the function body has finished executing, the object is considered constructed.</p></div>",
+      "preview": "Key insightOnce the member initializer list has finished executing, the object is considered initial",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b49",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer using the member initializer list to initialize your members over assigning values in the body of the constructor.</p></div>",
+      "preview": "Best practicePrefer using the member initializer list to initialize your members over assigning valu",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b50",
+      "type": "section",
+      "title": "Detecting and handling invalid arguments to constructors",
+      "html": "<h3 class=\"cpp-section-heading\">Detecting and handling invalid arguments to constructors</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b51",
+      "type": "paragraph",
+      "html": "<p>Consider the following Fraction class:</p>",
+      "preview": "Consider the following Fraction class:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Fraction\n{\nprivate:\n    int m_numerator {};\n    int m_denominator {};\n\npublic:\n    Fraction(int numerator, int denominator):\n        m_numerator { numerator }, m_denominator { denominator }\n    {\n    }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Fraction\n{\nprivate:\n    int m_numerator {};\n    int m_denominator {};\n\npublic:\n    Fraction(int numerator, int denominator):\n        m_numerator { numerator }, m_denominator { denominator }\n    {\n    }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b53",
+      "type": "paragraph",
+      "html": "<p>Because a Fraction is a numerator divided by a denominator, the denominator of a fraction cannot be zero (otherwise we get a divide by zero, which is mathematically undefined). In other words, this class has an invariant that <code>m_denominator</code> cannot be <code>0</code>.</p>",
+      "preview": "Because a Fraction is a numerator divided by a denominator, the denominator of a",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b54",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discussed class invariants in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-classes/\">14.2 -- Introduction to classes</a>.</p></div>",
+      "preview": "Related contentWe discussed class invariants in lesson 14.2 -- Introduction to classes.",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b55",
+      "type": "paragraph",
+      "html": "<p>So what do we do when the user tries to create a Fraction with a zero denominator (e.g. <code>Fraction f { 1, 0 };</code>)?</p>",
+      "preview": "So what do we do when the user tries to create a Fraction with a zero denominato",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b56",
+      "type": "paragraph",
+      "html": "<p>Inside a member initializer list, our tools for detecting and handling errors are quite limited. We can use the conditional operator to detect an error, but then what?</p>",
+      "preview": "Inside a member initializer list, our tools for detecting and handling errors ar",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b57",
+      "type": "code",
+      "language": "cpp",
+      "code": "class Fraction\n{\nprivate:\n    int m_numerator {};\n    int m_denominator {};\n\npublic:\n    Fraction(int numerator, int denominator):\n        m_numerator { numerator }, m_denominator { denominator != 0.0 ? denominator : ??? } // what do we do here?\n    {\n    }\n};",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Fraction\n{\nprivate:\n    int m_numerator {};\n    int m_denominator {};\n\npublic:\n    Fraction(int numerator, int denominator):\n        m_numerator { numerator }, m_denominator { denominator != 0.0 ? denominator : ??? } // what do we do here?\n    {\n    }\n};</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b58",
+      "type": "paragraph",
+      "html": "<p>We could change the denominator to a valid value, but then the user is going to get a <code>Fraction</code> that doesn’t contain the values they asked for, and we don’t have any way to notify them that we did something unexpected. Thus, we typically won’t try to do any kind of validation in the member initializer list -- we’ll just initialize the members with the values passed in, and then try to deal with the situation.</p>",
+      "preview": "We could change the denominator to a valid value, but then the user is going to ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b59",
+      "type": "paragraph",
+      "html": "<p>Inside the body of the constructor, we can use statements, so we have more options for detecting and handling errors. This is a good place to <code>assert</code> or <code>static_assert</code> that the arguments passed in are semantically valid, but that doesn’t actually handle runtime errors in a production build.</p>",
+      "preview": "Inside the body of the constructor, we can use statements, so we have more optio",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b60",
+      "type": "paragraph",
+      "html": "<p>When a constructor cannot construct a semantically valid object, we say it has failed.</p>",
+      "preview": "When a constructor cannot construct a semantically valid object, we say it has f",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b61",
+      "type": "section",
+      "title": "When constructors fail (a prelude)",
+      "html": "<h3 class=\"cpp-section-heading\">When constructors fail (a prelude)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b62",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/detecting-and-handling-errors/\">9.4 -- Detecting and handling errors</a>, we introduced the topic of error handling, and discussed some options for handling cases where a function cannot proceed due to an error occurring. Since constructors are functions, they are susceptible to the same issues.</p>",
+      "preview": "In lesson 9.4 -- Detecting and handling errors, we introduced the topic of error",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b63",
+      "type": "paragraph",
+      "html": "<p>In that lesson, we suggested 4 strategies for dealing with such errors:</p>",
+      "preview": "In that lesson, we suggested 4 strategies for dealing with such errors:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b64",
+      "type": "list",
+      "html": "<ul><li>Resolve the error within the function.</li><li>Pass the error back to the caller to deal with.</li><li>Halt the program.</li><li>Throw an exception.</li></ul>",
+      "preview": "Resolve the error within the function.Pass the error back to the caller to deal ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b65",
+      "type": "paragraph",
+      "html": "<p>In most cases, we don’t have enough information to resolve such issues entirely within the constructor. So fixing the issue is generally not an option.</p>",
+      "preview": "In most cases, we don’t have enough information to resolve such issues entirely ",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b66",
+      "type": "paragraph",
+      "html": "<p>With non-member and non-special member functions, we can pass an error back to the caller to deal with. But constructors have no return value, so we don’t have a good way to do that. In some cases, we can add an <code>isValid()</code> member function (or an overloaded conversion to <code>bool</code>) that returns whether the object is currently in a valid state or not. For example, an <code>isValid()</code> function for <code>Fraction</code> would return <code>true</code> when <code>m_denominator != 0.0</code>. But this means the caller has to remember to actually call the function any time a new Fraction is created. And having semantically invalid objects that are accessible is likely to lead to bugs. So while this is better than nothing, it’s not that great of an option.</p>",
+      "preview": "With non-member and non-special member functions, we can pass an error back to t",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b67",
+      "type": "paragraph",
+      "html": "<p>In certain types of programs, we can just halt the entire program and let the user rerun the program with the proper inputs… but in most cases, that’s just not acceptable. So probably not.</p>",
+      "preview": "In certain types of programs, we can just halt the entire program and let the us",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b68",
+      "type": "paragraph",
+      "html": "<p>And that leaves throwing an exception. Exceptions abort the construction process entirely, which means the user never gets access to a semantically invalid object. So in most cases, throwing an exception is the best thing to do in these situations.</p>",
+      "preview": "And that leaves throwing an exception. Exceptions abort the construction process",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b69",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Throwing an exception is usually the best thing to do when a constructor fails (and cannot recover). We discuss this further in lessons <a href=\"https://www.learncpp.com/cpp-tutorial/exceptions-classes-and-inheritance/\">27.5 -- Exceptions, classes, and inheritance</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/function-try-blocks/\">27.7 -- Function try blocks</a>.</p></div>",
+      "preview": "Key insightThrowing an exception is usually the best thing to do when a constructor fails (and canno",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b70",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>For now, we’ll generally assume that construction of our class object succeeds in creating a semantically valid object.</p></div>",
+      "preview": "Author’s noteFor now, we’ll generally assume that construction of our class object succeeds in creat",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b71",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>If exceptions aren’t possible or desired (either because you’ve decided not to use them or because you haven’t learned about them yet), there is one other reasonable option. Instead of letting the user create the class directly, provide a function that either returns an instance of the class or something that indicates failure.</p><p>In the following example, our <code>createFraction()</code> function returns a <code>std::optional&lt;Fraction&gt;</code> that optionally contains a valid <code>Fraction</code>. If it does, then we can use that Fraction. If not, then the caller can detect that and deal with it. We cover <code>std::optional</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdoptional/\">12.15 -- std::optional</a> and friend functions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/friend-non-member-functions/\">15.8 -- Friend non-member functions</a>.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;optional&gt;\n\nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n\n    // private constructor can't be called by public\n    Fraction(int numerator, int denominator):\n        m_numerator { numerator }, m_denominator { denominator }\n    {\n    }\n\npublic:\n    // Allow this function to access private members\n    friend std::optional&lt;Fraction&gt; createFraction(int numerator, int denominator);\n};\n\nstd::optional&lt;Fraction&gt; createFraction(int numerator, int denominator)\n{\n    if (denominator == 0)\n        return {};\n    \n    return Fraction{numerator, denominator};\n}\n\nint main()\n{\n    auto f1 { createFraction(0, 1) };\n    if (f1)\n    {\n        std::cout &lt;&lt; \"Fraction created\\n\";\n    }\n\n    auto f2 { createFraction(0, 0) };\n    if (!f2)\n    {\n        std::cout &lt;&lt; \"Bad fraction\\n\";\n    }   \n}</code></pre></div>",
+      "preview": "For advanced readersIf exceptions aren’t possible or desired (either because you’ve decided not to u",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b72",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b73",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Write a class named Ball. Ball should have two private member variables, one to hold a color, and one to hold a radius. Also write a function to print out the color and radius of the ball.",
+      "hintHtml": "",
+      "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Ball\n{\nprivate:\n\tstd::string m_color { \"none\" };\n\tdouble m_radius { 0.0 };\n\npublic:\n\tBall(std::string_view color, double radius)\n\t\t: m_color { color }\n\t\t, m_radius { radius }\n\t{\n\t}\n\n\tconst std::string&amp; getColor() const { return m_color; }\n\tdouble getRadius() const { return m_radius; }\n};\n\nvoid print(const Ball&amp; ball)\n{\n    std::cout &lt;&lt; \"Ball(\" &lt;&lt; ball.getColor() &lt;&lt; \", \" &lt;&lt; ball.getRadius() &lt;&lt; \")\\n\";\n}\n\nint main()\n{\n\tBall blue { \"blue\", 10.0 };\n\tprint(blue);\n\n\tBall red { \"red\", 12.0 };\n\tprint(red);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b74",
+      "type": "paragraph",
+      "html": "<p>The following sample program should compile:</p>",
+      "preview": "The following sample program should compile:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b75",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n\tBall blue { \"blue\", 10.0 };\n\tprint(blue);\n\n\tBall red { \"red\", 12.0 };\n\tprint(red);\n\n\treturn 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tBall blue { \"blue\", 10.0 };\n\tprint(blue);\n\n\tBall red { \"red\", 12.0 };\n\tprint(red);\n\n\treturn 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b76",
+      "type": "paragraph",
+      "html": "<p>and produce the result:</p>",
+      "preview": "and produce the result:",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b77",
+      "type": "output",
+      "text": "Ball(blue, 10)\nBall(red, 12)\n",
+      "html": "<pre>Ball(blue, 10)\nBall(red, 12)\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "constructor-member-initializer-lists_b78",
+      "type": "quiz",
+      "questionTitle": "Question #2",
+      "questionHtml": "Why did we make <code>print()</code> a non-member function instead of a member function?",
+      "hintHtml": "",
+      "solutionHtml": "<p>The rationale for this is given in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-benefits-of-data-hiding-encapsulation/#prefer-non-member-functions\">14.8 -- The benefits of data hiding (encapsulation)</a>.</p>",
+      "canCheck": true
+    },
+    {
+      "id": "constructor-member-initializer-lists_b79",
+      "type": "quiz",
+      "questionTitle": "Question #3",
+      "questionHtml": "Why did we make <code>m_color</code> a <code>std::string</code> instead of a <code>std::string_view</code>?",
+      "hintHtml": "",
+      "solutionHtml": "<p>In this particular example, it doesn’t matter (because our color arguments are C-style string literals, which doesn’t go out of scope).</p><p>But conceptually, we want our <code>Ball</code> class to be an owner of the color passed in. If <code>m_color</code> were a <code>std::string_view</code>, passing in a temporary object for the color argument (e.g. a <code>std::string</code> returned from a function) would leave <code>m_color</code> dangling when the temporary color argument was destroyed.</p><p>We discuss this case in more detail (and show an example) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/struct-miscellany/\">13.11 -- Struct miscellany</a>.</p>",
+      "canCheck": true
+    }
+  ]
+}

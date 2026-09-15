@@ -1,0 +1,277 @@
+{
+  "index": 103,
+  "chapterId": "8",
+  "number": "8.3",
+  "title": "8.3 — Common if statement problems",
+  "url": "https://www.learncpp.com/cpp-tutorial/common-if-statement-problems/",
+  "slug": "common-if-statement-problems",
+  "scrapedAt": "2026-09-15T16:29:29.741Z",
+  "totalBlocks": 36,
+  "totalCheckpoints": 30,
+  "blocks": [
+    {
+      "id": "common-if-statement-problems_b0",
+      "type": "paragraph",
+      "html": "<p>This lesson is a continuation of lesson <a href=\"https://www.learncpp.com/cpp-tutorial/if-statements-and-blocks/\">8.2 -- If statements and blocks</a>. In this lesson, we’ll take a look at some common problems that occur when using if-statements.</p>",
+      "preview": "This lesson is a continuation of lesson 8.2 -- If statements and blocks. In this",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b1",
+      "type": "section",
+      "title": "Nested if-statements and the dangling else problem",
+      "html": "<h3 class=\"cpp-section-heading\">Nested if-statements and the dangling else problem</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b2",
+      "type": "paragraph",
+      "html": "<p>It is possible to nest if-statements within other if-statements:</p>",
+      "preview": "It is possible to nest if-statements within other if-statements:",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    int x{};\n    std::cin >> x;\n\n    if (x >= 0) // outer if statement\n        // it is bad coding style to nest if statements this way\n        if (x <= 20) // inner if statement\n            std::cout << x << \" is between 0 and 20\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    if (x &gt;= 0) // outer if statement\n        // it is bad coding style to nest if statements this way\n        if (x &lt;= 20) // inner if statement\n            std::cout &lt;&lt; x &lt;&lt; \" is between 0 and 20\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b4",
+      "type": "paragraph",
+      "html": "<p>Now consider the following program:</p>",
+      "preview": "Now consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    int x{};\n    std::cin >> x;\n\n    if (x >= 0) // outer if-statement\n        // it is bad coding style to nest if statements this way\n        if (x <= 20) // inner if-statement\n            std::cout << x << \" is between 0 and 20\\n\";\n\n    // which if statement does this else belong to?\n    else\n        std::cout << x << \" is negative\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    if (x &gt;= 0) // outer if-statement\n        // it is bad coding style to nest if statements this way\n        if (x &lt;= 20) // inner if-statement\n            std::cout &lt;&lt; x &lt;&lt; \" is between 0 and 20\\n\";\n\n    // which if statement does this else belong to?\n    else\n        std::cout &lt;&lt; x &lt;&lt; \" is negative\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b6",
+      "type": "paragraph",
+      "html": "<p>The above program introduces a source of potential ambiguity called a <strong>dangling else</strong> problem. Is the else-statement in the above program matched up with the outer or inner if-statement?</p>",
+      "preview": "The above program introduces a source of potential ambiguity called a dangling e",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b7",
+      "type": "paragraph",
+      "html": "<p>The answer is that an else-statement is paired up with the last unmatched if-statement in the same block. Thus, in the program above, the else-statement is matched up with the inner if-statement, as if the program had been written like this:</p>",
+      "preview": "The answer is that an else-statement is paired up with the last unmatched if-sta",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    int x{};\n    std::cin >> x;\n\n    if (x >= 0) // outer if statement\n    {\n        if (x <= 20) // inner if statement\n            std::cout << x << \" is between 0 and 20\\n\";\n        else // attached to inner if statement\n            std::cout << x << \" is negative\\n\";\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    if (x &gt;= 0) // outer if statement\n    {\n        if (x &lt;= 20) // inner if statement\n            std::cout &lt;&lt; x &lt;&lt; \" is between 0 and 20\\n\";\n        else // attached to inner if statement\n            std::cout &lt;&lt; x &lt;&lt; \" is negative\\n\";\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b9",
+      "type": "paragraph",
+      "html": "<p>This causes the above program to produce incorrect output:</p>",
+      "preview": "This causes the above program to produce incorrect output:",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b10",
+      "type": "output",
+      "text": "Enter a number: 21\n21 is negative\n",
+      "html": "<pre>Enter a number: 21\n21 is negative\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b11",
+      "type": "paragraph",
+      "html": "<p>To avoid such ambiguities when nesting if-statements, it is a good idea to explicitly enclose the inner if-statement within a block. This allows us to attach an else-statement to either the inner or the outer if-statement without ambiguity:</p>",
+      "preview": "To avoid such ambiguities when nesting if-statements, it is a good idea to expli",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b12",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    int x{};\n    std::cin >> x;\n\n    if (x >= 0)\n    {\n        if (x <= 20)\n            std::cout << x << \" is between 0 and 20\\n\";\n        else // attached to inner if statement\n            std::cout << x << \" is greater than 20\\n\";\n    }\n    else // attached to outer if statement\n        std::cout << x << \" is negative\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    if (x &gt;= 0)\n    {\n        if (x &lt;= 20)\n            std::cout &lt;&lt; x &lt;&lt; \" is between 0 and 20\\n\";\n        else // attached to inner if statement\n            std::cout &lt;&lt; x &lt;&lt; \" is greater than 20\\n\";\n    }\n    else // attached to outer if statement\n        std::cout &lt;&lt; x &lt;&lt; \" is negative\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b13",
+      "type": "paragraph",
+      "html": "<p>The else-statement within the block attaches to the inner if-statement, and the else-statement outside of the block attaches to the outer if-statement.</p>",
+      "preview": "The else-statement within the block attaches to the inner if-statement, and the ",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b14",
+      "type": "section",
+      "title": "Flattening nested if-statements",
+      "html": "<h3 class=\"cpp-section-heading\">Flattening nested if-statements</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b15",
+      "type": "paragraph",
+      "html": "<p>Nested if-statements can often be flattened by either restructuring the logic or by using logical operators (covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/logical-operators/\">6.8 -- Logical operators</a>). Code that is less nested is less error prone.</p>",
+      "preview": "Nested if-statements can often be flattened by either restructuring the logic or",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b16",
+      "type": "paragraph",
+      "html": "<p>For example, the above example can be flattened as follows:</p>",
+      "preview": "For example, the above example can be flattened as follows:",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a number: \";\n    int x{};\n    std::cin >> x;\n\n    if (x < 0)\n        std::cout << x << \" is negative\\n\";\n    else if (x <= 20) // only executes if x >= 0\n        std::cout << x << \" is between 0 and 20\\n\";\n    else // only executes if x > 20\n        std::cout << x << \" is greater than 20\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a number: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    if (x &lt; 0)\n        std::cout &lt;&lt; x &lt;&lt; \" is negative\\n\";\n    else if (x &lt;= 20) // only executes if x &gt;= 0\n        std::cout &lt;&lt; x &lt;&lt; \" is between 0 and 20\\n\";\n    else // only executes if x &gt; 20\n        std::cout &lt;&lt; x &lt;&lt; \" is greater than 20\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b18",
+      "type": "paragraph",
+      "html": "<p>Here’s another example that uses logical operators to check multiple conditions within a single if-statement:</p>",
+      "preview": "Here’s another example that uses logical operators to check multiple conditions ",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b19",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter an integer: \";\n    int x{};\n    std::cin >> x;\n\n    std::cout << \"Enter another integer: \";\n    int y{};\n    std::cin >> y;\n\n    if (x > 0 && y > 0) // && is logical and -- checks if both conditions are true\n        std::cout << \"Both numbers are positive\\n\";\n    else if (x > 0 || y > 0) // || is logical or -- checks if either condition is true\n        std::cout << \"One of the numbers is positive\\n\";\n    else\n        std::cout << \"Neither number is positive\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int x{};\n    std::cin &gt;&gt; x;\n\n    std::cout &lt;&lt; \"Enter another integer: \";\n    int y{};\n    std::cin &gt;&gt; y;\n\n    if (x &gt; 0 &amp;&amp; y &gt; 0) // &amp;&amp; is logical and -- checks if both conditions are true\n        std::cout &lt;&lt; \"Both numbers are positive\\n\";\n    else if (x &gt; 0 || y &gt; 0) // || is logical or -- checks if either condition is true\n        std::cout &lt;&lt; \"One of the numbers is positive\\n\";\n    else\n        std::cout &lt;&lt; \"Neither number is positive\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b20",
+      "type": "section",
+      "title": "Null statements",
+      "html": "<h3 class=\"cpp-section-heading\">Null statements</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b21",
+      "type": "paragraph",
+      "html": "<p>A <strong>null statement</strong> is an expression statement that consists of just a semicolon:</p>",
+      "preview": "A null statement is an expression statement that consists of just a semicolon:",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b22",
+      "type": "code",
+      "language": "cpp",
+      "code": "if (x > 10)\n    ; // this is a null statement",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (x &gt; 10)\n    ; // this is a null statement</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b23",
+      "type": "paragraph",
+      "html": "<p>Null statements do nothing. They are typically used when the language requires a statement to exist but the programmer doesn’t need one. For readability, null statements are typically placed on their own lines. We’ll see examples of intentional null statements later in this chapter, when we cover loops.</p>",
+      "preview": "Null statements do nothing. They are typically used when the language requires a",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b24",
+      "type": "paragraph",
+      "html": "<p>Null statements are rarely intentionally used with if-statements. However, they can unintentionally cause problems for new (or careless) programmers. Consider the following snippet:</p>",
+      "preview": "Null statements are rarely intentionally used with if-statements. However, they ",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b25",
+      "type": "code",
+      "language": "cpp",
+      "code": "if (nuclearCodesActivated()); // note the semicolon at the end of this line\n    blowUpTheWorld();",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (nuclearCodesActivated()); // note the semicolon at the end of this line\n    blowUpTheWorld();</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b26",
+      "type": "paragraph",
+      "html": "<p>In the above snippet, the programmer accidentally put a semicolon on the end of the if-statement (a common mistake since semicolons end many statements). This unassuming error compiles fine, and causes the snippet to execute as if it had been written like this:</p>",
+      "preview": "In the above snippet, the programmer accidentally put a semicolon on the end of ",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b27",
+      "type": "code",
+      "language": "cpp",
+      "code": "if (nuclearCodesActivated())\n    ; // the semicolon acts as a null statement\nblowUpTheWorld(); // and this line always gets executed!",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (nuclearCodesActivated())\n    ; // the semicolon acts as a null statement\nblowUpTheWorld(); // and this line always gets executed!</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b28",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Be careful not to “terminate” your if-statement with a semicolon, otherwise the statement(s) you wanted to execute conditionally will execute unconditionally instead (even if they are inside a block).</p></div>",
+      "preview": "WarningBe careful not to “terminate” your if-statement with a semicolon, otherwise the statement(s) ",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b29",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>In Python, the <code>pass</code> keyword serves as a null statement. It is often used as a placeholder for code that will be implemented later. Because it is a word rather than a symbol, <code>pass</code> is less prone to inadvertent misuse and more searchable (allowing you to easily find those placeholders later).</p><pre>for x in [0, 1, 2]:\n  pass               # To be completed in the future\n</pre><p>In C++, we can mimic <code>pass</code> by using the preprocessor:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#define PASS\n\nvoid foo(int x, int y)\n{\n    if (x &gt; y)\n        PASS;\n    else\n        PASS;\n}\n\nint main()\n{\n    foo(4, 7);\n\n    return 0;\n}</code></pre><p>For consistency with other C++ statements, our <code>PASS</code> requires a trailing semicolon. <code>PASS</code> gets stripped out by the preprocessor, and the trailing semicolon is interpreted by the compiler as a null statement.</p></div>",
+      "preview": "TipIn Python, the pass keyword serves as a null statement. It is often used as a placeholder for cod",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b30",
+      "type": "section",
+      "title": "Operator== vs Operator= inside the conditional",
+      "html": "<h3 class=\"cpp-section-heading\">Operator== vs Operator= inside the conditional</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b31",
+      "type": "paragraph",
+      "html": "<p>Inside your conditional, you should be using <code>operator==</code> when testing for equality, not <code>operator=</code> (which is assignment). Consider the following program:</p>",
+      "preview": "Inside your conditional, you should be using operator== when testing for equalit",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter 0 or 1: \";\n    int x{};\n    std::cin >> x;\n    if (x = 0) // oops, we used an assignment here instead of a test for equality\n        std::cout << \"You entered 0\\n\";\n    else\n        std::cout << \"You entered 1\\n\";\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter 0 or 1: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    if (x = 0) // oops, we used an assignment here instead of a test for equality\n        std::cout &lt;&lt; \"You entered 0\\n\";\n    else\n        std::cout &lt;&lt; \"You entered 1\\n\";\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b33",
+      "type": "paragraph",
+      "html": "<p>This program will compile and run, but will produce the wrong result in some cases:</p>",
+      "preview": "This program will compile and run, but will produce the wrong result in some cas",
+      "canCheck": true
+    },
+    {
+      "id": "common-if-statement-problems_b34",
+      "type": "output",
+      "text": "Enter 0 or 1: 0\nYou entered 1\n",
+      "html": "<pre>Enter 0 or 1: 0\nYou entered 1\n</pre>",
+      "canCheck": false
+    },
+    {
+      "id": "common-if-statement-problems_b35",
+      "type": "paragraph",
+      "html": "<p>In fact, this program will always produce the result <code>You entered 1</code>. This happens because <code>x = 0</code> first assigns the value <code>0</code> to <code>x</code>, then evaluates to the value of <code>x</code>, which is now <code>0</code>, which is Boolean <code>false</code>. Since the conditional is always <code>false</code>, the else-statement always executes.</p>",
+      "preview": "In fact, this program will always produce the result You entered 1. This happens",
+      "canCheck": true
+    }
+  ]
+}

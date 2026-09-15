@@ -1,0 +1,153 @@
+{
+  "index": 328,
+  "chapterId": "28",
+  "number": "28.1",
+  "title": "28.1 — Input and output (I/O) streams",
+  "url": "https://www.learncpp.com/cpp-tutorial/input-and-output-io-streams/",
+  "slug": "input-and-output-io-streams",
+  "scrapedAt": "2026-09-15T16:31:29.679Z",
+  "totalBlocks": 20,
+  "totalCheckpoints": 20,
+  "blocks": [
+    {
+      "id": "input-and-output-io-streams_b0",
+      "type": "paragraph",
+      "html": "<p>Input and output functionality is not defined as part of the core C++ language, but rather is provided through the C++ standard library (and thus resides in the std namespace). In previous lessons, you included the iostream library header and made use of the cin and cout objects to do simple I/O. In this lesson, we’ll take a look at the iostream library in more detail.</p>",
+      "preview": "Input and output functionality is not defined as part of the core C++ language, ",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b1",
+      "type": "paragraph",
+      "html": "<p><strong>The iostream library</strong></p>",
+      "preview": "The iostream library",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b2",
+      "type": "paragraph",
+      "html": "<p>When you include the iostream header, you gain access to a whole hierarchy of classes responsible for providing I/O functionality (including one class that is actually named iostream). You can find a class hierarchy diagram for the non-file-I/O classes <a href=\"https://en.cppreference.com/w/cpp/io\">here</a>.</p>",
+      "preview": "When you include the iostream header, you gain access to a whole hierarchy of cl",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b3",
+      "type": "paragraph",
+      "html": "<p>The first thing you may notice about this hierarchy is that it uses multiple inheritance (that thing we told you to avoid if at all possible). However, the iostream library has been designed and extensively tested in order to avoid any of the typical multiple inheritance problems, so you can use it freely without worrying.</p>",
+      "preview": "The first thing you may notice about this hierarchy is that it uses multiple inh",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b4",
+      "type": "paragraph",
+      "html": "<p><strong>Streams</strong></p>",
+      "preview": "Streams",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b5",
+      "type": "paragraph",
+      "html": "<p>The second thing you may notice is that the word “stream” is used an awful lot. At its most basic, I/O in C++ is implemented with streams. Abstractly, a <strong>stream</strong> is just a sequence of bytes that can be accessed sequentially. Over time, a stream may produce or consume potentially unlimited amounts of data.</p>",
+      "preview": "The second thing you may notice is that the word “stream” is used an awful lot. ",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b6",
+      "type": "paragraph",
+      "html": "<p>Typically we deal with two different types of streams. <strong>Input streams</strong> are used to hold input from a data producer, such as a keyboard, a file, or a network. For example, the user may press a key on the keyboard while the program is currently not expecting any input. Rather than ignore the users keypress, the data is put into an input stream, where it will wait until the program is ready for it.</p>",
+      "preview": "Typically we deal with two different types of streams. Input streams are used to",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b7",
+      "type": "paragraph",
+      "html": "<p>Conversely, <strong>output streams</strong> are used to hold output for a particular data consumer, such as a monitor, a file, or a printer. When writing data to an output device, the device may not be ready to accept that data yet -- for example, the printer may still be warming up when the program writes data to its output stream. The data will sit in the output stream until the printer begins consuming it.</p>",
+      "preview": "Conversely, output streams are used to hold output for a particular data consume",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b8",
+      "type": "paragraph",
+      "html": "<p>Some devices, such as files and networks, are capable of being both input and output sources.</p>",
+      "preview": "Some devices, such as files and networks, are capable of being both input and ou",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b9",
+      "type": "paragraph",
+      "html": "<p>The nice thing about streams is the programmer only has to learn how to interact with the streams in order to read and write data to many different kinds of devices. The details about how the stream interfaces with the actual devices they are hooked up to is left up to the environment or operating system.</p>",
+      "preview": "The nice thing about streams is the programmer only has to learn how to interact",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b10",
+      "type": "paragraph",
+      "html": "<p><strong>Input/output in C++</strong></p>",
+      "preview": "Input/output in C++",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b11",
+      "type": "paragraph",
+      "html": "<p><code>ios</code> is a typedef for <code>std::basic_ios&lt;char&gt;</code> that defines a bunch of stuff that is common to both input and output streams. We’ll deal with this stuff in a future lesson.</p>",
+      "preview": "ios is a typedef for std::basic_ios<char> that defines a bunch of stuff that is ",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b12",
+      "type": "paragraph",
+      "html": "<p>The <strong>istream</strong> class is the primary class used when dealing with input streams. With input streams, the <strong>extraction operator (&gt;&gt;)</strong> is used to remove values from the stream. This makes sense: when the user presses a key on the keyboard, the key code is placed in an input stream. Your program then extracts the value from the stream so it can be used.</p>",
+      "preview": "The istream class is the primary class used when dealing with input streams. Wit",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b13",
+      "type": "paragraph",
+      "html": "<p>The <strong>ostream</strong> class is the primary class used when dealing with output streams. With output streams, the <strong>insertion operator (&lt;&lt;)</strong> is used to put values in the stream. This also makes sense: you insert your values into the stream, and the data consumer (e.g. monitor) uses them.</p>",
+      "preview": "The ostream class is the primary class used when dealing with output streams. Wi",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b14",
+      "type": "paragraph",
+      "html": "<p>The <strong>iostream</strong> class can handle both input and output, allowing bidirectional I/O.</p>",
+      "preview": "The iostream class can handle both input and output, allowing bidirectional I/O.",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b15",
+      "type": "paragraph",
+      "html": "<p><strong>Standard streams in C++</strong></p>",
+      "preview": "Standard streams in C++",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b16",
+      "type": "paragraph",
+      "html": "<p>A <strong>standard stream</strong> is a pre-connected stream provided to a computer program by its environment. C++ comes with four predefined standard stream objects that have already been set up for your use. The first three, you have seen before:</p>",
+      "preview": "A standard stream is a pre-connected stream provided to a computer program by it",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b17",
+      "type": "list",
+      "html": "<ol><li><b>cin</b> -- an istream object tied to the standard input (typically the keyboard)</li><li><b>cout</b> -- an ostream object tied to the standard output (typically the monitor)</li><li><b>cerr</b> -- an ostream object tied to the standard error (typically the monitor), providing unbuffered output</li><li><b>clog</b> -- an ostream object tied to the standard error (typically the monitor), providing buffered output</li></ol>",
+      "preview": "cin -- an istream object tied to the standard input (typically the keyboard)cout",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b18",
+      "type": "paragraph",
+      "html": "<p>Unbuffered output is typically handled immediately, whereas buffered output is typically stored and written out as a block. Because clog isn’t used very often, it is often omitted from the list of standard streams.</p>",
+      "preview": "Unbuffered output is typically handled immediately, whereas buffered output is t",
+      "canCheck": true
+    },
+    {
+      "id": "input-and-output-io-streams_b19",
+      "type": "paragraph",
+      "html": "<p>In the next lesson, we’ll take a look at some more I/O related functionality in more detail.</p>",
+      "preview": "In the next lesson, we’ll take a look at some more I/O related functionality in ",
+      "canCheck": true
+    }
+  ]
+}

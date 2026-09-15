@@ -1,0 +1,272 @@
+{
+  "index": 148,
+  "chapterId": "F",
+  "number": "F.4",
+  "title": "F.4 — Constexpr functions (part 4)",
+  "url": "https://www.learncpp.com/cpp-tutorial/constexpr-functions-part-4/",
+  "slug": "constexpr-functions-part-4",
+  "scrapedAt": "2026-09-15T16:29:53.372Z",
+  "totalBlocks": 36,
+  "totalCheckpoints": 30,
+  "blocks": [
+    {
+      "id": "constexpr-functions-part-4_b0",
+      "type": "section",
+      "title": "Constexpr/consteval functions can use non-const local variables",
+      "html": "<h3 class=\"cpp-section-heading\">Constexpr/consteval functions can use non-const local variables</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b1",
+      "type": "paragraph",
+      "html": "<p>Within a constexpr or consteval function, we can use local variables that are not constexpr, and the value of these variables can be changed.</p>",
+      "preview": "Within a constexpr or consteval function, we can use local variables that are no",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b2",
+      "type": "paragraph",
+      "html": "<p>As a silly example:</p>",
+      "preview": "As a silly example:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b3",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nconsteval int doSomething(int x, int y) // function is consteval\n{\n    x = x + 2;       // we can modify the value of non-const function parameters\n\n    int z { x + y }; // we can instantiate non-const local variables\n    if (x > y)\n        z = z - 1;   // and then modify their values\n\n    return z;\n}\n\nint main()\n{\n    constexpr int g { doSomething(5, 6) };\n    std::cout << g << '\\n';\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconsteval int doSomething(int x, int y) // function is consteval\n{\n    x = x + 2;       // we can modify the value of non-const function parameters\n\n    int z { x + y }; // we can instantiate non-const local variables\n    if (x &gt; y)\n        z = z - 1;   // and then modify their values\n\n    return z;\n}\n\nint main()\n{\n    constexpr int g { doSomething(5, 6) };\n    std::cout &lt;&lt; g &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b4",
+      "type": "paragraph",
+      "html": "<p>When such functions are evaluated at compile-time, the compiler will essentially “execute” the function and return the calculated value.</p>",
+      "preview": "When such functions are evaluated at compile-time, the compiler will essentially",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b5",
+      "type": "section",
+      "title": "Constexpr/consteval functions can use function parameters and local variables as arguments in constexpr function calls",
+      "html": "<h3 class=\"cpp-section-heading\">Constexpr/consteval functions can use function parameters and local variables as arguments in constexpr function calls</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b6",
+      "type": "paragraph",
+      "html": "<p>Above, we noted, “When a constexpr (or consteval) function is being evaluated at compile-time, any other functions it calls are required to be evaluated at compile-time.”</p>",
+      "preview": "Above, we noted, “When a constexpr (or consteval) function is being evaluated at",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b7",
+      "type": "paragraph",
+      "html": "<p>Perhaps surprisingly, a constexpr or consteval function can use its function parameters (which aren’t constexpr) or even local variables (which may not be const at all) as arguments in a constexpr function call. When a constexpr or consteval function is being evaluated at compile-time, the value of all function parameters and local variables must be known to the compiler (otherwise it couldn’t evaluate them at compile-time). Therefore, in this specific context, C++ allows these values to be used as arguments in a call to a constexpr function, and that constexpr function call can still be evaluated at compile-time.</p>",
+      "preview": "Perhaps surprisingly, a constexpr or consteval function can use its function par",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nconstexpr int goo(int c) // goo() is now constexpr\n{\n    return c;\n}\n\nconstexpr int foo(int b) // b is not a constant expression within foo()\n{\n    return goo(b);       // if foo() is resolved at compile-time, then `goo(b)` can also be resolved at compile-time\n}\n\nint main()\n{\n    std::cout << foo(5);\n    \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconstexpr int goo(int c) // goo() is now constexpr\n{\n    return c;\n}\n\nconstexpr int foo(int b) // b is not a constant expression within foo()\n{\n    return goo(b);       // if foo() is resolved at compile-time, then `goo(b)` can also be resolved at compile-time\n}\n\nint main()\n{\n    std::cout &lt;&lt; foo(5);\n    \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b9",
+      "type": "paragraph",
+      "html": "<p>In the above example, <code>foo(5)</code> may or may not be evaluated at compile time. If it is, then the compiler knows that <code>b</code> is <code>5</code>. And even though <code>b</code> is not constexpr, the compiler can treat the call to <code>goo(b)</code> as if it were <code>goo(5)</code> and evaluate that function call at compile-time. If <code>foo(5)</code> is instead resolved at runtime, then <code>goo(b)</code> will also be resolved at runtime.</p>",
+      "preview": "In the above example, foo(5) may or may not be evaluated at compile time. If it ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b10",
+      "type": "section",
+      "title": "Can a constexpr function call a non-constexpr function?",
+      "html": "<h3 class=\"cpp-section-heading\">Can a constexpr function call a non-constexpr function?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b11",
+      "type": "paragraph",
+      "html": "<p>The answer is yes, but only when the constexpr function is being evaluated in a non-constant context. A non-constexpr function may not be called when a constexpr function is evaluating in a constant context (because then the constexpr function wouldn’t be able to produce a compile-time constant value), and doing so will produce a compilation error.</p>",
+      "preview": "The answer is yes, but only when the constexpr function is being evaluated in a ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b12",
+      "type": "paragraph",
+      "html": "<p>Calling a non-constexpr function is allowed so that a constexpr function can do something like this:</p>",
+      "preview": "Calling a non-constexpr function is allowed so that a constexpr function can do ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b13",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <type_traits> // for std::is_constant_evaluated\n\nconstexpr int someFunction()\n{\n    if (std::is_constant_evaluated()) // if evaluating in constant context\n        return someConstexprFcn();\n    else\n        return someNonConstexprFcn();\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;type_traits&gt; // for std::is_constant_evaluated\n\nconstexpr int someFunction()\n{\n    if (std::is_constant_evaluated()) // if evaluating in constant context\n        return someConstexprFcn();\n    else\n        return someNonConstexprFcn();\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b14",
+      "type": "paragraph",
+      "html": "<p>Now consider this variant:</p>",
+      "preview": "Now consider this variant:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b15",
+      "type": "code",
+      "language": "cpp",
+      "code": "constexpr int someFunction(bool b)\n{\n    if (b)\n        return someConstexprFcn();\n    else\n        return someNonConstexprFcn();\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr int someFunction(bool b)\n{\n    if (b)\n        return someConstexprFcn();\n    else\n        return someNonConstexprFcn();\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b16",
+      "type": "paragraph",
+      "html": "<p>This is legal as long as <code>someFunction(false)</code> is never called in a constant expression.</p>",
+      "preview": "This is legal as long as someFunction(false) is never called in a constant expre",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b17",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Prior to C++23, the C++ standard says that a constexpr function must return a constexpr value for at least one set of arguments, otherwise it is technically ill-formed. Calling a non-constexpr function unconditionally in a constexpr function makes the constexpr function ill-formed. However, compilers are not required to generate errors or warnings for such cases -- therefore, the compiler probably won’t complain unless you try to call such a constexpr function in a constant context. In C++23, this requirement was rescinded.</p></div>",
+      "preview": "As an aside…Prior to C++23, the C++ standard says that a constexpr function must return a constexpr ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b18",
+      "type": "paragraph",
+      "html": "<p>For best results, we’d advise the following:</p>",
+      "preview": "For best results, we’d advise the following:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b19",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Avoid calling non-constexpr functions from within a constexpr function if possible.</li><li>If your constexpr function requires different behavior for constant and non-constant contexts, conditionalize the behavior with <code>if (std::is_constant_evaluated())</code> (in C++20) or <code>if consteval</code> (C++23 onward).</li><li>Always test your constexpr functions in a constant context, as they may work when called in a non-constant context but fail in a constant context.</li></ol>",
+      "preview": "Avoid calling non-constexpr functions from within a constexpr function if possib",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b20",
+      "type": "section",
+      "title": "When should I constexpr a function?",
+      "html": "<h3 class=\"cpp-section-heading\">When should I constexpr a function?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b21",
+      "type": "paragraph",
+      "html": "<p>As a general rule, if a function can be evaluated as part of a required constant expression, it should be made <code>constexpr</code>.</p>",
+      "preview": "As a general rule, if a function can be evaluated as part of a required constant",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b22",
+      "type": "paragraph",
+      "html": "<p>A <strong>pure function</strong> is a function that meets the following criteria:</p>",
+      "preview": "A pure function is a function that meets the following criteria:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b23",
+      "type": "list",
+      "html": "<ul><li>The function always returns the same return result when given the same arguments</li><li>The function has no side effects (e.g. it doesn’t change the value of static local or global variables, doesn’t do input or output, etc…).</li></ul>",
+      "preview": "The function always returns the same return result when given the same arguments",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b24",
+      "type": "paragraph",
+      "html": "<p>Pure functions should generally be made constexpr.</p>",
+      "preview": "Pure functions should generally be made constexpr.",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b25",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Constexpr functions don’t always need to be pure. In C++23, constexpr functions can use and modify static local variables. Since the value of a static local persists across function calls, modifying a static local variable is considered a side-effect.</p></div>",
+      "preview": "As an aside…Constexpr functions don’t always need to be pure. In C++23, constexpr functions can use ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b26",
+      "type": "paragraph",
+      "html": "<p>That said, if your program is trivial or a throw-away and you don’t constexpr a function, the world isn’t going to end. Hopefully.</p>",
+      "preview": "That said, if your program is trivial or a throw-away and you don’t constexpr a ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b27",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Unless you have a specific reason not to, a function that can be evaluated as part of a constant expression should be made <code>constexpr</code> (even if it isn’t currently used that way).</p><p>A function that cannot be evaluated as part of a required constant expression should not be marked as <code>constexpr</code>.</p></div>",
+      "preview": "Best practiceUnless you have a specific reason not to, a function that can be evaluated as part of a",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b28",
+      "type": "section",
+      "title": "Why not constexpr every function?",
+      "html": "<h3 class=\"cpp-section-heading\">Why not constexpr every function?</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b29",
+      "type": "paragraph",
+      "html": "<p>There are a few reasons you may not want to <code>constexpr</code> a function:</p>",
+      "preview": "There are a few reasons you may not want to constexpr a function:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b30",
+      "type": "list",
+      "html": "<ol start=\"1\"><li><code>constexpr</code> signals that a function can be used in a constant expression. If your function cannot be evaluated as part of a constant expression, it should not be marked as <code>constexpr</code>.</li><li><code>constexpr</code> is part of the interface of a function. Once a function is made constexpr, it can be called by other constexpr functions or used in contexts that require constant expressions. Removing the <code>constexpr</code> later will break such code.</li><li><code>constexpr</code> functions can be harder to debug since you can’t breakpoint or step through them in a debugger.</li></ol>",
+      "preview": "constexpr signals that a function can be used in a constant expression. If your ",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b31",
+      "type": "section",
+      "title": "Why constexpr a function when it is not actually evaluated at compile-time?",
+      "html": "<h3 class=\"cpp-section-heading\"><a name=\"constexprruntimeeval\"></a>Why constexpr a function when it is not actually evaluated at compile-time? <a href=\"#constexprruntimeeval\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "canCheck": false
+    },
+    {
+      "id": "constexpr-functions-part-4_b32",
+      "type": "paragraph",
+      "html": "<p>New programmers sometimes ask, “why should I constexpr a function when it is only evaluated at runtime in my program (e.g. because the arguments in the function call are non-const)”?</p>",
+      "preview": "New programmers sometimes ask, “why should I constexpr a function when it is onl",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b33",
+      "type": "paragraph",
+      "html": "<p>There are a few reasons:</p>",
+      "preview": "There are a few reasons:",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b34",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>There’s little downside to using constexpr, and it may help the compiler optimize your program to be smaller and faster.</li><li>Just because you’re not calling the function in a compile-time evaluatable context right now doesn’t mean you won’t call it in such a context when you modify or extend your program. And if you haven’t constexpr’d the function already, you may not think to when you do start to call it in such a context, and then you’ll miss out on the performance benefits. Or you may be forced to constexpr it later when you need to use the return value in a context that requires a constant expression somewhere.</li><li>Repetition helps ingrain best practices.</li></ol>",
+      "preview": "There’s little downside to using constexpr, and it may help the compiler optimiz",
+      "canCheck": true
+    },
+    {
+      "id": "constexpr-functions-part-4_b35",
+      "type": "paragraph",
+      "html": "<p>On a non-trivial project, it’s a good idea to implement your functions with the mindset that they may be reused (or extended) in the future. Any time you modify an existing function, you risk breaking it, and that means it needs to be retested, which takes time and energy. It’s often worth spending an extra minute or two “doing it right the first time” so you don’t have to redo (and retest) it again later.</p>",
+      "preview": "On a non-trivial project, it’s a good idea to implement your functions with the ",
+      "canCheck": true
+    }
+  ]
+}

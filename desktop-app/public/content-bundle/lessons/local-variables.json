@@ -1,0 +1,341 @@
+{
+  "index": 88,
+  "chapterId": "7",
+  "number": "7.3",
+  "title": "7.3 — Local variables",
+  "url": "https://www.learncpp.com/cpp-tutorial/local-variables/",
+  "slug": "local-variables",
+  "scrapedAt": "2026-09-15T16:29:22.154Z",
+  "totalBlocks": 45,
+  "totalCheckpoints": 38,
+  "blocks": [
+    {
+      "id": "local-variables_b0",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Introduction to local scope</a>, we introduced <code>local variables</code>, which are variables that are defined inside a function (including function parameters).</p>",
+      "preview": "In lesson 2.5 -- Introduction to local scope, we introduced local variables, whi",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b1",
+      "type": "paragraph",
+      "html": "<p>It turns out that C++ actually doesn’t have a single attribute that defines a variable as being a local variable. Instead, local variables have several different properties that differentiate how these variables behave from other kinds of (non-local) variables. We’ll explore these properties in this and upcoming lessons.</p>",
+      "preview": "It turns out that C++ actually doesn’t have a single attribute that defines a va",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b2",
+      "type": "paragraph",
+      "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Introduction to local scope</a>, we also introduced the concept of scope. An identifier’s <code>scope</code> determines where an identifier can be accessed within the source code. When an identifier can be accessed, we say it is <code>in scope</code>. When an identifier can not be accessed, we say it is <code>out of scope</code>. Scope is a compile-time property, and trying to use an identifier when it is out of scope will result in a compile error.</p>",
+      "preview": "In lesson 2.5 -- Introduction to local scope, we also introduced the concept of ",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b3",
+      "type": "section",
+      "title": "Local variables have block scope",
+      "html": "<h3 class=\"cpp-section-heading\">Local variables have block scope</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b4",
+      "type": "paragraph",
+      "html": "<p>Local variables have <strong>block scope</strong>, which means they are <em>in scope</em> from their point of definition to the end of the block they are defined within.</p>",
+      "preview": "Local variables have block scope, which means they are in scope from their point",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b5",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>Please review lesson <a href=\"https://www.learncpp.com/cpp-tutorial/compound-statements-blocks/\">7.1 -- Compound statements (blocks)</a> if you need a refresher on blocks.</p></div>",
+      "preview": "Related contentPlease review lesson 7.1 -- Compound statements (blocks) if you need a refresher on b",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b6",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int i { 5 }; // i enters scope here\n    double d { 4.0 }; // d enters scope here\n\n    return 0;\n} // d and i go out of scope here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int i { 5 }; // i enters scope here\n    double d { 4.0 }; // d enters scope here\n\n    return 0;\n} // d and i go out of scope here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b7",
+      "type": "paragraph",
+      "html": "<p>Although function parameters are not defined inside the function body, for typical functions they can be considered to be part of the scope of the function body block.</p>",
+      "preview": "Although function parameters are not defined inside the function body, for typic",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b8",
+      "type": "code",
+      "language": "cpp",
+      "code": "int max(int x, int y) // x and y enter scope here\n{\n    // assign the greater of x or y to max\n    int max{ (x > y) ? x : y }; // max enters scope here\n\n    return max;\n} // max, y, and x leave scope here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int max(int x, int y) // x and y enter scope here\n{\n    // assign the greater of x or y to max\n    int max{ (x &gt; y) ? x : y }; // max enters scope here\n\n    return max;\n} // max, y, and x leave scope here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b9",
+      "type": "section",
+      "title": "All variable names within a scope must be unique",
+      "html": "<h3 class=\"cpp-section-heading\">All variable names within a scope must be unique</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b10",
+      "type": "paragraph",
+      "html": "<p>Variable names must be unique within a given scope, otherwise any reference to the name will be ambiguous. Consider the following program:</p>",
+      "preview": "Variable names must be unique within a given scope, otherwise any reference to t",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b11",
+      "type": "code",
+      "language": "cpp",
+      "code": "void someFunction(int x)\n{\n    int x{}; // compilation failure due to name collision with function parameter\n}\n\nint main()\n{\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction(int x)\n{\n    int x{}; // compilation failure due to name collision with function parameter\n}\n\nint main()\n{\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b12",
+      "type": "paragraph",
+      "html": "<p>The above program doesn’t compile because the variable <code>x</code> defined inside the function body and the function parameter <code>x</code> have the same name and both are in the same block scope.</p>",
+      "preview": "The above program doesn’t compile because the variable x defined inside the func",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b13",
+      "type": "section",
+      "title": "Local variables have automatic storage duration",
+      "html": "<h3 class=\"cpp-section-heading\">Local variables have automatic storage duration</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b14",
+      "type": "paragraph",
+      "html": "<p>A variable’s <strong>storage duration</strong> (usually just called <strong>duration</strong>) determines what rules govern when and how a variable will be created (instantiated) and destroyed. In most cases, a variable’s storage duration directly determines its <code>lifetime</code>.</p>",
+      "preview": "A variable’s storage duration (usually just called duration) determines what rul",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b15",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss what a lifetime is in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Introduction to local scope</a>.</p></div>",
+      "preview": "Related contentWe discuss what a lifetime is in lesson 2.5 -- Introduction to local scope.",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b16",
+      "type": "paragraph",
+      "html": "<p>For example, local variables have <strong>automatic storage duration</strong>, which means they are created at the point of definition and destroyed at the end of the block they are defined in. For example:</p>",
+      "preview": "For example, local variables have automatic storage duration, which means they a",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b17",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int i { 5 }; // i created and initialized here\n    double d { 4.0 }; // d created and initialized here\n\n    return 0;\n} // d and i are destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int i { 5 }; // i created and initialized here\n    double d { 4.0 }; // d created and initialized here\n\n    return 0;\n} // d and i are destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b18",
+      "type": "paragraph",
+      "html": "<p>For this reason, local variables are sometimes called <strong>automatic variables</strong>.</p>",
+      "preview": "For this reason, local variables are sometimes called automatic variables.",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b19",
+      "type": "section",
+      "title": "Local variables in nested blocks",
+      "html": "<h3 class=\"cpp-section-heading\">Local variables in nested blocks</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b20",
+      "type": "paragraph",
+      "html": "<p>Local variables can be defined inside nested blocks. This works identically to local variables in function body blocks:</p>",
+      "preview": "Local variables can be defined inside nested blocks. This works identically to l",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b21",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main() // outer block\n{\n    int x { 5 }; // x enters scope and is created here\n\n    { // nested block\n        int y { 7 }; // y enters scope and is created here\n    } // y goes out of scope and is destroyed here\n\n    // y can not be used here because it is out of scope in this block\n\n    return 0;\n} // x goes out of scope and is destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main() // outer block\n{\n    int x { 5 }; // x enters scope and is created here\n\n    { // nested block\n        int y { 7 }; // y enters scope and is created here\n    } // y goes out of scope and is destroyed here\n\n    // y can not be used here because it is out of scope in this block\n\n    return 0;\n} // x goes out of scope and is destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b22",
+      "type": "paragraph",
+      "html": "<p>In the above example, variable <code>y</code> is defined inside a nested block. Its scope is limited from its point of definition to the end of the nested block, and its lifetime is the same. Because the scope of variable <code>y</code> is limited to the inner block in which it is defined, it’s not accessible anywhere in the outer block.</p>",
+      "preview": "In the above example, variable y is defined inside a nested block. Its scope is ",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b23",
+      "type": "paragraph",
+      "html": "<p>Note that nested blocks are considered part of the scope of the outer block in which they are defined. Consequently, variables defined in the outer block <em>can</em> be seen inside a nested block:</p>",
+      "preview": "Note that nested blocks are considered part of the scope of the outer block in w",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b24",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{ // outer block\n\n    int x { 5 }; // x enters scope and is created here\n\n    { // nested block\n        int y { 7 }; // y enters scope and is created here\n\n        // x and y are both in scope here\n        std::cout << x << \" + \" << y << \" = \" << x + y << '\\n';\n    } // y goes out of scope and is destroyed here\n\n    // y can not be used here because it is out of scope in this block\n\n    return 0;\n} // x goes out of scope and is destroyed here",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{ // outer block\n\n    int x { 5 }; // x enters scope and is created here\n\n    { // nested block\n        int y { 7 }; // y enters scope and is created here\n\n        // x and y are both in scope here\n        std::cout &lt;&lt; x &lt;&lt; \" + \" &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; x + y &lt;&lt; '\\n';\n    } // y goes out of scope and is destroyed here\n\n    // y can not be used here because it is out of scope in this block\n\n    return 0;\n} // x goes out of scope and is destroyed here</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b25",
+      "type": "section",
+      "title": "Local variables have no linkage",
+      "html": "<h3 class=\"cpp-section-heading\">Local variables have no linkage</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b26",
+      "type": "paragraph",
+      "html": "<p>Identifiers have another property named <em>linkage</em>. An identifier’s <strong>linkage</strong> determines whether a declaration of that same identifier in a different scope refers to the same object (or function).</p>",
+      "preview": "Identifiers have another property named linkage. An identifier’s linkage determi",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b27",
+      "type": "paragraph",
+      "html": "<p>Local variables have no linkage. Each declaration of an identifier with no linkage refers to a unique object or function.</p>",
+      "preview": "Local variables have no linkage. Each declaration of an identifier with no linka",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b28",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b29",
+      "type": "code",
+      "language": "cpp",
+      "code": "int main()\n{\n    int x { 2 }; // local variable, no linkage\n\n    {\n        int x { 3 }; // this declaration of x refers to a different object than the previous x\n    }\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 2 }; // local variable, no linkage\n\n    {\n        int x { 3 }; // this declaration of x refers to a different object than the previous x\n    }\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b30",
+      "type": "paragraph",
+      "html": "<p>Scope and linkage may seem somewhat similar. However, scope determines where declaration of a single identifier can be seen and used in the code. Linkage determines whether multiple declarations of the same identifier refer to the same object or not.</p>",
+      "preview": "Scope and linkage may seem somewhat similar. However, scope determines where dec",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b31",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss what happens when variables with the same name appear in nested blocks in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/variable-shadowing-name-hiding/\">7.5 -- Variable shadowing (name hiding)</a>.</p></div>",
+      "preview": "Related contentWe discuss what happens when variables with the same name appear in nested blocks in ",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b32",
+      "type": "paragraph",
+      "html": "<p>Linkage isn’t very interesting in the context of local variables, but we’ll talk about it more in the next few lessons.</p>",
+      "preview": "Linkage isn’t very interesting in the context of local variables, but we’ll talk",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b33",
+      "type": "section",
+      "title": "Variables should be defined in the most limited scope",
+      "html": "<h3 class=\"cpp-section-heading\">Variables should be defined in the most limited scope</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b34",
+      "type": "paragraph",
+      "html": "<p>If a variable is only used within a nested block, it should be defined inside that nested block:</p>",
+      "preview": "If a variable is only used within a nested block, it should be defined inside th",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b35",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    // do not define y here\n\n    {\n        // y is only used inside this block, so define it here\n        int y { 5 };\n        std::cout << y << '\\n';\n    }\n\n    // otherwise y could still be used here, where it's not needed\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // do not define y here\n\n    {\n        // y is only used inside this block, so define it here\n        int y { 5 };\n        std::cout &lt;&lt; y &lt;&lt; '\\n';\n    }\n\n    // otherwise y could still be used here, where it's not needed\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b36",
+      "type": "paragraph",
+      "html": "<p>By limiting the scope of a variable, you reduce the complexity of the program because the number of active variables is reduced. Further, it makes it easier to see where variables are used (or aren’t used). A variable defined inside a block can only be used within that block (or nested blocks). This can make the program easier to understand.</p>",
+      "preview": "By limiting the scope of a variable, you reduce the complexity of the program be",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b37",
+      "type": "paragraph",
+      "html": "<p>If a variable is needed in an outer block, it needs to be declared in the outer block:</p>",
+      "preview": "If a variable is needed in an outer block, it needs to be declared in the outer ",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b38",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    int y { 5 }; // we're declaring y here because we need it in this outer block later\n\n    {\n        int x{};\n        std::cin >> x;\n\n        // if we declared y here, immediately before its actual first use...\n        if (x == 4)\n            y = 4;\n    } // ... it would be destroyed here\n\n    std::cout << y; // and we need y to exist here\n\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int y { 5 }; // we're declaring y here because we need it in this outer block later\n\n    {\n        int x{};\n        std::cin &gt;&gt; x;\n\n        // if we declared y here, immediately before its actual first use...\n        if (x == 4)\n            y = 4;\n    } // ... it would be destroyed here\n\n    std::cout &lt;&lt; y; // and we need y to exist here\n\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b39",
+      "type": "paragraph",
+      "html": "<p>The above example shows one of the rare cases where you may need to declare a variable well before its first use.</p>",
+      "preview": "The above example shows one of the rare cases where you may need to declare a va",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b40",
+      "type": "paragraph",
+      "html": "<p>New developers sometimes wonder whether it’s worth creating a nested block just to intentionally limit a variable’s scope (and force it to go out of scope / be destroyed early). Doing so makes that variable simpler, but the overall function becomes longer and more complex as a result. The tradeoff generally isn’t worth it. If creating a nested block seems useful to intentionally limit the scope of a chunk of code, that code might be better to put in a separate function instead.</p>",
+      "preview": "New developers sometimes wonder whether it’s worth creating a nested block just ",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b41",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Define variables in the most limited existing scope. Avoid creating new blocks whose only purpose is to limit the scope of variables.</p></div>",
+      "preview": "Best practiceDefine variables in the most limited existing scope. Avoid creating new blocks whose on",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b42",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "local-variables_b43",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Write a program that asks the user to enter two integers, one named <code>smaller</code>, the other named <code>larger</code>. If the user enters a smaller value for the second integer, use a block and a temporary variable to swap the smaller and larger values. Then print the values of the <code>smaller</code> and <code>larger</code> variables. Add comments to your code indicating where each variable dies. Note: When you print the values, <code>smaller</code> should hold the smaller input and <code>larger</code> the larger input, no matter which order they were entered in.</p><p>The program output should match the following:</p><pre>Enter an integer: 4\nEnter a larger integer: 2\nSwapping the values\nThe smaller value is 2\nThe larger value is 4\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int smaller{};\n    std::cin &gt;&gt; smaller;\n\n    std::cout &lt;&lt; \"Enter a larger integer: \";\n    int larger{};\n    std::cin &gt;&gt; larger;\n\n    // if user did it wrong\n    if (smaller &gt; larger)\n    {\n        // swap values of smaller and larger\n        std::cout &lt;&lt; \"Swapping the values\\n\";\n\n        int temp{ larger };\n        larger = smaller;\n        smaller = temp;\n    } // temp dies here\n\n    std::cout &lt;&lt; \"The smaller value is: \" &lt;&lt; smaller &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"The larger value is: \" &lt;&lt; larger &lt;&lt; '\\n';\n\n    return 0;\n} // smaller and larger die here</code></pre><p>In the future, you can use <code>std::swap()</code> from the <code>&lt;utility&gt;</code> header to swap the values of two variables. For example</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int temp{ larger };\nlarger = smaller;\nsmaller = temp;\n\n// is the same as\nstd::swap(larger, smaller);</code></pre></div></div>",
+      "preview": "Question #1Write a program that asks the user to enter two integers, one named s",
+      "canCheck": true
+    },
+    {
+      "id": "local-variables_b44",
+      "type": "paragraph",
+      "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>What’s the difference between a variable’s scope, duration, and lifetime? By default, what kind of scope and duration do local variables have (and what do those mean)?</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>A variable’s scope determines where the variable is accessible within the source code. Duration defines the rules that govern when a variable is created and destroyed. A variable’s lifetime is the actual time between its creation and destruction.</p><p>Local variables have block scope, which means they can be accessed from their point of definition to the end of the block they are defined within.</p><p>Local variables have automatic duration, which means they are created at the point of definition, and destroyed at the end of the block in which they are defined.</p></div><p></p></div>",
+      "preview": "Question #2What’s the difference between a variable’s scope, duration, and lifet",
+      "canCheck": true
+    }
+  ]
+}

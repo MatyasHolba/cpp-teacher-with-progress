@@ -1,0 +1,386 @@
+{
+  "index": 139,
+  "chapterId": "11",
+  "number": "11.6",
+  "title": "11.6 — Function templates",
+  "url": "https://www.learncpp.com/cpp-tutorial/function-templates/",
+  "slug": "function-templates",
+  "scrapedAt": "2026-09-15T16:29:48.066Z",
+  "totalBlocks": 51,
+  "totalCheckpoints": 46,
+  "blocks": [
+    {
+      "id": "function-templates_b0",
+      "type": "paragraph",
+      "html": "<p>Let’s say you wanted to write a function to calculate the maximum of two numbers. You might do so like this:</p>",
+      "preview": "Let’s say you wanted to write a function to calculate the maximum of two numbers",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b1",
+      "type": "code",
+      "language": "cpp",
+      "code": "int max(int x, int y)\n{\n    return (x < y) ? y : x;\n    // Note: we use < instead of > because std::max uses <\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int max(int x, int y)\n{\n    return (x &lt; y) ? y : x;\n    // Note: we use &lt; instead of &gt; because std::max uses &lt;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b2",
+      "type": "paragraph",
+      "html": "<p>While the caller can pass different values into the function, the type of the parameters is fixed, so the caller can only pass in <code>int</code> values. That means this function really only works well for integers (and types that can be promoted to <code>int</code>).</p>",
+      "preview": "While the caller can pass different values into the function, the type of the pa",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b3",
+      "type": "paragraph",
+      "html": "<p>So what happens later when you want to find the max of two <code>double</code> values? Because C++ requires us to specify the type of all function parameters, the solution is to create a new overloaded version of <code>max</code> with parameters of type <code>double</code>:</p>",
+      "preview": "So what happens later when you want to find the max of two double values? Becaus",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b4",
+      "type": "code",
+      "language": "cpp",
+      "code": "double max(double x, double y)\n{\n    return (x < y) ? y: x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double max(double x, double y)\n{\n    return (x &lt; y) ? y: x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b5",
+      "type": "paragraph",
+      "html": "<p>Note that the code for the implementation of the double version of <code>max</code> is exactly the same as for the int version of <code>max</code>! In fact, this implementation works for many different types: including <code>int</code>, <code>double</code>, <code>long</code>, <code>long double</code>, and even new types that you’ve created yourself (which we’ll cover how to do in future lessons).</p>",
+      "preview": "Note that the code for the implementation of the double version of max is exactl",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b6",
+      "type": "paragraph",
+      "html": "<p>Having to create overloaded functions with the same implementation for each set of parameter types we want to support is a maintenance headache, a recipe for errors, and a clear violation of the DRY (don’t repeat yourself) principle. There’s a less-obvious challenge here as well: a programmer who wishes to use the <code>max</code> function may wish to call it with an argument type that the author of the <code>max</code> did not anticipate (and thus did not write an overloaded function for).</p>",
+      "preview": "Having to create overloaded functions with the same implementation for each set ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b7",
+      "type": "paragraph",
+      "html": "<p>What we are really missing is some way to write a single version of <code>max</code> that can work with arguments of any type (even types that may not have been anticipated when the code for <code>max</code> was written). Normal functions are simply not up to the task here. Fortunately, C++ supports another feature that was designed specifically to solve this kind of problem.</p>",
+      "preview": "What we are really missing is some way to write a single version of max that can",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b8",
+      "type": "paragraph",
+      "html": "<p>Welcome to the world of C++ templates.</p>",
+      "preview": "Welcome to the world of C++ templates.",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b9",
+      "type": "section",
+      "title": "Introduction to C++ templates",
+      "html": "<h3 class=\"cpp-section-heading\">Introduction to C++ templates</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-templates_b10",
+      "type": "paragraph",
+      "html": "<p>In C++, the template system was designed to simplify the process of creating functions (or classes) that are able to work with different data types.</p>",
+      "preview": "In C++, the template system was designed to simplify the process of creating fun",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b11",
+      "type": "paragraph",
+      "html": "<p>Instead of manually creating a bunch of mostly-identical functions or classes (one for each set of different types), we instead create a single <em>template</em>. Just like a normal definition, a <strong>template</strong> definition describes what a function or class looks like. Unlike a normal definition (where all types must be specified), in a template we can use one or more placeholder types. A placeholder type represents some type that is not known at the time the template is defined, but that will be provided later (when the template is used).</p>",
+      "preview": "Instead of manually creating a bunch of mostly-identical functions or classes (o",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b12",
+      "type": "paragraph",
+      "html": "<p>Once a template is defined, the compiler can use the template to generate as many overloaded functions (or classes) as needed, each using different actual types!</p>",
+      "preview": "Once a template is defined, the compiler can use the template to generate as man",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b13",
+      "type": "paragraph",
+      "html": "<p>The end result is the same -- we end up with a bunch of mostly-identical functions or classes (one for each set of different types). But we only have to create and maintain a single template, and the compiler does all the hard work to create the rest for us.</p>",
+      "preview": "The end result is the same -- we end up with a bunch of mostly-identical functio",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b14",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The compiler can use a single template to generate a family of related functions or classes, each using a different set of actual types.</p></div>",
+      "preview": "Key insightThe compiler can use a single template to generate a family of related functions or class",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b15",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Because the concept behind templates can be hard to describe in words, let’s try an analogy.</p><p>If you were to look up the word “template” in the dictionary, you’d find a definition that was similar to the following: “a template is a model that serves as a pattern for creating similar objects”. One type of template that is very easy to understand is that of a stencil. A stencil is a thin piece of material (such as a piece of cardboard or plastic) with a shape cut out of it (e.g. a happy face). By placing the stencil on top of another object, then spraying paint through the hole, you can very quickly replicate the cut-out shape. The stencil itself only needs to be created once, and then it can be reused as many times as desired, to create the cut out shape in as many different colors as you like. Even better, the color of a shape made with the stencil doesn’t have to be determined until the stencil is actually used.</p><p>A template is essentially a stencil for creating functions or classes. We create the template (our stencil) once, and then we can use it as many times as needed, to stencil out a function or class for a specific set of actual types. Those actual types don’t need to be determined until the template is actually used.</p></div>",
+      "preview": "As an aside…Because the concept behind templates can be hard to describe in words, let’s try an anal",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b16",
+      "type": "paragraph",
+      "html": "<p>Because the actual types aren’t determined until the template is used in a program (not when the template is written), the author of the template doesn’t have to try to anticipate all of the actual types that might be used. This means template code can be used with types that didn’t even exist when the template was written! We’ll see how this comes in handy later, when we start exploring the C++ standard library, which is absolutely full of template code!</p>",
+      "preview": "Because the actual types aren’t determined until the template is used in a progr",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b17",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Templates can work with types that didn’t even exist when the template was written. This helps make template code both flexible and future proof!</p></div>",
+      "preview": "Key insightTemplates can work with types that didn’t even exist when the template was written. This ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b18",
+      "type": "paragraph",
+      "html": "<p>In the rest of this lesson, we’ll introduce and explore how to create function templates, and describe how they work in more detail. We’ll save discussion of class templates until after we’ve covered what classes are.</p>",
+      "preview": "In the rest of this lesson, we’ll introduce and explore how to create function t",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b19",
+      "type": "section",
+      "title": "Function templates",
+      "html": "<h3 class=\"cpp-section-heading\">Function templates</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-templates_b20",
+      "type": "paragraph",
+      "html": "<p>A <strong>function template</strong> is a function-like definition that is used to generate one or more overloaded functions, each with a different set of actual types. This is what will allow us to create functions that can work with many different types. The initial function template that is used to generate other functions is called the <strong>primary template</strong>, and the functions generated from the primary template are called <strong>instantiated functions</strong>.</p>",
+      "preview": "A function template is a function-like definition that is used to generate one o",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b21",
+      "type": "paragraph",
+      "html": "<p>When we create a primary function template, we use <strong>placeholder types</strong> (technically called <strong>type template parameters</strong>, informally called <strong>template types</strong>) for any parameter types, return types, or types used in the function body that we want to be specified later, by the user of the template.</p>",
+      "preview": "When we create a primary function template, we use placeholder types (technicall",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b22",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>C++ supports 3 different kinds of template parameters:</p><ul><li>Type template parameters (where the template parameter represents a type).</li><li>Non-type template parameters (where the template parameter represents a constexpr value).</li><li>Template template parameters (where the template parameter represents a template).</li></ul><p>Type template parameters are by far the most common, so we’ll focus on those first. We’ll also discuss non-type template parameters, which are seeing increased usage in modern C++.</p></div>",
+      "preview": "For advanced readersC++ supports 3 different kinds of template parameters:Type template parameters (",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b23",
+      "type": "paragraph",
+      "html": "<p>Function templates are something that is best taught by example, so let’s convert our normal <code>max(int, int)</code> function from the example above into a function template. It’s surprisingly easy, and we’ll explain what’s happening along the way.</p>",
+      "preview": "Function templates are something that is best taught by example, so let’s conver",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b24",
+      "type": "section",
+      "title": "Creating a max() function template",
+      "html": "<h3 class=\"cpp-section-heading\">Creating a <code>max()</code> function template</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-templates_b25",
+      "type": "paragraph",
+      "html": "<p>Here’s the <code>int</code> version of <code>max()</code> again:</p>",
+      "preview": "Here’s the int version of max() again:",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b26",
+      "type": "code",
+      "language": "cpp",
+      "code": "int max(int x, int y)\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int max(int x, int y)\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b27",
+      "type": "paragraph",
+      "html": "<p>Note that we use type <code>int</code> three times in this function: once for parameter <code>x</code>, once for parameter <code>y</code>, and once for the return type of the function.</p>",
+      "preview": "Note that we use type int three times in this function: once for parameter x, on",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b28",
+      "type": "paragraph",
+      "html": "<p>To create a function template for <code>max()</code>, we’re going to do two things. First, we’re going to replace any actual types that we want to be specified later with type template parameters. In this case, because we have only one type that needs replacing (<code>int</code>), we only need one type template parameter (which we’ll call <code>T</code>):</p>",
+      "preview": "To create a function template for max(), we’re going to do two things. First, we",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b29",
+      "type": "paragraph",
+      "html": "<p>Here’s our new function that uses a single template type, where all occurrences of actual type <code>int</code> have been replaced with type template parameter <code>T</code> :</p>",
+      "preview": "Here’s our new function that uses a single template type, where all occurrences ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b30",
+      "type": "code",
+      "language": "cpp",
+      "code": "T max(T x, T y) // won't compile because we haven't defined T\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">T max(T x, T y) // won't compile because we haven't defined T\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b31",
+      "type": "paragraph",
+      "html": "<p>This is a good start -- however, it won’t compile because the compiler doesn’t know what <code>T</code> is! And this is still a normal function, not a function template.</p>",
+      "preview": "This is a good start -- however, it won’t compile because the compiler doesn’t k",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b32",
+      "type": "paragraph",
+      "html": "<p>Second, we’re going to tell the compiler that this is a template, and that <code>T</code> is a type template parameter that is a placeholder for any type. Both of these are done using a <strong>template parameter declaration</strong>, which defines any template parameters that will be subsequently used. The scope of a template parameter declaration is strictly limited to the function template (or class template) that follows. Therefore, each function template or class template needs its own template parameter declaration.</p>",
+      "preview": "Second, we’re going to tell the compiler that this is a template, and that T is ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b33",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T> // this is the template parameter declaration defining T as a type template parameter\nT max(T x, T y) // this is the function template definition for max<T>\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt; // this is the template parameter declaration defining T as a type template parameter\nT max(T x, T y) // this is the function template definition for max&lt;T&gt;\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b34",
+      "type": "paragraph",
+      "html": "<p>In our template parameter declaration, we start with the keyword <code>template</code>, which tells the compiler that we’re creating a template. Next, we specify all of the template parameters that our template will use inside angled brackets (<code>&lt;&gt;</code>). For each type template parameter, we use the keyword <code>typename</code> (preferred) or <code>class</code>, followed by the name of the type template parameter (e.g. <code>T</code>).</p>",
+      "preview": "In our template parameter declaration, we start with the keyword template, which",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b35",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss how to create function templates with multiple template types in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates-with-multiple-template-types/\">11.8 -- Function templates with multiple template types</a>.</p></div>",
+      "preview": "Related contentWe discuss how to create function templates with multiple template types in lesson 11",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b36",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>There is no difference between the <code>typename</code> and <code>class</code> keywords in this context. You will often see people use the <code>class</code> keyword since it was introduced into the language earlier. However, we prefer the newer <code>typename</code> keyword, because it makes it clearer that the type template parameter can be replaced by any type (such as a fundamental type), not just class types.</p></div>",
+      "preview": "As an aside…There is no difference between the typename and class keywords in this context. You will",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b37",
+      "type": "paragraph",
+      "html": "<p>Believe it or not, we’re done! We have created a template version of our <code>max()</code> function that can accept arguments of different types.</p>",
+      "preview": "Believe it or not, we’re done! We have created a template version of our max() f",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b38",
+      "type": "paragraph",
+      "html": "<p>In the next lesson, we’ll look at how we use our <code>max</code> function template to generate one or more <code>max()</code> functions with parameters of different types and actually call those functions.</p>",
+      "preview": "In the next lesson, we’ll look at how we use our max function template to genera",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b39",
+      "type": "section",
+      "title": "Naming template parameters",
+      "html": "<h3 class=\"cpp-section-heading\">Naming template parameters</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-templates_b40",
+      "type": "paragraph",
+      "html": "<p>Much like we often use a single letter for variable names used in trivial situations (e.g. <code>x</code>), it’s conventional to use a single capital letter (starting with <code>T</code>) when the template parameter is used in a trivial or obvious way. For example, in our <code>max</code> function template:</p>",
+      "preview": "Much like we often use a single letter for variable names used in trivial situat",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b41",
+      "type": "code",
+      "language": "cpp",
+      "code": "template <typename T>\nT max(T x, T y)\n{\n    return (x < y) ? y : x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nT max(T x, T y)\n{\n    return (x &lt; y) ? y : x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b42",
+      "type": "paragraph",
+      "html": "<p>We don’t need to give <code>T</code> a complex name, because it’s obviously just a placeholder type for the values being compared, and <code>T</code> can be any type that can be compared (such as <code>int</code>, <code>double</code>, or <code>char</code>, but not <code>nullptr</code>).</p>",
+      "preview": "We don’t need to give T a complex name, because it’s obviously just a placeholde",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b43",
+      "type": "paragraph",
+      "html": "<p>Our function templates will generally use this naming convention.</p>",
+      "preview": "Our function templates will generally use this naming convention.",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b44",
+      "type": "paragraph",
+      "html": "<p>If a type template parameter has a non-obvious usage or specific requirements that must be met, there are two common conventions for such names:</p>",
+      "preview": "If a type template parameter has a non-obvious usage or specific requirements th",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b45",
+      "type": "list",
+      "html": "<ul><li>Starting with a capital letter (e.g. <code>Allocator</code>). The standard library uses this naming convention.</li><li>Prefixed with a <code>T</code>, then starting with a capital letter (e.g. <code>TAllocator</code>). This makes it easier to see that the type is a type template parameter.</li></ul>",
+      "preview": "Starting with a capital letter (e.g. Allocator). The standard library uses this ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b46",
+      "type": "paragraph",
+      "html": "<p>Which you choose is a matter of personal preference.</p>",
+      "preview": "Which you choose is a matter of personal preference.",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b47",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>As an example, the standard library has an overload of <code>std::max()</code> that is declared like this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template&lt; class T, class Compare &gt;\nconst T&amp; max( const T&amp; a, const T&amp; b, Compare comp ); // ignore the &amp; for now, we'll cover these in a future lesson</code></pre><p>Because <code>a</code> and <code>b</code> are of type <code>T</code>, we know that we don’t care what type <code>a</code> and <code>b</code> are -- they can be any type. Because <code>comp</code> has type <code>Compare</code>, we know that <code>comp</code> must be a type that meets the requirements for a <code>Compare</code> (whatever that is).</p><p>When a function template is instantiated, the compiler replaces the template parameters with the template arguments and then compiles the resulting instantiated function. Whether the function compiles depends on how the object(s) of each type are used within the function. Therefore, the requirements for a given template parameter are essentially implicitly defined.</p><p>Because it can be hard to infer requirements from how objects of the type are used, this is one of those areas where it is useful to consult technical documentation, which should explicitly state the requirements. For example, if we want to know what the requirements for a <code>Compare</code> are, we can look up the documentation for <code>std::max</code> (e.g. see <a href=\"https://en.cppreference.com/w/cpp/algorithm/max\">https://en.cppreference.com/w/cpp/algorithm/max</a>) and it should be listed there.</p></div>",
+      "preview": "For advanced readersAs an example, the standard library has an overload of std::max() that is declar",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b48",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use a single capital letter starting with <code>T</code> (e.g. <code>T</code>, <code>U</code>, <code>V</code>, etc…) to name type template parameters that are used in trivial or obvious ways and represent “any reasonable type”.</p><p>If the type template parameter has a non-obvious usage or specific requirements that must be met, then a more descriptive name is warranted (e.g. <code>Allocator</code> or <code>TAllocator</code>).</p></div>",
+      "preview": "Best practiceUse a single capital letter starting with T (e.g. T, U, V, etc…) to name type template ",
+      "canCheck": true
+    },
+    {
+      "id": "function-templates_b49",
+      "type": "section",
+      "title": "Quiz time",
+      "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "function-templates_b50",
+      "type": "quiz",
+      "questionTitle": "Question #1",
+      "questionHtml": "Describe why construction blueprints are a type of template.",
+      "hintHtml": "",
+      "solutionHtml": "<p>The construction blueprint itself is just a piece of paper that describes how to construct a building. Using the blueprint, construction crews can quickly erect many buildings with an identical structure. However, the specific material types used for each building can vary (e.g. what type of material is used for the siding of the building), and don’t need to be determined until the buildings are actually built.</p>",
+      "canCheck": true
+    }
+  ]
+}

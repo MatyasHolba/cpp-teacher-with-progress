@@ -1,0 +1,474 @@
+{
+  "index": 33,
+  "chapterId": "2",
+  "number": "2.9",
+  "title": "2.9 — Naming collisions and an introduction to namespaces",
+  "url": "https://www.learncpp.com/cpp-tutorial/naming-collisions-and-an-introduction-to-namespaces/",
+  "slug": "naming-collisions-and-an-introduction-to-namespaces",
+  "scrapedAt": "2026-09-15T16:28:53.077Z",
+  "totalBlocks": 64,
+  "totalCheckpoints": 56,
+  "blocks": [
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b0",
+      "type": "paragraph",
+      "html": "<p>Let’s say you are driving to a friend’s house for the first time, and the address given to you is 245 Front Street in Mill City. Upon reaching Mill City, you take out your map, only to discover that Mill City actually has two different Front Streets across town from each other! Which one would you go to? Unless there were some additional clue to help you decide (e.g. you remember your friend’s house is near the river) you’d have to call your friend and ask for more information. Because this would be confusing and inefficient (particularly for your mail carrier), in most countries, all street names and house addresses within a city are required to be unique.</p>",
+      "preview": "Let’s say you are driving to a friend’s house for the first time, and the addres",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b1",
+      "type": "paragraph",
+      "html": "<p>Similarly, C++ requires that all identifiers be non-ambiguous. If two identical identifiers are introduced into the same program in a way that the compiler or linker can’t tell them apart, the compiler or linker will produce an error. This error is generally referred to as a <strong>naming collision</strong> (or <strong>naming conflict</strong>).</p>",
+      "preview": "Similarly, C++ requires that all identifiers be non-ambiguous. If two identical ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b2",
+      "type": "paragraph",
+      "html": "<p>If the colliding identifiers are introduced into the same file, the result will be a compiler error. If the colliding identifiers are introduced into separate files belonging to the same program, the result will be a linker error.</p>",
+      "preview": "If the colliding identifiers are introduced into the same file, the result will ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b3",
+      "type": "section",
+      "title": "An example of a naming collision",
+      "html": "<h3 class=\"cpp-section-heading\">An example of a naming collision</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b4",
+      "type": "paragraph",
+      "html": "<p>a.cpp:</p>",
+      "preview": "a.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b5",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << x;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid myFcn(int x)\n{\n    std::cout &lt;&lt; x;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b6",
+      "type": "paragraph",
+      "html": "<p>main.cpp:</p>",
+      "preview": "main.cpp:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b7",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << 2 * x;\n}\n\nint main()\n{\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid myFcn(int x)\n{\n    std::cout &lt;&lt; 2 * x;\n}\n\nint main()\n{\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b8",
+      "type": "paragraph",
+      "html": "<p>When the compiler compiles this program, it will compile <em>a.cpp</em> and <em>main.cpp</em> independently, and each file will compile with no problems.</p>",
+      "preview": "When the compiler compiles this program, it will compile a.cpp and main.cpp inde",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b9",
+      "type": "paragraph",
+      "html": "<p>However, when the linker executes, it will link all the definitions in <em>a.cpp</em> and <em>main.cpp</em> together, and discover conflicting definitions for function <code>myFcn()</code>. The linker will then abort with an error. Note that this error occurs even though <code>myFcn()</code> is never called!</p>",
+      "preview": "However, when the linker executes, it will link all the definitions in a.cpp and",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b10",
+      "type": "paragraph",
+      "html": "<p>Most naming collisions occur in two cases:</p>",
+      "preview": "Most naming collisions occur in two cases:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b11",
+      "type": "list",
+      "html": "<ol start=\"1\"><li>Two (or more) identically named functions (or global variables) are introduced into separate files belonging to the same program. This will result in a linker error, as shown above.</li><li>Two (or more) identically named functions (or global variables) are introduced into the same file. This will result in a compiler error.</li></ol>",
+      "preview": "Two (or more) identically named functions (or global variables) are introduced i",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b12",
+      "type": "paragraph",
+      "html": "<p>As programs get larger and use more identifiers, the odds of a naming collision being introduced increases significantly. The good news is that C++ provides plenty of mechanisms for avoiding naming collisions. Local scope, which keeps local variables defined inside functions from conflicting with each other, is one such mechanism. But local scope doesn’t work for function names. So how do we keep function names from conflicting with each other?</p>",
+      "preview": "As programs get larger and use more identifiers, the odds of a naming collision ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b13",
+      "type": "section",
+      "title": "Scope regions",
+      "html": "<h3 class=\"cpp-section-heading\">Scope regions</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b14",
+      "type": "paragraph",
+      "html": "<p>Back to our address analogy for a moment, having two Front Streets was only problematic because those streets existed within the same city. On the other hand, if you had to deliver mail to two addresses, one at 245 Front Street in Mill City, and another address at 245 Front Street in Jonesville, there would be no confusion about where to go. Put another way, cities provide groupings that allow us to disambiguate addresses that might otherwise conflict with each other.</p>",
+      "preview": "Back to our address analogy for a moment, having two Front Streets was only prob",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b15",
+      "type": "paragraph",
+      "html": "<p>A <strong>scope region</strong> is an area of source code where all declared identifiers are considered distinct from names declared in other scopes (much like the cities in our analogy). Two identifiers with the same name can be declared in separate scope regions without causing a naming conflict. However, within a given scope region, all identifiers must be unique, otherwise a naming collision will result.</p>",
+      "preview": "A scope region is an area of source code where all declared identifiers are cons",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b16",
+      "type": "paragraph",
+      "html": "<p>The body of a function is one example of a scope region. Two identically-named identifiers can be defined in separate functions without issue -- because each function provides a separate scope region, there is no collision. However, if you try to define two identically-named identifiers within the same function, a naming collision will result, and the compiler will complain.</p>",
+      "preview": "The body of a function is one example of a scope region. Two identically-named i",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b17",
+      "type": "section",
+      "title": "Namespaces",
+      "html": "<h3 class=\"cpp-section-heading\">Namespaces</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b18",
+      "type": "paragraph",
+      "html": "<p>A <strong>namespace</strong> provides another type of scope region (called <strong>namespace scope</strong>) that allows you to declare or define names inside of it for the purpose of disambiguation. The names declared in a namespace are isolated from names declared in other scopes, allowing such names to exist without conflict.</p>",
+      "preview": "A namespace provides another type of scope region (called namespace scope) that ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b19",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A name declared within a scope region (such as a namespace) is distinct from any identical name declared in another scope.</p></div>",
+      "preview": "Key insightA name declared within a scope region (such as a namespace) is distinct from any identica",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b20",
+      "type": "paragraph",
+      "html": "<p>For example, two functions with identical declarations can be defined inside different namespaces, and no naming collision or ambiguity will occur.</p>",
+      "preview": "For example, two functions with identical declarations can be defined inside dif",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b21",
+      "type": "paragraph",
+      "html": "<p>Namespaces may only contain declarations and definitions (e.g. variables and functions). Executable statements are not allowed unless they are part of a definition (e.g. within a function).</p>",
+      "preview": "Namespaces may only contain declarations and definitions (e.g. variables and fun",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b22",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A namespace may only contain declarations and definitions. Executable statements are only allowed as part of a definition (e.g. of a function).</p></div>",
+      "preview": "Key insightA namespace may only contain declarations and definitions. Executable statements are only",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b23",
+      "type": "paragraph",
+      "html": "<p>Namespaces are often used to group related identifiers in a large project to help ensure they don’t inadvertently collide with other identifiers. For example, if you put all your math functions in a namespace named <code>math</code>, then your math functions won’t collide with identically named functions outside the <code>math</code> namespace.</p>",
+      "preview": "Namespaces are often used to group related identifiers in a large project to hel",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b24",
+      "type": "paragraph",
+      "html": "<p>We’ll talk about how to create your own namespaces in a future lesson.</p>",
+      "preview": "We’ll talk about how to create your own namespaces in a future lesson.",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b25",
+      "type": "section",
+      "title": "The global namespace",
+      "html": "<h3 class=\"cpp-section-heading\">The global namespace</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b26",
+      "type": "paragraph",
+      "html": "<p>In C++, any name that is not defined inside a class, function, or a namespace is considered to be part of an implicitly-defined namespace called the <strong>global namespace</strong> (sometimes also called <strong>the global scope</strong>).</p>",
+      "preview": "In C++, any name that is not defined inside a class, function, or a namespace is",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b27",
+      "type": "paragraph",
+      "html": "<p>In the example at the top of the lesson, functions <code>main()</code> and both versions of <code>myFcn()</code> are defined inside the global namespace. The naming collision encountered in the example happens because both versions of <code>myFcn()</code> end up inside the global namespace, which violates the rule that all names in the scope region must be unique.</p>",
+      "preview": "In the example at the top of the lesson, functions main() and both versions of m",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b28",
+      "type": "paragraph",
+      "html": "<p>We discuss the global namespace in more detail in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-global-variables/\">7.4 -- Introduction to global variables</a>.</p>",
+      "preview": "We discuss the global namespace in more detail in lesson 7.4 -- Introduction to ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b29",
+      "type": "paragraph",
+      "html": "<p>For now, there are two things you should know:</p>",
+      "preview": "For now, there are two things you should know:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b30",
+      "type": "list",
+      "html": "<ul><li>Identifiers declared inside the global scope are in scope from the point of declaration to the end of the file.</li><li>Although variables can be defined in the global namespace, this should generally be avoided (we discuss why in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/\">7.8 -- Why (non-const) global variables are evil</a>).</li></ul>",
+      "preview": "Identifiers declared inside the global scope are in scope from the point of decl",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b31",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b32",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\n// All of the following statements are part of the global namespace\n\nvoid foo();    // okay: function forward declaration\nint x;         // compiles but strongly discouraged: non-const global variable definition (without initializer)\nint y { 5 };   // compiles but strongly discouraged: non-const global variable definition (with initializer)\nx = 5;         // compile error: executable statements are not allowed in namespaces\n\nint main()     // okay: function definition\n{\n    return 0;\n}\n\nvoid goo();    // okay: A function forward declaration",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\n// All of the following statements are part of the global namespace\n\nvoid foo();    // okay: function forward declaration\nint x;         // compiles but strongly discouraged: non-const global variable definition (without initializer)\nint y { 5 };   // compiles but strongly discouraged: non-const global variable definition (with initializer)\nx = 5;         // compile error: executable statements are not allowed in namespaces\n\nint main()     // okay: function definition\n{\n    return 0;\n}\n\nvoid goo();    // okay: A function forward declaration</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b33",
+      "type": "section",
+      "title": "The std namespace",
+      "html": "<h3 class=\"cpp-section-heading\">The std namespace</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b34",
+      "type": "paragraph",
+      "html": "<p>When C++ was originally designed, all of the identifiers in the C++ standard library (including std::cin and std::cout) were available to be used without the <code>std::</code> prefix (they were part of the global namespace). However, this meant that any identifier in the standard library could potentially conflict with any name you picked for your own identifiers (also defined in the global namespace). Code that was once working might suddenly have a naming conflict when you include a different part of the standard library. Or worse, code that compiled under one version of C++ might not compile under the next version of C++, as new identifiers introduced into the standard library could have a naming conflict with already written code. So C++ moved all of the functionality in the standard library into a namespace named <code>std</code> (short for “standard”).</p>",
+      "preview": "When C++ was originally designed, all of the identifiers in the C++ standard lib",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b35",
+      "type": "paragraph",
+      "html": "<p>It turns out that <code>std::cout</code>‘s name isn’t really <code>std::cout</code>. It’s actually just <code>cout</code>, and <code>std</code> is the name of the namespace that identifier <code>cout</code> is part of. Because <code>cout</code> is defined in the <code>std</code> namespace, the name <code>cout</code> won’t conflict with any objects or functions named <code>cout</code> that we create outside of the <code>std</code> namespace (such as in the global namespace).</p>",
+      "preview": "It turns out that std::cout‘s name isn’t really std::cout. It’s actually just co",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b36",
+      "type": "callout",
+      "calloutType": "insight",
+      "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>When you use an identifier that is defined inside a non-global namespace (e.g. the <code>std</code> namespace), you need to tell the compiler that the identifier lives inside the namespace.”</p></div>",
+      "preview": "Key insightWhen you use an identifier that is defined inside a non-global namespace (e.g. the std na",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b37",
+      "type": "paragraph",
+      "html": "<p>There are a few different ways to do this.</p>",
+      "preview": "There are a few different ways to do this.",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b38",
+      "type": "section",
+      "title": "Explicit namespace qualifier std::",
+      "html": "<h3 class=\"cpp-section-heading\">Explicit namespace qualifier std::</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b39",
+      "type": "paragraph",
+      "html": "<p>The most straightforward way to tell the compiler that we want to use <code>cout</code> from the <code>std</code> namespace is by explicitly using the <code>std::</code> prefix. For example:</p>",
+      "preview": "The most straightforward way to tell the compiler that we want to use cout from ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b40",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Hello world!\"; // when we say cout, we mean the cout defined in the std namespace\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello world!\"; // when we say cout, we mean the cout defined in the std namespace\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b41",
+      "type": "paragraph",
+      "html": "<p>The :: symbol is an operator called the <strong>scope resolution operator</strong>. The identifier to the left of the <code>::</code> symbol identifies the namespace that the name to the right of the <code>::</code> symbol is contained within. If no identifier to the left of the <code>::</code> symbol is provided, the global namespace is assumed.</p>",
+      "preview": "The :: symbol is an operator called the scope resolution operator. The identifie",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b42",
+      "type": "paragraph",
+      "html": "<p>So when we say <code>std::cout</code> we’re saying “the <code>cout</code> that is declared in namespace <code>std</code>“.</p>",
+      "preview": "So when we say std::cout we’re saying “the cout that is declared in namespace st",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b43",
+      "type": "paragraph",
+      "html": "<p>This is the safest way to use <code>cout</code>, because there’s no ambiguity about which <code>cout</code> we’re referencing (the one in the <code>std</code> namespace).</p>",
+      "preview": "This is the safest way to use cout, because there’s no ambiguity about which cou",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b44",
+      "type": "callout",
+      "calloutType": "best-practice",
+      "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use explicit namespace prefixes to access identifiers defined in a namespace.</p></div>",
+      "preview": "Best practiceUse explicit namespace prefixes to access identifiers defined in a namespace.",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b45",
+      "type": "paragraph",
+      "html": "<p>When an identifier includes a namespace prefix, the identifier is called a <strong>qualified name</strong>.</p>",
+      "preview": "When an identifier includes a namespace prefix, the identifier is called a quali",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b46",
+      "type": "section",
+      "title": "Using namespace std (and why to avoid it)",
+      "html": "<h3 class=\"cpp-section-heading\">Using namespace std (and why to avoid it)</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b47",
+      "type": "paragraph",
+      "html": "<p>Another way to access identifiers inside a namespace is to use a using-directive statement. Here’s our original “Hello world” program with a using-directive:</p>",
+      "preview": "Another way to access identifiers inside a namespace is to use a using-directive",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b48",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream>\n\nusing namespace std; // this is a using-directive that allows us to access names in the std namespace with no namespace prefix\n\nint main()\n{\n    cout << \"Hello world!\";\n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nusing namespace std; // this is a using-directive that allows us to access names in the std namespace with no namespace prefix\n\nint main()\n{\n    cout &lt;&lt; \"Hello world!\";\n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b49",
+      "type": "paragraph",
+      "html": "<p>A <strong>using directive</strong> allows us to access the names in a namespace without using a namespace prefix. So in the above example, when the compiler goes to determine what identifier <code>cout</code> is, it will match with <code>std::cout</code>, which, because of the using-directive, is accessible as just <code>cout</code>.</p>",
+      "preview": "A using directive allows us to access the names in a namespace without using a n",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b50",
+      "type": "paragraph",
+      "html": "<p>Many texts, tutorials, and even some IDEs recommend or use a using-directive at the top of the program. However, used in this way, this is a bad practice, and highly discouraged.</p>",
+      "preview": "Many texts, tutorials, and even some IDEs recommend or use a using-directive at ",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b51",
+      "type": "paragraph",
+      "html": "<p>Consider the following program:</p>",
+      "preview": "Consider the following program:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b52",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\nusing namespace std; // makes std::cout accessible as \"cout\"\n \nint cout() // defines our own \"cout\" function in the global namespace\n{\n    return 5;\n}\n \nint main()\n{\n    cout << \"Hello, world!\"; // Compile error!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n \n    return 0;\n}",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\nusing namespace std; // makes std::cout accessible as \"cout\"\n \nint cout() // defines our own \"cout\" function in the global namespace\n{\n    return 5;\n}\n \nint main()\n{\n    cout &lt;&lt; \"Hello, world!\"; // Compile error!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n \n    return 0;\n}</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b53",
+      "type": "paragraph",
+      "html": "<p>The above program doesn’t compile, because the compiler now can’t tell whether we want the <code>cout</code> function that we defined, or <code>std::cout</code>.</p>",
+      "preview": "The above program doesn’t compile, because the compiler now can’t tell whether w",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b54",
+      "type": "paragraph",
+      "html": "<p>When using a using-directive in this manner, <em>any</em> identifier we define may conflict with <em>any</em> identically named identifier in the <code>std</code> namespace. Even worse, while an identifier name may not conflict today, it may conflict with new identifiers added to the std namespace in future language revisions. This was the whole point of moving all of the identifiers in the standard library into the <code>std</code> namespace in the first place!</p>",
+      "preview": "When using a using-directive in this manner, any identifier we define may confli",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b55",
+      "type": "callout",
+      "calloutType": "warning",
+      "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Avoid using-directives (such as <code>using namespace std;</code>) at the top of your program or in header files. They violate the reason why namespaces were added in the first place.</p></div>",
+      "preview": "WarningAvoid using-directives (such as using namespace std;) at the top of your program or in header",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b56",
+      "type": "callout",
+      "calloutType": "advanced",
+      "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk more about using-declarations and using-directives (and how to use them responsibly) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/using-declarations-and-using-directives/\">7.13 -- Using declarations and using directives</a>.</p></div>",
+      "preview": "Related contentWe talk more about using-declarations and using-directives (and how to use them respo",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b57",
+      "type": "section",
+      "title": "Curly braces and indented code",
+      "html": "<h3 class=\"cpp-section-heading\">Curly braces and indented code</h3>",
+      "canCheck": false
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b58",
+      "type": "paragraph",
+      "html": "<p>In C++, curly braces are often used to delineate a scope region that is nested within another scope region (braces are also used for some non-scope-related purposes, such as list initialization). For example, a function defined inside the global scope region uses curly braces to separate the scope region of the function from the global scope.</p>",
+      "preview": "In C++, curly braces are often used to delineate a scope region that is nested w",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b59",
+      "type": "paragraph",
+      "html": "<p>In certain cases, identifiers defined outside the curly braces may still be part of the scope defined by the curly braces rather than the surrounding scope -- function parameters are a good example of this.</p>",
+      "preview": "In certain cases, identifiers defined outside the curly braces may still be part",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b60",
+      "type": "paragraph",
+      "html": "<p>For example:</p>",
+      "preview": "For example:",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b61",
+      "type": "code",
+      "language": "cpp",
+      "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\nvoid foo(int x) // foo is defined in the global scope, x is defined within scope of foo()\n{ // braces used to delineate nested scope region for function foo()\n    std::cout << x << '\\n';\n} // x goes out of scope here\n\nint main()\n{ // braces used to delineate nested scope region for function main()\n    foo(5);\n\n    int x { 6 }; // x is defined within the scope of main()\n    std::cout << x << '\\n';\n \n    return 0;\n} // x goes out of scope here\n// foo and main (and std::cout) go out of scope here (the end of the file)",
+      "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\nvoid foo(int x) // foo is defined in the global scope, x is defined within scope of foo()\n{ // braces used to delineate nested scope region for function foo()\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n} // x goes out of scope here\n\nint main()\n{ // braces used to delineate nested scope region for function main()\n    foo(5);\n\n    int x { 6 }; // x is defined within the scope of main()\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n \n    return 0;\n} // x goes out of scope here\n// foo and main (and std::cout) go out of scope here (the end of the file)</code></pre>",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b62",
+      "type": "paragraph",
+      "html": "<p>The code that exists inside a nested scope region is conventionally indented one level, both for readability and to help indicate that it exists inside a separate scope region.</p>",
+      "preview": "The code that exists inside a nested scope region is conventionally indented one",
+      "canCheck": true
+    },
+    {
+      "id": "naming-collisions-and-an-introduction-to-namespaces_b63",
+      "type": "paragraph",
+      "html": "<p>The <code>#include</code> and function definitions for <code>foo()</code> and <code>main()</code> exist in the global scope region, so they are not indented. The statements inside each function exist inside the nested scope region of the function, so they are indented one level.</p>",
+      "preview": "The #include and function definitions for foo() and main() exist in the global s",
+      "canCheck": true
+    }
+  ]
+}
