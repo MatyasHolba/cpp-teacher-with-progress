@@ -183,7 +183,7 @@ export async function pushToGitHub(
       const pagesUrl = `https://${repoOwner}.github.io/${repoName}/`;
       filesToCommit.push({
         path: 'README.md',
-        content: `# C++ Learning Journey & Portfolio
+        content: `# C++ Learning Journey
 
 ![Progress](https://img.shields.io/badge/C++%20Progress-${percentage}%25-brightgreen)
 ![Čas](https://img.shields.io/badge/Aktivn%C3%AD%20%C4%8Cas-${timeBadge}-blue)
@@ -191,7 +191,7 @@ export async function pushToGitHub(
 
 > **Poděkování:** Tento repozitář obsahuje můj osobní postup studia C++. Veškeré zdrojové texty a výukové materiály pocházejí z vynikajícího kurzu na **[learncpp.com](https://www.learncpp.com/)**. Děkuji autorům za skvělou práci při výuce C++! 
 
-## Interaktivní webové portfolio
+## Interaktivní webový přehled
 Kompletní kurz včetně odškrtaných splněných kapitol a úkolů, studijních časů a zapsaných poznámek je dostupný online na GitHub Pages:
 **[Otevřít interaktivní web](${pagesUrl})**
 

@@ -75,31 +75,44 @@ export function App() {
 
   // Handle active time tracker ticks (reading vs coding)
   const handleTimeTick = useCallback((slug: string, deltaSeconds: number, type: 'reading' | 'coding' = 'reading') => {
+    const lang = settings.contentLanguage || 'cs';
     setProgress(prev => {
       if (type === 'coding') {
-        const codingMap = prev.codingTimePerLesson || {};
-        const currentCodingSecs = (codingMap[slug] || 0) + deltaSeconds;
-        return {
-          ...prev,
-          codingTimePerLesson: {
-            ...codingMap,
-            [slug]: currentCodingSecs
-          },
-          totalCodingSeconds: (prev.totalCodingSeconds || 0) + deltaSeconds
-        };
+        if (lang === 'en') {
+          const codingMap = prev.codingTimePerLessonEN || {};
+          return {
+            ...prev,
+            codingTimePerLessonEN: { ...codingMap, [slug]: (codingMap[slug] || 0) + deltaSeconds },
+            totalCodingSeconds: (prev.totalCodingSeconds || 0) + deltaSeconds
+          };
+        } else {
+          const codingMap = prev.codingTimePerLesson || {};
+          return {
+            ...prev,
+            codingTimePerLesson: { ...codingMap, [slug]: (codingMap[slug] || 0) + deltaSeconds },
+            totalCodingSeconds: (prev.totalCodingSeconds || 0) + deltaSeconds
+          };
+        }
       }
 
-      const currentLessonSecs = (prev.timeSpentPerLesson[slug] || 0) + deltaSeconds;
-      return {
-        ...prev,
-        timeSpentPerLesson: {
-          ...prev.timeSpentPerLesson,
-          [slug]: currentLessonSecs
-        },
-        totalSecondsSpent: prev.totalSecondsSpent + deltaSeconds
-      };
+      // reading
+      if (lang === 'en') {
+        const timeMap = prev.timeSpentPerLessonEN || {};
+        return {
+          ...prev,
+          timeSpentPerLessonEN: { ...timeMap, [slug]: (timeMap[slug] || 0) + deltaSeconds },
+          totalSecondsSpent: (prev.totalSecondsSpent || 0) + deltaSeconds
+        };
+      } else {
+        const timeMap = prev.timeSpentPerLesson || {};
+        return {
+          ...prev,
+          timeSpentPerLesson: { ...timeMap, [slug]: (timeMap[slug] || 0) + deltaSeconds },
+          totalSecondsSpent: (prev.totalSecondsSpent || 0) + deltaSeconds
+        };
+      }
     });
-  }, []);
+  }, [settings.contentLanguage]);
 
   const {
     isActive,
@@ -245,34 +258,46 @@ export function App() {
             <span>Načítání lekce...</span>
           </div>
         ) : currentLesson ? (
-          <LessonView
-            lesson={currentLesson}
-            theme={settings.theme || 'dark'}
-            onToggleTheme={() => {
-              const newSettings: SyncSettings = { ...settings, theme: settings.theme === 'light' ? 'dark' : 'light' };
-              setSettings(newSettings);
-              saveSettings(newSettings);
-            }}
-            checkedBlocks={progress.checkedBlocks}
-            notes={progress.notes}
-            isActive={isActive}
-            isCodingMode={isCodingMode}
-            idleReason={idleReason}
-            onResumeTracking={resumeTracking}
-            onStartCodingMode={startCodingMode}
-            onStopCodingMode={stopCodingMode}
-            lessonSeconds={lessonSeconds}
-            codingSeconds={codingSeconds}
-            totalLessonSeconds={progress.timeSpentPerLesson[currentSlug] || 0}
-            totalCodingSeconds={progress.codingTimePerLesson?.[currentSlug] || 0}
-            prevLesson={prevLesson}
-            nextLesson={nextLesson}
-            onToggleCheck={handleToggleCheck}
-            onAddNote={handleAddNote}
-            onDeleteNote={handleDeleteNote}
-            onNavigateLesson={slug => setCurrentSlug(slug)}
-            onMarkAllDone={handleMarkAllDone}
-          />
+            <LessonView
+              lesson={currentLesson}
+              theme={settings.theme || 'dark'}
+              uiLanguage={settings.uiLanguage || 'cs'}
+              contentLanguage={settings.contentLanguage || 'cs'}
+              onToggleTheme={() => {
+                const newSettings: SyncSettings = { ...settings, theme: settings.theme === 'light' ? 'dark' : 'light' };
+                setSettings(newSettings);
+                saveSettings(newSettings);
+              }}
+              checkedBlocks={progress.checkedBlocks}
+              notes={progress.notes}
+              isActive={isActive}
+              isCodingMode={isCodingMode}
+              idleReason={idleReason}
+              onResumeTracking={resumeTracking}
+              onStartCodingMode={startCodingMode}
+              onStopCodingMode={stopCodingMode}
+              lessonSeconds={lessonSeconds}
+              codingSeconds={codingSeconds}
+              totalLessonSeconds={(settings.contentLanguage === 'en' ? progress.timeSpentPerLessonEN?.[currentSlug] : progress.timeSpentPerLesson[currentSlug]) || 0}
+              totalCodingSeconds={(settings.contentLanguage === 'en' ? progress.codingTimePerLessonEN?.[currentSlug] : progress.codingTimePerLesson?.[currentSlug]) || 0}
+              prevLesson={prevLesson}
+              nextLesson={nextLesson}
+              onToggleCheck={handleToggleCheck}
+              onAddNote={handleAddNote}
+              onDeleteNote={handleDeleteNote}
+              onNavigateLesson={slug => setCurrentSlug(slug)}
+              onMarkAllDone={() => {
+                const checkable = currentLesson.blocks.filter(b => b.canCheck);
+                const allChecked = checkable.every(b => progress.checkedBlocks[b.id]);
+                setProgress(prev => {
+                  const updatedChecked = { ...prev.checkedBlocks };
+                  checkable.forEach(b => {
+                    updatedChecked[b.id] = !allChecked;
+                  });
+                  return { ...prev, checkedBlocks: updatedChecked };
+                });
+              }}
+            />
         ) : (
           <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
             Vyberte lekci v levém menu pro zahájení studia.

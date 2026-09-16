@@ -27,7 +27,9 @@ export interface ContentBlock {
   id: string;
   type: 'section' | 'paragraph' | 'callout' | 'code' | 'output' | 'quiz' | 'list' | 'table';
   title?: string;
+  title_cs?: string;
   html: string;
+  html_cs?: string;
   preview?: string;
   code?: string;
   language?: string;
@@ -65,8 +67,10 @@ export interface NoteItem {
 export interface UserProgress {
   checkedBlocks: Record<string, boolean>; // blockId -> boolean
   notes: Record<string, NoteItem[]>; // blockId -> NoteItem[]
-  timeSpentPerLesson: Record<string, number>; // slug -> seconds (reading time)
-  codingTimePerLesson?: Record<string, number>; // slug -> seconds (coding/programming time)
+  timeSpentPerLesson: Record<string, number>; // slug -> seconds (reading time CS)
+  codingTimePerLesson?: Record<string, number>; // slug -> seconds (coding time CS)
+  timeSpentPerLessonEN?: Record<string, number>; // slug -> seconds (reading time EN)
+  codingTimePerLessonEN?: Record<string, number>; // slug -> seconds (coding time EN)
   totalSecondsSpent: number; // total reading seconds
   totalCodingSeconds?: number; // total coding seconds
   lastActiveLessonSlug: string;
@@ -78,6 +82,8 @@ export interface SyncSettings {
   repoName: string;
   mode: 'data-only' | 'full-web';
   theme?: 'light' | 'dark' | 'oled' | 'sepia';
+  uiLanguage?: 'cs' | 'en';
+  contentLanguage?: 'cs' | 'en';
   lastSyncAt?: string;
 }
 

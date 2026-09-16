@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { ContentBlock, NoteItem } from '../types';
-import { Check, MessageSquarePlus, MessageSquare, Trash2, ExternalLink, HelpCircle, Eye, EyeOff, Lightbulb } from 'lucide-react';
+import { Check, MessageSquarePlus, MessageSquare, Trash2, ExternalLink, HelpCircle, Eye, EyeOff, Lightbulb, Globe } from 'lucide-react';
 
 interface BlockItemProps {
   block: ContentBlock;
   lessonSlug: string;
   isChecked: boolean;
   notes: NoteItem[];
+  contentLanguage?: 'cs' | 'en';
   onToggleCheck: (blockId: string) => void;
   onAddNote: (blockId: string, content: string, url?: string) => void;
   onDeleteNote: (blockId: string, noteId: string) => void;
@@ -17,6 +18,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
   lessonSlug,
   isChecked,
   notes,
+  contentLanguage = 'cs',
   onToggleCheck,
   onAddNote,
   onDeleteNote
@@ -26,12 +28,16 @@ export const BlockItem: React.FC<BlockItemProps> = ({
   const [noteUrl, setNoteUrl] = useState('');
   const [showSolution, setShowSolution] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [forceTranslation, setForceTranslation] = useState(false);
+
+  const currentLang = forceTranslation ? (contentLanguage === 'en' ? 'cs' : 'en') : contentLanguage;
+  const displayHtml = (currentLang === 'cs' && block.html_cs) ? block.html_cs : block.html;
 
   // Section headings — no action buttons
   if (block.type === 'section') {
     return (
       <div className="lc-block-wrap lc-reader-pane" id={block.id}>
-        <div dangerouslySetInnerHTML={{ __html: block.html }} />
+        <div dangerouslySetInnerHTML={{ __html: displayHtml }} />
       </div>
     );
   }
@@ -68,6 +74,16 @@ export const BlockItem: React.FC<BlockItemProps> = ({
     >
       {/* Floating action bar — appears in right gutter on hover */}
       <div className="lc-block-actions">
+        {block.html_cs && (
+          <button
+            onClick={(e) => { e.stopPropagation(); setForceTranslation(!forceTranslation); }}
+            className={`lc-action-btn ${forceTranslation ? 'lc-checked' : ''}`}
+            title="Přepnout překlad tohoto bloku"
+          >
+            <Globe className="w-3 h-3 flex-shrink-0 text-blue-500" />
+            <span className="text-blue-500">{currentLang === 'cs' ? 'EN' : 'CS'}</span>
+          </button>
+        )}
         {block.canCheck && (
           <button
             onClick={() => onToggleCheck(block.id)}
@@ -146,7 +162,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
           )}
         </div>
       ) : (
-        <div dangerouslySetInnerHTML={{ __html: block.html }} />
+        <div dangerouslySetInnerHTML={{ __html: displayHtml }} />
       )}
 
       {/* Inline note composer */}

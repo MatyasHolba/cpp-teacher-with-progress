@@ -1,8 +1,8 @@
-﻿# C++ Learning Tracker (with GitHub Portfolio Sync)
+# C++ Learning Tracker (with GitHub Portfolio Sync)
 
 ![App Screenshot](docs/app_screenshot.png)
 
-A comprehensive, offline desktop learning tracker and web portfolio builder for C++ students. Built to seamlessly integrate with [learncpp.com](https://www.learncpp.com), allowing you to read offline, track your study time, make notes, and sync your progress automatically to an interactive GitHub Pages portfolio.
+A comprehensive, offline desktop learning tracker and web progress viewer for C++ students. Built to seamlessly integrate with [learncpp.com](https://www.learncpp.com), allowing you to read offline, track your study time, make notes, and sync your progress automatically to an interactive GitHub Pages view.
 
 ## 🚀 Download & Install
 

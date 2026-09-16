@@ -26,6 +26,8 @@ interface LessonViewProps {
   onNavigateLesson: (slug: string) => void;
   onMarkAllDone: () => void;
   theme: 'light' | 'dark' | 'oled' | 'sepia';
+  uiLanguage: 'cs' | 'en';
+  contentLanguage: 'cs' | 'en';
   onToggleTheme: () => void;
 }
 
@@ -51,6 +53,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
   onNavigateLesson,
   onMarkAllDone,
   theme,
+  uiLanguage,
+  contentLanguage,
   onToggleTheme
 }) => {
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
@@ -273,6 +277,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 lessonSlug={lesson.slug}
                 isChecked={!!checkedBlocks[block.id]}
                 notes={notes[block.id] || []}
+                contentLanguage={contentLanguage}
                 onToggleCheck={onToggleCheck}
                 onAddNote={onAddNote}
                 onDeleteNote={onDeleteNote}

@@ -200,6 +200,35 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             )}
           </div>
 
+          {/* Language Selection */}
+          <div className="space-y-2">
+            <label className="font-semibold text-[var(--text-main)] block">Jazyková nastavení:</label>
+            <div className="grid grid-cols-2 gap-2.5">
+              <div>
+                <label className="block text-[var(--text-muted)] mb-1">Jazyk aplikace (UI Language):</label>
+                <select
+                  value={formData.uiLanguage || 'cs'}
+                  onChange={e => setFormData({ ...formData, uiLanguage: e.target.value as 'cs' | 'en' })}
+                  className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
+                >
+                  <option value="cs">🇨🇿 Čeština</option>
+                  <option value="en">🇬🇧 English</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-[var(--text-muted)] mb-1">Jazyk materiálů (Content Language):</label>
+                <select
+                  value={formData.contentLanguage || 'cs'}
+                  onChange={e => setFormData({ ...formData, contentLanguage: e.target.value as 'cs' | 'en' })}
+                  className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
+                >
+                  <option value="cs">🇨🇿 Přeloženo (Czech)</option>
+                  <option value="en">🇬🇧 Originál (English)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           {/* Help Section */}
           <details className="text-[11px] text-[var(--text-muted)] bg-[var(--bg-header-alt)] border border-[var(--border-color)] rounded-lg p-3 cursor-pointer group">
             <summary className="font-semibold text-[var(--text-main)] flex items-center justify-between select-none">
