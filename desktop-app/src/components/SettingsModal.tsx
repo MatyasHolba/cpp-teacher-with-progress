@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SyncSettings, UserProgress, TOCData } from '../types';
 import { X, CloudUpload, CloudDownload, CheckCircle, AlertCircle, Loader2, Globe, Database, Key } from 'lucide-react';
 import { GithubIcon } from './GithubIcon';
@@ -32,6 +32,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [isPulling, setIsPulling] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isWidgetOpen, setIsWidgetOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData(settings);
+    }
+  }, [isOpen, settings]);
 
   if (!isOpen) return null;
 

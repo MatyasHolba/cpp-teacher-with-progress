@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SyncSettings } from '../types';
 import { X, Languages, Save, CheckCircle } from 'lucide-react';
 import { getT } from '../utils/i18n';
@@ -26,6 +26,18 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
   });
   
   const [showSaved, setShowSaved] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        ...settings,
+        theme: settings.theme || 'dark',
+        githubExportContentLang: settings.githubExportContentLang || settings.contentLanguage || 'en',
+        githubExportUiLang: settings.githubExportUiLang || settings.uiLanguage || 'en',
+        githubReadmeLang: settings.githubReadmeLang || 'en'
+      });
+    }
+  }, [isOpen, settings]);
 
   if (!isOpen) return null;
 
@@ -91,8 +103,8 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
                   }}
                   className="w-full bg-[var(--bg-app)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500 transition-colors"
                 >
-                  <option value="cs">🇨🇿 Čeština</option>
-                  <option value="en">🇬🇧 English</option>
+                  <option value="cs">Čeština</option>
+                  <option value="en">English</option>
                 </select>
                 <p className="text-[10px] text-[var(--text-muted)] mt-1.5 leading-tight">{t('uiLangHint')}</p>
               </div>
@@ -104,8 +116,8 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
                   onChange={e => setFormData({ ...formData, contentLanguage: e.target.value as 'cs' | 'en' })}
                   className="w-full bg-[var(--bg-app)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500 transition-colors"
                 >
-                  <option value="cs">🇨🇿 {settings.uiLanguage === 'en' ? 'Czech (Translated)' : 'Přeloženo (Czech)'}</option>
-                  <option value="en">🇬🇧 {settings.uiLanguage === 'en' ? 'English (Original)' : 'Originál (English)'}</option>
+                  <option value="cs">{settings.uiLanguage === 'en' ? 'Czech (Translated)' : 'Přeloženo (Czech)'}</option>
+                  <option value="en">{settings.uiLanguage === 'en' ? 'English (Original)' : 'Originál (English)'}</option>
                 </select>
                 <p className="text-[10px] text-[var(--text-muted)] mt-1.5 leading-tight">{t('contentLangHint')}</p>
               </div>
@@ -128,8 +140,8 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
                     onChange={e => setFormData({ ...formData, githubExportUiLang: e.target.value as 'cs' | 'en' })}
                     className="w-full bg-[var(--bg-app)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
                   >
-                    <option value="cs">🇨🇿 Čeština</option>
-                    <option value="en">🇬🇧 English</option>
+                    <option value="cs">CS Čeština</option>
+                    <option value="en">EN English</option>
                   </select>
                 </div>
                 
@@ -140,8 +152,8 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
                     onChange={e => setFormData({ ...formData, githubExportContentLang: e.target.value as 'cs' | 'en' })}
                     className="w-full bg-[var(--bg-app)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
                   >
-                    <option value="cs">🇨🇿 Čeština</option>
-                    <option value="en">🇬🇧 English</option>
+                    <option value="cs">CS Čeština</option>
+                    <option value="en">EN English</option>
                   </select>
                 </div>
               </div>
@@ -153,8 +165,8 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
                   onChange={e => setFormData({ ...formData, githubReadmeLang: e.target.value as 'cs' | 'en' })}
                   className="w-full bg-[var(--bg-app)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500 max-w-xs"
                 >
-                  <option value="cs">🇨🇿 Čeština</option>
-                  <option value="en">🇬🇧 English</option>
+                  <option value="cs">CS Čeština</option>
+                  <option value="en">EN English</option>
                 </select>
                 <p className="text-[10px] text-[var(--text-muted)] mt-1.5 leading-tight">{t('exportReadmeHint')}</p>
               </div>
