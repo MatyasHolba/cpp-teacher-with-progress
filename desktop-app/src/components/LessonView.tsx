@@ -96,16 +96,22 @@ export const LessonView: React.FC<LessonViewProps> = ({
             <span className="px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 font-mono text-xs font-semibold border border-blue-700/30 flex-shrink-0">
               {lesson.number}
             </span>
-            <span className="text-sm font-bold text-[var(--text-main)] truncate">{lesson.title}</span>
-            <a
-              href={lesson.url}
-              target="_blank"
-              rel="noreferrer"
+            <span className="text-sm font-bold text-[var(--text-main)] truncate">
+              {lesson.title.replace(/^[0-9.]+\s*[—–-]\s*/, '')}
+            </span>
+            <button
+              onClick={() => {
+                if ((window as any).__TAURI_INTERNALS__) {
+                  (window as any).__TAURI_INTERNALS__.invoke('open_url', { url: lesson.url });
+                } else {
+                  window.open(lesson.url, '_blank');
+                }
+              }}
               className="text-[var(--text-muted)] hover:text-blue-400 flex-shrink-0 transition-colors"
               title={t('originalLink')}
             >
               <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            </button>
           </div>
 
           <div className="flex items-center gap-3 flex-shrink-0">

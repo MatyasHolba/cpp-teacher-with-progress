@@ -203,6 +203,8 @@ export function App() {
   const nextLesson = currentIndex >= 0 && currentIndex < (toc?.allLessons.length ?? 0) - 1 && toc
     ? toc.allLessons[currentIndex + 1]
     : undefined;
+  // Find current chapter
+  const currentChapter = toc?.chapters.find(ch => ch.lessons.some(l => l.slug === currentSlug));
 
   return (
     <div className={`flex h-screen w-screen overflow-hidden bg-[var(--bg-app)] text-[var(--text-main)] font-sans theme-${activeTheme}`}>
@@ -225,8 +227,13 @@ export function App() {
           <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
             {!isSidebarOpen && <button onClick={() => setIsSidebarOpen(true)} className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors" title={t('toggleSidebar')}><PanelLeft className="w-5 h-5" /></button>}
             <span className="text-[var(--text-main)] font-medium">C++ Study Book</span>
-            <span>/</span>
-            <span className="text-blue-400 font-mono">{currentLesson?.number || ''}</span>
+            {currentChapter && (
+              <>
+                <span>/</span>
+                <span className="text-[var(--text-muted)] font-mono text-[10px]">Ch.{currentChapter.id}</span>
+                <span className="text-[var(--text-main)] truncate max-w-[200px]" title={currentChapter.title}>{currentChapter.title}</span>
+              </>
+            )}
           </div>
 
                       <div className="flex items-center gap-2">

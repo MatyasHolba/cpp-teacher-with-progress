@@ -51,7 +51,14 @@ export function loadSettings(): SyncSettings {
   try {
     const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
     if (!raw) return DEFAULT_SETTINGS;
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    const parsed = JSON.parse(raw);
+    // Existing users who never had isFirstBoot stored should NOT see the wizard again
+    // Only show wizard if the stored data explicitly has isFirstBoot: true
+    const merged = { ...DEFAULT_SETTINGS, ...parsed };
+    if (!('isFirstBoot' in parsed)) {
+      merged.isFirstBoot = false;
+    }
+    return merged;
   } catch (err) {
     console.error('Failed to load settings:', err);
     return DEFAULT_SETTINGS;
