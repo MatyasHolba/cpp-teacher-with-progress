@@ -167,10 +167,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               >
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <Database className="w-4 h-4 text-blue-400" />
-                  <span>Režim 1: Data & Poznámky</span>
+                  <span>Režim 1: Pouze data postupu</span>
                 </div>
                 <p className="text-[10px] text-[var(--text-muted)] leading-tight">
-                  Ukládá čistý JSON progres, časy a přehledné Markdowny s tvými poznámkami. Rychlé a úsporné.
+                  Zálohuje pouze data o postupu a čase (JSON). Nezveřejňuje poznámky ani web.
                 </p>
               </button>
 
@@ -185,13 +185,19 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               >
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <Globe className="w-4 h-4 text-emerald-400" />
-                  <span>Režim 2: Kompletní Web</span>
+                  <span>Režim 2: Kompletní Web & Portfolio</span>
                 </div>
                 <p className="text-[10px] text-[var(--text-muted)] leading-tight">
-                  Nahraje i celý interaktivní prohlížeč pro GitHub Pages, aby kdokoliv viděl tvůj kurz i poznámky v browseru.
+                  Nahraje interaktivní web pro GitHub Pages i Markdown poznámky. Kdokoliv uvidí tvůj postup v prohlížeči.
                 </p>
               </button>
             </div>
+            {formData.mode === 'full-web' && formData.repoOwner && formData.repoName && (
+              <div className="text-[11px] bg-emerald-950/30 border border-emerald-800/40 rounded p-2 text-emerald-300 flex items-center justify-between">
+                <span>🌐 GitHub Pages URL:</span>
+                <span className="font-mono select-all">https://{formData.repoOwner}.github.io/{formData.repoName}/</span>
+              </div>
+            )}
           </div>
 
           {/* 1-Click Sync Buttons */}

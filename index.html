@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C++ Learning Journey — Interaktivní Webové Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+  <style>
+    :root {
+      --bg-app: #f4f5f7;
+      --bg-header: #ffffff;
+      --bg-header-alt: #f0f2f5;
+      --bg-sidebar: #ffffff;
+      --bg-card: #ffffff;
+      --bg-hover: #f1f5f9;
+      --text-main: #1f2937;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 20px -2px rgba(0,0,0,0.08);
+      --font-code: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    body.theme-dark {
+      --bg-app: #0d0f14;
+      --bg-header: #12141a;
+      --bg-header-alt: #161922;
+      --bg-sidebar: #12141a;
+      --bg-card: #12141a;
+      --bg-hover: #1e222d;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border-color: #232733;
+      --card-shadow: 0 4px 24px -4px rgba(0,0,0,0.8);
+    }
+
+    body.theme-oled {
+      --bg-app: #000000;
+      --bg-header: #000000;
+      --bg-header-alt: #0a0a0a;
+      --bg-sidebar: #000000;
+      --bg-card: #000000;
+      --bg-hover: #121212;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --border-color: #222222;
+      --card-shadow: none;
+    }
+
+    body.theme-sepia {
+      --bg-app: #e8dfc7;
+      --bg-header: #f4ecd8;
+      --bg-header-alt: #ebe1c9;
+      --bg-sidebar: #f4ecd8;
+      --bg-card: #f4ecd8;
+      --bg-hover: #dfd4bb;
+      --text-main: #433422;
+      --text-muted: #79664d;
+      --border-color: #d3c4a2;
+      --card-shadow: 0 4px 18px -2px rgba(67,52,34,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg-app);
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Navbar */
+    header.navbar {
+      height: 50px;
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .badge-c {
+      background: #2563eb;
+      color: white;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .nav-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .stat-pill {
+      background: var(--bg-hover);
+      border: 1px solid var(--border-color);
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-code);
+      font-size: 11px;
+    }
+    .theme-select {
+      background: var(--bg-hover);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Layout Container */
+    .app-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    aside.sidebar {
+      width: 320px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: width 0.2s ease;
+    }
+    aside.sidebar.collapsed {
+      width: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+    .sidebar-header {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-header);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .search-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text-main);
+      outline: none;
+    }
+    .search-input:focus { border-color: #3b82f6; }
+    .progress-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+      width: 0%;
+      transition: width 0.3s;
+    }
+    .sidebar-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+    .chapter-group {
+      margin-bottom: 6px;
+    }
+    .chapter-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      padding: 7px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.1s;
+    }
+    .chapter-btn:hover { background: var(--bg-hover); }
+    .chapter-badge {
+      font-size: 10px;
+      font-family: var(--font-code);
+      background: var(--bg-hover);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+    .lesson-list {
+      padding-left: 10px;
+      margin-top: 2px;
+      border-left: 2px solid var(--border-color);
+      margin-left: 8px;
+    }
+    .lesson-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.1s;
+      gap: 6px;
+    }
+    .lesson-item:hover { background: var(--bg-hover); color: var(--text-main); }
+    .lesson-item.active {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+      font-weight: 700;
+      border-left: 2px solid #3b82f6;
+    }
+    .lesson-time {
+      font-size: 10px;
+      font-family: var(--font-code);
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    /* Main Reader View */
+    main.reader-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 20px 48px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .reader-card {
+      width: 100%;
+      max-width: 860px;
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      padding: 36px 44px 48px 44px;
+      line-height: 1.7;
+    }
+    .reader-card h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    .reader-card p { margin-bottom: 14px; font-size: 14.5px; }
+
+    /* Checked block highlight */
+    .lc-block {
+      position: relative;
+      margin-bottom: 14px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .lc-block.is-checked {
+      border-left: 3px solid #10b981;
+      background: rgba(16, 185, 129, 0.07);
+      padding-left: 10px;
+      margin-left: -13px;
+    }
+    .check-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: #10b981;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    /* Note cards */
+    .user-note-card {
+      background: #fffdf5;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0 14px 0;
+      font-size: 13px;
+      color: #78350f;
+    }
+    body.theme-dark .user-note-card, body.theme-oled .user-note-card {
+      background: #1c1917;
+      border-color: #78350f;
+      border-left-color: #f59e0b;
+      color: #fef3c7;
+    }
+    .note-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: #d97706;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .note-link {
+      display: inline-block;
+      margin-top: 6px;
+      color: #2563eb;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
+    /* Authentic LearnCPP Callouts */
+    .cpp-note {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    .cpp-note-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .cpp-lightgraybackground { background: #f8fafc; border-color: #cbd5e1; }
+    .cpp-lightgreenbackground { background: #f0fdf4; border-color: #86efac; }
+    .cpp-lightredbackground { background: #fef2f2; border-color: #fca5a5; }
+    .cpp-lightbluebackground { background: #eff6ff; border-color: #93c5fd; }
+    .cpp-lightpurplebackground { background: #faf5ff; border-color: #d8b4fe; }
+    .cpp-lightyellowbackground { background: #fefce8; border-color: #fde047; }
+
+    body.theme-dark .cpp-lightgraybackground { background: #1e293b; border-color: #334155; }
+    body.theme-dark .cpp-lightgreenbackground { background: #064e3b; border-color: #047857; color: #ecfdf5; }
+    body.theme-dark .cpp-lightredbackground { background: #7f1d1d; border-color: #b91c1c; color: #fef2f2; }
+    body.theme-dark .cpp-lightbluebackground { background: #1e3a8a; border-color: #1d4ed8; color: #eff6ff; }
+    body.theme-dark .cpp-lightpurplebackground { background: #4c1d95; border-color: #6d28d9; color: #faf5ff; }
+    body.theme-dark .cpp-lightyellowbackground { background: #713f12; border-color: #a16207; color: #fefce8; }
+
+    body.theme-oled .cpp-note { background: #080808 !important; border-color: #262626 !important; }
+
+    /* Code blocks */
+    pre, code {
+      font-family: var(--font-code);
+    }
+    pre {
+      background: #1e293b !important;
+      padding: 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 14px 0;
+      color: #f1f5f9;
+      font-size: 13px;
+    }
+    body.theme-oled pre { background: #09090b !important; border: 1px solid #27272a; }
+    :not(pre) > code {
+      background: rgba(148, 163, 184, 0.18);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #0284c7;
+    }
+
+    /* Nav buttons bottom */
+    .nav-buttons-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    .btn-nav-step {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-hover);
+      color: var(--text-main);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: all 0.1s;
+    }
+    .btn-nav-step:hover { border-color: #3b82f6; }
+    .btn-nav-label { font-size: 11px; color: var(--text-muted); }
+    .btn-nav-title { font-size: 13px; font-weight: 700; }
+
+    /* Buttons for hints/solutions in quizzes */
+    .quiz-toggle-btn {
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      cursor: pointer;
+      margin-top: 8px;
+      margin-right: 6px;
+    }
+    body.theme-dark .quiz-toggle-btn, body.theme-oled .quiz-toggle-btn {
+      background: #1e293b;
+      color: #f1f5f9;
+      border-color: #475569;
+    }
+  </style>
+</head>
+<body class="theme-dark">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="brand">
+      <button id="toggle-sidebar-btn" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;" title="Zobrazit/Skrýt panel">☰</button>
+      <span class="badge-c">C++</span>
+      <span>C++ Study Book & Learning Journey</span>
+    </div>
+
+    <div class="nav-stats">
+      <div class="stat-pill" id="stat-time-pill" title="Celkový aktivní čas studia">
+        ⏱ <span id="nav-total-time">0h 0m</span>
+      </div>
+      <div class="stat-pill" id="stat-code-pill" title="Čas psaní kódu" style="color:#10b981;display:none;">
+        💻 <span id="nav-code-time">0m</span>
+      </div>
+      <div class="stat-pill" id="stat-progress-pill" title="Procento dokončených úkolů">
+        ✓ <span id="nav-percent">0%</span>
+      </div>
+
+      <select id="theme-select" class="theme-select">
+        <option value="dark">🌙 Tmavý</option>
+        <option value="oled">🖤 OLED Black</option>
+        <option value="light">☀️ Světlý</option>
+        <option value="sepia">☕ Sepia</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- App Body -->
+  <div class="app-body">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="search-row">
+          <input type="text" id="search-input" class="search-input" placeholder="Hledat v lekcích..." />
+        </div>
+        <div class="progress-bar-wrap" title="Celkový postup kurzem">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-scroll" id="chapters-container">
+        <div style="padding:20px;text-align:center;color:var(--text-muted);font-size:12px;">
+          Načítání obsahu kurzu...
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Reader -->
+    <main class="reader-container">
+      <div class="reader-card" id="lesson-content">
+        <div style="padding:40px;text-align:center;color:var(--text-muted);">
+          <h2>Vítejte v interaktivním C++ studijním portfoliu</h2>
+          <p style="margin-top:10px;">Načítání lekce a poznámek...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+
+  <script>
+    let tocData = null;
+    let userProgress = { checkedBlocks: {}, notes: {}, timeSpentPerLesson: {}, codingTimePerLesson: {}, totalSecondsSpent: 0, totalCodingSeconds: 0 };
+    let currentLessonSlug = 'introduction-to-these-tutorials';
+    let currentLessonData = null;
+
+    function formatDuration(seconds) {
+      if (!seconds || seconds <= 0) return '0m';
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      if (h > 0) return `${h}h ${m}m`;
+      if (m > 0) return `${m}m ${s}s`;
+      return `${s}s`;
+    }
+
+    // Theme Management
+    const themeSelect = document.getElementById('theme-select');
+    const savedTheme = localStorage.getItem('cpp_web_theme') || 'dark';
+    document.body.className = 'theme-' + savedTheme;
+    themeSelect.value = savedTheme;
+    themeSelect.addEventListener('change', (e) => {
+      document.body.className = 'theme-' + e.target.value;
+      localStorage.setItem('cpp_web_theme', e.target.value);
+    });
+
+    // Sidebar Toggle
+    document.getElementById('toggle-sidebar-btn').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('collapsed');
+    });
+
+    // Data Load
+    async function loadData() {
+      // 1. Try to load user progress
+      try {
+        const res = await fetch('./data/progress.json');
+        if (res.ok) {
+          userProgress = await res.json();
+        }
+      } catch (e) {
+        console.warn('Could not load local progress.json, using defaults.');
+      }
+
+      updateHeaderStats();
+
+      // 2. Try to load TOC
+      try {
+        let res = await fetch('./content-bundle/toc.json');
+        if (!res.ok) {
+          // Fallback to github raw
+          res = await fetch('https://raw.githubusercontent.com/pablo3pablo/cpp-myWebsite/master/content-bundle/toc.json');
+        }
+        tocData = await res.json();
+        renderSidebar();
+
+        const initialSlug = userProgress.lastActiveLessonSlug || 'introduction-to-these-tutorials';
+        loadLesson(initialSlug);
+      } catch (e) {
+        document.getElementById('lesson-content').innerHTML = `
+          <h2>Chyba při načítání kurzu</h2>
+          <p>Nepodařilo se načíst obsah kurzu (toc.json). Ujistěte se, že je složka content-bundle nahrána v repozitáři.</p>
+        `;
+      }
+    }
+
+    function updateHeaderStats() {
+      const totalChecked = Object.values(userProgress.checkedBlocks || {}).filter(Boolean).length;
+      const totalCheckpoints = 15873;
+      const pct = Math.min(100, Math.round((totalChecked / totalCheckpoints) * 1000) / 10);
+
+      const totalStudySecs = (userProgress.totalSecondsSpent || 0) + (userProgress.totalCodingSeconds || 0);
+      document.getElementById('nav-total-time').textContent = formatDuration(totalStudySecs);
+      document.getElementById('nav-percent').textContent = pct + '%';
+      document.getElementById('progress-fill').style.width = Math.max(2, pct) + '%';
+
+      if (userProgress.totalCodingSeconds > 0) {
+        const codePill = document.getElementById('stat-code-pill');
+        codePill.style.display = 'flex';
+        document.getElementById('nav-code-time').textContent = formatDuration(userProgress.totalCodingSeconds);
+      }
+    }
+
+    function renderSidebar() {
+      if (!tocData) return;
+      const search = document.getElementById('search-input').value.toLowerCase().trim();
+      const container = document.getElementById('chapters-container');
+      container.innerHTML = '';
+
+      tocData.chapters.forEach((chapter, idx) => {
+        const matchingLessons = chapter.lessons.filter(l => 
+          !search || l.title.toLowerCase().includes(search) || l.number.includes(search)
+        );
+        if (search && matchingLessons.length === 0) return;
+
+        // Cumulative chapter time
+        let chapterSecs = 0;
+        let chapterCodeSecs = 0;
+        chapter.lessons.forEach(l => {
+          chapterSecs += userProgress.timeSpentPerLesson?.[l.slug] || 0;
+          chapterCodeSecs += userProgress.codingTimePerLesson?.[l.slug] || 0;
+        });
+
+        const group = document.createElement('div');
+        group.className = 'chapter-group';
+
+        const btn = document.createElement('button');
+        btn.className = 'chapter-btn';
+        btn.innerHTML = `
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px;">
+            <span style="color:#3b82f6;margin-right:4px;">${chapter.header}</span> ${chapter.title}
+          </span>
+          <span class="chapter-badge">${(chapterSecs + chapterCodeSecs) > 0 ? formatDuration(chapterSecs + chapterCodeSecs) : chapter.lessons.length}</span>
+        `;
+
+        const list = document.createElement('div');
+        list.className = 'lesson-list';
+        list.style.display = (idx === 0 || search) ? 'block' : 'none';
+
+        btn.addEventListener('click', () => {
+          list.style.display = list.style.display === 'none' ? 'block' : 'none';
+        });
+
+        matchingLessons.forEach(lesson => {
+          const item = document.createElement('a');
+          item.className = 'lesson-item' + (lesson.slug === currentLessonSlug ? ' active' : '');
+          const lessonTime = userProgress.timeSpentPerLesson?.[lesson.slug] || 0;
+          const lessonCode = userProgress.codingTimePerLesson?.[lesson.slug] || 0;
+
+          item.innerHTML = `
+            <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <span style="color:#3b82f6;font-family:var(--font-code);font-size:10.5px;margin-right:4px;">${lesson.number}</span>
+              <span>${lesson.title}</span>
+            </span>
+            <span class="lesson-time">${(lessonTime + lessonCode) > 0 ? formatDuration(lessonTime + lessonCode) : ''}</span>
+          `;
+
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadLesson(lesson.slug);
+          });
+          list.appendChild(item);
+        });
+
+        group.appendChild(btn);
+        group.appendChild(list);
+        container.appendChild(group);
+      });
+    }
+
+    document.getElementById('search-input').addEventListener('input', renderSidebar);
+
+    async function loadLesson(slug) {
+      currentLessonSlug = slug;
+      renderSidebar();
+      const contentCard = document.getElementById('lesson-content');
+      contentCard.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-muted);">Načítání lekce...</div>';
+
+      try {
+        let res = await fetch(`./content-bundle/lessons/${slug}.json`);
+        if (!res.ok) {
+          res = await fetch(`https://raw.githubusercontent.com/pablo3pablo/cpp-myWebsite/master/content-bundle/lessons/${slug}.json`);
+        }
+        currentLessonData = await res.json();
+        renderLesson();
+      } catch (e) {
+        contentCard.innerHTML = `
+          <h2>Chyba při načítání lekce</h2>
+          <p>Lekci ${slug} se nepodařilo načíst.</p>
+        `;
+      }
+    }
+
+    function renderLesson() {
+      if (!currentLessonData) return;
+      const card = document.getElementById('lesson-content');
+      card.innerHTML = '';
+
+      // Title
+      const h1 = document.createElement('h1');
+      h1.innerHTML = `<span style="color:#3b82f6;font-family:var(--font-code);font-size:0.8em;margin-right:8px;">${currentLessonData.number}</span> ${currentLessonData.title}`;
+      card.appendChild(h1);
+
+      // Blocks
+      currentLessonData.blocks.forEach(block => {
+        const wrap = document.createElement('div');
+        const isChecked = !!(userProgress.checkedBlocks && userProgress.checkedBlocks[block.id]);
+        const blockNotes = (userProgress.notes && userProgress.notes[block.id]) || [];
+
+        wrap.className = 'lc-block' + (isChecked ? ' is-checked' : '');
+        wrap.id = block.id;
+
+        let innerHtml = '';
+        if (isChecked) {
+          innerHtml += `<div class="check-pill">✓ Splněno / Přečteno</div>`;
+        }
+
+        if (block.type === 'quiz') {
+          innerHtml += `
+            <div class="cpp-note cpp-lightbluebackground">
+              <div class="cpp-note-title">❓ ${block.questionTitle || 'Kvízová otázka'}</div>
+              <div>${block.questionHtml || ''}</div>
+              <div style="margin-top:10px;">
+                ${block.hintHtml ? '<button class="quiz-toggle-btn" onclick="toggleQuizHint(\'' + block.id + '\')">Nápověda</button>' : ''}
+                ${block.solutionHtml ? '<button class="quiz-toggle-btn" onclick="toggleQuizSolution(\'' + block.id + '\')">Řešení</button>' : ''}
+              </div>
+              ${block.hintHtml ? '<div id="hint-' + block.id + '" style="display:none;margin-top:10px;padding:8px;background:rgba(255,255,255,0.7);border-radius:6px;">' + block.hintHtml + '</div>' : ''}
+              ${block.solutionHtml ? '<div id="sol-' + block.id + '" style="display:none;margin-top:10px;padding:8px;background:rgba(255,255,255,0.7);border-radius:6px;">' + block.solutionHtml + '</div>' : ''}
+            </div>
+          `;
+        } else {
+          innerHtml += block.html;
+        }
+
+        // Render user notes
+        if (blockNotes.length > 0) {
+          blockNotes.forEach(note => {
+            innerHtml += `
+              <div class="user-note-card">
+                <div class="note-header">
+                  <span>📝 Moje poznámka</span>
+                  <span>${new Date(note.createdAt).toLocaleDateString('cs-CZ')}</span>
+                </div>
+                <div>${note.content.replace(/\n/g, '<br>')}</div>
+                ${note.url ? '<a class="note-link" href="' + note.url + '" target="_blank">🔗 ' + note.url + '</a>' : ''}
+              </div>
+            `;
+          });
+        }
+
+        wrap.innerHTML = innerHtml;
+        card.appendChild(wrap);
+      });
+
+      // Bottom Prev / Next
+      if (tocData) {
+        const all = tocData.allLessons;
+        const currIdx = all.findIndex(l => l.slug === currentLessonSlug);
+        const prev = currIdx > 0 ? all[currIdx - 1] : null;
+        const next = currIdx < all.length - 1 ? all[currIdx + 1] : null;
+
+        const navRow = document.createElement('div');
+        navRow.className = 'nav-buttons-row';
+
+        if (prev) {
+          const btn = document.createElement('a');
+          btn.className = 'btn-nav-step';
+          btn.innerHTML = `<span class="btn-nav-label">← Předchozí lekce</span><span class="btn-nav-title">${prev.number} ${prev.title}</span>`;
+          btn.addEventListener('click', (e) => { e.preventDefault(); loadLesson(prev.slug); });
+          navRow.appendChild(btn);
+        } else {
+          navRow.appendChild(document.createElement('div'));
+        }
+
+        if (next) {
+          const btn = document.createElement('a');
+          btn.className = 'btn-nav-step';
+          btn.style.textAlign = 'right';
+          btn.innerHTML = `<span class="btn-nav-label">Další lekce →</span><span class="btn-nav-title">${next.number} ${next.title}</span>`;
+          btn.addEventListener('click', (e) => { e.preventDefault(); loadLesson(next.slug); });
+          navRow.appendChild(btn);
+        }
+
+        card.appendChild(navRow);
+      }
+
+      // Syntax highlight
+      if (window.Prism) {
+        Prism.highlightAllUnder(card);
+      }
+    }
+
+    function toggleQuizHint(id) {
+      const el = document.getElementById('hint-' + id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+    function toggleQuizSolution(id) {
+      const el = document.getElementById('sol-' + id);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Launch
+    loadData();
+  </script>
+</body>
+</html>

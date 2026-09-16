@@ -1,4 +1,5 @@
 import { UserProgress, SyncSettings, TOCData } from '../types';
+import webViewerHtml from '../templates/webViewer.html?raw';
 
 interface GitHubFileCommit {
   path: string;
@@ -74,7 +75,10 @@ export async function pushToGitHub(
     const totalChecked = Object.values(progress.checkedBlocks).filter(Boolean).length;
     const totalCheckpoints = 15873; // Course total
     const percentage = Math.min(100, Math.round((totalChecked / totalCheckpoints) * 1000) / 10);
-    const totalHours = Math.round((progress.totalSecondsSpent / 3600) * 10) / 10;
+    const totalReadingHours = Math.round((progress.totalSecondsSpent / 3600) * 10) / 10;
+    const totalCodingHours = Math.round(((progress.totalCodingSeconds || 0) / 3600) * 10) / 10;
+    const totalStudyHours = Math.round(((progress.totalSecondsSpent + (progress.totalCodingSeconds || 0)) / 3600) * 10) / 10;
+    const notesCount = Object.values(progress.notes).flat().length;
 
     const stats = {
       course: 'learncpp.com',
@@ -83,14 +87,18 @@ export async function pushToGitHub(
       totalCheckpoints,
       checkedCount: totalChecked,
       progressPercentage: percentage,
-      totalHours,
-      totalSeconds: progress.totalSecondsSpent,
-      notesCount: Object.values(progress.notes).flat().length
+      totalHours: totalStudyHours,
+      readingHours: totalReadingHours,
+      codingHours: totalCodingHours,
+      totalSeconds: progress.totalSecondsSpent + (progress.totalCodingSeconds || 0),
+      readingSeconds: progress.totalSecondsSpent,
+      codingSeconds: progress.totalCodingSeconds || 0,
+      notesCount
     };
 
     const filesToCommit: GitHubFileCommit[] = [];
 
-    // Always commit stats.json & progress.json
+    // Always commit stats.json & data/progress.json
     filesToCommit.push({
       path: 'stats.json',
       content: JSON.stringify(stats, null, 2)
@@ -101,63 +109,102 @@ export async function pushToGitHub(
       content: JSON.stringify(progress, null, 2)
     });
 
-    // Human-readable README.md for portfolio / GitHub visitors
-    const readmeContent = `# C++ Learning Journey — learncpp.com
+    if (mode === 'full-web') {
+      // 1. Upload Web Viewer for GitHub Pages
+      filesToCommit.push({
+        path: 'index.html',
+        content: webViewerHtml
+      });
+
+      // 2. Upload Markdown notes if any
+      if (toc && notesCount > 0) {
+        const notesByChapter: Record<string, string[]> = {};
+        for (const [blockId, noteList] of Object.entries(progress.notes)) {
+          if (!noteList || noteList.length === 0) continue;
+          const lessonSlug = noteList[0]?.lessonSlug || blockId.split('_b')[0];
+          const lesson = toc.allLessons.find(l => l.slug === lessonSlug);
+          const chapterId = lesson ? lesson.chapterId : 'general';
+
+          if (!notesByChapter[chapterId]) {
+            notesByChapter[chapterId] = [];
+          }
+
+          for (const note of noteList) {
+            notesByChapter[chapterId].push(
+              `### Lekce: ${lesson ? lesson.number + ' — ' + lesson.title : lessonSlug}\n` +
+              `*Blok: \`${blockId}\` | Zapsáno: ${new Date(note.createdAt).toLocaleDateString('cs-CZ')}*\n\n` +
+              `${note.content}\n` +
+              (note.url ? `\n🔗 Odkaz: [${note.url}](${note.url})\n` : '') +
+              `\n---\n`
+            );
+          }
+        }
+
+        for (const [chapterId, contentArr] of Object.entries(notesByChapter)) {
+          filesToCommit.push({
+            path: `notes/chapter-${chapterId}.md`,
+            content: `# Poznámky — Kapitola ${chapterId}\n\n` + contentArr.join('\n')
+          });
+        }
+      }
+
+      // 3. Full Web README with live GitHub Pages URL
+      const pagesUrl = `https://${repoOwner}.github.io/${repoName}/`;
+      filesToCommit.push({
+        path: 'README.md',
+        content: `# 📘 C++ Learning Journey & Portfolio — learncpp.com
 
 ![Progress](https://img.shields.io/badge/C++%20Progress-${percentage}%25-brightgreen)
-![Time](https://img.shields.io/badge/Aktivní%20Čas-${totalHours}h-blue)
-![Checkpoints](https://img.shields.io/badge/Splněno-${totalChecked}%20%2F%20${totalCheckpoints}-orange)
+![Time](https://img.shields.io/badge/Aktivn%C3%AD%20%C4%8Cas-${totalStudyHours}h-blue)
+![Checkpoints](https://img.shields.io/badge/Spln%C4%9Bno-${totalChecked}%20%2F%20${totalCheckpoints}-orange)
 
-> Automaticky synchronizováno z **C++ Learning Tracker (Offline Desktop Editor)**.
+## 🌐 Interaktivní Webové Portfolio
+Celý kurz i s mými odškrtanými splněnými úkoly, časy a zapsanými poznámkami je publikován na GitHub Pages:
+👉 **[Otevřít interaktivní web](${pagesUrl})**
+
+> Automaticky synchronizováno z desktopové aplikace **C++ Learning Tracker**.
 
 ### 📊 Celkový přehled
-- **Dokončeno**: **${percentage}%** (${totalChecked.toLocaleString()} z ${totalCheckpoints.toLocaleString()} odstavců/úkolů)
-- **Celkový aktivní čas studia**: **${totalHours} hodin** (${Math.floor(progress.totalSecondsSpent / 60)} minut)
-- **Vlastních poznámek a kódů**: **${stats.notesCount}**
+- **Dokončeno**: **${percentage}%** (${totalChecked.toLocaleString('cs-CZ')} z ${totalCheckpoints.toLocaleString('cs-CZ')} odstavců/úkolů)
+- **Celkový aktivní čas studia**: **${totalStudyHours} hodin**
+  - 📖 Čtení teorie: **${totalReadingHours} hodin**
+  - 💻 Praktické psaní kódu: **${totalCodingHours} hodin**
+- **Vlastních poznámek a kódů**: **${notesCount}**
 - **Poslední aktualizace**: ${new Date().toLocaleDateString('cs-CZ')} v ${new Date().toLocaleTimeString('cs-CZ')}
 
-### 📝 Moje poznámky podle kapitol
-Tento repozitář obsahuje autentický záznam mých poznámek, postřehů a odkazů pořízených během studia:
-- [Prohlédnout složku s poznámkami (notes/)](./notes/)
-- [Surová data o čase a progresu (stats.json)](./stats.json)
-`;
+### 📝 Odkazy a data
+- 🌐 [Spustit interaktivní web na GitHub Pages](${pagesUrl})
+${notesCount > 0 ? `- 📝 [Prohlédnout složku s poznámkami v Markdownu (notes/)](./notes/)\n` : ''}- 💾 [Surová data o postupu (data/progress.json)](./data/progress.json)
+- 📊 [Statistiky studia (stats.json)](./stats.json)
 
-    filesToCommit.push({
-      path: 'README.md',
-      content: readmeContent
-    });
+---
+*Pro zobrazení webu na GitHub Pages stačí mít v nastavení repozitáře (Settings → Pages) vybranou větev **master** (nebo main) s kořenovou složkou \`/\`.*
+`
+      });
+    } else {
+      // Mode === 'data-only'
+      // Clean README without notes/ link
+      filesToCommit.push({
+        path: 'README.md',
+        content: `# 📘 C++ Learning Progress — learncpp.com
 
-    // Generate human-readable Markdown notes organized by chapter
-    if (toc) {
-      const notesByChapter: Record<string, string[]> = {};
-      
-      for (const [blockId, noteList] of Object.entries(progress.notes)) {
-        if (!noteList || noteList.length === 0) continue;
-        const lessonSlug = noteList[0]?.lessonSlug || blockId.split('_b')[0];
-        const lesson = toc.allLessons.find(l => l.slug === lessonSlug);
-        const chapterId = lesson ? lesson.chapterId : 'general';
+![Progress](https://img.shields.io/badge/C++%20Progress-${percentage}%25-brightgreen)
+![Time](https://img.shields.io/badge/Aktivn%C3%AD%20%C4%8Cas-${totalStudyHours}h-blue)
+![Checkpoints](https://img.shields.io/badge/Spln%C4%9Bno-${totalChecked}%20%2F%20${totalCheckpoints}-orange)
 
-        if (!notesByChapter[chapterId]) {
-          notesByChapter[chapterId] = [];
-        }
+> Automaticky zálohováno z desktopové aplikace **C++ Learning Tracker**.
 
-        for (const note of noteList) {
-          notesByChapter[chapterId].push(
-            `### Lekce: ${lesson ? lesson.number + ' — ' + lesson.title : lessonSlug}\n` +
-            `*Blok: \`${blockId}\` | Zapsáno: ${new Date(note.createdAt).toLocaleDateString('cs-CZ')}*\n\n` +
-            `${note.content}\n` +
-            (note.url ? `\n🔗 Odkaz: [${note.url}](${note.url})\n` : '') +
-            `\n---\n`
-          );
-        }
-      }
+### 📊 Celkový přehled
+- **Dokončeno**: **${percentage}%** (${totalChecked.toLocaleString('cs-CZ')} z ${totalCheckpoints.toLocaleString('cs-CZ')} úkolů)
+- **Celkový aktivní čas studia**: **${totalStudyHours} hodin** (${Math.floor(progress.totalSecondsSpent / 60)} min čtení${totalCodingHours > 0 ? `, ${Math.floor((progress.totalCodingSeconds || 0) / 60)} min kódování` : ''})
+- **Poslední synchronizace**: ${new Date().toLocaleDateString('cs-CZ')} v ${new Date().toLocaleTimeString('cs-CZ')}
 
-      for (const [chapterId, contentArr] of Object.entries(notesByChapter)) {
-        filesToCommit.push({
-          path: `notes/chapter-${chapterId}.md`,
-          content: `# Poznámky — Kapitola ${chapterId}\n\n` + contentArr.join('\n')
-        });
-      }
+### 💾 Data o postupu
+Tento repozitář slouží k bezpečnému zálohování a synchronizaci mého postupu studiem C++:
+- [Surová data postupu (data/progress.json)](./data/progress.json)
+- [Statistiky studia (stats.json)](./stats.json)
+`
+      });
     }
 
     // Push each file to GitHub
@@ -168,15 +215,19 @@ Tento repozitář obsahuje autentický záznam mých poznámek, postřehů a odk
         repoName,
         file.path,
         file.content,
-        `Update ${file.path} — ${percentage}% done (${totalHours}h)`,
+        `Update ${file.path} — ${percentage}% done (${totalStudyHours}h)`,
         githubToken
       );
       if (ok) pushedCount++;
     }
 
+    const successMessage = mode === 'full-web'
+      ? `Kompletní web, poznámky i data byly úspěšně nahrány na GitHub! (${pushedCount} souborů)`
+      : `Data o postupu byla úspěšně zálohována na GitHub! (${pushedCount} souborů)`;
+
     return {
       success: true,
-      message: `Úspěšně uloženo na GitHub! (${pushedCount} souborů synchronizováno)`,
+      message: successMessage,
       filesSynced: pushedCount
     };
   } catch (err: any) {
