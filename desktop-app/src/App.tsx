@@ -27,17 +27,20 @@ export function App() {
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLanguageSettingsOpen, setIsLanguageSettingsOpen] = useState(false);
-  // Load TOC on startup
+  const [siteIndex, setSiteIndex] = useState<any>(null);
+
+  // Load TOC and Site Index on startup
   useEffect(() => {
-    fetch('/content-bundle/toc.json')
-      .then(r => r.json())
-      .then((data: TOCData) => {
-        setToc(data);
-        if (progress.lastActiveLessonSlug) {
-          setCurrentSlug(progress.lastActiveLessonSlug);
-        }
-      })
-      .catch(err => console.error('Failed to load TOC:', err));
+    Promise.all([
+      fetch('/content-bundle/toc.json').then(r => r.json()),
+      fetch('/content-bundle/site-index.json').then(r => r.json()).catch(() => null)
+    ]).then(([tocData, indexData]) => {
+      setToc(tocData);
+      if (indexData) setSiteIndex(indexData);
+      if (progress.lastActiveLessonSlug) {
+        setCurrentSlug(progress.lastActiveLessonSlug);
+      }
+    }).catch(err => console.error('Failed to load initial data:', err));
   }, []);
 
   // Save progress whenever it updates
@@ -212,6 +215,7 @@ export function App() {
       {isSidebarOpen && toc && (
         <Sidebar
           toc={toc}
+          siteIndex={siteIndex}
           progress={progress}
           activeLessonSlug={currentSlug}
           onSelectLesson={slug => setCurrentSlug(slug)}

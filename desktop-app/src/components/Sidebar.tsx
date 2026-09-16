@@ -7,6 +7,7 @@ import { getT } from '../utils/i18n';
 
 interface SidebarProps {
   toc: TOCData;
+  siteIndex?: any;
   progress: UserProgress;
   activeLessonSlug: string;
   uiLanguage: 'cs' | 'en';
@@ -16,6 +17,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({
   toc,
+  siteIndex,
   progress,
   activeLessonSlug,
   uiLanguage,
@@ -23,6 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleSidebar
 }) => {
   const t = getT(uiLanguage);
+  const [activeTab, setActiveTab] = useState<'toc' | 'index'>('toc');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({
     '0': true,
@@ -150,9 +153,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Chapters List */}
+      {/* Tabs */}
+      {siteIndex && (
+        <div className="flex border-b border-[var(--border-color)] text-xs font-semibold select-none">
+          <button
+            onClick={() => setActiveTab('toc')}
+            className={`flex-1 py-2 text-center transition-colors border-b-2 ${activeTab === 'toc' ? 'border-blue-500 text-blue-400 bg-blue-500/5' : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-hover)]'}`}
+          >
+            {uiLanguage === 'en' ? 'Chapters' : 'Kapitoly'}
+          </button>
+          <button
+            onClick={() => setActiveTab('index')}
+            className={`flex-1 py-2 text-center transition-colors border-b-2 ${activeTab === 'index' ? 'border-blue-500 text-blue-400 bg-blue-500/5' : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-hover)]'}`}
+          >
+            {uiLanguage === 'en' ? 'Site Index' : 'Rejstřík'}
+          </button>
+        </div>
+      )}
+
+      {/* Chapters / Index List */}
       <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
-        {filteredChapters.map(chapter => {
+        {activeTab === 'toc' ? (
+          filteredChapters.map(chapter => {
           const isExpanded = expandedChapters[chapter.id] || searchQuery.trim() !== '';
           const { readSecs, codeSecs, totalSecs } = getChapterStats(chapter.lessons);
 
@@ -169,11 +191,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     <div className="text-blue-500 font-mono text-[10px] font-bold uppercase tracking-wide leading-tight">
                       Chapter {chapter.id}
                     </div>
-                    {isExpanded && (
-                      <div className="text-[var(--text-muted)] text-[10px] leading-tight truncate font-normal mt-0.5">
-                        {chapter.title}
-                      </div>
-                    )}
+                    <div className="text-[var(--text-muted)] text-[10px] leading-tight truncate font-normal mt-0.5">
+                      {chapter.title}
+                    </div>
                   </div>
                 </div>
 
@@ -250,7 +270,71 @@ export const Sidebar: React.FC<SidebarProps> = ({
               )}
             </div>
           );
-        })}
+        })
+        ) : (
+          siteIndex?.letters?.map((letter: string) => (
+            <div key={letter} className="mb-2">
+              <div className="px-3 py-1 bg-[var(--bg-hover)] text-[var(--text-muted)] font-bold text-xs sticky top-0 z-10 border-b border-t border-[var(--border-color)]">
+                {letter}
+              </div>
+              <div className="flex flex-col py-1">
+                {siteIndex.index[letter]?.map((entry: any) => (
+                  <div key={entry.id || entry.term} className="px-3 py-0.5 text-[13px] hover:bg-[var(--bg-hover)] transition-colors">
+                    <div className="flex flex-wrap gap-x-2 gap-y-1 items-baseline">
+                      <span className="font-medium">{entry.term}</span>
+                      {entry.is_cross_ref ? (
+                        <span className="text-[var(--text-muted)] italic text-xs">
+                          see {entry.cross_ref}
+                        </span>
+                      ) : (
+                        entry.lessons?.map((l: any, i: number) => {
+                          const matchingLesson = toc.allLessons.find(tl => tl.url === l.url);
+                          return (
+                            <button
+                              key={i}
+                              onClick={() => matchingLesson && onSelectLesson(matchingLesson.slug)}
+                              className="text-blue-400 hover:text-blue-300 font-mono text-[11px] underline decoration-blue-900/50"
+                              title={matchingLesson ? matchingLesson.title : ''}
+                            >
+                              {l.number}
+                            </button>
+                          );
+                        })
+                      )}
+                    </div>
+                    {/* Sub-entries */}
+                    {entry.children?.length > 0 && (
+                      <div className="pl-4 mt-1 border-l-2 border-[var(--border-color)] flex flex-col gap-0.5">
+                        {entry.children.map((sub: any, si: number) => (
+                          <div key={sub.id || si} className="flex flex-wrap gap-x-2 gap-y-1 items-baseline text-xs">
+                            <span className="text-[var(--text-muted)]">{sub.term}</span>
+                            {sub.is_cross_ref ? (
+                              <span className="text-[var(--text-muted)] italic text-[10px]">see {sub.cross_ref}</span>
+                            ) : (
+                              sub.lessons?.map((l: any, i: number) => {
+                                const matchingLesson = toc.allLessons.find(tl => tl.url === l.url);
+                                return (
+                                  <button
+                                    key={i}
+                                    onClick={() => matchingLesson && onSelectLesson(matchingLesson.slug)}
+                                    className="text-blue-400 hover:text-blue-300 font-mono text-[10px] underline decoration-blue-900/50"
+                                    title={matchingLesson ? matchingLesson.title : ''}
+                                  >
+                                    {l.number}
+                                  </button>
+                                );
+                              })
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </aside>
   );

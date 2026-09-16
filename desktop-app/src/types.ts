@@ -92,4 +92,17 @@ export interface SyncSettings {
   isFirstBoot?: boolean;
 }
 
+export interface SiteIndexEntry {
+  id: string;
+  term: string;
+  is_sub: boolean;
+  is_cross_ref: boolean;
+  cross_ref: string | null;
+  lessons: { number: string; url: string }[];
+  children: SiteIndexEntry[];
+}
 
+export interface SiteIndexData {
+  letters: string[];
+  index: Record<string, SiteIndexEntry[]>;
+}
