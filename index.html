@@ -334,6 +334,7 @@
       padding: 24px 20px 48px 20px;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       min-width: 0;
     }
     .reader-card {
@@ -531,6 +532,9 @@
     </div>
 
     <div class="nav-stats">
+      <button id="install-app-btn" style="background:#10b981;color:white;border:none;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:8px;box-shadow:0 2px 4px rgba(16,185,129,0.3);">
+        📥 Nainstalovat aplikaci
+      </button>
       <select id="theme-select" class="theme-select">
         <option value="dark">🌙 Tmavý</option>
         <option value="oled">🖤 OLED Black</option>
@@ -587,10 +591,6 @@
         </div>
       </div>
 
-      <!-- App Credit -->
-      <div style="padding:12px; border-top: 1px solid var(--border-color); background: var(--bg-header-alt); font-size: 10px; text-align: center; color: var(--text-muted);">
-        Generováno aplikací <a href="https://github.com/MatyasHolba/cpp-teacher-with-progress" target="_blank" style="font-weight:bold;color:var(--text-main);text-decoration:none;">C++ Learning Tracker</a><br>vytvořenou Matyášem Holbou.
-      </div>
     </aside>
 
     <!-- Main Reader -->
@@ -602,6 +602,21 @@
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Install App Modal -->
+  <div id="install-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;width:90%;max-width:500px;padding:24px;box-shadow:0 10px 25px rgba(0,0,0,0.5);text-align:center;">
+      <h2 style="margin-bottom:12px;font-size:20px;">C++ Learning Tracker</h2>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.5;">
+        Zaujal tě tento webový přehled studia? Získat ho pro sebe můžeš s mojí desktopovou aplikací <strong>C++ Learning Tracker</strong>!<br><br>
+        Umožní ti offline čtení, měření času studia, psaní poznámek a automatický 1-klik export celého tvého postupu přímo na GitHub Pages!
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+        <button id="close-modal-btn" style="background:var(--bg-hover);color:var(--text-main);border:1px solid var(--border-color);padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:bold;">Zavřít</button>
+        <a href="https://github.com/MatyasHolba/cpp-teacher-with-progress" target="_blank" style="background:#3b82f6;color:white;text-decoration:none;padding:8px 24px;border-radius:8px;font-weight:bold;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(59,130,246,0.4);">🚀 Chci nainstalovat!</a>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -637,6 +652,18 @@
     // Sidebar Toggle
     document.getElementById('toggle-sidebar-btn').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('collapsed');
+    });
+
+    // Install Modal
+    const installModal = document.getElementById('install-modal');
+    document.getElementById('install-app-btn').addEventListener('click', () => {
+      installModal.style.display = 'flex';
+    });
+    document.getElementById('close-modal-btn').addEventListener('click', () => {
+      installModal.style.display = 'none';
+    });
+    installModal.addEventListener('click', (e) => {
+      if(e.target === installModal) installModal.style.display = 'none';
     });
 
     // Data Load
