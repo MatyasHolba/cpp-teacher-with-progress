@@ -75,6 +75,14 @@
       overflow: hidden;
     }
 
+    a {
+      color: #3b82f6;
+      text-decoration: underline;
+    }
+    body.theme-dark a, body.theme-oled a {
+      color: #60a5fa;
+    }
+
     /* Top Navbar */
     header.navbar {
       height: 50px;
@@ -177,6 +185,32 @@
       outline: none;
     }
     .search-input:focus { border-color: #3b82f6; }
+    
+    .stats-summary-btn {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .stats-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+    }
+    .stats-time {
+      font-family: var(--font-code);
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+    .stats-summary-btn:hover .stats-time { color: #60a5fa; }
+    .stats-pct {
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 10px;
+    }
+
     .progress-bar-wrap {
       width: 100%;
       height: 4px;
@@ -190,6 +224,30 @@
       width: 0%;
       transition: width 0.3s;
     }
+    
+    .stats-details-box {
+      margin-top: 8px;
+      padding: 10px;
+      background: var(--bg-app);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: var(--card-shadow);
+    }
+    .stats-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stats-detail-val { font-family: var(--font-code); font-weight: 700; color: var(--text-main); }
+    .stats-detail-read { color: #60a5fa; }
+    .stats-detail-code { color: #34d399; }
+    .stats-detail-tasks { color: #34d399; }
+
     .sidebar-scroll {
       flex: 1;
       overflow-y: auto;
@@ -215,6 +273,13 @@
       transition: background 0.1s;
     }
     .chapter-btn:hover { background: var(--bg-hover); }
+    
+    .chapter-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
     .chapter-badge {
       font-size: 10px;
       font-family: var(--font-code);
@@ -223,6 +288,11 @@
       border-radius: 4px;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+    }
+    .chapter-badge.time-badge {
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
     }
     .lesson-list {
       padding-left: 10px;
@@ -264,16 +334,25 @@
       padding: 24px 20px 48px 20px;
       display: flex;
       justify-content: center;
+      min-width: 0;
     }
     .reader-card {
       width: 100%;
       max-width: 860px;
+      min-width: 0;
       background: var(--bg-card);
       border-radius: 14px;
       border: 1px solid var(--border-color);
       box-shadow: var(--card-shadow);
       padding: 36px 44px 48px 44px;
       line-height: 1.7;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+    .reader-card img {
+      max-width: 100%;
+      height: auto;
     }
     .reader-card h1 {
       font-size: 26px;
@@ -290,6 +369,8 @@
       margin-bottom: 14px;
       border-radius: 6px;
       transition: background-color 0.2s;
+      min-width: 0;
+      max-width: 100%;
     }
     .lc-block.is-checked {
       border-left: 3px solid #10b981;
@@ -450,16 +531,6 @@
     </div>
 
     <div class="nav-stats">
-      <div class="stat-pill" id="stat-time-pill" title="Celkový aktivní čas studia">
-        ⏱ <span id="nav-total-time">0h 0m</span>
-      </div>
-      <div class="stat-pill" id="stat-code-pill" title="Čas psaní kódu" style="color:#10b981;display:none;">
-        💻 <span id="nav-code-time">0m</span>
-      </div>
-      <div class="stat-pill" id="stat-progress-pill" title="Procento dokončených úkolů">
-        ✓ <span id="nav-percent">0%</span>
-      </div>
-
       <select id="theme-select" class="theme-select">
         <option value="dark">🌙 Tmavý</option>
         <option value="oled">🖤 OLED Black</option>
@@ -477,8 +548,36 @@
         <div class="search-row">
           <input type="text" id="search-input" class="search-input" placeholder="Hledat v lekcích..." />
         </div>
-        <div class="progress-bar-wrap" title="Celkový postup kurzem">
-          <div class="progress-bar-fill" id="progress-fill"></div>
+        
+        <!-- Summary Stats -->
+        <div class="stats-summary-btn" id="stats-summary-btn" title="Zobrazit/Skrýt detailní statistiky">
+          <div class="stats-summary-row">
+            <span class="stats-time">⏱ <span id="nav-total-time">0h 0m</span></span>
+            <span class="stats-pct"><span id="nav-percent">0%</span> splněno</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Detail Stats (Hidden by default) -->
+        <div id="stats-details" class="stats-details-box" style="display:none;">
+          <div class="stats-detail-row">
+            <span>Celkový čas:</span>
+            <span class="stats-detail-val" id="det-total-time">0h 0m</span>
+          </div>
+          <div class="stats-detail-row">
+            <span>📖 Čtení teorie:</span>
+            <span class="stats-detail-val stats-detail-read" id="det-read-time">0h 0m</span>
+          </div>
+          <div class="stats-detail-row" id="det-code-row" style="display:none;">
+            <span>💻 Psaní kódu:</span>
+            <span class="stats-detail-val stats-detail-code" id="det-code-time">0h 0m</span>
+          </div>
+          <div class="stats-detail-row" style="border-top:1px solid var(--border-color);padding-top:4px;margin-top:2px;">
+            <span>Splněno úkolů:</span>
+            <span class="stats-detail-val stats-detail-tasks" id="det-tasks">0 / 0</span>
+          </div>
         </div>
       </div>
 
@@ -573,6 +672,12 @@
       }
     }
 
+    // Stats Toggle
+    document.getElementById('stats-summary-btn').addEventListener('click', () => {
+      const el = document.getElementById('stats-details');
+      el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+    });
+
     function updateHeaderStats() {
       const totalChecked = Object.values(userProgress.checkedBlocks || {}).filter(Boolean).length;
       const totalCheckpoints = 15873;
@@ -583,10 +688,14 @@
       document.getElementById('nav-percent').textContent = pct + '%';
       document.getElementById('progress-fill').style.width = Math.max(2, pct) + '%';
 
+      // Update detail stats
+      document.getElementById('det-total-time').textContent = formatDuration(totalStudySecs);
+      document.getElementById('det-read-time').textContent = formatDuration(userProgress.totalSecondsSpent || 0);
+      document.getElementById('det-tasks').textContent = `${totalChecked} / ${totalCheckpoints}`;
+
       if (userProgress.totalCodingSeconds > 0) {
-        const codePill = document.getElementById('stat-code-pill');
-        codePill.style.display = 'flex';
-        document.getElementById('nav-code-time').textContent = formatDuration(userProgress.totalCodingSeconds);
+        document.getElementById('det-code-row').style.display = 'flex';
+        document.getElementById('det-code-time').textContent = formatDuration(userProgress.totalCodingSeconds);
       }
     }
 
@@ -615,11 +724,18 @@
 
         const btn = document.createElement('button');
         btn.className = 'chapter-btn';
+        
+        let badgesHtml = '<div class="chapter-badges">';
+        if (chapterSecs + chapterCodeSecs > 0) {
+          badgesHtml += `<span class="chapter-badge time-badge">${formatDuration(chapterSecs + chapterCodeSecs)}</span>`;
+        }
+        badgesHtml += `<span class="chapter-badge">${chapter.lessons.length}</span></div>`;
+
         btn.innerHTML = `
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px;">
             <span style="color:#3b82f6;margin-right:4px;">${chapter.header}</span> ${chapter.title}
           </span>
-          <span class="chapter-badge">${(chapterSecs + chapterCodeSecs) > 0 ? formatDuration(chapterSecs + chapterCodeSecs) : chapter.lessons.length}</span>
+          ${badgesHtml}
         `;
 
         const list = document.createElement('div');
@@ -691,8 +807,12 @@
       card.innerHTML = '';
 
       // Title
+      let displayTitle = currentLessonData.title;
+      if (displayTitle.startsWith(currentLessonData.number)) {
+        displayTitle = displayTitle.substring(currentLessonData.number.length).replace(/^[\s-—]+/, '');
+      }
       const h1 = document.createElement('h1');
-      h1.innerHTML = `<span style="color:#3b82f6;font-family:var(--font-code);font-size:0.8em;margin-right:8px;">${currentLessonData.number}</span> ${currentLessonData.title}`;
+      h1.innerHTML = `<span style="color:#3b82f6;font-family:var(--font-code);font-size:0.8em;margin-right:8px;">${currentLessonData.number}</span> ${displayTitle}`;
       card.appendChild(h1);
 
       // Blocks
