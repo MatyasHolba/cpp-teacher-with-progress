@@ -5,9 +5,10 @@ import { LessonView } from './components/LessonView';
 import { SettingsModal } from './components/SettingsModal';
 import { loadProgress, saveProgress, loadSettings, saveSettings } from './services/storage';
 import { useTimeTracker } from './hooks/useTimeTracker';
-import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages, Settings } from 'lucide-react';
+import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages } from 'lucide-react';
 import { GithubIcon } from './components/GithubIcon';
 import { HighlightTranslator } from './components/HighlightTranslator';
+import { LanguageSettingsModal } from './components/LanguageSettingsModal';
 import { FirstBootModal } from './components/FirstBootModal';
 import { getT } from './utils/i18n';
 
@@ -25,6 +26,7 @@ export function App() {
   
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isLanguageSettingsOpen, setIsLanguageSettingsOpen] = useState(false);
   // Load TOC on startup
   useEffect(() => {
     fetch('/content-bundle/toc.json')
@@ -242,13 +244,21 @@ export function App() {
                 <option value="oled">{t('themeOLED')}</option>
                 <option value="sepia">{t('themeSepia')}</option>
               </select>
+              
+              <button
+                onClick={() => setIsLanguageSettingsOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--bg-hover)] text-[var(--text-main)] border border-[var(--border-color)] text-xs font-medium transition-colors hover:bg-[var(--border-color)]"
+              >
+                <Languages className="w-3.5 h-3.5 text-blue-400" />
+                <span>{t('languageSettings')}</span>
+              </button>
 
               <button
                 onClick={() => setIsSettingsOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-800 hover:bg-[var(--bg-hover)] text-gray-200 border border-gray-700 text-xs font-medium transition-colors"
               >
-                <Settings className="w-3.5 h-3.5 text-blue-400" />
-                <span>{t('navSettings')}</span>
+                <GithubIcon className="w-3.5 h-3.5 text-blue-400" />
+                <span>{t('githubSync')}</span>
                 {settings.lastSyncAt && (
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title={settings.uiLanguage === 'en' ? 'Synchronized' : 'Synchronizováno'} />
                 )}
@@ -318,10 +328,14 @@ export function App() {
         toc={toc}
         onClose={() => setIsSettingsOpen(false)}
         onSaveSettings={handleSaveSettings}
-        onProgressUpdated={(newProg) => {
-          setProgress(newProg);
-          saveProgress(newProg);
-        }}
+        onProgressUpdated={newProgress => setProgress(newProgress)}
+      />
+
+      <LanguageSettingsModal
+        isOpen={isLanguageSettingsOpen}
+        settings={settings}
+        onClose={() => setIsLanguageSettingsOpen(false)}
+        onSaveSettings={handleSaveSettings}
       />
 
       {/* Global Highlight Translator */}

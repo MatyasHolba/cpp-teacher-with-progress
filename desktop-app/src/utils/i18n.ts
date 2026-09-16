@@ -18,7 +18,6 @@ export const cs = {
   themeSepia: "☕ Sepia",
   githubSync: "GitHub Sync",
   languageSettings: "Jazyk",
-  navSettings: "Nastavení",
   
   // LessonView
   nextLesson: "Další lekce",
@@ -125,7 +124,6 @@ export const en = {
   themeSepia: "☕ Sepia",
   githubSync: "GitHub Sync",
   languageSettings: "Language",
-  navSettings: "Settings",
   
   // LessonView
   nextLesson: "Next Lesson",
