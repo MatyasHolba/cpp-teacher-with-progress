@@ -183,17 +183,19 @@ export async function pushToGitHub(
       const pagesUrl = `https://${repoOwner}.github.io/${repoName}/`;
       filesToCommit.push({
         path: 'README.md',
-        content: `# C++ Learning Journey & Portfolio — learncpp.com
+        content: `# C++ Learning Journey & Portfolio
 
 ![Progress](https://img.shields.io/badge/C++%20Progress-${percentage}%25-brightgreen)
 ![Čas](https://img.shields.io/badge/Aktivn%C3%AD%20%C4%8Cas-${timeBadge}-blue)
 ![Splněno](https://img.shields.io/badge/Spln%C4%9Bno-${totalChecked}%20%2F%20${totalCheckpoints}-orange)
 
+> **Poděkování:** Tento repozitář obsahuje můj osobní postup studia C++. Veškeré zdrojové texty a výukové materiály pocházejí z vynikajícího kurzu na **[learncpp.com](https://www.learncpp.com/)**. Děkuji autorům za skvělou práci při výuce C++! 
+
 ## Interaktivní webové portfolio
 Kompletní kurz včetně odškrtaných splněných kapitol a úkolů, studijních časů a zapsaných poznámek je dostupný online na GitHub Pages:
 **[Otevřít interaktivní web](${pagesUrl})**
 
-> Automaticky generováno aplikací **C++ Learning Tracker**.
+> Generováno aplikací **C++ Learning Tracker** vytvořenou Matyášem Holbou. Chceš si aplikaci také stáhnout a zaznamenávat si vlastní postup? **[Stáhnout aplikaci zde](https://github.com/MatyasHolba/cpp-teacher-with-progress)**.
 
 ### Přehled studia
 
@@ -210,9 +212,6 @@ Kompletní kurz včetně odškrtaných splněných kapitol a úkolů, studijníc
 - [Spustit interaktivní web na GitHub Pages](${pagesUrl})
 ${notesCount > 0 ? `- [Prohlédnout složku s poznámkami v Markdownu (notes/)](./notes/)\n` : ''}- [Surová data o postupu (data/progress.json)](./data/progress.json)
 - [Statistiky studia (stats.json)](./stats.json)
-
----
-*Web funguje přímo na GitHub Pages z větve \`main\` (nebo \`master\`).*
 `
       });
     } else {
@@ -220,13 +219,15 @@ ${notesCount > 0 ? `- [Prohlédnout složku s poznámkami v Markdownu (notes/)](
       // Clean README without notes/ link
       filesToCommit.push({
         path: 'README.md',
-        content: `# C++ Learning Progress — learncpp.com
+        content: `# C++ Learning Progress
 
 ![Progress](https://img.shields.io/badge/C++%20Progress-${percentage}%25-brightgreen)
 ![Čas](https://img.shields.io/badge/Aktivn%C3%AD%20%C4%8Cas-${timeBadge}-blue)
 ![Splněno](https://img.shields.io/badge/Spln%C4%9Bno-${totalChecked}%20%2F%20${totalCheckpoints}-orange)
 
-> Záloha postupu studia z desktopové aplikace **C++ Learning Tracker**.
+> **Poděkování:** Tento repozitář obsahuje můj osobní postup studia C++. Veškeré zdrojové texty a výukové materiály pocházejí z vynikajícího kurzu na **[learncpp.com](https://www.learncpp.com/)**. Děkuji autorům za skvělou práci při výuce C++! 
+
+> Generováno aplikací **C++ Learning Tracker** vytvořenou Matyášem Holbou. Chceš si aplikaci také stáhnout a zaznamenávat si vlastní postup? **[Stáhnout aplikaci zde](https://github.com/MatyasHolba/cpp-teacher-with-progress)**.
 
 ### Přehled studia
 

@@ -811,9 +811,39 @@
       if (displayTitle.startsWith(currentLessonData.number)) {
         displayTitle = displayTitle.substring(currentLessonData.number.length).replace(/^[\s-—]+/, '');
       }
+      
+      const titleWrapper = document.createElement('div');
+      titleWrapper.style.display = 'flex';
+      titleWrapper.style.alignItems = 'baseline';
+      titleWrapper.style.justifyContent = 'space-between';
+      titleWrapper.style.borderBottom = '2px solid var(--border-color)';
+      titleWrapper.style.marginBottom = '20px';
+      titleWrapper.style.paddingBottom = '12px';
+      
       const h1 = document.createElement('h1');
+      h1.style.borderBottom = 'none';
+      h1.style.marginBottom = '0';
+      h1.style.paddingBottom = '0';
       h1.innerHTML = `<span style="color:#3b82f6;font-family:var(--font-code);font-size:0.8em;margin-right:8px;">${currentLessonData.number}</span> ${displayTitle}`;
-      card.appendChild(h1);
+      
+      const sourceLink = document.createElement('a');
+      sourceLink.href = currentLessonData.url;
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noreferrer';
+      sourceLink.className = 'lesson-source-link';
+      sourceLink.innerHTML = '🔗 Originál na learncpp.com';
+      sourceLink.style.fontSize = '12px';
+      sourceLink.style.textDecoration = 'none';
+      sourceLink.style.padding = '4px 8px';
+      sourceLink.style.borderRadius = '4px';
+      sourceLink.style.background = 'var(--bg-hover)';
+      sourceLink.style.border = '1px solid var(--border-color)';
+      sourceLink.style.color = 'var(--text-muted)';
+      sourceLink.style.whiteSpace = 'nowrap';
+      
+      titleWrapper.appendChild(h1);
+      titleWrapper.appendChild(sourceLink);
+      card.appendChild(titleWrapper);
 
       // Blocks
       currentLessonData.blocks.forEach(block => {

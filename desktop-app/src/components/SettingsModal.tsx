@@ -200,6 +200,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             )}
           </div>
 
+          {/* Help Section */}
+          <details className="text-[11px] text-[var(--text-muted)] bg-[var(--bg-header-alt)] border border-[var(--border-color)] rounded-lg p-3 cursor-pointer group">
+            <summary className="font-semibold text-[var(--text-main)] flex items-center justify-between select-none">
+              <span>Máš problém se zobrazením stránky nebo nastavením? Klikni zde</span>
+              <span className="group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <div className="mt-3 space-y-2 cursor-text select-text">
+              <p><strong>1. Jak získat token (PAT):</strong><br/>
+              Běž na <em>GitHub.com → Settings → Developer Settings → Personal access tokens → Tokens (classic)</em>. Zvol <strong>Generate new token (classic)</strong>. Zaškrtni sekci <strong>repo</strong> (plný přístup) a případně <strong>workflow</strong> (pokud by ses rozhodl použít akce). Token zkopíruj a vlož sem (začíná na <code>ghp_</code>).</p>
+              
+              <p><strong>2. Co je to Vlastník a Název repozitáře?</strong><br/>
+              Když máš na GitHubu projekt např. <code>https://github.com/Pepa123/moje-stranka</code>, pak je Vlastník <code>Pepa123</code> a název <code>moje-stranka</code>.</p>
+
+              <p><strong>3. Jak zprovoznit GitHub Pages?</strong><br/>
+              Aby fungoval Režim 2 (kompletní web), nahraje se na tvůj GitHub soubor <code>index.html</code>. Poté musíš jít na GitHub do svého repozitáře: <em>Settings → Pages</em>. V sekci <strong>Build and deployment</strong> zvol <strong>Deploy from a branch</strong> a vyber větev <strong>main</strong> (případně <strong>master</strong>). Ulož to. Během pár minut GitHub stránku vygeneruje a ty ji najdeš na adrese <code>https://[Vlastnik].github.io/[Nazev_repozitare]/</code>.</p>
+            </div>
+          </details>
+
           {/* 1-Click Sync Buttons */}
           <div className="pt-2 border-t border-[var(--border-color)] flex items-center justify-between gap-3">
             <button
