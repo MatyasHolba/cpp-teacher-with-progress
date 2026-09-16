@@ -548,6 +548,10 @@
       <button id="install-app-btn" style="background:#10b981;color:white;border:none;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:8px;box-shadow:0 2px 4px rgba(16,185,129,0.3);">
         📥 Nainstalovat aplikaci
       </button>
+      <select id="lang-select" class="theme-select" style="margin-right:8px;">
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
       <select id="theme-select" class="theme-select">
         <option value="dark">🌙 Tmavý</option>
         <option value="oled">🖤 OLED Black</option>
@@ -661,6 +665,27 @@
       document.body.className = 'theme-' + e.target.value;
       localStorage.setItem('cpp_web_theme', e.target.value);
     });
+
+    // Language Management
+    let currentLanguage = localStorage.getItem('cpp_web_lang') || 'cs';
+    let blockLangOverrides = {}; // blockId -> 'cs' | 'en'
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) {
+      langSelect.value = currentLanguage;
+      langSelect.addEventListener('change', (e) => {
+        currentLanguage = e.target.value;
+        localStorage.setItem('cpp_web_lang', currentLanguage);
+        blockLangOverrides = {};
+        renderSidebar();
+        renderLesson();
+      });
+    }
+
+    window.toggleBlockLang = function(blockId) {
+      const current = blockLangOverrides[blockId] || currentLanguage;
+      blockLangOverrides[blockId] = (current === 'cs' ? 'en' : 'cs');
+      renderLesson();
+    };
 
     // Sidebar Toggle
     document.getElementById('toggle-sidebar-btn').addEventListener('click', () => {
@@ -776,9 +801,12 @@
         }
         badgesHtml += `<span class="chapter-badge">${chapter.lessons.length}</span></div>`;
 
+        const chapTitle = (currentLanguage === 'cs' && chapter.title_cs) ? chapter.title_cs : chapter.title;
+        const chapHeader = (currentLanguage === 'cs') ? chapter.header.replace('Chapter', 'Kapitola') : chapter.header;
+
         btn.innerHTML = `
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:6px;">
-            <span style="color:#3b82f6;margin-right:4px;">${chapter.header}</span> ${chapter.title}
+            <span style="color:#3b82f6;margin-right:4px;">${chapHeader}</span> ${chapTitle}
           </span>
           ${badgesHtml}
         `;
@@ -796,11 +824,12 @@
           item.className = 'lesson-item' + (lesson.slug === currentLessonSlug ? ' active' : '');
           const lessonTime = userProgress.timeSpentPerLesson?.[lesson.slug] || 0;
           const lessonCode = userProgress.codingTimePerLesson?.[lesson.slug] || 0;
+          const lTitle = (currentLanguage === 'cs' && lesson.title_cs) ? lesson.title_cs : lesson.title;
 
           item.innerHTML = `
             <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
               <span style="color:#3b82f6;font-family:var(--font-code);font-size:10.5px;margin-right:4px;">${lesson.number}</span>
-              <span>${lesson.title}</span>
+              <span>${lTitle}</span>
             </span>
             <span class="lesson-time">${(lessonTime + lessonCode) > 0 ? formatDuration(lessonTime + lessonCode) : ''}</span>
           `;
@@ -852,7 +881,8 @@
       card.innerHTML = '';
 
       // Title
-      let displayTitle = currentLessonData.title;
+      let rawTitle = (currentLanguage === 'cs' && currentLessonData.title_cs) ? currentLessonData.title_cs : currentLessonData.title;
+      let displayTitle = rawTitle;
       if (displayTitle.startsWith(currentLessonData.number)) {
         displayTitle = displayTitle.substring(currentLessonData.number.length).replace(/^[\s-—]+/, '');
       }
@@ -895,6 +925,8 @@
         const wrap = document.createElement('div');
         const isChecked = !!(userProgress.checkedBlocks && userProgress.checkedBlocks[block.id]);
         const blockNotes = (userProgress.notes && userProgress.notes[block.id]) || [];
+        const bLang = blockLangOverrides[block.id] || currentLanguage;
+        const bHtml = (bLang === 'cs' && block.html_cs) ? block.html_cs : block.html;
 
         wrap.className = 'lc-block' + (isChecked ? ' is-checked' : '');
         wrap.id = block.id;
@@ -904,11 +936,23 @@
           innerHtml += `<div class="check-pill">✓ Splněno / Přečteno</div>`;
         }
 
+        if (block.html_cs && block.html_cs !== block.html) {
+          innerHtml += `
+            <div style="display:flex;justify-content:flex-end;margin-bottom:4px;">
+              <button style="background:var(--bg-hover);border:1px solid var(--border-color);color:var(--text-muted);font-size:10px;padding:2px 7px;border-radius:4px;cursor:pointer;" onclick="toggleBlockLang('${block.id}')" title="Přepnout překlad tohoto odstavce">
+                🌐 ${bLang === 'cs' ? 'Zobrazit EN originál' : 'Přeložit do češtiny'}
+              </button>
+            </div>
+          `;
+        }
+
         if (block.type === 'quiz') {
+          const qTitle = (bLang === 'cs' && block.questionTitle_cs) ? block.questionTitle_cs : (block.questionTitle || 'Kvízová otázka');
+          const qHtml = (bLang === 'cs' && block.questionHtml_cs) ? block.questionHtml_cs : (block.questionHtml || '');
           innerHtml += `
             <div class="cpp-note cpp-lightbluebackground">
-              <div class="cpp-note-title">❓ ${block.questionTitle || 'Kvízová otázka'}</div>
-              <div>${block.questionHtml || ''}</div>
+              <div class="cpp-note-title">❓ ${qTitle}</div>
+              <div>${qHtml}</div>
               <div style="margin-top:10px;">
                 ${block.hintHtml ? '<button class="quiz-toggle-btn" onclick="toggleQuizHint(\'' + block.id + '\')">Nápověda</button>' : ''}
                 ${block.solutionHtml ? '<button class="quiz-toggle-btn" onclick="toggleQuizSolution(\'' + block.id + '\')">Řešení</button>' : ''}
@@ -918,7 +962,7 @@
             </div>
           `;
         } else {
-          innerHtml += block.html;
+          innerHtml += bHtml;
         }
 
         // Render user notes
