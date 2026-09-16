@@ -511,13 +511,13 @@
     let currentLessonData = null;
 
     function formatDuration(seconds) {
-      if (!seconds || seconds <= 0) return '0m';
+      if (!seconds || seconds <= 0) return '0 min 0 s';
       const h = Math.floor(seconds / 3600);
       const m = Math.floor((seconds % 3600) / 60);
       const s = seconds % 60;
-      if (h > 0) return `${h}h ${m}m`;
-      if (m > 0) return `${m}m ${s}s`;
-      return `${s}s`;
+      if (h > 0) return `${h} h ${m} min ${s} s`;
+      if (m > 0) return `${m} min ${s} s`;
+      return `${s} s`;
     }
 
     // Theme Management
@@ -553,8 +553,12 @@
       try {
         let res = await fetch('./content-bundle/toc.json');
         if (!res.ok) {
-          // Fallback to github raw
-          res = await fetch('https://raw.githubusercontent.com/pablo3pablo/cpp-myWebsite/master/content-bundle/toc.json');
+          // Fallback to jsDelivr CDN
+          res = await fetch('https://cdn.jsdelivr.net/gh/MatyasHolba/cpp-learning-progress@main/content-bundle/toc.json');
+        }
+        if (!res.ok) {
+          // Fallback to GitHub raw
+          res = await fetch('https://raw.githubusercontent.com/MatyasHolba/cpp-learning-progress/main/content-bundle/toc.json');
         }
         tocData = await res.json();
         renderSidebar();
@@ -664,7 +668,12 @@
       try {
         let res = await fetch(`./content-bundle/lessons/${slug}.json`);
         if (!res.ok) {
-          res = await fetch(`https://raw.githubusercontent.com/pablo3pablo/cpp-myWebsite/master/content-bundle/lessons/${slug}.json`);
+          // Fallback to jsDelivr CDN
+          res = await fetch(`https://cdn.jsdelivr.net/gh/MatyasHolba/cpp-learning-progress@main/content-bundle/lessons/${slug}.json`);
+        }
+        if (!res.ok) {
+          // Fallback to GitHub raw
+          res = await fetch(`https://raw.githubusercontent.com/MatyasHolba/cpp-learning-progress/main/content-bundle/lessons/${slug}.json`);
         }
         currentLessonData = await res.json();
         renderLesson();
