@@ -17,7 +17,14 @@ export const DEFAULT_SETTINGS: SyncSettings = {
   githubToken: '',
   repoOwner: '',
   repoName: 'cpp-learning-progress',
-  mode: 'data-only'
+  mode: 'data-only',
+  theme: 'dark',
+  uiLanguage: 'en',
+  contentLanguage: 'en',
+  githubExportContentLang: 'en',
+  githubExportUiLang: 'en',
+  githubReadmeLang: 'en',
+  isFirstBoot: true
 };
 
 export function loadProgress(): UserProgress {

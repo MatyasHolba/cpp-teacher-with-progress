@@ -89,6 +89,7 @@ export interface SyncSettings {
   githubExportUiLang?: 'cs' | 'en';
   githubReadmeLang?: 'cs' | 'en';
   lastSyncAt?: string;
+  isFirstBoot?: boolean;
 }
 
 

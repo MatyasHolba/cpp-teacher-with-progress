@@ -9,12 +9,13 @@ import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages } from 'lucide-
 import { GithubIcon } from './components/GithubIcon';
 import { HighlightTranslator } from './components/HighlightTranslator';
 import { LanguageSettingsModal } from './components/LanguageSettingsModal';
+import { FirstBootModal } from './components/FirstBootModal';
 import { getT } from './utils/i18n';
 
 export function App() {
   const [progress, setProgress] = useState<UserProgress>(loadProgress);
   const [settings, setSettings] = useState<SyncSettings>(loadSettings);
-  const t = getT(settings.uiLanguage || 'cs');
+  const t = getT(settings.uiLanguage || 'en');
   const activeTheme = settings.theme || "dark";
   const [toc, setToc] = useState<TOCData | null>(null);
   const [currentSlug, setCurrentSlug] = useState<string>('introduction-to-these-tutorials');
@@ -213,7 +214,7 @@ export function App() {
           activeLessonSlug={currentSlug}
           onSelectLesson={slug => setCurrentSlug(slug)}
           onToggleSidebar={() => setIsSidebarOpen(false)}
-          uiLanguage={settings.uiLanguage || 'cs'}
+          uiLanguage={settings.uiLanguage || 'en'}
         />
       )}
 
@@ -275,8 +276,8 @@ export function App() {
             <LessonView
               lesson={currentLesson}
               theme={settings.theme || 'dark'}
-              uiLanguage={settings.uiLanguage || 'cs'}
-              contentLanguage={settings.contentLanguage || 'cs'}
+              uiLanguage={settings.uiLanguage || 'en'}
+              contentLanguage={settings.contentLanguage || 'en'}
               onToggleTheme={() => {
                 const newSettings: SyncSettings = { ...settings, theme: settings.theme === 'light' ? 'dark' : 'light' };
                 setSettings(newSettings);
@@ -337,10 +338,13 @@ export function App() {
         onSaveSettings={handleSaveSettings}
       />
 
-      {/* Portfolio Widget Modal */}
-      
       {/* Global Highlight Translator */}
-      <HighlightTranslator uiLanguage={settings.uiLanguage || 'cs'} />
+      <HighlightTranslator uiLanguage={settings.uiLanguage || 'en'} />
+      <FirstBootModal
+        isOpen={settings.isFirstBoot === true}
+        settings={settings}
+        onSaveSettings={handleSaveSettings}
+      />
     </div>
   );
 }
