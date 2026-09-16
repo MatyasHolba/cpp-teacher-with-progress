@@ -268,7 +268,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
               fontFamily: '"Open Sans", Arial, sans-serif',
               lineHeight: 1.3,
             }}>
-              {lesson.number} — {contentLanguage === 'cs' && lesson.title_cs ? lesson.title_cs.replace(/^[0-9.]+\s*—\s*/, '') : lesson.title}
+              {lesson.number} — {contentLanguage === 'cs' && lesson.title_cs ? lesson.title_cs.replace(/^[0-9.]+\s*[—–-]\s*/, '') : lesson.title.replace(/^[0-9.]+\s*[—–-]\s*/, '')}
             </h1>
 
             {/* Lesson blocks */}

@@ -16,12 +16,13 @@ export const LanguageSettingsModal: React.FC<LanguageSettingsModalProps> = ({
   onClose,
   onSaveSettings
 }) => {
-  const t = getT(settings.uiLanguage || 'cs');
+  const t = getT(settings.uiLanguage || 'en');
   const [formData, setFormData] = useState<SyncSettings>({
     ...settings,
-    githubExportContentLang: settings.githubExportContentLang || settings.contentLanguage || 'cs',
-    githubExportUiLang: settings.githubExportUiLang || settings.uiLanguage || 'cs',
-    githubReadmeLang: settings.githubReadmeLang || 'cs'
+    theme: settings.theme || 'dark',
+    githubExportContentLang: settings.githubExportContentLang || settings.contentLanguage || 'en',
+    githubExportUiLang: settings.githubExportUiLang || settings.uiLanguage || 'en',
+    githubReadmeLang: settings.githubReadmeLang || 'en'
   });
   
   const [showSaved, setShowSaved] = useState(false);

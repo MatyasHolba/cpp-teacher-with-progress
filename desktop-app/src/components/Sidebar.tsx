@@ -158,23 +158,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           return (
             <div key={chapter.id} className="mb-1">
+              {/* Chapter header button */}
               <button
                 onClick={() => toggleChapter(chapter.id)}
                 className="w-full flex items-center justify-between px-2.5 py-2 text-xs font-semibold text-[var(--text-main)] hover:bg-[var(--bg-hover)]/60 rounded transition-colors text-left"
               >
-                <div className="flex items-center gap-1.5 truncate min-w-0 pr-2">
-                  {isExpanded ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />}
-                  <span className="truncate text-blue-500 font-mono text-[11px]">{chapter.header}</span>
-                  <span className="truncate">{chapter.title}</span>
+                <div className="flex items-center gap-1.5 min-w-0 pr-2 flex-1">
+                  {isExpanded ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 text-blue-400" /> : <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 text-[var(--text-muted)]" />}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-blue-500 font-mono text-[10px] font-bold uppercase tracking-wide leading-tight">
+                      Chapter {chapter.id}
+                    </div>
+                    {isExpanded && (
+                      <div className="text-[var(--text-muted)] text-[10px] leading-tight truncate font-normal mt-0.5">
+                        {chapter.title}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-1.5 flex-shrink-0">
                   {totalSecs > 0 && (
                     <span
                       className="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-1.5 py-0.5 rounded"
-                      title={codeSecs > 0 ? `Čtení: ${formatDuration(readSecs)} | Kódování: ${formatDuration(codeSecs)}` : `Čas kapitoly: ${formatDuration(readSecs)}`}
+                      title={codeSecs > 0 ? `Reading: ${formatDuration(readSecs)} | Coding: ${formatDuration(codeSecs)}` : `Chapter time: ${formatDuration(readSecs)}`}
                     >
-                      {codeSecs > 0 ? `${formatDuration(totalSecs)} (💻${formatDuration(codeSecs)})` : formatDuration(readSecs)}
+                      {codeSecs > 0 ? `${formatDuration(totalSecs)}` : formatDuration(readSecs)}
                     </span>
                   )}
                   <span className="text-[10px] text-[var(--text-muted)] bg-[var(--bg-header-alt)] px-1.5 py-0.5 rounded-sm">
@@ -207,8 +216,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         title={lesson.title}
                       >
                         <div className="flex items-center gap-2 truncate min-w-0 pr-2">
-                          <span className={isActive ? "text-blue-500 font-mono" : "font-mono text-[11px]"}>{lesson.number}</span>
-                          <span className="truncate font-medium">{lesson.title}</span>
+                          <span className={`flex-shrink-0 font-mono text-[10px] ${isActive ? 'text-blue-400' : 'text-[var(--text-muted)]'}`}>{lesson.number}</span>
+                          <span className="truncate">{lesson.title.replace(/^[0-9.]+\s*[—–-]\s*/, '')}</span>
                         </div>
 
                         {(lessonRead > 0 || lessonCode > 0) && (
