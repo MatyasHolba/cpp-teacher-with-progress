@@ -115,6 +115,32 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           )}
 
+          {/* Global Language */}
+          <div className="space-y-3 bg-[var(--bg-header-alt)] p-3.5 rounded-lg border border-[var(--border-color)]">
+            <div className="font-semibold text-[var(--text-main)] flex items-center gap-1.5 mb-2">
+              <Globe className="w-3.5 h-3.5 text-blue-400" />
+              <span>{t('languageSettings')}</span>
+            </div>
+            <select
+              value={formData.uiLanguage || 'en'}
+              onChange={e => {
+                const newLang = e.target.value as 'cs' | 'en';
+                setFormData({
+                  ...formData, 
+                  uiLanguage: newLang,
+                  contentLanguage: newLang,
+                  githubExportUiLang: newLang,
+                  githubExportContentLang: newLang,
+                  githubReadmeLang: newLang
+                });
+              }}
+              className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500 font-medium"
+            >
+              <option value="cs">🇨🇿 Čeština</option>
+              <option value="en">🇬🇧 English</option>
+            </select>
+          </div>
+
           {/* GitHub Credentials */}
           <div className="space-y-3 bg-[var(--bg-header-alt)] p-3.5 rounded-lg border border-[var(--border-color)]">
             <div className="font-semibold text-[var(--text-main)] flex items-center gap-1.5">
