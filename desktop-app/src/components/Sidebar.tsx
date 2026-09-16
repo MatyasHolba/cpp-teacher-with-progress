@@ -223,15 +223,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         {(lessonRead > 0 || lessonCode > 0) && (
                           <div className="flex items-center gap-1 flex-shrink-0 text-[10px] font-mono">
                             {lessonRead > 0 && (
-                              <span className="text-blue-400" title="Čtení">
-                                {lessonReadCS > 0 && lessonReadEN === 0 && '🇨🇿'}
-                                {lessonReadEN > 0 && lessonReadCS === 0 && '🇬🇧'}
-                                {lessonReadCS > 0 && lessonReadEN > 0 && '🌐'}
+                              <span
+                                className="text-blue-400 flex items-center gap-0.5"
+                                title={uiLanguage === 'en' ? 'Reading time' : 'Čas čtení'}
+                              >
+                                {lessonReadCS > 0 && lessonReadEN === 0 && <span className="text-[8px] font-bold opacity-60">CS</span>}
+                                {lessonReadEN > 0 && lessonReadCS === 0 && <span className="text-[8px] font-bold opacity-60">EN</span>}
+                                {lessonReadCS > 0 && lessonReadEN > 0 && <span className="text-[8px] font-bold opacity-60">+</span>}
                                 {formatDuration(lessonRead)}
                               </span>
                             )}
                             {lessonCode > 0 && (
-                              <span className="text-emerald-400 font-semibold" title="Psaní kódu">💻{formatDuration(lessonCode)}</span>
+                              <span
+                                className="text-emerald-400 font-semibold flex items-center gap-0.5"
+                                title={uiLanguage === 'en' ? 'Coding time' : 'Čas kódování'}
+                              >
+                                <span className="text-[9px]">⌨</span>{formatDuration(lessonCode)}
+                              </span>
                             )}
                           </div>
                         )}
