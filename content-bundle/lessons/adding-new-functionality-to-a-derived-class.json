@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In the <a href=\"https://www.learncpp.com/cpp-tutorial/111-introduction-to-inheritance/\">introduction to inheritance</a> lesson, we mentioned that one of the biggest benefits of using derived classes is the ability to reuse already written code. You can inherit the base class functionality and then add new functionality, modify existing functionality, or hide functionality you don’t want. In this and the next few lessons, we’ll take a closer look at how each of these things is done.</p>",
       "preview": "In the introduction to inheritance lesson, we mentioned that one of the biggest ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/111-introduction-to-inheritance/\">úvod do dědičnosti</a> jsme zmínili, že jednou z největších výhod používání odvozených tříd je možnost znovupoužití již napsaného kódu. Můžete zdědit funkcionalitu bázové třídy a poté přidat novou funkcionalitu, upravit stávající funkcionalitu nebo skrýt funkcionalitu, kterou nechcete. V této a v několika následujících lekcích se podrobněji podíváme na to, jak se každá z těchto věcí dělá.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b1",
       "type": "paragraph",
       "html": "<p>First, let’s start with a simple base class:</p>",
       "preview": "First, let’s start with a simple base class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve začněme s jednoduchou bázovou třídou:</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b2",
@@ -29,14 +31,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\nprotected:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\n    void identify() const { std::cout << \"I am a Base\\n\"; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\nprotected:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\n    void identify() const { std::cout &lt;&lt; \"I am a Base\\n\"; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nchráněno:\n    int m_hodnota {};\n\nveřejnost:\n    základ (hodnota int)\n        : m_value { value }\n    {\n    }\n\n    void identifik() const { std::cout << \"Jsem základ\\n\"; }\n};</code></pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b3",
       "type": "paragraph",
       "html": "<p>Now, let’s create a derived class that inherits from Base. Because we want the derived class to be able to set the value of m_value when derived objects are instantiated, we’ll make the Derived constructor call the Base constructor in the initialization list.</p>",
       "preview": "Now, let’s create a derived class that inherits from Base. Because we want the d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní vytvořme odvozenou třídu, která dědí z třídy Base. Protože chceme, aby odvozená třída mohla nastavit hodnotu m_value při vytváření instancí odvozených objektů, necháme konstruktor třídy Derived volat konstruktor třídy Base v inicializačním seznamu.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b4",
@@ -44,56 +48,64 @@
       "language": "cpp",
       "code": "class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída Odvozeno: public Base\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základ { hodnota }\n    {\n    }\n};</code></pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b5",
       "type": "paragraph",
       "html": "<p><strong>Adding new functionality to a derived class</strong></p>",
       "preview": "Adding new functionality to a derived class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přidání nové funkcionality do odvozené třídy</strong></p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b6",
       "type": "paragraph",
       "html": "<p>In the above example, because we have access to the source code of the Base class, we can add functionality directly to Base if we desire.</p>",
       "preview": "In the above example, because we have access to the source code of the Base clas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu můžeme přidat funkcionalitu přímo do třídy Base, pokud si to přejeme, protože máme přístup k jejímu zdrojovému kódu.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b7",
       "type": "paragraph",
       "html": "<p>There may be times when we have access to a base class but do not want to modify it. Consider the case where you have just purchased a library of code from a 3rd party vendor, but need some extra functionality. You could add to the original code, but this isn’t the best solution. What if the vendor sends you an update? Either your additions will be overwritten, or you’ll have to manually migrate them into the update, which is time-consuming and risky.</p>",
       "preview": "There may be times when we have access to a base class but do not want to modify",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mohou však nastat situace, kdy máme přístup k bázové třídě, ale nechceme ji upravovat. Představte si případ, kdy jste právě zakoupili knihovnu kódu od dodavatele třetí strany, ale potřebujete nějakou funkcionalitu navíc. Mohli byste kód rozšířit přímo, ale to není nejlepší řešení. Co když vám dodavatel pošle aktualizaci? Buď budou vaše úpravy přepsány, nebo je budete muset do aktualizace ručně migrovat, což je časově náročné a riskantní.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b8",
       "type": "paragraph",
       "html": "<p>Alternatively, there may be times when it’s not even possible to modify the base class. Consider the code in the standard library. We aren’t able to modify the code that’s part of the standard library. But we are able to inherit from those classes, and then add our own functionality into our derived classes. The same goes for 3rd party libraries where you are provided with headers but the code comes precompiled.</p>",
       "preview": "Alternatively, there may be times when it’s not even possible to modify the base",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případně mohou nastat situace, kdy bázovou třídu ani není možné upravit. Vezměte si například kód ve standardní knihovně. Nemůžeme upravovat kód, který je součástí standardní knihovny. Můžeme však z těchto tříd dědit a poté přidat vlastní funkcionalitu do našich odvozených tříd. Totéž platí pro knihovny třetích stran, kde máte k dispozici hlavičkové soubory, ale kód je předkompilovaný.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b9",
       "type": "paragraph",
       "html": "<p>In either case, the best answer is to derive your own class, and add the functionality you want to the derived class.</p>",
       "preview": "In either case, the best answer is to derive your own class, and add the functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V obou případech je nejlepším řešením odvodit si vlastní třídu a požadovanou funkcionalitu přidat do této odvozené třídy.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b10",
       "type": "paragraph",
       "html": "<p>One obvious omission from the Base class is a way for the public to access m_value. We could remedy this by adding an access function in the Base class -- but for the sake of example we’re going to add it to the derived class instead. Because m_value has been declared as protected in the Base class, Derived has direct access to it.</p>",
       "preview": "One obvious omission from the Base class is a way for the public to access m_val",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním zřejmým nedostatkem třídy Base je absence způsobu, jakým by k m_value mohl přistupovat kód zvenčí (public). Mohli bychom to napravit přidáním přístupové funkce (getteru) do třídy Base – ale pro účely tohoto příkladu ji místo toho přidáme do odvozené třídy. Protože m_value byla v Base deklarována jako protected, má k ní Derived přímý přístup.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b11",
       "type": "paragraph",
       "html": "<p>To add new functionality to a derived class, simply declare that functionality in the derived class like normal:</p>",
       "preview": "To add new functionality to a derived class, simply declare that functionality i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li do odvozené třídy přidat novou funkcionalitu, jednoduše ji v odvozené třídě deklarujte jako obvykle:</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b12",
@@ -101,14 +113,16 @@
       "language": "cpp",
       "code": "class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    int getValue() const { return m_value; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    int getValue() const { return m_value; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída Odvozeno: public Base\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základ { hodnota }\n    {\n    }\n\n    int getValue() const { return m_value; }\n};</code></pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b13",
       "type": "paragraph",
       "html": "<p>Now the public will be able to call getValue() on an object of type Derived to access the value of m_value.</p>",
       "preview": "Now the public will be able to call getValue() on an object of type Derived to a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní bude možné zavolat getValue() na objektu typu Derived a získat tak hodnotu m_value.</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b14",
@@ -116,28 +130,32 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived derived { 5 };\n    std::cout << \"derived has value \" << derived.getValue() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived derived { 5 };\n    std::cout &lt;&lt; \"derived has value \" &lt;&lt; derived.getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozené odvozené { 5 };\n    std::cout << \"odvozeno má hodnotu \" << derivováno.getValue() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b15",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vytvoří následující výstup:</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b16",
       "type": "output",
       "text": "derived has value 5\n",
       "html": "<pre>derived has value 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>derived has value 5\n</pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b17",
       "type": "paragraph",
       "html": "<p>Although it may be obvious, objects of type Base have no access to the getValue() function in Derived. The following does not work:</p>",
       "preview": "Although it may be obvious, objects of type Base have no access to the getValue(",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli to může být zřejmé, objekty typu Base nemají k funkci getValue() v Derived žádný přístup. Následující kód nebude fungovat:</p>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b18",
@@ -145,14 +163,17 @@
       "language": "cpp",
       "code": "int main()\n{\n    Base base { 5 };\n    std::cout << \"base has value \" << base.getValue() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Base base { 5 };\n    std::cout &lt;&lt; \"base has value \" &lt;&lt; base.getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Základní základ { 5 };\n    std::cout << \"základ má hodnotu \" << base.getValue() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "adding-new-functionality-to-a-derived-class_b19",
       "type": "paragraph",
       "html": "<p>This is because there is no getValue() function in Base. Function getValue() belongs to Derived. Because Derived is a Base, Derived has access to stuff in Base. However, Base does not have access to anything in Derived.</p>",
       "preview": "This is because there is no getValue() function in Base. Function getValue() bel",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Důvodem je, že v Base žádná funkce getValue() neexistuje. Funkce getValue() patří do Derived. Protože Derived je Base, má Derived přístup k prvkům v Base. Base však nemá přístup k ničemu v Derived.</p>"
     }
-  ]
+  ],
+  "title_cs": "24.6 — Přidání nové funkcionality do odvozené třídy"
 }

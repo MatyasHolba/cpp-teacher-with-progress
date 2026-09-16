@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { ContentBlock, NoteItem } from '../types';
 import { Check, MessageSquarePlus, MessageSquare, Trash2, ExternalLink, HelpCircle, Eye, EyeOff, Lightbulb, Globe } from 'lucide-react';
+import { getT } from '../utils/i18n';
 
 interface BlockItemProps {
   block: ContentBlock;
   lessonSlug: string;
   isChecked: boolean;
   notes: NoteItem[];
+  uiLanguage?: 'cs' | 'en';
   contentLanguage?: 'cs' | 'en';
   onToggleCheck: (blockId: string) => void;
   onAddNote: (blockId: string, content: string, url?: string) => void;
@@ -18,6 +20,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
   lessonSlug,
   isChecked,
   notes,
+  uiLanguage = 'cs',
   contentLanguage = 'cs',
   onToggleCheck,
   onAddNote,
@@ -42,6 +45,8 @@ export const BlockItem: React.FC<BlockItemProps> = ({
     );
   }
 
+  const t = getT(uiLanguage);
+  
   const handleSaveNote = (e: React.FormEvent) => {
     e.preventDefault();
     if (!noteContent.trim()) return;
@@ -52,7 +57,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
   };
 
   const isQuiz = block.type === 'quiz';
-  const labelText = isQuiz ? 'Splněno' : 'Přečteno';
+  const labelText = t('markDone');
 
   const handleDoubleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -70,7 +75,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
     <div
       className={`lc-block-wrap relative lc-reader-pane cursor-pointer group/block ${isChecked ? 'lc-block-checked' : ''}`}
       onDoubleClick={handleDoubleClick}
-      title="Dvojklik: Označit jako přečtené / splněné (Ctrl + klik: Přidat poznámku)"
+      title={t('doubleClickHint')}
     >
       {/* Floating action bar — appears in right gutter on hover */}
       <div className="lc-block-actions">
@@ -78,7 +83,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
           <button
             onClick={(e) => { e.stopPropagation(); setForceTranslation(!forceTranslation); }}
             className={`lc-action-btn ${forceTranslation ? 'lc-checked' : ''}`}
-            title="Přepnout překlad tohoto bloku"
+            title="Translate toggle"
           >
             <Globe className="w-3 h-3 flex-shrink-0 text-blue-500" />
             <span className="text-blue-500">{currentLang === 'cs' ? 'EN' : 'CS'}</span>
@@ -96,12 +101,12 @@ export const BlockItem: React.FC<BlockItemProps> = ({
         <button
           onClick={() => setIsAddingNote(!isAddingNote)}
           className={`lc-action-btn ${notes.length > 0 ? 'lc-note-active' : ''}`}
-          title="Přidat poznámku nebo odkaz"
+          title={t('addNoteHint')}
         >
           {notes.length > 0 ? (
-            <><MessageSquare className="w-3 h-3 flex-shrink-0" /><span>Pozn. ({notes.length})</span></>
+            <><MessageSquare className="w-3 h-3 flex-shrink-0" /><span>({notes.length})</span></>
           ) : (
-            <><MessageSquarePlus className="w-3 h-3 flex-shrink-0" /><span>Poznámka</span></>
+            <><MessageSquarePlus className="w-3 h-3 flex-shrink-0" /><span>{t('addNote')}</span></>
           )}
         </button>
       </div>
@@ -145,7 +150,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
                 }}
               >
                 {showSolution ? <EyeOff style={{ width:'12px', height:'12px' }} /> : <Eye style={{ width:'12px', height:'12px' }} />}
-                {showSolution ? 'Skrýt řešení' : 'Zobrazit řešení'}
+                {showSolution ? t('hideSolution') : t('solution')}
               </button>
             )}
           </div>
@@ -172,15 +177,15 @@ export const BlockItem: React.FC<BlockItemProps> = ({
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
               <span style={{ fontSize:'12px', fontWeight:700, color:'#7a5a00', display:'flex', alignItems:'center', gap:'5px' }}>
                 <MessageSquarePlus style={{ width:'14px', height:'14px' }} />
-                Nová poznámka k tomuto odstavci
+                {t('newNoteTitle')}
               </span>
               <button type="button" onClick={() => setIsAddingNote(false)} style={{ fontSize:'11px', color:'#999', cursor:'pointer', background:'none', border:'none' }}>
-                Zrušit
+                {t('cancelNote')}
               </button>
             </div>
             <textarea
               rows={3}
-              placeholder="Zapiš si vlastní postřeh, shrnutí, nebo část kódu..."
+              placeholder={t('notePlaceholder')}
               value={noteContent}
               onChange={e => setNoteContent(e.target.value)}
               style={{ width:'100%', padding:'8px', borderRadius:'5px', border:'1px solid #d4b840', fontSize:'13px', fontFamily:'inherit', resize:'vertical', boxSizing:'border-box' }}
@@ -189,7 +194,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
             <div style={{ display:'flex', gap:'8px', marginTop:'6px' }}>
               <input
                 type="url"
-                placeholder="Volitelný odkaz (YouTube, GitHub gist, dokumentace)..."
+                placeholder={t('urlPlaceholder')}
                 value={noteUrl}
                 onChange={e => setNoteUrl(e.target.value)}
                 style={{ flex:1, padding:'6px 10px', borderRadius:'5px', border:'1px solid #d4b840', fontSize:'12px', fontFamily:'inherit' }}
@@ -198,7 +203,7 @@ export const BlockItem: React.FC<BlockItemProps> = ({
                 type="submit"
                 style={{ padding:'6px 14px', background:'#0dcc82', color:'#fff', border:'none', borderRadius:'5px', fontWeight:700, fontSize:'12px', cursor:'pointer' }}
               >
-                Uložit
+                {t('saveNote')}
               </button>
             </div>
           </form>
@@ -219,12 +224,12 @@ export const BlockItem: React.FC<BlockItemProps> = ({
                   </a>
                 )}
                 <div style={{ fontSize:'10px', color:'#aaa', marginTop:'3px' }}>
-                  Uloženo: {new Date(note.createdAt).toLocaleString('cs-CZ')}
+                  {t('savedAt')} {new Date(note.createdAt).toLocaleString(uiLanguage === 'en' ? 'en-US' : 'cs-CZ')}
                 </div>
               </div>
               <button
                 onClick={() => onDeleteNote(block.id, note.id)}
-                title="Smazat"
+                title={t('deleteNote')}
                 style={{ marginLeft:'8px', color:'#ccc', cursor:'pointer', background:'none', border:'none', padding:'2px', flexShrink:0 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#e74c3c')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ccc')}

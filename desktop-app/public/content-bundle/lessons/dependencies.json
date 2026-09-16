@@ -14,35 +14,40 @@
       "type": "paragraph",
       "html": "<p>So far, we’ve explored 3 types of relationships: composition, aggregation, and association. We’ve saved the simplest one for last: dependencies.</p>",
       "preview": "So far, we’ve explored 3 types of relationships: composition, aggregation, and a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Doposud jsme prozkoumali 3 typy vztahů: kompozici, agregaci a asociaci. Ten nejjednodušší jsme si nechali na konec: závislosti.</p>"
     },
     {
       "id": "dependencies_b1",
       "type": "paragraph",
       "html": "<p>In casual conversation, we use the term dependency to indicate that an object is reliant upon another object for a given task. For example, if you break your foot, you are dependent on crutches to get around (but not otherwise). Flowers are dependent upon bees to pollinate them, in order to grow fruit or propagate (but not otherwise).</p>",
       "preview": "In casual conversation, we use the term dependency to indicate that an object is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V běžné konverzaci používáme pojem závislost k vyjádření toho, že jeden objekt spoléhá na jiný objekt při plnění určitého úkolu. Pokud si například zlomíte nohu, jste závislí na berlích, abyste se mohli pohybovat (ale jinak ne). Květiny jsou závislé na včelách, které je opylují, aby mohly vytvářet plody nebo se rozmnožovat (ale jinak ne).</p>"
     },
     {
       "id": "dependencies_b2",
       "type": "paragraph",
       "html": "<p>A <strong>dependency</strong> occurs when one object invokes another object’s functionality in order to accomplish some specific task. This is a weaker relationship than an association, but still, any change to object being depended upon may break functionality in the (dependent) caller. A dependency is always a unidirectional relationship.</p>",
       "preview": "A dependency occurs when one object invokes another object’s functionality in or",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K <strong>závislosti</strong> dochází, když jeden objekt volá funkcionalitu jiného objektu za účelem splnění určitého úkolu. Jedná se o slabší vztah než asociace, ale přesto jakákoli změna v objektu, na kterém závislost existuje, může rozbít funkcionalitu ve volajícím (závislém) objektu. Závislost je vždy jednosměrný vztah.</p>"
     },
     {
       "id": "dependencies_b3",
       "type": "paragraph",
       "html": "<p>A good example of a dependency that you’ve already seen many times is std::ostream. Our classes that use std::ostream use it in order to accomplish the task of printing something to the console, but not otherwise.</p>",
       "preview": "A good example of a dependency that you’ve already seen many times is std::ostre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dobrým příkladem závislosti, se kterým jste se již mnohokrát setkali, je std::ostream. Naše třídy, které používají std::ostream, jej využívají za účelem splnění úkolu vypsat něco do konzole, ale jinak ne.</p>"
     },
     {
       "id": "dependencies_b4",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "dependencies_b5",
@@ -50,70 +55,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Point\n{\nprivate:\n    double m_x{};\n    double m_y{};\n    double m_z{};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0): m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    friend std::ostream& operator<< (std::ostream& out, const Point& point); // Point has a dependency on std::ostream here\n};\n \nstd::ostream& operator<< (std::ostream& out, const Point& point)\n{\n    // Since operator<< is a friend of the Point class, we can access Point's members directly.\n    out << \"Point(\" << point.m_x << \", \" << point.m_y << \", \" << point.m_z << ')';\n \n    return out;\n}\n \nint main()\n{\n    Point point1 { 2.0, 3.0, 4.0 };\n \n    std::cout << point1; // the program has a dependency on std::cout here\n \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Point\n{\nprivate:\n    double m_x{};\n    double m_y{};\n    double m_z{};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0): m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Point&amp; point); // Point has a dependency on std::ostream here\n};\n \nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Point&amp; point)\n{\n    // Since operator&lt;&lt; is a friend of the Point class, we can access Point's members directly.\n    out &lt;&lt; \"Point(\" &lt;&lt; point.m_x &lt;&lt; \", \" &lt;&lt; point.m_y &lt;&lt; \", \" &lt;&lt; point.m_z &lt;&lt; ')';\n \n    return out;\n}\n \nint main()\n{\n    Point point1 { 2.0, 3.0, 4.0 };\n \n    std::cout &lt;&lt; point1; // the program has a dependency on std::cout here\n \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída Point\n{\nsoukromé:\n    double m_x{};\n    double m_y{};\n    double m_z{};\n \nveřejnost:\n    Bod(dvojité x=0,0, dvojité y=0,0, dvojité z=0,0): m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    friend std::ostream& operator<< (std::ostream& out, const Point& point); // Bod má závislost na std::ostream zde\n};\n \nstd::ostream& operátor<< (std::ostream& out, const Point& point)\n{\n    // Protože operátor<< je přítelem třídy Point, můžeme přistupovat přímo k členům Pointu.\n    out << \"Point(\" << bod.m_x << \", \" << bod.m_y << \", \" << bod.m_z << ')';\n \n    vrátit se ven;\n}\n \nint main()\n{\n    Bod bod1 { 2,0, 3,0, 4,0 };\n \n    std::cout << bod1; // program má závislost na std::cout zde\n \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "dependencies_b6",
       "type": "paragraph",
       "html": "<p>In the above code, Point isn’t directly related to std::ostream, but it has a dependency on std::ostream since operator&lt;&lt; uses std::ostream to print the Point to the console.</p>",
       "preview": "In the above code, Point isn’t directly related to std::ostream, but it has a de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném kódu nemá Point přímý vztah k std::ostream, ale má na std::ostream závislost, protože operator&lt;&lt; používá std::ostream k vypsání Point do konzole.</p>"
     },
     {
       "id": "dependencies_b7",
       "type": "paragraph",
       "html": "<p><strong>Dependencies vs Association in C++</strong></p>",
       "preview": "Dependencies vs Association in C++",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Závislost vs. asociace v C++</strong></p>"
     },
     {
       "id": "dependencies_b8",
       "type": "paragraph",
       "html": "<p>There’s typically some confusion about what differentiates a dependency from an association.</p>",
       "preview": "There’s typically some confusion about what differentiates a dependency from an ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obvykle panují určité nejasnosti ohledně toho, čím se liší závislost od asociace.</p>"
     },
     {
       "id": "dependencies_b9",
       "type": "paragraph",
       "html": "<p>In C++, associations are a relationship where one class keeps a direct or indirect “link” to the associated class as a member. For example, a Doctor class has an array of pointers to its Patients as a member. You can always ask the Doctor who its patients are. The Driver class holds the id of the Car the driver object owns as an integer member. The Driver always knows what Car is associated with it.</p>",
       "preview": "In C++, associations are a relationship where one class keeps a direct or indire",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ je asociace vztahem, kde si jedna třída uchovává přímý nebo nepřímý „odkaz“ na asociovanou třídu jako svůj členský prvek. Například třída Doctor má jako člena pole ukazatelů na své objekty Patient. Třídy Doctor se můžete kdykoli zeptat, kdo jsou její pacienti. Třída Driver drží ID automobilu Car, který daný řidič vlastní, jako celočíselný členský prvek. Driver vždy ví, jaký Car je s ním asociován.</p>"
     },
     {
       "id": "dependencies_b10",
       "type": "paragraph",
       "html": "<p>Dependencies typically are not members. Rather, the object being depended on is typically instantiated as needed (like opening a file to write data to), or passed into a function as a parameter (like std::ostream in the overloaded operator&lt;&lt; above).</p>",
       "preview": "Dependencies typically are not members. Rather, the object being depended on is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Závislosti obvykle nebývají členskými prvky. Objekt, na kterém závislost existuje, je spíše instanciován podle potřeby (například otevření souboru pro zápis dat) nebo je předán do funkce jako parametr (jako std::ostream ve výše uvedeném přetíženém operator&lt;&lt;).</p>"
     },
     {
       "id": "dependencies_b11",
       "type": "paragraph",
       "html": "<p><strong>Humor break</strong></p>",
       "preview": "Humor break",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Chvilka pro humor</strong></p>"
     },
     {
       "id": "dependencies_b12",
       "type": "paragraph",
       "html": "<p>Dependencies (courtesy of our friends at <a href=\"https://xkcd.com/754/\">xkcd</a>):</p>",
       "preview": "Dependencies (courtesy of our friends at xkcd):",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Závislosti (s laskavým svolením našich přátel z <a href=\"https://xkcd.com/754/\">xkcd</a>):</p>"
     },
     {
       "id": "dependencies_b13",
       "type": "paragraph",
       "html": "<p><img src=\"https://imgs.xkcd.com/comics/dependencies.png\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://imgs.xkcd.com/comics/dependencies.png\"></p>"
     },
     {
       "id": "dependencies_b14",
       "type": "paragraph",
       "html": "<p>Of course, you and I know that this is actually a reflexive association!</p>",
       "preview": "Of course, you and I know that this is actually a reflexive association!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vy i já ale samozřejmě víme, že jde ve skutečnosti o reflexivní asociaci!</p>"
     }
-  ]
+  ],
+  "title_cs": "23.5 — Závislosti"
 }

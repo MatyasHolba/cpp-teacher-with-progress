@@ -14,70 +14,82 @@
       "type": "paragraph",
       "html": "<p>A <strong>destructor</strong> is another special kind of class member function that is executed when an object of that class is destroyed. Whereas constructors are designed to initialize a class, destructors are designed to help clean up.</p>",
       "preview": "A destructor is another special kind of class member function that is executed w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Destruktor</strong> je další speciální druh členské funkce třídy, která se provede, když je objekt dané třídy zničen. Zatímco konstruktory jsou navrženy k inicializaci třídy, destruktory jsou určeny k provedení úklidu.</p>"
     },
     {
       "id": "destructors_b1",
       "type": "paragraph",
       "html": "<p>When an object goes out of scope normally, or a dynamically allocated object is explicitly deleted using the delete keyword, the class destructor is automatically called (if it exists) to do any necessary clean up before the object is removed from memory. For simple classes (those that just initialize the values of normal member variables), a destructor is not needed because C++ will automatically clean up the memory for you.</p>",
       "preview": "When an object goes out of scope normally, or a dynamically allocated object is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když objekt standardně opustí rozsah platnosti nebo je dynamicky alokovaný objekt explicitně odstraněn pomocí klíčového slova delete, automaticky se zavolá destruktor třídy (pokud existuje), aby provedl veškerý nezbytný úklid před odstraněním objektu z paměti. U jednoduchých tříd (těch, které pouze inicializují hodnoty běžných členských proměnných) destruktor není potřeba, protože C++ paměť uklidí automaticky za vás.</p>"
     },
     {
       "id": "destructors_b2",
       "type": "paragraph",
       "html": "<p>However, if your class object is holding any resources (e.g. dynamic memory, or a file or database handle), or if you need to do any kind of maintenance before the object is destroyed, the destructor is the perfect place to do so, as it is typically the last thing to happen before the object is destroyed.</p>",
       "preview": "However, if your class object is holding any resources (e.g. dynamic memory, or ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však objekt vaší třídy drží nějaké prostředky (např. dynamickou paměť, souborový deskriptor nebo databázový handle), nebo pokud potřebujete před zničením objektu provést jakoukoli údržbu, destruktor je k tomu ideálním místem, protože je to typicky to poslední, co se před zničením objektu stane.</p>"
     },
     {
       "id": "destructors_b3",
       "type": "section",
       "title": "Destructor naming",
       "html": "<h3 class=\"cpp-section-heading\">Destructor naming</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pojmenování destruktoru</h3>",
+      "title_cs": "Pojmenování destruktoru"
     },
     {
       "id": "destructors_b4",
       "type": "paragraph",
       "html": "<p>Like constructors, destructors have specific naming rules:</p>",
       "preview": "Like constructors, destructors have specific naming rules:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako konstruktory mají i destruktory specifická pravidla pro pojmenování:</p>"
     },
     {
       "id": "destructors_b5",
       "type": "list",
       "html": "<ol start=\"1\"><li>The destructor must have the same name as the class, preceded by a tilde (~).</li><li>The destructor can not take arguments.</li><li>The destructor has no return type.</li></ol>",
       "preview": "The destructor must have the same name as the class, preceded by a tilde (~).The",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Destruktor musí mít stejný název jako třída, kterému předchází vlnovka (~).</li><li>Destruktor nemůže přijímat žádné argumenty.</li><li>Destruktor nemá žádný návratový typ.</li></ol>"
     },
     {
       "id": "destructors_b6",
       "type": "paragraph",
       "html": "<p>A class can only have a single destructor.</p>",
       "preview": "A class can only have a single destructor.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída může mít pouze jeden destruktor.</p>"
     },
     {
       "id": "destructors_b7",
       "type": "paragraph",
       "html": "<p>Generally you should not call a destructor explicitly (as it will be called automatically when the object is destroyed), since there are rarely cases where you’d want to clean up an object more than once. However, destructors may safely call other member functions since the object isn’t destroyed until after the destructor executes.</p>",
       "preview": "Generally you should not call a destructor explicitly (as it will be called auto",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně byste neměli volat destruktor explicitně (protože bude zavolán automaticky při zničení objektu), jelikož jen zřídka nastane situace, kdy byste chtěli objekt uklidit více než jednou. Destruktory však mohou bezpečně volat jiné členské funkce, protože objekt je zničen až po vykonání destruktoru.</p>"
     },
     {
       "id": "destructors_b8",
       "type": "section",
       "title": "A destructor example",
       "html": "<h3 class=\"cpp-section-heading\">A destructor example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Příklad destruktoru</h3>",
+      "title_cs": "Příklad destruktoru"
     },
     {
       "id": "destructors_b9",
       "type": "paragraph",
       "html": "<p>Let’s take a look at a simple class that uses a destructor:</p>",
       "preview": "Let’s take a look at a simple class that uses a destructor:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na jednoduchou třídu, která používá destruktor:</p>"
     },
     {
       "id": "destructors_b10",
@@ -85,7 +97,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <cassert>\n#include <cstddef>\n\nclass IntArray\n{\nprivate:\n\tint* m_array{};\n\tint m_length{};\n\npublic:\n\tIntArray(int length) // constructor\n\t{\n\t\tassert(length > 0);\n\n\t\tm_array = new int[static_cast<std::size_t>(length)]{};\n\t\tm_length = length;\n\t}\n\n\t~IntArray() // destructor\n\t{\n\t\t// Dynamically delete the array we allocated earlier\n\t\tdelete[] m_array;\n\t}\n\n\tvoid setValue(int index, int value) { m_array[index] = value; }\n\tint getValue(int index) { return m_array[index]; }\n\n\tint getLength() { return m_length; }\n};\n\nint main()\n{\n\tIntArray ar ( 10 ); // allocate 10 integers\n\tfor (int count{ 0 }; count < ar.getLength(); ++count)\n\t\tar.setValue(count, count+1);\n\n\tstd::cout << \"The value of element 5 is: \" << ar.getValue(5) << '\\n';\n\n\treturn 0;\n} // ar is destroyed here, so the ~IntArray() destructor function is called here",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cassert&gt;\n#include &lt;cstddef&gt;\n\nclass IntArray\n{\nprivate:\n\tint* m_array{};\n\tint m_length{};\n\npublic:\n\tIntArray(int length) // constructor\n\t{\n\t\tassert(length &gt; 0);\n\n\t\tm_array = new int[static_cast&lt;std::size_t&gt;(length)]{};\n\t\tm_length = length;\n\t}\n\n\t~IntArray() // destructor\n\t{\n\t\t// Dynamically delete the array we allocated earlier\n\t\tdelete[] m_array;\n\t}\n\n\tvoid setValue(int index, int value) { m_array[index] = value; }\n\tint getValue(int index) { return m_array[index]; }\n\n\tint getLength() { return m_length; }\n};\n\nint main()\n{\n\tIntArray ar ( 10 ); // allocate 10 integers\n\tfor (int count{ 0 }; count &lt; ar.getLength(); ++count)\n\t\tar.setValue(count, count+1);\n\n\tstd::cout &lt;&lt; \"The value of element 5 is: \" &lt;&lt; ar.getValue(5) &lt;&lt; '\\n';\n\n\treturn 0;\n} // ar is destroyed here, so the ~IntArray() destructor function is called here</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <cassert>\n#include <cstddef>\n\ntřídy IntArray\n{\nsoukromé:\n\tint* m_array{};\n\tint m_délka{};\n\nveřejnost:\n\tIntArray(int length) // konstruktor\n\t{\n\t\ttvrdit(délka > 0);\n\n\t\tm_array = new int[static_cast<std::size_t>(délka)]{};\n\t\tm_délka = délka;\n\t}\n\n\t~IntArray() // destruktor\n\t{\n\t\t// Dynamicky odstraňte pole, které jsme dříve alokovali\n\t\tdelete[] m_array;\n\t}\n\n\tvoid setValue(int index, int hodnota) { m_array[index] = hodnota; }\n\tint getValue(int index) { return m_array[index]; }\n\n\tint getLength() { return m_délka; }\n};\n\nint main()\n{\n\tIntArray ar (10); // přidělí 10 celých čísel\n\tfor (int count{ 0 }; count < ar.getLength(); ++count)\n\t\tar.setValue(počet, počet+1);\n\n\tstd::cout << \"Hodnota prvku 5 je: \" << ar.getValue(5) << '\\n';\n\n\tnávrat 0;\n} // ar je zde zničen, takže se zde volá funkce destruktoru ~IntArray()</code></pre>"
     },
     {
       "id": "destructors_b11",
@@ -93,35 +106,40 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>If you compile the above example and get the following error:</p><pre>error: 'class IntArray' has pointer data members [-Werror=effc++]|\nerror:   but does not override 'IntArray(const IntArray&amp;)' [-Werror=effc++]|\nerror:   or 'operator=(const IntArray&amp;)' [-Werror=effc++]|\n</pre><p>Then you can either remove the “-Weffc++” flag from your compile settings for this example, or you can add the following two lines to the class:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tIntArray(const IntArray&amp;) = delete;\n\tIntArray&amp; operator=(const IntArray&amp;) = delete;</code></pre><p>We discuss <code>=delete</code> for members in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-the-copy-constructor/\">14.14 -- Introduction to the copy constructor</a></p></div>",
       "preview": "TipIf you compile the above example and get the following error:error: 'class IntArray' has pointer ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Pokud výše uvedený příklad zkompilujete a obdržíte následující chybu:</p><pre>error: 'class IntArray' has pointer data members [-Werror=effc++]|\nerror:   but does not override 'IntArray(const IntArray&amp;)' [-Werror=effc++]|\nerror:   or 'operator=(const IntArray&amp;)' [-Werror=effc++]|\n</pre><p>Můžete buď pro tento příklad odebrat přepínač „-Weffc++“ z nastavení překladače, nebo můžete do třídy přidat následující dva řádky:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tIntArray(const IntArray&amp;) = delete;\n\tIntArray&amp; operator=(const IntArray&amp;) = delete;</code></pre><p>Použití <code>=delete</code> pro členské funkce probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-the-copy-constructor/\">14.14 – Úvod do kopírovacího konstruktoru</a>.</p></div>"
     },
     {
       "id": "destructors_b12",
       "type": "paragraph",
       "html": "<p>This program produces the result:</p>",
       "preview": "This program produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "destructors_b13",
       "type": "output",
       "text": "The value of element 5 is: 6\n",
       "html": "<pre>The value of element 5 is: 6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The value of element 5 is: 6\n</pre>"
     },
     {
       "id": "destructors_b14",
       "type": "paragraph",
       "html": "<p>On the first line of main(), we instantiate a new IntArray class object called ar, and pass in a length of 10. This calls the constructor, which dynamically allocates memory for the array member. We must use dynamic allocation here because we do not know at compile time what the length of the array is (the caller decides that).</p>",
       "preview": "On the first line of main(), we instantiate a new IntArray class object called a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na prvním řádku funkce main() vytvoříme instanci třídy IntArray s názvem ar a předáme jí délku 10. Tím se zavolá konstruktor, který dynamicky alokuje paměť pro členské pole. Zde musíme použít dynamickou alokaci, protože v době překladu neznáme délku pole (o té rozhoduje volající).</p>"
     },
     {
       "id": "destructors_b15",
       "type": "paragraph",
       "html": "<p>At the end of main(), ar goes out of scope. This causes the ~IntArray() destructor to be called, which deletes the array that we allocated in the constructor!</p>",
       "preview": "At the end of main(), ar goes out of scope. This causes the ~IntArray() destruct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na konci funkce main() zanikne platnost (scope) proměnné ar. To způsobí zavolání destruktoru ~IntArray(), který uvolní (smaže) pole, jež jsme alokovali v konstruktoru!</p>"
     },
     {
       "id": "destructors_b16",
@@ -129,21 +147,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdvector-and-list-constructors/\">16.2 -- Introduction to std::vector and list constructors</a>, we note that parentheses based initialization should be used when initializing an array/container/list class with a length (as opposed to a list of elements). For this reason, we initialize IntArray using <code>IntArray ar ( 10 );</code>.</p></div>",
       "preview": "A reminderIn lesson 16.2 -- Introduction to std::vector and list constructors, we note that parenthe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdvector-and-list-constructors/\">16.2 – Úvod do std::vector a konstruktorů s initializer_list</a> uvádíme, že při inicializaci pole/kontejneru/seznamu délkou (na rozdíl od inicializace seznamem prvků) by se měla použít inicializace pomocí kulatých závorek. Z tohoto důvodu inicializujeme IntArray pomocí <code>IntArray ar ( 10 );</code>.</p></div>"
     },
     {
       "id": "destructors_b17",
       "type": "section",
       "title": "Constructor and destructor timing",
       "html": "<h3 class=\"cpp-section-heading\">Constructor and destructor timing</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Časování konstruktorů a destruktorů</h3>",
+      "title_cs": "Časování konstruktoru a destruktoru"
     },
     {
       "id": "destructors_b18",
       "type": "paragraph",
       "html": "<p>As mentioned previously, the constructor is called when an object is created, and the destructor is called when an object is destroyed. In the following example, we use cout statements inside the constructor and destructor to show this:</p>",
       "preview": "As mentioned previously, the constructor is called when an object is created, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak již bylo zmíněno dříve, konstruktor je volán při vytvoření objektu a destruktor při jeho zániku. V následujícím příkladu to demonstrujeme pomocí výpisů přes cout uvnitř konstruktoru a destruktoru:</p>"
     },
     {
       "id": "destructors_b19",
@@ -151,84 +173,100 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Simple\n{\nprivate:\n    int m_nID{};\n\npublic:\n    Simple(int nID)\n        : m_nID{ nID }\n    {\n        std::cout << \"Constructing Simple \" << nID << '\\n';\n    }\n\n    ~Simple()\n    {\n        std::cout << \"Destructing Simple\" << m_nID << '\\n';\n    }\n\n    int getID() { return m_nID; }\n};\n\nint main()\n{\n    // Allocate a Simple on the stack\n    Simple simple{ 1 };\n    std::cout << simple.getID() << '\\n';\n\n    // Allocate a Simple dynamically\n    Simple* pSimple{ new Simple{ 2 } };\n    \n    std::cout << pSimple->getID() << '\\n';\n\n    // We allocated pSimple dynamically, so we have to delete it.\n    delete pSimple;\n\n    return 0;\n} // simple goes out of scope here",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Simple\n{\nprivate:\n    int m_nID{};\n\npublic:\n    Simple(int nID)\n        : m_nID{ nID }\n    {\n        std::cout &lt;&lt; \"Constructing Simple \" &lt;&lt; nID &lt;&lt; '\\n';\n    }\n\n    ~Simple()\n    {\n        std::cout &lt;&lt; \"Destructing Simple\" &lt;&lt; m_nID &lt;&lt; '\\n';\n    }\n\n    int getID() { return m_nID; }\n};\n\nint main()\n{\n    // Allocate a Simple on the stack\n    Simple simple{ 1 };\n    std::cout &lt;&lt; simple.getID() &lt;&lt; '\\n';\n\n    // Allocate a Simple dynamically\n    Simple* pSimple{ new Simple{ 2 } };\n    \n    std::cout &lt;&lt; pSimple-&gt;getID() &lt;&lt; '\\n';\n\n    // We allocated pSimple dynamically, so we have to delete it.\n    delete pSimple;\n\n    return 0;\n} // simple goes out of scope here</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Jednoduchá\n{\nsoukromé:\n    int m_nID{};\n\nveřejnost:\n    Jednoduché (int nID)\n        : m_nID{ nID }\n    {\n        std::cout << \"Jednoduchá konstrukce\" << nID << '\\n';\n    }\n\n    ~Jednoduché()\n    {\n        std::cout << \"Jednoduché zničení\" << m_nID << '\\n';\n    }\n\n    int getID() { return m_nID; }\n};\n\nint main()\n{\n    // Alokace Simple na zásobníku\n    Jednoduché jednoduché{ 1 };\n    std::cout << simple.getID() << '\\n';\n\n    // Dynamicky alokovat Simple\n    Simple* pSimple{ new Simple{ 2 } };\n    \n    std::cout << pSimple->getID() << '\\n';\n\n    // pSimple jsme alokovali dynamicky, takže ho musíme smazat.\n    odstranit pSimple;\n\n    návrat 0;\n} // simple přechází zde mimo rozsah</code></pre>"
     },
     {
       "id": "destructors_b20",
       "type": "paragraph",
       "html": "<p>This program produces the following result:</p>",
       "preview": "This program produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "destructors_b21",
       "type": "output",
       "text": "Constructing Simple 1\n1\nConstructing Simple 2\n2\nDestructing Simple 2\nDestructing Simple 1\n",
       "html": "<pre>Constructing Simple 1\n1\nConstructing Simple 2\n2\nDestructing Simple 2\nDestructing Simple 1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Constructing Simple 1\n1\nConstructing Simple 2\n2\nDestructing Simple 2\nDestructing Simple 1\n</pre>"
     },
     {
       "id": "destructors_b22",
       "type": "paragraph",
       "html": "<p>Note that “Simple 1” is destroyed after “Simple 2” because we deleted pSimple before the end of the function, whereas simple was not destroyed until the end of main().</p>",
       "preview": "Note that “Simple 1” is destroyed after “Simple 2” because we deleted pSimple be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že „Simple 1“ je zničen až po „Simple 2“, protože jsme pSimple smazali pomocí delete ještě před koncem funkce, zatímco simple nebyl zničen až do konce funkce main().</p>"
     },
     {
       "id": "destructors_b23",
       "type": "paragraph",
       "html": "<p>Global variables are constructed before main() and destroyed after main().</p>",
       "preview": "Global variables are constructed before main() and destroyed after main().",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Globální proměnné jsou inicializovány před spuštěním funkce main() a zničeny po jejím skončení.</p>"
     },
     {
       "id": "destructors_b24",
       "type": "section",
       "title": "RAII",
       "html": "<h3 class=\"cpp-section-heading\">RAII</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">RAII</h3>",
+      "title_cs": "RAII"
     },
     {
       "id": "destructors_b25",
       "type": "paragraph",
       "html": "<p>RAII (Resource Acquisition Is Initialization) is a programming technique whereby resource use is tied to the lifetime of objects with automatic duration (e.g. non-dynamically allocated objects). In C++, RAII is implemented via classes with constructors and destructors. A resource (such as memory, a file or database handle, etc…) is typically acquired in the object’s constructor (though it can be acquired after the object is created if that makes sense). That resource can then be used while the object is alive. The resource is released in the destructor, when the object is destroyed. The primary advantage of RAII is that it helps prevent resource leaks (e.g. memory not being deallocated) as all resource-holding objects are cleaned up automatically.</p>",
       "preview": "RAII (Resource Acquisition Is Initialization) is a programming technique whereby",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>RAII (Resource Acquisition Is Initialization – Získání prostředku je inicializace) je programovací technika, při níž je správa prostředků svázána s dobou života objektů s automatickou dobou trvání (např. nedynamicky alokovaných objektů). V C++ je RAII implementováno pomocí tříd s konstruktory a destruktory. Prostředek (jako je paměť, diskový soubor nebo databázový deskriptor atd.) je typicky alokován v konstruktoru objektu (i když může být získán i po vytvoření objektu, dává-li to smysl). Tento prostředek pak lze používat po dobu, kdy objekt existuje. V destruktoru je prostředek uvolněn ve chvíli, kdy objekt zaniká. Hlavní výhodou RAII je, že pomáhá předcházet únikům prostředků (např. neuvolnění paměti), protože všechny objekty spravující prostředky jsou uklizeny automaticky.</p>"
     },
     {
       "id": "destructors_b26",
       "type": "paragraph",
       "html": "<p>The IntArray class at the top of this lesson is an example of a class that implements RAII -- allocation in the constructor, deallocation in the destructor. std::string and std::vector are examples of classes in the standard library that follow RAII -- dynamic memory is acquired on initialization, and cleaned up automatically on destruction.</p>",
       "preview": "The IntArray class at the top of this lesson is an example of a class that imple",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída IntArray na začátku této lekce je příkladem třídy, která implementuje RAII – alokaci v konstruktoru a dealokaci v destruktoru. std::string a std::vector jsou příklady tříd ve standardní knihovně, které se řídí RAII – dynamická paměť je získána při inicializaci a automaticky uvolněna při destrukci.</p>"
     },
     {
       "id": "destructors_b27",
       "type": "section",
       "title": "A warning about the std::exit() function",
       "html": "<h3 class=\"cpp-section-heading\">A warning about the std::exit() function</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Varování ohledně funkce std::exit()</h3>",
+      "title_cs": "Upozornění na funkci std::exit()"
     },
     {
       "id": "destructors_b28",
       "type": "paragraph",
       "html": "<p>Note that if you use the std::exit() function, your program will terminate and no destructors will be called. Be wary if you’re relying on your destructors to do necessary cleanup work (e.g. write something to a log file or database before exiting).</p>",
       "preview": "Note that if you use the std::exit() function, your program will terminate and n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že pokud použijete funkci std::exit(), váš program se ukončí a nebudou zavolány žádné destruktory. Buďte opatrní, pokud spoléháte na to, že vaše destruktory provedou nezbytný úklid (např. zápis do logovacího souboru nebo databáze před ukončením).</p>"
     },
     {
       "id": "destructors_b29",
       "type": "section",
       "title": "Summary",
       "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí</h3>",
+      "title_cs": "Shrnutí"
     },
     {
       "id": "destructors_b30",
       "type": "paragraph",
       "html": "<p>As you can see, when constructors and destructors are used together, your classes can initialize and clean up after themselves without the programmer having to do any special work! This reduces the probability of making an error, and makes classes easier to use.</p>",
       "preview": "As you can see, when constructors and destructors are used together, your classe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, když se konstruktory a destruktory používají společně, vaše třídy se mohou samy inicializovat i po sobě uklízet, aniž by programátor musel dělat cokoliv navíc! To snižuje pravděpodobnost vzniku chyby a usnadňuje používání tříd.</p>"
     }
-  ]
+  ],
+  "title_cs": "19.3 — Destruktory"
 }

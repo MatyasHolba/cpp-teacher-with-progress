@@ -14,14 +14,17 @@
       "type": "section",
       "title": "Uninitialized variables",
       "html": "<h3 class=\"cpp-section-heading\">Uninitialized variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Neinicializované proměnné</h3>",
+      "title_cs": "Neinicializované proměnné"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b1",
       "type": "paragraph",
       "html": "<p>Unlike some programming languages, C/C++ does not automatically initialize most variables to a given value (such as zero). When a variable that is not initialized is given a memory address to use to store data, the default value of that variable is whatever (garbage) value happens to already be in that memory address! A variable that has not been given a known value (through initialization or assignment) is called an <strong>uninitialized variable</strong>.</p>",
       "preview": "Unlike some programming languages, C/C++ does not automatically initialize most ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od některých programovacích jazyků C/C++ většinu proměnných automaticky neinicializuje na konkrétní hodnotu (jako je nula). Když je neinicializované proměnné přidělena paměťová adresa k uložení dat, výchozí hodnotou této proměnné je jakákoli (náhodná) hodnota, která se v dané paměťové adrese zrovna nachází! Proměnná, které nebyla dána známá hodnota (prostřednictvím inicializace nebo přiřazení), se nazývá <strong>neinicializovaná proměnná</strong>.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b2",
@@ -29,7 +32,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>Many readers expect the terms “initialized” and “uninitialized” to be strict opposites, but they aren’t quite! In common language, “initialized” means the object was provided with an initial value at the point of definition. “Uninitialized” means the object has not been given a known value yet (through any means, including assignment). Therefore, an object that is not initialized but is then assigned a value is no longer <em>uninitialized</em> (because it has been given a known value).</p><p>To recap:</p><ul><li>Initialized = The object is given a known value at the point of definition.</li><li>Assignment = The object is given a known value beyond the point of definition.</li><li>Uninitialized = The object has not been given a known value yet.</li></ul><p>Relatedly, consider this variable definition:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x;</code></pre><p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/\">1.4 -- Variable assignment and initialization</a>, we noted that when no initializer is provided, the variable is default-initialized. In most cases (such as this one), default-initialization performs no actual initialization. Thus we’d say <code>x</code> is uninitialized. We’re focused on the outcome (the object has not been given a known value), not the process.</p></div>",
       "preview": "NomenclatureMany readers expect the terms “initialized” and “uninitialized” to be strict opposites, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Terminologie</p><p>Mnoho čtenářů očekává, že pojmy „inicializovaný“ a „neinicializovaný“ jsou striktními protiklady, ale tak docela tomu není! V běžném jazyce „inicializovaný“ znamená, že objekt dostal počáteční hodnotu v místě definice. „Neinicializovaný“ znamená, že objektu dosud nebyla dána známá hodnota (jakýmkoli způsobem, včetně přiřazení). Proto objekt, který není inicializován, ale následně je mu přiřazena hodnota, již není <em>neinicializovaný</em> (protože mu byla dána známá hodnota).</p><p>Pro zopakování:</p><ul><li>Inicializovaný = Objektu je dána známá hodnota v místě definice.</li><li>Přiřazení = Objektu je dána známá hodnota za místem definice.</li><li>Neinicializovaný = Objektu dosud nebyla dána známá hodnota.</li></ul><p>V souvislosti s tím uvažujme tuto definici proměnné:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x;</code></pre><p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/\">1.4 -- Přiřazení a inicializace proměnných</a> jsme si uvedli, že pokud není zadán žádný inicializátor, je proměnná inicializována výchozím způsobem (default-initialized). Ve většině případů (jako je tento) však výchozí inicializace neprovede žádnou skutečnou inicializaci. Řekli bychom tedy, že <code>x</code> je neinicializovaná. Zaměřujeme se totiž na výsledek (objektu nebyla dána známá hodnota), nikoli na proces.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b3",
@@ -37,14 +41,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>This lack of initialization is a performance optimization inherited from C, back when computers were slow. Imagine a case where you were going to read in 100,000 values from a file. In such case, you might create 100,000 variables, then fill them with data from the file.</p><p>If C++ initialized all of those variables with default values upon creation, this would result in 100,000 initializations (which would be slow), and for little benefit (since you’re overwriting those values anyway).</p><p>For now, you should always initialize your variables because the cost of doing so is minuscule compared to the benefit. Once you are more comfortable with the language, there may be certain cases where you omit the initialization for optimization purposes. But this should always be done selectively and intentionally.</p></div>",
       "preview": "As an aside…This lack of initialization is a performance optimization inherited from C, back when co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Tato absence inicializace je výkonnostní optimalizace zděděná z jazyka C z dob, kdy byly počítače ještě pomalé. Představte si případ, kdy byste načítali 100 000 hodnot ze souboru. V takovém případě byste mohli vytvořit 100 000 proměnných a poté je naplnit daty ze souboru.</p><p>Pokud by C++ při vytvoření inicializovalo všechny tyto proměnné na výchozí hodnoty, vedlo by to ke 100 000 inicializacím (což by bylo pomalé), a to s minimálním přínosem (protože tyto hodnoty stejně vzápětí přepíšete).</p><p>Prozatím byste měli své proměnné inicializovat vždy, protože náklady na to jsou ve srovnání s přínosem zanedbatelné. Až se v jazyce budete cítit jistěji, mohou nastat určité případy, kdy inicializaci vynecháte z důvodu optimalizace. To by se však mělo dít vždy selektivně a záměrně.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b4",
       "type": "paragraph",
       "html": "<p>Using the values of uninitialized variables can lead to unexpected results. Consider the following short program:</p>",
       "preview": "Using the values of uninitialized variables can lead to unexpected results. Cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití hodnot neinicializovaných proměnných může vést k neočekávaným výsledkům. Podívejte se na následující krátký program:</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b5",
@@ -52,14 +58,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    // define an integer variable named x\n    int x; // this variable is uninitialized because we haven't given it a value\n    \n    // print the value of x to the screen\n    std::cout << x << '\\n'; // who knows what we'll get, because x is uninitialized\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // define an integer variable named x\n    int x; // this variable is uninitialized because we haven't given it a value\n    \n    // print the value of x to the screen\n    std::cout &lt;&lt; x &lt;&lt; '\\n'; // who knows what we'll get, because x is uninitialized\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    // definuje celočíselnou proměnnou s názvem x\n    int x; // tato proměnná je neinicializovaná, protože jsme jí nepřiřadili hodnotu\n    \n    // vypíše hodnotu x na obrazovku\n    std::cout << x << '\\n'; // kdo ví, co dostaneme, protože x je neinicializované\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b6",
       "type": "paragraph",
       "html": "<p>In this case, the computer will assign some unused memory to <em>x</em>. It will then send the value residing in that memory location to <em>std::cout</em>, which will print the value (interpreted as an integer). But what value will it print? The answer is “who knows!”, and the answer may (or may not) change every time you run the program. When the author ran this program in Visual Studio, <em>std::cout</em> printed the value <code>7177728</code> one time, and <code>5277592</code> the next. Feel free to compile and run the program yourself (your computer won’t explode).</p>",
       "preview": "In this case, the computer will assign some unused memory to x. It will then sen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě počítač přiřadí proměnné <em>x</em> nějakou nevyužitou paměť. Poté pošle hodnotu nacházející se na tomto paměťovém místě do <em>std::cout</em>, který tuto hodnotu vypíše (interpretovanou jako celé číslo). Ale jakou hodnotu vypíše? Odpověď zní: „Kdo ví!“, a tato hodnota se může (ale nemusí) změnit při každém spuštění programu. Když autor spustil tento program ve Visual Studiu, <em>std::cout</em> vypsal jednou hodnotu <code>7177728</code> a podruhé <code>5277592</code>. Neváhejte si program sami zkompilovat a spustit (počítač vám nevybuchne).</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b7",
@@ -67,28 +75,32 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Some compilers, such as Visual Studio, <em>will</em> initialize the contents of memory to some preset value when you’re using a debug build configuration. This will not happen when using a release build configuration. Therefore, if you want to run the above program yourself, make sure you’re using a <em>release build configuration</em> (see lesson <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-build-configurations/\">0.9 -- Configuring your compiler: Build configurations</a> for a reminder on how to do that).</p><p>For example, if you run the above program in a Visual Studio debug configuration, it will consistently print -858993460, because that’s the value (interpreted as an integer) that Visual Studio initializes memory with in debug configurations.</p></div>",
       "preview": "WarningSome compilers, such as Visual Studio, will initialize the contents of memory to some preset ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Některé kompilátory, například Visual Studio, v ladicí konfiguraci sestavení (debug build configuration) obsah paměti na určitou přednastavenou hodnotu <em>skutečně</em> inicializují. K tomu však nedochází při použití konfigurace Release. Pokud si tedy chcete výše uvedený program sami spustit, ujistěte se, že používáte <em>konfiguraci Release (release build configuration)</em> (připomenutí, jak to provést, najdete v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-build-configurations/\">0.9 -- Konfigurace kompilátoru: Konfigurace sestavení</a>).</p><p>Pokud například výše uvedený program spustíte v konfiguraci Debug ve Visual Studiu, bude konzistentně vypisovat -858993460, protože právě touto hodnotou (interpretovanou jako celé číslo) Visual Studio inicializuje paměť v ladicích konfiguracích.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b8",
       "type": "paragraph",
       "html": "<p>Most modern compilers will attempt to detect if a variable is being used without being given a value. If they are able to detect this, they will generally issue a compile-time warning or error. For example, compiling the above program on Visual Studio produced the following warning:</p>",
       "preview": "Most modern compilers will attempt to detect if a variable is being used without",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Většina moderních kompilátorů se pokusí rozpoznat, zda je proměnná použita, aniž by jí byla předem přiřazena hodnota. Pokud to dokážou detekovat, obvykle vygenerují varování nebo chybu při kompilaci. Například kompilace výše uvedeného programu ve Visual Studiu vedla k následujícímu varování:</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b9",
       "type": "paragraph",
       "html": "<p><code>c:\\VCprojects\\test\\test.cpp(11) : warning C4700: uninitialized local variable 'x' used</code></p>",
       "preview": "c:\\VCprojects\\test\\test.cpp(11) : warning C4700: uninitialized local variable 'x",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>c:\\VCprojects\\test\\test.cpp(11) : warning C4700: uninitialized local variable 'x' used</code></p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b10",
       "type": "paragraph",
       "html": "<p>If your compiler won’t let you compile and run the above program (e.g. because it treats the issue as an error), here is a possible solution to get around this issue:</p>",
       "preview": "If your compiler won’t let you compile and run the above program (e.g. because i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud vám kompilátor nedovolí výše uvedený program zkompilovat a spustit (např. protože tento problém považuje za chybu), zde je možné řešení, jak tento problém obejít:</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b11",
@@ -96,56 +108,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid doNothing(int&) // Don't worry about what & is for now, we're just using it to trick the compiler into thinking variable x is used\n{\n}\n\nint main()\n{\n    // define an integer variable named x\n    int x; // this variable is uninitialized\n\n    doNothing(x); // make the compiler think we're assigning a value to this variable\n\n    // print the value of x to the screen (who knows what we'll get, because x is uninitialized)\n    std::cout << x << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid doNothing(int&amp;) // Don't worry about what &amp; is for now, we're just using it to trick the compiler into thinking variable x is used\n{\n}\n\nint main()\n{\n    // define an integer variable named x\n    int x; // this variable is uninitialized\n\n    doNothing(x); // make the compiler think we're assigning a value to this variable\n\n    // print the value of x to the screen (who knows what we'll get, because x is uninitialized)\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid doNothing(int&) // Nedělejte si teď starosti s tím, co & je, jen to používáme k tomu, abychom kompilátor napálili, aby si myslel, že se používá proměnná x\n{\n}\n\nint main()\n{\n    // definuje celočíselnou proměnnou s názvem x\n    int x; // tato proměnná není inicializována\n\n    nedělat nic(x); // přimět kompilátor, aby si myslel, že této proměnné přiřazujeme hodnotu\n\n    // vytiskne hodnotu x na obrazovku (kdo ví, co dostaneme, protože x je neinicializované)\n    std::cout << x << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b12",
       "type": "paragraph",
       "html": "<p>Using uninitialized variables is one of the most common mistakes that novice programmers make, and unfortunately, it can also be one of the most challenging to debug (because the program may run fine anyway if the uninitialized variable happened to get assigned to a spot of memory that had a reasonable value in it, like 0).</p>",
       "preview": "Using uninitialized variables is one of the most common mistakes that novice pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Používání neinicializovaných proměnných je jednou z nejčastějších chyb, kterých se začínající programátoři dopouštějí, a bohužel může být také jednou z nejnáročnějších na ladění (protože program může i přesto běžet bez problémů, pokud bylo neinicializované proměnné náhodou přiděleno místo v paměti, které obsahovalo nějakou smysluplnou hodnotu, například 0).</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b13",
       "type": "paragraph",
       "html": "<p>This is the primary reason for the “always initialize your variables” best practice.</p>",
       "preview": "This is the primary reason for the “always initialize your variables” best pract",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je hlavní důvod pro osvědčený postup „vždy inicializujte své proměnné“.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b14",
       "type": "section",
       "title": "Undefined behavior",
       "html": "<h3 class=\"cpp-section-heading\">Undefined behavior</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nedefinované chování</h3>",
+      "title_cs": "Nedefinované chování"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b15",
       "type": "paragraph",
       "html": "<p>Using the value from an uninitialized variable is our first example of undefined behavior. <strong>Undefined behavior</strong> (often abbreviated <strong>UB</strong>) is the result of executing code whose behavior is not well-defined by the C++ language. In this case, the C++ language doesn’t have any rules determining what happens if you use the value of a variable that has not been given a known value. Consequently, if you actually do this, undefined behavior will result.</p>",
       "preview": "Using the value from an uninitialized variable is our first example of undefined",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití hodnoty z neinicializované proměnné je naším prvním příkladem nedefinovaného chování. <strong>Nedefinované chování</strong> (často zkracováno jako <strong>UB</strong>) je výsledkem vykonání kódu, jehož chování není jazykem C++ přesně definováno. V tomto případě jazyk C++ nemá žádná pravidla určující, co se stane, pokud použijete hodnotu proměnné, které nebyla přiřazena žádná známá hodnota. Pokud to tedy uděláte, výsledkem bude nedefinované chování.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b16",
       "type": "paragraph",
       "html": "<p>Code implementing undefined behavior may exhibit <em>any</em> of the following symptoms:</p>",
       "preview": "Code implementing undefined behavior may exhibit any of the following symptoms:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kód obsahující nedefinované chování může vykazovat <em>kterýkoli</em> z následujících příznaků:</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b17",
       "type": "list",
       "html": "<ul><li>Your program produces different results every time it is run.</li><li>Your program consistently produces the same incorrect result.</li><li>Your program behaves inconsistently (sometimes produces the correct result, sometimes not).</li><li>Your program seems like it’s working but produces incorrect results later in the program.</li><li>Your program crashes, either immediately or later.</li><li>Your program works on some compilers but not others.</li><li>Your program works until you change some other seemingly unrelated code.</li></ul>",
       "preview": "Your program produces different results every time it is run.Your program consis",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Váš program dává při každém spuštění jiné výsledky.</li><li>Váš program soustavně dává stejný nesprávný výsledek.</li><li>Váš program se chová nekonzistentně (někdy vyprodukuje správný výsledek, jindy ne).</li><li>Váš program zdánlivě funguje, ale později v průběhu běhu vrátí nesprávné výsledky.</li><li>Váš program spadne, ať už okamžitě, nebo později.</li><li>Váš program funguje na některých kompilátorech, ale na jiných ne.</li><li>Váš program funguje, dokud nezměníte nějaký jiný, zdánlivě nesouvisející kód.</li></ul>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b18",
       "type": "paragraph",
       "html": "<p>Or, your code may actually produce the correct behavior anyway.</p>",
       "preview": "Or, your code may actually produce the correct behavior anyway.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nebo se váš kód může i přesto chovat zcela správně.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b19",
@@ -153,14 +174,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Undefined behavior is like a box of chocolates. You never know what you’re going to get!</p></div>",
       "preview": "Author’s noteUndefined behavior is like a box of chocolates. You never know what you’re going to get",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Nedefinované chování je jako bonboniéra. Nikdy nevíte, co ochutnáte!</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b20",
       "type": "paragraph",
       "html": "<p>C++ contains many cases that can result in undefined behavior if you’re not careful. We’ll point these out in future lessons whenever we encounter them. Take note of where these cases are and make sure you avoid them.</p>",
       "preview": "C++ contains many cases that can result in undefined behavior if you’re not care",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ obsahuje mnoho případů, které mohou vyústit v nedefinované chování, pokud si nedáte pozor. Na tyto případy budeme v budoucích lekcích upozorňovat, kdykoli na ně narazíme. Všímejte si, o jaké případy jde, a dbejte na to, abyste se jim vyhnuli.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b21",
@@ -168,7 +191,8 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Take care to avoid all situations that result in undefined behavior, such as using uninitialized variables.</p></div>",
       "preview": "RuleTake care to avoid all situations that result in undefined behavior, such as using uninitialized",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Důsledně se vyhýbejte všem situacím, které vedou k nedefinovanému chování, jako je například používání neinicializovaných proměnných.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b22",
@@ -176,28 +200,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>One of the most common types of comment we get from readers says, “You said I couldn’t do X, but I did it anyway and my program works! Why?”.</p><p>There are two common answers. The most common answer is that your program is actually exhibiting undefined behavior, but that undefined behavior just happens to be producing the result you wanted anyway… for now. Tomorrow (or on another compiler or machine) it might not.</p><p>Alternatively, sometimes compiler authors take liberties with the language requirements when those requirements may be more restrictive than needed. For example, the standard may say, “you must do X before Y”, but a compiler author may feel that’s unnecessary, and make Y work even if you don’t do X first. This shouldn’t affect the operation of correctly written programs, but may cause incorrectly written programs to work anyway. So an alternate answer to the above question is that your compiler may simply be not following the standard! It happens. You can avoid much of this by making sure you’ve turned compiler extensions off, as described in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-compiler-extensions/\">0.10 -- Configuring your compiler: Compiler extensions</a>.</p></div>",
       "preview": "Author’s noteOne of the most common types of comment we get from readers says, “You said I couldn’t ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Jeden z nejčastějších typů komentářů, které od čtenářů dostáváme, zní: „Říkal jste, že nemohu dělat X, ale já to přesto udělal a můj program funguje! Proč?“</p><p>Existují dvě obvyklé odpovědi. Tou nejčastější je, že váš program ve skutečnosti vykazuje nedefinované chování, ale toto nedefinované chování shodou okolností zrovna produkuje výsledek, který jste chtěli… prozatím. Zítra (nebo na jiném překladači či stroji) už tomu tak být nemusí.</p><p>Druhou možností je, že si autoři překladačů občas přizpůsobují požadavky jazyka, pokud se jim zdají restriktivnější, než je nutné. Například standard může říkat: „musíte provést X před Y“, ale autor překladače může mít pocit, že je to zbytečné, a zařídí, aby Y fungovalo, i když X neprovedete jako první. To by nemělo ovlivnit fungování správně napsaných programů, ale může to způsobit, že nesprávně napsané programy budou přesto fungovat. Alternativní odpovědí na výše uvedenou otázku tedy je, že váš překladač jednoduše nedodržuje standard! To se stává. Velké části těchto situací se můžete vyhnout tím, že vypnete rozšíření překladače, jak je popsáno v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/configuring-your-compiler-compiler-extensions/\">0.10 -- Konfigurace překladače: Rozšíření překladače</a>.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b23",
       "type": "section",
       "title": "Implementation-defined behavior and unspecified behavior",
       "html": "<h3 class=\"cpp-section-heading\">Implementation-defined behavior and unspecified behavior</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Implementačně závislé chování a nespecifikované chování</h3>",
+      "title_cs": "Chování definované implementací a blíže nespecifikované chování"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b24",
       "type": "paragraph",
       "html": "<p>A specific compiler and the associated standard library it comes with are called an <strong>implementation</strong> (as these are what actually implements the C++ language). In some cases, the C++ language standard allows the implementation to determine how some aspect of the language will behave, so that the compiler can choose a behavior that is efficient for a given platform. Behavior that is defined by the implementation is called <strong>implementation-defined behavior</strong>. Implementation-defined behavior must be documented and consistent for a given implementation.</p>",
       "preview": "A specific compiler and the associated standard library it comes with are called",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konkrétní kompilátor a s ním dodávaná standardní knihovna se nazývají <strong>implementace</strong> (protože právě tyto nástroje reálně implementují jazyk C++). V některých případech standard jazyka C++ umožňuje implementaci určit, jak se bude určitý aspekt jazyka chovat, aby kompilátor mohl zvolit chování, které je pro danou platformu efektivní. Chování, které je definováno implementací, se nazývá <strong>implementačně závislé chování</strong> (implementation-defined behavior). Implementačně závislé chování musí být zdokumentované a v rámci dané implementace konzistentní.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b25",
       "type": "paragraph",
       "html": "<p>Let’s look at a simple example of implementation-defined behavior:</p>",
       "preview": "Let’s look at a simple example of implementation-defined behavior:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na jednoduchý příklad implementačně závislého chování:</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b26",
@@ -205,14 +234,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n\tstd::cout << sizeof(int) << '\\n'; // print how many bytes of memory an int value takes\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tstd::cout &lt;&lt; sizeof(int) &lt;&lt; '\\n'; // print how many bytes of memory an int value takes\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n\tstd::cout << sizeof(int) << '\\n'; // vypíše, kolik bajtů paměti zabírá hodnota int\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b27",
       "type": "paragraph",
       "html": "<p>On most platforms, this will produce <code>4</code>, but on others it may produce <code>2</code>.</p>",
       "preview": "On most platforms, this will produce 4, but on others it may produce 2.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na většině platforem to vrátí <code>4</code>, ale na jiných to může být <code>2</code>.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b28",
@@ -220,21 +251,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss <code>sizeof()</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/object-sizes-and-the-sizeof-operator/\">4.3 -- Object sizes and the sizeof operator</a>.</p></div>",
       "preview": "Related contentWe discuss sizeof() in lesson 4.3 -- Object sizes and the sizeof operator.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Operátorem <code>sizeof()</code> se zabýváme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/object-sizes-and-the-sizeof-operator/\">4.3 -- Velikost objektů a operátor sizeof</a>.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b29",
       "type": "paragraph",
       "html": "<p><strong>Unspecified behavior</strong> is almost identical to implementation-defined behavior in that the behavior is left up to the implementation to define, but the implementation is not required to document the behavior.</p>",
       "preview": "Unspecified behavior is almost identical to implementation-defined behavior in t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Nespecifikované chování</strong> (unspecified behavior) je téměř totožné s chováním definovaným implementací v tom smyslu, že určení chování je ponecháno na implementaci, ta však není povinna toto chování dokumentovat.</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b30",
       "type": "paragraph",
       "html": "<p>We generally want to avoid implementation-defined and unspecified behavior, as it means our program may not work as expected if compiled on a different compiler (or even on the same compiler if we change project settings that affect how the implementation behaves!)</p>",
       "preview": "We generally want to avoid implementation-defined and unspecified behavior, as i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně se chceme vyhnout chování definovanému implementací (implementation-defined) a nespecifikovanému chování (unspecified behavior), protože to znamená, že náš program nemusí fungovat podle očekávání, pokud jej zkompilujeme na jiném kompilátoru (nebo dokonce na stejném kompilátoru, pokud změníme nastavení projektu, která ovlivňují chování implementace!).</p>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b31",
@@ -242,7 +276,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid implementation-defined and unspecified behavior whenever possible, as they may cause your program to malfunction on other implementations.</p></div>",
       "preview": "Best practiceAvoid implementation-defined and unspecified behavior whenever possible, as they may ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Kdykoli je to možné, vyhněte se chování definovanému implementací i nespecifikovanému chování, protože mohou způsobit nesprávné fungování vašeho programu na jiných implementacích.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b32",
@@ -250,28 +285,34 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We show examples of unspecified behavior in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/#unspecified\">6.1 -- Operator precedence and associativity</a>.</p></div>",
       "preview": "Related contentWe show examples of unspecified behavior in lesson 6.1 -- Operator precedence and ass",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Příklady nespecifikovaného chování uvádíme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/operator-precedence-and-associativity/#unspecified\">6.1 – Priorita a asociativita operátorů</a>.</p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b33",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b34",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>What is an uninitialized variable? Why should you avoid using them?</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>An uninitialized variable is a variable that has not been given a value by the program (generally through initialization or assignment). Using the value stored in an uninitialized variable will result in undefined behavior.</p></div><p></p></div>",
       "preview": "Question #1What is an uninitialized variable? Why should you avoid using them?Sh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 1</p><p>Co je neinicializovaná proměnná? Proč byste se měli vyhnout jejímu používání?</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>Neinicializovaná proměnná je proměnná, které program nepřiřadil hodnotu (obvykle prostřednictvím inicializace nebo přiřazení). Použití hodnoty uložené v neinicializované proměnné povede k nedefinovanému chování (undefined behavior).</p></div><p></p></div>"
     },
     {
       "id": "uninitialized-variables-and-undefined-behavior_b35",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>What is undefined behavior, and what can happen if you do something that exhibits undefined behavior?</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>Undefined behavior is the result of executing code whose behavior is not well defined by the language. The result can be almost anything, including something that behaves correctly.</p></div><p></p></div>",
       "preview": "Question #2What is undefined behavior, and what can happen if you do something t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 2</p><p>Co je nedefinované chování (undefined behavior) a co se může stát, pokud uděláte něco, co vykazuje nedefinované chování?</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>Nedefinované chování je výsledkem vykonání kódu, jehož chování není jazykem přesně definováno. Výsledkem může být téměř cokoliv, včetně toho, že se program bude chovat zdánlivě správně.</p></div><p></p></div>"
     }
-  ]
+  ],
+  "title_cs": "1.6 — Neinicializované proměnné a nedefinované chování"
 }

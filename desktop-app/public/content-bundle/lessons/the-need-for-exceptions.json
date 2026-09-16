@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson on <a href=\"https://www.learncpp.com/cpp-tutorial/712-handling-errors-assert-cerr-exit-and-exceptions/\">handling errors</a>, we talked about ways to use assert(), std::cerr, and exit() to handle errors. However, we deferred one further topic that we will now cover: exceptions.</p>",
       "preview": "In the previous lesson on handling errors, we talked about ways to use assert(),",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci o <a href=\"https://www.learncpp.com/cpp-tutorial/712-handling-errors-assert-cerr-exit-and-exceptions/\">zpracování chyb</a> jsme mluvili o způsobech, jak k řešení chyb použít sustain(), std::cerr a exit(). Odložili jsme však jedno další téma, kterému se nyní budeme věnovat: výjimky.</p>"
     },
     {
       "id": "the-need-for-exceptions_b1",
       "type": "paragraph",
       "html": "<p><strong>When return codes fail</strong></p>",
       "preview": "When return codes fail",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Když návratové kódy selžou</strong></p>"
     },
     {
       "id": "the-need-for-exceptions_b2",
       "type": "paragraph",
       "html": "<p>When writing reusable code, error handling is a necessity. One of the most common ways to handle potential errors is via return codes. For example:</p>",
       "preview": "When writing reusable code, error handling is a necessity. One of the most commo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při psaní opakovaně použitelného kódu je zpracování chyb nutností. Jedním z nejběžnějších způsobů řešení potenciálních chyb je návratové kódy. Například:</p>"
     },
     {
       "id": "the-need-for-exceptions_b3",
@@ -36,35 +39,40 @@
       "language": "cpp",
       "code": "#include <string_view>\n\nint findFirstChar(std::string_view string, char ch)\n{\n    // Step through each character in string\n    for (std::size_t index{ 0 }; index < string.length(); ++index)\n        // If the character matches ch, return its index\n        if (string[index] == ch)\n            return index;\n\n    // If no match was found, return -1\n    return -1;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nint findFirstChar(std::string_view string, char ch)\n{\n    // Step through each character in string\n    for (std::size_t index{ 0 }; index &lt; string.length(); ++index)\n        // If the character matches ch, return its index\n        if (string[index] == ch)\n            return index;\n\n    // If no match was found, return -1\n    return -1;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string_view>\n\nint findFirstChar(std::string_view string, char ch)\n{\n    // Procházet každý znak v řetězci\n    for (std::size_t index{ 0 }; index < string.length(); ++index)\n        // Pokud znak odpovídá ch, vrátí jeho index\n        if (řetězec[index] == ch)\n            návratový index;\n\n    // Pokud nebyla nalezena žádná shoda, vrátí -1\n    návrat -1;\n}</code></pre>"
     },
     {
       "id": "the-need-for-exceptions_b4",
       "type": "paragraph",
       "html": "<p>This function returns the index of the first character matching ch within string. If the character can not be found, the function returns -1 as an indicator that the character wasn’t found.</p>",
       "preview": "This function returns the index of the first character matching ch within string",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato funkce vrací index prvního znaku vyhovujícího znaku ch v řetězci. Pokud znak nelze najít, funkce vrátí hodnotu -1 jako indikátor, že znak nebyl nalezen.</p>"
     },
     {
       "id": "the-need-for-exceptions_b5",
       "type": "paragraph",
       "html": "<p>The primary virtue of this approach is that it is extremely simple. However, using return codes has a number of drawbacks which can quickly become apparent when used in non-trivial cases:</p>",
       "preview": "The primary virtue of this approach is that it is extremely simple. However, usi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hlavní předností tohoto přístupu je, že je extrémně jednoduchý. Použití návratových kódů má však řadu nevýhod, které se mohou rychle projevit při použití v netriviálních případech:</p>"
     },
     {
       "id": "the-need-for-exceptions_b6",
       "type": "paragraph",
       "html": "<p>First, return values can be cryptic -- if a function returns -1, is it trying to indicate an error, or is that actually a valid return value? It’s often hard to tell without digging into the guts of the function or consulting documentation.</p>",
       "preview": "First, return values can be cryptic -- if a function returns -1, is it trying to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, návratové hodnoty mohou být záhadné – pokud funkce vrátí -1, pokouší se indikovat chybu, nebo je to ve skutečnosti platná návratová hodnota? Často je těžké to zjistit, aniž byste se ponořili do nitra funkce nebo nahlédli do dokumentace.</p>"
     },
     {
       "id": "the-need-for-exceptions_b7",
       "type": "paragraph",
       "html": "<p>Second, functions can only return one value, so what happens when you need to return both a function result and a possible error code? Consider the following function:</p>",
       "preview": "Second, functions can only return one value, so what happens when you need to re",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, funkce mohou vracet pouze jednu hodnotu, takže co se stane, když potřebujete vrátit výsledek funkce i možný kód chyby? Zvažte následující funkci:</p>"
     },
     {
       "id": "the-need-for-exceptions_b8",
@@ -72,14 +80,16 @@
       "language": "cpp",
       "code": "double divide(int x, int y)\n{\n    return static_cast<double>(x)/y;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double divide(int x, int y)\n{\n    return static_cast&lt;double&gt;(x)/y;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">dvojité dělení (int x, int y)\n{\n    return static_cast<double>(x)/y;\n}</code></pre>"
     },
     {
       "id": "the-need-for-exceptions_b9",
       "type": "paragraph",
       "html": "<p>This function is in desperate need of some error handling, because it will crash if the user passes in 0 for parameter y. However, it also needs to return the result of x/y. How can it do both? The most common answer is that either the result or the error handling will have to be passed back as a reference parameter, which makes for ugly code that is less convenient to use. For example:</p>",
       "preview": "This function is in desperate need of some error handling, because it will crash",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato funkce zoufale potřebuje nějaké ošetření chyb, protože se zhroutí, pokud uživatel zadá 0 pro parametr y. Musí však také vrátit výsledek x/y. Jak to může udělat obojí? Nejběžnější odpovědí je, že buď výsledek, nebo zpracování chyb bude muset být předáno zpět jako referenční parametr, což způsobuje, že je použití ošklivého kódu méně pohodlné. Například:</p>"
     },
     {
       "id": "the-need-for-exceptions_b10",
@@ -87,14 +97,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ndouble divide(int x, int y, bool& outSuccess)\n{\n    if (y == 0)\n    {\n        outSuccess = false;\n        return 0.0;\n    }\n\n    outSuccess = true;\n    return static_cast<double>(x)/y;\n}\n\nint main()\n{\n    bool success {}; // we must now pass in a bool value to see if the call was successful\n    double result { divide(5, 3, success) };\n\n    if (!success) // and check it before we use the result\n        std::cerr << \"An error occurred\" << std::endl;\n    else\n        std::cout << \"The answer is \" << result << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ndouble divide(int x, int y, bool&amp; outSuccess)\n{\n    if (y == 0)\n    {\n        outSuccess = false;\n        return 0.0;\n    }\n\n    outSuccess = true;\n    return static_cast&lt;double&gt;(x)/y;\n}\n\nint main()\n{\n    bool success {}; // we must now pass in a bool value to see if the call was successful\n    double result { divide(5, 3, success) };\n\n    if (!success) // and check it before we use the result\n        std::cerr &lt;&lt; \"An error occurred\" &lt;&lt; std::endl;\n    else\n        std::cout &lt;&lt; \"The answer is \" &lt;&lt; result &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ndvojité dělení (int x, int y, bool & outSuccess)\n{\n    if (y == 0)\n    {\n        outSuccess = false;\n        návrat 0,0;\n    }\n\n    outSuccess = true;\n    return static_cast<double>(x)/y;\n}\n\nint main()\n{\n    bool úspěch {}; // nyní musíme zadat boolovu hodnotu, abychom zjistili, zda bylo volání úspěšné\n    double vysledek { deleni(5, 3, uspech) };\n\n    if (!success) // a zkontrolujte to, než použijeme výsledek\n        std::cerr << \"Došlo k chybě\" << std::endl;\n    jinak\n        std::cout << \"Odpověď je \" << výsledek << '\\n';\n}</code></pre>"
     },
     {
       "id": "the-need-for-exceptions_b11",
       "type": "paragraph",
       "html": "<p>Third, in sequences of code where many things can go wrong, error codes have to be checked constantly. Consider the following snippet of code that involves parsing a text file for values that are supposed to be there:</p>",
       "preview": "Third, in sequences of code where many things can go wrong, error codes have to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za třetí, v sekvencích kódu, kde se mnoho věcí může pokazit, musí být chybové kódy neustále kontrolovány. Zvažte následující fragment kódu, který zahrnuje analýzu textového souboru na hodnoty, které tam mají být:</p>"
     },
     {
       "id": "the-need-for-exceptions_b12",
@@ -102,56 +114,65 @@
       "language": "cpp",
       "code": "    std::ifstream setupIni { \"setup.ini\" }; // open setup.ini for reading\n    // If the file couldn't be opened (e.g. because it was missing) return some error enum\n    if (!setupIni)\n        return ERROR_OPENING_FILE;\n\n    // Now read a bunch of values from a file\n    if (!readIntegerFromFile(setupIni, m_firstParameter)) // try to read an integer from the file\n        return ERROR_READING_VALUE; // Return enum value indicating value couldn't be read\n\n    if (!readDoubleFromFile(setupIni, m_secondParameter)) // try to read a double from the file\n        return ERROR_READING_VALUE;\n\n    if (!readFloatFromFile(setupIni, m_thirdParameter)) // try to read a float from the file\n        return ERROR_READING_VALUE;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::ifstream setupIni { \"setup.ini\" }; // open setup.ini for reading\n    // If the file couldn't be opened (e.g. because it was missing) return some error enum\n    if (!setupIni)\n        return ERROR_OPENING_FILE;\n\n    // Now read a bunch of values from a file\n    if (!readIntegerFromFile(setupIni, m_firstParameter)) // try to read an integer from the file\n        return ERROR_READING_VALUE; // Return enum value indicating value couldn't be read\n\n    if (!readDoubleFromFile(setupIni, m_secondParameter)) // try to read a double from the file\n        return ERROR_READING_VALUE;\n\n    if (!readFloatFromFile(setupIni, m_thirdParameter)) // try to read a float from the file\n        return ERROR_READING_VALUE;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> std::ifstream setupIni { \"setup.ini\" }; // otevřete soubor setup.ini pro čtení\n    // Pokud soubor nelze otevřít (např. protože chyběl), vraťte nějaký chybový výčet\n    if (!setupIni)\n        return ERROR_OPENING_FILE;\n\n    // Nyní načtěte spoustu hodnot ze souboru\n    if (!readIntegerFromFile(setupIni, m_firstParameter)) // pokuste se přečíst celé číslo ze souboru\n        return ERROR_READING_VALUE; // Vrátí hodnotu výčtu indikující hodnotu, kterou nelze přečíst\n\n    if (!readDoubleFromFile(setupIni, m_secondParameter)) // pokuste se přečíst double ze souboru\n        return ERROR_READING_VALUE;\n\n    if (!readFloatFromFile(setupIni, m_thirdParameter)) // pokuste se přečíst float ze souboru\n        return ERROR_READING_VALUE;</code></pre>"
     },
     {
       "id": "the-need-for-exceptions_b13",
       "type": "paragraph",
       "html": "<p>We haven’t covered file access yet, so don’t worry if you don’t understand how the above works -- just note the fact that every call requires an error-check and return back to the caller. Now imagine if there were twenty parameters of differing types -- you’re essentially checking for an error and returning ERROR_READING_VALUE twenty times! All of this error checking and returning values makes determining <em>what</em> the function is trying to do much harder to discern.</p>",
       "preview": "We haven’t covered file access yet, so don’t worry if you don’t understand how t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatím jsme se nezabývali přístupem k souborům, takže se nebojte, pokud nerozumíte tomu, jak výše uvedené funguje – jen si uvědomte, že každý hovor vyžaduje kontrolu chyb a vraťte se zpět k volajícímu. Nyní si představte, že by existovalo dvacet parametrů různých typů – v podstatě kontrolujete chybu a dvacetkrát vracíte ERROR_READING_VALUE! Všechny tyto kontroly chyb a vracení hodnot značně ztěžují rozpoznání, <em>co se</em> funkce pokouší udělat.</p>"
     },
     {
       "id": "the-need-for-exceptions_b14",
       "type": "paragraph",
       "html": "<p>Fourth, return codes do not mix with constructors very well. What happens if you’re creating an object and something inside the constructor goes catastrophically wrong? Constructors have no return type to pass back a status indicator, and passing one back via a reference parameter is messy and must be explicitly checked. Furthermore, even if you do this, the object will still be created and then has to be dealt with or disposed of.</p>",
       "preview": "Fourth, return codes do not mix with constructors very well. What happens if you",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za čtvrté, návratové kódy se s konstruktory příliš nekombinují. Co se stane, když vytváříte objekt a něco uvnitř konstruktoru se katastrofálně pokazí? Konstruktory nemají žádný návratový typ pro předání indikátoru stavu a předání jednoho zpět přes referenční parametr je chaotické a musí být výslovně zaškrtnuto. Navíc, i když to uděláte, objekt bude stále vytvořen a pak se s ním musí nakládat nebo se s ním musí naložit.</p>"
     },
     {
       "id": "the-need-for-exceptions_b15",
       "type": "paragraph",
       "html": "<p>Finally, when an error code is returned to the caller, the caller may not always be equipped to handle the error. If the caller doesn’t want to handle the error, it either has to ignore it (in which case it will be lost forever), or return the error up the stack to the function that called it. This can be messy and lead to many of the same issues noted above.</p>",
       "preview": "Finally, when an error code is returned to the caller, the caller may not always",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A konečně, když se volajícímu vrátí chybový kód, volající nemusí být vždy vybaven k tomu, aby chybu zvládl. Pokud volající nechce chybu zpracovat, musí ji buď ignorovat (v takovém případě bude navždy ztracena), nebo vrátit chybu do zásobníku funkci, která ji vyvolala. To může být chaotické a vést k mnoha stejným problémům uvedeným výše.</p>"
     },
     {
       "id": "the-need-for-exceptions_b16",
       "type": "paragraph",
       "html": "<p>To summarize, the primary issue with return codes is that the error handling code ends up intricately linked to the normal control flow of the code. This in turn ends up constraining both how the code is laid out, and how errors can be reasonably handled.</p>",
       "preview": "To summarize, the primary issue with return codes is that the error handling cod",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom to shrnuli, primární problém s návratovými kódy spočívá v tom, že kód zpracování chyb končí složitě propojený s normálním řídicím tokem kódu. To zase omezuje způsob, jakým je kód rozvržen a jak lze rozumně řešit chyby.</p>"
     },
     {
       "id": "the-need-for-exceptions_b17",
       "type": "paragraph",
       "html": "<p><strong>Exceptions</strong></p>",
       "preview": "Exceptions",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výjimky</strong></p>"
     },
     {
       "id": "the-need-for-exceptions_b18",
       "type": "paragraph",
       "html": "<p>Exception handling provides a mechanism to decouple handling of errors or other exceptional circumstances from the typical control flow of your code. This allows more freedom to handle errors when and how ever is most useful for a given situation, alleviating most (if not all) of the messiness that return codes cause.</p>",
       "preview": "Exception handling provides a mechanism to decouple handling of errors or other ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zpracování výjimek poskytuje mechanismus pro oddělení zpracování chyb nebo jiných výjimečných okolností od typického řídicího toku vašeho kódu. To umožňuje větší volnost při zpracovávání chyb, kdy a jak kdy je to pro danou situaci nejužitečnější, a zmírňuje většinu (pokud ne všechny) nepořádku, který návratové kódy způsobují.</p>"
     },
     {
       "id": "the-need-for-exceptions_b19",
       "type": "paragraph",
       "html": "<p>In the next lesson, we’ll take a look at how exceptions work in C++.</p>",
       "preview": "In the next lesson, we’ll take a look at how exceptions work in C++.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V další lekci se podíváme na to, jak výjimky fungují v C++.</p>"
     }
-  ]
+  ],
+  "title_cs": "27.1 — The need for exceptions"
 }

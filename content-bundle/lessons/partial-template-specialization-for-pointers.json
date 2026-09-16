@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-template-specialization/\">26.4 -- Class template specialization</a>, we took a look at a simple templated <code>Storage</code> class, along with a specialization for type <code>double</code>:</p>",
       "preview": "In previous lesson 26.4 -- Class template specialization, we took a look at a si",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/class-template-specialisation/\">26.4 -- Specializace šablony třídy</a> jsme se podívali na jednoduchou šablonu třídy <code>Storage</code> spolu se specializací pro typ <code>double</code>:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\ntemplate<>\nvoid Storage<double>::print() // fully specialized for type double\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // will cause Storage<double> to be implicitly instantiated\n\n    // Print out some values\n    i.print(); // calls Storage<int>::print (instantiated from Storage<T>)\n    d.print(); // calls Storage<double>::print (called from explicit specialization of Storage<double>::print())\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\ntemplate&lt;&gt;\nvoid Storage&lt;double&gt;::print() // fully specialized for type double\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; m_value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // will cause Storage&lt;double&gt; to be implicitly instantiated\n\n    // Print out some values\n    i.print(); // calls Storage&lt;int&gt;::print (instantiated from Storage&lt;T&gt;)\n    d.print(); // calls Storage&lt;double&gt;::print (called from explicit specialization of Storage&lt;double&gt;::print())\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nšablona<>\nvoid Storage<double>::print() // plně specializované pro typ double\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Definujte některé úložné jednotky\n    Úložiště i { 5 };\n    Storage d { 6.7 }; // způsobí, že Storage<double> bude implicitně konkretizováno\n\n    // Vytiskněte nějaké hodnoty\n    i.print(); // volá Storage<int>::print (instantováno z Storage<T>)\n    d.print(); // volá Storage<double>::print (voláno z explicitní specializace Storage<double>::print())\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b2",
       "type": "paragraph",
       "html": "<p>However, as simple as this class is, it has a hidden flaw: it compiles but malfunctions when <code>T</code> is a pointer type. For example:</p>",
       "preview": "However, as simple as this class is, it has a hidden flaw: it compiles but malfu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli je tato třída jednoduchá, má skrytou chybu: kompiluje se, ale nefunguje správně, když je <code>T</code> typ ukazatele. Například:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b3",
@@ -37,42 +40,48 @@
       "language": "cpp",
       "code": "int main()\n{\n    double d { 1.2 };\n    double *ptr { &d };\n\n    Storage s { ptr };\n    s.print();\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    double d { 1.2 };\n    double *ptr { &amp;d };\n\n    Storage s { ptr };\n    s.print();\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    dvojité d { 1,2 };\n    double *ptr { &d };\n\n    Úložiště s { ptr };\n    sprint();\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b4",
       "type": "paragraph",
       "html": "<p>On the authors machine, this produced the result:</p>",
       "preview": "On the authors machine, this produced the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na počítači autorů to přineslo výsledek:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b5",
       "type": "output",
       "text": "0x7ffe164e0f50\n",
       "html": "<pre>0x7ffe164e0f50\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0x7ffe164e0f50\n</pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b6",
       "type": "paragraph",
       "html": "<p>What happened? Because <code>ptr</code> is a <code>double*</code>, <code>s</code> has type <code>Storage&lt;double*&gt;</code>, which means <code>m_value</code> has type <code>double*</code>. When the constructor is invoked, <code>m_value</code> receives a copy of the address that <code>ptr</code> is holding, and it is this address that is printed when the <code>print()</code> member function is called.</p>",
       "preview": "What happened? Because ptr is a double*, s has type Storage<double*>, which mean",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se stalo? Protože <code>ptr</code> je <code>double*</code>, <code>s</code> má typ <code>Storage<double*></code>, což znamená, že <code>m_value</code> má typ <code>double*</code>. Když je vyvolán konstruktor, <code>m_value</code> obdrží kopii adresy, kterou <code>ptr</code> drží, a je to tato adresa, která se vytiskne při volání členské funkce <code>print()</code>.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b7",
       "type": "paragraph",
       "html": "<p>So how do we fix this?</p>",
       "preview": "So how do we fix this?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak to tedy napravíme?</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b8",
       "type": "paragraph",
       "html": "<p>One option would be to add a full specialization for type <code>double*</code>:</p>",
       "preview": "One option would be to add a full specialization for type double*:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou možností by bylo přidat úplnou specializaci pro typ <code>double*</code>:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b9",
@@ -80,49 +89,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\ntemplate<>\nvoid Storage<double*>::print() // fully specialized for type double*\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}\n\ntemplate<>\nvoid Storage<double>::print() // fully specialized for type double (for comparison, not used)\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    double d { 1.2 };\n    double *ptr { &d };\n\n    Storage s { ptr };\n    s.print(); // calls Storage<double*>::print()\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\ntemplate&lt;&gt;\nvoid Storage&lt;double*&gt;::print() // fully specialized for type double*\n{\n    if (m_value)\n        std::cout &lt;&lt; std::scientific &lt;&lt; *m_value &lt;&lt; '\\n';\n}\n\ntemplate&lt;&gt;\nvoid Storage&lt;double&gt;::print() // fully specialized for type double (for comparison, not used)\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; m_value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    double d { 1.2 };\n    double *ptr { &amp;d };\n\n    Storage s { ptr };\n    s.print(); // calls Storage&lt;double*&gt;::print()\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nšablona<>\nvoid Storage<double*>::print() // plně specializované pro typ double*\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}\n\nšablona<>\nvoid Storage<double>::print() // plně specializované pro typ double (pro srovnání, nepoužívá se)\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    dvojité d { 1,2 };\n    double *ptr { &d };\n\n    Úložiště s { ptr };\n    sprint(); // volá úložiště<double*>::print()\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b10",
       "type": "paragraph",
       "html": "<p>This now prints the correct result:</p>",
       "preview": "This now prints the correct result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto nyní vypisuje správný výsledek:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b11",
       "type": "output",
       "text": "1.200000e+00\n",
       "html": "<pre>1.200000e+00\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>1,200000e+00\n</pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b12",
       "type": "paragraph",
       "html": "<p>But this only solves the problem when <code>T</code> is of type <code>double*</code>. What about when <code>T</code> is <code>int*</code>, or <code>char*</code>, or any other pointer type?</p>",
       "preview": "But this only solves the problem when T is of type double*. What about when T is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To ale řeší problém pouze v případě, že <code>T</code> je typu <code>double*</code>. Co když <code>T</code> je <code>int*</code> nebo <code>char*</code> nebo jakýkoli jiný typ ukazatele?</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b13",
       "type": "paragraph",
       "html": "<p>We really don’t want to have to create a full specialization for every pointer type. And in fact, it’s not even possible, because the user can always pass in a pointer to a program-defined type.</p>",
       "preview": "We really don’t want to have to create a full specialization for every pointer t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Opravdu nechceme vytvářet úplnou specializaci pro každý typ ukazatele. A ve skutečnosti to ani není možné, protože uživatel může vždy předat ukazatel na programem definovaný typ.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b14",
       "type": "section",
       "title": "Partial template specialization for pointers",
       "html": "<h3 class=\"cpp-section-heading\">Partial template specialization for pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Částečná specializace šablony pro ukazatele</h3>",
+      "title_cs": "Částečná specializace šablony pro ukazatele"
     },
     {
       "id": "partial-template-specialization-for-pointers_b15",
       "type": "paragraph",
       "html": "<p>You might think to to try creating a template function overloaded on type <code>T*</code>:</p>",
       "preview": "You might think to to try creating a template function overloaded on type T*:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná vás napadne zkusit vytvořit šablonovou funkci přetíženou typem <code>T*</code>:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b16",
@@ -130,28 +147,32 @@
       "language": "cpp",
       "code": "// doesn't work\ntemplate<typename T>\nvoid Storage<T*>::print()\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// doesn't work\ntemplate&lt;typename T&gt;\nvoid Storage&lt;T*&gt;::print()\n{\n    if (m_value)\n        std::cout &lt;&lt; std::scientific &lt;&lt; *m_value &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// nefunguje\nšablona<název typu T>\nvoid Storage<T*>::print()\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b17",
       "type": "paragraph",
       "html": "<p>Such a function is a partially specialized template function because it’s restricting what type <code>T</code> can be (to a pointer type), but <code>T</code> is still a type template parameter.</p>",
       "preview": "Such a function is a partially specialized template function because it’s restri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Taková funkce je částečně specializovaná šablonová funkce, protože omezuje, jaký typ může být <code>T</code> (na typ ukazatele), ale <code>T</code> je stále parametr šablony typu.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b18",
       "type": "paragraph",
       "html": "<p>Unfortunately, this doesn’t work for a simple reason: as of the time of writing (C++23) functions cannot be partially specialized. As we noted in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/partial-template-specialization/\">26.5 -- Partial template specialization</a>, only classes can be partially specialized.</p>",
       "preview": "Unfortunately, this doesn’t work for a simple reason: as of the time of writing ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To bohužel nefunguje z jednoduchého důvodu: v době psaní (C++23) nelze funkce částečně specializovat. Jak jsme poznamenali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/partial-template-specialisation/\">26.5 -- Částečná specializace šablon</a>, pouze třídy mohou být částečně specializované.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b19",
       "type": "paragraph",
       "html": "<p>So let’s partially specialize the <code>Storage</code> class instead:</p>",
       "preview": "So let’s partially specialize the Storage class instead:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme tedy místo toho částečně specializovat třídu <code>Storage</code>:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b20",
@@ -159,70 +180,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage // This is our primary template class (same as previous)\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\ntemplate <typename T> // we still have a type template parameter\nclass Storage<T*> // This is partially specialized for T*\n{\nprivate:\n    T* m_value {};\npublic:\n    Storage(T* value)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\ntemplate <typename T>\nvoid Storage<T*>::print() // This is a non-specialized function of partially specialized class Storage<T*>\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}\n\nint main()\n{\n    double d { 1.2 };\n    double *ptr { &d };\n\n    Storage s { ptr }; // instantiates Storage<double*> from partially specialized class\n    s.print(); // calls Storage<double*>::print()\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage // This is our primary template class (same as previous)\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\ntemplate &lt;typename T&gt; // we still have a type template parameter\nclass Storage&lt;T*&gt; // This is partially specialized for T*\n{\nprivate:\n    T* m_value {};\npublic:\n    Storage(T* value)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\ntemplate &lt;typename T&gt;\nvoid Storage&lt;T*&gt;::print() // This is a non-specialized function of partially specialized class Storage&lt;T*&gt;\n{\n    if (m_value)\n        std::cout &lt;&lt; std::scientific &lt;&lt; *m_value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    double d { 1.2 };\n    double *ptr { &amp;d };\n\n    Storage s { ptr }; // instantiates Storage&lt;double*&gt; from partially specialized class\n    s.print(); // calls Storage&lt;double*&gt;::print()\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\nclass Storage // Toto je naše primární třída šablony (stejná jako předchozí)\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\ntemplate <typename T> // stále máme parametr šablony typu\nclass Storage<T*> // Toto je částečně specializované pro T*\n{\nsoukromé:\n    T* m_hodnota {};\nveřejnost:\n    Skladování (hodnota T*)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\nšablona <název typu T>\nvoid Storage<T*>::print() // Toto je nespecializovaná funkce částečně specializované třídy Storage<T*>\n{\n    if (m_value)\n        std::cout << std::scientific << *m_value << '\\n';\n}\n\nint main()\n{\n    dvojité d { 1,2 };\n    double *ptr { &d };\n\n    Úložiště s { ptr }; // vytvoří instanci Storage<double*> z částečně specializované třídy\n    s.print(); // volá úložiště<double*>::print()\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b21",
       "type": "paragraph",
       "html": "<p>We’ve defined <code>Storage&lt;T*&gt;::print()</code> outside the class just to show how it’s done, and to show that the definition is identical to the partially specialized function <code>Storage&lt;T*&gt;::print()</code> that did not work above. However, now that <code>Storage&lt;T*&gt;</code> is a partially specialized class, <code>Storage&lt;T*&gt;::print()</code> is no longer partially specialized -- it is a non-specialized function, which is why it is allowed.</p>",
       "preview": "We’ve defined Storage<T*>::print() outside the class just to show how it’s done,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Definovali jsme <code>Storage<T*>::print()</code> mimo třídu jen proto, abychom ukázali, jak se to dělá, a abychom ukázali, že definice je totožná s částečně specializovanou funkcí <code>Storage<T*>::print()</code>, která nefungovala výše. Nyní, když je <code>Storage<T*></code> částečně specializovanou třídou, <code>Storage<T*>::print()</code> již není částečně specializované -- jedná se o nespecializovanou funkci, a proto je povolena.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b22",
       "type": "paragraph",
       "html": "<p>It’s worth noting that our type template parameter is defined as <code>T</code>, not <code>T*</code>. This means that <code>T</code> will be deduced as the non-pointer type, so we have to use <code>T*</code> anywhere we want a pointer to <code>T</code>. It’s also worth a reminder that the partial specialization <code>Storage&lt;T*&gt;</code> needs to be defined after the primary template class <code>Storage&lt;T&gt;</code>.</p>",
       "preview": "It’s worth noting that our type template parameter is defined as T, not T*. This",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stojí za zmínku, že náš parametr šablony typu je definován jako <code>T</code>, nikoli <code>T*</code>. To znamená, že <code>T</code> bude dedukován jako typ bez ukazatele, takže musíme použít <code>T*</code> všude, kde chceme ukazatel na <code>T</code>. Za připomenutí také stojí, že částečná specializace <code>Úložiště<T*></code> musí být definována za třídou primární šablony <code>Úložiště<T></code>.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b23",
       "type": "section",
       "title": "Ownership and lifetime issues",
       "html": "<h3 class=\"cpp-section-heading\">Ownership and lifetime issues</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problémy s vlastnictvím a životností</h3>",
+      "title_cs": "Vlastnické a celoživotní problémy"
     },
     {
       "id": "partial-template-specialization-for-pointers_b24",
       "type": "paragraph",
       "html": "<p>The above partially specialized class <code>Storage&lt;T*&gt;</code> has another potential issue. Because <code>m_value</code> is a <code>T*</code>, it is a pointer to the object that is passed in. If that object is then destroyed, our <code>Storage&lt;T*&gt;</code> will be left dangling.</p>",
       "preview": "The above partially specialized class Storage<T*> has another potential issue. B",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše částečně specializovaná třída <code>Storage<T*></code> má další potenciální problém. Protože <code>m_value</code> je <code>T*</code>, je to ukazatel na objekt, který je předán dovnitř. Pokud bude objekt následně zničen, naše <code>Úložiště<T*></code> zůstane viset.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b25",
       "type": "paragraph",
       "html": "<p>The core problem is that our implementation of <code>Storage&lt;T&gt;</code> has copy semantics (meaning it makes a copy of its initializer) but <code>Storage&lt;T*&gt;</code> has reference semantics (meaning it’s a reference to its initializer). This inconsistency is a recipe for bugs.</p>",
       "preview": "The core problem is that our implementation of Storage<T> has copy semantics (me",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Základním problémem je, že naše implementace <code>Storage<T></code> má sémantiku kopírování (což znamená, že vytváří kopii svého inicializátoru), ale <code>Storage<T*></code> má referenční sémantiku (to znamená, že jde o odkaz na jeho inicializátor). Tato nekonzistence je receptem na chyby.</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b26",
       "type": "paragraph",
       "html": "<p>There are a few different ways we can deal with such issues (in order of increasing complexity):</p>",
       "preview": "There are a few different ways we can deal with such issues (in order of increas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje několik různých způsobů, jak se s takovými problémy můžeme vypořádat (v pořadí rostoucí složitosti):</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b27",
       "type": "list",
       "html": "<ol start=\"1\"><li>Make it clear really clear that <code>Storage&lt;T*&gt;</code> is a view class (with reference semantics), so it’s on the caller to ensure the object being pointed to stays valid for as long as the <code>Storage&lt;T*&gt;</code> does. Unfortunately, because this partially specialized class must have the same name as a the primary template class, we can’t give it a name like <code>StorageView</code>. So we’re restricted to using comments or other things that might be missed. Not a great option.</li><li>Prevent use of <code>Storage&lt;T*&gt;</code> altogether. We probably don’t need <code>Storage&lt;T*&gt;</code> to exist, as the caller can always dereference the pointer at the point of instantiation to use <code>Storage&lt;T&gt;</code> and make a copy of the value (which is semantically appropriate for a storage class).</li></ol>",
       "preview": "Make it clear really clear that Storage<T*> is a view class (with reference sema",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Ujasněte si, že <code>Storage<T*></code> je třída zobrazení (s referenční sémantikou), takže je na volajícím, aby zajistil, že objekt, na který se odkazuje, zůstane platný tak dlouho, dokud <code>Úložiště<T*></code> bude platit. Bohužel, protože tato částečně specializovaná třída musí mít stejný název jako třída primární šablony, nemůžeme jí dát název jako <code>StorageView</code>. Jsme tedy omezeni na používání komentářů nebo jiných věcí, které by mohly chybět. Není to skvělá volba.</li><li>Úplně zamezte používání <code>Úložiště<T*></code>. Pravděpodobně nepotřebujeme, aby existoval <code>Úložiště<T*></code>, protože volající může vždy dereferencovat ukazatel v okamžiku vytvoření instance, aby použil <code>Úložiště<T></code> a vytvořil kopii hodnoty (která je sémanticky vhodná pro třídu úložiště).</li></ol>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b28",
       "type": "paragraph",
       "html": "<p>However, while you can delete an overloaded function, C++ (as of C++23) won’t let you delete a class. The obvious solution is to partially specialize <code>Storage&lt;T*&gt;</code> and then do something to make it not compile (e.g. <code>static_assert</code>) when the template is instantiated, this approach has one major downside: <code>std::nullptr_t</code> is not a pointer type, so <code>Storage&lt;std::nullptr_t&gt;</code> won’t match <code>Storage&lt;T*&gt;</code>!</p>",
       "preview": "However, while you can delete an overloaded function, C++ (as of C++23) won’t le",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli můžete odstranit přetíženou funkci, C++ (od C++23) vám nedovolí odstranit třídu. Zřejmým řešením je částečně specializovat <code>Storage<T*></code> a poté udělat něco pro to, aby se nezkompilovalo (např. <code>static_assert</code>), když je šablona vytvořena instancí, tento přístup má jednu zásadní nevýhodu: <code>std::nullptr_t</code> není typ ukazatele, takže <code>Storage<null_code> nebude odpovídat/code> <code>Úložiště<T*></code>!</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b29",
       "type": "paragraph",
       "html": "<p>A better solution is to avoid partial specialization altogether, and use a <code>static_assert</code> on our primary template to ensure <code>T</code> is a type that we’re okay with. Here’s an example of that approach:</p>",
       "preview": "A better solution is to avoid partial specialization altogether, and use a stati",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Lepším řešením je zcela se vyhnout částečné specializaci a použít na naší primární šabloně <code>static_assert</code>, abychom zajistili, že <code>T</code> je typ, se kterým jsme v pořádku. Zde je příklad tohoto přístupu:</p>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b30",
@@ -230,14 +262,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <type_traits> // for std::is_pointer_v and std::is_null_pointer_v\n\ntemplate <typename T>\nclass Storage\n{\n    // Make sure T isn't a pointer or a std::nullptr_t\n    static_assert(!std::is_pointer_v<T> && !std::is_null_pointer_v<T>, \"Storage<T*> and Storage<nullptr> disallowed\");\n\nprivate:\n    T m_value {};\n\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nint main()\n{\n    double d { 1.2 };\n\n    Storage s1 { d }; // ok\n    s1.print();\n\n    Storage s2 { &d }; // static_assert because T is a pointer\n    s2.print();\n\n    Storage s3 { nullptr }; // static_assert because T is a nullptr\n    s3.print();\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;type_traits&gt; // for std::is_pointer_v and std::is_null_pointer_v\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\n    // Make sure T isn't a pointer or a std::nullptr_t\n    static_assert(!std::is_pointer_v&lt;T&gt; &amp;&amp; !std::is_null_pointer_v&lt;T&gt;, \"Storage&lt;T*&gt; and Storage&lt;nullptr&gt; disallowed\");\n\nprivate:\n    T m_value {};\n\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    double d { 1.2 };\n\n    Storage s1 { d }; // ok\n    s1.print();\n\n    Storage s2 { &amp;d }; // static_assert because T is a pointer\n    s2.print();\n\n    Storage s3 { nullptr }; // static_assert because T is a nullptr\n    s3.print();\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <type_traits> // pro std::is_pointer_v a std::is_null_pointer_v\n\nšablona <název typu T>\ntřída Skladování\n{\n    // Ujistěte se, že T není ukazatel nebo std::nullptr_t\n    static_assert(!std::is_pointer_v<T> && !std::is_null_pointer_v<T>, \"Úložiště<T*> a úložiště<nullptr> nepovoleno\");\n\nsoukromé:\n    T m_hodnota {};\n\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nint main()\n{\n    dvojité d { 1,2 };\n\n    Úložiště s1 { d }; // dobře\n    s1.print();\n\n    Úložiště s2 { &d }; // static_assert, protože T je ukazatel\n    s2.print();\n\n    Úložiště s3 { nullptr }; // static_assert, protože T je nullptr\n    s3.print();\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b31",
       "type": "list",
       "html": "<ol start=\"3\"><li>Have <code>Storage&lt;T*&gt;</code> make a copy of the object on the heap. If you do all the heap memory management yourself, this requires overloading the constructor, copy constructor, copy assignment, and destructor. An easier alternative is to just use <code>std::unique_ptr</code> (which we cover in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdunique_ptr/\">22.5 -- std::unique_ptr</a>):</li></ol>",
       "preview": "Have Storage<T*> make a copy of the object on the heap. If you do all the heap m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"3\"><li>Nechat <code>Úložiště<T*></code> vytvořit kopii objektu na hromadě. Pokud veškerou správu paměti haldy provádíte sami, vyžaduje to přetížení konstruktoru, konstruktoru kopírování, přiřazení kopírování a destruktoru. Jednodušší alternativou je jednoduše použít <code>std::unique_ptr</code> (kterému se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdunique_ptr/\">22.5 -- std::unique_ptr</a>):</li></ol>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b32",
@@ -245,14 +279,17 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <type_traits> // for std::is_pointer_v and std::is_null_pointer_v\n#include <memory>\n\ntemplate <typename T>\nclass Storage\n{\n    // Make sure T isn't a pointer or a std::nullptr_t\n    static_assert(!std::is_pointer_v<T> && !std::is_null_pointer_v<T>, \"Storage<T*> and Storage<nullptr> disallowed\");\n\nprivate:\n    T m_value {};\n\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\ntemplate <typename T>\nclass Storage<T*>\n{\nprivate:\n    std::unique_ptr<T> m_value {}; // use std::unique_ptr to automatically deallocate when Storage is destroyed\n\npublic:\n    Storage(T* value)\n      : m_value { std::make_unique<T>(value ? *value : 0) } // or throw exception when !value\n    {\n    }\n\n    void print()\n    {\n        if (m_value)\n            std::cout << *m_value << '\\n';\n    }\n};\n\nint main()\n{\n    double d { 1.2 };\n\n    Storage s1 { d }; // ok\n    s1.print();\n\n    Storage s2 { &d }; // ok, copies d on heap\n    s2.print();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;type_traits&gt; // for std::is_pointer_v and std::is_null_pointer_v\n#include &lt;memory&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\n    // Make sure T isn't a pointer or a std::nullptr_t\n    static_assert(!std::is_pointer_v&lt;T&gt; &amp;&amp; !std::is_null_pointer_v&lt;T&gt;, \"Storage&lt;T*&gt; and Storage&lt;nullptr&gt; disallowed\");\n\nprivate:\n    T m_value {};\n\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\ntemplate &lt;typename T&gt;\nclass Storage&lt;T*&gt;\n{\nprivate:\n    std::unique_ptr&lt;T&gt; m_value {}; // use std::unique_ptr to automatically deallocate when Storage is destroyed\n\npublic:\n    Storage(T* value)\n      : m_value { std::make_unique&lt;T&gt;(value ? *value : 0) } // or throw exception when !value\n    {\n    }\n\n    void print()\n    {\n        if (m_value)\n            std::cout &lt;&lt; *m_value &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    double d { 1.2 };\n\n    Storage s1 { d }; // ok\n    s1.print();\n\n    Storage s2 { &amp;d }; // ok, copies d on heap\n    s2.print();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <type_traits> // pro std::is_pointer_v a std::is_null_pointer_v\n#include <paměť>\n\nšablona <název typu T>\ntřída Skladování\n{\n    // Ujistěte se, že T není ukazatel nebo std::nullptr_t\n    static_assert(!std::is_pointer_v<T> && !std::is_null_pointer_v<T>, \"Úložiště<T*> a úložiště<nullptr> nepovoleno\");\n\nsoukromé:\n    T m_hodnota {};\n\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nšablona <název typu T>\ntřída Úložiště<T*>\n{\nsoukromé:\n    std::unique_ptr<T> m_value {}; // použijte std::unique_ptr k automatickému uvolnění při zničení úložiště\n\nveřejnost:\n    Skladování (hodnota T*)\n      : m_value { std::make_unique<T>(hodnota ? *hodnota: 0) } // nebo vyvolá výjimku, když !value\n    {\n    }\n\n    void print()\n    {\n        if (m_value)\n            std::cout << *m_value << '\\n';\n    }\n};\n\nint main()\n{\n    dvojité d { 1,2 };\n\n    Úložiště s1 { d }; // dobře\n    s1.print();\n\n    Úložiště s2 { &d }; // ok, kopie d na hromadu\n    s2.print();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "partial-template-specialization-for-pointers_b33",
       "type": "paragraph",
       "html": "<p>Using partial template class specialization to create separate pointer and non-pointer implementations of a class is extremely useful when you want a class to handle both differently, but in a way that’s completely transparent to the end-user.</p>",
       "preview": "Using partial template class specialization to create separate pointer and non-p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití částečné specializace na třídu šablony k vytvoření oddělených implementací ukazatele a neukazatele třídy je mimořádně užitečné, když chcete, aby třída zpracovávala obojí odlišně, ale způsobem, který je pro koncového uživatele zcela transparentní.</p>"
     }
-  ]
+  ],
+  "title_cs": "26.6 — Partial template specialization for pointers"
 }

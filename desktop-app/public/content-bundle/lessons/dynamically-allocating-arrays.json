@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In addition to dynamically allocating single values, we can also dynamically allocate arrays of variables. Unlike a fixed array, where the array size must be fixed at compile time, dynamically allocating an array allows us to choose an array length at runtime (meaning our length does not need to be constexpr).</p>",
       "preview": "In addition to dynamically allocating single values, we can also dynamically all",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kromě dynamické alokace jednotlivých hodnot můžeme také dynamicky alokovat pole proměnných. Na rozdíl od pevného pole, kde musí být velikost pole pevně daná v době kompilace, nám dynamická alokace pole umožňuje zvolit délku pole za běhu programu (což znamená, že délka nemusí být constexpr).</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b1",
@@ -22,14 +23,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>In these lessons, we’ll be dynamically allocating C-style arrays, which is the most common type of dynamically allocated array.</p><p>While you can dynamically allocate a <code>std::array</code>, you’re usually better off using a non-dynamically allocated <code>std::vector</code> in this case.</p></div>",
       "preview": "Author’s noteIn these lessons, we’ll be dynamically allocating C-style arrays, which is the most com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>V těchto lekcích budeme dynamicky alokovat pole ve stylu jazyka C (C-style arrays), což je nejběžnější typ dynamicky alokovaného pole.</p><p>Ačkoli můžete dynamicky alokovat i <code>std::array</code>, v tomto případě je obvykle lepší použít dynamicky nealokovaný <code>std::vector</code>.</p></div>"
     },
     {
       "id": "dynamically-allocating-arrays_b2",
       "type": "paragraph",
       "html": "<p>To allocate an array dynamically, we use the array form of new and delete (often called new[] and delete[]):</p>",
       "preview": "To allocate an array dynamically, we use the array form of new and delete (often",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro dynamickou alokaci pole používáme variantu operátorů new a delete pro pole (často označovanou jako new[] a delete[]):</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b3",
@@ -37,91 +40,107 @@
       "language": "cpp",
       "code": "#include <cstddef>\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter a positive integer: \";\n    std::size_t length{};\n    std::cin >> length;\n\n    int* array{ new int[length]{} }; // use array new.  Note that length does not need to be constant!\n\n    std::cout << \"I just allocated an array of integers of length \" << length << '\\n';\n\n    array[0] = 5; // set element 0 to value 5\n\n    delete[] array; // use array delete to deallocate array\n\n    // we don't need to set array to nullptr/0 here because it's going out of scope immediately after this anyway\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstddef&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter a positive integer: \";\n    std::size_t length{};\n    std::cin &gt;&gt; length;\n\n    int* array{ new int[length]{} }; // use array new.  Note that length does not need to be constant!\n\n    std::cout &lt;&lt; \"I just allocated an array of integers of length \" &lt;&lt; length &lt;&lt; '\\n';\n\n    array[0] = 5; // set element 0 to value 5\n\n    delete[] array; // use array delete to deallocate array\n\n    // we don't need to set array to nullptr/0 here because it's going out of scope immediately after this anyway\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstddef>\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Zadejte kladné celé číslo: \";\n    std::velikost_t délka{};\n    std::cin >> délka;\n\n    int* pole{ new int[délka]{} }; // použijte pole new.  Pamatujte, že délka nemusí být konstantní!\n\n    std::cout << \"Právě jsem alokoval pole celých čísel délky \" << délka << '\\n';\n\n    pole[0] = 5; // nastaví prvek 0 na hodnotu 5\n\n    delete[] pole; // použijte pole delete k uvolnění pole\n\n    // zde nemusíme nastavovat pole na nullptr/0, protože to stejně okamžitě přejde mimo rozsah\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "dynamically-allocating-arrays_b4",
       "type": "paragraph",
       "html": "<p>Because we are allocating an array, C++ knows that it should use the array version of new instead of the scalar version of new. Essentially, the new[] operator is called, even though the [] isn’t placed next to the new keyword.</p>",
       "preview": "Because we are allocating an array, C++ knows that it should use the array versi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože alokujeme pole, C++ ví, že má použít verzi new pro pole namísto skalární verze new. V podstatě se volá operátor new[], přestože hranaté závorky [] nejsou umístěny přímo vedle klíčového slova new.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b5",
       "type": "paragraph",
       "html": "<p>The length of dynamically allocated arrays has type <code>std::size_t</code>. If you are using a non-constexpr int, you’ll need to <code>static_cast</code> to <code>std::size_t</code> since that is considered a narrowing conversion and your compiler will warn otherwise.</p>",
       "preview": "The length of dynamically allocated arrays has type std::size_t. If you are usin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Délka dynamicky alokovaných polí je typu <code>std::size_t</code>. Pokud používáte ne-constexpr int, budete muset provést <code>static_cast</code> na <code>std::size_t</code>, protože se to považuje za zužující konverzi a kompilátor by jinak vypsal varování.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b6",
       "type": "paragraph",
       "html": "<p>Note that because this memory is allocated from a different place than the memory used for fixed arrays, the size of the array can be quite large. You can run the program above and allocate an array of length 1,000,000 (or probably even 100,000,000) without issue. Try it! Because of this, programs that need to allocate a lot of memory in C++ typically do so dynamically.</p>",
       "preview": "Note that because this memory is allocated from a different place than the memor",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že jelikož je tato paměť alokována z jiného místa než paměť používaná pro pevná pole, může být velikost pole poměrně velká. Můžete spustit výše uvedený program a bez problémů alokovat pole o délce 1 000 000 (nebo pravděpodobně i 100 000 000). Vyzkoušejte si to! Z tohoto důvodu programy v C++, které potřebují alokovat velké množství paměti, tak obvykle činí dynamicky.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b7",
       "type": "section",
       "title": "Dynamically deleting arrays",
       "html": "<h3 class=\"cpp-section-heading\">Dynamically deleting arrays</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dynamické uvolňování polí</h3>",
+      "title_cs": "Dynamické mazání polí"
     },
     {
       "id": "dynamically-allocating-arrays_b8",
       "type": "paragraph",
       "html": "<p>When deleting a dynamically allocated array, we have to use the array version of delete, which is delete[].</p>",
       "preview": "When deleting a dynamically allocated array, we have to use the array version of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při uvolňování dynamicky alokovaného pole musíme použít verzi operátoru delete pro pole, tedy delete[].</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b9",
       "type": "paragraph",
       "html": "<p>This tells the CPU that it needs to clean up multiple variables instead of a single variable. One of the most common mistakes that new programmers make when dealing with dynamic memory allocation is to use delete instead of delete[] when deleting a dynamically allocated array. Using the scalar version of delete on an array will result in undefined behavior, such as data corruption, memory leaks, crashes, or other problems.</p>",
       "preview": "This tells the CPU that it needs to clean up multiple variables instead of a sin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím se CPU sdělí, že je potřeba uklidit více proměnných namísto jedné jediné. Jednou z nejčastějších chyb, kterou začínající programátoři dělají při práci s dynamickou alokací paměti, je použití delete místo delete[] při uvolňování dynamicky alokovaného pole. Použití skalární verze delete na pole povede k nedefinovanému chování (undefined behavior), jako je poškození dat, úniky paměti, pády programu nebo jiné problémy.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b10",
       "type": "paragraph",
       "html": "<p>One often asked question of array delete[] is, “How does array delete know how much memory to delete?” The answer is that array new[] keeps track of how much memory was allocated to a variable, so that array delete[] can delete the proper amount. Unfortunately, this size/length isn’t accessible to the programmer.</p>",
       "preview": "One often asked question of array delete[] is, “How does array delete know how m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Často kladenou otázkou ohledně delete[] pro pole bývá: „Jak delete pro pole ví, kolik paměti má uvolnit?“ Odpověď zní, že new[] pro pole si udržuje informaci o tom, kolik paměti bylo pro proměnnou alokováno, aby mohl operátor delete[] uvolnit správné množství. Tato velikost/délka bohužel není pro programátora přístupná.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b11",
       "type": "section",
       "title": "Dynamic arrays are almost identical to fixed arrays",
       "html": "<h3 class=\"cpp-section-heading\">Dynamic arrays are almost identical to fixed arrays</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dynamická pole jsou téměř identická s fixními poli</h3>",
+      "title_cs": "Dynamická pole jsou téměř totožná s pevnými poli"
     },
     {
       "id": "dynamically-allocating-arrays_b12",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- C-style array decay</a>, you learned that a fixed array holds the memory address of the first array element. You also learned that a fixed array can decay into a pointer that points to the first element of the array. In this decayed form, the length of the fixed array is not available (and therefore neither is the size of the array via sizeof()), but otherwise there is little difference.</p>",
       "preview": "In lesson 17.8 -- C-style array decay, you learned that a fixed array holds the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 – Rozpad polí ve stylu C (C-style array decay)</a> jste se dozvěděli, že fixní pole uchovává paměťovou adresu prvního prvku pole. Také jste se dozvěděli, že se fixní pole může rozpadnout (decay) na ukazatel, který ukazuje na první prvek pole. V této rozpadlé formě není délka fixního pole dostupná (a tudíž ani velikost pole pomocí sizeof()), ale jinak je mezi nimi jen malý rozdíl.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b13",
       "type": "paragraph",
       "html": "<p>A dynamic array starts its life as a pointer that points to the first element of the array. Consequently, it has the same limitations in that it doesn’t know its length or size. A dynamic array functions identically to a decayed fixed array, with the exception that the programmer is responsible for deallocating the dynamic array via the delete[] keyword.</p>",
       "preview": "A dynamic array starts its life as a pointer that points to the first element of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dynamické pole začíná svůj život jako ukazatel, který ukazuje na první prvek pole. V důsledku toho má stejná omezení v tom, že nezná svou délku ani velikost. Dynamické pole funguje identicky jako rozpadlé fixní pole s tou výjimkou, že programátor je zodpovědný za dealokaci dynamického pole pomocí klíčového slova delete[].</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b14",
       "type": "section",
       "title": "Initializing dynamically allocated arrays",
       "html": "<h3 class=\"cpp-section-heading\">Initializing dynamically allocated arrays</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Inicializace dynamicky alokovaných polí</h3>",
+      "title_cs": "Inicializace dynamicky alokovaných polí"
     },
     {
       "id": "dynamically-allocating-arrays_b15",
       "type": "paragraph",
       "html": "<p>If you want to initialize a dynamically allocated array to 0, the syntax is quite simple:</p>",
       "preview": "If you want to initialize a dynamically allocated array to 0, the syntax is quit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chcete inicializovat dynamicky alokované pole na hodnotu 0, syntaxe je poměrně jednoduchá:</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b16",
@@ -129,14 +148,16 @@
       "language": "cpp",
       "code": "int* array{ new int[length]{} };",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* array{ new int[length]{} };</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* pole{ new int[length]{} };</code></pre>"
     },
     {
       "id": "dynamically-allocating-arrays_b17",
       "type": "paragraph",
       "html": "<p>Prior to C++11, there was no easy way to initialize a dynamic array to a non-zero value (initializer lists only worked for fixed arrays). This means you had to loop through the array and assign element values explicitly.</p>",
       "preview": "Prior to C++11, there was no easy way to initialize a dynamic array to a non-zer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Před příchodem C++11 neexistoval žádný snadný způsob, jak inicializovat dynamické pole na nenulovou hodnotu (inicializační seznamy fungovaly pouze pro fixní pole). To znamenalo, že jste museli pole projít cyklem a přiřadit hodnoty jednotlivým prvkům explicitně.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b18",
@@ -144,21 +165,24 @@
       "language": "cpp",
       "code": "int* array = new int[5];\narray[0] = 9;\narray[1] = 7;\narray[2] = 5;\narray[3] = 3;\narray[4] = 1;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* array = new int[5];\narray[0] = 9;\narray[1] = 7;\narray[2] = 5;\narray[3] = 3;\narray[4] = 1;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* pole = new int[5];\npole[0] = 9;\npole[1] = 7;\npole[2] = 5;\npole[3] = 3;\npole[4] = 1;</code></pre>"
     },
     {
       "id": "dynamically-allocating-arrays_b19",
       "type": "paragraph",
       "html": "<p>Super annoying!</p>",
       "preview": "Super annoying!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hrozně otravné!</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b20",
       "type": "paragraph",
       "html": "<p>However, starting with C++11, it’s now possible to initialize dynamic arrays using initializer lists!</p>",
       "preview": "However, starting with C++11, it’s now possible to initialize dynamic arrays usi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Od C++11 je však možné inicializovat dynamická pole pomocí inicializačních seznamů (initializer lists)!</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b21",
@@ -166,21 +190,24 @@
       "language": "cpp",
       "code": "int fixedArray[5] = { 9, 7, 5, 3, 1 }; // initialize a fixed array before C++11\nint* array{ new int[5]{ 9, 7, 5, 3, 1 } }; // initialize a dynamic array since C++11\n// To prevent writing the type twice, we can use auto. This is often done for types with long names.\nauto* array{ new int[5]{ 9, 7, 5, 3, 1 } };",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int fixedArray[5] = { 9, 7, 5, 3, 1 }; // initialize a fixed array before C++11\nint* array{ new int[5]{ 9, 7, 5, 3, 1 } }; // initialize a dynamic array since C++11\n// To prevent writing the type twice, we can use auto. This is often done for types with long names.\nauto* array{ new int[5]{ 9, 7, 5, 3, 1 } };</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int fixedArray[5] = { 9, 7, 5, 3, 1 }; // inicializuje pevné pole před C++11\nint* pole{ new int[5]{ 9, 7, 5, 3, 1 } }; // inicializuje dynamické pole od C++11\n// Abychom zabránili psaní typu dvakrát, můžeme použít auto. To se často provádí u typů s dlouhými názvy.\nauto* array{ new int[5]{ 9, 7, 5, 3, 1 } };</code></pre>"
     },
     {
       "id": "dynamically-allocating-arrays_b22",
       "type": "paragraph",
       "html": "<p>Note that this syntax has no operator= between the array length and the initializer list.</p>",
       "preview": "Note that this syntax has no operator= between the array length and the initiali",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že v této syntaxi není mezi délkou pole a inicializačním seznamem žádný operátor =.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b23",
       "type": "paragraph",
       "html": "<p>For consistency, fixed arrays can also be initialized using uniform initialization:</p>",
       "preview": "For consistency, fixed arrays can also be initialized using uniform initializati",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kvůli konzistenci lze pole s pevnou velikostí inicializovat také pomocí uniformní inicializace:</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b24",
@@ -188,49 +215,59 @@
       "language": "cpp",
       "code": "int fixedArray[]{ 9, 7, 5, 3, 1 }; // initialize a fixed array in C++11\nchar fixedArray[]{ \"Hello, world!\" }; // initialize a fixed array in C++11",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int fixedArray[]{ 9, 7, 5, 3, 1 }; // initialize a fixed array in C++11\nchar fixedArray[]{ \"Hello, world!\" }; // initialize a fixed array in C++11</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int fixedArray[]{ 9, 7, 5, 3, 1 }; // inicializuje pevné pole v C++11\nchar fixedArray[]{ \"Ahoj světe!\" }; // inicializuje pevné pole v C++ 11</code></pre>"
     },
     {
       "id": "dynamically-allocating-arrays_b25",
       "type": "paragraph",
       "html": "<p>Explicitly stating the size of the array is optional.</p>",
       "preview": "Explicitly stating the size of the array is optional.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Explicitní uvedení velikosti pole je volitelné.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b26",
       "type": "section",
       "title": "Resizing arrays",
       "html": "<h3 class=\"cpp-section-heading\">Resizing arrays</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Změna velikosti polí</h3>",
+      "title_cs": "Změna velikosti polí"
     },
     {
       "id": "dynamically-allocating-arrays_b27",
       "type": "paragraph",
       "html": "<p>Dynamically allocating an array allows you to set the array length at the time of allocation. However, C++ does not provide a built-in way to resize an array that has already been allocated. It is possible to work around this limitation by dynamically allocating a new array, copying the elements over, and deleting the old array. However, this is error prone, especially when the element type is a class (which have special rules governing how they are created).</p>",
       "preview": "Dynamically allocating an array allows you to set the array length at the time o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dynamická alokace pole vám umožňuje nastavit délku pole v okamžiku alokace. C++ však neposkytuje žádný vestavěný způsob, jak změnit velikost pole, které již bylo alokováno. Toto omezení je možné obejít dynamickou alokací nového pole, překopírováním prvků a smazáním starého pole. Tento postup je však náchylný k chybám, zejména pokud je typem prvku třída (pro kterou platí speciální pravidla řídící způsob jejího vytváření).</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b28",
       "type": "paragraph",
       "html": "<p>Consequently, we recommend avoiding doing this yourself. Use <code>std::vector</code> instead.</p>",
       "preview": "Consequently, we recommend avoiding doing this yourself. Use std::vector instead",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V důsledku toho doporučujeme se tomu vyhnout a nedělat to ručně. Místo toho použijte <code>std::vector</code>.</p>"
     },
     {
       "id": "dynamically-allocating-arrays_b29",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "dynamically-allocating-arrays_b30",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Write a program that:</p><ul><li>Asks the user how many names they wish to enter.</li><li>Dynamically allocates a <code>std::string</code> array.</li><li>Asks the user to enter each name.</li><li>Calls <code>std::sort</code> to sort the names (See <a href=\"https://www.learncpp.com/cpp-tutorial/sorting-an-array-using-selection-sort/#stdsort\">18.1 -- Sorting an array using selection sort</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/pointer-arithmetic-and-subscripting/\">17.9 -- Pointer arithmetic and subscripting</a>)</li><li>Prints the sorted list of names.</li></ul><p><code>std::string</code> supports comparing strings via the comparison operators &lt; and &gt;. You don’t need to implement string comparison by hand.</p><p>Your output should match this:</p><pre>How many names would you like to enter? 5\nEnter name #1: Jason\nEnter name #2: Mark\nEnter name #3: Alex\nEnter name #4: Chris\nEnter name #5: John\n\nHere is your sorted list:\nName #1: Alex\nName #2: Chris\nName #3: Jason\nName #4: John\nName #5: Mark\n</pre><div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>You can use <code>std::getline()</code> to read in names that contain spaces (see lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 -- Introduction to std::string</a>).</p></div><div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>To use <code>std::sort()</code> with a pointer to an array, calculate begin and end manually</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::sort(array, array + arrayLength);</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // std::sort\n#include &lt;cstddef&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nstd::size_t getNameCount()\n{\n    std::cout &lt;&lt; \"How many names would you like to enter? \";\n    std::size_t length{};\n    std::cin &gt;&gt; length;\n\n    return length;\n}\n\n// Asks user to enter all the names\nvoid getNames(std::string* names, std::size_t length)\n{\n    for (std::size_t i{ 0 }; i &lt; length; ++i)\n    {\n        std::cout &lt;&lt; \"Enter name #\" &lt;&lt; i + 1 &lt;&lt; \": \";\n        std::getline(std::cin &gt;&gt; std::ws, names[i]);\n    }\n}\n\n// Prints the sorted names\nvoid printNames(std::string* names, std::size_t length)\n{\n    std::cout &lt;&lt; \"\\nHere is your sorted list:\\n\";\n\n    for (std::size_t i{ 0 }; i &lt; length; ++i)\n        std::cout &lt;&lt; \"Name #\" &lt;&lt; i + 1 &lt;&lt; \": \" &lt;&lt; names[i] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::size_t length{ getNameCount() };\n\n    // Allocate an array to hold the names\n    auto* names{ new std::string[length]{} };\n\n    getNames(names, length);\n\n    // Sort the array\n    std::sort(names, names + length);\n\n    printNames(names, length);\n\n    // don't forget to use array delete\n    delete[] names;\n    // we don't need to set names to nullptr/0 here because it's going to go out\n    // of scope immediately after this anyway.\n\n    return 0;\n}</code></pre></div></div>",
       "preview": "Question #1Write a program that:Asks the user how many names they wish to enter.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 1</p><p>Napište program, který:</p><ul><li>Se zeptá uživatele, kolik jmen si přeje zadat.</li><li>Dynamicky alokuje pole typu <code>std::string</code>.</li><li>Vyzve uživatele k zadání jednotlivých jmen.</li><li>Zavolá <code>std::sort</code> pro seřazení jmen (viz <a href=\"https://www.learncpp.com/cpp-tutorial/sorting-an-array-using-selection-sort/#stdsort\">18.1 -- Řazení pole pomocí selection sortu</a> a <a href=\"https://www.learncpp.com/cpp-tutorial/pointer-arithmetic-and-subscripting/\">17.9 -- Ukazatelová aritmetika a indexování</a>).</li><li>Vypíše seřazený seznam jmen.</li></ul><p><code>std::string</code> podporuje porovnávání řetězců pomocí relačních operátorů &lt; a &gt;. Nemusíte tedy implementovat porovnávání řetězců ručně.</p><p>Váš výstup by měl odpovídat tomuto:</p><pre>How many names would you like to enter? 5\nEnter name #1: Jason\nEnter name #2: Mark\nEnter name #3: Alex\nEnter name #4: Chris\nEnter name #5: John\n\nHere is your sorted list:\nName #1: Alex\nName #2: Chris\nName #3: Jason\nName #4: John\nName #5: Mark\n</pre><div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Pro načtení jmen, která obsahují mezery, můžete použít <code>std::getline()</code> (viz lekce <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 -- Úvod do std::string</a>).</p></div><div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Chcete-li použít <code>std::sort()</code> s ukazatelem na pole, spočítejte začátek (begin) a konec (end) ručně</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::sort(array, array + arrayLength);</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // std::sort\n#include &lt;cstddef&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nstd::size_t getNameCount()\n{\n    std::cout &lt;&lt; \"How many names would you like to enter? \";\n    std::size_t length{};\n    std::cin &gt;&gt; length;\n\n    return length;\n}\n\n// Vyzve uživatele k zadání všech jmen\nvoid getNames(std::string* names, std::size_t length)\n{\n    for (std::size_t i{ 0 }; i &lt; length; ++i)\n    {\n        std::cout &lt;&lt; \"Enter name #\" &lt;&lt; i + 1 &lt;&lt; \": \";\n        std::getline(std::cin &gt;&gt; std::ws, names[i]);\n    }\n}\n\n// Vypíše seřazená jména\nvoid printNames(std::string* names, std::size_t length)\n{\n    std::cout &lt;&lt; \"\\nHere is your sorted list:\\n\";\n\n    for (std::size_t i{ 0 }; i &lt; length; ++i)\n        std::cout &lt;&lt; \"Name #\" &lt;&lt; i + 1 &lt;&lt; \": \" &lt;&lt; names[i] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::size_t length{ getNameCount() };\n\n    // Alokujeme pole pro uložení jmen\n    auto* names{ new std::string[length]{} };\n\n    getNames(names, length);\n\n    // Seřadíme pole\n    std::sort(names, names + length);\n\n    printNames(names, length);\n\n    // nezapomeňte použít delete pro pole\n    delete[] names;\n    // zde nemusíme nastavovat names na nullptr/0, protože hned\n    // poté stejně zanikne jeho platnost (vyjde ze scope).\n\n    return 0;\n}</code></pre></div></div>"
     }
-  ]
+  ],
+  "title_cs": "19.2 — Dynamická alokace polí"
 }

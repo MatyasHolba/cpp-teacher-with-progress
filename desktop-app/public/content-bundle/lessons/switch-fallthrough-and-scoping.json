@@ -14,49 +14,57 @@
       "type": "paragraph",
       "html": "<p>This lesson continues our exploration of switch statements that we started in the prior lesson <a href=\"https://www.learncpp.com/cpp-tutorial/switch-statement-basics/\">8.5 -- Switch statement basics</a>. In the prior lesson, we mentioned that each set of statements underneath a label should end in a <code>break statement</code> or a <code>return statement</code>.</p>",
       "preview": "This lesson continues our exploration of switch statements that we started in th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato lekce pokračuje v našem zkoumání příkazů switch, které jsme začali v předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/switch-statement-basics/\">8.5 -- Základy příkazu switch</a>. V předchozí lekci jsme zmínili, že každá sada příkazů pod návěstím by měla končit <code>příkazem break</code> nebo <code>příkazem return</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll explore why, and talk about some switch scoping issues that sometimes trip up new programmers.</p>",
       "preview": "In this lesson, we’ll explore why, and talk about some switch scoping issues tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci prozkoumáme proč a podíváme se na některé problémy s rozsahem platnosti (scoping) ve switchi, které občas zaskočí začínající programátory.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b2",
       "type": "section",
       "title": "Fallthrough",
       "html": "<h3 class=\"cpp-section-heading\">Fallthrough</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Fallthrough (propadávání)</h3>",
+      "title_cs": "Propad"
     },
     {
       "id": "switch-fallthrough-and-scoping_b3",
       "type": "paragraph",
       "html": "<p>When a switch expression matches a case label or optional default label, execution begins at the first statement following the matching label. Execution will then continue sequentially until one of the following termination conditions happens:</p>",
       "preview": "When a switch expression matches a case label or optional default label, executi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když výraz ve switchi odpovídá návěstí case nebo volitelnému návěstí default, provádění začne na prvním příkazu za odpovídajícím návěstím. Provádění pak bude pokračovat sekvenčně, dokud nenastane jedna z následujících ukončovacích podmínek:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b4",
       "type": "list",
       "html": "<ul><li>The end of the switch block is reached.</li><li>Another control flow statement (typically a <code>break</code> or <code>return</code>) causes the switch block or function to exit.</li><li>Something else interrupts the normal flow of the program (e.g. the OS shuts the program down, the universe implodes, etc…)</li></ul>",
       "preview": "The end of the switch block is reached.Another control flow statement (typically",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Je dosaženo konce bloku switch.</li><li>Jiný příkaz řízení toku (typicky <code>break</code> nebo <code>return</code>) způsobí opuštění bloku switch nebo funkce.</li><li>Běžný běh programu přeruší něco jiného (např. operační systém program ukončí, vesmír imploduje atd.).</li></ul>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b5",
       "type": "paragraph",
       "html": "<p>Note that the presence of another case label is <em>not</em> one of these terminating conditions -- thus, without a <code>break</code> or <code>return</code>, execution will overflow into subsequent cases.</p>",
       "preview": "Note that the presence of another case label is not one of these terminating con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že přítomnost dalšího návěstí case <em>není</em> jednou z těchto ukončovacích podmínek – bez <code>break</code> nebo <code>return</code> tak provádění kódu přeteče (propadne) do následujících větví case.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b6",
       "type": "paragraph",
       "html": "<p>Here is a program that exhibits this behavior:</p>",
       "preview": "Here is a program that exhibits this behavior:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je program, který toto chování demonstruje:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b7",
@@ -64,28 +72,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    switch (2)\n    {\n    case 1: // Does not match\n        std::cout << 1 << '\\n'; // Skipped\n    case 2: // Match!\n        std::cout << 2 << '\\n'; // Execution begins here\n    case 3:\n        std::cout << 3 << '\\n'; // This is also executed\n    case 4:\n        std::cout << 4 << '\\n'; // This is also executed\n    default:\n        std::cout << 5 << '\\n'; // This is also executed\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    switch (2)\n    {\n    case 1: // Does not match\n        std::cout &lt;&lt; 1 &lt;&lt; '\\n'; // Skipped\n    case 2: // Match!\n        std::cout &lt;&lt; 2 &lt;&lt; '\\n'; // Execution begins here\n    case 3:\n        std::cout &lt;&lt; 3 &lt;&lt; '\\n'; // This is also executed\n    case 4:\n        std::cout &lt;&lt; 4 &lt;&lt; '\\n'; // This is also executed\n    default:\n        std::cout &lt;&lt; 5 &lt;&lt; '\\n'; // This is also executed\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    vypínač (2)\n    {\n    case 1: // Neodpovídá\n        std::cout << 1 << '\\n'; // Přeskočeno\n    případ 2: // Shoda!\n        std::cout << 2 << '\\n'; // Zde začíná provádění\n    případ 3:\n        std::cout << 3 << '\\n'; // Toto se také provede\n    případ 4:\n        std::cout << 4 << '\\n'; // Toto se také provede\n    výchozí:\n        std::cout << 5 << '\\n'; // Toto se také provede\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b8",
       "type": "paragraph",
       "html": "<p>This program outputs the following:</p>",
       "preview": "This program outputs the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše následující:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b9",
       "type": "output",
       "text": "2\n3\n4\n5\n",
       "html": "<pre>2\n3\n4\n5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2\n3\n4\n5\n</pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b10",
       "type": "paragraph",
       "html": "<p>This is probably not what we wanted! When execution flows from a statement underneath a label into statements underneath a subsequent label, this is called <strong>fallthrough</strong>.</p>",
       "preview": "This is probably not what we wanted! When execution flows from a statement under",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tohle pravděpodobně není to, co jsme chtěli! Když vykonávání kódu přechází z příkazu pod jedním návěštím do příkazů pod následujícím návěštím, nazývá se to <strong>propadávání</strong> (angl. <strong>fallthrough</strong>).</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b11",
@@ -93,49 +105,57 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Once the statements underneath a case or default label have started executing, they will overflow (fallthrough) into subsequent cases. break or return statements are typically used to prevent this.</p></div>",
       "preview": "WarningOnce the statements underneath a case or default label have started executing, they will over",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Jakmile se začnou vykonávat příkazy pod návěštím case nebo default, samovolně propadnou (fallthrough) do následujících větví case. K zabránění tomuto chování se obvykle používají příkazy break nebo return.</p></div>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b12",
       "type": "paragraph",
       "html": "<p>Since fallthrough is rarely desired or intentional, many compilers and code analysis tools will flag fallthrough as a warning.</p>",
       "preview": "Since fallthrough is rarely desired or intentional, many compilers and code anal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k tomu, že propadávání je málokdy žádoucí nebo záměrné, mnoho překladačů a nástrojů pro statickou analýzu kódu označuje fallthrough jako varování (warning).</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b13",
       "type": "section",
       "title": "The [[fallthrough]] attribute",
       "html": "<h3 class=\"cpp-section-heading\">The [[fallthrough]] attribute</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Atribut [[fallthrough]]</h3>",
+      "title_cs": "Atribut [[fallthrough]]"
     },
     {
       "id": "switch-fallthrough-and-scoping_b14",
       "type": "paragraph",
       "html": "<p>Commenting intentional fallthrough is a common convention to tell other developers that fallthrough is intended. While this works for other developers, the compiler and code analysis tools don’t know how to interpret comments, so it won’t get rid of the warnings.</p>",
       "preview": "Commenting intentional fallthrough is a common convention to tell other develope",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Okomentování záměrného propadávání je běžnou konvencí, jak ostatním vývojářům sdělit, že jde o úmysl. Přestože to funguje pro ostatní programátory, překladač a nástroje pro analýzu kódu komentáře interpretovat neumí, takže vás to varování nezbaví.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b15",
       "type": "paragraph",
       "html": "<p>To help address this, C++17 adds a new attribute called <code>[[fallthrough]]</code>.</p>",
       "preview": "To help address this, C++17 adds a new attribute called [[fallthrough]].",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K řešení tohoto problému přidává C++17 nový atribut s názvem <code>[[fallthrough]]</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b16",
       "type": "paragraph",
       "html": "<p><strong>Attributes</strong> are a modern C++ feature that allows the programmer to provide the compiler with some additional data about the code. To specify an attribute, the attribute name is placed between double brackets. Attributes are not statements -- rather, they can be used almost anywhere where they are contextually relevant.</p>",
       "preview": "Attributes are a modern C++ feature that allows the programmer to provide the co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Atributy</strong> jsou moderní vlastností C++, která programátorovi umožňuje poskytnout překladači doplňující informace o kódu. K zadání atributu se jeho název umisťuje do dvojitých hranatých závorek. Atributy nejsou příkazy – lze je použít téměř kdekoli, kde dávají v daném kontextu smysl.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b17",
       "type": "paragraph",
       "html": "<p>The <code>[[fallthrough]]</code> attribute modifies a <code>null statement</code> to indicate that fallthrough is intentional (and no warnings should be triggered):</p>",
       "preview": "The [[fallthrough]] attribute modifies a null statement to indicate that fallthr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Atribut <code>[[fallthrough]]</code> modifikuje <code>prázdný příkaz</code>, aby naznačil, že propadnutí je záměrné (a neměla by se vyvolat žádná varování):</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b18",
@@ -143,28 +163,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    switch (2)\n    {\n    case 1:\n        std::cout << 1 << '\\n';\n        break;\n    case 2:\n        std::cout << 2 << '\\n'; // Execution begins here\n        [[fallthrough]]; // intentional fallthrough -- note the semicolon to indicate the null statement\n    case 3:\n        std::cout << 3 << '\\n'; // This is also executed\n        break;\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    switch (2)\n    {\n    case 1:\n        std::cout &lt;&lt; 1 &lt;&lt; '\\n';\n        break;\n    case 2:\n        std::cout &lt;&lt; 2 &lt;&lt; '\\n'; // Execution begins here\n        [[fallthrough]]; // intentional fallthrough -- note the semicolon to indicate the null statement\n    case 3:\n        std::cout &lt;&lt; 3 &lt;&lt; '\\n'; // This is also executed\n        break;\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    vypínač (2)\n    {\n    případ 1:\n        std::cout << 1 << '\\n';\n        přerušení;\n    případ 2:\n        std::cout << 2 << '\\n'; // Zde začíná provádění\n        [[fallthrough]]; // záměrný pokles -- všimněte si středníku označujícího příkaz null\n    případ 3:\n        std::cout << 3 << '\\n'; // Toto se také provede\n        přestávka;\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b19",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b20",
       "type": "output",
       "text": "2\n3\n",
       "html": "<pre>2\n3\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2\n3\n</pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b21",
       "type": "paragraph",
       "html": "<p>And it should not generate any warnings about the fallthrough.</p>",
       "preview": "And it should not generate any warnings about the fallthrough.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A neměl by generovat žádná varování ohledně propadnutí.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b22",
@@ -172,21 +196,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use the <code>[[fallthrough]]</code> attribute (along with a null statement) to indicate intentional fallthrough.</p></div>",
       "preview": "Best practiceUse the [[fallthrough]] attribute (along with a null statement) to indicate intentional",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Používejte atribut <code>[[fallthrough]]</code> (spolu s prázdným příkazem) k označení záměrného propadnutí.</p></div>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b23",
       "type": "section",
       "title": "Sequential case labels",
       "html": "<h3 class=\"cpp-section-heading\">Sequential case labels</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Sekvenční návěstí case</h3>",
+      "title_cs": "Sekvenční označení případu"
     },
     {
       "id": "switch-fallthrough-and-scoping_b24",
       "type": "paragraph",
       "html": "<p>You can use the logical OR operator to combine multiple tests into a single statement:</p>",
       "preview": "You can use the logical OR operator to combine multiple tests into a single stat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pomocí logického operátoru OR můžete zkombinovat více testů do jediného příkazu:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b25",
@@ -194,21 +222,24 @@
       "language": "cpp",
       "code": "bool isVowel(char c)\n{\n    return (c=='a' || c=='e' || c=='i' || c=='o' || c=='u' ||\n        c=='A' || c=='E' || c=='I' || c=='O' || c=='U');\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool isVowel(char c)\n{\n    return (c=='a' || c=='e' || c=='i' || c=='o' || c=='u' ||\n        c=='A' || c=='E' || c=='I' || c=='O' || c=='U');\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool isVowel(char c)\n{\n    návrat (c=='a' || c=='e' || c=='i' || c=='o' || c=='u' ||\n        c=='A' || c=='E' || c=='Já' || c=='O' || c=='U');\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b26",
       "type": "paragraph",
       "html": "<p>This suffers from the same challenges that we presented in the introduction to switch statements: <code>c</code> gets evaluated multiple times and the reader has to make sure it is <code>c</code> that is being evaluated each time.</p>",
       "preview": "This suffers from the same challenges that we presented in the introduction to s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To však trpí stejnými problémy, které jsme uvedli v úvodu k příkazům switch: <code>c</code> se vyhodnocuje vícekrát a čtenář se musí pokaždé ujistit, že se vyhodnocuje právě <code>c</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b27",
       "type": "paragraph",
       "html": "<p>You can do something similar using switch statements by placing multiple case labels in sequence:</p>",
       "preview": "You can do something similar using switch statements by placing multiple case la",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Něco podobného můžete udělat pomocí příkazů switch tím, že za sebou umístíte více návěstí case:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b28",
@@ -216,42 +247,49 @@
       "language": "cpp",
       "code": "bool isVowel(char c)\n{\n    switch (c)\n    {\n    case 'a': // if c is 'a'\n    case 'e': // or if c is 'e'\n    case 'i': // or if c is 'i'\n    case 'o': // or if c is 'o'\n    case 'u': // or if c is 'u'\n    case 'A': // or if c is 'A'\n    case 'E': // or if c is 'E'\n    case 'I': // or if c is 'I'\n    case 'O': // or if c is 'O'\n    case 'U': // or if c is 'U'\n        return true;\n    default:\n        return false;\n    }\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool isVowel(char c)\n{\n    switch (c)\n    {\n    case 'a': // if c is 'a'\n    case 'e': // or if c is 'e'\n    case 'i': // or if c is 'i'\n    case 'o': // or if c is 'o'\n    case 'u': // or if c is 'u'\n    case 'A': // or if c is 'A'\n    case 'E': // or if c is 'E'\n    case 'I': // or if c is 'I'\n    case 'O': // or if c is 'O'\n    case 'U': // or if c is 'U'\n        return true;\n    default:\n        return false;\n    }\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool isVowel(char c)\n{\n    spínač (c)\n    {\n    case 'a': // pokud c je 'a'\n    case 'e': // nebo jestliže c je 'e'\n    case 'i': // nebo jestliže c je 'i'\n    case 'o': // nebo jestliže c je 'o'\n    case 'u': // nebo jestliže c je 'u'\n    case 'A': // nebo jestliže c je 'A'\n    case 'E': // nebo pokud c je 'E'\n    case 'I': // nebo jestliže c je 'I'\n    case 'O': // nebo jestliže c je 'O'\n    case 'U': // nebo jestliže c je 'U'\n        vrátit true;\n    výchozí:\n        vrátit false;\n    }\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b29",
       "type": "paragraph",
       "html": "<p>Remember, execution begins at the first statement after a matching case label. Case labels aren’t statements (they’re labels), so they don’t count.</p>",
       "preview": "Remember, execution begins at the first statement after a matching case label. C",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte, že vykonávání začíná na prvním příkazu za odpovídajícím návěstím case. Návěstí case nejsou příkazy (jsou to návěstí), takže se nepočítají.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b30",
       "type": "paragraph",
       "html": "<p>The first statement after <em>all</em> of the case statements in the above program is <code>return true</code>, so if any case labels match, the function will return <code>true</code>.</p>",
       "preview": "The first statement after all of the case statements in the above program is ret",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prvním příkazem za <em>všemi</em> návěstími case ve výše uvedeném programu je <code>return true</code>, takže pokud se shoduje jakékoli návěstí case, funkce vrátí <code>true</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b31",
       "type": "paragraph",
       "html": "<p>Thus, we can “stack” case labels to make all of those case labels share the same set of statements afterward. This is not considered fallthrough behavior, so use of comments or <code>[[fallthrough]]</code> is not needed here.</p>",
       "preview": "Thus, we can “stack” case labels to make all of those case labels share the same",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme tedy návěstí case „skládat na sebe“, aby všechna tato návěstí case sdílela stejnou následující sadu příkazů. Toto se nepovažuje za propadávání (fallthrough), takže zde není nutné používat komentáře ani <code>[[fallthrough]]</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b32",
       "type": "section",
       "title": "Labels do not define a new scope",
       "html": "<h3 class=\"cpp-section-heading\">Labels do not define a new scope</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návěstí nedefinují nový rozsah platnosti (scope)</h3>",
+      "title_cs": "Štítky nedefinují nový rozsah"
     },
     {
       "id": "switch-fallthrough-and-scoping_b33",
       "type": "paragraph",
       "html": "<p>With <code>if statements</code>, you can only have a single statement after the if-condition, and that statement is considered to be implicitly inside a block:</p>",
       "preview": "With if statements, you can only have a single statement after the if-condition,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U <code>if statements</code> (příkazů if) můžete mít za podmínkou if pouze jediný příkaz a tento příkaz se považuje za implicitně uzavřený v bloku:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b34",
@@ -259,14 +297,16 @@
       "language": "cpp",
       "code": "if (x > 10)\n    std::cout << x << \" is greater than 10\\n\"; // this line implicitly considered to be inside a block",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (x &gt; 10)\n    std::cout &lt;&lt; x &lt;&lt; \" is greater than 10\\n\"; // this line implicitly considered to be inside a block</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (x > 10)\n    std::cout << x << \" je větší než 10\\n\"; // tento řádek je implicitně považován za uvnitř bloku</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b35",
       "type": "paragraph",
       "html": "<p>However, with switch statements, the statements after labels are all scoped to the switch block. No implicit blocks are created.</p>",
       "preview": "However, with switch statements, the statements after labels are all scoped to t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U příkazů switch však všechny příkazy za návěstími spadají do rozsahu platnosti (scope) bloku switch. Nevytvářejí se žádné implicitní bloky.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b36",
@@ -274,28 +314,33 @@
       "language": "cpp",
       "code": "switch (1)\n{\ncase 1: // does not create an implicit block\n    foo(); // this is part of the switch scope, not an implicit block to case 1\n    break; // this is part of the switch scope, not an implicit block to case 1\ndefault:\n    std::cout << \"default case\\n\";\n    break;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">switch (1)\n{\ncase 1: // does not create an implicit block\n    foo(); // this is part of the switch scope, not an implicit block to case 1\n    break; // this is part of the switch scope, not an implicit block to case 1\ndefault:\n    std::cout &lt;&lt; \"default case\\n\";\n    break;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">přepínač (1)\n{\npřípad 1: // nevytváří implicitní blok\n    foo(); // toto je část rozsahu přepínače, nikoli implicitní blok pro případ 1\n    přestávka; // toto je část rozsahu přepínače, nikoli implicitní blok pro případ 1\nvýchozí:\n    std::cout << \"výchozí případ\\n\";\n    přerušení;\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b37",
       "type": "paragraph",
       "html": "<p>In the above example, the 2 statements between the <code>case 1</code> and the default label are scoped as part of the switch block, not a block implicit to <code>case 1</code>.</p>",
       "preview": "In the above example, the 2 statements between the case 1 and the default label ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu mají 2 příkazy mezi <code>case 1</code> a návěstím default rozsah platnosti v rámci bloku switch, nikoli v bloku implicitním pro <code>case 1</code>.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b38",
       "type": "section",
       "title": "Variable declaration and initialization inside case statements",
       "html": "<h3 class=\"cpp-section-heading\">Variable declaration and initialization inside case statements</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Deklarace a inicializace proměnných uvnitř návěští case</h3>",
+      "title_cs": "Deklarace proměnných a inicializace uvnitř příkazů case"
     },
     {
       "id": "switch-fallthrough-and-scoping_b39",
       "type": "paragraph",
       "html": "<p>You can declare or define (but not initialize) variables inside the switch, both before and after the case labels:</p>",
       "preview": "You can declare or define (but not initialize) variables inside the switch, both",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř příkazu <code>switch</code> můžete deklarovat nebo definovat (ale ne inicializovat) proměnné, a to jak před návěštími <code>case</code>, tak za nimi:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b40",
@@ -303,28 +348,32 @@
       "language": "cpp",
       "code": "switch (1)\n{\n    int a; // okay: definition is allowed before the case labels\n    int b{ 5 }; // illegal: initialization is not allowed before the case labels\n\ncase 1:\n    int y; // okay but bad practice: definition is allowed within a case\n    y = 4; // okay: assignment is allowed\n    break;\n\ncase 2:\n    int z{ 4 }; // illegal: initialization is not allowed if subsequent cases exist\n    y = 5; // okay: y was declared above, so we can use it here too\n    break;\n\ncase 3:\n    break;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">switch (1)\n{\n    int a; // okay: definition is allowed before the case labels\n    int b{ 5 }; // illegal: initialization is not allowed before the case labels\n\ncase 1:\n    int y; // okay but bad practice: definition is allowed within a case\n    y = 4; // okay: assignment is allowed\n    break;\n\ncase 2:\n    int z{ 4 }; // illegal: initialization is not allowed if subsequent cases exist\n    y = 5; // okay: y was declared above, so we can use it here too\n    break;\n\ncase 3:\n    break;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">přepínač (1)\n{\n    int a; // dobře: definice je povolena před popisky velkých a malých písmen\n    int b{ 5 }; // nelegální: inicializace není povolena před popisky velkých a malých písmen\n\npřípad 1:\n    int y; // dobře, ale špatná praxe: definice je povolena v případě\n    y = 4; // dobře: přiřazení je povoleno\n    přestávka;\n\npřípad 2:\n    int z{ 4 }; // nelegální: inicializace není povolena, pokud existují následné případy\n    y = 5; // dobře: y bylo deklarováno výše, takže ho můžeme použít i zde\n    přestávka;\n\npřípad 3:\n    přestávka;\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b41",
       "type": "paragraph",
       "html": "<p>Although variable <code>y</code> was defined in <code>case 1</code>, it was used in <code>case 2</code> as well. All statements inside the switch are considered to be part of the same scope. Thus, a variable declared or defined in one case can be used in a later case, even if the case in which the variable is defined is never executed (because the switch jumped over it)!</p>",
       "preview": "Although variable y was defined in case 1, it was used in case 2 as well. All st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli byla proměnná <code>y</code> definována v <code>case 1</code>, byla použita i v <code>case 2</code>. Všechny příkazy uvnitř příkazu <code>switch</code> jsou považovány za součást stejného rozsahu platnosti (scope). Proměnná deklarovaná nebo definovaná v jednom <code>case</code> tak může být použita v pozdějším <code>case</code>, a to i v případě, že se <code>case</code>, ve kterém je proměnná definována, nikdy nevykoná (protože jej <code>switch</code> přeskočil)!</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b42",
       "type": "paragraph",
       "html": "<p>However, initialization of variables <em>does</em> require the definition to execute. Initialization of variables is disallowed in any case that is not the last case (because the switch could jump over the initializer if there is a subsequent case defined, in which case the variable would be undefined, and accessing it would result in undefined behavior). Initialization is also disallowed before the first case, as those statements will never be executed, as there is no way for the switch to reach them.</p>",
       "preview": "However, initialization of variables does require the definition to execute. Ini",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Inicializace proměnných však <em>vyžaduje</em>, aby se definice skutečně vykonala. Inicializace proměnných je zakázána v jakémkoli <code>case</code>, který není tím posledním (protože <code>switch</code> by mohl inicializátor přeskočit, pokud následuje další <code>case</code> – v takovém případě by proměnná nebyla inicializována a přístup k ní by vedl k nedefinovanému chování). Inicializace je také zakázána před prvním <code>case</code>, protože tyto příkazy se nikdy nevykonají, jelikož se k nim <code>switch</code> nemá jak dostat.</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b43",
       "type": "paragraph",
       "html": "<p>If a case needs to define and/or initialize a new variable, the best practice is to do so inside an explicit block underneath the case statement:</p>",
       "preview": "If a case needs to define and/or initialize a new variable, the best practice is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud <code>case</code> potřebuje definovat a/nebo inicializovat novou proměnnou, osvědčeným postupem (best practice) je udělat to uvnitř explicitního bloku pod daným návěštím <code>case</code>:</p>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b44",
@@ -332,7 +381,8 @@
       "language": "cpp",
       "code": "switch (1)\n{\ncase 1:\n{ // note addition of explicit block here\n    int x{ 4 }; // okay, variables can be initialized inside a block inside a case\n    std::cout << x;\n    break;\n}\n\ndefault:\n    std::cout << \"default case\\n\";\n    break;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">switch (1)\n{\ncase 1:\n{ // note addition of explicit block here\n    int x{ 4 }; // okay, variables can be initialized inside a block inside a case\n    std::cout &lt;&lt; x;\n    break;\n}\n\ndefault:\n    std::cout &lt;&lt; \"default case\\n\";\n    break;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">přepínač (1)\n{\npřípad 1:\n{ // zde si všimněte přidání explicitního bloku\n    int x{ 4}; // dobře, proměnné lze inicializovat uvnitř bloku uvnitř případu\n    std::cout << x;\n    přerušení;\n}\n\nvýchozí:\n    std::cout << \"výchozí případ\\n\";\n    přerušení;\n}</code></pre>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b45",
@@ -340,14 +390,17 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If defining variables used in a case statement, do so in a block inside the case.</p></div>",
       "preview": "Best practiceIf defining variables used in a case statement, do so in a block inside the case.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud definujete proměnné používané v návěští <code>case</code>, učiňte tak v bloku uvnitř daného <code>case</code>.</p></div>"
     },
     {
       "id": "switch-fallthrough-and-scoping_b46",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "switch-fallthrough-and-scoping_b47",
@@ -363,7 +416,9 @@
       "type": "paragraph",
       "html": "<p>Hint: “operator” is a keyword, variables can’t be named “operator”.</p>",
       "preview": "Hint: “operator” is a keyword, variables can’t be named “operator”.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nápověda: „operator“ je klíčové slovo, proměnné se nemohou jmenovat „operator“.</p>"
     }
-  ]
+  ],
+  "title_cs": "8.6 — Propouštění a rozsah platnosti v příkazu switch"
 }

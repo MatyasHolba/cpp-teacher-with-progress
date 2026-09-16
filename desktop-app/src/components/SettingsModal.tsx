@@ -5,6 +5,7 @@ import { GithubIcon } from './GithubIcon';
 import { PortfolioWidgetModal } from './PortfolioWidgetModal';
 import { Sparkles } from 'lucide-react';
 import { pushToGitHub, pullFromGitHub } from '../services/github';
+import { getT } from '../utils/i18n';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onSaveSettings,
   onProgressUpdated
 }) => {
+  const t = getT(settings.uiLanguage || 'cs');
   const [formData, setFormData] = useState<SyncSettings>(settings);
   const [isPushing, setIsPushing] = useState(false);
   const [isPulling, setIsPulling] = useState(false);
@@ -36,7 +38,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     onSaveSettings(formData);
-    setStatusMessage({ type: 'success', text: 'Nastavení bylo úspěšně uloženo lokálně.' });
+    setStatusMessage({ 
+      type: 'success', 
+      text: settings.uiLanguage === 'en' ? 'Settings saved locally.' : 'Nastavení bylo úspěšně uloženo lokálně.' 
+    });
   };
 
   const handlePush = async () => {
@@ -56,7 +61,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   const handlePull = async () => {
-    if (!confirm('Opravdu chcete načíst data z GitHubu? Toto přepíše lokální neuložený stav novými daty z cloudu.')) {
+    const confirmMsg = settings.uiLanguage === 'en' 
+      ? 'Do you really want to pull data from GitHub? This will overwrite your local unsaved progress.'
+      : 'Opravdu chcete načíst data z GitHubu? Toto přepíše lokální neuložený stav novými daty z cloudu.';
+    if (!confirm(confirmMsg)) {
       return;
     }
     setIsPulling(true);
@@ -79,7 +87,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className="flex items-center justify-between p-4 border-b border-[var(--border-color)] bg-[var(--bg-header)]">
           <div className="flex items-center gap-2 text-[var(--text-main)] font-bold text-base">
             <GithubIcon className="w-5 h-5 text-blue-400" />
-            <span>Nastavení & GitHub Synchronizace</span>
+            <span>{t('settingsTitle')}</span>
           </div>
           <button
             onClick={onClose}
@@ -111,11 +119,11 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <div className="space-y-3 bg-[var(--bg-header-alt)] p-3.5 rounded-lg border border-[var(--border-color)]">
             <div className="font-semibold text-[var(--text-main)] flex items-center gap-1.5">
               <Key className="w-3.5 h-3.5 text-blue-400" />
-              <span>GitHub Přístup (pro uložení z 1 kliku)</span>
+              <span>{t('githubAccess')}</span>
             </div>
 
             <div>
-              <label className="block text-[var(--text-muted)] mb-1">GitHub Personal Access Token (PAT):</label>
+              <label className="block text-[var(--text-muted)] mb-1">{t('githubToken')}</label>
               <input
                 type="password"
                 placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
@@ -124,13 +132,13 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500 font-mono text-xs"
               />
               <p className="text-[10px] text-[var(--text-muted)] mt-1">
-                Vygeneruj si token na GitHubu v <em>Settings → Developer Settings → Tokens</em> s oprávněním <code>repo</code>.
+                {t('githubTokenHint')}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-2.5">
               <div>
-                <label className="block text-[var(--text-muted)] mb-1">Vlastník (GitHub Username):</label>
+                <label className="block text-[var(--text-muted)] mb-1">{t('githubOwner')}</label>
                 <input
                   type="text"
                   placeholder="např. matyasholba"
@@ -140,7 +148,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 />
               </div>
               <div>
-                <label className="block text-[var(--text-muted)] mb-1">Název repozitáře:</label>
+                <label className="block text-[var(--text-muted)] mb-1">{t('githubRepo')}</label>
                 <input
                   type="text"
                   placeholder="cpp-learning-progress"
@@ -154,7 +162,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Sync Mode Selection */}
           <div className="space-y-2">
-            <label className="font-semibold text-[var(--text-main)] block">Režim synchronizace:</label>
+            <label className="font-semibold text-[var(--text-main)] block">{t('syncModeTitle')}</label>
             <div className="grid grid-cols-2 gap-2.5">
               <button
                 type="button"
@@ -167,10 +175,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               >
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <Database className="w-4 h-4 text-blue-400" />
-                  <span>Režim 1: Pouze data postupu</span>
+                  <span>{t('syncModeData')}</span>
                 </div>
                 <p className="text-[10px] text-[var(--text-muted)] leading-tight">
-                  Zálohuje pouze data o postupu a čase (JSON). Nezveřejňuje poznámky ani web.
+                  {t('syncModeDataDesc')}
                 </p>
               </button>
 
@@ -185,10 +193,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               >
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <Globe className="w-4 h-4 text-emerald-400" />
-                  <span>Režim 2: Kompletní Web & Portfolio</span>
+                  <span>{t('syncModeFull')}</span>
                 </div>
                 <p className="text-[10px] text-[var(--text-muted)] leading-tight">
-                  Nahraje interaktivní web pro GitHub Pages i Markdown poznámky. Kdokoliv uvidí tvůj postup v prohlížeči.
+                  {t('syncModeFullDesc')}
                 </p>
               </button>
             </div>
@@ -200,50 +208,36 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             )}
           </div>
 
-          {/* Language Selection */}
-          <div className="space-y-2">
-            <label className="font-semibold text-[var(--text-main)] block">Jazyková nastavení:</label>
-            <div className="grid grid-cols-2 gap-2.5">
-              <div>
-                <label className="block text-[var(--text-muted)] mb-1">Jazyk aplikace (UI Language):</label>
-                <select
-                  value={formData.uiLanguage || 'cs'}
-                  onChange={e => setFormData({ ...formData, uiLanguage: e.target.value as 'cs' | 'en' })}
-                  className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
-                >
-                  <option value="cs">🇨🇿 Čeština</option>
-                  <option value="en">🇬🇧 English</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-[var(--text-muted)] mb-1">Jazyk materiálů (Content Language):</label>
-                <select
-                  value={formData.contentLanguage || 'cs'}
-                  onChange={e => setFormData({ ...formData, contentLanguage: e.target.value as 'cs' | 'en' })}
-                  className="w-full bg-[var(--bg-hover)] text-[var(--text-main)] px-3 py-2 rounded border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
-                >
-                  <option value="cs">🇨🇿 Přeloženo (Czech)</option>
-                  <option value="en">🇬🇧 Originál (English)</option>
-                </select>
-              </div>
-            </div>
-          </div>
+
 
           {/* Help Section */}
           <details className="text-[11px] text-[var(--text-muted)] bg-[var(--bg-header-alt)] border border-[var(--border-color)] rounded-lg p-3 cursor-pointer group">
             <summary className="font-semibold text-[var(--text-main)] flex items-center justify-between select-none">
-              <span>Máš problém se zobrazením stránky nebo nastavením? Klikni zde</span>
+              <span>{settings.uiLanguage === 'en' ? 'Need help with setup? Click here' : 'Máš problém se zobrazením stránky nebo nastavením? Klikni zde'}</span>
               <span className="group-open:rotate-180 transition-transform">▼</span>
             </summary>
             <div className="mt-3 space-y-2 cursor-text select-text">
-              <p><strong>1. Jak získat token (PAT):</strong><br/>
-              Běž na <em>GitHub.com → Settings → Developer Settings → Personal access tokens → Tokens (classic)</em>. Zvol <strong>Generate new token (classic)</strong>. Zaškrtni sekci <strong>repo</strong> (plný přístup) a případně <strong>workflow</strong> (pokud by ses rozhodl použít akce). Token zkopíruj a vlož sem (začíná na <code>ghp_</code>).</p>
-              
-              <p><strong>2. Co je to Vlastník a Název repozitáře?</strong><br/>
-              Když máš na GitHubu projekt např. <code>https://github.com/Pepa123/moje-stranka</code>, pak je Vlastník <code>Pepa123</code> a název <code>moje-stranka</code>.</p>
+              {settings.uiLanguage === 'en' ? (
+                <>
+                  <p><strong>1. How to get a PAT token:</strong><br/>
+                  Go to <em>GitHub.com → Settings → Developer Settings → Personal access tokens → Tokens (classic)</em>. Click <strong>Generate new token (classic)</strong>. Check the <strong>repo</strong> scope. Copy the token (starts with <code>ghp_</code>) and paste it here.</p>
+                  <p><strong>2. What is Owner and Repo Name?</strong><br/>
+                  If your project URL is <code>https://github.com/John123/my-site</code>, the Owner is <code>John123</code> and repo name is <code>my-site</code>.</p>
+                  <p><strong>3. How to enable GitHub Pages?</strong><br/>
+                  Go to your repository: <em>Settings → Pages</em>. Under <strong>Build and deployment</strong>, select <strong>Deploy from a branch</strong> and choose <strong>main</strong> (or master). Save. Your site will be live in a few minutes.</p>
+                </>
+              ) : (
+                <>
+                  <p><strong>1. Jak získat token (PAT):</strong><br/>
+                  Běž na <em>GitHub.com → Settings → Developer Settings → Personal access tokens → Tokens (classic)</em>. Zvol <strong>Generate new token (classic)</strong>. Zaškrtni sekci <strong>repo</strong> (plný přístup) a případně <strong>workflow</strong> (pokud by ses rozhodl použít akce). Token zkopíruj a vlož sem (začíná na <code>ghp_</code>).</p>
+                  
+                  <p><strong>2. Co je to Vlastník a Název repozitáře?</strong><br/>
+                  Když máš na GitHubu projekt např. <code>https://github.com/Pepa123/moje-stranka</code>, pak je Vlastník <code>Pepa123</code> a název <code>moje-stranka</code>.</p>
 
-              <p><strong>3. Jak zprovoznit GitHub Pages?</strong><br/>
-              Aby fungoval Režim 2 (kompletní web), nahraje se na tvůj GitHub soubor <code>index.html</code>. Poté musíš jít na GitHub do svého repozitáře: <em>Settings → Pages</em>. V sekci <strong>Build and deployment</strong> zvol <strong>Deploy from a branch</strong> a vyber větev <strong>main</strong> (případně <strong>master</strong>). Ulož to. Během pár minut GitHub stránku vygeneruje a ty ji najdeš na adrese <code>https://[Vlastnik].github.io/[Nazev_repozitare]/</code>.</p>
+                  <p><strong>3. Jak zprovoznit GitHub Pages?</strong><br/>
+                  Aby fungoval Režim 2 (kompletní web), nahraje se na tvůj GitHub soubor <code>index.html</code>. Poté musíš jít na GitHub do svého repozitáře: <em>Settings → Pages</em>. V sekci <strong>Build and deployment</strong> zvol <strong>Deploy from a branch</strong> a vyber větev <strong>main</strong> (případně <strong>master</strong>). Ulož to. Během pár minut GitHub stránku vygeneruje a ty ji najdeš na adrese <code>https://[Vlastnik].github.io/[Nazev_repozitare]/</code>.</p>
+                </>
+              )}
             </div>
           </details>
 
@@ -254,10 +248,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               onClick={handlePull}
               disabled={isPulling || isPushing || !formData.githubToken}
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[var(--bg-hover)] hover:bg-[var(--border-color)] text-[var(--text-main)] hover:text-[var(--text-main)] border border-[var(--border-color)] transition-colors disabled:opacity-50"
-              title="Stáhnout a načíst data z GitHubu"
             >
               {isPulling ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CloudDownload className="w-3.5 h-3.5 text-blue-400" />}
-              <span>Načíst z GitHubu (Pull)</span>
+              <span>{t('pullButton')}</span>
             </button>
 
             <div className="flex items-center gap-2">
@@ -265,7 +258,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 type="submit"
                 className="px-3.5 py-2 rounded-lg bg-[var(--bg-hover)] hover:bg-[var(--border-color)] text-[var(--text-main)] font-medium transition-colors"
               >
-                Uložit nastavení
+                {t('saveSettings')}
               </button>
 
               <button
@@ -275,7 +268,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-[var(--text-main)] font-bold transition-all shadow-md shadow-blue-600/30 disabled:opacity-50"
               >
                 {isPushing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <CloudUpload className="w-3.5 h-3.5" />}
-                <span>Uložit na GitHub (1 klik)</span>
+                <span>{t('syncButton')}</span>
               </button>
             </div>
           </div>

@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>So far, all of the examples of inheritance we’ve presented have been single inheritance -- that is, each inherited class has one and only one parent. However, C++ provides the ability to do multiple inheritance. <strong>Multiple inheritance</strong> enables a derived class to inherit members from more than one parent.</p>",
       "preview": "So far, all of the examples of inheritance we’ve presented have been single inhe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Doposud byly všechny příklady dědičnosti, které jsme si představili, jednoduchou dědičností – to znamená, že každá odvozená třída měla právě jednoho rodiče. C++ však poskytuje možnost vícenásobné dědičnosti. <strong>Vícenásobná dědičnost</strong> (multiple inheritance) umožňuje odvozené třídě dědit členy od více než jednoho rodiče.</p>"
     },
     {
       "id": "multiple-inheritance_b1",
       "type": "paragraph",
       "html": "<p>Let’s say we wanted to write a program to keep track of a bunch of teachers. A teacher is a person. However, a teacher is also an employee (they are their own employer if working for themselves). Multiple inheritance can be used to create a Teacher class that inherits properties from both Person and Employee. To use multiple inheritance, simply specify each base class (just like in single inheritance), separated by a comma.</p>",
       "preview": "Let’s say we wanted to write a program to keep track of a bunch of teachers. A t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že bychom chtěli napsat program pro evidenci učitelů. Učitel je osoba (Person). Nicméně učitel je také zaměstnanec (Employee – i pokud pracuje sám na sebe, je svým vlastním zaměstnavatelem). Vícenásobnou dědičnost lze použít k vytvoření třídy Teacher, která dědí vlastnosti jak od Person, tak od Employee. Chcete-li použít vícenásobnou dědičnost, jednoduše uveďte jednotlivé bázové třídy (stejně jako u jednoduché dědičnosti) oddělené čárkou.</p>"
     },
     {
       "id": "multiple-inheritance_b2",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/PersonTeacher.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/PersonTeacher.gif\"></p>"
     },
     {
       "id": "multiple-inheritance_b3",
@@ -36,28 +39,33 @@
       "language": "cpp",
       "code": "#include <string>\n#include <string_view>\n\nclass Person\n{\nprivate:\n    std::string m_name{};\n    int m_age{};\n\npublic:\n    Person(std::string_view name, int age)\n        : m_name{ name }, m_age{ age }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n};\n\nclass Employee\n{\nprivate:\n    std::string m_employer{};\n    double m_wage{};\n\npublic:\n    Employee(std::string_view employer, double wage)\n        : m_employer{ employer }, m_wage{ wage }\n    {\n    }\n\n    const std::string& getEmployer() const { return m_employer; }\n    double getWage() const { return m_wage; }\n};\n\n// Teacher publicly inherits Person and Employee\nclass Teacher : public Person, public Employee\n{\nprivate:\n    int m_teachesGrade{};\n\npublic:\n    Teacher(std::string_view name, int age, std::string_view employer, double wage, int teachesGrade)\n        : Person{ name, age }, Employee{ employer, wage }, m_teachesGrade{ teachesGrade }\n    {\n    }\n};\n\nint main()\n{\n    Teacher t{ \"Mary\", 45, \"Boo\", 14.3, 8 };\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Person\n{\nprivate:\n    std::string m_name{};\n    int m_age{};\n\npublic:\n    Person(std::string_view name, int age)\n        : m_name{ name }, m_age{ age }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    int getAge() const { return m_age; }\n};\n\nclass Employee\n{\nprivate:\n    std::string m_employer{};\n    double m_wage{};\n\npublic:\n    Employee(std::string_view employer, double wage)\n        : m_employer{ employer }, m_wage{ wage }\n    {\n    }\n\n    const std::string&amp; getEmployer() const { return m_employer; }\n    double getWage() const { return m_wage; }\n};\n\n// Teacher publicly inherits Person and Employee\nclass Teacher : public Person, public Employee\n{\nprivate:\n    int m_teachesGrade{};\n\npublic:\n    Teacher(std::string_view name, int age, std::string_view employer, double wage, int teachesGrade)\n        : Person{ name, age }, Employee{ employer, wage }, m_teachesGrade{ teachesGrade }\n    {\n    }\n};\n\nint main()\n{\n    Teacher t{ \"Mary\", 45, \"Boo\", 14.3, 8 };\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n#include <string_view>\n\ntřída Osoba\n{\nsoukromé:\n    std::string m_name{};\n    int m_age{};\n\nveřejnost:\n    Osoba(std::string_view jméno, int věk)\n        : m_name{ jméno }, m_age{ věk }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n};\n\ntřída Zaměstnanec\n{\nsoukromé:\n    std::string m_employer{};\n    dvojnásobná m_mzda{};\n\nveřejnost:\n    Zaměstnanec(std::string_view zaměstnavatel, dvojnásobná mzda)\n        : m_employer{ zaměstnavatel }, m_mzda{ mzda }\n    {\n    }\n\n    const std::string& getEmployer() const { return m_employer; }\n    double getMzda() const { return m_mzda; }\n};\n\n// Učitel veřejně zdědí osobu a zaměstnance\ntřída Učitel : veřejná Osoba, veřejná Zaměstnanec\n{\nsoukromé:\n    int m_teachesGrade{};\n\nveřejnost:\n    Učitel(std::string_view jméno, int věk, std::string_view zaměstnavatel, dvojnásobná mzda, int learnesGrade)\n        : Osoba{ jméno, věk }, Zaměstnanec{ zaměstnavatel, mzda }, m_teachesGrade{ learnesGrade }\n    {\n    }\n};\n\nint main()\n{\n    Učitel t{ \"Mary\", 45, \"Boo\", 14.3, 8 };\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "multiple-inheritance_b4",
       "type": "section",
       "title": "Mixins",
       "html": "<h3 class=\"cpp-section-heading\">Mixins</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Mixiny</h3>",
+      "title_cs": "Mixins"
     },
     {
       "id": "multiple-inheritance_b5",
       "type": "paragraph",
       "html": "<p>A <strong>mixin</strong> (also spelled “mix-in”) is a small class that can be inherited from in order to add properties to a class. The name mixin indicates that the class is intended to be mixed into other classes, not instantiated on its own.</p>",
       "preview": "A mixin (also spelled “mix-in”) is a small class that can be inherited from in o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Mixin</strong> (někdy psáno také jako „mix-in“) je malá třída, ze které lze dědit za účelem přidání vlastností do jiné třídy. Název mixin naznačuje, že třída je určena k „přimíchání“ do jiných tříd, nikoli k vytváření samostatných instancí.</p>"
     },
     {
       "id": "multiple-inheritance_b6",
       "type": "paragraph",
       "html": "<p>In the following example, the <code>Box</code>, <code>Label</code>, and <code>Tooltip</code> classes are mixins that we inherit from in order to create a new <code>Button</code> class.</p>",
       "preview": "In the following example, the Box, Label, and Tooltip classes are mixins that we",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím příkladu jsou třídy <code>Box</code>, <code>Label</code> a <code>Tooltip</code> mixiny, ze kterých dědíme za účelem vytvoření nové třídy <code>Button</code>.</p>"
     },
     {
       "id": "multiple-inheritance_b7",
@@ -65,21 +73,24 @@
       "language": "cpp",
       "code": "// h/t to reader Waldo for this example\n#include <string>\n\nstruct Point2D\n{\n\tint x{};\n\tint y{};\n};\n\nclass Box // mixin Box class\n{\npublic:\n\tvoid setTopLeft(Point2D point) { m_topLeft = point; }\n\tvoid setBottomRight(Point2D point) { m_bottomRight = point; }\nprivate:\n\tPoint2D m_topLeft{};\n\tPoint2D m_bottomRight{};\n};\n\nclass Label // mixin Label class\n{\npublic:\n\tvoid setText(const std::string_view str) { m_text = str; }\n\tvoid setFontSize(int fontSize) { m_fontSize = fontSize; }\nprivate:\n\tstd::string m_text{};\n\tint m_fontSize{};\n};\n\nclass Tooltip // mixin Tooltip class\n{\npublic:\n\tvoid setText(const std::string_view str) { m_text = str; }\nprivate:\n\tstd::string m_text{};\n};\n\nclass Button : public Box, public Label, public Tooltip {}; // Button using three mixins\n\nint main()\n{\n\tButton button{};\n\tbutton.Box::setTopLeft({ 1, 1 });\n\tbutton.Box::setBottomRight({ 10, 10 });\n\tbutton.Label::setText(\"Submit\");\n\tbutton.Label::setFontSize(6);\n\tbutton.Tooltip::setText(\"Submit the form to the server\");\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader Waldo for this example\n#include &lt;string&gt;\n\nstruct Point2D\n{\n\tint x{};\n\tint y{};\n};\n\nclass Box // mixin Box class\n{\npublic:\n\tvoid setTopLeft(Point2D point) { m_topLeft = point; }\n\tvoid setBottomRight(Point2D point) { m_bottomRight = point; }\nprivate:\n\tPoint2D m_topLeft{};\n\tPoint2D m_bottomRight{};\n};\n\nclass Label // mixin Label class\n{\npublic:\n\tvoid setText(const std::string_view str) { m_text = str; }\n\tvoid setFontSize(int fontSize) { m_fontSize = fontSize; }\nprivate:\n\tstd::string m_text{};\n\tint m_fontSize{};\n};\n\nclass Tooltip // mixin Tooltip class\n{\npublic:\n\tvoid setText(const std::string_view str) { m_text = str; }\nprivate:\n\tstd::string m_text{};\n};\n\nclass Button : public Box, public Label, public Tooltip {}; // Button using three mixins\n\nint main()\n{\n\tButton button{};\n\tbutton.Box::setTopLeft({ 1, 1 });\n\tbutton.Box::setBottomRight({ 10, 10 });\n\tbutton.Label::setText(\"Submit\");\n\tbutton.Label::setFontSize(6);\n\tbutton.Tooltip::setText(\"Submit the form to the server\");\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t čtenáři Waldovi pro tento příklad\n#include <řetězec>\n\nstruct Point2D\n{\n\tint x{};\n\tint y{};\n};\n\nclass Box // mixin Box tř\n{\nveřejnost:\n\tvoid setTopLeft(Point2D bod) { m_topLeft = bod; }\n\tvoid setBottomRight(Point2D bod) { m_bottomRight = bod; }\nsoukromé:\n\tPoint2D m_topLeft{};\n\tPoint2D m_bottomRight{};\n};\n\nclass Label // mixin Label class\n{\nveřejnost:\n\tvoid setText(const std::string_view str) { m_text = str; }\n\tvoid setFontSize(int fontSize) { m_fontSize = fontSize; }\nsoukromé:\n\tstd::string m_text{};\n\tint m_fontSize{};\n};\n\nclass Tooltip // mixin Tooltip class\n{\nveřejnost:\n\tvoid setText(const std::string_view str) { m_text = str; }\nsoukromé:\n\tstd::string m_text{};\n};\n\nclass Button : public Box, public Label, public Tooltip {}; // Tlačítko pomocí tří mixinů\n\nint main()\n{\n\tTlačítko tlačítko{};\n\tbutton.Box::setTopLeft({ 1, 1 });\n\tbutton.Box::setBottomRight({ 10, 10 });\n\tbutton.Label::setText(\"Odeslat\");\n\tbutton.Label::setFontSize(6);\n\tbutton.Tooltip::setText(\"Odeslat formulář na server\");\n}</code></pre>"
     },
     {
       "id": "multiple-inheritance_b8",
       "type": "paragraph",
       "html": "<p>You may be wondering why we use explicit <code>Box::</code>, <code>Label::</code>, and <code>Tooltip::</code> scope resolution prefixes when this isn’t necessary in most cases.</p>",
       "preview": "You may be wondering why we use explicit Box::, Label::, and Tooltip:: scope res",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná se ptáte, proč používáme explicitní prefixy rozlišení oboru platnosti <code>Box::</code>, <code>Label::</code> a <code>Tooltip::</code>, když to ve většině případů není nutné.</p>"
     },
     {
       "id": "multiple-inheritance_b9",
       "type": "list",
       "html": "<ol start=\"1\"><li><code>Label::setText()</code> and <code>Tooltip::setText()</code> have the same prototype. If we called <code>button.setText()</code>, the compiler would produce an ambiguous function call compilation error. In such cases, we must use the prefix to disambiguate which version we want.</li><li>In non-ambiguous cases, using the mixin name provides documentation as to which mixin the function call applies to, which helps make our code easier to understand.</li><li>Non-ambiguous cases may become ambiguous in the future if we add additional mixins. Using explicit prefixes helps prevent this from occurring.</li></ol>",
       "preview": "Label::setText() and Tooltip::setText() have the same prototype. If we called bu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li><code>Label::setText()</code> a <code>Tooltip::setText()</code> mají stejný prototyp. Kdybychom zavolali <code>button.setText()</code>, kompilátor by ohlásil chybu překladu z důvodu nejednoznačného volání funkce (ambiguous function call). V takových případech musíme použít prefix, abychom jednoznačně určili, kterou verzi chceme.</li><li>V jednoznačných případech slouží použití názvu mixinu jako dokumentace toho, ke kterému mixinu se volání funkce vztahuje, což přispívá ke srozumitelnosti kódu.</li><li>Jednoznačné případy se v budoucnu mohou stát nejednoznačnými, pokud přidáme další mixiny. Použití explicitních prefixů tomu pomáhá předcházet.</li></ol>"
     },
     {
       "id": "multiple-inheritance_b10",
@@ -87,28 +98,32 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Because mixins are designed to add functionality to the derived class, not to provide an interface, mixins typically do not use virtual functions (covered in the next chapter). Instead, if a mixin class needs to be customized to work in a particular way, templates are typically used. For this reason, mixin classes are often templatized.</p><p>Perhaps surprisingly, a derived class can inherit from a mixin base class using the derived class as a template type parameter. Such inheritance is called <strong>Curiously Recurring Template Pattern</strong> (CRTP for short), which looks like this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// The Curiously Recurring Template Pattern (CRTP)\n\ntemplate &lt;class T&gt;\nclass Mixin\n{\n    // Mixin&lt;T&gt; can use template type parameter T to access members of Derived\n    // via (static_cast&lt;T*&gt;(this))\n};\n\nclass Derived : public Mixin&lt;Derived&gt;\n{\n};</code></pre><p>You can find a simple example using CRTP <a href=\"https://en.cppreference.com/w/cpp/language/crtp\">here</a>.</p></div>",
       "preview": "For advanced readersBecause mixins are designed to add functionality to the derived class, not to pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Protože mixiny jsou navrženy tak, aby přidávaly funkcionalitu do odvozené třídy, a nikoli k poskytování rozhraní, obvykle nepoužívají virtuální funkce (probereme v příští kapitole). Místo toho, pokud je potřeba třídu mixinu přizpůsobit tak, aby fungovala určitým způsobem, typicky se používají šablony (templates). Z tohoto důvodu bývají třídy mixinů často šablonové.</p><p>Může to být překvapivé, ale odvozená třída může dědit z bázové třídy mixinu s tím, že sama odvozená třída je použita jako typový parametr šablony. Takové dědičnosti se říká <strong>Curiously Recurring Template Pattern</strong> (zkráceně CRTP) a vypadá následovně:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// The Curiously Recurring Template Pattern (CRTP)\n\ntemplate &lt;class T&gt;\nclass Mixin\n{\n    // Mixin&lt;T&gt; can use template type parameter T to access members of Derived\n    // via (static_cast&lt;T*&gt;(this))\n};\n\nclass Derived : public Mixin&lt;Derived&gt;\n{\n};</code></pre><p>Jednoduchý příklad s využitím CRTP můžete najít <a href=\"https://en.cppreference.com/w/cpp/language/crtp\">zde</a>.</p></div>"
     },
     {
       "id": "multiple-inheritance_b11",
       "type": "paragraph",
       "html": "<p><strong>Problems with multiple inheritance</strong></p>",
       "preview": "Problems with multiple inheritance",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Problémy s vícenásobnou dědičností</strong></p>"
     },
     {
       "id": "multiple-inheritance_b12",
       "type": "paragraph",
       "html": "<p>While multiple inheritance seems like a simple extension of single inheritance, multiple inheritance introduces a lot of issues that can markedly increase the complexity of programs and make them a maintenance nightmare. Let’s take a look at some of these situations.</p>",
       "preview": "While multiple inheritance seems like a simple extension of single inheritance, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli vícenásobná dědičnost vypadá jako jednoduché rozšíření jednoduché dědičnosti, přináší s sebou spoustu problémů, které mohou výrazně zvýšit složitost programů a proměnit jejich údržbu v noční můru. Pojďme se na některé z těchto situací podívat.</p>"
     },
     {
       "id": "multiple-inheritance_b13",
       "type": "paragraph",
       "html": "<p>First, ambiguity can result when multiple base classes contain a function with the same name. For example:</p>",
       "preview": "First, ambiguity can result when multiple base classes contain a function with t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za prvé může dojít k nejednoznačnosti (ambiguity), pokud více bázových tříd obsahuje funkci se stejným názvem. Například:</p>"
     },
     {
       "id": "multiple-inheritance_b14",
@@ -116,21 +131,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass USBDevice\n{\nprivate:\n    long m_id {};\n\npublic:\n    USBDevice(long id)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\nclass NetworkDevice\n{\nprivate:\n    long m_id {};\n\npublic:\n    NetworkDevice(long id)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\nclass WirelessAdapter: public USBDevice, public NetworkDevice\n{\npublic:\n    WirelessAdapter(long usbId, long networkId)\n        : USBDevice { usbId }, NetworkDevice { networkId }\n    {\n    }\n};\n\nint main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout << c54G.getID(); // Which getID() do we call?\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass USBDevice\n{\nprivate:\n    long m_id {};\n\npublic:\n    USBDevice(long id)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\nclass NetworkDevice\n{\nprivate:\n    long m_id {};\n\npublic:\n    NetworkDevice(long id)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\nclass WirelessAdapter: public USBDevice, public NetworkDevice\n{\npublic:\n    WirelessAdapter(long usbId, long networkId)\n        : USBDevice { usbId }, NetworkDevice { networkId }\n    {\n    }\n};\n\nint main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout &lt;&lt; c54G.getID(); // Which getID() do we call?\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřídy USBDevice\n{\nsoukromé:\n    dlouhé m_id {};\n\nveřejnost:\n    USBDevice (dlouhé ID)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\ntřída NetworkDevice\n{\nsoukromé:\n    dlouhé m_id {};\n\nveřejnost:\n    NetworkDevice (dlouhé ID)\n        : m_id { id }\n    {\n    }\n\n    long getID() const { return m_id; }\n};\n\ntřída WirelessAdapter: veřejné zařízení USB, veřejné síťové zařízení\n{\nveřejnost:\n    WirelessAdapter (dlouhé usbId, dlouhé networkId)\n        : USBDevice { usbId }, NetworkDevice { networkId }\n    {\n    }\n};\n\nint main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout << c54G.getID(); // Které getID() voláme?\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "multiple-inheritance_b15",
       "type": "paragraph",
       "html": "<p>When <code>c54G.getID()</code> is compiled, the compiler looks to see if WirelessAdapter contains a function named getID(). It doesn’t. The compiler then looks to see if any of the parent classes have a function named getID(). See the problem here? The problem is that c54G actually contains TWO getID() functions: one inherited from USBDevice, and one inherited from NetworkDevice. Consequently, this function call is ambiguous, and you will receive a compiler error if you try to compile it.</p>",
       "preview": "When c54G.getID() is compiled, the compiler looks to see if WirelessAdapter cont",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při kompilaci <code>c54G.getID()</code> kompilátor zjišťuje, zda WirelessAdapter obsahuje funkci s názvem getID(). Neobsahuje. Kompilátor se pak podívá, zda některá z rodičovských tříd má funkci s názvem getID(). Vidíte v čem je problém? Problém je, že c54G ve skutečnosti obsahuje DVĚ funkce getID(): jednu zděděnou z USBDevice a druhou zděděnou z NetworkDevice. V důsledku toho je toto volání funkce nejednoznačné a při pokusu o kompilaci obdržíte chybu kompilátoru.</p>"
     },
     {
       "id": "multiple-inheritance_b16",
       "type": "paragraph",
       "html": "<p>However, there is a way to work around this problem: you can explicitly specify which version you meant to call:</p>",
       "preview": "However, there is a way to work around this problem: you can explicitly specify ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento problém však lze obejít: můžete explicitně určit, kterou verzi jste měli na mysli zavolat:</p>"
     },
     {
       "id": "multiple-inheritance_b17",
@@ -138,28 +156,32 @@
       "language": "cpp",
       "code": "int main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout << c54G.USBDevice::getID();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout &lt;&lt; c54G.USBDevice::getID();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    WirelessAdapter c54G { 5442, 181742 };\n    std::cout << c54G.USBDevice::getID();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "multiple-inheritance_b18",
       "type": "paragraph",
       "html": "<p>While this workaround is pretty simple, you can see how things can get complex when your class inherits from four or six base classes, which inherit from other classes themselves. The potential for naming conflicts increases exponentially as you inherit more classes, and each of these naming conflicts needs to be resolved explicitly.</p>",
       "preview": "While this workaround is pretty simple, you can see how things can get complex w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I když je toto řešení poměrně jednoduché, je zřejmé, jak se věci mohou zkomplikovat, když vaše třída dědí ze čtyř nebo šesti bázových tříd, které samy dědí z dalších tříd. Potenciál pro konflikty názvů roste exponenciálně s tím, jak dědíte z více tříd, a každý z těchto konfliktů názvů je třeba explicitně vyřešit.</p>"
     },
     {
       "id": "multiple-inheritance_b19",
       "type": "paragraph",
       "html": "<p>Second, and more serious is the <a href=\"https://en.wikipedia.org/wiki/Diamond_problem\">diamond problem</a>, which your author likes to call the “diamond of doom”. This occurs when a class multiply inherits from two classes which each inherit from a single base class. This leads to a diamond shaped inheritance pattern.</p>",
       "preview": "Second, and more serious is the diamond problem, which your author likes to call",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhým a závažnějším problémem je <a href=\"https://en.wikipedia.org/wiki/Diamond_problem\">problém diamantu</a> (diamond problem), kterému autor rád říká „diamant zkázy“ (diamond of doom). K tomu dochází, když třída vícenásobně dědí ze dvou tříd, z nichž každá dědí ze stejné bázové třídy. To vede ke struktuře dědičnosti ve tvaru kosočtverce (diamantu).</p>"
     },
     {
       "id": "multiple-inheritance_b20",
       "type": "paragraph",
       "html": "<p>For example, consider the following set of classes:</p>",
       "preview": "For example, consider the following set of classes:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zvažte například následující sadu tříd:</p>"
     },
     {
       "id": "multiple-inheritance_b21",
@@ -167,56 +189,64 @@
       "language": "cpp",
       "code": "class PoweredDevice\n{\n};\n\nclass Scanner: public PoweredDevice\n{\n};\n\nclass Printer: public PoweredDevice\n{\n};\n\nclass Copier: public Scanner, public Printer\n{\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class PoweredDevice\n{\n};\n\nclass Scanner: public PoweredDevice\n{\n};\n\nclass Printer: public PoweredDevice\n{\n};\n\nclass Copier: public Scanner, public Printer\n{\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class PoweredDevice\n{\n};\n\nSkener třídy: veřejný PoweredDevice\n{\n};\n\ntřída Tiskárna: veřejná PoweredDevice\n{\n};\n\ntřída Kopírka: veřejný skener, veřejná tiskárna\n{\n};</code></pre>"
     },
     {
       "id": "multiple-inheritance_b22",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/PoweredDevice.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/PoweredDevice.gif\"></p>"
     },
     {
       "id": "multiple-inheritance_b23",
       "type": "paragraph",
       "html": "<p>Scanners and printers are both powered devices, so they derived from PoweredDevice. However, a copy machine incorporates the functionality of both Scanners and Printers.</p>",
       "preview": "Scanners and printers are both powered devices, so they derived from PoweredDevi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Skenery i tiskárny jsou poháněná zařízení, takže jsou odvozeny od PoweredDevice. Kopírovací stroj však zahrnuje funkce skenerů i tiskáren.</p>"
     },
     {
       "id": "multiple-inheritance_b24",
       "type": "paragraph",
       "html": "<p>There are many issues that arise in this context, including whether Copier should have one or two copies of PoweredDevice, and how to resolve certain types of ambiguous references. While most of these issues can be addressed through explicit scoping, the maintenance overhead added to your classes in order to deal with the added complexity can cause development time to skyrocket. We’ll talk more about ways to resolve the diamond problem in the next chapter (lesson <a href=\"https://www.learncpp.com/cpp-tutorial/virtual-base-classes/\">25.8 -- Virtual base classes</a>).</p>",
       "preview": "There are many issues that arise in this context, including whether Copier shoul",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této souvislosti vyvstává mnoho problémů, včetně toho, zda by Copier měl mít jednu nebo dvě kopie PoweredDevice, a jak vyřešit určité typy nejednoznačných odkazů. Zatímco většinu těchto problémů lze vyřešit explicitním stanovením rozsahu, režie údržby přidaná k vašim třídám, aby se vypořádala s přidanou složitostí, může způsobit raketový nárůst času vývoje. O způsobech, jak vyřešit problém diamantů, si povíme více v další kapitole (lekce <a href=\"https://www.learncpp.com/cpp-tutorial/virtual-base-classes/\">25.8 -- Virtuální základní třídy</a>).</p>"
     },
     {
       "id": "multiple-inheritance_b25",
       "type": "paragraph",
       "html": "<p><strong>Is multiple inheritance more trouble than it’s worth?</strong></p>",
       "preview": "Is multiple inheritance more trouble than it’s worth?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Je vícenásobné dědictví větší potíže, než kolik stojí?</strong></p>"
     },
     {
       "id": "multiple-inheritance_b26",
       "type": "paragraph",
       "html": "<p>As it turns out, most of the problems that can be solved using multiple inheritance can be solved using single inheritance as well. Many object-oriented languages (eg. Smalltalk, PHP) do not even support multiple inheritance. Many relatively modern languages such as Java and C# restrict classes to single inheritance of normal classes, but allow multiple inheritance of interface classes (which we will talk about later). The driving idea behind disallowing multiple inheritance in these languages is that it simply makes the language too complex, and ultimately causes more problems than it fixes.</p>",
       "preview": "As it turns out, most of the problems that can be solved using multiple inherita",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak se ukazuje, většinu problémů, které lze vyřešit pomocí vícenásobné dědičnosti, lze vyřešit také pomocí jediné dědičnosti. Mnoho objektově orientovaných jazyků (např. Smalltalk, PHP) ani vícenásobnou dědičnost nepodporuje. Mnoho relativně moderních jazyků jako Java a C# omezuje třídy na jedinou dědičnost normálních tříd, ale umožňuje vícenásobné dědění tříd rozhraní (o čemž si povíme později). Hlavní myšlenkou zákazu vícenásobného dědění v těchto jazycích je to, že to jednoduše činí jazyk příliš složitým a v konečném důsledku způsobuje více problémů, než opravuje.</p>"
     },
     {
       "id": "multiple-inheritance_b27",
       "type": "paragraph",
       "html": "<p>Many authors and experienced programmers believe multiple inheritance in C++ should be avoided at all costs due to the many potential problems it brings. Your author does not agree with this approach, because there are times and situations when multiple inheritance is the best way to proceed. However, multiple inheritance should be used extremely judiciously.</p>",
       "preview": "Many authors and experienced programmers believe multiple inheritance in C++ sho",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho autorů a zkušených programátorů se domnívá, že vícenásobnému dědění v C++ je třeba se za každou cenu vyhnout kvůli mnoha potenciálním problémům, které to přináší. Váš autor s tímto přístupem nesouhlasí, protože jsou chvíle a situace, kdy je vícenásobné dědictví nejlepším způsobem, jak postupovat. Vícenásobná dědičnost by však měla být používána mimořádně uvážlivě.</p>"
     },
     {
       "id": "multiple-inheritance_b28",
       "type": "paragraph",
       "html": "<p>As an interesting aside, you have already been using classes written using multiple inheritance without knowing it: the iostream library objects std::cin and std::cout are both implemented using multiple inheritance!</p>",
       "preview": "As an interesting aside, you have already been using classes written using multi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zajímavé je, že jste již používali třídy napsané pomocí vícenásobné dědičnosti, aniž byste o tom věděli: objekty knihovny iostream std::cin a std::cout jsou oba implementovány pomocí vícenásobné dědičnosti!</p>"
     },
     {
       "id": "multiple-inheritance_b29",
@@ -224,7 +254,9 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid multiple inheritance unless alternatives lead to more complexity.</p></div>",
       "preview": "Best practiceAvoid multiple inheritance unless alternatives lead to more complexity.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Osvědčený postup</p><p>Vyhněte se vícenásobnému dědění, pokud alternativy nevedou k větší složitosti.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "24.9 — Vícenásobná dědičnost"
 }

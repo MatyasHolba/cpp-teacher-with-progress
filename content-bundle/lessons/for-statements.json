@@ -14,77 +14,89 @@
       "type": "paragraph",
       "html": "<p>By far, the most utilized loop statement in C++ is the for-statement. The <strong>for statement</strong> (also called a <strong>for loop</strong>) is preferred when we have an obvious loop variable because it lets us easily and concisely define, initialize, test, and change the value of loop variables.</p>",
       "preview": "By far, the most utilized loop statement in C++ is the for-statement. The for st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zdaleka nejvyužívanějším cyklem v C++ je příkaz for. <strong>Příkaz for</strong> (nazývaný také <strong>cyklus for</strong>) je preferován v situacích, kdy máme zřejmou řídicí proměnnou, protože nám umožňuje snadno a stručně definovat, inicializovat, testovat a měnit hodnotu proměnných cyklu.</p>"
     },
     {
       "id": "for-statements_b1",
       "type": "paragraph",
       "html": "<p>As of C++11, there are two different kinds of for-loops. We’ll cover the classic for-statement in this lesson, and the newer range-based for-statement in a future lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/\">16.8 -- Range-based for loops (for-each)</a>) once we’ve covered some other prerequisite topics.</p>",
       "preview": "As of C++11, there are two different kinds of for-loops. We’ll cover the classic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Od C++11 existují dva různé druhy cyklů for. V této lekci se budeme věnovat klasickému příkazu for a novějšímu range-based for cyklu v budoucí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/\">16.8 -- Range-based cykly for (for-each)</a>), jakmile probereme některá další navazující témata.</p>"
     },
     {
       "id": "for-statements_b2",
       "type": "paragraph",
       "html": "<p>The for-statement looks pretty simple in abstract:</p>",
       "preview": "The for-statement looks pretty simple in abstract:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V abstraktní rovině vypadá příkaz for velmi jednoduše:</p>"
     },
     {
       "id": "for-statements_b3",
       "type": "output",
       "text": "for (init-statement; condition; end-expression)\n   statement;\n",
       "html": "<pre>for (init-statement; condition; end-expression)\n   statement;\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>for (init-statement; condition; end-expression)\n   statement;\n</pre>"
     },
     {
       "id": "for-statements_b4",
       "type": "paragraph",
       "html": "<p>The easiest way to initially understand how a for-statement works is to convert it into an equivalent while-statement:</p>",
       "preview": "The easiest way to initially understand how a for-statement works is to convert ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejjednodušší způsob, jak zpočátku pochopit fungování příkazu for, je převést ho na ekvivalentní příkaz while:</p>"
     },
     {
       "id": "for-statements_b5",
       "type": "output",
       "text": "{ // note the block here\n    init-statement; // used to define variables used in the loop\n    while (condition)\n    {\n        statement; \n        end-expression; // used to modify the loop variable prior to reassessment of the condition\n    }\n} // variables defined inside the loop go out of scope here\n",
       "html": "<pre>{ // note the block here\n    init-statement; // used to define variables used in the loop\n    while (condition)\n    {\n        statement; \n        end-expression; // used to modify the loop variable prior to reassessment of the condition\n    }\n} // variables defined inside the loop go out of scope here\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>{ // všimněte si zde bloku\n    init-statement; // slouží k definování proměnných použitých v cyklu\n    while (condition)\n    {\n        statement; \n        end-expression; // slouží k úpravě proměnné cyklu před opětovným vyhodnocením podmínky\n    }\n} // proměnné definované uvnitř cyklu zde opouštějí rozsah platnosti (scope)\n</pre>"
     },
     {
       "id": "for-statements_b6",
       "type": "section",
       "title": "Evaluation of for-statements",
       "html": "<h3 class=\"cpp-section-heading\">Evaluation of for-statements</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vyhodnocování příkazů for</h3>",
+      "title_cs": "Hodnocení for-výpisů"
     },
     {
       "id": "for-statements_b7",
       "type": "paragraph",
       "html": "<p>A for-statement is evaluated in 3 parts:</p>",
       "preview": "A for-statement is evaluated in 3 parts:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příkaz for se vyhodnocuje ve 3 krocích:</p>"
     },
     {
       "id": "for-statements_b8",
       "type": "paragraph",
       "html": "<p>First, the init-statement is executed. This only happens once when the loop is initiated. The init-statement is typically used for variable definition and initialization. These variables have “loop scope”, which really just is a form of block scope where these variables exist from the point of definition through the end of the loop statement. In our while-loop equivalent, you can see that the init-statement is inside a block that contains the loop, so the variables defined in the init-statement go out of scope when the block containing the loop ends.</p>",
       "preview": "First, the init-statement is executed. This only happens once when the loop is i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se provede inicializační příkaz (init-statement). K tomu dojde pouze jednou při zahájení cyklu. Inicializační příkaz se obvykle používá pro definici a inicializaci proměnných. Tyto proměnné mají „rozsah platnosti cyklu“ (loop scope), což je ve skutečnosti jen forma blokového rozsahu platnosti (block scope), kde tyto proměnné existují od místa definice až po konec příkazu cyklu. V našem ekvivalentu s while-cyklem můžete vidět, že inicializační příkaz je uvnitř bloku, který cyklus obsahuje, takže proměnné definované v inicializačním příkazu zaniknou (vyjdou ze scope), jakmile blok obsahující cyklus skončí.</p>"
     },
     {
       "id": "for-statements_b9",
       "type": "paragraph",
       "html": "<p>Second, with each loop iteration, the condition is evaluated. If this evaluates to <code>true</code>, the statement is executed. If this evaluates to <code>false</code>, the loop terminates and execution continues with the next statement beyond the loop.</p>",
       "preview": "Second, with each loop iteration, the condition is evaluated. If this evaluates ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé se při každé iteraci cyklu vyhodnotí podmínka. Pokud se vyhodnotí jako <code>true</code>, provede se tělo cyklu (statement). Pokud se vyhodnotí jako <code>false</code>, cyklus se ukončí a provádění pokračuje dalším příkazem za cyklem.</p>"
     },
     {
       "id": "for-statements_b10",
       "type": "paragraph",
       "html": "<p>Finally, after the statement is executed, the end-expression is evaluated. Typically, this expression is used to increment or decrement the loop variables defined in the init-statement. After the end-expression has been evaluated, execution returns to the second step (and the condition is evaluated again).</p>",
       "preview": "Finally, after the statement is executed, the end-expression is evaluated. Typic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A nakonec, po vykonání těla cyklu, se vyhodnotí koncový výraz (end-expression). Obvykle se tento výraz používá k inkrementaci nebo dekrementaci proměnných cyklu definovaných v inicializačním příkazu. Po vyhodnocení koncového výrazu se provádění vrátí ke druhému kroku (a podmínka se vyhodnotí znovu).</p>"
     },
     {
       "id": "for-statements_b11",
@@ -92,14 +104,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The order of execution for the different parts of a for-statement is as follows:</p><ul><li>Init-statement</li><li>Condition (if this is false, the loop terminates here).</li><li>Loop body</li><li>End-expression (then jumps back to condition)</li></ul><p>Note that the end-expression executes <em>after</em> the loop statement, and then the condition is re-evaluated.</p></div>",
       "preview": "Key insightThe order of execution for the different parts of a for-statement is as follows:Init-stat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Pořadí provádění jednotlivých částí for-cyklu je následující:</p><ul><li>Inicializační příkaz (init-statement)</li><li>Podmínka (pokud je false, cyklus zde končí).</li><li>Tělo cyklu (loop body)</li><li>Koncový výraz (end-expression, poté skok zpět na podmínku)</li></ul><p>Všimněte si, že koncový výraz se provede <em>až po</em> těle cyklu a teprve poté se znovu vyhodnotí podmínka.</p></div>"
     },
     {
       "id": "for-statements_b12",
       "type": "paragraph",
       "html": "<p>Let’s take a look at a sample for-loop and discuss how it works:</p>",
       "preview": "Let’s take a look at a sample for-loop and discuss how it works:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme se podívat na ukázkový for-cyklus a probrat, jak funguje:</p>"
     },
     {
       "id": "for-statements_b13",
@@ -107,56 +121,64 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 1 }; i <= 10; ++i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 1 }; i &lt;= 10; ++i)\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int i{ 1 }; i <= 10; ++i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b14",
       "type": "paragraph",
       "html": "<p>First, we declare a loop variable named <code>i</code>, and initialize it with the value <code>1</code>.</p>",
       "preview": "First, we declare a loop variable named i, and initialize it with the value 1.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve deklarujeme řídicí proměnnou cyklu s názvem <code>i</code> a inicializujeme ji na hodnotu <code>1</code>.</p>"
     },
     {
       "id": "for-statements_b15",
       "type": "paragraph",
       "html": "<p>Second, <code>i &lt;= 10</code> is evaluated, and since <code>i</code> is <code>1</code>, this evaluates to <code>true</code>. Consequently, the statement executes, which prints <code>1</code> and a space.</p>",
       "preview": "Second, i <= 10 is evaluated, and since i is 1, this evaluates to true. Conseque",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé se vyhodnotí <code>i &lt;= 10</code>, a protože <code>i</code> je <code>1</code>, vyhodnotí se tento výraz jako <code>true</code>. V důsledku toho se provede příkaz, který vypíše <code>1</code> a mezeru.</p>"
     },
     {
       "id": "for-statements_b16",
       "type": "paragraph",
       "html": "<p>Finally, <code>++i</code> is evaluated, which increments <code>i</code> to <code>2</code>. Then the loop goes back to the second step.</p>",
       "preview": "Finally, ++i is evaluated, which increments i to 2. Then the loop goes back to t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nakonec se vyhodnotí <code>++i</code>, což inkrementuje <code>i</code> na <code>2</code>. Poté se cyklus vrátí ke druhému kroku.</p>"
     },
     {
       "id": "for-statements_b17",
       "type": "paragraph",
       "html": "<p>Now, <code>i&lt;= 10</code> is evaluated again. Since <code>i</code> has value <code>2</code>, this evaluates to <code>true</code>, so the loop iterates again. The statement prints <code>2</code> and a space, and <code>i</code> is incremented to <code>3</code>. The loop continues to iterate until eventually <code>i</code> is incremented to <code>11</code>, at which point <code>i &lt;= 10</code> evaluates to<code>false</code>, and the loop exits.</p>",
       "preview": "Now, i<= 10 is evaluated again. Since i has value 2, this evaluates to true, so ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se znovu vyhodnotí výraz <code>i &lt;= 10</code>. Protože má <code>i</code> hodnotu <code>2</code>, vyhodnotí se jako <code>true</code> a cyklus provede další iteraci. Příkaz vypíše <code>2</code> a mezeru a <code>i</code> se inkrementuje na <code>3</code>. Cyklus pokračuje v iteracích, dokud se <code>i</code> nakonec neinkrementuje na <code>11</code>. V tomto bodě se <code>i &lt;= 10</code> vyhodnotí jako <code>false</code> a cyklus skončí.</p>"
     },
     {
       "id": "for-statements_b18",
       "type": "paragraph",
       "html": "<p>Consequently, this program prints the result:</p>",
       "preview": "Consequently, this program prints the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program tedy ve výsledku vypíše:</p>"
     },
     {
       "id": "for-statements_b19",
       "type": "output",
       "text": "1 2 3 4 5 6 7 8 9 10\n",
       "html": "<pre>1 2 3 4 5 6 7 8 9 10\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>1 2 3 4 5 6 7 8 9 10\n</pre>"
     },
     {
       "id": "for-statements_b20",
       "type": "paragraph",
       "html": "<p>For the sake of example, let’s convert the above for-loop into an equivalent while-loop:</p>",
       "preview": "For the sake of example, let’s convert the above for-loop into an equivalent whi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro názornost převeďme výše uvedený cyklus for na ekvivalentní cyklus while:</p>"
     },
     {
       "id": "for-statements_b21",
@@ -164,35 +186,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    { // the block here ensures block scope for i\n        int i{ 1 }; // our init-statement\n        while (i <= 10) // our condition\n        {\n            std::cout << i << ' '; // our statement\n            ++i; // our end-expression\n        }\n    }\n\n    std::cout << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    { // the block here ensures block scope for i\n        int i{ 1 }; // our init-statement\n        while (i &lt;= 10) // our condition\n        {\n            std::cout &lt;&lt; i &lt;&lt; ' '; // our statement\n            ++i; // our end-expression\n        }\n    }\n\n    std::cout &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    { // blok zde zajišťuje rozsah bloku pro i\n        int i{ 1 }; // naše úvodní prohlášení\n        while (i <= 10) // naše podmínka\n        {\n            std::cout << i << ' '; // naše prohlášení\n            ++i; // náš koncový výraz\n        }\n    }\n\n    std::cout << '\\n';\n}</code></pre>"
     },
     {
       "id": "for-statements_b22",
       "type": "paragraph",
       "html": "<p>That doesn’t look so bad, does it? Note that the outer braces are necessary here, because <code>i</code> goes out of scope when the loop ends.</p>",
       "preview": "That doesn’t look so bad, does it? Note that the outer braces are necessary here",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nevypadá tak špatně, že? Všimněte si, že vnější složené závorky jsou zde nezbytné, protože <code>i</code> zanikne (opustí svůj rozsah platnosti), jakmile cyklus skončí.</p>"
     },
     {
       "id": "for-statements_b23",
       "type": "paragraph",
       "html": "<p>For-loops can be hard for new programmers to read -- however, experienced programmers love them because they are a very compact way to do loops with a counter, with all of the necessary information about the loop variables, loop conditions, and loop variable modifiers presented up front. This helps reduce errors.</p>",
       "preview": "For-loops can be hard for new programmers to read -- however, experienced progra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro začínající programátory mohou být cykly for obtížněji čitelné – zkušení programátoři je však milují, protože představují velmi kompaktní způsob vytváření cyklů s čítačem. Všechny potřebné informace o řídicích proměnných cyklu, podmínkách a modifikátorech proměnných jsou totiž uvedeny hned na začátku. To pomáhá omezit chyby.</p>"
     },
     {
       "id": "for-statements_b24",
       "type": "section",
       "title": "More for-loop examples",
       "html": "<h3 class=\"cpp-section-heading\">More for-loop examples</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další příklady cyklu for</h3>",
+      "title_cs": "Další příklady for-loop"
     },
     {
       "id": "for-statements_b25",
       "type": "paragraph",
       "html": "<p>Here’s an example of a function that uses a for-loop to calculate integer exponents:</p>",
       "preview": "Here’s an example of a function that uses a for-loop to calculate integer expone",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad funkce, která pomocí cyklu for počítá celočíselné mocniny:</p>"
     },
     {
       "id": "for-statements_b26",
@@ -200,35 +228,40 @@
       "language": "cpp",
       "code": "#include <cstdint> // for fixed-width integers\n\n// returns the value base ^ exponent -- watch out for overflow!\nstd::int64_t pow(int base, int exponent)\n{\n    std::int64_t total{ 1 };\n\n    for (int i{ 0 }; i < exponent; ++i)\n        total *= base;\n\n    return total;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt; // for fixed-width integers\n\n// returns the value base ^ exponent -- watch out for overflow!\nstd::int64_t pow(int base, int exponent)\n{\n    std::int64_t total{ 1 };\n\n    for (int i{ 0 }; i &lt; exponent; ++i)\n        total *= base;\n\n    return total;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint> // pro celá čísla s pevnou šířkou\n\n// vrátí základ hodnoty ^ exponent -- pozor na přetečení!\nstd::int64_t pow(int základ, int exponent)\n{\n    std::int64_t celkem{ 1 };\n\n    for (int i{ 0 }; i < exponent; ++i)\n        celkem *= základ;\n\n    návratnost celkem;\n}</code></pre>"
     },
     {
       "id": "for-statements_b27",
       "type": "paragraph",
       "html": "<p>This function returns the value base^exponent (base to the exponent power).</p>",
       "preview": "This function returns the value base^exponent (base to the exponent power).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato funkce vrací hodnotu base^exponent (base umocněno na exponent).</p>"
     },
     {
       "id": "for-statements_b28",
       "type": "paragraph",
       "html": "<p>This is a straightforward incrementing for-loop, with <code>i</code> looping from <code>0</code> up to (but excluding) <code>exponent</code>.</p>",
       "preview": "This is a straightforward incrementing for-loop, with i looping from 0 up to (bu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedná se o přímočarý inkrementující for-cyklus, kde <code>i</code> prochází hodnoty od <code>0</code> až po (ale kromě) <code>exponent</code>.</p>"
     },
     {
       "id": "for-statements_b29",
       "type": "paragraph",
       "html": "<p>In all cases, total is initialized to <code>1</code>.<br>If <code>exponent</code> is 0, the for-loop will execute 0 times. <code>total</code> (with value <code>1</code>) is returned, which is equivalent to <code>base^0</code>.<br>If <code>exponent</code> is 1, the for-loop will execute 1 time. <code>total</code> (with value <code>1</code>) is multiplied by <code>base</code>, so it is now has value <code>base</code>, which is equivalent to <code>base^1</code>, which is then returned.<br>If <code>exponent</code> is 2, the for-loop will execute 2 times. <code>total</code> (with value <code>1</code>) is multiplied by <code>base</code> twice, so it now has value <code>base * base</code>, which is equivalent to <code>base^2</code>, which is then returned.</p>",
       "preview": "In all cases, total is initialized to 1.If exponent is 0, the for-loop will exec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve všech případech je total inicializována na <code>1</code>.<br>Pokud je <code>exponent</code> 0, for-cyklus se provede 0krát. Vrátí se <code>total</code> (s hodnotou <code>1</code>), což odpovídá <code>base^0</code>.<br>Pokud je <code>exponent</code> 1, for-cyklus se provede 1krát. <code>total</code> (s hodnotou <code>1</code>) se vynásobí <code>base</code>, takže má nyní hodnotu <code>base</code>, což odpovídá <code>base^1</code>, a ta se poté vrátí.<br>Pokud je <code>exponent</code> 2, for-cyklus se provede 2krát. <code>total</code> (s hodnotou <code>1</code>) se dvakrát vynásobí <code>base</code>, takže má nyní hodnotu <code>base * base</code>, což odpovídá <code>base^2</code>, a ta se poté vrátí.</p>"
     },
     {
       "id": "for-statements_b30",
       "type": "paragraph",
       "html": "<p>Although most for-loops increment the loop variable by 1, we can decrement it as well:</p>",
       "preview": "Although most for-loops increment the loop variable by 1, we can decrement it as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli většina for-cyklů inkrementuje řídicí proměnnou o 1, můžeme ji stejně tak i dekrementovat:</p>"
     },
     {
       "id": "for-statements_b31",
@@ -236,28 +269,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 9 }; i >= 0; --i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 9 }; i &gt;= 0; --i)\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int i{ 9 }; i >= 0; --i)\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b32",
       "type": "paragraph",
       "html": "<p>This prints the result:</p>",
       "preview": "This prints the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše výsledek:</p>"
     },
     {
       "id": "for-statements_b33",
       "type": "output",
       "text": "9 8 7 6 5 4 3 2 1 0\n",
       "html": "<pre>9 8 7 6 5 4 3 2 1 0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>9 8 7 6 5 4 3 2 1 0\n</pre>"
     },
     {
       "id": "for-statements_b34",
       "type": "paragraph",
       "html": "<p>Alternately, we can change the value of our loop variable by more than 1 with each iteration:</p>",
       "preview": "Alternately, we can change the value of our loop variable by more than 1 with ea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případně můžeme hodnotu naší řídicí proměnné cyklu v každé iteraci měnit o více než 1:</p>"
     },
     {
       "id": "for-statements_b35",
@@ -265,35 +302,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int i{ 0 }; i <= 10; i += 2) // increment by 2 each iteration\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i{ 0 }; i &lt;= 10; i += 2) // increment by 2 each iteration\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int i{ 0 }; i <= 10; i += 2) // zvýšení o 2 v každé iteraci\n        std::cout << i << ' ';\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b36",
       "type": "paragraph",
       "html": "<p>This prints the result:</p>",
       "preview": "This prints the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše výsledek:</p>"
     },
     {
       "id": "for-statements_b37",
       "type": "output",
       "text": "0 2 4 6 8 10\n",
       "html": "<pre>0 2 4 6 8 10\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0 2 4 6 8 10\n</pre>"
     },
     {
       "id": "for-statements_b38",
       "type": "section",
       "title": "The perils of operator!= in for-loop conditions",
       "html": "<h3 class=\"cpp-section-heading\">The perils of <code>operator!=</code> in for-loop conditions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Úskalí <code>operator!=</code> v podmínkách for-cyklů</h3>",
+      "title_cs": "Nebezpečí operátora!= v podmínkách for-loop"
     },
     {
       "id": "for-statements_b39",
       "type": "paragraph",
       "html": "<p>When writing a loop condition involving a value, we can often write the condition in many different ways. The following two loops execute identically:</p>",
       "preview": "When writing a loop condition involving a value, we can often write the conditio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při psaní podmínky cyklu pracující s určitou hodnotou můžeme tuto podmínku často zapsat mnoha různými způsoby. Následující dva cykly se vykonají zcela identicky:</p>"
     },
     {
       "id": "for-statements_b40",
@@ -301,14 +344,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // uses <\n         std::cout << i;\n\n    for (int i { 0 }; i != 10; ++i) // uses !=\n         std::cout << i;\n\n     return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i { 0 }; i &lt; 10; ++i) // uses &lt;\n         std::cout &lt;&lt; i;\n\n    for (int i { 0 }; i != 10; ++i) // uses !=\n         std::cout &lt;&lt; i;\n\n     return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // používá <\n         std::cout << i;\n\n    for (int i { 0 }; i != 10; ++i) // používá !=\n         std::cout << i;\n\n     návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b41",
       "type": "paragraph",
       "html": "<p>So which should we prefer? The former is the better choice, as it will terminate even if <code>i</code> jumps over the value <code>10</code>, whereas the latter will not. The following example demonstrates this:</p>",
       "preview": "So which should we prefer? The former is the better choice, as it will terminate",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Čemu bychom tedy měli dát přednost? První možnost je lepší volbou, protože cyklus skončí i v případě, že <code>i</code> hodnotu <code>10</code> přeskočí, zatímco v druhém případě nikoli. Následující příklad to demonstruje:</p>"
     },
     {
       "id": "for-statements_b42",
@@ -316,7 +361,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // uses <, still terminates\n    {\n         std::cout << i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n    for (int i { 0 }; i != 10; ++i) // uses !=, infinite loop\n    {\n         std::cout << i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n     return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int i { 0 }; i &lt; 10; ++i) // uses &lt;, still terminates\n    {\n         std::cout &lt;&lt; i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n    for (int i { 0 }; i != 10; ++i) // uses !=, infinite loop\n    {\n         std::cout &lt;&lt; i;\n         if (i == 9) ++i; // jump over value 10\n    }\n\n     return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int i { 0 }; i < 10; ++i) // používá <, stále končí\n    {\n         std::cout << i;\n         if (i == 9) ++i; // skok přes hodnotu 10\n    }\n\n    for (int i { 0 }; i != 10; ++i) // používá !=, nekonečnou smyčku\n    {\n         std::cout << i;\n         if (i == 9) ++i; // skok přes hodnotu 10\n    }\n\n     návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b43",
@@ -324,28 +370,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid <code>operator!=</code> when doing numeric comparisons in the for-loop condition. Prefer <code>operator&lt;</code> or <code>operator&lt;=</code> where possible.</p></div>",
       "preview": "Best practiceAvoid operator!= when doing numeric comparisons in the for-loop condition. Prefer opera",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vyhněte se <code>operator!=</code> při číselném porovnávání v podmínce for-cyklu. Kde je to možné, dávejte přednost <code>operator&lt;</code> nebo <code>operator&lt;=</code>.</p></div>"
     },
     {
       "id": "for-statements_b44",
       "type": "section",
       "title": "Off-by-one errors",
       "html": "<h3 class=\"cpp-section-heading\">Off-by-one errors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Chyby o jedničku (off-by-one errors)</h3>",
+      "title_cs": "Chyby Off-by-one"
     },
     {
       "id": "for-statements_b45",
       "type": "paragraph",
       "html": "<p>One of the biggest problems that new programmers have with for-loops (and other loops that utilize counters) are off-by-one errors. <strong>Off-by-one errors</strong> occur when the loop iterates one too many or one too few times to produce the desired result.</p>",
       "preview": "One of the biggest problems that new programmers have with for-loops (and other ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z největších problémů, se kterými se začínající programátoři u for-cyklů (a dalších cyklů využívajících čítače) setkávají, jsou chyby o jedničku. K <strong>chybám o jedničku</strong> (off-by-one errors) dochází tehdy, když cyklus proběhne o jedno opakování více či méně, než je potřeba k dosažení požadovaného výsledku.</p>"
     },
     {
       "id": "for-statements_b46",
       "type": "paragraph",
       "html": "<p>Here’s an example:</p>",
       "preview": "Here’s an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad:</p>"
     },
     {
       "id": "for-statements_b47",
@@ -353,35 +404,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    // oops, we used operator< instead of operator<=\n    for (int i{ 1 }; i < 5; ++i)\n    {\n        std::cout << i << ' ';\n    }\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // oops, we used operator&lt; instead of operator&lt;=\n    for (int i{ 1 }; i &lt; 5; ++i)\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    // jejda, místo operátoru<= jsme použili operátor<\n    for (int i{ 1 }; i < 5; ++i)\n    {\n        std::cout << i << ' ';\n    }\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b48",
       "type": "paragraph",
       "html": "<p>This program is supposed to print <code>1 2 3 4 5</code>, but it only prints <code>1 2 3 4</code> because we used the wrong relational operator.</p>",
       "preview": "This program is supposed to print 1 2 3 4 5, but it only prints 1 2 3 4 because ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program má vypsat <code>1 2 3 4 5</code>, ale vypíše pouze <code>1 2 3 4</code>, protože jsme použili špatný relační operátor.</p>"
     },
     {
       "id": "for-statements_b49",
       "type": "paragraph",
       "html": "<p>Although the most common cause for these errors is using the wrong relational operator, they can sometimes occur by using pre-increment or pre-decrement instead of post-increment or post-decrement, or vice-versa.</p>",
       "preview": "Although the most common cause for these errors is using the wrong relational op",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli nejčastější příčinou těchto chyb je použití špatného relačního operátoru, někdy k nim může dojít použitím pre-inkrementace či pre-dekrementace namísto post-inkrementace či post-dekrementace, nebo naopak.</p>"
     },
     {
       "id": "for-statements_b50",
       "type": "section",
       "title": "Omitted expressions",
       "html": "<h3 class=\"cpp-section-heading\">Omitted expressions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vynechané výrazy</h3>",
+      "title_cs": "Vynechané výrazy"
     },
     {
       "id": "for-statements_b51",
       "type": "paragraph",
       "html": "<p>It is possible to write <em>for loops</em> that omit any or all of the statements or expressions. For example, in the following example, we’ll omit the init-statement and end-expression, leaving only the condition:</p>",
       "preview": "It is possible to write for loops that omit any or all of the statements or expr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je možné psát <em>for cykly</em>, které vynechávají jakékoli nebo všechny příkazy či výrazy. V následujícím příkladu například vynecháme init-statement a end-expression a ponecháme pouze podmínku:</p>"
     },
     {
       "id": "for-statements_b52",
@@ -389,35 +446,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int i{ 0 };\n    for ( ; i < 10; ) // no init-statement or end-expression\n    {\n        std::cout << i << ' ';\n        ++i;\n    }\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int i{ 0 };\n    for ( ; i &lt; 10; ) // no init-statement or end-expression\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';\n        ++i;\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int i{ 0 };\n    for ( ; i < 10; ) // žádný init-příkaz ani koncový výraz\n    {\n        std::cout << i << ' ';\n        ++i;\n    }\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b53",
       "type": "paragraph",
       "html": "<p>This <em>for loop</em> produces the result:</p>",
       "preview": "This for loop produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento <em>for cyklus</em> vyprodukuje výsledek:</p>"
     },
     {
       "id": "for-statements_b54",
       "type": "output",
       "text": "0 1 2 3 4 5 6 7 8 9\n",
       "html": "<pre>0 1 2 3 4 5 6 7 8 9\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0 1 2 3 4 5 6 7 8 9\n</pre>"
     },
     {
       "id": "for-statements_b55",
       "type": "paragraph",
       "html": "<p>Rather than having the <em>for loop</em> do the initialization and incrementing, we’ve done it manually. We have done so purely for academic purposes in this example, but there are cases where not defining a loop variable (because you already have one) or not incrementing it in the end-expression (because you’re incrementing it some other way) is desired.</p>",
       "preview": "Rather than having the for loop do the initialization and incrementing, we’ve do",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo toho, aby inicializaci a inkrementaci provedl <em>for cyklus</em>, jsme to udělali ručně. V tomto příkladu jsme tak učinili čistě pro studijní účely, existují však případy, kdy je žádoucí nedefinovat proměnnou cyklu (protože už ji máte) nebo ji neinkrementovat v end-expression (protože ji inkrementujete jiným způsobem).</p>"
     },
     {
       "id": "for-statements_b56",
       "type": "paragraph",
       "html": "<p>Although you do not see it very often, it is worth noting that the following example produces an infinite loop:</p>",
       "preview": "Although you do not see it very often, it is worth noting that the following exa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli se s tím nesetkáte příliš často, stojí za zmínku, že následující příklad vytvoří nekonečný cyklus:</p>"
     },
     {
       "id": "for-statements_b57",
@@ -425,14 +487,16 @@
       "language": "cpp",
       "code": "for (;;)\n    statement;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">for (;;)\n    statement;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">pro (;;)\n    výpis;</code></pre>"
     },
     {
       "id": "for-statements_b58",
       "type": "paragraph",
       "html": "<p>The above example is equivalent to:</p>",
       "preview": "The above example is equivalent to:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad je ekvivalentní s:</p>"
     },
     {
       "id": "for-statements_b59",
@@ -440,35 +504,41 @@
       "language": "cpp",
       "code": "while (true)\n    statement;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">while (true)\n    statement;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">zatímco (true)\n    výpis;</code></pre>"
     },
     {
       "id": "for-statements_b60",
       "type": "paragraph",
       "html": "<p>This might be a little unexpected, as you’d probably expect an omitted condition-expression to be treated as <code>false</code>. However, the C++ standard explicitly (and inconsistently) defines that an omitted condition-expression in a for-loop should be treated as <code>true</code>.</p>",
       "preview": "This might be a little unexpected, as you’d probably expect an omitted condition",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To může být trochu nečekané, protože byste pravděpodobně očekávali, že vynechaný podmínkový výraz (condition-expression) bude vyhodnocen jako <code>false</code>. Standard jazyka C++ však explicitně (a poněkud nekonzistentně) definuje, že vynechaný podmínkový výraz ve for-cyklu má být považován za <code>true</code>.</p>"
     },
     {
       "id": "for-statements_b61",
       "type": "paragraph",
       "html": "<p>We recommend avoiding this form of the for loop altogether and using <code>while (true)</code> instead.</p>",
       "preview": "We recommend avoiding this form of the for loop altogether and using while (true",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Doporučujeme se této formě for-cyklu zcela vyhnout a místo ní použít <code>while (true)</code>.</p>"
     },
     {
       "id": "for-statements_b62",
       "type": "section",
       "title": "For-loops with multiple counters",
       "html": "<h3 class=\"cpp-section-heading\">For-loops with multiple counters</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">For-cykly s více čítači</h3>",
+      "title_cs": "Smyčky For s více čítači"
     },
     {
       "id": "for-statements_b63",
       "type": "paragraph",
       "html": "<p>Although for-loops typically iterate over only one variable, sometimes for-loops need to work with multiple variables. To assist with this, the programmer can define multiple variables in the init-statement, and can make use of the comma operator to change the value of multiple variables in the end-expression:</p>",
       "preview": "Although for-loops typically iterate over only one variable, sometimes for-loops",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli for-cykly obvykle iterují pouze přes jednu proměnnou, někdy potřebují pracovat s více proměnnými. Aby to bylo možné, může programátor v inicializačním příkazu (init-statement) definovat více proměnných a v koncovém výrazu (end-expression) využít operátor čárky ke změně hodnot více proměnných:</p>"
     },
     {
       "id": "for-statements_b64",
@@ -476,35 +546,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    for (int x{ 0 }, y{ 9 }; x < 10; ++x, --y)\n        std::cout << x << ' ' << y << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    for (int x{ 0 }, y{ 9 }; x &lt; 10; ++x, --y)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; y &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    for (int x{ 0 }, y{ 9 }; x < 10; ++x, --y)\n        std::cout << x << ' ' << y << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b65",
       "type": "paragraph",
       "html": "<p>This loop defines and initializes two new variables: <code>x</code> and <code>y</code>. It iterates <code>x</code> over the range <code>0</code> to <code>9</code>, and after each iteration <code>x</code> is incremented and <code>y</code> is decremented.</p>",
       "preview": "This loop defines and initializes two new variables: x and y. It iterates x over",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento cyklus definuje a inicializuje dvě nové proměnné: <code>x</code> a <code>y</code>. Iteruje proměnnou <code>x</code> v rozsahu od <code>0</code> do <code>9</code> a po každé iteraci je proměnná <code>x</code> inkrementována a proměnná <code>y</code> dekrementována.</p>"
     },
     {
       "id": "for-statements_b66",
       "type": "paragraph",
       "html": "<p>This program produces the result:</p>",
       "preview": "This program produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "for-statements_b67",
       "type": "output",
       "text": "0 9\n1 8\n2 7\n3 6\n4 5\n5 4\n6 3\n7 2\n8 1\n9 0\n",
       "html": "<pre>0 9\n1 8\n2 7\n3 6\n4 5\n5 4\n6 3\n7 2\n8 1\n9 0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0 9\n1 8\n2 7\n3 6\n4 5\n5 4\n6 3\n7 2\n8 1\n9 0\n</pre>"
     },
     {
       "id": "for-statements_b68",
       "type": "paragraph",
       "html": "<p>This is about the only place in C++ where defining multiple variables in the same statement, and use of the comma operator is considered an acceptable practice.</p>",
       "preview": "This is about the only place in C++ where defining multiple variables in the sam",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je v C++ snad jediné místo, kde je definování více proměnných v jednom příkazu a použití operátoru čárky považováno za přijatelnou praxi.</p>"
     },
     {
       "id": "for-statements_b69",
@@ -512,7 +587,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover the comma operator in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-comma-operator/\">6.5 -- The comma operator</a>.</p></div>",
       "preview": "Related contentWe cover the comma operator in lesson 6.5 -- The comma operator.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Operátoru čárky se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/the-comma-operator/\">6.5 -- Operátor čárky</a>.</p></div>"
     },
     {
       "id": "for-statements_b70",
@@ -520,21 +596,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Defining multiple variables (in the init-statement) and using the comma operator (in the end-expression) is acceptable inside a for-statement.</p></div>",
       "preview": "Best practiceDefining multiple variables (in the init-statement) and using the comma operator (in th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Definování více proměnných (v init-statement) a použití operátoru čárky (v end-expression) je uvnitř cyklu for (for-statement) přijatelné.</p></div>"
     },
     {
       "id": "for-statements_b71",
       "type": "section",
       "title": "Nested for-loops",
       "html": "<h3 class=\"cpp-section-heading\">Nested for-loops</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vnořené cykly for</h3>",
+      "title_cs": "Vnořené smyčky for"
     },
     {
       "id": "for-statements_b72",
       "type": "paragraph",
       "html": "<p>Like other types of loops, for-loops can be nested inside other loops. In the following example, we’re nesting a for-loop inside another for-loop:</p>",
       "preview": "Like other types of loops, for-loops can be nested inside other loops. In the fo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako jiné typy cyklů lze i cykly for vnořovat do jiných cyklů. V následujícím příkladu vnořujeme cyklus for do jiného cyklu for:</p>"
     },
     {
       "id": "for-statements_b73",
@@ -542,42 +622,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n\tfor (char c{ 'a' }; c <= 'e'; ++c) // outer loop on letters\n\t{\n\t\tstd::cout << c; // print our letter first\n\t\t\n\t\tfor (int i{ 0 }; i < 3; ++i) // inner loop on all numbers\n\t\t\tstd::cout << i;\n\n\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tfor (char c{ 'a' }; c &lt;= 'e'; ++c) // outer loop on letters\n\t{\n\t\tstd::cout &lt;&lt; c; // print our letter first\n\t\t\n\t\tfor (int i{ 0 }; i &lt; 3; ++i) // inner loop on all numbers\n\t\t\tstd::cout &lt;&lt; i;\n\n\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n\tfor (char c{ 'a' }; c <= 'e'; ++c) // vnější smyčka na písmenech\n\t{\n\t\tstd::cout << c; // nejprve vytiskněte náš dopis\n\t\t\n\t\tfor (int i{ 0 }; i < 3; ++i) // vnitřní smyčka na všech číslech\n\t\t\tstd::cout << i;\n\n\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b74",
       "type": "paragraph",
       "html": "<p>For each iteration of the outer loop, the inner loop runs in its entirety. Consequently, the output is:</p>",
       "preview": "For each iteration of the outer loop, the inner loop runs in its entirety. Conse",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při každé iteraci vnějšího cyklu proběhne vnitřní cyklus celý. Výstupem tedy je:</p>"
     },
     {
       "id": "for-statements_b75",
       "type": "output",
       "text": "a012\nb012\nc012\nd012\ne012\n",
       "html": "<pre>a012\nb012\nc012\nd012\ne012\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>a012\nb012\nc012\nd012\ne012\n</pre>"
     },
     {
       "id": "for-statements_b76",
       "type": "paragraph",
       "html": "<p>Here’s some more detail on what’s happening here. The outer loop runs first, and char <code>c</code> is initialized to <code>'a'</code>. Then <code>c &lt;= 'e'</code> is evaluated, which is <code>true</code>, so the loop body executes. Since <code>c</code> is set to <code>'a'</code>, this first prints <code>a</code>. Next the inner loop executes entirely (which prints <code>0</code>, <code>1</code>, and <code>2</code>). Then a newline is printed. Now the outer loop body is finished, so the outer loop returns to the top, <code>c</code> is incremented to <code>'b'</code>, and the loop condition is re-evaluated. Since the loop condition is still <code>true</code> the next iteration of the outer loop begins. This prints <code>b012\\n</code>. And so on.</p>",
       "preview": "Here’s some more detail on what’s happening here. The outer loop runs first, and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je podrobnější vysvětlení toho, co se zde děje. Nejprve se spustí vnější cyklus a char <code>c</code> se inicializuje na <code>'a'</code>. Poté se vyhodnotí <code>c &lt;= 'e'</code>, což je <code>true</code>, takže se provede tělo cyklu. Protože <code>c</code> je nastaveno na <code>'a'</code>, nejprve se vypíše <code>a</code>. Dále se zcela provede vnitřní cyklus (který vypíše <code>0</code>, <code>1</code> a <code>2</code>). Poté se vypíše nový řádek. Nyní je tělo vnějšího cyklu dokončeno, takže se vnější cyklus vrátí na začátek, <code>c</code> se inkrementuje na <code>'b'</code> a podmínka cyklu se znovu vyhodnotí. Protože je podmínka cyklu stále <code>true</code>, začne další iterace vnějšího cyklu. Ta vypíše <code>b012\\n</code>. A tak dále.</p>"
     },
     {
       "id": "for-statements_b77",
       "type": "section",
       "title": "Variables used only inside a loop should be defined inside the loop",
       "html": "<h3 class=\"cpp-section-heading\">Variables used only inside a loop should be defined inside the loop</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proměnné používané pouze uvnitř cyklu by měly být definovány uvnitř cyklu</h3>",
+      "title_cs": "Proměnné používané pouze uvnitř smyčky by měly být definovány uvnitř smyčky"
     },
     {
       "id": "for-statements_b78",
       "type": "paragraph",
       "html": "<p>New programmers often think that creating variables is expensive, so that it is better to create a variable once (and then assign values to it) than create it many times (and use initialization). That leads to loops that look like some variation of the following:</p>",
       "preview": "New programmers often think that creating variables is expensive, so that it is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začínající programátoři si často myslí, že vytváření proměnných je režijně náročné, a proto je lepší vytvořit proměnnou jednou (a pak jí přiřazovat hodnoty), než ji vytvářet opakovaně (a používat inicializaci). To vede k cyklům, které vypadají jako nějaká variace na následující kód:</p>"
     },
     {
       "id": "for-statements_b79",
@@ -585,28 +672,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int i {}; // i defined outside loop\n    for (i = 0; i < 10; ++i) // i assigned value\n    {\n        std::cout << i << ' ';        \n    }\n\n    // i can still be accessed here\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int i {}; // i defined outside loop\n    for (i = 0; i &lt; 10; ++i) // i assigned value\n    {\n        std::cout &lt;&lt; i &lt;&lt; ' ';        \n    }\n\n    // i can still be accessed here\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int i {}; // Definoval jsem vnější smyčku\n    for (i = 0; i < 10; ++i) // i přiřazená hodnota\n    {\n        std::cout << i << ' ';        \n    }\n\n    // zde jsem stále přístupný\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "for-statements_b80",
       "type": "paragraph",
       "html": "<p>However, creating a variable has no cost -- it is the initialization that has a cost, and there is typically no cost difference between initialization and assignment. The above example makes <code>i</code> available beyond the loop. Unless using a variable beyond the loop is required, defining a variable outside the loop is likely to have two consequences:</p>",
       "preview": "However, creating a variable has no cost -- it is the initialization that has a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvoření proměnné však nemá žádnou režii – je to inicializace, která něco stojí, a mezi inicializací a přiřazením obvykle není žádný rozdíl v nákladech. Výše uvedený příklad zpřístupňuje <code>i</code> i mimo cyklus. Pokud není použití proměnné mimo cyklus výslovně vyžadováno, má definování proměnné vně cyklu pravděpodobně dva důsledky:</p>"
     },
     {
       "id": "for-statements_b81",
       "type": "list",
       "html": "<ol start=\"1\"><li>It makes our program more complex, as we have to read more code to see where the variable is used.</li><li>It may actually be slower because the compiler may not be able to optimize a variable with a larger scope as effectively.</li></ol>",
       "preview": "It makes our program more complex, as we have to read more code to see where the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Dělá náš program složitějším, protože musíme číst více kódu, abychom zjistili, kde všude se proměnná používá.</li><li>Ve skutečnosti může být program pomalejší, protože kompilátor nemusí být schopen proměnnou s větším rozsahem platnosti optimalizovat tak efektivně.</li></ol>"
     },
     {
       "id": "for-statements_b82",
       "type": "paragraph",
       "html": "<p>Consistent with our best practice to define variables in the smallest reasonable scope possible, a variable that is only used within a loop should be defined inside the loop rather than outside.</p>",
       "preview": "Consistent with our best practice to define variables in the smallest reasonable",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V souladu s naším doporučeným postupem definovat proměnné v co nejmenším rozumném rozsahu platnosti (scope) by měla být proměnná, která se používá pouze uvnitř cyklu, definována uvnitř cyklu, nikoli vně.</p>"
     },
     {
       "id": "for-statements_b83",
@@ -614,28 +705,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Variables used only inside a loop should be defined inside the scope of the loop.</p></div>",
       "preview": "Best practiceVariables used only inside a loop should be defined inside the scope of the loop.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Proměnné používané pouze uvnitř cyklu by měly být definovány uvnitř rozsahu platnosti (scope) daného cyklu.</p></div>"
     },
     {
       "id": "for-statements_b84",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "for-statements_b85",
       "type": "paragraph",
       "html": "<p>For-statements are the most commonly used loop in the C++ language because they place all of the necessary information about loop variables, loop condition, and loop variable modifies at the top of the loops, which helps reduce errors. Even though its syntax is typically a bit confusing to new programmers, you will see for-loops so often that you will understand them in no time at all!</p>",
       "preview": "For-statements are the most commonly used loop in the C++ language because they ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Cykly for jsou nejpoužívanějším druhem cyklu v jazyce C++, protože umisťují veškeré potřebné informace o řídicích proměnných, podmínce cyklu a úpravách proměnných přímo do hlavičky cyklu, což pomáhá předcházet chybám. Přestože je jejich syntaxe pro začínající programátory zpočátku trochu matoucí, s cykly for se budete setkávat tak často, že si je osvojíte raz dva!</p>"
     },
     {
       "id": "for-statements_b86",
       "type": "paragraph",
       "html": "<p>For-statements excel when you have a counter variable. If you do not have a counter, a while-statement is probably a better choice.</p>",
       "preview": "For-statements excel when you have a counter variable. If you do not have a coun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příkazy for vynikají v situacích, kdy máte proměnnou čítače. Pokud čítač nemáte, je pravděpodobně lepší volbou cyklus while.</p>"
     },
     {
       "id": "for-statements_b87",
@@ -643,14 +739,17 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer for-loops over while-loops when there is an obvious loop variable.<br>Prefer while-loops over for-loops when there is no obvious loop variable.</p></div>",
       "preview": "Best practicePrefer for-loops over while-loops when there is an obvious loop variable.Prefer while-l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Upřednostňujte cykly for před cykly while, pokud existuje zřejmá řídicí proměnná cyklu.<br>Upřednostňujte cykly while před cykly for, pokud žádná zřejmá řídicí proměnná cyklu neexistuje.</p></div>"
     },
     {
       "id": "for-statements_b88",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "for-statements_b89",
@@ -675,14 +774,16 @@
       "type": "paragraph",
       "html": "<p>For example, <code>sumTo(5)</code> should return 15, which is 1 + 2 + 3 + 4 + 5.</p>",
       "preview": "For example, sumTo(5) should return 15, which is 1 + 2 + 3 + 4 + 5.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například <code>sumTo(5)</code> by mělo vrátit 15, což je 1 + 2 + 3 + 4 + 5.</p>"
     },
     {
       "id": "for-statements_b92",
       "type": "paragraph",
       "html": "<p>Hint: Use a non-loop variable to accumulate the sum as you iterate from 1 to the input value, much like the <code>pow()</code> example above uses the total variable to accumulate the return value each iteration.</p>",
       "preview": "Hint: Use a non-loop variable to accumulate the sum as you iterate from 1 to the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nápověda: Použijte proměnnou mimo cyklus k akumulaci součtu při iteraci od 1 do vstupní hodnoty, podobně jako výše uvedený příklad s <code>pow()</code> používá proměnnou total k akumulaci návratové hodnoty v každé iteraci.</p>"
     },
     {
       "id": "for-statements_b93",
@@ -699,7 +800,8 @@
       "language": "cpp",
       "code": "// Print all numbers from 9 to 0\nfor (unsigned int i{ 9 }; i >= 0; --i)\n    std::cout << i<< ' ';",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Print all numbers from 9 to 0\nfor (unsigned int i{ 9 }; i &gt;= 0; --i)\n    std::cout &lt;&lt; i&lt;&lt; ' ';</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Tisk všech čísel od 9 do 0\nfor (bez znaménka int i{ 9 }; i >= 0; --i)\n    std::cout << i<< ' ';</code></pre>"
     },
     {
       "id": "for-statements_b95",
@@ -715,28 +817,32 @@
       "type": "paragraph",
       "html": "<p>The rules of the game are simple: Starting at 1, and counting upward, replace any number divisible only by three with the word “fizz”, any number only divisible by five with the word “buzz”, and any number divisible by both 3 and 5 with the word “fizzbuzz”.</p>",
       "preview": "The rules of the game are simple: Starting at 1, and counting upward, replace an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pravidla hry jsou jednoduchá: Začněte od 1 a počítejte nahoru; nahraďte každé číslo dělitelné pouze třemi slovem „fizz“, každé číslo dělitelné pouze pěti slovem „buzz“ a každé číslo dělitelné jak 3, tak 5 slovem „fizzbuzz“.</p>"
     },
     {
       "id": "for-statements_b97",
       "type": "paragraph",
       "html": "<p>Implement this game inside a function named <code>fizzbuzz()</code> that takes a parameter determining what number to count up to. Use a for-loop and a single if-else chain (meaning you can use as many else-if as you like).</p>",
       "preview": "Implement this game inside a function named fizzbuzz() that takes a parameter de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Implementujte tuto hru uvnitř funkce s názvem <code>fizzbuzz()</code>, která přijímá parametr určující, do jakého čísla se má počítat. Použijte cyklus for a jeden řetězec if-else (což znamená, že můžete použít libovolný počet větví else-if).</p>"
     },
     {
       "id": "for-statements_b98",
       "type": "paragraph",
       "html": "<p>The output of <code>fizzbuzz(15)</code> should match the following:</p>",
       "preview": "The output of fizzbuzz(15) should match the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup volání <code>fizzbuzz(15)</code> by měl odpovídat následujícímu:</p>"
     },
     {
       "id": "for-statements_b99",
       "type": "output",
       "text": "1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n",
       "html": "<pre>1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>1\n2\nfizz\n4\nbuzz\nfizz\n7\n8\nfizz\nbuzz\n11\nfizz\n13\n14\nfizzbuzz\n</pre>"
     },
     {
       "id": "for-statements_b100",
@@ -752,35 +858,41 @@
       "type": "paragraph",
       "html": "<p>In this version, using an if/else chain to explicitly cover every possible combination of words will result in a function that is too long. Optimize your function so only 4 if-statements are used: one for each of the non-compound words (“fizz”, “buzz”, “pop”), and one for the case where a number is printed.</p>",
       "preview": "In this version, using an if/else chain to explicitly cover every possible combi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této verzi by použití řetězce if/else pro explicitní pokrytí všech možných kombinací slov vedlo k příliš dlouhé funkci. Optimalizujte svou funkci tak, aby byly použity pouze 4 příkazy if: jeden pro každé z nesložených slov („fizz“, „buzz“, „pop“) a jeden pro případ, kdy se tiskne číslo.</p>"
     },
     {
       "id": "for-statements_b102",
       "type": "paragraph",
       "html": "<p>Here are some snippets of the expected output:</p>",
       "preview": "Here are some snippets of the expected output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je několik ukázek očekávaného výstupu:</p>"
     },
     {
       "id": "for-statements_b103",
       "type": "output",
       "text": "4\nbuzz\nfizz\npop\n8\n",
       "html": "<pre>4\nbuzz\nfizz\npop\n8\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>4\nbuzz\nfizz\npop\n8\n</pre>"
     },
     {
       "id": "for-statements_b104",
       "type": "output",
       "text": "19\nbuzz\nfizzpop\n22\n",
       "html": "<pre>19\nbuzz\nfizzpop\n22\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>19\nbuzz\nfizzpop\n22\n</pre>"
     },
     {
       "id": "for-statements_b105",
       "type": "output",
       "text": "104\nfizzbuzzpop\n106\n",
       "html": "<pre>104\nfizzbuzzpop\n106\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>104\nfizzbuzzpop\n106\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "8.10 — Příkazy for"
 }

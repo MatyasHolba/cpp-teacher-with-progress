@@ -14,21 +14,25 @@
       "type": "section",
       "title": "Shallow copying",
       "html": "<h3 class=\"cpp-section-heading\">Shallow copying</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Mělké kopírování</h3>",
+      "title_cs": "Mělké kopírování"
     },
     {
       "id": "shallow-vs-deep-copying_b1",
       "type": "paragraph",
       "html": "<p>Because C++ does not know much about your class, the default copy constructor and default assignment operators it provides use a copying method known as a memberwise copy (also known as a <strong>shallow copy</strong>). This means that C++ copies each member of the class individually (using the assignment operator for overloaded operator=, and direct initialization for the copy constructor). When classes are simple (e.g. do not contain any dynamically allocated memory), this works very well.</p>",
       "preview": "Because C++ does not know much about your class, the default copy constructor an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože C++ o vaší třídě mnoho neví, používá výchozí kopírovací konstruktor a výchozí operátor přiřazení, které poskytuje, metodu kopírování známou jako kopírování po jednotlivých členech (tzv. <strong>mělká kopie</strong> neboli <strong>shallow copy</strong>). To znamená, že C++ zkopíruje každý člen třídy zvlášť (pomocí operátoru přiřazení pro přetížený operator= a přímé inicializace pro kopírovací konstruktor). U jednoduchých tříd (např. těch, které neobsahují žádnou dynamicky alokovanou paměť) to funguje velmi dobře.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b2",
       "type": "paragraph",
       "html": "<p>For example, let’s take a look at our Fraction class:</p>",
       "preview": "For example, let’s take a look at our Fraction class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se například na naši třídu Fraction:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b3",
@@ -36,14 +40,16 @@
       "language": "cpp",
       "code": "#include <cassert>\n#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    friend std::ostream& operator<<(std::ostream& out, const Fraction& f1);\n};\n \nstd::ostream& operator<<(std::ostream& out, const Fraction& f1)\n{\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\treturn out;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1);\n};\n \nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n{\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cassert>\n#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator { 0 };\n    int m_jmenovatel { 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel = 0, int jmenovatel = 1)\n        : m_numerator{ numerator }\n        , m_jmenovatel{ jmenovatel }\n    {\n        tvrdit(jmenovatel != 0);\n    }\n \n    přítel std::ostream& operátor<<(std::ostream& out, const Fraction& f1);\n};\n \nstd::ostream& operátor<<(std::ostream& out, const zlomek& f1)\n{\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\tvrátit se ven;\n}</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b4",
       "type": "paragraph",
       "html": "<p>The default copy constructor and default assignment operator provided by the compiler for this class look something like this:</p>",
       "preview": "The default copy constructor and default assignment operator provided by the com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výchozí kopírovací konstruktor a výchozí operátor přiřazení, které pro tuto třídu poskytuje překladač, vypadají přibližně takto:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b5",
@@ -51,28 +57,32 @@
       "language": "cpp",
       "code": "#include <cassert>\n#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    // Possible implementation of implicit copy constructor\n    Fraction(const Fraction& f)\n        : m_numerator{ f.m_numerator }\n        , m_denominator{ f.m_denominator }\n    {\n    }\n\n    // Possible implementation of implicit assignment operator\n    Fraction& operator= (const Fraction& fraction)\n    {\n        // self-assignment guard\n        if (this == &fraction)\n            return *this;\n \n        // do the copy\n        m_numerator = fraction.m_numerator;\n        m_denominator = fraction.m_denominator;\n \n        // return the existing object so we can chain this operator\n        return *this;\n    }\n\n    friend std::ostream& operator<<(std::ostream& out, const Fraction& f1)\n    {\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\treturn out;\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator { 0 };\n    int m_denominator { 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }\n        , m_denominator{ denominator }\n    {\n        assert(denominator != 0);\n    }\n \n    // Possible implementation of implicit copy constructor\n    Fraction(const Fraction&amp; f)\n        : m_numerator{ f.m_numerator }\n        , m_denominator{ f.m_denominator }\n    {\n    }\n\n    // Possible implementation of implicit assignment operator\n    Fraction&amp; operator= (const Fraction&amp; fraction)\n    {\n        // self-assignment guard\n        if (this == &amp;fraction)\n            return *this;\n \n        // do the copy\n        m_numerator = fraction.m_numerator;\n        m_denominator = fraction.m_denominator;\n \n        // return the existing object so we can chain this operator\n        return *this;\n    }\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n    {\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cassert>\n#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator { 0 };\n    int m_jmenovatel { 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel = 0, int jmenovatel = 1)\n        : m_numerator{ numerator }\n        , m_jmenovatel{ jmenovatel }\n    {\n        tvrdit(jmenovatel != 0);\n    }\n \n    // Možná implementace implicitního kopírovacího konstruktoru\n    Zlomek (konst Zlomek&f)\n        : m_numerator{ f.m_numerator }\n        , m_denominator{ f.m_denominator }\n    {\n    }\n\n    // Možná implementace implicitního operátoru přiřazení\n    Zlomek& operátor= (konst Zlomek& zlomek)\n    {\n        // strážce samopřidělování\n        if (toto == &zlomek)\n            vrátit *toto;\n \n        // proveďte kopii\n        m_numerator = zlomek.m_numerator;\n        m_jmenovatel = zlomek.m_jmenovatel;\n \n        // vrátí existující objekt, abychom mohli zřetězit tento operátor\n        vrátit *toto;\n    }\n\n    přítel std::ostream& operátor<<(std::ostream& out, const Fraction& f1)\n    {\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\tvrátit se ven;\n    }\n};</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b6",
       "type": "paragraph",
       "html": "<p>Note that because these default versions work just fine for copying this class, there’s really no reason to write our own version of these functions in this case.</p>",
       "preview": "Note that because these default versions work just fine for copying this class, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že protože tyto výchozí verze fungují pro kopírování této třídy naprosto v pořádku, není v tomto případě žádný důvod psát vlastní verze těchto funkcí.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b7",
       "type": "paragraph",
       "html": "<p>However, when designing classes that handle dynamically allocated memory, memberwise (shallow) copying can get us in a lot of trouble! This is because shallow copies of a pointer just copy the address of the pointer -- it does not allocate any memory or copy the contents being pointed to!</p>",
       "preview": "However, when designing classes that handle dynamically allocated memory, member",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při navrhování tříd, které spravují dynamicky alokovanou paměť, nás však kopírování po členech (mělká kopie) může dostat do velkých potíží! Důvodem je to, že mělká kopie ukazatele pouze zkopíruje adresu tohoto ukazatele – nealokuje žádnou paměť ani nezkopíruje obsah, na který ukazatel ukazuje!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b8",
       "type": "paragraph",
       "html": "<p>Let’s take a look at an example of this:</p>",
       "preview": "Let’s take a look at an example of this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na příklad:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b9",
@@ -80,14 +90,16 @@
       "language": "cpp",
       "code": "#include <cstring> // for strlen()\n#include <cassert> // for assert()\n\nclass MyString\n{\nprivate:\n    char* m_data{};\n    int m_length{};\n \npublic:\n    MyString(const char* source = \"\" )\n    {\n        assert(source); // make sure source isn't a null string\n\n        // Find the length of the string\n        // Plus one character for a terminator\n        m_length = std::strlen(source) + 1;\n        \n        // Allocate a buffer equal to this length\n        m_data = new char[m_length];\n        \n        // Copy the parameter string into our internal buffer\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = source[i];\n    }\n \n    ~MyString() // destructor\n    {\n        // We need to deallocate our string\n        delete[] m_data;\n    }\n \n    char* getString() { return m_data; }\n    int getLength() { return m_length; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstring&gt; // for strlen()\n#include &lt;cassert&gt; // for assert()\n\nclass MyString\n{\nprivate:\n    char* m_data{};\n    int m_length{};\n \npublic:\n    MyString(const char* source = \"\" )\n    {\n        assert(source); // make sure source isn't a null string\n\n        // Find the length of the string\n        // Plus one character for a terminator\n        m_length = std::strlen(source) + 1;\n        \n        // Allocate a buffer equal to this length\n        m_data = new char[m_length];\n        \n        // Copy the parameter string into our internal buffer\n        for (int i{ 0 }; i &lt; m_length; ++i)\n            m_data[i] = source[i];\n    }\n \n    ~MyString() // destructor\n    {\n        // We need to deallocate our string\n        delete[] m_data;\n    }\n \n    char* getString() { return m_data; }\n    int getLength() { return m_length; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstring> // pro strlen()\n#include <cassert> // pro sustain()\n\ntřídy MyString\n{\nsoukromé:\n    char* m_data{};\n    int m_délka{};\n \nveřejnost:\n    MyString(const char* source = \"\" )\n    {\n        tvrdit(zdroj); // ujistěte se, že zdroj není prázdný řetězec\n\n        // Najděte délku řetězce\n        // Plus jeden znak pro terminátor\n        m_délka = std::strlen(zdroj) + 1;\n        \n        // Přidělte vyrovnávací paměť rovnající se této délce\n        m_data = nový znak[m_délka];\n        \n        // Zkopírujte řetězec parametrů do našeho interního bufferu\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = zdroj[i];\n    }\n \n    ~MyString() // destruktor\n    {\n        // Potřebujeme uvolnit náš řetězec\n        smazat[] m_data;\n    }\n \n    char* getString() { return m_data; }\n    int getLength() { return m_délka; }\n};</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b10",
       "type": "paragraph",
       "html": "<p>The above is a simple string class that allocates memory to hold a string that we pass in. Note that we have not defined a copy constructor or overloaded assignment operator. Consequently, C++ will provide a default copy constructor and default assignment operator that do a shallow copy. The copy constructor will look something like this:</p>",
       "preview": "The above is a simple string class that allocates memory to hold a string that w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše je uvedena jednoduchá řetězcová třída, která alokuje paměť pro uchování předaného řetězce. Všimněte si, že jsme nedefinovali kopírovací konstruktor ani přetížený operátor přiřazení. C++ proto poskytne výchozí kopírovací konstruktor a výchozí operátor přiřazení, které provádějí mělkou kopii. Kopírovací konstruktor bude vypadat přibližně takto:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b11",
@@ -95,21 +107,24 @@
       "language": "cpp",
       "code": "MyString::MyString(const MyString& source)\n    : m_length { source.m_length }\n    , m_data { source.m_data }\n{\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">MyString::MyString(const MyString&amp; source)\n    : m_length { source.m_length }\n    , m_data { source.m_data }\n{\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">MyString::MyString(const MyString& source)\n    : m_length { source.m_length }\n    , m_data { source.m_data }\n{\n}</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b12",
       "type": "paragraph",
       "html": "<p>Note that m_data is just a shallow pointer copy of source.m_data, meaning they now both point to the same thing.</p>",
       "preview": "Note that m_data is just a shallow pointer copy of source.m_data, meaning they n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že m_data je pouze mělká kopie ukazatele source.m_data, což znamená, že nyní oba ukazují na stejnou věc.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b13",
       "type": "paragraph",
       "html": "<p>Now, consider the following snippet of code:</p>",
       "preview": "Now, consider the following snippet of code:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na následující úryvek kódu:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b14",
@@ -117,21 +132,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    MyString hello{ \"Hello, world!\" };\n    {\n        MyString copy{ hello }; // use default copy constructor\n    } // copy is a local variable, so it gets destroyed here.  The destructor deletes copy's string, which leaves hello with a dangling pointer\n\n    std::cout << hello.getString() << '\\n'; // this will have undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    MyString hello{ \"Hello, world!\" };\n    {\n        MyString copy{ hello }; // use default copy constructor\n    } // copy is a local variable, so it gets destroyed here.  The destructor deletes copy's string, which leaves hello with a dangling pointer\n\n    std::cout &lt;&lt; hello.getString() &lt;&lt; '\\n'; // this will have undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    MyString ahoj{ \"Ahoj světe!\" };\n    {\n        MyString copy{ ahoj }; // použít výchozí konstruktor kopírování\n    } // kopie je lokální proměnná, takže zde bude zničena.  Destruktor vymaže řetězec kopie, který opustí ahoj s visícím ukazatelem\n\n    std::cout << hello.getString() << '\\n'; // toto bude mít nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b15",
       "type": "paragraph",
       "html": "<p>While this code looks harmless enough, it contains an insidious problem that will cause the program to exhibit undefined behavior!</p>",
       "preview": "While this code looks harmless enough, it contains an insidious problem that wil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli tento kód vypadá celkem neškodně, obsahuje zákeřný problém, který způsobí, že program vykáže nedefinované chování!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b16",
       "type": "paragraph",
       "html": "<p>Let’s break down this example line by line:</p>",
       "preview": "Let’s break down this example line by line:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme si tento příklad rozebrat řádek po řádku:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b17",
@@ -139,14 +157,16 @@
       "language": "cpp",
       "code": "    MyString hello{ \"Hello, world!\" };",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    MyString hello{ \"Hello, world!\" };</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> MyString ahoj{ \"Ahoj světe!\" };</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b18",
       "type": "paragraph",
       "html": "<p>This line is harmless enough. This calls the MyString constructor, which allocates some memory, sets hello.m_data to point to it, and then copies the string “Hello, world!” into it.</p>",
       "preview": "This line is harmless enough. This calls the MyString constructor, which allocat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento řádek je zcela neškodný. Volá konstruktor MyString, který alokuje paměť, nastaví hello.m_data tak, aby na ni ukazoval, a poté do ní zkopíruje řetězec „Hello, world!“.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b19",
@@ -154,14 +174,16 @@
       "language": "cpp",
       "code": "    MyString copy{ hello }; // use default copy constructor",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    MyString copy{ hello }; // use default copy constructor</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> MyString copy{ ahoj }; // použít výchozí konstruktor kopírování</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b20",
       "type": "paragraph",
       "html": "<p>This line seems harmless enough as well, but it’s actually the source of our problem! When this line is evaluated, C++ will use the default copy constructor (because we haven’t provided our own). This copy constructor will do a shallow copy, initializing copy.m_data to the same address of hello.m_data. As a result, copy.m_data and hello.m_data are now both pointing to the same piece of memory!</p>",
       "preview": "This line seems harmless enough as well, but it’s actually the source of our pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento řádek se také zdá být neškodný, ale ve skutečnosti je zdrojem našeho problému! Když se tento řádek vyhodnotí, C++ použije výchozí kopírovací konstruktor (protože jsme nedodali vlastní). Tento kopírovací konstruktor provede mělkou kopii a inicializuje copy.m_data na stejnou adresu jako hello.m_data. V důsledku toho nyní copy.m_data i hello.m_data ukazují na stejné místo v paměti!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b21",
@@ -169,14 +191,16 @@
       "language": "cpp",
       "code": "} // copy gets destroyed here",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">} // copy gets destroyed here</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">} // kopie zde bude zničena</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b22",
       "type": "paragraph",
       "html": "<p>When copy goes out of scope, the MyString destructor is called on copy. The destructor deletes the dynamically allocated memory that both copy.m_data and hello.m_data are pointing to! Consequently, by deleting copy, we’ve also (inadvertently) affected hello. Variable copy then gets destroyed, but hello.m_data is left pointing to the deleted (invalid) memory!</p>",
       "preview": "When copy goes out of scope, the MyString destructor is called on copy. The dest",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když copy opustí rozsah platnosti, je pro copy zavolán destruktor MyString. Destruktor uvolní dynamicky alokovanou paměť, na kterou ukazují jak copy.m_data, tak hello.m_data! Následkem toho jsme smazáním copy (neúmyslně) ovlivnili i hello. Proměnná copy je poté zničena, ale hello.m_data zůstává ukazovat na smazanou (neplatnou) paměť!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b23",
@@ -184,42 +208,49 @@
       "language": "cpp",
       "code": "    std::cout << hello.getString() << '\\n'; // this will have undefined behavior",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; hello.getString() &lt;&lt; '\\n'; // this will have undefined behavior</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> std::cout << hello.getString() << '\\n'; // toto bude mít nedefinované chování</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b24",
       "type": "paragraph",
       "html": "<p>Now you can see why this program has undefined behavior. We deleted the string that hello was pointing to, and now we are trying to print the value of memory that is no longer allocated.</p>",
       "preview": "Now you can see why this program has undefined behavior. We deleted the string t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní můžete vidět, proč má tento program nedefinované chování. Smazali jsme řetězec, na který hello ukazoval, a nyní se pokoušíme vypsat hodnotu z paměti, která již není alokována.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b25",
       "type": "paragraph",
       "html": "<p>The root of this problem is the shallow copy done by the copy constructor -- doing a shallow copy on pointer values in a copy constructor or overloaded assignment operator is almost always asking for trouble.</p>",
       "preview": "The root of this problem is the shallow copy done by the copy constructor -- doi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kořenem tohoto problému je mělká kopie prováděná kopírovacím konstruktorem – provádění mělkých kopií u hodnot ukazatelů v kopírovacím konstruktoru nebo přetíženém operátoru přiřazení si téměř vždy říká o potíže.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b26",
       "type": "section",
       "title": "Deep copying",
       "html": "<h3 class=\"cpp-section-heading\">Deep copying</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Hluboké kopírování</h3>",
+      "title_cs": "Hluboké kopírování"
     },
     {
       "id": "shallow-vs-deep-copying_b27",
       "type": "paragraph",
       "html": "<p>One answer to this problem is to do a deep copy on any non-null pointers being copied. A <strong>deep copy</strong> allocates memory for the copy and then copies the actual value, so that the copy lives in distinct memory from the source. This way, the copy and source are distinct and will not affect each other in any way. Doing deep copies requires that we write our own copy constructors and overloaded assignment operators.</p>",
       "preview": "One answer to this problem is to do a deep copy on any non-null pointers being c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z řešení tohoto problému je provádět hlubokou kopii u všech kopírovaných nenulových ukazatelů. <strong>Hluboká kopie</strong> (deep copy) alokuje paměť pro kopii a poté zkopíruje samotnou hodnotu, takže kopie existuje v odlišné paměti než zdroj. Tímto způsobem jsou kopie i zdroj oddělené a nebudou se navzájem nijak ovlivňovat. Provádění hlubokých kopií vyžaduje, abychom napsali vlastní kopírovací konstruktory a přetížené operátory přiřazení.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b28",
       "type": "paragraph",
       "html": "<p>Let’s go ahead and show how this is done for our MyString class:</p>",
       "preview": "Let’s go ahead and show how this is done for our MyString class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme si ukázat, jak se to provede pro naši třídu MyString:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b29",
@@ -227,21 +258,24 @@
       "language": "cpp",
       "code": "// assumes m_data is initialized\nvoid MyString::deepCopy(const MyString& source)\n{\n    // first we need to deallocate any value that this string is holding!\n    delete[] m_data;\n\n    // because m_length is not a pointer, we can shallow copy it\n    m_length = source.m_length;\n\n    // m_data is a pointer, so we need to deep copy it if it is non-null\n    if (source.m_data)\n    {\n        // allocate memory for our copy\n        m_data = new char[m_length];\n\n        // do the copy\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = source.m_data[i];\n    }\n    else\n        m_data = nullptr;\n}\n\n// Copy constructor\nMyString::MyString(const MyString& source)\n{\n    deepCopy(source);\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// assumes m_data is initialized\nvoid MyString::deepCopy(const MyString&amp; source)\n{\n    // first we need to deallocate any value that this string is holding!\n    delete[] m_data;\n\n    // because m_length is not a pointer, we can shallow copy it\n    m_length = source.m_length;\n\n    // m_data is a pointer, so we need to deep copy it if it is non-null\n    if (source.m_data)\n    {\n        // allocate memory for our copy\n        m_data = new char[m_length];\n\n        // do the copy\n        for (int i{ 0 }; i &lt; m_length; ++i)\n            m_data[i] = source.m_data[i];\n    }\n    else\n        m_data = nullptr;\n}\n\n// Copy constructor\nMyString::MyString(const MyString&amp; source)\n{\n    deepCopy(source);\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// předpokládá, že m_data jsou inicializována\nvoid MyString::deepCopy(const MyString& source)\n{\n    // nejprve musíme uvolnit libovolnou hodnotu, kterou tento řetězec obsahuje!\n    smazat[] m_data;\n\n    // protože m_length není ukazatel, můžeme jej povrchně zkopírovat\n    m_délka = zdroj.m_délka;\n\n    // m_data je ukazatel, takže pokud není null, musíme jej hluboce zkopírovat\n    if (source.m_data)\n    {\n        // přidělení paměti pro naši kopii\n        m_data = nový znak[m_délka];\n\n        // proveďte kopii\n        for (int i{ 0 }; i < m_length; ++i)\n            m_data[i] = zdroj.m_data[i];\n    }\n    jinak\n        m_data = nullptr;\n}\n\n// Kopírovat konstruktor\nMyString::MyString(const MyString& source)\n{\n    deepCopy(zdroj);\n}</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b30",
       "type": "paragraph",
       "html": "<p>As you can see, this is quite a bit more involved than a simple shallow copy! First, we have to check to make sure source even has a string (line 11). If it does, then we allocate enough memory to hold a copy of that string (line 14). Finally, we have to manually copy the string (lines 17 and 18).</p>",
       "preview": "As you can see, this is quite a bit more involved than a simple shallow copy! Fi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, je to o dost složitější než pouhá mělká kopie! Nejprve musíme zkontrolovat, zda source vůbec obsahuje nějaký řetězec (řádek 11). Pokud ano, alokujeme dostatek paměti pro uložení kopie tohoto řetězce (řádek 14). Nakonec musíme řetězec ručně zkopírovat (řádky 17 a 18).</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b31",
       "type": "paragraph",
       "html": "<p>Now let’s do the overloaded assignment operator. The overloaded assignment operator is slightly trickier:</p>",
       "preview": "Now let’s do the overloaded assignment operator. The overloaded assignment opera",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na přetížený operátor přiřazení. Přetížený operátor přiřazení je o něco záludnější:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b32",
@@ -249,70 +283,84 @@
       "language": "cpp",
       "code": "// Assignment operator\nMyString& MyString::operator=(const MyString& source)\n{\n    // check for self-assignment\n    if (this != &source)\n    {\n        // now do the deep copy\n        deepCopy(source);\n    }\n\n    return *this;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Assignment operator\nMyString&amp; MyString::operator=(const MyString&amp; source)\n{\n    // check for self-assignment\n    if (this != &amp;source)\n    {\n        // now do the deep copy\n        deepCopy(source);\n    }\n\n    return *this;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Operátor přiřazení\nMyString& MyString::operator=(const MyString& source)\n{\n    // kontrola samopřiřazení\n    if (toto != &zdroj)\n    {\n        // nyní proveďte hlubokou kopii\n        deepCopy(zdroj);\n    }\n\n    vrátit *toto;\n}</code></pre>"
     },
     {
       "id": "shallow-vs-deep-copying_b33",
       "type": "paragraph",
       "html": "<p>Note that our assignment operator is very similar to our copy constructor, but there are three major differences:</p>",
       "preview": "Note that our assignment operator is very similar to our copy constructor, but t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že náš operátor přiřazení je velmi podobný našemu kopírovacímu konstruktoru, ale jsou zde tři zásadní rozdíly:</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b34",
       "type": "list",
       "html": "<ul><li>We added a self-assignment check.</li><li>We return *this so we can chain the assignment operator.</li><li>We need to explicitly deallocate any value that the string is already holding (so we don’t have a memory leak when m_data is reallocated later). This is handled inside deepCopy().</li></ul>",
       "preview": "We added a self-assignment check.We return *this so we can chain the assignment ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Přidali jsme kontrolu přiřazení sobě samému (self-assignment).</li><li>Vracíme *this, abychom mohli operátor přiřazení řetězit.</li><li>Musíme explicitně dealokovat jakoukoli hodnotu, kterou řetězec již obsahuje (abychom nezpůsobili únik paměti, až bude m_data později znovu alokován). O to se stará volání deepCopy().</li></ul>"
     },
     {
       "id": "shallow-vs-deep-copying_b35",
       "type": "paragraph",
       "html": "<p>When the overloaded assignment operator is called, the item being assigned to may already contain a previous value, which we need to make sure we clean up before we assign memory for new values. For non-dynamically allocated variables (which are a fixed size), we don’t have to bother because the new value just overwrites the old one. However, for dynamically allocated variables, we need to explicitly deallocate any old memory before we allocate any new memory. If we don’t, the code will not crash, but we will have a memory leak that will eat away our free memory every time we do an assignment!</p>",
       "preview": "When the overloaded assignment operator is called, the item being assigned to ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je přetížený operátor přiřazení zavolán, prvek, do kterého přiřazujeme, již může obsahovat předchozí hodnotu, u které musíme zajistit úklid ještě předtím, než alokujeme paměť pro nové hodnoty. U nedynamicky alokovaných proměnných (které mají pevnou velikost) se tím nemusíme zabývat, protože nová hodnota jednoduše přepíše tu starou. U dynamicky alokovaných proměnných však musíme jakoukoli starou paměť explicitně dealokovat předtím, než alokujeme paměť novou. Pokud to neuděláme, kód nespadne, ale vznikne únik paměti (memory leak), který nám při každém přiřazení ukousne kus volné paměti!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b36",
       "type": "section",
       "title": "The rule of three",
       "html": "<h3 class=\"cpp-section-heading\">The rule of three</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pravidlo tří</h3>",
+      "title_cs": "Pravidlo tří"
     },
     {
       "id": "shallow-vs-deep-copying_b37",
       "type": "paragraph",
       "html": "<p>Remember the rule of three? If a class requires a user-defined destructor, copy constructor, or copy assignment operator, then it probably requires all three. This is why. If we’re user-defining any of these functions, it’s probably because we’re dealing with dynamic memory allocation. We need the copy constructor and copy assignment to handle deep copies, and the destructor to deallocate memory.</p>",
       "preview": "Remember the rule of three? If a class requires a user-defined destructor, copy ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujete si pravidlo tří? Pokud třída vyžaduje uživatelem definovaný destruktor, kopírovací konstruktor nebo kopírovací operátor přiřazení, pak pravděpodobně vyžaduje všechny tři. A právě proto: pokud uživatelsky definujeme kteroukoli z těchto funkcí, je to pravděpodobně proto, že pracujeme s dynamickou alokací paměti. Potřebujeme kopírovací konstruktor a kopírovací přiřazení pro provádění hlubokých kopií a destruktor pro dealokaci paměti.</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b38",
       "type": "section",
       "title": "A better solution",
       "html": "<h3 class=\"cpp-section-heading\">A better solution</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Lepší řešení</h3>",
+      "title_cs": "Lepší řešení"
     },
     {
       "id": "shallow-vs-deep-copying_b39",
       "type": "paragraph",
       "html": "<p>Classes in the standard library that deal with dynamic memory, such as std::string and std::vector, handle all of their memory management, and have overloaded copy constructors and assignment operators that do proper deep copying. So instead of doing your own memory management, you can just initialize or assign them like normal fundamental variables! That makes these classes simpler to use, less error-prone, and you don’t have to spend time writing your own overloaded functions!</p>",
       "preview": "Classes in the standard library that deal with dynamic memory, such as std::stri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třídy ve standardní knihovně, které pracují s dynamickou pamětí, jako například std::string a std::vector, řeší veškerou svou správu paměti samy a mají přetížené kopírovací konstruktory a operátory přiřazení, které provádějí správné hluboké kopírování. Místo vlastní správy paměti je tedy můžete jednoduše inicializovat nebo přiřazovat jako běžné fundamentální proměnné! Díky tomu se tyto třídy používají jednodušeji, jsou méně náchylné k chybám a nemusíte trávit čas psaním vlastních přetížených funkcí!</p>"
     },
     {
       "id": "shallow-vs-deep-copying_b40",
       "type": "section",
       "title": "Summary",
       "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí</h3>",
+      "title_cs": "Shrnutí"
     },
     {
       "id": "shallow-vs-deep-copying_b41",
       "type": "list",
       "html": "<ul><li>The default copy constructor and default assignment operators do shallow copies, which is fine for classes that contain no dynamically allocated variables.</li><li>Classes with dynamically allocated variables need to have a copy constructor and assignment operator that do a deep copy.</li><li>Favor using classes in the standard library over doing your own memory management.</li></ul>",
       "preview": "The default copy constructor and default assignment operators do shallow copies,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Výchozí kopírovací konstruktor a výchozí operátory přiřazení provádějí mělké kopie, což je v pořádku pro třídy, které neobsahují žádné dynamicky alokované proměnné.</li><li>Třídy s dynamicky alokovanými proměnnými musí mít kopírovací konstruktor a operátor přiřazení, které provádějí hlubokou kopii.</li><li>Upřednostňujte používání tříd ze standardní knihovny před vlastní správou paměti.</li></ul>"
     }
-  ]
+  ],
+  "title_cs": "21.13 — Mělké vs. hluboké kopírování"
 }

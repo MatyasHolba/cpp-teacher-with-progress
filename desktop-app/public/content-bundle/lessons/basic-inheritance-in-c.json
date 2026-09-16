@@ -14,70 +14,80 @@
       "type": "paragraph",
       "html": "<p>Now that we’ve talked about what inheritance is in an abstract sense, let’s talk about how it’s used within C++.</p>",
       "preview": "Now that we’ve talked about what inheritance is in an abstract sense, let’s talk",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když jsme si řekli, co dědičnost znamená v abstraktním smyslu, pojďme se podívat na to, jak se používá v C++.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b1",
       "type": "paragraph",
       "html": "<p>Inheritance in C++ takes place between classes. In an inheritance (is-a) relationship, the class being inherited from is called the <strong>parent class</strong>, <strong>base class</strong>, or <strong>superclass</strong>, and the class doing the inheriting is called the <strong>child class</strong>, <strong>derived class</strong>, or <strong>subclass</strong>.</p>",
       "preview": "Inheritance in C++ takes place between classes. In an inheritance (is-a) relatio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dědičnost v C++ probíhá mezi třídami. Ve vztahu dědičnosti (vztahu typu „is-a“) se třída, ze které se dědí, nazývá <strong>rodičovská třída</strong>, <strong>bázová třída</strong> nebo <strong>supertřída</strong> a třída, která dědí, se nazývá <strong>dceřiná třída</strong>, <strong>odvozená třída</strong> nebo <strong>podtřída</strong>.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b2",
       "type": "paragraph",
       "html": "<p><img src=\"http://learncpp.com/images/CppTutorial/Section11/FruitInheritance.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"http://learncpp.com/images/CppTutorial/Section11/FruitInheritance.gif\"></p>"
     },
     {
       "id": "basic-inheritance-in-c_b3",
       "type": "paragraph",
       "html": "<p>In the above diagram, Fruit is the parent, and both Apple and Banana are children.</p>",
       "preview": "In the above diagram, Fruit is the parent, and both Apple and Banana are childre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném diagramu je Fruit rodičem a Apple i Banana jsou potomky.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b4",
       "type": "paragraph",
       "html": "<p><img src=\"http://learncpp.com/images/CppTutorial/Section11/ShapesInheritance.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"http://learncpp.com/images/CppTutorial/Section11/ShapesInheritance.gif\"></p>"
     },
     {
       "id": "basic-inheritance-in-c_b5",
       "type": "paragraph",
       "html": "<p>In this diagram, Triangle is both a child (to Shape) and a parent (to Right Triangle).</p>",
       "preview": "In this diagram, Triangle is both a child (to Shape) and a parent (to Right Tria",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto diagramu je Triangle jak potomkem (pro Shape), tak rodičem (pro Right Triangle).</p>"
     },
     {
       "id": "basic-inheritance-in-c_b6",
       "type": "paragraph",
       "html": "<p>A child class inherits both behaviors (member functions) and properties (member variables) from the parent (subject to some access restrictions that we’ll cover in a future lesson).<br>These variables and functions become members of the derived class.</p>",
       "preview": "A child class inherits both behaviors (member functions) and properties (member ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dceřiná třída dědí od rodiče jak chování (členské funkce), tak vlastnosti (členské proměnné) (s výhradou určitých přístupových omezení, kterým se budeme věnovat v budoucí lekci).<br>Tyto proměnné a funkce se stávají členy odvozené třídy.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b7",
       "type": "paragraph",
       "html": "<p>Because child classes are full-fledged classes, they can (of course) have their own members that are specific to that class. We’ll see an example of this in a moment.</p>",
       "preview": "Because child classes are full-fledged classes, they can (of course) have their ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože dceřiné třídy jsou plnohodnotné třídy, mohou mít (samozřejmě) své vlastní členy, které jsou pro danou třídu specifické. Příklad si ukážeme za chvíli.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b8",
       "type": "paragraph",
       "html": "<p><strong>A Person class</strong></p>",
       "preview": "A Person class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Třída Person</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b9",
       "type": "paragraph",
       "html": "<p>Here’s a simple class to represent a generic person:</p>",
       "preview": "Here’s a simple class to represent a generic person:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je jednoduchá třída reprezentující obecnou osobu:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b10",
@@ -85,42 +95,48 @@
       "language": "cpp",
       "code": "#include <string>\n#include <string_view>\n\nclass Person\n{\n// In this example, we're making our members public for simplicity\npublic: \n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{ name }, m_age{ age }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Person\n{\n// In this example, we're making our members public for simplicity\npublic: \n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{ name }, m_age{ age }\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n#include <string_view>\n\ntřída Osoba\n{\n// V tomto příkladu pro zjednodušení zveřejňujeme naše členy\nveřejnost: \n    std::string m_name{};\n    int m_age{};\n\n    Osoba(std::string_view name = \"\", int věk = 0)\n        : m_name{ jméno }, m_age{ věk }\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b11",
       "type": "paragraph",
       "html": "<p>Because this Person class is designed to represent a generic person, we’ve only defined members that would be common to any type of person. Every person (regardless of gender, profession, etc…) has a name and age, so those are represented here.</p>",
       "preview": "Because this Person class is designed to represent a generic person, we’ve only ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je tato třída Person navržena tak, aby reprezentovala obecnou osobu, definovali jsme pouze členy, které jsou společné pro jakýkoli typ osoby. Každá osoba (bez ohledu na pohlaví, profesi atd.) má jméno a věk, takže ty jsou zde reprezentovány.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b12",
       "type": "paragraph",
       "html": "<p>Note that in this example, we’ve made all of our variables and functions public. This is purely for the sake of keeping these examples simple right now. Normally we would make the variables private. We will talk about access controls and how those interact with inheritance later in this chapter.</p>",
       "preview": "Note that in this example, we’ve made all of our variables and functions public.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že v tomto příkladu jsme všechny naše proměnné a funkce nastavili jako public. Důvodem je čistě to, aby tyto příklady zůstaly prozatím jednoduché. Normálně bychom proměnné nastavili jako private. O řízení přístupu a o tom, jak interaguje s dědičností, budeme hovořit později v této kapitole.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b13",
       "type": "paragraph",
       "html": "<p><strong>A BaseballPlayer class</strong></p>",
       "preview": "A BaseballPlayer class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Třída BaseballPlayer</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b14",
       "type": "paragraph",
       "html": "<p>Let’s say we wanted to write a program that keeps track of information about some baseball players. Baseball players need to contain information that is specific to baseball players -- for example, we might want to store a player’s batting average, and the number of home runs they’ve hit.</p>",
       "preview": "Let’s say we wanted to write a program that keeps track of information about som",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že bychom chtěli napsat program, který uchovává informace o baseballových hráčích. Baseballoví hráči musí obsahovat informace specifické právě pro baseballové hráče – například bychom mohli chtít ukládat hráčův pálkařský průměr a počet homerunů, které odpálil.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b15",
       "type": "paragraph",
       "html": "<p>Here’s our incomplete Baseball player class:</p>",
       "preview": "Here’s our incomplete Baseball player class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je naše neúplná třída baseballového hráče:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b16",
@@ -128,42 +144,48 @@
       "language": "cpp",
       "code": "class BaseballPlayer\n{\n// In this example, we're making our members public for simplicity\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class BaseballPlayer\n{\n// In this example, we're making our members public for simplicity\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída hráče baseballu\n{\n// V tomto příkladu pro zjednodušení zveřejňujeme naše členy\nveřejnost:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    Hráč baseballu (průměr dvojitého odpalování = 0,0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b17",
       "type": "paragraph",
       "html": "<p>Now, we also want to keep track of a baseball player’s name and age, and we already have that information as part of our Person class.</p>",
       "preview": "Now, we also want to keep track of a baseball player’s name and age, and we alre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní chceme také uchovávat jméno a věk baseballového hráče, a tyto informace již máme jako součást naší třídy Person.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b18",
       "type": "paragraph",
       "html": "<p>We have three choices for how to add name and age to BaseballPlayer:</p>",
       "preview": "We have three choices for how to add name and age to BaseballPlayer:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Máme tři možnosti, jak přidat jméno a věk do třídy BaseballPlayer:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b19",
       "type": "list",
       "html": "<ol start=\"1\"><li>Add name and age to the BaseballPlayer class directly as members. This is probably the worst choice, as we’re duplicating code that already exists in our Person class. Any updates to Person will have to be made in BaseballPlayer too.</li><li>Add Person as a member of BaseballPlayer using composition. But we have to ask ourselves, “does a BaseballPlayer have a Person”? No, it doesn’t. So this isn’t the right paradigm.</li><li>Have BaseballPlayer inherit those attributes from Person. Remember that inheritance represents an is-a relationship. Is a BaseballPlayer a Person? Yes, it is. So inheritance is a good choice here.</li></ol>",
       "preview": "Add name and age to the BaseballPlayer class directly as members. This is probab",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Přidat jméno a věk přímo jako členy třídy BaseballPlayer. To je pravděpodobně ta nejhorší volba, protože tím duplikujeme kód, který již existuje v naší třídě Person. Jakékoli úpravy třídy Person by se pak musely provést i v BaseballPlayer.</li><li>Přidat třídu Person jako člena BaseballPlayer pomocí kompozice. Musíme si však položit otázku: „má BaseballPlayer nějakou Person (osobu)?“ Ne, nemá. Takže toto není to správné paradigma.</li><li>Nechat BaseballPlayer tyto atributy podědit z třídy Person. Pamatujte, že dědičnost představuje vztah typu „je“ (is-a). Je BaseballPlayer osobou (Person)? Ano, je. Dědičnost je zde tedy dobrou volbou.</li></ol>"
     },
     {
       "id": "basic-inheritance-in-c_b20",
       "type": "paragraph",
       "html": "<p><strong>Making BaseballPlayer a derived class</strong></p>",
       "preview": "Making BaseballPlayer a derived class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Vytvoření odvozené třídy BaseballPlayer</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b21",
       "type": "paragraph",
       "html": "<p>To have BaseballPlayer inherit from our Person class, the syntax is fairly simple. After the <code>class BaseballPlayer</code> declaration, we use a colon, the word “public”, and the name of the class we wish to inherit. This is called <em>public inheritance</em>. We’ll talk more about what public inheritance means in a future lesson.</p>",
       "preview": "To have BaseballPlayer inherit from our Person class, the syntax is fairly simpl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Syntaxe pro dědění BaseballPlayer z naší třídy Person je poměrně jednoduchá. Za deklarací <code>class BaseballPlayer</code> použijeme dvojtečku, slovo „public“ a název třídy, ze které chceme dědit. Tomu se říká <em>veřejná dědičnost</em> (public inheritance). O tom, co přesně veřejná dědičnost znamená, si povíme více v některé z budoucích lekcí.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b22",
@@ -171,42 +193,48 @@
       "language": "cpp",
       "code": "// BaseballPlayer publicly inheriting Person\nclass BaseballPlayer : public Person\n{\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// BaseballPlayer publicly inheriting Person\nclass BaseballPlayer : public Person\n{\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Hráč baseballu, který veřejně zdědí osobu\ntřída Hráč baseballu: veřejná osoba\n{\nveřejnost:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    Hráč baseballu (průměr dvojitého odpalování = 0,0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b23",
       "type": "paragraph",
       "html": "<p>Using a derivation diagram, our inheritance looks like this:</p>",
       "preview": "Using a derivation diagram, our inheritance looks like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na diagramu dědičnosti vypadá náš vztah následovně:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b24",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/BaseballPlayerInheritance.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/BaseballPlayerInheritance.gif\"></p>"
     },
     {
       "id": "basic-inheritance-in-c_b25",
       "type": "paragraph",
       "html": "<p>When BaseballPlayer inherits from Person, BaseballPlayer acquires the member functions and variables from Person. Additionally, BaseballPlayer defines two members of its own: m_battingAverage and m_homeRuns. This makes sense, since these properties are specific to a BaseballPlayer, not to any Person.</p>",
       "preview": "When BaseballPlayer inherits from Person, BaseballPlayer acquires the member fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když BaseballPlayer dědí z třídy Person, získá od ní členské funkce a proměnné. BaseballPlayer navíc definuje dva vlastní členy: m_battingAverage a m_homeRuns. To dává smysl, protože tyto vlastnosti jsou specifické pro BaseballPlayer, nikoli obecně pro každou Person.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b26",
       "type": "paragraph",
       "html": "<p>Thus, BaseballPlayer objects will have 4 member variables: m_battingAverage and m_homeRuns from BaseballPlayer, and m_name and m_age from Person.</p>",
       "preview": "Thus, BaseballPlayer objects will have 4 member variables: m_battingAverage and ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Objekty typu BaseballPlayer tak budou mít 4 členské proměnné: m_battingAverage a m_homeRuns z třídy BaseballPlayer a m_name a m_age z třídy Person.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b27",
       "type": "paragraph",
       "html": "<p>This is easy to prove:</p>",
       "preview": "This is easy to prove:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To lze snadno dokázat:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b28",
@@ -214,42 +242,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Person\n{\npublic:\n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// BaseballPlayer publicly inheriting Person\nclass BaseballPlayer : public Person\n{\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};\n\nint main()\n{\n    // Create a new BaseballPlayer object\n    BaseballPlayer joe{};\n    // Assign it a name (we can do this directly because m_name is public)\n    joe.m_name = \"Joe\";\n    // Print out the name\n    std::cout << joe.getName() << '\\n'; // use the getName() function we've acquired from the Person base class\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Person\n{\npublic:\n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// BaseballPlayer publicly inheriting Person\nclass BaseballPlayer : public Person\n{\npublic:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    BaseballPlayer(double battingAverage = 0.0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};\n\nint main()\n{\n    // Create a new BaseballPlayer object\n    BaseballPlayer joe{};\n    // Assign it a name (we can do this directly because m_name is public)\n    joe.m_name = \"Joe\";\n    // Print out the name\n    std::cout &lt;&lt; joe.getName() &lt;&lt; '\\n'; // use the getName() function we've acquired from the Person base class\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřída Osoba\n{\nveřejnost:\n    std::string m_name{};\n    int m_age{};\n\n    Osoba(std::string_view name = \"\", int věk = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// BaseballPlayer veřejně dědí osobu\ntřída Hráč baseballu: veřejná osoba\n{\nveřejnost:\n    double m_battingAverage{};\n    int m_homeRuns{};\n\n    Hráč baseballu (průměr dvojitého odpalování = 0,0, int homeRuns = 0)\n       : m_battingAverage{battingAverage}, m_homeRuns{homeRuns}\n    {\n    }\n};\n\nint main()\n{\n    // Vytvoří nový objekt BaseballPlayer\n    Baseball Player joe{};\n    // Přiřaďte mu jméno (můžeme to udělat přímo, protože m_name je veřejné)\n    joe.m_name = \"Joe\";\n    // Vytiskněte jméno\n    std::cout << joe.getName() << '\\n'; // použijeme funkci getName(), kterou jsme získali ze základní třídy Person\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b29",
       "type": "paragraph",
       "html": "<p>Which prints the value:</p>",
       "preview": "Which prints the value:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Což vypíše hodnotu:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b30",
       "type": "output",
       "text": "Joe\n",
       "html": "<pre>Joe\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Joe\n</pre>"
     },
     {
       "id": "basic-inheritance-in-c_b31",
       "type": "paragraph",
       "html": "<p>This compiles and runs because joe is a BaseballPlayer, and all BaseballPlayer objects have a m_name member variable and a getName() member function inherited from the Person class.</p>",
       "preview": "This compiles and runs because joe is a BaseballPlayer, and all BaseballPlayer o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To se přeloží a spustí, protože joe je BaseballPlayer a všechny objekty typu BaseballPlayer mají členskou proměnnou m_name a členskou funkci getName() zděděné ze třídy Person.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b32",
       "type": "paragraph",
       "html": "<p><strong>An Employee derived class</strong></p>",
       "preview": "An Employee derived class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Odvozená třída Employee</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b33",
       "type": "paragraph",
       "html": "<p>Now let’s write another class that also inherits from Person. This time, we’ll write an Employee class. An employee “is a” person, so using inheritance is appropriate:</p>",
       "preview": "Now let’s write another class that also inherits from Person. This time, we’ll w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní napišme další třídu, která také dědí z Person. Tentokrát napíšeme třídu Employee. Zaměstnanec „je“ osoba (vztah „is a“), takže použití dědičnosti je na místě:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b34",
@@ -257,42 +291,48 @@
       "language": "cpp",
       "code": "// Employee publicly inherits from Person\nclass Employee: public Person\n{\npublic:\n    double m_hourlySalary{};\n    long m_employeeID{};\n\n    Employee(double hourlySalary = 0.0, long employeeID = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout << m_name << \": \" << m_hourlySalary << '\\n';\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Employee publicly inherits from Person\nclass Employee: public Person\n{\npublic:\n    double m_hourlySalary{};\n    long m_employeeID{};\n\n    Employee(double hourlySalary = 0.0, long employeeID = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout &lt;&lt; m_name &lt;&lt; \": \" &lt;&lt; m_hourlySalary &lt;&lt; '\\n';\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Zaměstnanec veřejně dědí po osobě\ntřída Zaměstnanec: veřejná Osoba\n{\nveřejnost:\n    dvojnásobná m_hodinová mzda{};\n    long m_employeeID{};\n\n    Zaměstnanec (dvojitý hodinový plat = 0,0, dlouhé ID zaměstnance = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout << m_name << \": \" << m_hourlySalary << '\\n';\n    }\n};</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b35",
       "type": "paragraph",
       "html": "<p>Employee inherits m_name and m_age from Person (as well as the two access functions), and adds two more member variables and a member function of its own. Note that printNameAndSalary() uses variables both from the class it belongs to (Employee::m_hourlySalary) and the parent class (Person::m_name).</p>",
       "preview": "Employee inherits m_name and m_age from Person (as well as the two access functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Employee dědí m_name a m_age z Person (stejně jako dvě přístupové funkce) a přidává dvě další členské proměnné a vlastní členskou funkci. Všimněte si, že printNameAndSalary() používá proměnné jak ze třídy, do které patří (Employee::m_hourlySalary), tak z rodičovské třídy (Person::m_name).</p>"
     },
     {
       "id": "basic-inheritance-in-c_b36",
       "type": "paragraph",
       "html": "<p>This gives us a derivation chart that looks like this:</p>",
       "preview": "This gives us a derivation chart that looks like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím získáme diagram dědičnosti, který vypadá takto:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b37",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/EmployeeInheritance.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/EmployeeInheritance.gif\"></p>"
     },
     {
       "id": "basic-inheritance-in-c_b38",
       "type": "paragraph",
       "html": "<p>Note that Employee and BaseballPlayer don’t have any direct relationship, even though they both inherit from Person.</p>",
       "preview": "Note that Employee and BaseballPlayer don’t have any direct relationship, even t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že Employee a BaseballPlayer mezi sebou nemají žádný přímý vztah, přestože obě třídy dědí z Person.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b39",
       "type": "paragraph",
       "html": "<p>Here’s a full example using Employee:</p>",
       "preview": "Here’s a full example using Employee:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je kompletní příklad s použitím třídy Employee:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b40",
@@ -300,42 +340,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Person\n{\npublic:\n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// Employee publicly inherits from Person\nclass Employee: public Person\n{\npublic:\n    double m_hourlySalary{};\n    long m_employeeID{};\n\n    Employee(double hourlySalary = 0.0, long employeeID = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout << m_name << \": \" << m_hourlySalary << '\\n';\n    }\n};\n\nint main()\n{\n    Employee frank{20.25, 12345};\n    frank.m_name = \"Frank\"; // we can do this because m_name is public\n\n    frank.printNameAndSalary();\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Person\n{\npublic:\n    std::string m_name{};\n    int m_age{};\n\n    Person(std::string_view name = \"\", int age = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string&amp; getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// Employee publicly inherits from Person\nclass Employee: public Person\n{\npublic:\n    double m_hourlySalary{};\n    long m_employeeID{};\n\n    Employee(double hourlySalary = 0.0, long employeeID = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout &lt;&lt; m_name &lt;&lt; \": \" &lt;&lt; m_hourlySalary &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    Employee frank{20.25, 12345};\n    frank.m_name = \"Frank\"; // we can do this because m_name is public\n\n    frank.printNameAndSalary();\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřída Osoba\n{\nveřejnost:\n    std::string m_name{};\n    int m_age{};\n\n    Osoba(std::string_view name = \"\", int věk = 0)\n        : m_name{name}, m_age{age}\n    {\n    }\n\n    const std::string& getName() const { return m_name; }\n    int getAge() const { return m_age; }\n\n};\n\n// Zaměstnanec veřejně dědí po osobě\ntřída Zaměstnanec: veřejná Osoba\n{\nveřejnost:\n    dvojnásobná m_hodinová mzda{};\n    long m_employeeID{};\n\n    Zaměstnanec (dvojitý hodinový plat = 0,0, dlouhé ID zaměstnance = 0)\n        : m_hourlySalary{hourlySalary}, m_employeeID{employeeID}\n    {\n    }\n\n    void printNameAndSalary() const\n    {\n        std::cout << m_name << \": \" << m_hourlySalary << '\\n';\n    }\n};\n\nint main()\n{\n    Zaměstnanec frank{20.25, 12345};\n    frank.m_name = \"Frank\"; // můžeme to udělat, protože m_name je veřejné\n\n    frank.printNameAndSalary();\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b41",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b42",
       "type": "output",
       "text": "Frank: 20.25\n",
       "html": "<pre>Frank: 20.25\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Frank: 20.25\n</pre>"
     },
     {
       "id": "basic-inheritance-in-c_b43",
       "type": "paragraph",
       "html": "<p><strong>Inheritance chains</strong></p>",
       "preview": "Inheritance chains",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Řetězce dědičnosti (Inheritance chains)</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b44",
       "type": "paragraph",
       "html": "<p>It’s possible to inherit from a class that is itself derived from another class. There is nothing noteworthy or special when doing so -- everything proceeds as in the examples above.</p>",
       "preview": "It’s possible to inherit from a class that is itself derived from another class.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je možné dědit z třídy, která je sama odvozena z jiné třídy. Na tomto postupu není nic zvláštního ani neobvyklého – vše funguje stejně jako ve výše uvedených příkladech.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b45",
       "type": "paragraph",
       "html": "<p>For example, let’s write a Supervisor class. A Supervisor is an Employee, which is a Person. We’ve already written an Employee class, so let’s use that as the base class from which to derive Supervisor:</p>",
       "preview": "For example, let’s write a Supervisor class. A Supervisor is an Employee, which ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Napišme si například třídu Supervisor. Supervisor (vedoucí) je Employee (zaměstnanec), což je zároveň Person (osoba). Třídu Employee už máme napsanou, použijme ji tedy jako základní třídu, ze které odvodíme třídu Supervisor:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b46",
@@ -343,70 +389,81 @@
       "language": "cpp",
       "code": "class Supervisor: public Employee\n{\npublic:\n    // This Supervisor can oversee a max of 5 employees\n    long m_overseesIDs[5]{};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Supervisor: public Employee\n{\npublic:\n    // This Supervisor can oversee a max of 5 employees\n    long m_overseesIDs[5]{};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">vedoucí třídy: veřejný zaměstnanec\n{\nveřejnost:\n    // Tento supervizor může dohlížet na maximálně 5 zaměstnanců\n    long m_overseesIDs[5]{};\n};</code></pre>"
     },
     {
       "id": "basic-inheritance-in-c_b47",
       "type": "paragraph",
       "html": "<p>Now our derivation chart looks like this:</p>",
       "preview": "Now our derivation chart looks like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Náš diagram dědičnosti nyní vypadá takto:</p>"
     },
     {
       "id": "basic-inheritance-in-c_b48",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/SupervisorInheritance.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/SupervisorInheritance.gif\"></p>"
     },
     {
       "id": "basic-inheritance-in-c_b49",
       "type": "paragraph",
       "html": "<p>All Supervisor objects inherit the functions and variables from both Employee and Person, and add their own m_overseesIDs member variable.</p>",
       "preview": "All Supervisor objects inherit the functions and variables from both Employee an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všechny objekty typu Supervisor dědí funkce a proměnné jak z třídy Employee, tak z třídy Person, a navíc přidávají svou vlastní členskou proměnnou m_overseesIDs.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b50",
       "type": "paragraph",
       "html": "<p>By constructing such inheritance chains, we can create a set of reusable classes that are very general (at the top) and become progressively more specific at each level of inheritance.</p>",
       "preview": "By constructing such inheritance chains, we can create a set of reusable classes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvářením takových řetězců dědičnosti můžeme vytvořit sadu znovupoužitelných tříd, které jsou nahoře velmi obecné a s každou další úrovní dědičnosti se stávají postupně specifičtějšími.</p>"
     },
     {
       "id": "basic-inheritance-in-c_b51",
       "type": "paragraph",
       "html": "<p><strong>Why is this kind of inheritance useful?</strong></p>",
       "preview": "Why is this kind of inheritance useful?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Proč je tento druh dědičnosti užitečný?</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b52",
       "type": "paragraph",
       "html": "<p>Inheriting from a base class means we don’t have to redefine the information from the base class in our derived classes. We automatically receive the member functions and member variables of the base class through inheritance, and then simply add the additional functions or member variables we want. This not only saves work, but also means that if we ever update or modify the base class (e.g. add new functions, or fix a bug), all of our derived classes will automatically inherit the changes!</p>",
       "preview": "Inheriting from a base class means we don’t have to redefine the information fro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dědění z bázové třídy znamená, že v našich odvozených třídách nemusíme znovu definovat informace z bázové třídy. Prostřednictvím dědičnosti automaticky získáme členské funkce a členské proměnné bázové třídy a pak jednoduše přidáme požadované dodatečné funkce či členské proměnné. To nejen šetří práci, ale také to znamená, že pokud někdy bázovou třídu aktualizujeme nebo upravíme (např. přidáme nové funkce nebo opravíme chybu), všechny naše odvozené třídy tyto změny automaticky zdědí!</p>"
     },
     {
       "id": "basic-inheritance-in-c_b53",
       "type": "paragraph",
       "html": "<p>For example, if we ever added a new function to Person, then Employee, Supervisor, and BaseballPlayer would automatically gain access to it. If we added a new variable to Employee, then Supervisor would also gain access to it. This allows us to construct new classes in an easy, intuitive, and low-maintenance way!</p>",
       "preview": "For example, if we ever added a new function to Person, then Employee, Superviso",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud bychom například někdy přidali novou funkci do třídy Person, pak Employee, Supervisor i BaseballPlayer k ní automaticky získají přístup. Pokud bychom přidali novou proměnnou do Employee, pak k ní získá přístup i Supervisor. To nám umožňuje vytvářet nové třídy snadným, intuitivním a na údržbu nenáročným způsobem!</p>"
     },
     {
       "id": "basic-inheritance-in-c_b54",
       "type": "paragraph",
       "html": "<p><strong>Conclusion</strong></p>",
       "preview": "Conclusion",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Závěr</strong></p>"
     },
     {
       "id": "basic-inheritance-in-c_b55",
       "type": "paragraph",
       "html": "<p>Inheritance allows us to reuse classes by having other classes inherit their members. In future lessons, we’ll continue to explore how this works.</p>",
       "preview": "Inheritance allows us to reuse classes by having other classes inherit their mem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dědičnost nám umožňuje znovu používat třídy tím, že jiné třídy dědí jejich členy. V budoucích lekcích se budeme dále věnovat tomu, jak to funguje.</p>"
     }
-  ]
+  ],
+  "title_cs": "24.2 — Základní dědičnost v C++"
 }

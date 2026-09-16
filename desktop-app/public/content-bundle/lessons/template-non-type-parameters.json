@@ -14,49 +14,56 @@
       "type": "paragraph",
       "html": "<p>In previous lessons, you’ve learned how to use template type parameters to create functions and classes that are type independent. A template type parameter is a placeholder type that is substituted for a type passed in as an argument.</p>",
       "preview": "In previous lessons, you’ve learned how to use template type parameters to creat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích jste se naučili, jak používat parametry typu šablony k vytváření funkcí a tříd, které jsou na typu nezávislé. Parametr typu šablony je zástupný typ, který nahrazuje typ předaný jako argument.</p>"
     },
     {
       "id": "template-non-type-parameters_b1",
       "type": "paragraph",
       "html": "<p>However, template type parameters are not the only type of template parameters available. Template classes and functions can make use of another kind of template parameter known as a non-type parameter.</p>",
       "preview": "However, template type parameters are not the only type of template parameters a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Parametry typu šablony však nejsou jediným typem dostupných parametrů šablony. Třídy a funkce šablony mohou využívat jiný druh parametru šablony známý jako netypový parametr.</p>"
     },
     {
       "id": "template-non-type-parameters_b2",
       "type": "paragraph",
       "html": "<p><strong>Non-type parameters</strong></p>",
       "preview": "Non-type parameters",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Netypové parametry</strong></p>"
     },
     {
       "id": "template-non-type-parameters_b3",
       "type": "paragraph",
       "html": "<p>A template non-type parameter is a template parameter where the type of the parameter is predefined and is substituted for a constexpr value passed in as an argument.</p>",
       "preview": "A template non-type parameter is a template parameter where the type of the para",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Netypový parametr šablony je parametr šablony, kde je typ parametru předdefinován a nahrazuje hodnotu constexpr předávanou jako argument.</p>"
     },
     {
       "id": "template-non-type-parameters_b4",
       "type": "paragraph",
       "html": "<p>A non-type parameter can be any of the following types:</p>",
       "preview": "A non-type parameter can be any of the following types:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Netypový parametr může být kterýkoli z následujících typů:</p>"
     },
     {
       "id": "template-non-type-parameters_b5",
       "type": "list",
       "html": "<ul><li>An integral type</li><li>An enumeration type</li><li>A pointer or reference to a class object</li><li>A pointer or reference to a function</li><li>A pointer or reference to a class member function</li><li>std::nullptr_t</li><li>A floating point type (since C++20)</li></ul>",
       "preview": "An integral typeAn enumeration typeA pointer or reference to a class objectA poi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Celkový typ</li><li>Typ výčtu</li><li>Ukazatel nebo odkaz na objekt třídy</li><li>Ukazatel nebo odkaz na funkci</li><li>Ukazatel nebo odkaz na funkci člena třídy</li><li>std::nullptr_t</li><li>Typ s plovoucí desetinnou čárkou (od C++/20)</li)"
     },
     {
       "id": "template-non-type-parameters_b6",
       "type": "paragraph",
       "html": "<p>In the following example, we create a non-dynamic (static) array class that uses both a type parameter and a non-type parameter. The type parameter controls the data type of the static array, and the integral non-type parameter controls how large the static array is.</p>",
       "preview": "In the following example, we create a non-dynamic (static) array class that uses",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím příkladu vytvoříme nedynamickou (statickou) třídu pole, která používá parametr typu i netypový parametr. Parametr type řídí datový typ statického pole a integrální netypový parametr řídí velikost statického pole.</p>"
     },
     {
       "id": "template-non-type-parameters_b7",
@@ -64,42 +71,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T, int size> // size is an integral non-type parameter\nclass StaticArray\n{\nprivate:\n    // The non-type parameter controls the size of the array\n    T m_array[size] {};\n\npublic:\n    T* getArray();\n\t\n    T& operator[](int index)\n    {\n        return m_array[index];\n    }\n};\n\n// Showing how a function for a class with a non-type parameter is defined outside of the class\ntemplate <typename T, int size>\nT* StaticArray<T, size>::getArray()\n{\n    return m_array;\n}\n\nint main()\n{\n    // declare an integer array with room for 12 integers\n    StaticArray<int, 12> intArray;\n\n    // Fill it up in order, then print it backwards\n    for (int count { 0 }; count < 12; ++count)\n        intArray[count] = count;\n\n    for (int count { 11 }; count >= 0; --count)\n        std::cout << intArray[count] << ' ';\n    std::cout << '\\n';\n\n    // declare a double buffer with room for 4 doubles\n    StaticArray<double, 4> doubleArray;\n\n    for (int count { 0 }; count < 4; ++count)\n        doubleArray[count] = 4.4 + 0.1 * count;\n\n    for (int count { 0 }; count < 4; ++count)\n        std::cout << doubleArray[count] << ' ';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T, int size&gt; // size is an integral non-type parameter\nclass StaticArray\n{\nprivate:\n    // The non-type parameter controls the size of the array\n    T m_array[size] {};\n\npublic:\n    T* getArray();\n\t\n    T&amp; operator[](int index)\n    {\n        return m_array[index];\n    }\n};\n\n// Showing how a function for a class with a non-type parameter is defined outside of the class\ntemplate &lt;typename T, int size&gt;\nT* StaticArray&lt;T, size&gt;::getArray()\n{\n    return m_array;\n}\n\nint main()\n{\n    // declare an integer array with room for 12 integers\n    StaticArray&lt;int, 12&gt; intArray;\n\n    // Fill it up in order, then print it backwards\n    for (int count { 0 }; count &lt; 12; ++count)\n        intArray[count] = count;\n\n    for (int count { 11 }; count &gt;= 0; --count)\n        std::cout &lt;&lt; intArray[count] &lt;&lt; ' ';\n    std::cout &lt;&lt; '\\n';\n\n    // declare a double buffer with room for 4 doubles\n    StaticArray&lt;double, 4&gt; doubleArray;\n\n    for (int count { 0 }; count &lt; 4; ++count)\n        doubleArray[count] = 4.4 + 0.1 * count;\n\n    for (int count { 0 }; count &lt; 4; ++count)\n        std::cout &lt;&lt; doubleArray[count] &lt;&lt; ' ';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntemplate <typename T, int size> // velikost je integrální netypový parametr\ntřídy StaticArray\n{\nsoukromé:\n    // Parametr non-type řídí velikost pole\n    T m_array[velikost] {};\n\nveřejnost:\n    T* getArray();\n\t\n    T& operátor[](int index)\n    {\n        return m_array[index];\n    }\n};\n\n// Ukazuje, jak je funkce pro třídu s netypovým parametrem definována mimo třídu\nšablona <název typu T, velikost int>\nT* StaticArray<T, velikost>::getArray()\n{\n    return m_array;\n}\n\nint main()\n{\n    // deklaruje celočíselné pole s místem pro 12 celých čísel\n    StaticArray<int, 12> intArray;\n\n    // Vyplňte jej v pořadí a poté vytiskněte zpět\n    for (int počet { 0 }; počet < 12; ++počet)\n        intArray[počet] = počet;\n\n    for (int počet { 11 }; počet >= 0; --počet)\n        std::cout << intArray[počet] << ' ';\n    std::cout << '\\n';\n\n    // vyhlásí dvojitý buffer s místem pro 4 double\n    StaticArray<double, 4> doubleArray;\n\n    for (int počet { 0 }; počet < 4; ++počet)\n        doubleArray[počet] = 4,4 + 0,1 * počet;\n\n    for (int počet { 0 }; počet < 4; ++počet)\n        std::cout << doubleArray[count] << ' ';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "template-non-type-parameters_b8",
       "type": "paragraph",
       "html": "<p>This code produces the following:</p>",
       "preview": "This code produces the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód produkuje následující:</p>"
     },
     {
       "id": "template-non-type-parameters_b9",
       "type": "output",
       "text": "11 10 9 8 7 6 5 4 3 2 1 0\n4.4 4.5 4.6 4.7\n",
       "html": "<pre>11 10 9 8 7 6 5 4 3 2 1 0\n4.4 4.5 4.6 4.7\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>11 10 9 8 7 6 5 4 3 2 1 0\n4,4 4,5 4,6 4,7\n</pre>"
     },
     {
       "id": "template-non-type-parameters_b10",
       "type": "paragraph",
       "html": "<p>One noteworthy thing about the above example is that we do not have to dynamically allocate the m_array member variable! This is because for any given instance of the StaticArray class, size must be constexpr. For example, if you instantiate a StaticArray&lt;int, 12&gt;, the compiler replaces size with 12. Thus m_array is of type int[12], which can be allocated statically.</p>",
       "preview": "One noteworthy thing about the above example is that we do not have to dynamical",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedna pozoruhodná věc na výše uvedeném příkladu je, že nemusíme dynamicky přidělovat členskou proměnnou m_array! Důvodem je, že pro každou danou instanci třídy StaticArray musí být velikost constexpr. Pokud například vytvoříte instanci StaticArray<int, 12>, kompilátor nahradí velikost 12. Tedy m_array je typu int[12], který lze alokovat staticky.</p>"
     },
     {
       "id": "template-non-type-parameters_b11",
       "type": "paragraph",
       "html": "<p>This functionality is used by the standard library class std::array. When you allocate a std::array&lt;int, 5&gt;, the int is a type parameter, and the 5 is a non-type parameter!</p>",
       "preview": "This functionality is used by the standard library class std::array. When you al",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tuto funkci používá standardní knihovna třídy std::array. Když přidělíte std::array<int, 5>, int je typový parametr a 5 je netypový parametr!</p>"
     },
     {
       "id": "template-non-type-parameters_b12",
       "type": "paragraph",
       "html": "<p>Note that if you try to instantiate a template non-type parameter with a non-constexpr value, it will not work:</p>",
       "preview": "Note that if you try to instantiate a template non-type parameter with a non-con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že pokud se pokusíte vytvořit instanci netypového parametru šablony s nekonstexpr hodnotou, nebude to fungovat:</p>"
     },
     {
       "id": "template-non-type-parameters_b13",
@@ -107,14 +120,17 @@
       "language": "cpp",
       "code": "template <int size>\nclass Foo\n{\n};\n\nint main()\n{\n    int x{ 4 }; // x is non-constexpr\n    Foo<x> f; // error: the template non-type argument must be constexpr\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;int size&gt;\nclass Foo\n{\n};\n\nint main()\n{\n    int x{ 4 }; // x is non-constexpr\n    Foo&lt;x&gt; f; // error: the template non-type argument must be constexpr\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">šablona <int size>\ntřída Foo\n{\n};\n\nint main()\n{\n    int x{ 4}; // x je non-constexpr\n    Foo<x> f; // chyba: netypový argument šablony musí být constexpr\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "template-non-type-parameters_b14",
       "type": "paragraph",
       "html": "<p>In such a case, your compiler will issue an error.</p>",
       "preview": "In such a case, your compiler will issue an error.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V takovém případě váš kompilátor ohlásí chybu.</p>"
     }
-  ]
+  ],
+  "title_cs": "26.2 — Netypové parametry šablon"
 }

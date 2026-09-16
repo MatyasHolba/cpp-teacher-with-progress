@@ -1,0 +1,218 @@
+export const cs = {
+  // Sidebar
+  searchPlaceholder: "Hledat v lekcích...",
+  totalTime: "Celkový čas (studium + kód):",
+  readingTime: "📖 Čtení teorie:",
+  codingTime: "💻 Psaní kódu (praxe):",
+  completedTasks: "Počet úkolů splněných:",
+  notesCount: "Vlastních poznámek:",
+  showDetailsHint: "Klikněte pro zobrazení detailních statistik",
+  tasksSuffix: "úkolů",
+  
+  // App/Nav
+  toggleSidebar: "Zobrazit panel",
+  hideSidebar: "Skrýt panel",
+  themeLight: "☀️ Světlý",
+  themeDark: "🌙 Tmavý",
+  themeOLED: "🖤 OLED Black",
+  themeSepia: "☕ Sepia",
+  githubSync: "GitHub Sync",
+  languageSettings: "Jazyk",
+  
+  // LessonView
+  nextLesson: "Další lekce",
+  prevLesson: "Předchozí lekce",
+  markAsRead: "Označit lekci jako přečtenou",
+  codingModeStart: "Začít kódit",
+  codingModeStop: "Zastavit kódování",
+  idleMessage: "Jsi tu ještě? Měření času bylo pozastaveno.",
+  continueStudying: "Pokračovat ve studiu",
+  originalLink: "Originál na learncpp.com",
+  activeReading: "Aktivní čtení",
+  paused: "Pozastaveno",
+  readingTooltip: "Čas strávený čtením teorie",
+  codingTooltip: "Čas strávený praktickým psaním kódu",
+  hideBar: "Skrýt lištu",
+  showBar: "Zobrazit lištu",
+  measuringCode: "Měření psaní kódu (aktivní)",
+  activeReadingTheory: "Aktivní čtení teorie",
+  studyPaused: "Studium pozastaveno",
+  markAll: "Označit vše",
+  clickToContinue: "Kliknutím kamkoliv pokračujete ve čtení",
+  codingTitle: "MĚŘENÍ PSANÍ KÓDU",
+  codingDesc: "Čas se počítá, i když píšete kód v jiném okně nebo editoru.",
+  backToReading: "Zpět ke čtení",
+  pausedTitle: "POZASTAVENO",
+  resumeHint: "Klikněte kamkoliv pro pokračování ve studiu",
+  startCodingModeAction: "Programuji (měřit čas psaní kódu)",
+  startCodingTooltip: "Spustí počítadlo pro psaní kódu v externím editoru",
+  
+  // BlockItem
+  markDone: "Označit jako hotové",
+  doubleClickHint: "Dvojklik označí jako přečtené",
+  addNote: "Přidat poznámku",
+  addNoteHint: "Přidat vlastní poznámku",
+  solution: "Zobrazit řešení",
+  hideSolution: "Skrýt řešení",
+  hint: "Zobrazit nápovědu",
+  hideHint: "Skrýt nápovědu",
+  deleteNote: "Smazat",
+  confirmDeleteNote: "Opravdu chceš smazat tuto poznámku?",
+  saveNote: "Uložit",
+  cancelNote: "Zrušit",
+  notePlaceholder: "Zapiš si vlastní postřeh, shrnutí, nebo část kódu...",
+  urlPlaceholder: "Volitelný odkaz (YouTube, GitHub gist, dokumentace)...",
+  newNoteTitle: "Nová poznámka k tomuto odstavci",
+  savedAt: "Uloženo:",
+  
+  // SettingsModal
+  settingsTitle: "Nastavení & GitHub Synchronizace",
+  githubAccess: "Přístup na GitHub",
+  githubToken: "Personal Access Token (classic)",
+  githubTokenHint: "Musí mít zaškrtnutá práva 'repo'. Tvůj token se ukládá pouze lokálně v prohlížeči.",
+  githubOwner: "Vlastník (uživatelské jméno)",
+  githubRepo: "Název repozitáře",
+  syncModeTitle: "Režim synchronizace",
+  syncModeData: "Režim 1: Pouze data postupu",
+  syncModeDataDesc: "Zálohuje pouze data o postupu a čase (JSON). Nezveřejňuje poznámky ani web.",
+  syncModeFull: "Režim 2: Kompletní Web & Portfolio",
+  syncModeFullDesc: "Nahraje interaktivní web pro GitHub Pages i Markdown poznámky. Kdokoliv uvidí tvůj postup v prohlížeči.",
+  pullButton: "Načíst z GitHubu (Pull)",
+  saveSettings: "Uložit nastavení",
+  syncButton: "Uložit na GitHub (1 klik)",
+  syncSuccess: "Synchronizace byla úspěšná!",
+  
+  // LanguageSettingsModal
+  langTitle: "Jazyková nastavení",
+  langSaved: "Nastavení úspěšně uloženo!",
+  localApp: "Lokální aplikace",
+  uiLangLabel: "Jazyk rozhraní (UI):",
+  contentLangLabel: "Jazyk studijních materiálů:",
+  uiLangHint: "Ovlivňuje tlačítka, menu a texty samotné aplikace.",
+  contentLangHint: "Obsah lekcí. Překlad lze v textu přepínat po blocích.",
+  exportTitle: "Export na GitHub (Portfolio & Web)",
+  exportUiLabel: "Web UI Jazyk (Tlačítka):",
+  exportContentLabel: "Web Obsah (Poznámky):",
+  exportReadmeLabel: "Jazyk hlavního README.md:",
+  exportReadmeHint: "Tohle je uvítací stránka tvého repozitáře, kterou vidí personalisté jako první.",
+  cancel: "Zrušit",
+  
+  // HighlightTranslator
+  translate: "Přeložit",
+  close: "Zavřít"
+};
+
+export const en = {
+  // Sidebar
+  installApp: "Install App",
+  searchPlaceholder: "Search lessons...",
+  totalTime: "Total active time:",
+  readingTime: "Reading theory:",
+  codingTime: "Coding & practice:",
+  completedTasks: "Total tasks completed:",
+  showDetailsHint: "Click to show detailed statistics",
+  tasksSuffix: "tasks",
+  tasks: "tasks",
+  notesCount: "Personal notes:",
+  
+  // App/Nav
+  toggleSidebar: "Show Sidebar",
+  hideSidebar: "Hide Sidebar",
+  themeLight: "☀️ Light",
+  themeDark: "🌙 Dark",
+  themeOLED: "🖤 OLED Black",
+  themeSepia: "☕ Sepia",
+  githubSync: "GitHub Sync",
+  languageSettings: "Language",
+  
+  // LessonView
+  nextLesson: "Next Lesson",
+  prevLesson: "Previous Lesson",
+  markAsRead: "Mark lesson as read",
+  codingModeStart: "Start coding",
+  codingModeStop: "Stop coding",
+  idleMessage: "Are you still there? Time tracking paused.",
+  continueStudying: "Continue studying",
+  originalLink: "Original on learncpp.com",
+  activeReading: "Active reading",
+  paused: "Paused",
+  readingTooltip: "Time spent reading theory",
+  codingTooltip: "Time spent writing code",
+  hideBar: "Hide bar",
+  showBar: "Show bar",
+  measuringCode: "Measuring coding (active)",
+  activeReadingTheory: "Active reading theory",
+  studyPaused: "Study paused",
+  markAll: "Mark all",
+  clickToContinue: "Click anywhere to continue reading",
+  codingTitle: "MEASURING CODING",
+  codingDesc: "Time is tracked even while you write code in another window.",
+  backToReading: "Back to reading",
+  pausedTitle: "PAUSED",
+  resumeHint: "Click anywhere to continue studying",
+  startCodingModeAction: "I am coding (track coding time)",
+  startCodingTooltip: "Start tracking time spent coding in an external editor",
+  
+  // BlockItem
+  markDone: "Mark as done",
+  doubleClickHint: "Double click to mark as read",
+  addNote: "Add note",
+  addNoteHint: "Add personal note",
+  solution: "Show solution",
+  hideSolution: "Hide solution",
+  hint: "Show hint",
+  hideHint: "Hide hint",
+  deleteNote: "Delete",
+  confirmDeleteNote: "Are you sure you want to delete this note?",
+  saveNote: "Save",
+  cancelNote: "Cancel",
+  notePlaceholder: "Your note (supports Markdown)...",
+  urlPlaceholder: "URL (optional)...",
+  newNoteTitle: "New note for this paragraph",
+  savedAt: "Saved:",
+  
+  // SettingsModal
+  settingsTitle: "GitHub Synchronization Settings",
+  githubAccess: "GitHub Access",
+  githubToken: "Personal Access Token (classic)",
+  githubTokenHint: "Requires 'repo' scope. Your token is stored only locally in your browser.",
+  githubOwner: "Repository Owner (username)",
+  githubRepo: "Repository Name",
+  syncModeTitle: "Synchronization Mode",
+  syncModeData: "Mode 1: Progress Data Only",
+  syncModeDataDesc: "Backs up only progress data and time (JSON). Doesn't publish notes or web.",
+  syncModeFull: "Mode 2: Complete Web & Portfolio",
+  syncModeFullDesc: "Uploads interactive web for GitHub Pages and Markdown notes. Anyone can see your progress.",
+  pullButton: "Load from GitHub (Pull)",
+  saveSettings: "Save Settings",
+  syncButton: "Save to GitHub (1 click)",
+  syncSuccess: "Sync was successful!",
+  
+  // LanguageSettingsModal
+  langTitle: "Language Settings",
+  langSaved: "Settings successfully saved!",
+  localApp: "Local Application",
+  uiLangLabel: "UI Language:",
+  contentLangLabel: "Study Materials Language:",
+  uiLangHint: "Affects buttons, menus, and application texts.",
+  contentLangHint: "Lesson content. Translation can be toggled per block.",
+  exportTitle: "GitHub Export (Portfolio & Web)",
+  exportUiLabel: "Web UI Language (Buttons):",
+  exportContentLabel: "Web Content (Notes):",
+  exportReadmeLabel: "Main README.md Language:",
+  exportReadmeHint: "This is your repository's welcome page that recruiters see first.",
+  cancel: "Cancel",
+  
+  // HighlightTranslator
+  translate: "Translate",
+  close: "Close"
+};
+
+export type Translations = typeof cs;
+export type TranslationKey = keyof Translations;
+
+export function getT(lang: 'cs' | 'en') {
+  return (key: TranslationKey) => {
+    return lang === 'en' ? en[key] : cs[key];
+  };
+}

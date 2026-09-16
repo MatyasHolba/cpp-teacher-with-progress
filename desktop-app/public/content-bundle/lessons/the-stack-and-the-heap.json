@@ -14,49 +14,56 @@
       "type": "paragraph",
       "html": "<p>The memory that a program uses is typically divided into a few different areas, called segments:</p>",
       "preview": "The memory that a program uses is typically divided into a few different areas, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Paměť, kterou program používá, je obvykle rozdělena do několika různých oblastí, kterým se říká segmenty:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b1",
       "type": "list",
       "html": "<ul><li>The code segment (also called a text segment), where the compiled program sits in memory. The code segment is typically read-only.</li><li>The bss segment (also called the uninitialized data segment), where zero-initialized global and static variables are stored.</li><li>The data segment (also called the initialized data segment), where initialized global and static variables are stored.</li><li>The heap, where dynamically allocated variables are allocated from.</li><li>The call stack, where function parameters, local variables, and other function-related information are stored.</li></ul>",
       "preview": "The code segment (also called a text segment), where the compiled program sits i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Kódový segment (code segment, nazývaný také textový segment / text segment), kde je v paměti uložen zkompilovaný program. Kódový segment je obvykle pouze pro čtení.</li><li>Segment bss (bss segment, nazývaný také neinicializovaný datový segment), kde jsou uloženy nulově inicializované globální a statické proměnné.</li><li>Datový segment (data segment, nazývaný také inicializovaný datový segment), kde jsou uloženy inicializované globální a statické proměnné.</li><li>Halda (heap), ze které jsou alokovány dynamicky alokované proměnné.</li><li>Zásobník volání (call stack), kde jsou uloženy parametry funkcí, lokální proměnné a další informace související s funkcemi.</li></ul>"
     },
     {
       "id": "the-stack-and-the-heap_b2",
       "type": "paragraph",
       "html": "<p>For this lesson, we’ll focus primarily on the heap and the stack, as that is where most of the interesting stuff takes place.</p>",
       "preview": "For this lesson, we’ll focus primarily on the heap and the stack, as that is whe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci se zaměříme především na haldu a zásobník, protože právě tam se odehrává většina zajímavých věcí.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b3",
       "type": "paragraph",
       "html": "<p><strong>The heap segment</strong></p>",
       "preview": "The heap segment",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Segment haldy (heap segment)</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b4",
       "type": "paragraph",
       "html": "<p>The heap segment (also known as the “free store”) keeps track of memory used for dynamic memory allocation. We talked about the heap a bit already in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/dynamic-memory-allocation-with-new-and-delete/\">19.1 -- Dynamic memory allocation with new and delete</a>, so this will be a recap.</p>",
       "preview": "The heap segment (also known as the “free store”) keeps track of memory used for",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Segment haldy (také známý jako „free store“) udržuje přehled o paměti používané pro dynamickou alokaci paměti. O haldě jsme již trochu mluvili v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/dynamic-memory-allocation-with-new-and-delete/\">19.1 -- Dynamická alokace paměti pomocí new a delete</a>, takže toto bude rekapitulace.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b5",
       "type": "paragraph",
       "html": "<p>In C++, when you use the new operator to allocate memory, this memory is allocated in the application’s heap segment.</p>",
       "preview": "In C++, when you use the new operator to allocate memory, this memory is allocat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++, když použijete operátor new k alokaci paměti, je tato paměť alokována v segmentu haldy dané aplikace.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b6",
       "type": "paragraph",
       "html": "<p>Assuming an int is 4 bytes:</p>",
       "preview": "Assuming an int is 4 bytes:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za předpokladu, že int má 4 bajty:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b7",
@@ -64,14 +71,16 @@
       "language": "cpp",
       "code": "int* ptr { new int }; // new int allocates 4 bytes in the heap\nint* array { new int[10] }; // new int[10] allocates 40 bytes in the heap",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr { new int }; // new int allocates 4 bytes in the heap\nint* array { new int[10] }; // new int[10] allocates 40 bytes in the heap</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr { new int }; // new int alokuje 4 bajty v haldě\nint* pole { new int[10] }; // new int[10] alokuje 40 bajtů v haldě</code></pre>"
     },
     {
       "id": "the-stack-and-the-heap_b8",
       "type": "paragraph",
       "html": "<p>The address of this memory is passed back by operator new, and can then be stored in a pointer. You do not have to worry about the mechanics behind the process of how free memory is located and allocated to the user. However, it is worth knowing that sequential memory requests may not result in sequential memory addresses being allocated!</p>",
       "preview": "The address of this memory is passed back by operator new, and can then be store",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Adresa této paměti je vrácena operátorem new a poté může být uložena v ukazateli. Nemusíte se starat o vnitřní fungování procesu vyhledávání a přidělování volné paměti uživateli. Stojí však za to vědět, že po sobě jdoucí požadavky na paměť nemusí nutně vést k alokaci po sobě jdoucích paměťových adres!</p>"
     },
     {
       "id": "the-stack-and-the-heap_b9",
@@ -79,245 +88,280 @@
       "language": "cpp",
       "code": "int* ptr1 { new int };\nint* ptr2 { new int };\n// ptr1 and ptr2 may not have sequential addresses",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1 { new int };\nint* ptr2 { new int };\n// ptr1 and ptr2 may not have sequential addresses</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1 { new int };\nint* ptr2 { new int };\n// ptr1 a ptr2 nemusí mít sekvenční adresy</code></pre>"
     },
     {
       "id": "the-stack-and-the-heap_b10",
       "type": "paragraph",
       "html": "<p>When a dynamically allocated variable is deleted, the memory is “returned” to the heap and can then be reassigned as future allocation requests are received. Remember that deleting a pointer does not delete the variable, it just returns the memory at the associated address back to the operating system.</p>",
       "preview": "When a dynamically allocated variable is deleted, the memory is “returned” to th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je dynamicky alokovaná proměnná smazána, paměť je „vrácena“ haldě (heapu) a může být znovu přidělena při dalších požadavcích na alokaci. Pamatujte, že smazání ukazatele nesmaže proměnnou, pouze vrátí paměť na příslušné adrese zpět operačnímu systému.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b11",
       "type": "paragraph",
       "html": "<p>The heap has advantages and disadvantages:</p>",
       "preview": "The heap has advantages and disadvantages:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Halda má své výhody i nevýhody:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b12",
       "type": "list",
       "html": "<ul><li>Allocating memory on the heap is comparatively slow.</li><li>Allocated memory stays allocated until it is specifically deallocated (beware memory leaks) or the application ends (at which point the OS should clean it up).</li><li>Dynamically allocated memory must be accessed through a pointer. Dereferencing a pointer is slower than accessing a variable directly.</li><li>Because the heap is a big pool of memory, large arrays, structures, or classes can be allocated here.</li></ul>",
       "preview": "Allocating memory on the heap is comparatively slow.Allocated memory stays alloc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Alokace paměti na haldě je poměrně pomalá.</li><li>Alokovaná paměť zůstává alokována, dokud není výslovně uvolněna (pozor na úniky paměti – memory leaks), nebo dokud aplikace neskončí (v tom okamžiku by ji měl uklidit operační systém).</li><li>K dynamicky alokované paměti se musí přistupovat přes ukazatel. Dereference ukazatele je pomalejší než přímý přístup k proměnné.</li><li>Protože je halda velký paměťový fond (memory pool), lze zde alokovat velká pole, struktury nebo třídy.</li></ul>"
     },
     {
       "id": "the-stack-and-the-heap_b13",
       "type": "paragraph",
       "html": "<p><strong>The call stack</strong></p>",
       "preview": "The call stack",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Zásobník volání (call stack)</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b14",
       "type": "paragraph",
       "html": "<p>The <strong>call stack</strong> (usually referred to as “the stack”) has a much more interesting role to play. The call stack keeps track of all the active functions (those that have been called but have not yet terminated) from the start of the program to the current point of execution, and handles allocation of all function parameters and local variables.</p>",
       "preview": "The call stack (usually referred to as “the stack”) has a much more interesting ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Zásobník volání</strong> (obvykle označovaný jednoduše jako „zásobník“ či „stack“) hraje mnohem zajímavější roli. Zásobník volání udržuje přehled o všech aktivních funkcích (těch, které byly zavolány, ale ještě nebyly ukončeny) od začátku programu až po aktuální bod provádění a zajišťuje alokaci všech parametrů funkcí a lokálních proměnných.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b15",
       "type": "paragraph",
       "html": "<p>The call stack is implemented as a stack data structure. So before we can talk about how the call stack works, we need to understand what a stack data structure is.</p>",
       "preview": "The call stack is implemented as a stack data structure. So before we can talk a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zásobník volání je implementován jako datová struktura typu zásobník (stack). Než si tedy povíme, jak zásobník volání funguje, musíme pochopit, co to datová struktura zásobník vlastně je.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b16",
       "type": "paragraph",
       "html": "<p><strong>The stack data structure</strong></p>",
       "preview": "The stack data structure",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Datová struktura zásobník (stack)</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b17",
       "type": "paragraph",
       "html": "<p>A <strong>data structure</strong> is a programming mechanism for organizing data so that it can be used efficiently. You’ve already seen several types of data structures, such as arrays and structs. Both of these data structures provide mechanisms for storing data and accessing that data in an efficient way. There are many additional data structures that are commonly used in programming, quite a few of which are implemented in the standard library, and a stack is one of those.</p>",
       "preview": "A data structure is a programming mechanism for organizing data so that it can b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Datová struktura</strong> je programovací mechanismus pro organizaci dat tak, aby je bylo možné efektivně využívat. Již jste viděli několik typů datových struktur, například pole a struktury (<code>struct</code>). Obě tyto datové struktury poskytují mechanismy pro ukládání dat a efektivní přístup k nim. V programování se běžně používá mnoho dalších datových struktur, z nichž řada je implementována ve standardní knihovně, a zásobník je jednou z nich.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b18",
       "type": "paragraph",
       "html": "<p>Consider a stack of plates in a cafeteria. Because each plate is heavy and they are stacked, you can really only do one of three things:</p>",
       "preview": "Consider a stack of plates in a cafeteria. Because each plate is heavy and they ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si stoh talířů v jídelně. Protože je každý talíř těžký a jsou naskládané na sobě, můžete udělat v zásadě jen jednu ze tří věcí:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b19",
       "type": "list",
       "html": "<ol start=\"1\"><li>Look at the surface of the top plate</li><li>Take the top plate off the stack (exposing the one underneath, if it exists)</li><li>Put a new plate on top of the stack (hiding the one underneath, if it exists)</li></ol>",
       "preview": "Look at the surface of the top plateTake the top plate off the stack (exposing t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Podívat se na povrch vrchního talíře</li><li>Odebrat vrchní talíř ze stohu (čímž se odkryje ten pod ním, pokud existuje)</li><li>Položit nový talíř na vrchol stohu (čímž se zakryje ten pod ním, pokud existuje)</li></ol>"
     },
     {
       "id": "the-stack-and-the-heap_b20",
       "type": "paragraph",
       "html": "<p>In computer programming, a stack is a container data structure that holds multiple variables (much like an array). However, whereas an array lets you access and modify elements in any order you wish (called <strong>random access</strong>), a stack is more limited. The operations that can be performed on a stack correspond to the three things mentioned above:</p>",
       "preview": "In computer programming, a stack is a container data structure that holds multip",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V počítačovém programování je zásobník (stack) kontejnerová datová struktura, která uchovává více proměnných (podobně jako pole). Zatímco však pole umožňuje přistupovat k prvkům a upravovat je v libovolném pořadí (což se označuje jako <strong>přímý přístup</strong> / random access), zásobník je více omezený. Operace, které lze se zásobníkem provádět, odpovídají výše uvedeným třem činnostem:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b21",
       "type": "list",
       "html": "<ol start=\"1\"><li>Look at the top item on the stack (usually done via a function called top(), but sometimes called peek())</li><li>Take the top item off of the stack (done via a function called pop())</li><li>Put a new item on top of the stack (done via a function called push())</li></ol>",
       "preview": "Look at the top item on the stack (usually done via a function called top(), but",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Podívat se na prvek na vrcholu zásobníku (obvykle se provádí pomocí funkce top(), ale někdy se nazývá i peek())</li><li>Odebrat prvek z vrcholu zásobníku (provádí se pomocí funkce pop())</li><li>Vložit nový prvek na vrchol zásobníku (provádí se pomocí funkce push())</li></ol>"
     },
     {
       "id": "the-stack-and-the-heap_b22",
       "type": "paragraph",
       "html": "<p>A stack is a last-in, first-out (LIFO) structure. The last item pushed onto the stack will be the first item popped off. If you put a new plate on top of the stack, the first plate removed from the stack will be the plate you just pushed on last. Last on, first off. As items are pushed onto a stack, the stack grows larger -- as items are popped off, the stack grows smaller.</p>",
       "preview": "A stack is a last-in, first-out (LIFO) structure. The last item pushed onto the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zásobník je struktura typu LIFO (last-in, first-out – poslední dovnitř, první ven). Poslední prvek vložený na zásobník bude prvním prvkem, který z něj bude odebrán. Pokud položíte nový talíř na vrchol stohu, prvním odebraným talířem bude právě ten, který jste tam položili jako poslední. Poslední dovnitř, první ven. Jak se prvky vkládají na zásobník, zásobník se zvětšuje – a jak se prvky odebírají, zásobník se zmenšuje.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b23",
       "type": "paragraph",
       "html": "<p>For example, here’s a short sequence showing how pushing and popping on a stack works:</p>",
       "preview": "For example, here’s a short sequence showing how pushing and popping on a stack ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je například krátká sekvence ukazující, jak funguje vkládání (push) a odebírání (pop) na zásobníku:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b24",
       "type": "output",
       "text": "Stack: empty\nPush 1\nStack: 1\nPush 2\nStack: 1 2\nPush 3\nStack: 1 2 3\nPop\nStack: 1 2\nPop\nStack: 1\n",
       "html": "<pre>Stack: empty\nPush 1\nStack: 1\nPush 2\nStack: 1 2\nPush 3\nStack: 1 2 3\nPop\nStack: 1 2\nPop\nStack: 1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Stack: empty\nPush 1\nStack: 1\nPush 2\nStack: 1 2\nPush 3\nStack: 1 2 3\nPop\nStack: 1 2\nPop\nStack: 1\n</pre>"
     },
     {
       "id": "the-stack-and-the-heap_b25",
       "type": "paragraph",
       "html": "<p>The plate analogy is a pretty good analogy as to how the call stack works, but we can make a better analogy. Consider a bunch of mailboxes, all stacked on top of each other. Each mailbox can only hold one item, and all mailboxes start out empty. Furthermore, each mailbox is nailed to the mailbox below it, so the number of mailboxes can not be changed. If we can’t change the number of mailboxes, how do we get a stack-like behavior?</p>",
       "preview": "The plate analogy is a pretty good analogy as to how the call stack works, but w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Analogie s talíři docela dobře popisuje, jak funguje zásobník volání (call stack), ale můžeme použít ještě lepší analogii. Představte si sadu poštovních schránek naskládaných na sobě. Každá schránka pojme pouze jednu položku a všechny schránky jsou na začátku prázdné. Navíc je každá schránka přibitá k té pod ní, takže počet schránek nelze změnit. Pokud nemůžeme měnit počet schránek, jak docílíme chování podobného zásobníku?</p>"
     },
     {
       "id": "the-stack-and-the-heap_b26",
       "type": "paragraph",
       "html": "<p>First, we use a marker (like a post-it note) to keep track of where the bottom-most empty mailbox is. In the beginning, this will be the lowest mailbox (on the bottom of the stack). When we push an item onto our mailbox stack, we put it in the mailbox that is marked (which is the first empty mailbox), and move the marker up one mailbox. When we pop an item off the stack, we move the marker down one mailbox (so it’s pointed at the top non-empty mailbox) and remove the item from that mailbox. Anything below the marker is considered “on the stack”. Anything at the marker or above the marker is not on the stack.</p>",
       "preview": "First, we use a marker (like a post-it note) to keep track of where the bottom-m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve použijeme značku (například lepicí lístek), abychom měli přehled o tom, kde se nachází nejspodnější prázdná schránka. Na začátku to bude ta úplně nejnižší schránka (na dně zásobníku). Když na náš zásobník schránek vložíme (push) položku, umístíme ji do označené schránky (což je první prázdná schránka) a posuneme značku o jednu schránku nahoru. Když položku ze zásobníku odebereme (pop), posuneme značku o jednu schránku dolů (takže ukazuje na nejvyšší neprázdnou schránku) a položku z této schránky vyjmeme. Cokoli pod značkou je považováno za součást „na zásobníku“. Cokoli na úrovni značky nebo nad ní se na zásobníku nenachází.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b27",
       "type": "paragraph",
       "html": "<p><strong>The call stack segment</strong></p>",
       "preview": "The call stack segment",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Segment zásobníku volání (call stack segment)</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b28",
       "type": "paragraph",
       "html": "<p>The call stack segment holds the memory used for the call stack. When the application starts, the main() function is pushed on the call stack by the operating system. Then the program begins executing.</p>",
       "preview": "The call stack segment holds the memory used for the call stack. When the applic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Segment zásobníku volání uchovává paměť používanou pro zásobník volání (call stack). Když se aplikace spustí, operační systém vloží funkci main() na zásobník volání. Poté se program začne vykonávat.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b29",
       "type": "paragraph",
       "html": "<p>When a function call is encountered, the function is pushed onto the call stack. When the current function ends, that function is popped off the call stack (this process is sometimes called <strong>unwinding the stack</strong>). Thus, by looking at the functions that are currently on the call stack, we can see all of the functions that were called to get to the current point of execution.</p>",
       "preview": "When a function call is encountered, the function is pushed onto the call stack.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se narazí na volání funkce, tato funkce je vložena na zásobník volání. Když aktuální funkce skončí, je z tohoto zásobníku odebrána (tento proces se někdy nazývá <strong>odvíjení zásobníku</strong> neboli <strong>unwinding the stack</strong>). Pohledem na funkce, které se aktuálně nacházejí na zásobníku volání, tedy můžeme vidět všechny funkce, které byly zavolány, abychom se dostali do aktuálního bodu provádění.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b30",
       "type": "paragraph",
       "html": "<p>Our mailbox analogy above is fairly analogous to how the call stack works. The stack itself is a fixed-size chunk of memory addresses. The mailboxes are memory addresses, and the “items” we’re pushing and popping on the stack are called <strong>stack frames</strong>. A stack frame keeps track of all of the data associated with one function call. We’ll talk more about stack frames in a bit. The “marker” is a register (a small piece of memory in the CPU) known as the stack pointer (sometimes abbreviated “SP”). The stack pointer keeps track of where the top of the call stack currently is.</p>",
       "preview": "Our mailbox analogy above is fairly analogous to how the call stack works. The s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naše výše uvedená analogie se schránkami velmi věrně odpovídá tomu, jak funguje zásobník volání. Samotný zásobník je blok paměťových adres o pevné velikosti. Schránky představují paměťové adresy a „položky“, které na zásobník vkládáme a odebíráme, se nazývají <strong>rámce zásobníku</strong> (<strong>stack frames</strong>). Rámec zásobníku uchovává veškerá data spojená s jedním voláním funkce. O rámcích zásobníku si řekneme více za chvíli. „Značka“ je registr (malá část paměti v CPU) známý jako ukazatel zásobníku (stack pointer, někdy zkracováno jako „SP“). Ukazatel zásobníku sleduje, kde se aktuálně nachází vrchol zásobníku volání.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b31",
       "type": "paragraph",
       "html": "<p>We can make one further optimization: When we pop an item off the call stack, we only have to move the stack pointer down -- we don’t have to clean up or zero the memory used by the popped stack frame (the equivalent of emptying the mailbox). This memory is no longer considered to be “on the stack” (the stack pointer will be at or below this address), so it won’t be accessed. If we later push a new stack frame to this same memory, it will overwrite the old value we never cleaned up.</p>",
       "preview": "We can make one further optimization: When we pop an item off the call stack, we",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme provést ještě jednu optimalizaci: Když odebíráme položku ze zásobníku volání, stačí nám pouze posunout ukazatel zásobníku dolů – nemusíme uklízet ani nulovat paměť využívanou odebraným rámcem zásobníku (ekvivalent vyprázdnění schránky). Tato paměť se již nepovažuje za součást „na zásobníku“ (ukazatel zásobníku bude na této adrese nebo pod ní), takže k ní nebude přistupováno. Pokud později do této stejné paměti vložíme nový rámec zásobníku, přepíše původní hodnotu, kterou jsme nikdy neuklidili.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b32",
       "type": "paragraph",
       "html": "<p><strong>The call stack in action</strong></p>",
       "preview": "The call stack in action",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Zásobník volání v akci</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b33",
       "type": "paragraph",
       "html": "<p>Let’s examine in more detail how the call stack works. Here is the sequence of steps that takes place when a function is called:</p>",
       "preview": "Let’s examine in more detail how the call stack works. Here is the sequence of s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme podrobněji prozkoumat, jak zásobník volání funguje. Zde je posloupnost kroků, které proběhnou při zavolání funkce:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b34",
       "type": "list",
       "html": "<ol start=\"1\"><li>The program encounters a function call.</li><li>A stack frame is constructed and pushed on the stack. The stack frame consists of:</li></ol>",
       "preview": "The program encounters a function call.A stack frame is constructed and pushed o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Program narazí na volání funkce.</li><li>Vytvoří se zásobníkový rámec (stack frame) a vloží se na zásobník (push). Zásobníkový rámec se skládá z:</li></ol>"
     },
     {
       "id": "the-stack-and-the-heap_b35",
       "type": "list",
       "html": "<ul><li>The address of the instruction beyond the function call (called the <strong>return address</strong>). This is how the CPU remembers where to return to after the called function exits.</li><li>All function arguments.</li><li>Memory for any local variables</li><li>Saved copies of any registers modified by the function that need to be restored when the function returns</li></ul>",
       "preview": "The address of the instruction beyond the function call (called the return addre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Adresy instrukce za voláním funkce (nazývané <strong>návratová adresa</strong> neboli <strong>return address</strong>). Takto si CPU pamatuje, kam se po ukončení volané funkce vrátit.</li><li>Všech argumentů funkce.</li><li>Paměti pro lokální proměnné.</li><li>Uložených kopií všech registrů modifikovaných funkcí, které je třeba při návratu z funkce obnovit.</li></ul>"
     },
     {
       "id": "the-stack-and-the-heap_b36",
       "type": "list",
       "html": "<ol start=\"3\"><li>The CPU jumps to the function’s start point.</li><li>The instructions inside of the function begin executing.</li></ol>",
       "preview": "The CPU jumps to the function’s start point.The instructions inside of the funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"3\"><li>CPU skočí na počáteční bod funkce.</li><li>Instrukce uvnitř funkce se začnou vykonávat.</li></ol>"
     },
     {
       "id": "the-stack-and-the-heap_b37",
       "type": "paragraph",
       "html": "<p>When the function terminates, the following steps happen:</p>",
       "preview": "When the function terminates, the following steps happen:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když funkce skončí, proběhnou následující kroky:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b38",
       "type": "list",
       "html": "<ol><li>Registers are restored from the call stack</li><li>The stack frame is popped off the stack. This frees the memory for all local variables and arguments.</li><li>The return value is handled.</li><li>The CPU resumes execution at the return address.</li></ol>",
       "preview": "Registers are restored from the call stackThe stack frame is popped off the stac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol><li>Z volacího zásobníku se obnoví registry.</li><li>Zásobníkový rámec je ze zásobníku odstraněn (pop). Tím se uvolní paměť pro všechny lokální proměnné a argumenty.</li><li>Zpracuje se návratová hodnota.</li><li>CPU pokračuje ve vykonávání kódu na návratové adrese.</li></ol>"
     },
     {
       "id": "the-stack-and-the-heap_b39",
       "type": "paragraph",
       "html": "<p>Return values can be handled in a number of different ways, depending on the computer’s architecture. Some architectures include the return value as part of the stack frame. Others use CPU registers.</p>",
       "preview": "Return values can be handled in a number of different ways, depending on the com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Návratové hodnoty mohou být zpracovány různými způsoby v závislosti na architektuře počítače. Některé architektury zahrnují návratovou hodnotu jako součást zásobníkového rámce. Jiné využívají registry CPU.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b40",
       "type": "paragraph",
       "html": "<p>Typically, it is not important to know all the details about how the call stack works. However, understanding that functions are effectively pushed on the stack when they are called and popped off (unwound) when they return gives you the fundamentals needed to understand recursion, as well as some other concepts that are useful when debugging.</p>",
       "preview": "Typically, it is not important to know all the details about how the call stack ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obvykle není nutné znát všechny podrobnosti o tom, jak volací zásobník funguje. Nicméně pochopení toho, že funkce jsou při zavolání v podstatě vloženy na zásobník (pushed) a při návratu z něj odebrány (popped off / unwound), vám poskytne základy potřebné pro pochopení rekurze i dalších konceptů užitečných při ladění (debuggingu).</p>"
     },
     {
       "id": "the-stack-and-the-heap_b41",
       "type": "paragraph",
       "html": "<p>A technical note: on some architectures, the call stack grows away from memory address 0. On others, it grows towards memory address 0. As a consequence, newly pushed stack frames may have a higher or a lower memory address than the previous ones.</p>",
       "preview": "A technical note: on some architectures, the call stack grows away from memory a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Technická poznámka: na některých architekturách roste volací zásobník směrem od paměťové adresy 0. Na jiných roste směrem k paměťové adrese 0. V důsledku toho mohou mít nově vložené zásobníkové rámce vyšší nebo nižší paměťovou adresu než ty předchozí.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b42",
       "type": "paragraph",
       "html": "<p><strong>A quick and dirty call stack example</strong></p>",
       "preview": "A quick and dirty call stack example",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Rychlý a jednoduchý příklad zásobníku volání</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b43",
       "type": "paragraph",
       "html": "<p>Consider the following simple application:</p>",
       "preview": "Consider the following simple application:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující jednoduchou aplikaci:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b44",
@@ -325,84 +369,96 @@
       "language": "cpp",
       "code": "int foo(int x)\n{\n    // b\n    return x;\n} // foo is popped off the call stack here\n\nint main()\n{\n    // a\n    foo(5); // foo is pushed on the call stack here\n    // c\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    // b\n    return x;\n} // foo is popped off the call stack here\n\nint main()\n{\n    // a\n    foo(5); // foo is pushed on the call stack here\n    // c\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    // b\n    návrat x;\n} // foo je zde vysunuto ze zásobníku volání\n\nint main()\n{\n    // a\n    foo(5); // zde se na zásobníku volání posune foo\n    // c\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-stack-and-the-heap_b45",
       "type": "paragraph",
       "html": "<p>The call stack looks like the following at the labeled points:</p>",
       "preview": "The call stack looks like the following at the labeled points:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V označených bodech vypadá zásobník volání následovně:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b46",
       "type": "paragraph",
       "html": "<p>a:</p>",
       "preview": "a:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b47",
       "type": "output",
       "text": "main()\n",
       "html": "<pre>main()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>main()\n</pre>"
     },
     {
       "id": "the-stack-and-the-heap_b48",
       "type": "paragraph",
       "html": "<p>b:</p>",
       "preview": "b:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>b:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b49",
       "type": "output",
       "text": "foo() (including parameter x)\nmain()\n",
       "html": "<pre>foo() (including parameter x)\nmain()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>foo() (včetně parametru x)\nmain()\n</pre>"
     },
     {
       "id": "the-stack-and-the-heap_b50",
       "type": "paragraph",
       "html": "<p>c:</p>",
       "preview": "c:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>c:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b51",
       "type": "output",
       "text": "main()\n",
       "html": "<pre>main()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>main()\n</pre>"
     },
     {
       "id": "the-stack-and-the-heap_b52",
       "type": "paragraph",
       "html": "<p><strong>Stack overflow</strong></p>",
       "preview": "Stack overflow",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přetečení zásobníku (stack overflow)</strong></p>"
     },
     {
       "id": "the-stack-and-the-heap_b53",
       "type": "paragraph",
       "html": "<p>The stack has a limited size, and consequently can only hold a limited amount of information. On Visual Studio for Windows, the default stack size is 1MB. With g++/Clang for Unix variants, it can be as large as 8MB. If the program tries to put too much information on the stack, stack overflow will result. <strong>Stack overflow</strong> happens when all the memory in the stack has been allocated -- in that case, further allocations begin overflowing into other sections of memory.</p>",
       "preview": "The stack has a limited size, and consequently can only hold a limited amount of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zásobník má omezenou velikost, a v důsledku toho může pojmout pouze omezené množství informací. Ve Visual Studiu pro Windows je výchozí velikost zásobníku 1 MB. U g++/Clang pro unixové varianty může dosahovat až 8 MB. Pokud se program pokusí umístit na zásobník příliš mnoho informací, dojde k přetečení zásobníku. K <strong>přetečení zásobníku</strong> (stack overflow) dochází tehdy, když je alokována veškerá paměť na zásobníku – v takovém případě začnou další alokace přetékat do jiných částí paměti.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b54",
       "type": "paragraph",
       "html": "<p>Stack overflow is generally the result of allocating too many variables on the stack, and/or making too many nested function calls (where function A calls function B calls function C calls function D etc…) On modern operating systems, overflowing the stack will generally cause your OS to issue an access violation and terminate the program.</p>",
       "preview": "Stack overflow is generally the result of allocating too many variables on the s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetečení zásobníku je obvykle důsledkem alokace příliš velkého množství proměnných na zásobníku a/nebo příliš mnoha vnořených volání funkcí (kde funkce A volá funkci B, ta volá funkci C, ta volá funkci D atd.). Na moderních operačních systémech přetečení zásobníku obvykle způsobí, že operační systém vyvolá narušení přístupu (access violation) a program ukončí.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b55",
       "type": "paragraph",
       "html": "<p>Here is an example program that will likely cause a stack overflow. You can run it on your system and watch it crash:</p>",
       "preview": "Here is an example program that will likely cause a stack overflow. You can run ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový program, který pravděpodobně způsobí přetečení zásobníku. Můžete jej spustit na svém systému a sledovat jeho pád:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b56",
@@ -410,42 +466,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int stack[10000000];\n    std::cout << \"hi\" << stack[0]; // we'll use stack[0] here so the compiler won't optimize the array away\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int stack[10000000];\n    std::cout &lt;&lt; \"hi\" &lt;&lt; stack[0]; // we'll use stack[0] here so the compiler won't optimize the array away\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int zásobník[10000000];\n    std::cout << \"ahoj\" << stack[0]; // zde použijeme stack[0], aby kompilátor pole neoptimalizoval\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-stack-and-the-heap_b57",
       "type": "paragraph",
       "html": "<p>This program tries to allocate a huge (likely 40MB) array on the stack. Because the stack is not large enough to handle this array, the array allocation overflows into portions of memory the program is not allowed to use.</p>",
       "preview": "This program tries to allocate a huge (likely 40MB) array on the stack. Because ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se pokouší alokovat na zásobníku obrovské (pravděpodobně 40MB) pole. Protože zásobník není dostatečně velký, aby toto pole pojal, alokace pole přeteče do částí paměti, které program nemá povoleno používat.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b58",
       "type": "paragraph",
       "html": "<p>On Windows (Visual Studio), this program produces the result:</p>",
       "preview": "On Windows (Visual Studio), this program produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na Windows (Visual Studio) tento program vygeneruje následující výsledek:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b59",
       "type": "output",
       "text": "HelloWorld.exe (process 15916) exited with code -1073741571.\n",
       "html": "<pre>HelloWorld.exe (process 15916) exited with code -1073741571.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>HelloWorld.exe (process 15916) exited with code -1073741571.\n</pre>"
     },
     {
       "id": "the-stack-and-the-heap_b60",
       "type": "paragraph",
       "html": "<p>-1073741571 is c0000005 in hex, which is the Windows OS code for an access violation. Note that “hi” is never printed because the program is terminated prior to that point.</p>",
       "preview": "-1073741571 is c0000005 in hex, which is the Windows OS code for an access viola",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>-1073741571 je v hexadecimální soustavě c0000005, což je kód operačního systému Windows pro porušení přístupu (access violation). Všimněte si, že „hi“ se nikdy nevytiskne, protože program je ukončen před tímto bodem.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b61",
       "type": "paragraph",
       "html": "<p>Here’s another program that will cause a stack overflow for a different reason:</p>",
       "preview": "Here’s another program that will cause a stack overflow for a different reason:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další program, který způsobí přetečení zásobníku (stack overflow) z jiného důvodu:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b62",
@@ -453,14 +515,16 @@
       "language": "cpp",
       "code": "// h/t to reader yellowEmu for the idea of adding a counter\n#include <iostream>\n\nint g_counter{ 0 };\n\nvoid eatStack()\n{\n    std::cout << ++g_counter << ' ';\n\n    // We use a conditional here to avoid compiler warnings about infinite recursion\n    if (g_counter > 0)\n        eatStack(); // note that eatStack() calls itself\n\n    // Needed to prevent compiler from doing tail-call optimization\n    std::cout << \"hi\";\n}\n\nint main()\n{\n    eatStack();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader yellowEmu for the idea of adding a counter\n#include &lt;iostream&gt;\n\nint g_counter{ 0 };\n\nvoid eatStack()\n{\n    std::cout &lt;&lt; ++g_counter &lt;&lt; ' ';\n\n    // We use a conditional here to avoid compiler warnings about infinite recursion\n    if (g_counter &gt; 0)\n        eatStack(); // note that eatStack() calls itself\n\n    // Needed to prevent compiler from doing tail-call optimization\n    std::cout &lt;&lt; \"hi\";\n}\n\nint main()\n{\n    eatStack();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t čtenáři yellowEmu pro myšlenku přidání počítadla\n#include <iostream>\n\nint g_counter{ 0 };\n\nvoid eatStack()\n{\n    std::cout << ++g_counter << ' ';\n\n    // Zde používáme podmínku, abychom se vyhnuli varování kompilátoru o nekonečné rekurzi\n    if (g_counter > 0)\n        eatStack(); // všimněte si, že eatStack() volá samo sebe\n\n    // Potřebné, aby se zabránilo kompilátoru v provádění optimalizace tail-call\n    std::cout << \"ahoj\";\n}\n\nint main()\n{\n    eatStack();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-stack-and-the-heap_b63",
       "type": "paragraph",
       "html": "<p>In the above program, a stack frame is pushed on the stack every time function eatStack() is called. Since eatStack() calls itself (and never returns to the caller), eventually the stack will run out of memory and cause an overflow.</p>",
       "preview": "In the above program, a stack frame is pushed on the stack every time function e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu je rámec zásobníku (stack frame) vložen na zásobník při každém volání funkce eatStack(). Protože eatStack() volá sama sebe (a nikdy se nevrátí volajícímu), zásobníku nakonec dojde paměť a způsobí přetečení.</p>"
     },
     {
       "id": "the-stack-and-the-heap_b64",
@@ -468,7 +532,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>When run on the author’s Windows 10 machine (from within the Visual Studio Community IDE), eatStack() crashed after 4848 calls in debug mode, and 128,679 calls in release mode.</p></div>",
       "preview": "Author’s noteWhen run on the author’s Windows 10 machine (from within the Visual Studio Community ID",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Při spuštění na autorově počítači se systémem Windows 10 (z IDE Visual Studio Community) funkce eatStack() spadla po 4848 voláních v režimu ladění (debug mode) a po 128 679 voláních v produkčním režimu (release mode).</p></div>"
     },
     {
       "id": "the-stack-and-the-heap_b65",
@@ -476,21 +541,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk more about functions that call themselves in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/recursion/\">20.3 -- Recursion</a>.</p></div>",
       "preview": "Related contentWe talk more about functions that call themselves in upcoming lesson 20.3 -- Recursio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Více si o funkcích, které volají samy sebe, povíme v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/recursion/\">20.3 -- Rekurze</a>.</p></div>"
     },
     {
       "id": "the-stack-and-the-heap_b66",
       "type": "paragraph",
       "html": "<p>The stack has advantages and disadvantages:</p>",
       "preview": "The stack has advantages and disadvantages:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zásobník má své výhody i nevýhody:</p>"
     },
     {
       "id": "the-stack-and-the-heap_b67",
       "type": "list",
       "html": "<ul><li>Allocating memory on the stack is comparatively fast.</li><li>Memory allocated on the stack stays in scope as long as it is on the stack. It is destroyed when it is popped off the stack.</li><li>All memory allocated on the stack is known at compile time. Consequently, this memory can be accessed directly through a variable.</li><li>Because the stack is relatively small, it is generally not a good idea to do anything that eats up lots of stack space. This includes allocating or copying large arrays or other memory-intensive structures.</li></ul>",
       "preview": "Allocating memory on the stack is comparatively fast.Memory allocated on the sta",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Alokace paměti na zásobníku je relativně rychlá.</li><li>Paměť alokovaná na zásobníku zůstává v rozsahu platnosti (scope) tak dlouho, dokud je na zásobníku. Zruší se, jakmile je ze zásobníku odstraněna (popped).</li><li>Veškerá paměť alokovaná na zásobníku je známa v době kompilace. V důsledku toho lze k této paměti přistupovat přímo prostřednictvím proměnné.</li><li>Protože je zásobník relativně malý, obecně není dobrý nápad provádět cokoliv, co spotřebovává velké množství místa na zásobníku. To zahrnuje alokaci nebo kopírování velkých polí či jiných paměťově náročných struktur.</li></ul>"
     },
     {
       "id": "the-stack-and-the-heap_b68",
@@ -498,7 +566,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p><a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/#comment-560618\">This comment</a> has some additional (simplified) information about how variables on the stack are laid out and receive actual memory addresses at runtime.</p></div>",
       "preview": "Author’s noteThis comment has some additional (simplified) information about how variables on the st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p><a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-objects-and-variables/#comment-560618\">Tento komentář</a> obsahuje doplňující (zjednodušené) informace o tom, jak jsou proměnné na zásobníku uspořádány a jak za běhu programu získávají skutečné paměťové adresy.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "20.2 — Zásobník a halda"
 }

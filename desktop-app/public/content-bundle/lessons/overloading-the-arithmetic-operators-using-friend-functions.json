@@ -14,28 +14,33 @@
       "type": "paragraph",
       "html": "<p>Some of the most commonly used operators in C++ are the arithmetic operators -- that is, the plus operator (+), minus operator (-), multiplication operator (*), and division operator (/). Note that all of the arithmetic operators are binary operators -- meaning they take two operands -- one on each side of the operator. All four of these operators are overloaded in the exact same way.</p>",
       "preview": "Some of the most commonly used operators in C++ are the arithmetic operators -- ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mezi jedny z nejpoužívanějších operátorů v C++ patří aritmetické operátory – tedy operátor sčítání (+), operátor odčítání (-), operátor násobení (*) a operátor dělení (/). Všimněte si, že všechny aritmetické operátory jsou binární operátory – což znamená, že přebírají dva operandy – jeden po každé straně operátoru. Všechny tyto čtyři operátory se přetěžují úplně stejným způsobem.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b1",
       "type": "paragraph",
       "html": "<p>It turns out that there are three different ways to overload operators: the member function way, the friend function way, and the normal function way. In this lesson, we’ll cover the friend function way (because it’s more intuitive for most binary operators). Next lesson, we’ll discuss the normal function way. Finally, in a later lesson in this chapter, we’ll cover the member function way. And, of course, we’ll also summarize when to use each in more detail.</p>",
       "preview": "It turns out that there are three different ways to overload operators: the memb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazuje se, že existují tři různé způsoby, jak přetěžovat operátory: pomocí členské funkce, pomocí spřátelené funkce (friend funkce) a pomocí běžné funkce. V této lekci se budeme věnovat způsobu pomocí friend funkcí (protože je pro většinu binárních operátorů intuitivnější). V příští lekci probereme způsob pomocí běžných funkcí. A nakonec v pozdější lekci této kapitoly probereme způsob pomocí členských funkcí. Samozřejmě si také podrobněji shrneme, kdy který způsob použít.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b2",
       "type": "section",
       "title": "Overloading operators using friend functions",
       "html": "<h3 class=\"cpp-section-heading\">Overloading operators using friend functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetěžování operátorů pomocí friend funkcí</h3>",
+      "title_cs": "Přetížení operátorů pomocí funkcí přátel"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b3",
       "type": "paragraph",
       "html": "<p>Consider the following class:</p>",
       "preview": "Consider the following class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující třídu:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b4",
@@ -43,14 +48,16 @@
       "language": "cpp",
       "code": "class Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\tCents(int cents) : m_cents{ cents } { }\n\tint getCents() const { return m_cents; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\tCents(int cents) : m_cents{ cents } { }\n\tint getCents() const { return m_cents; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Cents\n{\nsoukromé:\n\tint m_centů {};\n\nveřejnost:\n\tCents(int cents) : m_cents{ cents } { }\n\tint getCents() const { return m_cents; }\n};</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b5",
       "type": "paragraph",
       "html": "<p>The following example shows how to overload operator plus (+) in order to add two “Cents” objects together:</p>",
       "preview": "The following example shows how to overload operator plus (+) in order to add tw",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující příklad ukazuje, jak přetížit operátor plus (+) pro sečtení dvou objektů typu „Cents“ dohromady:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b6",
@@ -58,49 +65,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\tCents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n\tfriend Cents operator+(const Cents& c1, const Cents& c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents& c1, const Cents& c2)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn c1.m_cents + c2.m_cents;\n}\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\tCents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n\tfriend Cents operator+(const Cents&amp; c1, const Cents&amp; c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents&amp; c1, const Cents&amp; c2)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn c1.m_cents + c2.m_cents;\n}\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n\tint m_centů {};\n\nveřejnost:\n\tCents(int cents) : m_cents{ cents } { }\n\n\t// přidání centů + centů pomocí funkce přítele\n\tpřítel centů operátor+ (konst centů& c1, konst centů& c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// poznámka: tato funkce není členská funkce!\nOperátor centů+ (konst centů a c1, konst centů a c2)\n{\n\t// použijte konstruktor Cents a operátor+(int, int)\n\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\tnávrat c1.m_centů + c2.m_centů;\n}\n\nint main()\n{\n\tCenty centy1{ 6 };\n\tCenty centy2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b7",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vytvoří následující výstup:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b8",
       "type": "output",
       "text": "I have 14 cents.\n",
       "html": "<pre>I have 14 cents.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>I have 14 cents.\n</pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b9",
       "type": "paragraph",
       "html": "<p>Overloading the plus operator (+) is as simple as declaring a function named operator+, giving it two parameters of the type of the operands we want to add, picking an appropriate return type, and then writing the function.</p>",
       "preview": "Overloading the plus operator (+) is as simple as declaring a function named ope",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetížení operátoru plus (+) je tak jednoduché jako deklarovat funkci s názvem operator+, předat jí dva parametry odpovídající typům operandů, které chceme sčítat, zvolit vhodný návratový typ a poté tělo funkce naimplementovat.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b10",
       "type": "paragraph",
       "html": "<p>In the case of our Cents object, implementing our operator+() function is very simple. First, the parameter types: in this version of operator+, we are going to add two Cents objects together, so our function will take two objects of type Cents. Second, the return type: our operator+ is going to return a result of type Cents, so that’s our return type.</p>",
       "preview": "In the case of our Cents object, implementing our operator+() function is very s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě našeho objektu Cents je implementace naší funkce operator+() velmi jednoduchá. Za prvé, typy parametrů: v této verzi operator+ budeme sčítat dva objekty typu Cents dohromady, takže naše funkce bude přijímat dva objekty typu Cents. Za druhé, návratový typ: náš operator+ bude vracet výsledek typu Cents, takže to je náš návratový typ.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b11",
       "type": "paragraph",
       "html": "<p>Finally, implementation: to add two Cents objects together, we really need to add the m_cents member from each Cents object. Because our overloaded operator+() function is a friend of the class, we can access the m_cents member of our parameters directly. Also, because m_cents is an integer, and C++ knows how to add integers together using the built-in version of the plus operator that works with integer operands, we can simply use the + operator to do the adding.</p>",
       "preview": "Finally, implementation: to add two Cents objects together, we really need to ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A nakonec implementace: abychom sečetli dva objekty Cents dohromady, potřebujeme ve skutečnosti sečíst členskou proměnnou m_cents z každého objektu Cents. Protože je naše přetížená funkce operator+() spřátelenou funkcí (friend) třídy, můžeme k členské proměnné m_cents našich parametrů přistupovat přímo. A protože m_cents je celé číslo (integer) a C++ umí sčítat celá čísla pomocí vestavěné verze operátoru plus pracující s celočíselnými operandy, můžeme ke sčítání jednoduše použít operátor +.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b12",
       "type": "paragraph",
       "html": "<p>Overloading the subtraction operator (-) is simple as well:</p>",
       "preview": "Overloading the subtraction operator (-) is simple as well:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetížení operátoru odčítání (-) je také jednoduché:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b13",
@@ -108,28 +122,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n\tfriend Cents operator+(const Cents& c1, const Cents& c2);\n\n\t// subtract Cents - Cents using a friend function\n\tfriend Cents operator-(const Cents& c1, const Cents& c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents& c1, const Cents& c2)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + c2.m_cents };\n}\n\n// note: this function is not a member function!\nCents operator-(const Cents& c1, const Cents& c2)\n{\n\t// use the Cents constructor and operator-(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents - c2.m_cents };\n}\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 2 };\n\tCents centsSum{ cents1 - cents2 };\n\tstd::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n\tfriend Cents operator+(const Cents&amp; c1, const Cents&amp; c2);\n\n\t// subtract Cents - Cents using a friend function\n\tfriend Cents operator-(const Cents&amp; c1, const Cents&amp; c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents&amp; c1, const Cents&amp; c2)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + c2.m_cents };\n}\n\n// note: this function is not a member function!\nCents operator-(const Cents&amp; c1, const Cents&amp; c2)\n{\n\t// use the Cents constructor and operator-(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents - c2.m_cents };\n}\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 2 };\n\tCents centsSum{ cents1 - cents2 };\n\tstd::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n\tint m_centů {};\n\nveřejnost:\n\texplicitní centy (int centů) : m_cents{ centů } { }\n\n\t// přidání centů + centů pomocí funkce přítele\n\tpřítel centů operátor+ (konst centů& c1, konst centů& c2);\n\n\t// odečtení centů - centů pomocí funkce přítele\n\tpřítel Cents operátor-(const Cents& c1, const Cents& c2);\n\n\tint getCents() const { return m_cents; }\n};\n\n// poznámka: tato funkce není členská funkce!\nOperátor centů+ (konst centů a c1, konst centů a c2)\n{\n\t// použijte konstruktor Cents a operátor+(int, int)\n\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\treturn Cents { c1.m_cents + c2.m_cents };\n}\n\n// poznámka: tato funkce není členská funkce!\nOperátor centů (konst centů a c1, konst centů a c2)\n{\n\t// použijte konstruktor Cents a operátor-(int, int)\n\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\treturn Cents { c1.m_cents - c2.m_cents };\n}\n\nint main()\n{\n\tCenty centy1{ 6 };\n\tCenty centy2{ 2 };\n\tCents centsSum{ cents1 - cents2 };\n\tstd::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b14",
       "type": "paragraph",
       "html": "<p>Overloading the multiplication operator (*) and the division operator (/) is as easy as defining functions for <code>operator*</code> and <code>operator/</code> respectively.</p>",
       "preview": "Overloading the multiplication operator (*) and the division operator (/) is as ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetížení operátoru násobení (*) a operátoru dělení (/) je stejně snadné jako definování funkcí pro <code>operator*</code>, respektive <code>operator/</code>.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b15",
       "type": "section",
       "title": "Friend functions can be defined inside the class",
       "html": "<h3 class=\"cpp-section-heading\">Friend functions can be defined inside the class</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Friend funkce lze definovat uvnitř třídy</h3>",
+      "title_cs": "Funkce přátel lze definovat uvnitř třídy"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b16",
       "type": "paragraph",
       "html": "<p>Even though friend functions are not members of the class, they can still be defined inside the class if desired:</p>",
       "preview": "Even though friend functions are not members of the class, they can still be def",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože friend funkce nejsou členy třídy, lze je v případě potřeby stále definovat přímo uvnitř třídy:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b17",
@@ -137,42 +156,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n        // This function is not considered a member of the class, even though the definition is inside the class\n\tfriend Cents operator+(const Cents& c1, const Cents& c2)\n\t{\n\t\t// use the Cents constructor and operator+(int, int)\n\t\t// we can access m_cents directly because this is a friend function\n\t\treturn Cents { c1.m_cents + c2.m_cents };\n\t}\n\n\tint getCents() const { return m_cents; }\n};\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + Cents using a friend function\n        // This function is not considered a member of the class, even though the definition is inside the class\n\tfriend Cents operator+(const Cents&amp; c1, const Cents&amp; c2)\n\t{\n\t\t// use the Cents constructor and operator+(int, int)\n\t\t// we can access m_cents directly because this is a friend function\n\t\treturn Cents { c1.m_cents + c2.m_cents };\n\t}\n\n\tint getCents() const { return m_cents; }\n};\n\nint main()\n{\n\tCents cents1{ 6 };\n\tCents cents2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n\tint m_centů {};\n\nveřejnost:\n\texplicitní centy (int centů) : m_cents{ centů } { }\n\n\t// přidání centů + centů pomocí funkce přítele\n        // Tato funkce není považována za člena třídy, přestože definice je uvnitř třídy\n\tpřítel centů operátor+ (konst centů a c1, konst centů a c2)\n\t{\n\t\t// použijte konstruktor Cents a operátor+(int, int)\n\t\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\t\treturn Cents { c1.m_cents + c2.m_cents };\n\t}\n\n\tint getCents() const { return m_cents; }\n};\n\nint main()\n{\n\tCenty centy1{ 6 };\n\tCenty centy2{ 8 };\n\tCents centsSum{ cents1 + cents2 };\n\tstd::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b18",
       "type": "paragraph",
       "html": "<p>This is fine for overloaded operators with trivial implementations.</p>",
       "preview": "This is fine for overloaded operators with trivial implementations.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je v pořádku pro přetížené operátory s triviální implementací.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b19",
       "type": "section",
       "title": "Overloading operators for operands of different types",
       "html": "<h3 class=\"cpp-section-heading\">Overloading operators for operands of different types</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetěžování operátorů pro operandy různých typů</h3>",
+      "title_cs": "Přetížení operátorů pro operandy různých typů"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b20",
       "type": "paragraph",
       "html": "<p>Often it is the case that you want your overloaded operators to work with operands that are different types. For example, if we have Cents(4), we may want to add the integer 6 to this to produce the result Cents(10).</p>",
       "preview": "Often it is the case that you want your overloaded operators to work with operan",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Často se stává, že chcete, aby vaše přetížené operátory pracovaly s operandy různých typů. Pokud máme například Cents(4), můžeme k němu chtít přičíst celé číslo 6, abychom získali výsledek Cents(10).</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b21",
       "type": "paragraph",
       "html": "<p>When C++ evaluates the expression <code>x + y</code>, x becomes the first parameter, and y becomes the second parameter. When x and y have the same type, it does not matter if you add x + y or y + x -- either way, the same version of operator+ gets called. However, when the operands have different types, x + y does not call the same function as y + x.</p>",
       "preview": "When C++ evaluates the expression x + y, x becomes the first parameter, and y be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když C++ vyhodnocuje výraz <code>x + y</code>, x se stane prvním parametrem a y druhým parametrem. Pokud mají x a y stejný typ, nezáleží na tom, zda sčítáte x + y nebo y + x – v obou případech se zavolá stejná verze operator+. Pokud však mají operandy různé typy, x + y nevolá stejnou funkci jako y + x.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b22",
       "type": "paragraph",
       "html": "<p>For example, <code>Cents(4) + 6</code> would call operator+(Cents, int), and <code>6 + Cents(4)</code> would call operator+(int, Cents). Consequently, whenever we overload binary operators for operands of different types, we actually need to write two functions -- one for each case. Here is an example of that:</p>",
       "preview": "For example, Cents(4) + 6 would call operator+(Cents, int), and 6 + Cents(4) wou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například <code>Cents(4) + 6</code> by zavolalo operator+(Cents, int) a <code>6 + Cents(4)</code> by zavolalo operator+(int, Cents). V důsledku toho, kdykoli přetěžujeme binární operátory pro operandy různých typů, musíme ve skutečnosti napsat dvě funkce – jednu pro každý případ. Zde je příklad:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b23",
@@ -180,28 +206,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + int using a friend function\n\tfriend Cents operator+(const Cents& c1, int value);\n\n\t// add int + Cents using a friend function\n\tfriend Cents operator+(int value, const Cents& c1);\n\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents& c1, int value)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + value };\n}\n\n// note: this function is not a member function!\nCents operator+(int value, const Cents& c1)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + value };\n}\n\nint main()\n{\n\tCents c1{ Cents{ 4 } + 6 };\n\tCents c2{ 6 + Cents{ 4 } };\n\n\tstd::cout << \"I have \" << c1.getCents() << \" cents.\\n\";\n\tstd::cout << \"I have \" << c2.getCents() << \" cents.\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n\tint m_cents {};\n\npublic:\n\texplicit Cents(int cents) : m_cents{ cents } { }\n\n\t// add Cents + int using a friend function\n\tfriend Cents operator+(const Cents&amp; c1, int value);\n\n\t// add int + Cents using a friend function\n\tfriend Cents operator+(int value, const Cents&amp; c1);\n\n\n\tint getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function!\nCents operator+(const Cents&amp; c1, int value)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + value };\n}\n\n// note: this function is not a member function!\nCents operator+(int value, const Cents&amp; c1)\n{\n\t// use the Cents constructor and operator+(int, int)\n\t// we can access m_cents directly because this is a friend function\n\treturn Cents { c1.m_cents + value };\n}\n\nint main()\n{\n\tCents c1{ Cents{ 4 } + 6 };\n\tCents c2{ 6 + Cents{ 4 } };\n\n\tstd::cout &lt;&lt; \"I have \" &lt;&lt; c1.getCents() &lt;&lt; \" cents.\\n\";\n\tstd::cout &lt;&lt; \"I have \" &lt;&lt; c2.getCents() &lt;&lt; \" cents.\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n\tint m_centů {};\n\nveřejnost:\n\texplicitní centy (int centů) : m_cents{ centů } { }\n\n\t// přidání centů + int pomocí funkce přítele\n\tpřítel centů operátor+(konst centů& c1, hodnota int);\n\n\t// přidání int + centů pomocí funkce přítele\n\tpřítel Cents operator+(int value, const Cents& c1);\n\n\n\tint getCents() const { return m_cents; }\n};\n\n// poznámka: tato funkce není členská funkce!\nOperátor centů+ (konst centů a c1, hodnota int)\n{\n\t// použijte konstruktor Cents a operátor+(int, int)\n\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\treturn Cents { c1.m_cents + value };\n}\n\n// poznámka: tato funkce není členská funkce!\nOperátor centů+ (hodnota int, konst centů a c1)\n{\n\t// použijte konstruktor Cents a operátor+(int, int)\n\t// můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n\treturn Cents { c1.m_cents + value };\n}\n\nint main()\n{\n\tcentů c1{ centů{ 4 } + 6 };\n\tcentů c2{ 6 + centů{ 4 } };\n\n\tstd::cout << \"Mám \" << c1.getCents() << \" centů.\\n\";\n\tstd::cout << \"Mám \" << c2.getCents() << \" centů.\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b24",
       "type": "paragraph",
       "html": "<p>Note that both overloaded functions have the same implementation -- that’s because they do the same thing, they just take their parameters in a different order.</p>",
       "preview": "Note that both overloaded functions have the same implementation -- that’s becau",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že obě přetížené funkce mají stejnou implementaci – to proto, že dělají totéž, jen přijímají své parametry v jiném pořadí.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b25",
       "type": "section",
       "title": "Another example",
       "html": "<h3 class=\"cpp-section-heading\">Another example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další příklad</h3>",
+      "title_cs": "Další příklad"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b26",
       "type": "paragraph",
       "html": "<p>Let’s take a look at another example:</p>",
       "preview": "Let’s take a look at another example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na další příklad:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b27",
@@ -209,84 +240,99 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass MinMax\n{\nprivate:\n\tint m_min {}; // The min value seen so far\n\tint m_max {}; // The max value seen so far\n\npublic:\n\tMinMax(int min, int max)\n\t\t: m_min { min }, m_max { max }\n\t{ }\n\n\tint getMin() const { return m_min; }\n\tint getMax() const { return m_max; }\n\n\tfriend MinMax operator+(const MinMax& m1, const MinMax& m2);\n\tfriend MinMax operator+(const MinMax& m, int value);\n\tfriend MinMax operator+(int value, const MinMax& m);\n};\n\nMinMax operator+(const MinMax& m1, const MinMax& m2)\n{\n\t// Get the minimum value seen in m1 and m2\n\tint min{ m1.m_min < m2.m_min ? m1.m_min : m2.m_min };\n\n\t// Get the maximum value seen in m1 and m2\n\tint max{ m1.m_max > m2.m_max ? m1.m_max : m2.m_max };\n\n\treturn MinMax { min, max };\n}\n\nMinMax operator+(const MinMax& m, int value)\n{\n\t// Get the minimum value seen in m and value\n\tint min{ m.m_min < value ? m.m_min : value };\n\n\t// Get the maximum value seen in m and value\n\tint max{ m.m_max > value ? m.m_max : value };\n\n\treturn MinMax { min, max };\n}\n\nMinMax operator+(int value, const MinMax& m)\n{\n\t// calls operator+(MinMax, int)\n\treturn m + value;\n}\n\nint main()\n{\n\tMinMax m1{ 10, 15 };\n\tMinMax m2{ 8, 11 };\n\tMinMax m3{ 3, 12 };\n\n\tMinMax mFinal{ m1 + m2 + 5 + 8 + m3 + 16 };\n\n\tstd::cout << \"Result: (\" << mFinal.getMin() << \", \" <<\n\t\tmFinal.getMax() << \")\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass MinMax\n{\nprivate:\n\tint m_min {}; // The min value seen so far\n\tint m_max {}; // The max value seen so far\n\npublic:\n\tMinMax(int min, int max)\n\t\t: m_min { min }, m_max { max }\n\t{ }\n\n\tint getMin() const { return m_min; }\n\tint getMax() const { return m_max; }\n\n\tfriend MinMax operator+(const MinMax&amp; m1, const MinMax&amp; m2);\n\tfriend MinMax operator+(const MinMax&amp; m, int value);\n\tfriend MinMax operator+(int value, const MinMax&amp; m);\n};\n\nMinMax operator+(const MinMax&amp; m1, const MinMax&amp; m2)\n{\n\t// Get the minimum value seen in m1 and m2\n\tint min{ m1.m_min &lt; m2.m_min ? m1.m_min : m2.m_min };\n\n\t// Get the maximum value seen in m1 and m2\n\tint max{ m1.m_max &gt; m2.m_max ? m1.m_max : m2.m_max };\n\n\treturn MinMax { min, max };\n}\n\nMinMax operator+(const MinMax&amp; m, int value)\n{\n\t// Get the minimum value seen in m and value\n\tint min{ m.m_min &lt; value ? m.m_min : value };\n\n\t// Get the maximum value seen in m and value\n\tint max{ m.m_max &gt; value ? m.m_max : value };\n\n\treturn MinMax { min, max };\n}\n\nMinMax operator+(int value, const MinMax&amp; m)\n{\n\t// calls operator+(MinMax, int)\n\treturn m + value;\n}\n\nint main()\n{\n\tMinMax m1{ 10, 15 };\n\tMinMax m2{ 8, 11 };\n\tMinMax m3{ 3, 12 };\n\n\tMinMax mFinal{ m1 + m2 + 5 + 8 + m3 + 16 };\n\n\tstd::cout &lt;&lt; \"Result: (\" &lt;&lt; mFinal.getMin() &lt;&lt; \", \" &lt;&lt;\n\t\tmFinal.getMax() &lt;&lt; \")\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída MinMax\n{\nsoukromé:\n\tint m_min {}; // Dosud viděná minimální hodnota\n\tint m_max {}; // Dosud viděná maximální hodnota\n\nveřejnost:\n\tMinMax (int min, int max)\n\t\t: m_min { min }, m_max { max }\n\t{ }\n\n\tint getMin() const { return m_min; }\n\tint getMax() const { return m_max; }\n\n\tpřítel MinMax operátor+(const MinMax& m1, const MinMax& m2);\n\tpřítel MinMax operátor+(const MinMax& m, int hodnota);\n\tpřítel MinMax operátor+(int value, const MinMax& m);\n};\n\nMinMax operátor+ (konst. MinMax& m1, konst. MinMax& m2)\n{\n\t// Získání minimální hodnoty v m1 a m2\n\tint min{ m1.m_min < m2.m_min ? m1.m_min : m2.m_min };\n\n\t// Získání maximální hodnoty v m1 a m2\n\tint max{ m1.m_max > m2.m_max ? m1.m_max : m2.m_max };\n\n\treturn MinMax { min, max };\n}\n\nOperátor MinMax+(konst MinMax&m, int hodnota)\n{\n\t// Získání minimální hodnoty vm a hodnoty\n\tint min{ m.m_min < hodnota ? m.m_min : hodnota };\n\n\t// Získání maximální hodnoty v ma hodnotu\n\tint max{ m.m_max > hodnota ? m.m_max : hodnota };\n\n\treturn MinMax { min, max };\n}\n\nOperátor MinMax+(hodnota int, const MinMax&m)\n{\n\t// volání operátora+(MinMax, int)\n\tnávrat m + hodnota;\n}\n\nint main()\n{\n\tMinMax m1{ 10, 15 };\n\tMinMax m2{ 8, 11 };\n\tMinMax m3{ 3, 12 };\n\n\tMinMax mFinal{ m1 + m2 + 5 + 8 + m3 + 16 };\n\n\tstd::cout << \"Výsledek: (\" << mFinal.getMin() << \", \" <<\n\t\tmFinal.getMax() << \")\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b28",
       "type": "paragraph",
       "html": "<p>The MinMax class keeps track of the minimum and maximum values that it has seen so far. We have overloaded the + operator 3 times, so that we can add two MinMax objects together, or add integers to MinMax objects.</p>",
       "preview": "The MinMax class keeps track of the minimum and maximum values that it has seen ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída MinMax uchovává informace o minimální a maximální hodnotě, se kterou se dosud setkala. Operátor + jsme přetížili třikrát, abychom mohli sečíst dva objekty MinMax dohromady nebo k objektům MinMax přičítat celá čísla.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b29",
       "type": "paragraph",
       "html": "<p>This example produces the result:</p>",
       "preview": "This example produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vytvoří následující výsledek:</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b30",
       "type": "output",
       "text": "Result: (3, 16)\n",
       "html": "<pre>Result: (3, 16)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Výsledek: (3, 16)\n</pre>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b31",
       "type": "paragraph",
       "html": "<p>which you will note is the minimum and maximum values that we added to mFinal.</p>",
       "preview": "which you will note is the minimum and maximum values that we added to mFinal.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>což jsou, jak si můžete všimnout, minimální a maximální hodnoty, které jsme přidali do mFinal.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b32",
       "type": "paragraph",
       "html": "<p>Let’s talk a little bit more about how “MinMax mFinal { m1 + m2 + 5 + 8 + m3 + 16 }” evaluates. Remember that operator+ evaluates from left to right, so m1 + m2 evaluates first. This becomes a call to operator+(m1, m2), which produces the return value MinMax(8, 15). Then MinMax(8, 15) + 5 evaluates next. This becomes a call to operator+(MinMax(8, 15), 5), which produces return value MinMax(5, 15). Then MinMax(5, 15) + 8 evaluates in the same way to produce MinMax(5, 15). Then MinMax(5, 15) + m3 evaluates to produce MinMax(3, 15). And finally, MinMax(3, 15) + 16 evaluates to MinMax(3, 16). This final result is then used to initialize mFinal.</p>",
       "preview": "Let’s talk a little bit more about how “MinMax mFinal { m1 + m2 + 5 + 8 + m3 + 1",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme si říct trochu více o tom, jak se vyhodnocuje „MinMax mFinal { m1 + m2 + 5 + 8 + m3 + 16 }“. Pamatujte, že operator+ se vyhodnocuje zleva doprava, takže se nejprve vyhodnotí m1 + m2. To se stane voláním operator+(m1, m2), což vyprodukuje návratovou hodnotu MinMax(8, 15). Poté se vyhodnotí MinMax(8, 15) + 5. To se převede na volání operator+(MinMax(8, 15), 5), které vrátí hodnotu MinMax(5, 15). Následně se stejným způsobem vyhodnotí MinMax(5, 15) + 8 a vznikne MinMax(5, 15). Poté se vyhodnotí MinMax(5, 15) + m3, což dá MinMax(3, 15). A nakonec se MinMax(3, 15) + 16 vyhodnotí jako MinMax(3, 16). Tento konečný výsledek je pak použit k inicializaci mFinal.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b33",
       "type": "paragraph",
       "html": "<p>In other words, this expression evaluates as “MinMax mFinal = (((((m1 + m2) + 5) + 8) + m3) + 16)”, with each successive operation returning a MinMax object that becomes the left-hand operand for the following operator.</p>",
       "preview": "In other words, this expression evaluates as “MinMax mFinal = (((((m1 + m2) + 5)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinými slovy, tento výraz se vyhodnocuje jako „MinMax mFinal = (((((m1 + m2) + 5) + 8) + m3) + 16)“, přičemž každá po sobě jdoucí operace vrací objekt MinMax, který se stává levým operandem pro následující operátor.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b34",
       "type": "section",
       "title": "Implementing operators using other operators",
       "html": "<h3 class=\"cpp-section-heading\">Implementing operators using other operators</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Implementace operátorů pomocí jiných operátorů</h3>",
+      "title_cs": "Implementační operátory pomocí jiných operátorů"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b35",
       "type": "paragraph",
       "html": "<p>In the above example, note that we defined operator+(int, MinMax) by calling operator+(MinMax, int) (which produces the same result). This allows us to reduce the implementation of operator+(int, MinMax) to a single line, making our code easier to maintain by minimizing redundancy and making the function simpler to understand.</p>",
       "preview": "In the above example, note that we defined operator+(int, MinMax) by calling ope",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu si všimněte, že jsme definovali operator+(int, MinMax) voláním operator+(MinMax, int) (což dává stejný výsledek). To nám umožňuje zredukovat implementaci operator+(int, MinMax) na jediný řádek, což usnadňuje údržbu kódu díky minimalizaci redundance a činí funkci snáze pochopitelnou.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b36",
       "type": "paragraph",
       "html": "<p>It is often possible to define overloaded operators by calling other overloaded operators. You should do so if and when doing so produces simpler code. In cases where the implementation is trivial (e.g. a single line) it may or may not be worth doing this.</p>",
       "preview": "It is often possible to define overloaded operators by calling other overloaded ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Často je možné definovat přetížené operátory voláním jiných přetížených operátorů. Měli byste tak učinit, pokud tím vznikne jednodušší kód. V případech, kdy je implementace triviální (např. jediný řádek), se to však může, ale nemusí vyplatit.</p>"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b37",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "overloading-the-arithmetic-operators-using-friend-functions_b38",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>a) Write a class named Fraction that has an integer numerator and denominator member. Write a print() function that prints out the fraction.</p><p>The following code should compile:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Fraction f1{ 1, 4 };\n    f1.print();\n\n    Fraction f2{ 1, 2 };\n    f2.print();\n\n    return 0;\n}</code></pre><p>This should print:</p><pre>1/4\n1/2\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Fraction\n{\nprivate:\n\tint m_numerator { 0 };\n\tint m_denominator { 1 };\n\npublic:\n\texplicit Fraction(int numerator, int denominator=1)\n\t\t: m_numerator{numerator}, m_denominator{denominator}\n\t{\n\t}\n\n\tvoid print() const\n\t{\n\t\tstd::cout &lt;&lt; m_numerator &lt;&lt; '/' &lt;&lt; m_denominator &lt;&lt; '\\n';\n\t}\n};\n\nint main()\n{\n\tFraction f1 {1, 4};\n\tf1.print();\n\t\n\tFraction f2 {1, 2};\n\tf2.print();\n\n\treturn 0;\n}</code></pre></div><p>b) Add overloaded multiplication operators to handle multiplication between a Fraction and integer, and between two Fractions. Use the friend function method.</p><p>Hint: To multiply two fractions, first multiply the two numerators together, and then multiply the two denominators together. To multiply a fraction and an integer, multiply the numerator of the fraction by the integer and leave the denominator alone.</p><p>The following code should compile:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Fraction f1{2, 5};\n    f1.print();\n\n    Fraction f2{3, 8};\n    f2.print();\n\n    Fraction f3{ f1 * f2 };\n    f3.print();\n\n    Fraction f4{ f1 * 2 };\n    f4.print();\n\n    Fraction f5{ 2 * f2 };\n    f5.print();\n\n    Fraction f6{ Fraction{1, 2} * Fraction{2, 3} * Fraction{3, 4} };\n    f6.print();\n\n    return 0;\n}</code></pre><p>This should print:</p><pre>2/5\n3/8\n6/40\n4/5\n6/8\n6/24\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Fraction\n{\nprivate:\n\tint m_numerator { 0 };\n\tint m_denominator { 1 };\n\npublic:\n\texplicit Fraction(int numerator, int denominator=1)\n\t\t: m_numerator{numerator}, m_denominator{denominator}\n\t{\n\t}\n\n\t// We don't want to pass by value, because copying is slow.\n\t// We can't and shouldn't pass by non-const reference, because then\n\t// our functions wouldn't work with r-values.\n\tfriend Fraction operator*(const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend Fraction operator*(const Fraction&amp; f1, int value);\n\tfriend Fraction operator*(int value, const Fraction&amp; f1);\n\n\tvoid print() const\n\t{\n\t\tstd::cout &lt;&lt; m_numerator &lt;&lt; '/' &lt;&lt; m_denominator &lt;&lt; '\\n';\n\t}\n};\n\nFraction operator*(const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn Fraction { f1.m_numerator * f2.m_numerator, f1.m_denominator * f2.m_denominator };\n}\n\nFraction operator*(const Fraction&amp; f1, int value)\n{\n\treturn Fraction { f1.m_numerator * value, f1.m_denominator };\n}\n\nFraction operator*(int value, const Fraction&amp; f1)\n{\n\treturn Fraction { f1 * value };\n}\n\nint main()\n{\n\tFraction f1{2, 5};\n\tf1.print();\n\n\tFraction f2{3, 8};\n\tf2.print();\n\n\tFraction f3{ f1 * f2 };\n\tf3.print();\n\n\tFraction f4{ f1 * 2 };\n\tf4.print();\n\n\tFraction f5{ 2 * f2 };\n\tf5.print();\n\n\tFraction f6{ Fraction{1, 2} * Fraction{2, 3} * Fraction{3, 4} };\n\tf6.print();\n\n\treturn 0;\n}</code></pre></div><p>c) Why does the program continue to work correctly if we make the constructor non-explicit and remove the operators for integer multiplication from the previous solution?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Remove explicit from constructor\n\tFraction(int numerator, int denominator=1)\n\t\t: m_numerator{numerator}, m_denominator{denominator}\n\t{\n\t}\n\n// We can remove these operators, and the program continues to work\nFraction operator*(const Fraction&amp; f1, int value);\nFraction operator*(int value, const Fraction&amp; f1);</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><p>We still have</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Fraction operator*(const Fraction&amp; f1, const Fraction&amp; f2)</code></pre><p>When we multiply a fraction with an integer, for example</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Fraction f5{ 2 * f2 };</code></pre><p>The non-explicit <code>Fraction(int, int)</code> constructor will be used to construct a new <code>Fraction</code> from 2. This new <code>Fraction</code> is then multiplied by <code>f2</code> using the <code>Fraction * Fraction</code> operator.</p><p>Because this requires converting <code>2</code> to a <code>Fraction</code>, this is slightly slower than the implementation with overloaded operators for integer multiplication.</p></div><p>d) If we make the reference parameters of the <code>operator*(Fraction, Fraction)</code> non-const, the following line from the <code>main</code> function no longer works. Why?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// The non-const multiplication operator looks like this\nFraction operator*(Fraction&amp; f1, Fraction&amp; f2)\n\n// This doesn't work anymore\nFraction f6{ Fraction{1, 2} * Fraction{2, 3} * Fraction{3, 4} };</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>We’re multiplying temporary <code>Fraction</code> objects, but non-const references cannot bind to temporaries.</p></div><p>e) Extra credit: the fraction 2/4 is the same as 1/2, but 2/4 is not reduced to the lowest terms. We can reduce any given fraction to lowest terms by finding the greatest common divisor (GCD) between the numerator and denominator, and then dividing both the numerator and denominator by the GCD.</p><p><code>std::gcd()</code> was added to the standard library in C++17 (in the &lt;numeric&gt; header).</p><p>If you’re on an older compiler, you can use this function to find the GCD:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cmath&gt; // for std::abs\n\nint gcd(int a, int b) {\n    return (b == 0) ? std::abs(a) : gcd(b, a % b);\n}</code></pre><p>Write a member function named reduce() that reduces your fraction. Make sure all fractions are properly reduced.</p><p>The following should compile:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Fraction f1{2, 5};\n    f1.print();\n\n    Fraction f2{3, 8};\n    f2.print();\n\n    Fraction f3{ f1 * f2 };\n    f3.print();\n\n    Fraction f4{ f1 * 2 };\n    f4.print();\n\n    Fraction f5{ 2 * f2 };\n    f5.print();\n\n    Fraction f6{ Fraction{1, 2} * Fraction{2, 3} * Fraction{3, 4} };\n    f6.print();\n\n    Fraction f7{0, 6};\n    f7.print();\n\n    return 0;\n}</code></pre><p>And produce the result:</p><pre>2/5\n3/8\n3/20\n4/5\n3/4\n1/4\n0/1\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_4'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;numeric&gt; // for std::gcd\n\n// This version of the Fraction class auto-reduces fractions\nclass Fraction\n{\nprivate:\n\tint m_numerator{ 0 };\n\tint m_denominator{ 1 };\n\npublic:\n\texplicit Fraction(int numerator, int denominator = 1)\n\t\t: m_numerator{ numerator }, m_denominator{ denominator }\n\t{\n\t\t// We put reduce() in the constructor to ensure any fractions we make get reduced!\n\t\t// Since all of the overloaded operators create new Fractions, we can guarantee this will get called here\n\t\treduce();\n\t}\n\n\tvoid reduce()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_denominator) };\n\t\tif (gcd) // Make sure we don't try to divide by 0\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_denominator /= gcd;\n\t\t}\n\t}\n\n\tfriend Fraction operator*(const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend Fraction operator*(const Fraction&amp; f1, int value);\n\tfriend Fraction operator*(int value, const Fraction&amp; f1);\n\n\tvoid print() const\n\t{\n\t\tstd::cout &lt;&lt; m_numerator &lt;&lt; '/' &lt;&lt; m_denominator &lt;&lt; '\\n';\n\t}\n};\n\nFraction operator*(const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn Fraction { f1.m_numerator * f2.m_numerator, f1.m_denominator * f2.m_denominator };\n}\n\nFraction operator*(const Fraction&amp; f1, int value)\n{\n\treturn Fraction { f1.m_numerator * value, f1.m_denominator };\n}\n\nFraction operator*(int value, const Fraction&amp; f1)\n{\n\treturn Fraction { f1 * value };\n}\n\nint main()\n{\n\tFraction f1{ 2, 5 };\n\tf1.print();\n\n\tFraction f2{ 3, 8 };\n\tf2.print();\n\n\tFraction f3{ f1 * f2 };\n\tf3.print();\n\n\tFraction f4{ f1 * 2 };\n\tf4.print();\n\n\tFraction f5{ 2 * f2 };\n\tf5.print();\n\n\tFraction f6{ Fraction{1, 2} * Fraction{2, 3} * Fraction{3, 4} };\n\tf6.print();\n\n\tFraction f7{ 0, 6 };\n\tf7.print();\n\n\treturn 0;\n}</code></pre></div></div>",
       "preview": "Question #1a) Write a class named Fraction that has an integer numerator and den",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 1</p><p>a) Napište třídu s názvem Zlomek, která má celočíselný čitatel a člen jmenovatele. Napište funkci print(), která vypíše zlomek.</p><p>Následující kód by se měl zkompilovat:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    Zlomek f1{ 1, 4 };\n    f1.print();\n\n    Zlomek f2{ 1, 2 };\n    f2.print();\n\n    návrat 0;\n}</code></pre><p>Mělo by se vytisknout:</p><pre>1/4\n1/2\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"cppSolution\" style_id><id class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Zlomek\n{\nsoukromé:\n\tint m_numerator { 0 };\n\tint m_jmenovatel { 1 };\n\nveřejnost:\n\texplicitní zlomek (int čitatel, int jmenovatel=1)\n\t\t: m_numerator{numerator}, m_denominator{jmenovatel}\n\t{\n\t}\n\n\tvoid print() konst\n\t{\n\t\tstd::cout << m_numerator << '/' << m_denominator << '\\n';\n\t}\n};\n\nint main()\n{\n\tZlomek f1 {1, 4};\n\tf1.print();\n\t\n\tZlomek f2 {1, 2};\n\tf2.print();\n\n\tnávrat 0;\n}</code></pre></div><p>b) Přidejte přetížené operátory násobení, abyste zvládli násobení mezi zlomkem a celým číslem a mezi dvěma zlomky. Použijte metodu funkce přítele.</p><p>Tip: Chcete-li vynásobit dva zlomky, nejprve vynásobte dva čitatele dohromady a poté vynásobte dva jmenovatele dohromady. Chcete-li vynásobit zlomek a celé číslo, vynásobte čitatel zlomku celým číslem a jmenovatele ponechte na pokoji.</p><p>Měl by se zkompilovat následující kód:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    Zlomek f1{2, 5};\n    f1.print();\n\n    Zlomek f2{3, 8};\n    f2.print();\n\n    Zlomek f3{ f1 * f2 };\n    f3.print();\n\n    Zlomek f4{ f1 * 2 };\n    f4.print();\n\n    Zlomek f5{ 2 * f2 };\n    f5.print();\n\n    Zlomek f6{ Zlomek{1, 2} * Zlomek{2, 3} * Zlomek{3, 4} };\n    f6.print();\n\n    návrat 0;\n}</code></pre><p>Mělo by se vytisknout:</p><pre>2/5\n3/8\n6/40\n4/5\n6/8\n24. 6\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"cplay_no\" style_id> id class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Zlomek\n{\nsoukromé:\n\tint m_numerator { 0 };\n\tint m_jmenovatel { 1 };\n\nveřejnost:\n\texplicitní zlomek (int čitatel, int jmenovatel=1)\n\t\t: m_numerator{numerator}, m_denominator{jmenovatel}\n\t{\n\t}\n\n\t// Nechceme předávat hodnotu, protože kopírování je pomalé.\n\t// Nemůžeme a neměli bychom přejít přes non-const odkaz, protože pak\n\t// naše funkce by nefungovaly s r-hodnotami.\n\tpřítel Operátor zlomku*(konst zlomek& f1, const zlomek& f2);\n\tpřítel Operátor zlomku*(konst zlomek& f1, hodnota int);\n\tpřítel Operátor zlomku*(hodnota int, const zlomek& f1);\n\n\tvoid print() konst\n\t{\n\t\tstd::cout << m_numerator << '/' << m_denominator << '\\n';\n\t}\n};\n\nOperátor zlomku* (konst zlomek& f1, konst zlomek& f2)\n{\n\treturn Zlomek { f1.m_numerator * f2.m_numerator, f1.m_jmenovatel * f2.m_jmenovatel };\n}\n\nOperátor zlomku* (konst zlomek& f1, hodnota int)\n{\n\treturn Zlomek { f1.m_numerator * hodnota, f1.m_jmenovatel };\n}\n\nOperátor zlomku*(hodnota int, const zlomek& f1)\n{\n\treturn Zlomek { f1 * hodnota };\n}\n\nint main()\n{\n\tZlomek f1{2, 5};\n\tf1.print();\n\n\tZlomek f2{3, 8};\n\tf2.print();\n\n\tZlomek f3{ f1 * f2 };\n\tf3.print();\n\n\tZlomek f4{ f1 * 2 };\n\tf4.print();\n\n\tZlomek f5{ 2 * f2 };\n\tf5.print();\n\n\tZlomek f6{ Zlomek{1, 2} * Zlomek{2, 3} * Zlomek{3, 4} };\n\tf6.print();\n\n\tnávrat 0;\n}</code></pre></div><p>c) Proč program nadále funguje správně, pokud konstruktor uděláme neexplicitním a odstraníme operátory pro násobení celých čísel z předchozího řešení?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Odebrat explicitní z konstruktoru\n\tZlomek (int čitatel, int jmenovatel=1)\n\t\t: m_numerator{numerator}, m_denominator{jmenovatel}\n\t{\n\t}\n\n// Tyto operátory můžeme odstranit a program pokračuje v práci\nOperátor zlomku*(konst zlomek& f1, int hodnota);\nOperátor zlomku*(int value, const Fraction& f1);</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution</p><div')\">Sw id=\"cpp_solution_id_2\" style=\"display:none\"><p>Stále máme</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Operátor zlomku*(const Fraction& f1, const Fraction& f2)</code></pre><p>Když násobíme integer-příklad-prepp zlomkem pro třídu an line-numbers\"><code class=\"language-cpp match-braces\">Zlomek f5{ 2 * f2 };</code></pre><p>Neexplicitní konstruktor <code>Zlomek(int, int)</code> bude použit k vytvoření nového <code>Zlomku</code> z 2. Tento nový <code>Zlomek</code> pomocí <code> vícenásobný <code>Fraction</code> je potom * Operátor Zlomek</code>.</p><p>Protože to vyžaduje převod <code>2</code> na <code>Zlomek</code>, je to o něco pomalejší než implementace s přetíženými operátory pro násobení celých čísel.</p></div><p>d) Pokud vytvoříme referenční parametry operátoru <code>operátor*(Zlomek, Zlomek)</code> již nefunguje následující řádek z <code>konst. Proč?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Non-const operátor násobení vypadá takto\nOperátor zlomku* (zlomek& f1, zlomek& f2)\n\n// Tohle už nefunguje\nZlomek f6{ Zlomek{1, 2} * Zlomek{2, 3} * Zlomek{3, 4} };</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementByhowId('cpp),idethis)Solution,'Show Řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>Množíme dočasné objekty <code>Zlomek</code>, ale nekonstantní reference se nemohou vázat na provizoria.</p></div><p>e) Mimořádný kredit: zlomek 2/4 je stejný jako 2/4, ale není snížen na 1/2. Jakýkoli daný zlomek můžeme zredukovat na nejnižší členy tak, že najdeme největšího společného dělitele (GCD) mezi čitatelem a jmenovatelem a poté vydělíme čitatele i jmenovatele GCD.</p><p><code>std::gcd()</code> bylo přidáno do standardní knihovny v C++17 (v hlavičce <numeric> můžete tuto funkci použít k nalezení starší funkce.</p><p> GCD:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cmath> // pro std::abs\n\nint gcd(int a, int b) {\n    návrat (b == 0) ? std::abs(a): gcd(b, a % b);\n}</code></pre><p>Napište členskou funkci s názvem reduction(), která sníží váš zlomek. Ujistěte se, že jsou všechny zlomky správně zmenšeny.</p><p>Mělo by se zkompilovat:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    Zlomek f1{2, 5};\n    f1.print();\n\n    Zlomek f2{3, 8};\n    f2.print();\n\n    Zlomek f3{ f1 * f2 };\n    f3.print();\n\n    Zlomek f4{ f1 * 2 };\n    f4.print();\n\n    Zlomek f5{ 2 * f2 };\n    f5.print();\n\n    Zlomek f6{ Zlomek{1, 2} * Zlomek{2, 3} * Zlomek{3, 4} };\n    f6.print();\n\n    Zlomek f7{0, 6};\n    f7.print();\n\n    návrat 0;\n}</code></pre><p>A vytvořte výsledek:</p><pre>2/5\n3/8\n3/20\n4/5\n3/4\n1/4\n0/1\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_4'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"cplay_no\" style_id> id class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <numeric> // pro std::gcd\n\n// Tato verze třídy Zlomek automaticky redukuje zlomky\ntřída Zlomek\n{\nsoukromé:\n\tint m_numerator{ 0 };\n\tint m_jmenovatel{ 1 };\n\nveřejnost:\n\texplicitní zlomek (int čitatel, int jmenovatel = 1)\n\t\t: m_numerator{ numerator }, m_denominator{ jmenovatel }\n\t{\n\t\t// Do konstruktoru vložíme redukovat(), abychom zajistili zmenšení všech vytvořených zlomků!\n\t\t// Protože všechny přetížené operátory vytvářejí nové zlomky, můžeme zaručit, že to bude voláno zde\n\t\tsnížit();\n\t}\n\n\tvoid snížit()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_jmenovatel) };\n\t\tif (gcd) // Ujistěte se, že se nepokoušíme dělit 0\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_jmenovatel /= gcd;\n\t\t}\n\t}\n\n\tpřítel Operátor zlomku*(konst zlomek& f1, const zlomek& f2);\n\tpřítel Operátor zlomku*(konst zlomek& f1, hodnota int);\n\tpřítel Operátor zlomku*(hodnota int, const zlomek& f1);\n\n\tvoid print() konst\n\t{\n\t\tstd::cout << m_numerator << '/' << m_denominator << '\\n';\n\t}\n};\n\nOperátor zlomku* (konst zlomek& f1, konst zlomek& f2)\n{\n\treturn Zlomek { f1.m_numerator * f2.m_numerator, f1.m_jmenovatel * f2.m_jmenovatel };\n}\n\nOperátor zlomku* (konst zlomek& f1, hodnota int)\n{\n\treturn Zlomek { f1.m_numerator * hodnota, f1.m_jmenovatel };\n}\n\nOperátor zlomku*(hodnota int, const zlomek& f1)\n{\n\treturn Zlomek { f1 * hodnota };\n}\n\nint main()\n{\n\tZlomek f1{ 2, 5 };\n\tf1.print();\n\n\tZlomek f2{ 3, 8 };\n\tf2.print();\n\n\tZlomek f3{ f1 * f2 };\n\tf3.print();\n\n\tZlomek f4{ f1 * 2 };\n\tf4.print();\n\n\tZlomek f5{ 2 * f2 };\n\tf5.print();\n\n\tZlomek f6{ Zlomek{1, 2} * Zlomek{2, 3} * Zlomek{3, 4} };\n\tf6.print();\n\n\tZlomek f7{ 0, 6 };\n\tf7.print();\n\n\tnávrat 0;\n}</code></pre></div></div>"
     }
-  ]
+  ],
+  "title_cs": "21.2 — Přetěžování aritmetických operátorů pomocí spřátelených funkcí"
 }

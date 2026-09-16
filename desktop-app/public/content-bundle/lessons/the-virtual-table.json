@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "the-virtual-table_b1",
@@ -22,56 +23,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass Base\n{\npublic:\n    std::string_view getName() const { return \"Base\"; }                // not virtual\n    virtual std::string_view getNameVirtual() const { return \"Base\"; } // virtual\n};\n\nclass Derived: public Base\n{\npublic:\n    std::string_view getName() const { return \"Derived\"; }\n    virtual std::string_view getNameVirtual() const override { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base& base { derived };\n\n    std::cout << \"base has static type \" << base.getName() << '\\n';\n    std::cout << \"base has dynamic type \" << base.getNameVirtual() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass Base\n{\npublic:\n    std::string_view getName() const { return \"Base\"; }                // not virtual\n    virtual std::string_view getNameVirtual() const { return \"Base\"; } // virtual\n};\n\nclass Derived: public Base\n{\npublic:\n    std::string_view getName() const { return \"Derived\"; }\n    virtual std::string_view getNameVirtual() const override { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base&amp; base { derived };\n\n    std::cout &lt;&lt; \"base has static type \" &lt;&lt; base.getName() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"base has dynamic type \" &lt;&lt; base.getNameVirtual() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída Základní\n{\nveřejnost:\n    std::string_view getName() const { return \"Základ\"; } // není virtuální\n    virtual std::string_view getNameVirtual() const { return \"Základ\"; } // virtuální\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    std::string_view getName() const { return \"Odvozeno\"; }\n    virtual std::string_view getNameVirtual() const override { return \"Odvozeno\"; }\n};\n\nint main()\n{\n    Odvozené odvozené {};\n    Základ& základ { odvozené };\n\n    std::cout << \"základ má statický typ \" << base.getName() << '\\n';\n    std::cout << \"základ má dynamický typ \" << base.getNameVirtual() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-virtual-table_b2",
       "type": "paragraph",
       "html": "<p>First, let’s look at the call to <code>base.getName()</code>. Because this is a non-virtual function, the compiler can use the actual type of <code>base</code> (<code>Base</code>) to determine (at compile-time) that this should resolve to <code>Base::getName()</code>.</p>",
       "preview": "First, let’s look at the call to base.getName(). Because this is a non-virtual f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se podívejme na volání <code>base.getName()</code>. Protože se jedná o nevirtuální funkci, kompilátor může použít skutečný typ proměnné <code>base</code> (<code>Base</code>), aby určil (v době kompilace), že se toto volání má vyhodnotit jako <code>Base::getName()</code>.</p>"
     },
     {
       "id": "the-virtual-table_b3",
       "type": "paragraph",
       "html": "<p>Although it looks almost identical, the call to <code>base.getNameVirtual()</code> must be resolved differently. Because this is a virtual function call, the compiler must use the dynamic type of <code>base</code> to resolve the call, and the dynamic type of <code>base</code> is not knowable until runtime. Therefore, only at runtime will it be determined that this particular call to <code>base.getNameVirtual()</code> resolves to <code>Derived::getNameVirtual()</code>, not <code>Base::getNameVirtual()</code>.</p>",
       "preview": "Although it looks almost identical, the call to base.getNameVirtual() must be re",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli to vypadá téměř identicky, volání <code>base.getNameVirtual()</code> musí být vyřešeno odlišně. Protože jde o volání virtuální funkce, kompilátor musí k vyhodnocení volání použít dynamický typ <code>base</code>, a dynamický typ <code>base</code> nelze zjistit dříve než za běhu programu (runtime). Až za běhu se tedy určí, že se toto konkrétní volání <code>base.getNameVirtual()</code> vyhodnotí jako <code>Derived::getNameVirtual()</code>, nikoli <code>Base::getNameVirtual()</code>.</p>"
     },
     {
       "id": "the-virtual-table_b4",
       "type": "paragraph",
       "html": "<p>So how do virtual functions actually work?</p>",
       "preview": "So how do virtual functions actually work?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak tedy virtuální funkce ve skutečnosti fungují?</p>"
     },
     {
       "id": "the-virtual-table_b5",
       "type": "section",
       "title": "The virtual table",
       "html": "<h3 class=\"cpp-section-heading\">The virtual table</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Virtuální tabulka</h3>",
+      "title_cs": "Virtuální stůl"
     },
     {
       "id": "the-virtual-table_b6",
       "type": "paragraph",
       "html": "<p>The C++ standard does not specify how virtual functions should be implemented (this detail is left up to the implementation).</p>",
       "preview": "The C++ standard does not specify how virtual functions should be implemented (t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Standard C++ nespecifikuje, jak mají být virtuální funkce implementovány (tento detail je ponechán na konkrétní implementaci).</p>"
     },
     {
       "id": "the-virtual-table_b7",
       "type": "paragraph",
       "html": "<p>However, C++ implementations typically implement virtual functions using a form of late binding known as the virtual table.</p>",
       "preview": "However, C++ implementations typically implement virtual functions using a form ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Implementace C++ však virtuální funkce typicky implementují pomocí formy pozdní vazby (late binding) známé jako virtuální tabulka (virtual table).</p>"
     },
     {
       "id": "the-virtual-table_b8",
       "type": "paragraph",
       "html": "<p>The <strong>virtual table</strong> is a lookup table of functions used to resolve function calls in a dynamic/late binding manner. The virtual table sometimes goes by other names, such as “vtable”, “virtual function table”, “virtual method table”, or “dispatch table”. In C++, virtual function resolution is sometimes called <strong>dynamic dispatch</strong>.</p>",
       "preview": "The virtual table is a lookup table of functions used to resolve function calls ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Virtuální tabulka</strong> je vyhledávací tabulka funkcí používaná k vyhodnocování volání funkcí na základě dynamické / pozdní vazby. Virtuální tabulka má někdy i jiná označení, jako je „vtable“, „virtual function table“, „virtual method table“ nebo „dispatch table“. V C++ se vyhodnocování virtuálních funkcí někdy nazývá <strong>dynamický dispatch</strong> (dynamic dispatch).</p>"
     },
     {
       "id": "the-virtual-table_b9",
@@ -79,35 +89,40 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>Here’s an easier way of thinking about it in C++:<br>Early binding/static dispatch = direct function call overload resolution<br>Late binding = indirect function call resolution<br>Dynamic dispatch = virtual function override resolution</p></div>",
       "preview": "NomenclatureHere’s an easier way of thinking about it in C++:Early binding/static dispatch = direct ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenklatura</p><p>Zde je snazší způsob uvažování v C++:<br>Včasná vazba/statické odeslání = přímé řešení přetížení volání funkce<br>Pozdní vazba = rozlišení volání nepřímé funkce<br>Dynamické rozlišení <br>Dynamické překrytí</p>"
     },
     {
       "id": "the-virtual-table_b10",
       "type": "paragraph",
       "html": "<p>Because knowing how the virtual table works is not necessary to use virtual functions, this section can be considered optional reading.</p>",
       "preview": "Because knowing how the virtual table works is not necessary to use virtual func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože pro používání virtuálních funkcí není nutné vědět, jak virtuální tabulka funguje, lze tuto část považovat za nepovinnou četbu.</p>"
     },
     {
       "id": "the-virtual-table_b11",
       "type": "paragraph",
       "html": "<p>The virtual table is actually quite simple, though it’s a little complex to describe in words. First, every class that uses virtual functions (or is derived from a class that uses virtual functions) has a corresponding virtual table. This table is simply a static array that the compiler sets up at compile time. A virtual table contains one entry for each virtual function that can be called by objects of the class. Each entry in this table is simply a function pointer that points to the most-derived function accessible by that class.</p>",
       "preview": "The virtual table is actually quite simple, though it’s a little complex to desc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Virtuální stůl je ve skutečnosti docela jednoduchý, i když jeho popis slovy je trochu složitý. Za prvé, každá třída, která používá virtuální funkce (nebo je odvozena od třídy, která používá virtuální funkce), má odpovídající virtuální tabulku. Tato tabulka je jednoduše statické pole, které kompilátor nastaví v době kompilace. Virtuální tabulka obsahuje jednu položku pro každou virtuální funkci, kterou lze volat objekty třídy. Každá položka v této tabulce je jednoduše ukazatel funkce, který ukazuje na nejvíce odvozenou funkci přístupnou danou třídou.</p>"
     },
     {
       "id": "the-virtual-table_b12",
       "type": "paragraph",
       "html": "<p>Second, the compiler also adds a hidden pointer that is a member of the base class, which we will call <code>*__vptr</code>. <code>*__vptr</code> is set (automatically) when a class object is created so that it points to the virtual table for that class. Unlike the <code>this</code> pointer, which is actually a function parameter used by the compiler to resolve self-references, <code>*__vptr</code> is a real pointer member. Consequently, it makes each class object allocated bigger by the size of one pointer. It also means that <code>*__vptr</code> is inherited by derived classes, which is important.</p>",
       "preview": "Second, the compiler also adds a hidden pointer that is a member of the base cla",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, kompilátor také přidá skrytý ukazatel, který je členem základní třídy, kterou budeme nazývat <code>*__vptr</code>. <code>*__vptr</code> se nastaví (automaticky) při vytvoření objektu třídy tak, aby ukazoval na virtuální tabulku pro danou třídu. Na rozdíl od ukazatele <code>this</code>, který je ve skutečnosti funkčním parametrem používaným kompilátorem k vyřešení vlastních referencí, je <code>*__vptr</code> skutečným členem ukazatele. V důsledku toho je každý objekt třídy přidělen větší o velikost jednoho ukazatele. To také znamená, že <code>*__vptr</code> je zděděn odvozenými třídami, což je důležité.</p>"
     },
     {
       "id": "the-virtual-table_b13",
       "type": "paragraph",
       "html": "<p>By now, you’re probably confused as to how these things all fit together, so let’s take a look at a simple example:</p>",
       "preview": "By now, you’re probably confused as to how these things all fit together, so let",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní jste pravděpodobně zmateni, jak tyto věci do sebe zapadají, takže se podívejme na jednoduchý příklad:</p>"
     },
     {
       "id": "the-virtual-table_b14",
@@ -115,21 +130,24 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    virtual void function1() {};\n    virtual void function2() {};\n};\n\nclass D1: public Base\n{\npublic:\n    void function1() override {};\n};\n\nclass D2: public Base\n{\npublic:\n    void function2() override {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    virtual void function1() {};\n    virtual void function2() {};\n};\n\nclass D1: public Base\n{\npublic:\n    void function1() override {};\n};\n\nclass D2: public Base\n{\npublic:\n    void function2() override {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    virtuální void funkce1() {};\n    virtuální void funkce2() {};\n};\n\ntřída D1: veřejná Základna\n{\nveřejnost:\n    void function1() override {};\n};\n\ntřída D2: veřejná Základna\n{\nveřejnost:\n    void function2() override {};\n};</code></pre>"
     },
     {
       "id": "the-virtual-table_b15",
       "type": "paragraph",
       "html": "<p>Because there are 3 classes here, the compiler will set up 3 virtual tables: one for Base, one for D1, and one for D2.</p>",
       "preview": "Because there are 3 classes here, the compiler will set up 3 virtual tables: one",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože jsou zde 3 třídy, kompilátor nastaví 3 virtuální tabulky: jednu pro Base, jednu pro D1 a jednu pro D2.</p>"
     },
     {
       "id": "the-virtual-table_b16",
       "type": "paragraph",
       "html": "<p>The compiler also adds a hidden pointer member to the most base class that uses virtual functions. Although the compiler does this automatically, we’ll put it in the next example just to show where it’s added:</p>",
       "preview": "The compiler also adds a hidden pointer member to the most base class that uses ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompilátor také přidá skrytý člen ukazatele do nejzákladnější třídy, která používá virtuální funkce. Ačkoli to kompilátor dělá automaticky, dáme to do dalšího příkladu, abychom ukázali, kam je přidán:</p>"
     },
     {
       "id": "the-virtual-table_b17",
@@ -137,70 +155,80 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    VirtualTable* __vptr;\n    virtual void function1() {};\n    virtual void function2() {};\n};\n\nclass D1: public Base\n{\npublic:\n    void function1() override {};\n};\n\nclass D2: public Base\n{\npublic:\n    void function2() override {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    VirtualTable* __vptr;\n    virtual void function1() {};\n    virtual void function2() {};\n};\n\nclass D1: public Base\n{\npublic:\n    void function1() override {};\n};\n\nclass D2: public Base\n{\npublic:\n    void function2() override {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    VirtualTable* __vptr;\n    virtuální void funkce1() {};\n    virtuální void funkce2() {};\n};\n\ntřída D1: veřejná Základna\n{\nveřejnost:\n    void function1() override {};\n};\n\ntřída D2: veřejná Základna\n{\nveřejnost:\n    void function2() override {};\n};</code></pre>"
     },
     {
       "id": "the-virtual-table_b18",
       "type": "paragraph",
       "html": "<p>When a class object is created, <code>*__vptr</code> is set to point to the virtual table for that class. For example, when an object of type Base is created, <code>*__vptr</code> is set to point to the virtual table for Base. When objects of type D1 or D2 are constructed, <code>*__vptr</code> is set to point to the virtual table for D1 or D2 respectively.</p>",
       "preview": "When a class object is created, *__vptr is set to point to the virtual table for",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vytvořen objekt třídy, <code>*__vptr</code> je nastaven tak, aby ukazoval na virtuální tabulku pro danou třídu. Když je například vytvořen objekt typu Base, <code>*__vptr</code> je nastaven tak, aby ukazoval na virtuální tabulku pro Base. Když jsou konstruovány objekty typu D1 nebo D2, <code>*__vptr</code> je nastaveno tak, aby ukazovalo na virtuální tabulku pro D1 nebo D2.</p>"
     },
     {
       "id": "the-virtual-table_b19",
       "type": "paragraph",
       "html": "<p>Now, let’s talk about how these virtual tables are filled out. Because there are only two virtual functions here, each virtual table will have two entries (one for function1() and one for function2()). Remember that when these virtual tables are filled out, each entry is filled out with the most-derived function an object of that class type can call.</p>",
       "preview": "Now, let’s talk about how these virtual tables are filled out. Because there are",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si povíme, jak se tyto virtuální tabulky vyplňují. Protože zde existují pouze dvě virtuální funkce, každá virtuální tabulka bude mít dvě položky (jednu pro funkci1() a jednu pro funkci2()). Pamatujte, že když jsou tyto virtuální tabulky vyplněny, každá položka je vyplněna nejodvozenější funkcí, kterou může objekt daného typu třídy volat.</p>"
     },
     {
       "id": "the-virtual-table_b20",
       "type": "paragraph",
       "html": "<p>The virtual table for Base objects is simple. An object of type Base can only access the members of Base. Base has no access to D1 or D2 functions. Consequently, the entry for function1 points to Base::function1() and the entry for function2 points to Base::function2().</p>",
       "preview": "The virtual table for Base objects is simple. An object of type Base can only ac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Virtuální tabulka pro objekty Base je jednoduchá. Objekt typu Base má přístup pouze ke členům Base. Základna nemá přístup k funkcím D1 nebo D2. V důsledku toho záznam pro function1 ukazuje na Base::function1() a záznam pro function2 ukazuje na Base::function2().</p>"
     },
     {
       "id": "the-virtual-table_b21",
       "type": "paragraph",
       "html": "<p>The virtual table for D1 is slightly more complex. An object of type D1 can access members of both D1 and Base. However, D1 has overridden function1(), making D1::function1() more derived than Base::function1(). Consequently, the entry for function1 points to D1::function1(). D1 hasn’t overridden function2(), so the entry for function2 will point to Base::function2().</p>",
       "preview": "The virtual table for D1 is slightly more complex. An object of type D1 can acce",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Virtuální tabulka pro D1 je o něco složitější. Objekt typu D1 má přístup k členům D1 i Base. D1 však přepsal function1(), takže D1::function1() je odvozenější než Base::function1(). V důsledku toho záznam pro funkci1 ukazuje na D1::funkce1(). D1 nepřepsal funkci2(), takže záznam pro funkci2 bude ukazovat na Base::funkce2().</p>"
     },
     {
       "id": "the-virtual-table_b22",
       "type": "paragraph",
       "html": "<p>The virtual table for D2 is similar to D1, except the entry for function1 points to Base::function1(), and the entry for function2 points to D2::function2().</p>",
       "preview": "The virtual table for D2 is similar to D1, except the entry for function1 points",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Virtuální tabulka pro D2 je podobná D1, kromě položky pro function1 ukazuje na Base::function1() a položky pro function2 ukazuje na D2::function2().</p>"
     },
     {
       "id": "the-virtual-table_b23",
       "type": "paragraph",
       "html": "<p>Here’s a picture of this graphically:</p>",
       "preview": "Here’s a picture of this graphically:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je to graficky:</p>"
     },
     {
       "id": "the-virtual-table_b24",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section12/VTable.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section12/VTable.gif\"></p>"
     },
     {
       "id": "the-virtual-table_b25",
       "type": "paragraph",
       "html": "<p>Although this diagram is kind of crazy looking, it’s really quite simple: the <code>*__vptr</code> in each class points to the virtual table for that class. The entries in the virtual table point to the most-derived version of the function that objects of that class are allowed to call.</p>",
       "preview": "Although this diagram is kind of crazy looking, it’s really quite simple: the *_",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli tento diagram vypadá trochu bláznivě, je opravdu docela jednoduchý: <code>*__vptr</code> v každé třídě ukazuje na virtuální tabulku pro danou třídu. Záznamy ve virtuální tabulce ukazují na nejvíce odvozenou verzi funkce, kterou mohou objekty dané třídy volat.</p>"
     },
     {
       "id": "the-virtual-table_b26",
       "type": "paragraph",
       "html": "<p>So consider what happens when we create an object of type D1:</p>",
       "preview": "So consider what happens when we create an object of type D1:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zvažte tedy, co se stane, když vytvoříme objekt typu D1:</p>"
     },
     {
       "id": "the-virtual-table_b27",
@@ -208,21 +236,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    D1 d1 {};\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n}</code></pre>"
     },
     {
       "id": "the-virtual-table_b28",
       "type": "paragraph",
       "html": "<p>Because d1 is a D1 object, d1 has its *__vptr set to the D1 virtual table.</p>",
       "preview": "Because d1 is a D1 object, d1 has its *__vptr set to the D1 virtual table.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože d1 je objekt D1, d1 má *__vptr nastaveno na virtuální tabulku D1.</p>"
     },
     {
       "id": "the-virtual-table_b29",
       "type": "paragraph",
       "html": "<p>Now, let’s set a base pointer to D1:</p>",
       "preview": "Now, let’s set a base pointer to D1:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní nastavíme základní ukazatel na D1:</p>"
     },
     {
       "id": "the-virtual-table_b30",
@@ -230,21 +261,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    D1 d1 {};\n    Base* dPtr = &d1;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n    Base* dPtr = &amp;d1;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n    Základní* dPtr = &d1;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-virtual-table_b31",
       "type": "paragraph",
       "html": "<p>Note that because dPtr is a base pointer, it only points to the Base portion of d1. However, also note that <code>*__vptr</code> is in the Base portion of the class, so dPtr has access to this pointer. Finally, note that <code>dPtr-&gt;__vptr</code> points to the D1 virtual table! Consequently, even though dPtr is of type <code>Base*</code>, it still has access to D1’s virtual table (through <code>__vptr</code>).</p>",
       "preview": "Note that because dPtr is a base pointer, it only points to the Base portion of ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že protože dPtr je základní ukazatel, ukazuje pouze na základní část d1. Všimněte si však také, že <code>*__vptr</code> je v základní části třídy, takže dPtr má přístup k tomuto ukazateli. Nakonec si všimněte, že <code>dPtr->__vptr</code> ukazuje na virtuální stůl D1! V důsledku toho, i když je dPtr typu <code>Base*</code>, má stále přístup k virtuální tabulce D1 (prostřednictvím <code>__vptr</code>).</p>"
     },
     {
       "id": "the-virtual-table_b32",
       "type": "paragraph",
       "html": "<p>So what happens when we try to call dPtr-&gt;function1()?</p>",
       "preview": "So what happens when we try to call dPtr->function1()?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se tedy stane, když se pokusíme zavolat dPtr->function1()?</p>"
     },
     {
       "id": "the-virtual-table_b33",
@@ -252,21 +286,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    D1 d1 {};\n    Base* dPtr = &d1;\n    dPtr->function1();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n    Base* dPtr = &amp;d1;\n    dPtr-&gt;function1();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    D1 d1 {};\n    Základní* dPtr = &d1;\n    dPtr->funkce1();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-virtual-table_b34",
       "type": "paragraph",
       "html": "<p>First, the program recognizes that function1() is a virtual function. Second, the program uses <code>dPtr-&gt;__vptr</code> to get to D1’s virtual table. Third, it looks up which version of function1() to call in D1’s virtual table. This has been set to D1::function1(). Therefore, <code>dPtr-&gt;function1()</code> resolves to D1::function1()!</p>",
       "preview": "First, the program recognizes that function1() is a virtual function. Second, th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za prvé, program rozpozná, že function1() je virtuální funkce. Za druhé, program používá <code>dPtr->__vptr</code> k tomu, aby se dostal k virtuálnímu stolu D1. Za třetí, vyhledá, kterou verzi funkce function1() má volat ve virtuální tabulce D1. Toto bylo nastaveno na D1::function1(). Proto <code>dPtr->function1()</code> převede na D1::function1()!</p>"
     },
     {
       "id": "the-virtual-table_b35",
       "type": "paragraph",
       "html": "<p>Now, you might be saying, “But what if dPtr really pointed to a Base object instead of a D1 object. Would it still call D1::function1()?”. The answer is no.</p>",
       "preview": "Now, you might be saying, “But what if dPtr really pointed to a Base object inst",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si možná říkáte: \"Ale co kdyby dPtr skutečně ukázal na objekt Base místo na objekt D1. Stále by volal D1::function1()?\". Odpověď zní ne.</p>"
     },
     {
       "id": "the-virtual-table_b36",
@@ -274,35 +311,41 @@
       "language": "cpp",
       "code": "int main()\n{\n    Base b {};\n    Base* bPtr = &b;\n    bPtr->function1();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Base b {};\n    Base* bPtr = &amp;b;\n    bPtr-&gt;function1();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Základ b {};\n    Základ* bPtr = &b;\n    bPtr->funkce1();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "the-virtual-table_b37",
       "type": "paragraph",
       "html": "<p>In this case, when b is created, b.__vptr points to Base’s virtual table, not D1’s virtual table. Since bPtr is pointing to b, <code>bPtr-&gt;__vptr</code> points to Base’s virtual table as well. Base’s virtual table entry for function1() points to Base::function1(). Thus, <code>bPtr-&gt;function1()</code> resolves to Base::function1(), which is the most-derived version of function1() that a Base object should be able to call.</p>",
       "preview": "In this case, when b is created, b.__vptr points to Base’s virtual table, not D1",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě, když je vytvořen b, b.__vptr ukazuje na virtuální stůl Base, nikoli na virtuální stůl D1. Protože bPtr ukazuje na b, <code>bPtr->__vptr</code> ukazuje také na virtuální tabulku Base. Záznam virtuální tabulky Base pro function1() ukazuje na Base::function1(). <code>bPtr->function1()</code> se tedy převede na Base::function1(), což je nejvíce odvozená verze function1(), kterou by měl být objekt Base schopen volat.</p>"
     },
     {
       "id": "the-virtual-table_b38",
       "type": "paragraph",
       "html": "<p>By using these tables, the compiler and program are able to ensure function calls resolve to the appropriate virtual function, even if you’re only using a pointer or reference to a base class!</p>",
       "preview": "By using these tables, the compiler and program are able to ensure function call",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pomocí těchto tabulek jsou kompilátor a program schopny zajistit, aby se volání funkcí převedla na příslušnou virtuální funkci, i když používáte pouze ukazatel nebo odkaz na základní třídu!</p>"
     },
     {
       "id": "the-virtual-table_b39",
       "type": "paragraph",
       "html": "<p>Calling a virtual function is slower than calling a non-virtual function for a couple of reasons: First, we have to use the <code>*__vptr</code> to get to the appropriate virtual table. Second, we have to index the virtual table to find the correct function to call. Only then can we call the function. As a result, we have to do 3 operations to find the function to call, as opposed to 2 operations for a normal indirect function call, or one operation for a direct function call. However, with modern computers, this added time is usually fairly insignificant.</p>",
       "preview": "Calling a virtual function is slower than calling a non-virtual function for a c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání virtuální funkce je pomalejší než volání nevirtuální funkce z několika důvodů: Nejprve musíme použít <code>*__vptr</code>, abychom se dostali k příslušné virtuální tabulce. Za druhé, musíme indexovat virtuální tabulku, abychom našli správnou funkci k volání. Teprve poté můžeme funkci zavolat. V důsledku toho musíme provést 3 operace, abychom našli funkci, kterou chcete volat, na rozdíl od 2 operací pro normální nepřímé volání funkce nebo jedné operace pro přímé volání funkce. U moderních počítačů je však tato přidaná doba obvykle poměrně zanedbatelná.</p>"
     },
     {
       "id": "the-virtual-table_b40",
       "type": "paragraph",
       "html": "<p>Also as a reminder, any class that uses virtual functions has a <code>*__vptr</code>, and thus each object of that class will be bigger by one pointer. Virtual functions are powerful, but they do have a performance cost.</p>",
       "preview": "Also as a reminder, any class that uses virtual functions has a *__vptr, and thu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Také pro připomenutí, každá třída, která používá virtuální funkce, má <code>*__vptr</code>, takže každý objekt této třídy bude větší o jeden ukazatel. Virtuální funkce jsou výkonné, ale stojí za to výkon.</p>"
     }
-  ]
+  ],
+  "title_cs": "25.6 — Virtuální tabulka"
 }

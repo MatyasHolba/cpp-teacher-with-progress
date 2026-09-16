@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-pointers/\">12.7 -- Introduction to pointers</a>, you learned that a pointer is a variable that holds the address of another variable. Function pointers are similar, except that instead of pointing to variables, they point to functions!</p>",
       "preview": "In lesson 12.7 -- Introduction to pointers, you learned that a pointer is a vari",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-pointers/\">12.7 – Úvod do ukazatelů</a> jste se dozvěděli, že ukazatel je proměnná, která uchovává adresu jiné proměnné. Ukazatele na funkce jsou podobné, s tím rozdílem, že místo na proměnné ukazují na funkce!</p>"
     },
     {
       "id": "function-pointers_b1",
       "type": "paragraph",
       "html": "<p>Consider the following function:</p>",
       "preview": "Consider the following function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující funkci:</p>"
     },
     {
       "id": "function-pointers_b2",
@@ -29,21 +31,24 @@
       "language": "cpp",
       "code": "int foo()\n{\n    return 5;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo()\n{\n    return 5;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo()\n{\n    návrat 5;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b3",
       "type": "paragraph",
       "html": "<p>Identifier <code>foo()</code> is the function’s name. But what type is the function? Functions have their own function type -- in this case, a function type that returns an integer and takes no parameters. Much like variables, functions live at an assigned address in memory (making them lvalues).</p>",
       "preview": "Identifier foo() is the function’s name. But what type is the function? Function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Identifikátor <code>foo()</code> je název funkce. Jaký typ ale funkce má? Funkce mají svůj vlastní funkční typ – v tomto případě funkční typ, který vrací celé číslo a nepřijímá žádné parametry. Podobně jako proměnné se i funkce nacházejí na přiřazené adrese v paměti (což z nich dělá l-hodnoty).</p>"
     },
     {
       "id": "function-pointers_b4",
       "type": "paragraph",
       "html": "<p>When a function is called (via <code>operator()</code>), execution jumps to the address of the function being called:</p>",
       "preview": "When a function is called (via operator()), execution jumps to the address of th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při volání funkce (pomocí <code>operator()</code>) provádění programu přeskočí na adresu volané funkce:</p>"
     },
     {
       "id": "function-pointers_b5",
@@ -51,14 +56,16 @@
       "language": "cpp",
       "code": "int foo() // code for foo starts at memory address 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    foo(); // jump to address 0x002717f0\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo() // code for foo starts at memory address 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    foo(); // jump to address 0x002717f0\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo() // kód pro foo začíná na adrese paměti 0x002717f0\n{\n    návrat 5;\n}\n\nint main()\n{\n    foo(); // skok na adresu 0x002717f0\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b6",
       "type": "paragraph",
       "html": "<p>At some point in your programming career (if you haven’t already), you’ll probably make a simple mistake:</p>",
       "preview": "At some point in your programming career (if you haven’t already), you’ll probab",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V určitém okamžiku své programátorské kariéry (pokud se vám to již nestalo) pravděpodobně uděláte jednoduchou chybu:</p>"
     },
     {
       "id": "function-pointers_b7",
@@ -66,28 +73,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint foo() // code starts at memory address 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout << foo << '\\n'; // we meant to call foo(), but instead we're printing foo itself!\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint foo() // code starts at memory address 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; foo &lt;&lt; '\\n'; // we meant to call foo(), but instead we're printing foo itself!\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint foo() // kód začíná na adrese paměti 0x002717f0\n{\n    návrat 5;\n}\n\nint main()\n{\n    std::cout << foo << '\\n'; // chtěli jsme volat foo(), ale místo toho tiskneme samotné foo!\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b8",
       "type": "paragraph",
       "html": "<p>Instead of calling function <code>foo()</code> and printing the return value, we’ve unintentionally sent function <code>foo</code> directly to <code>std::cout</code>. What happens in this case?</p>",
       "preview": "Instead of calling function foo() and printing the return value, we’ve unintenti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo volání funkce <code>foo()</code> a vypsání její návratové hodnoty jsme neúmyslně poslali funkci <code>foo</code> přímo do <code>std::cout</code>. Co se v tomto případě stane?</p>"
     },
     {
       "id": "function-pointers_b9",
       "type": "paragraph",
       "html": "<p>When a function is referred to by name (without parenthesis), C++ converts the function into a function pointer (holding the address of the function). Then <code>operator&lt;&lt;</code> tries to print the function pointer, which it fails at because <code>operator&lt;&lt;</code> does not know how to print function pointers. The standard says that in this case, <code>foo</code> should be converted to a <code>bool</code> (which <code>operator&lt;&lt;</code> does know how to print). And since the function pointer for <code>foo</code> is a non-null pointer, it should always evaluate to Boolean <code>true</code>. Thus, this should print:</p>",
       "preview": "When a function is referred to by name (without parenthesis), C++ converts the f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se na funkci odkazuje jejím názvem (bez závorek), C++ převede funkci na ukazatel na funkci (který uchovává adresu dané funkce). Poté se <code>operator&lt;&lt;</code> pokusí tento ukazatel na funkci vypsat, což selže, protože <code>operator&lt;&lt;</code> neumí ukazatele na funkce tisknout. Standard říká, že v tomto případě by se měl <code>foo</code> převést na <code>bool</code> (který <code>operator&lt;&lt;</code> vypsat umí). A protože ukazatel na funkci pro <code>foo</code> není nulový ukazatel (non-null pointer), měl by se vždy vyhodnotit jako booleovské <code>true</code>. Výstupem by tedy mělo být:</p>"
     },
     {
       "id": "function-pointers_b10",
       "type": "output",
       "text": "1\n",
       "html": "<pre>1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>1\n</pre>"
     },
     {
       "id": "function-pointers_b11",
@@ -95,28 +106,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Some compilers (e.g. Visual Studio) have a compiler extension that prints the address of the function instead:</p><pre>0x002717f0\n</pre><p>If your platform doesn’t print the function’s address and you want it to, you may be able to force it to do so by converting the function to a void pointer and printing that:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint foo() // code starts at memory address 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; reinterpret_cast&lt;void*&gt;(foo) &lt;&lt; '\\n'; // Tell C++ to interpret function foo as a void pointer (implementation-defined behavior)\n\n    return 0;\n}</code></pre><p>This is implementation-defined behavior, so it may not work on all platforms.</p></div>",
       "preview": "TipSome compilers (e.g. Visual Studio) have a compiler extension that prints the address of the func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Některé překladače (např. Visual Studio) mají rozšíření překladače, které místo toho vypíše adresu funkce:</p><pre>0x002717f0\n</pre><p>Pokud vaše platforma adresu funkce nevypisuje a vy to požadujete, můžete si to vynutit převodem funkce na void ukazatel a jeho vypsáním:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint foo() // kód začíná na paměťové adrese 0x002717f0\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; reinterpret_cast&lt;void*&gt;(foo) &lt;&lt; '\\n'; // Řekne C++, aby interpretoval funkci foo jako ukazatel na void (chování definované implementací)\n\n    return 0;\n}</code></pre><p>Jedná se o chování definované implementací, takže nemusí fungovat na všech platformách.</p></div>"
     },
     {
       "id": "function-pointers_b12",
       "type": "paragraph",
       "html": "<p>Just like it is possible to declare a non-constant pointer to a normal variable, it’s also possible to declare a non-constant pointer to a function. In the rest of this lesson, we’ll examine these function pointers and their uses. Function pointers are a fairly advanced topic, and the rest of this lesson can be safely skipped or skimmed by those only looking for C++ basics.</p>",
       "preview": "Just like it is possible to declare a non-constant pointer to a normal variable,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako je možné deklarovat nekonstantní ukazatel na běžnou proměnnou, je možné deklarovat i nekonstantní ukazatel na funkci. Ve zbytku této lekce prozkoumáme tyto ukazatele na funkce a jejich využití. Ukazatele na funkce jsou poměrně pokročilé téma a zbytek této lekce mohou bezpečně přeskočit nebo jen zběžně projít ti, kteří hledají pouze základy C++.</p>"
     },
     {
       "id": "function-pointers_b13",
       "type": "section",
       "title": "Pointers to functions",
       "html": "<h3 class=\"cpp-section-heading\">Pointers to functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ukazatele na funkce</h3>",
+      "title_cs": "Ukazatele na funkce"
     },
     {
       "id": "function-pointers_b14",
       "type": "paragraph",
       "html": "<p>The syntax for creating a non-const function pointer is one of the ugliest things you will ever see in C++:</p>",
       "preview": "The syntax for creating a non-const function pointer is one of the ugliest thing",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Syntaxe pro vytvoření nekonstantního (non-const) ukazatele na funkci je jedna z nejošklivějších věcí, jaké kdy v C++ uvidíte:</p>"
     },
     {
       "id": "function-pointers_b15",
@@ -124,28 +140,32 @@
       "language": "cpp",
       "code": "// fcnPtr is a pointer to a function that takes no arguments and returns an integer\nint (*fcnPtr)();",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// fcnPtr is a pointer to a function that takes no arguments and returns an integer\nint (*fcnPtr)();</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// fcnPtr je ukazatel na funkci, která nebere žádné argumenty a vrací celé číslo\nint (*fcnPtr)();</code></pre>"
     },
     {
       "id": "function-pointers_b16",
       "type": "paragraph",
       "html": "<p>In the above snippet, fcnPtr is a pointer to a function that has no parameters and returns an integer. fcnPtr can point to any function that matches this type.</p>",
       "preview": "In the above snippet, fcnPtr is a pointer to a function that has no parameters a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedené ukázce je fcnPtr ukazatel na funkci, která nemá žádné parametry a vrací celé číslo (integer). fcnPtr může ukazovat na jakoukoli funkci, která odpovídá tomuto typu.</p>"
     },
     {
       "id": "function-pointers_b17",
       "type": "paragraph",
       "html": "<p>The parentheses around *fcnPtr are necessary for precedence reasons, as <code>int* fcnPtr()</code> would be interpreted as a forward declaration for a function named fcnPtr that takes no parameters and returns a pointer to an integer.</p>",
       "preview": "The parentheses around *fcnPtr are necessary for precedence reasons, as int* fcn",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Závorky kolem *fcnPtr jsou nutné z důvodu priorit operátorů, protože <code>int* fcnPtr()</code> by bylo interpretováno jako dopředná deklarace funkce s názvem fcnPtr, která nepřijímá žádné parametry a vrací ukazatel na celé číslo.</p>"
     },
     {
       "id": "function-pointers_b18",
       "type": "paragraph",
       "html": "<p>To make a const function pointer, the const goes after the asterisk:</p>",
       "preview": "To make a const function pointer, the const goes after the asterisk:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li vytvořit const ukazatel na funkci, slovo const se umístí za hvězdičku:</p>"
     },
     {
       "id": "function-pointers_b19",
@@ -153,14 +173,16 @@
       "language": "cpp",
       "code": "int (*const fcnPtr)();",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int (*const fcnPtr)();</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int (*const fcnPtr)();</code></pre>"
     },
     {
       "id": "function-pointers_b20",
       "type": "paragraph",
       "html": "<p>If you put the const before the int, then that would indicate the function being pointed to would return a const int.</p>",
       "preview": "If you put the const before the int, then that would indicate the function being",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud byste const umístili před int, znamenalo by to, že odkazovaná funkce bude vracet const int.</p>"
     },
     {
       "id": "function-pointers_b21",
@@ -168,21 +190,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>The function pointer syntax can be hard to understand. The following articles demonstrates a method for parsing such declarations:</p><ul><li><a href=\"https://c-faq.com/decl/spiral.anderson.html\">https://c-faq.com/decl/spiral.anderson.html</a></li><li><a href=\"https://web.archive.org/web/20110818081319/http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html\">https://web.archive.org/web/20110818081319/http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html</a></li></ul></div>",
       "preview": "TipThe function pointer syntax can be hard to understand. The following articles demonstrates a meth",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Syntaxe ukazatelů na funkce může být obtížně srozumitelná. Následující články demonstrují metodu pro čtení a analýzu takových deklarací:</p><ul><li><a href=\"https://c-faq.com/decl/spiral.anderson.html\">https://c-faq.com/decl/spiral.anderson.html</a></li><li><a href=\"https://web.archive.org/web/20110818081319/http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html\">https://web.archive.org/web/20110818081319/http://ieng9.ucsd.edu/~cs30x/rt_lt.rule.html</a></li></ul></div>"
     },
     {
       "id": "function-pointers_b22",
       "type": "section",
       "title": "Assigning a function to a function pointer",
       "html": "<h3 class=\"cpp-section-heading\">Assigning a function to a function pointer</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přiřazení funkce do ukazatele na funkci</h3>",
+      "title_cs": "Přiřazení funkce ukazateli funkce"
     },
     {
       "id": "function-pointers_b23",
       "type": "paragraph",
       "html": "<p>Function pointers can be initialized with a function (and non-const function pointers can be assigned a function). Like with pointers to variables, we can also use &amp;foo to get a function pointer to foo.</p>",
       "preview": "Function pointers can be initialized with a function (and non-const function poi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele na funkce lze inicializovat funkcí (a do nekonstantních ukazatelů na funkce lze funkci přiřadit). Stejně jako u ukazatelů na proměnné můžeme použít &amp;foo k získání ukazatele na funkci foo.</p>"
     },
     {
       "id": "function-pointers_b24",
@@ -190,14 +216,16 @@
       "language": "cpp",
       "code": "int foo()\n{\n    return 5;\n}\n\nint goo()\n{\n    return 6;\n}\n\nint main()\n{\n    int (*fcnPtr)(){ &foo }; // fcnPtr points to function foo\n    fcnPtr = &goo; // fcnPtr now points to function goo\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo()\n{\n    return 5;\n}\n\nint goo()\n{\n    return 6;\n}\n\nint main()\n{\n    int (*fcnPtr)(){ &amp;foo }; // fcnPtr points to function foo\n    fcnPtr = &amp;goo; // fcnPtr now points to function goo\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo()\n{\n    návrat 5;\n}\n\nint goo()\n{\n    návrat 6;\n}\n\nint main()\n{\n    int (*fcnPtr)(){ &foo }; // fcnPtr ukazuje na funkci foo\n    fcnPtr = &goo; // fcnPtr nyní ukazuje na funkci goo\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b25",
       "type": "paragraph",
       "html": "<p>One common mistake is to do this:</p>",
       "preview": "One common mistake is to do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou z častých chyb je udělat toto:</p>"
     },
     {
       "id": "function-pointers_b26",
@@ -205,21 +233,24 @@
       "language": "cpp",
       "code": "fcnPtr = goo();",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">fcnPtr = goo();</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">fcnPtr = goo();</code></pre>"
     },
     {
       "id": "function-pointers_b27",
       "type": "paragraph",
       "html": "<p>This tries to assign the return value from a call to function goo() (which has type <code>int</code>) to fcnPtr (which is expecting a value of type <code>int(*)()</code>), which isn’t what we want. We want fcnPtr to be assigned the address of function goo, not the return value from function goo(). So no parentheses are needed.</p>",
       "preview": "This tries to assign the return value from a call to function goo() (which has t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód se pokouší přiřadit návratovou hodnotu z volání funkce goo() (která je typu <code>int</code>) do fcnPtr (který očekává hodnotu typu <code>int(*)()</code>), což není to, co chceme. Chceme, aby byla do fcnPtr přiřazena adresa funkce goo, nikoli návratová hodnota z funkce goo(). Závorky tedy nejsou potřeba.</p>"
     },
     {
       "id": "function-pointers_b28",
       "type": "paragraph",
       "html": "<p>Note that the type (parameters and return type) of the function pointer must match the type of the function. Here are some examples of this:</p>",
       "preview": "Note that the type (parameters and return type) of the function pointer must mat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že typ (parametry a návratový typ) ukazatele na funkci se musí shodovat s typem funkce. Zde je několik příkladů:</p>"
     },
     {
       "id": "function-pointers_b29",
@@ -227,14 +258,16 @@
       "language": "cpp",
       "code": "// function prototypes\nint foo();\ndouble goo();\nint hoo(int x);\n\n// function pointer initializers\nint (*fcnPtr1)(){ &foo };    // okay\nint (*fcnPtr2)(){ &goo };    // wrong -- return types don't match!\ndouble (*fcnPtr4)(){ &goo }; // okay\nfcnPtr1 = &hoo;              // wrong -- fcnPtr1 has no parameters, but hoo() does\nint (*fcnPtr3)(int){ &hoo }; // okay",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// function prototypes\nint foo();\ndouble goo();\nint hoo(int x);\n\n// function pointer initializers\nint (*fcnPtr1)(){ &amp;foo };    // okay\nint (*fcnPtr2)(){ &amp;goo };    // wrong -- return types don't match!\ndouble (*fcnPtr4)(){ &amp;goo }; // okay\nfcnPtr1 = &amp;hoo;              // wrong -- fcnPtr1 has no parameters, but hoo() does\nint (*fcnPtr3)(int){ &amp;hoo }; // okay</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// prototypy funkcí\nint foo();\ndouble goo();\nint hoo(int x);\n\n// inicializátory ukazatelů funkcí\nint (*fcnPtr1)(){ &foo };    // dobře\nint (*fcnPtr2)(){ &goo };    // špatně -- návratové typy se neshodují!\ndouble (*fcnPtr4)(){ &goo }; // dobře\nfcnPtr1 = &hoo;              // špatně -- fcnPtr1 nemá žádné parametry, ale hoo() ano\nint (*fcnPtr3)(int){ &hoo }; // dobře</code></pre>"
     },
     {
       "id": "function-pointers_b30",
       "type": "paragraph",
       "html": "<p>Unlike fundamental types, C++ <em>will</em> implicitly convert a function into a function pointer if needed (so you don’t need to use the address-of operator (&amp;) to get the function’s address). However, function pointers will not convert to void pointers, or vice-versa (though some compilers like Visual Studio may allow this anyway).</p>",
       "preview": "Unlike fundamental types, C++ will implicitly convert a function into a function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od fundamentálních typů C++ funkci v případě potřeby <em>implicitně převede</em> na ukazatel na funkci (takže k získání adresy funkce nemusíte používat operátor adresy &amp;). Ukazatele na funkce se však nepřevádějí na ukazatele typu void ani naopak (ačkoli některé kompilátory, například Visual Studio, to přesto mohou umožňovat).</p>"
     },
     {
       "id": "function-pointers_b31",
@@ -242,14 +275,16 @@
       "language": "cpp",
       "code": "\t// function prototypes\n\tint foo();\n\n\t// function initializations\n\tint (*fcnPtr5)() { foo }; // okay, foo implicitly converts to function pointer to foo\n\tvoid* vPtr { foo };       // not okay, though some compilers may allow",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\t// function prototypes\n\tint foo();\n\n\t// function initializations\n\tint (*fcnPtr5)() { foo }; // okay, foo implicitly converts to function pointer to foo\n\tvoid* vPtr { foo };       // not okay, though some compilers may allow</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> // prototypy funkcí\n\tint foo();\n\n\t// inicializace funkcí\n\tint (*fcnPtr5)() { foo}; // dobře, foo se implicitně převede na ukazatel funkce na foo\n\tvoid* vPtr { foo };       // není v pořádku, i když některé kompilátory mohou umožňovat</code></pre>"
     },
     {
       "id": "function-pointers_b32",
       "type": "paragraph",
       "html": "<p>Function pointers can also be initialized or assigned the value nullptr:</p>",
       "preview": "Function pointers can also be initialized or assigned the value nullptr:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele na funkce lze také inicializovat nebo jim přiřadit hodnotu nullptr:</p>"
     },
     {
       "id": "function-pointers_b33",
@@ -257,21 +292,25 @@
       "language": "cpp",
       "code": "int (*fcnptr)() { nullptr }; // okay",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int (*fcnptr)() { nullptr }; // okay</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int (*fcnptr)() { nullptr }; // dobře</code></pre>"
     },
     {
       "id": "function-pointers_b34",
       "type": "section",
       "title": "Calling a function using a function pointer",
       "html": "<h3 class=\"cpp-section-heading\">Calling a function using a function pointer</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Volání funkce pomocí ukazatele na funkci</h3>",
+      "title_cs": "Volání funkce pomocí ukazatele funkce"
     },
     {
       "id": "function-pointers_b35",
       "type": "paragraph",
       "html": "<p>The other primary thing you can do with a function pointer is use it to actually call the function. There are two ways to do this. The first is via explicit dereference:</p>",
       "preview": "The other primary thing you can do with a function pointer is use it to actually",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhou hlavní věcí, kterou můžete s ukazatelem na funkci udělat, je použít jej k samotnému zavolání funkce. Existují dva způsoby, jak to provést. Prvním je explicitní dereference:</p>"
     },
     {
       "id": "function-pointers_b36",
@@ -279,14 +318,16 @@
       "language": "cpp",
       "code": "int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Initialize fcnPtr with function foo\n    (*fcnPtr)(5); // call function foo(5) through fcnPtr.\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &amp;foo }; // Initialize fcnPtr with function foo\n    (*fcnPtr)(5); // call function foo(5) through fcnPtr.\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    návrat x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Inicializuje fcnPtr funkcí foo\n    (*fcnPtr)(5); // volání funkce foo(5) přes fcnPtr.\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b37",
       "type": "paragraph",
       "html": "<p>The second way is via implicit dereference:</p>",
       "preview": "The second way is via implicit dereference:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhým způsobem je implicitní dereference:</p>"
     },
     {
       "id": "function-pointers_b38",
@@ -294,21 +335,24 @@
       "language": "cpp",
       "code": "int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Initialize fcnPtr with function foo\n    fcnPtr(5); // call function foo(5) through fcnPtr.\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &amp;foo }; // Initialize fcnPtr with function foo\n    fcnPtr(5); // call function foo(5) through fcnPtr.\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    návrat x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Inicializuje fcnPtr funkcí foo\n    fcnPtr(5); // volání funkce foo(5) přes fcnPtr.\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b39",
       "type": "paragraph",
       "html": "<p>As you can see, the implicit dereference method looks just like a normal function call -- which is what you’d expect, since normal function names are pointers to functions anyway! However, some older compilers do not support the implicit dereference method, but all modern compilers should.</p>",
       "preview": "As you can see, the implicit dereference method looks just like a normal functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, metoda implicitní dereference vypadá přesně jako běžné volání funkce – což je přesně to, co byste čekali, protože běžné názvy funkcí jsou stejně ukazateli na funkce! Některé starší kompilátory však metodu implicitní dereference nepodporují, ale všechny moderní kompilátory by ji podporovat měly.</p>"
     },
     {
       "id": "function-pointers_b40",
       "type": "paragraph",
       "html": "<p>Also note that because function pointers can be set to nullptr, it’s a good idea to assert or conditionally test whether your function pointer is a null pointer before calling it. Just like with normal pointers, dereferencing a null function pointer leads to undefined behavior.</p>",
       "preview": "Also note that because function pointers can be set to nullptr, it’s a good idea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si také, že jelikož lze ukazatele na funkce nastavit na nullptr, je dobré před jejich voláním pomocí assertu nebo podmínky ověřit, zda ukazatel na funkci není nulový ukazatel (null pointer). Stejně jako u běžných ukazatelů vede dereference nulového ukazatele na funkci k nedefinovanému chování.</p>"
     },
     {
       "id": "function-pointers_b41",
@@ -316,28 +360,33 @@
       "language": "cpp",
       "code": "int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Initialize fcnPtr with function foo\n    if (fcnPtr) // make sure fcnPtr isn't a null pointer    \n        fcnPtr(5); // otherwise this will lead to undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    return x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &amp;foo }; // Initialize fcnPtr with function foo\n    if (fcnPtr) // make sure fcnPtr isn't a null pointer    \n        fcnPtr(5); // otherwise this will lead to undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo(int x)\n{\n    návrat x;\n}\n\nint main()\n{\n    int (*fcnPtr)(int){ &foo }; // Inicializuje fcnPtr funkcí foo\n    if (fcnPtr) // ujistěte se, že fcnPtr není nulový ukazatel    \n        fcnPtr(5); // jinak to povede k nedefinovanému chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b42",
       "type": "section",
       "title": "Default arguments don’t work for functions called through function pointers Advanced",
       "html": "<h3 class=\"cpp-section-heading\">Default arguments don’t work for functions called through function pointers <span class=\"cpp-section-pill cpp-section-advanced\">Advanced</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výchozí argumenty nefungují u funkcí volaných přes ukazatele na funkce <span class=\"cpp-section-pill cpp-section-advanced\">Pokročilé</span></h3>",
+      "title_cs": "Výchozí argumenty nefungují pro funkce volané pomocí ukazatelů funkcí Advanced"
     },
     {
       "id": "function-pointers_b43",
       "type": "paragraph",
       "html": "<p>When the compiler encounters a normal function call to a function with one or more default arguments, it rewrites the function call to include the default arguments. This process happens at compile-time, and thus can only be applied to functions that can be resolved at compile time.</p>",
       "preview": "When the compiler encounters a normal function call to a function with one or mo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když kompilátor narazí na běžné volání funkce s jedním nebo více výchozími argumenty, přepíše toto volání funkce tak, aby zahrnovalo výchozí argumenty. Tento proces probíhá v době překladu (compile-time), a lze jej tedy aplikovat pouze na funkce, které lze vyhodnotit v době překladu.</p>"
     },
     {
       "id": "function-pointers_b44",
       "type": "paragraph",
       "html": "<p>However, when a function is called through a function pointer, it is resolved at runtime. In this case, there is no rewriting of the function call to include default arguments.</p>",
       "preview": "However, when a function is called through a function pointer, it is resolved at",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je však funkce volána prostřednictvím ukazatele na funkci, vyhodnocuje se až za běhu programu (runtime). V tomto případě nedochází k žádnému přepsání volání funkce tak, aby zahrnovalo výchozí argumenty.</p>"
     },
     {
       "id": "function-pointers_b45",
@@ -345,14 +394,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Because the resolution happens at runtime, default arguments are not resolved when a function is called through a function pointer.</p></div>",
       "preview": "Key insightBecause the resolution happens at runtime, default arguments are not resolved when a func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Protože k vyhodnocení dochází za běhu programu, výchozí argumenty se při volání funkce přes ukazatel na funkci nevyhodnocují.</p></div>"
     },
     {
       "id": "function-pointers_b46",
       "type": "paragraph",
       "html": "<p>This means that we can use a function pointer to disambiguate a function call that would otherwise be ambiguous due to default arguments. In the following example, we show two ways to do this:</p>",
       "preview": "This means that we can use a function pointer to disambiguate a function call th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že můžeme použít ukazatel na funkci k jednoznačnému určení volání funkce, které by jinak bylo kvůli výchozím argumentům nejednoznačné. V následujícím příkladu si ukážeme dva způsoby, jak toho dosáhnout:</p>"
     },
     {
       "id": "function-pointers_b47",
@@ -360,42 +411,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int x)\n{\n    std::cout << \"print(int)\\n\";\n}\n\nvoid print(int x, int y = 10)\n{\n    std::cout << \"print(int, int)\\n\";\n}\n\nint main()\n{\n//    print(1); // ambiguous function call\n\n    // Deconstructed method\n    using vnptr = void(*)(int); // define a type alias for a function pointer to a void(int) function\n    vnptr pi { print }; // initialize our function pointer with function print\n    pi(1); // call the print(int) function through the function pointer\n\n    // Concise method\n    static_cast<void(*)(int)>(print)(1); // call void(int) version of print with argument 1\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int x)\n{\n    std::cout &lt;&lt; \"print(int)\\n\";\n}\n\nvoid print(int x, int y = 10)\n{\n    std::cout &lt;&lt; \"print(int, int)\\n\";\n}\n\nint main()\n{\n//    print(1); // ambiguous function call\n\n    // Deconstructed method\n    using vnptr = void(*)(int); // define a type alias for a function pointer to a void(int) function\n    vnptr pi { print }; // initialize our function pointer with function print\n    pi(1); // call the print(int) function through the function pointer\n\n    // Concise method\n    static_cast&lt;void(*)(int)&gt;(print)(1); // call void(int) version of print with argument 1\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int x)\n{\n    std::cout << \"print(int)\\n\";\n}\n\nvoid print(int x, int y = 10)\n{\n    std::cout << \"print(int, int)\\n\";\n}\n\nint main()\n{\n// print(1); // nejednoznačné volání funkce\n\n    // Dekonstruovaná metoda\n    pomocí vnptr = void(*)(int); // definuje alias typu pro ukazatel funkce na funkci void(int).\n    vnptr pi { tisk }; // inicializuje náš ukazatel funkce pomocí funkce print\n    pi(1); // volání funkce print(int) přes ukazatel funkce\n\n    // Stručná metoda\n    static_cast<void(*)(int)>(print)(1); // volání void(int) verze tisku s argumentem 1\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b48",
       "type": "section",
       "title": "Passing functions as arguments to other functions",
       "html": "<h3 class=\"cpp-section-heading\">Passing functions as arguments to other functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání funkcí jako argumentů jiným funkcím</h3>",
+      "title_cs": "Předávání funkcí jako argumentů jiným funkcím"
     },
     {
       "id": "function-pointers_b49",
       "type": "paragraph",
       "html": "<p>One of the most useful things to do with function pointers is pass a function as an argument to another function. Functions used as arguments to another function are sometimes called <strong>callback functions</strong>.</p>",
       "preview": "One of the most useful things to do with function pointers is pass a function as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z nejužitečnějších způsobů použití ukazatelů na funkce je předávání funkce jako argumentu jiné funkci. Funkcím předávaným jako argumenty jiným funkcím se někdy říká <strong>funkce zpětného volání</strong> (callback functions).</p>"
     },
     {
       "id": "function-pointers_b50",
       "type": "paragraph",
       "html": "<p>Consider a case where you are writing a function to perform a task (such as sorting an array), but you want the user to be able to define how a particular part of that task will be performed (such as whether the array is sorted in ascending or descending order). Let’s take a closer look at this problem as applied specifically to sorting, as an example that can be generalized to other similar problems.</p>",
       "preview": "Consider a case where you are writing a function to perform a task (such as sort",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si situaci, kdy píšete funkci pro vykonání nějakého úkolu (například řazení pole), ale chcete, aby uživatel mohl definovat, jak se má určitá část tohoto úkolu provést (například zda má být pole seřazeno vzestupně nebo sestupně). Pojďme se na tento problém podívat blíže na konkrétním příkladu řazení, který lze zobecnit i na další podobné úlohy.</p>"
     },
     {
       "id": "function-pointers_b51",
       "type": "paragraph",
       "html": "<p>Many comparison-based sorting algorithms work on a similar concept: the sorting algorithm iterates through a list of numbers, does comparisons on pairs of numbers, and reorders the numbers based on the results of those comparisons. Consequently, by varying the comparison, we can change the way the algorithm sorts without affecting the rest of the sorting code.</p>",
       "preview": "Many comparison-based sorting algorithms work on a similar concept: the sorting ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho řadicích algoritmů založených na porovnávání funguje na podobném principu: řadicí algoritmus prochází seznam čísel, porovnává dvojice čísel a na základě výsledků těchto porovnání mění jejich pořadí. Díky tomu můžeme změnou porovnávání změnit způsob, jakým algoritmus řadí, aniž bychom ovlivnili zbytek řadicího kódu.</p>"
     },
     {
       "id": "function-pointers_b52",
       "type": "paragraph",
       "html": "<p>Here is our selection sort routine from a previous lesson:</p>",
       "preview": "Here is our selection sort routine from a previous lesson:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je naše implementace řazení výběrem (selection sort) z předchozí lekce:</p>"
     },
     {
       "id": "function-pointers_b53",
@@ -403,14 +461,16 @@
       "language": "cpp",
       "code": "#include <utility> // for std::swap\n\nvoid SelectionSort(int* array, int size)\n{\n    if (!array)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex < (size - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we've encountered so far.\n        int smallestIndex{ startIndex };\n \n        // Look for smallest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // If the current element is smaller than our previously found smallest\n            if (array[smallestIndex] > array[currentIndex]) // COMPARISON DONE HERE\n            {\n                // This is the new smallest number for this iteration\n                smallestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest element\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::swap\n\nvoid SelectionSort(int* array, int size)\n{\n    if (!array)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex &lt; (size - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we've encountered so far.\n        int smallestIndex{ startIndex };\n \n        // Look for smallest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex &lt; size; ++currentIndex)\n        {\n            // If the current element is smaller than our previously found smallest\n            if (array[smallestIndex] &gt; array[currentIndex]) // COMPARISON DONE HERE\n            {\n                // This is the new smallest number for this iteration\n                smallestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest element\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <utility> // pro std::swap\n\nvoid SelectionSort(int* pole, int velikost)\n{\n    pokud (!pole)\n        návrat;\n\n    // Procházet každým prvkem pole\n    for (int startIndex{ 0 }; startIndex < (velikost - 1); ++startIndex)\n    {\n        // nejmenšíIndex je index nejmenšího prvku, se kterým jsme se dosud setkali.\n        int nejmenšíIndex{ startIndex };\n \n        // Vyhledejte nejmenší zbývající prvek v poli (začínající na startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // Pokud je aktuální prvek menší než náš dříve nalezený nejmenší\n            if (array[smallestIndex] > array[currentIndex]) // POROVNÁNÍ PROVEDENO ZDE\n            {\n                // Toto je nové nejmenší číslo pro tuto iteraci\n                nejmenšíIndex = aktuálníIndex;\n            }\n        }\n \n        // Vyměníme náš počáteční prvek za náš nejmenší prvek\n        std::swap(pole[startIndex], pole[smallestIndex]);\n    }\n}</code></pre>"
     },
     {
       "id": "function-pointers_b54",
       "type": "paragraph",
       "html": "<p>Let’s replace that comparison with a function to do the comparison. Because our comparison function is going to compare two integers and return a boolean value to indicate whether the elements should be swapped, it will look something like this:</p>",
       "preview": "Let’s replace that comparison with a function to do the comparison. Because our ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nahraďme toto porovnání funkcí, která jej provede. Protože naše porovnávací funkce bude porovnávat dvě celá čísla a vracet booleanovskou hodnotu určující, zda by se prvky měly prohodit, bude vypadat přibližně takto:</p>"
     },
     {
       "id": "function-pointers_b55",
@@ -418,14 +478,16 @@
       "language": "cpp",
       "code": "bool ascending(int x, int y)\n{\n    return x > y; // swap if the first element is greater than the second\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool ascending(int x, int y)\n{\n    return x &gt; y; // swap if the first element is greater than the second\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool ascending(int x, int y)\n{\n    návrat x > y; // swap, pokud je první prvek větší než druhý\n}</code></pre>"
     },
     {
       "id": "function-pointers_b56",
       "type": "paragraph",
       "html": "<p>And here’s our selection sort routine using the ascending() function to do the comparison:</p>",
       "preview": "And here’s our selection sort routine using the ascending() function to do the c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A zde je naše rutina selection sortu, která k porovnání používá funkci ascending():</p>"
     },
     {
       "id": "function-pointers_b57",
@@ -433,21 +495,24 @@
       "language": "cpp",
       "code": "#include <utility> // for std::swap\n\nvoid SelectionSort(int* array, int size)\n{\n    if (!array)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex < (size - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we've encountered so far.\n        int smallestIndex{ startIndex };\n \n        // Look for smallest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // If the current element is smaller than our previously found smallest\n            if (ascending(array[smallestIndex], array[currentIndex])) // COMPARISON DONE HERE\n            {\n                // This is the new smallest number for this iteration\n                smallestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest element\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::swap\n\nvoid SelectionSort(int* array, int size)\n{\n    if (!array)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex &lt; (size - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we've encountered so far.\n        int smallestIndex{ startIndex };\n \n        // Look for smallest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex &lt; size; ++currentIndex)\n        {\n            // If the current element is smaller than our previously found smallest\n            if (ascending(array[smallestIndex], array[currentIndex])) // COMPARISON DONE HERE\n            {\n                // This is the new smallest number for this iteration\n                smallestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest element\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <utility> // pro std::swap\n\nvoid SelectionSort(int* pole, int velikost)\n{\n    pokud (!pole)\n        návrat;\n\n    // Procházet každým prvkem pole\n    for (int startIndex{ 0 }; startIndex < (velikost - 1); ++startIndex)\n    {\n        // nejmenšíIndex je index nejmenšího prvku, se kterým jsme se dosud setkali.\n        int nejmenšíIndex{ startIndex };\n \n        // Vyhledejte nejmenší zbývající prvek v poli (začínající na startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // Pokud je aktuální prvek menší než náš dříve nalezený nejmenší\n            if (ascending(array[smallestIndex], array[currentIndex])) // POROVNÁNÍ PROVEDENO ZDE\n            {\n                // Toto je nové nejmenší číslo pro tuto iteraci\n                nejmenšíIndex = aktuálníIndex;\n            }\n        }\n \n        // Vyměníme náš počáteční prvek za náš nejmenší prvek\n        std::swap(pole[startIndex], pole[smallestIndex]);\n    }\n}</code></pre>"
     },
     {
       "id": "function-pointers_b58",
       "type": "paragraph",
       "html": "<p>Now, in order to let the caller decide how the sorting will be done, instead of using our own hard-coded comparison function, we’ll allow the caller to provide their own sorting function! This is done via a function pointer.</p>",
       "preview": "Now, in order to let the caller decide how the sorting will be done, instead of ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom nyní volajícímu umožnili rozhodnout, jak se má řazení provést, namísto použití naší vlastní napevno zakódované porovnávací funkce umožníme volajícímu dodat vlastní porovnávací funkci! To se provádí pomocí ukazatele na funkci.</p>"
     },
     {
       "id": "function-pointers_b59",
       "type": "paragraph",
       "html": "<p>Because the caller’s comparison function is going to compare two integers and return a boolean value, a pointer to such a function would look something like this:</p>",
       "preview": "Because the caller’s comparison function is going to compare two integers and re",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože porovnávací funkce volajícího bude porovnávat dvě celá čísla a vracet booleovskou hodnotu, ukazatel na takovou funkci by vypadal nějak takto:</p>"
     },
     {
       "id": "function-pointers_b60",
@@ -455,21 +520,24 @@
       "language": "cpp",
       "code": "bool (*comparisonFcn)(int, int);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool (*comparisonFcn)(int, int);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool (*comparisonFcn)(int, int);</code></pre>"
     },
     {
       "id": "function-pointers_b61",
       "type": "paragraph",
       "html": "<p>So, we’ll allow the caller to pass our sort routine a pointer to their desired comparison function as the third parameter, and then we’ll use the caller’s function to do the comparison.</p>",
       "preview": "So, we’ll allow the caller to pass our sort routine a pointer to their desired c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Umožníme tedy volajícímu předat naší řadicí rutině ukazatel na požadovanou porovnávací funkci jako třetí parametr a k samotnému porovnání pak použijeme funkci volajícího.</p>"
     },
     {
       "id": "function-pointers_b62",
       "type": "paragraph",
       "html": "<p>Here’s a full example of a selection sort that uses a function pointer parameter to do a user-defined comparison, along with an example of how to call it:</p>",
       "preview": "Here’s a full example of a selection sort that uses a function pointer parameter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je kompletní příklad selection sortu, který využívá parametr v podobě ukazatele na funkci k provedení uživatelsky definovaného porovnání, spolu s ukázkou jeho volání:</p>"
     },
     {
       "id": "function-pointers_b63",
@@ -477,35 +545,40 @@
       "language": "cpp",
       "code": "#include <utility> // for std::swap\n#include <iostream>\n\n// Note our user-defined comparison is the third parameter\nvoid selectionSort(int* array, int size, bool (*comparisonFcn)(int, int))\n{\n    if (!array || !comparisonFcn)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex < (size - 1); ++startIndex)\n    {\n        // bestIndex is the index of the smallest/largest element we've encountered so far.\n        int bestIndex{ startIndex };\n \n        // Look for smallest/largest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // If the current element is smaller/larger than our previously found smallest\n            if (comparisonFcn(array[bestIndex], array[currentIndex])) // COMPARISON DONE HERE\n            {\n                // This is the new smallest/largest number for this iteration\n                bestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest/largest element\n        std::swap(array[startIndex], array[bestIndex]);\n    }\n}\n\n// Here is a comparison function that sorts in ascending order\n// (Note: it's exactly the same as the previous ascending() function)\nbool ascending(int x, int y)\n{\n    return x > y; // swap if the first element is greater than the second\n}\n\n// Here is a comparison function that sorts in descending order\nbool descending(int x, int y)\n{\n    return x < y; // swap if the second element is greater than the first\n}\n\n// This function prints out the values in the array\nvoid printArray(int* array, int size)\n{\n    if (!array)\n        return;\n\n    for (int index{ 0 }; index < size; ++index)\n    {\n        std::cout << array[index] << ' ';\n    }\n    \n    std::cout << '\\n';\n}\n\nint main()\n{\n    int array[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    // Sort the array in descending order using the descending() function\n    selectionSort(array, 9, descending);\n    printArray(array, 9);\n\n    // Sort the array in ascending order using the ascending() function\n    selectionSort(array, 9, ascending);\n    printArray(array, 9);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;utility&gt; // for std::swap\n#include &lt;iostream&gt;\n\n// Note our user-defined comparison is the third parameter\nvoid selectionSort(int* array, int size, bool (*comparisonFcn)(int, int))\n{\n    if (!array || !comparisonFcn)\n        return;\n\n    // Step through each element of the array\n    for (int startIndex{ 0 }; startIndex &lt; (size - 1); ++startIndex)\n    {\n        // bestIndex is the index of the smallest/largest element we've encountered so far.\n        int bestIndex{ startIndex };\n \n        // Look for smallest/largest element remaining in the array (starting at startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex &lt; size; ++currentIndex)\n        {\n            // If the current element is smaller/larger than our previously found smallest\n            if (comparisonFcn(array[bestIndex], array[currentIndex])) // COMPARISON DONE HERE\n            {\n                // This is the new smallest/largest number for this iteration\n                bestIndex = currentIndex;\n            }\n        }\n \n        // Swap our start element with our smallest/largest element\n        std::swap(array[startIndex], array[bestIndex]);\n    }\n}\n\n// Here is a comparison function that sorts in ascending order\n// (Note: it's exactly the same as the previous ascending() function)\nbool ascending(int x, int y)\n{\n    return x &gt; y; // swap if the first element is greater than the second\n}\n\n// Here is a comparison function that sorts in descending order\nbool descending(int x, int y)\n{\n    return x &lt; y; // swap if the second element is greater than the first\n}\n\n// This function prints out the values in the array\nvoid printArray(int* array, int size)\n{\n    if (!array)\n        return;\n\n    for (int index{ 0 }; index &lt; size; ++index)\n    {\n        std::cout &lt;&lt; array[index] &lt;&lt; ' ';\n    }\n    \n    std::cout &lt;&lt; '\\n';\n}\n\nint main()\n{\n    int array[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    // Sort the array in descending order using the descending() function\n    selectionSort(array, 9, descending);\n    printArray(array, 9);\n\n    // Sort the array in ascending order using the ascending() function\n    selectionSort(array, 9, ascending);\n    printArray(array, 9);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <utility> // pro std::swap\n#include <iostream>\n\n// Všimněte si, že naše uživatelsky definované srovnání je třetím parametrem\nvoid selectionSort(int* pole, int velikost, bool (*comparisonFcn)(int, int))\n{\n    if (!array || !comparisonFcn)\n        návrat;\n\n    // Procházet každým prvkem pole\n    for (int startIndex{ 0 }; startIndex < (velikost - 1); ++startIndex)\n    {\n        // bestIndex je index nejmenšího/největšího prvku, se kterým jsme se dosud setkali.\n        int bestIndex{ startIndex };\n \n        // Vyhledejte nejmenší/největší zbývající prvek v poli (začínající startIndex+1)\n        for (int currentIndex{ startIndex + 1 }; currentIndex < size; ++currentIndex)\n        {\n            // Pokud je aktuální prvek menší/větší než náš dříve nalezený nejmenší\n            if (comparisonFcn(array[bestIndex], array[currentIndex])) // POROVNÁNÍ PROVEDENO ZDE\n            {\n                // Toto je nové nejmenší/největší číslo pro tuto iteraci\n                bestIndex = aktuální index;\n            }\n        }\n \n        // Vyměňte náš počáteční prvek za náš nejmenší/největší prvek\n        std::swap(pole[startIndex], pole[bestIndex]);\n    }\n}\n\n// Zde je porovnávací funkce, která seřadí vzestupně\n// (Poznámka: je to úplně stejné jako předchozí funkce ascending())\nbool vzestupně (int x, int y)\n{\n    návrat x > y; // swap, pokud je první prvek větší než druhý\n}\n\n// Zde je porovnávací funkce, která třídí v sestupném pořadí\nbool sestupně (int x, int y)\n{\n    návrat x < y; // swap, pokud je druhý prvek větší než první\n}\n\n// Tato funkce vypíše hodnoty v poli\nvoid printArray(int* pole, int velikost)\n{\n    pokud (!pole)\n        návrat;\n\n    for (int index{ 0 }; index < velikost; ++index)\n    {\n        std::cout << pole[index] << ' ';\n    }\n    \n    std::cout << '\\n';\n}\n\nint main()\n{\n    int pole[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    // Seřadit pole v sestupném pořadí pomocí funkce descending().\n    selectionSort(pole, 9, sestupně);\n    printArray(pole, 9);\n\n    // Seřadit pole ve vzestupném pořadí pomocí funkce ascending().\n    selectSort(pole, 9, vzestupne);\n    printArray(pole, 9);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b64",
       "type": "paragraph",
       "html": "<p>This program produces the result:</p>",
       "preview": "This program produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří výstup:</p>"
     },
     {
       "id": "function-pointers_b65",
       "type": "output",
       "text": "9 8 7 6 5 4 3 2 1\n1 2 3 4 5 6 7 8 9\n",
       "html": "<pre>9 8 7 6 5 4 3 2 1\n1 2 3 4 5 6 7 8 9\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>9 8 7 6 5 4 3 2 1\n1 2 3 4 5 6 7 8 9\n</pre>"
     },
     {
       "id": "function-pointers_b66",
       "type": "paragraph",
       "html": "<p>Is that cool or what? We’ve given the caller the ability to control how our selection sort does its job.</p>",
       "preview": "Is that cool or what? We’ve given the caller the ability to control how our sele",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Není to skvělé? Dali jsme volajícímu možnost řídit, jak náš selection sort odvádí svou práci.</p>"
     },
     {
       "id": "function-pointers_b67",
       "type": "paragraph",
       "html": "<p>The caller can even define their own “strange” comparison functions:</p>",
       "preview": "The caller can even define their own “strange” comparison functions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volající si může dokonce definovat vlastní „zvláštní“ porovnávací funkce:</p>"
     },
     {
       "id": "function-pointers_b68",
@@ -513,35 +586,40 @@
       "language": "cpp",
       "code": "bool evensFirst(int x, int y)\n{\n\t// if x is even and y is odd, x goes first (no swap needed)\n\tif ((x % 2 == 0) && !(y % 2 == 0))\n\t\treturn false;\n \n\t// if x is odd and y is even, y goes first (swap needed)\n\tif (!(x % 2 == 0) && (y % 2 == 0))\n\t\treturn true;\n\n        // otherwise sort in ascending order\n\treturn ascending(x, y);\n}\n\nint main()\n{\n    int array[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    selectionSort(array, 9, evensFirst);\n    printArray(array, 9);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool evensFirst(int x, int y)\n{\n\t// if x is even and y is odd, x goes first (no swap needed)\n\tif ((x % 2 == 0) &amp;&amp; !(y % 2 == 0))\n\t\treturn false;\n \n\t// if x is odd and y is even, y goes first (swap needed)\n\tif (!(x % 2 == 0) &amp;&amp; (y % 2 == 0))\n\t\treturn true;\n\n        // otherwise sort in ascending order\n\treturn ascending(x, y);\n}\n\nint main()\n{\n    int array[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    selectionSort(array, 9, evensFirst);\n    printArray(array, 9);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool evensFirst(int x, int y)\n{\n\t// pokud je x sudé a y je liché, x jde jako první (není potřeba prohodit)\n\tif ((x % 2 == 0) && !(y % 2 == 0))\n\t\tvrátit false;\n \n\t// pokud je x liché a y sudé, y jde jako první (nutná výměna)\n\tif (!(x % 2 == 0) && (y % 2 == 0))\n\t\tvrátit true;\n\n        // jinak seřadit vzestupně\n\treturn ascending(x, y);\n}\n\nint main()\n{\n    int pole[9]{ 3, 7, 9, 5, 6, 1, 8, 2, 4 };\n\n    selectSort(pole, 9, sudePrvni);\n    printArray(pole, 9);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b69",
       "type": "paragraph",
       "html": "<p>The above snippet produces the following result:</p>",
       "preview": "The above snippet produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený úryvek kódu vytvoří následující výstup:</p>"
     },
     {
       "id": "function-pointers_b70",
       "type": "output",
       "text": "2 4 6 8 1 3 5 7 9\n",
       "html": "<pre>2 4 6 8 1 3 5 7 9\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2 4 6 8 1 3 5 7 9\n</pre>"
     },
     {
       "id": "function-pointers_b71",
       "type": "paragraph",
       "html": "<p>As you can see, using a function pointer in this context provides a nice way to allow a caller to “hook” their own functionality into something you’ve previously written and tested, which helps facilitate code reuse! Previously, if you wanted to sort one array in descending order and another in ascending order, you’d need multiple versions of the sort routine. Now you can have one version that can sort any way the caller desires!</p>",
       "preview": "As you can see, using a function pointer in this context provides a nice way to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, použití ukazatele na funkci v tomto kontextu poskytuje elegantní způsob, jak umožnit volajícímu „napojit“ (hook) svou vlastní funkcionalitu do něčeho, co jste již dříve napsali a otestovali, což usnadňuje znovupoužitelnost kódu! Dříve, pokud jste chtěli seřadit jedno pole sestupně a jiné vzestupně, potřebovali byste více verzí řadicí rutiny. Nyní můžete mít jednu verzi, která dokáže řadit jakýmkoli způsobem, který si volající přeje!</p>"
     },
     {
       "id": "function-pointers_b72",
       "type": "paragraph",
       "html": "<p>Note: If a function parameter is of a function type, it will be converted to a pointer to the function type. This means:</p>",
       "preview": "Note: If a function parameter is of a function type, it will be converted to a p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Poznámka: Pokud je parametr funkce typu funkce, dojde k jeho převodu na ukazatel na daný typ funkce. To znamená, že:</p>"
     },
     {
       "id": "function-pointers_b73",
@@ -549,14 +627,16 @@
       "language": "cpp",
       "code": "void selectionSort(int* array, int size, bool (*comparisonFcn)(int, int))",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void selectionSort(int* array, int size, bool (*comparisonFcn)(int, int))</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void selectionSort(int* pole, velikost int, bool (*comparisonFcn)(int, int))</code></pre>"
     },
     {
       "id": "function-pointers_b74",
       "type": "paragraph",
       "html": "<p>can be equivalently written as:</p>",
       "preview": "can be equivalently written as:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>lze ekvivalentně zapsat jako:</p>"
     },
     {
       "id": "function-pointers_b75",
@@ -564,14 +644,16 @@
       "language": "cpp",
       "code": "void selectionSort(int* array, int size, bool comparisonFcn(int, int))",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void selectionSort(int* array, int size, bool comparisonFcn(int, int))</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void selectionSort(int* pole, int velikost, bool porovnáníFcn(int, int))</code></pre>"
     },
     {
       "id": "function-pointers_b76",
       "type": "paragraph",
       "html": "<p>This only works for function parameters, and so is of somewhat limited use. On a non-function parameter, the latter is interpreted as a forward declaration:</p>",
       "preview": "This only works for function parameters, and so is of somewhat limited use. On a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto funguje pouze pro parametry funkcí, takže je to poněkud omezeně použitelné. Mimo parametr funkce je druhý zápis interpretován jako dopředná deklarace (forward declaration):</p>"
     },
     {
       "id": "function-pointers_b77",
@@ -579,28 +661,33 @@
       "language": "cpp",
       "code": "    bool (*ptr)(int, int); // definition of function pointer ptr\n    bool fcn(int, int);    // forward declaration of function fcn",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    bool (*ptr)(int, int); // definition of function pointer ptr\n    bool fcn(int, int);    // forward declaration of function fcn</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> bool (*ptr)(int, int); // definice ukazatele funkce ptr\n    bool fcn(int, int);    // dopředná deklarace funkce fcn</code></pre>"
     },
     {
       "id": "function-pointers_b78",
       "type": "section",
       "title": "Providing default functions",
       "html": "<h3 class=\"cpp-section-heading\">Providing default functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Poskytování výchozích funkcí</h3>",
+      "title_cs": "Poskytování výchozích funkcí"
     },
     {
       "id": "function-pointers_b79",
       "type": "paragraph",
       "html": "<p>If you’re going to allow the caller to pass in a function as a parameter, it can often be useful to provide some standard functions for the caller to use for their convenience. For example, in the selection sort example above, providing the ascending() and descending() function along with the selectionSort() function would make the caller’s life easier, as they wouldn’t have to rewrite ascending() or descending() every time they want to use them.</p>",
       "preview": "If you’re going to allow the caller to pass in a function as a parameter, it can",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud hodláte volajícímu umožnit předat funkci jako parametr, bývá často užitečné poskytnout několik standardních funkcí pro jeho pohodlí. Například ve výše uvedeném příkladu se selection sortem by poskytnutí funkcí ascending() a descending() společně s funkcí selectionSort() usnadnilo volajícímu život, protože by nemusel přepisovat ascending() nebo descending() pokaždé, když je chce použít.</p>"
     },
     {
       "id": "function-pointers_b80",
       "type": "paragraph",
       "html": "<p>You can even set one of these as a default parameter:</p>",
       "preview": "You can even set one of these as a default parameter:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete dokonce jednu z nich nastavit jako výchozí parametr:</p>"
     },
     {
       "id": "function-pointers_b81",
@@ -608,28 +695,33 @@
       "language": "cpp",
       "code": "// Default the sort to ascending sort\nvoid selectionSort(int* array, int size, bool (*comparisonFcn)(int, int) = ascending);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Default the sort to ascending sort\nvoid selectionSort(int* array, int size, bool (*comparisonFcn)(int, int) = ascending);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Výchozí řazení na vzestupné\nvoid selectionSort(int* array, int size, bool (*comparisonFcn)(int, int) = ascending);</code></pre>"
     },
     {
       "id": "function-pointers_b82",
       "type": "paragraph",
       "html": "<p>In this case, as long as the user calls selectionSort normally (not through a function pointer), the comparisonFcn parameter will default to ascending. You will need to make sure that the <code>ascending</code> function is declared prior to this point, otherwise the compiler will complain it doesn’t know what <code>ascending</code> is.</p>",
       "preview": "In this case, as long as the user calls selectionSort normally (not through a fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě, dokud uživatel volá selectionSort normálně (nikoli přes ukazatel na funkci), bude parametr comparisonFcn ve výchozím nastavení nastaven na ascending. Musíte se ujistit, že funkce <code>ascending</code> je deklarována před tímto místem, jinak si kompilátor bude stěžovat, že neví, co <code>ascending</code> je.</p>"
     },
     {
       "id": "function-pointers_b83",
       "type": "section",
       "title": "Making function pointers prettier with type aliases",
       "html": "<h3 class=\"cpp-section-heading\">Making function pointers prettier with type aliases</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zpřehlednění ukazatelů na funkce pomocí typových aliasů</h3>",
+      "title_cs": "Zkrášlení ukazatelů funkcí pomocí aliasů typu"
     },
     {
       "id": "function-pointers_b84",
       "type": "paragraph",
       "html": "<p>Let’s face it -- the syntax for pointers to functions is ugly. However, type aliases can be used to make pointers to functions look more like regular variables:</p>",
       "preview": "Let’s face it -- the syntax for pointers to functions is ugly. However, type ali",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přiznejme si to – syntaxe ukazatelů na funkce je ošklivá. Pomocí typových aliasů však můžeme zařídit, aby ukazatele na funkce vypadaly více jako běžné proměnné:</p>"
     },
     {
       "id": "function-pointers_b85",
@@ -637,21 +729,24 @@
       "language": "cpp",
       "code": "using ValidateFunction = bool(*)(int, int);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">using ValidateFunction = bool(*)(int, int);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">pomocí ValidateFunction = bool(*)(int, int);</code></pre>"
     },
     {
       "id": "function-pointers_b86",
       "type": "paragraph",
       "html": "<p>This defines a type alias called “ValidateFunction” that is a pointer to a function that takes two ints and returns a bool.</p>",
       "preview": "This defines a type alias called “ValidateFunction” that is a pointer to a funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím se definuje typový alias s názvem „ValidateFunction“, což je ukazatel na funkci, která přijímá dva parametry typu int a vrací bool.</p>"
     },
     {
       "id": "function-pointers_b87",
       "type": "paragraph",
       "html": "<p>Now instead of doing this:</p>",
       "preview": "Now instead of doing this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní místo tohoto:</p>"
     },
     {
       "id": "function-pointers_b88",
@@ -659,14 +754,16 @@
       "language": "cpp",
       "code": "bool validate(int x, int y, bool (*fcnPtr)(int, int)); // ugly",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool validate(int x, int y, bool (*fcnPtr)(int, int)); // ugly</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool validate(int x, int y, bool (*fcnPtr)(int, int)); // ošklivý</code></pre>"
     },
     {
       "id": "function-pointers_b89",
       "type": "paragraph",
       "html": "<p>You can do this:</p>",
       "preview": "You can do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete udělat toto:</p>"
     },
     {
       "id": "function-pointers_b90",
@@ -674,21 +771,25 @@
       "language": "cpp",
       "code": "bool validate(int x, int y, ValidateFunction pfcn) // clean",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool validate(int x, int y, ValidateFunction pfcn) // clean</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool validate(int x, int y, ValidateFunction pfcn) // čisté</code></pre>"
     },
     {
       "id": "function-pointers_b91",
       "type": "section",
       "title": "Using std::function",
       "html": "<h3 class=\"cpp-section-heading\">Using std::function</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití std::function</h3>",
+      "title_cs": "Pomocí funkce std::funkce"
     },
     {
       "id": "function-pointers_b92",
       "type": "paragraph",
       "html": "<p>An alternate method of defining and storing function pointers is to use std::function, which is part of the standard library &lt;functional&gt; header. To define a function pointer using this method, declare a std::function object like so:</p>",
       "preview": "An alternate method of defining and storing function pointers is to use std::fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Alternativním způsobem definování a ukládání ukazatelů na funkce je použití std::function, což je součást hlavičkového souboru &lt;functional&gt; standardní knihovny. Chcete-li definovat ukazatel na funkci touto metodou, deklarujte objekt std::function následovně:</p>"
     },
     {
       "id": "function-pointers_b93",
@@ -696,21 +797,24 @@
       "language": "cpp",
       "code": "#include <functional>\nbool validate(int x, int y, std::function<bool(int, int)> fcn); // std::function method that returns a bool and takes two int parameters",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\nbool validate(int x, int y, std::function&lt;bool(int, int)&gt; fcn); // std::function method that returns a bool and takes two int parameters</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <funkční>\nbool validate(int x, int y, std::funkce<bool(int, int)> fcn); // std::function metoda, která vrací bool a přebírá dva parametry int</code></pre>"
     },
     {
       "id": "function-pointers_b94",
       "type": "paragraph",
       "html": "<p>As you see, both the return type and parameters go inside angled brackets, with the parameters inside parentheses. If there are no parameters, the parentheses can be left empty.</p>",
       "preview": "As you see, both the return type and parameters go inside angled brackets, with ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, jak návratový typ, tak parametry se uvádějí do špičatých závorek, přičemž parametry jsou uvnitř kulatých závorek. Pokud funkce nemá žádné parametry, kulaté závorky mohou zůstat prázdné.</p>"
     },
     {
       "id": "function-pointers_b95",
       "type": "paragraph",
       "html": "<p>Updating our earlier example with std::function:</p>",
       "preview": "Updating our earlier example with std::function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Úprava našeho dřívějšího příkladu pomocí std::function:</p>"
     },
     {
       "id": "function-pointers_b96",
@@ -718,14 +822,16 @@
       "language": "cpp",
       "code": "#include <functional>\n#include <iostream>\n\nint foo()\n{\n    return 5;\n}\n\nint goo()\n{\n    return 6;\n}\n\nint main()\n{\n    std::function<int()> fcnPtr{ &foo }; // declare function pointer that returns an int and takes no parameters\n    fcnPtr = &goo; // fcnPtr now points to function goo\n    std::cout << fcnPtr() << '\\n'; // call the function just like normal\n\n    std::function fcnPtr2{ &foo }; // can also use CTAD to infer template arguments\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\n#include &lt;iostream&gt;\n\nint foo()\n{\n    return 5;\n}\n\nint goo()\n{\n    return 6;\n}\n\nint main()\n{\n    std::function&lt;int()&gt; fcnPtr{ &amp;foo }; // declare function pointer that returns an int and takes no parameters\n    fcnPtr = &amp;goo; // fcnPtr now points to function goo\n    std::cout &lt;&lt; fcnPtr() &lt;&lt; '\\n'; // call the function just like normal\n\n    std::function fcnPtr2{ &amp;foo }; // can also use CTAD to infer template arguments\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <funkční>\n#include <iostream>\n\nint foo()\n{\n    návrat 5;\n}\n\nint goo()\n{\n    návrat 6;\n}\n\nint main()\n{\n    std::function<int()> fcnPtr{ &foo }; // deklaruje ukazatel funkce, který vrací int a nebere žádné parametry\n    fcnPtr = &goo; // fcnPtr nyní ukazuje na funkci goo\n    std::cout << fcnPtr() << '\\n'; // volání funkce jako normálně\n\n    std::function fcnPtr2{ &foo }; // může také použít CTAD k odvození argumentů šablony\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b97",
       "type": "paragraph",
       "html": "<p>Type aliasing std::function can be helpful for readability:</p>",
       "preview": "Type aliasing std::function can be helpful for readability:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvoření aliasu typu pro std::function může pomoci čitelnosti:</p>"
     },
     {
       "id": "function-pointers_b98",
@@ -733,35 +839,41 @@
       "language": "cpp",
       "code": "using ValidateFunctionRaw = bool(*)(int, int); // type alias to raw function pointer\nusing ValidateFunction = std::function<bool(int, int)>; // type alias to std::function",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">using ValidateFunctionRaw = bool(*)(int, int); // type alias to raw function pointer\nusing ValidateFunction = std::function&lt;bool(int, int)&gt;; // type alias to std::function</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">pomocí ValidateFunctionRaw = bool(*)(int, int); // zadejte alias na ukazatel raw funkce\nusing ValidateFunction = std::function<bool(int, int)>; // zadejte alias do std::function</code></pre>"
     },
     {
       "id": "function-pointers_b99",
       "type": "paragraph",
       "html": "<p>Also note that std::function only allows calling the function via implicit dereference (e.g. <code>fcnPtr()</code>), not explicit dereference (e.g. <code>(*fcnPtr)()</code>).</p>",
       "preview": "Also note that std::function only allows calling the function via implicit deref",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si také, že std::function umožňuje volat funkci pouze prostřednictvím implicitní dereference (např. <code>fcnPtr()</code>), nikoli explicitní dereference (např. <code>(*fcnPtr)()</code>).</p>"
     },
     {
       "id": "function-pointers_b100",
       "type": "paragraph",
       "html": "<p>When defining a type alias, we must explicitly specify any template arguments. We can’t use CTAD in this case since there is no initializer to deduce the template arguments from.</p>",
       "preview": "When defining a type alias, we must explicitly specify any template arguments. W",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při definování aliasu typu musíme explicitně specifikovat všechny šablonové argumenty. V tomto případě nemůžeme použít CTAD, protože zde není žádný inicializátor, ze kterého by bylo možné šablonové argumenty odvodit.</p>"
     },
     {
       "id": "function-pointers_b101",
       "type": "section",
       "title": "Type inference for function pointers",
       "html": "<h3 class=\"cpp-section-heading\">Type inference for function pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Typová inference pro ukazatele na funkce</h3>",
+      "title_cs": "Zadejte odvození pro ukazatele funkcí"
     },
     {
       "id": "function-pointers_b102",
       "type": "paragraph",
       "html": "<p>Much like the <em>auto</em> keyword can be used to infer the type of normal variables, the <em>auto</em> keyword can also infer the type of a function pointer.</p>",
       "preview": "Much like the auto keyword can be used to infer the type of normal variables, th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako lze klíčové slovo <em>auto</em> použít k odvození typu běžných proměnných, může klíčové slovo <em>auto</em> odvodit také typ ukazatele na funkci.</p>"
     },
     {
       "id": "function-pointers_b103",
@@ -769,126 +881,147 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint foo(int x)\n{\n\treturn x;\n}\n\nint main()\n{\n\tauto fcnPtr{ &foo };\n\tstd::cout << fcnPtr(5) << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint foo(int x)\n{\n\treturn x;\n}\n\nint main()\n{\n\tauto fcnPtr{ &amp;foo };\n\tstd::cout &lt;&lt; fcnPtr(5) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint foo (int x)\n{\n\tnávrat x;\n}\n\nint main()\n{\n\tauto fcnPtr{ &foo };\n\tstd::cout << fcnPtr(5) << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-pointers_b104",
       "type": "paragraph",
       "html": "<p>This works exactly like you’d expect, and the syntax is very clean. The downside is, of course, that all of the details about the function’s parameters types and return type are hidden, so it’s easier to make a mistake when making a call with the function, or using its return value.</p>",
       "preview": "This works exactly like you’d expect, and the syntax is very clean. The downside",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funguje to přesně tak, jak byste čekali, a syntaxe je velmi přehledná. Nevýhodou samozřejmě je, že všechny podrobnosti o typech parametrů a návratovém typu funkce jsou skryté, takže je snazší udělat chybu při volání dané funkce nebo při použití její návratové hodnoty.</p>"
     },
     {
       "id": "function-pointers_b105",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "function-pointers_b106",
       "type": "paragraph",
       "html": "<p>Function pointers are useful primarily when you want to store functions in an array (or other structure), or when you need to pass a function to another function. Because the native syntax to declare function pointers is ugly and error prone, we recommend using std::function. In places where a function pointer type is only used once (e.g. a single parameter or return value), std::function can be used directly. In places where a function pointer type is used multiple times, a type alias to a std::function is a better choice (to prevent repeating yourself).</p>",
       "preview": "Function pointers are useful primarily when you want to store functions in an ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele na funkce jsou užitečné především tehdy, když chcete funkce ukládat do pole (nebo jiné datové struktury), nebo když potřebujete předat funkci jiné funkci. Vzhledem k tomu, že nativní syntaxe pro deklaraci ukazatelů na funkce je nevzhledná a náchylná k chybám, doporučujeme používat std::function. V místech, kde je typ ukazatele na funkci použit pouze jednou (např. jako jediný parametr nebo návratová hodnota), lze std::function použít přímo. V místech, kde se typ ukazatele na funkci používá vícekrát, je lepší volbou alias typu pro std::function (aby se zabránilo opakování kódu).</p>"
     },
     {
       "id": "function-pointers_b107",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "function-pointers_b108",
       "type": "list",
       "html": "<ol start=\"1\"><li>In this quiz, we’re going to write a version of our basic calculator using function pointers.</li></ol>",
       "preview": "In this quiz, we’re going to write a version of our basic calculator using funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>V tomto kvízu napíšeme verzi naší jednoduché kalkulačky pomocí ukazatelů na funkce.</li></ol>"
     },
     {
       "id": "function-pointers_b109",
       "type": "paragraph",
       "html": "<p>1a) Create a short program asking the user for two integer inputs and a mathematical operation (‘+’, ‘-‘, ‘*’, ‘/’). Ensure the user enters a valid operation.</p>",
       "preview": "1a) Create a short program asking the user for two integer inputs and a mathemat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1a) Vytvořte krátký program, který uživatele požádá o zadání dvou celých čísel a matematické operace (‘+’, ‘-‘, ‘*’, ‘/’). Ujistěte se, že uživatel zadal platnou operaci.</p>"
     },
     {
       "id": "function-pointers_b110",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getInteger()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    return x;\n}\n\nchar getOperation()\n{\n    char op{};\n\n    do\n    {   \n        std::cout &lt;&lt; \"Enter an operation ('+', '-', '*', '/'): \";\n        std::cin &gt;&gt; op;\n    }\n    while (op!='+' &amp;&amp; op!='-' &amp;&amp; op!='*' &amp;&amp; op!='/');\n\n    return op;\n}\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    return 0;\n}</code></pre></div>",
       "preview": "#include <iostream> int getInteger() { std::cout << \"Enter an integer: \"; int x{",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getInteger()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    return x;\n}\n\nchar getOperation()\n{\n    char op{};\n\n    do\n    {   \n        std::cout &lt;&lt; \"Enter an operation ('+', '-', '*', '/'): \";\n        std::cin &gt;&gt; op;\n    }\n    while (op!='+' &amp;&amp; op!='-' &amp;&amp; op!='*' &amp;&amp; op!='/');\n\n    return op;\n}\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    return 0;\n}</code></pre></div>"
     },
     {
       "id": "function-pointers_b111",
       "type": "paragraph",
       "html": "<p>1b) Write functions named add(), subtract(), multiply(), and divide(). These should take two integer parameters and return an integer.</p>",
       "preview": "1b) Write functions named add(), subtract(), multiply(), and divide(). These sho",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1b) Napište funkce pojmenované add(), subtract(), multiply() a divide(). Tyto funkce by měly přijímat dva celočíselné parametry a vracet celé číslo.</p>"
     },
     {
       "id": "function-pointers_b112",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint divide(int x, int y)\n{\n    return x / y;\n}</code></pre></div>",
       "preview": "int add(int x, int y) { return x + y; } int subtract(int x, int y) { return x - ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint divide(int x, int y)\n{\n    return x / y;\n}</code></pre></div>"
     },
     {
       "id": "function-pointers_b113",
       "type": "paragraph",
       "html": "<p>1c) Create a type alias named ArithmeticFunction for a pointer to a function that takes two integer parameters and returns an integer. Use std::function, and include the appropriate header.</p>",
       "preview": "1c) Create a type alias named ArithmeticFunction for a pointer to a function tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1c) Vytvořte alias typu pojmenovaný ArithmeticFunction pro ukazatel na funkci, která přijímá dva celočíselné parametry a vrací celé číslo. Použijte std::function a vložte příslušný hlavičkový soubor.</p>"
     },
     {
       "id": "function-pointers_b114",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\nusing ArithmeticFunction = std::function&lt;int(int, int)&gt;;</code></pre></div>",
       "preview": "#include <functional> using ArithmeticFunction = std::function<int(int, int)>;",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt;\nusing ArithmeticFunction = std::function&lt;int(int, int)&gt;;</code></pre></div>"
     },
     {
       "id": "function-pointers_b115",
       "type": "paragraph",
       "html": "<p>1d) Write a function named getArithmeticFunction() that takes an operator character and returns the appropriate function as a function pointer.</p>",
       "preview": "1d) Write a function named getArithmeticFunction() that takes an operator charac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1d) Napište funkci pojmenovanou getArithmeticFunction(), která přijímá znak operátoru a vrací příslušnou funkci jako ukazatel na funkci.</p>"
     },
     {
       "id": "function-pointers_b116",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">ArithmeticFunction getArithmeticFunction(char op)\n{\n    switch (op)\n    {\n    case '+': return &amp;add;\n    case '-': return &amp;subtract;\n    case '*': return &amp;multiply;\n    case '/': return &amp;divide;\n    }\n\n    return nullptr;\n}</code></pre></div>",
       "preview": "ArithmeticFunction getArithmeticFunction(char op) { switch (op) { case '+': retu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">ArithmeticFunction getArithmeticFunction(char op)\n{\n    switch (op)\n    {\n    case '+': return &amp;add;\n    case '-': return &amp;subtract;\n    case '*': return &amp;multiply;\n    case '/': return &amp;divide;\n    }\n\n    return nullptr;\n}</code></pre></div>"
     },
     {
       "id": "function-pointers_b117",
       "type": "paragraph",
       "html": "<p>1e) Modify your main() function to call getArithmeticFunction(). Call the return value from that function with your inputs and print the result.</p>",
       "preview": "1e) Modify your main() function to call getArithmeticFunction(). Call the return",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1e) Upravte svou funkci main() tak, aby volala getArithmeticFunction(). Zavolejte návratovou hodnotu z této funkce s vašimi vstupy a vypište výsledek.</p>"
     },
     {
       "id": "function-pointers_b118",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    ArithmeticFunction fcn{ getArithmeticFunction(op) };\n    if (fcn)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; op &lt;&lt; ' ' &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; fcn(x, y) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div>",
       "preview": "#include <iostream> int main() { int x{ getInteger() }; char op{ getOperation() ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    ArithmeticFunction fcn{ getArithmeticFunction(op) };\n    if (fcn)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; op &lt;&lt; ' ' &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; fcn(x, y) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div>"
     },
     {
       "id": "function-pointers_b119",
       "type": "paragraph",
       "html": "<p>Here’s the full program:</p>",
       "preview": "Here’s the full program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je celý program:</p>"
     },
     {
       "id": "function-pointers_b120",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;functional&gt;\n\nint getInteger()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    return x;\n}\n\nchar getOperation()\n{\n    char op{};\n\n    do\n    {   \n        std::cout &lt;&lt; \"Enter an operation ('+', '-', '*', '/'): \";\n        std::cin &gt;&gt; op;\n    }\n    while (op!='+' &amp;&amp; op!='-' &amp;&amp; op!='*' &amp;&amp; op!='/');\n\n    return op;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint divide(int x, int y)\n{\n    return x / y;\n}\n\nusing ArithmeticFunction = std::function&lt;int(int, int)&gt;;\n\nArithmeticFunction getArithmeticFunction(char op)\n{\n    switch (op)\n    {\n    case '+': return &amp;add;\n    case '-': return &amp;subtract;\n    case '*': return &amp;multiply;\n    case '/': return &amp;divide;\n    }\n\n    return nullptr;\n}\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    ArithmeticFunction fcn{ getArithmeticFunction(op) };\n    if (fcn)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; op &lt;&lt; ' ' &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; fcn(x, y) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div>",
       "preview": "#include <iostream> #include <functional> int getInteger() { std::cout << \"Enter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;functional&gt;\n\nint getInteger()\n{\n    std::cout &lt;&lt; \"Enter an integer: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    return x;\n}\n\nchar getOperation()\n{\n    char op{};\n\n    do\n    {   \n        std::cout &lt;&lt; \"Enter an operation ('+', '-', '*', '/'): \";\n        std::cin &gt;&gt; op;\n    }\n    while (op!='+' &amp;&amp; op!='-' &amp;&amp; op!='*' &amp;&amp; op!='/');\n\n    return op;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint divide(int x, int y)\n{\n    return x / y;\n}\n\nusing ArithmeticFunction = std::function&lt;int(int, int)&gt;;\n\nArithmeticFunction getArithmeticFunction(char op)\n{\n    switch (op)\n    {\n    case '+': return &amp;add;\n    case '-': return &amp;subtract;\n    case '*': return &amp;multiply;\n    case '/': return &amp;divide;\n    }\n\n    return nullptr;\n}\n\nint main()\n{\n    int x{ getInteger() };\n    char op{ getOperation() };\n    int y{ getInteger() };\n\n    ArithmeticFunction fcn{ getArithmeticFunction(op) };\n    if (fcn)\n        std::cout &lt;&lt; x &lt;&lt; ' ' &lt;&lt; op &lt;&lt; ' ' &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; fcn(x, y) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre></div>"
     }
-  ]
+  ],
+  "title_cs": "20.1 — Ukazatele na funkce"
 }

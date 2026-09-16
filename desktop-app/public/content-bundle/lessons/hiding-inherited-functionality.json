@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p><strong>Changing an inherited member’s access level</strong></p>",
       "preview": "Changing an inherited member’s access level",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Změna úrovně přístupu ke zděděnému členu</strong></p>"
     },
     {
       "id": "hiding-inherited-functionality_b1",
       "type": "paragraph",
       "html": "<p>C++ gives us the ability to change an inherited member’s access specifier in the derived class. This is done by using a <em>using declaration</em> to identify the (scoped) base class member that is having its access changed in the derived class, under the new access specifier.</p>",
       "preview": "C++ gives us the ability to change an inherited member’s access specifier in the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ nám umožňuje změnit specifikátor přístupu ke zděděnému členu v odvozené třídě. To se provádí pomocí <em>deklarace using</em>, kterou se pod novým specifikátorem přístupu určí člen bázové třídy (s kvalifikovaným názvem), jehož přístupnost se v odvozené třídě mění.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b2",
       "type": "paragraph",
       "html": "<p>For example, consider the following Base:</p>",
       "preview": "For example, consider the following Base:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme například následující třídu Base:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b3",
@@ -36,21 +39,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\nprivate:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\nprotected:\n    void printValue() const { std::cout << m_value; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\nprivate:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value { value }\n    {\n    }\n\nprotected:\n    void printValue() const { std::cout &lt;&lt; m_value; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nsoukromé:\n    int m_hodnota {};\n\nveřejnost:\n    základ (hodnota int)\n        : m_value { value }\n    {\n    }\n\nchráněno:\n    void printValue() const { std::cout << m_value; }\n};</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b4",
       "type": "paragraph",
       "html": "<p>Because Base::printValue() has been declared as protected, it can only be called by Base or its derived classes. The public can not access it.</p>",
       "preview": "Because Base::printValue() has been declared as protected, it can only be called",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože byla metoda Base::printValue() deklarována jako protected, může být volána pouze ze třídy Base nebo jejích odvozených tříd. Zvenčí k ní nelze přistupovat.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b5",
       "type": "paragraph",
       "html": "<p>Let’s define a Derived class that changes the access specifier of printValue() to public:</p>",
       "preview": "Let’s define a Derived class that changes the access specifier of printValue() t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Definujme třídu Derived, která změní specifikátor přístupu metody printValue() na public:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b6",
@@ -58,14 +64,16 @@
       "language": "cpp",
       "code": "class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    // Base::printValue was inherited as protected, so the public has no access\n    // But we're changing it to public via a using declaration\n    using Base::printValue; // note: no parenthesis here\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base { value }\n    {\n    }\n\n    // Base::printValue was inherited as protected, so the public has no access\n    // But we're changing it to public via a using declaration\n    using Base::printValue; // note: no parenthesis here\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída Odvozeno: public Base\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základ { hodnota }\n    {\n    }\n\n    // Base::printValue byla zděděna jako chráněná, takže veřejnost nemá přístup\n    // Ale měníme to na veřejné pomocí deklarace using\n    pomocí Base::printValue; // poznámka: zde nejsou závorky\n};</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b7",
       "type": "paragraph",
       "html": "<p>This means that this code will now work:</p>",
       "preview": "This means that this code will now work:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že následující kód bude nyní fungovat:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b8",
@@ -73,35 +81,40 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived derived { 7 };\n\n    // printValue is public in Derived, so this is okay\n    derived.printValue(); // prints 7\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived derived { 7 };\n\n    // printValue is public in Derived, so this is okay\n    derived.printValue(); // prints 7\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozené odvozené { 7 };\n\n    // printValue je v Derived veřejná, takže je to v pořádku\n    odvozeno.printValue(); // vytiskne 7\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b9",
       "type": "paragraph",
       "html": "<p>You can only change the access specifiers of base members the derived class would normally be able to access. Therefore, you can never change the access specifier of a base member from private to protected or public, because derived classes do not have access to private members of the base class.</p>",
       "preview": "You can only change the access specifiers of base members the derived class woul",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Měnit můžete pouze specifikátory přístupu těch členů bázové třídy, ke kterým by odvozená třída měla za normálních okolností přístup. Nikdy tedy nemůžete změnit specifikátor přístupu člena bázové třídy z private na protected nebo public, protože odvozené třídy nemají k private členům bázové třídy přístup.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b10",
       "type": "paragraph",
       "html": "<p><strong>Hiding functionality</strong></p>",
       "preview": "Hiding functionality",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Skrývání funkcionality</strong></p>"
     },
     {
       "id": "hiding-inherited-functionality_b11",
       "type": "paragraph",
       "html": "<p>In C++, it is not possible to remove or restrict functionality from a base class other than by modifying the source code. However, in a derived class, it is possible to hide functionality that exists in the base class, so that it can not be accessed through the derived class. This can be done simply by changing the relevant access specifier.</p>",
       "preview": "In C++, it is not possible to remove or restrict functionality from a base class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ není možné odebrat nebo omezit funkcionalitu ze základní třídy jinak než úpravou jejího zdrojového kódu. V odvozené třídě je však možné skrýt funkcionalitu, která existuje v základní třídě, takže k ní nelze přistupovat prostřednictvím odvozené třídy. Toho lze dosáhnout jednoduše změnou příslušného specifikátoru přístupu.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b12",
       "type": "paragraph",
       "html": "<p>For example, we can make a public member private:</p>",
       "preview": "For example, we can make a public member private:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme například z veřejného (public) člena udělat privátní (private):</p>"
     },
     {
       "id": "hiding-inherited-functionality_b13",
@@ -109,21 +122,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n\tint m_value{};\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::m_value;\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout << derived.m_value; // error: m_value is private in Derived\n\n\tBase& base{ derived };\n\tstd::cout << base.m_value; // okay: m_value is public in Base\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n\tint m_value{};\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::m_value;\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout &lt;&lt; derived.m_value; // error: m_value is private in Derived\n\n\tBase&amp; base{ derived };\n\tstd::cout &lt;&lt; base.m_value; // okay: m_value is public in Base\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n\tint m_hodnota{};\n};\n\ntřída Odvozeno: veřejná Základna\n{\nsoukromé:\n\tpomocí Base::m_value;\n\nveřejnost:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tOdvozené odvozené{ 7 };\n\tstd::cout << odvozeno.m_hodnota; // chyba: m_value je soukromá v Derived\n\n\tBase& base{ odvozené };\n\tstd::cout << zaklad.m_hodnota; // dobře: m_value je v Base veřejné\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b14",
       "type": "paragraph",
       "html": "<p>This allowed us to take a poorly designed base class and encapsulate its data in our derived class. Alternatively, instead of inheriting Base’s members publicly and making m_value private by overriding its access specifier, we could have inherited Base privately, which would have caused all of Base’s member to be inherited privately in the first place.</p>",
       "preview": "This allowed us to take a poorly designed base class and encapsulate its data in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nám umožnilo vzít špatně navrženou základní třídu a zapouzdřit její data v naší odvozené třídě. Alternativně, místo veřejného dědění členů třídy Base a nastavení m_value jako private přepsáním jejího specifikátoru přístupu, jsme mohli třídu Base dědit privátně (private), což by rovnou způsobilo, že by se všechny členy třídy Base zdědily jako privátní.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b15",
       "type": "paragraph",
       "html": "<p>However, it is worth noting that while m_value is private in the Derived class, it is still public in the Base class. Therefore the encapsulation of m_value in Derived can still be subverted by casting to Base&amp; and directly accessing the member.</p>",
       "preview": "However, it is worth noting that while m_value is private in the Derived class, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stojí však za zmínku, že ačkoli je m_value v odvozené třídě Derived privátní, v základní třídě Base je stále veřejná. Zapouzdření m_value v Derived lze proto stále obejít přetypováním na Base&amp; a přímým přístupem k tomuto členu.</p>"
     },
     {
       "id": "hiding-inherited-functionality_b16",
@@ -131,14 +147,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>For the same reason, if a Base class has a public virtual function, and the Derived class changes the access specifier to private, the public can still access the private Derived function by casting a Derived object to a Base&amp; and calling the virtual function. The compiler will allow this because the function is public in Base. However, because the object is actually a Derived, virtual function resolution will resolve to (and call) the (private) Derived version of the function. Access controls are not enforced at runtime.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass A\n{\npublic:\n    virtual void fun()\n    {\n        std::cout &lt;&lt; \"public A::fun()\\n\";\n    }\n};\n\nclass B : public A\n{\nprivate:\n    virtual void fun()\n    {\n         std::cout &lt;&lt; \"private B::fun()\\n\";\n   }\n};\n\nint main()\n{\n    B b {};\n    b.fun();                  // compile error: not allowed as B::fun() is private\n    static_cast&lt;A&amp;&gt;(b).fun(); // okay: A::fun() is public, resolves to private B::fun() at runtime\n\n    return 0;\n}</code></pre></div>",
       "preview": "For advanced readersFor the same reason, if a Base class has a public virtual function, and the Deri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Ze stejného důvodu platí, že pokud má základní třída Base veřejnou virtuální funkci a odvozená třída Derived změní její specifikátor přístupu na private, kdokoli může k této privátní funkci z Derived stále přistupovat přetypováním objektu Derived na Base&amp; a zavoláním této virtuální funkce. Kompilátor to povolí, protože funkce je v Base veřejná (public). Protože je však objekt ve skutečnosti typu Derived, mechanismus virtuálních funkcí vyřeší volání na (privátní) verzi funkce z Derived a zavolá ji. Řízení přístupu se totiž za běhu programu nevynucuje.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass A\n{\npublic:\n    virtual void fun()\n    {\n        std::cout &lt;&lt; \"public A::fun()\\n\";\n    }\n};\n\nclass B : public A\n{\nprivate:\n    virtual void fun()\n    {\n         std::cout &lt;&lt; \"private B::fun()\\n\";\n   }\n};\n\nint main()\n{\n    B b {};\n    b.fun();                  // chyba při překladu: nelze volat, protože B::fun() je private\n    static_cast&lt;A&amp;&gt;(b).fun(); // v pořádku: A::fun() je public, za běhu programu se vyhodnotí na privátní B::fun()\n\n    return 0;\n}</code></pre></div>"
     },
     {
       "id": "hiding-inherited-functionality_b17",
       "type": "paragraph",
       "html": "<p>Perhaps surprisingly, given a set of overloaded functions in the base class, there is no way to change the access specifier for a single overload. You can only change them all:</p>",
       "preview": "Perhaps surprisingly, given a set of overloaded functions in the base class, the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná překvapivě neexistuje žádný způsob, jak u sady přetížených funkcí v základní třídě změnit specifikátor přístupu pouze pro jedno konkrétní přetížení. Můžete je změnit pouze všechny najednou:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b18",
@@ -146,21 +164,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    int m_value{};\n\n    int getValue() const { return m_value; }\n    int getValue(int) const { return m_value; }\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::getValue; // make ALL getValue functions private\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout << derived.getValue();  // error: getValue() is private in Derived\n\tstd::cout << derived.getValue(5); // error: getValue(int) is private in Derived\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    int m_value{};\n\n    int getValue() const { return m_value; }\n    int getValue(int) const { return m_value; }\n};\n\nclass Derived : public Base\n{\nprivate:\n\tusing Base::getValue; // make ALL getValue functions private\n\npublic:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tDerived derived{ 7 };\n\tstd::cout &lt;&lt; derived.getValue();  // error: getValue() is private in Derived\n\tstd::cout &lt;&lt; derived.getValue(5); // error: getValue(int) is private in Derived\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    int m_hodnota{};\n\n    int getValue() const { return m_value; }\n    int getValue(int) const { return m_value; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nsoukromé:\n\tpomocí Base::getValue; // nastaví VŠECHNY funkce getValue jako soukromé\n\nveřejnost:\n\tDerived(int value) : Base { value }\n\t{\n\t}\n};\n\nint main()\n{\n\tOdvozené odvozené{ 7 };\n\tstd::cout << odvozeno.getValue();  // chyba: getValue() je v Derived soukromé\n\tstd::cout << odvozeno.getValue(5); // chyba: getValue(int) je v Derived soukromé\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b19",
       "type": "section",
       "title": "Deleting functions in the derived class",
       "html": "<h3 class=\"cpp-section-heading\">Deleting functions in the derived class</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Mazání funkcí v odvozené třídě</h3>",
+      "title_cs": "Odstranění funkcí v odvozené třídě"
     },
     {
       "id": "hiding-inherited-functionality_b20",
       "type": "paragraph",
       "html": "<p>You can also mark member functions as deleted in the derived class, which ensures they can’t be called at all through a derived object:</p>",
       "preview": "You can also mark member functions as deleted in the derived class, which ensure",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Členské funkce můžete v odvozené třídě také označit jako smazané (= deleted), což zajistí, že je nebude možné prostřednictvím odvozeného objektu vůbec zavolat:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b21",
@@ -168,14 +190,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nclass Base\n{\nprivate:\n\tint m_value {};\n\npublic:\n\tBase(int value)\n\t\t: m_value { value }\n\t{\n\t}\n\n\tint getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n\tDerived(int value)\n\t\t: Base { value }\n\t{\n\t}\n\n\n\tint getValue() const = delete; // mark this function as inaccessible\n};\n\nint main()\n{\n\tDerived derived { 7 };\n\n\t// The following won't work because getValue() has been deleted!\n\tstd::cout << derived.getValue();\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\nprivate:\n\tint m_value {};\n\npublic:\n\tBase(int value)\n\t\t: m_value { value }\n\t{\n\t}\n\n\tint getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n\tDerived(int value)\n\t\t: Base { value }\n\t{\n\t}\n\n\n\tint getValue() const = delete; // mark this function as inaccessible\n};\n\nint main()\n{\n\tDerived derived { 7 };\n\n\t// The following won't work because getValue() has been deleted!\n\tstd::cout &lt;&lt; derived.getValue();\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\ntřída Základní\n{\nsoukromé:\n\tint m_hodnota {};\n\nveřejnost:\n\tzáklad (hodnota int)\n\t\t: m_value { value }\n\t{\n\t}\n\n\tint getValue() const { return m_value; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n\tOdvozeno (hodnota int)\n\t\t: Základ { hodnota }\n\t{\n\t}\n\n\n\tint getValue() const = delete; // označte tuto funkci jako nepřístupnou\n};\n\nint main()\n{\n\tOdvozené odvozené { 7 };\n\n\t// Následující nebude fungovat, protože getValue() bylo smazáno!\n\tstd::cout << odvozeno.getValue();\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b22",
       "type": "paragraph",
       "html": "<p>In the above example, we’ve marked the getValue() function as deleted. This means that the compiler will complain when we try to call the derived version of the function. Note that the Base version of getValue() is still accessible though. We can call Base::getValue() in one of two ways:</p>",
       "preview": "In the above example, we’ve marked the getValue() function as deleted. This mean",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu jsme funkci getValue() označili jako smazanou (deleted). To znamená, že kompilátor ohlásí chybu, když se pokusíme zavolat odvozenou verzi této funkce. Všimněte si však, že verze getValue() ze třídy Base je stále přístupná. Base::getValue() můžeme zavolat jedním ze dvou způsobů:</p>"
     },
     {
       "id": "hiding-inherited-functionality_b23",
@@ -183,14 +207,17 @@
       "language": "cpp",
       "code": "int main()\n{\n\tDerived derived { 7 };\n\n\t// We can call the Base::getValue() function directly\n\tstd::cout << derived.Base::getValue();\n\n\t// Or we can upcast Derived to a Base reference and getValue() will resolve to Base::getValue()\n\tstd::cout << static_cast<Base&>(derived).getValue();\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tDerived derived { 7 };\n\n\t// We can call the Base::getValue() function directly\n\tstd::cout &lt;&lt; derived.Base::getValue();\n\n\t// Or we can upcast Derived to a Base reference and getValue() will resolve to Base::getValue()\n\tstd::cout &lt;&lt; static_cast&lt;Base&amp;&gt;(derived).getValue();\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n\tOdvozené odvozené { 7 };\n\n\t// Funkci Base::getValue() můžeme zavolat přímo\n\tstd::cout << odvozeno.Base::getValue();\n\n\t// Nebo můžeme přenést Derived na základní referenci a getValue() se převede na Base::getValue()\n\tstd::cout << static_cast<Base&>(derived).getValue();\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "hiding-inherited-functionality_b24",
       "type": "paragraph",
       "html": "<p>If using the casting method, we cast to a Base&amp; rather than a Base to avoid making a copy of the Base portion of <code>derived</code>.</p>",
       "preview": "If using the casting method, we cast to a Base& rather than a Base to avoid maki",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud použijeme metodu přetypování, přetypujeme na Base&amp; namísto Base, abychom se vyhnuli vytvoření kopie části Base objektu <code>derived</code>.</p>"
     }
-  ]
+  ],
+  "title_cs": "24.8 — Skrývání zděděné funkcionality"
 }

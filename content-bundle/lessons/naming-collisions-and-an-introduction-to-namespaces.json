@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>Let’s say you are driving to a friend’s house for the first time, and the address given to you is 245 Front Street in Mill City. Upon reaching Mill City, you take out your map, only to discover that Mill City actually has two different Front Streets across town from each other! Which one would you go to? Unless there were some additional clue to help you decide (e.g. you remember your friend’s house is near the river) you’d have to call your friend and ask for more information. Because this would be confusing and inefficient (particularly for your mail carrier), in most countries, all street names and house addresses within a city are required to be unique.</p>",
       "preview": "Let’s say you are driving to a friend’s house for the first time, and the addres",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že jedete poprvé na návštěvu ke kamarádovi a adresa, kterou jste dostali, je Front Street 245 ve městě Mill City. Po příjezdu do Mill City vytáhnete mapu a zjistíte, že v Mill City jsou vlastně dvě různé ulice Front Street na opačných koncích města! Do které z nich byste se vydali? Pokud byste neměli nějaké další vodítko, které by vám pomohlo se rozhodnout (např. si vzpomenete, že dům vašeho kamaráda je blízko řeky), museli byste kamarádovi zavolat a požádat o doplňující informace. Protože by to bylo matoucí a neefektivní (zejména pro doručovatele pošty), ve většině zemí se vyžaduje, aby všechny názvy ulic a adresy domů v rámci jednoho města byly jedinečné.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b1",
       "type": "paragraph",
       "html": "<p>Similarly, C++ requires that all identifiers be non-ambiguous. If two identical identifiers are introduced into the same program in a way that the compiler or linker can’t tell them apart, the compiler or linker will produce an error. This error is generally referred to as a <strong>naming collision</strong> (or <strong>naming conflict</strong>).</p>",
       "preview": "Similarly, C++ requires that all identifiers be non-ambiguous. If two identical ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně C++ vyžaduje, aby všechny identifikátory byly jednoznačné. Pokud jsou do stejného programu zavedeny dva identické identifikátory způsobem, při kterém je kompilátor nebo linker nedokáže od sebe rozeznat, kompilátor nebo linker ohlásí chybu. Tato chyba se obecně označuje jako <strong>kolize názvů</strong> (nebo <strong>konflikt názvů</strong>).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b2",
       "type": "paragraph",
       "html": "<p>If the colliding identifiers are introduced into the same file, the result will be a compiler error. If the colliding identifiers are introduced into separate files belonging to the same program, the result will be a linker error.</p>",
       "preview": "If the colliding identifiers are introduced into the same file, the result will ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud jsou kolidující identifikátory zavedeny ve stejném souboru, výsledkem bude chyba kompilátoru. Pokud jsou kolidující identifikátory zavedeny v oddělených souborech patřících do stejného programu, výsledkem bude chyba linkeru.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b3",
       "type": "section",
       "title": "An example of a naming collision",
       "html": "<h3 class=\"cpp-section-heading\">An example of a naming collision</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Příklad kolize názvů</h3>",
+      "title_cs": "Příklad kolize jmen"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b4",
       "type": "paragraph",
       "html": "<p>a.cpp:</p>",
       "preview": "a.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a.cpp:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b5",
@@ -50,14 +56,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << x;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid myFcn(int x)\n{\n    std::cout &lt;&lt; x;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << x;\n}</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b6",
       "type": "paragraph",
       "html": "<p>main.cpp:</p>",
       "preview": "main.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>main.cpp:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b7",
@@ -65,84 +73,98 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << 2 * x;\n}\n\nint main()\n{\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid myFcn(int x)\n{\n    std::cout &lt;&lt; 2 * x;\n}\n\nint main()\n{\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid myFcn(int x)\n{\n    std::cout << 2 * x;\n}\n\nint main()\n{\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b8",
       "type": "paragraph",
       "html": "<p>When the compiler compiles this program, it will compile <em>a.cpp</em> and <em>main.cpp</em> independently, and each file will compile with no problems.</p>",
       "preview": "When the compiler compiles this program, it will compile a.cpp and main.cpp inde",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když kompilátor tento program překládá, přeloží <em>a.cpp</em> a <em>main.cpp</em> nezávisle na sobě a každý soubor se zkompiluje bez problémů.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b9",
       "type": "paragraph",
       "html": "<p>However, when the linker executes, it will link all the definitions in <em>a.cpp</em> and <em>main.cpp</em> together, and discover conflicting definitions for function <code>myFcn()</code>. The linker will then abort with an error. Note that this error occurs even though <code>myFcn()</code> is never called!</p>",
       "preview": "However, when the linker executes, it will link all the definitions in a.cpp and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile se však spustí linker, propojí všechny definice z <em>a.cpp</em> a <em>main.cpp</em> dohromady a narazí na konfliktní definice funkce <code>myFcn()</code>. Linker poté skončí s chybou. Všimněte si, že k této chybě dojde, i když funkce <code>myFcn()</code> není nikde volána!</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b10",
       "type": "paragraph",
       "html": "<p>Most naming collisions occur in two cases:</p>",
       "preview": "Most naming collisions occur in two cases:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K většině kolizí názvů dochází ve dvou případech:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b11",
       "type": "list",
       "html": "<ol start=\"1\"><li>Two (or more) identically named functions (or global variables) are introduced into separate files belonging to the same program. This will result in a linker error, as shown above.</li><li>Two (or more) identically named functions (or global variables) are introduced into the same file. This will result in a compiler error.</li></ol>",
       "preview": "Two (or more) identically named functions (or global variables) are introduced i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Do samostatných souborů patřících ke stejnému programu jsou zavedeny dvě (nebo více) stejně pojmenované funkce (nebo globální proměnné). To povede k chybě linkeru, jak je ukázáno výše.</li><li>Do stejného souboru jsou zavedeny dvě (nebo více) stejně pojmenované funkce (nebo globální proměnné). To povede k chybě kompilátoru.</li></ol>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b12",
       "type": "paragraph",
       "html": "<p>As programs get larger and use more identifiers, the odds of a naming collision being introduced increases significantly. The good news is that C++ provides plenty of mechanisms for avoiding naming collisions. Local scope, which keeps local variables defined inside functions from conflicting with each other, is one such mechanism. But local scope doesn’t work for function names. So how do we keep function names from conflicting with each other?</p>",
       "preview": "As programs get larger and use more identifiers, the odds of a naming collision ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak se programy zvětšují a používají více identifikátorů, pravděpodobnost vzniku kolize názvů se výrazně zvyšuje. Dobrou zprávou je, že C++ poskytuje mnoho mechanismů, jak se kolizím názvů vyhnout. Lokální rozsah platnosti (local scope), který zabraňuje vzájemnému konfliktu lokálních proměnných definovaných uvnitř funkcí, je jedním z těchto mechanismů. Lokální rozsah platnosti však pro názvy funkcí nefunguje. Jak tedy zabránit tomu, aby se názvy funkcí vzájemně střetávaly?</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b13",
       "type": "section",
       "title": "Scope regions",
       "html": "<h3 class=\"cpp-section-heading\">Scope regions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Oblasti platnosti (scope regions)</h3>",
+      "title_cs": "Oblasti působnosti"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b14",
       "type": "paragraph",
       "html": "<p>Back to our address analogy for a moment, having two Front Streets was only problematic because those streets existed within the same city. On the other hand, if you had to deliver mail to two addresses, one at 245 Front Street in Mill City, and another address at 245 Front Street in Jonesville, there would be no confusion about where to go. Put another way, cities provide groupings that allow us to disambiguate addresses that might otherwise conflict with each other.</p>",
       "preview": "Back to our address analogy for a moment, having two Front Streets was only prob",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vraťme se na chvíli k naší analogii s adresami – mít dvě ulice Front Street bylo problematické pouze proto, že tyto ulice existovaly v rámci stejného města. Na druhou stranu, pokud byste měli doručit poštu na dvě adresy, jednu na 245 Front Street v Mill City a druhou na 245 Front Street v Jonesville, nevznikl by žádný zmatek ohledně toho, kam jít. Jinak řečeno, města poskytují seskupení, která nám umožňují rozlišit adresy, jež by jinak byly ve vzájemném konfliktu.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b15",
       "type": "paragraph",
       "html": "<p>A <strong>scope region</strong> is an area of source code where all declared identifiers are considered distinct from names declared in other scopes (much like the cities in our analogy). Two identifiers with the same name can be declared in separate scope regions without causing a naming conflict. However, within a given scope region, all identifiers must be unique, otherwise a naming collision will result.</p>",
       "preview": "A scope region is an area of source code where all declared identifiers are cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Oblast platnosti</strong> (scope region) je část zdrojového kódu, kde jsou všechny deklarované identifikátory považovány za odlišné od jmen deklarovaných v jiných oblastech (podobně jako města v naší analogii). Dva identifikátory se stejným názvem mohou být deklarovány v oddělených oblastech platnosti, aniž by došlo ke konfliktu názvů. V rámci dané oblasti platnosti však musí být všechny identifikátory jedinečné, jinak dojde ke kolizi názvů.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b16",
       "type": "paragraph",
       "html": "<p>The body of a function is one example of a scope region. Two identically-named identifiers can be defined in separate functions without issue -- because each function provides a separate scope region, there is no collision. However, if you try to define two identically-named identifiers within the same function, a naming collision will result, and the compiler will complain.</p>",
       "preview": "The body of a function is one example of a scope region. Two identically-named i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tělo funkce je jedním z příkladů oblasti platnosti. V samostatných funkcích lze bez problémů definovat dva stejně pojmenované identifikátory – protože každá funkce poskytuje samostatnou oblast platnosti, k žádné kolizi nedojde. Pokud se však pokusíte definovat dva stejně pojmenované identifikátory v rámci stejné funkce, dojde ke kolizi názvů a kompilátor ohlásí chybu.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b17",
       "type": "section",
       "title": "Namespaces",
       "html": "<h3 class=\"cpp-section-heading\">Namespaces</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jmenné prostory</h3>",
+      "title_cs": "Jmenné prostory"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b18",
       "type": "paragraph",
       "html": "<p>A <strong>namespace</strong> provides another type of scope region (called <strong>namespace scope</strong>) that allows you to declare or define names inside of it for the purpose of disambiguation. The names declared in a namespace are isolated from names declared in other scopes, allowing such names to exist without conflict.</p>",
       "preview": "A namespace provides another type of scope region (called namespace scope) that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Jmenný prostor</strong> (namespace) poskytuje další typ oblasti platnosti (zvaný <strong>rozsah jmenného prostoru</strong> neboli namespace scope), který vám umožňuje uvnitř něj deklarovat nebo definovat názvy za účelem zamezení nejednoznačnosti. Názvy deklarované ve jmenném prostoru jsou izolovány od názvů deklarovaných v jiných oblastech platnosti, což jim umožňuje existovat bez konfliktů.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b19",
@@ -150,21 +172,24 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A name declared within a scope region (such as a namespace) is distinct from any identical name declared in another scope.</p></div>",
       "preview": "Key insightA name declared within a scope region (such as a namespace) is distinct from any identica",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Název deklarovaný v rámci jedné oblasti platnosti (jako je například jmenný prostor) je odlišný od jakéhokoli stejného názvu deklarovaného v jiné oblasti platnosti.</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b20",
       "type": "paragraph",
       "html": "<p>For example, two functions with identical declarations can be defined inside different namespaces, and no naming collision or ambiguity will occur.</p>",
       "preview": "For example, two functions with identical declarations can be defined inside dif",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například dvě funkce se shodnými deklaracemi mohou být definovány uvnitř různých jmenných prostorů a nedojde k žádné kolizi názvů ani nejednoznačnosti.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b21",
       "type": "paragraph",
       "html": "<p>Namespaces may only contain declarations and definitions (e.g. variables and functions). Executable statements are not allowed unless they are part of a definition (e.g. within a function).</p>",
       "preview": "Namespaces may only contain declarations and definitions (e.g. variables and fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jmenné prostory mohou obsahovat pouze deklarace a definice (např. proměnných a funkcí). Spustitelné příkazy nejsou povoleny, pokud nejsou součástí definice (např. uvnitř funkce).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b22",
@@ -172,70 +197,81 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A namespace may only contain declarations and definitions. Executable statements are only allowed as part of a definition (e.g. of a function).</p></div>",
       "preview": "Key insightA namespace may only contain declarations and definitions. Executable statements are only",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Jmenný prostor může obsahovat pouze deklarace a definice. Spustitelné příkazy jsou povoleny pouze jako součást definice (např. funkce).</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b23",
       "type": "paragraph",
       "html": "<p>Namespaces are often used to group related identifiers in a large project to help ensure they don’t inadvertently collide with other identifiers. For example, if you put all your math functions in a namespace named <code>math</code>, then your math functions won’t collide with identically named functions outside the <code>math</code> namespace.</p>",
       "preview": "Namespaces are often used to group related identifiers in a large project to hel",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jmenné prostory se ve velkých projektech často používají k seskupení souvisejících identifikátorů, což pomáhá zajistit, aby nedocházelo k jejich nechtěným kolizím s jinými identifikátory. Pokud například umístíte všechny své matematické funkce do jmenného prostoru s názvem <code>math</code>, nebudou tyto funkce kolidovat se stejně pojmenovanými funkcemi mimo jmenný prostor <code>math</code>.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b24",
       "type": "paragraph",
       "html": "<p>We’ll talk about how to create your own namespaces in a future lesson.</p>",
       "preview": "We’ll talk about how to create your own namespaces in a future lesson.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>O tom, jak vytvářet vlastní jmenné prostory, si povíme v některé z budoucích lekcí.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b25",
       "type": "section",
       "title": "The global namespace",
       "html": "<h3 class=\"cpp-section-heading\">The global namespace</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Globální jmenný prostor</h3>",
+      "title_cs": "Globální jmenný prostor"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b26",
       "type": "paragraph",
       "html": "<p>In C++, any name that is not defined inside a class, function, or a namespace is considered to be part of an implicitly-defined namespace called the <strong>global namespace</strong> (sometimes also called <strong>the global scope</strong>).</p>",
       "preview": "In C++, any name that is not defined inside a class, function, or a namespace is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ je jakýkoli název, který není definován uvnitř třídy, funkce nebo jmenného prostoru, považován za součást implicitně definovaného jmenného prostoru nazývaného <strong>globální jmenný prostor</strong> (anglicky <strong>global namespace</strong>, někdy také <strong>globální rozsah platnosti / global scope</strong>).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b27",
       "type": "paragraph",
       "html": "<p>In the example at the top of the lesson, functions <code>main()</code> and both versions of <code>myFcn()</code> are defined inside the global namespace. The naming collision encountered in the example happens because both versions of <code>myFcn()</code> end up inside the global namespace, which violates the rule that all names in the scope region must be unique.</p>",
       "preview": "In the example at the top of the lesson, functions main() and both versions of m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V příkladu v horní části lekce jsou funkce <code>main()</code> i obě verze <code>myFcn()</code> definovány uvnitř globálního jmenného prostoru. Ke kolizi názvů v tomto příkladu dochází proto, že obě verze <code>myFcn()</code> skončí uvnitř globálního jmenného prostoru, což porušuje pravidlo, že všechny názvy v daném rozsahu platnosti (scope region) musí být jedinečné.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b28",
       "type": "paragraph",
       "html": "<p>We discuss the global namespace in more detail in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-global-variables/\">7.4 -- Introduction to global variables</a>.</p>",
       "preview": "We discuss the global namespace in more detail in lesson 7.4 -- Introduction to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Globální jmenný prostor podrobněji rozebíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-global-variables/\">7.4 -- Úvod do globálních proměnných</a>.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b29",
       "type": "paragraph",
       "html": "<p>For now, there are two things you should know:</p>",
       "preview": "For now, there are two things you should know:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prozatím byste měli vědět dvě věci:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b30",
       "type": "list",
       "html": "<ul><li>Identifiers declared inside the global scope are in scope from the point of declaration to the end of the file.</li><li>Although variables can be defined in the global namespace, this should generally be avoided (we discuss why in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/\">7.8 -- Why (non-const) global variables are evil</a>).</li></ul>",
       "preview": "Identifiers declared inside the global scope are in scope from the point of decl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Identifikátory deklarované v globálním rozsahu platnosti (global scope) mají platnost od místa deklarace až do konce souboru.</li><li>Ačkoliv lze proměnné definovat v globálním jmenném prostoru, obecně byste se tomu měli vyhýbat (proč tomu tak je, probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/\">7.8 -- Proč jsou (nekonstantní) globální proměnné zlo</a>).</li></ul>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b31",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b32",
@@ -243,28 +279,33 @@
       "language": "cpp",
       "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\n// All of the following statements are part of the global namespace\n\nvoid foo();    // okay: function forward declaration\nint x;         // compiles but strongly discouraged: non-const global variable definition (without initializer)\nint y { 5 };   // compiles but strongly discouraged: non-const global variable definition (with initializer)\nx = 5;         // compile error: executable statements are not allowed in namespaces\n\nint main()     // okay: function definition\n{\n    return 0;\n}\n\nvoid goo();    // okay: A function forward declaration",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\n// All of the following statements are part of the global namespace\n\nvoid foo();    // okay: function forward declaration\nint x;         // compiles but strongly discouraged: non-const global variable definition (without initializer)\nint y { 5 };   // compiles but strongly discouraged: non-const global variable definition (with initializer)\nx = 5;         // compile error: executable statements are not allowed in namespaces\n\nint main()     // okay: function definition\n{\n    return 0;\n}\n\nvoid goo();    // okay: A function forward declaration</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream> // importuje deklaraci std::cout do globálního rozsahu\n\n// Všechny následující příkazy jsou součástí globálního jmenného prostoru\n\nvoid foo();    // dobře: deklarace předání funkce\nint x;         // kompiluje, ale důrazně se nedoporučuje: definice non-const globální proměnné (bez inicializátoru)\nint y { 5 };   // kompiluje, ale důrazně se nedoporučuje: definice non-const globální proměnné (s inicializátorem)\nx = 5;         // chyba kompilace: spustitelné příkazy nejsou ve jmenných prostorech povoleny\n\nint main() // dobře: definice funkce\n{\n    návrat 0;\n}\n\nvoid goo();    // v pořádku: Předepsaná deklarace funkce</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b33",
       "type": "section",
       "title": "The std namespace",
       "html": "<h3 class=\"cpp-section-heading\">The std namespace</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jmenný prostor std</h3>",
+      "title_cs": "Jmenný prostor std"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b34",
       "type": "paragraph",
       "html": "<p>When C++ was originally designed, all of the identifiers in the C++ standard library (including std::cin and std::cout) were available to be used without the <code>std::</code> prefix (they were part of the global namespace). However, this meant that any identifier in the standard library could potentially conflict with any name you picked for your own identifiers (also defined in the global namespace). Code that was once working might suddenly have a naming conflict when you include a different part of the standard library. Or worse, code that compiled under one version of C++ might not compile under the next version of C++, as new identifiers introduced into the standard library could have a naming conflict with already written code. So C++ moved all of the functionality in the standard library into a namespace named <code>std</code> (short for “standard”).</p>",
       "preview": "When C++ was originally designed, all of the identifiers in the C++ standard lib",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když byl jazyk C++ původně navržen, všechny identifikátory ve standardní knihovně C++ (včetně std::cin a std::cout) bylo možné používat bez předpony <code>std::</code> (byly součástí globálního jmenného prostoru). To však znamenalo, že jakýkoli identifikátor ve standardní knihovně mohl potenciálně kolidovat s jakýmkoli názvem, který jste zvolili pro své vlastní identifikátory (rovněž definované v globálním jmenném prostoru). Kód, který dříve fungoval, mohl náhle narazit na kolizi názvů, jakmile jste vložili (include) jinou část standardní knihovny. Nebo ještě hůře, kód, který se zkompiloval v jedné verzi C++, se nemusel zkompilovat v následující verzi C++, protože nové identifikátory zavedené do standardní knihovny mohly být v kolizi s již napsaným kódem. C++ proto přesunulo veškerou funkcionalitu standardní knihovny do jmenného prostoru s názvem <code>std</code> (zkratka pro „standard“).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b35",
       "type": "paragraph",
       "html": "<p>It turns out that <code>std::cout</code>‘s name isn’t really <code>std::cout</code>. It’s actually just <code>cout</code>, and <code>std</code> is the name of the namespace that identifier <code>cout</code> is part of. Because <code>cout</code> is defined in the <code>std</code> namespace, the name <code>cout</code> won’t conflict with any objects or functions named <code>cout</code> that we create outside of the <code>std</code> namespace (such as in the global namespace).</p>",
       "preview": "It turns out that std::cout‘s name isn’t really std::cout. It’s actually just co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazuje se, že název <code>std::cout</code> ve skutečnosti není <code>std::cout</code>. Ve skutečnosti je to pouze <code>cout</code> a <code>std</code> je název jmenného prostoru, jehož je identifikátor <code>cout</code> součástí. Protože je <code>cout</code> definován v jmenném prostoru <code>std</code>, název <code>cout</code> nebude kolidovat s žádnými objekty ani funkcemi pojmenovanými <code>cout</code>, které vytvoříme mimo jmenný prostor <code>std</code> (například v globálním jmenném prostoru).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b36",
@@ -272,28 +313,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>When you use an identifier that is defined inside a non-global namespace (e.g. the <code>std</code> namespace), you need to tell the compiler that the identifier lives inside the namespace.”</p></div>",
       "preview": "Key insightWhen you use an identifier that is defined inside a non-global namespace (e.g. the std na",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Pokud používáte identifikátor, který je definován uvnitř neglobálního jmenného prostoru (např. jmenného prostoru <code>std</code>), musíte kompilátoru sdělit, že se daný identifikátor nachází uvnitř tohoto jmenného prostoru.</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b37",
       "type": "paragraph",
       "html": "<p>There are a few different ways to do this.</p>",
       "preview": "There are a few different ways to do this.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje několik různých způsobů, jak toho dosáhnout.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b38",
       "type": "section",
       "title": "Explicit namespace qualifier std::",
       "html": "<h3 class=\"cpp-section-heading\">Explicit namespace qualifier std::</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Explicitní kvalifikátor jmenného prostoru std::</h3>",
+      "title_cs": "Explicitní kvalifikátor jmenného prostoru std::"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b39",
       "type": "paragraph",
       "html": "<p>The most straightforward way to tell the compiler that we want to use <code>cout</code> from the <code>std</code> namespace is by explicitly using the <code>std::</code> prefix. For example:</p>",
       "preview": "The most straightforward way to tell the compiler that we want to use cout from ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejpřímočařejší způsob, jak kompilátoru říct, že chceme použít <code>cout</code> ze jmenného prostoru <code>std</code>, je explicitní použití prefixu <code>std::</code>. Například:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b40",
@@ -301,28 +347,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Hello world!\"; // when we say cout, we mean the cout defined in the std namespace\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Hello world!\"; // when we say cout, we mean the cout defined in the std namespace\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    std::cout << \"Ahoj světe!\"; // když říkáme cout, máme na mysli cout definovaný ve jmenném prostoru std\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b41",
       "type": "paragraph",
       "html": "<p>The :: symbol is an operator called the <strong>scope resolution operator</strong>. The identifier to the left of the <code>::</code> symbol identifies the namespace that the name to the right of the <code>::</code> symbol is contained within. If no identifier to the left of the <code>::</code> symbol is provided, the global namespace is assumed.</p>",
       "preview": "The :: symbol is an operator called the scope resolution operator. The identifie",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Symbol :: je operátor nazývaný <strong>operátor rozlišení oboru platnosti</strong> (scope resolution operator). Identifikátor nalevo od symbolu <code>::</code> určuje jmenný prostor, ve kterém se nachází název napravo od symbolu <code>::</code>. Pokud nalevo od symbolu <code>::</code> není uveden žádný identifikátor, předpokládá se globální jmenný prostor.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b42",
       "type": "paragraph",
       "html": "<p>So when we say <code>std::cout</code> we’re saying “the <code>cout</code> that is declared in namespace <code>std</code>“.</p>",
       "preview": "So when we say std::cout we’re saying “the cout that is declared in namespace st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když tedy napíšeme <code>std::cout</code>, říkáme tím „<code>cout</code>, který je deklarován ve jmenném prostoru <code>std</code>“.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b43",
       "type": "paragraph",
       "html": "<p>This is the safest way to use <code>cout</code>, because there’s no ambiguity about which <code>cout</code> we’re referencing (the one in the <code>std</code> namespace).</p>",
       "preview": "This is the safest way to use cout, because there’s no ambiguity about which cou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je nejbezpečnější způsob, jak používat <code>cout</code>, protože zde nevzniká žádná nejednoznačnost ohledně toho, na který <code>cout</code> odkazujeme (ten ve jmenném prostoru <code>std</code>).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b44",
@@ -330,28 +380,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use explicit namespace prefixes to access identifiers defined in a namespace.</p></div>",
       "preview": "Best practiceUse explicit namespace prefixes to access identifiers defined in a namespace.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pro přístup k identifikátorům definovaným ve jmenném prostoru používejte explicitní předpony jmenných prostorů.</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b45",
       "type": "paragraph",
       "html": "<p>When an identifier includes a namespace prefix, the identifier is called a <strong>qualified name</strong>.</p>",
       "preview": "When an identifier includes a namespace prefix, the identifier is called a quali",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když identifikátor obsahuje předponu jmenného prostoru, nazývá se <strong>kvalifikovaný název</strong> (qualified name).</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b46",
       "type": "section",
       "title": "Using namespace std (and why to avoid it)",
       "html": "<h3 class=\"cpp-section-heading\">Using namespace std (and why to avoid it)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Using namespace std (a proč se mu vyhnout)</h3>",
+      "title_cs": "Použití jmenného prostoru std (a proč se tomu vyhnout)"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b47",
       "type": "paragraph",
       "html": "<p>Another way to access identifiers inside a namespace is to use a using-directive statement. Here’s our original “Hello world” program with a using-directive:</p>",
       "preview": "Another way to access identifiers inside a namespace is to use a using-directive",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dalším způsobem, jak přistupovat k identifikátorům uvnitř jmenného prostoru, je použití direktivy using (using-directive). Zde je náš původní program „Hello world“ s direktivou using:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b48",
@@ -359,28 +414,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nusing namespace std; // this is a using-directive that allows us to access names in the std namespace with no namespace prefix\n\nint main()\n{\n    cout << \"Hello world!\";\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nusing namespace std; // this is a using-directive that allows us to access names in the std namespace with no namespace prefix\n\nint main()\n{\n    cout &lt;&lt; \"Hello world!\";\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\npomocí jmenného prostoru std; // toto je using-directive, která nám umožňuje přistupovat ke jménům ve jmenném prostoru std bez předpony jmenného prostoru\n\nint main()\n{\n    cout << \"Ahoj světe!\";\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b49",
       "type": "paragraph",
       "html": "<p>A <strong>using directive</strong> allows us to access the names in a namespace without using a namespace prefix. So in the above example, when the compiler goes to determine what identifier <code>cout</code> is, it will match with <code>std::cout</code>, which, because of the using-directive, is accessible as just <code>cout</code>.</p>",
       "preview": "A using directive allows us to access the names in a namespace without using a n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Direktiva using</strong> (using directive) nám umožňuje přistupovat k názvům ve jmenném prostoru bez použití prefixu jmenného prostoru. Ve výše uvedeném příkladu tedy kompilátor při zjišťování, co je identifikátor <code>cout</code> zač, najde shodu s <code>std::cout</code>, který je díky direktivě using přístupný jednoduše jako <code>cout</code>.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b50",
       "type": "paragraph",
       "html": "<p>Many texts, tutorials, and even some IDEs recommend or use a using-directive at the top of the program. However, used in this way, this is a bad practice, and highly discouraged.</p>",
       "preview": "Many texts, tutorials, and even some IDEs recommend or use a using-directive at ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho textů, tutoriálů a dokonce i některá IDE doporučuje nebo používá using-direktivu na začátku programu. Použití tímto způsobem je však špatná praktika a důrazně se nedoporučuje.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b51",
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b52",
@@ -388,21 +447,24 @@
       "language": "cpp",
       "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\nusing namespace std; // makes std::cout accessible as \"cout\"\n \nint cout() // defines our own \"cout\" function in the global namespace\n{\n    return 5;\n}\n \nint main()\n{\n    cout << \"Hello, world!\"; // Compile error!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\nusing namespace std; // makes std::cout accessible as \"cout\"\n \nint cout() // defines our own \"cout\" function in the global namespace\n{\n    return 5;\n}\n \nint main()\n{\n    cout &lt;&lt; \"Hello, world!\"; // Compile error!  Which cout do we want here?  The one in the std namespace or the one we defined above?\n \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream> // importuje deklaraci std::cout do globálního rozsahu\n\npomocí jmenného prostoru std; // zpřístupní std::cout jako \"cout\"\n \nint cout() // definuje naši vlastní funkci \"cout\" v globálním jmenném prostoru\n{\n    návrat 5;\n}\n \nint main()\n{\n    cout << \"Ahoj světe!\"; // Chyba kompilace!  Který kurník tady chceme?  Ten ve jmenném prostoru std nebo ten, který jsme definovali výše?\n \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b53",
       "type": "paragraph",
       "html": "<p>The above program doesn’t compile, because the compiler now can’t tell whether we want the <code>cout</code> function that we defined, or <code>std::cout</code>.</p>",
       "preview": "The above program doesn’t compile, because the compiler now can’t tell whether w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený program se nezkompiluje, protože kompilátor nyní nedokáže určit, zda chceme námi definovanou funkci <code>cout</code>, nebo <code>std::cout</code>.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b54",
       "type": "paragraph",
       "html": "<p>When using a using-directive in this manner, <em>any</em> identifier we define may conflict with <em>any</em> identically named identifier in the <code>std</code> namespace. Even worse, while an identifier name may not conflict today, it may conflict with new identifiers added to the std namespace in future language revisions. This was the whole point of moving all of the identifiers in the standard library into the <code>std</code> namespace in the first place!</p>",
       "preview": "When using a using-directive in this manner, any identifier we define may confli",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při použití using-direktivy tímto způsobem může <em>jakýkoli</em> námi definovaný identifikátor kolidovat s <em>jakýmkoli</em> stejně pojmenovaným identifikátorem ve jmenném prostoru <code>std</code>. Co je ještě horší – i když název identifikátoru nekoliduje dnes, může kolidovat s novými identifikátory přidanými do jmenného prostoru std v budoucích revizích jazyka. To byl přece od samého začátku hlavní důvod přesunutí všech identifikátorů standardní knihovny do jmenného prostoru <code>std</code>!</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b55",
@@ -410,7 +472,8 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Avoid using-directives (such as <code>using namespace std;</code>) at the top of your program or in header files. They violate the reason why namespaces were added in the first place.</p></div>",
       "preview": "WarningAvoid using-directives (such as using namespace std;) at the top of your program or in header",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Vyhněte se using-direktivám (jako je <code>using namespace std;</code>) na začátku programu nebo v hlavičkových souborech. Popírají samotný důvod, proč byly jmenné prostory vůbec zavedeny.</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b56",
@@ -418,35 +481,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk more about using-declarations and using-directives (and how to use them responsibly) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/using-declarations-and-using-directives/\">7.13 -- Using declarations and using directives</a>.</p></div>",
       "preview": "Related contentWe talk more about using-declarations and using-directives (and how to use them respo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Více o using-deklaracích a using-direktivách (a jak je používat zodpovědně) se dozvíte v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/using-declarations-and-using-directives/\">7.13 – Using deklarace a using direktivy</a>.</p></div>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b57",
       "type": "section",
       "title": "Curly braces and indented code",
       "html": "<h3 class=\"cpp-section-heading\">Curly braces and indented code</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Složené závorky a odsazený kód</h3>",
+      "title_cs": "Složené závorky a odsazený kód"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b58",
       "type": "paragraph",
       "html": "<p>In C++, curly braces are often used to delineate a scope region that is nested within another scope region (braces are also used for some non-scope-related purposes, such as list initialization). For example, a function defined inside the global scope region uses curly braces to separate the scope region of the function from the global scope.</p>",
       "preview": "In C++, curly braces are often used to delineate a scope region that is nested w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ se složené závorky často používají k vymezení oblasti platnosti (scope region), která je vnořena do jiné oblasti platnosti (závorky se používají také pro některé účely nesouvisející s oblastí platnosti, jako je například inicializace seznamem). Například funkce definovaná uvnitř globální oblasti platnosti používá složené závorky k oddělení oblasti platnosti funkce od globální oblasti platnosti.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b59",
       "type": "paragraph",
       "html": "<p>In certain cases, identifiers defined outside the curly braces may still be part of the scope defined by the curly braces rather than the surrounding scope -- function parameters are a good example of this.</p>",
       "preview": "In certain cases, identifiers defined outside the curly braces may still be part",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V určitých případech mohou být identifikátory definované vně složených závorek stále součástí oblasti platnosti definované složenými závorkami, nikoli okolní oblasti platnosti – dobrým příkladem jsou parametry funkcí.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b60",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b61",
@@ -454,21 +523,25 @@
       "language": "cpp",
       "code": "#include <iostream> // imports the declaration of std::cout into the global scope\n\nvoid foo(int x) // foo is defined in the global scope, x is defined within scope of foo()\n{ // braces used to delineate nested scope region for function foo()\n    std::cout << x << '\\n';\n} // x goes out of scope here\n\nint main()\n{ // braces used to delineate nested scope region for function main()\n    foo(5);\n\n    int x { 6 }; // x is defined within the scope of main()\n    std::cout << x << '\\n';\n \n    return 0;\n} // x goes out of scope here\n// foo and main (and std::cout) go out of scope here (the end of the file)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt; // imports the declaration of std::cout into the global scope\n\nvoid foo(int x) // foo is defined in the global scope, x is defined within scope of foo()\n{ // braces used to delineate nested scope region for function foo()\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n} // x goes out of scope here\n\nint main()\n{ // braces used to delineate nested scope region for function main()\n    foo(5);\n\n    int x { 6 }; // x is defined within the scope of main()\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n \n    return 0;\n} // x goes out of scope here\n// foo and main (and std::cout) go out of scope here (the end of the file)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream> // importuje deklaraci std::cout do globálního rozsahu\n\nvoid foo(int x) // foo je definováno v globálním rozsahu, x je definováno v rozsahu foo()\n{ // složené závorky používané k vymezení vnořené oblasti rozsahu pro funkci foo()\n    std::cout << x << '\\n';\n} // x je zde mimo rozsah\n\nint main()\n{ // složené závorky používané k vymezení vnořené oblasti rozsahu pro funkci main()\n    foo(5);\n\n    int x {6}; // x je definováno v rámci main()\n    std::cout << x << '\\n';\n \n    návrat 0;\n} // x je zde mimo rozsah\n// foo a main (a std::cout) jsou zde mimo rozsah (konec souboru)</code></pre>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b62",
       "type": "paragraph",
       "html": "<p>The code that exists inside a nested scope region is conventionally indented one level, both for readability and to help indicate that it exists inside a separate scope region.</p>",
       "preview": "The code that exists inside a nested scope region is conventionally indented one",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kód, který se nachází uvnitř vnořené oblasti platnosti (scope region), bývá podle konvence odsazen o jednu úroveň, a to jak kvůli čitelnosti, tak pro snazší rozpoznání, že se nachází v samostatné oblasti platnosti.</p>"
     },
     {
       "id": "naming-collisions-and-an-introduction-to-namespaces_b63",
       "type": "paragraph",
       "html": "<p>The <code>#include</code> and function definitions for <code>foo()</code> and <code>main()</code> exist in the global scope region, so they are not indented. The statements inside each function exist inside the nested scope region of the function, so they are indented one level.</p>",
       "preview": "The #include and function definitions for foo() and main() exist in the global s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Direktiva <code>#include</code> a definice funkcí <code>foo()</code> a <code>main()</code> se nacházejí v globální oblasti platnosti, proto nejsou odsazeny. Příkazy uvnitř každé funkce se nacházejí ve vnořené oblasti platnosti dané funkce, proto jsou odsazeny o jednu úroveň.</p>"
     }
-  ]
+  ],
+  "title_cs": "2.9 — Kolize názvů a úvod do jmenných prostorů"
 }

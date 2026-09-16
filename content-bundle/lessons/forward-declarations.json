@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Take a look at this seemingly innocent sample program:</p>",
       "preview": "Take a look at this seemingly innocent sample program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejte se na tento zdánlivě nevinný ukázkový program:</p>"
     },
     {
       "id": "forward-declarations_b1",
@@ -22,63 +23,72 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"The sum of 3 and 4 is: \" << add(3, 4) << '\\n';\n    return 0;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"The sum of 3 and 4 is: \" &lt;&lt; add(3, 4) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    std::cout << \"Součet 3 a 4 je: \" << add(3, 4) << '\\n';\n    návrat 0;\n}\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b2",
       "type": "paragraph",
       "html": "<p>You would expect this program to produce the result:</p>",
       "preview": "You would expect this program to produce the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Očekávali byste, že tento program vyprodukuje výsledek:</p>"
     },
     {
       "id": "forward-declarations_b3",
       "type": "output",
       "text": "The sum of 3 and 4 is: 7\n",
       "html": "<pre>The sum of 3 and 4 is: 7\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The sum of 3 and 4 is: 7\n</pre>"
     },
     {
       "id": "forward-declarations_b4",
       "type": "paragraph",
       "html": "<p>But in fact, it doesn’t compile at all! Visual Studio produces the following compile error:</p>",
       "preview": "But in fact, it doesn’t compile at all! Visual Studio produces the following com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve skutečnosti se však vůbec nezkompiluje! Visual Studio vygeneruje následující chybu při kompilaci:</p>"
     },
     {
       "id": "forward-declarations_b5",
       "type": "output",
       "text": "add.cpp(5) : error C3861: 'add': identifier not found\n",
       "html": "<pre>add.cpp(5) : error C3861: 'add': identifier not found\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>add.cpp(5) : error C3861: 'add': identifier not found\n</pre>"
     },
     {
       "id": "forward-declarations_b6",
       "type": "paragraph",
       "html": "<p>The reason this program doesn’t compile is because the compiler compiles the contents of code files sequentially. When the compiler reaches the function call <em>add()</em> on line 5 of <em>main</em>, it doesn’t know what <em>add</em> is, because we haven’t defined <em>add</em> until line 9! That produces the error, <em>identifier not found</em>.</p>",
       "preview": "The reason this program doesn’t compile is because the compiler compiles the con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Důvodem, proč se tento program nezkompiluje, je to, že kompilátor zpracovává obsah souborů s kódem sekvenčně. Když kompilátor narazí na volání funkce <em>add()</em> na řádku 5 ve funkci <em>main</em>, neví, co <em>add</em> je, protože jsme <em>add</em> definovali až na řádku 9! To způsobí chybu <em>identifier not found</em>.</p>"
     },
     {
       "id": "forward-declarations_b7",
       "type": "paragraph",
       "html": "<p>Older versions of Visual Studio would produce an additional error:</p>",
       "preview": "Older versions of Visual Studio would produce an additional error:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Starší verze Visual Studia generovaly další chybu:</p>"
     },
     {
       "id": "forward-declarations_b8",
       "type": "output",
       "text": "add.cpp(9) : error C2365: 'add'; : redefinition; previous definition was 'formerly unknown identifier'\n",
       "html": "<pre>add.cpp(9) : error C2365: 'add'; : redefinition; previous definition was 'formerly unknown identifier'\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>add.cpp(9) : error C2365: 'add'; : redefinition; previous definition was 'formerly unknown identifier'\n</pre>"
     },
     {
       "id": "forward-declarations_b9",
       "type": "paragraph",
       "html": "<p>This is somewhat misleading, given that <em>add</em> wasn’t ever defined in the first place. Despite this, it’s useful to generally note that it is fairly common for a single error to produce many redundant or related errors or warnings. It can sometimes be hard to tell whether any error or warning beyond the first is a consequence of the first issue, or whether it is an independent issue that needs to be resolved separately.</p>",
       "preview": "This is somewhat misleading, given that add wasn’t ever defined in the first pla",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je poněkud zavádějící vzhledem k tomu, že <em>add</em> vlastně vůbec nebyla definována. Přesto je užitečné si obecně uvědomit, že je zcela běžné, že jediná chyba vyvolá mnoho nadbytečných nebo souvisejících chyb či varování. Někdy může být obtížné určit, zda je jakákoli další chyba či varování po té první důsledkem tohoto prvního problému, nebo zda se jedná o nezávislý problém, který je třeba vyřešit samostatně.</p>"
     },
     {
       "id": "forward-declarations_b10",
@@ -86,28 +96,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When addressing compilation errors or warnings in your programs, resolve the first issue listed and then compile again.</p></div>",
       "preview": "Best practiceWhen addressing compilation errors or warnings in your programs, resolve the first issu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Při řešení chyb nebo varování při kompilaci ve svých programech vyřešte nejprve první uvedený problém a poté kód znovu zkompilujte.</p></div>"
     },
     {
       "id": "forward-declarations_b11",
       "type": "paragraph",
       "html": "<p>To fix this problem, we need to address the fact that the compiler doesn’t know what add is. There are two common ways to address the issue.</p>",
       "preview": "To fix this problem, we need to address the fact that the compiler doesn’t know ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom tento problém vyřešili, musíme se vypořádat s tím, že kompilátor neví, co je add. Existují dva běžné způsoby, jak tuto situaci vyřešit.</p>"
     },
     {
       "id": "forward-declarations_b12",
       "type": "section",
       "title": "Option 1: Reorder the function definitions",
       "html": "<h3 class=\"cpp-section-heading\">Option 1: Reorder the function definitions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Možnost 1: Změna pořadí definic funkcí</h3>",
+      "title_cs": "Možnost 1: Změna pořadí definic funkcí"
     },
     {
       "id": "forward-declarations_b13",
       "type": "paragraph",
       "html": "<p>One way to address the issue is to reorder the function definitions so <em>add</em> is defined before <em>main</em>:</p>",
       "preview": "One way to address the issue is to reorder the function definitions so add is de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze způsobů, jak tento problém vyřešit, je změnit pořadí definic funkcí tak, aby byla <em>add</em> definována před <em>main</em>:</p>"
     },
     {
       "id": "forward-declarations_b14",
@@ -115,63 +130,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint main()\n{\n    std::cout << \"The sum of 3 and 4 is: \" << add(3, 4) << '\\n';\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"The sum of 3 and 4 is: \" &lt;&lt; add(3, 4) &lt;&lt; '\\n';\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}\n\nint main()\n{\n    std::cout << \"Součet 3 a 4 je: \" << add(3, 4) << '\\n';\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b15",
       "type": "paragraph",
       "html": "<p>That way, by the time <em>main</em> calls <em>add</em>, the compiler will already know what <em>add</em> is. Because this is such a simple program, this change is relatively easy to do. However, in a larger program, it can be tedious trying to figure out which functions call which other functions (and in what order) so they can be declared sequentially.</p>",
       "preview": "That way, by the time main calls add, the compiler will already know what add is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto způsobem v okamžiku, kdy <em>main</em> zavolá <em>add</em>, bude kompilátor již vědět, co <em>add</em> je. Protože se jedná o tak jednoduchý program, je tato změna poměrně snadná. Ve větším programu však může být zdlouhavé zjišťovat, které funkce volají které jiné funkce (a v jakém pořadí), aby mohly být deklarovány sekvenčně.</p>"
     },
     {
       "id": "forward-declarations_b16",
       "type": "paragraph",
       "html": "<p>Furthermore, this option is not always possible. Let’s say we’re writing a program that has two functions <em>A</em> and <em>B</em>. If function <em>A</em> calls function <em>B</em>, and function <em>B</em> calls function <em>A</em>, then there’s no way to order the functions in a way that will make the compiler happy. If you define <em>A</em> first, the compiler will complain it doesn’t know what <em>B</em> is. If you define <em>B</em> first, the compiler will complain that it doesn’t know what <em>A</em> is.</p>",
       "preview": "Furthermore, this option is not always possible. Let’s say we’re writing a progr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato možnost navíc není vždy proveditelná. Řekněme, že píšeme program, který má dvě funkce <em>A</em> a <em>B</em>. Pokud funkce <em>A</em> volá funkci <em>B</em> a funkce <em>B</em> volá funkci <em>A</em>, pak neexistuje způsob, jak funkce seřadit tak, aby byl kompilátor spokojený. Pokud definujete nejdříve <em>A</em>, kompilátor si bude stěžovat, že neví, co je <em>B</em>. Pokud definujete nejdříve <em>B</em>, kompilátor si bude stěžovat, že neví, co je <em>A</em>.</p>"
     },
     {
       "id": "forward-declarations_b17",
       "type": "section",
       "title": "Option 2: Use a forward declaration",
       "html": "<h3 class=\"cpp-section-heading\">Option 2: Use a forward declaration</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Možnost 2: Použijte dopřednou deklaraci</h3>",
+      "title_cs": "Možnost 2: Použijte dopředné prohlášení"
     },
     {
       "id": "forward-declarations_b18",
       "type": "paragraph",
       "html": "<p>We can also fix this by using a forward declaration.</p>",
       "preview": "We can also fix this by using a forward declaration.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento problém můžeme vyřešit také použitím dopředné deklarace.</p>"
     },
     {
       "id": "forward-declarations_b19",
       "type": "paragraph",
       "html": "<p>A <strong>forward declaration</strong> allows us to tell the compiler about the existence of an identifier <em>before</em> actually defining the identifier.</p>",
       "preview": "A forward declaration allows us to tell the compiler about the existence of an i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Dopředná deklarace</strong> nám umožňuje oznámit kompilátoru existenci identifikátoru ještě <em>předtím</em>, než daný identifikátor skutečně definujeme.</p>"
     },
     {
       "id": "forward-declarations_b20",
       "type": "paragraph",
       "html": "<p>In the case of functions, this allows us to tell the compiler about the existence of a function before we define the function’s body. This way, when the compiler encounters a call to the function, it’ll understand that we’re making a function call, and can check to ensure we’re calling the function correctly, even if it doesn’t yet know how or where the function is defined.</p>",
       "preview": "In the case of functions, this allows us to tell the compiler about the existenc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě funkcí nám to umožňuje informovat kompilátor o existenci funkce ještě předtím, než definujeme její tělo. Tímto způsobem, když kompilátor narazí na volání dané funkce, pochopí, že provádíme volání funkce, a může zkontrolovat, zda ji voláme správně, i když ještě neví, jak nebo kde je tato funkce definována.</p>"
     },
     {
       "id": "forward-declarations_b21",
       "type": "paragraph",
       "html": "<p>To write a forward declaration for a function, we use a <strong>function declaration</strong> statement (also called a <strong>function prototype</strong>). The function declaration consists of the function’s return type, name, and parameter types, terminated with a semicolon. The names of the parameters can be optionally included. The function body is not included in the declaration.</p>",
       "preview": "To write a forward declaration for a function, we use a function declaration sta",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chceme-li pro funkci vytvořit dopřednou deklaraci, použijeme příkaz <strong>deklarace funkce</strong> (nazývaný také <strong>prototyp funkce</strong>). Deklarace funkce se skládá z návratového typu, názvu a typů parametrů funkce a je zakončena středníkem. Názvy parametrů mohou být volitelně zahrnuty. Tělo funkce v deklaraci obsaženo není.</p>"
     },
     {
       "id": "forward-declarations_b22",
       "type": "paragraph",
       "html": "<p>Here’s a function declaration for the <em>add</em> function:</p>",
       "preview": "Here’s a function declaration for the add function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je deklarace funkce pro funkci <em>add</em>:</p>"
     },
     {
       "id": "forward-declarations_b23",
@@ -179,14 +204,16 @@
       "language": "cpp",
       "code": "int add(int x, int y); // function declaration includes return type, name, parameters, and semicolon.  No function body!",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y); // function declaration includes return type, name, parameters, and semicolon.  No function body!</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y); // deklarace funkce obsahuje návratový typ, název, parametry a středník.  Žádné tělo funkce!</code></pre>"
     },
     {
       "id": "forward-declarations_b24",
       "type": "paragraph",
       "html": "<p>Now, here’s our original program that didn’t compile, using a function declaration as a forward declaration for function <em>add</em>:</p>",
       "preview": "Now, here’s our original program that didn’t compile, using a function declarati",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na náš původní program, který se nepodařilo zkompilovat, tentokrát s využitím deklarace funkce jako dopředné deklarace pro funkci <em>add</em>:</p>"
     },
     {
       "id": "forward-declarations_b25",
@@ -194,21 +221,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y); // forward declaration of add() (using a function declaration)\n\nint main()\n{\n    std::cout << \"The sum of 3 and 4 is: \" << add(3, 4) << '\\n'; // this works because we forward declared add() above\n    return 0;\n}\n\nint add(int x, int y) // even though the body of add() isn't defined until here\n{\n    return x + y;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y); // forward declaration of add() (using a function declaration)\n\nint main()\n{\n    std::cout &lt;&lt; \"The sum of 3 and 4 is: \" &lt;&lt; add(3, 4) &lt;&lt; '\\n'; // this works because we forward declared add() above\n    return 0;\n}\n\nint add(int x, int y) // even though the body of add() isn't defined until here\n{\n    return x + y;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint add(int x, int y); // dopředná deklarace add() (pomocí deklarace funkce)\n\nint main()\n{\n    std::cout << \"Součet 3 a 4 je: \" << add(3, 4) << '\\n'; // to funguje, protože jsme přeposílali deklarované add() výše\n    návrat 0;\n}\n\nint add(int x, int y) // i když tělo add() není definováno až sem\n{\n    návrat x + y;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b26",
       "type": "paragraph",
       "html": "<p>Now when the compiler reaches the call to <em>add</em> in main, it will know what <em>add</em> looks like (a function that takes two integer parameters and returns an integer), and it won’t complain.</p>",
       "preview": "Now when the compiler reaches the call to add in main, it will know what add loo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když nyní překladač narazí na volání <em>add</em> v main, bude vědět, jak <em>add</em> vypadá (funkce, která přijímá dva celočíselné parametry a vrací celé číslo), a nebude hlásit chybu.</p>"
     },
     {
       "id": "forward-declarations_b27",
       "type": "paragraph",
       "html": "<p>It is worth noting that function declarations do not need to specify the names of the parameters (as they are not considered to be part of the function declaration). In the above code, you can also forward declare your function like this:</p>",
       "preview": "It is worth noting that function declarations do not need to specify the names o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stojí za zmínku, že v deklaracích funkcí není nutné uvádět názvy parametrů (protože nejsou považovány za součást deklarace funkce). Ve výše uvedeném kódu můžete svou funkci dopředně deklarovat také takto:</p>"
     },
     {
       "id": "forward-declarations_b28",
@@ -216,21 +246,24 @@
       "language": "cpp",
       "code": "int add(int, int); // valid function declaration",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int, int); // valid function declaration</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int, int); // platná deklarace funkce</code></pre>"
     },
     {
       "id": "forward-declarations_b29",
       "type": "paragraph",
       "html": "<p>However, we prefer to name our parameters (using the same names as the actual function). This allows you to understand what the function parameters are just by looking at the declaration. For example, if you were to see the declaration <code>void doSomething(int, int, int)</code>, you may think you remember what each of the parameters represent, but you may also get it wrong.</p>",
       "preview": "However, we prefer to name our parameters (using the same names as the actual fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dáváme však přednost pojmenovávání parametrů (s použitím stejných názvů jako u samotné funkce). To vám umožní porozumět tomu, k čemu parametry funkce slouží, pouhým pohledem na její deklaraci. Pokud byste například viděli deklaraci <code>void doSomething(int, int, int)</code>, můžete si myslet, že si pamatujete, co jednotlivé parametry představují, ale také se můžete snadno splést.</p>"
     },
     {
       "id": "forward-declarations_b30",
       "type": "paragraph",
       "html": "<p>Also many automated documentation generation tools will generate documentation from the content of header files, which is where declarations are often placed. We discuss header files and declarations in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/header-files/\">2.11 -- Header files</a>.</p>",
       "preview": "Also many automated documentation generation tools will generate documentation f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho nástrojů pro automatické generování dokumentace navíc vytváří dokumentaci z obsahu hlavičkových souborů, kde jsou deklarace často umístěny. Hlavičkovým souborům a deklaracím se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/header-files/\">2.11 -- Hlavičkové soubory (Header files)</a>.</p>"
     },
     {
       "id": "forward-declarations_b31",
@@ -238,7 +271,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Keep the parameter names in your function declarations.</p></div>",
       "preview": "Best practiceKeep the parameter names in your function declarations.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Ponechávejte názvy parametrů v deklaracích funkcí.</p></div>"
     },
     {
       "id": "forward-declarations_b32",
@@ -246,70 +280,82 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>You can easily create function declarations by copy/pasting your function’s header and adding a semicolon.</p></div>",
       "preview": "TipYou can easily create function declarations by copy/pasting your function’s header and adding a s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Deklarace funkcí můžete snadno vytvořit zkopírováním a vložením hlavičky funkce a přidáním středníku.</p></div>"
     },
     {
       "id": "forward-declarations_b33",
       "type": "section",
       "title": "Why forward declarations?",
       "html": "<h3 class=\"cpp-section-heading\">Why forward declarations?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proč dopředné deklarace?</h3>",
+      "title_cs": "Proč dopředná prohlášení?"
     },
     {
       "id": "forward-declarations_b34",
       "type": "paragraph",
       "html": "<p>You may be wondering why we would use a forward declaration if we could just reorder the functions to make our programs work.</p>",
       "preview": "You may be wondering why we would use a forward declaration if we could just reo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná si říkáte, proč bychom měli používat dopřednou deklaraci, když bychom pro správné fungování našich programů mohli funkce jednoduše přeuspořádat.</p>"
     },
     {
       "id": "forward-declarations_b35",
       "type": "paragraph",
       "html": "<p>Most often, forward declarations are used to tell the compiler about the existence of some function that has been defined in a different code file. Reordering isn’t possible in this scenario because the caller and the callee are in completely different files! We’ll discuss this in more detail in the next lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/programs-with-multiple-code-files/\">2.8 -- Programs with multiple code files</a>).</p>",
       "preview": "Most often, forward declarations are used to tell the compiler about the existen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejčastěji se dopředné deklarace používají k tomu, aby kompilátoru oznámily existenci funkce, která byla definována v jiném zdrojovém souboru. Změna pořadí v tomto scénáři není možná, protože volající i volaná funkce se nacházejí v úplně jiných souborech! Podrobněji se tomu budeme věnovat v následující lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/programs-with-multiple-code-files/\">2.8 – Programy s více zdrojovými soubory</a>).</p>"
     },
     {
       "id": "forward-declarations_b36",
       "type": "paragraph",
       "html": "<p>Forward declarations can also be used to define our functions in an order-agnostic manner. This allows us to define functions in whatever order maximizes organization (e.g. by clustering related functions together) or reader understanding.</p>",
       "preview": "Forward declarations can also be used to define our functions in an order-agnost",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dopředné deklarace lze také využít k tomu, abychom funkce definovali bez ohledu na jejich pořadí. To nám umožňuje definovat funkce v takovém pořadí, které maximalizuje přehlednost kódu (např. seskupením souvisejících funkcí k sobě) nebo usnadňuje čtenáři porozumění.</p>"
     },
     {
       "id": "forward-declarations_b37",
       "type": "paragraph",
       "html": "<p>Less often, there are times when we have two functions that call each other. Reordering isn’t possible in this case either, as there is no way to reorder the functions such that each is before the other. Forward declarations give us a way to resolve such circular dependencies.</p>",
       "preview": "Less often, there are times when we have two functions that call each other. Reo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Méně často nastávají situace, kdy máme dvě funkce, které se volají navzájem. Změna pořadí v tomto případě také není možná, jelikož neexistuje způsob, jak funkce seřadit tak, aby byla každá před tou druhou. Dopředné deklarace nám poskytují způsob, jak tyto kruhové závislosti vyřešit.</p>"
     },
     {
       "id": "forward-declarations_b38",
       "type": "section",
       "title": "Forgetting the function body",
       "html": "<h3 class=\"cpp-section-heading\">Forgetting the function body</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zapomenutí těla funkce</h3>",
+      "title_cs": "Zapomenutí těla funkce"
     },
     {
       "id": "forward-declarations_b39",
       "type": "paragraph",
       "html": "<p>New programmers often wonder what happens if they forward declare a function but do not define it.</p>",
       "preview": "New programmers often wonder what happens if they forward declare a function but",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začínající programátoři se často ptají, co se stane, když funkci dopředně deklarují, ale již ji nedefinují.</p>"
     },
     {
       "id": "forward-declarations_b40",
       "type": "paragraph",
       "html": "<p>The answer is: it depends. If a forward declaration is made, but the function is never called, the program will compile and run fine. However, if a forward declaration is made and the function is called, but the program never defines the function, the program will compile okay, but the linker will complain that it can’t resolve the function call.</p>",
       "preview": "The answer is: it depends. If a forward declaration is made, but the function is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odpověď zní: záleží na okolnostech. Pokud funkci dopředně deklarujete, ale nikdy ji nezavoláte, program se bez problémů přeloží a spustí. Pokud však funkci dopředně deklarujete a zavoláte, ale nikde ji nedefinujete, program se sice úspěšně zkompiluje, ale linker (sestavovací program) ohlásí chybu, protože nedokáže volání funkce přeložit (vyřešit odkaz na ni).</p>"
     },
     {
       "id": "forward-declarations_b41",
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "forward-declarations_b42",
@@ -317,63 +363,74 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y); // forward declaration of add()\n\nint main()\n{\n    std::cout << \"The sum of 3 and 4 is: \" << add(3, 4) << '\\n';\n    return 0;\n}\n\n// note: No definition for function add",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y); // forward declaration of add()\n\nint main()\n{\n    std::cout &lt;&lt; \"The sum of 3 and 4 is: \" &lt;&lt; add(3, 4) &lt;&lt; '\\n';\n    return 0;\n}\n\n// note: No definition for function add</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint add(int x, int y); // dopředná deklarace add()\n\nint main()\n{\n    std::cout << \"Součet 3 a 4 je: \" << add(3, 4) << '\\n';\n    návrat 0;\n}\n\n// poznámka: Žádná definice funkce add</code></pre>"
     },
     {
       "id": "forward-declarations_b43",
       "type": "paragraph",
       "html": "<p>In this program, we forward declare <em>add</em>, and we call <em>add</em>, but we never define <em>add</em> anywhere. When we try and compile this program, Visual Studio produces the following message:</p>",
       "preview": "In this program, we forward declare add, and we call add, but we never define ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto programu dopředně deklarujeme <em>add</em> a funkci <em>add</em> voláme, ale nikde ji nedefinujeme. Když se pokusíme tento program zkompilovat, Visual Studio vygeneruje následující zprávu:</p>"
     },
     {
       "id": "forward-declarations_b44",
       "type": "output",
       "text": "Compiling...\nadd.cpp\nLinking...\nadd.obj : error LNK2001: unresolved external symbol \"int __cdecl add(int,int)\" (?add@@YAHHH@Z)\nadd.exe : fatal error LNK1120: 1 unresolved externals\n",
       "html": "<pre>Compiling...\nadd.cpp\nLinking...\nadd.obj : error LNK2001: unresolved external symbol \"int __cdecl add(int,int)\" (?add@@YAHHH@Z)\nadd.exe : fatal error LNK1120: 1 unresolved externals\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Compiling...\nadd.cpp\nLinking...\nadd.obj : error LNK2001: unresolved external symbol \"int __cdecl add(int,int)\" (?add@@YAHHH@Z)\nadd.exe : fatal error LNK1120: 1 unresolved externals\n</pre>"
     },
     {
       "id": "forward-declarations_b45",
       "type": "paragraph",
       "html": "<p>As you can see, the program compiled okay, but it failed at the link stage because <em>int add(int, int)</em> was never defined.</p>",
       "preview": "As you can see, the program compiled okay, but it failed at the link stage becau",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, program se v pořádku zkompiloval, ale selhal ve fázi linkování, protože <em>int add(int, int)</em> nebyla nikdy definována.</p>"
     },
     {
       "id": "forward-declarations_b46",
       "type": "section",
       "title": "Other types of forward declarations",
       "html": "<h3 class=\"cpp-section-heading\">Other types of forward declarations</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další typy dopředných deklarací</h3>",
+      "title_cs": "Jiné typy předběžných prohlášení"
     },
     {
       "id": "forward-declarations_b47",
       "type": "paragraph",
       "html": "<p>Forward declarations are most often used with functions. However, forward declarations can also be used with other identifiers in C++, such as variables and types. Variables and types have a different syntax for forward declaration, so we’ll cover these in future lessons.</p>",
       "preview": "Forward declarations are most often used with functions. However, forward declar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dopředné deklarace se nejčastěji používají u funkcí. Dopředné deklarace lze však v C++ použít i s jinými identifikátory, jako jsou proměnné a typy. Proměnné a typy mají pro dopředné deklarace odlišnou syntaxi, takže se jim budeme věnovat v budoucích lekcích.</p>"
     },
     {
       "id": "forward-declarations_b48",
       "type": "section",
       "title": "Declarations vs. definitions",
       "html": "<h3 class=\"cpp-section-heading\">Declarations vs. definitions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Deklarace vs. definice</h3>",
+      "title_cs": "Deklarace vs. definice"
     },
     {
       "id": "forward-declarations_b49",
       "type": "paragraph",
       "html": "<p>In C++, you’ll frequently hear the words “declaration” and “definition” used, and often interchangeably. What do they mean? You now have enough fundamental knowledge to understand the difference between the two.</p>",
       "preview": "In C++, you’ll frequently hear the words “declaration” and “definition” used, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ budete často slýchat slova „deklarace“ a „definice“, a to mnohdy zaměnitelně. Co vlastně znamenají? Nyní již máte dostatek základních znalostí k tomu, abyste pochopili rozdíl mezi nimi.</p>"
     },
     {
       "id": "forward-declarations_b50",
       "type": "paragraph",
       "html": "<p>A <strong>declaration</strong> tells the <em>compiler</em> about the <em>existence</em> of an identifier and its associated type information. Here are some examples of declarations:</p>",
       "preview": "A declaration tells the compiler about the existence of an identifier and its as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Deklarace</strong> říká <em>kompilátoru</em> o <em>existenci</em> identifikátoru a s ním spojených typových informacích. Zde je několik příkladů deklarací:</p>"
     },
     {
       "id": "forward-declarations_b51",
@@ -381,21 +438,24 @@
       "language": "cpp",
       "code": "int add(int x, int y); // tells the compiler about a function named \"add\" that takes two int parameters and returns an int.  No body!\nint x;                 // tells the compiler about an integer variable named x",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y); // tells the compiler about a function named \"add\" that takes two int parameters and returns an int.  No body!\nint x;                 // tells the compiler about an integer variable named x</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y); // informuje kompilátor o funkci s názvem \"add\", která přebírá dva parametry int a vrací int.  Žádné tělo!\nint x;                 // informuje kompilátor o celočíselné proměnné s názvem x</code></pre>"
     },
     {
       "id": "forward-declarations_b52",
       "type": "paragraph",
       "html": "<p>A <strong>definition</strong> is a declaration that actually implements (for functions and types) or instantiates (for variables) the identifier.</p>",
       "preview": "A definition is a declaration that actually implements (for functions and types)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Definice</strong> je deklarace, která daný identifikátor skutečně implementuje (u funkcí a typů) nebo instancuje (u proměnných).</p>"
     },
     {
       "id": "forward-declarations_b53",
       "type": "paragraph",
       "html": "<p>Here are some examples of definitions:</p>",
       "preview": "Here are some examples of definitions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je několik příkladů definic:</p>"
     },
     {
       "id": "forward-declarations_b54",
@@ -403,21 +463,24 @@
       "language": "cpp",
       "code": "// because this function has a body, it is an implementation of function add()\nint add(int x, int y)\n{\n    int z{ x + y };   // instantiates variable z\n\n    return z;\n}\n\nint x;                // instantiates variable x",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// because this function has a body, it is an implementation of function add()\nint add(int x, int y)\n{\n    int z{ x + y };   // instantiates variable z\n\n    return z;\n}\n\nint x;                // instantiates variable x</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// protože tato funkce má tělo, jedná se o implementaci funkce add()\nint přidat (int x, int y)\n{\n    int z{ x + y};   // vytvoří instanci proměnné z\n\n    návrat z;\n}\n\nint x;                // vytvoří instanci proměnné x</code></pre>"
     },
     {
       "id": "forward-declarations_b55",
       "type": "paragraph",
       "html": "<p>In C++, all definitions are declarations. Therefore <code>int x;</code> is both a definition and a declaration.</p>",
       "preview": "In C++, all definitions are declarations. Therefore int x; is both a definition ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ jsou všechny definice deklaracemi. Proto je <code>int x;</code> jak definicí, tak deklarací.</p>"
     },
     {
       "id": "forward-declarations_b56",
       "type": "paragraph",
       "html": "<p>Conversely, not all declarations are definitions. Declarations that aren’t definitions are called <strong>pure declarations</strong>. Types of pure declarations include forward declarations for function, variables, and types.</p>",
       "preview": "Conversely, not all declarations are definitions. Declarations that aren’t defin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naopak, ne všechny deklarace jsou definicemi. Deklaracím, které nejsou definicemi, se říká <strong>čisté deklarace</strong>. Mezi čisté deklarace patří například dopředné deklarace funkcí, proměnných a typů.</p>"
     },
     {
       "id": "forward-declarations_b57",
@@ -425,70 +488,81 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>In common language, the term “declaration” is typically used to mean “a pure declaration”, and “definition” is used to mean “a definition that also serves as a declaration”. Thus, we’d typically call <code>int x;</code> a definition, even though it is both a definition and a declaration.</p></div>",
       "preview": "NomenclatureIn common language, the term “declaration” is typically used to mean “a pure declaration",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>V běžném jazyce se pojem „deklarace“ obvykle používá ve významu „čistá deklarace“ a „definice“ ve významu „definice, která zároveň slouží jako deklarace“. Obvykle tedy <code>int x;</code> označujeme jako definici, přestože se jedná jak o definici, tak o deklaraci.</p></div>"
     },
     {
       "id": "forward-declarations_b58",
       "type": "paragraph",
       "html": "<p>When the compiler encounters an identifier, it will check to ensure use of that identifier is valid (e.g. that the identifier is in scope, that it is used in a syntactically valid manner, etc…).</p>",
       "preview": "When the compiler encounters an identifier, it will check to ensure use of that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když kompilátor narazí na identifikátor, zkontroluje, zda je použití tohoto identifikátoru platné (např. zda je identifikátor v rozsahu platnosti, zda je použit syntakticky platným způsobem atd.).</p>"
     },
     {
       "id": "forward-declarations_b59",
       "type": "paragraph",
       "html": "<p>In most cases, a declaration is sufficient to allow the compiler to ensure an identifier is being used properly. For example, when the compiler encounters function call <code>add(5, 6)</code>, if it has already seen the declaration for <code>add(int, int)</code>, then it can validate that <code>add</code> is actually a function that takes two <code>int</code> parameters. It does not need to have actually seen the definition for function <code>add</code> (which may exist in some other file).</p>",
       "preview": "In most cases, a declaration is sufficient to allow the compiler to ensure an id",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů deklarace stačí k tomu, aby kompilátor mohl ověřit, zda je identifikátor používán správně. Například když kompilátor narazí na volání funkce <code>add(5, 6)</code> a již dříve viděl deklaraci pro <code>add(int, int)</code>, může zkontrolovat, že <code>add</code> je skutečně funkce, která přebírá dva parametry typu <code>int</code>. Nepotřebuje k tomu vidět skutečnou definici funkce <code>add</code> (která se může nacházet v nějakém jiném souboru).</p>"
     },
     {
       "id": "forward-declarations_b60",
       "type": "paragraph",
       "html": "<p>However, there are a few cases where the compiler must be able to see a full definition in order to use an identifier (such as for template definitions and type definitions, both of which we will discuss in future lessons).</p>",
       "preview": "However, there are a few cases where the compiler must be able to see a full def",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje však několik případů, kdy kompilátor musí mít k dispozici úplnou definici, aby mohl identifikátor použít (například u definic šablon a definic typů, o obojím budeme hovořit v budoucích lekcích).</p>"
     },
     {
       "id": "forward-declarations_b61",
       "type": "paragraph",
       "html": "<p>Here’s a summary table:</p>",
       "preview": "Here’s a summary table:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je souhrnná tabulka:</p>"
     },
     {
       "id": "forward-declarations_b62",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Term</th><th>Technical Meaning</th><th>Examples</th></tr><tr><td>Declaration</td><td>Tells compiler about an identifier and its associated type information.</td><td>void foo(); // function forward declaration (no body)<br>void goo() {}; // function definition (has body)<br>int x; // variable definition</td></tr><tr><td>Definition</td><td>Implements a function or instantiates a variable.<br>Definitions are also declarations.</td><td>void foo() { } // function definition (has body)<br>int x; // variable definition</td></tr><tr><td>Pure declaration</td><td>A declaration that isn’t a definition.</td><td>void foo(); // function forward declaration (no body)</td></tr><tr><td>Initialization</td><td>Provides an initial value for a defined object.</td><td>int x { 2 }; // x is initialized to value 2</td></tr></tbody></table></div>",
       "preview": "TermTechnical MeaningExamplesDeclarationTells compiler about an identifier and i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Pojem</th><th>Technický význam</th><th>Příklady</th></tr><tr><td>Deklarace (Declaration)</td><td>Informuje kompilátor o identifikátoru a s ním spojených informacích o typu.</td><td>void foo(); // dopředná deklarace funkce (bez těla)<br>void goo() {}; // definice funkce (má tělo)<br>int x; // definice proměnné</td></tr><tr><td>Definice (Definition)</td><td>Implementuje funkci nebo instancuje proměnnou.<br>Definice jsou zároveň také deklaracemi.</td><td>void foo() { } // definice funkce (má tělo)<br>int x; // definice proměnné</td></tr><tr><td>Čistá deklarace (Pure declaration)</td><td>Deklarace, která není definicí.</td><td>void foo(); // dopředná deklarace funkce (bez těla)</td></tr><tr><td>Inicializace (Initialization)</td><td>Poskytuje počáteční hodnotu pro definovaný objekt.</td><td>int x { 2 }; // x je inicializováno na hodnotu 2</td></tr></tbody></table></div>"
     },
     {
       "id": "forward-declarations_b63",
       "type": "paragraph",
       "html": "<p>The term “declaration” is commonly used to mean “pure declaration”, and the term “definition” used for anything that is both a definition and a declaration. We use this common nomenclature in the example column comments.</p>",
       "preview": "The term “declaration” is commonly used to mean “pure declaration”, and the term",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojem „deklarace“ se běžně používá ve významu „čistá deklarace“ a pojem „definice“ pro cokoliv, co je zároveň definicí i deklarací. Toto běžné názvosloví používáme v komentářích sloupců s příklady.</p>"
     },
     {
       "id": "forward-declarations_b64",
       "type": "section",
       "title": "The one definition rule (ODR)",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"ODR\"></a>The one definition rule (ODR) <a href=\"#ODR\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"ODR\"></a>Pravidlo jedné definice (ODR) <a href=\"#ODR\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "Pravidlo jedné definice (ODR)"
     },
     {
       "id": "forward-declarations_b65",
       "type": "paragraph",
       "html": "<p>The <strong>one definition rule</strong> (or ODR for short) is a well-known rule in C++. The ODR has three parts:</p>",
       "preview": "The one definition rule (or ODR for short) is a well-known rule in C++. The ODR ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Pravidlo jedné definice</strong> (neboli zkráceně ODR z anglického <em>one definition rule</em>) je v C++ dobře známé pravidlo. ODR se skládá ze tří částí:</p>"
     },
     {
       "id": "forward-declarations_b66",
       "type": "list",
       "html": "<ol start=\"1\"><li>Within a <em>file</em>, each function, variable, type, or template in a given scope can only have one definition. Definitions occurring in different scopes (e.g. local variables defined inside different functions, or functions defined inside different namespaces) do not violate this rule.</li><li>Within a <em>program</em>, each function or variable in a given scope can only have one definition. This rule exists because programs can have more than one file (we’ll cover this in the next lesson). Functions and variables not visible to the linker are excluded from this rule (discussed further in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/internal-linkage/\">7.6 -- Internal linkage</a>).</li><li>Types, templates, inline functions, and inline variables are allowed to have duplicate definitions in different files, so long as each definition is identical. We haven’t covered what most of these things are yet, so don’t worry about this for now -- we’ll bring it back up when it’s relevant.</li></ol>",
       "preview": "Within a file, each function, variable, type, or template in a given scope can o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>V rámci jednoho <em>souboru</em> může mít každá funkce, proměnná, typ nebo šablona v daném oboru platnosti (scope) pouze jednu definici. Definice nacházející se v různých oborech platnosti (např. lokální proměnné definované uvnitř různých funkcí nebo funkce definované uvnitř různých jmenných prostorů) toto pravidlo neporušují.</li><li>V rámci celého <em>programu</em> může mít každá funkce nebo proměnná v daném oboru platnosti pouze jednu definici. Toto pravidlo existuje proto, že programy se mohou skládat z více než jednoho souboru (tomu se budeme věnovat v příští lekci). Funkce a proměnné, které nejsou viditelné pro linker, jsou z tohoto pravidla vyjmuty (podrobněji to rozebereme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/internal-linkage/\">7.6 -- Vnitřní propojování (Internal linkage)</a>).</li><li>Typy, šablony, inline funkce a inline proměnné mohou mít duplicitní definice v různých souborech, pokud je každá definice identická. Většinu z těchto pojmů jsme zatím neprobírali, takže si s tím prozatím nedělejte starosti – vrátíme se k tomu, až to bude aktuální.</li></ol>"
     },
     {
       "id": "forward-declarations_b67",
@@ -496,21 +570,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss ODR part 3 exemptions further in the following lessons:</p><ul><li>Types (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-program-defined-user-defined-types/\">13.1 -- Introduction to program-defined (user-defined) types</a>).</li><li>Function templates (<a href=\"https://www.learncpp.com/cpp-tutorial/function-templates/\">11.6 -- Function templates</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-instantiation/\">11.7 -- Function template instantiation</a>).</li><li>Inline functions and variables (<a href=\"https://www.learncpp.com/cpp-tutorial/inline-functions-and-variables/\">7.9 -- Inline functions and variables</a>).</li></ul></div>",
       "preview": "Related contentWe discuss ODR part 3 exemptions further in the following lessons:Types (13.1 -- Intr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Výjimkám ze 3. části pravidla ODR se podrobněji věnujeme v následujících lekcích:</p><ul><li>Typy (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-program-defined-user-defined-types/\">13.1 -- Úvod do uživatelsky definovaných typů</a>).</li><li>Šablony funkcí (<a href=\"https://www.learncpp.com/cpp-tutorial/function-templates/\">11.6 -- Šablony funkcí</a> a <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-instantiation/\">11.7 -- Instanciace šablon funkcí</a>).</li><li>Inline funkce a proměnné (<a href=\"https://www.learncpp.com/cpp-tutorial/inline-functions-and-variables/\">7.9 -- Inline funkce a proměnné</a>).</li></ul></div>"
     },
     {
       "id": "forward-declarations_b68",
       "type": "paragraph",
       "html": "<p>Violating part 1 of the ODR will cause the compiler to issue a redefinition error. Violating ODR part 2 will cause the linker to issue a redefinition error. Violating ODR part 3 will cause undefined behavior.</p>",
       "preview": "Violating part 1 of the ODR will cause the compiler to issue a redefinition erro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Porušení 1. části ODR způsobí, že kompilátor ohlásí chybu redefinice. Porušení 2. části ODR způsobí, že linker ohlásí chybu redefinice. Porušení 3. části ODR způsobí nedefinované chování.</p>"
     },
     {
       "id": "forward-declarations_b69",
       "type": "paragraph",
       "html": "<p>Here’s an example of a violation of part 1:</p>",
       "preview": "Here’s an example of a violation of part 1:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad porušení 1. části:</p>"
     },
     {
       "id": "forward-declarations_b70",
@@ -518,28 +595,32 @@
       "language": "cpp",
       "code": "int add(int x, int y)\n{\n     return x + y;\n}\n\nint add(int x, int y) // violation of ODR, we've already defined function add(int, int)\n{\n     return x + y;\n}\n\nint main()\n{\n    int x{};\n    int x{ 5 }; // violation of ODR, we've already defined x\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n     return x + y;\n}\n\nint add(int x, int y) // violation of ODR, we've already defined function add(int, int)\n{\n     return x + y;\n}\n\nint main()\n{\n    int x{};\n    int x{ 5 }; // violation of ODR, we've already defined x\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int x, int y)\n{\n     návrat x + y;\n}\n\nint add(int x, int y) // porušení ODR, již jsme definovali funkci add(int, int)\n{\n     návrat x + y;\n}\n\nint main()\n{\n    int x{};\n    int x{5}; // porušení ODR, již jsme definovali x\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b71",
       "type": "paragraph",
       "html": "<p>In this example, function <code>add(int, int)</code> is defined twice (in the global scope), and local variable <code>int x</code> is defined twice (in the scope of <code>main()</code>). The Visual Studio compiler thus issues the following compile errors:</p>",
       "preview": "In this example, function add(int, int) is defined twice (in the global scope), ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu je funkce <code>add(int, int)</code> definována dvakrát (v globálním rozsahu platnosti) a lokální proměnná <code>int x</code> je definována dvakrát (v rozsahu platnosti <code>main()</code>). Kompilátor Visual Studia proto ohlásí následující chyby překladu:</p>"
     },
     {
       "id": "forward-declarations_b72",
       "type": "output",
       "text": "project3.cpp(9): error C2084: function 'int add(int,int)' already has a body\nproject3.cpp(3): note: see previous definition of 'add'\nproject3.cpp(16): error C2086: 'int x': redefinition\nproject3.cpp(15): note: see declaration of 'x'\n",
       "html": "<pre>project3.cpp(9): error C2084: function 'int add(int,int)' already has a body\nproject3.cpp(3): note: see previous definition of 'add'\nproject3.cpp(16): error C2086: 'int x': redefinition\nproject3.cpp(15): note: see declaration of 'x'\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>project3.cpp(9): error C2084: function 'int add(int,int)' already has a body\nproject3.cpp(3): note: see previous definition of 'add'\nproject3.cpp(16): error C2086: 'int x': redefinition\nproject3.cpp(15): note: see declaration of 'x'\n</pre>"
     },
     {
       "id": "forward-declarations_b73",
       "type": "paragraph",
       "html": "<p>However, it is not a violation of ODR part 1 for <code>main()</code> to have a local variable defined as <code>int x</code> and <code>add()</code> to also have a function parameter defined as <code>int x</code>. These definitions occur in different scopes (in the scope of each respective function), so they are considered to be separate definitions for two distinct objects, not a definition and redefinition of the same object.</p>",
       "preview": "However, it is not a violation of ODR part 1 for main() to have a local variable",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Není však porušením 1. části ODR, pokud má funkce <code>main()</code> lokální proměnnou definovanou jako <code>int x</code> a funkce <code>add()</code> má také parametr funkce definovaný jako <code>int x</code>. Tyto definice se nacházejí v různých oborech platnosti (v oboru platnosti každé z příslušných funkcí), takže jsou považovány za samostatné definice dvou odlišných objektů, nikoli za definici a redefinici téhož objektu.</p>"
     },
     {
       "id": "forward-declarations_b74",
@@ -547,14 +628,17 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Functions that share an identifier but have different sets of parameters are also considered to be distinct functions, so such definitions do not violate the ODR. We discuss this further in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Introduction to function overloading</a>.</p></div>",
       "preview": "For advanced readersFunctions that share an identifier but have different sets of parameters are als",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Funkce, které sdílejí stejný identifikátor, ale mají různé sady parametrů, jsou také považovány za odlišné funkce, takže takové definice neporušují ODR. Podrobněji se tomu věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Úvod do přetěžování funkcí</a>.</p></div>"
     },
     {
       "id": "forward-declarations_b75",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "forward-declarations_b76",
@@ -598,7 +682,8 @@
       "language": "cpp",
       "code": "int doMath(int first, int second, int third, int fourth)\n{\n     return first + second * third / fourth;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doMath(int first, int second, int third, int fourth)\n{\n     return first + second * third / fourth;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doMath(int first, int second, int third, int four)\n{\n     návrat první + druhý * třetí / čtvrtý;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b81",
@@ -614,7 +699,8 @@
       "type": "paragraph",
       "html": "<p>a)</p>",
       "preview": "a)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a)</p>"
     },
     {
       "id": "forward-declarations_b83",
@@ -622,14 +708,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    return 0;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint add(int x, int y);\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 + 5 = \" &lt;&lt; add(3, 4, 5) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int x, int y)\n{\n    return x + y;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    návrat 0;\n}\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b84",
       "type": "paragraph",
       "html": "<p>b)</p>",
       "preview": "b)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>b)</p>"
     },
     {
       "id": "forward-declarations_b85",
@@ -637,14 +725,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint add(int x, int y);\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 + 5 = \" &lt;&lt; add(3, 4, 5) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    návrat 0;\n}\n\nint add(int x, int y, int z)\n{\n    návrat x + y + z;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b86",
       "type": "paragraph",
       "html": "<p>c)</p>",
       "preview": "c)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>c)</p>"
     },
     {
       "id": "forward-declarations_b87",
@@ -652,14 +742,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 = \" << add(3, 4) << '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint add(int x, int y);\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 = \" &lt;&lt; add(3, 4) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint add(int x, int y);\n\nint main()\n{\n    std::cout << \"3 + 4 = \" << add(3, 4) << '\\n';\n    návrat 0;\n}\n\nint add(int x, int y, int z)\n{\n    návrat x + y + z;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b88",
       "type": "paragraph",
       "html": "<p>d)</p>",
       "preview": "d)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>d)</p>"
     },
     {
       "id": "forward-declarations_b89",
@@ -667,14 +759,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint add(int x, int y, int z);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    return 0;\n}\n\nint add(int z, int y, int x) // names don't match the declaration\n{\n    return x + y + z;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint add(int x, int y, int z);\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 + 5 = \" &lt;&lt; add(3, 4, 5) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int z, int y, int x) // names don't match the declaration\n{\n    return x + y + z;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint add(int x, int y, int z);\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    návrat 0;\n}\n\nint add(int z, int y, int x) // názvy neodpovídají deklaraci\n{\n    návrat x + y + z;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b90",
       "type": "paragraph",
       "html": "<p>e)</p>",
       "preview": "e)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>e)</p>"
     },
     {
       "id": "forward-declarations_b91",
@@ -682,14 +776,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint add(int, int, int); // no parameter names\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint add(int, int, int); // no parameter names\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 + 5 = \" &lt;&lt; add(3, 4, 5) &lt;&lt; '\\n';\n    return 0;\n}\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint add(int, int, int); // žádné názvy parametrů\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    návrat 0;\n}\n\nint add(int x, int y, int z)\n{\n    návrat x + y + z;\n}</code></pre>"
     },
     {
       "id": "forward-declarations_b92",
       "type": "paragraph",
       "html": "<p>f)</p>",
       "preview": "f)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>f)</p>"
     },
     {
       "id": "forward-declarations_b93",
@@ -697,7 +793,9 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y);\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y);\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"3 + 4 + 5 = \" &lt;&lt; add(3, 4, 5) &lt;&lt; '\\n';\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint add(int x, int y);\n\nint add(int x, int y, int z)\n{\n    návrat x + y + z;\n}\n\nint main()\n{\n    std::cout << \"3 + 4 + 5 = \" << add(3, 4, 5) << '\\n';\n    návrat 0;\n}</code></pre>"
     }
-  ]
+  ],
+  "title_cs": "2.7 — Dopředné deklarace a definice"
 }

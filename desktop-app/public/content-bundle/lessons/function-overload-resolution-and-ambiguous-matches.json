@@ -14,28 +14,32 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/\">11.2 -- Function overload differentiation</a>), we discussed which attributes of a function are used to differentiate overloaded functions from each other. If an overloaded function is not properly differentiated from the other overloads of the same name, then the compiler will issue a compile error.</p>",
       "preview": "In the previous lesson (11.2 -- Function overload differentiation), we discussed",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/\">11.2 -- Rozlišení přetížených funkcí</a>) jsme probírali, které vlastnosti funkce se používají k vzájemnému odlišení přetížených funkcí. Pokud přetížená funkce není od ostatních přetížení se stejným názvem správně odlišena, kompilátor ohlásí chybu při překladu.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b1",
       "type": "paragraph",
       "html": "<p>However, having a set of differentiated overloaded functions is only half of the picture. When any function call is made, the compiler must also ensure that a matching function declaration can be found.</p>",
       "preview": "However, having a set of differentiated overloaded functions is only half of the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mít k dispozici sadu rozlišených přetížených funkcí je však pouze polovina úspěchu. Při každém volání funkce musí kompilátor také zajistit, aby bylo možné najít odpovídající deklaraci funkce.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b2",
       "type": "paragraph",
       "html": "<p>With non-overloaded functions (functions with unique names), there is only one function that can potentially match a function call. That function either matches (or can be made to match after type conversions are applied), or it doesn’t (and a compile error results). With overloaded functions, there can be many functions that can potentially match a function call. Since a function call can only resolve to one of them, the compiler has to determine which overloaded function is the best match. The process of matching function calls to a specific overloaded function is called <strong>overload resolution</strong>.</p>",
       "preview": "With non-overloaded functions (functions with unique names), there is only one f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U nepřetížených funkcí (funkcí s jedinečnými názvy) existuje pouze jedna funkce, která může potenciálně odpovídat danému volání. Tato funkce buď odpovídá (případně může odpovídat po aplikaci typových konverzí), nebo neodpovídá (což vede k chybě při překladu). U přetížených funkcí existuje mnoho funkcí, které by potenciálně mohly volání odpovídat. Jelikož se volání funkce může vyhodnotit pouze na jednu z nich, kompilátor musí určit, která přetížená funkce je nejlepší shodou. Proces přiřazování volání funkce ke konkrétní přetížené funkci se nazývá <strong>overload resolution</strong> (vyhodnocování přetížení).</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b3",
       "type": "paragraph",
       "html": "<p>In simple cases where the type of the function arguments and type of the function parameters match exactly, this is (usually) straightforward:</p>",
       "preview": "In simple cases where the type of the function arguments and type of the functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V jednoduchých případech, kdy se typ argumentů funkce přesně shoduje s typem parametrů funkce, je to (obvykle) přímočaré:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b4",
@@ -43,14 +47,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int x)\n{\n     std::cout << x << '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     print(5); // 5 is an int, so this matches print(int)\n     print(6.7); // 6.7 is a double, so this matches print(double)\n\n     return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int x)\n{\n     std::cout &lt;&lt; x &lt;&lt; '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout &lt;&lt; d &lt;&lt; '\\n';\n}\n\nint main()\n{\n     print(5); // 5 is an int, so this matches print(int)\n     print(6.7); // 6.7 is a double, so this matches print(double)\n\n     return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int x)\n{\n     std::cout << x << '\\n';\n}\n\nprázdný tisk (dvojité d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     tisknout(5); // 5 je int, takže to odpovídá print(int)\n     tisk (6.7); // 6.7 je double, takže to odpovídá print(double)\n\n     návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b5",
       "type": "paragraph",
       "html": "<p>But what happens in cases where the argument types in the function call don’t exactly match the parameter types in any of the overloaded functions? For example:</p>",
       "preview": "But what happens in cases where the argument types in the function call don’t ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se ale stane v případech, kdy se typy argumentů při volání funkce přesně neshodují s typy parametrů v žádné z přetížených funkcí? Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b6",
@@ -58,70 +64,82 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int x)\n{\n     std::cout << x << '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     print('a'); // char does not match int or double, so what happens?\n     print(5L); // long does not match int or double, so what happens?\n\n     return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int x)\n{\n     std::cout &lt;&lt; x &lt;&lt; '\\n';\n}\n\nvoid print(double d)\n{\n     std::cout &lt;&lt; d &lt;&lt; '\\n';\n}\n\nint main()\n{\n     print('a'); // char does not match int or double, so what happens?\n     print(5L); // long does not match int or double, so what happens?\n\n     return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int x)\n{\n     std::cout << x << '\\n';\n}\n\nprázdný tisk (dvojité d)\n{\n     std::cout << d << '\\n';\n}\n\nint main()\n{\n     print('a'); // char neodpovídá int nebo double, takže co se stane?\n     tisk (5L); // long neodpovídá int nebo double, takže co se stane?\n\n     návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b7",
       "type": "paragraph",
       "html": "<p>Just because there is no exact match here doesn’t mean a match can’t be found -- after all, a <code>char</code> or <code>long</code> can be implicitly type converted to an <code>int</code> or a <code>double</code>. But which is the best conversion to make in each case?</p>",
       "preview": "Just because there is no exact match here doesn’t mean a match can’t be found --",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, že zde není přesná shoda, ještě neznamená, že shodu nelze najít – <code>char</code> nebo <code>long</code> lze přece implicitně typově zkonvertovat na <code>int</code> nebo <code>double</code>. Která konverze je ale v daném případě ta nejlepší?</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b8",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll explore how the compiler matches a given function call to a specific overloaded function.</p>",
       "preview": "In this lesson, we’ll explore how the compiler matches a given function call to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci prozkoumáme, jak kompilátor přiřazuje dané volání funkce ke konkrétní přetížené funkci.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b9",
       "type": "section",
       "title": "Resolving overloaded function calls",
       "html": "<h3 class=\"cpp-section-heading\">Resolving overloaded function calls</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vyhodnocování volání přetížených funkcí</h3>",
+      "title_cs": "Řešení přetížených volání funkcí"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b10",
       "type": "paragraph",
       "html": "<p>When a function call is made to an overloaded function, the compiler steps through a sequence of rules to determine which (if any) of the overloaded functions is the best match (we’ll cover these steps in the next section below).</p>",
       "preview": "When a function call is made to an overloaded function, the compiler steps throu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když dojde k volání přetížené funkce, kompilátor projde posloupnost pravidel, aby určil, která z přetížených funkcí (pokud vůbec nějaká) představuje nejlepší shodu (tyto kroky probereme v následující sekci níže).</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b11",
       "type": "paragraph",
       "html": "<p>At each step, the compiler applies a bunch of different type conversions to the argument(s) in the function call. For each conversion applied, the compiler checks if any of the overloaded functions are now a match. After all the different type conversions have been applied and checked for matches, the step is done. The result will be one of three possible outcomes:</p>",
       "preview": "At each step, the compiler applies a bunch of different type conversions to the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V každém kroku kompilátor aplikuje na argument(y) ve volání funkce řadu různých typových konverzí. Pro každou aplikovanou konverzi zkontroluje, zda některá z přetížených funkcí nyní nepředstavuje shodu. Jakmile jsou všechny různé typové konverze aplikovány a zkontrolovány na shodu, je krok dokončen. Výsledkem bude jeden ze tří možných závěrů:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b12",
       "type": "list",
       "html": "<ul><li>No matching functions were found. The compiler moves to the next step in the sequence.</li><li>A single matching function was found. This function is considered to be the best match. The matching process is now complete, and subsequent steps are not executed.</li><li>More than one matching function was found. The compiler will issue an ambiguous match compile error. We’ll discuss this case further in a bit.</li></ul>",
       "preview": "No matching functions were found. The compiler moves to the next step in the seq",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Nebyly nalezeny žádné odpovídající funkce. Kompilátor přejde k dalšímu kroku v posloupnosti.</li><li>Byla nalezena jediná odpovídající funkce. Tato funkce je považována za nejlepší shodu. Proces párování je tímto dokončen a následující kroky se již neprovádějí.</li><li>Bylo nalezeno více odpovídajících funkcí. Kompilátor vygeneruje chybu kompilace o nejednoznačné shodě (ambiguous match). Tento případ podrobněji rozebereme za chvíli.</li></ul>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b13",
       "type": "paragraph",
       "html": "<p>If the compiler reaches the end of the entire sequence without finding a match, it will generate a compile error that no matching overloaded function could be found for the function call.</p>",
       "preview": "If the compiler reaches the end of the entire sequence without finding a match, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud kompilátor dosáhne konce celé posloupnosti, aniž by nalezl shodu, vygeneruje chybu kompilace oznamující, že pro dané volání funkce nebyla nalezena žádná odpovídající přetížená funkce.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b14",
       "type": "section",
       "title": "The argument matching sequence",
       "html": "<h3 class=\"cpp-section-heading\">The argument matching sequence</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Posloupnost párování argumentů</h3>",
+      "title_cs": "Posloupnost porovnávání argumentů"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b15",
       "type": "paragraph",
       "html": "<p>Step 1) The compiler tries to find an exact match. This happens in two phases. First, the compiler will see if there is an overloaded function where the type of the arguments in the function call exactly matches the type of the parameters in the overloaded functions. For example:</p>",
       "preview": "Step 1) The compiler tries to find an exact match. This happens in two phases. F",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 1) Kompilátor se pokusí najít přesnou shodu. K tomu dochází ve dvou fázích. Nejprve kompilátor zjišťuje, zda existuje přetížená funkce, kde typ argumentů ve volání funkce přesně odpovídá typu parametrů v přetížených funkcích. Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b16",
@@ -129,35 +147,40 @@
       "language": "cpp",
       "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(0);   // exact match with foo(int)\n    foo(3.4); // exact match with foo(double)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(0);   // exact match with foo(int)\n    foo(3.4); // exact match with foo(double)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo (double)\n{\n}\n\nint main()\n{\n    foo(0);   // přesná shoda s foo(int)\n    foo(3,4); // přesná shoda s foo(double)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b17",
       "type": "paragraph",
       "html": "<p>Because the <code>0</code> in the function call <code>foo(0)</code> is an int, the compiler will look to see if a <code>foo(int)</code> overload has been declared. Since it has, the compiler determines that <code>foo(int)</code> is an exact match.</p>",
       "preview": "Because the 0 in the function call foo(0) is an int, the compiler will look to s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>0</code> ve volání funkce <code>foo(0)</code> je int, kompilátor zkontroluje, zda bylo deklarováno přetížení <code>foo(int)</code>. Protože deklarováno bylo, kompilátor určí, že <code>foo(int)</code> je přesná shoda.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b18",
       "type": "paragraph",
       "html": "<p>Second, the compiler will apply a number of trivial conversions to the arguments in the function call. The <strong>trivial conversions</strong> are a set of specific conversion rules that will modify types (without modifying the value) for purposes of finding a match. These include:</p>",
       "preview": "Second, the compiler will apply a number of trivial conversions to the arguments",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé kompilátor aplikuje na argumenty ve volání funkce několik triviálních konverzí. <strong>Triviální konverze</strong> (trivial conversions) jsou sada specifických konverzních pravidel, která upravují typy (aniž by měnila hodnotu) za účelem nalezení shody. Patří mezi ně:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b19",
       "type": "list",
       "html": "<ul><li>lvalue to rvalue conversions</li><li>qualification conversions (e.g. non-const to const)</li><li>non-reference to reference conversions</li></ul>",
       "preview": "lvalue to rvalue conversionsqualification conversions (e.g. non-const to const)n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>konverze lvalue na rvalue</li><li>kvalifikační konverze (např. non-const na const)</li><li>konverze z ne-reference na referenci</li></ul>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b20",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b21",
@@ -165,14 +188,16 @@
       "language": "cpp",
       "code": "void foo(const int)\n{\n}\n\nvoid foo(const double&) // double& is a reference to a double\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // x trivially converted from int to const int\n\n    double d { 2.3 };\n    foo(d); // d trivially converted from double to const double& (non-ref to ref conversion)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(const int)\n{\n}\n\nvoid foo(const double&amp;) // double&amp; is a reference to a double\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // x trivially converted from int to const int\n\n    double d { 2.3 };\n    foo(d); // d trivially converted from double to const double&amp; (non-ref to ref conversion)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(const int)\n{\n}\n\nvoid foo(const double&) // double& je odkaz na double\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // x triviálně převedeno z int na const int\n\n    dvojité d { 2,3 };\n    jídlo); // d triviálně převedeno z double na const double& (konverze bez ref na ref)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b22",
       "type": "paragraph",
       "html": "<p>In the above example, we’ve called <code>foo(x)</code>, where <code>x</code> is an <code>int</code>. The compiler will trivially convert <code>x</code> from an <code>int</code> into a <code>const int</code>, which then matches <code>foo(const int)</code>. We’ve also called <code>foo(d)</code>, where <code>d</code> is a <code>double</code>. The compiler will trivially convert <code>d</code> from a <code>double</code> to a <code>const double&amp;</code>, which then matches <code>foo(const double&amp;)</code>.</p>",
       "preview": "In the above example, we’ve called foo(x), where x is an int. The compiler will ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu jsme zavolali <code>foo(x)</code>, kde <code>x</code> je typu <code>int</code>. Kompilátor triviálně převede <code>x</code> z <code>int</code> na <code>const int</code>, což se následně přesně shoduje s <code>foo(const int)</code>. Dále jsme zavolali <code>foo(d)</code>, kde <code>d</code> je <code>double</code>. Kompilátor triviálně převede <code>d</code> z <code>double</code> na <code>const double&amp;</code>, což odpovídá <code>foo(const double&amp;)</code>.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b23",
@@ -180,14 +205,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover references in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue references</a>.</p></div>",
       "preview": "Related contentWe cover references in lesson 12.3 -- Lvalue references.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Referencím se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue reference</a>.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b24",
       "type": "paragraph",
       "html": "<p>Matches made via the trivial conversions are considered exact matches. This means the following program results in an ambiguous match:</p>",
       "preview": "Matches made via the trivial conversions are considered exact matches. This mean",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Shody nalezené pomocí triviálních konverzí jsou považovány za přesné shody. To znamená, že následující program skončí nejednoznačnou shodou (ambiguous match):</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b25",
@@ -195,21 +222,24 @@
       "language": "cpp",
       "code": "void foo(int)\n{\n}\n\nvoid foo(const int&) // int& is a reference to a int\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // ambiguous match with foo(int) and foo(const int&)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(const int&amp;) // int&amp; is a reference to a int\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // ambiguous match with foo(int) and foo(const int&amp;)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(const int&) // int& je odkaz na int\n{\n}\n\nint main()\n{\n    int x { 1 };\n    foo(x); // nejednoznačná shoda s foo(int) a foo(const int&)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b26",
       "type": "paragraph",
       "html": "<p>Step 2) If no exact match is found, the compiler tries to find a match by applying numeric promotion to the argument(s). In lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicit type conversion</a>), we covered how certain narrow integral and floating point types can be automatically promoted to wider types, such as <code>int</code> or <code>double</code>. If, after numeric promotion, a match is found, the function call is resolved.</p>",
       "preview": "Step 2) If no exact match is found, the compiler tries to find a match by applyi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 2) Pokud není nalezena žádná přesná shoda, kompilátor se pokusí najít shodu aplikováním číselného povýšení (numeric promotion) na argument(y). V lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicitní typová konverze</a>) jsme si ukázali, jak mohou být určité úzké celočíselné typy a typy s plovoucí řádovou čárkou automaticky povýšeny na širší typy, jako je <code>int</code> nebo <code>double</code>. Pokud je po číselném povýšení nalezena shoda, volání funkce je vyřešeno.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b27",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b28",
@@ -217,28 +247,32 @@
       "language": "cpp",
       "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo('a');  // promoted to match foo(int)\n    foo(true); // promoted to match foo(int)\n    foo(4.5f); // promoted to match foo(double)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo('a');  // promoted to match foo(int)\n    foo(true); // promoted to match foo(int)\n    foo(4.5f); // promoted to match foo(double)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo (double)\n{\n}\n\nint main()\n{\n    foo('a');  // povýšen na shodu foo(int)\n    foo(pravda); // povýšen na shodu foo(int)\n    foo(4,5f); // povýšen na shodu foo(double)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b29",
       "type": "paragraph",
       "html": "<p>For <code>foo('a')</code>, because an exact match for <code>foo(char)</code> could not be found in the prior step, the compiler promotes the char <code>'a'</code> to an <code>int</code>, and looks for a match. This matches <code>foo(int)</code>, so the function call resolves to <code>foo(int)</code>.</p>",
       "preview": "For foo('a'), because an exact match for foo(char) could not be found in the pri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U <code>foo('a')</code>, jelikož v předchozím kroku nebyla nalezena přesná shoda pro <code>foo(char)</code>, kompilátor povýší char <code>'a'</code> na <code>int</code> a hledá shodu. To se shoduje s <code>foo(int)</code>, takže se volání funkce vyřeší jako <code>foo(int)</code>.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b30",
       "type": "paragraph",
       "html": "<p>Step 3) If no match is found via numeric promotion, the compiler tries to find a match by applying numeric conversions (<a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a>) to the arguments.</p>",
       "preview": "Step 3) If no match is found via numeric promotion, the compiler tries to find a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 3) Pokud není nalezena žádná shoda pomocí celočíselného/číselného povýšení (numeric promotion), kompilátor se pokusí najít shodu aplikováním číselných konverzí (<a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Číselné konverze</a>) na argumenty.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b31",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b32",
@@ -246,14 +280,16 @@
       "language": "cpp",
       "code": "#include <string> // for std::string\n\nvoid foo(double)\n{\n}\n\nvoid foo(std::string)\n{\n}\n\nint main()\n{\n    foo('a'); // 'a' converted to match foo(double)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt; // for std::string\n\nvoid foo(double)\n{\n}\n\nvoid foo(std::string)\n{\n}\n\nint main()\n{\n    foo('a'); // 'a' converted to match foo(double)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string> // pro std::string\n\nvoid foo (double)\n{\n}\n\nvoid foo(std::string)\n{\n}\n\nint main()\n{\n    foo('a'); // 'a' převedeno na shodu foo(double)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b33",
       "type": "paragraph",
       "html": "<p>In this case, because there is no <code>foo(char)</code> (exact match), and no <code>foo(int)</code> (promotion match), the <code>'a'</code> is numerically converted to a double and matched with <code>foo(double)</code>.</p>",
       "preview": "In this case, because there is no foo(char) (exact match), and no foo(int) (prom",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě, protože neexistuje žádné <code>foo(char)</code> (přesná shoda) ani <code>foo(int)</code> (shoda po povýšení), je <code>'a'</code> číselně zkonvertováno na <code>double</code> a spárováno s <code>foo(double)</code>.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b34",
@@ -261,14 +297,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Matches made by applying numeric promotions take precedence over any matches made by applying numeric conversions.</p></div>",
       "preview": "Key insightMatches made by applying numeric promotions take precedence over any matches made by appl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Shody nalezené pomocí číselného povýšení (numeric promotion) mají přednost před jakýmikoli shodami vzniklými pomocí číselných konverzí.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b35",
       "type": "paragraph",
       "html": "<p>Step 4) If no match is found via numeric conversion, the compiler tries to find a match through any user-defined conversions. Although we haven’t covered user-defined conversions yet, certain types (e.g. classes) can define conversions to other types that can be implicitly invoked. Here’s an example, just to illustrate the point:</p>",
       "preview": "Step 4) If no match is found via numeric conversion, the compiler tries to find ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 4) Pokud není nalezena žádná shoda pomocí číselné konverze, kompilátor se pokusí najít shodu prostřednictvím uživatelsky definovaných konverzí. Ačkoli jsme uživatelsky definované konverze ještě neprobírali, určité typy (např. třídy) mohou definovat konverze na jiné typy, které lze vyvolat implicitně. Zde je příklad pouze pro ilustraci:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b36",
@@ -276,21 +314,24 @@
       "language": "cpp",
       "code": "// We haven't covered classes yet, so don't worry if this doesn't make sense\nclass X // this defines a new type called X\n{\npublic:\n    operator int() { return 0; } // Here's a user-defined conversion from X to int\n};\n\nvoid foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    X x; // Here, we're creating an object of type X (named x)\n    foo(x); // x is converted to type int using the user-defined conversion from X to int\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// We haven't covered classes yet, so don't worry if this doesn't make sense\nclass X // this defines a new type called X\n{\npublic:\n    operator int() { return 0; } // Here's a user-defined conversion from X to int\n};\n\nvoid foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    X x; // Here, we're creating an object of type X (named x)\n    foo(x); // x is converted to type int using the user-defined conversion from X to int\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Kurzy jsme ještě neprobrali, takže se nebojte, pokud to nedává smysl\nclass X // definuje nový typ s názvem X\n{\nveřejnost:\n    operátor int() { return 0; } // Zde je uživatelsky definovaný převod z X na int\n};\n\nvoid foo (int)\n{\n}\n\nvoid foo (double)\n{\n}\n\nint main()\n{\n    Xx; // Zde vytváříme objekt typu X (pojmenovaný x)\n    foo(x); // x je převedeno na typ int pomocí uživatelem definovaného převodu z X na int\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b37",
       "type": "paragraph",
       "html": "<p>In this example, the compiler will first check whether an exact match to <code>foo(X)</code> exists. We haven’t defined one. Next the compiler will check whether <code>x</code> can be numerically promoted, which it can’t. The compiler will then check if <code>x</code> can be numerically converted, which it also can’t. Finally, the compiler will then look for any user-defined conversions. Because we’ve defined a user-defined conversion from <code>X</code> to <code>int</code>, the compiler will convert <code>X</code> to an <code>int</code> to match <code>foo(int)</code>.</p>",
       "preview": "In this example, the compiler will first check whether an exact match to foo(X) ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu kompilátor nejprve zkontroluje, zda existuje přesná shoda pro <code>foo(X)</code>. Žádnou takovou jsme nedefinovali. Dále kompilátor zkontroluje, zda lze <code>x</code> číselně povýšit, což nelze. Poté kompilátor ověří, zda lze <code>x</code> číselně zkonvertovat, což také nelze. Nakonec se kompilátor podívá po uživatelsky definovaných konverzích. Protože jsme definovali uživatelskou konverzi z <code>X</code> na <code>int</code>, kompilátor zkonvertuje <code>X</code> na <code>int</code>, aby odpovídalo <code>foo(int)</code>.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b38",
       "type": "paragraph",
       "html": "<p>After applying a user-defined conversion, the compiler may apply additional implicit promotions or conversions to find a match. So if our user-defined conversion had been to type <code>char</code> instead of <code>int</code>, the compiler would have used the user-defined conversion to <code>char</code> and then promoted the result into an <code>int</code> to match.</p>",
       "preview": "After applying a user-defined conversion, the compiler may apply additional impl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po uplatnění uživatelsky definované konverze může kompilátor aplikovat další implicitní povýšení nebo konverze, aby nalezl shodu. Pokud by tedy naše uživatelsky definovaná konverze vedla na typ <code>char</code> místo <code>int</code>, kompilátor by použil uživatelsky definovanou konverzi na <code>char</code> a následně by výsledek povýšil na <code>int</code> pro nalezení shody.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b39",
@@ -298,7 +339,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss how to create user-defined conversions for class types (by overloading the typecast operators) in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-typecasts/\">21.11 -- Overloading typecasts</a>.</p></div>",
       "preview": "Related contentWe discuss how to create user-defined conversions for class types (by overloading the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Jak vytvářet uživatelsky definované konverze pro třídní typy (přetěžováním operátorů přetypování) probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-typecasts/\">21.11 -- Přetěžování operátorů přetypování</a>.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b40",
@@ -306,14 +348,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The constructor of a class also acts as a user-defined conversion from other types to that class type, and can be used during this step to find matching functions.</p></div>",
       "preview": "For advanced readersThe constructor of a class also acts as a user-defined conversion from other typ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Konstruktor třídy funguje také jako uživatelsky definovaná konverze z jiných typů na daný typ třídy a lze jej v tomto kroku použít k nalezení odpovídajících funkcí.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b41",
       "type": "paragraph",
       "html": "<p>Step 5) If no match is found via user-defined conversion, the compiler will look for a matching function that uses ellipsis.</p>",
       "preview": "Step 5) If no match is found via user-defined conversion, the compiler will look",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 5) Pokud není nalezena žádná shoda pomocí uživatelsky definované konverze, kompilátor se pokusí najít odpovídající funkci, která používá výpustku (ellipsis / trojtečku).</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b42",
@@ -321,28 +365,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover ellipses in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/ellipsis-and-why-to-avoid-them/\">20.5 -- Ellipsis (and why to avoid them)</a>.</p></div>",
       "preview": "Related contentWe cover ellipses in lesson 20.5 -- Ellipsis (and why to avoid them).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Výpustkám (ellipsis) se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/ellipsis-and-why-to-avoid-them/\">20.5 -- Ellipsis (a proč se jim vyhýbat)</a>.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b43",
       "type": "paragraph",
       "html": "<p>Step 6) If no matches have been found by this point, the compiler gives up and will issue a compile error about not being able to find a matching function.</p>",
       "preview": "Step 6) If no matches have been found by this point, the compiler gives up and w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Krok 6) Pokud do této chvíle nebyla nalezena žádná shoda, kompilátor to vzdá a vyvolá chybu kompilace o nemožnosti najít odpovídající funkci.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b44",
       "type": "section",
       "title": "Ambiguous matches",
       "html": "<h3 class=\"cpp-section-heading\">Ambiguous matches</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nejednoznačné shody (Ambiguous matches)</h3>",
+      "title_cs": "Nejednoznačné shody"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b45",
       "type": "paragraph",
       "html": "<p>With non-overloaded functions, each function call will either resolve to a function, or no match will be found and the compiler will issue a compile error:</p>",
       "preview": "With non-overloaded functions, each function call will either resolve to a funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U nepřetížených funkcí se každé volání funkce buď vyřeší na danou funkci, nebo není nalezena žádná shoda a kompilátor vyvolá chybu při kompilaci:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b46",
@@ -350,21 +399,24 @@
       "language": "cpp",
       "code": "void foo()\n{\n}\n\nint main()\n{\n     foo(); // okay: match found\n     goo(); // compile error: no match found\n\n     return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo()\n{\n}\n\nint main()\n{\n     foo(); // okay: match found\n     goo(); // compile error: no match found\n\n     return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo()\n{\n}\n\nint main()\n{\n     foo(); // dobře: nalezena shoda\n     goo(); // chyba kompilace: nebyla nalezena žádná shoda\n\n     návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b47",
       "type": "paragraph",
       "html": "<p>With overloaded functions, there is a third possible outcome: an <code>ambiguous match</code> may be found. An <strong>ambiguous match</strong> occurs when the compiler finds two or more functions that can be made to match in the same step. When this occurs, the compiler will stop matching and issue a compile error stating that it has found an ambiguous function call.</p>",
       "preview": "With overloaded functions, there is a third possible outcome: an ambiguous match",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U přetížených funkcí existuje třetí možný výsledek: může být nalezena <code>nejednoznačná shoda</code> (ambiguous match). K <strong>nejednoznačné shodě</strong> dochází, když kompilátor v tomtéž kroku najde dvě nebo více funkcí, které mohou odpovídat volání. Když k tomu dojde, kompilátor proces vyhodnocování ukončí a vyvolá chybu kompilace s tím, že našel nejednoznačné volání funkce.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b48",
       "type": "paragraph",
       "html": "<p>Since every overloaded function must be differentiated in order to compile, you might be wondering how it is possible that a function call could result in more than one match. Let’s take a look at an example that illustrates this:</p>",
       "preview": "Since every overloaded function must be differentiated in order to compile, you ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k tomu, že každá přetížená funkce musí být rozlišitelná, aby se kód zkompiloval, možná si říkáte, jak je možné, že volání funkce může vést k více než jedné shodě. Podívejme se na příklad, který to ilustruje:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b49",
@@ -372,35 +424,40 @@
       "language": "cpp",
       "code": "void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(5L); // 5L is type long\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo(double)\n{\n}\n\nint main()\n{\n    foo(5L); // 5L is type long\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int)\n{\n}\n\nvoid foo (double)\n{\n}\n\nint main()\n{\n    foo(5L); // 5L je typ long\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b50",
       "type": "paragraph",
       "html": "<p>Since literal <code>5L</code> is of type <code>long</code>, the compiler will first look to see if it can find an exact match for <code>foo(long)</code>, but it will not find one. Next, the compiler will try numeric promotion, but values of type <code>long</code> can’t be promoted, so there is no match here either.</p>",
       "preview": "Since literal 5L is of type long, the compiler will first look to see if it can ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jelikož literál <code>5L</code> je typu <code>long</code>, kompilátor nejprve zkontroluje, zda dokáže najít přesnou shodu pro <code>foo(long)</code>, ale žádnou nenajde. Dále kompilátor zkusí numerickou propagaci (numeric promotion), ale hodnoty typu <code>long</code> nelze propagovat, takže ani zde ke shodě nedojde.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b51",
       "type": "paragraph",
       "html": "<p>Following that, the compiler will try to find a match by applying numeric conversions to the <code>long</code> argument. In the process of checking all the numeric conversion rules, the compiler will find two potential matches. If the <code>long</code> argument is numerically converted into an <code>int</code>, then the function call will match <code>foo(int)</code>. If the <code>long</code> argument is instead converted into a <code>double</code>, then it will match <code>foo(double)</code> instead. Since two possible matches via numeric conversion have been found, the function call is considered ambiguous.</p>",
       "preview": "Following that, the compiler will try to find a match by applying numeric conver",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Poté se kompilátor pokusí najít shodu aplikováním numerických konverzí na argument typu <code>long</code>. V procesu kontroly všech pravidel numerických konverzí najde kompilátor dvě potenciální shody. Pokud je argument <code>long</code> numericky zkonvertován na <code>int</code>, volání funkce bude odpovídat <code>foo(int)</code>. Pokud je argument <code>long</code> místo toho zkonvertován na <code>double</code>, bude odpovídat <code>foo(double)</code>. Jelikož byly pomocí numerické konverze nalezeny dvě možné shody, volání funkce je považováno za nejednoznačné (ambiguous).</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b52",
       "type": "paragraph",
       "html": "<p>On Visual Studio 2019, this results in the following error message:</p>",
       "preview": "On Visual Studio 2019, this results in the following error message:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve Visual Studiu 2019 to vede k následující chybové zprávě:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b53",
       "type": "output",
       "text": "error C2668: 'foo': ambiguous call to overloaded function\nmessage : could be 'void foo(double)'\nmessage : or       'void foo(int)'\nmessage : while trying to match the argument list '(long)'\n",
       "html": "<pre>error C2668: 'foo': ambiguous call to overloaded function\nmessage : could be 'void foo(double)'\nmessage : or       'void foo(int)'\nmessage : while trying to match the argument list '(long)'\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>error C2668: 'foo': ambiguous call to overloaded function\nmessage : could be 'void foo(double)'\nmessage : or       'void foo(int)'\nmessage : while trying to match the argument list '(long)'\n</pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b54",
@@ -408,14 +465,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>If the compiler finds multiple matches in a given step, an ambiguous function call will result. This means no match from a given step is considered to be better than any other match from the same step.</p></div>",
       "preview": "Key insightIf the compiler finds multiple matches in a given step, an ambiguous function call will r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Pokud kompilátor v daném kroku najde více shod, výsledkem je nejednoznačné volání funkce (ambiguous function call). To znamená, že žádná shoda z daného kroku není považována za lepší než jakákoli jiná shoda ze stejného kroku.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b55",
       "type": "paragraph",
       "html": "<p>Here’s another example that yields ambiguous matches:</p>",
       "preview": "Here’s another example that yields ambiguous matches:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další příklad, který vede k nejednoznačným shodám:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b56",
@@ -423,21 +482,24 @@
       "language": "cpp",
       "code": "void foo(unsigned int)\n{\n}\n\nvoid foo(float)\n{\n}\n\nint main()\n{ \n    foo(0);       // int can be numerically converted to unsigned int or to float\n    foo(3.14159); // double can be numerically converted to unsigned int or to float\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(unsigned int)\n{\n}\n\nvoid foo(float)\n{\n}\n\nint main()\n{ \n    foo(0);       // int can be numerically converted to unsigned int or to float\n    foo(3.14159); // double can be numerically converted to unsigned int or to float\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(unsigned int)\n{\n}\n\nvoid foo (plovoucí)\n{\n}\n\nint main()\n{ \n    foo(0);       // int lze numericky převést na unsigned int nebo na float\n    foo(3,14159); // double lze numericky převést na unsigned int nebo na float\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b57",
       "type": "paragraph",
       "html": "<p>Although you might expect <code>0</code> to resolve to <code>foo(unsigned int)</code> and <code>3.14159</code> to resolve to <code>foo(float)</code>, both of these calls result in an ambiguous match. The <code>int</code> value <code>0</code> can be numerically converted to either an <code>unsigned int</code> or a <code>float</code>, so either overload matches equally well, and the result is an ambiguous function call.</p>",
       "preview": "Although you might expect 0 to resolve to foo(unsigned int) and 3.14159 to resol",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli byste mohli očekávat, že <code>0</code> se vyhodnotí na <code>foo(unsigned int)</code> a <code>3.14159</code> na <code>foo(float)</code>, obě tato volání vedou k nejednoznačné shodě. Hodnotu <code>0</code> typu <code>int</code> lze numericky převést jak na <code>unsigned int</code>, tak na <code>float</code>, takže obě přetížení vyhovují stejně dobře a výsledkem je nejednoznačné volání funkce.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b58",
       "type": "paragraph",
       "html": "<p>The same applies for the conversion of a <code>double</code> to either a <code>float</code> or <code>unsigned int</code>. Both are numeric conversions, so either overload matches equally well, and the result is again ambiguous.</p>",
       "preview": "The same applies for the conversion of a double to either a float or unsigned in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Totéž platí pro převod <code>double</code> na <code>float</code> nebo <code>unsigned int</code>. V obou případech jde o numerické konverze, takže obě přetížení vyhovují stejně dobře a výsledek je opět nejednoznačný.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b59",
@@ -445,28 +507,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Default arguments can also cause ambiguous matches. We cover such cases in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/default-arguments/\">11.5 -- Default arguments</a>.</p></div>",
       "preview": "For advanced readersDefault arguments can also cause ambiguous matches. We cover such cases in lesso",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Výchozí argumenty mohou také způsobit nejednoznačné shody (ambiguous matches). Tyto případy probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/default-arguments/\">11.5 -- Výchozí argumenty</a>.</p></div>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b60",
       "type": "section",
       "title": "Resolving ambiguous matches",
       "html": "<h3 class=\"cpp-section-heading\">Resolving ambiguous matches</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Řešení nejednoznačných shod</h3>",
+      "title_cs": "Řešení nejednoznačných shod"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b61",
       "type": "paragraph",
       "html": "<p>Because ambiguous matches are a compile-time error, an ambiguous match needs to be disambiguated before your program will compile. There are a few ways to resolve ambiguous matches:</p>",
       "preview": "Because ambiguous matches are a compile-time error, an ambiguous match needs to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože nejednoznačné shody představují chybu při překladu, je nutné nejednoznačnou shodu odstranit, aby bylo možné program zkompilovat. Existuje několik způsobů, jak nejednoznačné shody vyřešit:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b62",
       "type": "list",
       "html": "<ol start=\"1\"><li>Often, the best way is simply to define a new overloaded function that takes parameters of exactly the type you are trying to call the function with. Then C++ will be able to find an exact match for the function call.</li><li>Alternatively, explicitly cast the ambiguous argument(s) to match the type of the function you want to call. For example, to have <code>foo(0)</code> match <code>foo(unsigned int)</code> in the above example, you would do this:</li></ol>",
       "preview": "Often, the best way is simply to define a new overloaded function that takes par",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Často nejlepším způsobem je jednoduše definovat novou přetíženou funkci, která přebírá parametry přesně toho typu, se kterým se funkci pokoušíte volat. C++ pak bude schopno pro volání funkce nalézt přesnou shodu (exact match).</li><li>Alternativně můžete nejednoznačný argument (či argumenty) explicitně přetypovat tak, aby odpovídal typu funkce, kterou chcete volat. Například aby ve výše uvedeném příkladu volání <code>foo(0)</code> odpovídalo <code>foo(unsigned int)</code>, provedli byste toto:</li></ol>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b63",
@@ -474,14 +541,16 @@
       "language": "cpp",
       "code": "int x{ 0 };\nfoo(static_cast<unsigned int>(x)); // will call foo(unsigned int)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x{ 0 };\nfoo(static_cast&lt;unsigned int&gt;(x)); // will call foo(unsigned int)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x{ 0 };\nfoo(static_cast<unsigned int>(x)); // zavolá foo(unsigned int)</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b64",
       "type": "list",
       "html": "<ol start=\"3\"><li>If your argument is a literal, you can use the literal suffix to ensure your literal is interpreted as the correct type:</li></ol>",
       "preview": "If your argument is a literal, you can use the literal suffix to ensure your lit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"3\"><li>Pokud je váš argument literál, můžete použít příponu literálu, abyste zajistili, že bude literál interpretován jako správný typ:</li></ol>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b65",
@@ -489,42 +558,49 @@
       "language": "cpp",
       "code": "foo(0u); // will call foo(unsigned int) since 'u' suffix is unsigned int, so this is now an exact match",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">foo(0u); // will call foo(unsigned int) since 'u' suffix is unsigned int, so this is now an exact match</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">foo(0u); // zavolá foo(unsigned int), protože přípona 'u' je unsigned int, takže toto je nyní přesná shoda</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b66",
       "type": "paragraph",
       "html": "<p>The list of the most used suffixes can be found in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literals</a>.</p>",
       "preview": "The list of the most used suffixes can be found in lesson 5.2 -- Literals.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Seznam nejpoužívanějších přípon naleznete v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literály</a>.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b67",
       "type": "section",
       "title": "Matching for functions with multiple arguments",
       "html": "<h3 class=\"cpp-section-heading\">Matching for functions with multiple arguments</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přiřazování u funkcí s více argumenty</h3>",
+      "title_cs": "Shoda pro funkce s více argumenty"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b68",
       "type": "paragraph",
       "html": "<p>If there are multiple arguments, the compiler applies the matching rules to each argument in turn. The function chosen is the one for which each argument matches at least as well as all the other functions, with at least one argument matching better than all the other functions. In other words, the function chosen must provide a better match than all the other candidate functions for at least one parameter, and no worse for all of the other parameters.</p>",
       "preview": "If there are multiple arguments, the compiler applies the matching rules to each",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je argumentů více, kompilátor aplikuje pravidla pro shodu na každý argument postupně. Vybrána je ta funkce, pro kterou každý argument odpovídá alespoň tak dobře jako u všech ostatních funkcí a alespoň jeden argument odpovídá lépe než u všech ostatních funkcí. Jinými slovy, vybraná funkce musí poskytovat lepší shodu než všechny ostatní kandidátní funkce pro alespoň jeden parametr a ne horší pro všechny ostatní parametry.</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b69",
       "type": "paragraph",
       "html": "<p>In the case that such a function is found, it is clearly and unambiguously the best choice. If no such function can be found, the call will be considered ambiguous (or a non-match).</p>",
       "preview": "In the case that such a function is found, it is clearly and unambiguously the b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě, že je taková funkce nalezena, představuje jasně a jednoznačně nejlepší volbu. Pokud žádnou takovou funkci nelze najít, bude volání považováno za nejednoznačné (nebo za žádnou shodu).</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b70",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b71",
@@ -532,14 +608,17 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(char, int)\n{\n\tstd::cout << 'a' << '\\n';\n}\n\nvoid print(char, double)\n{\n\tstd::cout << 'b' << '\\n';\n}\n\nvoid print(char, float)\n{\n\tstd::cout << 'c' << '\\n';\n}\n\nint main()\n{\n\tprint('x', 'a');\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(char, int)\n{\n\tstd::cout &lt;&lt; 'a' &lt;&lt; '\\n';\n}\n\nvoid print(char, double)\n{\n\tstd::cout &lt;&lt; 'b' &lt;&lt; '\\n';\n}\n\nvoid print(char, float)\n{\n\tstd::cout &lt;&lt; 'c' &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tprint('x', 'a');\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid print (char, int)\n{\n\tstd::cout << 'a' << '\\n';\n}\n\nvoid print (char, double)\n{\n\tstd::cout << 'b' << '\\n';\n}\n\nneplatný tisk (char, float)\n{\n\tstd::cout << 'c' << '\\n';\n}\n\nint main()\n{\n\tprint('x', 'a');\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-overload-resolution-and-ambiguous-matches_b72",
       "type": "paragraph",
       "html": "<p>In the above program, all functions match the first argument exactly. However, the top function matches the second parameter via promotion, whereas the other functions require a conversion. Therefore, <code>print(char, int)</code> is unambiguously the best match.</p>",
       "preview": "In the above program, all functions match the first argument exactly. However, t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu se všechny funkce přesně shodují v prvním argumentu. První funkce se však u druhého parametru shoduje pomocí celočíselného povýšení (promotion), zatímco ostatní funkce vyžadují konverzi. Proto je <code>print(char, int)</code> jednoznačně nejlepší shodou.</p>"
     }
-  ]
+  ],
+  "title_cs": "11.3 — Řešení přetížení funkcí a nejednoznačné shody"
 }

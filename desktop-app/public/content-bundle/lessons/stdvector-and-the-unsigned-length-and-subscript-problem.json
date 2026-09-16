@@ -14,98 +14,114 @@
       "type": "paragraph",
       "html": "<p>In the prior lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdvector-and-list-constructors/\">16.2 -- Introduction to std::vector and list constructors</a>, we introduced <code>operator[]</code>, which can be used to subscript an array to access an element.</p>",
       "preview": "In the prior lesson 16.2 -- Introduction to std::vector and list constructors, w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdvector-and-list-constructors/\">16.2 -- Úvod do std::vector a konstruktorů se seznamem (list constructors)</a> jsme si představili <code>operator[]</code>, který lze použít k indexování pole pro přístup k prvku.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll look at other ways to access array elements, as well as a few different ways to get the length of an container class (the number of elements currently in the container class).</p>",
       "preview": "In this lesson, we’ll look at other ways to access array elements, as well as a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci se podíváme na další způsoby přístupu k prvkům pole a také na několik různých způsobů, jak získat délku kontejnerové třídy (počet prvků, které se v kontejnerové třídě aktuálně nacházejí).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b2",
       "type": "paragraph",
       "html": "<p>But before we can do that, we need to discuss one major mistake that the designers of C++ made, and how it affects all the container classes in the C++ standard library.</p>",
       "preview": "But before we can do that, we need to discuss one major mistake that the designe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než se k tomu ale dostaneme, musíme probrat jednu zásadní chybu, které se tvůrci C++ dopustili, a jak ovlivňuje všechny kontejnerové třídy ve standardní knihovně C++.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b3",
       "type": "section",
       "title": "The container length sign problem",
       "html": "<h3 class=\"cpp-section-heading\">The container length sign problem</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problém se znaménkem u délky kontejneru</h3>",
+      "title_cs": "Problém znaku délky kontejneru"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b4",
       "type": "paragraph",
       "html": "<p>Let’s start with an assertion: the data type used for subscripting an array should match the data type used for storing the length of the array. This is so that all elements in the longest possible array can be indexed, and no more.</p>",
       "preview": "Let’s start with an assertion: the data type used for subscripting an array shou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začněme jedním tvrzením: datový typ použitý pro indexování pole by měl odpovídat datovému typu použitému pro ukládání délky pole. Je to proto, aby bylo možné zaindexovat všechny prvky v nejdelším možném poli – a ani o jeden víc.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b5",
       "type": "paragraph",
       "html": "<p>As Bjarne Stroustrup <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1428r0.pdf\">recalls</a>, when the container classes in the C++ standard library was being designed (circa 1997), the designers had to choose whether to make the length (and array subscripts) signed or unsigned. They chose to make them unsigned.</p>",
       "preview": "As Bjarne Stroustrup recalls, when the container classes in the C++ standard lib",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak Bjarne Stroustrup <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1428r0.pdf\">vzpomíná</a>, když se navrhovaly kontejnerové třídy ve standardní knihovně C++ (kolem roku 1997), museli se návrháři rozhodnout, zda délku (a indexy polí) udělat se znaménkem (signed), nebo bez znaménka (unsigned). Rozhodli se pro bezznaménkový typ (unsigned).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b6",
       "type": "paragraph",
       "html": "<p>The reasons given for this: the subscripts of the standard library array types can’t be negative, using an unsigned type allows arrays of greater length due to the extra bit (something that was important in the 16-bit days), and range-checking the subscript requires one conditional check instead of two (since no check was needed to ensure the index was less than 0).</p>",
       "preview": "The reasons given for this: the subscripts of the standard library array types c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Důvody pro toto rozhodnutí byly následující: indexy polí standardní knihovny nemohou být záporné, použití bezznaménkového typu umožňuje větší délku polí díky jednomu bitu navíc (což bylo důležité v dobách 16bitových systémů) a kontrola mezí indexu vyžaduje pouze jednu podmíněnou kontrolu místo dvou (protože nebylo nutné kontrolovat, zda je index menší než 0).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b7",
       "type": "paragraph",
       "html": "<p>In retrospect, this is generally regarded as having been the wrong choice. We now understand that using unsigned values to try to enforce non-negativity doesn’t work due to the implicit conversion rules (since a negative signed integer will just implicitly convert to a large unsigned integer, producing a garbage result), the extra bit of range typically isn’t needed on 32-bit or 64-bit systems (since you probably aren’t creating arrays with more than 2 billion elements), and the commonly used <code>operator[]</code> doesn’t do range-checking anyway.</p>",
       "preview": "In retrospect, this is generally regarded as having been the wrong choice. We no",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při zpětném pohledu je to obecně považováno za špatnou volbu. Dnes již chápeme, že snaha vynutit nezápornost pomocí bezznaménkových hodnot nefunguje kvůli pravidlům implicitní konverze (protože záporné celé číslo se znaménkem se jednoduše implicitně převede na velké bezznaménkové číslo, což vede k nesmyslnému výsledku), onen bit navíc obvykle na 32bitových nebo 64bitových systémech není potřeba (protože pravděpodobně nevytváříte pole s více než 2 miliardami prvků) a běžně používaný <code>operator[]</code> kontrolu mezí stejně neprovádí.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b8",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 -- Unsigned integers, and why to avoid them</a>, we discussed the reasons why we prefer to use signed values to hold quantities. We also noted that mixing signed and unsigned values is a recipe for unexpected behavior. So the fact that the standard library container classes use unsigned values for the length (and indices) is problematic, as it makes it impossible to avoid unsigned values when using these types.</p>",
       "preview": "In lesson 4.5 -- Unsigned integers, and why to avoid them, we discussed the reas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 – Bezznaménková celá čísla a proč se jim vyhnout</a> jsme probírali důvody, proč pro ukládání množství dáváme přednost znaménkovým hodnotám. Také jsme poznamenali, že míchání znaménkových a bezznaménkových hodnot je receptem na neočekávané chování. Skutečnost, že kontejnerové třídy standardní knihovny používají pro délku (a indexy) bezznaménkové hodnoty, je proto problematická, jelikož při používání těchto typů znemožňuje se bezznaménkovým hodnotám vyhnout.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b9",
       "type": "paragraph",
       "html": "<p>For now, we are stuck with this choice and the unnecessary complexity it causes.</p>",
       "preview": "For now, we are stuck with this choice and the unnecessary complexity it causes.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatím nám nezbývá než s touto volbou a zbytečnou složitostí, kterou způsobuje, žít.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b10",
       "type": "section",
       "title": "A review: sign conversions are narrowing conversions, except when constexpr",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"constexprconversions\"></a>A review: sign conversions are narrowing conversions, except when constexpr <a href=\"#constexprconversions\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"constexprconversions\"></a>Opakování: znaménkové konverze jsou zužující konverze, s výjimkou případů constexpr <a href=\"#constexprconversions\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "A review: sign conversions are narrowing conversions, except when constexpr"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b11",
       "type": "paragraph",
       "html": "<p>Before we proceed further, let’s quickly recap some material from lesson <a href=\"https://www.learncpp.com/cpp-tutorial/narrowing-conversions-list-initialization-and-constexpr-initializers/\">10.4 -- Narrowing conversions, list initialization, and constexpr initializers</a> regarding sign conversions (integral conversions from signed to unsigned or vice-versa) because we’ll be talking about these a lot in this chapter.</p>",
       "preview": "Before we proceed further, let’s quickly recap some material from lesson 10.4 --",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než budeme pokračovat dále, pojďme si v rychlosti zopakovat látku z lekce <a href=\"https://www.learncpp.com/cpp-tutorial/narrowing-conversions-list-initialization-and-constexpr-initializers/\">10.4 – Zužující konverze, inicializace seznamem a constexpr inicializátory</a> týkající se znaménkových konverzí (celočíselných převodů ze signed na unsigned nebo naopak), protože o nich v této kapitole budeme mluvit velmi často.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b12",
       "type": "paragraph",
       "html": "<p>Sign conversions are considered to be narrowing conversions because a signed or unsigned type cannot hold all the values contained in the range of the opposing type. When such a conversion would be performed at runtime, the compiler will issue an error in contexts where narrowing conversions are disallowed (such as in list initialization), and may or may not issue a warning in other contexts where such a conversion is performed.</p>",
       "preview": "Sign conversions are considered to be narrowing conversions because a signed or ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Znaménkové konverze jsou považovány za zužující konverze (narrowing conversions), protože znaménkový nebo bezznaménkový typ nedokáže pojmout všechny hodnoty obsažené v rozsahu opačného typu. Pokud by se taková konverze měla provést za běhu programu, kompilátor vygeneruje chybu v kontextech, kde jsou zužující konverze zakázány (například při inicializaci seznamem), a může, ale nemusí vygenerovat varování v jiných kontextech, kde se taková konverze provádí.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b13",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b14",
@@ -113,21 +129,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid foo(unsigned int)\n{\n}\n\nint main()\n{\n    int s { 5 };\n    \n    [[maybe_unused]] unsigned int u { s }; // compile error: list initialization disallows narrowing conversion\n    foo(s);                                // possible warning: copy initialization allows narrowing conversion\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid foo(unsigned int)\n{\n}\n\nint main()\n{\n    int s { 5 };\n    \n    [[maybe_unused]] unsigned int u { s }; // compile error: list initialization disallows narrowing conversion\n    foo(s);                                // possible warning: copy initialization allows narrowing conversion\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid foo (unsigned int)\n{\n}\n\nint main()\n{\n    int s { 5 };\n    \n    [[možná_nepoužito]] unsigned int u { s }; // compile error: list initialization disallows narrowing conversion\n    foo(s);                                // possible warning: copy initialization allows narrowing conversion\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b15",
       "type": "paragraph",
       "html": "<p>In the above example, the initialization of variable <code>u</code> produces a compilation error because narrowing conversions are disallowed when doing list initialization. The call to <code>foo()</code> performs copy initialization, which does allow narrowing conversions, and which may or may not produce a warning depending on how aggressive the compiler is in producing sign conversion warnings. For example, both GCC and Clang will produce warnings in this case when compiler flag <code>-Wsign-conversion</code> is used.</p>",
       "preview": "In the above example, the initialization of variable u produces a compilation er",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu inicializace proměnné <code>u</code> způsobí chybu kompilace, protože zužující konverze jsou při inicializaci seznamem zakázány. Volání funkce <code>foo()</code> provádí kopírovací inicializaci (copy initialization), která zužující konverze povoluje a která může, ale nemusí vygenerovat varování v závislosti na tom, jak agresivní je kompilátor při hlášení varování ohledně znaménkových konverzí. Například jak GCC, tak Clang v tomto případě vygenerují varování, pokud je použit přepínač kompilátoru <code>-Wsign-conversion</code>.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b16",
       "type": "paragraph",
       "html": "<p>However, if the value to be sign converted is constexpr and can be converted to an equivalent value in the opposing type, the sign conversion is <em>not</em> considered to be narrowing. This is because the compiler can guarantee that the conversion is safe, or halt the compilation process.</p>",
       "preview": "However, if the value to be sign converted is constexpr and can be converted to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je však hodnota, u níž má dojít ke znaménkové konverzi, constexpr a lze ji převést na ekvivalentní hodnotu v opačném typu, znaménková konverze <em>není</em> považována za zužující. Je tomu tak proto, že kompilátor může zaručit, že je převod bezpečný, nebo proces kompilace zastavit.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b17",
@@ -135,49 +154,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid foo(unsigned int)\n{\n}\n\nint main()\n{\n    constexpr int s { 5 };                 // now constexpr\n    [[maybe_unused]] unsigned int u { s }; // ok: s is constexpr and can be converted safely, not a narrowing conversion\n    foo(s);                                // ok: s is constexpr and can be converted safely, not a narrowing conversion\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid foo(unsigned int)\n{\n}\n\nint main()\n{\n    constexpr int s { 5 };                 // now constexpr\n    [[maybe_unused]] unsigned int u { s }; // ok: s is constexpr and can be converted safely, not a narrowing conversion\n    foo(s);                                // ok: s is constexpr and can be converted safely, not a narrowing conversion\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid foo (unsigned int)\n{\n}\n\nint main()\n{\n    constexpr int s { 5 };                 // nyní constexpr\n    [[možná_nepoužito]] unsigned int u { s }; // ok: s is constexpr and can be converted safely, not a narrowing conversion\n    foo(s);                                // ok: s is constexpr and can be converted safely, not a narrowing conversion\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b18",
       "type": "paragraph",
       "html": "<p>In this case, since <code>s</code> is constexpr and the value to be converted (<code>5</code>) can be represented as an unsigned value, the conversion is not considered to be narrowing and can be performed implicitly without issue.</p>",
       "preview": "In this case, since s is constexpr and the value to be converted (5) can be repr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě, jelikož <code>s</code> je constexpr a převáděnou hodnotu (<code>5</code>) lze reprezentovat jako bezznaménkovou hodnotu, není tato konverze považována za zužující a lze ji bez problémů provést implicitně.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b19",
       "type": "paragraph",
       "html": "<p>This non-narrowing constexpr conversion (from <code>constexpr int</code> to <code>constexpr std::size_t</code>) will be something we make use of a lot.</p>",
       "preview": "This non-narrowing constexpr conversion (from constexpr int to constexpr std::si",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tuto nezužující constexpr konverzi (z <code>constexpr int</code> na <code>constexpr std::size_t</code>) budeme využívat velmi často.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b20",
       "type": "section",
       "title": "The length and indices of std::vector have type size_type",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"size_type\"></a>The length and indices of <code>std::vector</code> have type <code>size_type</code> <a href=\"#size_type\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"size_type\"></a>Délka a indexy <code>std::vector</code> mají typ <code>size_type</code> <a href=\"#size_type\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "The length and indices of std::vector have type size_type"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b21",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/\">10.7 -- Typedefs and type aliases</a>, we mentioned that typedefs and type aliases are often used in cases where we need a name for a type that may vary (e.g. because it is implementation-defined). For example <code>std::size_t</code> is a typedef for some large unsigned integral type, usually <code>unsigned long</code> or <code>unsigned long long</code>.</p>",
       "preview": "In lesson 10.7 -- Typedefs and type aliases, we mentioned that typedefs and type",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/typedefs-and-type-aliases/\">10.7 -- Typedefs and type aliases</a> jsme zmínili, že typedefy a aliasy typů se často používají v případech, kdy potřebujeme název pro typ, který se může lišit (např. protože je definován implementací). Například <code>std::size_t</code> je typedef pro nějaký velký celočíselný typ bez znaménka, obvykle <code>unsigned long</code> nebo <code>unsigned long long</code>.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b22",
       "type": "paragraph",
       "html": "<p>Each of the standard library container classes defines a nested typedef member named <code>size_type</code> (sometimes written as <code>T::size_type</code>), which is an alias for the type used for the length (and indices, if supported) of the container.</p>",
       "preview": "Each of the standard library container classes defines a nested typedef member n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Každá z kontejnerových tříd standardní knihovny definuje vnořený členský typedef s názvem <code>size_type</code> (někdy zapisovaný jako <code>T::size_type</code>), což je alias pro typ používaný pro délku (a indexy, pokud jsou podporovány) daného kontejneru.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b23",
       "type": "paragraph",
       "html": "<p>You’ll typically see <code>size_type</code> appear in documentation and in compiler warnings/error messages. For example, this <a href=\"https://en.cppreference.com/w/cpp/container/vector/size\">documentation for the <code>size()</code> member function</a> of <code>std::vector</code> indicates that <code>size()</code> returns a value of <code>size_type</code>.</p>",
       "preview": "You’ll typically see size_type appear in documentation and in compiler warnings/",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S typem <code>size_type</code> se typicky setkáte v dokumentaci a ve varováních či chybových hlášeních kompilátoru. Například tato <a href=\"https://en.cppreference.com/w/cpp/container/vector/size\">dokumentace pro členskou funkci <code>size()</code></a> třídy <code>std::vector</code> uvádí, že <code>size()</code> vrací hodnotu typu <code>size_type</code>.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b24",
@@ -185,14 +212,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover nested typedefs in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/nested-types-member-types/\">15.3 -- Nested types (member types)</a>.</p></div>",
       "preview": "Related contentWe cover nested typedefs in lesson 15.3 -- Nested types (member types).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Vnořené typedefy probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/nested-types-member-types/\">15.3 -- Vnořené typy (členské typy)</a>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b25",
       "type": "paragraph",
       "html": "<p><code>size_type</code> is almost always an alias for <code>std::size_t</code>, but can be overridden (in rare cases) to use a different type.</p>",
       "preview": "size_type is almost always an alias for std::size_t, but can be overridden (in r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>size_type</code> je téměř vždy alias pro <code>std::size_t</code>, ale může být (ve vzácných případech) přepsán tak, aby používal jiný typ.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b26",
@@ -200,7 +229,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p><code>size_type</code> is a nested typedef defined in standard library container classes, used as the type for the length (and indices, if supported) of the container class.</p><p><code>size_type</code> defaults to <code>std::size_t</code>, and since this is almost never changed, we can reasonably assume <code>size_type</code> is an alias for <code>std::size_t</code>.</p></div>",
       "preview": "Key insightsize_type is a nested typedef defined in standard library container classes, used as the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p><code>size_type</code> je vnořený typedef definovaný v kontejnerových třídách standardní knihovny, který se používá jako typ pro délku (a indexy, jsou-li podporovány) dané kontejnerové třídy.</p><p><code>size_type</code> je standardně nastaven na <code>std::size_t</code>, a jelikož se toto téměř nikdy nemění, můžeme oprávněně předpokládat, že <code>size_type</code> je alias pro <code>std::size_t</code>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b27",
@@ -208,28 +238,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>All of the standard library containers except <code>std::array</code> use <a href=\"https://en.cppreference.com/w/cpp/memory/allocator\"><code>std::allocator</code></a> to allocate memory. For these containers, <code>T::size_type</code> is derived from the <code>size_type</code> of the allocator used. Since <code>std::allocator</code> can allocate up to <code>std::size_t</code> bytes of memory, <code>std::allocator&lt;T&gt;::size_type</code> is defined as <code>std::size_t</code>. Therefore, <code>T::size_type</code> defaults to <code>std::size_t</code>.</p><p>Only in cases where a custom allocator whose <code>T::size_type</code> is defined as something other than <code>std::size_t</code> will a container’s <code>T::size_type</code> be something other than <code>std::size_t</code>. This is rare and something done on a per-application basis, so it’s generally safe to assume <code>T::size_type</code> will be <code>std::size_t</code> unless your application is using such a custom allocator (and you will know if that is the case).</p></div>",
       "preview": "For advanced readersAll of the standard library containers except std::array use std::allocator to a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Všechny kontejnery standardní knihovny kromě <code>std::array</code> používají k alokaci paměti <a href=\"https://en.cppreference.com/w/cpp/memory/allocator\"><code>std::allocator</code></a>. U těchto kontejnerů je <code>T::size_type</code> odvozen ze <code>size_type</code> použitého alokátoru. Jelikož <code>std::allocator</code> může alokovat až <code>std::size_t</code> bajtů paměti, je <code>std::allocator&lt;T&gt;::size_type</code> definován jako <code>std::size_t</code>. Proto je <code>T::size_type</code> ve výchozím nastavení <code>std::size_t</code>.</p><p>Pouze v případech, kdy je použit vlastní alokátor, jehož <code>T::size_type</code> je definován jako něco jiného než <code>std::size_t</code>, bude <code>T::size_type</code> kontejneru jiný než <code>std::size_t</code>. To je vzácné a řeší se to na úrovni konkrétní aplikace, takže je obecně bezpečné předpokládat, že <code>T::size_type</code> bude <code>std::size_t</code>, pokud vaše aplikace takový vlastní alokátor nepoužívá (a v takovém případě o tom budete vědět).</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b28",
       "type": "paragraph",
       "html": "<p>When accessing the <code>size_type</code> member of a container class, we must scope qualify it with the fully templated name of the container class. For example, <code>std::vector&lt;int&gt;::size_type</code>.</p>",
       "preview": "When accessing the size_type member of a container class, we must scope qualify ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při přístupu k členu <code>size_type</code> kontejnerové třídy musíme použít kvalifikaci oboru názvů s plným šablonovým názvem dané třídy. Například <code>std::vector&lt;int&gt;::size_type</code>.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b29",
       "type": "section",
       "title": "Getting the length of a std::vector using the size() member function or std::size()",
       "html": "<h3 class=\"cpp-section-heading\">Getting the length of a <code>std::vector</code> using the <code>size()</code> member function or <code>std::size()</code></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Získání délky <code>std::vector</code> pomocí členské funkce <code>size()</code> nebo <code>std::size()</code></h3>",
+      "title_cs": "Getting the length of a std::vector using the size() member function or std::size()"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b30",
       "type": "paragraph",
       "html": "<p>We can ask a container class object for its length using the <code>size()</code> member function (which returns the length as unsigned <code>size_type</code>):</p>",
       "preview": "We can ask a container class object for its length using the size() member funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Objektu kontejnerové třídy se můžeme na jeho délku zeptat pomocí členské funkce <code>size()</code> (která vrací délku jako bezznaménkový <code>size_type</code>):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b31",
@@ -237,35 +272,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout << \"length: \" << prime.size() << '\\n'; // returns length as type `size_type` (alias for `std::size_t`)\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout &lt;&lt; \"length: \" &lt;&lt; prime.size() &lt;&lt; '\\n'; // returns length as type `size_type` (alias for `std::size_t`)\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout << \"length: \" << prime.size() << '\\n'; // vrátí délku jako typ `size_type` (alias pro `std::size_t`)\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b32",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto se vypíše:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b33",
       "type": "output",
       "text": "length: 5\n",
       "html": "<pre>length: 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>length: 5\n</pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b34",
       "type": "paragraph",
       "html": "<p>Unlike <code>std::string</code> and <code>std::string_view</code>, which have both a <code>length()</code> and a <code>size()</code> member function (that do the same thing), <code>std::vector</code> (and most other container types in C++) only has <code>size()</code>. And now you understand why the length of a container is sometimes ambiguously called its size.</p>",
       "preview": "Unlike std::string and std::string_view, which have both a length() and a size()",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od <code>std::string</code> a <code>std::string_view</code>, které mají jak členskou funkci <code>length()</code>, tak <code>size()</code> (které dělají totéž), <code>std::vector</code> (a většina ostatních typů kontejnerů v C++) má pouze <code>size()</code>. A nyní už chápete, proč se délka kontejneru někdy poněkud nejednoznačně označuje jako jeho velikost (size).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b35",
       "type": "paragraph",
       "html": "<p>In C++17, we can also use the <code>std::size()</code> non-member function (which for container classes just calls the <code>size()</code> member function).</p>",
       "preview": "In C++17, we can also use the std::size() non-member function (which for contain",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++17 můžeme také použít nečlenskou funkci <code>std::size()</code> (která u kontejnerových tříd pouze volá členskou funkci <code>size()</code>).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b36",
@@ -273,7 +313,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout << \"length: \" << std::size(prime); // C++17, returns length as type `size_type` (alias for `std::size_t`)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout &lt;&lt; \"length: \" &lt;&lt; std::size(prime); // C++17, returns length as type `size_type` (alias for `std::size_t`)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    std::cout << \"délka: \" << std::size(prime); // C++17, vrátí délku jako typ `size_type` (alias pro `std::size_t`)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b37",
@@ -281,14 +322,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Because <code>std::size()</code> can also be used on non-decayed C-style arrays, this method is sometimes favored over the using the <code>size()</code> member function (particularly when writing function templates that can accept either a container class or non-decayed C-style array argument).</p><p>We discuss C-style array decay in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- C-style array decay</a>.</p></div>",
       "preview": "For advanced readersBecause std::size() can also be used on non-decayed C-style arrays, this method ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Protože <code>std::size()</code> lze použít také na nerozpadlá pole ve stylu jazyka C (non-decayed C-style arrays), je tato metoda někdy upřednostňována před použitím členské funkce <code>size()</code> (zejména při psaní šablon funkcí, které mohou přijmout buď kontejnerovou třídu, nebo argument typu nerozpadlého pole ve stylu C).</p><p>Rozpad polí ve stylu jazyka C probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- Rozpad polí ve stylu C (C-style array decay)</a>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b38",
       "type": "paragraph",
       "html": "<p>If we want to use either of the above methods to store the length in a variable with a signed type, this will likely result in a signed/unsigned conversion warning or error. The simplest thing to do here is static_cast the result to the desired type:</p>",
       "preview": "If we want to use either of the above methods to store the length in a variable ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chceme použít kteroukoli z výše uvedených metod k uložení délky do proměnné se znaménkovým typem (signed), pravděpodobně to povede k varování nebo chybě při převodu mezi signed a unsigned. Nejjednodušší věc, kterou zde můžeme udělat, je přetypovat výsledek pomocí static_cast na požadovaný typ:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b39",
@@ -296,21 +339,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    int length { static_cast<int>(prime.size()) }; // static_cast return value to int\n    std::cout << \"length: \" << length ;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    int length { static_cast&lt;int&gt;(prime.size()) }; // static_cast return value to int\n    std::cout &lt;&lt; \"length: \" &lt;&lt; length ;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector prime { 2, 3, 5, 7, 11 };\n    int length { static_cast<int>(prime.size()) }; // static_cast vrátí hodnotu int\n    std::cout << \"délka: \" << délka ;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b40",
       "type": "section",
       "title": "Getting the length of a std::vector using std::ssize() C++20",
       "html": "<h3 class=\"cpp-section-heading\">Getting the length of a <code>std::vector</code> using <code>std::ssize()</code> <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Získání délky <code>std::vector</code> pomocí <code>std::ssize()</code> <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
+      "title_cs": "Getting the length of a std::vector using std::ssize() C++20"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b41",
       "type": "paragraph",
       "html": "<p>C++20 introduces the <code>std::ssize()</code> non-member function, which returns the length as a large <em>signed</em> integral type (usually <code>std::ptrdiff_t</code>, which is the type normally used as the signed counterpart to <code>std::size_t</code>):</p>",
       "preview": "C++20 introduces the std::ssize() non-member function, which returns the length ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++20 zavádí nečlenskou funkci <code>std::ssize()</code>, která vrací délku jako velký <em>znaménkový</em> (signed) celočíselný typ (obvykle <code>std::ptrdiff_t</code>, což je typ běžně používaný jako znaménkový protějšek k <code>std::size_t</code>):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b42",
@@ -318,28 +365,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    std::cout << \"length: \" << std::ssize(prime); // C++20, returns length as a large signed integral type\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    std::cout &lt;&lt; \"length: \" &lt;&lt; std::ssize(prime); // C++20, returns length as a large signed integral type\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n    std::cout << \"length: \" << std::ssize(prime); // C++20, vrátí délku jako velký integrální typ se znaménkem\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b43",
       "type": "paragraph",
       "html": "<p>This is the only function of the three which returns the length as a signed type.</p>",
       "preview": "This is the only function of the three which returns the length as a signed type",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je jediná funkce z těchto tří, která vrací délku jako znaménkový typ.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b44",
       "type": "paragraph",
       "html": "<p>If you want to use this method to store the length in a variable with a signed type, you have a couple of options.</p>",
       "preview": "If you want to use this method to store the length in a variable with a signed t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chcete tuto metodu použít k uložení délky do proměnné se znaménkovým typem, máte několik možností.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b45",
       "type": "paragraph",
       "html": "<p>First, because the <code>int</code> type may be smaller than the signed type returned by <code>std::ssize()</code>, if you are going to assign the length to an <code>int</code> variable, you should static_cast the result to <code>int</code> to make any such conversion explicit (otherwise you might get a narrowing conversion warning or error):</p>",
       "preview": "First, because the int type may be smaller than the signed type returned by std:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, protože typ <code>int</code> může být menší než znaménkový typ vrácený funkcí <code>std::ssize()</code>, pokud se chystáte přiřadit délku do proměnné typu <code>int</code>, měli byste výsledek přetypovat pomocí static_cast na <code>int</code>, aby byl takový převod explicitní (jinak můžete obdržet varování nebo chybu týkající se zužující konverze / narrowing conversion):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b46",
@@ -347,14 +398,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    int length { static_cast<int>(std::ssize(prime)) }; // static_cast return value to int\n    std::cout << \"length: \" << length;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    int length { static_cast&lt;int&gt;(std::ssize(prime)) }; // static_cast return value to int\n    std::cout &lt;&lt; \"length: \" &lt;&lt; length;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n    int length { static_cast<int>(std::ssize(prime)) }; // static_cast vrátí hodnotu int\n    std::cout << \"délka: \" << délka;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b47",
       "type": "paragraph",
       "html": "<p>Alternatively, you can use <code>auto</code> to have the compiler deduce the correct signed type to use for the variable:</p>",
       "preview": "Alternatively, you can use auto to have the compiler deduce the correct signed t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případně můžete použít <code>auto</code>, aby kompilátor sám odvodil správný znaménkový typ (signed type), který se má pro proměnnou použít:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b48",
@@ -362,21 +415,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    auto length { std::ssize(prime) }; // use auto to deduce signed type, as returned by std::ssize()\n    std::cout << \"length: \" << length;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n    auto length { std::ssize(prime) }; // use auto to deduce signed type, as returned by std::ssize()\n    std::cout &lt;&lt; \"length: \" &lt;&lt; length;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n    auto length { std::ssize(prime) }; // použijte auto k odvození podepsaného typu, jak je vráceno std::ssize()\n    std::cout << \"délka: \" << délka;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b49",
       "type": "section",
       "title": "Accessing array elements using operator[] does no bounds checking",
       "html": "<h3 class=\"cpp-section-heading\">Accessing array elements using <code>operator[]</code> does no bounds checking</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přístup k prvkům pole pomocí <code>operator[]</code> nekontroluje meze</h3>",
+      "title_cs": "Přístup k prvkům pole pomocí operátoru[] nemá žádné hranice kontroly"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b50",
       "type": "paragraph",
       "html": "<p>In the prior lesson, we introduced the subscript operator (<code>operator[]</code>):</p>",
       "preview": "In the prior lesson, we introduced the subscript operator (operator[]):",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci jsme si představili operátor indexování (<code>operator[]</code>):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b51",
@@ -384,28 +441,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime[3];  // print the value of element with index 3 (7)\n    std::cout << prime[9]; // invalid index (undefined behavior)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout &lt;&lt; prime[3];  // print the value of element with index 3 (7)\n    std::cout &lt;&lt; prime[9]; // invalid index (undefined behavior)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime[3];  // vytiskne hodnotu prvku s indexem 3 (7)\n    std::cout << prime[9]; // neplatný index (nedefinované chování)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b52",
       "type": "paragraph",
       "html": "<p><code>operator[]</code> does not do bounds checking. The index for operator[] can be non-const. We’ll discuss this further in a later section.</p>",
       "preview": "operator[] does not do bounds checking. The index for operator[] can be non-cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>operator[]</code> neprovádí kontrolu mezí (bounds checking). Index pro operator[] může být nekonstantní. Tomuto tématu se budeme podrobněji věnovat v pozdější části.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b53",
       "type": "section",
       "title": "Accessing array elements using the at() member function does runtime bounds checking",
       "html": "<h3 class=\"cpp-section-heading\">Accessing array elements using the <code>at()</code> member function does runtime bounds checking</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přístup k prvkům pole pomocí členské funkce <code>at()</code> provádí kontrolu mezí za běhu programu</h3>",
+      "title_cs": "Přístup k prvkům pole pomocí členské funkce at() provádí kontrolu hranic běhu"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b54",
       "type": "paragraph",
       "html": "<p>The array container classes support another method for accessing an array. The <code>at()</code> member function can be used to do array access with runtime bounds checking:</p>",
       "preview": "The array container classes support another method for accessing an array. The a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kontejnerové třídy pro pole podporují další způsob přístupu k prvkům. Členskou funkci <code>at()</code> lze použít k přístupu k poli s kontrolou mezí za běhu programu (runtime bounds checking):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b55",
@@ -413,14 +475,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime.at(3); // print the value of element with index 3\n    std::cout << prime.at(9); // invalid index (throws exception)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout &lt;&lt; prime.at(3); // print the value of element with index 3\n    std::cout &lt;&lt; prime.at(9); // invalid index (throws exception)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime.at(3); // vypíše hodnotu prvku s indexem 3\n    std::cout << prime.at(9); // neplatný index (vyvolá výjimku)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b56",
       "type": "paragraph",
       "html": "<p>In the above example, the call to <code>prime.at(3)</code> checks to ensure the index 3 is valid, and because it is, it returns a reference to array element 3. We can then print this value. However, the call to <code>prime.at(9)</code> fails (at runtime) because 9 is not a valid index for this array. Instead of returning a reference, the <code>at()</code> function generates an error that terminates the program.</p>",
       "preview": "In the above example, the call to prime.at(3) checks to ensure the index 3 is va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu volání <code>prime.at(3)</code> ověří, zda je index 3 platný, a protože je, vrátí referenci na prvek pole s indexem 3. Tuto hodnotu pak můžeme vypsat. Volání <code>prime.at(9)</code> však selže (za běhu programu), protože 9 není pro toto pole platný index. Místo vrácení reference vygeneruje funkce <code>at()</code> chybu, která program ukončí.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b57",
@@ -428,35 +492,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>When the <code>at()</code> member function encounters an out-of-bounds index, it actually throws an exception of type <code>std::out_of_range</code>. If the exception is not handled, the program will be terminated. We cover exceptions and how to handle them in <a href=\"https://www.learncpp.com#Chapter27\">chapter 27</a>.</p></div>",
       "preview": "For advanced readersWhen the at() member function encounters an out-of-bounds index, it actually thr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Když členská funkce <code>at()</code> narazí na index mimo meze, ve skutečnosti vyhodí výjimku typu <code>std::out_of_range</code>. Pokud tato výjimka není ošetřena, program se ukončí. Výjimkami a tím, jak je ošetřovat, se zabýváme v <a href=\"https://www.learncpp.com#Chapter27\">kapitole 27</a>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b58",
       "type": "paragraph",
       "html": "<p>Just like <code>operator[]</code>, the index passed to <code>at()</code> can be non-const.</p>",
       "preview": "Just like operator[], the index passed to at() can be non-const.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u <code>operator[]</code> může být index předaný funkci <code>at()</code> nekonstantní (non-const).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b59",
       "type": "paragraph",
       "html": "<p>Because it does runtime bounds checking on every call, <code>at()</code> is slower (but safer) than <code>operator[]</code>. Despite being less safe, <code>operator[]</code> is typically used over <code>at()</code>, primarily because it’s better to do bounds checking prior to indexing, so we don’t try to use an invalid index in the first place.</p>",
       "preview": "Because it does runtime bounds checking on every call, at() is slower (but safer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>at()</code> provádí kontrolu mezí za běhu programu při každém volání, je pomalejší (ale bezpečnější) než <code>operator[]</code>. Navzdory menší bezpečnosti se <code>operator[]</code> obvykle používá častěji než <code>at()</code>, především proto, že je lepší provést kontrolu mezí ještě před indexováním, abychom se vůbec nepokoušeli použít neplatný index.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b60",
       "type": "section",
       "title": "Indexing std::vector with a constexpr signed int",
       "html": "<h3 class=\"cpp-section-heading\">Indexing <code>std::vector</code> with a constexpr signed int</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Indexování <code>std::vector</code> pomocí constexpr signed int</h3>",
+      "title_cs": "Indexování std::vector s constexpr podepsaným int"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b61",
       "type": "paragraph",
       "html": "<p>When indexing a <code>std::vector</code> with a constexpr (signed) int, we can let the compiler implicitly convert this to a <code>std::size_t</code> without it being a narrowing conversion:</p>",
       "preview": "When indexing a std::vector with a constexpr (signed) int, we can let the compil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při indexování <code>std::vector</code> pomocí constexpr (signed) int můžeme nechat kompilátor tuto hodnotu implicitně převést na <code>std::size_t</code>, aniž by šlo o zužující konverzi (narrowing conversion):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b62",
@@ -464,21 +534,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime[3] << '\\n';     // okay: 3 converted from int to std::size_t, not a narrowing conversion\n \n    constexpr int index { 3 };         // constexpr\n    std::cout << prime[index] << '\\n'; // okay: constexpr index implicitly converted to std::size_t, not a narrowing conversion\n   \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::cout &lt;&lt; prime[3] &lt;&lt; '\\n';     // okay: 3 converted from int to std::size_t, not a narrowing conversion\n \n    constexpr int index { 3 };         // constexpr\n    std::cout &lt;&lt; prime[index] &lt;&lt; '\\n'; // okay: constexpr index implicitly converted to std::size_t, not a narrowing conversion\n   \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n\n    std::cout << prime[3] << '\\n';     // v pořádku: 3 převedeno z int na std::size_t, ne zužující převod\n \n    constexpr int index { 3 };         // constexpr\n    std::cout << prime[index] << '\\n'; // v pořádku: index constexpr je implicitně převeden na std::size_t, nikoli zužující převod\n   \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b63",
       "type": "section",
       "title": "Indexing std::vector with a non-constexpr value",
       "html": "<h3 class=\"cpp-section-heading\">Indexing <code>std::vector</code> with a non-constexpr value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Indexování <code>std::vector</code> pomocí ne-constexpr hodnoty</h3>",
+      "title_cs": "Indexování std::vector s jinou než constexpr hodnotou"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b64",
       "type": "paragraph",
       "html": "<p>The subscripts used to index an array can be non-const:</p>",
       "preview": "The subscripts used to index an array can be non-const:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Indexy použité k přístupu k prvkům pole mohou být nekonstantní (non-const):</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b65",
@@ -486,21 +560,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::size_t index { 3 };           // non-constexpr\n    std::cout << prime[index] << '\\n'; // operator[] expects an index of type std::size_t, no conversion required\n   \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    std::size_t index { 3 };           // non-constexpr\n    std::cout &lt;&lt; prime[index] &lt;&lt; '\\n'; // operator[] expects an index of type std::size_t, no conversion required\n   \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n\n    std::size_t index { 3 };           // non-constexpr\n    std::cout << prime[index] << '\\n'; // operátor[] očekává index typu std::size_t, není nutná žádná konverze\n   \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b66",
       "type": "paragraph",
       "html": "<p>However, as per our best practices (<a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 -- Unsigned integers, and why to avoid them</a>), we generally want to avoid using unsigned types to hold quantities.</p>",
       "preview": "However, as per our best practices (4.5 -- Unsigned integers, and why to avoid t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podle našich doporučených postupů (<a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 -- Bezznaménková celá čísla a proč se jim vyhýbat</a>) se však obecně chceme vyhnout používání bezznaménkových typů pro uchovávání kvantity.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b67",
       "type": "paragraph",
       "html": "<p>When our subscript is a non-constexpr signed value, we run into problems:</p>",
       "preview": "When our subscript is a non-constexpr signed value, we run into problems:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je náš index ne-constexpr signed hodnota, narážíme na problémy:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b68",
@@ -508,35 +585,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    int index { 3 };                   // non-constexpr\n    std::cout << prime[index] << '\\n'; // possible warning: index implicitly converted to std::size_t, narrowing conversion\n   \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    int index { 3 };                   // non-constexpr\n    std::cout &lt;&lt; prime[index] &lt;&lt; '\\n'; // possible warning: index implicitly converted to std::size_t, narrowing conversion\n   \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vektor prvočíslo{ 2, 3, 5, 7, 11 };\n\n    int index { 3 };                   // non-constexpr\n    std::cout << prime[index] << '\\n'; // možné varování: index je implicitně převeden na std::size_t, zužuje převod\n   \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b69",
       "type": "paragraph",
       "html": "<p>In this example, <code>index</code> is a non-constexpr signed int. The subscript of <code>operator[]</code> defined as part of <code>std::vector</code> has type <code>size_type</code> (an alias for <code>std::size_t</code>). Therefore, when we call <code>prime[index]</code>, our signed int must be converted to <code>std::size_t</code>.</p>",
       "preview": "In this example, index is a non-constexpr signed int. The subscript of operator[",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu je <code>index</code> non-constexpr signed int. Parametr indexování operátoru <code>operator[]</code> definovaného v rámci <code>std::vector</code> má typ <code>size_type</code> (alias pro <code>std::size_t</code>). Proto když zavoláme <code>prime[index]</code>, náš signed int musí být převeden na <code>std::size_t</code>.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b70",
       "type": "paragraph",
       "html": "<p>Such a conversion should not be dangerous (because the index of a <code>std::vector</code> is expected to be non-negative, and a non-negative signed value will safely convert to an unsigned value). But when performed at runtime, this is considered to be a narrowing conversion, and your compiler should produce a warning about this being an unsafe conversion (if it doesn’t, you should consider modifying your warnings so that it does).</p>",
       "preview": "Such a conversion should not be dangerous (because the index of a std::vector is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Takový převod by neměl být nebezpečný (protože se očekává, že index u <code>std::vector</code> bude nezáporný a nezáporná hodnota se znaménkem se bezpečně převede na bezznaménkovou hodnotu). Pokud se však provádí za běhu programu (runtime), je považován za zužující konverzi (narrowing conversion) a váš kompilátor by měl vygenerovat varování, že se jedná o nebezpečnou konverzi (pokud to nedělá, měli byste zvážit úpravu nastavení varování, aby tak činil).</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b71",
       "type": "paragraph",
       "html": "<p>Because array subscripting is common, and each such conversion will generate a warning, this can easily clutter up your compilation log with spurious warnings. Or, if you have “treat warning as errors” enabled, it will halt your compilation.</p>",
       "preview": "Because array subscripting is common, and each such conversion will generate a w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože indexování polí je běžné a každá taková konverze vygeneruje varování, může to snadno zaplnit výstup kompilátoru zbytečnými varováními. Nebo, pokud máte povolenou volbu „považovat varování za chyby“ (treat warnings as errors), kompilace se úplně zastaví.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b72",
       "type": "paragraph",
       "html": "<p>There are many possible ways to avoid this issue (e.g. <code>static_cast</code> your <code>int</code> to a <code>std::size_t</code> every time you index an array), but all inevitably end up cluttering or complicating your code in some way. The simplest thing to do in this case is use a variable of type std::size_t as your index, and do not use this variable for anything but indexing. That way you’ll avoid any non-constexpr conversions in the first place.</p>",
       "preview": "There are many possible ways to avoid this issue (e.g. static_cast your int to a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje mnoho způsobů, jak se tomuto problému vyhnout (např. pomocí <code>static_cast</code> přetypovat <code>int</code> na <code>std::size_t</code> pokaždé, když indexujete pole), ale všechny nevyhnutelně kód nějakým způsobem znepřehledňují nebo komplikují. Nejjednodušší, co můžete v tomto případě udělat, je použít jako index proměnnou typu std::size_t a nepoužívat ji k ničemu jinému než k indexování. Tím se v prvé řadě vyhnete jakýmkoli non-constexpr konverzím.</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b73",
@@ -544,7 +626,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Another good alternative is instead of indexing the <code>std::vector</code> itself, index the result of the <code>data()</code> member function:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    int index { 3 };                          // non-constexpr signed value\n    std::cout &lt;&lt; prime.data()[index] &lt;&lt; '\\n'; // okay: no sign conversion warnings\n   \n    return 0;\n}</code></pre><p>Under the hood, <code>std::vector</code> holds its elements in a C-style array. The <code>data()</code> member function returns a pointer to this underlying C-style array, which we can then index. Since C-style arrays allow indexing with both signed and unsigned types, we don’t run into any sign conversion issues. We discuss C-style arrays further in lessons <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/\">17.7 -- Introduction to C-style arrays</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- C-style array decay</a>.</p></div>",
       "preview": "TipAnother good alternative is instead of indexing the std::vector itself, index the result of the d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Další dobrou alternativou je namísto indexování samotného <code>std::vector</code> indexovat výsledek členské funkce <code>data()</code>:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector prime{ 2, 3, 5, 7, 11 };\n\n    int index { 3 };                          // non-constexpr signed value\n    std::cout &lt;&lt; prime.data()[index] &lt;&lt; '\\n'; // okay: no sign conversion warnings\n   \n    return 0;\n}</code></pre><p>Pod kapotou uchovává <code>std::vector</code> své prvky v poli ve stylu jazyka C (C-style array). Členská funkce <code>data()</code> vrací ukazatel na toto podkladové pole ve stylu jazyka C, které pak můžeme indexovat. Protože pole ve stylu jazyka C umožňují indexování pomocí signed i unsigned typů, nenarazíme na žádné problémy s převodem znaménka. Pole ve stylu jazyka C podrobněji rozebíráme v lekcích <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/\">17.7 -- Úvod do polí ve stylu C</a> a <a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- C-style array decay (rozpad polí ve stylu C)</a>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b74",
@@ -552,14 +635,17 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>We’ll discuss additional options to address such indexing challenges in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/arrays-loops-and-sign-challenge-solutions/\">16.7 -- Arrays, loops, and sign challenge solutions</a>.</p></div>",
       "preview": "Author’s noteWe’ll discuss additional options to address such indexing challenges in lesson 16.7 -- ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Další možnosti řešení těchto problémů s indexováním probereme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/arrays-loops-and-sign-challenge-solutions/\">16.7 -- Pole, cykly a řešení problémů se znaménky</a>.</p></div>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b75",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b76",
@@ -575,14 +661,16 @@
       "type": "paragraph",
       "html": "<p>The program should output the following:</p>",
       "preview": "The program should output the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Program by měl vypsat následující:</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b78",
       "type": "output",
       "text": "The array has 5 elements.\nee\n",
       "html": "<pre>The array has 5 elements.\nee\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Pole má 5 prvků.\nee\n</pre>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b79",
@@ -598,14 +686,17 @@
       "type": "paragraph",
       "html": "<p>b) What type does <code>size_type</code> default to? Is it signed or unsigned?</p>",
       "preview": "b) What type does size_type default to? Is it signed or unsigned?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>b) Jaký typ je pro <code>size_type</code> výchozí? Je se znaménkem, nebo bez znaménka?</p>"
     },
     {
       "id": "stdvector-and-the-unsigned-length-and-subscript-problem_b81",
       "type": "paragraph",
       "html": "<p>c) Which functions to get the length of a container return <code>size_type</code>?</p>",
       "preview": "c) Which functions to get the length of a container return size_type?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>c) Které funkce pro zjištění délky kontejneru vracejí <code>size_type</code>?</p>"
     }
-  ]
+  ],
+  "title_cs": "16.3 — std::vector a problém s neznaménkovou délkou a indexováním"
 }

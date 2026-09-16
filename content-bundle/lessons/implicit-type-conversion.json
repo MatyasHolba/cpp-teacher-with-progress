@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>We introduced type conversion in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-type-conversion-and-static_cast/\">4.12 -- Introduction to type conversion and static_cast</a>. To recap the most important points from that lesson:</p>",
       "preview": "We introduced type conversion in lesson 4.12 -- Introduction to type conversion ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Typovou konverzi jsme si představili v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-type-conversion-and-static_cast/\">4.12 – Úvod do typové konverze a static_cast</a>. Pro zopakování nejdůležitějších bodů z této lekce:</p>"
     },
     {
       "id": "implicit-type-conversion_b1",
       "type": "list",
       "html": "<ul><li>The process of converting data from one type to another type is called “type conversion”.</li><li>Implicit type conversion is performed automatically by the compiler when one data type is required, but a different data type is supplied.</li><li>Explicit type conversion is requested by using a cast operator, such as <code>static_cast</code>.</li><li>Conversions do not change the data being converted. Instead, the conversion process uses that data as input, and produces the converted result.</li><li>When converting a value to another type of value, the conversion process produces a temporary object of the target type that holds the result of the conversion.</li></ul>",
       "preview": "The process of converting data from one type to another type is called “type con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Proces převodu dat z jednoho typu na jiný typ se nazývá „typová konverze“ (type conversion).</li><li>Implicitní typová konverze je prováděna kompilátorem automaticky, když je vyžadován jeden datový typ, ale je dodán jiný datový typ.</li><li>Explicitní typová konverze je vyžádána pomocí operátoru přetypování, jako je například <code>static_cast</code>.</li><li>Konverze nemění původní převáděná data. Místo toho proces konverze použije tato data jako vstup a vygeneruje převedený výsledek.</li><li>Při převodu hodnoty na jiný typ hodnoty proces konverze vytvoří dočasný objekt cílového typu, který uchovává výsledek této konverze.</li></ul>"
     },
     {
       "id": "implicit-type-conversion_b2",
       "type": "paragraph",
       "html": "<p>In the first half of this chapter, we’re going to dig a bit deeper into how type conversion works. We’ll start with implicit conversions in this lesson, and explicit type conversions (casting) in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/explicit-type-conversion-casting-and-static-cast/\">10.6 -- Explicit type conversion (casting) and static_cast</a>. Since type conversion is used all over the place, having some understanding of what’s happening under the hood when a conversion is needed is important. This knowledge is also relevant when for understanding how overloaded functions (functions that can have the same name as other functions) work.</p>",
       "preview": "In the first half of this chapter, we’re going to dig a bit deeper into how type",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V první polovině této kapitoly se podíváme trochu hlouběji na to, jak typová konverze funguje. V této lekci začneme implicitními konverzemi a v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/explicit-type-conversion-casting-and-static-cast/\">10.6 – Explicitní typová konverze (přetypování) a static_cast</a> se zaměříme na explicitní typové konverze (přetypování). Vzhledem k tomu, že typová konverze se používá prakticky všude, je důležité mít alespoň základní představu o tom, co se děje „pod kapotou“, když je konverze potřeba. Tyto znalosti jsou také relevantní pro pochopení toho, jak fungují přetížené funkce (funkce, které mohou mít stejný název jako jiné funkce).</p>"
     },
     {
       "id": "implicit-type-conversion_b3",
@@ -36,28 +39,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>In this chapter, we’ll focus on the conversion of values to other types of values. We’ll cover other types of conversions once we introduce the prerequisite topics (such as pointers, references, inheritance, etc…).</p></div>",
       "preview": "Author’s noteIn this chapter, we’ll focus on the conversion of values to other types of values. We’l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>V této kapitole se zaměříme na konverzi hodnot na jiné typy hodnot. Dalším typům konverzí se budeme věnovat, jakmile si představíme potřebná prerekvizitní témata (jako jsou ukazatele, reference, dědičnost atd.).</p></div>"
     },
     {
       "id": "implicit-type-conversion_b4",
       "type": "section",
       "title": "Why conversions are needed",
       "html": "<h3 class=\"cpp-section-heading\">Why conversions are needed</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proč jsou konverze potřeba</h3>",
+      "title_cs": "Proč jsou potřebné konverze"
     },
     {
       "id": "implicit-type-conversion_b5",
       "type": "paragraph",
       "html": "<p>The value of an object is stored as a sequence of bits, and the data type of the object tells the compiler how to interpret those bits into meaningful values. Different data types may represent the “same” value differently. For example, the integer value <code>3</code> might be stored as binary <code>0000 0000 0000 0000 0000 0000 0000 0011</code>, whereas floating point value <code>3.0</code> might be stored as binary <code>0100 0000 0100 0000 0000 0000 0000 0000</code>.</p>",
       "preview": "The value of an object is stored as a sequence of bits, and the data type of the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hodnota objektu je uložena jako posloupnost bitů a datový typ objektu říká kompilátoru, jak má tyto bity interpretovat do smysluplných hodnot. Různé datové typy mohou reprezentovat „stejnou“ hodnotu odlišně. Například celočíselná hodnota <code>3</code> může být uložena binárně jako <code>0000 0000 0000 0000 0000 0000 0000 0011</code>, zatímco hodnota s plovoucí řádovou čárkou <code>3.0</code> může být uložena binárně jako <code>0100 0000 0100 0000 0000 0000 0000 0000</code>.</p>"
     },
     {
       "id": "implicit-type-conversion_b6",
       "type": "paragraph",
       "html": "<p>So what happens when we do something like this?</p>",
       "preview": "So what happens when we do something like this?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se tedy stane, když uděláme něco takového?</p>"
     },
     {
       "id": "implicit-type-conversion_b7",
@@ -65,14 +73,16 @@
       "language": "cpp",
       "code": "float f{ 3 }; // initialize floating point variable with int 3",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">float f{ 3 }; // initialize floating point variable with int 3</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">float f{ 3 }; // inicializuje proměnnou s plovoucí desetinnou čárkou pomocí int 3</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b8",
       "type": "paragraph",
       "html": "<p>In such a case, the compiler can’t just copy the bits used to represent <code>int</code> value <code>3</code> into the memory allocated for <code>float</code> variable <code>f</code>. If it were to do so, then when <code>f</code> (which has type <code>float</code>) was evaluated, those bits would be interpreted as a <code>float</code> rather than an <code>int</code>, and who knows what <code>float</code> value we’d end up with!</p>",
       "preview": "In such a case, the compiler can’t just copy the bits used to represent int valu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V takovém případě kompilátor nemůže pouze zkopírovat bity použité k reprezentaci hodnoty <code>int</code> <code>3</code> do paměti alokované pro proměnnou <code>f</code> typu <code>float</code>. Kdyby to udělal, pak by při vyhodnocení <code>f</code> (která je typu <code>float</code>) byly tyto bity interpretovány jako <code>float</code> namísto <code>int</code> a kdo ví, jakou <code>float</code> hodnotu bychom nakonec dostali!</p>"
     },
     {
       "id": "implicit-type-conversion_b9",
@@ -80,35 +90,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The following program actually prints <code>int</code> value <code>3</code> as if it were a <code>float</code>:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cstring&gt;\n\nint main()\n{\n    int n { 3 };                        // here's int value 3\n    float f {};                         // here's our float variable\n    std::memcpy(&amp;f, &amp;n, sizeof(float)); // copy the bits from n into f\n    std::cout &lt;&lt; f &lt;&lt; '\\n';             // print f (containing the bits from n)\n\n    return 0;\n}</code></pre><p>This produces the following result:</p><pre>4.2039e-45\n</pre></div>",
       "preview": "As an aside…The following program actually prints int value 3 as if it were a float:#include <iostre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Následující program skutečně vypíše hodnotu <code>int</code> <code>3</code>, jako by to byl <code>float</code>:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cstring&gt;\n\nint main()\n{\n    int n { 3 };                        // zde je int hodnota 3\n    float f {};                         // zde je naše float proměnná\n    std::memcpy(&amp;f, &amp;n, sizeof(float)); // zkopíruje bity z n do f\n    std::cout &lt;&lt; f &lt;&lt; '\\n';             // vypíše f (obsahující bity z n)\n\n    return 0;\n}</code></pre><p>To vytvoří následující výstup:</p><pre>4.2039e-45\n</pre></div>"
     },
     {
       "id": "implicit-type-conversion_b10",
       "type": "paragraph",
       "html": "<p>Instead, the integer value <code>3</code> needs to be converted into the equivalent floating point value <code>3.0</code>, which can then be stored in the memory allocated for <code>f</code> (using the bit representation for <code>float</code> value <code>3.0</code>) .</p>",
       "preview": "Instead, the integer value 3 needs to be converted into the equivalent floating ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo toho je potřeba celočíselnou hodnotu <code>3</code> převést na ekvivalentní hodnotu s plovoucí řádovou čárkou <code>3.0</code>, kterou pak lze uložit do paměti alokované pro <code>f</code> (pomocí bitové reprezentace pro <code>float</code> hodnotu <code>3.0</code>).</p>"
     },
     {
       "id": "implicit-type-conversion_b11",
       "type": "section",
       "title": "When implicit type conversion happens",
       "html": "<h3 class=\"cpp-section-heading\">When implicit type conversion happens</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy dochází k implicitní typové konverzi</h3>",
+      "title_cs": "Když dojde ke konverzi implicitního typu"
     },
     {
       "id": "implicit-type-conversion_b12",
       "type": "paragraph",
       "html": "<p><strong>Implicit type conversion</strong> (also called <strong>automatic type conversion</strong> or <strong>coercion</strong>) is performed automatically by the compiler when an expression of some type is supplied in a context where some other type is expected. The vast majority of type conversions in C++ are implicit type conversions. For example, implicit type conversion happens in all of the following cases:</p>",
       "preview": "Implicit type conversion (also called automatic type conversion or coercion) is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Implicitní typovou konverzi</strong> (nazývanou také <strong>automatická typová konverze</strong> nebo <strong>přetypování (coercion)</strong>) provádí kompilátor automaticky, když je výraz určitého typu poskytnut v kontextu, kde se očekává jiný typ. Naprostá většina typových konverzí v C++ jsou implicitní typové konverze. K implicitní typové konverzi dochází například ve všech následujících případech:</p>"
     },
     {
       "id": "implicit-type-conversion_b13",
       "type": "paragraph",
       "html": "<p>When initializing (or assigning a value to) a variable with a value of a different data type:</p>",
       "preview": "When initializing (or assigning a value to) a variable with a value of a differe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při inicializaci (nebo přiřazení hodnoty do) proměnné s hodnotou jiného datového typu:</p>"
     },
     {
       "id": "implicit-type-conversion_b14",
@@ -116,14 +132,16 @@
       "language": "cpp",
       "code": "double d{ 3 }; // int value 3 implicitly converted to type double\nd = 6; // int value 6 implicitly converted to type double",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double d{ 3 }; // int value 3 implicitly converted to type double\nd = 6; // int value 6 implicitly converted to type double</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">dvojité d{ 3 }; // int hodnota 3 implicitně převedena na typ double\nd = 6; // int hodnota 6 implicitně převedena na typ double</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b15",
       "type": "paragraph",
       "html": "<p>When the type of a return value is different from the function’s declared return type:</p>",
       "preview": "When the type of a return value is different from the function’s declared return",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se typ návratové hodnoty liší od deklarovaného návratového typu funkce:</p>"
     },
     {
       "id": "implicit-type-conversion_b16",
@@ -131,14 +149,16 @@
       "language": "cpp",
       "code": "float doSomething()\n{\n    return 3.0; // double value 3.0 implicitly converted to type float\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">float doSomething()\n{\n    return 3.0; // double value 3.0 implicitly converted to type float\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">float doSomething()\n{\n    návrat 3,0; // dvojitá hodnota 3.0 implicitně převedena na typ float\n}</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b17",
       "type": "paragraph",
       "html": "<p>When using certain binary operators with operands of different types:</p>",
       "preview": "When using certain binary operators with operands of different types:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při použití určitých binárních operátorů s operandy různých typů:</p>"
     },
     {
       "id": "implicit-type-conversion_b18",
@@ -146,14 +166,16 @@
       "language": "cpp",
       "code": "double division{ 4.0 / 3 }; // int value 3 implicitly converted to type double",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double division{ 4.0 / 3 }; // int value 3 implicitly converted to type double</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">dvojité dělení{ 4.0 / 3 }; // int hodnota 3 implicitně převedena na typ double</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b19",
       "type": "paragraph",
       "html": "<p>When using a non-Boolean value in an if-statement:</p>",
       "preview": "When using a non-Boolean value in an if-statement:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při použití neboooleovské hodnoty v příkazu if:</p>"
     },
     {
       "id": "implicit-type-conversion_b20",
@@ -161,14 +183,16 @@
       "language": "cpp",
       "code": "if (5) // int value 5 implicitly converted to type bool\n{\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (5) // int value 5 implicitly converted to type bool\n{\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (5) // hodnota int 5 je implicitně převedena na typ bool\n{\n}</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b21",
       "type": "paragraph",
       "html": "<p>When an argument passed to a function is a different type than the function parameter:</p>",
       "preview": "When an argument passed to a function is a different type than the function para",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je argument předaný funkci jiného typu než parametr funkce:</p>"
     },
     {
       "id": "implicit-type-conversion_b22",
@@ -176,56 +200,65 @@
       "language": "cpp",
       "code": "void doSomething(long l)\n{\n}\n\ndoSomething(3); // int value 3 implicitly converted to type long",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(long l)\n{\n}\n\ndoSomething(3); // int value 3 implicitly converted to type long</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething (dlouhé l)\n{\n}\n\ndoSomething(3); // int hodnota 3 implicitně převedena na typ long</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b23",
       "type": "paragraph",
       "html": "<p>So how does the compiler know how to convert a value to a different type anyway?</p>",
       "preview": "So how does the compiler know how to convert a value to a different type anyway?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak tedy kompilátor vůbec ví, jak převést hodnotu na jiný typ?</p>"
     },
     {
       "id": "implicit-type-conversion_b24",
       "type": "section",
       "title": "The standard conversions",
       "html": "<h3 class=\"cpp-section-heading\">The standard conversions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Standardní konverze</h3>",
+      "title_cs": "Standardní převody"
     },
     {
       "id": "implicit-type-conversion_b25",
       "type": "paragraph",
       "html": "<p>As part of the core language, the C++ standard defines a collection of conversion rules known as the “standard conversions”. The <strong>standard conversions</strong> specify how various fundamental types (and certain compound types, including arrays, references, pointers, and enumerations) convert to other types within that same group.</p>",
       "preview": "As part of the core language, the C++ standard defines a collection of conversio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V rámci jádra jazyka definuje standard C++ sadu pravidel pro převod známou jako „standardní konverze“. <strong>Standardní konverze</strong> (standard conversions) určují, jak se různé fundamentální typy (a některé složené typy, včetně polí, referencí, ukazatelů a výčtů) převádějí na jiné typy v rámci téže skupiny.</p>"
     },
     {
       "id": "implicit-type-conversion_b26",
       "type": "paragraph",
       "html": "<p>As of C++23, there are 14 different standard conversions. These can be roughly grouped into 5 general categories:</p>",
       "preview": "As of C++23, there are 14 different standard conversions. These can be roughly g",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Od verze C++23 existuje 14 různých standardních konverzí. Ty lze zhruba rozdělit do 5 obecných kategorií:</p>"
     },
     {
       "id": "implicit-type-conversion_b27",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Category</th><th>Meaning</th><th>Link</th></tr><tr><td>Numeric promotions</td><td>Conversions of small integral types to <code>int</code> or <code>unsigned int</code>, and of <code>float</code> to <code>double</code>.</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Floating-point and integral promotion</a></td></tr><tr><td>Numeric conversions</td><td>Other integral and floating point conversions that aren’t promotions.</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a></td></tr><tr><td>Qualification conversions</td><td>Conversions that add or remove <code>const</code> or <code>volatile</code>.</td><td></td></tr><tr><td>Value transformations</td><td>Conversions that change the value category of an expression</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/\">12.2 -- Value categories (lvalues and rvalues)</a></td></tr><tr><td>Pointer conversions</td><td>Conversions from <code>std::nullptr</code> to pointer types, or pointer types to other pointer types</td><td></td></tr></tbody></table></div>",
       "preview": "CategoryMeaningLinkNumeric promotionsConversions of small integral types to int ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Kategorie</th><th>Význam</th><th>Odkaz</th></tr><tr><td>Numerické povýšení (numeric promotions)</td><td>Konverze malých celočíselných typů na <code>int</code> nebo <code>unsigned int</code> a typu <code>float</code> na <code>double</code>.</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Povýšení celých čísel a čísel s plovoucí řádovou čárkou</a></td></tr><tr><td>Numerické konverze (numeric conversions)</td><td>Ostatní celočíselné konverze a konverze čísel s plovoucí řádovou čárkou, které nejsou povýšením.</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numerické konverze</a></td></tr><tr><td>Kvalifikační konverze (qualification conversions)</td><td>Konverze, které přidávají nebo odebírají <code>const</code> nebo <code>volatile</code>.</td><td></td></tr><tr><td>Transformace hodnot (value transformations)</td><td>Konverze, které mění hodnotovou kategorii výrazu</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/\">12.2 -- Hodnotové kategorie (l-hodnoty a r-hodnoty)</a></td></tr><tr><td>Konverze ukazatelů (pointer conversions)</td><td>Konverze z <code>std::nullptr</code> na typy ukazatelů nebo typů ukazatelů na jiné typy ukazatelů</td><td></td></tr></tbody></table></div>"
     },
     {
       "id": "implicit-type-conversion_b28",
       "type": "paragraph",
       "html": "<p>For example, converting an <code>int</code> value to a <code>float</code> value falls under the numeric conversions category, so the compiler to perform such a conversion, the compiler simply need apply the <code>int</code> to <code>float</code> numeric conversion rules.</p>",
       "preview": "For example, converting an int value to a float value falls under the numeric co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například převod hodnoty typu <code>int</code> na hodnotu typu <code>float</code> spadá do kategorie numerických konverzí, takže k provedení takového převodu stačí, aby kompilátor aplikoval pravidla numerické konverze z <code>int</code> na <code>float</code>.</p>"
     },
     {
       "id": "implicit-type-conversion_b29",
       "type": "paragraph",
       "html": "<p>The numeric conversions and numeric promotions are the most important of these categories, and we’ll cover them in more detail in upcoming lessons.</p>",
       "preview": "The numeric conversions and numeric promotions are the most important of these c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Numerické konverze a numerická povýšení jsou z těchto kategorií nejdůležitější a podrobněji se jim budeme věnovat v nadcházejících lekcích.</p>"
     },
     {
       "id": "implicit-type-conversion_b30",
@@ -233,35 +266,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Here is the full list of standard conversions:</p><div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Category</th><th>Standard Conversion</th><th>Description</th><th>Also See</th></tr><tr><td>Value transformation</td><td>Lvalue-to-rvalue</td><td>Converts lvalue expression to rvalue expression</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/\">12.2 -- Value categories (lvalues and rvalues)</a></td></tr><tr><td>Value transformation</td><td>Array-to-pointer</td><td>Converts C-style array to pointer to first array element (a.k.a. array decay)</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- C-style array decay</a></td></tr><tr><td>Value transformation</td><td>Function-to-pointer</td><td>Converts function to function pointer</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/function-pointers/\">20.1 -- Function Pointers</a></td></tr><tr><td>Value transformation</td><td>Temporary materialization</td><td>Converts value to temporary object</td><td></td></tr><tr><td>Qualification conversion</td><td>Qualification conversion</td><td>Adds or removes <code>const</code> or <code>volatile</code> from types</td><td></td></tr><tr><td>Numeric promotions</td><td>Integral promotions</td><td>Converts smaller integral types to <code>int</code> or <code>unsigned int</code></td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Floating-point and integral promotion</a></td></tr><tr><td>Numeric promotions</td><td>Floating point promotions</td><td>Converts <code>float</code> to <code>double</code></td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Floating-point and integral promotion</a></td></tr><tr><td>Numeric conversions</td><td>Integral conversions</td><td>Integral conversions that aren’t integral promotions</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a></td></tr><tr><td>Numeric conversions</td><td>Floating point conversions</td><td>Floating point conversions that aren’t floating point promotions</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a></td></tr><tr><td>Numeric conversions</td><td>Integral-floating conversions</td><td>Converts integral and floating point types</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numeric conversions</a></td></tr><tr><td>Numeric conversions</td><td>Boolean conversions</td><td>Converts integral, unscoped enumeration, pointer, or pointer-to-memver to bool</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-if-statements/\">4.10 -- Introduction to if statements</a></td></tr><tr><td>Pointer conversions</td><td>Pointer conversions</td><td>Converts <code>std::nullptr</code> to pointer, or pointer to void pointer or base class</td><td></td></tr><tr><td>Pointer conversions</td><td>Pointer-to-member conversions</td><td>Converts <code>std::nullptr</code> to pointer-to-member<br>or pointer-to-member of base class to pointer-to-member of derived class</td><td></td></tr><tr><td>Pointer conversions</td><td>Function pointer conversions</td><td>Converts pointer-to-noexcept-function to pointer-to-function</td><td></td></tr></tbody></table></div></div>",
       "preview": "For advanced readersHere is the full list of standard conversions:CategoryStandard ConversionDescrip",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Zde je úplný seznam standardních konverzí:</p><div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Kategorie</th><th>Standardní konverze</th><th>Popis</th><th>Viz také</th></tr><tr><td>Transformace hodnoty</td><td>Lvalue-na-rvalue</td><td>Převede lvalue výraz na rvalue výraz</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/\">12.2 -- Hodnotové kategorie (lvalues a rvalues)</a></td></tr><tr><td>Transformace hodnoty</td><td>Pole-na-ukazatel</td><td>Převede pole ve stylu C na ukazatel na první prvek pole (tzv. array decay)</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/c-style-array-decay/\">17.8 -- Rozpad polí ve stylu C (array decay)</a></td></tr><tr><td>Transformace hodnoty</td><td>Funkce-na-ukazatel</td><td>Převede funkci na ukazatel na funkci</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/function-pointers/\">20.1 -- Ukazatele na funkce</a></td></tr><tr><td>Transformace hodnoty</td><td>Materializace dočasného objektu</td><td>Převede hodnotu na dočasný objekt</td><td></td></tr><tr><td>Kvalifikační konverze</td><td>Kvalifikační konverze</td><td>Přidá nebo odebere <code>const</code> nebo <code>volatile</code> z typů</td><td></td></tr><tr><td>Numerická povýšení</td><td>Celočíselná povýšení</td><td>Převede menší celočíselné typy na <code>int</code> nebo <code>unsigned int</code></td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Povýšení reálných a celočíselných typů</a></td></tr><tr><td>Numerická povýšení</td><td>Povýšení typů s plovoucí řádovou čárkou</td><td>Převede <code>float</code> na <code>double</code></td><td><a href=\"https://www.learncpp.com/cpp-tutorial/floating-point-and-integral-promotion/\">10.2 -- Povýšení reálných a celočíselných typů</a></td></tr><tr><td>Numerické konverze</td><td>Celočíselné konverze</td><td>Celočíselné konverze, které nejsou celočíselnými povýšeními</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numerické konverze</a></td></tr><tr><td>Numerické konverze</td><td>Konverze typů s plovoucí řádovou čárkou</td><td>Konverze typů s plovoucí řádovou čárkou, které nejsou povýšeními typů s plovoucí řádovou čárkou</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numerické konverze</a></td></tr><tr><td>Numerické konverze</td><td>Konverze mezi celočíselnými a reálnými typy</td><td>Převede celočíselné typy a typy s plovoucí řádovou čárkou navzájem</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/numeric-conversions/\">10.3 -- Numerické konverze</a></td></tr><tr><td>Numerické konverze</td><td>Booleovské konverze</td><td>Převede celočíselný typ, neoborový výčet (unscoped enum), ukazatel nebo ukazatel na člena na bool</td><td><a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-if-statements/\">4.10 -- Úvod do příkazů if</a></td></tr><tr><td>Konverze ukazatelů</td><td>Konverze ukazatelů</td><td>Převede <code>std::nullptr</code> na ukazatel, nebo ukazatel na void ukazatel či bázovou třídu</td><td></td></tr><tr><td>Konverze ukazatelů</td><td>Konverze ukazatele na člena</td><td>Převede <code>std::nullptr</code> na ukazatel na člena<br>nebo ukazatel na člena bázové třídy na ukazatel na člena odvozené třídy</td><td></td></tr><tr><td>Konverze ukazatelů</td><td>Konverze ukazatelů na funkce</td><td>Převede ukazatel na noexcept funkci na ukazatel na funkci</td><td></td></tr></tbody></table></div></div>"
     },
     {
       "id": "implicit-type-conversion_b31",
       "type": "section",
       "title": "Type conversion can fail",
       "html": "<h3 class=\"cpp-section-heading\">Type conversion can fail</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Typová konverze může selhat</h3>",
+      "title_cs": "Konverze typu může selhat"
     },
     {
       "id": "implicit-type-conversion_b32",
       "type": "paragraph",
       "html": "<p>When a type conversion is invoked (whether implicitly or explicitly), the compiler will determine whether it can convert the value from the current type to the desired type. If a valid conversion can be found, then the compiler will produce a new value of the desired type.</p>",
       "preview": "When a type conversion is invoked (whether implicitly or explicitly), the compil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vyvolána typová konverze (ať už implicitně nebo explicitně), kompilátor určí, zda dokáže převést hodnotu ze stávajícího typu na požadovaný typ. Pokud je nalezena platná konverze, kompilátor vytvoří novou hodnotu požadovaného typu.</p>"
     },
     {
       "id": "implicit-type-conversion_b33",
       "type": "paragraph",
       "html": "<p>If the compiler can’t find an acceptable conversion, then the compilation will fail with a compile error. Type conversions can fail for any number of reasons. For example, the compiler might not know how to convert a value between the original type and the desired type.</p>",
       "preview": "If the compiler can’t find an acceptable conversion, then the compilation will f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud kompilátor nenajde přijatelnou konverzi, kompilace selže s chybou překladu. Typové konverze mohou selhat z celé řady důvodů. Kompilátor například nemusí vědět, jak převést hodnotu mezi původním a požadovaným typem.</p>"
     },
     {
       "id": "implicit-type-conversion_b34",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "implicit-type-conversion_b35",
@@ -269,21 +308,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x { \"14\" };\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { \"14\" };\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { \"14\" };\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b36",
       "type": "paragraph",
       "html": "<p>The because there isn’t a standard conversion from the string literal “14” to <code>int</code>, the compiler will produce an error. For example, GCC produces the error: <code>prog.cc:3:13: error: invalid conversion from 'const char*' to 'int' [-fpermissive]</code>.</p>",
       "preview": "The because there isn’t a standard conversion from the string literal “14” to in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože neexistuje standardní konverze z řetězcového literálu „14“ na <code>int</code>, kompilátor vygeneruje chybu. GCC například vypíše chybu: <code>prog.cc:3:13: error: invalid conversion from 'const char*' to 'int' [-fpermissive]</code>.</p>"
     },
     {
       "id": "implicit-type-conversion_b37",
       "type": "paragraph",
       "html": "<p>In other cases, specific features may disallow some categories of conversions. For example:</p>",
       "preview": "In other cases, specific features may disallow some categories of conversions. F",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V jiných případech mohou konkrétní vlastnosti jazyka zakazovat určité kategorie konverzí. Například:</p>"
     },
     {
       "id": "implicit-type-conversion_b38",
@@ -291,35 +333,41 @@
       "language": "cpp",
       "code": "int x { 3.5 }; // brace-initialization disallows conversions that result in data loss",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x { 3.5 }; // brace-initialization disallows conversions that result in data loss</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x { 3,5 }; // Brace-initialization zakáže převody, které vedou ke ztrátě dat</code></pre>"
     },
     {
       "id": "implicit-type-conversion_b39",
       "type": "paragraph",
       "html": "<p>Even though the compiler knows how to convert a <code>double</code> value to an <code>int</code> value, narrowing conversions are disallowed when using brace-initialization.</p>",
       "preview": "Even though the compiler knows how to convert a double value to an int value, na",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli kompilátor ví, jak převést hodnotu typu <code>double</code> na hodnotu typu <code>int</code>, zužující konverze jsou při použití inicializace pomocí složených závorek (brace-initialization) zakázány.</p>"
     },
     {
       "id": "implicit-type-conversion_b40",
       "type": "paragraph",
       "html": "<p>There are also cases where the compiler may not be able to figure out which of several possible type conversions is the best one to use. We’ll see examples of this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-resolution-and-ambiguous-matches/\">11.3 -- Function overload resolution and ambiguous matches</a>.</p>",
       "preview": "There are also cases where the compiler may not be able to figure out which of s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existují také případy, kdy kompilátor nemusí být schopen určit, která z několika možných typových konverzí je ta nejvhodnější. Příklady si ukážeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-resolution-and-ambiguous-matches/\">11.3 -- Vyhodnocení přetížení funkcí a nejednoznačné shody</a>.</p>"
     },
     {
       "id": "implicit-type-conversion_b41",
       "type": "paragraph",
       "html": "<p>The full set of rules describing how type conversions work is both lengthy and complicated, and for the most part, type conversion “just works”. In the next set of lessons, we’ll cover the most important things you need to know about the standard conversions. If finer detail is required for some uncommon case, the full rules are detailed in <a href=\"https://en.cppreference.com/w/cpp/language/implicit_conversion\">technical reference documentation for implicit conversions</a>.</p>",
       "preview": "The full set of rules describing how type conversions work is both lengthy and c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompletní sada pravidel popisujících, jak typové konverze fungují, je zdlouhavá a komplikovaná, ale většinou typová konverze „prostě funguje“. V následující sérii lekcí probereme to nejdůležitější, co o standardních konverzích potřebujete vědět. Pokud byste pro nějaký neobvyklý případ potřebovali detailnější informace, kompletní pravidla jsou podrobně popsána v <a href=\"https://en.cppreference.com/w/cpp/language/implicit_conversion\">technické referenční dokumentaci k implicitním konverzím</a>.</p>"
     },
     {
       "id": "implicit-type-conversion_b42",
       "type": "paragraph",
       "html": "<p>Let’s get to it!</p>",
       "preview": "Let’s get to it!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pusťme se do toho!</p>"
     }
-  ]
+  ],
+  "title_cs": "10.1 — Implicitní typová konverze"
 }

@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>When writing your code, sometimes you’ll run across cases where you’re not sure whether one method or another will be more performant. So how do you tell?</p>",
       "preview": "When writing your code, sometimes you’ll run across cases where you’re not sure ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při psaní kódu občas narazíte na případy, kdy si nebudete jistí, zda bude výkonnější ten či onen způsob řešení. Jak to tedy zjistit?</p>"
     },
     {
       "id": "timing-your-code_b1",
       "type": "paragraph",
       "html": "<p>One easy way is to time your code to see how long it takes to run. C++11 comes with some functionality in the chrono library to do just that. However, using the chrono library is a bit arcane. The good news is that we can easily encapsulate all the timing functionality we need into a class that we can then use in our own programs.</p>",
       "preview": "One easy way is to time your code to see how long it takes to run. C++11 comes w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze snadných způsobů je změřit čas běhu vašeho kódu. C++11 pro tento účel přináší funkcionalitu v knihovně chrono. Používání knihovny chrono je však poněkud krkolomné. Dobrou zprávou je, že veškerou potřebnou funkcionalitu pro měření času můžeme snadno zapouzdřit do třídy, kterou pak lze používat ve vlastních programech.</p>"
     },
     {
       "id": "timing-your-code_b2",
       "type": "paragraph",
       "html": "<p>Here’s the class:</p>",
       "preview": "Here’s the class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je tato třída:</p>"
     },
     {
       "id": "timing-your-code_b3",
@@ -36,14 +39,16 @@
       "language": "cpp",
       "code": "#include <chrono> // for std::chrono functions\n\nclass Timer\n{\nprivate:\n\t// Type aliases to make accessing nested type easier\n\tusing Clock = std::chrono::steady_clock;\n\tusing Second = std::chrono::duration<double, std::ratio<1> >;\n\t\n\tstd::chrono::time_point<Clock> m_beg { Clock::now() };\n\npublic:\n\tvoid reset()\n\t{\n\t\tm_beg = Clock::now();\n\t}\n\t\n\tdouble elapsed() const\n\t{\n\t\treturn std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n\t}\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;chrono&gt; // for std::chrono functions\n\nclass Timer\n{\nprivate:\n\t// Type aliases to make accessing nested type easier\n\tusing Clock = std::chrono::steady_clock;\n\tusing Second = std::chrono::duration&lt;double, std::ratio&lt;1&gt; &gt;;\n\t\n\tstd::chrono::time_point&lt;Clock&gt; m_beg { Clock::now() };\n\npublic:\n\tvoid reset()\n\t{\n\t\tm_beg = Clock::now();\n\t}\n\t\n\tdouble elapsed() const\n\t{\n\t\treturn std::chrono::duration_cast&lt;Second&gt;(Clock::now() - m_beg).count();\n\t}\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <chrono> // pro funkce std::chrono\n\ntřída časovač\n{\nsoukromé:\n\t// Zadejte aliasy pro usnadnění přístupu k vnořenému typu\n\tusing Clock = std::chrono::steady_clock;\n\tpomocí Second = std::chrono::duration<double, std::ratio<1> >;\n\t\n\tstd::chrono::time_point<Hodiny> m_beg { Hodiny::nyni() };\n\nveřejnost:\n\tvoid reset()\n\t{\n\t\tm_beg = Hodiny::nyni();\n\t}\n\t\n\tdouble elapsed() const\n\t{\n\t\treturn std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n\t}\n};</code></pre>"
     },
     {
       "id": "timing-your-code_b4",
       "type": "paragraph",
       "html": "<p>That’s it! To use it, we instantiate a Timer object at the top of our main function (or wherever we want to start timing), and then call the elapsed() member function whenever we want to know how long the program took to run to that point.</p>",
       "preview": "That’s it! To use it, we instantiate a Timer object at the top of our main funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A to je vše! Chceme-li ji použít, vytvoříme instanci objektu Timer na začátku naší funkce main (nebo kdekoli, kde chceme začít měřit čas), a pak zavoláme členskou funkci elapsed(), kdykoli chceme vědět, jak dlouho programu trvalo dostat se do tohoto bodu.</p>"
     },
     {
       "id": "timing-your-code_b5",
@@ -51,14 +56,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    Timer t;\n\n    // Code to time goes here\n\n    std::cout << \"Time elapsed: \" << t.elapsed() << \" seconds\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Timer t;\n\n    // Code to time goes here\n\n    std::cout &lt;&lt; \"Time elapsed: \" &lt;&lt; t.elapsed() &lt;&lt; \" seconds\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    časovač t;\n\n    // Kód do času jde sem\n\n    std::cout << \"Uplynulý čas: \" << t.elapsed() << \" sekund\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "timing-your-code_b6",
       "type": "paragraph",
       "html": "<p>Now, let’s use this in an actual example where we sort an array of 10000 elements. First, let’s use the selection sort algorithm we developed in a previous chapter:</p>",
       "preview": "Now, let’s use this in an actual example where we sort an array of 10000 element",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si to ukažme na konkrétním příkladu, kde seřadíme pole o 10 000 prvcích. Nejprve použijeme algoritmus selection sort, který jsme vytvořili v předchozí kapitole:</p>"
     },
     {
       "id": "timing-your-code_b7",
@@ -66,21 +73,24 @@
       "language": "cpp",
       "code": "#include <array>\n#include <chrono> // for std::chrono functions\n#include <cstddef> // for std::size_t\n#include <iostream>\n#include <numeric> // for std::iota\n\nconst int g_arrayElements { 10000 };\n\nclass Timer\n{\nprivate:\n    // Type aliases to make accessing nested type easier\n    using Clock = std::chrono::steady_clock;\n    using Second = std::chrono::duration<double, std::ratio<1> >;\n\n    std::chrono::time_point<Clock> m_beg{ Clock::now() };\n\npublic:\n\n    void reset()\n    {\n        m_beg = Clock::now();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n    }\n};\n\nvoid sortArray(std::array<int, g_arrayElements>& array)\n{\n\n    // Step through each element of the array\n    // (except the last one, which will already be sorted by the time we get there)\n    for (std::size_t startIndex{ 0 }; startIndex < (g_arrayElements - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we’ve encountered this iteration\n        // Start by assuming the smallest element is the first element of this iteration\n        std::size_t smallestIndex{ startIndex };\n\n        // Then look for a smaller element in the rest of the array\n        for (std::size_t currentIndex{ startIndex + 1 }; currentIndex < g_arrayElements; ++currentIndex)\n        {\n            // If we've found an element that is smaller than our previously found smallest\n            if (array[currentIndex] < array[smallestIndex])\n            {\n                // then keep track of it\n                smallestIndex = currentIndex;\n            }\n        }\n\n        // smallestIndex is now the smallest element in the remaining array\n        // swap our start element with our smallest element (this sorts it into the correct place)\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}\n\nint main()\n{\n    std::array<int, g_arrayElements> array;\n    std::iota(array.rbegin(), array.rend(), 1); // fill the array with values 10000 to 1\n\n    Timer t;\n\n    sortArray(array);\n\n    std::cout << \"Time taken: \" << t.elapsed() << \" seconds\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;chrono&gt; // for std::chrono functions\n#include &lt;cstddef&gt; // for std::size_t\n#include &lt;iostream&gt;\n#include &lt;numeric&gt; // for std::iota\n\nconst int g_arrayElements { 10000 };\n\nclass Timer\n{\nprivate:\n    // Type aliases to make accessing nested type easier\n    using Clock = std::chrono::steady_clock;\n    using Second = std::chrono::duration&lt;double, std::ratio&lt;1&gt; &gt;;\n\n    std::chrono::time_point&lt;Clock&gt; m_beg{ Clock::now() };\n\npublic:\n\n    void reset()\n    {\n        m_beg = Clock::now();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast&lt;Second&gt;(Clock::now() - m_beg).count();\n    }\n};\n\nvoid sortArray(std::array&lt;int, g_arrayElements&gt;&amp; array)\n{\n\n    // Step through each element of the array\n    // (except the last one, which will already be sorted by the time we get there)\n    for (std::size_t startIndex{ 0 }; startIndex &lt; (g_arrayElements - 1); ++startIndex)\n    {\n        // smallestIndex is the index of the smallest element we’ve encountered this iteration\n        // Start by assuming the smallest element is the first element of this iteration\n        std::size_t smallestIndex{ startIndex };\n\n        // Then look for a smaller element in the rest of the array\n        for (std::size_t currentIndex{ startIndex + 1 }; currentIndex &lt; g_arrayElements; ++currentIndex)\n        {\n            // If we've found an element that is smaller than our previously found smallest\n            if (array[currentIndex] &lt; array[smallestIndex])\n            {\n                // then keep track of it\n                smallestIndex = currentIndex;\n            }\n        }\n\n        // smallestIndex is now the smallest element in the remaining array\n        // swap our start element with our smallest element (this sorts it into the correct place)\n        std::swap(array[startIndex], array[smallestIndex]);\n    }\n}\n\nint main()\n{\n    std::array&lt;int, g_arrayElements&gt; array;\n    std::iota(array.rbegin(), array.rend(), 1); // fill the array with values 10000 to 1\n\n    Timer t;\n\n    sortArray(array);\n\n    std::cout &lt;&lt; \"Time taken: \" &lt;&lt; t.elapsed() &lt;&lt; \" seconds\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <chrono> // pro funkce std::chrono\n#include <cstddef> // pro std::size_t\n#include <iostream>\n#include <numeric> // pro std::iota\n\nconst int g_arrayElements { 10000 };\n\ntřída časovač\n{\nsoukromé:\n    // Zadejte aliasy pro usnadnění přístupu k vnořenému typu\n    using Clock = std::chrono::steady_clock;\n    pomocí Second = std::chrono::duration<double, std::ratio<1> >;\n\n    std::chrono::time_point<Hodiny> m_beg{ Hodiny::nyni() };\n\nveřejnost:\n\n    void reset()\n    {\n        m_beg = Hodiny::nyni();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n    }\n};\n\nvoid sortArray(std::array<int, g_arrayElements>& pole)\n{\n\n    // Procházet každým prvkem pole\n    // (kromě poslední, která již bude seřazena podle doby, kdy se tam dostaneme)\n    for (std::size_t startIndex{ 0 }; startIndex < (g_arrayElements - 1); ++startIndex)\n    {\n        // nejmenšíIndex je index nejmenšího prvku, se kterým jsme se v této iteraci setkali\n        // Začněte tím, že předpokládáme, že nejmenší prvek je prvním prvkem této iterace\n        std::velikost_t nejmenšíIndex{ startIndex };\n\n        // Poté vyhledejte menší prvek ve zbytku pole\n        for (std::size_t currentIndex{ startIndex + 1 }; currentIndex < g_arrayElements; ++currentIndex)\n        {\n            // Pokud jsme našli prvek, který je menší než náš dříve nalezený nejmenší\n            if (array[currentIndex] < array[smallestIndex])\n            {\n                // pak to sledujte\n                nejmenšíIndex = aktuálníIndex;\n            }\n        }\n\n        // nejmenší index je nyní nejmenší prvek ve zbývajícím poli\n        // vyměníme náš počáteční prvek za náš nejmenší prvek (tím se seřadí na správné místo)\n        std::swap(pole[startIndex], pole[smallestIndex]);\n    }\n}\n\nint main()\n{\n    std::array<int, g_arrayElements> pole;\n    std::iota(pole.rbegin(), pole.rend(), 1); // vyplňte pole hodnotami 10000 až 1\n\n    časovač t;\n\n    sortArray(pole);\n\n    std::cout << \"Čas: \" << t.elapsed() << \" sekund\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "timing-your-code_b8",
       "type": "paragraph",
       "html": "<p>On the author’s machine, three runs produced timings of 0.0507, 0.0506, and 0.0498. So we can say around 0.05 seconds.</p>",
       "preview": "On the author’s machine, three runs produced timings of 0.0507, 0.0506, and 0.04",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači přinesla tři spuštění časy 0,0507, 0,0506 a 0,0498. Můžeme tedy říct zhruba 0,05 sekundy.</p>"
     },
     {
       "id": "timing-your-code_b9",
       "type": "paragraph",
       "html": "<p>Now, let’s do the same test using std::sort from the standard library.</p>",
       "preview": "Now, let’s do the same test using std::sort from the standard library.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní proveďme stejný test s použitím std::sort ze standardní knihovny.</p>"
     },
     {
       "id": "timing-your-code_b10",
@@ -88,112 +98,131 @@
       "language": "cpp",
       "code": "#include <algorithm> // for std::sort\n#include <array>\n#include <chrono> // for std::chrono functions\n#include <cstddef> // for std::size_t\n#include <iostream>\n#include <numeric> // for std::iota\n\nconst int g_arrayElements { 10000 };\n\nclass Timer\n{\nprivate:\n    // Type aliases to make accessing nested type easier\n    using Clock = std::chrono::steady_clock;\n    using Second = std::chrono::duration<double, std::ratio<1> >;\n\n    std::chrono::time_point<Clock> m_beg{ Clock::now() };\n\npublic:\n\n    void reset()\n    {\n        m_beg = Clock::now();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n    }\n};\n\nint main()\n{\n    std::array<int, g_arrayElements> array;\n    std::iota(array.rbegin(), array.rend(), 1); // fill the array with values 10000 to 1\n\n    Timer t;\n\n    std::ranges::sort(array); // Since C++20\n    // If your compiler isn't C++20-capable\n    // std::sort(array.begin(), array.end());\n\n    std::cout << \"Time taken: \" << t.elapsed() << \" seconds\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::sort\n#include &lt;array&gt;\n#include &lt;chrono&gt; // for std::chrono functions\n#include &lt;cstddef&gt; // for std::size_t\n#include &lt;iostream&gt;\n#include &lt;numeric&gt; // for std::iota\n\nconst int g_arrayElements { 10000 };\n\nclass Timer\n{\nprivate:\n    // Type aliases to make accessing nested type easier\n    using Clock = std::chrono::steady_clock;\n    using Second = std::chrono::duration&lt;double, std::ratio&lt;1&gt; &gt;;\n\n    std::chrono::time_point&lt;Clock&gt; m_beg{ Clock::now() };\n\npublic:\n\n    void reset()\n    {\n        m_beg = Clock::now();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast&lt;Second&gt;(Clock::now() - m_beg).count();\n    }\n};\n\nint main()\n{\n    std::array&lt;int, g_arrayElements&gt; array;\n    std::iota(array.rbegin(), array.rend(), 1); // fill the array with values 10000 to 1\n\n    Timer t;\n\n    std::ranges::sort(array); // Since C++20\n    // If your compiler isn't C++20-capable\n    // std::sort(array.begin(), array.end());\n\n    std::cout &lt;&lt; \"Time taken: \" &lt;&lt; t.elapsed() &lt;&lt; \" seconds\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm> // pro std::sort\n#include <pole>\n#include <chrono> // pro funkce std::chrono\n#include <cstddef> // pro std::size_t\n#include <iostream>\n#include <numeric> // pro std::iota\n\nconst int g_arrayElements { 10000 };\n\ntřída časovač\n{\nsoukromé:\n    // Zadejte aliasy pro usnadnění přístupu k vnořenému typu\n    using Clock = std::chrono::steady_clock;\n    pomocí Second = std::chrono::duration<double, std::ratio<1> >;\n\n    std::chrono::time_point<Hodiny> m_beg{ Hodiny::nyni() };\n\nveřejnost:\n\n    void reset()\n    {\n        m_beg = Hodiny::nyni();\n    }\n\n    double elapsed() const\n    {\n        return std::chrono::duration_cast<Second>(Clock::now() - m_beg).count();\n    }\n};\n\nint main()\n{\n    std::array<int, g_arrayElements> pole;\n    std::iota(pole.rbegin(), pole.rend(), 1); // vyplňte pole hodnotami 10000 až 1\n\n    časovač t;\n\n    std::rozsahy::sort(pole); // Od C++20\n    // Pokud váš kompilátor nepodporuje C++20\n    // std::sort(array.begin(), array.end());\n\n    std::cout << \"Čas: \" << t.elapsed() << \" sekund\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "timing-your-code_b11",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this produced results of: 0.000693, 0.000692, and 0.000699. So basically right around 0.0007.</p>",
       "preview": "On the author’s machine, this produced results of: 0.000693, 0.000692, and 0.000",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači to dalo výsledky: 0,000693, 0,000692 a 0,000699. Tedy v podstatě přibližně 0,0007.</p>"
     },
     {
       "id": "timing-your-code_b12",
       "type": "paragraph",
       "html": "<p>In other words, in this case, std::sort is 100 times faster than the selection sort we wrote ourselves!</p>",
       "preview": "In other words, in this case, std::sort is 100 times faster than the selection s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinými slovy, v tomto případě je std::sort 100krát rychlejší než námi napsaný selection sort!</p>"
     },
     {
       "id": "timing-your-code_b13",
       "type": "section",
       "title": "Things that can impact the performance of your program",
       "html": "<h3 class=\"cpp-section-heading\">Things that can impact the performance of your program</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Faktory, které mohou ovlivnit výkon vašeho programu</h3>",
+      "title_cs": "Věci, které mohou ovlivnit výkon vašeho programu"
     },
     {
       "id": "timing-your-code_b14",
       "type": "paragraph",
       "html": "<p>Timing a run of your program is fairly straightforward, but your results can be significantly impacted by a number of things, and it’s important to be aware of how to properly measure and what things can impact timing.</p>",
       "preview": "Timing a run of your program is fairly straightforward, but your results can be ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Měření doby běhu vašeho programu je poměrně přímočaré, ale vaše výsledky mohou být výrazně ovlivněny celou řadou faktorů. Je proto důležité vědět, jak správně měřit a co všechno může měření času ovlivnit.</p>"
     },
     {
       "id": "timing-your-code_b15",
       "type": "paragraph",
       "html": "<p>First, make sure you’re using a release build target, not a debug build target. Debug build targets typically turn optimization off, and that optimization can have a significant impact on the results. For example, using a debug build target, running the above std::sort example on the author’s machine took 0.0235 seconds -- 33 times as long!</p>",
       "preview": "First, make sure you’re using a release build target, not a debug build target. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé se ujistěte, že používáte sestavení Release (release build target), nikoli Debug. Sestavení typu Debug obvykle vypínají optimalizace, přičemž tyto optimalizace mohou mít na výsledky zásadní vliv. Například v sestavení Debug trvalo spuštění výše uvedeného příkladu se std::sort na autorově počítači 0,0235 sekundy – 33krát déle!</p>"
     },
     {
       "id": "timing-your-code_b16",
       "type": "paragraph",
       "html": "<p>Second, your timing results may be influenced by other things your system may be doing in the background. Make sure your system isn’t doing anything CPU, memory, or hard drive intensive (e.g. playing a game, searching for a file, running an antivirus scan, or installing a update in the background). Seemingly innocent things, like idle web browsers, can temporarily spike your CPU to 100% utilization when the active tab rotates in a new ad banner and has to parse a bunch of javascript. The more apps you can shut down before measuring, the less variance in your results you are likely to have.</p>",
       "preview": "Second, your timing results may be influenced by other things your system may be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, vaše výsledky měření mohou být ovlivněny dalšími činnostmi, které systém provádí na pozadí. Ujistěte se, že systém nedělá nic náročného na procesor, paměť nebo disk (např. hraní her, vyhledávání souborů, spuštěná antivirová kontrola nebo instalace aktualizací na pozadí). I zdánlivě nevinné věci, jako jsou nečinné webové prohlížeče, mohou dočasně vytížit procesor na 100 %, když se na aktivní záložce načte nový reklamní banner a musí se zpracovat hromada JavaScriptu. Čím více aplikací před měřením ukončíte, tím menší rozptyl výsledků pravděpodobně získáte.</p>"
     },
     {
       "id": "timing-your-code_b17",
       "type": "paragraph",
       "html": "<p>Third, if your program uses a random number generator, the particular sequence of random numbers generated may impact timing. For example, if you’re sorting an array filled with random numbers, the results will likely vary from run to run because the number of swaps required to sort the array will vary from run to run. To get more consistent results across multiple runs of your program, you can temporarily seed your random number generator with a literal value (rather than std::random_device or the system clock), so that it generates the same sequence of numbers with each run. However, if your program’s performance is highly dependent on the particular random sequence generated, this can also lead to misleading results overall.</p>",
       "preview": "Third, if your program uses a random number generator, the particular sequence o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí, pokud váš program používá generátor náhodných čísel, konkrétní vygenerovaná posloupnost náhodných čísel může ovlivnit naměřený čas. Pokud například řadíte pole naplněné náhodnými čísly, výsledky se budou pravděpodobně lišit běh od běhu, protože počet prohození potřebných k seřazení pole se bude při každém běhu lišit. Chcete-li dosáhnout konzistentnějších výsledků napříč více běhy programu, můžete generátor náhodných čísel dočasně inicializovat (tzv. seedovat) fixní hodnotou (místo std::random_device nebo systémových hodin), aby při každém běhu generoval stejnou posloupnost čísel. Pokud je však výkon vašeho programu silně závislý na konkrétní náhodné posloupnosti, může to celkově vést i k zavádějícím výsledkům.</p>"
     },
     {
       "id": "timing-your-code_b18",
       "type": "paragraph",
       "html": "<p>Fourth, make sure you’re not timing waiting for user input, as how long the user takes to input something should not be part of your timing considerations. If user input is required, consider adding some way to provide that input that does not wait on the user (e.g. command line, from a file, having a code path that routes around the input).</p>",
       "preview": "Fourth, make sure you’re not timing waiting for user input, as how long the user",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začtvrté, ujistěte se, že neměříte čekání na uživatelský vstup, protože doba, kterou uživatel potřebuje k zadání vstupu, by neměla být součástí měření. Je-li uživatelský vstup vyžadován, zvažte možnost poskytnout tento vstup způsobem, který na uživatele nečeká (např. přes příkazovou řádku, ze souboru nebo pomocí větve kódu, která vstup obejde).</p>"
     },
     {
       "id": "timing-your-code_b19",
       "type": "section",
       "title": "Measuring performance",
       "html": "<h3 class=\"cpp-section-heading\">Measuring performance</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Měření výkonu</h3>",
+      "title_cs": "Měření výkonu"
     },
     {
       "id": "timing-your-code_b20",
       "type": "paragraph",
       "html": "<p>When measuring the performance of your program, gather at least 3 results. If the results are all similar, these likely represent the actual performance of your program on that machine. Otherwise, continue to take measurements until you have a cluster of similar results (and understand which other results are outliers). It’s not uncommon to have one or more outliers due to your system doing something in the background during some of those runs.</p>",
       "preview": "When measuring the performance of your program, gather at least 3 results. If th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při měření výkonu vašeho programu nasbírejte alespoň 3 výsledky. Pokud jsou všechny výsledky podobné, pravděpodobně představují skutečný výkon vašeho programu na daném stroji. V opačném případě pokračujte v měření, dokud nezískáte shluk podobných výsledků (a nepochopíte, které další výsledky jsou odlehlé hodnoty). Není neobvyklé mít jednu nebo více odlehlých hodnot kvůli tomu, že systém během některých z těchto běhů provádí něco na pozadí.</p>"
     },
     {
       "id": "timing-your-code_b21",
       "type": "paragraph",
       "html": "<p>If your results have a lot of variance (and aren’t clustering well), your program is likely either being significantly affected by other things happening on the system, or by the effects of randomization within your application.</p>",
       "preview": "If your results have a lot of variance (and aren’t clustering well), your progra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud mají vaše výsledky velký rozptyl (a netvoří ucelený shluk), je váš program pravděpodobně buď výrazně ovlivněn jinými procesy probíhajícími v systému, nebo vlivy náhodnosti v rámci vaší aplikace.</p>"
     },
     {
       "id": "timing-your-code_b22",
       "type": "paragraph",
       "html": "<p>Because performance measurements are impacted by so many things (particularly hardware speed, but also OS, apps running, etc…), absolute performance measurements (e.g. “the program runs in 10 seconds”) are generally not that useful outside of understanding how well the program runs on one particular machine you care about. On a different machine, that same program may run in 1 second, 10 seconds, or 1 minute. It’s hard to know without actually measuring across a spectrum of different hardware.</p>",
       "preview": "Because performance measurements are impacted by so many things (particularly ha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je měření výkonu ovlivněno tolika faktory (zejména rychlostí hardwaru, ale také operačním systémem, běžícími aplikacemi atd.), absolutní měření výkonu (např. „program běží 10 sekund“) obecně nejsou příliš užitečná mimo zjištění, jak dobře program běží na jednom konkrétním stroji, který vás zajímá. Na jiném stroji může tentýž program běžet 1 sekundu, 10 sekund nebo 1 minutu. Bez reálného měření na celém spektru různého hardwaru je těžké to předvídat.</p>"
     },
     {
       "id": "timing-your-code_b23",
       "type": "paragraph",
       "html": "<p>However, on a single machine, relative performance measurements can be useful. We can gather performance results from several different variants of a program to determine which variant is the most performant. For example, if variant 1 runs in 10 seconds and variant 2 runs in 8 seconds, variant 2 is probably going to be faster on all similar machines regardless of the absolute speed of that machine.</p>",
       "preview": "However, on a single machine, relative performance measurements can be useful. W",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na jednom stroji však mohou být relativní měření výkonu užitečná. Můžeme shromáždit výsledky výkonu z několika různých variant programu a určit, která varianta je nejvýkonnější. Pokud například varianta 1 běží 10 sekund a varianta 2 běží 8 sekund, varianta 2 bude pravděpodobně rychlejší na všech podobných strojích bez ohledu na absolutní rychlost daného stroje.</p>"
     },
     {
       "id": "timing-your-code_b24",
       "type": "paragraph",
       "html": "<p>After measuring the second variant, a good sanity check is to measure the first variant again. If the results of the first variant are consistent with your initial measurements for that variant, then the result of both variants should be reasonably comparable. For example, if variant 1 runs in 10 seconds, and variant 2 runs in 8 seconds, and then we measure variant 1 again and get 10 seconds, then we can reasonably conclude that the measurements for both variants were fairly measured, and that variant 2 is faster.</p>",
       "preview": "After measuring the second variant, a good sanity check is to measure the first ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po změření druhé varianty je dobrou kontrolou spolehlivosti (sanity check) znovu změřit první variantu. Pokud jsou výsledky první varianty konzistentní s vašimi počátečními měřeními této varianty, pak by výsledky obou variant měly být rozumně porovnatelné. Pokud například varianta 1 běží 10 sekund a varianta 2 běží 8 sekund, a poté znovu změříme variantu 1 a dostaneme 10 sekund, můžeme s jistotou vyvodit, že měření pro obě varianty proběhla spravedlivě a že varianta 2 je rychlejší.</p>"
     },
     {
       "id": "timing-your-code_b25",
       "type": "paragraph",
       "html": "<p>However, if the results of the first variant are no longer consistent with your initial measurements for that variant, then something has happened on the machine that is now affecting performance, and it will be hard to tell whether differences in measurement are due to the variant or due to the machine itself. In this case, it’s best to discard the existing results and re-measure.</p>",
       "preview": "However, if the results of the first variant are no longer consistent with your ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však výsledky první varianty již nejsou konzistentní s vašimi původními měřeními pro tuto variantu, pak se na stroji stalo něco, co nyní ovlivňuje výkon, a bude těžké určit, zda jsou rozdíly v měření způsobeny danou variantou, nebo samotným strojem. V takovém případě je nejlepší stávající výsledky zahodit a měření zopakovat.</p>"
     }
-  ]
+  ],
+  "title_cs": "18.4 — Měření doby běhu kódu"
 }

@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>On modern computer architectures, the smallest addressable unit of memory is a byte. Since all objects need to have unique memory addresses, this means objects must be at least one byte in size. For most variable types, this is fine. However, for Boolean values, this is a bit wasteful (pun intended). Boolean types only have two states: true (1), or false (0). This set of states only requires one bit to store. However, if a variable must be at least a byte, and a byte is 8 bits, that means a Boolean is using 1 bit and leaving the other 7 unused.</p>",
       "preview": "On modern computer architectures, the smallest addressable unit of memory is a b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na moderních počítačových architekturách je nejmenší adresovatelnou jednotkou paměti bajt. Vzhledem k tomu, že všechny objekty musí mít jedinečné paměťové adresy, znamená to, že objekty musí mít velikost alespoň jeden bajt. Pro většinu typů proměnných je to v pořádku. U booleovských hodnot je to však trochu plýtvání (v angličtině slovní hříčka: „a bit wasteful“). Booleovské typy mají pouze dva stavy: true (1) nebo false (0). K uložení této sady stavů stačí pouze jeden bit. Pokud však proměnná musí mít alespoň jeden bajt a bajt má 8 bitů, znamená to, že Boolean využívá 1 bit a zbývajících 7 nechává nevyužitých.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b1",
       "type": "paragraph",
       "html": "<p>In the majority of cases, this is fine -- we’re usually not so hard-up for memory that we need to care about 7 wasted bits (we’re better off optimizing for understandability and maintainability). However, in some storage-intensive cases, it can be useful to “pack” 8 individual Boolean values into a single byte for storage efficiency purposes.</p>",
       "preview": "In the majority of cases, this is fine -- we’re usually not so hard-up for memor",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů je to v pořádku – obvykle nemáme o paměť takovou nouzi, abychom museli řešit 7 promarněných bitů (je lepší optimalizovat pro srozumitelnost a udržovatelnost kódu). V některých případech náročných na paměť však může být z důvodu efektivity ukládání užitečné „zabalit“ 8 jednotlivých booleovských hodnot do jediného bajtu.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b2",
       "type": "paragraph",
       "html": "<p>Doing these things requires that we can manipulate objects at the bit level. Fortunately, C++ gives us tools to do precisely this. Modifying individual bits within an object is called <strong>bit manipulation</strong>.</p>",
       "preview": "Doing these things requires that we can manipulate objects at the bit level. For",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Provádění těchto věcí vyžaduje, abychom dokázali s objekty manipulovat na úrovni bitů. C++ nám naštěstí nabízí nástroje přesně k tomuto účelu. Úprava jednotlivých bitů v rámci objektu se nazývá <strong>bitová manipulace</strong>.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b3",
@@ -36,21 +39,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Bit manipulation is used a lot in certain programming contexts (e.g. graphics, encryption, compression, optimization), but not as much in general programming.</p><p>Because of that, this entire chapter is optional reading. Feel free to skip or skim it and come back later.</p></div>",
       "preview": "Author’s noteBit manipulation is used a lot in certain programming contexts (e.g. graphics, encrypti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Bitové manipulace se hojně využívají v určitých programátorských oblastech (např. grafika, šifrování, komprese, optimalizace), ale v běžném programování už tolik ne.</p><p>Z tohoto důvodu je celá tato kapitola nepovinná. Klidně ji přeskočte nebo jen zběžně prolétněte a vraťte se k ní později.</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b4",
       "type": "section",
       "title": "Bit flags",
       "html": "<h3 class=\"cpp-section-heading\">Bit flags</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Bitové příznaky</h3>",
+      "title_cs": "Bit flags"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b5",
       "type": "paragraph",
       "html": "<p>Up to this point, we’ve used variables to hold single values:</p>",
       "preview": "Up to this point, we’ve used variables to hold single values:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Až do této chvíle jsme používali proměnné k uchovávání jednotlivých hodnot:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b6",
@@ -58,14 +65,16 @@
       "language": "cpp",
       "code": "int foo { 5 }; // assign foo the value 5 (probably uses 32 bits of storage)\nstd::cout << foo; // print the value 5",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo { 5 }; // assign foo the value 5 (probably uses 32 bits of storage)\nstd::cout &lt;&lt; foo; // print the value 5</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int foo { 5 }; // přiřadit foo hodnotu 5 (pravděpodobně používá 32 bitů úložiště)\nstd::cout << foo; // vypíše hodnotu 5</code></pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b7",
       "type": "paragraph",
       "html": "<p>However, instead of viewing objects as holding a single value, we can instead treat each bit in the object as an independent Boolean value. When individual bits of an object are used as Boolean values, the bits are called <strong>bit flags</strong>.</p>",
       "preview": "However, instead of viewing objects as holding a single value, we can instead tr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo toho, abychom však objekty chápali pouze jako nositele jediné hodnoty, můžeme s každým bitem v objektu zacházet jako s nezávislou booleovskou hodnotou. Pokud jsou jednotlivé bity objektu použity jako booleovské hodnoty, nazýváme tyto bity <strong>bitovými příznaky</strong> (bit flags).</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b8",
@@ -73,7 +82,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>A bit holding a <code>0</code> value is said to be “false”, “off”, or “not set”.<br>A bit holding a <code>1</code> value is said to be “true”, “on”, or “set”.<br>When a bit is changed from a <code>0</code> to a <code>1</code> or a <code>1</code> to a <code>0</code>, we say it has been “flipped” or “inverted”.</p></div>",
       "preview": "NomenclatureA bit holding a 0 value is said to be “false”, “off”, or “not set”.A bit holding a 1 val",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>O bitu s hodnotou <code>0</code> se říká, že je „false“ (nepravdivý), „vypnutý“ (off) nebo „nenastavený“ (not set).<br>O bitu s hodnotou <code>1</code> se říká, že je „true“ (pravdivý), „zapnutý“ (on) nebo „nastavený“ (set).<br>Když se bit změní z <code>0</code> na <code>1</code> nebo z <code>1</code> na <code>0</code>, říkáme, že byl „překlopen“ (flipped) nebo „invertován“ (inverted).</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b9",
@@ -81,14 +91,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>In computing, a <strong>flag</strong> is a value that signals when some condition exists in a program. With a bit flag, a value of <code>true</code> means the condition exists.</p><p>Analogously, in the United States, many mailboxes have small (usually red) physical flags attached to the side. When outgoing mail is waiting to be picked up by the carrier, the flag is raised to signal that there is outgoing mail.</p></div>",
       "preview": "As an aside…In computing, a flag is a value that signals when some condition exists in a program. Wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>V informatice je <strong>příznak</strong> (flag) hodnota, která signalizuje, že v programu nastala určitá podmínka či stav. U bitového příznaku hodnota <code>true</code> znamená, že daný stav nastal.</p><p>Podobně ve Spojených státech má mnoho poštovních schránek na boku připevněný malý (obvykle červený) fyzický praporek. Když v ní čeká odchozí pošta na vyzvednutí doručovatelem, praporek se zvedne, aby signalizoval přítomnost odchozí pošty.</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b10",
       "type": "paragraph",
       "html": "<p>To define a set of bit flags, we’ll typically use an unsigned integer of the appropriate size (8 bits, 16 bits, 32 bits, etc… depending on how many flags we have), or <code>std::bitset</code>.</p>",
       "preview": "To define a set of bit flags, we’ll typically use an unsigned integer of the app",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K definici sady bitových příznaků obvykle použijeme bezznaménkové celé číslo vhodné velikosti (8 bitů, 16 bitů, 32 bitů atd. v závislosti na tom, kolik příznaků máme), nebo <code>std::bitset</code>.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b11",
@@ -96,7 +108,8 @@
       "language": "cpp",
       "code": "#include <bitset> // for std::bitset\n\nstd::bitset<8> mybitset {}; // 8 bits in size means room for 8 flags",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt; // for std::bitset\n\nstd::bitset&lt;8&gt; mybitset {}; // 8 bits in size means room for 8 flags</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset> // pro std::bitset\n\nstd::bitset<8> mybitset {}; // Velikost 8 bitů znamená místo pro 8 příznaků</code></pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b12",
@@ -104,84 +117,98 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Bit manipulation is one of the few times when you should unambiguously use unsigned integers (or <code>std::bitset</code>).</p></div>",
       "preview": "Best practiceBit manipulation is one of the few times when you should unambiguously use unsigned int",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Bitová manipulace je jedním z mála případů, kdy byste měli jednoznačně používat bezznaménková celá čísla (nebo <code>std::bitset</code>).</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b13",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll show how to do bit manipulation the easy way, via <code>std::bitset</code>. In the next set of lessons, we’ll explore how to do it the more difficult but versatile way.</p>",
       "preview": "In this lesson, we’ll show how to do bit manipulation the easy way, via std::bit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci si ukážeme, jak provádět bitovou manipulaci tím jednodušším způsobem, a to pomocí <code>std::bitset</code>. V další sérii lekcí prozkoumáme, jak to dělat složitějším, ale všestrannějším způsobem.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b14",
       "type": "section",
       "title": "Bit numbering and bit positions",
       "html": "<h3 class=\"cpp-section-heading\">Bit numbering and bit positions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Číslování bitů a bitové pozice</h3>",
+      "title_cs": "Číslování bitů a pozice bitů"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b15",
       "type": "paragraph",
       "html": "<p>Given a sequence of bits, we typically number the bits from right to left, starting with 0 (not 1). Each number denotes a <strong>bit position</strong>.</p>",
       "preview": "Given a sequence of bits, we typically number the bits from right to left, start",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Máme-li posloupnost bitů, obvykle bity číslujeme zprava doleva, počínaje 0 (nikoli 1). Každé číslo označuje <strong>bitovou pozici</strong>.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b16",
       "type": "output",
       "text": "76543210  Bit position\n00000101  Bit sequence\n",
       "html": "<pre>76543210  Bit position\n00000101  Bit sequence\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>76543210  Bitová pozice\n00000101  Bitová posloupnost\n</pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b17",
       "type": "paragraph",
       "html": "<p>Given the bit sequence 0000 0101, the bits that are in position 0 and 2 have value 1, and the other bits have value 0.</p>",
       "preview": "Given the bit sequence 0000 0101, the bits that are in position 0 and 2 have val",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U bitové sekvence 0000 0101 mají bity na pozicích 0 a 2 hodnotu 1 a ostatní bity mají hodnotu 0.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b18",
       "type": "section",
       "title": "Manipulating bits via std::bitset",
       "html": "<h3 class=\"cpp-section-heading\">Manipulating bits via <code>std::bitset</code></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Manipulace s bity pomocí <code>std::bitset</code></h3>",
+      "title_cs": "Manipulace s bity přes std::bitset"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b19",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal)</a> we already showed how to use a <code>std::bitset</code> to print values in binary. However, this isn’t the only useful thing <code>std::bitset</code> can do.</p>",
       "preview": "In lesson 5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal) we al",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 -- Číselné soustavy (desítková, binární, hexadecimální a osmičková)</a> jsme si již ukázali, jak použít <code>std::bitset</code> k výpisu hodnot v binární soustavě. To však není jediná užitečná věc, kterou <code>std::bitset</code> dokáže.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b20",
       "type": "paragraph",
       "html": "<p><code>std::bitset</code> provides 4 key member functions that are useful for doing bit manipulation:</p>",
       "preview": "std::bitset provides 4 key member functions that are useful for doing bit manipu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::bitset</code> poskytuje 4 klíčové členské funkce, které jsou užitečné pro manipulaci s bity:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b21",
       "type": "list",
       "html": "<ul><li>test() allows us to query whether a bit is a 0 or 1.</li><li>set() allows us to turn a bit on (this will do nothing if the bit is already on).</li><li>reset() allows us to turn a bit off (this will do nothing if the bit is already off).</li><li>flip() allows us to flip a bit value from a 0 to a 1 or vice versa.</li></ul>",
       "preview": "test() allows us to query whether a bit is a 0 or 1.set() allows us to turn a bi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>test() nám umožňuje zjistit, zda je bit 0 nebo 1.</li><li>set() nám umožňuje bit zapnout (pokud je bit již zapnutý, neprovede se nic).</li><li>reset() nám umožňuje bit vypnout (pokud je bit již vypnutý, neprovede se nic).</li><li>flip() nám umožňuje překlopit hodnotu bitu z 0 na 1 nebo naopak.</li></ul>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b22",
       "type": "paragraph",
       "html": "<p>Each of these functions takes the position of the bit we want to operate on as their only argument.</p>",
       "preview": "Each of these functions takes the position of the bit we want to operate on as t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Každá z těchto funkcí přijímá jako svůj jediný argument pozici bitu, se kterým chceme pracovat.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b23",
       "type": "paragraph",
       "html": "<p>Here’s an example:</p>",
       "preview": "Here’s an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b24",
@@ -189,21 +216,24 @@
       "language": "cpp",
       "code": "#include <bitset>\n#include <iostream>\n\nint main()\n{\n    std::bitset<8> bits{ 0b0000'0101 }; // we need 8 bits, start with bit pattern 0000 0101\n    bits.set(3);   // set bit position 3 to 1 (now we have 0000 1101)\n    bits.flip(4);  // flip bit 4 (now we have 0001 1101)\n    bits.reset(4); // set bit 4 back to 0 (now we have 0000 1101)\n\n    std::cout << \"All the bits: \" << bits<< '\\n';\n    std::cout << \"Bit 3 has value: \" << bits.test(3) << '\\n';\n    std::cout << \"Bit 4 has value: \" << bits.test(4) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::bitset&lt;8&gt; bits{ 0b0000'0101 }; // we need 8 bits, start with bit pattern 0000 0101\n    bits.set(3);   // set bit position 3 to 1 (now we have 0000 1101)\n    bits.flip(4);  // flip bit 4 (now we have 0001 1101)\n    bits.reset(4); // set bit 4 back to 0 (now we have 0000 1101)\n\n    std::cout &lt;&lt; \"All the bits: \" &lt;&lt; bits&lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Bit 3 has value: \" &lt;&lt; bits.test(3) &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Bit 4 has value: \" &lt;&lt; bits.test(4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset>\n#include <iostream>\n\nint main()\n{\n    std::bitset<8> bitů{ 0b0000'0101 }; // potřebujeme 8 bitů, začněte bitovým vzorem 0000 0101\n    bits.set(3);   // nastavte bitovou pozici 3 na 1 (nyní máme 0000 1101)\n    bits.flip(4);  // flip bit 4 (nyní máme 0001 1101)\n    bits.reset(4); // nastaví bit 4 zpět na 0 (nyní máme 0000 1101)\n\n    std::cout << \"Všechny bity: \" << bity<< '\\n';\n    std::cout << \"Bit 3 má hodnotu: \" << bits.test(3) << '\\n';\n    std::cout << \"Bit 4 má hodnotu: \" << bits.test(4) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b25",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b26",
       "type": "output",
       "text": "All the bits: 00001101\nBit 3 has value: 1\nBit 4 has value: 0\n",
       "html": "<pre>All the bits: 00001101\nBit 3 has value: 1\nBit 4 has value: 0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>All the bits: 00001101\nBit 3 has value: 1\nBit 4 has value: 0\n</pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b27",
@@ -211,14 +241,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>We introduced member functions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 -- Introduction to std::string</a>. With normal functions, we call <code>function(object)</code>. With member functions, we call <code>object.function()</code>.</p><p>We covered the <code>0b</code> binary literal prefix and the <code>'</code> digit separator in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal)</a>.</p></div>",
       "preview": "A reminderWe introduced member functions in lesson 5.7 -- Introduction to std::string. With normal f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Členské funkce jsme si představili v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 – Úvod do std::string</a>. U běžných funkcí voláme <code>function(object)</code>. U členských funkcí voláme <code>object.function()</code>.</p><p>Prefix binárních literálů <code>0b</code> a oddělovač číslic <code>'</code> jsme probírali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 – Číselné soustavy (desítková, binární, hexadecimální a osmičková)</a>.</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b28",
       "type": "paragraph",
       "html": "<p>Giving our bits names can help make our code more readable:</p>",
       "preview": "Giving our bits names can help make our code more readable:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojmenování jednotlivých bitů může pomoci zpřehlednit a zpříjemnit čitelnost našeho kódu:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b29",
@@ -226,7 +258,8 @@
       "language": "cpp",
       "code": "#include <bitset>\n#include <iostream>\n\nint main()\n{\n    [[maybe_unused]] constexpr int  isHungry   { 0 };\n    [[maybe_unused]] constexpr int  isSad      { 1 };\n    [[maybe_unused]] constexpr int  isMad      { 2 };\n    [[maybe_unused]] constexpr int  isHappy    { 3 };\n    [[maybe_unused]] constexpr int  isLaughing { 4 };\n    [[maybe_unused]] constexpr int  isAsleep   { 5 };\n    [[maybe_unused]] constexpr int  isDead     { 6 };\n    [[maybe_unused]] constexpr int  isCrying   { 7 };\n\n    std::bitset<8> me{ 0b0000'0101 }; // we need 8 bits, start with bit pattern 0000 0101\n    me.set(isHappy);      // set bit position 3 to 1 (now we have 0000 1101)\n    me.flip(isLaughing);  // flip bit 4 (now we have 0001 1101)\n    me.reset(isLaughing); // set bit 4 back to 0 (now we have 0000 1101)\n\n    std::cout << \"All the bits: \" << me << '\\n';\n    std::cout << \"I am happy: \" << me.test(isHappy) << '\\n';\n    std::cout << \"I am laughing: \" << me.test(isLaughing) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr int  isHungry   { 0 };\n    [[maybe_unused]] constexpr int  isSad      { 1 };\n    [[maybe_unused]] constexpr int  isMad      { 2 };\n    [[maybe_unused]] constexpr int  isHappy    { 3 };\n    [[maybe_unused]] constexpr int  isLaughing { 4 };\n    [[maybe_unused]] constexpr int  isAsleep   { 5 };\n    [[maybe_unused]] constexpr int  isDead     { 6 };\n    [[maybe_unused]] constexpr int  isCrying   { 7 };\n\n    std::bitset&lt;8&gt; me{ 0b0000'0101 }; // we need 8 bits, start with bit pattern 0000 0101\n    me.set(isHappy);      // set bit position 3 to 1 (now we have 0000 1101)\n    me.flip(isLaughing);  // flip bit 4 (now we have 0001 1101)\n    me.reset(isLaughing); // set bit 4 back to 0 (now we have 0000 1101)\n\n    std::cout &lt;&lt; \"All the bits: \" &lt;&lt; me &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"I am happy: \" &lt;&lt; me.test(isHappy) &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"I am laughing: \" &lt;&lt; me.test(isLaughing) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset>\n#include <iostream>\n\nint main()\n{\n    [[možná_nepoužité]] constexpr int isHungry { 0 };\n    [[možná_nepoužité]] constexpr int isSad { 1 };\n    [[možná_nepoužité]] constexpr int isMad { 2 };\n    [[možná_nepoužité]] constexpr int isHappy { 3 };\n    [[možná_unused]] constexpr int isLaughing { 4 };\n    [[možná_nepoužito]] constexpr int isSleep { 5 };\n    [[možná_unused]] constexpr int isDead { 6 };\n    [[možná_nepoužité]] constexpr int isCrying { 7 };\n\n    std::bitset<8> me{ 0b0000'0101 }; // potřebujeme 8 bitů, začněte bitovým vzorem 0000 0101\n    me.set(isHappy);      // nastavte bitovou pozici 3 na 1 (nyní máme 0000 1101)\n    me.flip(isLaughing);  // flip bit 4 (nyní máme 0001 1101)\n    me.reset(isLaughing); // nastaví bit 4 zpět na 0 (nyní máme 0000 1101)\n\n    std::cout << \"Všechny bity: \" << já << '\\n';\n    std::cout << \"Mám radost: \" << me.test(isHappy) << '\\n';\n    std::cout << \"Směju se: \" << me.test(isLaughing) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b30",
@@ -234,63 +267,75 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover <code>[maybe_unused]</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/\">1.4 -- Variable assignment and initialization</a>.</p><p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/\">13.2 -- Unscoped enumerations</a>, we show how enumerators make an even better collection of named bits.</p></div>",
       "preview": "Related contentWe cover [maybe_unused] in lesson 1.4 -- Variable assignment and initialization.In le",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Atribut <code>[maybe_unused]</code> probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/variable-assignment-and-initialization/\">1.4 – Přiřazení a inicializace proměnných</a>.</p><p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/\">13.2 – Neomezené výčty (unscoped enumerations)</a> si ukážeme, jak výčtové typy tvoří ještě lepší kolekci pojmenovaných bitů.</p></div>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b31",
       "type": "section",
       "title": "What if we want to get or set multiple bits at once",
       "html": "<h3 class=\"cpp-section-heading\">What if we want to get or set multiple bits at once</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Co když chceme získat nebo nastavit více bitů najednou</h3>",
+      "title_cs": "Co když chceme získat nebo nastavit více bitů najednou"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b32",
       "type": "paragraph",
       "html": "<p><code>std::bitset</code> doesn’t make this easy. In order to do this, or if we want to use unsigned integer bit flags instead of <code>std::bitset</code>, we need to turn to more traditional methods. We’ll cover these in the next couple of lessons.</p>",
       "preview": "std::bitset doesn’t make this easy. In order to do this, or if we want to use un",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::bitset</code> toto nijak neusnadňuje. Abychom to mohli udělat, nebo pokud chceme místo <code>std::bitset</code> použít bitové příznaky v bezznaménkovém celém čísle (unsigned integer), musíme se obrátit k tradičnějším metodám. Těm se budeme věnovat v následujících několika lekcích.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b33",
       "type": "section",
       "title": "The size of std::bitset",
       "html": "<h3 class=\"cpp-section-heading\">The size of <code>std::bitset</code></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Velikost <code>std::bitset</code></h3>",
+      "title_cs": "Velikost std::bitset"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b34",
       "type": "paragraph",
       "html": "<p>One potential surprise is that <code>std::bitset</code> is optimized for speed, not memory savings. The size of a <code>std::bitset</code> is typically the number of bytes needed to hold the bits, rounded <em>up</em> to the nearest <code>sizeof(size_t)</code>, which is 4 bytes on 32-bit machines, and 8-bytes on 64-bit machines.</p>",
       "preview": "One potential surprise is that std::bitset is optimized for speed, not memory sa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z možných překvapení je, že <code>std::bitset</code> je optimalizován pro rychlost, nikoli pro úsporu paměti. Velikost <code>std::bitset</code> je obvykle počet bajtů potřebných k uložení daných bitů zaokrouhlený <em>nahoru</em> na nejbližší násobek <code>sizeof(size_t)</code>, což jsou 4 bajty na 32bitových a 8 bajtů na 64bitových architekturách.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b35",
       "type": "paragraph",
       "html": "<p>Thus, a <code>std::bitset&lt;8&gt;</code> will typically use either 4 or 8 bytes of memory, even though it technically only needs 1 byte to store 8 bits. Thus, <code>std::bitset</code> is most useful when we desire convenience, not memory savings.</p>",
       "preview": "Thus, a std::bitset<8> will typically use either 4 or 8 bytes of memory, even th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proto <code>std::bitset&lt;8&gt;</code> obvykle zabere buď 4, nebo 8 bajtů paměti, přestože technicky vzato potřebuje k uložení 8 bitů pouze 1 bajt. <code>std::bitset</code> je tedy nejužitečnější v situacích, kdy požadujeme pohodlí, nikoli úsporu paměti.</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b36",
       "type": "section",
       "title": "Querying std::bitset",
       "html": "<h3 class=\"cpp-section-heading\">Querying <code>std::bitset</code></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dotazování na <code>std::bitset</code></h3>",
+      "title_cs": "Dotaz na std::bitset"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b37",
       "type": "paragraph",
       "html": "<p>There are a few other member functions that are often useful:</p>",
       "preview": "There are a few other member functions that are often useful:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje několik dalších členských funkcí, které jsou často užitečné:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b38",
       "type": "list",
       "html": "<ul><li>size() returns the number of bits in the bitset.</li><li>count() returns the number of bits in the bitset that are set to <code>true</code>.</li><li>all() returns a Boolean indicating whether all bits are set to <code>true</code>.</li><li>any() returns a Boolean indicating whether any bits are set to <code>true</code>.</li><li>none() returns a Boolean indicating whether no bits are set to <code>true</code>.</li></ul>",
       "preview": "size() returns the number of bits in the bitset.count() returns the number of bi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>size() vrací počet bitů v bitsetu.</li><li>count() vrací počet bitů v bitsetu, které jsou nastaveny na <code>true</code>.</li><li>all() vrací booleovskou hodnotu udávající, zda jsou všechny bity nastaveny na <code>true</code>.</li><li>any() vrací booleovskou hodnotu udávající, zda je některý z bitů nastaven na <code>true</code>.</li><li>none() vrací booleovskou hodnotu udávající, zda žádný z bitů není nastaven na <code>true</code>.</li></ul>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b39",
@@ -298,21 +343,25 @@
       "language": "cpp",
       "code": "#include <bitset>\n#include <iostream>\n\nint main()\n{\n    std::bitset<8> bits{ 0b0000'1101 };\n    std::cout << bits.size() << \" bits are in the bitset\\n\";\n    std::cout << bits.count() << \" bits are set to true\\n\";\n\n    std::cout << std::boolalpha;\n    std::cout << \"All bits are true: \" << bits.all() << '\\n';\n    std::cout << \"Some bits are true: \" << bits.any() << '\\n';\n    std::cout << \"No bits are true: \" << bits.none() << '\\n';\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::bitset&lt;8&gt; bits{ 0b0000'1101 };\n    std::cout &lt;&lt; bits.size() &lt;&lt; \" bits are in the bitset\\n\";\n    std::cout &lt;&lt; bits.count() &lt;&lt; \" bits are set to true\\n\";\n\n    std::cout &lt;&lt; std::boolalpha;\n    std::cout &lt;&lt; \"All bits are true: \" &lt;&lt; bits.all() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"Some bits are true: \" &lt;&lt; bits.any() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"No bits are true: \" &lt;&lt; bits.none() &lt;&lt; '\\n';\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset>\n#include <iostream>\n\nint main()\n{\n    std::bitset<8> bitů{ 0b0000'1101 };\n    std::cout << bits.size() << \" bity jsou v bitové sadě\\n\";\n    std::cout << bits.count() << \" bity jsou nastaveny na true\\n\";\n\n    std::cout << std::boolalpha;\n    std::cout << \"Všechny bity jsou pravdivé: \" << bits.all() << '\\n';\n    std::cout << \"Některé bity jsou pravdivé: \" << bits.any() << '\\n';\n    std::cout << \"Žádné bity nejsou pravdivé: \" << bits.none() << '\\n';\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b40",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-flags-and-bit-manipulation-via-stdbitset_b41",
       "type": "output",
       "text": "8 bits are in the bitset\n3 bits are set to true\nAll bits are true: false\nSome bits are true: true\nNo bits are true: false\n",
       "html": "<pre>8 bits are in the bitset\n3 bits are set to true\nAll bits are true: false\nSome bits are true: true\nNo bits are true: false\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>8 bits are in the bitset\n3 bits are set to true\nAll bits are true: false\nSome bits are true: true\nNo bits are true: false\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "O.1 — Bitové příznaky a manipulace s bity pomocí std::bitset"
 }

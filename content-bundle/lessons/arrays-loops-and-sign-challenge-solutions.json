@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 -- Unsigned integers, and why to avoid them</a>, we noted how we generally prefer to use signed values to hold quantities, because unsigned values can act in surprising ways. However, in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/\">16.3 -- std::vector and the unsigned length and subscript problem</a>, we discussed how <code>std::vector</code> (and other container classes) uses unsigned integral type <code>std::size_t</code> for length and indices.</p>",
       "preview": "In lesson 4.5 -- Unsigned integers, and why to avoid them, we noted how we gener",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/unsigned-integers-and-why-to-avoid-them/\">4.5 -- Bezznaménková celá čísla a proč se jim vyhýbat</a> jsme si uvedli, že pro uchovávání množství obecně dáváme přednost znaménkovým hodnotám, protože bezznaménkové hodnoty se mohou chovat překvapivým způsobem. V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/\">16.3 -- std::vector a problém s bezznaménkovou délkou a indexováním</a> jsme však probírali, že <code>std::vector</code> (a další kontejnerové třídy) používá pro délku a indexy bezznaménkový celočíselný typ <code>std::size_t</code>.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b1",
       "type": "paragraph",
       "html": "<p>This can lead to problems such as this one:</p>",
       "preview": "This can lead to problems such as this one:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To může vést k problémům, jako je například tento:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b2",
@@ -29,56 +31,64 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid printReverse(const std::vector<T>& arr)\n{\n    for (std::size_t index{ arr.size() - 1 }; index >= 0; --index) // index is unsigned\n    {\n        std::cout << arr[index] << ' ';\n    }\n\n    std::cout << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid printReverse(const std::vector&lt;T&gt;&amp; arr)\n{\n    for (std::size_t index{ arr.size() - 1 }; index &gt;= 0; --index) // index is unsigned\n    {\n        std::cout &lt;&lt; arr[index] &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid printReverse(const std::vector<T>& arr)\n{\n    for (std::size_t index{ arr.size() - 1 }; index >= 0; --index) // index je bez znaménka\n    {\n        std::cout << arr[index] << ' ';\n    }\n\n    std::cout << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b3",
       "type": "paragraph",
       "html": "<p>This code begins by printing the array in reverse:</p>",
       "preview": "This code begins by printing the array in reverse:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód nejprve vypíše pole pozpátku:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b4",
       "type": "output",
       "text": "9 1 2 8 3 7 6 4\n",
       "html": "<pre>9 1 2 8 3 7 6 4\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>9 1 2 8 3 7 6 4\n</pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b5",
       "type": "paragraph",
       "html": "<p>And then exhibits undefined behavior. It might print garbage values, or crash the application.</p>",
       "preview": "And then exhibits undefined behavior. It might print garbage values, or crash th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A poté vykazuje nedefinované chování. Může vypsat nesmyslné hodnoty nebo způsobit pád aplikace.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b6",
       "type": "paragraph",
       "html": "<p>There are two problems here. First, our loop executes as long as <code>index &gt;= 0</code> (or in other words, as long as <code>index</code> is positive), which is always true when <code>index</code> is unsigned. Therefore, the loop never terminates.</p>",
       "preview": "There are two problems here. First, our loop executes as long as index >= 0 (or ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jsou zde dva problémy. Za prvé, náš cyklus se provádí tak dlouho, dokud <code>index &gt;= 0</code> (jinými slovy, dokud je <code>index</code> nezáporný), což pro bezznaménkový <code>index</code> platí vždy. Cyklus se tedy nikdy neukončí.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b7",
       "type": "paragraph",
       "html": "<p>Second, when we decrement <code>index</code> when it has value <code>0</code>, it will wrap around to a large positive value, which we then use to index the array on the next iteration. This is an out-of-bounds index, and will cause undefined behavior. We run into the same problem if our vector is empty.</p>",
       "preview": "Second, when we decrement index when it has value 0, it will wrap around to a la",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, když dekrementujeme <code>index</code> ve chvíli, kdy má hodnotu <code>0</code>, dojde k jeho přetečení (wrap around) na velkou kladnou hodnotu, kterou pak v další iteraci použijeme k indexaci pole. Jde o index mimo rozsah pole, což způsobí nedefinované chování. Na stejný problém narazíme, i pokud je náš vektor prázdný.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b8",
       "type": "paragraph",
       "html": "<p>And while there are plenty of ways to work around these specific issues, these kinds of issues are magnets for bugs.</p>",
       "preview": "And while there are plenty of ways to work around these specific issues, these k",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A i když existuje spousta způsobů, jak tyto konkrétní problémy obejít, jsou tyto typy situací doslova magnetem na chyby.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b9",
       "type": "paragraph",
       "html": "<p>Using a signed type for a loop variable more easily avoids such problems, but has its own challenges. Here’s a version of the above problem that uses a signed index:</p>",
       "preview": "Using a signed type for a loop variable more easily avoids such problems, but ha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití signed typu pro řídicí proměnnou cyklu se takovým problémům snáze vyhne, ale přináší vlastní úskalí. Zde je verze výše uvedeného problému, která používá signed index:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b10",
@@ -86,21 +96,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid printReverse(const std::vector<T>& arr)\n{\n    for (int index{ static_cast<int>(arr.size()) - 1}; index >= 0; --index) // index is signed\n    {\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n    }\n\n    std::cout << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid printReverse(const std::vector&lt;T&gt;&amp; arr)\n{\n    for (int index{ static_cast&lt;int&gt;(arr.size()) - 1}; index &gt;= 0; --index) // index is signed\n    {\n        std::cout &lt;&lt; arr[static_cast&lt;std::size_t&gt;(index)] &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid printReverse(const std::vector<T>& arr)\n{\n    for (int index{ static_cast<int>(arr.size()) - 1}; index >= 0; --index) // index je podepsán\n    {\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n    }\n\n    std::cout << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printReverse(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b11",
       "type": "paragraph",
       "html": "<p>While this version functions as intended, the code is also a cluttered due to the addition two static casts. <code>arr[static_cast&lt;std::size_t&gt;(index)]</code> is particularly hard to read. In this case, we’ve improved safety at a significant cost to readability.</p>",
       "preview": "While this version functions as intended, the code is also a cluttered due to th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli tato verze funguje podle očekávání, kód je také nepřehledný kvůli přidání dvou statických přetypování. <code>arr[static_cast&lt;std::size_t&gt;(index)]</code> je obzvláště těžko čitelné. V tomto případě jsme zlepšili bezpečnost za cenu výrazného zhoršení čitelnosti.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b12",
       "type": "paragraph",
       "html": "<p>Here’s another example of using a signed index:</p>",
       "preview": "Here’s another example of using a signed index:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další příklad použití signed indexu:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b13",
@@ -108,28 +121,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\n// Function template to calculate the average value in a std::vector\ntemplate <typename T>\nT calculateAverage(const std::vector<T>& arr)\n{\n    int length{ static_cast<int>(arr.size()) };\n\n    T average{ 0 };\n    for (int index{ 0 }; index < length; ++index)\n        average += arr[static_cast<std::size_t>(index)];\n    average /= length;\n\n    return average;\n}\n\nint main()\n{\n    std::vector testScore1 { 84, 92, 76, 81, 56 };\n    std::cout << \"The class 1 average is: \" << calculateAverage(testScore1) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\n// Function template to calculate the average value in a std::vector\ntemplate &lt;typename T&gt;\nT calculateAverage(const std::vector&lt;T&gt;&amp; arr)\n{\n    int length{ static_cast&lt;int&gt;(arr.size()) };\n\n    T average{ 0 };\n    for (int index{ 0 }; index &lt; length; ++index)\n        average += arr[static_cast&lt;std::size_t&gt;(index)];\n    average /= length;\n\n    return average;\n}\n\nint main()\n{\n    std::vector testScore1 { 84, 92, 76, 81, 56 };\n    std::cout &lt;&lt; \"The class 1 average is: \" &lt;&lt; calculateAverage(testScore1) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\n// Šablona funkce pro výpočet průměrné hodnoty v std::vector\nšablona <název typu T>\nT vypočítatPrůměr(const std::vector<T>& arr)\n{\n    int length{ static_cast<int>(arr.size()) };\n\n    T průměr{ 0 };\n    for (int index{ 0 }; index < délka; ++index)\n        průměr += arr[static_cast<std::size_t>(index)];\n    průměr /= délka;\n\n    průměrná návratnost;\n}\n\nint main()\n{\n    std::vector testScore1 { 84, 92, 76, 81, 56 };\n    std::cout << \"Průměr třídy 1 je: \" << vypočítatAverage(testScore1) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b14",
       "type": "paragraph",
       "html": "<p>The cluttering of our code with static casts is pretty terrible.</p>",
       "preview": "The cluttering of our code with static casts is pretty terrible.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaplevelení našeho kódu statickými přetypováními je docela hrozné.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b15",
       "type": "paragraph",
       "html": "<p>So what should we do? This is an area where there is no ideal solution.</p>",
       "preview": "So what should we do? This is an area where there is no ideal solution.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co bychom tedy měli dělat? V této oblasti neexistuje žádné ideální řešení.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b16",
       "type": "paragraph",
       "html": "<p>There are many viable options here, which we’ll present in order from what we believe is worst to best. You will likely encounter all of these in code written by others.</p>",
       "preview": "There are many viable options here, which we’ll present in order from what we be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje zde mnoho použitelných možností, které si představíme v pořadí od podle nás nejhorší po nejlepší. Pravděpodobně se se všemi z nich setkáte v kódu napsaném ostatními.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b17",
@@ -137,63 +154,74 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Although we’ll be discussing this in the context of <code>std::vector</code>, all of the standard library containers (e.g. <code>std::array</code>) work similarly and have the same challenges. The discussion that follows is applicable to any of them.</p></div>",
       "preview": "Author’s noteAlthough we’ll be discussing this in the context of std::vector, all of the standard li",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Ačkoli to budeme probírat v kontextu <code>std::vector</code>, všechny kontejnery standardní knihovny (např. <code>std::array</code>) fungují podobně a mají stejná úskalí. Následující výklad je použitelný pro kterýkoli z nich.</p></div>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b18",
       "type": "section",
       "title": "Leave signed/unsigned conversion warnings off",
       "html": "<h3 class=\"cpp-section-heading\">Leave signed/unsigned conversion warnings off</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ponechat varování před převodem signed/unsigned vypnutá</h3>",
+      "title_cs": "Upozornění na podepsané/nepodepsané konverze ponechte vypnuté"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b19",
       "type": "paragraph",
       "html": "<p>If you were wondering why signed/unsigned conversion warnings are often disabled by default, this topic is one of the key reasons. Every time we subscript a standard library container using a signed index, a sign conversion warning will be generated. This will quickly fill up your compilation log with spurious warnings, drowning out warnings that may actually be legitimate.</p>",
       "preview": "If you were wondering why signed/unsigned conversion warnings are often disabled",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud jste se divili, proč bývají varování před převodem signed/unsigned ve výchozím nastavení často vypnutá, toto téma je jedním z hlavních důvodů. Pokaždé, když k prvkům kontejneru standardní knihovny přistupujeme pomocí signed indexu, vygeneruje se varování před konverzí znaménka. To vám rychle zaplní výstup kompilace falešnými varováními, která přehluší ta skutečně opodstatněná.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b20",
       "type": "paragraph",
       "html": "<p>So one way to avoid having to deal with lots of signed/unsigned conversion warnings is to simply leave those warnings turned off.</p>",
       "preview": "So one way to avoid having to deal with lots of signed/unsigned conversion warni",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze způsobů, jak se vyhnout řešení spousty varování před konverzí signed/unsigned, je tedy jednoduše nechat tato varování vypnutá.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b21",
       "type": "paragraph",
       "html": "<p>This is the simplest solution, but not one we recommend, as this will also suppress generation of legitimate sign conversion warnings that may cause bugs if not addressed.</p>",
       "preview": "This is the simplest solution, but not one we recommend, as this will also suppr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je nejjednodušší řešení, ale nedoporučujeme jej, protože tím potlačíte i generování legitimních varování před konverzí znaménka, která mohou vést k chybám, pokud se nevyřeší.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b22",
       "type": "section",
       "title": "Using an unsigned loop variable",
       "html": "<h3 class=\"cpp-section-heading\">Using an unsigned loop variable</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití unsigned proměnné cyklu</h3>",
+      "title_cs": "Použití proměnné smyčky bez znaménka"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b23",
       "type": "paragraph",
       "html": "<p>Many developers believe that since the standard library array types were designed to use unsigned indices, then we should use unsigned indices! This is a completely reasonable position. We just need to be extra careful that we do not run into signed/unsigned mismatches when doing so. If possible, avoid using the index loop variable for anything but indexing.</p>",
       "preview": "Many developers believe that since the standard library array types were designe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho vývojářů se domnívá, že jelikož byly typy polí ve standardní knihovně navrženy pro použití unsigned indexů, měli bychom tedy používat unsigned indexy! To je zcela rozumný postoj. Jen musíme být obzvláště opatrní, abychom při tom nenarazili na neshody mezi signed a unsigned. Pokud je to možné, vyhněte se použití proměnné cyklu k čemukoli jinému než k samotnému indexování.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b24",
       "type": "paragraph",
       "html": "<p>If we decide to use this approach, which unsigned type should we actually use?</p>",
       "preview": "If we decide to use this approach, which unsigned type should we actually use?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud se rozhodneme tento přístup použít, jaký unsigned typ bychom vlastně měli zvolit?</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b25",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/#size_type\">16.3 -- std::vector and the unsigned length and subscript problem</a>, we noted that the standard library container classes define nested typedef <code>size_type</code>, which is an unsigned integral type used for array lengths and indices. The <code>size()</code> member function returns <code>size_type</code>, and <code>operator[]</code> uses <code>size_type</code> as an index, so using <code>size_type</code> as the type of your index is technically the most consistent and safe unsigned type to use (as it will work in all cases, even in the extremely rare case where <code>size_type</code> is something other than <code>size_t</code>.). For example:</p>",
       "preview": "In lesson 16.3 -- std::vector and the unsigned length and subscript problem, we ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/#size_type\">16.3 -- std::vector a problém s unsigned délkou a indexováním</a> jsme si uvedli, že kontejnerové třídy standardní knihovny definují vnořený typedef <code>size_type</code>, což je celočíselný unsigned typ používaný pro délky polí a indexy. Členská funkce <code>size()</code> vrací <code>size_type</code> a <code>operator[]</code> používá <code>size_type</code> jako index, takže použití <code>size_type</code> jako typu vašeho indexu je technicky nejkonzistentnější a nejbezpečnější unsigned typ k použití (protože bude fungovat ve všech případech, dokonce i v extrémně vzácném případě, kdy je <code>size_type</code> něco jiného než <code>size_t</code>.). Například:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b26",
@@ -201,21 +229,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n\tstd::vector arr { 1, 2, 3, 4, 5 };\n\n\tfor (std::vector<int>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n\tstd::vector arr { 1, 2, 3, 4, 5 };\n\n\tfor (std::vector&lt;int&gt;::size_type index { 0 }; index &lt; arr.size(); ++index)\n\t\tstd::cout &lt;&lt; arr[index] &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n\tstd::vector arr { 1, 2, 3, 4, 5 };\n\n\tfor (std::vector<int>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b27",
       "type": "paragraph",
       "html": "<p>However, using <code>size_type</code> has a major downside: because it is a nested type, to use it we have to explicitly prefix the name with the fully templated name of the container (meaning we have to type <code>std::vector&lt;int&gt;::size_type</code> rather than just <code>std::size_type</code>). This requires a lot of typing, is hard to read, and varies depending on the container and element type.</p>",
       "preview": "However, using size_type has a major downside: because it is a nested type, to u",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití <code>size_type</code> má však zásadní nevýhodu: jelikož se jedná o vnořený typ, musíme před jeho název explicitně uvést úplný šablonový název kontejneru (což znamená, že musíme psát <code>std::vector&lt;int&gt;::size_type</code> namísto pouhého <code>std::size_type</code>). To vyžaduje spoustu psaní, je to těžko čitelné a liší se to v závislosti na kontejneru a typu prvku.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b28",
       "type": "paragraph",
       "html": "<p>When used inside a function template, we can use <code>T</code> for the template arguments. But we also need to prefix the type with the <code>typename</code> keyword:</p>",
       "preview": "When used inside a function template, we can use T for the template arguments. B",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při použití uvnitř šablony funkce můžeme pro argumenty šablony použít <code>T</code>. Před typ však také musíme přidat klíčové slovo <code>typename</code>:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b29",
@@ -223,14 +254,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid printArray(const std::vector<T>& arr)\n{\n\t// typename keyword prefix required for dependent type\n\tfor (typename std::vector<T>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n}\n\nint main()\n{\n\tstd::vector arr { 9, 7, 5, 3, 1 };\n\n\tprintArray(arr);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid printArray(const std::vector&lt;T&gt;&amp; arr)\n{\n\t// typename keyword prefix required for dependent type\n\tfor (typename std::vector&lt;T&gt;::size_type index { 0 }; index &lt; arr.size(); ++index)\n\t\tstd::cout &lt;&lt; arr[index] &lt;&lt; ' ';\n}\n\nint main()\n{\n\tstd::vector arr { 9, 7, 5, 3, 1 };\n\n\tprintArray(arr);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid printArray(const std::vector<T>& arr)\n{\n\t// pro závislý typ je vyžadována předpona klíčového slova typename\n\tfor (typename std::vector<T>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n}\n\nint main()\n{\n\tstd::vector arr { 9, 7, 5, 3, 1 };\n\n\tprintArray(arr);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b30",
       "type": "paragraph",
       "html": "<p>If you forget the <code>typename</code> keyword, your compiler will probably remind you to add it.</p>",
       "preview": "If you forget the typename keyword, your compiler will probably remind you to ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud klíčové slovo <code>typename</code> zapomenete, váš kompilátor vám pravděpodobně připomene, abyste jej doplnili.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b31",
@@ -238,14 +271,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Any name that depends on a type containing a template parameter is called a <strong>dependent name</strong>. Dependent names must be prefixed with the keyword <code>typename</code> in order to be used as a type.</p><p>In the above example, <code>std::vector&lt;T&gt;</code> is a type with a template parameter, so nested type <code>std::vector&lt;T&gt;::size_type</code> is a dependent name, and must be prefixed with <code>typename</code> to be used as a type.</p></div>",
       "preview": "For advanced readersAny name that depends on a type containing a template parameter is called a depe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Jakýkoli název, který závisí na typu obsahujícím parametr šablony, se nazývá <strong>závislý název</strong> (dependent name). Závislé názvy musí být uvozeny klíčovým slovem <code>typename</code>, aby mohly být použity jako typ.</p><p>Ve výše uvedeném příkladu je <code>std::vector&lt;T&gt;</code> typem s parametrem šablony, takže vnořený typ <code>std::vector&lt;T&gt;::size_type</code> je závislým názvem a musí být uvozen klíčovým slovem <code>typename</code>, aby mohl být použit jako typ.</p></div>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b32",
       "type": "paragraph",
       "html": "<p>You may occasionally see the array type aliased to make the loop easier to read:</p>",
       "preview": "You may occasionally see the array type aliased to make the loop easier to read:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Občas můžete vidět vytvoření aliasu pro typ pole, aby byl cyklus lépe čitelný:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b33",
@@ -253,14 +288,16 @@
       "language": "cpp",
       "code": "    using arrayi = std::vector<int>;\n    for (arrayi::size_type index { 0 }; index < arr.size(); ++index)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    using arrayi = std::vector&lt;int&gt;;\n    for (arrayi::size_type index { 0 }; index &lt; arr.size(); ++index)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> using arrayi = std::vector<int>;\n    for (arrayi::size_type index { 0 }; index < arr.size(); ++index)</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b34",
       "type": "paragraph",
       "html": "<p>A more general solution is to have the compiler fetch the type of the array type object for us, so that we don’t have to explicitly specify the container type or template arguments. To do so, we can use the <strong>decltype</strong> keyword, which returns the type of its parameter.</p>",
       "preview": "A more general solution is to have the compiler fetch the type of the array type",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecnějším řešením je nechat kompilátor zjistit typ objektu pole za nás, abychom nemuseli explicitně specifikovat typ kontejneru ani argumenty šablony. K tomu můžeme použít klíčové slovo <strong>decltype</strong>, které vrací typ svého parametru.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b35",
@@ -268,14 +305,16 @@
       "language": "cpp",
       "code": "    // arr is some non-reference type\n    for (decltype(arr)::size_type index { 0 }; index < arr.size(); ++index) // decltype(arr) resolves to std::vector<int>",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    // arr is some non-reference type\n    for (decltype(arr)::size_type index { 0 }; index &lt; arr.size(); ++index) // decltype(arr) resolves to std::vector&lt;int&gt;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> // arr je nějaký nereferenční typ\n    for (decltype(arr)::size_type index { 0 }; index < arr.size(); ++index) // decltype(arr) se vyhodnotí jako std::vector<int></code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b36",
       "type": "paragraph",
       "html": "<p>However, if <code>arr</code> is a reference type (e.g. an array passed by reference), the above doesn’t work. We need to first remove the reference from <code>arr</code>:</p>",
       "preview": "However, if arr is a reference type (e.g. an array passed by reference), the abo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je však <code>arr</code> referenční typ (např. pole předané referencí), výše uvedený postup nefunguje. Nejprve musíme z <code>arr</code> referenci odstranit:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b37",
@@ -283,21 +322,24 @@
       "language": "cpp",
       "code": "template <typename T>\nvoid printArray(const std::vector<T>& arr)\n{\n\t// arr can be a reference or non-reference type\n\tfor (typename std::remove_reference_t<decltype(arr)>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nvoid printArray(const std::vector&lt;T&gt;&amp; arr)\n{\n\t// arr can be a reference or non-reference type\n\tfor (typename std::remove_reference_t&lt;decltype(arr)&gt;::size_type index { 0 }; index &lt; arr.size(); ++index)\n\t\tstd::cout &lt;&lt; arr[index] &lt;&lt; ' ';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">šablona <typename T>\nvoid printArray(const std::vector<T>& arr)\n{\n\t// arr může být referenčního nebo nereferenčního typu\n\tfor (typename std::remove_reference_t<decltype(arr)>::size_type index { 0 }; index < arr.size(); ++index)\n\t\tstd::cout << arr[index] << ' ';\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b38",
       "type": "paragraph",
       "html": "<p>Unfortunately, this is no longer very concise or easy to remember.</p>",
       "preview": "Unfortunately, this is no longer very concise or easy to remember.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bohužel to již není příliš stručné ani snadno zapamatovatelné.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b39",
       "type": "paragraph",
       "html": "<p>Because <code>size_type</code> is almost always a typedef for <code>size_t</code>, many programmers just skip using <code>size_type</code> altogether and use the easier to remember and type <code>std::size_t</code> directly:</p>",
       "preview": "Because size_type is almost always a typedef for size_t, many programmers just s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>size_type</code> je téměř vždy typedef pro <code>size_t</code>, mnoho programátorů používání <code>size_type</code> úplně vynechává a používá přímo <code>std::size_t</code>, což se lépe pamatuje i píše:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b40",
@@ -305,63 +347,74 @@
       "language": "cpp",
       "code": "    for (std::size_t index { 0 }; index < arr.size(); ++index)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    for (std::size_t index { 0 }; index &lt; arr.size(); ++index)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> for (std::size_t index { 0 }; index < arr.size(); ++index)</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b41",
       "type": "paragraph",
       "html": "<p>Unless you’re using custom allocators (and you probably aren’t), we believe this is a reasonable approach.</p>",
       "preview": "Unless you’re using custom allocators (and you probably aren’t), we believe this",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud nepoužíváte vlastní alokátory (a to pravděpodobně nepoužíváte), věříme, že jde o rozumný přístup.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b42",
       "type": "section",
       "title": "Using a signed loop variable",
       "html": "<h3 class=\"cpp-section-heading\">Using a signed loop variable</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití řídicí proměnné cyklu se znaménkem (signed)</h3>",
+      "title_cs": "Použití proměnné smyčky se znaménkem"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b43",
       "type": "paragraph",
       "html": "<p>Although it makes working with the standard library container types a bit more difficult, using a signed loop variable is consistent with the best practices employed in the rest of our code (to favor signed values for quantities). And the more we can consistently apply our best practices, the fewer errors we will have overall.</p>",
       "preview": "Although it makes working with the standard library container types a bit more d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli to mírně znesnadňuje práci s kontejnery ze standardní knihovny, použití řídicí proměnné cyklu se znaménkem je v souladu s doporučenými postupy používanými ve zbytku našeho kódu (upřednostňovat hodnoty se znaménkem pro vyjádření množství). A čím důsledněji dokážeme naše doporučené postupy uplatňovat, tím méně chyb celkově uděláme.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b44",
       "type": "paragraph",
       "html": "<p>If we are going to use signed loop variables, there are three issues we need to address:</p>",
       "preview": "If we are going to use signed loop variables, there are three issues we need to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud se chystáme používat řídicí proměnné se znaménkem, musíme vyřešit tři problémy:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b45",
       "type": "list",
       "html": "<ul><li>What signed type should we use?</li><li>Getting the length of the array as a signed value</li><li>Converting the signed loop variable to an unsigned index</li></ul>",
       "preview": "What signed type should we use?Getting the length of the array as a signed value",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Jaký signed typ bychom měli použít?</li><li>Získání délky pole jako hodnoty se znaménkem (signed)</li><li>Převod signed řídicí proměnné cyklu na unsigned index</li></ul>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b46",
       "type": "section",
       "title": "What signed type should we use?",
       "html": "<h3 class=\"cpp-section-heading\">What signed type should we use?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jaký signed typ bychom měli použít?</h3>",
+      "title_cs": "Jaký typ podepsaného bychom měli použít?"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b47",
       "type": "paragraph",
       "html": "<p>There are three (sometimes four) good options here.</p>",
       "preview": "There are three (sometimes four) good options here.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde máme tři (někdy čtyři) dobré možnosti.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b48",
       "type": "list",
       "html": "<ol start=\"1\"><li>Unless you are working with a very large array, using <code>int</code> should be fine (particularly on architectures where int is 4 bytes). <code>int</code> is the default signed integral type we use for everything when we don’t really care about the type otherwise, and there’s little reason to do otherwise here.</li><li>If you are dealing with very large arrays, or if you want to be a bit more defensive, you can use the strangely named <code>std::ptrdiff_t</code>. This typedef is often used as the signed counterpart to <code>std::size_t</code>.</li><li>Because <code>std::ptrdiff_t</code> has a weird name, another good approach is to define your own type alias for indices:</li></ol>",
       "preview": "Unless you are working with a very large array, using int should be fine (partic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Pokud nepracujete s velmi velkým polem, použití <code>int</code> by mělo být v pořádku (zejména na architekturách, kde má int 4 bajty). <code>int</code> je výchozí celočíselný typ se znaménkem, který používáme pro všechno, když nám na konkrétním typu jinak nezáleží, a není velký důvod zde postupovat jinak.</li><li>Pokud pracujete s velmi velkými poli nebo chcete psát o něco defenzivnější kód, můžete použít podivně pojmenovaný <code>std::ptrdiff_t</code>. Tento typedef se často používá jako signed protějšek k <code>std::size_t</code>.</li><li>Protože má <code>std::ptrdiff_t</code> zvláštní název, dalším dobrým přístupem je definovat si vlastní alias typu pro indexy:</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b49",
@@ -369,28 +422,32 @@
       "language": "cpp",
       "code": "using Index = std::ptrdiff_t;\n\n// Sample loop using index\nfor (Index index{ 0 }; index < static_cast<Index>(arr.size()); ++index)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">using Index = std::ptrdiff_t;\n\n// Sample loop using index\nfor (Index index{ 0 }; index &lt; static_cast&lt;Index&gt;(arr.size()); ++index)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">pomocí Index = std::ptrdiff_t;\n\n// Ukázka smyčky pomocí indexu\nfor (Index index{ 0 }; index < static_cast<Index>(arr.size()); ++index)</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b50",
       "type": "paragraph",
       "html": "<p>We’ll show a full example of this in the next section.</p>",
       "preview": "We’ll show a full example of this in the next section.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompletní příklad si ukážeme v následující části.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b51",
       "type": "paragraph",
       "html": "<p>Defining your own type alias also has a potential future benefit: if the C++ standard library ever releases a type designed to be used as a signed index, it will be easy to either modify <code>Index</code> to alias that type, or to find/replace <code>Index</code> with whatever that type is named.</p>",
       "preview": "Defining your own type alias also has a potential future benefit: if the C++ sta",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Definování vlastního aliasu typu má také potenciální budoucí výhodu: pokud standardní knihovna C++ někdy představí typ určený k použití jako znaménkový index, bude snadné buď upravit <code>Index</code> tak, aby byl aliasem tohoto typu, nebo najít a nahradit <code>Index</code> jakýmkoli názvem tohoto nového typu.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b52",
       "type": "list",
       "html": "<ol start=\"4\"><li>In cases where you can derive the type of your loop variable from the initializer, you can use <code>auto</code> to have the compiler deduce the type:</li></ol>",
       "preview": "In cases where you can derive the type of your loop variable from the initialize",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"4\"><li>V případech, kdy můžete odvodit typ své řídicí proměnné smyčky z inicializátoru, můžete použít <code>auto</code>, aby typ odvodil kompilátor:</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b53",
@@ -398,14 +455,16 @@
       "language": "cpp",
       "code": "    for (auto index{ static_cast<std::ptrdiff_t>(arr.size())-1 }; index >= 0; --index)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    for (auto index{ static_cast&lt;std::ptrdiff_t&gt;(arr.size())-1 }; index &gt;= 0; --index)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> pro (automatický index{ static_cast<std::ptrdiff_t>(arr.size())-1 }; index >= 0; --index)</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b54",
       "type": "paragraph",
       "html": "<p>In C++23, the <code>Z</code> suffix can be used to define a literal of the type that is the signed counterpart to <code>std::size_t</code> (probably <code>std::ptrdiff_t</code>):</p>",
       "preview": "In C++23, the Z suffix can be used to define a literal of the type that is the s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++23 lze použít příponu <code>Z</code> k definování literálu typu, který je znaménkovým protějškem k <code>std::size_t</code> (pravděpodobně <code>std::ptrdiff_t</code>):</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b55",
@@ -413,21 +472,25 @@
       "language": "cpp",
       "code": "    for (auto index{ 0Z }; index < static_cast<std::ptrdiff_t>(arr.size()); ++index)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    for (auto index{ 0Z }; index &lt; static_cast&lt;std::ptrdiff_t&gt;(arr.size()); ++index)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> for (automatický index{ 0Z }; index < static_cast<std::ptrdiff_t>(arr.size()); ++index)</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b56",
       "type": "section",
       "title": "Getting the length of an array as a signed value",
       "html": "<h3 class=\"cpp-section-heading\">Getting the length of an array as a signed value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Získání délky pole jako znaménkové hodnoty</h3>",
+      "title_cs": "Získání délky pole jako hodnoty se znaménkem"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b57",
       "type": "list",
       "html": "<ol start=\"1\"><li>Pre-C++20, the best option is to <code>static_cast</code> the return value of the <code>size()</code> member function or <code>std::size()</code> to a signed type:</li></ol>",
       "preview": "Pre-C++20, the best option is to static_cast the return value of the size() memb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Před C++20 je nejlepší možností přetypovat pomocí <code>static_cast</code> návratovou hodnotu členské funkce <code>size()</code> nebo <code>std::size()</code> na znaménkový typ:</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b58",
@@ -435,21 +498,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nusing Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ static_cast<Index>(arr.size())-1 }; index >= 0; --index)\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nusing Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ static_cast&lt;Index&gt;(arr.size())-1 }; index &gt;= 0; --index)\n        std::cout &lt;&lt; arr[static_cast&lt;std::size_t&gt;(index)] &lt;&lt; ' ';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\npomocí Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ static_cast<Index>(arr.size())-1 }; index >= 0; --index)\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b59",
       "type": "paragraph",
       "html": "<p>That way, the unsigned value returned by <code>arr.size()</code> will be converted to a signed type, so our comparison operator will have two signed operands. And because signed indices won’t overflow when they go negative, we don’t have the wrap-around problem we ran into when using unsigned indices.</p>",
       "preview": "That way, the unsigned value returned by arr.size() will be converted to a signe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto způsobem bude bezznaménková hodnota vrácená funkcí <code>arr.size()</code> převedena na znaménkový typ, takže náš porovnávací operátor bude mít dva znaménkové operandy. A protože u znaménkových indexů nedojde k podtečení/přetečení, když přejdou do záporných hodnot, vyhneme se problému s přetočením (wrap-around), na který jsme narazili při použití bezznaménkových indexů.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b60",
       "type": "paragraph",
       "html": "<p>The downside of this approach is that it clutters up our loop, making it harder to read. We can address this by moving the length out of the loop:</p>",
       "preview": "The downside of this approach is that it clutters up our loop, making it harder ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou tohoto přístupu je, že znepřehledňuje naši smyčku a zhoršuje její čitelnost. To můžeme vyřešit přesunutím zjištění délky mimo smyčku:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b61",
@@ -457,21 +523,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nusing Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length{ static_cast<Index>(arr.size()) }; \n    for (auto index{ length-1 }; index >= 0; --index)\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nusing Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length{ static_cast&lt;Index&gt;(arr.size()) }; \n    for (auto index{ length-1 }; index &gt;= 0; --index)\n        std::cout &lt;&lt; arr[static_cast&lt;std::size_t&gt;(index)] &lt;&lt; ' ';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\npomocí Index = std::ptrdiff_t;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length{ static_cast<Index>(arr.size()) }; \n    for (automatický index{ délka-1 }; index >= 0; --index)\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b62",
       "type": "list",
       "html": "<ol start=\"2\"><li>In C++20, use <code>std::ssize()</code>:</li></ol>",
       "preview": "In C++20, use std::ssize():",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"2\"><li>V C++20 použijte <code>std::ssize()</code>:</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b63",
       "type": "paragraph",
       "html": "<p>If you want more evidence that the designers of C++ now believe that signed indices are the way to go, consider the introduction of <code>std::ssize()</code> in C++20. This function returns the size of an array type as a signed type (likely <code>ptrdiff_t</code>).</p>",
       "preview": "If you want more evidence that the designers of C++ now believe that signed indi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chcete další důkaz, že tvůrci C++ nyní považují indexy se znaménkem za správnou cestu, zvažte zavedení <code>std::ssize()</code> v C++20. Tato funkce vrací velikost typu pole jako typ se znaménkem (pravděpodobně <code>ptrdiff_t</code>).</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b64",
@@ -479,28 +548,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ std::ssize(arr)-1 }; index >= 0; --index) // std::ssize introduced in C++20\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ std::ssize(arr)-1 }; index &gt;= 0; --index) // std::ssize introduced in C++20\n        std::cout &lt;&lt; arr[static_cast&lt;std::size_t&gt;(index)] &lt;&lt; ' ';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    for (auto index{ std::ssize(arr)-1 }; index >= 0; --index) // std::ssize zavedena v C++20\n        std::cout << arr[static_cast<std::size_t>(index)] << ' ';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b65",
       "type": "section",
       "title": "Converting the signed loop variable to an unsigned index",
       "html": "<h3 class=\"cpp-section-heading\">Converting the signed loop variable to an unsigned index</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Převod proměnné cyklu se znaménkem na bezznaménkový index</h3>",
+      "title_cs": "Převod proměnné smyčky se znaménkem na index bez znaménka"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b66",
       "type": "paragraph",
       "html": "<p>Once we have a signed loop variable, we’re going to run into implicit sign conversion warnings whenever we try to use that signed loop variable as an index. So we need some way to convert our signed loop variable to an unsigned value wherever we intend to use it as an index.</p>",
       "preview": "Once we have a signed loop variable, we’re going to run into implicit sign conve",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile máme proměnnou cyklu se znaménkem, narazíme na varování před implicitní konverzí znaménka, kdykoli se ji pokusíme použít jako index. Potřebujeme tedy nějaký způsob, jak tuto proměnnou cyklu se znaménkem převést na bezznaménkovou hodnotu všude tam, kde ji zamýšlíme použít jako index.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b67",
       "type": "list",
       "html": "<ol start=\"1\"><li>The obvious option is to static cast our signed loop variable into an unsigned index. We show this in the prior example. Unfortunately, we need to do this everywhere we subscript the array, and it makes our array indices hard to read.</li><li>Use a conversion function with a short name:</li></ol>",
       "preview": "The obvious option is to static cast our signed loop variable into an unsigned i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Zřejmou možností je přetypovat naši proměnnou cyklu se znaménkem na bezznaménkový index pomocí static castu. Ukázali jsme to v předchozím příkladu. Bohužel to musíme dělat všude, kde k poli přistupujeme přes index, a naše indexy jsou pak těžko čitelné.</li><li>Použijte konverzní funkci s krátkým názvem:</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b68",
@@ -508,63 +582,72 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <type_traits> // for std::is_integral and std::is_enum\n#include <vector>\n\nusing Index = std::ptrdiff_t;\n\n// Helper function to convert `value` into an object of type std::size_t\n// UZ is the suffix for literals of type std::size_t.\ntemplate <typename T>\nconstexpr std::size_t toUZ(T value)\n{\n    // make sure T is an integral type\n    static_assert(std::is_integral<T>() || std::is_enum<T>());\n    \n    return static_cast<std::size_t>(value);\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast<Index>(arr.size()) };  // in C++20, prefer std::ssize()\n    for (auto index{ length-1 }; index >= 0; --index)\n        std::cout << arr[toUZ(index)] << ' '; // use toUZ() to avoid sign conversion warning\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;type_traits&gt; // for std::is_integral and std::is_enum\n#include &lt;vector&gt;\n\nusing Index = std::ptrdiff_t;\n\n// Helper function to convert `value` into an object of type std::size_t\n// UZ is the suffix for literals of type std::size_t.\ntemplate &lt;typename T&gt;\nconstexpr std::size_t toUZ(T value)\n{\n    // make sure T is an integral type\n    static_assert(std::is_integral&lt;T&gt;() || std::is_enum&lt;T&gt;());\n    \n    return static_cast&lt;std::size_t&gt;(value);\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast&lt;Index&gt;(arr.size()) };  // in C++20, prefer std::ssize()\n    for (auto index{ length-1 }; index &gt;= 0; --index)\n        std::cout &lt;&lt; arr[toUZ(index)] &lt;&lt; ' '; // use toUZ() to avoid sign conversion warning\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <type_traits> // pro std::is_integral a std::is_enum\n#include <vektor>\n\npomocí Index = std::ptrdiff_t;\n\n// Pomocná funkce pro převod `value` na objekt typu std::size_t\n// UZ je přípona pro literály typu std::size_t.\nšablona <název typu T>\nconstexpr std::size_t toUZ(hodnota T)\n{\n    // ujistěte se, že T je integrální typ\n    static_assert(std::je_integrální<T>() || std::je_výčet<T>());\n    \n    return static_cast<std::size_t>(hodnota);\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast<Index>(arr.size()) };  // v C++20 preferujte std::ssize()\n    for (automatický index{ délka-1 }; index >= 0; --index)\n        std::cout << arr[toUZ(index)] << ' '; // použijte toUZ(), abyste se vyhnuli upozornění na konverzi znaménka\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b69",
       "type": "paragraph",
       "html": "<p>In the above example, we’ve created a function named <code>toUZ()</code> that is designed to convert integral values to values of type <code>std::size_t</code>. This allows us to index our array as <code>arr[toUZ(index)]</code>, which is pretty readable.</p>",
       "preview": "In the above example, we’ve created a function named toUZ() that is designed to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu jsme vytvořili funkci s názvem <code>toUZ()</code>, která je navržena pro převod celočíselných hodnot na hodnoty typu <code>std::size_t</code>. To nám umožňuje indexovat naše pole jako <code>arr[toUZ(index)]</code>, což je poměrně dobře čitelné.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b70",
       "type": "list",
       "html": "<ol start=\"3\"><li>Use a custom view</li></ol>",
       "preview": "Use a custom view",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"3\"><li>Použijte vlastní view</li></ol>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b71",
       "type": "paragraph",
       "html": "<p>In prior lessons, we discussed how <code>std::string</code> owns a string, whereas <code>std::string_view</code> is a view into a string that exists elsewhere. One of the neat things about <code>std::string_view</code> is how it can view different types of strings (C-style string literals, <code>std::string</code>, and other <code>std::string_view</code>) but keeps a consistent interface for us to use.</p>",
       "preview": "In prior lessons, we discussed how std::string owns a string, whereas std::strin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích jsme probírali, jak <code>std::string</code> řetězec vlastní, zatímco <code>std::string_view</code> je pohled (view) na řetězec, který existuje někde jinde. Jednou ze skvělých vlastností <code>std::string_view</code> je, že může poskytovat pohled na různé typy řetězců (řetězcové literály ve stylu C, <code>std::string</code> a další <code>std::string_view</code>), přičemž si zachovává konzistentní rozhraní.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b72",
       "type": "paragraph",
       "html": "<p>While we can’t modify the standard library containers to accept a signed integral index, we can create our own custom view class to “view” a standard library container class. And in doing so, we can define our own interface to work however we want.</p>",
       "preview": "While we can’t modify the standard library containers to accept a signed integra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I když nemůžeme upravit kontejnery standardní knihovny tak, aby přijímaly signed celočíselný index, můžeme si vytvořit vlastní třídu pohledu (custom view class) pro „nahlížení“ na kontejner ze standardní knihovny. Tím si můžeme definovat vlastní rozhraní fungující přesně tak, jak potřebujeme.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b73",
       "type": "paragraph",
       "html": "<p>In the following example, we define a custom view class that can view any standard library container that supports indexing. Our interface will do two things:</p>",
       "preview": "In the following example, we define a custom view class that can view any standa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím příkladu definujeme vlastní třídu pohledu, která dokáže nahlížet na jakýkoli kontejner standardní knihovny podporující indexování. Naše rozhraní bude dělat dvě věci:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b74",
       "type": "list",
       "html": "<ul><li>Allow us to access elements using <code>operator[]</code> with a signed integral type.</li><li>Get the length of the container as a signed integral type (since <code>std::ssize()</code> is only available on C++20).</li></ul>",
       "preview": "Allow us to access elements using operator[] with a signed integral type.Get the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Umožní nám přistupovat k prvkům pomocí <code>operator[]</code> se signed celočíselným typem.</li><li>Získá délku kontejneru jako signed celočíselný typ (protože <code>std::ssize()</code> je k dispozici až od C++20).</li></ul>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b75",
       "type": "paragraph",
       "html": "<p>This uses operator overloading (which we briefly introduced in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-overloading-the-i-o-operators/\">13.5 -- Introduction to overloading the I/O operators</a>) to implement <code>operator[]</code>. You don’t need to know how <code>SignedArrayView</code> is implemented in order to use it.</p>",
       "preview": "This uses operator overloading (which we briefly introduced in lesson 13.5 -- In",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K implementaci <code>operator[]</code> se zde využívá přetěžování operátorů (které jsme si stručně představili v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-overloading-the-i-o-operators/\">13.5 – Úvod do přetěžování I/O operátorů</a>). Abyste mohli <code>SignedArrayView</code> používat, nemusíte vědět, jak je implementován.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b76",
       "type": "paragraph",
       "html": "<p>SignedArrayView.h:</p>",
       "preview": "SignedArrayView.h:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>SignedArrayView.h:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b77",
@@ -572,14 +655,16 @@
       "language": "cpp",
       "code": "#ifndef SIGNED_ARRAY_VIEW_H\n#define SIGNED_ARRAY_VIEW_H\n\n#include <cstddef> // for std::size_t and std::ptrdiff_t\n\n// SignedArrayView provides a view into a container that supports indexing\n// allowing us to work with these types using signed indices\ntemplate <typename T>\nclass SignedArrayView // requires C++17\n{\nprivate:\n    T& m_array;\n\npublic:\n    using Index = std::ptrdiff_t;\n\n    SignedArrayView(T& array)\n        : m_array{ array } {}\n\n    // Overload operator[] to take a signed index\n    constexpr auto& operator[](Index index) { return m_array[static_cast<typename T::size_type>(index)]; }\n    constexpr const auto& operator[](Index index) const { return m_array[static_cast<typename T::size_type>(index)]; }\n    constexpr auto ssize() const { return static_cast<Index>(m_array.size()); }\n};\n\n#endif",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef SIGNED_ARRAY_VIEW_H\n#define SIGNED_ARRAY_VIEW_H\n\n#include &lt;cstddef&gt; // for std::size_t and std::ptrdiff_t\n\n// SignedArrayView provides a view into a container that supports indexing\n// allowing us to work with these types using signed indices\ntemplate &lt;typename T&gt;\nclass SignedArrayView // requires C++17\n{\nprivate:\n    T&amp; m_array;\n\npublic:\n    using Index = std::ptrdiff_t;\n\n    SignedArrayView(T&amp; array)\n        : m_array{ array } {}\n\n    // Overload operator[] to take a signed index\n    constexpr auto&amp; operator[](Index index) { return m_array[static_cast&lt;typename T::size_type&gt;(index)]; }\n    constexpr const auto&amp; operator[](Index index) const { return m_array[static_cast&lt;typename T::size_type&gt;(index)]; }\n    constexpr auto ssize() const { return static_cast&lt;Index&gt;(m_array.size()); }\n};\n\n#endif</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef SIGNED_ARRAY_VIEW_H\n#define SIGNED_ARRAY_VIEW_H\n\n#include <cstddef> // pro std::size_t a std::ptrdiff_t\n\n// SignedArrayView poskytuje pohled do kontejneru, který podporuje indexování\n// nám umožňuje pracovat s těmito typy pomocí podepsaných indexů\nšablona <název typu T>\nclass SignedArrayView // vyžaduje C++17\n{\nsoukromé:\n    T& m_array;\n\nveřejnost:\n    pomocí Index = std::ptrdiff_t;\n\n    SignedArrayView (T& pole)\n        : m_array{ pole } {}\n\n    // Přetížení operátoru[] pro převzetí podepsaného indexu\n    constexpr auto& operator[](index indexu) { return m_array[static_cast<typename T::size_type>(index)]; }\n    constexpr const auto& operator[](index indexu) const { return m_array[static_cast<typename T::size_type>(index)]; }\n    constexpr auto ssize() const { return static_cast<Index>(m_array.size()); }\n};\n\n#endif</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b78",
       "type": "paragraph",
       "html": "<p>main.cpp:</p>",
       "preview": "main.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>main.cpp:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b79",
@@ -587,21 +672,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n#include \"SignedArrayView.h\"\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    SignedArrayView sarr{ arr }; // Create a signed view of our std::vector\n\n    for (auto index{ sarr.ssize() - 1 }; index >= 0; --index)\n        std::cout << sarr[index] << ' '; // index using a signed type\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n#include \"SignedArrayView.h\"\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    SignedArrayView sarr{ arr }; // Create a signed view of our std::vector\n\n    for (auto index{ sarr.ssize() - 1 }; index &gt;= 0; --index)\n        std::cout &lt;&lt; sarr[index] &lt;&lt; ' '; // index using a signed type\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n#include \"SignedArrayView.h\"\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    SignedArrayView sarr{ arr }; // Vytvořte podepsaný pohled na náš std::vector\n\n    for (auto index{ sarr.ssize() - 1 }; index >= 0; --index)\n        std::cout << sarr[index] << ' '; // index pomocí podepsaného typu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b80",
       "type": "section",
       "title": "Index the underlying C-style array instead",
       "html": "<h3 class=\"cpp-section-heading\">Index the underlying C-style array instead</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Místo toho indexujte podkladové C-style pole</h3>",
+      "title_cs": "Místo toho indexujte základní pole ve stylu C"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b81",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/\">16.3 -- std::vector and the unsigned length and subscript problem</a>, we noted that instead of indexing the standard library container, we can instead call the <code>data()</code> member function and index that instead. Since <code>data()</code> returns the array data as a C-style array, and C-style arrays allow indexing with both signed and unsigned values, this avoids sign conversion issues.</p>",
       "preview": "In lesson 16.3 -- std::vector and the unsigned length and subscript problem, we ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdvector-and-the-unsigned-length-and-subscript-problem/\">16.3 – std::vector a problém s unsigned délkou a indexováním</a> jsme zmínili, že místo indexování kontejneru standardní knihovny můžeme zavolat členskou funkci <code>data()</code> a indexovat ji. Protože <code>data()</code> vrací data pole jako C-style pole a C-style pole umožňují indexování jak se signed, tak s unsigned hodnotami, vyhneme se tím problémům s konverzí znaménka.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b82",
@@ -609,49 +698,57 @@
       "language": "cpp",
       "code": "int main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast<Index>(arr.size()) };  // in C++20, prefer std::ssize()\n    for (auto index{ length - 1 }; index >= 0; --index)\n        std::cout << arr.data()[index] << ' ';       // use data() to avoid sign conversion warning\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast&lt;Index&gt;(arr.size()) };  // in C++20, prefer std::ssize()\n    for (auto index{ length - 1 }; index &gt;= 0; --index)\n        std::cout &lt;&lt; arr.data()[index] &lt;&lt; ' ';       // use data() to avoid sign conversion warning\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n\n    auto length { static_cast<Index>(arr.size()) };  // v C++20 preferujte std::ssize()\n    for (automatický index{ délka - 1 }; index >= 0; --index)\n        std::cout << arr.data()[index] << ' ';       // použijte data(), abyste se vyhnuli upozornění na konverzi znamének\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b83",
       "type": "paragraph",
       "html": "<p>We believe that this method is the best of the indexing options:</p>",
       "preview": "We believe that this method is the best of the indexing options:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Věříme, že tato metoda je z možností indexování ta nejlepší:</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b84",
       "type": "list",
       "html": "<ul><li>We can use signed loop variables and indices.</li><li>We don’t have to define any custom types or type aliases.</li><li>The hit to readability from using <code>data()</code> isn’t very big.</li><li>There should be no performance hit in optimized code.</li></ul>",
       "preview": "We can use signed loop variables and indices.We don’t have to define any custom ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Můžeme používat proměnné cyklu a indexy se znaménkem (signed).</li><li>Nemusíme definovat žádné vlastní typy ani aliasy typů.</li><li>Dopad na čitelnost při použití <code>data()</code> není nijak velký.</li><li>V optimalizovaném kódu by nemělo dojít k žádnému poklesu výkonu.</li></ul>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b85",
       "type": "section",
       "title": "The only sane choice: avoid indexing altogether!",
       "html": "<h3 class=\"cpp-section-heading\">The only sane choice: avoid indexing altogether!</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jediná rozumná volba: indexování se zcela vyhnout!</h3>",
+      "title_cs": "Jediná rozumná volba: úplně se vyhnout indexování!"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b86",
       "type": "paragraph",
       "html": "<p>All of the options presented above have their own downsides, so it’s hard to recommend one approach over the other. However, there is a choice that is far more sane than the others: avoid indexing with integral values altogether.</p>",
       "preview": "All of the options presented above have their own downsides, so it’s hard to rec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všechny výše uvedené možnosti mají své nevýhody, takže je těžké doporučit jeden přístup na úkor druhého. Existuje však volba, která je mnohem rozumnější než ostatní: indexování pomocí celočíselných hodnot se zcela vyhnout.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b87",
       "type": "paragraph",
       "html": "<p>C++ provides several other methods for traversing through arrays that do not use indices at all. And if we don’t have indices, then we don’t run into all of these signed/unsigned conversion issues.</p>",
       "preview": "C++ provides several other methods for traversing through arrays that do not use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ poskytuje několik dalších metod pro procházení polí, které indexy vůbec nepoužívají. A pokud indexy nemáme, nenarazíme na žádný z těchto problémů s převody mezi signed a unsigned.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b88",
       "type": "paragraph",
       "html": "<p>Two common methods for array traversal without indices include range-based for loops, and iterators.</p>",
       "preview": "Two common methods for array traversal without indices include range-based for l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mezi dvě běžné metody pro procházení polí bez indexů patří range-based for cykly a iterátory.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b89",
@@ -659,14 +756,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover ranged-for loops in the next lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/\">16.8 -- Range-based for loops (for-each)</a>).<br>We cover iterators in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-iterators/\">18.2 -- Introduction to iterators</a>.</p></div>",
       "preview": "Related contentWe cover ranged-for loops in the next lesson (16.8 -- Range-based for loops (for-each",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Range-based for cykly probíráme v další lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/range-based-for-loops-for-each/\">16.8 -- Range-based for cykly (for-each)</a>).<br>Iterátory probíráme v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-iterators/\">18.2 -- Úvod do iterátorů</a>.</p></div>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b90",
       "type": "paragraph",
       "html": "<p>If you’re only using the index variable to traverse the array, then prefer a method that does not use indices.</p>",
       "preview": "If you’re only using the index variable to traverse the array, then prefer a met",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud proměnnou indexu používáte pouze k procházení pole, dejte přednost metodě, která indexy nepoužívá.</p>"
     },
     {
       "id": "arrays-loops-and-sign-challenge-solutions_b91",
@@ -674,7 +773,9 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid array indexing with integral values whenever possible.</p></div>",
       "preview": "Best practiceAvoid array indexing with integral values whenever possible.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Kdykoli je to možné, vyhněte se indexování polí pomocí celočíselných hodnot.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "16.7 — Pole, cykly a řešení výzvy se znaménky"
 }

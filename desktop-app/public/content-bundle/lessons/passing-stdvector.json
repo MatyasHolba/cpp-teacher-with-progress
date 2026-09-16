@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>An object of type <code>std::vector</code> can be passed to a function just like any other object. That means if we pass a <code>std::vector</code> by value, an expensive copy will be made. Therefore, we typically pass <code>std::vector</code> by (const) reference to avoid such copies.</p>",
       "preview": "An object of type std::vector can be passed to a function just like any other ob",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Objekt typu <code>std::vector</code> lze předat do funkce stejně jako jakýkoli jiný objekt. To znamená, že pokud předáme <code>std::vector</code> hodnotou, vytvoří se nákladná kopie. Z tohoto důvodu obvykle předáváme <code>std::vector</code> (const) referencí, abychom se takovým kopiím vyhnuli.</p>"
     },
     {
       "id": "passing-stdvector_b1",
       "type": "paragraph",
       "html": "<p>With a <code>std::vector</code>, the element type is part of the type information of the object. Therefore, when we use a <code>std::vector</code> as a function parameter, we have to explicitly specify the element type:</p>",
       "preview": "With a std::vector, the element type is part of the type information of the obje",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U <code>std::vector</code> je typ prvků součástí typové informace objektu. Proto když použijeme <code>std::vector</code> jako parametr funkce, musíme typ prvků explicitně specifikovat:</p>"
     },
     {
       "id": "passing-stdvector_b2",
@@ -29,21 +31,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid passByRef(const std::vector<int>& arr) // we must explicitly specify <int> here\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid passByRef(const std::vector&lt;int&gt;&amp; arr) // we must explicitly specify &lt;int&gt; here\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid passByRef(const std::vector<int>& arr) // zde musíme výslovně uvést <int>\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 };\n    passByRef(primes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b3",
       "type": "section",
       "title": "Passing std::vector of different element types",
       "html": "<h3 class=\"cpp-section-heading\">Passing <code>std::vector</code> of different element types</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání <code>std::vector</code> s různými typy prvků</h3>",
+      "title_cs": "Předání std::vektoru různých typů prvků"
     },
     {
       "id": "passing-stdvector_b4",
       "type": "paragraph",
       "html": "<p>Because our <code>passByRef()</code> function expects a <code>std::vector&lt;int&gt;</code>, we are unable to pass vectors with different element types:</p>",
       "preview": "Because our passByRef() function expects a std::vector<int>, we are unable to pa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože naše funkce <code>passByRef()</code> očekává <code>std::vector&lt;int&gt;</code>, nemůžeme předávat vektory s jinými typy prvků:</p>"
     },
     {
       "id": "passing-stdvector_b5",
@@ -51,14 +57,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid passByRef(const std::vector<int>& arr)\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes);  // ok: this is a std::vector<int>\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl); // compile error: std::vector<double> is not convertible to std::vector<int>\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid passByRef(const std::vector&lt;int&gt;&amp; arr)\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes);  // ok: this is a std::vector&lt;int&gt;\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl); // compile error: std::vector&lt;double&gt; is not convertible to std::vector&lt;int&gt;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid passByRef(const std::vector<int>& arr)\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 };\n    passByRef(primes);  // ok: toto je std::vector<int>\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl); // chyba kompilace: std::vector<double> nelze převést na std::vector<int>\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b6",
       "type": "paragraph",
       "html": "<p>In C++17 or newer, you might try to use CTAD to solve this problem:</p>",
       "preview": "In C++17 or newer, you might try to use CTAD to solve this problem:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++17 nebo novějším byste se mohli pokusit vyřešit tento problém pomocí CTAD:</p>"
     },
     {
       "id": "passing-stdvector_b7",
@@ -66,21 +74,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid passByRef(const std::vector& arr) // compile error: CTAD can't be used to infer function parameters\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 }; // okay: use CTAD to infer std::vector<int>\n    passByRef(primes);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid passByRef(const std::vector&amp; arr) // compile error: CTAD can't be used to infer function parameters\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 }; // okay: use CTAD to infer std::vector&lt;int&gt;\n    passByRef(primes);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid passByRef(const std::vector& arr) // chyba kompilace: CTAD nelze použít k odvození parametrů funkce\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 }; // dobře: použijte CTAD k odvození std::vector<int>\n    passByRef(primes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b8",
       "type": "paragraph",
       "html": "<p>Although CTAD will work to deduce an vector’s element type from initializers when it is defined, CTAD doesn’t (currently) work with function parameters.</p>",
       "preview": "Although CTAD will work to deduce an vector’s element type from initializers whe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli CTAD funguje pro odvození typu prvků vektoru z inicializátorů při jeho definici, u parametrů funkcí CTAD (v současnosti) nefunguje.</p>"
     },
     {
       "id": "passing-stdvector_b9",
       "type": "paragraph",
       "html": "<p>We’ve seen this kind of problem before, where we have overloaded functions that only differ by the parameter type. This is a great place to make use of function templates! We can create a function template that parameterizes the element type, and then C++ will use that function template to instantiate functions with actual types.</p>",
       "preview": "We’ve seen this kind of problem before, where we have overloaded functions that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S tímto druhem problému jsme se již setkali u přetížených funkcí, které se liší pouze typem parametru. Zde je skvělé místo pro využití šablon funkcí! Můžeme vytvořit šablonu funkce, která parametrizuje typ prvku, a C++ pak tuto šablonu funkce použije k instanciování funkcí s konkrétními typy.</p>"
     },
     {
       "id": "passing-stdvector_b10",
@@ -88,14 +99,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover function templates in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates/\">11.6 -- Function templates</a>.</p></div>",
       "preview": "Related contentWe cover function templates in lesson 11.6 -- Function templates.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Šablonám funkcí se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates/\">11.6 -- Šablony funkcí (Function templates)</a>.</p></div>"
     },
     {
       "id": "passing-stdvector_b11",
       "type": "paragraph",
       "html": "<p>We can create a function template that uses the same template parameter declaration:</p>",
       "preview": "We can create a function template that uses the same template parameter declarat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme vytvořit šablonu funkce, která používá stejnou deklaraci parametrů šablony:</p>"
     },
     {
       "id": "passing-stdvector_b12",
@@ -103,49 +116,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid passByRef(const std::vector<T>& arr)\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector<double>&)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid passByRef(const std::vector&lt;T&gt;&amp; arr)\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector&lt;int&gt;&amp;)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector&lt;double&gt;&amp;)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid passByRef(const std::vector<T>& arr)\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: kompilátor vytvoří instanci passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: kompilátor vytvoří instanci passByRef(const std::vector<double>&)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b13",
       "type": "paragraph",
       "html": "<p>In the above example, we’ve created a single function template named <code>passByRef()</code> that has a parameter of type <code>const std::vector&lt;T&gt;&amp;</code>. <code>T</code> is defined in the template parameter declaration on the previous line: <code>template &lt;typename T</code>. <code>T</code> is a standard type template parameter that allows the caller to specify the element type.</p>",
       "preview": "In the above example, we’ve created a single function template named passByRef()",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu jsme vytvořili jedinou šablonu funkce s názvem <code>passByRef()</code>, která má parametr typu <code>const std::vector&lt;T&gt;&amp;</code>. <code>T</code> je definováno v deklaraci parametrů šablony na předchozím řádku: <code>template &lt;typename T</code>. <code>T</code> je standardní typový parametr šablony, který volajícímu umožňuje určit typ prvků.</p>"
     },
     {
       "id": "passing-stdvector_b14",
       "type": "paragraph",
       "html": "<p>Therefore, when we call <code>passByRef(primes)</code> from <code>main()</code> (where <code>primes</code> is defined as a <code>std::vector&lt;int&gt;</code>), the compiler will instantiate and call <code>void passByRef(const std::vector&lt;int&gt;&amp; arr)</code>.</p>",
       "preview": "Therefore, when we call passByRef(primes) from main() (where primes is defined a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když tedy z <code>main()</code> zavoláme <code>passByRef(primes)</code> (kde je <code>primes</code> definován jako <code>std::vector&lt;int&gt;</code>), kompilátor instancuje a zavolá <code>void passByRef(const std::vector&lt;int&gt;&amp; arr)</code>.</p>"
     },
     {
       "id": "passing-stdvector_b15",
       "type": "paragraph",
       "html": "<p>When we call <code>passByRef(dbl)</code> from <code>main()</code> (where <code>dbl</code> is defined as a <code>std::vector&lt;double&gt;</code>), the compiler will instantiate and call <code>void passByRef(const std::vector&lt;double&gt;&amp; arr)</code>.</p>",
       "preview": "When we call passByRef(dbl) from main() (where dbl is defined as a std::vector<d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když z <code>main()</code> zavoláme <code>passByRef(dbl)</code> (kde je <code>dbl</code> definován jako <code>std::vector&lt;double&gt;</code>), kompilátor instancuje a zavolá <code>void passByRef(const std::vector&lt;double&gt;&amp; arr)</code>.</p>"
     },
     {
       "id": "passing-stdvector_b16",
       "type": "paragraph",
       "html": "<p>Thus, we’ve created a single function template that can instantiate functions to handle <code>std::vector</code> arguments of any element type and length!</p>",
       "preview": "Thus, we’ve created a single function template that can instantiate functions to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvořili jsme tak jedinou šablonu funkce, která dokáže instancovat funkce pro zpracování argumentů typu <code>std::vector</code> s libovolným typem prvků i délkou!</p>"
     },
     {
       "id": "passing-stdvector_b17",
       "type": "section",
       "title": "Passing a std::vector using a generic template or abbreviated function template",
       "html": "<h3 class=\"cpp-section-heading\">Passing a <code>std::vector</code> using a generic template or abbreviated function template</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání <code>std::vector</code> pomocí generické šablony nebo zkrácené šablony funkce</h3>",
+      "title_cs": "Předání std::vektoru pomocí obecné šablony nebo šablony zkrácené funkce"
     },
     {
       "id": "passing-stdvector_b18",
       "type": "paragraph",
       "html": "<p>We can also create a function template that will accept any type of object:</p>",
       "preview": "We can also create a function template that will accept any type of object:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme také vytvořit šablonu funkce, která bude přijímat libovolný typ objektu:</p>"
     },
     {
       "id": "passing-stdvector_b19",
@@ -153,14 +174,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid passByRef(const T& arr) // will accept any type of object that has an overloaded operator[]\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector<double>&)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid passByRef(const T&amp; arr) // will accept any type of object that has an overloaded operator[]\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector&lt;int&gt;&amp;)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector&lt;double&gt;&amp;)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid passByRef(const T& arr) // přijme jakýkoli typ objektu, který má přetížený operátor[]\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: kompilátor vytvoří instanci passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: kompilátor vytvoří instanci passByRef(const std::vector<double>&)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b20",
       "type": "paragraph",
       "html": "<p>In C++20, we can use an abbreviated function template (via an <code>auto</code> parameter) to do the same thing:</p>",
       "preview": "In C++20, we can use an abbreviated function template (via an auto parameter) to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++20 můžeme k dosažení téhož použít zkrácenou šablonu funkce (pomocí parametru <code>auto</code>):</p>"
     },
     {
       "id": "passing-stdvector_b21",
@@ -168,35 +191,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid passByRef(const auto& arr) // abbreviated function template\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector<double>&)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid passByRef(const auto&amp; arr) // abbreviated function template\n{\n    std::cout &lt;&lt; arr[0] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector primes{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: compiler will instantiate passByRef(const std::vector&lt;int&gt;&amp;)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: compiler will instantiate passByRef(const std::vector&lt;double&gt;&amp;)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid passByRef(const auto& arr) // zkrácená šablona funkce\n{\n    std::cout << arr[0] << '\\n';\n}\n\nint main()\n{\n    std::vector prvočísla{ 2, 3, 5, 7, 11 };\n    passByRef(primes); // ok: kompilátor vytvoří instanci passByRef(const std::vector<int>&)\n\n    std::vector dbl{ 1.1, 2.2, 3.3 };\n    passByRef(dbl);    // ok: kompilátor vytvoří instanci passByRef(const std::vector<double>&)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b22",
       "type": "paragraph",
       "html": "<p>Both of these will accept an argument of <em>any</em> type that will compile. This can be desirable when writing functions that we might want to operate on more than just a <code>std::vector</code>. For example, the above functions will also work on a <code>std::array</code>, a <code>std::string</code>, or some other type we may not have even considered.</p>",
       "preview": "Both of these will accept an argument of any type that will compile. This can be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obě tyto varianty přijmou argument <em>jakéhokoli</em> typu, který projde kompilací. To může být žádoucí při psaní funkcí, u kterých chceme, aby fungovaly nejen s <code>std::vector</code>. Výše uvedené funkce budou například fungovat také s <code>std::array</code>, <code>std::string</code> nebo nějakým jiným typem, který jsme možná ani nezvažovali.</p>"
     },
     {
       "id": "passing-stdvector_b23",
       "type": "paragraph",
       "html": "<p>The potential downside of this method is that it may lead to bugs if the function is passed an object of a type that compiles but doesn’t make sense semantically.</p>",
       "preview": "The potential downside of this method is that it may lead to bugs if the functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Potenciální nevýhodou této metody je, že může vést k chybám, pokud je funkci předán objekt typu, který se sice zkompiluje, ale sémanticky nedává smysl.</p>"
     },
     {
       "id": "passing-stdvector_b24",
       "type": "section",
       "title": "Asserting on array length",
       "html": "<h3 class=\"cpp-section-heading\">Asserting on array length</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ověření délky pole pomocí assertu</h3>",
+      "title_cs": "Tvrzení o délce pole"
     },
     {
       "id": "passing-stdvector_b25",
       "type": "paragraph",
       "html": "<p>Consider the following template function, which is similar to the one presented above:</p>",
       "preview": "Consider the following template function, which is similar to the one presented ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující šablonovou funkci, která je podobná té uvedené výše:</p>"
     },
     {
       "id": "passing-stdvector_b26",
@@ -204,21 +233,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid printElement3(const std::vector<T>& arr)\n{\n    std::cout << arr[3] << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    printElement3(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid printElement3(const std::vector&lt;T&gt;&amp; arr)\n{\n    std::cout &lt;&lt; arr[3] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    printElement3(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid printElement3(const std::vector<T>& arr)\n{\n    std::cout << arr[3] << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7, 5, 3, 1 };\n    printPrvek3(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b27",
       "type": "paragraph",
       "html": "<p>While <code>printElement3(arr)</code> works fine in this case, there’s a potential bug waiting for a unwary programmer in this program. See it?</p>",
       "preview": "While printElement3(arr) works fine in this case, there’s a potential bug waitin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli <code>printElement3(arr)</code> v tomto případě funguje bez problémů, v programu čeká na nepozorného programátora potenciální chyba. Vidíte ji?</p>"
     },
     {
       "id": "passing-stdvector_b28",
       "type": "paragraph",
       "html": "<p>The above program prints the value of the array element with index 3. This is fine as long as the array has a valid element with index 3. However, the compiler will happily let you pass in arrays where index 3 is out of bounds. For example:</p>",
       "preview": "The above program prints the value of the array element with index 3. This is fi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený program vypíše hodnotu prvku pole s indexem 3. To je v pořádku, dokud má pole platný prvek s indexem 3. Kompilátor vám však s radostí dovolí předat pole, kde je index 3 mimo meze. Například:</p>"
     },
     {
       "id": "passing-stdvector_b29",
@@ -226,21 +258,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\ntemplate <typename T>\nvoid printElement3(const std::vector<T>& arr)\n{\n    std::cout << arr[3] << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7 }; // a 2-element array (valid indexes 0 and 1)\n    printElement3(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\ntemplate &lt;typename T&gt;\nvoid printElement3(const std::vector&lt;T&gt;&amp; arr)\n{\n    std::cout &lt;&lt; arr[3] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7 }; // a 2-element array (valid indexes 0 and 1)\n    printElement3(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nšablona <název typu T>\nvoid printElement3(const std::vector<T>& arr)\n{\n    std::cout << arr[3] << '\\n';\n}\n\nint main()\n{\n    std::vector arr{ 9, 7 }; // 2prvkové pole (platné indexy 0 a 1)\n    printPrvek3(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b30",
       "type": "paragraph",
       "html": "<p>This leads to undefined behavior.</p>",
       "preview": "This leads to undefined behavior.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vede k nedefinovanému chování.</p>"
     },
     {
       "id": "passing-stdvector_b31",
       "type": "paragraph",
       "html": "<p>One option here is to assert on <code>arr.size()</code>, which will catch such errors when run in a debug build configuration. Because <code>std::vector::size()</code> is a non-constexpr function, we can only do a runtime assert here.</p>",
       "preview": "One option here is to assert on arr.size(), which will catch such errors when ru",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou z možností je použít assert na <code>arr.size()</code>, což takové chyby zachytí při spuštění v debug konfiguraci. Protože <code>std::vector::size()</code> je non-constexpr funkce, můžeme zde provést pouze runtime assert.</p>"
     },
     {
       "id": "passing-stdvector_b32",
@@ -248,21 +283,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>A better option is to avoid using <code>std::vector</code>in cases where you need to assert on array length. Using a type that supports <code>constexpr</code> arrays (e.g. <code>std::array</code>) is probably a better choice, as you can <code>static_assert</code> on the length of a constexpr array. We cover this in future lesson <a href=\"https://www.learncpp.com/cpp-tutorial/passing-and-returning-stdarray/\">17.3 -- Passing and returning std::array</a>.</p></div>",
       "preview": "TipA better option is to avoid using std::vectorin cases where you need to assert on array length. U",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Lepší možností je vyhnout se použití <code>std::vector</code> v případech, kdy potřebujete ověřovat délku pole pomocí assertu. Použití typu, který podporuje <code>constexpr</code> pole (např. <code>std::array</code>), je pravděpodobně lepší volbou, protože u délky constexpr pole můžete použít <code>static_assert</code>. Tomuto tématu se věnujeme v budoucí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/passing-and-returning-stdarray/\">17.3 -- Předávání a vracení std::array</a>.</p></div>"
     },
     {
       "id": "passing-stdvector_b33",
       "type": "paragraph",
       "html": "<p>The best option is to avoid writing functions that rely on the user passing in a vector with a minimum length in the first place.</p>",
       "preview": "The best option is to avoid writing functions that rely on the user passing in a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejlepší možností je především se vyhnout psaní funkcí, které spoléhají na to, že uživatel předá vektor s minimální délkou.</p>"
     },
     {
       "id": "passing-stdvector_b34",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "passing-stdvector_b35",
@@ -278,7 +317,8 @@
       "type": "paragraph",
       "html": "<p>The following sample program should compile:</p>",
       "preview": "The following sample program should compile:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující ukázkový program by se měl zkompilovat:</p>"
     },
     {
       "id": "passing-stdvector_b37",
@@ -286,21 +326,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\n// Write your printElement function here\n\nint main()\n{\n    std::vector v1 { 0, 1, 2, 3, 4 };\n    printElement(v1, 2);\n    printElement(v1, 5);\n\n    std::vector v2 { 1.1, 2.2, 3.3 };\n    printElement(v2, 0);\n    printElement(v2, -1);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\n// Write your printElement function here\n\nint main()\n{\n    std::vector v1 { 0, 1, 2, 3, 4 };\n    printElement(v1, 2);\n    printElement(v1, 5);\n\n    std::vector v2 { 1.1, 2.2, 3.3 };\n    printElement(v2, 0);\n    printElement(v2, -1);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\n// Sem napište svou funkci printElement\n\nint main()\n{\n    std::vector v1 { 0, 1, 2, 3, 4 };\n    printElement(v1, 2);\n    printElement(v1, 5);\n\n    std::vector v2 { 1.1, 2.2, 3.3 };\n    printElement(v2, 0);\n    printElement(v2, -1);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "passing-stdvector_b38",
       "type": "paragraph",
       "html": "<p>and produce the following result:</p>",
       "preview": "and produce the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a vytvořit následující výstup:</p>"
     },
     {
       "id": "passing-stdvector_b39",
       "type": "output",
       "text": "The element has value 2\nInvalid index\nThe element has value 1.1\nInvalid index\n",
       "html": "<pre>The element has value 2\nInvalid index\nThe element has value 1.1\nInvalid index\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The element has value 2\nInvalid index\nThe element has value 1.1\nInvalid index\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "16.4 — Předávání std::vector"
 }

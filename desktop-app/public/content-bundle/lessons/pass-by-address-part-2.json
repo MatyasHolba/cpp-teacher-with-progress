@@ -14,21 +14,25 @@
       "type": "paragraph",
       "html": "<p>This lesson is a continuation of <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-address/\">12.10 -- Pass by address</a>.</p>",
       "preview": "This lesson is a continuation of 12.10 -- Pass by address.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato lekce je pokračováním <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-address/\">12.10 -- Předávání adresou (Pass by address)</a>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b1",
       "type": "section",
       "title": "Pass by address for “optional” arguments",
       "html": "<h3 class=\"cpp-section-heading\">Pass by address for “optional” arguments</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání adresou pro „volitelné“ argumenty</h3>",
+      "title_cs": "Pass by address for “optional” arguments"
     },
     {
       "id": "pass-by-address-part-2_b2",
       "type": "paragraph",
       "html": "<p>One of the more common uses for pass by address is to allow a function to accept an “optional” argument. This is easier to illustrate by example than to describe:</p>",
       "preview": "One of the more common uses for pass by address is to allow a function to accept",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedno z běžnějších využití předávání adresou je umožnit funkci přijímat „volitelný“ argument. To lze lépe ilustrovat na příkladu než popsat:</p>"
     },
     {
       "id": "pass-by-address-part-2_b3",
@@ -36,35 +40,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printIDNumber(const int *id=nullptr)\n{\n    if (id)\n        std::cout << \"Your ID number is \" << *id << \".\\n\";\n    else\n        std::cout << \"Your ID number is not known.\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(&userid); // we know the user's ID now\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printIDNumber(const int *id=nullptr)\n{\n    if (id)\n        std::cout &lt;&lt; \"Your ID number is \" &lt;&lt; *id &lt;&lt; \".\\n\";\n    else\n        std::cout &lt;&lt; \"Your ID number is not known.\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(&amp;userid); // we know the user's ID now\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printIDNumber(const int *id=nullptr)\n{\n    pokud (id)\n        std::cout << \"Vaše ID číslo je \" << *id << \".\\n\";\n    jinak\n        std::cout << \"Your ID number is not known.\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(&uživatelské jméno); // we know the user's ID now\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b4",
       "type": "paragraph",
       "html": "<p>This example prints:</p>",
       "preview": "This example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vypíše:</p>"
     },
     {
       "id": "pass-by-address-part-2_b5",
       "type": "output",
       "text": "Your ID number is not known.\nYour ID number is 34.\n",
       "html": "<pre>Your ID number is not known.\nYour ID number is 34.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Your ID number is not known.\nYour ID number is 34.\n</pre>"
     },
     {
       "id": "pass-by-address-part-2_b6",
       "type": "paragraph",
       "html": "<p>In this program, the <code>printIDNumber()</code> function has one parameter that is passed by address and defaulted to <code>nullptr</code>. Inside <code>main()</code>, we call this function twice. The first call, we don’t know the user’s ID, so we call <code>printIDNumber()</code> without an argument. The <code>id</code> parameter defaults to <code>nullptr</code>, and the function prints <code>Your ID number is not known.</code>. For the second call, we now have a valid id, so we call <code>printIDNumber(&amp;userid)</code>. The <code>id</code> parameter receives the address of <code>userid</code>, so the function prints <code>Your ID number is 34.</code>.</p>",
       "preview": "In this program, the printIDNumber() function has one parameter that is passed b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto programu má funkce <code>printIDNumber()</code> jeden parametr předávaný adresou s výchozí hodnotou <code>nullptr</code>. Uvnitř <code>main()</code> tuto funkci voláme dvakrát. Při prvním volání neznáme ID uživatele, takže <code>printIDNumber()</code> voláme bez argumentu. Parametr <code>id</code> se nastaví na výchozí hodnotu <code>nullptr</code> a funkce vypíše <code>Your ID number is not known.</code>. Při druhém volání již máme platné ID, takže voláme <code>printIDNumber(&amp;userid)</code>. Parametr <code>id</code> obdrží adresu <code>userid</code>, a funkce tedy vypíše <code>Your ID number is 34.</code>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b7",
       "type": "paragraph",
       "html": "<p>However, in many cases, function overloading is a better alternative to achieve the same result:</p>",
       "preview": "However, in many cases, function overloading is a better alternative to achieve ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V mnoha případech je však pro dosažení stejného výsledku lepší alternativou přetěžování funkcí:</p>"
     },
     {
       "id": "pass-by-address-part-2_b8",
@@ -72,28 +81,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printIDNumber()\n{\n    std::cout << \"Your ID is not known\\n\";\n}\n\nvoid printIDNumber(int id)\n{\n    std::cout << \"Your ID is \" << id << \"\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(userid); // we know the user is 34\n\n    printIDNumber(62); // now also works with rvalue arguments\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printIDNumber()\n{\n    std::cout &lt;&lt; \"Your ID is not known\\n\";\n}\n\nvoid printIDNumber(int id)\n{\n    std::cout &lt;&lt; \"Your ID is \" &lt;&lt; id &lt;&lt; \"\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(userid); // we know the user is 34\n\n    printIDNumber(62); // now also works with rvalue arguments\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printIDNumber()\n{\n    std::cout << \"Your ID is not known\\n\";\n}\n\nvoid printIDNumber(int id)\n{\n    std::cout << \"Your ID is \" << id << \"\\n\";\n}\n\nint main()\n{\n    printIDNumber(); // we don't know the user's ID yet\n\n    int userid { 34 };\n    printIDNumber(uživatelské jméno); // we know the user is 34\n\n    printIDNumber(62); // now also works with rvalue arguments\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b9",
       "type": "paragraph",
       "html": "<p>This has a number of advantages: we no longer have to worry about null dereferences, and we can pass in literals or other rvalues as an argument.</p>",
       "preview": "This has a number of advantages: we no longer have to worry about null dereferen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To má řadu výhod: již se nemusíme obávat dereferencování nulového ukazatele a jako argument můžeme předávat literály nebo jiné r-hodnoty (rvalues).</p>"
     },
     {
       "id": "pass-by-address-part-2_b10",
       "type": "section",
       "title": "Changing what a pointer parameter points at",
       "html": "<h3 class=\"cpp-section-heading\">Changing what a pointer parameter points at</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Změna toho, na co ukazuje parametrický ukazatel</h3>",
+      "title_cs": "Changing what a pointer parameter points at"
     },
     {
       "id": "pass-by-address-part-2_b11",
       "type": "paragraph",
       "html": "<p>When we pass an address to a function, that address is copied from the argument into the pointer parameter (which is fine, because copying an address is fast). Now consider the following program:</p>",
       "preview": "When we pass an address to a function, that address is copied from the argument ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když předáváme funkci adresu, tato adresa se zkopíruje z argumentu do parametru typu ukazatel (což je v pořádku, protože kopírování adresy je rychlé). Nyní se podívejme na následující program:</p>"
     },
     {
       "id": "pass-by-address-part-2_b12",
@@ -101,49 +115,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// [[maybe_unused]] gets rid of compiler warnings about ptr2 being set but not used\nvoid nullify([[maybe_unused]] int* ptr2) \n{\n    ptr2 = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &x }; // ptr points to x\n\n    std::cout << \"ptr is \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    nullify(ptr);\n\n    std::cout << \"ptr is \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// [[maybe_unused]] gets rid of compiler warnings about ptr2 being set but not used\nvoid nullify([[maybe_unused]] int* ptr2) \n{\n    ptr2 = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &amp;x }; // ptr points to x\n\n    std::cout &lt;&lt; \"ptr is \" &lt;&lt; (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    nullify(ptr);\n\n    std::cout &lt;&lt; \"ptr is \" &lt;&lt; (ptr ? \"non-null\\n\" : \"null\\n\");\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// [[možná_unused]] odstraní varování kompilátoru o tom, že ptr2 je nastaven, ale není používán\nvoid nullify([[možná_unused]] int* ptr2) \n{\n    ptr2 = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{5};\n    int* ptr{ &x }; // ptr ukazuje na x\n\n    std::cout << \"ptr je \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    vynulovat(ptr);\n\n    std::cout << \"ptr je \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b13",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "pass-by-address-part-2_b14",
       "type": "output",
       "text": "ptr is non-null\nptr is non-null\n",
       "html": "<pre>ptr is non-null\nptr is non-null\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>ptr is non-null\nptr is non-null\n</pre>"
     },
     {
       "id": "pass-by-address-part-2_b15",
       "type": "paragraph",
       "html": "<p>As you can see, changing the address held by the pointer parameter had no impact on the address held by the argument (<code>ptr</code> still points at <code>x</code>). When function <code>nullify()</code> is called, <code>ptr2</code> receives a copy of the address passed in (in this case, the address held by <code>ptr</code>, which is the address of <code>x</code>). When the function changes what <code>ptr2</code> points at, this only affects the copy held by <code>ptr2</code>.</p>",
       "preview": "As you can see, changing the address held by the pointer parameter had no impact",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, změna adresy uložené v parametru typu ukazatel neměla žádný vliv na adresu drženou argumentem (<code>ptr</code> stále ukazuje na <code>x</code>). Když je funkce <code>nullify()</code> zavolána, <code>ptr2</code> obdrží kopii předané adresy (v tomto případě adresu drženou <code>ptr</code>, což je adresa proměnné <code>x</code>). Když funkce změní to, na co <code>ptr2</code> ukazuje, ovlivní to pouze kopii drženou v <code>ptr2</code>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b16",
       "type": "paragraph",
       "html": "<p>So what if we want to allow a function to change what a pointer argument points to?</p>",
       "preview": "So what if we want to allow a function to change what a pointer argument points ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co když tedy chceme funkci umožnit změnit to, na co ukazuje argument typu ukazatel?</p>"
     },
     {
       "id": "pass-by-address-part-2_b17",
       "type": "section",
       "title": "Pass by address… by reference?",
       "html": "<h3 class=\"cpp-section-heading\">Pass by address… by reference?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předání adresou… referencí?</h3>",
+      "title_cs": "Předat podle adresy... podle odkazu?"
     },
     {
       "id": "pass-by-address-part-2_b18",
       "type": "paragraph",
       "html": "<p>Yup, it’s a thing. Just like we can pass a normal variable by reference, we can also pass pointers by reference. Here’s the same program as above with <code>ptr2</code> changed to be a reference to an address:</p>",
       "preview": "Yup, it’s a thing. Just like we can pass a normal variable by reference, we can ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ano, i to existuje. Stejně jako můžeme referencí předat běžnou proměnnou, můžeme referencí předat i ukazatele. Zde je stejný program jako výše, kde byl <code>ptr2</code> změněn na referenci na ukazatel (adresu):</p>"
     },
     {
       "id": "pass-by-address-part-2_b19",
@@ -151,28 +173,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid nullify(int*& refptr) // refptr is now a reference to a pointer\n{\n    refptr = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &x }; // ptr points to x\n\n    std::cout << \"ptr is \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    nullify(ptr);\n\n    std::cout << \"ptr is \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid nullify(int*&amp; refptr) // refptr is now a reference to a pointer\n{\n    refptr = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &amp;x }; // ptr points to x\n\n    std::cout &lt;&lt; \"ptr is \" &lt;&lt; (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    nullify(ptr);\n\n    std::cout &lt;&lt; \"ptr is \" &lt;&lt; (ptr ? \"non-null\\n\" : \"null\\n\");\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid nullify(int*& refptr) // refptr je nyní odkaz na ukazatel\n{\n    refptr = nullptr; // Make the function parameter a null pointer\n}\n\nint main()\n{\n    int x{5};\n    int* ptr{ &x }; // ptr ukazuje na x\n\n    std::cout << \"ptr je \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n\n    vynulovat(ptr);\n\n    std::cout << \"ptr je \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b20",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "pass-by-address-part-2_b21",
       "type": "output",
       "text": "ptr is non-null\nptr is null\n",
       "html": "<pre>ptr is non-null\nptr is null\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>ptr is non-null\nptr is null\n</pre>"
     },
     {
       "id": "pass-by-address-part-2_b22",
       "type": "paragraph",
       "html": "<p>Because <code>refptr</code> is now a reference to a pointer, when <code>ptr</code> is passed as an argument, <code>refptr</code> is bound to <code>ptr</code>. This means any changes to <code>refptr</code> are made to <code>ptr</code>.</p>",
       "preview": "Because refptr is now a reference to a pointer, when ptr is passed as an argumen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>refptr</code> je nyní referencí na ukazatel, při předání <code>ptr</code> jako argumentu se <code>refptr</code> naváže na <code>ptr</code>. To znamená, že jakékoli změny v <code>refptr</code> se projeví přímo na <code>ptr</code>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b23",
@@ -180,49 +206,57 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Because references to pointers are fairly uncommon, it can be easy to mix up the syntax (is it <code>int*&amp;</code> or <code>int&amp;*</code>?). The good news is that if you do it backwards, the compiler will error because you can’t have a pointer to a reference (because pointers must hold the address of an object, and references aren’t objects). Then you can switch it around.</p></div>",
       "preview": "As an aside…Because references to pointers are fairly uncommon, it can be easy to mix up the syntax ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Protože reference na ukazatele jsou poměrně neobvyklé, je snadné splést si syntaxi (je to <code>int*&amp;</code>, nebo <code>int&amp;*</code>?). Dobrou zprávou je, že pokud to napíšete obráceně, kompilátor ohlásí chybu, protože nemůžete mít ukazatel na referenci (protože ukazatele musí obsahovat adresu objektu a reference objekty nejsou). Pak to jednoduše prohodíte.</p></div>"
     },
     {
       "id": "pass-by-address-part-2_b24",
       "type": "section",
       "title": "Why using 0 or NULL is no longer preferred (optional)",
       "html": "<h3 class=\"cpp-section-heading\">Why using <code>0</code> or <code>NULL</code> is no longer preferred (optional)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proč se již nedoporučuje používat <code>0</code> nebo <code>NULL</code> (volitelné)</h3>",
+      "title_cs": "Proč již není preferováno použití 0 nebo NULL (volitelné)"
     },
     {
       "id": "pass-by-address-part-2_b25",
       "type": "paragraph",
       "html": "<p>In this subsection, we’ll explain why using <code>0</code> or <code>NULL</code> is no longer preferred.</p>",
       "preview": "In this subsection, we’ll explain why using 0 or NULL is no longer preferred.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této podkapitole si vysvětlíme, proč se již nedoporučuje používat <code>0</code> nebo <code>NULL</code>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b26",
       "type": "paragraph",
       "html": "<p>The literal <code>0</code> can be interpreted as either an integer literal, or as a null pointer literal. In certain cases, it can be ambiguous which one we intend -- and in some of those cases, the compiler may assume we mean one when we mean the other -- with unintended consequences to the behavior of our program.</p>",
       "preview": "The literal 0 can be interpreted as either an integer literal, or as a null poin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Literál <code>0</code> může být interpretován buď jako celočíselný literál, nebo jako literál nulového ukazatele. V určitých případech může být nejednoznačné, který z nich máme na mysli – a v některých z těchto případů může kompilátor předpokládat jeden, zatímco my mysleli druhý – což může mít nezamýšlené důsledky pro chování našeho programu.</p>"
     },
     {
       "id": "pass-by-address-part-2_b27",
       "type": "paragraph",
       "html": "<p>The definition of preprocessor macro <code>NULL</code> is not defined by the language standard. It can be defined as <code>0</code>, <code>0L</code>, <code>((void*)0)</code>, or something else entirely.</p>",
       "preview": "The definition of preprocessor macro NULL is not defined by the language standar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Definice preprocesorového makra <code>NULL</code> není standardem jazyka striktně určena. Může být definováno jako <code>0</code>, <code>0L</code>, <code>((void*)0)</code>, nebo úplně jinak.</p>"
     },
     {
       "id": "pass-by-address-part-2_b28",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Introduction to function overloading</a>, we discussed that functions can be overloaded (multiple functions can have the same name, so long as they can be differentiated by the number or type of parameters). The compiler can figure out which overloaded function you desire by the arguments passed in as part of the function call.</p>",
       "preview": "In lesson 11.1 -- Introduction to function overloading, we discussed that functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-overloading/\">11.1 -- Úvod do přetěžování funkcí</a> jsme si řekli, že funkce lze přetěžovat (více funkcí může mít stejný název, pokud se liší počtem nebo typem parametrů). Kompilátor dokáže určit, kterou přetíženou funkci požadujete, na základě argumentů předaných v rámci volání funkce.</p>"
     },
     {
       "id": "pass-by-address-part-2_b29",
       "type": "paragraph",
       "html": "<p>When using <code>0</code> or <code>NULL</code>, this can cause problems:</p>",
       "preview": "When using 0 or NULL, this can cause problems:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při použití <code>0</code> nebo <code>NULL</code> to však může způsobit problémy:</p>"
     },
     {
       "id": "pass-by-address-part-2_b30",
@@ -230,56 +264,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <cstddef> // for NULL\n\nvoid print(int x) // this function accepts an integer\n{\n\tstd::cout << \"print(int): \" << x << '\\n';\n}\n\nvoid print(int* ptr) // this function accepts an integer pointer\n{\n\tstd::cout << \"print(int*): \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n}\n\nint main()\n{\n\tint x{ 5 };\n\tint* ptr{ &x };\n\n\tprint(ptr);  // always calls print(int*) because ptr has type int* (good)\n\tprint(0);    // always calls print(int) because 0 is an integer literal (hopefully this is what we expected)\n\n\tprint(NULL); // this statement could do any of the following:\n\t// call print(int) (Visual Studio does this)\n\t// call print(int*)\n\t// result in an ambiguous function call compilation error (gcc and Clang do this)\n\n\tprint(nullptr); // always calls print(int*)\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cstddef&gt; // for NULL\n\nvoid print(int x) // this function accepts an integer\n{\n\tstd::cout &lt;&lt; \"print(int): \" &lt;&lt; x &lt;&lt; '\\n';\n}\n\nvoid print(int* ptr) // this function accepts an integer pointer\n{\n\tstd::cout &lt;&lt; \"print(int*): \" &lt;&lt; (ptr ? \"non-null\\n\" : \"null\\n\");\n}\n\nint main()\n{\n\tint x{ 5 };\n\tint* ptr{ &amp;x };\n\n\tprint(ptr);  // always calls print(int*) because ptr has type int* (good)\n\tprint(0);    // always calls print(int) because 0 is an integer literal (hopefully this is what we expected)\n\n\tprint(NULL); // this statement could do any of the following:\n\t// call print(int) (Visual Studio does this)\n\t// call print(int*)\n\t// result in an ambiguous function call compilation error (gcc and Clang do this)\n\n\tprint(nullptr); // always calls print(int*)\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <cstddef> // pro NULL\n\nvoid print(int x) // tato funkce přijímá celé číslo\n{\n\tstd::cout << \"print(int): \" << x << '\\n';\n}\n\nvoid print(int* ptr) // tato funkce přijímá celočíselný ukazatel\n{\n\tstd::cout << \"print(int*): \" << (ptr ? \"non-null\\n\" : \"null\\n\");\n}\n\nint main()\n{\n\tint x{5};\n\tint* ptr{ &x };\n\n\tprint(ptr);  // vždy volá print(int*), protože ptr má typ int* (dobré)\n\tprint(0);    // vždy volá print(int), protože 0 je celočíselný literál (doufejme, že to je to, co jsme očekávali)\n\n\tprint(NULL); // tento příkaz může provést kteroukoli z následujících akcí:\n\t// volání print(int) (Visual Studio to udělá)\n\t// volání tisku (int*)\n\t// výsledkem je nejednoznačná chyba kompilace volání funkce (toto dělají gcc a Clang)\n\n\tprint(nullptr); // vždy volá print(int*)\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b31",
       "type": "paragraph",
       "html": "<p>On the author’s machine (using Visual Studio), this prints:</p>",
       "preview": "On the author’s machine (using Visual Studio), this prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači (při použití Visual Studia) program vypíše:</p>"
     },
     {
       "id": "pass-by-address-part-2_b32",
       "type": "output",
       "text": "print(int*): non-null\nprint(int): 0\nprint(int): 0\nprint(int*): null\n",
       "html": "<pre>print(int*): non-null\nprint(int): 0\nprint(int): 0\nprint(int*): null\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>print(int*): non-null\nprint(int): 0\nprint(int): 0\nprint(int*): null\n</pre>"
     },
     {
       "id": "pass-by-address-part-2_b33",
       "type": "paragraph",
       "html": "<p>When passing integer value <code>0</code> as a parameter, the compiler will prefer <code>print(int)</code> over <code>print(int*)</code>. This can lead to unexpected results when we intended <code>print(int*)</code> to be called with a null pointer argument.</p>",
       "preview": "When passing integer value 0 as a parameter, the compiler will prefer print(int)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při předání celočíselné hodnoty <code>0</code> jako parametru dá kompilátor přednost <code>print(int)</code> před <code>print(int*)</code>. To může vést k neočekávaným výsledkům, pokud jsme zamýšleli zavolat <code>print(int*)</code> s argumentem nulového ukazatele.</p>"
     },
     {
       "id": "pass-by-address-part-2_b34",
       "type": "paragraph",
       "html": "<p>In the case where <code>NULL</code> is defined as value <code>0</code>, <code>print(NULL)</code> will also call <code>print(int)</code>, not <code>print(int*)</code> like you might expect for a null pointer literal. In cases where <code>NULL</code> is not defined as <code>0</code>, other behavior might result, like a call to <code>print(int*)</code> or a compilation error.</p>",
       "preview": "In the case where NULL is defined as value 0, print(NULL) will also call print(i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě, kdy je <code>NULL</code> definován jako hodnota <code>0</code>, zavolá <code>print(NULL)</code> také <code>print(int)</code>, nikoli <code>print(int*)</code>, jak by se dalo očekávat u literálu nulového ukazatele. V případech, kdy <code>NULL</code> není definován jako <code>0</code>, může dojít k jinému chování, například k volání <code>print(int*)</code> nebo k chybě při překladu.</p>"
     },
     {
       "id": "pass-by-address-part-2_b35",
       "type": "paragraph",
       "html": "<p>Using <code>nullptr</code> removes this ambiguity (it will always call <code>print(int*)</code>), since <code>nullptr</code> will only match a pointer type.</p>",
       "preview": "Using nullptr removes this ambiguity (it will always call print(int*)), since nu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití <code>nullptr</code> tuto nejednoznačnost odstraňuje (vždy zavolá <code>print(int*)</code>), protože <code>nullptr</code> odpovídá pouze ukazatelovému typu.</p>"
     },
     {
       "id": "pass-by-address-part-2_b36",
       "type": "section",
       "title": "std::nullptr_t (optional)",
       "html": "<h3 class=\"cpp-section-heading\">std::nullptr_t (optional)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::nullptr_t (volitelné)</h3>",
+      "title_cs": "std::nullptr_t (nepovinné)"
     },
     {
       "id": "pass-by-address-part-2_b37",
       "type": "paragraph",
       "html": "<p>Since <code>nullptr</code> can be differentiated from integer values in function overloads, it must have a different type. So what type is <code>nullptr</code>? The answer is that <code>nullptr</code> has type <code>std::nullptr_t</code> (defined in header &lt;cstddef&gt;). <code>std::nullptr_t</code> can only hold one value: <code>nullptr</code>! While this may seem kind of silly, it’s useful in one situation. If we want to write a function that accepts only a <code>nullptr</code> literal argument, we can make the parameter a <code>std::nullptr_t</code>.</p>",
       "preview": "Since nullptr can be differentiated from integer values in function overloads, i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k tomu, že <code>nullptr</code> lze při přetěžování funkcí odlišit od celočíselných hodnot, musí mít jiný typ. Jaký typ tedy <code>nullptr</code> má? Odpovědí je, že <code>nullptr</code> má typ <code>std::nullptr_t</code> (definovaný v hlavičkovém souboru &lt;cstddef&gt;). <code>std::nullptr_t</code> může uchovávat pouze jedinou hodnotu: <code>nullptr</code>! I když se to může zdát poněkud zvláštní, je to užitečné v jedné situaci. Pokud chceme napsat funkci, která jako argument přijímá pouze literál <code>nullptr</code>, můžeme její parametr definovat jako <code>std::nullptr_t</code>.</p>"
     },
     {
       "id": "pass-by-address-part-2_b38",
@@ -287,63 +330,74 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <cstddef> // for std::nullptr_t\n\nvoid print(std::nullptr_t)\n{\n    std::cout << \"in print(std::nullptr_t)\\n\";\n}\n\nvoid print(int*)\n{\n    std::cout << \"in print(int*)\\n\";\n}\n\nint main()\n{\n    print(nullptr); // calls print(std::nullptr_t)\n\n    int x { 5 };\n    int* ptr { &x };\n\n    print(ptr); // calls print(int*)\n\n    ptr = nullptr;\n    print(ptr); // calls print(int*) (since ptr has type int*)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cstddef&gt; // for std::nullptr_t\n\nvoid print(std::nullptr_t)\n{\n    std::cout &lt;&lt; \"in print(std::nullptr_t)\\n\";\n}\n\nvoid print(int*)\n{\n    std::cout &lt;&lt; \"in print(int*)\\n\";\n}\n\nint main()\n{\n    print(nullptr); // calls print(std::nullptr_t)\n\n    int x { 5 };\n    int* ptr { &amp;x };\n\n    print(ptr); // calls print(int*)\n\n    ptr = nullptr;\n    print(ptr); // calls print(int*) (since ptr has type int*)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <cstddef> // pro std::nullptr_t\n\nvoid print(std::nullptr_t)\n{\n    std::cout << \"v print(std::nullptr_t)\\n\";\n}\n\nneplatný tisk (int*)\n{\n    std::cout << \"v print(int*)\\n\";\n}\n\nint main()\n{\n    print(nullptr); // volá print(std::nullptr_t)\n\n    int x { 5 };\n    int* ptr { &x };\n\n    print(ptr); // volá print(int*)\n\n    ptr = nullptr;\n    print(ptr); // volá print(int*) (protože ptr má typ int*)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address-part-2_b39",
       "type": "paragraph",
       "html": "<p>In the above example, the function call <code>print(nullptr)</code> resolves to the function <code>print(std::nullptr_t)</code> over <code>print(int*)</code> because it doesn’t require a conversion.</p>",
       "preview": "In the above example, the function call print(nullptr) resolves to the function ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu se volání funkce <code>print(nullptr)</code> vyhodnotí na funkci <code>print(std::nullptr_t)</code> namísto <code>print(int*)</code>, protože nevyžaduje konverzi.</p>"
     },
     {
       "id": "pass-by-address-part-2_b40",
       "type": "paragraph",
       "html": "<p>The one case that might be a little confusing is when we call <code>print(ptr)</code> when <code>ptr</code> is holding the value <code>nullptr</code>. Remember that function overloading matches on types, not values, and <code>ptr</code> has type <code>int*</code>. Therefore, <code>print(int*)</code> will be matched. <code>print(std::nullptr_t)</code> isn’t even in consideration in this case, as pointer types will not implicitly convert to a <code>std::nullptr_t</code>.</p>",
       "preview": "The one case that might be a little confusing is when we call print(ptr) when pt",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jediný případ, který by mohl být trochu matoucí, je, když zavoláme <code>print(ptr)</code> ve chvíli, kdy <code>ptr</code> obsahuje hodnotu <code>nullptr</code>. Pamatujte, že přetěžování funkcí se vyhodnocuje podle typů, nikoli podle hodnot, a <code>ptr</code> má typ <code>int*</code>. Zvolí se tedy <code>print(int*)</code>. <code>print(std::nullptr_t)</code> v tomto případě ani nepřichází v úvahu, protože ukazatelové typy se na <code>std::nullptr_t</code> implicitně nekonvertují.</p>"
     },
     {
       "id": "pass-by-address-part-2_b41",
       "type": "paragraph",
       "html": "<p>You probably won’t ever need to use this, but it’s good to know, just in case.</p>",
       "preview": "You probably won’t ever need to use this, but it’s good to know, just in case.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pravděpodobně to nikdy nebudete potřebovat, ale pro jistotu je dobré to vědět.</p>"
     },
     {
       "id": "pass-by-address-part-2_b42",
       "type": "section",
       "title": "There is only pass by value",
       "html": "<h3 class=\"cpp-section-heading\">There is only pass by value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Existuje pouze předávání hodnotou</h3>",
+      "title_cs": "Existuje pouze předání hodnoty"
     },
     {
       "id": "pass-by-address-part-2_b43",
       "type": "paragraph",
       "html": "<p>Now that you understand the basic differences between passing by reference, address, and value, let’s get reductionist for a moment. :)</p>",
       "preview": "Now that you understand the basic differences between passing by reference, addr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když rozumíte základním rozdílům mezi předáváním referencí, adresou a hodnotou, pojďme být na chvíli redukcionističtí. :)</p>"
     },
     {
       "id": "pass-by-address-part-2_b44",
       "type": "paragraph",
       "html": "<p>While the compiler can often optimize references away entirely, there are cases where this is not possible and a reference is actually needed. References are normally implemented by the compiler using pointers. This means that behind the scenes, pass by reference is essentially just a pass by address.</p>",
       "preview": "While the compiler can often optimize references away entirely, there are cases ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli kompilátor často dokáže reference zcela optimalizovat a odstranit, existují případy, kdy to není možné a reference je skutečně potřeba. Reference jsou kompilátorem obvykle implementovány pomocí ukazatelů. To znamená, že v zákulisí je předávání referencí v podstatě jen předávání adresou.</p>"
     },
     {
       "id": "pass-by-address-part-2_b45",
       "type": "paragraph",
       "html": "<p>And in the previous lesson, we mentioned that pass by address just copies an address from the caller to the called function -- which is just passing an address by value.</p>",
       "preview": "And in the previous lesson, we mentioned that pass by address just copies an add",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A v předchozí lekci jsme zmínili, že předávání adresou pouze kopíruje adresu od volajícího k volané funkci – což není nic jiného než předávání adresy hodnotou.</p>"
     },
     {
       "id": "pass-by-address-part-2_b46",
       "type": "paragraph",
       "html": "<p>Therefore, we can conclude that C++ really passes everything by value! The properties of pass by address (and reference) come solely from the fact that we can dereference the passed address to change the argument, which we can not do with a normal value parameter!</p>",
       "preview": "Therefore, we can conclude that C++ really passes everything by value! The prope",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme tedy dojít k závěru, že C++ ve skutečnosti předává vše hodnotou! Vlastnosti předávání adresou (a referencí) vycházejí čistě ze skutečnosti, že předanou adresu můžeme dereferencovat a změnit tak původní argument, což u běžného hodnotového parametru udělat nemůžeme!</p>"
     }
-  ]
+  ],
+  "title_cs": "12.11 — Předávání adresou (2. část)"
 }

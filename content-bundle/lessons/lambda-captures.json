@@ -14,14 +14,17 @@
       "type": "section",
       "title": "Capture clauses and capture by value",
       "html": "<h3 class=\"cpp-section-heading\">Capture clauses and capture by value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Záchytové klauzule a záchyt hodnotou</h3>",
+      "title_cs": "Zachycovací klauzule a zachycení podle hodnoty"
     },
     {
       "id": "lambda-captures_b1",
       "type": "paragraph",
       "html": "<p>In the previous lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/\">20.6 -- Introduction to lambdas (anonymous functions)</a>), we introduced this example:</p>",
       "preview": "In the previous lesson (20.6 -- Introduction to lambdas (anonymous functions)), ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/\">20.6 – Úvod do lambda funkcí (anonymní funkce)</a>) jsme si představili tento příklad:</p>"
     },
     {
       "id": "lambda-captures_b2",
@@ -29,14 +32,16 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  auto found{ std::find_if(arr.begin(), arr.end(),\n                           [](std::string_view str)\n                           {\n                             return str.find(\"nut\") != std::string_view::npos;\n                           }) };\n\n  if (found == arr.end())\n  {\n    std::cout << \"No nuts\\n\";\n  }\n  else\n  {\n    std::cout << \"Found \" << *found << '\\n';\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nint main()\n{\n  std::array&lt;std::string_view, 4&gt; arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  auto found{ std::find_if(arr.begin(), arr.end(),\n                           [](std::string_view str)\n                           {\n                             return str.find(\"nut\") != std::string_view::npos;\n                           }) };\n\n  if (found == arr.end())\n  {\n    std::cout &lt;&lt; \"No nuts\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Found \" &lt;&lt; *found &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <pole>\n#include <iostream>\n#include <string_view>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"jablko\", \"banán\", \"ořech\", \"citron\" };\n\n  auto found{ std::find_if(arr.begin(), arr.end(),\n                           [](std::string_view str)\n                           {\n                             return str.find(\"nut\") != std::string_view::npos;\n                           }) };\n\n  if (nalezeno == arr.end())\n  {\n    std::cout << \"Žádné ořechy\\n\";\n  }\n  jinak\n  {\n    std::cout << \"Nalezeno \" << *nalezeno << '\\n';\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b3",
       "type": "paragraph",
       "html": "<p>Now, let’s modify the nut example and let the user pick a substring to search for. This isn’t as intuitive as you might expect.</p>",
       "preview": "Now, let’s modify the nut example and let the user pick a substring to search fo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní upravme příklad s ořechy a umožněme uživateli zvolit podřetězec, který chce vyhledat. Není to tak intuitivní, jak byste možná čekali.</p>"
     },
     {
       "id": "lambda-captures_b4",
@@ -44,28 +49,32 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n#include <string>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  // Ask the user what to search for.\n  std::cout << \"search for: \";\n\n  std::string search{};\n  std::cin >> search;\n\n  auto found{ std::find_if(arr.begin(), arr.end(), [](std::string_view str) {\n    // Search for @search rather than \"nut\".\n    return str.find(search) != std::string_view::npos; // Error: search not accessible in this scope\n  }) };\n\n  if (found == arr.end())\n  {\n    std::cout << \"Not found\\n\";\n  }\n  else\n  {\n    std::cout << \"Found \" << *found << '\\n';\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n#include &lt;string&gt;\n\nint main()\n{\n  std::array&lt;std::string_view, 4&gt; arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  // Ask the user what to search for.\n  std::cout &lt;&lt; \"search for: \";\n\n  std::string search{};\n  std::cin &gt;&gt; search;\n\n  auto found{ std::find_if(arr.begin(), arr.end(), [](std::string_view str) {\n    // Search for @search rather than \"nut\".\n    return str.find(search) != std::string_view::npos; // Error: search not accessible in this scope\n  }) };\n\n  if (found == arr.end())\n  {\n    std::cout &lt;&lt; \"Not found\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Found \" &lt;&lt; *found &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <pole>\n#include <iostream>\n#include <string_view>\n#include <řetězec>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"jablko\", \"banán\", \"ořech\", \"citron\" };\n\n  // Zeptejte se uživatele, co má hledat.\n  std::cout << \"hledat: \";\n\n  std::string search{};\n  std::cin >> hledat;\n\n  auto found{ std::find_if(arr.begin(), arr.end(), [](std::string_view str) {\n    // Hledat @search spíše než \"nut\".\n    return str.find(search) != std::string_view::npos; // Chyba: hledání není v tomto oboru dostupné\n  }) };\n\n  if (nalezeno == arr.end())\n  {\n    std::cout << \"Nenalezeno\\n\";\n  }\n  jinak\n  {\n    std::cout << \"Nalezeno \" << *nalezeno << '\\n';\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b5",
       "type": "paragraph",
       "html": "<p>This code won’t compile. Unlike nested blocks, where any identifier accessible in the outer block is accessible in the nested block, lambdas can only access certain kinds of objects that have been defined outside the lambda. This includes:</p>",
       "preview": "This code won’t compile. Unlike nested blocks, where any identifier accessible i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód se nepřeloží. Na rozdíl od vnořených bloků, kde je jakýkoli identifikátor přístupný ve vnějším bloku přístupný i v bloku vnořeném, mohou lambda funkce přistupovat pouze k určitým druhům objektů definovaných mimo lambdu. Mezi ně patří:</p>"
     },
     {
       "id": "lambda-captures_b6",
       "type": "list",
       "html": "<ul><li>Objects with static (or thread local) storage duration (this includes global variables and static locals)</li><li>Objects that are constexpr (explicitly or implicitly)</li></ul>",
       "preview": "Objects with static (or thread local) storage duration (this includes global var",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Objekty se statickou (nebo thread local) dobou uložení (to zahrnuje globální proměnné a statické lokální proměnné)</li><li>Objekty, které jsou constexpr (explicitně či implicitně)</li></ul>"
     },
     {
       "id": "lambda-captures_b7",
       "type": "paragraph",
       "html": "<p>Since <code>search</code> fulfills none of these requirements, the lambda can’t see it.</p>",
       "preview": "Since search fulfills none of these requirements, the lambda can’t see it.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>search</code> nesplňuje žádný z těchto požadavků, lambda k němu nemá přístup.</p>"
     },
     {
       "id": "lambda-captures_b8",
@@ -73,28 +82,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Lambdas can only access certain kinds of objects that have been defined outside the lambda, including those with static storage duration (e.g. global variables and static locals) and constexpr objects.</p></div>",
       "preview": "TipLambdas can only access certain kinds of objects that have been defined outside the lambda, inclu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Lambda funkce mohou přistupovat pouze k určitým druhům objektů definovaných mimo lambdu, včetně těch se statickou dobou uložení (např. globální proměnné a statické lokální proměnné) a constexpr objektů.</p></div>"
     },
     {
       "id": "lambda-captures_b9",
       "type": "paragraph",
       "html": "<p>To access <code>search</code> from within the lambda, we’ll need to use a capture clause.</p>",
       "preview": "To access search from within the lambda, we’ll need to use a capture clause.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom k <code>search</code> získali přístup zevnitř lambdy, budeme muset použít záchytovou klauzuli (capture clause).</p>"
     },
     {
       "id": "lambda-captures_b10",
       "type": "section",
       "title": "The capture clause",
       "html": "<h3 class=\"cpp-section-heading\">The capture clause</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Záchytová klauzule</h3>",
+      "title_cs": "Doložka o zachycení"
     },
     {
       "id": "lambda-captures_b11",
       "type": "paragraph",
       "html": "<p>The <strong>capture clause</strong> is used to (indirectly) give a lambda access to variables available in the surrounding scope that it normally would not have access to. All we need to do is list the entities we want to access from within the lambda as part of the capture clause. In this case, we want to give our lambda access to the value of variable <code>search</code>, so we add it to the capture clause:</p>",
       "preview": "The capture clause is used to (indirectly) give a lambda access to variables ava",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Záchytová klauzule</strong> (capture clause) se používá k tomu, aby lambda funkci (nepřímo) umožnila přístup k proměnným dostupným v okolním rozsahu platnosti (scope), ke kterým by za normálních okolností přístup neměla. Vše, co musíme udělat, je uvést entity, ke kterým chceme zevnitř lambda funkce přistupovat, jako součást záchytové klauzule. V tomto případě chceme naší lambda funkci umožnit přístup k hodnotě proměnné <code>search</code>, a proto ji přidáme do záchytové klauzule:</p>"
     },
     {
       "id": "lambda-captures_b12",
@@ -102,63 +116,73 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n#include <string>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  std::cout << \"search for: \";\n\n  std::string search{};\n  std::cin >> search;\n\n  // Capture @search                                vvvvvv\n  auto found{ std::find_if(arr.begin(), arr.end(), [search](std::string_view str) {\n    return str.find(search) != std::string_view::npos;\n  }) };\n\n  if (found == arr.end())\n  {\n    std::cout << \"Not found\\n\";\n  }\n  else\n  {\n    std::cout << \"Found \" << *found << '\\n';\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n#include &lt;string&gt;\n\nint main()\n{\n  std::array&lt;std::string_view, 4&gt; arr{ \"apple\", \"banana\", \"walnut\", \"lemon\" };\n\n  std::cout &lt;&lt; \"search for: \";\n\n  std::string search{};\n  std::cin &gt;&gt; search;\n\n  // Capture @search                                vvvvvv\n  auto found{ std::find_if(arr.begin(), arr.end(), [search](std::string_view str) {\n    return str.find(search) != std::string_view::npos;\n  }) };\n\n  if (found == arr.end())\n  {\n    std::cout &lt;&lt; \"Not found\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Found \" &lt;&lt; *found &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <pole>\n#include <iostream>\n#include <string_view>\n#include <řetězec>\n\nint main()\n{\n  std::array<std::string_view, 4> arr{ \"jablko\", \"banán\", \"ořech\", \"citron\" };\n\n  std::cout << \"hledat: \";\n\n  std::string search{};\n  std::cin >> hledat;\n\n  // Zachyťte @search vvvvvv\n  auto found{ std::find_if(arr.begin(), arr.end(), [search](std::string_view str) {\n    return str.find(search) != std::string_view::npos;\n  }) };\n\n  if (nalezeno == arr.end())\n  {\n    std::cout << \"Nenalezeno\\n\";\n  }\n  jinak\n  {\n    std::cout << \"Nalezeno \" << *nalezeno << '\\n';\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b13",
       "type": "paragraph",
       "html": "<p>The user can now search for an element of our array.</p>",
       "preview": "The user can now search for an element of our array.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uživatel nyní může vyhledávat prvek našeho pole.</p>"
     },
     {
       "id": "lambda-captures_b14",
       "type": "paragraph",
       "html": "<p>Output</p>",
       "preview": "Output",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup</p>"
     },
     {
       "id": "lambda-captures_b15",
       "type": "output",
       "text": "search for: nana\nFound banana\n",
       "html": "<pre>search for: nana\nFound banana\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>search for: nana\nFound banana\n</pre>"
     },
     {
       "id": "lambda-captures_b16",
       "type": "section",
       "title": "So how do captures actually work?",
       "html": "<h3 class=\"cpp-section-heading\">So how do captures actually work?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak tedy záchyty ve skutečnosti fungují?</h3>",
+      "title_cs": "Jak tedy odchyty vlastně fungují?"
     },
     {
       "id": "lambda-captures_b17",
       "type": "paragraph",
       "html": "<p>While it might look like our lambda in the example above is directly accessing the value of <code>main</code>‘s <code>search</code> variable, this is not the case. Lambdas might look like nested blocks, but they work slightly differently (and the distinction is important).</p>",
       "preview": "While it might look like our lambda in the example above is directly accessing t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli to může vypadat, že naše lambda funkce ve výše uvedeném příkladu přistupuje přímo k hodnotě proměnné <code>search</code> funkce <code>main</code>, není tomu tak. Lambdy sice mohou vypadat jako vnořené bloky, ale fungují poněkud odlišně (a tento rozdíl je důležitý).</p>"
     },
     {
       "id": "lambda-captures_b18",
       "type": "paragraph",
       "html": "<p>When a lambda definition is executed, for each variable that the lambda captures, a clone of that variable is made (with an identical name) inside the lambda. These cloned variables are initialized from the outer scope variables of the same name at this point.</p>",
       "preview": "When a lambda definition is executed, for each variable that the lambda captures",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se provede definice lambda funkce, pro každou proměnnou, kterou lambda zachytí, se uvnitř lambdy vytvoří klon této proměnné (se stejným názvem). Tyto naklonované proměnné jsou v tomto okamžiku inicializovány z proměnných se stejným názvem ve vnějším rozsahu platnosti.</p>"
     },
     {
       "id": "lambda-captures_b19",
       "type": "paragraph",
       "html": "<p>Thus, in the above example, when the lambda object is created, the lambda gets its own cloned variable named <code>search</code>. This cloned <code>search</code> has the same value as <code>main</code>‘s <code>search</code>, so it behaves like we’re accessing <code>main</code>‘s <code>search</code>, but we’re not.</p>",
       "preview": "Thus, in the above example, when the lambda object is created, the lambda gets i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu tedy lambda při vytvoření lambda objektu získá svou vlastní naklonovanou proměnnou s názvem <code>search</code>. Tato naklonovaná proměnná <code>search</code> má stejnou hodnotu jako proměnná <code>search</code> z funkce <code>main</code>, takže se chová, jako bychom přistupovali k <code>search</code> z <code>main</code>, ale ve skutečnosti tomu tak není.</p>"
     },
     {
       "id": "lambda-captures_b20",
       "type": "paragraph",
       "html": "<p>While these cloned variables have the same name, they don’t necessarily have the same type as the original variable. We’ll explore this in the upcoming sections of this lesson.</p>",
       "preview": "While these cloned variables have the same name, they don’t necessarily have the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli mají tyto naklonované proměnné stejný název, nemusí mít nutně stejný typ jako původní proměnná. Na to se podíváme v nadcházejících částech této lekce.</p>"
     },
     {
       "id": "lambda-captures_b21",
@@ -166,7 +190,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The captured variables of a lambda are <em>copies</em> of the outer scope variables, not the actual variables.</p></div>",
       "preview": "Key insightThe captured variables of a lambda are copies of the outer scope variables, not the actua",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Zachycené proměnné lambdy jsou <em>kopiemi</em> proměnných z vnějšího oboru platnosti, nikoli samotnými proměnnými.</p></div>"
     },
     {
       "id": "lambda-captures_b22",
@@ -174,28 +199,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Although lambdas look like functions, they’re actually objects that can be called like functions (these are called <strong>functors</strong> -- we’ll discuss how to create your own functors from scratch in a future lesson).</p><p>When the compiler encounters a lambda definition, it creates a custom object definition for the lambda. Each captured variable becomes a data member of the object.</p><p>At runtime, when the lambda definition is encountered, the lambda object is instantiated, and the members of the lambda are initialized at that point.</p></div>",
       "preview": "For advanced readersAlthough lambdas look like functions, they’re actually objects that can be calle",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Ačkoli lambdy vypadají jako funkce, ve skutečnosti jsou to objekty, které lze volat jako funkce (říká se jim <strong>funktory</strong> – v některé z budoucích lekcí si probereme, jak si vytvořit vlastní funktory od nuly).</p><p>Když kompilátor narazí na definici lambdy, vytvoří pro ni vlastní definici objektu. Každá zachycená proměnná se stane datovým členem tohoto objektu.</p><p>Za běhu programu, když se narazí na definici lambdy, dojde k vytvoření instance tohoto objektu a v tomto okamžiku se inicializují jeho členy.</p></div>"
     },
     {
       "id": "lambda-captures_b23",
       "type": "section",
       "title": "Captures are treated as const by default",
       "html": "<h3 class=\"cpp-section-heading\">Captures are treated as const by default</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zachycené proměnné jsou ve výchozím nastavení const</h3>",
+      "title_cs": "Záběry jsou standardně považovány za const"
     },
     {
       "id": "lambda-captures_b24",
       "type": "paragraph",
       "html": "<p>When a lambda is called, <code>operator()</code> is invoked. By default, this <code>operator()</code> treats captures as const, meaning the lambda is not allowed to modify those captures.</p>",
       "preview": "When a lambda is called, operator() is invoked. By default, this operator() trea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při volání lambdy se vyvolá <code>operator()</code>. Ve výchozím nastavení tento <code>operator()</code> považuje zachycené proměnné za const, což znamená, že lambda nemá dovoleno tyto zachycené proměnné měnit.</p>"
     },
     {
       "id": "lambda-captures_b25",
       "type": "paragraph",
       "html": "<p>In the following example, we capture the variable <code>ammo</code> and try to decrement it.</p>",
       "preview": "In the following example, we capture the variable ammo and try to decrement it.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím příkladu zachytíme proměnnou <code>ammo</code> a pokusíme se ji dekrementovat.</p>"
     },
     {
       "id": "lambda-captures_b26",
@@ -203,28 +233,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n  int ammo{ 10 };\n\n  // Define a lambda and store it in a variable called \"shoot\".\n  auto shoot{\n    [ammo]() {\n      // Illegal, ammo cannot be modified.\n      --ammo;\n\n      std::cout << \"Pew! \" << ammo << \" shot(s) left.\\n\";\n    }\n  };\n\n  // Call the lambda\n  shoot();\n\n  std::cout << ammo << \" shot(s) left\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  int ammo{ 10 };\n\n  // Define a lambda and store it in a variable called \"shoot\".\n  auto shoot{\n    [ammo]() {\n      // Illegal, ammo cannot be modified.\n      --ammo;\n\n      std::cout &lt;&lt; \"Pew! \" &lt;&lt; ammo &lt;&lt; \" shot(s) left.\\n\";\n    }\n  };\n\n  // Call the lambda\n  shoot();\n\n  std::cout &lt;&lt; ammo &lt;&lt; \" shot(s) left\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n  int munice{ 10 };\n\n  // Definujte lambdu a uložte ji do proměnné s názvem \"shoot\".\n  automatické střílení{\n    [munice] () {\n      // Nelegální, munice nelze upravit.\n      --munice;\n\n      std::cout << \"Pew!\" << munice << \" výstřel(y) vlevo.\\n\";\n    }\n  };\n\n  // Zavolejte lambdu\n  střílet();\n\n  std::cout << munice << \" výstřel(y) vlevo\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b27",
       "type": "paragraph",
       "html": "<p>The above won’t compile, because <code>ammo</code> is treated as const within the lambda.</p>",
       "preview": "The above won’t compile, because ammo is treated as const within the lambda.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený kód se nezkompiluje, protože se s <code>ammo</code> uvnitř lambdy zachází jako s const.</p>"
     },
     {
       "id": "lambda-captures_b28",
       "type": "section",
       "title": "Mutable captures",
       "html": "<h3 class=\"cpp-section-heading\">Mutable captures</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Měnitelné (mutable) záchyty</h3>",
+      "title_cs": "Proměnlivé odchyty"
     },
     {
       "id": "lambda-captures_b29",
       "type": "paragraph",
       "html": "<p>To allow modifications of variables that were captured, we can mark the lambda as <code>mutable</code>:</p>",
       "preview": "To allow modifications of variables that were captured, we can mark the lambda a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom umožnili úpravy proměnných, které byly zachyceny, můžeme lambda funkci označit jako <code>mutable</code>:</p>"
     },
     {
       "id": "lambda-captures_b30",
@@ -232,35 +267,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n  int ammo{ 10 };\n\n  auto shoot{\n    [ammo]() mutable { // now mutable\n      // We're allowed to modify ammo now\n      --ammo;\n\n      std::cout << \"Pew! \" << ammo << \" shot(s) left.\\n\";\n    }\n  };\n\n  shoot();\n  shoot();\n\n  std::cout << ammo << \" shot(s) left\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  int ammo{ 10 };\n\n  auto shoot{\n    [ammo]() mutable { // now mutable\n      // We're allowed to modify ammo now\n      --ammo;\n\n      std::cout &lt;&lt; \"Pew! \" &lt;&lt; ammo &lt;&lt; \" shot(s) left.\\n\";\n    }\n  };\n\n  shoot();\n  shoot();\n\n  std::cout &lt;&lt; ammo &lt;&lt; \" shot(s) left\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n  int munice{ 10 };\n\n  automatické střílení{\n    [ammo]() mutable { // nyní měnitelné\n      // Nyní máme povoleno upravovat munici\n      --munice;\n\n      std::cout << \"Pew!\" << munice << \" výstřel(y) vlevo.\\n\";\n    }\n  };\n\n  střílet();\n  střílet();\n\n  std::cout << munice << \" výstřel(y) vlevo\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b31",
       "type": "paragraph",
       "html": "<p>Output:</p>",
       "preview": "Output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup:</p>"
     },
     {
       "id": "lambda-captures_b32",
       "type": "output",
       "text": "Pew! 9 shot(s) left.\nPew! 8 shot(s) left.\n10 shot(s) left\n",
       "html": "<pre>Pew! 9 shot(s) left.\nPew! 8 shot(s) left.\n10 shot(s) left\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Pew! 9 shot(s) left.\nPew! 8 shot(s) left.\n10 shot(s) left\n</pre>"
     },
     {
       "id": "lambda-captures_b33",
       "type": "paragraph",
       "html": "<p>While this now compiles, there’s still a logic error. What happened? When the lambda was called, the lambda captured a <em>copy</em> of <code>ammo</code>. When the lambda decremented <code>ammo</code> from <code>10</code> to <code>9</code> to <code>8</code>, it decremented its own copy, not the original <code>ammo</code> value in <code>main()</code>.</p>",
       "preview": "While this now compiles, there’s still a logic error. What happened? When the la",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli se kód nyní přeloží, stále je v něm logická chyba. Co se stalo? Když byla lambda funkce vytvořena, zachytila <em>kopii</em> proměnné <code>ammo</code>. Když lambda dekrementovala <code>ammo</code> z <code>10</code> na <code>9</code> a na <code>8</code>, dekrementovala svou vlastní kopii, nikoli původní hodnotu <code>ammo</code> ve funkci <code>main()</code>.</p>"
     },
     {
       "id": "lambda-captures_b34",
       "type": "paragraph",
       "html": "<p>Note that the value of <code>ammo</code> is preserved across calls to the lambda!</p>",
       "preview": "Note that the value of ammo is preserved across calls to the lambda!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že hodnota <code>ammo</code> je zachována napříč jednotlivými voláními lambda funkce!</p>"
     },
     {
       "id": "lambda-captures_b35",
@@ -268,35 +308,41 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Because captured variables are members of the lambda object, their values are persisted across multiple calls to the lambda!</p></div>",
       "preview": "WarningBecause captured variables are members of the lambda object, their values are persisted acros",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Protože zachycené proměnné jsou členy objektu lambda funkce, jejich hodnoty přetrvávají napříč vícenásobnými voláními dané lambda funkce!</p></div>"
     },
     {
       "id": "lambda-captures_b36",
       "type": "section",
       "title": "Capture by reference",
       "html": "<h3 class=\"cpp-section-heading\">Capture by reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Záchyt referencí</h3>",
+      "title_cs": "Zachytit odkazem"
     },
     {
       "id": "lambda-captures_b37",
       "type": "paragraph",
       "html": "<p>Much like functions can change the value of arguments passed by reference, we can also capture variables by reference to allow our lambda to affect the value of the argument.</p>",
       "preview": "Much like functions can change the value of arguments passed by reference, we ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako mohou funkce měnit hodnotu argumentů předaných referencí, můžeme proměnné zachytávat referencí i my, a umožnit tak naší lambdě měnit hodnotu daného argumentu.</p>"
     },
     {
       "id": "lambda-captures_b38",
       "type": "paragraph",
       "html": "<p>To capture a variable by reference, we prepend an ampersand (<code>&amp;</code>) to the variable name in the capture. Unlike variables that are captured by value, variables that are captured by reference are non-const, unless the variable they’re capturing is <code>const</code>. Capture by reference should be preferred over capture by value whenever you would normally prefer passing an argument to a function by reference (e.g. for non-fundamental types).</p>",
       "preview": "To capture a variable by reference, we prepend an ampersand (&) to the variable ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li zachytit proměnnou referencí, předřaďte před její název v zachytávacím seznamu ampersand (<code>&amp;</code>). Na rozdíl od proměnných zachycených hodnotou nejsou proměnné zachycené referencí konstantní, pokud ovšem samotná zachycovaná proměnná není <code>const</code>. Zachycení referencí byste měli dát přednost před zachycením hodnotou kdykoli, kdy byste běžně preferovali předání argumentu do funkce referencí (např. u nefundamentálních typů).</p>"
     },
     {
       "id": "lambda-captures_b39",
       "type": "paragraph",
       "html": "<p>Here’s the above code with <code>ammo</code> captured by reference:</p>",
       "preview": "Here’s the above code with ammo captured by reference:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je výše uvedený kód s proměnnou <code>ammo</code> zachycenou referencí:</p>"
     },
     {
       "id": "lambda-captures_b40",
@@ -304,28 +350,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n  int ammo{ 10 };\n\n  auto shoot{\n    // We don't need mutable anymore\n    [&ammo]() { // &ammo means ammo is captured by reference\n      // Changes to ammo will affect main's ammo\n      --ammo;\n\n      std::cout << \"Pew! \" << ammo << \" shot(s) left.\\n\";\n    }\n  };\n\n  shoot();\n\n  std::cout << ammo << \" shot(s) left\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  int ammo{ 10 };\n\n  auto shoot{\n    // We don't need mutable anymore\n    [&amp;ammo]() { // &amp;ammo means ammo is captured by reference\n      // Changes to ammo will affect main's ammo\n      --ammo;\n\n      std::cout &lt;&lt; \"Pew! \" &lt;&lt; ammo &lt;&lt; \" shot(s) left.\\n\";\n    }\n  };\n\n  shoot();\n\n  std::cout &lt;&lt; ammo &lt;&lt; \" shot(s) left\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n  int munice{ 10 };\n\n  automatické střílení{\n    // Proměnlivé už nepotřebujeme\n    [&ammo]() { // &ammo znamená, že munice je zachycena odkazem\n      // Změny munice ovlivní munici hlavní\n      --munice;\n\n      std::cout << \"Pew!\" << munice << \" výstřel(y) vlevo.\\n\";\n    }\n  };\n\n  střílet();\n\n  std::cout << munice << \" výstřel(y) vlevo\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b41",
       "type": "paragraph",
       "html": "<p>This produces the expected answer:</p>",
       "preview": "This produces the expected answer:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vyprodukuje očekávaný výsledek:</p>"
     },
     {
       "id": "lambda-captures_b42",
       "type": "output",
       "text": "Pew! 9 shot(s) left.\n9 shot(s) left\n",
       "html": "<pre>Pew! 9 shot(s) left.\n9 shot(s) left\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Pew! 9 shot(s) left.\n9 shot(s) left\n</pre>"
     },
     {
       "id": "lambda-captures_b43",
       "type": "paragraph",
       "html": "<p>Now, let’s use a reference capture to count how many comparisons <code>std::sort</code> makes when it sorts an array.</p>",
       "preview": "Now, let’s use a reference capture to count how many comparisons std::sort makes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní použijme zachycení referencí k tomu, abychom spočítali, kolik porovnání provede <code>std::sort</code> při řazení pole.</p>"
     },
     {
       "id": "lambda-captures_b44",
@@ -333,35 +383,41 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <string_view>\n\nstruct Car\n{\n  std::string_view make{};\n  std::string_view model{};\n};\n\nint main()\n{\n  std::array<Car, 3> cars{ { { \"Volkswagen\", \"Golf\" },\n                             { \"Toyota\", \"Corolla\" },\n                             { \"Honda\", \"Civic\" } } };\n\n  int comparisons{ 0 };\n\n  std::sort(cars.begin(), cars.end(),\n    // Capture @comparisons by reference.\n    [&comparisons](const auto& a, const auto& b) {\n      // We captured comparisons by reference. We can modify it without \"mutable\".\n      ++comparisons;\n\n      // Sort the cars by their make.\n      return a.make < b.make;\n  });\n\n  std::cout << \"Comparisons: \" << comparisons << '\\n';\n\n  for (const auto& car : cars)\n  {\n    std::cout << car.make << ' ' << car.model << '\\n';\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Car\n{\n  std::string_view make{};\n  std::string_view model{};\n};\n\nint main()\n{\n  std::array&lt;Car, 3&gt; cars{ { { \"Volkswagen\", \"Golf\" },\n                             { \"Toyota\", \"Corolla\" },\n                             { \"Honda\", \"Civic\" } } };\n\n  int comparisons{ 0 };\n\n  std::sort(cars.begin(), cars.end(),\n    // Capture @comparisons by reference.\n    [&amp;comparisons](const auto&amp; a, const auto&amp; b) {\n      // We captured comparisons by reference. We can modify it without \"mutable\".\n      ++comparisons;\n\n      // Sort the cars by their make.\n      return a.make &lt; b.make;\n  });\n\n  std::cout &lt;&lt; \"Comparisons: \" &lt;&lt; comparisons &lt;&lt; '\\n';\n\n  for (const auto&amp; car : cars)\n  {\n    std::cout &lt;&lt; car.make &lt;&lt; ' ' &lt;&lt; car.model &lt;&lt; '\\n';\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <pole>\n#include <iostream>\n#include <string_view>\n\nstruct Car\n{\n  std::string_view make{};\n  std::string_view model{};\n};\n\nint main()\n{\n  std::array<Auto, 3> auta{ { { \"Volkswagen\", \"Golf\" },\n                             { \"Toyota\", \"Corolla\" },\n                             { \"Honda\", \"Civic\" } } };\n\n  int porovnání{ 0 };\n\n  std::sort(cars.begin(), cars.end(),\n    // Zachyťte @srovnání pomocí odkazu.\n    [&srovnání](const auto& a, const auto& b) {\n      // Zachytili jsme srovnání odkazem. Můžeme jej upravit bez \"mutable\".\n      ++srovnání;\n\n      // Seřaďte auta podle značky.\n      return a.make < b.make;\n  });\n\n  std::cout << \"Porovnání: \" << porovnání << '\\n';\n\n  pro (const auto & car : cars)\n  {\n    std::cout << auto.make << ' ' << auto.model << '\\n';\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b45",
       "type": "paragraph",
       "html": "<p>Possible output</p>",
       "preview": "Possible output",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možný výstup</p>"
     },
     {
       "id": "lambda-captures_b46",
       "type": "output",
       "text": "Comparisons: 2\nHonda Civic\nToyota Corolla\nVolkswagen Golf\n",
       "html": "<pre>Comparisons: 2\nHonda Civic\nToyota Corolla\nVolkswagen Golf\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Comparisons: 2\nHonda Civic\nToyota Corolla\nVolkswagen Golf\n</pre>"
     },
     {
       "id": "lambda-captures_b47",
       "type": "section",
       "title": "Capturing multiple variables",
       "html": "<h3 class=\"cpp-section-heading\">Capturing multiple variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zachycení více proměnných</h3>",
+      "title_cs": "Zachycování více proměnných"
     },
     {
       "id": "lambda-captures_b48",
       "type": "paragraph",
       "html": "<p>Multiple variables can be captured by separating them with a comma. This can include a mix of variables captured by value or by reference:</p>",
       "preview": "Multiple variables can be captured by separating them with a comma. This can inc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Více proměnných lze zachytit jejich oddělením čárkou. To může zahrnovat kombinaci proměnných zachycených hodnotou nebo referencí:</p>"
     },
     {
       "id": "lambda-captures_b49",
@@ -369,42 +425,49 @@
       "language": "cpp",
       "code": "int health{ 33 };\nint armor{ 100 };\nstd::vector<CEnemy> enemies{};\n\n// Capture health and armor by value, and enemies by reference.\n[health, armor, &enemies](){};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int health{ 33 };\nint armor{ 100 };\nstd::vector&lt;CEnemy&gt; enemies{};\n\n// Capture health and armor by value, and enemies by reference.\n[health, armor, &amp;enemies](){};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">zdraví int{ 33 };\nvnitřní brnění{ 100 };\nstd::vector<CEnemy> nepřátelé{};\n\n// Zachyťte zdraví a brnění podle hodnoty a nepřátele podle reference.\n[zdraví, brnění, &nepřátelé](){};</code></pre>"
     },
     {
       "id": "lambda-captures_b50",
       "type": "section",
       "title": "Default captures",
       "html": "<h3 class=\"cpp-section-heading\">Default captures</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výchozí zachycení</h3>",
+      "title_cs": "Výchozí zachycení"
     },
     {
       "id": "lambda-captures_b51",
       "type": "paragraph",
       "html": "<p>Having to explicitly list the variables you want to capture can be burdensome. If you modify your lambda, you may forget to add or remove captured variables. Fortunately, we can enlist the compiler’s help to auto-generate a list of variables we need to capture.</p>",
       "preview": "Having to explicitly list the variables you want to capture can be burdensome. I",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nutnost explicitně vyjmenovávat proměnné, které chcete zachytit, může být obtěžující. Pokud svou lambdu upravíte, můžete zapomenout zachycené proměnné přidat nebo odebrat. Naštěstí můžeme využít pomoci kompilátoru a nechat si seznam proměnných k zachycení vygenerovat automaticky.</p>"
     },
     {
       "id": "lambda-captures_b52",
       "type": "paragraph",
       "html": "<p>A <strong>default capture</strong> (also called a <strong>capture-default</strong>) captures all variables that are mentioned in the lambda. Variables not mentioned in the lambda are not captured if a default capture is used.</p>",
       "preview": "A default capture (also called a capture-default) captures all variables that ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výchozí zachycení</strong> (též nazývané <strong>capture-default</strong>) zachytí všechny proměnné, které jsou v lambdě zmíněny. Proměnné, které v lambdě zmíněny nejsou, se při použití výchozího zachycení nezachytí.</p>"
     },
     {
       "id": "lambda-captures_b53",
       "type": "paragraph",
       "html": "<p>To capture all used variables by value, use a capture value of <code>=</code>.<br>To capture all used variables by reference, use a capture value of <code>&amp;</code>.</p>",
       "preview": "To capture all used variables by value, use a capture value of =.To capture all ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li zachytit všechny použité proměnné hodnotou, použijte <code>=</code>.<br>Chcete-li zachytit všechny použité proměnné referencí, použijte <code>&amp;</code>.</p>"
     },
     {
       "id": "lambda-captures_b54",
       "type": "paragraph",
       "html": "<p>Here’s an example of using a default capture by value:</p>",
       "preview": "Here’s an example of using a default capture by value:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad použití výchozího zachycení hodnotou:</p>"
     },
     {
       "id": "lambda-captures_b55",
@@ -412,14 +475,16 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <array>\n#include <iostream>\n\nint main()\n{\n  std::array areas{ 100, 25, 121, 40, 56 };\n\n  int width{};\n  int height{};\n\n  std::cout << \"Enter width and height: \";\n  std::cin >> width >> height;\n\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           [=](int knownArea) { // will default capture width and height by value\n                             return width * height == knownArea; // because they're mentioned here\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout << \"I don't know this area :(\\n\";\n  }\n  else\n  {\n    std::cout << \"Area found :)\\n\";\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n  std::array areas{ 100, 25, 121, 40, 56 };\n\n  int width{};\n  int height{};\n\n  std::cout &lt;&lt; \"Enter width and height: \";\n  std::cin &gt;&gt; width &gt;&gt; height;\n\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           [=](int knownArea) { // will default capture width and height by value\n                             return width * height == knownArea; // because they're mentioned here\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout &lt;&lt; \"I don't know this area :(\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Area found :)\\n\";\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <pole>\n#include <iostream>\n\nint main()\n{\n  std::array oblasti{ 100, 25, 121, 40, 56 };\n\n  int šířka{};\n  int vyska{};\n\n  std::cout << \"Zadejte šířku a výšku: \";\n  std::cin >> šířka >> výška;\n\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           [=](int známá oblast) { // výchozí zachytí šířku a výšku podle hodnoty\n                             návratová šířka * výška == známá Oblast; // protože jsou zde zmíněni\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout << \"Tuto oblast neznám :(\\n\";\n  }\n  jinak\n  {\n    std::cout << \"Nalezena oblast :)\\n\";\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b56",
       "type": "paragraph",
       "html": "<p>Default captures can be mixed with normal captures. We can capture some variables by value and others by reference, but each variable can only be captured once.</p>",
       "preview": "Default captures can be mixed with normal captures. We can capture some variable",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výchozí zachycení lze kombinovat s běžnými zachyceními. Některé proměnné můžeme zachytit hodnotou a jiné referencí, ale každou proměnnou lze zachytit pouze jednou.</p>"
     },
     {
       "id": "lambda-captures_b57",
@@ -427,21 +492,25 @@
       "language": "cpp",
       "code": "int health{ 33 };\nint armor{ 100 };\nstd::vector<CEnemy> enemies{};\n\n// Capture health and armor by value, and enemies by reference.\n[health, armor, &enemies](){};\n\n// Capture enemies by reference and everything else by value.\n[=, &enemies](){};\n\n// Capture armor by value and everything else by reference.\n[&, armor](){};\n\n// Illegal, we already said we want to capture everything by reference.\n[&, &armor](){};\n\n// Illegal, we already said we want to capture everything by value.\n[=, armor](){};\n\n// Illegal, armor appears twice.\n[armor, &health, &armor](){};\n\n// Illegal, the default capture has to be the first element in the capture group.\n[armor, &](){};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int health{ 33 };\nint armor{ 100 };\nstd::vector&lt;CEnemy&gt; enemies{};\n\n// Capture health and armor by value, and enemies by reference.\n[health, armor, &amp;enemies](){};\n\n// Capture enemies by reference and everything else by value.\n[=, &amp;enemies](){};\n\n// Capture armor by value and everything else by reference.\n[&amp;, armor](){};\n\n// Illegal, we already said we want to capture everything by reference.\n[&amp;, &amp;armor](){};\n\n// Illegal, we already said we want to capture everything by value.\n[=, armor](){};\n\n// Illegal, armor appears twice.\n[armor, &amp;health, &amp;armor](){};\n\n// Illegal, the default capture has to be the first element in the capture group.\n[armor, &amp;](){};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">zdraví int{ 33 };\nvnitřní brnění{ 100 };\nstd::vector<CEnemy> nepřátelé{};\n\n// Zachyťte zdraví a brnění podle hodnoty a nepřátele podle reference.\n[zdraví, brnění, &nepřátelé](){};\n\n// Zachyťte nepřátele odkazem a vše ostatní podle hodnoty.\n[=, &nepřátelé](){};\n\n// Zachyťte brnění podle hodnoty a vše ostatní pomocí odkazu.\n[&, brnění](){};\n\n// Nelegální, už jsme řekli, že chceme vše zachytit odkazem.\n[&, &brnění](){};\n\n// Nelegální, už jsme řekli, že chceme všechno zachytit hodnotou.\n[=, brnění](){};\n\n// Nelegální, brnění se objevuje dvakrát.\n[brnění, &zdraví, &brnění](){};\n\n// Nelegální, výchozí zachycení musí být prvním prvkem ve skupině zachycení.\n[brnění, &](){};</code></pre>"
     },
     {
       "id": "lambda-captures_b58",
       "type": "section",
       "title": "Defining new variables in the lambda-capture",
       "html": "<h3 class=\"cpp-section-heading\">Defining new variables in the lambda-capture</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Definování nových proměnných v lambda-capture</h3>",
+      "title_cs": "Definování nových proměnných v lambda-capture"
     },
     {
       "id": "lambda-captures_b59",
       "type": "paragraph",
       "html": "<p>Sometimes we want to capture a variable with a slight modification or declare a new variable that is only visible in the scope of the lambda. We can do so by defining a variable in the lambda-capture without specifying its type.</p>",
       "preview": "Sometimes we want to capture a variable with a slight modification or declare a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Někdy chceme zachytit proměnnou s drobnou úpravou nebo deklarovat novou proměnnou, která je viditelná pouze v rámci rozsahu platnosti (scope) lambdy. Můžeme tak učinit definováním proměnné v lambda-capture bez uvedení jejího typu.</p>"
     },
     {
       "id": "lambda-captures_b60",
@@ -449,14 +518,16 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n#include <algorithm>\n\nint main()\n{\n  std::array areas{ 100, 25, 121, 40, 56 };\n\n  int width{};\n  int height{};\n\n  std::cout << \"Enter width and height: \";\n  std::cin >> width >> height;\n\n  // We store areas, but the user entered width and height.\n  // We need to calculate the area before we can search for it.\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           // Declare a new variable that's visible only to the lambda.\n                           // The type of userArea is automatically deduced to int.\n                           [userArea{ width * height }](int knownArea) {\n                             return userArea == knownArea;\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout << \"I don't know this area :(\\n\";\n  }\n  else\n  {\n    std::cout << \"Area found :)\\n\";\n  }\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;algorithm&gt;\n\nint main()\n{\n  std::array areas{ 100, 25, 121, 40, 56 };\n\n  int width{};\n  int height{};\n\n  std::cout &lt;&lt; \"Enter width and height: \";\n  std::cin &gt;&gt; width &gt;&gt; height;\n\n  // We store areas, but the user entered width and height.\n  // We need to calculate the area before we can search for it.\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           // Declare a new variable that's visible only to the lambda.\n                           // The type of userArea is automatically deduced to int.\n                           [userArea{ width * height }](int knownArea) {\n                             return userArea == knownArea;\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout &lt;&lt; \"I don't know this area :(\\n\";\n  }\n  else\n  {\n    std::cout &lt;&lt; \"Area found :)\\n\";\n  }\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n#include <algoritmus>\n\nint main()\n{\n  std::array oblasti{ 100, 25, 121, 40, 56 };\n\n  int šířka{};\n  int vyska{};\n\n  std::cout << \"Zadejte šířku a výšku: \";\n  std::cin >> šířka >> výška;\n\n  // Oblasti ukládáme, ale uživatel zadal šířku a výšku.\n  // Než ji budeme moci hledat, musíme plochu vypočítat.\n  auto found{ std::find_if(areas.begin(), areas.end(),\n                           // Deklaruje novou proměnnou, která je viditelná pouze pro lambda.\n                           // Typ userArea je automaticky odvozen z int.\n                           [uživatelská oblast{ šířka * výška }](int známá oblast) {\n                             return userArea == známá oblast;\n                           }) };\n\n  if (found == areas.end())\n  {\n    std::cout << \"Tuto oblast neznám :(\\n\";\n  }\n  jinak\n  {\n    std::cout << \"Nalezena oblast :)\\n\";\n  }\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b61",
       "type": "paragraph",
       "html": "<p><code>userArea</code> will only be calculated once when the lambda is defined. The calculated area is stored in the lambda object and is the same for every call. If a lambda is mutable and modifies a variable that was defined in the capture, the original value will be overridden.</p>",
       "preview": "userArea will only be calculated once when the lambda is defined. The calculated",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>userArea</code> se vypočítá pouze jednou při definici lambdy. Vypočítaná hodnota se uloží do objektu lambdy a je stejná pro každé volání. Pokud je lambda označena jako <code>mutable</code> a modifikuje proměnnou definovanou v capture, původní hodnota bude přepsána.</p>"
     },
     {
       "id": "lambda-captures_b62",
@@ -464,28 +535,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Only initialize variables in the capture if their value is short and their type is obvious. Otherwise it’s best to define the variable outside of the lambda and capture it.</p></div>",
       "preview": "Best practiceOnly initialize variables in the capture if their value is short and their type is obvi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Proměnné v záchytu inicializujte pouze tehdy, pokud je jejich hodnota krátká a jejich typ je zřejmý. V opačném případě je nejlepší proměnnou definovat mimo lambdu a zachytit ji.</p></div>"
     },
     {
       "id": "lambda-captures_b63",
       "type": "section",
       "title": "Dangling captured variables",
       "html": "<h3 class=\"cpp-section-heading\">Dangling captured variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Visící (dangling) zachycené proměnné</h3>",
+      "title_cs": "Visící zachycené proměnné"
     },
     {
       "id": "lambda-captures_b64",
       "type": "paragraph",
       "html": "<p>Variables are captured at the point where the lambda is defined. If a variable captured by reference dies before the lambda, the lambda will be left holding a dangling reference.</p>",
       "preview": "Variables are captured at the point where the lambda is defined. If a variable c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proměnné jsou zachyceny v místě, kde je lambda definována. Pokud proměnná zachycená referencí zanikne dříve než lambda, zůstane v lambdě visící reference (dangling reference).</p>"
     },
     {
       "id": "lambda-captures_b65",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "lambda-captures_b66",
@@ -493,21 +569,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\n// returns a lambda\nauto makeWalrus(const std::string& name)\n{\n  // Capture name by reference and return the lambda.\n  return [&]() {\n    std::cout << \"I am a walrus, my name is \" << name << '\\n'; // Undefined behavior\n  };\n}\n\nint main()\n{\n  // Create a new walrus whose name is Roofus.\n  // sayName is the lambda returned by makeWalrus.\n  auto sayName{ makeWalrus(\"Roofus\") };\n\n  // Call the lambda function that makeWalrus returned.\n  sayName();\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\n// returns a lambda\nauto makeWalrus(const std::string&amp; name)\n{\n  // Capture name by reference and return the lambda.\n  return [&amp;]() {\n    std::cout &lt;&lt; \"I am a walrus, my name is \" &lt;&lt; name &lt;&lt; '\\n'; // Undefined behavior\n  };\n}\n\nint main()\n{\n  // Create a new walrus whose name is Roofus.\n  // sayName is the lambda returned by makeWalrus.\n  auto sayName{ makeWalrus(\"Roofus\") };\n\n  // Call the lambda function that makeWalrus returned.\n  sayName();\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\n// vrátí lambda\nauto makeWalrus(const std::string& name)\n{\n  // Zachytí název odkazem a vrátí lambda.\n  return [&]() {\n    std::cout << \"Jsem mrož, jmenuji se \" << jméno << '\\n'; // Nedefinované chování\n  };\n}\n\nint main()\n{\n  // Vytvořte nového mrože, jehož jméno je Roofus.\n  // sayName je lambda vrácená makeWalrus.\n  auto sayName{ makeWalrus(\"Roofus\") };\n\n  // Volání funkce lambda, kterou makeWalrus vrátil.\n  sayName();\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b67",
       "type": "paragraph",
       "html": "<p>The call to <code>makeWalrus()</code> creates a temporary <code>std::string</code> from the string literal <code>\"Roofus\"</code>. The lambda in <code>makeWalrus()</code> captures the temporary string by reference. The temporary string dies at the end of the full expression containing the call to <code>makeWalrus()</code>, but the lambda <code>sayName</code> still references it past that point. Thus, when we call <code>sayName</code>, the dangling reference is accessed, causing undefined behavior.</p>",
       "preview": "The call to makeWalrus() creates a temporary std::string from the string literal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání <code>makeWalrus()</code> vytvoří dočasný <code>std::string</code> z řetězcového literálu <code>\"Roofus\"</code>. Lambda v <code>makeWalrus()</code> zachytí tento dočasný řetězec referencí. Dočasný řetězec zanikne na konci úplného výrazu obsahujícího volání <code>makeWalrus()</code>, ale lambda <code>sayName</code> na něj i po tomto okamžiku stále odkazuje. Když tedy zavoláme <code>sayName</code>, dojde k přístupu k visící referenci (dangling reference), což způsobí nedefinované chování.</p>"
     },
     {
       "id": "lambda-captures_b68",
       "type": "paragraph",
       "html": "<p>Note that this also happens if <code>\"Roofus\"</code> is passed to <code>makeWalrus()</code> by value. Parameter <code>name</code> dies at the end of <code>makeWalrus()</code>, and the lambda is left holding a dangling reference.</p>",
       "preview": "Note that this also happens if \"Roofus\" is passed to makeWalrus() by value. Para",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Upozorňujeme, že k tomu také dochází, pokud je <code>\"Roofus\"</code> předán do <code>makeWalrus()</code> pomocí hodnoty. Parametr <code>name</code> zanikne na konci <code>makeWalrus()</code> a lambda zůstane s visícím odkazem.</p>"
     },
     {
       "id": "lambda-captures_b69",
@@ -515,28 +594,33 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Be extra careful when you capture variables by reference, especially with a default reference capture. The captured variables must outlive the lambda.</p></div>",
       "preview": "WarningBe extra careful when you capture variables by reference, especially with a default reference",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Upozornění</p><p>Při zachycování proměnných pomocí odkazu buďte zvlášť opatrní, zejména při výchozím zachycení odkazů. Zachycené proměnné musí přežít lambda.</p></div>"
     },
     {
       "id": "lambda-captures_b70",
       "type": "paragraph",
       "html": "<p>If we want the captured <code>name</code> to be valid when the lambda is used, we need to capture it by value instead (either explicitly or using a default-capture by value).</p>",
       "preview": "If we want the captured name to be valid when the lambda is used, we need to cap",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chceme, aby byl zachycený <code>název</code> platný při použití lambda, musíme jej místo toho zachytit podle hodnoty (buď explicitně nebo pomocí výchozího zachycení podle hodnoty).</p>"
     },
     {
       "id": "lambda-captures_b71",
       "type": "section",
       "title": "Unintended copies of mutable lambdas",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"mutable_copy\"></a>Unintended copies of mutable lambdas <a href=\"#mutable_copy\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"mutable_copy\"></a>Nezamýšlené kopie proměnlivých lambd <a href=\"#mutable_copy\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "Nezamýšlené kopie proměnlivých lambd"
     },
     {
       "id": "lambda-captures_b72",
       "type": "paragraph",
       "html": "<p>Because lambdas are objects, they can be copied. In some cases, this can cause problems. Consider the following code:</p>",
       "preview": "Because lambdas are objects, they can be copied. In some cases, this can cause p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože lambdy jsou objekty, lze je kopírovat. V některých případech to může způsobit problémy. Zvažte následující kód:</p>"
     },
     {
       "id": "lambda-captures_b73",
@@ -544,35 +628,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n  int i{ 0 };\n\n  // Create a new lambda named count\n  auto count{ [i]() mutable {\n    std::cout << ++i << '\\n';\n  } };\n\n  count(); // invoke count\n\n  auto otherCount{ count }; // create a copy of count\n\n  // invoke both count and the copy\n  count();\n  otherCount();\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n  int i{ 0 };\n\n  // Create a new lambda named count\n  auto count{ [i]() mutable {\n    std::cout &lt;&lt; ++i &lt;&lt; '\\n';\n  } };\n\n  count(); // invoke count\n\n  auto otherCount{ count }; // create a copy of count\n\n  // invoke both count and the copy\n  count();\n  otherCount();\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n  int i{ 0 };\n\n  // Vytvoří novou lambdu s názvem count\n  auto count{ [i]() měnitelné {\n    std::cout << ++i << '\\n';\n  } };\n\n  počítat(); // vyvolání počtu\n\n  auto otherCount{ count }; // vytvořit kopii count\n\n  // vyvolá počet i kopii\n  pocet();\n  otherCount();\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b74",
       "type": "paragraph",
       "html": "<p>Output</p>",
       "preview": "Output",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup</p>"
     },
     {
       "id": "lambda-captures_b75",
       "type": "output",
       "text": "1\n2\n2\n",
       "html": "<pre>1\n2\n2\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>1\n2\n2\n</pre>"
     },
     {
       "id": "lambda-captures_b76",
       "type": "paragraph",
       "html": "<p>Rather than printing 1, 2, 3, the code prints 2 twice. When we created <code>otherCount</code> as a copy of <code>count</code>, we created a copy of <code>count</code> in its current state. <code>count</code>‘s <code>i</code> was 1, so <code>otherCount</code>‘s <code>i</code> is 1 as well. Since <code>otherCount</code> is a copy of <code>count</code>, they each have their own <code>i</code>.</p>",
       "preview": "Rather than printing 1, 2, 3, the code prints 2 twice. When we created otherCoun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Namísto tisku 1, 2, 3 kód vytiskne 2 dvakrát. Když jsme vytvořili <code>otherCount</code> jako kopii <code>count</code>, vytvořili jsme kopii <code>count</code> v jeho aktuálním stavu. <code>i</code> <code>count</code> bylo 1, takže <code>i</code> <code>otherCount</code> je také 1. Protože <code>otherCount</code> je kopií <code>count</code>, každý z nich má své vlastní <code>i</code>.</p>"
     },
     {
       "id": "lambda-captures_b77",
       "type": "paragraph",
       "html": "<p>Now let’s take a look at a slightly less obvious example:</p>",
       "preview": "Now let’s take a look at a slightly less obvious example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na trochu méně zřejmý příklad:</p>"
     },
     {
       "id": "lambda-captures_b78",
@@ -580,49 +669,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <functional>\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    auto count{ [i]() mutable {\n      std::cout << ++i << '\\n';\n    } };\n\n    myInvoke(count);\n    myInvoke(count);\n    myInvoke(count);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;functional&gt;\n\nvoid myInvoke(const std::function&lt;void()&gt;&amp; fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    auto count{ [i]() mutable {\n      std::cout &lt;&lt; ++i &lt;&lt; '\\n';\n    } };\n\n    myInvoke(count);\n    myInvoke(count);\n    myInvoke(count);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <funkční>\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Zvýší a vytiskne svou lokální kopii @i.\n    auto count{ [i]() měnitelné {\n      std::cout << ++i << '\\n';\n    } };\n\n    myInvoke(počet);\n    myInvoke(počet);\n    myInvoke(počet);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b79",
       "type": "paragraph",
       "html": "<p>Output:</p>",
       "preview": "Output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup:</p>"
     },
     {
       "id": "lambda-captures_b80",
       "type": "output",
       "text": "1\n1\n1\n",
       "html": "<pre>1\n1\n1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>1\n1\n1\n</pre>"
     },
     {
       "id": "lambda-captures_b81",
       "type": "paragraph",
       "html": "<p>This exhibits the same problem as the prior example in a more obscure form.</p>",
       "preview": "This exhibits the same problem as the prior example in a more obscure form.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To ukazuje stejný problém jako předchozí příklad ve více nejasné podobě.</p>"
     },
     {
       "id": "lambda-captures_b82",
       "type": "paragraph",
       "html": "<p>When we call <code>myInvoke(count)</code>, the compiler will see that <code>count</code> (which has a lambda type) doesn’t match the type of the reference parameter type (<code>std::function&lt;void()&gt;</code>). It will convert the lambda into a temporary <code>std::function</code> so that the reference parameter can bind to it, and this will make a copy of the lambda. Thus, our call to <code>fn()</code> is actually being executed on the copy of our lambda that exists as part of the temporary <code>std::function</code>, not the actual lambda.</p>",
       "preview": "When we call myInvoke(count), the compiler will see that count (which has a lamb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když zavoláme <code>myInvoke(count)</code>, kompilátor uvidí, že <code>count</code> (který má typ lambda) neodpovídá typu typu referenčního parametru (<code>std::function<void()></code>). Převede lambdu na dočasnou <code>std::function</code>, aby se na ni mohl navázat referenční parametr, a tím se vytvoří kopie lambdy. Naše volání <code>fn()</code> se tedy ve skutečnosti provádí na kopii naší lambda, která existuje jako součást dočasné <code>std::function</code>, nikoli na skutečné lambda.</p>"
     },
     {
       "id": "lambda-captures_b83",
       "type": "paragraph",
       "html": "<p>If we need to pass a mutable lambda, and want to avoid the possibility of inadvertent copies being made, there are two options. One option is to use a non-capturing lambda instead -- in the above case, we could remove the capture and track our state using a static local variable instead. But static local variables can be difficult to keep track of and make our code less readable. A better option is to prevent copies of our lambda from being made in the first place. But since we can’t affect how <code>std::function</code> (or other standard library functions or objects) are implemented, how can we do this?</p>",
       "preview": "If we need to pass a mutable lambda, and want to avoid the possibility of inadve",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud potřebujeme předat měnitelnou lambdu a chceme se vyhnout možnosti neúmyslných kopií, máme dvě možnosti. Jednou z možností je místo toho použít nezachycující lambdu - ve výše uvedeném případě bychom mohli odstranit zachycení a místo toho sledovat náš stav pomocí statické lokální proměnné. Statické lokální proměnné však může být obtížné sledovat a náš kód bude méně čitelný. Lepší variantou je v první řadě zabránit vytváření kopií naší lambdy. Ale protože nemůžeme ovlivnit, jak jsou implementovány <code>std::function</code> (nebo jiné standardní knihovní funkce nebo objekty), jak to můžeme udělat?</p>"
     },
     {
       "id": "lambda-captures_b84",
       "type": "paragraph",
       "html": "<p>One option (h/t to reader Dck) is to put our lambda into a <code>std::function</code> immediately. That way, when we call <code>myInvoke()</code>, the reference parameter <code>fn</code> can bind to our <code>std::function</code>, and no temporary copy is made:</p>",
       "preview": "One option (h/t to reader Dck) is to put our lambda into a std::function immedia",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou možností (h/t do čtečky Dck) je okamžitě vložit naši lambdu do <code>std::function</code>. Tímto způsobem, když zavoláme <code>myInvoke()</code>, referenční parametr <code>fn</code> se může vázat na naši <code>std::function</code> a nevytvoří se žádná dočasná kopie:</p>"
     },
     {
       "id": "lambda-captures_b85",
@@ -630,35 +726,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <functional>\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    std::function count{ [i]() mutable { // lambda object stored in a std::function\n      std::cout << ++i << '\\n';\n    } };\n\n    myInvoke(count); // doesn't create copy when called\n    myInvoke(count); // doesn't create copy when called\n    myInvoke(count); // doesn't create copy when called\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;functional&gt;\n\nvoid myInvoke(const std::function&lt;void()&gt;&amp; fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    std::function count{ [i]() mutable { // lambda object stored in a std::function\n      std::cout &lt;&lt; ++i &lt;&lt; '\\n';\n    } };\n\n    myInvoke(count); // doesn't create copy when called\n    myInvoke(count); // doesn't create copy when called\n    myInvoke(count); // doesn't create copy when called\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <funkční>\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Zvýší a vytiskne svou lokální kopii @i.\n    std::function count{ [i]() mutable { // objekt lambda uložený ve funkci std::function\n      std::cout << ++i << '\\n';\n    } };\n\n    myInvoke(počet); // při volání nevytváří kopii\n    myInvoke(počet); // při volání nevytváří kopii\n    myInvoke(počet); // při volání nevytváří kopii\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b86",
       "type": "paragraph",
       "html": "<p>Our output is now as expected:</p>",
       "preview": "Our output is now as expected:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Náš výstup je nyní podle očekávání:</p>"
     },
     {
       "id": "lambda-captures_b87",
       "type": "output",
       "text": "1\n2\n3\n",
       "html": "<pre>1\n2\n3\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>1\n2\n3\n</pre>"
     },
     {
       "id": "lambda-captures_b88",
       "type": "paragraph",
       "html": "<p>An alternate solution is to use a reference wrapper. C++ provides a convenient type (as part of the &lt;functional&gt; header) called <code>std::reference_wrapper</code> that allows us to pass a normal type as if it was a reference. For even more convenience, a <code>std::reference_wrapper</code> can be created by using the <code>std::ref()</code> function. By wrapping our lambda in a <code>std::reference_wrapper</code>, whenever anybody tries to make a copy of our lambda, they’ll make a copy of the reference_wrapper instead (avoiding making a copy of the lambda).</p>",
       "preview": "An alternate solution is to use a reference wrapper. C++ provides a convenient t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Alternativním řešením je použití referenční obálky. C++ poskytuje pohodlný typ (jako součást hlavičky <functional>) nazvaný <code>std::reference_wrapper</code>, který nám umožňuje předat normální typ, jako by to byl odkaz. Pro ještě větší pohodlí lze <code>std::reference_wrapper</code> vytvořit pomocí funkce <code>std::ref()</code>. Zabalením naší lambdy do <code>std::reference_wrapper</code>, kdykoli se někdo pokusí vytvořit kopii naší lambdy, vytvoří místo toho kopii reference_wrapper (a vyhýbá se vytváření kopie lambdy).</p>"
     },
     {
       "id": "lambda-captures_b89",
       "type": "paragraph",
       "html": "<p>Here’s our updated code using <code>std::ref</code>:</p>",
       "preview": "Here’s our updated code using std::ref:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je náš aktualizovaný kód pomocí <code>std::ref</code>:</p>"
     },
     {
       "id": "lambda-captures_b90",
@@ -666,28 +767,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <functional> // includes std::reference_wrapper and std::ref\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    auto count{ [i]() mutable {\n      std::cout << ++i << '\\n';\n    } };\n\n    // std::ref(count) ensures count is treated like a reference\n    // thus, anything that tries to copy count will actually copy the reference\n    // ensuring that only one count exists\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;functional&gt; // includes std::reference_wrapper and std::ref\n\nvoid myInvoke(const std::function&lt;void()&gt;&amp; fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Increments and prints its local copy of @i.\n    auto count{ [i]() mutable {\n      std::cout &lt;&lt; ++i &lt;&lt; '\\n';\n    } };\n\n    // std::ref(count) ensures count is treated like a reference\n    // thus, anything that tries to copy count will actually copy the reference\n    // ensuring that only one count exists\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <funkční> // zahrnuje std::reference_wrapper a std::ref\n\nvoid myInvoke(const std::function<void()>& fn)\n{\n    fn();\n}\n\nint main()\n{\n    int i{ 0 };\n\n    // Zvýší a vytiskne svou lokální kopii @i.\n    auto count{ [i]() měnitelné {\n      std::cout << ++i << '\\n';\n    } };\n\n    // std::ref(count) zajišťuje, že se s počtem zachází jako s odkazem\n    // tedy cokoli, co se pokusí zkopírovat počet, ve skutečnosti zkopíruje odkaz\n    // zajišťuje, že existuje pouze jeden počet\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n    myInvoke(std::ref(count));\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "lambda-captures_b91",
       "type": "paragraph",
       "html": "<p>Our output is now as expected:</p>",
       "preview": "Our output is now as expected:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Náš výstup je nyní podle očekávání:</p>"
     },
     {
       "id": "lambda-captures_b92",
       "type": "output",
       "text": "1\n2\n3\n",
       "html": "<pre>1\n2\n3\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>1\n2\n3\n</pre>"
     },
     {
       "id": "lambda-captures_b93",
       "type": "paragraph",
       "html": "<p>What’s interesting about this method is that it works even if <code>myInvoke</code> takes <code>fn</code> by value (instead of by reference)!</p>",
       "preview": "What’s interesting about this method is that it works even if myInvoke takes fn ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na této metodě je zajímavé, že funguje, i když <code>myInvoke</code> bere <code>fn</code> jako hodnotu (namísto odkazu)!</p>"
     },
     {
       "id": "lambda-captures_b94",
@@ -695,7 +800,8 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Standard library functions may copy function objects (reminder: lambdas are function objects). If you want to provide lambdas with mutable captured variables, pass them by reference using <code>std::ref</code>.</p></div>",
       "preview": "RuleStandard library functions may copy function objects (reminder: lambdas are function objects). I",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Standardní funkce knihovny mohou kopírovat funkční objekty (připomenutí: lambdas jsou funkční objekty). Pokud chcete poskytnout lambda s měnitelnými zachycenými proměnnými, předejte je odkazem pomocí <code>std::ref</code>.</p></div>"
     },
     {
       "id": "lambda-captures_b95",
@@ -703,35 +809,42 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Try to avoid mutable lambdas. Non-mutable lambdas are easier to understand and don’t suffer from the above issues, as well as more dangerous issues that arise when you add parallel execution.</p></div>",
       "preview": "Best practiceTry to avoid mutable lambdas. Non-mutable lambdas are easier to understand and don’t su",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Snažte se vyhnout proměnlivým lambdám. Neměnitelné lambdy jsou snáze pochopitelné a netrpí výše uvedenými problémy, stejně jako nebezpečnějšími problémy, které nastanou, když přidáte paralelní spouštění.</p></div>"
     },
     {
       "id": "lambda-captures_b96",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Čas kvízu</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "lambda-captures_b97",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Which of the following variables can be used by the lambda in <code>main</code> without explicitly capturing them?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i{};\nstatic int j{};\n\nint getValue()\n{\n  return 0;\n}\n\nint main()\n{\n  int a{};\n  constexpr int b{};\n  static int c{};\n  static constexpr int d{};\n  const int e{};\n  const int f{ getValue() };\n  static const int g{}; \n  static const int h{ getValue() }; \n\n  [](){\n    // Try to use the variables without explicitly capturing them.\n    a;\n    b;\n    c;\n    d;\n    e;\n    f;\n    g;\n    h;\n    i;\n    j;\n  }();\n\n  return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Variable</th><th>Usable without explicit capture</th></tr><tr><td><code>a</code></td><td>No. <code>a</code> has automatic storage duration.</td></tr><tr><td><code>b</code></td><td>Yes. <code>b</code> is usable in a constant expression.</td></tr><tr><td><code>c</code></td><td>Yes. <code>c</code> has static storage duration.</td></tr><tr><td><code>d</code></td><td>Yes.</td></tr><tr><td><code>e</code></td><td>Yes. <code>e</code> is usable in a constant expression.</td></tr><tr><td><code>f</code></td><td>No. <code>f</code>‘s value depends on <code>getValue</code>, which might require the program to run.</td></tr><tr><td><code>g</code></td><td>Yes.</td></tr><tr><td><code>h</code></td><td>Yes. <code>h</code> has static storage duration.</td></tr><tr><td><code>i</code></td><td>Yes. <code>i</code> is a global variable.</td></tr><tr><td><code>j</code></td><td>Yes. <code>j</code> is accessible in the entire file.</td></tr></tbody></table></div></div><p></p></div>",
       "preview": "Question #1Which of the following variables can be used by the lambda in main wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 1</p><p>Které z následujících proměnných může použít lambda v <code>main</code>, aniž by je explicitně zachytil?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp\">int i-{}}\nstatické int j{};\n\nint getValue()\n{\n  návrat 0;\n}\n\nint main()\n{\n  int a{};\n  constexpr int b{};\n  static int c{};\n  static constexpr int d{};\n  const int e{};\n  const int f{ getValue() };\n  static const int g{}; \n  static const int h{ getValue() }; \n\n  [](){\n    // Pokuste se použít proměnné, aniž byste je explicitně zachytili.\n    A;\n    b;\n    C;\n    d;\n    E;\n    F;\n    G;\n    h;\n    i;\n    j;\n  }();\n\n  návrat 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"cpp_0\" style=\"display:none\"><div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Proměnná</th><th>Použitelné bez explicitního zachycení</th></tr><tr><td><code>a</code></td><td>Ne. <code>a</code> má automatickou dobu ukládání.</td></tr><tr><td><code>b</code></td><td>Ano. <code>b</code> je použitelný v konstantním výrazu.</td></tr><tr><td><code>c</code></td><td>Ano. <code>c</code> má statickou dobu ukládání.</td></tr><tr><td><code>d</code></td><td>Ano.</td></tr><tr><td><code>e</code></td><td>Ano. <code>e</code> je použitelný v konstantním výrazu.</td></tr><tr><td><code>f</code></td><td>Ne. Hodnota <code>f</code> závisí na <code>getValue</code>, což může vyžadovat spuštění programu.</td></tr><tr><td><code>g</code></td><td>Ano.</td></tr><tr><td><code>h</code></td><td>Ano. <code>h</code> má statickou dobu ukládání.</td></tr><tr><td><code>i</code></td><td>Ano. <code>i</code> je globální proměnná.</td></tr><tr><td><code>j</code></td><td>Ano. <code>j</code> je přístupný v celém souboru.</td></tr></tbody></table></div></div><p></p></div>"
     },
     {
       "id": "lambda-captures_b98",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>What does the following code print? Don’t run the code, work it out in your head.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nint main()\n{\n  std::string favoriteFruit{ \"grapes\" };\n\n  auto printFavoriteFruit{\n    [=]() {\n      std::cout &lt;&lt; \"I like \" &lt;&lt; favoriteFruit &lt;&lt; '\\n';\n    }\n  };\n\n  favoriteFruit = \"bananas with chocolate\";\n\n  printFavoriteFruit();\n\n  return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre>I like grapes\n</pre><p><code>printFavoriteFruit</code> captured <code>favoriteFruit</code> by value. Modifying <code>main</code>‘s <code>favoriteFruit</code> doesn’t affect the lambda’s <code>favoriteFruit</code>.</p></div><p></p></div>",
       "preview": "Question #2What does the following code print? Don’t run the code, work it out i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 2</p><p>Co vytiskne následující kód? Nespouštějte kód, vypracujte si ho v hlavě.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nint main()\n{\n  std::string oblíbenéOvoce{ \"hrozny\" };\n\n  automatický tiskOblíbenýOvoce{\n    [=]() {\n      std::cout << \"Mám rád \" << oblíbenéOvoce << '\\n';\n    }\n  };\n\n  oblíbenéOvoce = \"banány s čokoládou\";\n\n  printOblíbenéOvoce();\n\n  návrat 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a></p><div class=\"id_1\"\" style=\"display:none\"><pre>Mám rád hrozny\n</pre><p><code>printFavoriteFruit</code> zachyceno <code>favoriteFruit</code> podle hodnoty. Úprava <code>oblíbeného ovoce</code> u <code>main</code> nemá vliv na <code>oblíbené ovoce</code> lambdy.</p></div><p></p></div>"
     },
     {
       "id": "lambda-captures_b99",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #3</p><p>We’re going to write a little game with square numbers (numbers which can be created by multiplying an integer with itself (1, 4, 9, 16, 25, …)).</p><p>To setup the game:</p><ul><li>Ask the user to enter a number to start at (e.g. 3).</li><li>Ask the user how many values to generate.</li><li>Pick a random integer between 2 and 4. This is the multiplier.</li><li>Generate the number of values the user indicated. Begining with the starting number, each value should be the next square number, multiplied by the multiplier.</li></ul><p>To play the game:</p><ul><li>The user enters a guess.</li><li>If the guess matches any generated value, the value is removed from the list and the user gets to guess again.</li><li>If the user guesses all of the generated values, they win.</li><li>If the guess does not match a generated value, the user loses and the program tells them the nearest unguessed value.</li></ul><p>Here are a couple of sample sessions to give you a better understanding of how the game works:</p><pre>Start where? 4\nHow many? 5\nI generated 5 square numbers. Do you know what each number is after multiplying it by 2?\n&gt; 32\nNice! 4 number(s) left.\n&gt; 72\nNice! 3 number(s) left.\n&gt; 50\nNice! 2 number(s) left.\n&gt; 126\n126 is wrong! Try 128 next time.\n</pre><ul><li>Starting at 4, the program generates the next 5 squares: 16, 25, 36, 49, 64</li><li>The program picked 2 as the random multiplier, so each square is multiplied by 2: 32, 50, 72, 98, 128</li><li>Now the user gets to guess.</li><li>32 is in the list.</li><li>72 is in the list.</li><li>126 is not in the list, so the user loses. The closest unguessed number is 128.</li></ul><pre>Start where? 1\nHow many? 3\nI generated 3 square numbers. Do you know what each number is after multiplying it by 4?\n&gt; 4\nNice! 2 number(s) left.\n&gt; 16\nNice! 1 number(s) left.\n&gt; 36\nNice! You found all numbers, good job!\n</pre><ul><li>Starting at 1, the program generates the next 3 squares: 1, 4, 9</li><li>The program picked 4 as the random multiplier, so each square is multiplied by 4: 4, 16, 36</li><li>The user guesses all numbers correctly and wins the game.</li></ul><p>Tips:</p><ul><li>Use Random.h (<a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Global random numbers (Random.h)</a>) to generate random numbers.</li><li>Use <code>std::find()</code> (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/#std_find\">18.3 -- Introduction to standard library algorithms</a>) to search for a number in the list.</li><li>Use <code>std::vector::erase()</code> to remove an element, e.g.</li></ul><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">auto found{ std::find(/* ... */) };\n\n// Make sure the element was found\n\nmyVector.erase(found);</code></pre><ul><li>Use <code>std::min_element</code> and a lambda to find the number closest to the user’s guess. <code>std::min_element</code> works analogous to <code>std::max_element</code> from the previous quiz.</li></ul><p><a class=\"hint_link_show\" href=\"javascript:void(0)\" onclick=\"cppHintToggle(document.getElementById('cpp_hint_id_0'),this,'Show Hint','')\">Show Hint</a></p><div class=\"wphint\" id=\"cpp_hint_id_0\" style=\"display:none;margin-bottom:1em\">Hint: Use <code>std::abs</code> from &lt;cmath&gt; to calculate the positive difference between two numbers.<p></p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int distance{ std::abs(3 - 5) }; // 2</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // std::find, std::min_element\n#include &lt;cmath&gt; // std::abs\n#include &lt;cstddef&gt; // std::size_t\n#include &lt;iostream&gt;\n#include &lt;vector&gt;\n#include \"Random.h\"\n\nusing Numbers = std::vector&lt;int&gt;;\n\nnamespace config\n{\n    constexpr int multiplierMin{ 2 };\n    constexpr int multiplierMax{ 6 };\n}\n\n// Generates @count numbers starting at @start*@start and multiplies\n// every square number by @multiplier.\nNumbers generateNumbers(int start, int count, int multiplier)\n{\n    Numbers numbers(static_cast&lt;std::size_t&gt;(count));\n\n    for (int index = 0; index &lt; count; ++index)\n    {\n        std::size_t uindex{ static_cast&lt;std::size_t&gt;(index) };\n        numbers[uindex] = (start + index) * (start + index) * multiplier;\n    }\n\n    return numbers;\n}\n\n// Asks the user to input starting number, then generates array of numbers\nNumbers setupGame()\n{\n    int start{};\n    std::cout &lt;&lt; \"Start where? \";\n    std::cin &gt;&gt; start;\n\n    int count{};\n    std::cout &lt;&lt; \"How many? \";\n    std::cin &gt;&gt; count;\n\n    int multiplier{ Random::get(config::multiplierMin, config::multiplierMax) };\n\n    std::cout &lt;&lt; \"I generated \" &lt;&lt; count\n        &lt;&lt; \" square numbers. Do you know what each number is after multiplying it by \"\n        &lt;&lt; multiplier &lt;&lt; \"?\\n\";\n\n    return generateNumbers(start, count, multiplier);\n}\n\n// Returns the user's guess\nint getUserGuess()\n{\n    int guess{};\n\n    std::cout &lt;&lt; \"&gt; \";\n    std::cin &gt;&gt; guess;\n\n    return guess;\n}\n\n// Searches for the value @guess in @numbers and removes it.\n// Returns true if the value was found. False otherwise.\nbool findAndRemove(Numbers&amp; numbers, int guess)\n{\n    auto found{ std::find(numbers.begin(), numbers.end(), guess) };\n\n    if (found == numbers.end())\n        return false;\n\n    numbers.erase(found);\n    return true;\n}\n\n// Finds the value in @numbers that is closest to @guess.\nint findClosestNumber(const Numbers&amp; numbers, int guess)\n{\n    return *std::min_element(numbers.begin(), numbers.end(),\n        [=](int a, int b)\n        {\n            return std::abs(a - guess) &lt; std::abs(b - guess);\n        });\n}\n\n\n// Called when the user guesses a number correctly.\nvoid printSuccess(const Numbers&amp; numbers)\n{\n    std::cout &lt;&lt; \"Nice! \";\n\n    if (numbers.size() == 0)\n    {\n        std::cout &lt;&lt; \"You found all numbers, good job!\\n\";\n    }\n    else\n    {\n        std::cout &lt;&lt; numbers.size() &lt;&lt; \" number(s) left.\\n\";\n    }\n}\n\n// Called when the user guesses a number that is not in the numbers.\nvoid printFailure(const Numbers&amp; numbers, int guess)\n{\n    int closest{ findClosestNumber(numbers, guess) };\n\n    std::cout &lt;&lt; guess &lt;&lt; \" is wrong!\\n\";\n\n    std::cout &lt;&lt; \"Try \" &lt;&lt; closest &lt;&lt; \" next time.\\n\";\n}\n\nint main()\n{\n    Numbers numbers{ setupGame() };\n\n    while (true)\n    {\n        int guess{ getUserGuess() };\n\n        if (!findAndRemove(numbers, guess))\n        {\n            printFailure(numbers, guess);\n            break;\n        }\n        \n        printSuccess(numbers);\n        if (numbers.size() == 0)\n            break;\n    }\n\n    return 0;\n}</code></pre></div></div>",
       "preview": "Question #3We’re going to write a little game with square numbers (numbers which",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 3</p><p>Napíšeme malou hru se čtvercovými čísly (čísla, která lze vytvořit vynásobením celého čísla se sebou samým (1, 4, 9, 16, 25, …)).</p><p>Chcete-li nastavit uživatele pro spuštění hry na adrese >> a.p><p> 3).</li><li>Zeptejte se uživatele, kolik hodnot má vygenerovat.</li><li>Vyberte náhodné celé číslo mezi 2 a 4. Toto je násobitel.</li><li>Vygenerujte počet hodnot, které uživatel uvedl. Počínaje počátečním číslem by každá hodnota měla být dalším čtvercovým číslem vynásobeným násobitelem.</li></ul><p>Chcete-li hrát hru:</p><ul><li>Uživatel zadá tip.</li><li>Pokud se odhad shoduje s jakoukoli vygenerovanou hodnotou, hodnota je odstraněna ze seznamu a uživatel může hádat znovu.</li><li>Pokud uživatel neuhodne všechny vygenerované hodnoty,</li><li>Pokud uživatel neuhodne všechny vygenerované hodnoty,</li> prohraje a program jim sdělí nejbližší neuhodnutou hodnotu.</li></ul><p>Zde je několik ukázkových relací, které vám pomohou lépe porozumět tomu, jak hra funguje:</p><pre>Kde začít? 4\nkolik? 5\nVygeneroval jsem 5 čtverečních čísel. Víte, co je každé číslo po vynásobení dvěma?\n> 32\nPěkné! Zbývají 4 čísla.\n> 72\nPěkné! Zbývají 3 čísla.\n> 50\nPěkné! Zbývají 2 čísla.\n> 126\n126 je špatně! Zkuste příště 128.\n</pre><ul><li>Počínaje 4, program vygeneruje dalších 5 políček: 16, 25, 36, 49, 64</li><li>Program vybral 2 jako náhodný násobitel, takže každý čtverec se vynásobí 2: 32, 50, 72, dostane 32, 98, 128 uživatel to odhadne.</li> 2. <li> seznam.</li><li>72 je v seznamu.</li><li>126 není v seznamu, takže uživatel prohraje. Nejbližší neuhádnuté číslo je 128.</li></ul><pre>Kde začít? 1\nkolik? 3\nVygeneroval jsem 3 čtvercová čísla. Víte, co je každé číslo po vynásobení čtyřmi?\n> 4\nPěkné! Zbývají 2 čísla.\n> 16\nPěkné! Zbývá 1 číslo.\n> 36\nPěkné! Našli jste všechna čísla, dobrá práce!\n</pre><ul><li>Počínaje 1, program vygeneruje další 3 políčka: 1, 4, 9</li><li>Program vybral 4 jako náhodný násobitel, takže každý čtverec se vynásobí 4: 4, 16, 36</li><li>Uživatel uhodne všechna čísla správně a vyhraje hru.</li><//uls.><p>UTipuls><h><p>U. (<a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Globální náhodná čísla (Random.h)</a>) ke generování náhodných čísel.</li><li>Použijte <code>std::find()</code> (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/#std_find\">18.3 -- Úvod do algoritmů standardních knihoven</a>) pro vyhledání čísla v seznamu.</li><li>Pomocí <code>std::vector::elect/erase an., element> odstraňte/ul><pre. class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">automaticky nalezen{ std::find(/* ... */) };\n\n// Ujistěte se, že byl prvek nalezen\n\nmyVector.erase(found);</code></pre><ul><li>Použijte <code>std::min_element</code> a lambda k nalezení čísla, které je nejblíže odhadu uživatele. <code>std::min_element</code> funguje obdobně jako <code>std::max_element</code> z předchozího kvízu.</li></ul><p><a class=\"hint_link_show\" href=\"javascript:void(0)\" onclick=\"cppHintToggle(document.getElementByIdhow('cpp_h'), Hint','')\">Zobrazit nápovědu</a></p><div class=\"wphint\" id=\"cpp_hint_id_0\" style=\"display:none;margin-bottom:1em\">Nápověda: K výpočtu kladného rozdílu mezi dvěma čísly použijte <code>std::abs</code> z <cmath>.<p></p></p> class=\"cpp><uppage\" class-c-langu match-braces\">int distance{ std::abs(3 - 5) }; // 2</code></pre></div><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Zobrazit řešení</a>_id\" cppdiv class=\"w_id\" 2p>< style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm> // std::find, std::min_element\n#include <cmath> // std::abs\n#include <cstddef> // std::size_t\n#include <iostream>\n#include <vektor>\n#include \"Random.h\"\n\npomocí Numbers = std::vector<int>;\n\nkonfigurace jmenného prostoru\n{\n    constexpr int multiplierMin{ 2 };\n    constexpr int multiplierMax{ 6 };\n}\n\n// Generuje @count čísla začínající na @start*@start a násobí\n// každé čtvercové číslo pomocí @násobiče.\nČísla generujíNumbers (int start, int count, int multiplikátor)\n{\n    Numbers numbers(static_cast<std::size_t>(count));\n\n    for (int index = 0; index < počet; ++index)\n    {\n        std::size_t uindex{ static_cast<std::size_t>(index) };\n        čísla[uindex] = (začátek + index) * (začátek + index) * násobitel;\n    }\n\n    návratová čísla;\n}\n\n// Požádá uživatele o zadání počátečního čísla a poté vygeneruje pole čísel\nNastavení číselHra()\n{\n    int start{};\n    std::cout << \"Kde začít?\";\n    std::cin >> start;\n\n    int počet{};\n    std::cout << \"Kolik?\";\n    std::cin >> počet;\n\n    int multiplikátor{ Random::get(config::multiplierMin, config::multiplierMax) };\n\n    std::cout << \"Vygeneroval jsem \" << počet\n        << \" čtvercová čísla. Víte, co je každé číslo po vynásobení \"\n        << násobitel << \"?\\n\";\n\n    return createNumbers(start, count, multiplier);\n}\n\n// Vrátí odhad uživatele\nint getUserGuess()\n{\n    int odhad{};\n\n    std::cout << \"> \";\n    std::cin >> hádat;\n\n    vrátit odhad;\n}\n\n// Vyhledá hodnotu @guess v @číslech a odstraní ji.\n// Vrátí hodnotu true, pokud byla hodnota nalezena. Jinak nepravda.\nbool findAndRemove(Čísla a čísla, odhad int)\n{\n    auto found{ std::find(čísla.začátek(), čísla.konec(), odhad) };\n\n    if (found == numbers.end())\n        vrátit false;\n\n    čísla.erase(nalezeno);\n    vrátit true;\n}\n\n// Najde hodnotu v @číslech, která je nejblíže @hádám.\nint najítClosestNumber(konst Čísla a čísla, odhad int)\n{\n    return *std::min_element(numbers.begin(), numbers.end(),\n        [=](int a, int b)\n        {\n            return std::abs(a - odhad) < std::abs(b - odhad);\n        });\n}\n\n\n// Volá se, když uživatel správně uhodne číslo.\nvoid printSuccess (const Numbers&numbers)\n{\n    std::cout << \"Pěkné!\";\n\n    if (čísla.velikost() == 0)\n    {\n        std::cout << \"Našli jste všechna čísla, dobrá práce!\\n\";\n    }\n    jinak\n    {\n        std::cout << čísla.velikost() << \"číslo(a) zbývá.\\n\";\n    }\n}\n\n// Volá se, když uživatel uhodne číslo, které není v číslech.\nvoid printFailure (const Numbers&numbers, int odhad)\n{\n    int nejblizsi{ findClosestNumber(cisla, odhad) };\n\n    std::cout << odhad << \" je špatně!\\n\";\n\n    std::cout << \"Zkuste příště \" << nejbližší << \".\\n\";\n}\n\nint main()\n{\n    Čísla čísla{ setupGame() };\n\n    zatímco (pravda)\n    {\n        int hádat{ getUserGuess() };\n\n        if (!findAndRemove(čísla, hádejte))\n        {\n            printFailure(čísla, odhad);\n            přerušení;\n        }\n        \n        printSuccess(čísla);\n        if (čísla.velikost() == 0)\n            přestávka;\n    }\n\n    návrat 0;\n}</code></pre></div></div>"
     }
-  ]
+  ],
+  "title_cs": "20.7 — Zachytávání v lambda výrazech"
 }

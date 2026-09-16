@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson on <a href=\"https://www.learncpp.com/cpp-tutorial/121-pointers-and-references-to-the-base-class-of-derived-objects/\">pointers and references to the base class of derived objects</a>, we took a look at a number of examples where using pointers or references to a base class had the potential to simplify code. However, in every case, we ran up against the problem that the base pointer or reference was only able to call the base version of a function, not a derived version.</p>",
       "preview": "In the previous lesson on pointers and references to the base class of derived o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci o <a href=\"https://www.learncpp.com/cpp-tutorial/121-pointers-and-references-to-the-base-class-of-derived-objects/\">ukazatelích a referencích na bázovou třídu odvozených objektů</a> jsme se podívali na řadu příkladů, kde použití ukazatelů nebo referencí na bázovou třídu mohlo zjednodušit kód. V každém případě jsme však narazili na problém, že bázový ukazatel či reference dokázaly volat pouze bázovou verzi funkce, nikoli její odvozenou verzi.</p>"
     },
     {
       "id": "virtual-functions_b1",
       "type": "paragraph",
       "html": "<p>Here’s a simple example of this behavior:</p>",
       "preview": "Here’s a simple example of this behavior:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je jednoduchý příklad tohoto chování:</p>"
     },
     {
       "id": "virtual-functions_b2",
@@ -29,70 +31,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass Base\n{\npublic:\n    std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    std::string_view getName() const { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base& rBase{ derived };\n    std::cout << \"rBase is a \" << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass Base\n{\npublic:\n    std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    std::string_view getName() const { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base&amp; rBase{ derived };\n    std::cout &lt;&lt; \"rBase is a \" &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída Základní\n{\nveřejnost:\n    std::string_view getName() const { return \"Základ\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    std::string_view getName() const { return \"Odvozeno\"; }\n};\n\nint main()\n{\n    Odvozené odvozené {};\n    Base& rBase{ odvozeno };\n    std::cout << \"rBase je \" << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b3",
       "type": "paragraph",
       "html": "<p>This example prints the result:</p>",
       "preview": "This example prints the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vypíše výsledek:</p>"
     },
     {
       "id": "virtual-functions_b4",
       "type": "output",
       "text": "rBase is a Base\n",
       "html": "<pre>rBase is a Base\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>rBase is a Base\n</pre>"
     },
     {
       "id": "virtual-functions_b5",
       "type": "paragraph",
       "html": "<p>Because rBase is a Base reference, it calls Base::getName(), even though it’s actually referencing the Base portion of a Derived object.</p>",
       "preview": "Because rBase is a Base reference, it calls Base::getName(), even though it’s ac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože rBase je reference na Base, volá Base::getName(), i když ve skutečnosti odkazuje na část Base objektu Derived.</p>"
     },
     {
       "id": "virtual-functions_b6",
       "type": "paragraph",
       "html": "<p>In this lesson, we will show how to address this issue using virtual functions.</p>",
       "preview": "In this lesson, we will show how to address this issue using virtual functions.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci si ukážeme, jak tento problém vyřešit pomocí virtuálních funkcí.</p>"
     },
     {
       "id": "virtual-functions_b7",
       "type": "section",
       "title": "Virtual functions",
       "html": "<h3 class=\"cpp-section-heading\">Virtual functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Virtuální funkce</h3>",
+      "title_cs": "Virtuální funkce"
     },
     {
       "id": "virtual-functions_b8",
       "type": "paragraph",
       "html": "<p>A <strong>virtual function</strong> is a special type of member function that, when called, resolves to the most-derived version of the function for the actual type of the object being referenced or pointed to.</p>",
       "preview": "A virtual function is a special type of member function that, when called, resol",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Virtuální funkce</strong> je speciální typ členské funkce, která se při volání vyhodnotí na nejvíce odvozenou verzi funkce pro skutečný typ odkazovaného objektu (nebo objektu, na který ukazuje ukazatel).</p>"
     },
     {
       "id": "virtual-functions_b9",
       "type": "paragraph",
       "html": "<p>A derived function is considered a match if it has the same signature (name, parameter types, and whether it is const) and return type as the base version of the function. Such functions are called <strong>overrides</strong>.</p>",
       "preview": "A derived function is considered a match if it has the same signature (name, par",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odvozená funkce je považována za shodu, pokud má stejný podpis (název, typy parametrů a zda je const) a návratový typ jako základní verze funkce. Takové funkce se nazývají <strong>přepisy</strong>.</p>"
     },
     {
       "id": "virtual-functions_b10",
       "type": "paragraph",
       "html": "<p>To make a function virtual, simply place the “virtual” keyword before the function declaration.</p>",
       "preview": "To make a function virtual, simply place the “virtual” keyword before the functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li funkci učinit virtuální, jednoduše umístěte klíčové slovo „virtuální“ před deklaraci funkce.</p>"
     },
     {
       "id": "virtual-functions_b11",
       "type": "paragraph",
       "html": "<p>Here’s the above example with a virtual function:</p>",
       "preview": "Here’s the above example with a virtual function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je výše uvedený příklad s virtuální funkcí:</p>"
     },
     {
       "id": "virtual-functions_b12",
@@ -100,21 +113,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Base\"; } // note addition of virtual keyword\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base& rBase{ derived };\n    std::cout << \"rBase is a \" << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Base\"; } // note addition of virtual keyword\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived {};\n    Base&amp; rBase{ derived };\n    std::cout &lt;&lt; \"rBase is a \" &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída Základní\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"Základ\"; } // poznámka přidání virtuálního klíčového slova\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"Odvozeno\"; }\n};\n\nint main()\n{\n    Odvozené odvozené {};\n    Base& rBase{ odvozeno };\n    std::cout << \"rBase je \" << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b13",
       "type": "paragraph",
       "html": "<p>This example prints the result:</p>",
       "preview": "This example prints the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vytiskne výsledek:</p>"
     },
     {
       "id": "virtual-functions_b14",
       "type": "output",
       "text": "rBase is a Derived\n",
       "html": "<pre>rBase is a Derived\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>rBase je odvozený\n</pre>"
     },
     {
       "id": "virtual-functions_b15",
@@ -122,21 +138,24 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Some modern compilers may give an error about having virtual functions and an accessible non-virtual destructor. If this is the case, add a virtual destructor to the base class. In the above program, add this to the definition of <code>Base</code>:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    virtual ~Base() = default;</code></pre><p>We discuss virtual destructors in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/virtual-destructors-virtual-assignment-and-overriding-virtualization/\">25.4 -- Virtual destructors, virtual assignment, and overriding virtualization</a>.</p></div>",
       "preview": "TipSome modern compilers may give an error about having virtual functions and an accessible non-virt",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Některé moderní kompilátory mohou hlásit chybu ohledně virtuálních funkcí a přístupného nevirtuálního destruktoru. V takovém případě přidejte do základní třídy virtuální destruktor. Ve výše uvedeném programu přidejte toto k definici <code>Base</code>:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> virtuální ~Base() = default;</code></pre><p>Virtuální destruktory probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/virtual-destructors-virtual-assignment-and-overriding-virtualization/\">25.4 -- Virtuální destruktory, virtuální přiřazení a přepisující virtualizace</a>.</p></div>"
     },
     {
       "id": "virtual-functions_b16",
       "type": "paragraph",
       "html": "<p>Because rBase is a reference to the Base portion of a Derived object, when <em>rBase.getName()</em> is evaluated, it would normally resolve to Base::getName(). However, Base::getName() is virtual, which tells the program to go look and see if there are any more-derived versions of the function available for a Derived object. In this case, it will resolve to Derived::getName()!</p>",
       "preview": "Because rBase is a reference to the Base portion of a Derived object, when rBase",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože rBase je odkaz na základní část odvozeného objektu, když je vyhodnocena <em>rBase.getName()</em>, normálně se převede na Base::getName(). Base::getName() je však virtuální, což říká programu, aby se šel podívat a zjistit, zda jsou pro odvozený objekt k dispozici nějaké další odvozené verze funkce. V tomto případě se to vyřeší jako Derived::getName()!</p>"
     },
     {
       "id": "virtual-functions_b17",
       "type": "paragraph",
       "html": "<p>Let’s take a look at a slightly more complex example:</p>",
       "preview": "Let’s take a look at a slightly more complex example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na trochu složitější příklad:</p>"
     },
     {
       "id": "virtual-functions_b18",
@@ -144,49 +163,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << \"rBase is a \" << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A&amp; rBase{ c };\n    std::cout &lt;&lt; \"rBase is a \" &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << \"rBase je \" << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b19",
       "type": "paragraph",
       "html": "<p>What do you think this program will output?</p>",
       "preview": "What do you think this program will output?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co si myslíte, že tento program vygeneruje?</p>"
     },
     {
       "id": "virtual-functions_b20",
       "type": "paragraph",
       "html": "<p>Let’s look at how this works. First, we instantiate a C class object. rBase is an A reference, which we set to reference the A portion of the C object. Finally, we call rBase.getName(). rBase.getName() evaluates to A::getName(). However, A::getName() is virtual, so the compiler will call the most-derived match between A and C. In this case, that is C::getName(). Note that it will not call D::getName(), because our original object was a C, not a D, so only functions between A and C are considered.</p>",
       "preview": "Let’s look at how this works. First, we instantiate a C class object. rBase is a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se, jak to funguje. Nejprve vytvoříme instanci objektu třídy C. rBase je reference A, kterou jsme nastavili tak, aby odkazovala na část A objektu C. Nakonec zavoláme rBase.getName(). rBase.getName() se vyhodnotí jako A::getName(). A::getName() je však virtuální, takže kompilátor zavolá nejvíce odvozenou shodu mezi A a C. V tomto případě je to C::getName(). Všimněte si, že nebude volat D::getName(), protože náš původní objekt byl C, nikoli D, takže jsou brány v úvahu pouze funkce mezi A a C.</p>"
     },
     {
       "id": "virtual-functions_b21",
       "type": "paragraph",
       "html": "<p>As a result, our program outputs:</p>",
       "preview": "As a result, our program outputs:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je, že výstupy našeho programu:</p>"
     },
     {
       "id": "virtual-functions_b22",
       "type": "output",
       "text": "rBase is a C\n",
       "html": "<pre>rBase is a C\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>rBase je C\n</pre>"
     },
     {
       "id": "virtual-functions_b23",
       "type": "paragraph",
       "html": "<p>Note that virtual function resolution only works when a virtual member function is called through a pointer or reference to a class type object. This works because the compiler can differentiate the type of the pointer or reference from the type of the object being pointed to or referenced. We see this in example above.</p>",
       "preview": "Note that virtual function resolution only works when a virtual member function ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že rozlišení virtuálních funkcí funguje pouze tehdy, když je virtuální členská funkce volána prostřednictvím ukazatele nebo odkazu na objekt typu třídy. To funguje, protože kompilátor může odlišit typ ukazatele nebo odkazu od typu objektu, na který odkazuje nebo na něj odkazuje. Vidíme to na příkladu výše.</p>"
     },
     {
       "id": "virtual-functions_b24",
       "type": "paragraph",
       "html": "<p>Calling a virtual member function directly on an object (not through a pointer or reference) will always invoke the member function belonging to the same type of that object. For example:</p>",
       "preview": "Calling a virtual member function directly on an object (not through a pointer o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání virtuální členské funkce přímo na objekt (nikoli prostřednictvím ukazatele nebo odkazu) vždy vyvolá členskou funkci patřící ke stejnému typu daného objektu. Například:</p>"
     },
     {
       "id": "virtual-functions_b25",
@@ -194,7 +220,8 @@
       "language": "cpp",
       "code": "C c{};\nstd::cout << c.getName(); // will always call C::getName\n\nA a { c }; // copies the A portion of c into a (don't do this)\nstd::cout << a.getName(); // will always call A::getName",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">C c{};\nstd::cout &lt;&lt; c.getName(); // will always call C::getName\n\nA a { c }; // copies the A portion of c into a (don't do this)\nstd::cout &lt;&lt; a.getName(); // will always call A::getName</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">C c{};\nstd::cout << c.getName(); // bude vždy volat C::getName\n\nA a { c }; // zkopíruje část A z c do a (nedělejte to)\nstd::cout << a.getName(); // bude vždy volat A::getName</code></pre>"
     },
     {
       "id": "virtual-functions_b26",
@@ -202,21 +229,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Virtual function resolution only works when a member function is called through a pointer or reference to a class type object.</p></div>",
       "preview": "Key insightVirtual function resolution only works when a member function is called through a pointer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový přehled</p><p>Virtuální rozlišení funkcí funguje pouze tehdy, když je členská funkce volána pomocí ukazatele nebo odkazu na objekt typu třídy.</p></div>"
     },
     {
       "id": "virtual-functions_b27",
       "type": "section",
       "title": "Polymorphism",
       "html": "<h3 class=\"cpp-section-heading\">Polymorphism</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Polymorfismus</h3>",
+      "title_cs": "Polymorfismus"
     },
     {
       "id": "virtual-functions_b28",
       "type": "paragraph",
       "html": "<p>In programming, <strong>polymorphism</strong> refers to the ability of an entity to have multiple forms (the term “polymorphism” literally means “many forms”). For example, consider the following two function declarations:</p>",
       "preview": "In programming, polymorphism refers to the ability of an entity to have multiple",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V programování <strong>polymorfismus</strong> označuje schopnost entity mít více forem (výraz „polymorfismus“ doslova znamená „mnoho forem“). Zvažte například následující dvě deklarace funkce:</p>"
     },
     {
       "id": "virtual-functions_b29",
@@ -224,42 +255,49 @@
       "language": "cpp",
       "code": "int add(int, int);\ndouble add(double, double);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int, int);\ndouble add(double, double);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int add(int, int);\ndouble add(double, double);</code></pre>"
     },
     {
       "id": "virtual-functions_b30",
       "type": "paragraph",
       "html": "<p>The identifier <code>add</code> has two forms: <code>add(int, int)</code> and <code>add(double, double)</code>.</p>",
       "preview": "The identifier add has two forms: add(int, int) and add(double, double).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Identifikátor <code>add</code> má dvě podoby: <code>add(int, int)</code> a <code>add(double, double)</code>.</p>"
     },
     {
       "id": "virtual-functions_b31",
       "type": "paragraph",
       "html": "<p><strong>Compile-time polymorphism</strong> refers to forms of polymorphism that are resolved by the compiler. These include function overload resolution, as well as template resolution.</p>",
       "preview": "Compile-time polymorphism refers to forms of polymorphism that are resolved by t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Polymorfismus v době kompilace</strong> označuje formy polymorfismu, které kompilátor řeší. Patří mezi ně rozlišení přetížení funkcí a také rozlišení šablony.</p>"
     },
     {
       "id": "virtual-functions_b32",
       "type": "paragraph",
       "html": "<p><strong>Runtime polymorphism</strong> refers to forms of polymorphism that are resolved at runtime. This includes virtual function resolution.</p>",
       "preview": "Runtime polymorphism refers to forms of polymorphism that are resolved at runtim",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Polymorfismus za běhu</strong> označuje formy polymorfismu, které jsou vyřešeny za běhu. To zahrnuje rozlišení virtuálních funkcí.</p>"
     },
     {
       "id": "virtual-functions_b33",
       "type": "section",
       "title": "A more complex example",
       "html": "<h3 class=\"cpp-section-heading\">A more complex example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Složitější příklad</h3>",
+      "title_cs": "Složitější příklad"
     },
     {
       "id": "virtual-functions_b34",
       "type": "paragraph",
       "html": "<p>Let’s take another look at the Animal example we were working with in the previous lesson. Here’s the original class, along with some test code:</p>",
       "preview": "Let’s take another look at the Animal example we were working with in the previo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se znovu na příklad se zvířaty, se kterým jsme pracovali v předchozí lekci. Zde je původní třída spolu s nějakým testovacím kódem:</p>"
     },
     {
       "id": "virtual-functions_b35",
@@ -267,28 +305,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string& getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Woof\"; }\n};\n\nvoid report(const Animal& animal)\n{\n    std::cout << animal.getName() << \" says \" << animal.speak() << '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Dog dog{ \"Garbo\" };\n\n    report(cat);\n    report(dog);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string&amp; getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Woof\"; }\n};\n\nvoid report(const Animal&amp; animal)\n{\n    std::cout &lt;&lt; animal.getName() &lt;&lt; \" says \" &lt;&lt; animal.speak() &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Dog dog{ \"Garbo\" };\n\n    report(cat);\n    report(dog);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřída Zvíře\n{\nchráněno:\n    std::string m_name {};\n\n    // Děláme tento konstruktor chráněný, protože\n    // nechceme, aby lidé vytvářeli objekty zvířat přímo,\n    // ale přesto chceme, aby to mohly používat odvozené třídy.\n    Animal(std::string_view name)\n        : m_name{ jméno }\n    {\n    }\n\nveřejnost:\n    const std::string& getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\ntřída Kočka: veřejná Zvíř\n{\nveřejnost:\n    Cat(std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    std::string_view speak() const { return \"Mňau\"; }\n};\n\ntřída Pes: veřejný Zvíř\n{\nveřejnost:\n    Pes (std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    std::string_view speak() const { return \"Fuj\"; }\n};\n\nneplatná zpráva (konst Zvíře a zvíře)\n{\n    std::cout << animal.getName() << \" říká \" << animal.speak() << '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Pes pes{ \"Garbo\" };\n\n    zpráva(kočka);\n    hlásit (pes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b36",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto vytiskne:</p>"
     },
     {
       "id": "virtual-functions_b37",
       "type": "output",
       "text": "Fred says ???\nGarbo says ???\n",
       "html": "<pre>Fred says ???\nGarbo says ???\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Fred říká ???\nGarbo říká???\n</pre>"
     },
     {
       "id": "virtual-functions_b38",
       "type": "paragraph",
       "html": "<p>Here’s the equivalent class with the speak() function made virtual:</p>",
       "preview": "Here’s the equivalent class with the speak() function made virtual:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ekvivalentní třída s virtuální funkcí speak():</p>"
     },
     {
       "id": "virtual-functions_b39",
@@ -296,49 +338,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Woof\"; }\n};\n\nvoid report(const Animal& animal)\n{\n    std::cout << animal.getName() << \" says \" << animal.speak() << '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Dog dog{ \"Garbo\" };\n\n    report(cat);\n    report(dog);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name {};\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n\npublic:\n    const std::string&amp; getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Woof\"; }\n};\n\nvoid report(const Animal&amp; animal)\n{\n    std::cout &lt;&lt; animal.getName() &lt;&lt; \" says \" &lt;&lt; animal.speak() &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Dog dog{ \"Garbo\" };\n\n    report(cat);\n    report(dog);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřída Zvíře\n{\nchráněno:\n    std::string m_name {};\n\n    // Děláme tento konstruktor chráněný, protože\n    // nechceme, aby lidé vytvářeli objekty zvířat přímo,\n    // ale přesto chceme, aby to mohly používat odvozené třídy.\n    Animal(std::string_view name)\n        : m_name{ jméno }\n    {\n    }\n\nveřejnost:\n    const std::string& getName() const { return m_name; }\n    virtual std::string_view speak() const { return \"???\"; }\n};\n\ntřída Kočka: veřejná Zvíř\n{\nveřejnost:\n    Cat(std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Mňau\"; }\n};\n\ntřída Pes: veřejný Zvíř\n{\nveřejnost:\n    Pes (std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    virtual std::string_view speak() const { return \"Fuj\"; }\n};\n\nneplatná zpráva (konst Zvíře a zvíře)\n{\n    std::cout << animal.getName() << \" říká \" << animal.speak() << '\\n';\n}\n\nint main()\n{\n    Cat cat{ \"Fred\" };\n    Pes pes{ \"Garbo\" };\n\n    zpráva(kočka);\n    hlásit (pes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b40",
       "type": "paragraph",
       "html": "<p>This program produces the result:</p>",
       "preview": "This program produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří výsledek:</p>"
     },
     {
       "id": "virtual-functions_b41",
       "type": "output",
       "text": "Fred says Meow\nGarbo says Woof\n",
       "html": "<pre>Fred says Meow\nGarbo says Woof\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Fred říká Mňau\nGarbo říká Woof\n</pre>"
     },
     {
       "id": "virtual-functions_b42",
       "type": "paragraph",
       "html": "<p>It works!</p>",
       "preview": "It works!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funguje to!</p>"
     },
     {
       "id": "virtual-functions_b43",
       "type": "paragraph",
       "html": "<p>When animal.speak() is evaluated, the program notes that Animal::speak() is a virtual function. In the case where animal is referencing the Animal portion of a Cat object, the program looks at all the classes between Animal and Cat to see if it can find a more derived function. In that case, it finds Cat::speak(). In the case where animal references the Animal portion of a Dog object, the program resolves the function call to Dog::speak().</p>",
       "preview": "When animal.speak() is evaluated, the program notes that Animal::speak() is a vi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vyhodnocena animal.speak(), program poznamená, že Animal::speak() je virtuální funkce. V případě, že zvíře odkazuje na zvířecí část objektu Cat, program se podívá na všechny třídy mezi Animal a Cat, aby zjistil, zda může najít odvozenější funkci. V takovém případě najde Cat::speak(). V případě, že zvíře odkazuje na zvířecí část objektu Dog, program vyřeší volání funkce Dog::speak().</p>"
     },
     {
       "id": "virtual-functions_b44",
       "type": "paragraph",
       "html": "<p>Note that we didn’t make Animal::getName() virtual. This is because getName() is never overridden in any of the derived classes, therefore there is no need.</p>",
       "preview": "Note that we didn’t make Animal::getName() virtual. This is because getName() is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Upozorňujeme, že jsme Animal::getName() neudělali virtuální. Je to proto, že getName() není nikdy přepsána v žádné z odvozených tříd, a proto není potřeba.</p>"
     },
     {
       "id": "virtual-functions_b45",
       "type": "paragraph",
       "html": "<p>Similarly, the following array example now works as expected:</p>",
       "preview": "Similarly, the following array example now works as expected:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně následující příklad pole nyní funguje podle očekávání:</p>"
     },
     {
       "id": "virtual-functions_b46",
@@ -346,42 +395,48 @@
       "language": "cpp",
       "code": "Cat fred{ \"Fred\" };\nCat misty{ \"Misty\" };\nCat zeke{ \"Zeke\" };\n \nDog garbo{ \"Garbo\" };\nDog pooky{ \"Pooky\" };\nDog truffle{ \"Truffle\" };\n\n// Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\nAnimal* animals[]{ &fred, &garbo, &misty, &pooky, &truffle, &zeke };\n\nfor (const auto* animal : animals)\n    std::cout << animal->getName() << \" says \" << animal->speak() << '\\n';",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Cat fred{ \"Fred\" };\nCat misty{ \"Misty\" };\nCat zeke{ \"Zeke\" };\n \nDog garbo{ \"Garbo\" };\nDog pooky{ \"Pooky\" };\nDog truffle{ \"Truffle\" };\n\n// Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\nAnimal* animals[]{ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke };\n\nfor (const auto* animal : animals)\n    std::cout &lt;&lt; animal-&gt;getName() &lt;&lt; \" says \" &lt;&lt; animal-&gt;speak() &lt;&lt; '\\n';</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Kočka fred{ \"Fred\" };\nCat misty{ \"Misty\" };\nCat zeke{ \"Zeke\" };\n \nPsí garbo{ \"Garbo\" };\nPes pooky{ \"Pooky\" };\nPsí lanýž{ \"Lanýž\" };\n\n// Nastavte pole ukazatelů na zvířata a nastavte tyto ukazatele na naše objekty kočka a pes\nZvířecí* zvířata[]{ &fred, &garbo, &misty, &pooky, &lanýž, &zeke };\n\npro (konst auto* zvíře : zvířata)\n    std::cout << animal->getName() << \" říká \" << animal->speak() << '\\n';</code></pre>"
     },
     {
       "id": "virtual-functions_b47",
       "type": "paragraph",
       "html": "<p>Which produces the result:</p>",
       "preview": "Which produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledek:</p>"
     },
     {
       "id": "virtual-functions_b48",
       "type": "output",
       "text": "Fred says Meow\nGarbo says Woof\nMisty says Meow\nPooky says Woof\nTruffle says Woof\nZeke says Meow\n",
       "html": "<pre>Fred says Meow\nGarbo says Woof\nMisty says Meow\nPooky says Woof\nTruffle says Woof\nZeke says Meow\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Fred říká Mňau\nGarbo říká Woof\nMisty říká Mňau\nPooky říká Woof\nLanýž říká Woof\nZeke říká Mňau\n</pre>"
     },
     {
       "id": "virtual-functions_b49",
       "type": "paragraph",
       "html": "<p>Even though these two examples only use Cat and Dog, any other classes we derive from Animal would also work with our report() function and animal array without further modification! This is perhaps the biggest benefit of virtual functions -- the ability to structure your code in such a way that newly derived classes will automatically work with the old code without modification!</p>",
       "preview": "Even though these two examples only use Cat and Dog, any other classes we derive",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože tyto dva příklady používají pouze Cat a Dog, všechny ostatní třídy, které jsme odvodili od Animal, by také fungovaly s naší funkcí report() a zvířecím polem bez dalších úprav! To je možná největší výhoda virtuálních funkcí – schopnost strukturovat váš kód tak, že nově odvozené třídy budou automaticky pracovat se starým kódem bez úprav!</p>"
     },
     {
       "id": "virtual-functions_b50",
       "type": "paragraph",
       "html": "<p>A word of warning: the signature of the derived class function must <em>exactly</em> match the signature of the base class virtual function in order for the derived class function to be used. If the derived class function has different parameter types, the program will likely still compile fine, but the virtual function will not resolve as intended. In the next lesson, we’ll discuss how to guard against this.</p>",
       "preview": "A word of warning: the signature of the derived class function must exactly matc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Upozornění: Aby mohla být funkce odvozené třídy použita, musí se podpis funkce odvozené třídy <em>přesně</em> shodovat s podpisem virtuální funkce základní třídy. Pokud má funkce odvozené třídy různé typy parametrů, program se pravděpodobně zkompiluje v pořádku, ale virtuální funkce se nevyřeší tak, jak bylo zamýšleno. V další lekci probereme, jak se tomu bránit.</p>"
     },
     {
       "id": "virtual-functions_b51",
       "type": "paragraph",
       "html": "<p>Note that if a function is marked as virtual, all matching overrides in derived classes are also implicitly considered virtual, even if they are not explicitly marked as such.</p>",
       "preview": "Note that if a function is marked as virtual, all matching overrides in derived ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že pokud je funkce označena jako virtuální, všechny odpovídající přepisy v odvozených třídách jsou také implicitně považovány za virtuální, i když nejsou jako takové explicitně označeny.</p>"
     },
     {
       "id": "virtual-functions_b52",
@@ -389,28 +444,33 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>If a function is virtual, all matching overrides in derived classes are implicitly virtual.</p></div>",
       "preview": "RuleIf a function is virtual, all matching overrides in derived classes are implicitly virtual.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Pokud je funkce virtuální, všechna odpovídající přepsání v odvozených třídách jsou implicitně virtuální.</p></div>"
     },
     {
       "id": "virtual-functions_b53",
       "type": "paragraph",
       "html": "<p>This does not work the other way around -- a virtual override in a derived class does not implicitly make the base class function virtual.</p>",
       "preview": "This does not work the other way around -- a virtual override in a derived class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto nefunguje naopak -- virtuální přepsání v odvozené třídě implicitně nečiní funkci základní třídy virtuální.</p>"
     },
     {
       "id": "virtual-functions_b54",
       "type": "section",
       "title": "Return types of virtual functions",
       "html": "<h3 class=\"cpp-section-heading\">Return types of virtual functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vrátí typy virtuálních funkcí</h3>",
+      "title_cs": "Vrátí typy virtuálních funkcí"
     },
     {
       "id": "virtual-functions_b55",
       "type": "paragraph",
       "html": "<p>Under normal circumstances, the return type of a virtual function and its override must match. Consider the following example:</p>",
       "preview": "Under normal circumstances, the return type of a virtual function and its overri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za normálních okolností se musí návratový typ virtuální funkce a její přepsání shodovat. Zvažte následující příklad:</p>"
     },
     {
       "id": "virtual-functions_b56",
@@ -418,42 +478,49 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    virtual int getValue() const { return 5; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual double getValue() const { return 6.78; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    virtual int getValue() const { return 5; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual double getValue() const { return 6.78; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    virtual int getValue() const { return 5; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    virtual double getValue() const { return 6.78; }\n};</code></pre>"
     },
     {
       "id": "virtual-functions_b57",
       "type": "paragraph",
       "html": "<p>In this case, Derived::getValue() is not considered a matching override for Base::getValue() and compilation will fail.</p>",
       "preview": "In this case, Derived::getValue() is not considered a matching override for Base",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě se Derived::getValue() nepovažuje za odpovídající přepsání pro Base::getValue() a kompilace se nezdaří.</p>"
     },
     {
       "id": "virtual-functions_b58",
       "type": "section",
       "title": "Do not call virtual functions from constructors or destructors",
       "html": "<h3 class=\"cpp-section-heading\">Do not call virtual functions from constructors or destructors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nevolat virtuální funkce z konstruktorů nebo destruktorů</h3>",
+      "title_cs": "Nevolejte virtuální funkce z konstruktorů nebo destruktorů"
     },
     {
       "id": "virtual-functions_b59",
       "type": "paragraph",
       "html": "<p>Here’s another gotcha that often catches unsuspecting new programmers. You should not call virtual functions from constructors or destructors. Why?</p>",
       "preview": "Here’s another gotcha that often catches unsuspecting new programmers. You shoul",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další problém, který často zastihne nic netušící nové programátory. Virtuální funkce byste neměli volat z konstruktorů nebo destruktorů. Proč?</p>"
     },
     {
       "id": "virtual-functions_b60",
       "type": "paragraph",
       "html": "<p>Remember that when a Derived class is created, the Base portion is constructed first. If you were to call a virtual function from the Base constructor, and Derived portion of the class hadn’t even been created yet, it would be unable to call the Derived version of the function because there’s no Derived object for the Derived function to work on. In C++, it will call the Base version instead.</p>",
       "preview": "Remember that when a Derived class is created, the Base portion is constructed f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte si, že když je vytvořena odvozená třída, je nejprve vytvořena základní část. Pokud byste zavolali virtuální funkci z konstruktoru Base a Odvozená část třídy ještě nebyla vytvořena, nebude možné zavolat odvozenou verzi funkce, protože neexistuje žádný odvozený objekt, se kterým by funkce Odvozená mohla pracovat. V C++ místo toho zavolá základní verzi.</p>"
     },
     {
       "id": "virtual-functions_b61",
       "type": "paragraph",
       "html": "<p>A similar issue exists for destructors. If you call a virtual function in a Base class destructor, it will always resolve to the Base class version of the function, because the Derived portion of the class will already have been destroyed.</p>",
       "preview": "A similar issue exists for destructors. If you call a virtual function in a Base",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobný problém existuje u destruktorů. Pokud zavoláte virtuální funkci v destruktoru třídy Base, vždy se to převede na verzi funkce třídy Base, protože odvozená část třídy již byla zničena.</p>"
     },
     {
       "id": "virtual-functions_b62",
@@ -461,49 +528,58 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Never call virtual functions from constructors or destructors.</p></div>",
       "preview": "Best practiceNever call virtual functions from constructors or destructors.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Osvědčený postup</p><p>Nikdy nevolejte virtuální funkce z konstruktorů nebo destruktorů.</p></div>"
     },
     {
       "id": "virtual-functions_b63",
       "type": "section",
       "title": "The downside of virtual functions",
       "html": "<h3 class=\"cpp-section-heading\">The downside of virtual functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nevýhoda virtuálních funkcí</h3>",
+      "title_cs": "Nevýhoda virtuálních funkcí"
     },
     {
       "id": "virtual-functions_b64",
       "type": "paragraph",
       "html": "<p>Since most of the time you’ll want your functions to be virtual, why not just make all functions virtual? The answer is because it’s inefficient -- resolving a virtual function call takes longer than resolving a regular one.</p>",
       "preview": "Since most of the time you’ll want your functions to be virtual, why not just ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Většinu času budete chtít, aby byly vaše funkce virtuální, proč prostě neudělat všechny funkce virtuálními? Odpověď zní, protože je to neefektivní – vyřešení volání virtuální funkce trvá déle než vyřešení běžného.</p>"
     },
     {
       "id": "virtual-functions_b65",
       "type": "paragraph",
       "html": "<p>Furthermore, to make virtual functions work, the compiler has to allocate an extra pointer for each object of a class that has virtual functions. This adds a lot of overhead to objects that otherwise have a small size. We’ll talk about this more in future lessons in this chapter.</p>",
       "preview": "Furthermore, to make virtual functions work, the compiler has to allocate an ext",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kromě toho, aby virtuální funkce fungovaly, musí kompilátor přidělit zvláštní ukazatel pro každý objekt třídy, která má virtuální funkce. To přidává spoustu režie k objektům, které jinak mají malou velikost. Více o tom promluvíme v budoucích lekcích této kapitoly.</p>"
     },
     {
       "id": "virtual-functions_b66",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Čas kvízu</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "virtual-functions_b67",
       "type": "list",
       "html": "<ol start=\"1\"><li>What do the following programs print? This exercise is meant to be done by inspection, not by compiling the examples with your compiler.</li></ol>",
       "preview": "What do the following programs print? This exercise is meant to be done by inspe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Co tisknou následující programy? Toto cvičení má být provedeno kontrolou, nikoli kompilací příkladů pomocí vašeho kompilátoru.</li></ol>"
     },
     {
       "id": "virtual-functions_b68",
       "type": "paragraph",
       "html": "<p>1a)</p>",
       "preview": "1a)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1a)</p>"
     },
     {
       "id": "virtual-functions_b69",
@@ -511,21 +587,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n// Note: no getName() function here\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n// Note: no getName() function here\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A&amp; rBase{ c };\n    std::cout &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n// Poznámka: zde není funkce getName().\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b70",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\">B. rBase is an A reference pointing to a C object. Normally rBase.getName() would call A::getName(), but A::getName() is virtual so it instead calls the most derived matching function between A and C. That is B::getName(), which prints B.</div>",
       "preview": "B. rBase is an A reference pointing to a C object. Normally rBase.getName() woul",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\">B. rBase je odkaz A ukazující na objekt C. Za normálních okolností by rBase.getName() zavolala A::getName(), ale A::getName() je virtuální, takže místo toho volá nejodvozenější porovnávací funkci mezi A a C. To je B::getName(), která vytiskne B.</div>"
     },
     {
       "id": "virtual-functions_b71",
       "type": "paragraph",
       "html": "<p>1b)</p>",
       "preview": "1b)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1b)</p>"
     },
     {
       "id": "virtual-functions_b72",
@@ -533,21 +612,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c;\n    B& rBase{ c }; // note: rBase is a B this time\n    std::cout << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c;\n    B&amp; rBase{ c }; // note: rBase is a B this time\n    std::cout &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c;\n    B& rBase{ c }; // poznámka: rBase je tentokrát B\n    std::cout << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b73",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">C. This is pretty straightforward, as C::getName() is the most derived matching call between classes B and C.</div>",
       "preview": "C. This is pretty straightforward, as C::getName() is the most derived matching ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">C. To je docela jednoduché, protože C::getName() je nejvíce odvozené odpovídající volání mezi třídami B a C.</div>"
     },
     {
       "id": "virtual-functions_b74",
       "type": "paragraph",
       "html": "<p>1c)</p>",
       "preview": "1c)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1c)</p>"
     },
     {
       "id": "virtual-functions_b75",
@@ -555,21 +637,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    // note: no virtual keyword\n    std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    // note: no virtual keyword\n    std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A&amp; rBase{ c };\n    std::cout &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    // poznámka: žádné virtuální klíčové slovo\n    std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b76",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\">A. Since A is not virtual, when rBase.getName() is called, A::getName() is called.</div>",
       "preview": "A. Since A is not virtual, when rBase.getName() is called, A::getName() is calle",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\">A. Protože A není virtuální, při volání rBase.getName() se volá A::getName().</div>"
     },
     {
       "id": "virtual-functions_b77",
       "type": "paragraph",
       "html": "<p>1d)</p>",
       "preview": "1d)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1d)</p>"
     },
     {
       "id": "virtual-functions_b78",
@@ -577,21 +662,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    // note: no virtual keyword in B, C, and D\n    std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    std::string_view getName() const { return \"D\"; } \n};\n\nint main()\n{\n    C c {};\n    B& rBase{ c }; // note: rBase is a B this time\n    std::cout << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    // note: no virtual keyword in B, C, and D\n    std::string_view getName() const { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    std::string_view getName() const { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    std::string_view getName() const { return \"D\"; } \n};\n\nint main()\n{\n    C c {};\n    B&amp; rBase{ c }; // note: rBase is a B this time\n    std::cout &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    // poznámka: žádné virtuální klíčové slovo v B, C a D\n    std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    std::string_view getName() const { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    std::string_view getName() const { return \"D\"; } \n};\n\nint main()\n{\n    C c {};\n    B& rBase{ c }; // poznámka: rBase je tentokrát B\n    std::cout << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b79",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\">C. Even though B and C aren’t marked as virtual functions, A::getName() is virtual and B::getName() and C::getName() are overrides. Therefore, B::getName() and C::getName() are considered implicitly virtual, and thus the call to rBase.getName() resolves to C::getName(), not B::getName().</div>",
       "preview": "C. Even though B and C aren’t marked as virtual functions, A::getName() is virtu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\">C. I když B a C nejsou označeny jako virtuální funkce, A::getName() je virtuální a B::getName() a C::getName() jsou přepisy. Proto jsou B::getName() a C::getName() považovány za implicitně virtuální, a proto se volání funkce rBase.getName() převede na C::getName(), nikoli na B::getName().</div>"
     },
     {
       "id": "virtual-functions_b80",
       "type": "paragraph",
       "html": "<p>1e)</p>",
       "preview": "1e)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1e)</p>"
     },
     {
       "id": "virtual-functions_b81",
@@ -599,21 +687,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    // Note: Functions in B, C, and D are non-const.\n    virtual std::string_view getName() { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B: public A\n{\npublic:\n    // Note: Functions in B, C, and D are non-const.\n    virtual std::string_view getName() { return \"B\"; }\n};\n\nclass C: public B\n{\npublic:\n    virtual std::string_view getName() { return \"C\"; }\n};\n\nclass D: public C\n{\npublic:\n    virtual std::string_view getName() { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A&amp; rBase{ c };\n    std::cout &lt;&lt; rBase.getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    // Poznámka: Funkce v B, C a D jsou nekonstantní.\n    virtual std::string_view getName() { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    virtual std::string_view getName() { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    virtual std::string_view getName() { return \"D\"; }\n};\n\nint main()\n{\n    C c {};\n    A& rBase{ c };\n    std::cout << rBase.getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b82",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\">A. This one is a little trickier. rBase is an A reference to a C object, so rBase.getName() would normally call A::getName(). But A::getName() is virtual, so it calls the most derived version of the function between A and C. And that is A::getName(). Because B::getName() and C::getName() are not const, they are not considered overrides! Consequently, this program prints A.</div>",
       "preview": "A. This one is a little trickier. rBase is an A reference to a C object, so rBas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\">A. Tenhle je trochu složitější. rBase je odkaz A na objekt C, takže rBase.getName() by normálně volal A::getName(). Ale A::getName() je virtuální, takže volá nejvíce odvozenou verzi funkce mezi A a C. A to je A::getName(). Protože B::getName() a C::getName() nejsou const, nejsou považovány za přepisy! Následně tento program vytiskne A.</div>"
     },
     {
       "id": "virtual-functions_b83",
       "type": "paragraph",
       "html": "<p>1f)</p>",
       "preview": "1f)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1f)</p>"
     },
     {
       "id": "virtual-functions_b84",
@@ -621,14 +712,17 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass A\n{\npublic:\n\tA() { std::cout << getName(); } // note addition of constructor (getName() now called from here)\n\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C : public B\n{\npublic:\n\tvirtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D : public C\n{\npublic:\n\tvirtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n\tC c {};\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass A\n{\npublic:\n\tA() { std::cout &lt;&lt; getName(); } // note addition of constructor (getName() now called from here)\n\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\nclass B : public A\n{\npublic:\n\tvirtual std::string_view getName() const { return \"B\"; }\n};\n\nclass C : public B\n{\npublic:\n\tvirtual std::string_view getName() const { return \"C\"; }\n};\n\nclass D : public C\n{\npublic:\n\tvirtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n\tC c {};\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída A\n{\nveřejnost:\n\tA() { std::cout << getName(); } // poznámka přidání konstruktoru (getName() nyní volaného odtud)\n\n\tvirtual std::string_view getName() const { return \"A\"; }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n\tvirtual std::string_view getName() const { return \"B\"; }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n\tvirtual std::string_view getName() const { return \"C\"; }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n\tvirtual std::string_view getName() const { return \"D\"; }\n};\n\nint main()\n{\n\tC c {};\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-functions_b85",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\">A. Another tricky one. When we create a C object, the A part is constructed first. When the A constructor is called to do this, it calls virtual function getName(). Because the B and C parts of the class aren’t set up yet, this resolves to A::getName().</div>",
       "preview": "A. Another tricky one. When we create a C object, the A part is constructed firs",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\">A. Další záludná. Když vytvoříme objekt C, nejprve se zkonstruuje část A. Když je k tomu zavolán konstruktor A, zavolá virtuální funkci getName(). Protože části B a C třídy ještě nejsou nastaveny, převede se to na A::getName().</div>"
     }
-  ]
+  ],
+  "title_cs": "25.2 — Virtuální funkce a polymorfismus"
 }

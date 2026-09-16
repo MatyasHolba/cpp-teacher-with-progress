@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-specialization/\">26.3 -- Function template specialization</a>, we saw how it was possible to specialize functions in order to provide different functionality for specific data types. As it turns out, it is not only possible to specialize functions, it is also possible to specialize classes!</p>",
       "preview": "In the previous lesson 26.3 -- Function template specialization, we saw how it w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/function-template-specialisation/\">26.3 -- Specializace šablony funkcí</a> jsme viděli, jak je možné specializovat funkce za účelem poskytování různých funkcí pro konkrétní datové typy. Jak se ukazuje, není možné pouze specializovat funkce, je také možné specializovat třídy!</p>"
     },
     {
       "id": "class-template-specialization_b1",
       "type": "paragraph",
       "html": "<p>Consider the case where you want a class that stores 8 objects. Here’s a simplified class template to do so:</p>",
       "preview": "Consider the case where you want a class that stores 8 objects. Here’s a simplif",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zvažte případ, kdy chcete třídu, která ukládá 8 objektů. Zde je zjednodušená šablona třídy, jak to udělat:</p>"
     },
     {
       "id": "class-template-specialization_b2",
@@ -29,70 +31,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage8\n{\nprivate:\n    T m_array[8];\n\npublic:\n    void set(int index, const T& value)\n    {\n        m_array[index] = value;\n    }\n\n    const T& get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\nint main()\n{\n    // Define a Storage8 for integers\n    Storage8<int> intStorage;\n\n    for (int count{ 0 }; count < 8; ++count)\n        intStorage.set(count, count);\n\n    for (int count{ 0 }; count < 8; ++count)\n        std::cout << intStorage.get(count) << '\\n';\n\n    // Define a Storage8 for bool\n    Storage8<bool> boolStorage;\n    for (int count{ 0 }; count < 8; ++count)\n        boolStorage.set(count, count & 3);\n\n\tstd::cout << std::boolalpha;\n\n    for (int count{ 0 }; count < 8; ++count)\n    {\n        std::cout << boolStorage.get(count) << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage8\n{\nprivate:\n    T m_array[8];\n\npublic:\n    void set(int index, const T&amp; value)\n    {\n        m_array[index] = value;\n    }\n\n    const T&amp; get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\nint main()\n{\n    // Define a Storage8 for integers\n    Storage8&lt;int&gt; intStorage;\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n        intStorage.set(count, count);\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n        std::cout &lt;&lt; intStorage.get(count) &lt;&lt; '\\n';\n\n    // Define a Storage8 for bool\n    Storage8&lt;bool&gt; boolStorage;\n    for (int count{ 0 }; count &lt; 8; ++count)\n        boolStorage.set(count, count &amp; 3);\n\n\tstd::cout &lt;&lt; std::boolalpha;\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n    {\n        std::cout &lt;&lt; boolStorage.get(count) &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování8\n{\nsoukromé:\n    T m_array[8];\n\nveřejnost:\n    void set (int index, const T& hodnota)\n    {\n        m_array[index] = hodnota;\n    }\n\n    const T& get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\nint main()\n{\n    // Definice Storage8 pro celá čísla\n    Storage8<int> intStorage;\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n        intStorage.set(počet, počet);\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n        std::cout << intStorage.get(count) << '\\n';\n\n    // Definice úložiště8 pro bool\n    Storage8<bool> boolStorage;\n    for (int počet{ 0 }; počet < 8; ++počet)\n        boolStorage.set(počet, počet & 3);\n\n\tstd::cout << std::boolalpha;\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n    {\n        std::cout << boolStorage.get(count) << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "class-template-specialization_b3",
       "type": "paragraph",
       "html": "<p>This example prints:</p>",
       "preview": "This example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vypíše:</p>"
     },
     {
       "id": "class-template-specialization_b4",
       "type": "output",
       "text": "0\n1\n2\n3\n4\n5\n6\n7\nfalse\ntrue\ntrue\ntrue\nfalse\ntrue\ntrue\ntrue\n",
       "html": "<pre>0\n1\n2\n3\n4\n5\n6\n7\nfalse\ntrue\ntrue\ntrue\nfalse\ntrue\ntrue\ntrue\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>0\n1\n2\n3\n4\n5\n6\n7\nfalešný\npravda\npravda\npravda\nfalešný\npravda\npravda\npravda\n</pre>"
     },
     {
       "id": "class-template-specialization_b5",
       "type": "paragraph",
       "html": "<p>While this class is completely functional, it turns out that the implementation of <code>Storage8&lt;bool&gt;</code> is more inefficient than it needs to be. Because all variables must have an address, and the CPU can’t address anything smaller than a byte, all variables must be at least a byte in size. Consequently, a variable of type <code>bool</code> ends up using an entire byte even though technically it only needs a single bit to store its true or false value! Thus, a <code>bool</code> is 1 bit of useful information and 7 bits of wasted space. Our <code>Storage8&lt;bool&gt;</code> class, which contains 8 <code>bool</code>, is 1 byte worth of useful information and 7 bytes of wasted space.</p>",
       "preview": "While this class is completely functional, it turns out that the implementation ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I když je tato třída plně funkční, ukazuje se, že implementace <code>Storage8<bool></code> je neefektivnější, než by bylo potřeba. Protože všechny proměnné musí mít adresu a CPU nemůže adresovat nic menšího než bajt, musí mít všechny proměnné velikost alespoň bajtu. V důsledku toho proměnná typu <code>bool</code> používá celý bajt, i když technicky potřebuje pouze jeden bit k uložení své pravdivé nebo nepravdivé hodnoty! <code>bool</code> je tedy 1 bit užitečné informace a 7 bitů promarněného místa. Naše třída <code>Storage8<bool></code>, která obsahuje 8 <code>bool</code>, má hodnotu 1 bajtu užitečných informací a 7 bajtů zbytečného prostoru.</p>"
     },
     {
       "id": "class-template-specialization_b6",
       "type": "paragraph",
       "html": "<p>As it turns out, using some basic bit logic, it’s possible to compress all 8 bools into a single byte, eliminating the wasted space altogether. However, in order to do this, we’ll need to revamp the class when used with type <code>bool</code>, replacing the array of 8 <code>bool</code> with a variable that is a single byte in size. While we could create an entirely new class to do so, this has one major downside: we have to give it a different name. Then the programmer has to remember that <code>Storage8&lt;T&gt;</code> is meant for non-bool types, whereas <code>Storage8Bool</code> (or whatever we name the new class) is meant for <code>bool</code>. That’s needless complexity we’d rather avoid. Fortunately, C++ provides us a better method: class template specialization.</p>",
       "preview": "As it turns out, using some basic bit logic, it’s possible to compress all 8 boo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak se ukázalo, pomocí určité základní bitové logiky je možné zkomprimovat všech 8 boolů do jednoho bajtu, čímž se zcela eliminuje plýtvání místem. Abychom to však mohli udělat, budeme muset třídu předělat, když ji použijeme s typem <code>bool</code>, a nahradit pole 8 <code>bool</code> proměnnou o velikosti jednoho bajtu. I když bychom k tomu mohli vytvořit zcela novou třídu, má to jednu zásadní nevýhodu: musíme ji pojmenovat jinak. Pak si programátor musí pamatovat, že <code>Storage8<T></code> je určeno pro typy, které nejsou typu bool, zatímco <code>Storage8Bool</code> (nebo jak novou třídu nazýváme) je určeno pro <code>bool</code>. To je zbytečná složitost, které se raději vyhneme. Naštěstí nám C++ poskytuje lepší metodu: specializaci šablony třídy.</p>"
     },
     {
       "id": "class-template-specialization_b7",
       "type": "section",
       "title": "Class template specialization",
       "html": "<h3 class=\"cpp-section-heading\">Class template specialization</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specializace šablony třídy</h3>",
+      "title_cs": "Specializace šablony třídy"
     },
     {
       "id": "class-template-specialization_b8",
       "type": "paragraph",
       "html": "<p>Class template specialization allows us to specialize a template class for a particular data type (or data types, if there are multiple template parameters). In this case, we’re going to use class template specialization to write a customized version of <code>Storage8&lt;bool&gt;</code> that will take precedence over the generic <code>Storage8&lt;T&gt;</code> class.</p>",
       "preview": "Class template specialization allows us to specialize a template class for a par",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Specializace šablony třídy nám umožňuje specializovat třídu šablony pro konkrétní datový typ (nebo datové typy, pokud existuje více parametrů šablony). V tomto případě použijeme specializaci šablony třídy k napsání přizpůsobené verze <code>Storage8<bool></code>, která bude mít přednost před generickou třídou <code>Storage8<T></code>.</p>"
     },
     {
       "id": "class-template-specialization_b9",
       "type": "paragraph",
       "html": "<p>Class template specializations are treated as completely independent classes, even though they are instantiated in the same way as the templated class. This means that we can change anything and everything about our specialization class, including the way it’s implemented and even the functions it makes public, just as if it were an independent class.</p>",
       "preview": "Class template specializations are treated as completely independent classes, ev",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S specializacemi šablony tříd se zachází jako se zcela nezávislými třídami, i když jsou konkretizovány stejným způsobem jako šablona třídy. To znamená, že na naší třídě specializace můžeme změnit cokoli a všechno, včetně způsobu, jakým je implementována, a dokonce i funkcí, které zveřejňuje, stejně jako by to byla nezávislá třída.</p>"
     },
     {
       "id": "class-template-specialization_b10",
       "type": "paragraph",
       "html": "<p>Just like all templates, the compiler must be able to see the full definition of a specialization to use it. Also, defining a class template specialization requires the non-specialized class to be defined first.</p>",
       "preview": "Just like all templates, the compiler must be able to see the full definition of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako všechny šablony musí být kompilátor schopen vidět úplnou definici specializace, aby ji mohl použít. Také definování specializace šablony třídy vyžaduje, aby byla nejprve definována nespecializovaná třída.</p>"
     },
     {
       "id": "class-template-specialization_b11",
       "type": "paragraph",
       "html": "<p>Here’s an example of a specialized <code>Storage8&lt;bool&gt;</code> class:</p>",
       "preview": "Here’s an example of a specialized Storage8<bool> class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad specializované třídy <code>Storage8<bool></code>:</p>"
     },
     {
       "id": "class-template-specialization_b12",
@@ -100,70 +113,81 @@
       "language": "cpp",
       "code": "#include <cstdint>\n\n// First define our non-specialized class template\ntemplate <typename T>\nclass Storage8\n{\nprivate:\n    T m_array[8];\n\npublic:\n    void set(int index, const T& value)\n    {\n        m_array[index] = value;\n    }\n\n    const T& get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\n// Now define our specialized class template\ntemplate <> // the following is a template class with no templated parameters\nclass Storage8<bool> // we're specializing Storage8 for bool\n{\n// What follows is just standard class implementation details\n\nprivate:\n    std::uint8_t m_data{};\n\npublic:\n    // Don't worry about the details of the implementation of these functions\n    void set(int index, bool value)\n    {\n        // Figure out which bit we're setting/unsetting\n        // This will put a 1 in the bit we're interested in turning on/off\n        auto mask{ 1 << index };\n\n        if (value)  // If we're setting a bit\n            m_data |= mask;   // use bitwise-or to turn that bit on\n        else  // if we're turning a bit off\n            m_data &= ~mask;  // bitwise-and the inverse mask to turn that bit off\n\t}\n\t\n    bool get(int index)\n    {\n        // Figure out which bit we're getting\n        auto mask{ 1 << index };\n        // bitwise-and to get the value of the bit we're interested in\n        // Then implicit cast to boolean\n        return (m_data & mask);\n    }\n};\n\n// Same example as before\nint main()\n{\n    // Define a Storage8 for integers (instantiates Storage8<T>, where T = int)\n    Storage8<int> intStorage;\n\n    for (int count{ 0 }; count < 8; ++count)\n    {\n        intStorage.set(count, count);\n\t}\n\n    for (int count{ 0 }; count < 8; ++count)\n    {\n        std::cout << intStorage.get(count) << '\\n';\n    }\n\n    // Define a Storage8 for bool  (instantiates Storage8<bool> specialization)\n    Storage8<bool> boolStorage;\n    \n    for (int count{ 0 }; count < 8; ++count)\n    {\n        boolStorage.set(count, count & 3);\n    }\n\n\tstd::cout << std::boolalpha;\n\n    for (int count{ 0 }; count < 8; ++count)\n    {\n        std::cout << boolStorage.get(count) << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n\n// First define our non-specialized class template\ntemplate &lt;typename T&gt;\nclass Storage8\n{\nprivate:\n    T m_array[8];\n\npublic:\n    void set(int index, const T&amp; value)\n    {\n        m_array[index] = value;\n    }\n\n    const T&amp; get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\n// Now define our specialized class template\ntemplate &lt;&gt; // the following is a template class with no templated parameters\nclass Storage8&lt;bool&gt; // we're specializing Storage8 for bool\n{\n// What follows is just standard class implementation details\n\nprivate:\n    std::uint8_t m_data{};\n\npublic:\n    // Don't worry about the details of the implementation of these functions\n    void set(int index, bool value)\n    {\n        // Figure out which bit we're setting/unsetting\n        // This will put a 1 in the bit we're interested in turning on/off\n        auto mask{ 1 &lt;&lt; index };\n\n        if (value)  // If we're setting a bit\n            m_data |= mask;   // use bitwise-or to turn that bit on\n        else  // if we're turning a bit off\n            m_data &amp;= ~mask;  // bitwise-and the inverse mask to turn that bit off\n\t}\n\t\n    bool get(int index)\n    {\n        // Figure out which bit we're getting\n        auto mask{ 1 &lt;&lt; index };\n        // bitwise-and to get the value of the bit we're interested in\n        // Then implicit cast to boolean\n        return (m_data &amp; mask);\n    }\n};\n\n// Same example as before\nint main()\n{\n    // Define a Storage8 for integers (instantiates Storage8&lt;T&gt;, where T = int)\n    Storage8&lt;int&gt; intStorage;\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n    {\n        intStorage.set(count, count);\n\t}\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n    {\n        std::cout &lt;&lt; intStorage.get(count) &lt;&lt; '\\n';\n    }\n\n    // Define a Storage8 for bool  (instantiates Storage8&lt;bool&gt; specialization)\n    Storage8&lt;bool&gt; boolStorage;\n    \n    for (int count{ 0 }; count &lt; 8; ++count)\n    {\n        boolStorage.set(count, count &amp; 3);\n    }\n\n\tstd::cout &lt;&lt; std::boolalpha;\n\n    for (int count{ 0 }; count &lt; 8; ++count)\n    {\n        std::cout &lt;&lt; boolStorage.get(count) &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n\n// Nejprve definujte naši šablonu nespecializované třídy\nšablona <název typu T>\ntřída Skladování8\n{\nsoukromé:\n    T m_array[8];\n\nveřejnost:\n    void set (int index, const T& hodnota)\n    {\n        m_array[index] = hodnota;\n    }\n\n    const T& get(int index) const\n    {\n        return m_array[index];\n    }\n};\n\n// Nyní definujte naši specializovanou šablonu třídy\ntemplate <> // následuje třída šablony bez šablonových parametrů\nclass Storage8<bool> // specializujeme se na Storage8 pro bool\n{\n// To, co následuje, jsou pouze detaily implementace standardní třídy\n\nsoukromé:\n    std::uint8_t m_data{};\n\nveřejnost:\n    // Nedělejte si starosti s detaily implementace těchto funkcí\n    void set (int index, bool hodnota)\n    {\n        // Zjistěte, který bit nastavujeme/deaktivujeme\n        // Toto vloží 1 do bitu, který chceme zapnout/vypnout\n        automatická maska{ 1 << index };\n\n        if (hodnota) // Pokud nastavujeme bit\n            m_data |= maska;   // použijte bitwise-or k zapnutí tohoto bitu\n        jinak // pokud trochu vypneme\n            m_data &= ~mask;  // bitově-a inverzní maska pro vypnutí tohoto bitu\n\t}\n\t\n    bool get (int index)\n    {\n        // Zjistěte, který bit dostáváme\n        automatická maska{ 1 << index };\n        // bitově-a získat hodnotu bitu, který nás zajímá\n        // Potom implicitně přetypovat na boolean\n        return (m_data & mask);\n    }\n};\n\n// Stejný příklad jako předtím\nint main()\n{\n    // Definuje Storage8 pro celá čísla (instanciuje Storage8<T>, kde T = int)\n    Storage8<int> intStorage;\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n    {\n        intStorage.set(počet, počet);\n\t}\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n    {\n        std::cout << intStorage.get(count) << '\\n';\n    }\n\n    // Definice Storage8 pro bool (instanciuje specializaci Storage8<bool>)\n    Storage8<bool> boolStorage;\n    \n    for (int počet{ 0 }; počet < 8; ++počet)\n    {\n        boolStorage.set(počet, počet & 3);\n    }\n\n\tstd::cout << std::boolalpha;\n\n    for (int počet{ 0 }; počet < 8; ++počet)\n    {\n        std::cout << boolStorage.get(count) << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "class-template-specialization_b13",
       "type": "paragraph",
       "html": "<p>First, note that our specialized class template starts off with <code>template&lt;&gt;</code>. The template keyword tells the compiler that what follows is a template, and the empty angle braces means that there aren’t any template parameters. In this case, there aren’t any template parameters because we’re replacing the only template parameter (<code>T</code>) with a specific type (<code>bool</code>).</p>",
       "preview": "First, note that our specialized class template starts off with template<>. The ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve si uvědomte, že naše specializovaná šablona třídy začíná <code>šablona<></code>. Klíčové slovo šablona říká kompilátoru, že to, co následuje, je šablona, ​​a prázdné úhlové závorky znamenají, že neexistují žádné parametry šablony. V tomto případě neexistují žádné parametry šablony, protože nahrazujeme jediný parametr šablony (<code>T</code>) konkrétním typem (<code>bool</code>).</p>"
     },
     {
       "id": "class-template-specialization_b14",
       "type": "paragraph",
       "html": "<p>Next, we add <code>&lt;bool&gt;</code> to the class name to denote that we’re specializing a <code>bool</code> version of <code>class Storage8</code>.</p>",
       "preview": "Next, we add <bool> to the class name to denote that we’re specializing a bool v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dále k názvu třídy přidáme <code><bool></code>, abychom označili, že se specializujeme na verzi <code>bool</code> <code>class Storage8</code>.</p>"
     },
     {
       "id": "class-template-specialization_b15",
       "type": "paragraph",
       "html": "<p>All of the other changes are just class implementation details. You do not need to understand how the bit-logic works in order to use the class (though you can review <a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitwise operators</a> if you want to figure it out, but need a refresher on how bitwise operators work).</p>",
       "preview": "All of the other changes are just class implementation details. You do not need ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všechny ostatní změny jsou pouze detaily implementace třídy. Abyste mohli třídu používat, nemusíte rozumět tomu, jak funguje bitová logika (ačkoli si můžete přečíst <a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitové operátory</a>, pokud na to chcete přijít, ale potřebujete si zopakovat, jak fungují bitové operátory).</p>"
     },
     {
       "id": "class-template-specialization_b16",
       "type": "paragraph",
       "html": "<p>Note that this specialization class utilizes a <code>std::uint8_t</code> (1 byte unsigned int) instead of an array of 8 <code>bool</code> (8 bytes).</p>",
       "preview": "Note that this specialization class utilizes a std::uint8_t (1 byte unsigned int",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že tato třída specializace používá <code>std::uint8_t</code> (1 bajt bez znaménka int) namísto pole 8 <code>bool</code> (8 bajtů).</p>"
     },
     {
       "id": "class-template-specialization_b17",
       "type": "paragraph",
       "html": "<p>Now, when we instantiate an object type <code>Storage&lt;T&gt;</code>, where <code>T</code> is not a <code>bool</code>, we’ll get a version stenciled from the generic templated <code>Storage8&lt;T&gt;</code> class. When we instantiate an object of type <code>Storage8&lt;bool&gt;</code>, we’ll get the specialized version we just created. Note that we have kept the publicly exposed interface of both classes the same -- while C++ gives us free reign to add, remove, or change functions of <code>Storage8&lt;bool&gt;</code> as we see fit, keeping a consistent interface means the programmer can use either class in exactly the same manner.</p>",
       "preview": "Now, when we instantiate an object type Storage<T>, where T is not a bool, we’ll",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když vytvoříme instanci objektu typu <code>Storage<T></code>, kde <code>T</code> není <code>bool</code>, získáme verzi vytvořenou podle šablony z obecné šablony <code>Storage8<T></code> třídy. Když vytvoříme instanci objektu typu <code>Storage8<bool></code>, získáme specializovanou verzi, kterou jsme právě vytvořili. Všimněte si, že jsme ponechali veřejně přístupné rozhraní obou tříd stejné -- zatímco C++ nám dává volnost přidávat, odebírat nebo měnit funkce <code>Storage8<bool></code>, jak uznáme za vhodné, zachování konzistentního rozhraní znamená, že programátor může používat kteroukoli třídu přesně stejným způsobem.</p>"
     },
     {
       "id": "class-template-specialization_b18",
       "type": "paragraph",
       "html": "<p>As you might expect, this prints the same result as the previous example that used the non-specialized version of <code>Storage8&lt;bool&gt;</code>:</p>",
       "preview": "As you might expect, this prints the same result as the previous example that us",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak můžete očekávat, vytiskne se stejný výsledek jako v předchozím příkladu, který používal nespecializovanou verzi <code>Storage8<bool></code>:</p>"
     },
     {
       "id": "class-template-specialization_b19",
       "type": "output",
       "text": "0\n1\n2\n3\n4\n5\n6\n7\nfalse\ntrue\ntrue\ntrue\nfalse\ntrue\ntrue\ntrue\n",
       "html": "<pre>0\n1\n2\n3\n4\n5\n6\n7\nfalse\ntrue\ntrue\ntrue\nfalse\ntrue\ntrue\ntrue\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>0\n1\n2\n3\n4\n5\n6\n7\nfalešný\npravda\npravda\npravda\nfalešný\npravda\npravda\npravda\n</pre>"
     },
     {
       "id": "class-template-specialization_b20",
       "type": "section",
       "title": "Specializing member functions",
       "html": "<h3 class=\"cpp-section-heading\">Specializing member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specializace členských funkcí</h3>",
+      "title_cs": "Specializace členských funkcí"
     },
     {
       "id": "class-template-specialization_b21",
       "type": "paragraph",
       "html": "<p>In the previous lesson, we introduced this example:</p>",
       "preview": "In the previous lesson, we introduced this example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci jsme uvedli tento příklad:</p>"
     },
     {
       "id": "class-template-specialization_b22",
@@ -171,14 +195,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 };\n\n    // Print out some values\n    i.print();\n    d.print();\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 };\n\n    // Print out some values\n    i.print();\n    d.print();\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\nint main()\n{\n    // Definujte některé úložné jednotky\n    Úložiště i { 5 };\n    Storage d { 6.7 };\n\n    // Vytiskněte nějaké hodnoty\n    i.print();\n    d.print();\n}</code></pre>"
     },
     {
       "id": "class-template-specialization_b23",
       "type": "paragraph",
       "html": "<p>Our desire is to specialize the <code>print()</code> function so that it prints doubles in scientific notation. Using class template specialization, we could define a specialized class for <code>Storage&lt;double&gt;</code>:</p>",
       "preview": "Our desire is to specialize the print() function so that it prints doubles in sc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naším přáním je specializovat funkci <code>print()</code> tak, aby ve vědeckém zápisu tiskla dvojníky. Pomocí specializace šablony třídy bychom mohli definovat specializovanou třídu pro <code>Úložiště<double></code>:</p>"
     },
     {
       "id": "class-template-specialization_b24",
@@ -186,21 +212,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\n// Explicit class template specialization for Storage<double>\n// Note how redundant this is\ntemplate <>\nclass Storage<double>\n{\nprivate:\n    double m_value {};\npublic:\n    Storage(double value)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\n// We're going to define this outside the class for reasons that will become obvious shortly\n// This is a normal (non-specialized) member function definition (for member function print of specialized class Storage<double>)\nvoid Storage<double>::print()\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // uses explicit specialization Storage<double>\n\n    // Print out some values\n    i.print(); // calls Storage<int>::print (instantiated from Storage<T>)\n    d.print(); // calls Storage<double>::print (called from explicit specialization of Storage<double>)\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\n// Explicit class template specialization for Storage&lt;double&gt;\n// Note how redundant this is\ntemplate &lt;&gt;\nclass Storage&lt;double&gt;\n{\nprivate:\n    double m_value {};\npublic:\n    Storage(double value)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\n// We're going to define this outside the class for reasons that will become obvious shortly\n// This is a normal (non-specialized) member function definition (for member function print of specialized class Storage&lt;double&gt;)\nvoid Storage&lt;double&gt;::print()\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; m_value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // uses explicit specialization Storage&lt;double&gt;\n\n    // Print out some values\n    i.print(); // calls Storage&lt;int&gt;::print (instantiated from Storage&lt;T&gt;)\n    d.print(); // calls Storage&lt;double&gt;::print (called from explicit specialization of Storage&lt;double&gt;)\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\n// Explicitní specializace šablony třídy pro Storage<double>\n// Všimněte si, jak je to nadbytečné\nšablona <>\ntřída Úložiště<double>\n{\nsoukromé:\n    double m_value {};\nveřejnost:\n    Úložiště (dvojnásobná hodnota)\n      : m_value { value }\n    {\n    }\n\n    void print();\n};\n\n// Toto budeme definovat mimo třídu z důvodů, které budou brzy zřejmé\n// Toto je normální (nespecializovaná) definice členské funkce (pro tisk členské funkce specializované třídy Storage<double>)\nvoid Storage<double>::print()\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Definujte některé úložné jednotky\n    Úložiště i { 5 };\n    Storage d { 6.7 }; // používá explicitní specializaci Storage<double>\n\n    // Vytiskněte nějaké hodnoty\n    i.print(); // volá Storage<int>::print (instantováno z Storage<T>)\n    d.print(); // volá Storage<double>::print (voláno z explicitní specializace Storage<double>)\n}</code></pre>"
     },
     {
       "id": "class-template-specialization_b25",
       "type": "paragraph",
       "html": "<p>However, note how much redundancy there is here. We’ve duplicated an entire class definition just so that we can change one member function!</p>",
       "preview": "However, note how much redundancy there is here. We’ve duplicated an entire clas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si však, kolik je zde redundance. Zduplikovali jsme celou definici třídy, abychom mohli změnit jednu členskou funkci!</p>"
     },
     {
       "id": "class-template-specialization_b26",
       "type": "paragraph",
       "html": "<p>Fortunately, we can do better. C++ does not require us to explicitly specialize <code>Storage&lt;double&gt;</code> to explicitly specialize <code>Storage&lt;double&gt;::print()</code>. Instead, we can let the compiler implicitly specialize <code>Storage&lt;double&gt;</code> from <code>Storage&lt;T&gt;</code>, and provide an explicit specialization of just <code>Storage&lt;double&gt;::print()</code>! Here’s what that looks like:</p>",
       "preview": "Fortunately, we can do better. C++ does not require us to explicitly specialize ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí to umíme lépe. C++ nevyžaduje, abychom explicitně specializovali <code>Storage<double></code> na explicitní specializaci <code>Storage<double>::print()</code>. Místo toho můžeme nechat kompilátor implicitně specializovat <code>Storage<double></code> od <code>Storage<T></code> a poskytnout explicitní specializaci pouze na <code>Storage<double>::print()</code>! Tady je to, jak to vypadá:</p>"
     },
     {
       "id": "class-template-specialization_b27",
@@ -208,56 +237,66 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\n// This is a specialized member function definition\n// Explicit function specializations are not implicitly inline, so make this inline if put in header file\ntemplate<>\nvoid Storage<double>::print()\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // will cause Storage<double> to be implicitly instantiated\n\n    // Print out some values\n    i.print(); // calls Storage<int>::print (instantiated from Storage<T>)\n    d.print(); // calls Storage<double>::print (called from explicit specialization of Storage<double>::print())\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Storage\n{\nprivate:\n    T m_value {};\npublic:\n    Storage(T value)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout &lt;&lt; m_value &lt;&lt; '\\n';\n    }\n};\n\n// This is a specialized member function definition\n// Explicit function specializations are not implicitly inline, so make this inline if put in header file\ntemplate&lt;&gt;\nvoid Storage&lt;double&gt;::print()\n{\n    std::cout &lt;&lt; std::scientific &lt;&lt; m_value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    // Define some storage units\n    Storage i { 5 };\n    Storage d { 6.7 }; // will cause Storage&lt;double&gt; to be implicitly instantiated\n\n    // Print out some values\n    i.print(); // calls Storage&lt;int&gt;::print (instantiated from Storage&lt;T&gt;)\n    d.print(); // calls Storage&lt;double&gt;::print (called from explicit specialization of Storage&lt;double&gt;::print())\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Skladování\n{\nsoukromé:\n    T m_hodnota {};\nveřejnost:\n    Skladování (hodnota T)\n      : m_value { value }\n    {\n    }\n\n    void print()\n    {\n        std::cout << m_value << '\\n';\n    }\n};\n\n// Toto je definice specializované členské funkce\n// Explicitní specializace funkcí nejsou implicitně vloženy, takže pokud jsou vloženy do hlavičkového souboru, vkládejte je\nšablona<>\nvoid Storage<double>::print()\n{\n    std::cout << std::scientific << m_value << '\\n';\n}\n\nint main()\n{\n    // Definujte některé úložné jednotky\n    Úložiště i { 5 };\n    Storage d { 6.7 }; // způsobí, že Storage<double> bude implicitně konkretizováno\n\n    // Vytiskněte nějaké hodnoty\n    i.print(); // volá Storage<int>::print (instantováno z Storage<T>)\n    d.print(); // volá Storage<double>::print (voláno z explicitní specializace Storage<double>::print())\n}</code></pre>"
     },
     {
       "id": "class-template-specialization_b28",
       "type": "paragraph",
       "html": "<p>That’s it!</p>",
       "preview": "That’s it!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je ono!</p>"
     },
     {
       "id": "class-template-specialization_b29",
       "type": "paragraph",
       "html": "<p>As noted in the prior lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/function-template-specialization/\">26.3 -- Function template specialization</a>), explicit function specializations are not implicitly inline, so we should mark our specialization of <code>Storage&lt;double&gt;::print()</code> as inline if it is defined it in a header file.</p>",
       "preview": "As noted in the prior lesson (26.3 -- Function template specialization), explici",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak bylo uvedeno v předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/function-template-specialisation/\">26.3 -- Specializace šablony funkcí</a>), explicitní specializace funkcí nejsou implicitně vložené, takže bychom měli označit naši specializaci <code>Úložiště<double>, je-li definováno v souboru inline>::print()</code> jako header inline."
     },
     {
       "id": "class-template-specialization_b30",
       "type": "section",
       "title": "Where to define class template specializations",
       "html": "<h3 class=\"cpp-section-heading\">Where to define class template specializations</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kde definovat specializace šablony třídy</h3>",
+      "title_cs": "Kde definovat specializace šablony třídy"
     },
     {
       "id": "class-template-specialization_b31",
       "type": "paragraph",
       "html": "<p>In order to use a specialization, the compiler must be able to see the full definition of both the non-specialized class and the specialized class. If the compiler can only see the definition of the non-specialized class, it will use that instead of the specialization.</p>",
       "preview": "In order to use a specialization, the compiler must be able to see the full defi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Aby bylo možné použít specializaci, musí být kompilátor schopen vidět úplnou definici nespecializované třídy i specializované třídy. Pokud kompilátor vidí pouze definici nespecializované třídy, použije ji místo specializace.</p>"
     },
     {
       "id": "class-template-specialization_b32",
       "type": "paragraph",
       "html": "<p>For this reason, specialized classes and functions are often defined in a header file just below the definition of the non-specialized class, so that including a single header includes both the non-specialized class and any specializations. This ensures the specialization can always be seen whenever the non-specialized class can also be seen.</p>",
       "preview": "For this reason, specialized classes and functions are often defined in a header",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Z tohoto důvodu jsou specializované třídy a funkce často definovány v záhlaví souboru těsně pod definicí nespecializované třídy, takže zahrnutí jediné hlavičky zahrnuje jak nespecializovanou třídu, tak všechny specializace. Tím je zajištěno, že specializace bude vždy vidět, kdykoli bude vidět i nespecializovaná třída.</p>"
     },
     {
       "id": "class-template-specialization_b33",
       "type": "paragraph",
       "html": "<p>If a specialization is only required in a single translation unit, it can be defined in the source file for that translation unit. Because other translation units will not be able to see the definition of the specialization, they will continue to use the non-specialized version.</p>",
       "preview": "If a specialization is only required in a single translation unit, it can be def",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je specializace vyžadována pouze v jedné překladové jednotce, lze ji definovat ve zdrojovém souboru pro tuto překladovou jednotku. Protože ostatní překladatelské jednotky neuvidí definici specializace, budou nadále používat nespecializovanou verzi.</p>"
     },
     {
       "id": "class-template-specialization_b34",
       "type": "paragraph",
       "html": "<p>Be wary of putting a specialization in its own separate header file, with the intent of including the specialization’s header in any translation unit where the specialization is desired. It’s a bad idea to design code that transparently changes behavior based on the presence or absence of a header file. For example, if you intend to use the specialization but forget to include the header of the specialization, you may end up using the non-specialized version instead. If you intend to use the non-specialization, you may end up using the specialization anyway if some other header includes the specialization as a transitive include.</p>",
       "preview": "Be wary of putting a specialization in its own separate header file, with the in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dejte si pozor na vkládání specializace do samostatného souboru záhlaví se záměrem zahrnout záhlaví specializace do jakékoli překladové jednotky, kde je specializace požadována. Je špatný nápad navrhovat kód, který transparentně mění chování na základě přítomnosti nebo nepřítomnosti souboru záhlaví. Pokud například zamýšlíte použít specializaci, ale zapomenete zahrnout záhlaví specializace, můžete místo ní skončit s použitím nespecializované verze. Pokud máte v úmyslu použít nespecializaci, můžete ji nakonec stejně použít, pokud nějaká jiná hlavička zahrnuje specializaci jako tranzitivní include.</p>"
     }
-  ]
+  ],
+  "title_cs": "26.4 — Class template specialization"
 }

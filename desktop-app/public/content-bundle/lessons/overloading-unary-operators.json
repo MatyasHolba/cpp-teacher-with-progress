@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p><strong>Overloading unary operators</strong></p>",
       "preview": "Overloading unary operators",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přetěžování unárních operátorů</strong></p>"
     },
     {
       "id": "overloading-unary-operators_b1",
       "type": "paragraph",
       "html": "<p>Unlike the operators you’ve seen so far, the positive (+), negative (-) and logical not (!) operators all are unary operators, which means they only operate on one operand. Because they only operate on the object they are applied to, typically unary operator overloads are implemented as member functions. All three operators are implemented in an identical manner.</p>",
       "preview": "Unlike the operators you’ve seen so far, the positive (+), negative (-) and logi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od operátorů, které jste viděli dosud, jsou unární plus (+), unární mínus (-) a logická negace (!) unární operátory, což znamená, že pracují pouze s jedním operandem. Protože působí pouze na objekt, na který jsou aplikovány, implementuje se přetížení unárních operátorů obvykle jako členské funkce. Všechny tři operátory se implementují identickým způsobem.</p>"
     },
     {
       "id": "overloading-unary-operators_b2",
       "type": "paragraph",
       "html": "<p>Let’s take a look at how we’d implement operator- on the Cents class we used in a previous example:</p>",
       "preview": "Let’s take a look at how we’d implement operator- on the Cents class we used in ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se, jak bychom implementovali operator- pro třídu Cents, kterou jsme použili v předchozím příkladu:</p>"
     },
     {
       "id": "overloading-unary-operators_b3",
@@ -36,28 +39,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n    int m_cents {};\n \npublic:\n    Cents(int cents): m_cents{cents} {}\n \n    // Overload -Cents as a member function\n    Cents operator-() const;\n\n    int getCents() const { return m_cents; }\n};\n \n// note: this function is a member function!\nCents Cents::operator-() const\n{\n    return -m_cents; // since return type is a Cents, this does an implicit conversion from int to Cents using the Cents(int) constructor\n}\n\nint main()\n{\n    const Cents nickle{ 5 };\n    std::cout << \"A nickle of debt is worth \" << (-nickle).getCents() << \" cents\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n    int m_cents {};\n \npublic:\n    Cents(int cents): m_cents{cents} {}\n \n    // Overload -Cents as a member function\n    Cents operator-() const;\n\n    int getCents() const { return m_cents; }\n};\n \n// note: this function is a member function!\nCents Cents::operator-() const\n{\n    return -m_cents; // since return type is a Cents, this does an implicit conversion from int to Cents using the Cents(int) constructor\n}\n\nint main()\n{\n    const Cents nickle{ 5 };\n    std::cout &lt;&lt; \"A nickle of debt is worth \" &lt;&lt; (-nickle).getCents() &lt;&lt; \" cents\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n    int m_centů {};\n \nveřejnost:\n    Cents(int cents): m_cents{cents} {}\n \n    // Přetížení -Centy jako členská funkce\n    Operátor centů-() konst;\n\n    int getCents() const { return m_cents; }\n};\n \n// poznámka: tato funkce je členská funkce!\ncentů centů::operátor-() konst\n{\n    return -m_cents; // protože návratový typ je centů, provede se implicitní převod z int na centy pomocí konstruktoru Cents(int)\n}\n\nint main()\n{\n    const centů nickle{ 5 };\n    std::cout << \"Nízký dluh má hodnotu \" << (-nickle).getCents() << \" centů\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-unary-operators_b4",
       "type": "paragraph",
       "html": "<p>This should be straightforward. Our overloaded negative operator (-) is a unary operator implemented as a member function, so it takes no parameters (it operates on the *this object). It returns a Cents object that is the negation of the original Cents value. Because operator- does not modify the Cents object, we can (and should) make it a const function (so it can be called on const Cents objects).</p>",
       "preview": "This should be straightforward. Our overloaded negative operator (-) is a unary ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To by mělo být přímočaré. Náš přetížený operátor unárního mínus (-) je unární operátor implementovaný jako členská funkce, takže nepřijímá žádné parametry (pracuje s objektem *this). Vrací objekt Cents, který je negací původní hodnoty Cents. Protože operator- nemodifikuje objekt Cents, můžeme (a měli bychom) z něj udělat const funkci (aby jej bylo možné volat na const objektech Cents).</p>"
     },
     {
       "id": "overloading-unary-operators_b5",
       "type": "paragraph",
       "html": "<p>Note that there’s no confusion between the negative operator- and the minus operator- since they have a different number of parameters.</p>",
       "preview": "Note that there’s no confusion between the negative operator- and the minus oper",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že nedochází k žádné záměně mezi unárním operator- a binárním operator- (odčítání), jelikož mají rozdílný počet parametrů.</p>"
     },
     {
       "id": "overloading-unary-operators_b6",
       "type": "paragraph",
       "html": "<p>Here’s another example. The ! operator is the logical negation operator -- if an expression evaluates to “true”, operator! will return false, and vice-versa. We commonly see this applied to boolean variables to test whether they are true or not:</p>",
       "preview": "Here’s another example. The ! operator is the logical negation operator -- if an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další příklad. Operátor ! je operátor logické negace – pokud se výraz vyhodnotí jako „true“, operator! vrátí false a naopak. Běžně se s ním setkáváme u boolean proměnných, kde testujeme, zda jsou pravdivé, či nikoli:</p>"
     },
     {
       "id": "overloading-unary-operators_b7",
@@ -65,28 +72,32 @@
       "language": "cpp",
       "code": "if (!isHappy)\n    std::cout << \"I am not happy!\\n\";\nelse\n    std::cout << \"I am so happy!\\n\";",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (!isHappy)\n    std::cout &lt;&lt; \"I am not happy!\\n\";\nelse\n    std::cout &lt;&lt; \"I am so happy!\\n\";</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (!isHappy)\n    std::cout << \"Nejsem šťastný!\\n\";\njinak\n    std::cout << \"Jsem tak šťastný!\\n\";</code></pre>"
     },
     {
       "id": "overloading-unary-operators_b8",
       "type": "paragraph",
       "html": "<p>For integers, 0 evaluates to false, and anything else to true, so operator! as applied to integers will return true for an integer value of 0 and false otherwise.</p>",
       "preview": "For integers, 0 evaluates to false, and anything else to true, so operator! as a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U celých čísel se 0 vyhodnotí jako false a cokoliv jiného jako true, takže operator! aplikovaný na celá čísla vrátí true pro celočíselnou hodnotu 0 a v ostatních případech false.</p>"
     },
     {
       "id": "overloading-unary-operators_b9",
       "type": "paragraph",
       "html": "<p>Extending the concept, we can say that operator! should evaluate to true if the state of the object is “false”, “zero”, or whatever the default initialization state is.</p>",
       "preview": "Extending the concept, we can say that operator! should evaluate to true if the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Rozšíříme-li tento koncept, můžeme říci, že operator! by se měl vyhodnotit jako true, pokud je stav objektu „false“, „nula“ nebo jakýkoli výchozí inicializační stav.</p>"
     },
     {
       "id": "overloading-unary-operators_b10",
       "type": "paragraph",
       "html": "<p>The following example shows an overload of both operator- and operator! for a user-defined Point class:</p>",
       "preview": "The following example shows an overload of both operator- and operator! for a us",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující příklad ukazuje přetížení jak operator-, tak operator! pro uživatelsky definovanou třídu Point:</p>"
     },
     {
       "id": "overloading-unary-operators_b11",
@@ -94,42 +105,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Point\n{\nprivate:\n    double m_x {};\n    double m_y {};\n    double m_z {};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0):\n        m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    // Convert a Point into its negative equivalent\n    Point operator- () const;\n\n    // Return true if the point is set at the origin\n    bool operator! () const;\n \n    double getX() const { return m_x; }\n    double getY() const { return m_y; }\n    double getZ() const { return m_z; }\n};\n\n// Convert a Point into its negative equivalent \nPoint Point::operator- () const\n{\n    return { -m_x, -m_y, -m_z };\n}\n\n// Return true if the point is set at the origin, false otherwise\nbool Point::operator! () const\n{\n    return (m_x == 0.0 && m_y == 0.0 && m_z == 0.0);\n}\n\nint main()\n{\n    Point point{}; // use default constructor to set to (0.0, 0.0, 0.0)\n\n    if (!point)\n        std::cout << \"point is set at the origin.\\n\";\n    else\n        std::cout << \"point is not set at the origin.\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Point\n{\nprivate:\n    double m_x {};\n    double m_y {};\n    double m_z {};\n \npublic:\n    Point(double x=0.0, double y=0.0, double z=0.0):\n        m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    // Convert a Point into its negative equivalent\n    Point operator- () const;\n\n    // Return true if the point is set at the origin\n    bool operator! () const;\n \n    double getX() const { return m_x; }\n    double getY() const { return m_y; }\n    double getZ() const { return m_z; }\n};\n\n// Convert a Point into its negative equivalent \nPoint Point::operator- () const\n{\n    return { -m_x, -m_y, -m_z };\n}\n\n// Return true if the point is set at the origin, false otherwise\nbool Point::operator! () const\n{\n    return (m_x == 0.0 &amp;&amp; m_y == 0.0 &amp;&amp; m_z == 0.0);\n}\n\nint main()\n{\n    Point point{}; // use default constructor to set to (0.0, 0.0, 0.0)\n\n    if (!point)\n        std::cout &lt;&lt; \"point is set at the origin.\\n\";\n    else\n        std::cout &lt;&lt; \"point is not set at the origin.\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Point\n{\nsoukromé:\n    double m_x {};\n    double m_y {};\n    double m_z {};\n \nveřejnost:\n    Bod(dvojité x=0,0, dvojité y=0,0, dvojité z=0,0):\n        m_x{x}, m_y{y}, m_z{z}\n    {\n    }\n \n    // Převede bod na jeho záporný ekvivalent\n    Bodový operátor- () konst;\n\n    // Vrátí hodnotu true, pokud je bod nastaven na počátku\n    bool operátor! () konst;\n \n    double getX() const { return m_x; }\n    double getY() const { return m_y; }\n    double getZ() const { return m_z; }\n};\n\n// Převede bod na jeho záporný ekvivalent \nBod Bod::operátor- () konst\n{\n    return { -m_x, -m_y, -m_z };\n}\n\n// Vrátí true, pokud je bod nastaven na počátku, jinak false\nbool Point::operátor! () konst\n{\n    návrat (m_x == 0,0 && m_y == 0,0 && m_z == 0,0);\n}\n\nint main()\n{\n    Bodový bod{}; // použijte výchozí konstruktor pro nastavení na (0.0, 0.0, 0.0)\n\n    pokud (! bod)\n        std::cout << \"bod je nastaven na počátek.\\n\";\n    jinak\n        std::cout << \"bod není nastaven na počátku.\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-unary-operators_b12",
       "type": "paragraph",
       "html": "<p>The overloaded operator! for this class returns the Boolean value “true” if the Point is set to the default value at coordinate (0.0, 0.0, 0.0). Thus, the above code produces the result:</p>",
       "preview": "The overloaded operator! for this class returns the Boolean value “true” if the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetížený operator! pro tuto třídu vrací booleovskou hodnotu „true“, pokud je Point nastaven na výchozí hodnotu na souřadnicích (0.0, 0.0, 0.0). Výše uvedený kód proto vytvoří následující výsledek:</p>"
     },
     {
       "id": "overloading-unary-operators_b13",
       "type": "output",
       "text": "point is set at the origin.\n",
       "html": "<pre>point is set at the origin.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>point is set at the origin.\n</pre>"
     },
     {
       "id": "overloading-unary-operators_b14",
       "type": "paragraph",
       "html": "<p><strong>Quiz time</strong></p>",
       "preview": "Quiz time",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Kvíz</strong></p>"
     },
     {
       "id": "overloading-unary-operators_b15",
       "type": "list",
       "html": "<ol start=\"1\"><li>Implement overloaded unary <code>operator+</code> for the Point class. Unary <code>operator+</code> just returns its operand (it does not make negative values positive).</li></ol>",
       "preview": "Implement overloaded unary operator+ for the Point class. Unary operator+ just r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Implementujte přetížený unární <code>operator+</code> pro třídu Point. Unární <code>operator+</code> pouze vrací svůj operand (nemění záporné hodnoty na kladné).</li></ol>"
     },
     {
       "id": "overloading-unary-operators_b16",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>Here’s the obvious solution:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point Point::operator+ () const\n{\n    return { m_x, m_y, m_z };\n}</code></pre><p>But because the Point we’re returning is exactly the same one we’re operating on, the following also works:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point Point::operator+ () const\n{\n    return *this;\n}</code></pre><p>Note that we’re returning a copy by value rather than a const reference here. This is because users of this function will probably expect the returned object to be modifiable.</p></div>",
       "preview": "Here’s the obvious solution:Point Point::operator+ () const { return { m_x, m_y,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>Zde je přímočaré řešení:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point Point::operator+ () const\n{\n    return { m_x, m_y, m_z };\n}</code></pre><p>Protože je však vrácený Point přesně stejný jako ten, se kterým pracujeme, funguje také následující:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Point Point::operator+ () const\n{\n    return *this;\n}</code></pre><p>Všimněte si, že zde vracíme kopii hodnotou namísto konstantní reference. Je to proto, že uživatelé této funkce budou pravděpodobně očekávat, že vrácený objekt bude možné modifikovat.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "21.6 — Přetěžování unárních operátorů +, - a !"
 }

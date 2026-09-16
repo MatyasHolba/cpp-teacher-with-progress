@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-structs-members-and-member-selection/\">13.7 -- Introduction to structs, members, and member selection</a>, we introduced the struct program-defined type, which can contain member variables. Here is an example of a struct used to hold a date:</p>",
       "preview": "In lesson 13.7 -- Introduction to structs, members, and member selection, we int",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-structs-members-and-member-selection/\">13.7 – Úvod do struktur, členů a výběru členů</a> jsme si představili programátorem definovaný typ struct, který může obsahovat členské proměnné. Zde je příklad struktury použité k uložení data:</p>"
     },
     {
       "id": "member-functions_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n};</code></pre>"
     },
     {
       "id": "member-functions_b2",
       "type": "paragraph",
       "html": "<p>Now, if we want to print the date to the screen (something we probably want to do a lot), it makes sense to write a function to do this. Here’s a full program:</p>",
       "preview": "Now, if we want to print the date to the screen (something we probably want to d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud nyní chceme datum vypsat na obrazovku (což je něco, co budeme chtít dělat pravděpodobně často), dává smysl pro tento účel napsat funkci. Zde je celý program:</p>"
     },
     {
       "id": "member-functions_b3",
@@ -37,77 +40,90 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    // here are our member variables\n    int year {};\n    int month {};\n    int day {};\n};\n\nvoid print(const Date& date)\n{\n    // member variables accessed using member selection operator (.)\n    std::cout << date.year << '/' << date.month << '/' << date.day;\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // aggregate initialize our struct\n\n    today.day = 16; // member variables accessed using member selection operator (.)\n    print(today);   // non-member function accessed using normal calling convention\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    // here are our member variables\n    int year {};\n    int month {};\n    int day {};\n};\n\nvoid print(const Date&amp; date)\n{\n    // member variables accessed using member selection operator (.)\n    std::cout &lt;&lt; date.year &lt;&lt; '/' &lt;&lt; date.month &lt;&lt; '/' &lt;&lt; date.day;\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // aggregate initialize our struct\n\n    today.day = 16; // member variables accessed using member selection operator (.)\n    print(today);   // non-member function accessed using normal calling convention\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    // zde jsou naše členské proměnné\n    int rok {};\n    int měsíc {};\n    int den {};\n};\n\nneplatný tisk (konst Datum a datum)\n{\n    // členské proměnné přístupné pomocí operátoru výběru členů (.)\n    std::cout << datum.rok << '/' << datum.měsíc << '/' << datum.den;\n}\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 }; // agregace inicializuje naši strukturu\n\n    dnes.den = 16; // členské proměnné přístupné pomocí operátoru výběru členů (.)\n    tisknout (dnes);   // nečlenská funkce přístupná pomocí běžné konvence volání\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b4",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "member-functions_b5",
       "type": "output",
       "text": "2020/10/16\n",
       "html": "<pre>2020/10/16\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2020/10/16\n</pre>"
     },
     {
       "id": "member-functions_b6",
       "type": "section",
       "title": "The separation of properties and actions",
       "html": "<h3 class=\"cpp-section-heading\">The separation of properties and actions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Oddělení vlastností a akcí</h3>",
+      "title_cs": "Oddělení vlastností a akcí"
     },
     {
       "id": "member-functions_b7",
       "type": "paragraph",
       "html": "<p>Take a look around you -- everywhere you look are objects: books and buildings and food and even you. Real-life objects have two major components to them: 1) Some number of observable properties (e.g. weight, color, size, solidity, shape, etc…), and 2) Some number of actions that they can perform or have performed on them (e.g. being opened, damaging something else, etc…) based on those properties. These properties and actions are inseparable.</p>",
       "preview": "Take a look around you -- everywhere you look are objects: books and buildings a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Rozhlédněte se kolem sebe – všude, kam se podíváte, jsou objekty: knihy, budovy, jídlo a dokonce i vy. Objekty v reálném světě mají dvě hlavní složky: 1) určitý počet pozorovatelných vlastností (např. hmotnost, barva, velikost, pevnost, tvar atd.) a 2) určitý počet akcí, které mohou vykonávat nebo které na nich mohou být vykonány (např. otevření, poškození něčeho jiného atd.) na základě těchto vlastností. Tyto vlastnosti a akce jsou neoddělitelné.</p>"
     },
     {
       "id": "member-functions_b8",
       "type": "paragraph",
       "html": "<p>In programming, we represent properties with variables, and actions with functions.</p>",
       "preview": "In programming, we represent properties with variables, and actions with functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V programování reprezentujeme vlastnosti pomocí proměnných a akce pomocí funkcí.</p>"
     },
     {
       "id": "member-functions_b9",
       "type": "paragraph",
       "html": "<p>In the <code>Date</code> example above, note that we have defined our properties (the member variables of <code>Date</code>) and the actions we perform using those properties (the function <code>print()</code>) separately. We are left to infer a connection between <code>Date</code> and <code>print()</code> based solely on the <code>const Date&amp;</code> parameter of <code>print()</code>.</p>",
       "preview": "In the Date example above, note that we have defined our properties (the member ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu <code>Date</code> si všimněte, že jsme naše vlastnosti (členské proměnné <code>Date</code>) a akce, které pomocí těchto vlastností provádíme (funkci <code>print()</code>), definovali odděleně. Spojení mezi <code>Date</code> a <code>print()</code> tak musíme vyvozovat pouze na základě parametru <code>const Date&amp;</code> funkce <code>print()</code>.</p>"
     },
     {
       "id": "member-functions_b10",
       "type": "paragraph",
       "html": "<p>While we could put both <code>Date</code> and <code>print()</code> into a namespace (to make it clearer that the two are meant to be packaged together), that adds yet more names into our program and more namespace prefixes, cluttering our code.</p>",
       "preview": "While we could put both Date and print() into a namespace (to make it clearer th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli bychom mohli jak <code>Date</code>, tak <code>print()</code> vložit do jmenného prostoru (aby bylo jasnější, že mají patřit k sobě), přidalo by to do našeho programu další názvy a další prefixy jmenných prostorů, což by znepřehlednilo náš kód.</p>"
     },
     {
       "id": "member-functions_b11",
       "type": "paragraph",
       "html": "<p>It sure would be nice if there were some way to define our properties and actions together, as a single package.</p>",
       "preview": "It sure would be nice if there were some way to define our properties and action",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Určitě by bylo skvělé, kdyby existoval nějaký způsob, jak definovat naše vlastnosti a akce společně jako jeden celek.</p>"
     },
     {
       "id": "member-functions_b12",
       "type": "section",
       "title": "Member functions",
       "html": "<h3 class=\"cpp-section-heading\">Member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Členské funkce</h3>",
+      "title_cs": "Funkce členů"
     },
     {
       "id": "member-functions_b13",
       "type": "paragraph",
       "html": "<p>In addition to having member variables, class types (which includes structs, classes, and unions) can also have their own functions! Functions that belong to a class type are called <strong>member functions</strong>.</p>",
       "preview": "In addition to having member variables, class types (which includes structs, cla",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kromě členských proměnných mohou mít třídní typy (mezi které patří struktury, třídy a unie) také své vlastní funkce! Funkce, které patří třídnímu typu, se nazývají <strong>členské funkce</strong>.</p>"
     },
     {
       "id": "member-functions_b14",
@@ -115,14 +131,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>In other object-oriented languages (such as Java and C#), these are called <strong>methods</strong>. Although the term “method” is not used in C++, programmers who learned one of those other languages first may still use that term.</p></div>",
       "preview": "As an aside…In other object-oriented languages (such as Java and C#), these are called methods. Alth",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>V jiných objektově orientovaných jazycích (jako je Java a C#) se jim říká <strong>metody</strong>. Ačkoli se termín „metoda“ v C++ standardně nepoužívá, programátoři, kteří se nejprve naučili některý z těchto jiných jazyků, mohou tento výraz stále používat.</p></div>"
     },
     {
       "id": "member-functions_b15",
       "type": "paragraph",
       "html": "<p>Functions that are not member functions are called <strong>non-member functions</strong> (or occasionally <strong>free functions</strong>) to distinguish them from member functions. The <code>print()</code> function above is a non-member function.</p>",
       "preview": "Functions that are not member functions are called non-member functions (or occa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce, které nejsou členskými funkcemi, se nazývají <strong>nečlenské funkce</strong> (případně občas <strong>volné funkce</strong>), aby se odlišily od členských funkcí. Výše uvedená funkce <code>print()</code> je nečlenská funkce.</p>"
     },
     {
       "id": "member-functions_b16",
@@ -130,21 +148,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>In this lesson, we’ll use structs to show examples of member functions -- but everything we show here applies equally well to classes. For reasons that will become obvious when we get there, we’ll show examples of classes with member functions in upcoming lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/public-and-private-members-and-access-specifiers/\">14.5 -- Public and private members and access specifiers</a>).</p></div>",
       "preview": "Author’s noteIn this lesson, we’ll use structs to show examples of member functions -- but everythin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>V této lekci použijeme struktury k ukázce příkladů členských funkcí – ale vše, co zde ukazujeme, platí stejně tak i pro třídy. Z důvodů, které budou zřejmé, až k nim dospějeme, si ukážeme příklady tříd s členskými funkcemi v nadcházející lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/public-and-private-members-and-access-specifiers/\">14.5 – Veřejní a privátní členové a specifikátory přístupu</a>).</p></div>"
     },
     {
       "id": "member-functions_b17",
       "type": "paragraph",
       "html": "<p>Member functions must be declared inside the class type definition, and can be defined inside or outside of the class type definition. As a reminder, a definition is also a declaration, so if we define a member function inside the class, that counts as a declaration.</p>",
       "preview": "Member functions must be declared inside the class type definition, and can be d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Členské funkce musí být deklarovány uvnitř definice třídního typu a mohou být definovány uvnitř nebo vně definice třídního typu. Pro připomenutí: definice je zároveň i deklarací, takže pokud definujeme členskou funkci uvnitř třídy, počítá se to i jako deklarace.</p>"
     },
     {
       "id": "member-functions_b18",
       "type": "paragraph",
       "html": "<p>To keep things simple, we’ll define our member functions inside the class type definition for now.</p>",
       "preview": "To keep things simple, we’ll define our member functions inside the class type d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro jednoduchost budeme naše členské funkce prozatím definovat uvnitř definice typu třídy.</p>"
     },
     {
       "id": "member-functions_b19",
@@ -152,21 +173,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We show how to define member functions outside the class type definition in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 -- Classes and header files</a>.</p></div>",
       "preview": "Related contentWe show how to define member functions outside the class type definition in lesson 15",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Jak definovat členské funkce vně definice typu třídy si ukážeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 – Třídy a hlavičkové soubory</a>.</p></div>"
     },
     {
       "id": "member-functions_b20",
       "type": "section",
       "title": "A member function example",
       "html": "<h3 class=\"cpp-section-heading\">A member function example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Příklad členské funkce</h3>",
+      "title_cs": "Příklad členské funkce"
     },
     {
       "id": "member-functions_b21",
       "type": "paragraph",
       "html": "<p>Let’s rewrite the <code>Date</code> example from the top of the lesson, converting <code>print()</code> from a non-member function into a member function:</p>",
       "preview": "Let’s rewrite the Date example from the top of the lesson, converting print() fr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme přepsat příklad <code>Date</code> ze začátku lekce a převést <code>print()</code> z nečlenské funkce na členskou funkci:</p>"
     },
     {
       "id": "member-functions_b22",
@@ -174,70 +199,81 @@
       "language": "cpp",
       "code": "// Member function version\n#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() // defines a member function named print\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // aggregate initialize our struct\n\n    today.day = 16; // member variables accessed using member selection operator (.)\n    today.print();  // member functions also accessed using member selection operator (.)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Member function version\n#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() // defines a member function named print\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // aggregate initialize our struct\n\n    today.day = 16; // member variables accessed using member selection operator (.)\n    today.print();  // member functions also accessed using member selection operator (.)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Verze členské funkce\n#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print() // definuje členskou funkci s názvem print\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 }; // agregace inicializuje naši strukturu\n\n    dnes.den = 16; // členské proměnné přístupné pomocí operátoru výběru členů (.)\n    dnes.tisk();  // členské funkce přístupné také pomocí operátoru výběru členů (.)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b23",
       "type": "paragraph",
       "html": "<p>This program compiles and produces the same result as above:</p>",
       "preview": "This program compiles and produces the same result as above:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se přeloží a vytvoří stejný výsledek jako výše:</p>"
     },
     {
       "id": "member-functions_b24",
       "type": "output",
       "text": "2020/10/16\n",
       "html": "<pre>2020/10/16\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2020/10/16\n</pre>"
     },
     {
       "id": "member-functions_b25",
       "type": "paragraph",
       "html": "<p>There are three key differences between the non-member and member examples:</p>",
       "preview": "There are three key differences between the non-member and member examples:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mezi příklady s nečlenskou a členskou funkcí jsou tři klíčové rozdíly:</p>"
     },
     {
       "id": "member-functions_b26",
       "type": "list",
       "html": "<ol start=\"1\"><li>Where we declare (and define) the <code>print()</code> function</li><li>How we call the <code>print()</code> function</li><li>How we access members inside the <code>print()</code> function</li></ol>",
       "preview": "Where we declare (and define) the print() functionHow we call the print() functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Kde funkci <code>print()</code> deklarujeme (a definujeme)</li><li>Jak funkci <code>print()</code> voláme</li><li>Jak přistupujeme ke členům uvnitř funkce <code>print()</code></li></ol>"
     },
     {
       "id": "member-functions_b27",
       "type": "paragraph",
       "html": "<p>Let’s explore each of these in turn.</p>",
       "preview": "Let’s explore each of these in turn.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme se na každé z nich postupně podívat.</p>"
     },
     {
       "id": "member-functions_b28",
       "type": "section",
       "title": "Member functions are declared inside the class type definition",
       "html": "<h3 class=\"cpp-section-heading\">Member functions are declared inside the class type definition</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Členské funkce se deklarují uvnitř definice typu třídy</h3>",
+      "title_cs": "Členské funkce jsou deklarovány uvnitř definice typu třídy"
     },
     {
       "id": "member-functions_b29",
       "type": "paragraph",
       "html": "<p>In the non-member example, the <code>print()</code> non-member function is defined outside of the <code>Date</code> struct, in the global namespace. By default, it has external linkage, so it could be called from other source files (with the appropriate forward declaration).</p>",
       "preview": "In the non-member example, the print() non-member function is defined outside of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V nečlenském příkladu je nečlenská funkce <code>print()</code> definována vně struktury <code>Date</code>, v globálním jmenném prostoru. Ve výchozím nastavení má externí vazbu (external linkage), takže by ji bylo možné volat i z jiných zdrojových souborů (s příslušnou dopřednou deklarací).</p>"
     },
     {
       "id": "member-functions_b30",
       "type": "paragraph",
       "html": "<p>In the member example, the <code>print()</code> member function is declared (and in this case, defined) inside the <code>Date</code> struct definition. Because <code>print()</code> is declared as part of the <code>Date</code>, this tells the compiler that <code>print()</code> is a member function.</p>",
       "preview": "In the member example, the print() member function is declared (and in this case",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V členském příkladu je členská funkce <code>print()</code> deklarována (a v tomto případě i definována) uvnitř definice struktury <code>Date</code>. Protože je <code>print()</code> deklarována jako součást <code>Date</code>, kompilátor ví, že <code>print()</code> je členská funkce.</p>"
     },
     {
       "id": "member-functions_b31",
       "type": "paragraph",
       "html": "<p>Member functions defined inside the class type definition are implicitly inline, so they will not cause violations of the one-definition rule if the class type definition is included into multiple code files.</p>",
       "preview": "Member functions defined inside the class type definition are implicitly inline,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Členské funkce definované uvnitř definice typu třídy jsou implicitně inline, takže nezpůsobí porušení pravidla jedné definice (one-definition rule), pokud je definice typu třídy vložena do více souborů s kódem.</p>"
     },
     {
       "id": "member-functions_b32",
@@ -245,49 +281,57 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>Member functions can also be (forward) declared inside the class definition, and defined after the class definition. We cover this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 -- Classes and header files</a>.</p></div>",
       "preview": "Related contentMember functions can also be (forward) declared inside the class definition, and defi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Členské funkce mohou být uvnitř definice třídy také pouze (dopředně) deklarovány a definovány až za definicí třídy. Tomuto tématu se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 -- Třídy a hlavičkové soubory</a>.</p></div>"
     },
     {
       "id": "member-functions_b33",
       "type": "section",
       "title": "Calling member functions (and the implicit object)",
       "html": "<h3 class=\"cpp-section-heading\">Calling member functions (and the implicit object)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Volání členských funkcí (a implicitní objekt)</h3>",
+      "title_cs": "Volání členských funkcí (a implicitního objektu)"
     },
     {
       "id": "member-functions_b34",
       "type": "paragraph",
       "html": "<p>In the non-member example, we call <code>print(today)</code>, where <code>today</code> is (explicitly) passed as an argument.</p>",
       "preview": "In the non-member example, we call print(today), where today is (explicitly) pas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V nečlenském příkladu voláme <code>print(today)</code>, kde je <code>today</code> (explicitně) předáno jako argument.</p>"
     },
     {
       "id": "member-functions_b35",
       "type": "paragraph",
       "html": "<p>In the member example, we call <code>today.print()</code>. This syntax, which uses the member selection operator (.) to select the member function to call, is consistent with how we access member variables (e.g. <code>today.day = 16;</code>).</p>",
       "preview": "In the member example, we call today.print(). This syntax, which uses the member",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V členském příkladu voláme <code>today.print()</code>. Tato syntaxe, která používá operátor výběru členu (.) k výběru členské funkce k volání, je konzistentní s tím, jak přistupujeme k členským proměnným (např. <code>today.day = 16;</code>).</p>"
     },
     {
       "id": "member-functions_b36",
       "type": "paragraph",
       "html": "<p>All (non-static) member functions must be called using an object of that class type. In this case, <code>today</code> is the object that <code>print()</code> is being called on.</p>",
       "preview": "All (non-static) member functions must be called using an object of that class t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všechny (nestatické) členské funkce musí být volány pomocí objektu daného třídního typu. V tomto případě je <code>today</code> objektem, na kterém je funkce <code>print()</code> volána.</p>"
     },
     {
       "id": "member-functions_b37",
       "type": "paragraph",
       "html": "<p>Note that in the member function case, we don’t need to pass <code>today</code> as an argument. The object that a member function is called on is <em>implicitly</em> passed to the member function. For this reason, the object that a member function is called on is often called <strong>the implicit object</strong>.</p>",
       "preview": "Note that in the member function case, we don’t need to pass today as an argumen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že v případě členské funkce nemusíme předávat <code>today</code> jako argument. Objekt, na kterém je členská funkce volána, je členské funkci předán <em>implicitně</em>. Z tohoto důvodu se objekt, na kterém je členská funkce volána, často nazývá <strong>implicitní objekt</strong> (implicit object).</p>"
     },
     {
       "id": "member-functions_b38",
       "type": "paragraph",
       "html": "<p>In other words, when we call <code>today.print()</code>, <code>today</code> is the implicit object, and it is implicitly passed to the <code>print()</code> member function.</p>",
       "preview": "In other words, when we call today.print(), today is the implicit object, and it",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinými slovy, když zavoláme <code>today.print()</code>, <code>today</code> je implicitní objekt a je implicitně předán členské funkci <code>print()</code>.</p>"
     },
     {
       "id": "member-functions_b39",
@@ -295,21 +339,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover the mechanics of how the associated object is actually passed to a member function in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/\">15.1 -- The hidden “this” pointer and member function chaining</a>.</p></div>",
       "preview": "Related contentWe cover the mechanics of how the associated object is actually passed to a member fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Mechanismus toho, jak je přidružený objekt ve skutečnosti předáván členské funkci, probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/the-hidden-this-pointer-and-member-function-chaining/\">15.1 -- Skrytý ukazatel „this“ a řetězení členských funkcí</a>.</p></div>"
     },
     {
       "id": "member-functions_b40",
       "type": "section",
       "title": "Accessing members inside a member function uses the implicit object",
       "html": "<h3 class=\"cpp-section-heading\">Accessing members inside a member function uses the implicit object</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přístup ke členům uvnitř členské funkce využívá implicitní objekt</h3>",
+      "title_cs": "Přístup k členům uvnitř členské funkce používá implicitní objekt"
     },
     {
       "id": "member-functions_b41",
       "type": "paragraph",
       "html": "<p>Here’s the non-member version of <code>print()</code> again:</p>",
       "preview": "Here’s the non-member version of print() again:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je opět nečlenská verze funkce <code>print()</code>:</p>"
     },
     {
       "id": "member-functions_b42",
@@ -317,21 +365,24 @@
       "language": "cpp",
       "code": "// non-member version of print\nvoid print(const Date& date)\n{\n    // member variables accessed using member selection operator (.)\n    std::cout << date.year << '/' << date.month << '/' << date.day;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// non-member version of print\nvoid print(const Date&amp; date)\n{\n    // member variables accessed using member selection operator (.)\n    std::cout &lt;&lt; date.year &lt;&lt; '/' &lt;&lt; date.month &lt;&lt; '/' &lt;&lt; date.day;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// nečlenská verze tisku\nneplatný tisk (konst Datum a datum)\n{\n    // členské proměnné přístupné pomocí operátoru výběru členů (.)\n    std::cout << datum.rok << '/' << datum.měsíc << '/' << datum.den;\n}</code></pre>"
     },
     {
       "id": "member-functions_b43",
       "type": "paragraph",
       "html": "<p>This version of <code>print()</code> has reference parameter <code>const Date&amp; date</code>. Within the function, we access the members through this reference parameter, as <code>date.year</code>, <code>date.month</code>, and <code>date.day</code>. When <code>print(today)</code> is called, the <code>date</code> reference parameter is bound to argument <code>today</code>, and <code>date.year</code>, <code>date.month</code>, and <code>date.day</code> evaluate to <code>today.year</code>, <code>today.month</code>, and <code>today.day</code> respectively.</p>",
       "preview": "This version of print() has reference parameter const Date& date. Within the fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato verze funkce <code>print()</code> má referenční parametr <code>const Date&amp; date</code>. Uvnitř funkce přistupujeme ke členům prostřednictvím tohoto referenčního parametru jako <code>date.year</code>, <code>date.month</code> a <code>date.day</code>. Když je zavoláno <code>print(today)</code>, referenční parametr <code>date</code> se naváže na argument <code>today</code> a výrazy <code>date.year</code>, <code>date.month</code> a <code>date.day</code> se vyhodnotí postupně jako <code>today.year</code>, <code>today.month</code> a <code>today.day</code>.</p>"
     },
     {
       "id": "member-functions_b44",
       "type": "paragraph",
       "html": "<p>Now let’s look at the definition of the <code>print()</code> member function again:</p>",
       "preview": "Now let’s look at the definition of the print() member function again:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se znovu podívejme na definici členské funkce <code>print()</code>:</p>"
     },
     {
       "id": "member-functions_b45",
@@ -339,28 +390,32 @@
       "language": "cpp",
       "code": "    void print() // defines a member function named print()\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    void print() // defines a member function named print()\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> void print() // definuje členskou funkci s názvem print()\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }</code></pre>"
     },
     {
       "id": "member-functions_b46",
       "type": "paragraph",
       "html": "<p>In the member example, we access the members as <code>year</code>, <code>month,</code> and <code>day</code>.</p>",
       "preview": "In the member example, we access the members as year, month, and day.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V příkladu s členskou funkcí přistupujeme ke členům jako <code>year</code>, <code>month,</code> a <code>day</code>.</p>"
     },
     {
       "id": "member-functions_b47",
       "type": "paragraph",
       "html": "<p>Inside a member function, any member identifier that is not prefixed with the member selection operator (.) is associated with the implicit object.</p>",
       "preview": "Inside a member function, any member identifier that is not prefixed with the me",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř členské funkce je každý identifikátor člena, který není uvozen operátorem výběru člena (.), svázán s implicitním objektem.</p>"
     },
     {
       "id": "member-functions_b48",
       "type": "paragraph",
       "html": "<p>In other words, when <code>today.print()</code> is called, <code>today</code> is our implicit object, and <code>year</code>, <code>month</code>, and <code>day</code> (which are not prefixed) evaluate to the values of <code>today.year</code>, <code>today.month</code>, and <code>today.day</code> respectively.</p>",
       "preview": "In other words, when today.print() is called, today is our implicit object, and ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinými slovy, když je zavoláno <code>today.print()</code>, <code>today</code> je náš implicitní objekt a <code>year</code>, <code>month</code> a <code>day</code> (které nemají předponu) se vyhodnotí na hodnoty <code>today.year</code>, <code>today.month</code> a <code>today.day</code>.</p>"
     },
     {
       "id": "member-functions_b49",
@@ -368,21 +423,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>With non-member functions, we have to explicitly pass an object to the function to work with, and members are explicitly accessed through that object.</p><p>With member functions, we implicitly pass an object to the function to work with, and members are implicitly accessed through that object.</p></div>",
       "preview": "Key insightWith non-member functions, we have to explicitly pass an object to the function to work w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>U nečlenských funkcí musíme funkci explicitně předat objekt, se kterým má pracovat, a ke členům se přistupuje explicitně prostřednictvím tohoto objektu.</p><p>U členských funkcí předáváme funkci objekt k práci implicitně a ke členům se přistupuje implicitně prostřednictvím tohoto objektu.</p></div>"
     },
     {
       "id": "member-functions_b50",
       "type": "section",
       "title": "Another member function example",
       "html": "<h3 class=\"cpp-section-heading\">Another member function example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další příklad členské funkce</h3>",
+      "title_cs": "Jiný příklad členské funkce"
     },
     {
       "id": "member-functions_b51",
       "type": "paragraph",
       "html": "<p>Here’s an example with a slightly more complex member function:</p>",
       "preview": "Here’s an example with a slightly more complex member function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad s o něco složitější členskou funkcí:</p>"
     },
     {
       "id": "member-functions_b52",
@@ -390,35 +449,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nstruct Person\n{\n    std::string name{};\n    int age{};\n\n    void kisses(const Person& person)\n    {\n        std::cout << name << \" kisses \" << person.name << '\\n';\n    }\n};\n\nint main()\n{\n    Person joe{ \"Joe\", 29 };\n    Person kate{ \"Kate\", 27 };\n\n    joe.kisses(kate);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nstruct Person\n{\n    std::string name{};\n    int age{};\n\n    void kisses(const Person&amp; person)\n    {\n        std::cout &lt;&lt; name &lt;&lt; \" kisses \" &lt;&lt; person.name &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    Person joe{ \"Joe\", 29 };\n    Person kate{ \"Kate\", 27 };\n\n    joe.kisses(kate);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nstrukturovat osobu\n{\n    std::string name{};\n    int věk{};\n\n    prázdné polibky (konst. osoba a osoba)\n    {\n        std::cout << jméno << \" polibky \" << jmeno osoby << '\\n';\n    }\n};\n\nint main()\n{\n    Osoba joe{ \"Joe\", 29 };\n    Osoba kate{ \"Kate\", 27 };\n\n    joe.polibky(kate);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b53",
       "type": "paragraph",
       "html": "<p>This produces the output:</p>",
       "preview": "This produces the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vytvoří následující výstup:</p>"
     },
     {
       "id": "member-functions_b54",
       "type": "output",
       "text": "Joe kisses Kate\n",
       "html": "<pre>Joe kisses Kate\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Joe kisses Kate\n</pre>"
     },
     {
       "id": "member-functions_b55",
       "type": "paragraph",
       "html": "<p>Let’s examine how this works. First, we define two <code>Person</code> structs, <code>joe</code> and <code>kate</code>. Next, we call <code>joe.kisses(kate)</code>. <code>joe</code> is the implicit object here, and <code>kate</code> is passed as an explicit argument.</p>",
       "preview": "Let’s examine how this works. First, we define two Person structs, joe and kate.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme prozkoumat, jak to funguje. Nejprve definujeme dvě struktury <code>Person</code>, <code>joe</code> a <code>kate</code>. Dále zavoláme <code>joe.kisses(kate)</code>. <code>joe</code> je zde implicitní objekt a <code>kate</code> je předána jako explicitní argument.</p>"
     },
     {
       "id": "member-functions_b56",
       "type": "paragraph",
       "html": "<p>When the <code>kisses()</code> member function executes, the identifier <code>name</code> doesn’t use the member selection operator (.), so it refers to the implicit object, which is <code>joe</code>. So this resolves to <code>joe.name</code>. <code>person.name</code> uses the member selection operator, so it does not refer to the implicit object. Since <code>person</code> is a reference for <code>kate</code>, this resolves to <code>kate.name</code>.</p>",
       "preview": "When the kisses() member function executes, the identifier name doesn’t use the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se členská funkce <code>kisses()</code> vykonává, identifikátor <code>name</code> nepoužívá operátor výběru členu (.), takže odkazuje na implicitní objekt, kterým je <code>joe</code>. Vyhodnotí se tedy jako <code>joe.name</code>. <code>person.name</code> operátor výběru členu používá, takže neodkazuje na implicitní objekt. Jelikož <code>person</code> je referencí na <code>kate</code>, vyhodnotí se to jako <code>kate.name</code>.</p>"
     },
     {
       "id": "member-functions_b57",
@@ -426,28 +490,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Without a member function, we would have written <code>kisses(joe, kate)</code>. With a member function, we write <code>joe.kisses(kate)</code>. Note how much better the latter reads, and how it makes clear exactly which object is initiating the action and which is in support.</p></div>",
       "preview": "Key insightWithout a member function, we would have written kisses(joe, kate). With a member functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Bez členské funkce bychom napsali <code>kisses(joe, kate)</code>. S členskou funkcí píšeme <code>joe.kisses(kate)</code>. Všimněte si, o kolik lépe se druhá varianta čte a jak jasně z ní vyplývá, který objekt akci iniciuje a který je v roli doplňku.</p></div>"
     },
     {
       "id": "member-functions_b58",
       "type": "section",
       "title": "Member variables and functions can be defined in any order",
       "html": "<h3 class=\"cpp-section-heading\">Member variables and functions can be defined in any order</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Členské proměnné a funkce lze definovat v libovolném pořadí</h3>",
+      "title_cs": "Členské proměnné a funkce lze definovat v libovolném pořadí"
     },
     {
       "id": "member-functions_b59",
       "type": "paragraph",
       "html": "<p>The C++ compiler normally compiles code from top to bottom. For each name encountered, the compiler determines whether it has already seen a declaration for that name, so that it can do proper type checking.</p>",
       "preview": "The C++ compiler normally compiles code from top to bottom. For each name encoun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompilátor C++ obvykle překládá kód shora dolů. U každého nalezeného názvu kompilátor zjišťuje, zda již viděl jeho deklaraci, aby mohl provést řádnou typovou kontrolu.</p>"
     },
     {
       "id": "member-functions_b60",
       "type": "paragraph",
       "html": "<p>Non-members must be declared before they can be used, or the compiler will complain:</p>",
       "preview": "Non-members must be declared before they can be used, or the compiler will compl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nečlenské prvky (funkce a proměnné) musí být deklarovány dříve, než mohou být použity, jinak si kompilátor bude stěžovat:</p>"
     },
     {
       "id": "member-functions_b61",
@@ -455,28 +524,32 @@
       "language": "cpp",
       "code": "int x()\n{\n    return y(); // error: y not declared yet, so compiler doesn't know what it is\n}\n \nint y()\n{\n    return 5;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x()\n{\n    return y(); // error: y not declared yet, so compiler doesn't know what it is\n}\n \nint y()\n{\n    return 5;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x()\n{\n    vrátit y(); // chyba: y ještě není deklarováno, takže kompilátor neví, co to je\n}\n \nint y()\n{\n    návrat 5;\n}</code></pre>"
     },
     {
       "id": "member-functions_b62",
       "type": "paragraph",
       "html": "<p>To address this, we typically either define our non-members in rough order of use (which requires work whenever we need to change the order), or use forward declarations (which requires work to add).</p>",
       "preview": "To address this, we typically either define our non-members in rough order of us",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K vyřešení tohoto problému obvykle buď definujeme nečlenské prvky zhruba v pořadí jejich použití (což vyžaduje práci, kdykoli potřebujeme pořadí změnit), nebo použijeme dopředné deklarace (forward declarations, které vyžadují práci s jejich doplňováním).</p>"
     },
     {
       "id": "member-functions_b63",
       "type": "paragraph",
       "html": "<p>However, inside a class definition, this restriction doesn’t apply: you can access member variables and member functions before they are declared. This means you can define member variables and member functions in any order you like!</p>",
       "preview": "However, inside a class definition, this restriction doesn’t apply: you can acce",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř definice třídy však toto omezení neplatí: k členským proměnným a členským funkcím můžete přistupovat ještě předtím, než jsou deklarovány. To znamená, že členské proměnné a členské funkce můžete definovat v libovolném pořadí!</p>"
     },
     {
       "id": "member-functions_b64",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "member-functions_b65",
@@ -484,14 +557,16 @@
       "language": "cpp",
       "code": "struct Foo\n{\n    int z() { return m_data; } // We can access data members before they are defined\n    int x() { return y(); }    // We can access member functions before they are defined\n\n    int m_data { y() };        // This even works in default member initializers (see warning below)\n    int y() { return 5; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z() { return m_data; } // We can access data members before they are defined\n    int x() { return y(); }    // We can access member functions before they are defined\n\n    int m_data { y() };        // This even works in default member initializers (see warning below)\n    int y() { return 5; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z() { return m_data; } // K datovým členům můžeme přistupovat před jejich definováním\n    int x() { return y(); } // Členským funkcím můžeme přistupovat před jejich definováním\n\n    int m_data { y() };        // Toto funguje i ve výchozích inicializátorech členů (viz upozornění níže)\n    int y() { return 5; }\n};</code></pre>"
     },
     {
       "id": "member-functions_b66",
       "type": "paragraph",
       "html": "<p>We discuss a recommended order for member definition in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-benefits-of-data-hiding-encapsulation/\">14.8 -- The benefits of data hiding (encapsulation)</a>.</p>",
       "preview": "We discuss a recommended order for member definition in upcoming lesson 14.8 -- ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Doporučené pořadí definic členů probíráme v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/the-benefits-of-data-hiding-encapsulation/\">14.8 – Výhody skrývání dat (zapouzdření)</a>.</p>"
     },
     {
       "id": "member-functions_b67",
@@ -499,7 +574,8 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Data members are initialized in order of declaration. If the initialization of a data member accesses another data member that isn’t declared until later (and thus hasn’t been initialized yet), the initialization will result in undefined behavior.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Bad\n{\n    int m_bad1 { m_data }; // undefined behavior: m_bad1 initialized before m_data\n    int m_bad2 { fcn() };  // undefined behavior: m_bad2 initialized before m_data (accessed through fcn())\n\n    int m_data { 5 };\n    int fcn() { return m_data; }\n};</code></pre><p>For this reason, it’s generally a good idea to avoid using other members inside default member initializers.</p></div>",
       "preview": "WarningData members are initialized in order of declaration. If the initialization of a data member ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Datové členy jsou inicializovány v pořadí jejich deklarace. Pokud inicializace datového členu přistupuje k jinému datovému členu, který je deklarován až později (a tudíž ještě nebyl inicializován), inicializace povede k nedefinovanému chování (undefined behavior).</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Bad\n{\n    int m_bad1 { m_data }; // nedefinované chování: m_bad1 je inicializován před m_data\n    int m_bad2 { fcn() };  // nedefinované chování: m_bad2 je inicializován před m_data (přístup přes fcn())\n\n    int m_data { 5 };\n    int fcn() { return m_data; }\n};</code></pre><p>Z tohoto důvodu je obecně dobré se vyhnout používání jiných členů uvnitř výchozích inicializátorů členů (default member initializers).</p></div>"
     },
     {
       "id": "member-functions_b68",
@@ -507,21 +583,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>To allow the definition of data members and member functions in any order, compilers employ a neat trick. When the compiler encounters a member function defined inside the class definition:</p><ul><li>The member function is implicitly forward declared.</li><li>The member function definition is moved immediately after the end of the class definition.</li></ul><p>That way, by the time the compiler actually compiles the member function definitions, it has already seen the full class definition (containing declarations for all members!)</p><p>For example, when the compiler encounters this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z() { return m_data; } // m_data not declared yet\n    int x() { return y(); }    // y not declared yet\n    int y() { return 5; }\n\n    int m_data{};\n};</code></pre><p>It will compile the equivalent of this:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z(); // forward declaration of Foo::z()\n    int x(); // forward declaration of Foo::x()\n    int y(); // forward declaration of Foo::y()\n\n    int m_data{};\n};\n\nint Foo::z() { return m_data; } // m_data already declared above\nint Foo::x() { return y(); }    // y already declared above\nint Foo::y() { return 5; }</code></pre></div>",
       "preview": "For advanced readersTo allow the definition of data members and member functions in any order, compi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Aby bylo možné definovat datové členy a členské funkce v libovolném pořadí, používají kompilátory šikovný trik. Když kompilátor narazí na členskou funkci definovanou uvnitř definice třídy:</p><ul><li>Členská funkce je implicitně dopředně deklarována (forward declared).</li><li>Definice členské funkce je přesunuta bezprostředně za konec definice třídy.</li></ul><p>Tímto způsobem má kompilátor v okamžiku, kdy skutečně kompiluje definice členských funkcí, již k dispozici kompletní definici třídy (obsahující deklarace všech členů!).</p><p>Když například kompilátor narazí na toto:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z() { return m_data; } // m_data ještě není deklarováno\n    int x() { return y(); }    // y ještě není deklarováno\n    int y() { return 5; }\n\n    int m_data{};\n};</code></pre><p>Zkompiluje ekvivalent tohoto kódu:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo\n{\n    int z(); // dopředná deklarace Foo::z()\n    int x(); // dopředná deklarace Foo::x()\n    int y(); // dopředná deklarace Foo::y()\n\n    int m_data{};\n};\n\nint Foo::z() { return m_data; } // m_data je již výše deklarováno\nint Foo::x() { return y(); }    // y je již výše deklarováno\nint Foo::y() { return 5; }</code></pre></div>"
     },
     {
       "id": "member-functions_b69",
       "type": "section",
       "title": "Member functions can be overloaded",
       "html": "<h3 class=\"cpp-section-heading\">Member functions can be overloaded</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Členské funkce lze přetěžovat</h3>",
+      "title_cs": "Členské funkce mohou být přetíženy"
     },
     {
       "id": "member-functions_b70",
       "type": "paragraph",
       "html": "<p>Just like non-member functions, member functions can be overloaded, so long as each member function can be differentiated.</p>",
       "preview": "Just like non-member functions, member functions can be overloaded, so long as e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako nečlenské funkce lze i členské funkce přetěžovat (overload), pokud lze jednotlivé členské funkce od sebe vzájemně odlišit.</p>"
     },
     {
       "id": "member-functions_b71",
@@ -529,14 +609,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover function overload differentiation in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/\">11.2 -- Function overload differentiation</a>.</p></div>",
       "preview": "Related contentWe cover function overload differentiation in lesson 11.2 -- Function overload differ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Rozlišování přetížených funkcí se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/function-overload-differentiation/\">11.2 – Rozlišování přetížených funkcí</a>.</p></div>"
     },
     {
       "id": "member-functions_b72",
       "type": "paragraph",
       "html": "<p>Here’s an example of a <code>Date</code> struct with overloaded <code>print()</code> member functions:</p>",
       "preview": "Here’s an example of a Date struct with overloaded print() member functions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad struktury <code>Date</code> s přetíženými členskými funkcemi <code>print()</code>:</p>"
     },
     {
       "id": "member-functions_b73",
@@ -544,42 +626,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print()\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n\n    void print(std::string_view prefix)\n    {\n        std::cout << prefix << year << '/' << month << '/' << day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 };\n\n    today.print(); // calls Date::print()\n    std::cout << '\\n';\n\n    today.print(\"The date is: \"); // calls Date::print(std::string_view)\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print()\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n\n    void print(std::string_view prefix)\n    {\n        std::cout &lt;&lt; prefix &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 };\n\n    today.print(); // calls Date::print()\n    std::cout &lt;&lt; '\\n';\n\n    today.print(\"The date is: \"); // calls Date::print(std::string_view)\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print()\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n\n    void print (předpona std::string_view)\n    {\n        std::cout << prefix << rok << '/' << mesic << '/' << den;\n    }\n};\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 };\n\n    dnes.tisk(); // volání Datum::print()\n    std::cout << '\\n';\n\n    dnes.print(\"Datum je: \"); // volání Datum::print(std::string_view)\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b74",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "member-functions_b75",
       "type": "output",
       "text": "2020/10/14\nThe date is: 2020/10/14\n",
       "html": "<pre>2020/10/14\nThe date is: 2020/10/14\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2020/10/14\nThe date is: 2020/10/14\n</pre>"
     },
     {
       "id": "member-functions_b76",
       "type": "section",
       "title": "Structs and member functions",
       "html": "<h3 class=\"cpp-section-heading\">Structs and member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Struktury a členské funkce</h3>",
+      "title_cs": "Struktury a členské funkce"
     },
     {
       "id": "member-functions_b77",
       "type": "paragraph",
       "html": "<p>In C, structs only have data members, not member functions.</p>",
       "preview": "In C, structs only have data members, not member functions.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V jazyce C mají struktury pouze datové členy, nikoli členské funkce.</p>"
     },
     {
       "id": "member-functions_b78",
       "type": "paragraph",
       "html": "<p>In C++, while designing classes, Bjarne Stroustrup spent some amount of time considering whether structs (which were inherited from C) should be granted the ability to have member functions. Upon consideration, he determined that they should.</p>",
       "preview": "In C++, while designing classes, Bjarne Stroustrup spent some amount of time con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ Bjarne Stroustrup při navrhování tříd nějakou dobu zvažoval, zda by struktury (převzaté z C) měly mít možnost mít členské funkce. Po zralé úvaze rozhodl, že ano.</p>"
     },
     {
       "id": "member-functions_b79",
@@ -587,14 +676,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>That decision led to a cascade of other questions about what other new C++ capabilities structs should have access to. Bjarne was concerned that giving structs access to a limited subset of capabilities would end up adding complexity and edge-cases to the language. For simplicity, he ultimately decided that structs and classes would have a unified ruleset (meaning structs can do everything classes can, and vice-versa), and convention could dictate how structs would actually be used.</p></div>",
       "preview": "As an aside…That decision led to a cascade of other questions about what other new C++ capabilities ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Toto rozhodnutí vedlo ke kaskádě dalších otázek ohledně toho, k jakým dalším novým možnostem C++ by struktury měly mít přístup. Bjarne se obával, že poskytnutí přístupu pouze k omezené podmnožině schopností by do jazyka vneslo zbytečnou složitost a okrajové případy. Z důvodu jednoduchosti se nakonec rozhodl, že struktury a třídy budou mít sjednocenou sadu pravidel (což znamená, že struktury mohou dělat vše, co třídy, a naopak), a samotné využití struktur bude řízeno konvencemi.</p></div>"
     },
     {
       "id": "member-functions_b80",
       "type": "paragraph",
       "html": "<p>In modern C++, it is fine for structs to have member functions. This excludes constructors, which are a special type of member function that we cover in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 -- Introduction to constructors</a>. A class type with a constructor is no longer an aggregate, and we want our structs to remain aggregates.</p>",
       "preview": "In modern C++, it is fine for structs to have member functions. This excludes co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V moderním C++ je zcela v pořádku, aby struktury měly členské funkce. Výjimkou jsou konstruktory, což je speciální typ členské funkce, kterému se budeme věnovat v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 – Úvod do konstruktorů</a>. Typ třídy s konstruktorem již není agregát a my chceme, aby naše struktury agregáty zůstaly.</p>"
     },
     {
       "id": "member-functions_b81",
@@ -602,21 +693,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Member functions can be used with both structs and classes.</p><p>However, structs should avoid defining constructor member functions, as doing so makes them a non-aggregate.</p></div>",
       "preview": "Best practiceMember functions can be used with both structs and classes.However, structs should avoi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Členské funkce lze používat jak u struktur (struct), tak u tříd (class).</p><p>U struktur byste se však měli vyhnout definování členských funkcí konstruktoru, protože se tím z nich stane ne-agregát (non-aggregate).</p></div>"
     },
     {
       "id": "member-functions_b82",
       "type": "section",
       "title": "Class types with no data members",
       "html": "<h3 class=\"cpp-section-heading\">Class types with no data members</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Třídní typy bez datových členů</h3>",
+      "title_cs": "Typy tříd bez datových členů"
     },
     {
       "id": "member-functions_b83",
       "type": "paragraph",
       "html": "<p>It is possible to create class types with no data members (e.g. class types that only have member functions). It is also possible to instantiate objects of such a class type:</p>",
       "preview": "It is possible to create class types with no data members (e.g. class types that",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je možné vytvářet třídní typy bez jakýchkoli datových členů (např. třídní typy, které mají pouze členské funkce). Stejně tak je možné vytvářet instance objektů takového třídního typu:</p>"
     },
     {
       "id": "member-functions_b84",
@@ -624,14 +719,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Foo\n{\n    void printHi() { std::cout << \"Hi!\\n\"; }\n};\n\nint main()\n{\n    Foo f{};\n    f.printHi(); // requires object to call\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Foo\n{\n    void printHi() { std::cout &lt;&lt; \"Hi!\\n\"; }\n};\n\nint main()\n{\n    Foo f{};\n    f.printHi(); // requires object to call\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Foo\n{\n    void printHi() { std::cout << \"Ahoj!\\n\"; }\n};\n\nint main()\n{\n    Foo f{};\n    f.printHi(); // vyžaduje volání objektu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b85",
       "type": "paragraph",
       "html": "<p>However, if a class type does not have any data members, then using a class type is probably overkill. In such cases, consider using a namespace (containing non-member functions) instead. This makes it clearer to the reader that no data is being managed (and does not require an object to be instantiated to call the functions).</p>",
       "preview": "However, if a class type does not have any data members, then using a class type",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však třídní typ nemá žádné datové členy, je použití třídního typu pravděpodobně zbytečné (overkill). V takových případech zvažte raději použití jmenného prostoru (obsahujícího nečlenské funkce). Pro čtenáře kódu je pak zřetelnější, že se nespravují žádná data (a pro volání funkcí není nutné vytvářet instanci objektu).</p>"
     },
     {
       "id": "member-functions_b86",
@@ -639,7 +736,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nnamespace Foo\n{\n    void printHi() { std::cout << \"Hi!\\n\"; }\n};\n\nint main()\n{\n    Foo::printHi(); // no object needed\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace Foo\n{\n    void printHi() { std::cout &lt;&lt; \"Hi!\\n\"; }\n};\n\nint main()\n{\n    Foo::printHi(); // no object needed\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\njmenný prostor Foo\n{\n    void printHi() { std::cout << \"Ahoj!\\n\"; }\n};\n\nint main()\n{\n    Foo::printHi(); // není potřeba žádný objekt\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b87",
@@ -647,14 +745,17 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If your class type has no data members, prefer using a namespace.</p></div>",
       "preview": "Best practiceIf your class type has no data members, prefer using a namespace.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud váš třídní typ nemá žádné datové členy, dejte přednost použití jmenného prostoru.</p></div>"
     },
     {
       "id": "member-functions_b88",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "member-functions_b89",
@@ -670,7 +771,8 @@
       "type": "paragraph",
       "html": "<p>The following program function should compile:</p>",
       "preview": "The following program function should compile:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující program by se měl zkompilovat:</p>"
     },
     {
       "id": "member-functions_b91",
@@ -678,21 +780,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// Provide the definition for IntPair and the print() member function here\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout << \"p1: \";\n\tp1.print();\n\n\tstd::cout << \"p2: \";\n\tp2.print();\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Provide the definition for IntPair and the print() member function here\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout &lt;&lt; \"p1: \";\n\tp1.print();\n\n\tstd::cout &lt;&lt; \"p2: \";\n\tp2.print();\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Zde zadejte definici pro IntPair a členskou funkci print().\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout << \"p1: \";\n\tp1.print();\n\n\tstd::cout << \"p2: \";\n\tp2.print();\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b92",
       "type": "paragraph",
       "html": "<p>and produce the output:</p>",
       "preview": "and produce the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a vygenerovat výstup:</p>"
     },
     {
       "id": "member-functions_b93",
       "type": "output",
       "text": "p1: Pair(1, 2)\np2: Pair(3, 4)\n",
       "html": "<pre>p1: Pair(1, 2)\np2: Pair(3, 4)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>p1: Pair(1, 2)\np2: Pair(3, 4)\n</pre>"
     },
     {
       "id": "member-functions_b94",
@@ -708,7 +813,8 @@
       "type": "paragraph",
       "html": "<p>The following program function should compile:</p>",
       "preview": "The following program function should compile:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující programová funkce by se měla zkompilovat:</p>"
     },
     {
       "id": "member-functions_b96",
@@ -716,21 +822,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// Provide the definition for IntPair and the member functions here\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout << \"p1: \";\n\tp1.print();\n\n\tstd::cout << \"p2: \";\n\tp2.print();\n\n\tstd::cout << \"p1 and p1 \" << (p1.isEqual(p1) ? \"are equal\\n\" : \"are not equal\\n\");\n\tstd::cout << \"p1 and p2 \" << (p1.isEqual(p2) ? \"are equal\\n\" : \"are not equal\\n\");\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Provide the definition for IntPair and the member functions here\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout &lt;&lt; \"p1: \";\n\tp1.print();\n\n\tstd::cout &lt;&lt; \"p2: \";\n\tp2.print();\n\n\tstd::cout &lt;&lt; \"p1 and p1 \" &lt;&lt; (p1.isEqual(p1) ? \"are equal\\n\" : \"are not equal\\n\");\n\tstd::cout &lt;&lt; \"p1 and p2 \" &lt;&lt; (p1.isEqual(p2) ? \"are equal\\n\" : \"are not equal\\n\");\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Zde zadejte definici pro IntPair a členské funkce\n\nint main()\n{\n\tIntPair p1 {1, 2};\n\tIntPair p2 {3, 4};\n\n\tstd::cout << \"p1: \";\n\tp1.print();\n\n\tstd::cout << \"p2: \";\n\tp2.print();\n\n\tstd::cout << \"p1 a p1 \" << (p1.isEqual(p1) ? \"jsou si rovni\\n\" : \"nejsou si rovni\\n\");\n\tstd::cout << \"p1 a p2 \" << (p1.isEqual(p2) ? \"jsou si rovni\\n\" : \"nejsou si rovni\\n\");\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "member-functions_b97",
       "type": "paragraph",
       "html": "<p>and produce the output:</p>",
       "preview": "and produce the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a vygenerovat výstup:</p>"
     },
     {
       "id": "member-functions_b98",
       "type": "output",
       "text": "p1: Pair(1, 2)\np2: Pair(3, 4)\np1 and p1 are equal\np1 and p2 are not equal \n",
       "html": "<pre>p1: Pair(1, 2)\np2: Pair(3, 4)\np1 and p1 are equal\np1 and p2 are not equal \n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>p1: Pair(1, 2)\np2: Pair(3, 4)\np1 and p1 are equal\np1 and p2 are not equal \n</pre>"
     }
-  ]
+  ],
+  "title_cs": "14.3 — Členské funkce"
 }

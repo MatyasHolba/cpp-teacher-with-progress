@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Let’s go back to an example we looked at previously:</p>",
       "preview": "Let’s go back to an example we looked at previously:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vraťme se k příkladu, na který jsme se dívali dříve:</p>"
     },
     {
       "id": "object-slicing_b1",
@@ -22,28 +23,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nclass Base\n{\nprotected:\n    int m_value{};\n \npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n\n    virtual ~Base() = default;\n\n    virtual std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n \nclass Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n \n   std::string_view getName() const override { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived{ 5 };\n    std::cout << \"derived is a \" << derived.getName() << \" and has value \" << derived.getValue() << '\\n';\n \n    Base& ref{ derived };\n    std::cout << \"ref is a \" << ref.getName() << \" and has value \" << ref.getValue() << '\\n';\n \n    Base* ptr{ &derived };\n    std::cout << \"ptr is a \" << ptr->getName() << \" and has value \" << ptr->getValue() << '\\n';\n \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nclass Base\n{\nprotected:\n    int m_value{};\n \npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n\n    virtual ~Base() = default;\n\n    virtual std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n \nclass Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n \n   std::string_view getName() const override { return \"Derived\"; }\n};\n\nint main()\n{\n    Derived derived{ 5 };\n    std::cout &lt;&lt; \"derived is a \" &lt;&lt; derived.getName() &lt;&lt; \" and has value \" &lt;&lt; derived.getValue() &lt;&lt; '\\n';\n \n    Base&amp; ref{ derived };\n    std::cout &lt;&lt; \"ref is a \" &lt;&lt; ref.getName() &lt;&lt; \" and has value \" &lt;&lt; ref.getValue() &lt;&lt; '\\n';\n \n    Base* ptr{ &amp;derived };\n    std::cout &lt;&lt; \"ptr is a \" &lt;&lt; ptr-&gt;getName() &lt;&lt; \" and has value \" &lt;&lt; ptr-&gt;getValue() &lt;&lt; '\\n';\n \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\ntřída Základní\n{\nchráněno:\n    int m_hodnota{};\n \nveřejnost:\n    základ (hodnota int)\n        : m_value{ hodnota }\n    {\n    }\n\n    virtual ~Base() = výchozí;\n\n    virtual std::string_view getName() const { return \"Základ\"; }\n    int getValue() const { return m_value; }\n};\n \ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základní{ hodnota }\n    {\n    }\n \n   std::string_view getName() const override { return \"Odvozeno\"; }\n};\n\nint main()\n{\n    Odvozené odvozené{ 5 };\n    std::cout << \"derived je \" << odvozené.getName() << \" a má hodnotu \" << derivované.getValue() << '\\n';\n \n    Base& ref{ odvozené };\n    std::cout << \"ref je \" << ref.getName() << \" a má hodnotu \" << ref.getValue() << '\\n';\n \n    Základ* ptr{ &derived };\n    std::cout << \"ptr je \" << ptr->getName() << \" a má hodnotu \" << ptr->getValue() << '\\n';\n \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b2",
       "type": "paragraph",
       "html": "<p>In the above example, ref references and ptr points to derived, which has a Base part, and a Derived part. Because ref and ptr are of type Base, ref and ptr can only see the Base part of derived -- the Derived part of derived still exists, but simply can’t be seen through ref or ptr. However, through use of virtual functions, we can access the most-derived version of a function. Consequently, the above program prints:</p>",
       "preview": "In the above example, ref references and ptr points to derived, which has a Base",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu ref odkazuje a ptr ukazuje na derived, který má část Base a část Derived. Protože ref a ptr jsou typu Base, mohou vidět pouze část Base objektu derived – část Derived objektu derived stále existuje, ale skrze ref nebo ptr ji jednoduše nelze vidět. Pomocí virtuálních funkcí však můžeme přistupovat k nejvíce odvozené (most-derived) verzi funkce. Výše uvedený program proto vypíše:</p>"
     },
     {
       "id": "object-slicing_b3",
       "type": "output",
       "text": "derived is a Derived and has value 5\nref is a Derived and has value 5\nptr is a Derived and has value 5\n",
       "html": "<pre>derived is a Derived and has value 5\nref is a Derived and has value 5\nptr is a Derived and has value 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>derived is a Derived and has value 5\nref is a Derived and has value 5\nptr is a Derived and has value 5\n</pre>"
     },
     {
       "id": "object-slicing_b4",
       "type": "paragraph",
       "html": "<p>But what happens if instead of setting a Base reference or pointer to a Derived object, we simply <em>assign</em> a Derived object to a Base object?</p>",
       "preview": "But what happens if instead of setting a Base reference or pointer to a Derived ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se ale stane, když místo nastavení reference nebo ukazatele typu Base na objekt Derived jednoduše <em>přiřadíme</em> objekt Derived do objektu Base?</p>"
     },
     {
       "id": "object-slicing_b5",
@@ -51,63 +56,73 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived derived{ 5 };\n    Base base{ derived }; // what happens here?\n    std::cout << \"base is a \" << base.getName() << \" and has value \" << base.getValue() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived derived{ 5 };\n    Base base{ derived }; // what happens here?\n    std::cout &lt;&lt; \"base is a \" &lt;&lt; base.getName() &lt;&lt; \" and has value \" &lt;&lt; base.getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozené odvozené{ 5 };\n    Základní základ{ odvozený }; // co se tu děje?\n    std::cout << \"base je \" << base.getName() << \" a má hodnotu \" << base.getValue() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b6",
       "type": "paragraph",
       "html": "<p>Remember that derived has a Base part and a Derived part. When we assign a Derived object to a Base object, only the Base portion of the Derived object is copied. The Derived portion is not. In the example above, base receives a copy of the Base portion of derived, but not the Derived portion. That Derived portion has effectively been “sliced off”. Consequently, the assigning of a Derived class object to a Base class object is called <strong>object slicing</strong> (or slicing for short).</p>",
       "preview": "Remember that derived has a Base part and a Derived part. When we assign a Deriv",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte, že derived má část Base a část Derived. Když přiřadíme objekt Derived do objektu Base, zkopíruje se pouze část Base objektu Derived. Část Derived nikoliv. Ve výše uvedeném příkladu base obdrží kopii části Base objektu derived, ale nikoli část Derived. Tato část Derived byla efektivně „odříznuta“. Přiřazení objektu odvozené třídy (Derived) do objektu bázové třídy (Base) se proto nazývá <strong>object slicing</strong> (nebo zkráceně slicing).</p>"
     },
     {
       "id": "object-slicing_b7",
       "type": "paragraph",
       "html": "<p>Because base was and still is just a Base, Base’s virtual pointer still points to Base. Thus, base.getName() resolves to Base::getName().</p>",
       "preview": "Because base was and still is just a Base, Base’s virtual pointer still points t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože base byl a stále je pouze Base, virtuální ukazatel třídy Base stále ukazuje na Base. Volání base.getName() se tedy vyhodnotí na Base::getName().</p>"
     },
     {
       "id": "object-slicing_b8",
       "type": "paragraph",
       "html": "<p>The above example prints:</p>",
       "preview": "The above example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad vypíše:</p>"
     },
     {
       "id": "object-slicing_b9",
       "type": "output",
       "text": "base is a Base and has value 5\n",
       "html": "<pre>base is a Base and has value 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>base is a Base and has value 5\n</pre>"
     },
     {
       "id": "object-slicing_b10",
       "type": "paragraph",
       "html": "<p>Used conscientiously, slicing can be benign. However, used improperly, slicing can cause unexpected results in quite a few different ways. Let’s examine some of those cases.</p>",
       "preview": "Used conscientiously, slicing can be benign. However, used improperly, slicing c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při svědomitém použití může být slicing neškodný. Při nesprávném použití však může způsobit neočekávané výsledky mnoha různými způsoby. Pojďme se na některé z těchto případů podívat.</p>"
     },
     {
       "id": "object-slicing_b11",
       "type": "section",
       "title": "Slicing and functions",
       "html": "<h3 class=\"cpp-section-heading\">Slicing and functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Slicing a funkce</h3>",
+      "title_cs": "Krájení a funkce"
     },
     {
       "id": "object-slicing_b12",
       "type": "paragraph",
       "html": "<p>Now, you might think the above example is a bit silly. After all, why would you assign derived to base like that? You probably wouldn’t. However, slicing is much more likely to occur accidentally with functions.</p>",
       "preview": "Now, you might think the above example is a bit silly. After all, why would you ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná si říkáte, že výše uvedený příklad je trochu přitažený za vlasy. Proč byste koneckonců takto přiřazovali derived do base? Pravděpodobně byste to neudělali. U funkcí však k nechtěnému slicingu dochází mnohem častěji.</p>"
     },
     {
       "id": "object-slicing_b13",
       "type": "paragraph",
       "html": "<p>Consider the following function:</p>",
       "preview": "Consider the following function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující funkci:</p>"
     },
     {
       "id": "object-slicing_b14",
@@ -115,14 +130,16 @@
       "language": "cpp",
       "code": "void printName(const Base base) // note: base passed by value, not reference\n{\n    std::cout << \"I am a \" << base.getName() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printName(const Base base) // note: base passed by value, not reference\n{\n    std::cout &lt;&lt; \"I am a \" &lt;&lt; base.getName() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printName(const Base base) // poznámka: základ předán hodnotou, nikoli odkazem\n{\n    std::cout << \"Jsem \" << base.getName() << '\\n';\n}</code></pre>"
     },
     {
       "id": "object-slicing_b15",
       "type": "paragraph",
       "html": "<p>This is a pretty simple function with a const base object parameter that is passed by value. If we call this function like such:</p>",
       "preview": "This is a pretty simple function with a const base object parameter that is pass",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedná se o celkem jednoduchou funkci s parametrem typu const base předávaným hodnotou. Pokud tuto funkci zavoláme následovně:</p>"
     },
     {
       "id": "object-slicing_b16",
@@ -130,14 +147,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived d{ 5 };\n    printName(d); // oops, didn't realize this was pass by value on the calling end\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived d{ 5 };\n    printName(d); // oops, didn't realize this was pass by value on the calling end\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozeno d{ 5 };\n    printName(d); // jejda, neuvědomil jsem si, že to bylo předáno hodnotou na volajícím konci\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b17",
       "type": "paragraph",
       "html": "<p>When you wrote this program, you may not have noticed that base is a value parameter, not a reference. Therefore, when called as printName(d), while we might have expected base.getName() to call virtualized function getName() and print “I am a Derived”, that is not what happens. Instead, Derived object d is sliced and only the Base portion is copied into the base parameter. When base.getName() executes, even though the getName() function is virtualized, there’s no Derived portion of the class for it to resolve to. Consequently, this program prints:</p>",
       "preview": "When you wrote this program, you may not have noticed that base is a value param",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při psaní tohoto programu jste si možná nevšimli, že base je parametr předávaný hodnotou, nikoli referencí. Když je tedy zavolána jako printName(d), ačkoli bychom mohli očekávat, že base.getName() zavolá virtuální funkci getName() a vypíše „I am a Derived“, nestane se tak. Místo toho dojde k oříznutí (slicingu) objektu d typu Derived a do parametru base se zkopíruje pouze část Base. Když se vykoná base.getName(), přestože je funkce getName() virtuální, neexistuje žádná část třídy Derived, na kterou by se mohla vyhodnotit. V důsledku toho tento program vypíše:</p>"
     },
     {
       "id": "object-slicing_b18",
@@ -145,21 +164,24 @@
       "language": "cpp",
       "code": "I am a Base",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">I am a Base</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Jsem základna</code></pre>"
     },
     {
       "id": "object-slicing_b19",
       "type": "paragraph",
       "html": "<p>In this case, it’s pretty obvious what happened, but if your functions don’t actually print any identifying information like this, tracking down the error can be challenging.</p>",
       "preview": "In this case, it’s pretty obvious what happened, but if your functions don’t act",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě je celkem zřejmé, co se stalo, ale pokud vaše funkce nevypisují žádné takové identifikační informace, může být dohledání chyby náročné.</p>"
     },
     {
       "id": "object-slicing_b20",
       "type": "paragraph",
       "html": "<p>Of course, slicing here can all be easily avoided by making the function parameter a reference instead of a pass by value (yet another reason why passing classes by reference instead of value is a good idea).</p>",
       "preview": "Of course, slicing here can all be easily avoided by making the function paramet",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Slicingu se zde samozřejmě lze snadno vyhnout tím, že parametr funkce bude reference namísto předávání hodnotou (což je další důvod, proč je předávání tříd referencí namísto hodnotou dobrý nápad).</p>"
     },
     {
       "id": "object-slicing_b21",
@@ -167,35 +189,41 @@
       "language": "cpp",
       "code": "void printName(const Base& base) // note: base now passed by reference\n{\n    std::cout << \"I am a \" << base.getName() << '\\n';\n}\n\nint main()\n{\n    Derived d{ 5 };\n    printName(d);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printName(const Base&amp; base) // note: base now passed by reference\n{\n    std::cout &lt;&lt; \"I am a \" &lt;&lt; base.getName() &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Derived d{ 5 };\n    printName(d);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printName(const Base& base) // poznámka: základ nyní předán odkazem\n{\n    std::cout << \"Jsem \" << base.getName() << '\\n';\n}\n\nint main()\n{\n    Odvozeno d{ 5 };\n    printName(d);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b22",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "object-slicing_b23",
       "type": "output",
       "text": "I am a Derived\n",
       "html": "<pre>I am a Derived\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>I am a Derived\n</pre>"
     },
     {
       "id": "object-slicing_b24",
       "type": "section",
       "title": "Slicing vectors",
       "html": "<h3 class=\"cpp-section-heading\">Slicing vectors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ořezávání vektorů</h3>",
+      "title_cs": "Krájecí vektory"
     },
     {
       "id": "object-slicing_b25",
       "type": "paragraph",
       "html": "<p>Yet another area where new programmers run into trouble with slicing is trying to implement polymorphism with std::vector. Consider the following program:</p>",
       "preview": "Yet another area where new programmers run into trouble with slicing is trying t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Další oblastí, kde začínající programátoři narážejí na problémy s ořezáváním objektů (slicing), je snaha implementovat polymorfismus pomocí std::vector. Uvažujme následující program:</p>"
     },
     {
       "id": "object-slicing_b26",
@@ -203,35 +231,40 @@
       "language": "cpp",
       "code": "#include <vector>\n\nint main()\n{\n\tstd::vector<Base> v{};\n\tv.push_back(Base{ 5 });    // add a Base object to our vector\n\tv.push_back(Derived{ 6 }); // add a Derived object to our vector\n\n        // Print out all of the elements in our vector\n\tfor (const auto& element : v)\n\t\tstd::cout << \"I am a \" << element.getName() << \" with value \" << element.getValue() << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;vector&gt;\n\nint main()\n{\n\tstd::vector&lt;Base&gt; v{};\n\tv.push_back(Base{ 5 });    // add a Base object to our vector\n\tv.push_back(Derived{ 6 }); // add a Derived object to our vector\n\n        // Print out all of the elements in our vector\n\tfor (const auto&amp; element : v)\n\t\tstd::cout &lt;&lt; \"I am a \" &lt;&lt; element.getName() &lt;&lt; \" with value \" &lt;&lt; element.getValue() &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <vector>\n\nint main()\n{\n\tstd::vector<Base> v{};\n\tv.push_back(Základ{ 5 });    // přidáme objekt Base do našeho vektoru\n\tv.push_back(Odvozeno{ 6 }); // přidat Odvozený objekt do našeho vektoru\n\n        // Vytiskněte všechny prvky v našem vektoru\n\tfor (const auto& element : v)\n\t\tstd::cout << \"Jsem \" << element.getName() << \" s hodnotou \" << element.getValue() << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b27",
       "type": "paragraph",
       "html": "<p>This program compiles just fine. But when run, it prints:</p>",
       "preview": "This program compiles just fine. But when run, it prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se v pořádku zkompiluje. Po spuštění však vypíše:</p>"
     },
     {
       "id": "object-slicing_b28",
       "type": "output",
       "text": "I am a Base with value 5\nI am a Base with value 6\n",
       "html": "<pre>I am a Base with value 5\nI am a Base with value 6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>I am a Base with value 5\nI am a Base with value 6\n</pre>"
     },
     {
       "id": "object-slicing_b29",
       "type": "paragraph",
       "html": "<p>Similar to the previous examples, because the std::vector was declared to be a vector of type Base, when Derived(6) was added to the vector, it was sliced.</p>",
       "preview": "Similar to the previous examples, because the std::vector was declared to be a v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako v předchozích příkladech, jelikož byl std::vector deklarován jako vektor typu Base, při přidání Derived(6) do vektoru došlo k jeho oříznutí.</p>"
     },
     {
       "id": "object-slicing_b30",
       "type": "paragraph",
       "html": "<p>Fixing this is a little more difficult. Many new programmers try creating a std::vector of references to an object, like this:</p>",
       "preview": "Fixing this is a little more difficult. Many new programmers try creating a std:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Náprava je o něco složitější. Mnoho začínajících programátorů se pokouší vytvořit std::vector referencí na objekt, například takto:</p>"
     },
     {
       "id": "object-slicing_b31",
@@ -239,21 +272,24 @@
       "language": "cpp",
       "code": "std::vector<Base&> v{};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector&lt;Base&amp;&gt; v{};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector<Base&> v{};</code></pre>"
     },
     {
       "id": "object-slicing_b32",
       "type": "paragraph",
       "html": "<p>Unfortunately, this won’t compile. The elements of std::vector must be assignable, whereas references can’t be reassigned (only initialized).</p>",
       "preview": "Unfortunately, this won’t compile. The elements of std::vector must be assignabl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto se bohužel nezkompiluje. Prvky std::vector musí být přiřaditelné, zatímco odkazy nelze přeřadit (pouze inicializovat).</p>"
     },
     {
       "id": "object-slicing_b33",
       "type": "paragraph",
       "html": "<p>One way to address this is to make a vector of pointers:</p>",
       "preview": "One way to address this is to make a vector of pointers:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze způsobů, jak to vyřešit, je vytvořit vektor ukazatelů:</p>"
     },
     {
       "id": "object-slicing_b34",
@@ -261,35 +297,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n\tstd::vector<Base*> v{};\n\t\n\tBase b{ 5 }; // b and d can't be anonymous objects\n\tDerived d{ 6 };\n\n\tv.push_back(&b); // add a Base object to our vector\n\tv.push_back(&d); // add a Derived object to our vector\n\n\t// Print out all of the elements in our vector\n\tfor (const auto* element : v)\n\t\tstd::cout << \"I am a \" << element->getName() << \" with value \" << element->getValue() << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n\tstd::vector&lt;Base*&gt; v{};\n\t\n\tBase b{ 5 }; // b and d can't be anonymous objects\n\tDerived d{ 6 };\n\n\tv.push_back(&amp;b); // add a Base object to our vector\n\tv.push_back(&amp;d); // add a Derived object to our vector\n\n\t// Print out all of the elements in our vector\n\tfor (const auto* element : v)\n\t\tstd::cout &lt;&lt; \"I am a \" &lt;&lt; element-&gt;getName() &lt;&lt; \" with value \" &lt;&lt; element-&gt;getValue() &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n\tstd::vector<Base*> v{};\n\t\n\tZáklad b{ 5 }; // b a d nemohou být anonymní objekty\n\tOdvozeno d{ 6 };\n\n\tv.push_back(&b); // přidáme objekt Base do našeho vektoru\n\tv.push_back(&d); // přidat Odvozený objekt do našeho vektoru\n\n\t// Vytiskněte všechny prvky v našem vektoru\n\tfor (const auto* element : v)\n\t\tstd::cout << \"Jsem \" << element->getName() << \" s hodnotou \" << element->getValue() << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b35",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto vytiskne:</p>"
     },
     {
       "id": "object-slicing_b36",
       "type": "output",
       "text": "I am a Base with value 5\nI am a Derived with value 6\n",
       "html": "<pre>I am a Base with value 5\nI am a Derived with value 6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Jsem základ s hodnotou 5\nJsem odvozený s hodnotou 6\n</pre>"
     },
     {
       "id": "object-slicing_b37",
       "type": "paragraph",
       "html": "<p>which works! A few comments about this. First, nullptr is now a valid option, which may or may not be desirable. Second, you now have to deal with pointer semantics, which can be awkward. But the upside is that using pointers allows us to put dynamically allocated objects in the vector (just don’t forget to explicitly delete them).</p>",
       "preview": "which works! A few comments about this. First, nullptr is now a valid option, wh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>což funguje! Pár komentářů k tomu. Za prvé, nullptr je nyní platná možnost, která může nebo nemusí být žádoucí. Za druhé, nyní se musíte vypořádat se sémantikou ukazatelů, což může být nepříjemné. Výhodou však je, že pomocí ukazatelů můžeme do vektoru umístit dynamicky alokované objekty (jen je nezapomeňte explicitně odstranit).</p>"
     },
     {
       "id": "object-slicing_b38",
       "type": "paragraph",
       "html": "<p>Another option is to use std::reference_wrapper, which is a class that mimics an reassignable reference:</p>",
       "preview": "Another option is to use std::reference_wrapper, which is a class that mimics an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Další možností je použít std::reference_wrapper, což je třída, která napodobuje znovu přiřaditelný odkaz:</p>"
     },
     {
       "id": "object-slicing_b39",
@@ -297,28 +338,33 @@
       "language": "cpp",
       "code": "#include <functional> // for std::reference_wrapper\n#include <iostream>\n#include <string_view>\n#include <vector>\n\nclass Base\n{\nprotected:\n    int m_value{};\n\npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n    virtual ~Base() = default;\n\n    virtual std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n\n    std::string_view getName() const override { return \"Derived\"; }\n};\n\nint main()\n{\n\tstd::vector<std::reference_wrapper<Base>> v{}; // a vector of reassignable references to Base\n\n\tBase b{ 5 }; // b and d can't be anonymous objects\n\tDerived d{ 6 };\n\n\tv.push_back(b); // add a Base object to our vector\n\tv.push_back(d); // add a Derived object to our vector\n\n\t// Print out all of the elements in our vector\n\t// we use .get() to get our element out of the std::reference_wrapper\n\tfor (const auto& element : v) // element has type const std::reference_wrapper<Base>&\n\t\tstd::cout << \"I am a \" << element.get().getName() << \" with value \" << element.get().getValue() << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;functional&gt; // for std::reference_wrapper\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n#include &lt;vector&gt;\n\nclass Base\n{\nprotected:\n    int m_value{};\n\npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n    virtual ~Base() = default;\n\n    virtual std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n\n    std::string_view getName() const override { return \"Derived\"; }\n};\n\nint main()\n{\n\tstd::vector&lt;std::reference_wrapper&lt;Base&gt;&gt; v{}; // a vector of reassignable references to Base\n\n\tBase b{ 5 }; // b and d can't be anonymous objects\n\tDerived d{ 6 };\n\n\tv.push_back(b); // add a Base object to our vector\n\tv.push_back(d); // add a Derived object to our vector\n\n\t// Print out all of the elements in our vector\n\t// we use .get() to get our element out of the std::reference_wrapper\n\tfor (const auto&amp; element : v) // element has type const std::reference_wrapper&lt;Base&gt;&amp;\n\t\tstd::cout &lt;&lt; \"I am a \" &lt;&lt; element.get().getName() &lt;&lt; \" with value \" &lt;&lt; element.get().getValue() &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <functional> // pro std::reference_wrapper\n#include <iostream>\n#include <string_view>\n#include <vektor>\n\ntřída Základní\n{\nchráněno:\n    int m_hodnota{};\n\nveřejnost:\n    základ (hodnota int)\n        : m_value{ hodnota }\n    {\n    }\n    virtual ~Base() = výchozí;\n\n    virtual std::string_view getName() const { return \"Základ\"; }\n    int getValue() const { return m_value; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základní{ hodnota }\n    {\n    }\n\n    std::string_view getName() const override { return \"Odvozeno\"; }\n};\n\nint main()\n{\n\tstd::vector<std::reference_wrapper<Základ>> v{}; // vektor znovu přiřaditelných odkazů na Base\n\n\tZáklad b{ 5 }; // b a d nemohou být anonymní objekty\n\tOdvozeno d{ 6 };\n\n\tv.push_back(b); // přidáme objekt Base do našeho vektoru\n\tv.push_back(d); // přidat Odvozený objekt do našeho vektoru\n\n\t// Vytiskněte všechny prvky v našem vektoru\n\t// používáme .get(), abychom dostali náš prvek z std::reference_wrapper\n\tfor (const auto& element : v) // element má typ const std::reference_wrapper<Base>&\n\t\tstd::cout << \"Jsem \" << element.get().getName() << \" s hodnotou \" << element.get().getValue() << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b40",
       "type": "section",
       "title": "The Frankenobject",
       "html": "<h3 class=\"cpp-section-heading\">The Frankenobject</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Frankenobject</h3>",
+      "title_cs": "Frankenobject"
     },
     {
       "id": "object-slicing_b41",
       "type": "paragraph",
       "html": "<p>In the above examples, we’ve seen cases where slicing lead to the wrong result because the derived class had been sliced off. Now let’s take a look at another dangerous case where the derived object still exists!</p>",
       "preview": "In the above examples, we’ve seen cases where slicing lead to the wrong result b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedených příkladech jsme viděli případy, kdy krájení vedlo k nesprávnému výsledku, protože odvozená třída byla odříznuta. Nyní se podívejme na další nebezpečný případ, kdy odvozený objekt stále existuje!</p>"
     },
     {
       "id": "object-slicing_b42",
       "type": "paragraph",
       "html": "<p>Consider the following code:</p>",
       "preview": "Consider the following code:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zvažte následující kód:</p>"
     },
     {
       "id": "object-slicing_b43",
@@ -326,35 +372,40 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived d1{ 5 };\n    Derived d2{ 6 };\n    Base& b{ d2 };\n\n    b = d1; // this line is problematic\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived d1{ 5 };\n    Derived d2{ 6 };\n    Base&amp; b{ d2 };\n\n    b = d1; // this line is problematic\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozeno d1{ 5 };\n    Odvozeno d2{ 6 };\n    Základ& b{ d2 };\n\n    b = dl; // tento řádek je problematický\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "object-slicing_b44",
       "type": "paragraph",
       "html": "<p>The first three lines in the function are pretty straightforward. Create two Derived objects, and set a Base reference to the second one.</p>",
       "preview": "The first three lines in the function are pretty straightforward. Create two Der",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První tři řádky ve funkci jsou docela jednoduché. Vytvořte dva odvozené objekty a na druhý nastavte základní referenci.</p>"
     },
     {
       "id": "object-slicing_b45",
       "type": "paragraph",
       "html": "<p>The fourth line is where things go astray. Since b points at d2, and we’re assigning d1 to b, you might think that the result would be that d1 would get copied into d2 -- and it would, if b were a Derived. But b is a Base, and the operator= that C++ provides for classes isn’t virtual by default. Consequently, the assignment operator that copies a Base is invoked, and only the Base portion of d1 is copied into d2.</p>",
       "preview": "The fourth line is where things go astray. Since b points at d2, and we’re assig",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Čtvrtý řádek je místo, kde věci jdou z cesty. Protože b ukazuje na d2 a my přiřazujeme d1 k b, můžete si myslet, že výsledkem by bylo, že d1 by se zkopírovalo do d2 -- a bylo by, kdyby b bylo odvozeno. Ale b je Báze a operátor=, který C++ poskytuje pro třídy, není ve výchozím nastavení virtuální. Následně je vyvolán operátor přiřazení, který zkopíruje Bázi, a do d2 se zkopíruje pouze Báze část d1.</p>"
     },
     {
       "id": "object-slicing_b46",
       "type": "paragraph",
       "html": "<p>As a result, you’ll discover that d2 now has the Base portion of d1 and the Derived portion of d2. In this particular example, that’s not a problem (because the Derived class has no data of its own), but in most cases, you’ll have just created a Frankenobject -- composed of parts of multiple objects.</p>",
       "preview": "As a result, you’ll discover that d2 now has the Base portion of d1 and the Deri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V důsledku toho zjistíte, že d2 má nyní základní část d1 a odvozenou část d2. V tomto konkrétním příkladu to není problém (protože třída Derived nemá žádná vlastní data), ale ve většině případů jste právě vytvořili Frankenobject – složený z částí více objektů.</p>"
     },
     {
       "id": "object-slicing_b47",
       "type": "paragraph",
       "html": "<p>Worse, there’s no easy way to prevent this from happening (other than avoiding assignments like this as much as possible).</p>",
       "preview": "Worse, there’s no easy way to prevent this from happening (other than avoiding a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co je horší, neexistuje žádný snadný způsob, jak tomu zabránit (kromě toho, že se podobným úkolům budete co nejvíce vyhýbat).</p>"
     },
     {
       "id": "object-slicing_b48",
@@ -362,21 +413,26 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>If the Base class is not designed to be instantiated by itself (e.g. it is just an interface class), slicing can be avoided by making the Base class non-copyable (by deleting the Base copy constructor and Base assignment operator).</p></div>",
       "preview": "TipIf the Base class is not designed to be instantiated by itself (e.g. it is just an interface clas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Pokud třída Base není navržena tak, aby byla vytvořena sama o sobě (např. je to pouze třída rozhraní), lze se dělení vyhnout tím, že třídu Base učiníte nekopírovatelnou (smazáním konstruktoru Base copy a operátoru Base><div).</p><div."
     },
     {
       "id": "object-slicing_b49",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "object-slicing_b50",
       "type": "paragraph",
       "html": "<p>Although C++ supports assigning derived objects to base objects via object slicing, in general, this is likely to cause nothing but headaches, and you should generally try to avoid slicing. Make sure your function parameters are references (or pointers) and try to avoid any kind of pass-by-value when it comes to derived classes.</p>",
       "preview": "Although C++ supports assigning derived objects to base objects via object slici",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože C++ podporuje přiřazování odvozených objektů k základním objektům pomocí krájení objektů, obecně to pravděpodobně nezpůsobí nic jiného než bolesti hlavy a obecně byste se měli snažit krácení vyhnout. Ujistěte se, že parametry vaší funkce jsou reference (nebo ukazatele) a snažte se vyhnout jakémukoli typu předávané hodnoty, pokud jde o odvozené třídy.</p>"
     }
-  ]
+  ],
+  "title_cs": "25.9 — Ořezávání objektů"
 }

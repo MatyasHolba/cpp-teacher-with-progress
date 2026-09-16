@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/\">6.7 -- Relational operators and floating point comparisons</a>, we discussed the six comparison operators. Overloading these comparison operators is comparatively simple (see what I did there?), as they follow the same patterns as we’ve seen in overloading other operators.</p>",
       "preview": "In lesson 6.7 -- Relational operators and floating point comparisons, we discuss",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/relational-operators-and-floating-point-comparisons/\">6.7 -- Relační operátory a porovnávání čísel s plovoucí řádovou čárkou</a> jsme probírali šestici porovnávacích operátorů. Přetěžování těchto porovnávacích operátorů je poměrně (či srovnatelně) jednoduché, protože se řídí stejnými vzory, jaké jsme viděli u přetěžování jiných operátorů.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b1",
       "type": "paragraph",
       "html": "<p>Because the comparison operators are all binary operators that do not modify their left operands, we will make our overloaded comparison operators friend functions.</p>",
       "preview": "Because the comparison operators are all binary operators that do not modify the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože jsou všechny porovnávací operátory binárními operátory, které nemění své levé operandy, vytvoříme naše přetížené porovnávací operátory jako spřátelené funkce (friend functions).</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b2",
       "type": "paragraph",
       "html": "<p>Here’s an example Car class with an overloaded operator== and operator!=.</p>",
       "preview": "Here’s an example Car class with an overloaded operator== and operator!=.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad třídy Car s přetíženým operator== a operator!=.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b3",
@@ -36,21 +39,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass Car\n{\nprivate:\n    std::string m_make;\n    std::string m_model;\n\npublic:\n    Car(std::string_view make, std::string_view model)\n        : m_make{ make }, m_model{ model }\n    {\n    }\n\n    friend bool operator== (const Car& c1, const Car& c2);\n    friend bool operator!= (const Car& c1, const Car& c2);\n};\n\nbool operator== (const Car& c1, const Car& c2)\n{\n    return (c1.m_make == c2.m_make &&\n            c1.m_model == c2.m_model);\n}\n\nbool operator!= (const Car& c1, const Car& c2)\n{\n    return (c1.m_make != c2.m_make ||\n            c1.m_model != c2.m_model);\n}\n\nint main()\n{\n    Car corolla{ \"Toyota\", \"Corolla\" };\n    Car camry{ \"Toyota\", \"Camry\" };\n\n    if (corolla == camry)\n        std::cout << \"a Corolla and Camry are the same.\\n\";\n\n    if (corolla != camry)\n        std::cout << \"a Corolla and Camry are not the same.\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass Car\n{\nprivate:\n    std::string m_make;\n    std::string m_model;\n\npublic:\n    Car(std::string_view make, std::string_view model)\n        : m_make{ make }, m_model{ model }\n    {\n    }\n\n    friend bool operator== (const Car&amp; c1, const Car&amp; c2);\n    friend bool operator!= (const Car&amp; c1, const Car&amp; c2);\n};\n\nbool operator== (const Car&amp; c1, const Car&amp; c2)\n{\n    return (c1.m_make == c2.m_make &amp;&amp;\n            c1.m_model == c2.m_model);\n}\n\nbool operator!= (const Car&amp; c1, const Car&amp; c2)\n{\n    return (c1.m_make != c2.m_make ||\n            c1.m_model != c2.m_model);\n}\n\nint main()\n{\n    Car corolla{ \"Toyota\", \"Corolla\" };\n    Car camry{ \"Toyota\", \"Camry\" };\n\n    if (corolla == camry)\n        std::cout &lt;&lt; \"a Corolla and Camry are the same.\\n\";\n\n    if (corolla != camry)\n        std::cout &lt;&lt; \"a Corolla and Camry are not the same.\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřída Auto\n{\nsoukromé:\n    std::string m_make;\n    std::string m_model;\n\nveřejnost:\n    Auto(std::string_view make, std::string_view model)\n        : m_make{ make }, m_model{ model }\n    {\n    }\n\n    přítel bool operátor== (konst Car& c1, const Car& c2);\n    přítel bool operátor!= (konst Car& c1, const Car& c2);\n};\n\nbool operator== (konst Car& c1, const Car& c2)\n{\n    návrat (c1.m_make == c2.m_make &&\n            c1.m_model == c2.m_model);\n}\n\nbool operátor!= (konst Car& c1, const Car& c2)\n{\n    návrat (c1.m_make != c2.m_make ||\n            c1.m_model != c2.m_model);\n}\n\nint main()\n{\n    Car corolla{ \"Toyota\", \"Corolla\" };\n    Car camry{ \"Toyota\", \"Camry\" };\n\n    if (corolla == camry)\n        std::cout << \"Corolla a Camry jsou stejné.\\n\";\n\n    if (corolla != camry)\n        std::cout << \"Corolla a Camry nejsou totéž.\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b4",
       "type": "paragraph",
       "html": "<p>The code here should be straightforward.</p>",
       "preview": "The code here should be straightforward.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód by měl být přímočarý.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b5",
       "type": "paragraph",
       "html": "<p>What about operator&lt; and operator&gt;? What would it mean for a Car to be greater or less than another Car? We typically don’t think about cars this way. Since the results of operator&lt; and operator&gt; would not be immediately intuitive, it may be better to leave these operators undefined.</p>",
       "preview": "What about operator< and operator>? What would it mean for a Car to be greater o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A co operator&lt; a operator&gt;? Co by znamenalo, že jedno Car je větší nebo menší než jiné Car? Tímto způsobem o autech obvykle neuvažujeme. Vzhledem k tomu, že výsledky operator&lt; a operator&gt; by nebyly intuitivně zřejmé, může být lepší nechat tyto operátory nedefinované.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b6",
@@ -58,28 +64,32 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Only define overloaded operators that make intuitive sense for your class.</p></div>",
       "preview": "Best practiceOnly define overloaded operators that make intuitive sense for your class.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Definujte pouze ty přetížené operátory, které pro vaši třídu dávají intuitivní smysl.</p></div>"
     },
     {
       "id": "overloading-the-comparison-operators_b7",
       "type": "paragraph",
       "html": "<p>However, there is one common exception to the above recommendation. What if we wanted to sort a list of Cars? In such a case, we might want to overload the comparison operators to return the member (or members) you’re most likely to want to sort on. For example, an overloaded operator&lt; for Cars might sort based on make and model alphabetically.</p>",
       "preview": "However, there is one common exception to the above recommendation. What if we w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Z výše uvedeného doporučení však existuje jedna běžná výjimka. Co kdybychom chtěli seřadit seznam objektů Car? V takovém případě bychom mohli chtít přetížit porovnávací operátory tak, aby vracely člen (nebo členy), podle kterých budete nejspíše chtít řadit. Například přetížený operator&lt; pro Car by mohl řadit abecedně podle značky a modelu.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b8",
       "type": "paragraph",
       "html": "<p>Some of the container classes in the standard library (classes that hold sets of other classes) require an overloaded operator&lt; so they can keep the elements sorted.</p>",
       "preview": "Some of the container classes in the standard library (classes that hold sets of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Některé kontejnerové třídy ve standardní knihovně (třídy, které uchovávají sady jiných tříd) vyžadují přetížený operator&lt;, aby mohly udržovat prvky seřazené.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b9",
       "type": "paragraph",
       "html": "<p>Here’s a different example overloading all 6 logical comparison operators:</p>",
       "preview": "Here’s a different example overloading all 6 logical comparison operators:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další příklad přetěžující všech 6 relačních porovnávacích operátorů:</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b10",
@@ -87,49 +97,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n    int m_cents;\n \npublic:\n    Cents(int cents)\n\t: m_cents{ cents }\n\t{}\n \n    friend bool operator== (const Cents& c1, const Cents& c2);\n    friend bool operator!= (const Cents& c1, const Cents& c2);\n\n    friend bool operator< (const Cents& c1, const Cents& c2);\n    friend bool operator> (const Cents& c1, const Cents& c2);\n\n    friend bool operator<= (const Cents& c1, const Cents& c2);\n    friend bool operator>= (const Cents& c1, const Cents& c2);\n};\n\nbool operator== (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents == c2.m_cents;\n}\n\nbool operator!= (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents != c2.m_cents;\n}\n\nbool operator> (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents > c2.m_cents;\n}\n\nbool operator< (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents < c2.m_cents;\n}\n\nbool operator<= (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents <= c2.m_cents;\n}\n\nbool operator>= (const Cents& c1, const Cents& c2)\n{\n    return c1.m_cents >= c2.m_cents;\n}\n\nint main()\n{\n    Cents dime{ 10 };\n    Cents nickel{ 5 };\n \n    if (nickel > dime)\n        std::cout << \"a nickel is greater than a dime.\\n\";\n    if (nickel >= dime)\n        std::cout << \"a nickel is greater than or equal to a dime.\\n\";\n    if (nickel < dime)\n        std::cout << \"a dime is greater than a nickel.\\n\";\n    if (nickel <= dime)\n        std::cout << \"a dime is greater than or equal to a nickel.\\n\";\n    if (nickel == dime)\n        std::cout << \"a dime is equal to a nickel.\\n\";\n    if (nickel != dime)\n        std::cout << \"a dime is not equal to a nickel.\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n    int m_cents;\n \npublic:\n    Cents(int cents)\n\t: m_cents{ cents }\n\t{}\n \n    friend bool operator== (const Cents&amp; c1, const Cents&amp; c2);\n    friend bool operator!= (const Cents&amp; c1, const Cents&amp; c2);\n\n    friend bool operator&lt; (const Cents&amp; c1, const Cents&amp; c2);\n    friend bool operator&gt; (const Cents&amp; c1, const Cents&amp; c2);\n\n    friend bool operator&lt;= (const Cents&amp; c1, const Cents&amp; c2);\n    friend bool operator&gt;= (const Cents&amp; c1, const Cents&amp; c2);\n};\n\nbool operator== (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents == c2.m_cents;\n}\n\nbool operator!= (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents != c2.m_cents;\n}\n\nbool operator&gt; (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents &gt; c2.m_cents;\n}\n\nbool operator&lt; (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents &lt; c2.m_cents;\n}\n\nbool operator&lt;= (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents &lt;= c2.m_cents;\n}\n\nbool operator&gt;= (const Cents&amp; c1, const Cents&amp; c2)\n{\n    return c1.m_cents &gt;= c2.m_cents;\n}\n\nint main()\n{\n    Cents dime{ 10 };\n    Cents nickel{ 5 };\n \n    if (nickel &gt; dime)\n        std::cout &lt;&lt; \"a nickel is greater than a dime.\\n\";\n    if (nickel &gt;= dime)\n        std::cout &lt;&lt; \"a nickel is greater than or equal to a dime.\\n\";\n    if (nickel &lt; dime)\n        std::cout &lt;&lt; \"a dime is greater than a nickel.\\n\";\n    if (nickel &lt;= dime)\n        std::cout &lt;&lt; \"a dime is greater than or equal to a nickel.\\n\";\n    if (nickel == dime)\n        std::cout &lt;&lt; \"a dime is equal to a nickel.\\n\";\n    if (nickel != dime)\n        std::cout &lt;&lt; \"a dime is not equal to a nickel.\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n    int m_cents;\n \nveřejnost:\n    centů (int centů)\n\t: m_cents{ cents}\n\t{}\n \n    přítel bool operátor== (konst centů& c1, konst centů& c2);\n    přítel bool operátor!= (const Cents& c1, const Cents& c2);\n\n    přítel bool operátor< (const Cents& c1, const Cents& c2);\n    přítel bool operátor> (konst centů& c1, konst centů& c2);\n\n    přítel bool operátor<= (konst centů& c1, konst centů& c2);\n    přítel bool operátor>= (konst centů& c1, konst centů& c2);\n};\n\nbool operátor== (konst centů& c1, konst centů& c2)\n{\n    return c1.m_cents == c2.m_cents;\n}\n\nbool operátor!= (konst centů& c1, konst centů& c2)\n{\n    return c1.m_cents != c2.m_cents;\n}\n\nbool operátor> (konst centů a c1, konst centů a c2)\n{\n    návrat c1.m_centů > c2.m_centů;\n}\n\nbool operátor< (konst centů& c1, konst centů& c2)\n{\n    návrat c1.m_centů < c2.m_centů;\n}\n\nbool operátor<= (konst centů& c1, konst centů& c2)\n{\n    return c1.m_cents <= c2.m_cents;\n}\n\nbool operátor>= (konst centů& c1, konst centů& c2)\n{\n    návrat c1.m_centů >= c2.m_centů;\n}\n\nint main()\n{\n    centů desetník{ 10 };\n    centů nikl{ 5 };\n \n    if (nikl > desetník)\n        std::cout << \"nikl je větší než desetník.\\n\";\n    if (nikl >= desetník)\n        std::cout << \"nikl je větší nebo roven desetníku.\\n\";\n    if (nikl < desetník)\n        std::cout << \"deník je větší než nikl.\\n\";\n    if (nikl <= desetník)\n        std::cout << \"desetník je větší nebo roven niklu.\\n\";\n    if (nikl == desetník)\n        std::cout << \"desetník se rovná niklu.\\n\";\n    if (nikl != desetník)\n        std::cout << \"desetník nerovná se nikl.\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b11",
       "type": "paragraph",
       "html": "<p>This is also pretty straightforward.</p>",
       "preview": "This is also pretty straightforward.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I toto je poměrně přímočaré.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b12",
       "type": "section",
       "title": "Minimizing comparative redundancy",
       "html": "<h3 class=\"cpp-section-heading\">Minimizing comparative redundancy</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Minimalizace redundance při porovnávání</h3>",
+      "title_cs": "Minimalizace komparativní redundance"
     },
     {
       "id": "overloading-the-comparison-operators_b13",
       "type": "paragraph",
       "html": "<p>In the example above, note how similar the implementation of each of the overloaded comparison operators are. Overloaded comparison operators tend to have a high degree of redundancy, and the more complex the implementation, the more redundancy there will be.</p>",
       "preview": "In the example above, note how similar the implementation of each of the overloa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu si všimněte, jak podobné jsou implementace jednotlivých přetížených porovnávacích operátorů. Přetížené porovnávací operátory mívají vysokou míru redundance, a čím složitější je implementace, tím více redundance v ní bude.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b14",
       "type": "paragraph",
       "html": "<p>Fortunately, many of the comparison operators can be implemented using the other comparison operators:</p>",
       "preview": "Fortunately, many of the comparison operators can be implemented using the other",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí lze mnoho porovnávacích operátorů implementovat pomocí jiných porovnávacích operátorů:</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b15",
       "type": "list",
       "html": "<ul><li>operator!= can be implemented as !(operator==)</li><li>operator&gt; can be implemented as operator&lt; with the order of the parameters flipped</li><li>operator&gt;= can be implemented as !(operator&lt;)</li><li>operator&lt;= can be implemented as !(operator&gt;)</li></ul>",
       "preview": "operator!= can be implemented as !(operator==)operator> can be implemented as op",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>operator!= lze implementovat jako !(operator==)</li><li>operator&gt; lze implementovat jako operator&lt; s obráceným pořadím parametrů</li><li>operator&gt;= lze implementovat jako !(operator&lt;)</li><li>operator&lt;= lze implementovat jako !(operator&gt;)</li></ul>"
     },
     {
       "id": "overloading-the-comparison-operators_b16",
       "type": "paragraph",
       "html": "<p>This means that we only need to implement logic for operator== and operator&lt;, and then the other four comparison operators can be defined in terms of those two! Here’s an updated Cents example illustrating this:</p>",
       "preview": "This means that we only need to implement logic for operator== and operator<, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že musíme implementovat logiku pouze pro operator== a operator&lt;, a zbývající čtyři porovnávací operátory pak mohou být definovány pomocí těchto dvou! Zde je aktualizovaný příklad třídy Cents, který to ilustruje:</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b17",
@@ -137,28 +155,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n    int m_cents;\n\npublic:\n    Cents(int cents)\n        : m_cents{ cents }\n    {}\n\n    friend bool operator== (const Cents& c1, const Cents& c2) { return c1.m_cents == c2.m_cents; }\n    friend bool operator!= (const Cents& c1, const Cents& c2) { return !(operator==(c1, c2)); }\n\n    friend bool operator< (const Cents& c1, const Cents& c2) { return c1.m_cents < c2.m_cents; }\n    friend bool operator> (const Cents& c1, const Cents& c2) { return operator<(c2, c1); }\n\n    friend bool operator<= (const Cents& c1, const Cents& c2) { return !(operator>(c1, c2)); }\n    friend bool operator>= (const Cents& c1, const Cents& c2) { return !(operator<(c1, c2)); }\n\n};\n\nint main()\n{\n    Cents dime{ 10 };\n    Cents nickel{ 5 };\n\n    if (nickel > dime)\n        std::cout << \"a nickel is greater than a dime.\\n\";\n    if (nickel >= dime)\n        std::cout << \"a nickel is greater than or equal to a dime.\\n\";\n    if (nickel < dime)\n        std::cout << \"a dime is greater than a nickel.\\n\";\n    if (nickel <= dime)\n        std::cout << \"a dime is greater than or equal to a nickel.\\n\";\n    if (nickel == dime)\n        std::cout << \"a dime is equal to a nickel.\\n\";\n    if (nickel != dime)\n        std::cout << \"a dime is not equal to a nickel.\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n    int m_cents;\n\npublic:\n    Cents(int cents)\n        : m_cents{ cents }\n    {}\n\n    friend bool operator== (const Cents&amp; c1, const Cents&amp; c2) { return c1.m_cents == c2.m_cents; }\n    friend bool operator!= (const Cents&amp; c1, const Cents&amp; c2) { return !(operator==(c1, c2)); }\n\n    friend bool operator&lt; (const Cents&amp; c1, const Cents&amp; c2) { return c1.m_cents &lt; c2.m_cents; }\n    friend bool operator&gt; (const Cents&amp; c1, const Cents&amp; c2) { return operator&lt;(c2, c1); }\n\n    friend bool operator&lt;= (const Cents&amp; c1, const Cents&amp; c2) { return !(operator&gt;(c1, c2)); }\n    friend bool operator&gt;= (const Cents&amp; c1, const Cents&amp; c2) { return !(operator&lt;(c1, c2)); }\n\n};\n\nint main()\n{\n    Cents dime{ 10 };\n    Cents nickel{ 5 };\n\n    if (nickel &gt; dime)\n        std::cout &lt;&lt; \"a nickel is greater than a dime.\\n\";\n    if (nickel &gt;= dime)\n        std::cout &lt;&lt; \"a nickel is greater than or equal to a dime.\\n\";\n    if (nickel &lt; dime)\n        std::cout &lt;&lt; \"a dime is greater than a nickel.\\n\";\n    if (nickel &lt;= dime)\n        std::cout &lt;&lt; \"a dime is greater than or equal to a nickel.\\n\";\n    if (nickel == dime)\n        std::cout &lt;&lt; \"a dime is equal to a nickel.\\n\";\n    if (nickel != dime)\n        std::cout &lt;&lt; \"a dime is not equal to a nickel.\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n    int m_cents;\n\nveřejnost:\n    centů (int centů)\n        : m_cents{ cents}\n    {}\n\n    přítel bool operátor== (konst centů& c1, konst centů& c2) { return c1.m_cents == c2.m_cents; }\n    friend bool operator!= (const Cents& c1, const Cents& c2) { return !(operator==(c1, c2)); }\n\n    přítel bool operátor< (const Cents& c1, const Cents& c2) { return c1.m_cents < c2.m_cents; }\n    friend bool operator> (const Cents& c1, const Cents& c2) { return operator<(c2, c1); }\n\n    friend bool operator<= (const Cents& c1, const Cents& c2) { return !(operator>(c1, c2)); }\n    friend bool operator>= (const Cents& c1, const Cents& c2) { return !(operator<(c1, c2)); }\n\n};\n\nint main()\n{\n    centů desetník{ 10 };\n    centů nikl{ 5 };\n\n    if (nikl > desetník)\n        std::cout << \"nikl je větší než desetník.\\n\";\n    if (nikl >= desetník)\n        std::cout << \"nikl je větší nebo roven desetníku.\\n\";\n    if (nikl < desetník)\n        std::cout << \"deník je větší než nikl.\\n\";\n    if (nikl <= desetník)\n        std::cout << \"desetník je větší nebo roven niklu.\\n\";\n    if (nikl == desetník)\n        std::cout << \"desetník se rovná niklu.\\n\";\n    if (nikl != desetník)\n        std::cout << \"desetník nerovná se nikl.\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b18",
       "type": "paragraph",
       "html": "<p>This way, if we ever need to change something, we only need to update operator== and operator&lt; instead of all six comparison operators!</p>",
       "preview": "This way, if we ever need to change something, we only need to update operator==",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto způsobem, pokud budeme někdy potřebovat něco změnit, stačí upravit pouze operator== a operator&lt; namísto všech šesti porovnávacích operátorů!</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b19",
       "type": "section",
       "title": "The spaceship operator <=> C++20",
       "html": "<h3 class=\"cpp-section-heading\">The spaceship operator &lt;=&gt; <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Operátor spaceship &lt;=&gt; <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
+      "title_cs": "Operátor vesmírné lodi <=> C++20"
     },
     {
       "id": "overloading-the-comparison-operators_b20",
       "type": "paragraph",
       "html": "<p>C++20 introduces the spaceship operator (<code>operator&lt;=&gt;</code>), which allows us to reduce the number of comparison functions we need to write down to 2 at most, and sometimes just 1!</p>",
       "preview": "C++20 introduces the spaceship operator (operator<=>), which allows us to reduce",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++20 zavádí operátor spaceship (<code>operator&lt;=&gt;</code>), který nám umožňuje snížit počet porovnávacích funkcí, jež musíme napsat, na nejvýše 2 a někdy dokonce jen na 1!</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b21",
@@ -166,21 +189,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>We intend to add a new lesson on this topic soon. Until then, consider this something to pique your interest -- but you’ll have to go off-site to discover more.</p></div>",
       "preview": "Author’s noteWe intend to add a new lesson on this topic soon. Until then, consider this something t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Na toto téma plánujeme brzy přidat novou lekci. Do té doby to berte jako podnět k probuzení vašeho zájmu – více informací však budete muset vyhledat jinde.</p></div>"
     },
     {
       "id": "overloading-the-comparison-operators_b22",
       "type": "paragraph",
       "html": "<p><strong>Quiz time</strong></p>",
       "preview": "Quiz time",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Kvíz</strong></p>"
     },
     {
       "id": "overloading-the-comparison-operators_b23",
       "type": "list",
       "html": "<ol start=\"1\"><li>Add the six comparison operators to the Fraction class so that the following program compiles:</li></ol>",
       "preview": "Add the six comparison operators to the Fraction class so that the following pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Přidejte do třídy Fraction všech šest porovnávacích operátorů tak, aby bylo možné následující program zkompilovat:</li></ol>"
     },
     {
       "id": "overloading-the-comparison-operators_b24",
@@ -188,14 +214,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <numeric> // for std::gcd\n\nclass Fraction\n{\nprivate:\n\tint m_numerator{};\n\tint m_denominator{};\n\npublic:\n\tFraction(int numerator = 0, int denominator = 1) :\n\t\tm_numerator{ numerator }, m_denominator{ denominator }\n\t{\n\t\t// We put reduce() in the constructor to ensure any new fractions we make get reduced!\n\t\t// Any fractions that are overwritten will need to be re-reduced\n\t\treduce();\n\t}\n\n\tvoid reduce()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_denominator) };\n\t\tif (gcd)\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_denominator /= gcd;\n\t\t}\n\t}\n\n\tfriend std::ostream& operator<<(std::ostream& out, const Fraction& f1);\n};\n\nstd::ostream& operator<<(std::ostream& out, const Fraction& f1)\n{\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\treturn out;\n}\n\nint main()\n{\n\tFraction f1{ 3, 2 };\n\tFraction f2{ 5, 8 };\n\n\tstd::cout << f1 << ((f1 == f2) ? \" == \" : \" not == \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 != f2) ? \" != \" : \" not != \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 < f2) ? \" < \" : \" not < \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 > f2) ? \" > \" : \" not > \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 <= f2) ? \" <= \" : \" not <= \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 >= f2) ? \" >= \" : \" not >= \") << f2 << '\\n';\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;numeric&gt; // for std::gcd\n\nclass Fraction\n{\nprivate:\n\tint m_numerator{};\n\tint m_denominator{};\n\npublic:\n\tFraction(int numerator = 0, int denominator = 1) :\n\t\tm_numerator{ numerator }, m_denominator{ denominator }\n\t{\n\t\t// We put reduce() in the constructor to ensure any new fractions we make get reduced!\n\t\t// Any fractions that are overwritten will need to be re-reduced\n\t\treduce();\n\t}\n\n\tvoid reduce()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_denominator) };\n\t\tif (gcd)\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_denominator /= gcd;\n\t\t}\n\t}\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1);\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n{\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n}\n\nint main()\n{\n\tFraction f1{ 3, 2 };\n\tFraction f2{ 5, 8 };\n\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 == f2) ? \" == \" : \" not == \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 != f2) ? \" != \" : \" not != \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt; f2) ? \" &lt; \" : \" not &lt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt; f2) ? \" &gt; \" : \" not &gt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt;= f2) ? \" &lt;= \" : \" not &lt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt;= f2) ? \" &gt;= \" : \" not &gt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <numeric> // pro std::gcd\n\ntřída Zlomek\n{\nsoukromé:\n\tint m_numerator{};\n\tint m_jmenovatel{};\n\nveřejnost:\n\tZlomek (int čitatel = 0, int jmenovatel = 1) :\n\t\tm_numerator{ numerator }, m_denominator{ jmenovatel }\n\t{\n\t\t// Do konstruktoru vložíme redukci(), abychom zajistili redukci všech nových zlomků, které vytvoříme!\n\t\t// Všechny zlomky, které jsou přepsány, bude nutné znovu zmenšit\n\t\tsnížit();\n\t}\n\n\tvoid snížit()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_jmenovatel) };\n\t\tif (gcd)\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_jmenovatel /= gcd;\n\t\t}\n\t}\n\n\tpřítel std::ostream& operátor<<(std::ostream& out, const Fraction& f1);\n};\n\nstd::ostream& operátor<<(std::ostream& out, const zlomek& f1)\n{\n\tout << f1.m_numerator << '/' << f1.m_denominator;\n\tvrátit se ven;\n}\n\nint main()\n{\n\tZlomek f1{ 3, 2 };\n\tZlomek f2{ 5, 8 };\n\n\tstd::cout << f1 << ((f1 == f2) ? \" == \" : \" ne == \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 != f2) ? \" != \" : \" ne != \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 < f2) ? \" < \" : \" ne < \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 > f2) ? \" > \" : \" ne > \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 <= f2) ? \" <= \" : \" ne <= \") << f2 << '\\n';\n\tstd::cout << f1 << ((f1 >= f2) ? \" >= \" : \" ne >= \") << f2 << '\\n';\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b25",
       "type": "paragraph",
       "html": "<p>If you’re on a pre-C++17 compiler, you can replace std::gcd with this function:</p>",
       "preview": "If you’re on a pre-C++17 compiler, you can replace std::gcd with this function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud používáte kompilátor starší než C++17, můžete std::gcd nahradit touto funkcí:</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b26",
@@ -203,21 +231,24 @@
       "language": "cpp",
       "code": "#include <cmath>\n \nint gcd(int a, int b) {\n    return (b == 0) ? std::abs(a) : gcd(b, a % b);\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cmath&gt;\n \nint gcd(int a, int b) {\n    return (b == 0) ? std::abs(a) : gcd(b, a % b);\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cmath>\n \nint gcd(int a, int b) {\n    návrat (b == 0) ? std::abs(a): gcd(b, a % b);\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b27",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;numeric&gt; // for std::gcd\n\nclass Fraction\n{\nprivate:\n\tint m_numerator{};\n\tint m_denominator{};\n\npublic:\n\tFraction(int numerator = 0, int denominator = 1) :\n\t\tm_numerator{ numerator }, m_denominator{ denominator }\n\t{\n\t\t// We put reduce() in the constructor to ensure any new fractions we make get reduced!\n\t\t// Any fractions that are overwritten will need to be re-reduced\n\t\treduce();\n\t}\n\n\tvoid reduce()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_denominator) };\n\t\tif (gcd)\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_denominator /= gcd;\n\t\t}\n\t}\n\n\tfriend bool operator== (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator!= (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend bool operator&lt; (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator&gt; (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend bool operator&lt;= (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator&gt;= (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1);\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n{\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n}\n\nbool operator== (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn (f1.m_numerator == f2.m_numerator) &amp;&amp; (f1.m_denominator == f2.m_denominator);\n}\n\nbool operator!= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator==(f1, f2));\n}\n\nbool operator&lt; (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn (f1.m_numerator * f2.m_denominator &lt; f2.m_numerator * f1.m_denominator);\n}\n\nbool operator&gt; (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn operator&lt;(f2, f1);\n}\n\nbool operator&lt;= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator&gt;(f1, f2));\n}\n\nbool operator&gt;= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator&lt;(f1, f2));\n}\n\nint main()\n{\n\tFraction f1{ 3, 2 };\n\tFraction f2{ 5, 8 };\n\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 == f2) ? \" == \" : \" not == \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 != f2) ? \" != \" : \" not != \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt; f2) ? \" &lt; \" : \" not &lt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt; f2) ? \" &gt; \" : \" not &gt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt;= f2) ? \" &lt;= \" : \" not &lt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt;= f2) ? \" &gt;= \" : \" not &gt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre></div>",
       "preview": "#include <iostream> #include <numeric> // for std::gcd class Fraction { private:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;numeric&gt; // pro std::gcd\n\nclass Fraction\n{\nprivate:\n\tint m_numerator{};\n\tint m_denominator{};\n\npublic:\n\tFraction(int numerator = 0, int denominator = 1) :\n\t\tm_numerator{ numerator }, m_denominator{ denominator }\n\t{\n\t\t// Voláme reduce() v konstruktoru, abychom zajistili, že každý nově vytvořený zlomek bude zkrácen!\n\t\t// Všechny přepsané zlomky bude nutné znovu zkrátit\n\t\treduce();\n\t}\n\n\tvoid reduce()\n\t{\n\t\tint gcd{ std::gcd(m_numerator, m_denominator) };\n\t\tif (gcd)\n\t\t{\n\t\t\tm_numerator /= gcd;\n\t\t\tm_denominator /= gcd;\n\t\t}\n\t}\n\n\tfriend bool operator== (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator!= (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend bool operator&lt; (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator&gt; (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend bool operator&lt;= (const Fraction&amp; f1, const Fraction&amp; f2);\n\tfriend bool operator&gt;= (const Fraction&amp; f1, const Fraction&amp; f2);\n\n\tfriend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1);\n};\n\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Fraction&amp; f1)\n{\n\tout &lt;&lt; f1.m_numerator &lt;&lt; '/' &lt;&lt; f1.m_denominator;\n\treturn out;\n}\n\nbool operator== (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn (f1.m_numerator == f2.m_numerator) &amp;&amp; (f1.m_denominator == f2.m_denominator);\n}\n\nbool operator!= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator==(f1, f2));\n}\n\nbool operator&lt; (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn (f1.m_numerator * f2.m_denominator &lt; f2.m_numerator * f1.m_denominator);\n}\n\nbool operator&gt; (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn operator&lt;(f2, f1);\n}\n\nbool operator&lt;= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator&gt;(f1, f2));\n}\n\nbool operator&gt;= (const Fraction&amp; f1, const Fraction&amp; f2)\n{\n\treturn !(operator&lt;(f1, f2));\n}\n\nint main()\n{\n\tFraction f1{ 3, 2 };\n\tFraction f2{ 5, 8 };\n\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 == f2) ? \" == \" : \" not == \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 != f2) ? \" != \" : \" not != \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt; f2) ? \" &lt; \" : \" not &lt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt; f2) ? \" &gt; \" : \" not &gt; \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &lt;= f2) ? \" &lt;= \" : \" not &lt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; f1 &lt;&lt; ((f1 &gt;= f2) ? \" &gt;= \" : \" not &gt;= \") &lt;&lt; f2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre></div>"
     },
     {
       "id": "overloading-the-comparison-operators_b28",
       "type": "list",
       "html": "<ol start=\"2\"><li>Add an overloaded operator&lt;&lt; and operator&lt; to the Car class at the top of the lesson so that the following program compiles:</li></ol>",
       "preview": "Add an overloaded operator<< and operator< to the Car class at the top of the le",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"2\"><li>Přidejte přetížený operator&lt;&lt; a operator&lt; do třídy Car z úvodu lekce tak, aby bylo možné následující program zkompilovat:</li></ol>"
     },
     {
       "id": "overloading-the-comparison-operators_b29",
@@ -225,35 +256,41 @@
       "language": "cpp",
       "code": "#include <algorithm>\n#include <iostream>\n#include <string>\n#include <vector>\n\nint main()\n{\n  std::vector<Car> cars{\n    { \"Toyota\", \"Corolla\" },\n    { \"Honda\", \"Accord\" },\n    { \"Toyota\", \"Camry\" },\n    { \"Honda\", \"Civic\" }\n  };\n\n  std::sort(cars.begin(), cars.end()); // requires an overloaded operator<\n\n  for (const auto& car : cars)\n    std::cout << car << '\\n'; // requires an overloaded operator<<\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n  std::vector&lt;Car&gt; cars{\n    { \"Toyota\", \"Corolla\" },\n    { \"Honda\", \"Accord\" },\n    { \"Toyota\", \"Camry\" },\n    { \"Honda\", \"Civic\" }\n  };\n\n  std::sort(cars.begin(), cars.end()); // requires an overloaded operator&lt;\n\n  for (const auto&amp; car : cars)\n    std::cout &lt;&lt; car &lt;&lt; '\\n'; // requires an overloaded operator&lt;&lt;\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm>\n#include <iostream>\n#include <řetězec>\n#include <vektor>\n\nint main()\n{\n  std::vector<Auto> auta{\n    { \"Toyota\", \"Corolla\" },\n    { \"Honda\", \"Accord\" },\n    { \"Toyota\", \"Camry\" },\n    { \"Honda\", \"Civic\" }\n  };\n\n  std::sort(cars.begin(), cars.end()); // vyžaduje přetížený operátor<\n\n  pro (const auto & car : cars)\n    std::cout << auto << '\\n'; // vyžaduje přetížený operátor<<\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b30",
       "type": "paragraph",
       "html": "<p>This program should produce the following output:</p>",
       "preview": "This program should produce the following output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program by měl vygenerovat následující výstup:</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b31",
       "type": "output",
       "text": "(Honda, Accord)\n(Honda, Civic)\n(Toyota, Camry)\n(Toyota, Corolla)\n",
       "html": "<pre>(Honda, Accord)\n(Honda, Civic)\n(Toyota, Camry)\n(Toyota, Corolla)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>(Honda, Accord)\n(Honda, Civic)\n(Toyota, Camry)\n(Toyota, Corolla)\n</pre>"
     },
     {
       "id": "overloading-the-comparison-operators_b32",
       "type": "paragraph",
       "html": "<p>If you need a refresher on std::sort, we talk about it in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/sorting-an-array-using-selection-sort/\">18.1 -- Sorting an array using selection sort</a>.</p>",
       "preview": "If you need a refresher on std::sort, we talk about it in lesson 18.1 -- Sorting",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud si potřebujete osvěžit std::sort, věnujeme se mu v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/sorting-an-array-using-selection-sort/\">18.1 -- Řazení pole pomocí selection sortu</a>.</p>"
     },
     {
       "id": "overloading-the-comparison-operators_b33",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n#include &lt;vector&gt;\n\nclass Car\n{\nprivate:\n    std::string m_make;\n    std::string m_model;\n\npublic:\n    Car(std::string_view make, std::string_view model)\n        : m_make{ make }, m_model{ model }\n    {\n    }\n\n    friend bool operator==(const Car&amp; c1, const Car&amp; c2);\n    friend bool operator!=(const Car&amp; c1, const Car&amp; c2);\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Car&amp; c)\n    {\n        out &lt;&lt; '(' &lt;&lt; c.m_make &lt;&lt; \", \" &lt;&lt; c.m_model &lt;&lt; ')';\n        return out;\n    }\n\n    // h/t to reader Olivier for the initial version of the function\n    friend bool operator&lt;(const Car&amp; c1, const Car&amp; c2)\n    {\n        if (c1.m_make != c2.m_make) // If the car is not the same make...\n            return c1.m_make &lt; c2.m_make; // ...then compare the make\n\n        return c1.m_model &lt; c2.m_model; // otherwise compare the model\n    }\n};\n\nbool operator==(const Car&amp; c1, const Car&amp; c2)\n{\n    return c1.m_make == c2.m_make &amp;&amp; c1.m_model == c2.m_model;\n}\n\nbool operator!= (const Car&amp; c1, const Car&amp; c2)\n{\n    return !operator==(c1, c2);\n}\n\nint main()\n{\n    std::vector&lt;Car&gt; cars{\n      { \"Toyota\", \"Corolla\" },\n      { \"Honda\", \"Accord\" },\n      { \"Toyota\", \"Camry\" },\n      { \"Honda\", \"Civic\" }\n    };\n\n    std::sort(cars.begin(), cars.end()); // requires an overloaded Car::operator&lt;\n\n    for (const auto&amp; car : cars)\n        std::cout &lt;&lt; car &lt;&lt; '\\n'; // requires an overloaded Car::operator&lt;&lt;\n\n    return 0;\n}</code></pre></div>",
       "preview": "#include <algorithm> #include <iostream> #include <string> #include <string_view",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n#include &lt;vector&gt;\n\nclass Car\n{\nprivate:\n    std::string m_make;\n    std::string m_model;\n\npublic:\n    Car(std::string_view make, std::string_view model)\n        : m_make{ make }, m_model{ model }\n    {\n    }\n\n    friend bool operator==(const Car&amp; c1, const Car&amp; c2);\n    friend bool operator!=(const Car&amp; c1, const Car&amp; c2);\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Car&amp; c)\n    {\n        out &lt;&lt; '(' &lt;&lt; c.m_make &lt;&lt; \", \" &lt;&lt; c.m_model &lt;&lt; ')';\n        return out;\n    }\n\n    // poděkování čtenáři Olivierovi za původní verzi této funkce\n    friend bool operator&lt;(const Car&amp; c1, const Car&amp; c2)\n    {\n        if (c1.m_make != c2.m_make) // Pokud auta nemají stejnou značku...\n            return c1.m_make &lt; c2.m_make; // ...pak porovnáme značku\n\n        return c1.m_model &lt; c2.m_model; // jinak porovnáme model\n    }\n};\n\nbool operator==(const Car&amp; c1, const Car&amp; c2)\n{\n    return c1.m_make == c2.m_make &amp;&amp; c1.m_model == c2.m_model;\n}\n\nbool operator!= (const Car&amp; c1, const Car&amp; c2)\n{\n    return !operator==(c1, c2);\n}\n\nint main()\n{\n    std::vector&lt;Car&gt; cars{\n      { \"Toyota\", \"Corolla\" },\n      { \"Honda\", \"Accord\" },\n      { \"Toyota\", \"Camry\" },\n      { \"Honda\", \"Civic\" }\n    };\n\n    std::sort(cars.begin(), cars.end()); // vyžaduje přetížený Car::operator&lt;\n\n    for (const auto&amp; car : cars)\n        std::cout &lt;&lt; car &lt;&lt; '\\n'; // vyžaduje přetížený Car::operator&lt;&lt;\n\n    return 0;\n}</code></pre></div>"
     }
-  ]
+  ],
+  "title_cs": "21.7 — Přetěžování porovnávacích operátorů"
 }

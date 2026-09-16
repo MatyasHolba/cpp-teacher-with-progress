@@ -14,14 +14,17 @@
       "type": "section",
       "title": "The C-style array passing challenge",
       "html": "<h3 class=\"cpp-section-heading\">The C-style array passing challenge</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výzva spojená s předáváním polí ve stylu jazyka C</h3>",
+      "title_cs": "Výzva pro předávání pole ve stylu C"
     },
     {
       "id": "c-style-array-decay_b1",
       "type": "paragraph",
       "html": "<p>The designers of the C language had a problem. Consider the following simple program:</p>",
       "preview": "The designers of the C language had a problem. Consider the following simple pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tvůrci jazyka C stáli před problémem. Uvažujme následující jednoduchý program:</p>"
     },
     {
       "id": "c-style-array-decay_b2",
@@ -29,21 +32,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int val)\n{\n    std::cout << val;\n}\n\nint main()\n{\n    int x { 5 };\n    print(x);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int val)\n{\n    std::cout &lt;&lt; val;\n}\n\nint main()\n{\n    int x { 5 };\n    print(x);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int val)\n{\n    std::cout << val;\n}\n\nint main()\n{\n    int x { 5 };\n    print(x);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b3",
       "type": "paragraph",
       "html": "<p>When <code>print(x)</code> is called, the value of argument <code>x</code> (<code>5</code>) is copied into parameter <code>val</code>. Within the body of the function, the value of <code>val</code> (<code>5</code>) is printed to the console. Because <code>x</code> is cheap to copy, there’s no problem here.</p>",
       "preview": "When print(x) is called, the value of argument x (5) is copied into parameter va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je zavoláno <code>print(x)</code>, hodnota argumentu <code>x</code> (<code>5</code>) se zkopíruje do parametru <code>val</code>. Uvnitř těla funkce se hodnota <code>val</code> (<code>5</code>) vypíše do konzole. Protože kopírování <code>x</code> je levné (nenáročné), nevzniká zde žádný problém.</p>"
     },
     {
       "id": "c-style-array-decay_b4",
       "type": "paragraph",
       "html": "<p>Now consider the following similar program, which uses a 1000 element C-style int array instead of a single int:</p>",
       "preview": "Now consider the following similar program, which uses a 1000 element C-style in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní uvažujme následující podobný program, který místo jednoho int používá 1000prvkové pole typu int ve stylu jazyka C:</p>"
     },
     {
       "id": "c-style-array-decay_b5",
@@ -51,42 +57,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printElementZero(int arr[1000])\n{\n    std::cout << arr[0]; // print the value of the first element\n}\n\nint main()\n{\n    int x[1000] { 5 };   // define an array with 1000 elements, x[0] is initialized to 5\n    printElementZero(x);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printElementZero(int arr[1000])\n{\n    std::cout &lt;&lt; arr[0]; // print the value of the first element\n}\n\nint main()\n{\n    int x[1000] { 5 };   // define an array with 1000 elements, x[0] is initialized to 5\n    printElementZero(x);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printElementZero(int arr[1000])\n{\n    std::cout << arr[0]; // vypíše hodnotu prvního prvku\n}\n\nint main()\n{\n    int x[1000] { 5 };   // definuje pole s 1000 prvky, x[0] je inicializováno na 5\n    printElementZero(x);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b6",
       "type": "paragraph",
       "html": "<p>This program also compiles and prints the expected value (<code>5</code>) to the console.</p>",
       "preview": "This program also compiles and prints the expected value (5) to the console.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se také zkompiluje a vypíše do konzole očekávanou hodnotu (<code>5</code>).</p>"
     },
     {
       "id": "c-style-array-decay_b7",
       "type": "paragraph",
       "html": "<p>While the code in this example is similar to the code in the prior example, mechanically it works a bit different than you might expect (we’ll explain this below). And that is due to the solution that the C designers came up to solve for two major challenges.</p>",
       "preview": "While the code in this example is similar to the code in the prior example, mech",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli je kód v tomto příkladu podobný kódu v předchozím příkladu, po mechanické stránce funguje poněkud jinak, než byste možná čekali (vysvětlíme si to níže). To je způsobeno řešením, se kterým tvůrci jazyka C přišli, aby vyřešili dvě zásadní výzvy.</p>"
     },
     {
       "id": "c-style-array-decay_b8",
       "type": "paragraph",
       "html": "<p>First, copying a 1000 element array every time a function is called is expensive (and even more so if the elements are an expensive-to-copy type), so we want to avoid that. But how? C doesn’t have references, so using pass by reference to avoid making a copy of function arguments wasn’t an option.</p>",
       "preview": "First, copying a 1000 element array every time a function is called is expensive",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za prvé, kopírování 1000prvkového pole při každém volání funkce je drahé (a ještě více, pokud jsou prvky typu, jehož kopírování je náročné), takže se tomu chceme vyhnout. Ale jak? Jazyk C nemá reference, takže použití předávání referencí k zabránění vytváření kopie argumentů funkce nepřipadalo v úvahu.</p>"
     },
     {
       "id": "c-style-array-decay_b9",
       "type": "paragraph",
       "html": "<p>Second, we want to be able to write a single function that can accept array arguments of different lengths. Ideally, our <code>printElementZero()</code> function in the example above should be callable with arrays arguments of any length (since element 0 is guaranteed to exist). We don’t want to have to write a different function for every possible array length that we want to use as an argument. But how? C has no syntax to specify “any length” arrays, nor does it support templates, nor can arrays of one length be converted to arrays of another length (presumably because doing so would involve making an expensive copy).</p>",
       "preview": "Second, we want to be able to write a single function that can accept array argu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, chceme mít možnost napsat jedinou funkci, která může přijímat argumenty polí různých délek. V ideálním případě by naše funkce <code>printElementZero()</code> ve výše uvedeném příkladu měla být volatelná s argumenty polí libovolné délky (protože je zaručeno, že prvek 0 existuje). Nechceme muset psát jinou funkci pro každou možnou délku pole, kterou chceme použít jako argument. Ale jak? Jazyk C nemá žádnou syntaxi pro určení pole „libovolné délky“, nepodporuje šablony a ani pole jedné délky nelze převést na pole jiné délky (pravděpodobně proto, že by to vyžadovalo vytvoření nákladné kopie).</p>"
     },
     {
       "id": "c-style-array-decay_b10",
       "type": "paragraph",
       "html": "<p>The designers of the C language came up with a clever solution (inherited by C++ for compatibility reasons) that solves for both of these issues:</p>",
       "preview": "The designers of the C language came up with a clever solution (inherited by C++",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tvůrci jazyka C přišli s chytrým řešením (které C++ z důvodů kompatibility převzalo), jež řeší oba tyto problémy:</p>"
     },
     {
       "id": "c-style-array-decay_b11",
@@ -94,49 +106,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printElementZero(int arr[1000]) // doesn't make a copy\n{\n    std::cout << arr[0]; // print the value of the first element\n}\n\nint main()\n{\n    int x[7] { 5 };      // define an array with 7 elements\n    printElementZero(x); // somehow works!\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printElementZero(int arr[1000]) // doesn't make a copy\n{\n    std::cout &lt;&lt; arr[0]; // print the value of the first element\n}\n\nint main()\n{\n    int x[7] { 5 };      // define an array with 7 elements\n    printElementZero(x); // somehow works!\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printElementZero(int arr[1000]) // nevytváří kopii\n{\n    std::cout << arr[0]; // vypíše hodnotu prvního prvku\n}\n\nint main()\n{\n    int x[7] { 5 };      // definuje pole se 7 prvky\n    printElementZero(x); // nějak to funguje!\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b12",
       "type": "paragraph",
       "html": "<p>Somehow, the above example passes a 7 element array to a function expecting a 1000 element array, without any copies being made. In this lesson, we’ll explore how this works.</p>",
       "preview": "Somehow, the above example passes a 7 element array to a function expecting a 10",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad nějakým způsobem předává pole o 7 prvcích do funkce očekávající pole o 1000 prvcích, aniž by se vytvořily jakékoli kopie. V této lekci prozkoumáme, jak to funguje.</p>"
     },
     {
       "id": "c-style-array-decay_b13",
       "type": "paragraph",
       "html": "<p>We’ll also take a look at why the solution the C designers picked is dangerous, and not well suited for use in modern C++.</p>",
       "preview": "We’ll also take a look at why the solution the C designers picked is dangerous, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podíváme se také na to, proč je řešení zvolené tvůrci jazyka C nebezpečné a nevhodné pro použití v moderním C++.</p>"
     },
     {
       "id": "c-style-array-decay_b14",
       "type": "paragraph",
       "html": "<p>But first, we need to cover two subtopics.</p>",
       "preview": "But first, we need to cover two subtopics.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se však musíme věnovat dvěma dílčím tématům.</p>"
     },
     {
       "id": "c-style-array-decay_b15",
       "type": "section",
       "title": "Array to pointer conversions (array decay)",
       "html": "<h3 class=\"cpp-section-heading\">Array to pointer conversions (array decay)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konverze pole na ukazatel (array decay)</h3>",
+      "title_cs": "Konverze pole na ukazatel (rozpad pole)"
     },
     {
       "id": "c-style-array-decay_b16",
       "type": "paragraph",
       "html": "<p>In most cases, when a C-style array is used in an expression, the array will be implicitly converted into a pointer to the element type, initialized with the address of the first element (with index 0). Colloquially, this is called <strong>array decay</strong> (or just <strong>decay</strong> for short).</p>",
       "preview": "In most cases, when a C-style array is used in an expression, the array will be ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů, kdy je pole ve stylu C (C-style array) použito ve výrazu, dojde k jeho implicitní konverzi na ukazatel na typ prvku, inicializovaný adresou prvního prvku (s indexem 0). Hovorově se tomu říká <strong>array decay</strong> (nebo zkráceně jen <strong>decay</strong> / rozpad pole).</p>"
     },
     {
       "id": "c-style-array-decay_b17",
       "type": "paragraph",
       "html": "<p>You can see this in the following program:</p>",
       "preview": "You can see this in the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete to vidět v následujícím programu:</p>"
     },
     {
       "id": "c-style-array-decay_b18",
@@ -144,35 +164,40 @@
       "language": "cpp",
       "code": "#include <iomanip> // for std::boolalpha\n#include <iostream>\n\nint main()\n{\n    int arr[5]{ 9, 7, 5, 3, 1 }; // our array has elements of type int\n\n    // First, let's prove that arr decays into an int* pointer\n\n    auto ptr{ arr }; // evaluation causes arr to decay, type deduction should deduce type int*\n    std::cout << std::boolalpha << (typeid(ptr) == typeid(int*)) << '\\n'; // Prints true if the type of ptr is int*\n\n    // Now let's prove that the pointer holds the address of the first element of the array\n\n    std::cout << std::boolalpha << (&arr[0] == ptr) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iomanip&gt; // for std::boolalpha\n#include &lt;iostream&gt;\n\nint main()\n{\n    int arr[5]{ 9, 7, 5, 3, 1 }; // our array has elements of type int\n\n    // First, let's prove that arr decays into an int* pointer\n\n    auto ptr{ arr }; // evaluation causes arr to decay, type deduction should deduce type int*\n    std::cout &lt;&lt; std::boolalpha &lt;&lt; (typeid(ptr) == typeid(int*)) &lt;&lt; '\\n'; // Prints true if the type of ptr is int*\n\n    // Now let's prove that the pointer holds the address of the first element of the array\n\n    std::cout &lt;&lt; std::boolalpha &lt;&lt; (&amp;arr[0] == ptr) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iomanip> // pro std::boolalpha\n#include <iostream>\n\nint main()\n{\n    int arr[5]{ 9, 7, 5, 3, 1 }; // naše pole má prvky typu int\n\n    // Nejprve dokažme, že arr se rozpadá na ukazatel int*\n\n    auto ptr{ arr }; // vyhodnocení způsobí rozpad arr, dedukce typu by měla odvodit typ int*\n    std::cout << std::boolalpha << (typeid(ptr) == typeid(int*)) << '\\n'; // Vypíše hodnotu true, pokud je typ ptr int*\n\n    // Nyní dokažme, že ukazatel obsahuje adresu prvního prvku pole\n\n    std::cout << std::boolalpha << (&arr[0] == ptr) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b19",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this printed:</p>",
       "preview": "On the author’s machine, this printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači se vypsalo:</p>"
     },
     {
       "id": "c-style-array-decay_b20",
       "type": "output",
       "text": "true\ntrue\n",
       "html": "<pre>true\ntrue\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>true\ntrue\n</pre>"
     },
     {
       "id": "c-style-array-decay_b21",
       "type": "paragraph",
       "html": "<p>There is nothing special about the pointer that an array decays into. It is a normal pointer that holds the address of the first element.</p>",
       "preview": "There is nothing special about the pointer that an array decays into. It is a no",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na ukazateli, na který pole devalvuje (decay), není nic zvláštního. Je to běžný ukazatel, který obsahuje adresu prvního prvku.</p>"
     },
     {
       "id": "c-style-array-decay_b22",
       "type": "paragraph",
       "html": "<p>Similarly, a const array (e.g. <code>const int arr[5]</code>) decays into a pointer-to-const (<code>const int*</code>).</p>",
       "preview": "Similarly, a const array (e.g. const int arr[5]) decays into a pointer-to-const ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně i konstantní pole (např. <code>const int arr[5]</code>) devalvuje na ukazatel na konstantu (<code>const int*</code>).</p>"
     },
     {
       "id": "c-style-array-decay_b23",
@@ -180,21 +205,24 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>In C++, there are a few common cases where an C-style array doesn’t decay:</p><ol start=\"1\"><li>When used as an argument to <code>sizeof()</code> or <code>typeid()</code>.</li><li>When taking the address of the array using <code>operator&amp;</code>.</li><li>When passed as a member of a class type.</li><li>When passed by reference.</li></ol></div>",
       "preview": "TipIn C++, there are a few common cases where an C-style array doesn’t decay:When used as an argumen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>V C++ existuje několik běžných případů, kdy u pole ve stylu jazyka C k decayi nedochází:</p><ol start=\"1\"><li>Při použití jako argument pro <code>sizeof()</code> nebo <code>typeid()</code>.</li><li>Při získávání adresy pole pomocí <code>operator&amp;</code>.</li><li>Při předání jako člen třídního typu (class type).</li><li>Při předání referencí.</li></ol></div>"
     },
     {
       "id": "c-style-array-decay_b24",
       "type": "paragraph",
       "html": "<p>Because C-style arrays decay into a pointer in most cases, it’s a common fallacy to believe arrays <em>are</em> pointers. This is not the case. An array object is a sequence of elements, whereas a pointer object just holds an address.</p>",
       "preview": "Because C-style arrays decay into a pointer in most cases, it’s a common fallacy",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože pole ve stylu jazyka C ve většině případů devalvují na ukazatel, je častým omylem se domnívat, že pole <em>jsou</em> ukazatele. Není tomu tak. Objekt pole je sekvence prvků, zatímco objekt ukazatele pouze uchovává adresu.</p>"
     },
     {
       "id": "c-style-array-decay_b25",
       "type": "paragraph",
       "html": "<p>The type information of an array and a decayed array is different. In the example above, the array <code>arr</code> has type <code>int[5]</code>, whereas the decayed array has type <code>int*</code>. Notably, the array type <code>int[5]</code> contains length information, whereas the decayed array pointer type <code>int*</code> does not.</p>",
       "preview": "The type information of an array and a decayed array is different. In the exampl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Typová informace pole a devalvovaného pole je odlišná. Ve výše uvedeném příkladu má pole <code>arr</code> typ <code>int[5]</code>, zatímco devalvované pole má typ <code>int*</code>. Pozoruhodné je, že typ pole <code>int[5]</code> obsahuje informaci o délce, zatímco typ ukazatele po decayi <code>int*</code> ji neobsahuje.</p>"
     },
     {
       "id": "c-style-array-decay_b26",
@@ -202,21 +230,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A decayed array pointer does not know how long the array it is pointing to is. The term “decay” indicates this loss of length type information.</p></div>",
       "preview": "Key insightA decayed array pointer does not know how long the array it is pointing to is. The term “",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Ukazatel vzniklý rozpadem (decay) pole neví, jak dlouhé je pole, na které ukazuje. Pojem „decay“ označuje právě tuto ztrátu typové informace o délce.</p></div>"
     },
     {
       "id": "c-style-array-decay_b27",
       "type": "section",
       "title": "Subscripting a C-style array actually applies operator[] to the decayed pointer",
       "html": "<h3 class=\"cpp-section-heading\">Subscripting a C-style array actually applies <code>operator[]</code> to the decayed pointer</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Indexování pole ve stylu C ve skutečnosti aplikuje <code>operator[]</code> na devalvovaný ukazatel</h3>",
+      "title_cs": "Subscriptování pole ve stylu C ve skutečnosti aplikuje operátor[] na zaniklý ukazatel"
     },
     {
       "id": "c-style-array-decay_b28",
       "type": "paragraph",
       "html": "<p>Because a C-style arrays decays to a pointer when evaluated, when a C-style array is subscripted, the subscript is actually operating on the decayed array pointer:</p>",
       "preview": "Because a C-style arrays decays to a pointer when evaluated, when a C-style arra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože pole ve stylu jazyka C při vyhodnocení degraduje (decay) na ukazatel, při indexování pole ve stylu jazyka C ve skutečnosti operace indexování probíhá nad tímto degradovaným ukazatelem:</p>"
     },
     {
       "id": "c-style-array-decay_b29",
@@ -224,14 +256,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    std::cout << arr[2]; // subscript decayed array to get element 2, prints 5\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    std::cout &lt;&lt; arr[2]; // subscript decayed array to get element 2, prints 5\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    std::cout << arr[2]; // dolní index decayed pole pro získání prvku 2, vypíše 5\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b30",
       "type": "paragraph",
       "html": "<p>We can also use <code>operator[]</code> directly on a pointer. If that pointer is holding the address of the first element, the result will be identical:</p>",
       "preview": "We can also use operator[] directly on a pointer. If that pointer is holding the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>operator[]</code> můžeme použít také přímo na ukazatel. Pokud tento ukazatel obsahuje adresu prvního prvku, výsledek bude identický:</p>"
     },
     {
       "id": "c-style-array-decay_b31",
@@ -239,35 +273,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    \n    const int* ptr{ arr };  // arr decays into a pointer\n    std::cout << ptr[2];    // subscript ptr to get element 2, prints 5\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    \n    const int* ptr{ arr };  // arr decays into a pointer\n    std::cout &lt;&lt; ptr[2];    // subscript ptr to get element 2, prints 5\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    const int arr[] { 9, 7, 5, 3, 1 };\n    \n    const int* ptr{ arr };  // arr se rozpadne na ukazatel\n    std::cout << ptr[2];    // dolní index ptr pro získání prvku 2, vypíše 5\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b32",
       "type": "paragraph",
       "html": "<p>We’ll see where this is convenient in a moment, and take a deeper look at how this actually works (as well as what happens when the pointer is holding something other than the address of the first element) in the next lesson <a href=\"https://www.learncpp.com/cpp-tutorial/pointer-arithmetic-and-subscripting/\">17.9 -- Pointer arithmetic and subscripting</a>.</p>",
       "preview": "We’ll see where this is convenient in a moment, and take a deeper look at how th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za chvíli uvidíme, kde je to výhodné, a podrobněji se podíváme na to, jak to ve skutečnosti funguje (stejně jako na to, co se stane, když ukazatel obsahuje jinou adresu než adresu prvního prvku), v následující lekci <a href=\"https://www.learncpp.com/cpp-tutorial/pointer-arithmetic-and-subscripting/\">17.9 -- Aritmetika ukazatelů a indexování</a>.</p>"
     },
     {
       "id": "c-style-array-decay_b33",
       "type": "section",
       "title": "Array decay solves our C-style array passing issue",
       "html": "<h3 class=\"cpp-section-heading\">Array decay solves our C-style array passing issue</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Degradace pole (array decay) řeší náš problém s předáváním polí ve stylu jazyka C</h3>",
+      "title_cs": "Rozpad pole řeší náš problém s předáváním pole ve stylu C"
     },
     {
       "id": "c-style-array-decay_b34",
       "type": "paragraph",
       "html": "<p>Array decay solves both challenges we encountered at the top of the lesson.</p>",
       "preview": "Array decay solves both challenges we encountered at the top of the lesson.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Degradace pole řeší oba problémy, se kterými jsme se setkali na začátku lekce.</p>"
     },
     {
       "id": "c-style-array-decay_b35",
       "type": "paragraph",
       "html": "<p>When passing a C-style array as an argument, the array decays into a pointer, and the pointer holding the address of the first element of the array is what gets passed to the function. So although it looks like we’re passing the C-style array by value, we’re actually passing it by address! This is how making a copy of the C-style array argument is avoided.</p>",
       "preview": "When passing a C-style array as an argument, the array decays into a pointer, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při předávání pole ve stylu jazyka C jako argumentu pole degraduje na ukazatel a funkci je předán ukazatel obsahující adresu prvního prvku pole. Ačkoli to tedy vypadá, že pole ve stylu jazyka C předáváme hodnotou, ve skutečnosti ho předáváme adresou! Tímto způsobem se zabrání vytváření kopie argumentu pole ve stylu jazyka C.</p>"
     },
     {
       "id": "c-style-array-decay_b36",
@@ -275,14 +315,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>C-style arrays are passed by address, even when it looks like they are passed by value.</p></div>",
       "preview": "Key insightC-style arrays are passed by address, even when it looks like they are passed by value.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Pole ve stylu jazyka C se předávají adresou, i když to vypadá, že se předávají hodnotou.</p></div>"
     },
     {
       "id": "c-style-array-decay_b37",
       "type": "paragraph",
       "html": "<p>Now consider two different arrays of the same element type but different lengths (e.g. <code>int[5]</code> and <code>int[7]</code>). These are distinct types, incompatible with each other. However, they will both decay into the same pointer type (e.g. <code>int*</code>). Their decayed versions are interchangable! Dropping the length information from the type allows us to pass arrays of different lengths without a type mismatch.</p>",
       "preview": "Now consider two different arrays of the same element type but different lengths",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní uvažujme dvě různá pole stejného typu prvku, ale různých délek (např. <code>int[5]</code> a <code>int[7]</code>). Jedná se o odlišné typy, které jsou navzájem nekompatibilní. Obě však degradují na stejný typ ukazatele (např. <code>int*</code>). Jejich degradované verze jsou vzájemně zaměnitelné! Odstranění informace o délce z typu nám umožňuje předávat pole různých délek bez neshody typů.</p>"
     },
     {
       "id": "c-style-array-decay_b38",
@@ -290,21 +332,24 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Two C-style arrays with the same element type but different lengths will decay into the same pointer type.</p></div>",
       "preview": "Key insightTwo C-style arrays with the same element type but different lengths will decay into the s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Dvě pole ve stylu jazyka C se stejným typem prvků, ale různou délkou, degradují (decay) na stejný typ ukazatele.</p></div>"
     },
     {
       "id": "c-style-array-decay_b39",
       "type": "paragraph",
       "html": "<p>In the following example, we’ll illustrate two things:</p>",
       "preview": "In the following example, we’ll illustrate two things:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím příkladu si ukážeme dvě věci:</p>"
     },
     {
       "id": "c-style-array-decay_b40",
       "type": "list",
       "html": "<ul><li>That we can pass arrays of different lengths to a single function (because both decay to the same pointer type).</li><li>That our function parameter receiving the array can be a (const) pointer of the array’s element type.</li></ul>",
       "preview": "That we can pass arrays of different lengths to a single function (because both ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Že můžeme do jedné funkce předat pole různých délek (protože obě degradují na stejný typ ukazatele).</li><li>Že parametr naší funkce přijímající pole může být (konstantní) ukazatel na typ prvků daného pole.</li></ul>"
     },
     {
       "id": "c-style-array-decay_b41",
@@ -312,63 +357,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printElementZero(const int* arr) // pass by const address\n{\n    std::cout << arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prime);   // prime decays to an const int* pointer\n    printElementZero(squares); // squares decays to an const int* pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printElementZero(const int* arr) // pass by const address\n{\n    std::cout &lt;&lt; arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prime);   // prime decays to an const int* pointer\n    printElementZero(squares); // squares decays to an const int* pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printElementZero(const int* arr) // projde adresou const\n{\n    std::cout << arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prvočíslo);   // prvočíslo se rozpadne na ukazatel const int*\n    printElementNula(čtverce); // čtverce se rozpadají na ukazatel const int*\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b42",
       "type": "paragraph",
       "html": "<p>This example works just fine, and prints:</p>",
       "preview": "This example works just fine, and prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad funguje bez problémů a vypíše:</p>"
     },
     {
       "id": "c-style-array-decay_b43",
       "type": "output",
       "text": "2\n1\n",
       "html": "<pre>2\n1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2\n1\n</pre>"
     },
     {
       "id": "c-style-array-decay_b44",
       "type": "paragraph",
       "html": "<p>Within <code>main()</code>, when we call <code>printElementZero(prime)</code>, the <code>prime</code> array decays from an array of type <code>const int[5]</code> to a pointer of type <code>const int*</code> that is holding the address of the first element of <code>prime</code>. Similarly, when we call <code>printElementZero(squares)</code>, <code>squares</code> decays from an array of type <code>const int[8]</code> to a pointer of type <code>const int*</code> that is holding the address of the first element of <code>squares</code>. These pointers of type <code>const int*</code> are what are actually passed to the function as an argument.</p>",
       "preview": "Within main(), when we call printElementZero(prime), the prime array decays from",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř <code>main()</code>, když zavoláme <code>printElementZero(prime)</code>, pole <code>prime</code> degraduje z pole typu <code>const int[5]</code> na ukazatel typu <code>const int*</code>, který nese adresu prvního prvku <code>prime</code>. Podobně, když zavoláme <code>printElementZero(squares)</code>, pole <code>squares</code> degraduje z pole typu <code>const int[8]</code> na ukazatel typu <code>const int*</code>, který nese adresu prvního prvku <code>squares</code>. Tyto ukazatele typu <code>const int*</code> jsou tím, co se ve skutečnosti předává funkci jako argument.</p>"
     },
     {
       "id": "c-style-array-decay_b45",
       "type": "paragraph",
       "html": "<p>Since we’re passing pointers of type <code>const int*</code>, our <code>printElementZero()</code> function needs to have a parameter of the same pointer type (<code>const int*</code>).</p>",
       "preview": "Since we’re passing pointers of type const int*, our printElementZero() function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jelikož předáváme ukazatele typu <code>const int*</code>, musí mít naše funkce <code>printElementZero()</code> parametr stejného typu ukazatele (<code>const int*</code>).</p>"
     },
     {
       "id": "c-style-array-decay_b46",
       "type": "paragraph",
       "html": "<p>Within this function, we’re subscripting the pointer to access the selected array element.</p>",
       "preview": "Within this function, we’re subscripting the pointer to access the selected arra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř této funkce používáme indexaci (subscripting) ukazatele pro přístup k vybranému prvku pole.</p>"
     },
     {
       "id": "c-style-array-decay_b47",
       "type": "paragraph",
       "html": "<p>Because a C-style array is passed by address, the function has direct access to the array passed in (not a copy) and can modify its elements. For this reason, it’s a good idea to make sure your function parameter is const if your function does not intend to modify the array elements.</p>",
       "preview": "Because a C-style array is passed by address, the function has direct access to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože se pole ve stylu jazyka C předává adresou, má funkce přímý přístup k předanému poli (nikoli ke kopii) a může modifikovat jeho prvky. Z tohoto důvodu je dobré zajistit, aby byl parametr funkce <code>const</code>, pokud funkce nemá v úmyslu prvky pole měnit.</p>"
     },
     {
       "id": "c-style-array-decay_b48",
       "type": "section",
       "title": "C-style array function parameter syntax",
       "html": "<h3 class=\"cpp-section-heading\">C-style array function parameter syntax</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Syntaxe parametrů funkcí pro pole ve stylu C</h3>",
+      "title_cs": "Syntaxe parametru funkce pole ve stylu C"
     },
     {
       "id": "c-style-array-decay_b49",
       "type": "paragraph",
       "html": "<p>One problem with declaring the function parameter as <code>int* arr</code> is that it’s not obvious that <code>arr</code> is supposed to be a pointer to an array of values rather than a pointer to a single integer. For this reason, when passing a C-style array, its preferable to use the alternate declaration form <code>int arr[]</code>:</p>",
       "preview": "One problem with declaring the function parameter as int* arr is that it’s not o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z problémů při deklaraci parametru funkce jako <code>int* arr</code> je, že není zřejmé, zda má být <code>arr</code> ukazatelem na pole hodnot, nebo ukazatelem na jedno celé číslo. Z tohoto důvodu je při předávání pole ve stylu C vhodnější použít alternativní formu deklarace <code>int arr[]</code>:</p>"
     },
     {
       "id": "c-style-array-decay_b50",
@@ -376,14 +431,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printElementZero(const int arr[]) // treated the same as const int*\n{\n    std::cout << arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prime);  // prime decays to a pointer\n    printElementZero(squares); // squares decays to a pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printElementZero(const int arr[]) // treated the same as const int*\n{\n    std::cout &lt;&lt; arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prime);  // prime decays to a pointer\n    printElementZero(squares); // squares decays to a pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printElementZero(const int arr[]) // zpracováváno stejně jako const int*\n{\n    std::cout << arr[0];\n}\n\nint main()\n{\n    const int prime[] { 2, 3, 5, 7, 11 };\n    const int squares[] { 1, 4, 9, 25, 36, 49, 64, 81 };\n\n    printElementZero(prvočíslo);  // prvočíslo se rozpadá na ukazatel\n    printElementNula(čtverce); // čtverce se rozpadají na ukazatel\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b51",
       "type": "paragraph",
       "html": "<p>This program behaves identically to the prior one, as the compiler will interpret function parameter <code>const int arr[]</code> the same as <code>const int*</code>. However, this has the advantage of communicating to the caller that <code>arr</code> is expected to be a decayed C-style array, not a pointer to a single value. Note that no length information is required between the square brackets (since it is not used anyway). If a length is provided, it will be ignored.</p>",
       "preview": "This program behaves identically to the prior one, as the compiler will interpre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se chová identicky jako ten předchozí, protože kompilátor interpretuje parametr funkce <code>const int arr[]</code> stejně jako <code>const int*</code>. To má však tu výhodu, že volajícímu dává najevo, že se u <code>arr</code> očekává rozpadlé pole ve stylu C, nikoli ukazatel na jedinou hodnotu. Všimněte si, že mezi hranatými závorkami není vyžadována žádná informace o délce (protože se stejně nepoužívá). Pokud je délka zadána, bude ignorována.</p>"
     },
     {
       "id": "c-style-array-decay_b52",
@@ -391,35 +448,41 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>A function parameter expecting a C-style array type should use the array syntax (e.g. <code>int arr[]</code>) rather than pointer syntax (e.g. <code>int *arr</code>).</p></div>",
       "preview": "Best practiceA function parameter expecting a C-style array type should use the array syntax (e.g. i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Parametr funkce očekávající typ pole ve stylu C by měl používat syntaxi pole (např. <code>int arr[]</code>) namísto syntaxe ukazatele (např. <code>int *arr</code>).</p></div>"
     },
     {
       "id": "c-style-array-decay_b53",
       "type": "paragraph",
       "html": "<p>The downside of using this syntax is that it makes it less obvious that <code>arr</code> has decayed (whereas it’s quite clear with the pointer syntax), so you’ll need to take extra care not to do anything that doesn’t work as expected with a decayed array (we’ll cover some of these in a moment).</p>",
       "preview": "The downside of using this syntax is that it makes it less obvious that arr has ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou použití této syntaxe je, že je méně zřejmé, že došlo k rozpadu <code>arr</code> (zatímco u syntaxe ukazatele je to zcela jasné), takže musíte věnovat zvýšenou pozornost tomu, abyste nedělali nic, co s rozpadlým polem nefunguje podle očekávání (některé z těchto případů si za chvíli ukážeme).</p>"
     },
     {
       "id": "c-style-array-decay_b54",
       "type": "section",
       "title": "The problems with array decay",
       "html": "<h3 class=\"cpp-section-heading\">The problems with array decay</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problémy s rozpadem polí</h3>",
+      "title_cs": "Problémy s rozpadem pole"
     },
     {
       "id": "c-style-array-decay_b55",
       "type": "paragraph",
       "html": "<p>Although array decay was a clever solution to ensure C-style arrays of different lengths could be passed to a function without making expensive copies, the loss of array length information makes it easy for several types of mistakes to be made.</p>",
       "preview": "Although array decay was a clever solution to ensure C-style arrays of different",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli byl rozpad pole chytrým řešením, jak zajistit, aby bylo možné předávat funkci pole ve stylu C různých délek bez vytváření nákladných kopií, ztráta informace o délce pole usnadňuje vznik několika typů chyb.</p>"
     },
     {
       "id": "c-style-array-decay_b56",
       "type": "paragraph",
       "html": "<p>First, <code>sizeof()</code> will return different values for arrays and decayed arrays:</p>",
       "preview": "First, sizeof() will return different values for arrays and decayed arrays:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, <code>sizeof()</code> vrací různé hodnoty pro pole a pro rozpadlá pole:</p>"
     },
     {
       "id": "c-style-array-decay_b57",
@@ -427,28 +490,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printArraySize(int arr[])\n{\n    std::cout << sizeof(arr) << '\\n'; // prints 4 (assuming 32-bit addresses)\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout << sizeof(arr) << '\\n'; // prints 12 (assuming 4 byte ints)\n\n    printArraySize(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printArraySize(int arr[])\n{\n    std::cout &lt;&lt; sizeof(arr) &lt;&lt; '\\n'; // prints 4 (assuming 32-bit addresses)\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout &lt;&lt; sizeof(arr) &lt;&lt; '\\n'; // prints 12 (assuming 4 byte ints)\n\n    printArraySize(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printArraySize(int arr[])\n{\n    std::cout << sizeof(arr) << '\\n'; // vytiskne 4 (za předpokladu 32bitových adres)\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout << sizeof(arr) << '\\n'; // vytiskne 12 (za předpokladu 4byte ints)\n\n    printArraySize(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b58",
       "type": "paragraph",
       "html": "<p>This means using <code>sizeof()</code> on a C-style array is potentially dangerous, as you have to ensure you are using it only when you can access the actual array object, not the decayed array or pointer.</p>",
       "preview": "This means using sizeof() on a C-style array is potentially dangerous, as you ha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že použití <code>sizeof()</code> na pole ve stylu C je potenciálně nebezpečné, protože se musíte ujistit, že jej používáte pouze tehdy, když máte přístup ke skutečnému objektu pole, a nikoli k rozpadlému poli nebo ukazateli.</p>"
     },
     {
       "id": "c-style-array-decay_b59",
       "type": "paragraph",
       "html": "<p>In the prior lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/\">17.7 -- Introduction to C-style arrays</a>), we mentioned that <code>sizeof(arr)/sizeof(*arr)</code> was historically used as a hack to get the size of a C-style array. This hack is dangerous because if <code>arr</code> has decayed, <code>sizeof(arr)</code> will return the size of a pointer rather than the size of the array, producing the wrong array length as a result, likely causing the program to malfunction.</p>",
       "preview": "In the prior lesson (17.7 -- Introduction to C-style arrays), we mentioned that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-c-style-arrays/\">17.7 -- Úvod do polí ve stylu C</a>) jsme zmínili, že zápis <code>sizeof(arr)/sizeof(*arr)</code> se historicky používal jako trik k získání velikosti pole ve stylu C. Tento trik je nebezpečný, protože pokud došlo k rozpadu <code>arr</code>, <code>sizeof(arr)</code> vrátí velikost ukazatele namísto velikosti pole, což bude mít za následek nesprávnou délku pole a pravděpodobně to způsobí selhání programu.</p>"
     },
     {
       "id": "c-style-array-decay_b60",
       "type": "paragraph",
       "html": "<p>Fortunately, C++17’s better replacement <code>std::size()</code> (and C++20’s <code>std::ssize()</code>) will fail to compile if passed a pointer value:</p>",
       "preview": "Fortunately, C++17’s better replacement std::size() (and C++20’s std::ssize()) w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Lepší alternativa <code>std::size()</code> z C++17 (a <code>std::ssize()</code> z C++20) naštěstí selže při překladu, pokud jí předáte hodnotu ukazatele:</p>"
     },
     {
       "id": "c-style-array-decay_b61",
@@ -456,21 +523,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint printArrayLength(int arr[])\n{\n    std::cout << std::size(arr) << '\\n'; // compile error: std::size() won't work on a pointer\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout << std::size(arr) << '\\n'; // prints 3\n\n    printArrayLength(arr);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint printArrayLength(int arr[])\n{\n    std::cout &lt;&lt; std::size(arr) &lt;&lt; '\\n'; // compile error: std::size() won't work on a pointer\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout &lt;&lt; std::size(arr) &lt;&lt; '\\n'; // prints 3\n\n    printArrayLength(arr);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint printArrayLength(int arr[])\n{\n    std::cout << std::velikost(arr) << '\\n'; // chyba kompilace: std::size() nebude fungovat na ukazateli\n}\n\nint main()\n{\n    int arr[]{ 3, 2, 1 };\n\n    std::cout << std::velikost(arr) << '\\n'; // vytiskne 3\n\n    printPoleLength(arr);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b62",
       "type": "paragraph",
       "html": "<p>Second, and perhaps most importantly, array decay can make refactoring (breaking long functions into shorter, more modular functions) difficult. Code that works as expected with a non-decayed array may not compile (or worse, may silently malfunction) when the same code is using a decayed array.</p>",
       "preview": "Second, and perhaps most importantly, array decay can make refactoring (breaking",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, a možná především, rozpad pole může zkomplikovat refaktorování (rozdělování dlouhých funkcí na kratší, modulárnější funkce). Kód, který s nerozpadlým polem funguje podle očekávání, se nemusí přeložit (nebo ještě hůře, může tiše selhat), pokud stejný kód použije rozpadlé pole.</p>"
     },
     {
       "id": "c-style-array-decay_b63",
       "type": "paragraph",
       "html": "<p>Third, not having length information creates several programmatic challenges. Without length information, it is difficult to sanity check the length of the array. Users can easily pass in arrays that are shorter than expected (or even pointers to a single value), which will then cause undefined behavior when they are subscripted with an invalid index.</p>",
       "preview": "Third, not having length information creates several programmatic challenges. Wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí, absence informací o délce přináší několik programátorských úskalí. Bez informace o délce je obtížné provést kontrolu smysluplnosti délky pole. Uživatelé mohou snadno předat pole, která jsou kratší, než se očekává (nebo dokonce ukazatele na jedinou hodnotu), což následně způsobí nedefinované chování při přístupu přes neplatný index.</p>"
     },
     {
       "id": "c-style-array-decay_b64",
@@ -478,42 +548,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printElement2(int arr[])\n{\n    // How do we ensure that arr has at least three elements?\n    std::cout << arr[2] << '\\n';\n}\n\nint main()\n{\n    int a[]{ 3, 2, 1 };\n    printElement2(a);  // ok\n\n    int b[]{ 7, 6 };\n    printElement2(b);  // compiles but produces undefined behavior\n\n    int c{ 9 };\n    printElement2(&c); // compiles but produces undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printElement2(int arr[])\n{\n    // How do we ensure that arr has at least three elements?\n    std::cout &lt;&lt; arr[2] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    int a[]{ 3, 2, 1 };\n    printElement2(a);  // ok\n\n    int b[]{ 7, 6 };\n    printElement2(b);  // compiles but produces undefined behavior\n\n    int c{ 9 };\n    printElement2(&amp;c); // compiles but produces undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printElement2(int arr[])\n{\n    // Jak zajistíme, že arr má alespoň tři prvky?\n    std::cout << arr[2] << '\\n';\n}\n\nint main()\n{\n    int a[]{ 3, 2, 1 };\n    printPrvek2(a);  // dobře\n\n    int b[]{ 7, 6 };\n    printPrvek2(b);  // kompiluje, ale vytváří nedefinované chování\n\n    int c{ 9 };\n    printPrvek2(&c); // kompiluje, ale vytváří nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b65",
       "type": "paragraph",
       "html": "<p>Not having the array length also create challenges when traversing the array -- how do we know when we’ve reached the end?</p>",
       "preview": "Not having the array length also create challenges when traversing the array -- ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Absence délky pole také přináší komplikace při procházení pole – jak poznáme, že jsme dosáhli konce?</p>"
     },
     {
       "id": "c-style-array-decay_b66",
       "type": "paragraph",
       "html": "<p>There are solutions to these issues, but these solutions add both complexity and fragility to a program.</p>",
       "preview": "There are solutions to these issues, but these solutions add both complexity and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro tyto problémy sice existují řešení, ale ta do programu vnášejí jak složitost, tak křehkost.</p>"
     },
     {
       "id": "c-style-array-decay_b67",
       "type": "section",
       "title": "Working around array length issues",
       "html": "<h3 class=\"cpp-section-heading\">Working around array length issues</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak obejít problémy s délkou pole</h3>",
+      "title_cs": "Řešení problémů s délkou pole"
     },
     {
       "id": "c-style-array-decay_b68",
       "type": "paragraph",
       "html": "<p>Historically, programmers have worked around the lack of array length information via one of two methods.</p>",
       "preview": "Historically, programmers have worked around the lack of array length informatio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V minulosti programátoři obcházeli nedostatek informací o délce pole jedním ze dvou způsobů.</p>"
     },
     {
       "id": "c-style-array-decay_b69",
       "type": "paragraph",
       "html": "<p>First, we can pass in both the array and the array length as separate arguments:</p>",
       "preview": "First, we can pass in both the array and the array length as separate arguments:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé můžeme předat pole i délku pole jako samostatné argumenty:</p>"
     },
     {
       "id": "c-style-array-decay_b70",
@@ -521,28 +598,32 @@
       "language": "cpp",
       "code": "#include <cassert>\n#include <iostream>\n\nvoid printElement2(const int arr[], int length)\n{\n    assert(length > 2 && \"printElement2: Array too short\"); // can't static_assert on length\n\n    std::cout << arr[2] << '\\n';\n}\n\nint main()\n{\n    constexpr int a[]{ 3, 2, 1 };\n    printElement2(a, static_cast<int>(std::size(a)));  // ok\n\n    constexpr int b[]{ 7, 6 };\n    printElement2(b, static_cast<int>(std::size(b)));  // will trigger assert\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cassert&gt;\n#include &lt;iostream&gt;\n\nvoid printElement2(const int arr[], int length)\n{\n    assert(length &gt; 2 &amp;&amp; \"printElement2: Array too short\"); // can't static_assert on length\n\n    std::cout &lt;&lt; arr[2] &lt;&lt; '\\n';\n}\n\nint main()\n{\n    constexpr int a[]{ 3, 2, 1 };\n    printElement2(a, static_cast&lt;int&gt;(std::size(a)));  // ok\n\n    constexpr int b[]{ 7, 6 };\n    printElement2(b, static_cast&lt;int&gt;(std::size(b)));  // will trigger assert\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cassert>\n#include <iostream>\n\nvoid printElement2(const int arr[], délka int)\n{\n    sustain(délka > 2 && \"printElement2: Pole je příliš krátké\"); // nelze static_assert na délku\n\n    std::cout << arr[2] << '\\n';\n}\n\nint main()\n{\n    constexpr int a[]{ 3, 2, 1 };\n    printElement2(a, static_cast<int>(std::velikost(a)));  // dobře\n\n    constexpr int b[]{ 7, 6 };\n    printElement2(b, static_cast<int>(std::size(b)));  // spustí hlášení\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "c-style-array-decay_b71",
       "type": "paragraph",
       "html": "<p>However, this still has a number of issues:</p>",
       "preview": "However, this still has a number of issues:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To má však stále řadu problémů:</p>"
     },
     {
       "id": "c-style-array-decay_b72",
       "type": "list",
       "html": "<ul><li>The caller needs to make sure that the array and the array length are paired -- if the wrong value for length is passed in, the function will still malfunction.</li><li>There are potential sign conversion issues if you’re using <code>std::size()</code> or a function that returns a length as <code>std::size_t</code>.</li><li>Runtime asserts only trigger when encountered at runtime. If our testing path doesn’t cover all calls to the function, there’s a risk of shipping a program to the customer that will assert when they do something we didn’t explicitly test for. In modern C++, we’d want to use <code>static_assert</code> for compile-time validation of the array length of constexpr arrays, but there’s no easy way to do this (as function parameters can’t be constexpr, even in constexpr or consteval functions!).</li><li>This method only works if we’re making an explicit function call. If the function call is implicit (e.g. we’re calling an operator with the array as an operand), then there’s no opportunity to pass in the length.</li></ul>",
       "preview": "The caller needs to make sure that the array and the array length are paired -- ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Volající se musí ujistit, že pole a délka pole k sobě patří – pokud je předána nesprávná hodnota délky, funkce bude stále fungovat nesprávně.</li><li>Mohou nastat potenciální problémy s přetypováním/konverzí znaménka (sign conversion), pokud používáte <code>std::size()</code> nebo funkci, která vrací délku jako <code>std::size_t</code>.</li><li>Běhové asserty se aktivují pouze při jejich zasažení za běhu programu. Pokud naše testovací cesty nezahrnují všechna volání dané funkce, existuje riziko vydání programu zákazníkovi, který selže na assertu ve chvíli, kdy zákazník udělá něco, co jsme explicitně neotestovali. V moderním C++ bychom chtěli použít <code>static_assert</code> pro validaci délky constexpr polí v době překladu, ale neexistuje žádný snadný způsob, jak to udělat (protože parametry funkcí nemohou být constexpr, a to ani v constexpr nebo consteval funkcích!).</li><li>Tato metoda funguje pouze v případě, že provádíme explicitní volání funkce. Pokud je volání funkce implicitní (např. voláme operátor s polem jako operandem), pak nemáme žádnou možnost délku předat.</li></ul>"
     },
     {
       "id": "c-style-array-decay_b73",
       "type": "paragraph",
       "html": "<p>Second, if there is an element value that is not semantically valid (e.g. a test score of <code>-1</code>), we can instead mark the end of the array using an element of that value. That way, the length of the array can be calculated by counting how many elements exist between the start of the array and this terminating element. The array can also be traversed by iterating from the start until we hit the terminating element. The nice thing about this method is that it works even with implicit function calls.</p>",
       "preview": "Second, if there is an element value that is not semantically valid (e.g. a test",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, pokud existuje hodnota prvku, která není sémanticky platná (např. výsledek testu <code>-1</code>), můžeme místo toho konec pole označit prvkem s touto hodnotou. Délku pole pak lze spočítat zjištěním počtu prvků mezi začátkem pole a tímto ukončovacím prvkem. Pole lze také procházet iterací od začátku, dokud nenarazíme na ukončovací prvek. Výhodou této metody je, že funguje i při implicitních voláních funkcí.</p>"
     },
     {
       "id": "c-style-array-decay_b74",
@@ -550,35 +631,41 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>C-style strings (which are C-style arrays) use a null-terminator to mark the end of the string, so that they can be traversed even if they have decayed.</p></div>",
       "preview": "Key insightC-style strings (which are C-style arrays) use a null-terminator to mark the end of the s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Řetězce ve stylu jazyka C (což jsou pole ve stylu jazyka C) používají nulový ukončovací znak (null-terminator) k označení konce řetězce, takže je lze procházet, i když u nich došlo k rozpadu (decay).</p></div>"
     },
     {
       "id": "c-style-array-decay_b75",
       "type": "paragraph",
       "html": "<p>But this method also has a number of issues:</p>",
       "preview": "But this method also has a number of issues:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale i tato metoda má řadu problémů:</p>"
     },
     {
       "id": "c-style-array-decay_b76",
       "type": "list",
       "html": "<ul><li>If the terminating element does not exist, traversal will walk right off the end of the array, causing undefined behavior.</li><li>Functions that traverse the array need special handling for the terminating element (e.g. a C-style string print function needs to know not to print the terminating element).</li><li>There is a mismatch between the actual array length and the number of semantically valid elements. If the wrong length is used, the semantically invalid terminating element may be “processed”.</li><li>This approach only works if a semantically invalid value exists, which is often not the case.</li></ul>",
       "preview": "If the terminating element does not exist, traversal will walk right off the end",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pokud ukončovací prvek neexistuje, procházení pole přeteče za jeho konec, což způsobí nedefinované chování.</li><li>Funkce, které pole procházejí, potřebují speciální logiku pro ukončovací prvek (např. funkce pro tisk řetězce ve stylu jazyka C musí vědět, že ukončovací prvek nemá tisknout).</li><li>Dochází k nesouladu mezi skutečnou délkou pole a počtem sémanticky platných prvků. Pokud je použita nesprávná délka, může dojít ke „zpracování“ sémanticky neplatného ukončovacího prvku.</li><li>Tento přístup funguje pouze v případě, že existuje hodnota vyhrazená jako sémanticky neplatná, což často neplatí.</li></ul>"
     },
     {
       "id": "c-style-array-decay_b77",
       "type": "section",
       "title": "C-style arrays should be avoided in most cases",
       "html": "<h3 class=\"cpp-section-heading\">C-style arrays should be avoided in most cases</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ve většině případů byste se měli polím ve stylu jazyka C vyhýbat</h3>",
+      "title_cs": "Pole ve stylu C byste se měli ve většině případů vyhnout"
     },
     {
       "id": "c-style-array-decay_b78",
       "type": "paragraph",
       "html": "<p>Because of the non-standard passing semantics (pass by address is used instead of pass by value) and risks associated with decayed arrays losing their length information, C-style arrays have generally fallen out of favor. We recommend avoiding them as much as possible.</p>",
       "preview": "Because of the non-standard passing semantics (pass by address is used instead o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k nestandardní sémantice předávání (místo předávání hodnotou se používá předávání adresou) a rizikům spojeným s degradací polí, při níž dochází ke ztrátě informací o jejich délce, se od polí ve stylu jazyka C obecně upustilo. Doporučujeme se jim v maximální možné míře vyhýbat.</p>"
     },
     {
       "id": "c-style-array-decay_b79",
@@ -586,7 +673,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid C-style arrays whenever practical.</p><ul><li>Prefer <code>std::string_view</code> for read-only strings (string literal symbolic constants and string parameters).</li><li>Prefer <code>std::string</code> for modifiable strings.</li><li>Prefer <code>std::array</code> for non-global constexpr arrays.</li><li>Prefer <code>std::vector</code> for non-constexpr arrays.</li></ul><p>It is okay to use C-style arrays for global constexpr arrays. We’ll discuss this in a moment.</p></div>",
       "preview": "Best practiceAvoid C-style arrays whenever practical.Prefer std::string_view for read-only strings (",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Kdykoli je to praktické, vyhněte se polím ve stylu jazyka C.</p><ul><li>Pro řetězce určené pouze pro čtení (symbolické konstanty řetězcových literálů a parametry typu řetězec) preferujte <code>std::string_view</code>.</li><li>Pro modifikovatelné řetězce preferujte <code>std::string</code>.</li><li>Pro neglobální constexpr pole preferujte <code>std::array</code>.</li><li>Pro pole, která nejsou constexpr, preferujte <code>std::vector</code>.</li></ul><p>Použití polí ve stylu jazyka C pro globální constexpr pole je v pořádku. K tomu se za chvíli dostaneme.</p></div>"
     },
     {
       "id": "c-style-array-decay_b80",
@@ -594,35 +682,42 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>In C++, arrays can be passed by reference, in which case the array argument won’t decay when passed to a function (but the reference to the array will still decay when evaluated). However, it’s easy to forget to apply this consistently, and one missed reference will lead to decaying arguments. Also, array reference parameters must have a fixed length, meaning the function can only handle arrays of one particular length. If we want a function that can handle arrays of different lengths, then we also have to use function templates. But if you’re going to do both of those things to “fix” C-style arrays, then you might as well just use <code>std::array</code>!</p></div>",
       "preview": "As an aside…In C++, arrays can be passed by reference, in which case the array argument won’t decay ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>V C++ lze pole předávat referencí; v takovém případě argument typu pole při předání do funkce nedegraduje (reference na pole však při vyhodnocení stále degradovat bude). Je však snadné na to zapomenout a nepoužít to důsledně – a jediná vynechaná reference povede k degradaci argumentů na ukazatel. Parametry typu reference na pole navíc musí mít pevnou délku, což znamená, že funkce může zpracovávat pouze pole jedné konkrétní délky. Pokud chceme funkci, která zvládne pole různých délek, musíme navíc použít šablony funkcí. Pokud se však chystáte udělat obě tyto věci, abyste pole ve stylu jazyka C „opravili“, můžete rovnou použít <code>std::array</code>!</p></div>"
     },
     {
       "id": "c-style-array-decay_b81",
       "type": "section",
       "title": "So when are C-style arrays used in modern C++?",
       "html": "<h3 class=\"cpp-section-heading\">So when are C-style arrays used in modern C++?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy se tedy pole ve stylu jazyka C v moderním C++ používají?</h3>",
+      "title_cs": "Kdy se tedy v moderním C++ používají pole ve stylu C?"
     },
     {
       "id": "c-style-array-decay_b82",
       "type": "paragraph",
       "html": "<p>In modern C++, C-style arrays are typically used in two cases:</p>",
       "preview": "In modern C++, C-style arrays are typically used in two cases:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V moderním C++ se pole ve stylu jazyka C obvykle používají ve dvou případech:</p>"
     },
     {
       "id": "c-style-array-decay_b83",
       "type": "list",
       "html": "<ol start=\"1\"><li>To store constexpr global (or constexpr static local) program data. Because such arrays can be accessed directly from anywhere in the program, we do not need to pass the array, which avoids decay-related issues. The syntax for defining C-style arrays can be a little less wonky than <code>std::array</code>. More importantly, indexing such arrays does not have sign conversion issues like the standard library container classes do.</li><li>As parameters to functions or classes that want to handle non-constexpr C-style string arguments directly (rather than requiring a conversion to <code>std::string_view</code>). There are two possible reasons for this: First, converting a non-constexpr C-style string to a <code>std::string_view</code> requires traversing the C-style string to determine its length. If the function is in a performance critical section of code and the length isn’t needed (e.g. because the function is going to traverse the string anyway) then avoiding the conversion may be useful. Second, if the function (or class) calls other functions that expect C-style strings, converting to a <code>std::string_view</code> just to convert back may be suboptimal (unless you have other reasons for wanting a <code>std::string_view</code>).</li></ol>",
       "preview": "To store constexpr global (or constexpr static local) program data. Because such",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>K ukládání constexpr globálních (nebo constexpr statických lokálních) programových dat. Protože k takovým polím lze přistupovat přímo odkudkoli z programu, nemusíme pole předávat jako argument, což eliminuje problémy spojené s degradací na ukazatel. Syntaxe pro definování polí ve stylu jazyka C může být o něco přímočařejší než u <code>std::array</code>. A co je ještě důležitější, indexování těchto polí netrpí problémy s konverzí znaménka (sign conversion) jako kontejnerové třídy ze standardní knihovny.</li><li>Jako parametry funkcí nebo tříd, které chtějí pracovat přímo s argumenty typu C-style řetězec, jež nejsou constexpr (místo vyžadování konverze na <code>std::string_view</code>). Pro to existují dva možné důvody: Zaprvé, převod C-style řetězce, který není constexpr, na <code>std::string_view</code> vyžaduje projití celého řetězce za účelem zjištění jeho délky. Pokud se funkce nachází v výkonnostně kritické části kódu a délka není potřeba (např. proto, že funkce bude řetězec stejně procházet), pak může být vyhnutí se této konverzi užitečné. Zadruhé, pokud funkce (nebo třída) volá jiné funkce, které očekávají C-style řetězce, převod na <code>std::string_view</code> jen proto, aby se vzápětí převedl zpět, může být neoptimální (pokud nemáte jiný důvod, proč <code>std::string_view</code> vyžadovat).</li></ol>"
     },
     {
       "id": "c-style-array-decay_b84",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "c-style-array-decay_b85",
@@ -656,7 +751,9 @@
       "type": "paragraph",
       "html": "<p>Extra Credit #2: Even if C++ wanted to implement having to pass explicit length information, why wouldn’t it work?</p>",
       "preview": "Extra Credit #2: Even if C++ wanted to implement having to pass explicit length ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bonusová otázka č. 2: I kdyby C++ chtělo zavést nutnost předávat explicitní informaci o délce, proč by to nefungovalo?</p>"
     }
-  ]
+  ],
+  "title_cs": "17.8 — Rozpad pole ve stylu C"
 }

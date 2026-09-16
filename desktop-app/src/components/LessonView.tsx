@@ -3,6 +3,7 @@ import { LessonData, NoteItem, LessonMeta } from "../types";
 import { BlockItem } from "./BlockItem";
 import { Clock, CheckCheck, ExternalLink, ChevronUp, ChevronDown, ArrowLeft, ArrowRight, Play, Code } from "lucide-react";
 import { formatDuration } from "../services/storage";
+import { getT } from "../utils/i18n";
 
 interface LessonViewProps {
   lesson: LessonData;
@@ -57,6 +58,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
   contentLanguage,
   onToggleTheme
 }) => {
+  const t = getT(uiLanguage);
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
   const isDarkMode = theme === "dark" || theme === "oled";
 
@@ -100,7 +102,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
               target="_blank"
               rel="noreferrer"
               className="text-[var(--text-muted)] hover:text-blue-400 flex-shrink-0 transition-colors"
-              title="Originál na learncpp.com"
+              title={t('originalLink')}
             >
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -109,11 +111,11 @@ export const LessonView: React.FC<LessonViewProps> = ({
           <div className="flex items-center gap-3 flex-shrink-0">
             <span
               className={`w-2 h-2 rounded-full flex-shrink-0 ${isActive ? "bg-emerald-400 animate-pulse" : "bg-amber-400"}`}
-              title={isActive ? "Aktivní čtení" : "Pozastaveno"}
+              title={isActive ? t('activeReading') : t('paused')}
             />
             <div
               className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--bg-app)] text-[var(--text-main)] font-mono text-xs border border-[var(--border-color)]"
-              title="Čas strávený čtením teorie"
+              title={t('readingTooltip')}
             >
               <Clock className="w-3 h-3 text-blue-400" />
               <span>{formatDuration(totalLessonSeconds + lessonSeconds)}</span>
@@ -121,7 +123,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
             {(totalCodingSeconds + codingSeconds > 0 || isCodingMode) && (
               <div
                 className={`flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--bg-app)] text-emerald-400 font-mono text-xs border border-emerald-500/30 ${isCodingMode ? 'ring-1 ring-emerald-400 animate-pulse' : ''}`}
-                title="Čas strávený praktickým psaním kódu"
+                title={t('codingTooltip')}
               >
                 <Code className="w-3 h-3 text-emerald-400" />
                 <span>{formatDuration(totalCodingSeconds + codingSeconds)}</span>
@@ -133,7 +135,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
             <button
               onClick={() => setIsHeaderOpen(!isHeaderOpen)}
               className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors"
-              title={isHeaderOpen ? "Skrýt lištu" : "Zobrazit lištu"}
+              title={isHeaderOpen ? t('hideBar') : t('showBar')}
             >
               {isHeaderOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
@@ -153,7 +155,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
               }`}>
                 <span className={`w-2 h-2 rounded-full ${isCodingMode ? "bg-emerald-400 animate-ping" : isActive ? "bg-blue-400 animate-pulse" : "bg-amber-400"}`} />
                 <span className="font-medium">
-                  {isCodingMode ? "Měření psaní kódu (aktivní)" : isActive ? "Aktivní čtení teorie" : "Studium pozastaveno"}
+                  {isCodingMode ? t('measuringCode') : isActive ? t('activeReadingTheory') : t('studyPaused')}
                 </span>
               </div>
               <div className="flex-1 bg-gray-800 rounded-full h-1.5 overflow-hidden">
@@ -168,7 +170,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                   className="flex items-center gap-1 px-2 py-0.5 text-[11px] rounded bg-[var(--bg-app)] hover:bg-[var(--bg-hover)] text-[var(--text-main)] hover:text-[var(--text-main)] transition-colors border border-[var(--border-color)]"
                 >
                   <CheckCheck className="w-3 h-3 text-emerald-400" />
-                  <span>Označit vše</span>
+                  <span>{t('markAll')}</span>
                 </button>
               )}
             </div>
@@ -186,7 +188,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
           <div
             onClick={onResumeTracking}
             className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center cursor-pointer select-none animate-in fade-in duration-200"
-            title="Kliknutím kamkoliv pokračujete ve čtení"
+            title={t('clickToContinue')}
           >
             {isCodingMode ? (
               /* Coding Mode Active Window */
@@ -196,7 +198,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
               >
                 <div className="flex items-center gap-2 text-xs font-bold tracking-wide text-emerald-400">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>MĚŘENÍ PSANÍ KÓDU</span>
+                  <span>{t('codingTitle')}</span>
                 </div>
 
                 <div className="text-3xl font-mono font-bold text-[var(--text-main)] py-1 flex items-center gap-2">
@@ -205,7 +207,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 </div>
 
                 <p className="text-[11px] text-[var(--text-muted)]">
-                  Čas se počítá, i když píšete kód v jiném okně nebo editoru.
+                  {t('codingDesc')}
                 </p>
 
                 <button
@@ -213,7 +215,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                   className="mt-1 flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/25 cursor-pointer"
                 >
                   <Play className="w-3.5 h-3.5 fill-white" />
-                  <span>Zpět ke čtení</span>
+                  <span>{t('backToReading')}</span>
                 </button>
               </div>
             ) : (
@@ -224,21 +226,21 @@ export const LessonView: React.FC<LessonViewProps> = ({
               >
                 <div className="flex items-center gap-2 text-xs font-bold text-[var(--text-muted)]">
                   <span className="w-2 h-2 rounded-full bg-amber-400" />
-                  <span>POZASTAVENO</span>
+                  <span>{t('pausedTitle')}</span>
                 </div>
 
                 <p className="text-xs text-[var(--text-main)]">
-                  Klikněte kamkoliv pro pokračování ve studiu
+                  {t('resumeHint')}
                 </p>
 
                 <div className="pt-2 border-t border-[var(--border-color)] w-full">
                   <button
                     onClick={onStartCodingMode}
                     className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-colors cursor-pointer"
-                    title="Spustí počítadlo pro psaní kódu v externím editoru"
+                    title={t('startCodingTooltip')}
                   >
                     <Code className="w-3.5 h-3.5" />
-                    <span>Programuji (měřit čas psaní kódu)</span>
+                    <span>{t('startCodingModeAction')}</span>
                   </button>
                 </div>
               </div>
@@ -266,7 +268,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
               fontFamily: '"Open Sans", Arial, sans-serif',
               lineHeight: 1.3,
             }}>
-              {lesson.title}
+              {lesson.number} — {contentLanguage === 'cs' && lesson.title_cs ? lesson.title_cs.replace(/^[0-9.]+\s*—\s*/, '') : lesson.title}
             </h1>
 
             {/* Lesson blocks */}
@@ -277,6 +279,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 lessonSlug={lesson.slug}
                 isChecked={!!checkedBlocks[block.id]}
                 notes={notes[block.id] || []}
+                uiLanguage={uiLanguage}
                 contentLanguage={contentLanguage}
                 onToggleCheck={onToggleCheck}
                 onAddNote={onAddNote}
@@ -297,7 +300,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     <ArrowLeft className="w-8 h-8 text-blue-400" />
                   </span>
                   <span>
-                    <div className="nav-button-title" style={{ fontSize: "16px" }}>Předchozí lekce</div>
+                    <div className="nav-button-title" style={{ fontSize: "16px" }}>{t('prevLesson')}</div>
                     <div className="nav-button-lesson">
                       <span className="nav-button-lesson-number">{prevLesson.number}</span>
                       {prevLesson.title}
@@ -317,7 +320,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     <ArrowRight className="w-8 h-8 text-emerald-400" />
                   </span>
                   <span>
-                    <div className="nav-button-title" style={{ fontSize: "16px" }}>Další lekce</div>
+                    <div className="nav-button-title" style={{ fontSize: "16px" }}>{t('nextLesson')}</div>
                     <div className="nav-button-lesson">
                       <span className="nav-button-lesson-number">{nextLesson.number}</span>
                       {nextLesson.title}

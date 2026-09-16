@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson, we overloaded operator+ as a friend function:</p>",
       "preview": "In the previous lesson, we overloaded operator+ as a friend function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci jsme přetížili operator+ jako spřátelenou funkci (friend function):</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b1",
@@ -22,21 +23,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n\n  // add Cents + Cents using a friend function\n  friend Cents operator+(const Cents& c1, const Cents& c2);\n\n  int getCents() const { return m_cents; }\n};\n \n// note: this function is not a member function!\nCents operator+(const Cents& c1, const Cents& c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we can access m_cents directly because this is a friend function\n  return { c1.m_cents + c2.m_cents };\n}\n \nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n\n  // add Cents + Cents using a friend function\n  friend Cents operator+(const Cents&amp; c1, const Cents&amp; c2);\n\n  int getCents() const { return m_cents; }\n};\n \n// note: this function is not a member function!\nCents operator+(const Cents&amp; c1, const Cents&amp; c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we can access m_cents directly because this is a friend function\n  return { c1.m_cents + c2.m_cents };\n}\n \nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída centů\n{\nsoukromé:\n  int m_centů{};\n\nveřejnost:\n  centů (int centů)\n    : m_cents{ cents}\n  {}\n\n  // přidání centů + centů pomocí funkce přítele\n  přítel centů operátor+ (konst centů& c1, konst centů& c2);\n\n  int getCents() const { return m_cents; }\n};\n \n// poznámka: tato funkce není členská funkce!\nOperátor centů+ (konst centů a c1, konst centů a c2)\n{\n  // použijte konstruktor Cents a operátor+(int, int)\n  // můžeme přistupovat přímo k m_cents, protože se jedná o funkci přítele\n  return { c1.m_centů + c2.m_centů };\n}\n \nint main()\n{\n  Centy centy1{ 6 };\n  Centy centy2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b2",
       "type": "paragraph",
       "html": "<p>Using a friend function to overload an operator is convenient because it gives you direct access to the internal members of the classes you’re operating on. In the initial Cents example above, our friend function version of operator+ accessed member variable m_cents directly.</p>",
       "preview": "Using a friend function to overload an operator is convenient because it gives y",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití spřátelené funkce k přetížení operátoru je praktické, protože vám poskytuje přímý přístup k vnitřním členům tříd, se kterými pracujete. V úvodním příkladu s Cents výše naše verze operator+ jakožto spřátelené funkce přistupovala k členské proměnné m_cents přímo.</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b3",
       "type": "paragraph",
       "html": "<p>However, if you don’t need that access, you can write your overloaded operators as normal functions. Note that the Cents class above contains an access function (getCents()) that allows us to get at m_cents without having to have direct access to private members. Because of this, we can write our overloaded operator+ as a non-friend:</p>",
       "preview": "However, if you don’t need that access, you can write your overloaded operators ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však takový přístup nepotřebujete, můžete své přetížené operátory napsat jako běžné funkce. Všimněte si, že třída Cents výše obsahuje přístupovou funkci (getCents()), která nám umožňuje získat m_cents bez nutnosti přímého přístupu k privátním členům. Díky tomu můžeme náš přetížený operator+ napsat jako nespřátelenou funkci (non-friend):</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b4",
@@ -44,21 +48,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n\n  int getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function nor a friend function!\nCents operator+(const Cents& c1, const Cents& c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we don't need direct access to private members here\n  return Cents{ c1.getCents() + c2.getCents() };\n}\n\nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n\n  int getCents() const { return m_cents; }\n};\n\n// note: this function is not a member function nor a friend function!\nCents operator+(const Cents&amp; c1, const Cents&amp; c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we don't need direct access to private members here\n  return Cents{ c1.getCents() + c2.getCents() };\n}\n\nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída centů\n{\nsoukromé:\n  int m_centů{};\n\nveřejnost:\n  centů (int centů)\n    : m_cents{ cents}\n  {}\n\n  int getCents() const { return m_cents; }\n};\n\n// poznámka: tato funkce není členská funkce ani funkce přátel!\nOperátor centů+ (konst centů a c1, konst centů a c2)\n{\n  // použijte konstruktor Cents a operátor+(int, int)\n  // zde nepotřebujeme přímý přístup k soukromým členům\n  return Cents{ c1.getCents() + c2.getCents() };\n}\n\nint main()\n{\n  Centy centy1{ 6 };\n  Centy centy2{ 8 };\n  Cents centsSum{ cents1 + cents2 };\n  std::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b5",
       "type": "paragraph",
       "html": "<p>Because the normal and friend functions work almost identically (they just have different levels of access to private members), we generally won’t differentiate them. The one difference is that the friend function declaration inside the class serves as a prototype as well. With the normal function version, you’ll have to provide your own function prototype.</p>",
       "preview": "Because the normal and friend functions work almost identically (they just have ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože běžné a spřátelené funkce fungují téměř identicky (liší se pouze úrovní přístupu k privátním členům), obecně mezi nimi nebudeme dělat rozdíly. Jediným rozdílem je, že deklarace spřátelené funkce uvnitř třídy slouží zároveň jako prototyp. U verze s běžnou funkcí budete muset poskytnout vlastní prototyp funkce.</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b6",
       "type": "paragraph",
       "html": "<p>Cents.h:</p>",
       "preview": "Cents.h:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Cents.h:</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b7",
@@ -66,14 +73,16 @@
       "language": "cpp",
       "code": "#ifndef CENTS_H\n#define CENTS_H\n\nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n  \n  int getCents() const { return m_cents; }\n};\n\n// Need to explicitly provide prototype for operator+ so uses of operator+ in other files know this overload exists\nCents operator+(const Cents& c1, const Cents& c2);\n\n#endif",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef CENTS_H\n#define CENTS_H\n\nclass Cents\n{\nprivate:\n  int m_cents{};\n\npublic:\n  Cents(int cents)\n    : m_cents{ cents }\n  {}\n  \n  int getCents() const { return m_cents; }\n};\n\n// Need to explicitly provide prototype for operator+ so uses of operator+ in other files know this overload exists\nCents operator+(const Cents&amp; c1, const Cents&amp; c2);\n\n#endif</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#ifndef CENTS_H\n#define CENTS_H\n\ntřída centů\n{\nsoukromé:\n  int m_centů{};\n\nveřejnost:\n  centů (int centů)\n    : m_cents{ cents}\n  {}\n  \n  int getCents() const { return m_cents; }\n};\n\n// Potřeba explicitně poskytnout prototyp pro operator+, aby použití operator+ v jiných souborech vědělo, že toto přetížení existuje\nOperátor centů+ (konst centů& c1, konst centů& c2);\n\n#endif</code></pre>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b8",
       "type": "paragraph",
       "html": "<p>Cents.cpp:</p>",
       "preview": "Cents.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Cents.cpp:</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b9",
@@ -81,14 +90,16 @@
       "language": "cpp",
       "code": "#include \"Cents.h\"\n\n// note: this function is not a member function nor a friend function!\nCents operator+(const Cents& c1, const Cents& c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we don't need direct access to private members here\n  return { c1.getCents() + c2.getCents() };\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"Cents.h\"\n\n// note: this function is not a member function nor a friend function!\nCents operator+(const Cents&amp; c1, const Cents&amp; c2)\n{\n  // use the Cents constructor and operator+(int, int)\n  // we don't need direct access to private members here\n  return { c1.getCents() + c2.getCents() };\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"Cents.h\"\n\n// poznámka: tato funkce není členská funkce ani funkce přátel!\nOperátor centů+ (konst centů a c1, konst centů a c2)\n{\n  // použijte konstruktor Cents a operátor+(int, int)\n  // zde nepotřebujeme přímý přístup k soukromým členům\n  return { c1.getCents() + c2.getCents() };\n}</code></pre>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b10",
       "type": "paragraph",
       "html": "<p>main.cpp:</p>",
       "preview": "main.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>main.cpp:</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b11",
@@ -96,14 +107,16 @@
       "language": "cpp",
       "code": "#include \"Cents.h\"\n#include <iostream>\n\nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 }; // without the prototype in Cents.h, this would fail to compile\n  std::cout << \"I have \" << centsSum.getCents() << \" cents.\\n\";\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"Cents.h\"\n#include &lt;iostream&gt;\n\nint main()\n{\n  Cents cents1{ 6 };\n  Cents cents2{ 8 };\n  Cents centsSum{ cents1 + cents2 }; // without the prototype in Cents.h, this would fail to compile\n  std::cout &lt;&lt; \"I have \" &lt;&lt; centsSum.getCents() &lt;&lt; \" cents.\\n\";\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include \"Cents.h\"\n#include <iostream>\n\nint main()\n{\n  Centy centy1{ 6 };\n  Centy centy2{ 8 };\n  Cents centsSum{ cents1 + cents2 }; // bez prototypu v Cents.h by se to nepodařilo zkompilovat\n  std::cout << \"Mám \" << centsSum.getCents() << \" centů.\\n\";\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b12",
       "type": "paragraph",
       "html": "<p>In general, a normal function should be preferred over a friend function if it’s possible to do so with the existing member functions available (the less functions touching your classes’s internals, the better). However, don’t add additional access functions just to overload an operator as a normal function instead of a friend function!</p>",
       "preview": "In general, a normal function should be preferred over a friend function if it’s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně by se měla upřednostňovat běžná funkce před spřátelenou funkcí, pokud je to možné provést pomocí stávajících dostupných členských funkcí (čím méně funkcí sahá do vnitřností vašich tříd, tím lépe). Nepřidávejte však další přístupové funkce jen proto, abyste operátor přetížili jako běžnou funkci namísto spřátelené funkce!</p>"
     },
     {
       "id": "overloading-operators-using-normal-functions_b13",
@@ -111,7 +124,9 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer overloading operators as normal functions instead of friends if it’s possible to do so without adding additional functions.</p></div>",
       "preview": "Best practicePrefer overloading operators as normal functions instead of friends if it’s possible to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost přetěžování operátorů jako běžných funkcí namísto přátelských funkcí (friend), pokud je to možné bez přidávání dalších funkcí.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "21.3 — Přetěžování operátorů pomocí běžných funkcí"
 }

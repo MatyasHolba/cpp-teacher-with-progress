@@ -14,28 +14,32 @@
       "type": "paragraph",
       "html": "<p>File I/O in C++ works very similarly to normal I/O (with a few minor added complexities). There are 3 basic file I/O classes in C++: ifstream (derived from istream), ofstream (derived from ostream), and fstream (derived from iostream). These classes do file input, output, and input/output respectively. To use the file I/O classes, you will need to include the fstream header.</p>",
       "preview": "File I/O in C++ works very similarly to normal I/O (with a few minor added compl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>File I/O v C++ funguje velmi podobně jako normální I/O (s několika drobnými přidanými složitostmi). V C++ existují 3 základní souborové I/O třídy: ifstream (odvozený z istream), ofstream (odvozený z ostream) a fstream (odvozený z iostream). Tyto třídy provádějí vstup, výstup a vstup/výstup souboru. Chcete-li použít třídy I/O souboru, budete muset zahrnout záhlaví fstream.</p>"
     },
     {
       "id": "basic-file-io_b1",
       "type": "paragraph",
       "html": "<p>Unlike the cout, cin, cerr, and clog streams, which are already ready for use, file streams have to be explicitly set up by the programmer. However, this is extremely simple: to open a file for reading and/or writing, simply instantiate an object of the appropriate file I/O class, with the name of the file as a parameter. Then use the insertion (&lt;&lt;) or extraction (&gt;&gt;) operator to write to or read data from the file. Once you are done, there are several ways to close a file: explicitly call the close() function, or just let the file I/O variable go out of scope (the file I/O class destructor will close the file for you).</p>",
       "preview": "Unlike the cout, cin, cerr, and clog streams, which are already ready for use, f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od proudů cout, cin, cerr a clog, které jsou již připraveny k použití, musí být datové proudy souborů explicitně nastaveny programátorem. To je však velmi jednoduché: chcete-li otevřít soubor pro čtení a/nebo zápis, jednoduše vytvořte instanci objektu příslušné třídy I/O souboru s názvem souboru jako parametrem. Poté použijte operátor vložení (<<) nebo extrakce (>>) k zápisu nebo čtení dat ze souboru. Jakmile budete hotovi, existuje několik způsobů, jak zavřít soubor: explicitně zavolejte funkci close() nebo nechte proměnnou I/O souboru mimo rozsah (destruktor třídy I/O souboru za vás soubor zavře).</p>"
     },
     {
       "id": "basic-file-io_b2",
       "type": "paragraph",
       "html": "<p><strong>File output</strong></p>",
       "preview": "File output",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výstup souboru</strong></p>"
     },
     {
       "id": "basic-file-io_b3",
       "type": "paragraph",
       "html": "<p>To do file output in the following example, we’re going to use the ofstream class. This is extremely straightforward:</p>",
       "preview": "To do file output in the following example, we’re going to use the ofstream clas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro výstup souboru v následujícím příkladu použijeme třídu ofstream. To je velmi přímočaré:</p>"
     },
     {
       "id": "basic-file-io_b4",
@@ -43,35 +47,40 @@
       "language": "cpp",
       "code": "#include <fstream>\n#include <iostream>\n \nint main()\n{\n    // ofstream is used for writing files\n    // We'll make a file called Sample.txt\n    std::ofstream outf{ \"Sample.txt\" };\n\n    // If we couldn't open the output file stream for writing\n    if (!outf)\n    {\n        // Print an error and exit\n        std::cerr << \"Uh oh, Sample.txt could not be opened for writing!\\n\";\n        return 1;\n    }\n\n    // We'll write two lines into this file\n    outf << \"This is line 1\\n\";\n    outf << \"This is line 2\\n\";\n\n    return 0;\n\t\n    // When outf goes out of scope, the ofstream\n    // destructor will close the file\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;fstream&gt;\n#include &lt;iostream&gt;\n \nint main()\n{\n    // ofstream is used for writing files\n    // We'll make a file called Sample.txt\n    std::ofstream outf{ \"Sample.txt\" };\n\n    // If we couldn't open the output file stream for writing\n    if (!outf)\n    {\n        // Print an error and exit\n        std::cerr &lt;&lt; \"Uh oh, Sample.txt could not be opened for writing!\\n\";\n        return 1;\n    }\n\n    // We'll write two lines into this file\n    outf &lt;&lt; \"This is line 1\\n\";\n    outf &lt;&lt; \"This is line 2\\n\";\n\n    return 0;\n\t\n    // When outf goes out of scope, the ofstream\n    // destructor will close the file\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <fstream>\n#include <iostream>\n \nint main()\n{\n    // ofstream se používá pro zápis souborů\n    // Vytvoříme soubor s názvem Sample.txt\n    std::ofstream outf{ \"Sample.txt\" };\n\n    // Pokud bychom nemohli otevřít proud výstupního souboru pro zápis\n    pokud (!outf)\n    {\n        // Vytiskne chybu a skončí\n        std::cerr << \"Uh, Sample.txt nelze otevřít pro zápis!\\n\";\n        návrat 1;\n    }\n\n    // Do tohoto souboru zapíšeme dva řádky\n    outf << \"Toto je řádek 1\\n\";\n    outf << \"Toto je řádek 2\\n\";\n\n    návrat 0;\n\t\n    // Když outf přejde mimo rozsah, ofstream\n    // destruktor zavře soubor\n}</code></pre>"
     },
     {
       "id": "basic-file-io_b5",
       "type": "paragraph",
       "html": "<p>If you look in your project directory, you should see a file called Sample.txt. If you open it with a text editor, you will see that it indeed contains two lines we wrote to the file.</p>",
       "preview": "If you look in your project directory, you should see a file called Sample.txt. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud se podíváte do adresáře projektu, měli byste vidět soubor s názvem Sample.txt. Pokud jej otevřete v textovém editoru, uvidíte, že skutečně obsahuje dva řádky, které jsme do souboru zapsali.</p>"
     },
     {
       "id": "basic-file-io_b6",
       "type": "paragraph",
       "html": "<p>Note that it is also possible to use the put() function to write a single character to the file.</p>",
       "preview": "Note that it is also possible to use the put() function to write a single charac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že je také možné použít funkci put() k zápisu jednoho znaku do souboru.</p>"
     },
     {
       "id": "basic-file-io_b7",
       "type": "paragraph",
       "html": "<p><strong>File input</strong></p>",
       "preview": "File input",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Zadání souboru</strong></p>"
     },
     {
       "id": "basic-file-io_b8",
       "type": "paragraph",
       "html": "<p>Now, we’ll take the file we wrote in the last example and read it back in from disk. Note that ifstream returns a 0 if we’ve reached the end of the file (EOF). We’ll use this fact to determine how much to read.</p>",
       "preview": "Now, we’ll take the file we wrote in the last example and read it back in from d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní vezmeme soubor, který jsme napsali v posledním příkladu, a načteme jej zpět z disku. Všimněte si, že ifstream vrátí 0, pokud jsme dosáhli konce souboru (EOF). Na základě této skutečnosti určíme, kolik číst.</p>"
     },
     {
       "id": "basic-file-io_b9",
@@ -79,28 +88,32 @@
       "language": "cpp",
       "code": "#include <fstream>\n#include <iostream>\n#include <string>\n\nint main()\n{\n    // ifstream is used for reading files\n    // We'll read from a file called Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // If we couldn't open the output file stream for reading\n    if (!inf)\n    {\n        // Print an error and exit\n        std::cerr << \"Uh oh, Sample.txt could not be opened for reading!\\n\";\n        return 1;\n    }\n\n    // While there's still stuff left to read\n    std::string strInput{};\n    while (inf >> strInput)\n        std::cout << strInput << '\\n';\n    \n    return 0;\n\t\n    // When inf goes out of scope, the ifstream\n    // destructor will close the file\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;fstream&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    // ifstream is used for reading files\n    // We'll read from a file called Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // If we couldn't open the output file stream for reading\n    if (!inf)\n    {\n        // Print an error and exit\n        std::cerr &lt;&lt; \"Uh oh, Sample.txt could not be opened for reading!\\n\";\n        return 1;\n    }\n\n    // While there's still stuff left to read\n    std::string strInput{};\n    while (inf &gt;&gt; strInput)\n        std::cout &lt;&lt; strInput &lt;&lt; '\\n';\n    \n    return 0;\n\t\n    // When inf goes out of scope, the ifstream\n    // destructor will close the file\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <fstream>\n#include <iostream>\n#include <řetězec>\n\nint main()\n{\n    // ifstream se používá pro čtení souborů\n    // Budeme číst ze souboru s názvem Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // Pokud bychom nemohli otevřít proud výstupního souboru pro čtení\n    pokud (!inf)\n    {\n        // Vytiskne chybu a skončí\n        std::cerr << \"Aha, Sample.txt nelze otevřít pro čtení!\\n\";\n        návrat 1;\n    }\n\n    // Dokud ještě zbývá něco ke čtení\n    std::string strInput{};\n    while (inf >> strInput)\n        std::cout << strInput << '\\n';\n    \n    návrat 0;\n\t\n    // Když je inf mimo rozsah, ifstream\n    // destruktor zavře soubor\n}</code></pre>"
     },
     {
       "id": "basic-file-io_b10",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je:</p>"
     },
     {
       "id": "basic-file-io_b11",
       "type": "output",
       "text": "This\nis\nline\n1\nThis\nis\nline\n2\n",
       "html": "<pre>This\nis\nline\n1\nThis\nis\nline\n2\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Toto\nje\nlinka\n1\nToto\nje\nlinka\n2\n</pre>"
     },
     {
       "id": "basic-file-io_b12",
       "type": "paragraph",
       "html": "<p>Hmmm, that wasn’t quite what we wanted. Remember that the extraction operator breaks on whitespace. In order to read in entire lines, we’ll have to use the getline() function.</p>",
       "preview": "Hmmm, that wasn’t quite what we wanted. Remember that the extraction operator br",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hmmm, to nebylo úplně to, co jsme chtěli. Pamatujte si, že operátor extrakce přeruší mezery. Abychom mohli číst celé řádky, budeme muset použít funkci getline().</p>"
     },
     {
       "id": "basic-file-io_b13",
@@ -108,84 +121,96 @@
       "language": "cpp",
       "code": "#include <fstream>\n#include <iostream>\n#include <string>\n\nint main()\n{\n    // ifstream is used for reading files\n    // We'll read from a file called Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // If we couldn't open the input file stream for reading\n    if (!inf)\n    {\n        // Print an error and exit\n        std::cerr << \"Uh oh, Sample.txt could not be opened for reading!\\n\";\n        return 1;\n    }\n\n    // While there's still stuff left to read\n    std::string strInput{};\n    while (std::getline(inf, strInput))\n\tstd::cout << strInput << '\\n';\n    \n    return 0;\n\t\n    // When inf goes out of scope, the ifstream\n    // destructor will close the file\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;fstream&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nint main()\n{\n    // ifstream is used for reading files\n    // We'll read from a file called Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // If we couldn't open the input file stream for reading\n    if (!inf)\n    {\n        // Print an error and exit\n        std::cerr &lt;&lt; \"Uh oh, Sample.txt could not be opened for reading!\\n\";\n        return 1;\n    }\n\n    // While there's still stuff left to read\n    std::string strInput{};\n    while (std::getline(inf, strInput))\n\tstd::cout &lt;&lt; strInput &lt;&lt; '\\n';\n    \n    return 0;\n\t\n    // When inf goes out of scope, the ifstream\n    // destructor will close the file\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <fstream>\n#include <iostream>\n#include <řetězec>\n\nint main()\n{\n    // ifstream se používá pro čtení souborů\n    // Budeme číst ze souboru s názvem Sample.txt\n    std::ifstream inf{ \"Sample.txt\" };\n\n    // Pokud bychom nemohli otevřít proud vstupního souboru pro čtení\n    pokud (!inf)\n    {\n        // Vytiskne chybu a skončí\n        std::cerr << \"Aha, Sample.txt nelze otevřít pro čtení!\\n\";\n        návrat 1;\n    }\n\n    // Dokud ještě zbývá něco ke čtení\n    std::string strInput{};\n    while (std::getline(inf, strInput))\n\tstd::cout << strInput << '\\n';\n    \n    návrat 0;\n\t\n    // Když je inf mimo rozsah, ifstream\n    // destruktor zavře soubor\n}</code></pre>"
     },
     {
       "id": "basic-file-io_b14",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je:</p>"
     },
     {
       "id": "basic-file-io_b15",
       "type": "output",
       "text": "This is line 1\nThis is line 2\n",
       "html": "<pre>This is line 1\nThis is line 2\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Toto je řádek 1\nToto je řádek 2\n</pre>"
     },
     {
       "id": "basic-file-io_b16",
       "type": "paragraph",
       "html": "<p><strong>Buffered output</strong></p>",
       "preview": "Buffered output",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výstup ve vyrovnávací paměti</strong></p>"
     },
     {
       "id": "basic-file-io_b17",
       "type": "paragraph",
       "html": "<p>Output in C++ may be buffered. This means that anything that is output to a file stream may not be written to disk immediately. Instead, several output operations may be batched and handled together. This is done primarily for performance reasons. When a buffer is written to disk, this is called <strong>flushing</strong> the buffer. One way to cause the buffer to be flushed is to close the file -- the contents of the buffer will be flushed to disk, and then the file will be closed.</p>",
       "preview": "Output in C++ may be buffered. This means that anything that is output to a file",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup v C++ může být uložen do vyrovnávací paměti. To znamená, že cokoli, co je výstupem do datového proudu souboru, nemusí být okamžitě zapsáno na disk. Místo toho může být několik výstupních operací dávkováno a zpracováváno společně. Děje se tak především z výkonnostních důvodů. Když se vyrovnávací paměť zapisuje na disk, nazývá se to <strong>vyprázdnění</strong> vyrovnávací paměti. Jedním ze způsobů, jak vyprázdnit vyrovnávací paměť, je zavřít soubor -- obsah vyrovnávací paměti bude vyprázdněn na disk a poté bude soubor uzavřen.</p>"
     },
     {
       "id": "basic-file-io_b18",
       "type": "paragraph",
       "html": "<p>Buffering is usually not a problem, but in certain circumstance it can cause complications for the unwary. The main culprit in this case is when there is data in the buffer, and then program terminates immediately (either by crashing, or by calling exit()). In these cases, the destructors for the file stream classes are not executed, which means the files are never closed, which means the buffers are never flushed. In this case, the data in the buffer is not written to disk, and is lost forever. This is why it is always a good idea to explicitly close any open files before calling exit().</p>",
       "preview": "Buffering is usually not a problem, but in certain circumstance it can cause com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukládání do vyrovnávací paměti obvykle není problém, ale za určitých okolností může způsobit komplikace neopatrným. Hlavním viníkem v tomto případě je, když jsou ve vyrovnávací paměti data a program se okamžitě ukončí (buď pádem nebo voláním exit()). V těchto případech nejsou destruktory pro třídy proudů souborů provedeny, což znamená, že soubory nejsou nikdy uzavřeny, což znamená, že vyrovnávací paměti nejsou nikdy vyprázdněny. V tomto případě nejsou data ve vyrovnávací paměti zapsána na disk a jsou navždy ztracena. Proto je vždy dobré před voláním exit() explicitně zavřít všechny otevřené soubory.</p>"
     },
     {
       "id": "basic-file-io_b19",
       "type": "paragraph",
       "html": "<p>It is possible to flush the buffer manually using the ostream::flush() function or sending std::flush to the output stream. Either of these methods can be useful to ensure the contents of the buffer are written to disk immediately, just in case the program crashes.</p>",
       "preview": "It is possible to flush the buffer manually using the ostream::flush() function ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vyrovnávací paměť je možné vyprázdnit ručně pomocí funkce ostream::flush() nebo odesláním std::flush do výstupního proudu. Každá z těchto metod může být užitečná pro zajištění okamžitého zápisu obsahu vyrovnávací paměti na disk pro případ, že by se program zhroutil.</p>"
     },
     {
       "id": "basic-file-io_b20",
       "type": "paragraph",
       "html": "<p>One interesting note is that std::endl; also flushes the output stream. Consequently, overuse of std::endl (causing unnecessary buffer flushes) can have performance impacts when doing buffered I/O where flushes are expensive (such as writing to a file). For this reason, performance conscious programmers will often use ‘\\n’ instead of std::endl to insert a newline into the output stream, to avoid unnecessary flushing of the buffer.</p>",
       "preview": "One interesting note is that std::endl; also flushes the output stream. Conseque",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedna zajímavá poznámka je, že std::endl; také proplachuje výstupní proud. V důsledku toho může nadměrné používání std::endl (způsobující zbytečné vyprázdnění vyrovnávací paměti) mít dopad na výkon při provádění I/O s vyrovnávací pamětí, kde jsou vyprázdnění drahé (jako je zápis do souboru). Z tohoto důvodu programátoři, kteří dbají na výkon, často používají ‚\\n‘ místo std::endl k vložení nového řádku do výstupního proudu, aby se vyhnuli zbytečnému proplachování vyrovnávací paměti.</p>"
     },
     {
       "id": "basic-file-io_b21",
       "type": "paragraph",
       "html": "<p><strong>File modes</strong></p>",
       "preview": "File modes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Režimy souborů</strong></p>"
     },
     {
       "id": "basic-file-io_b22",
       "type": "paragraph",
       "html": "<p>What happens if we try to write to a file that already exists? Running the output example again shows that the original file is completely overwritten each time the program is run. What if, instead, we wanted to append some more data to the end of the file? It turns out that the file stream constructors take an optional second parameter that allows you to specify information about how the file should be opened. This parameter is called mode, and the valid flags that it accepts live in the ios class.</p>",
       "preview": "What happens if we try to write to a file that already exists? Running the outpu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se stane, když se pokusíme zapsat do souboru, který již existuje? Opětovné spuštění příkladu výstupu ukazuje, že původní soubor je při každém spuštění programu zcela přepsán. Co kdybychom místo toho chtěli na konec souboru přidat nějaká další data? Ukázalo se, že konstruktory toku souborů berou volitelný druhý parametr, který vám umožňuje zadat informace o tom, jak by se měl soubor otevřít. Tento parametr se nazývá mode a platné příznaky, které přijímá, žijí ve třídě ios.</p>"
     },
     {
       "id": "basic-file-io_b23",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Ios file mode</th><th>Meaning</th></tr><tr><td>app</td><td>Opens the file in append mode</td></tr><tr><td>ate</td><td>Seeks to the end of the file before reading/writing</td></tr><tr><td>binary</td><td>Opens the file in binary mode (instead of text mode)</td></tr><tr><td>in</td><td>Opens the file in read mode (default for ifstream)</td></tr><tr><td>out</td><td>Opens the file in write mode (default for ofstream)</td></tr><tr><td>trunc</td><td>Erases the file if it already exists</td></tr></tbody></table></div>",
       "preview": "Ios file modeMeaningappOpens the file in append modeateSeeks to the end of the f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Režim souboru Ios</th><th>Význam</th></tr><tr><td>aplikace</td><td>Otevře soubor v režimu připojení</td></tr><tr><td>před koncem konce</td><td> čtení/zápis</td></tr><tr><td>binární</td><td>Otevře soubor v binárním režimu (místo v textovém režimu)</td></tr><tr><td>in</td><td>Otevře soubor v režimu čtení (výchozí pro ifstream)</td></tr><tr><td>out (soubor inOpendd><td ofstream)</td></tr><tr><td>trunc</td><td>Vymaže soubor, pokud již existuje</td></tr></tbody></table></div>"
     },
     {
       "id": "basic-file-io_b24",
       "type": "paragraph",
       "html": "<p>It is possible to specify multiple flags by bitwise ORing them together (using the | operator). ifstream defaults to std::ios::in file mode. ofstream defaults to std::ios::out file mode. And fstream defaults to std::ios::in | std::ios::out file mode, meaning you can both read and write by default.</p>",
       "preview": "It is possible to specify multiple flags by bitwise ORing them together (using t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je možné zadat více příznaků jejich bitovým OR seřazením (pomocí operátoru |). ifstream má výchozí hodnotu std::ios::v souborovém režimu. ofstream výchozí souborový režim std::ios::out. A fstream má výchozí hodnotu std::ios::in | std::ios::out souborový režim, což znamená, že ve výchozím nastavení můžete číst i zapisovat.</p>"
     },
     {
       "id": "basic-file-io_b25",
@@ -193,14 +218,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Due to the way fstream was designed, it may fail if std::ios::in is used and the file being opened does not exist. If you need to create a new file using fstream, use std::ios::out mode only.</p></div>",
       "preview": "TipDue to the way fstream was designed, it may fail if std::ios::in is used and the file being opene",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Vzhledem k tomu, jak byl fstream navržen, může selhat, pokud je použit std::ios::in a otevíraný soubor neexistuje. Pokud potřebujete vytvořit nový soubor pomocí fstream, použijte pouze režim std::ios::out.</p></div>"
     },
     {
       "id": "basic-file-io_b26",
       "type": "paragraph",
       "html": "<p>Let’s write a program that appends two more lines to the Sample.txt file we previously created:</p>",
       "preview": "Let’s write a program that appends two more lines to the Sample.txt file we prev",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Napišme program, který k souboru Sample.txt, který jsme dříve vytvořili, připojí další dva řádky:</p>"
     },
     {
       "id": "basic-file-io_b27",
@@ -208,42 +235,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <fstream>\n\nint main()\n{\n    // We'll pass the ios:app flag to tell the ofstream to append\n    // rather than rewrite the file. We do not need to pass in std::ios::out\n    // because ofstream defaults to std::ios::out\n    std::ofstream outf{ \"Sample.txt\", std::ios::app };\n\n    // If we couldn't open the output file stream for writing\n    if (!outf)\n    {\n        // Print an error and exit\n        std::cerr << \"Uh oh, Sample.txt could not be opened for writing!\\n\";\n        return 1;\n    }\n\n    outf << \"This is line 3\\n\";\n    outf << \"This is line 4\\n\";\n    \n    return 0;\n\t\n    // When outf goes out of scope, the ofstream\n    // destructor will close the file\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;fstream&gt;\n\nint main()\n{\n    // We'll pass the ios:app flag to tell the ofstream to append\n    // rather than rewrite the file. We do not need to pass in std::ios::out\n    // because ofstream defaults to std::ios::out\n    std::ofstream outf{ \"Sample.txt\", std::ios::app };\n\n    // If we couldn't open the output file stream for writing\n    if (!outf)\n    {\n        // Print an error and exit\n        std::cerr &lt;&lt; \"Uh oh, Sample.txt could not be opened for writing!\\n\";\n        return 1;\n    }\n\n    outf &lt;&lt; \"This is line 3\\n\";\n    outf &lt;&lt; \"This is line 4\\n\";\n    \n    return 0;\n\t\n    // When outf goes out of scope, the ofstream\n    // destructor will close the file\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <fstream>\n\nint main()\n{\n    // Předáme příznak ios:app, který řekne ofstreamu, aby se přidal\n    // místo přepisování souboru. Nemusíme předávat std::ios::out\n    // protože ofstream má výchozí hodnotu std::ios::out\n    std::ofstream outf{ \"Sample.txt\", std::ios::app };\n\n    // Pokud bychom nemohli otevřít proud výstupního souboru pro zápis\n    pokud (!outf)\n    {\n        // Vytiskne chybu a skončí\n        std::cerr << \"Uh, Sample.txt nelze otevřít pro zápis!\\n\";\n        návrat 1;\n    }\n\n    outf << \"Toto je řádek 3\\n\";\n    outf << \"Toto je řádek 4\\n\";\n    \n    návrat 0;\n\t\n    // Když outf přejde mimo rozsah, ofstream\n    // destruktor zavře soubor\n}</code></pre>"
     },
     {
       "id": "basic-file-io_b28",
       "type": "paragraph",
       "html": "<p>Now if we take a look at Sample.txt (using one of the above sample programs that prints its contents, or loading it in a text editor), we will see the following:</p>",
       "preview": "Now if we take a look at Sample.txt (using one of the above sample programs that",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když se podíváme na Sample.txt (pomocí jednoho z výše uvedených ukázkových programů, který vytiskne jeho obsah nebo jej nahraje do textového editoru), uvidíme následující:</p>"
     },
     {
       "id": "basic-file-io_b29",
       "type": "output",
       "text": "This is line 1\nThis is line 2\nThis is line 3\nThis is line 4\n",
       "html": "<pre>This is line 1\nThis is line 2\nThis is line 3\nThis is line 4\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Toto je řádek 1\nToto je řádek 2\nToto je řádek 3\nToto je řádek 4\n</pre>"
     },
     {
       "id": "basic-file-io_b30",
       "type": "paragraph",
       "html": "<p><strong>Explicitly opening files using open()</strong></p>",
       "preview": "Explicitly opening files using open()",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Explicitní otevírání souborů pomocí open()</strong></p>"
     },
     {
       "id": "basic-file-io_b31",
       "type": "paragraph",
       "html": "<p>Just like it is possible to explicitly close a file stream using close(), it’s also possible to explicitly open a file stream using open(). open() works just like the file stream constructors -- it takes a file name and an optional file mode.</p>",
       "preview": "Just like it is possible to explicitly close a file stream using close(), it’s a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako je možné explicitně zavřít souborový proud pomocí close(), je také možné explicitně otevřít souborový proud pomocí open(). open() funguje stejně jako konstruktory souborového proudu -- vyžaduje název souboru a volitelný režim souboru.</p>"
     },
     {
       "id": "basic-file-io_b32",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "basic-file-io_b33",
@@ -251,14 +284,17 @@
       "language": "cpp",
       "code": "std::ofstream outf{ \"Sample.txt\" };\noutf << \"This is line 1\\n\";\noutf << \"This is line 2\\n\";\noutf.close(); // explicitly close the file\n\n// Oops, we forgot something\noutf.open(\"Sample.txt\", std::ios::app);\noutf << \"This is line 3\\n\";\noutf.close();",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::ofstream outf{ \"Sample.txt\" };\noutf &lt;&lt; \"This is line 1\\n\";\noutf &lt;&lt; \"This is line 2\\n\";\noutf.close(); // explicitly close the file\n\n// Oops, we forgot something\noutf.open(\"Sample.txt\", std::ios::app);\noutf &lt;&lt; \"This is line 3\\n\";\noutf.close();</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::ofstream outf{ \"Sample.txt\" };\noutf << \"Toto je řádek 1\\n\";\noutf << \"Toto je řádek 2\\n\";\noutf.close(); // explicitně zavře soubor\n\n// Jejda, na něco jsme zapomněli\noutf.open(\"Sample.txt\", std::ios::app);\noutf << \"Toto je řádek 3\\n\";\noutf.close();</code></pre>"
     },
     {
       "id": "basic-file-io_b34",
       "type": "paragraph",
       "html": "<p>You can find more information about the open() function <a href=\"https://en.cppreference.com/w/cpp/io/basic_filebuf/open\">here</a>.</p>",
       "preview": "You can find more information about the open() function here.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Další informace o funkci open() naleznete <a href=\"https://en.cppreference.com/w/cpp/io/basic_filebuf/open\">zde</a>.</p>"
     }
-  ]
+  ],
+  "title_cs": "28.6 — Basic file I/O"
 }

@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson on <a href=\"https://www.learncpp.com/cpp-tutorial/112-basic-inheritance-in-c/\">basic inheritance in C++</a>, you learned that classes can inherit members and functions from other classes. In this lesson, we’re going to take a closer look at the order of construction that happens when a derived class is instantiated.</p>",
       "preview": "In the previous lesson on basic inheritance in C++, you learned that classes can",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci o <a href=\"https://www.learncpp.com/cpp-tutorial/112-basic-inheritance-in-c/\">základech dědičnosti v C++</a> jste se dozvěděli, že třídy mohou dědit členy a funkce z jiných tříd. V této lekci se blíže podíváme na pořadí volání konstruktorů, ke kterému dochází při instanciaci odvozené třídy.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b1",
       "type": "paragraph",
       "html": "<p>First, let’s introduce some new classes that will help us illustrate some important points.</p>",
       "preview": "First, let’s introduce some new classes that will help us illustrate some import",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve si představíme několik nových tříd, které nám pomohou ilustrovat důležité koncepty.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b2",
@@ -29,42 +31,48 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    int m_id {};\n\n    Base(int id=0)\n        : m_id { id }\n    {\n    }\n\n    int getId() const { return m_id; }\n};\n\nclass Derived: public Base\n{\npublic:\n    double m_cost {};\n\n    Derived(double cost=0.0)\n        : m_cost { cost }\n    {\n    }\n\n    double getCost() const { return m_cost; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    int m_id {};\n\n    Base(int id=0)\n        : m_id { id }\n    {\n    }\n\n    int getId() const { return m_id; }\n};\n\nclass Derived: public Base\n{\npublic:\n    double m_cost {};\n\n    Derived(double cost=0.0)\n        : m_cost { cost }\n    {\n    }\n\n    double getCost() const { return m_cost; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    int m_id {};\n\n    Základ(int id=0)\n        : m_id { id }\n    {\n    }\n\n    int getId() const { return m_id; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    double m_cost {};\n\n    Odvozeno (dvojitá cena = 0,0)\n        : m_cost { cost }\n    {\n    }\n\n    double getCost() const { return m_cost; }\n};</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b3",
       "type": "paragraph",
       "html": "<p>In this example, class Derived is derived from class Base.</p>",
       "preview": "In this example, class Derived is derived from class Base.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu je třída Derived odvozena od třídy Base.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b4",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/DerivedBase.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/DerivedBase.gif\"></p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b5",
       "type": "paragraph",
       "html": "<p>Because Derived inherits functions and variables from Base, you may assume that the members of Base are copied into Derived. However, this is not true. Instead, we can consider Derived as a two part class: one part Derived, and one part Base.</p>",
       "preview": "Because Derived inherits functions and variables from Base, you may assume that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože Derived dědí funkce a proměnné z Base, mohli byste předpokládat, že členy třídy Base jsou zkopírovány do třídy Derived. To však není pravda. Místo toho můžeme třídu Derived chápat jako dvoudílnou: jedna část je Derived a druhá část Base.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b6",
       "type": "paragraph",
       "html": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/DerivedBaseCombined.gif\"></p>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><img src=\"https://www.learncpp.com/images/CppTutorial/Section11/DerivedBaseCombined.gif\"></p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b7",
       "type": "paragraph",
       "html": "<p>You’ve already seen plenty examples of what happens when we instantiate a normal (non-derived) class:</p>",
       "preview": "You’ve already seen plenty examples of what happens when we instantiate a normal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Už jste viděli spoustu příkladů toho, co se stane, když vytvoříme instanci běžné (neodvozené) třídy:</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b8",
@@ -72,21 +80,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    Base base;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Base base;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Základní základna;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b9",
       "type": "paragraph",
       "html": "<p>Base is a non-derived class because it does not inherit from any other classes. C++ allocates memory for Base, then calls Base’s default constructor to do the initialization.</p>",
       "preview": "Base is a non-derived class because it does not inherit from any other classes. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Base je neodvozená třída, protože nedědí z žádné jiné třídy. C++ pro Base alokuje paměť a poté zavolá výchozí konstruktor třídy Base, který provede inicializaci.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b10",
       "type": "paragraph",
       "html": "<p>Now let’s take a look at what happens when we instantiate a derived class:</p>",
       "preview": "Now let’s take a look at what happens when we instantiate a derived class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na to, co se stane, když vytvoříme instanci odvozené třídy:</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b11",
@@ -94,28 +105,32 @@
       "language": "cpp",
       "code": "int main()\n{\n    Derived derived;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Derived derived;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Odvozený odvozený;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b12",
       "type": "paragraph",
       "html": "<p>If you were to try this yourself, you wouldn’t notice any difference from the previous example where we instantiate non-derived class Base. But behind the scenes, things happen slightly differently. As mentioned above, Derived is really two parts: a Base part, and a Derived part. When C++ constructs derived objects, it does so in phases. First, the most-base class (at the top of the inheritance tree) is constructed. Then each child class is constructed in order, until the most-child class (at the bottom of the inheritance tree) is constructed last.</p>",
       "preview": "If you were to try this yourself, you wouldn’t notice any difference from the pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kdybyste si to sami vyzkoušeli, nevšimli byste si žádného rozdílu oproti předchozímu příkladu, kde vytváříme instanci neodvozené třídy Base. V zákulisí se však věci odehrávají trochu jinak. Jak již bylo zmíněno výše, Derived se ve skutečnosti skládá ze dvou částí: části Base a části Derived. Když C++ vytváří odvozené objekty, dělá to ve fázích. Nejprve je zkonstruována nejbazičtější třída (na vrcholu dědického stromu). Poté je postupně zkonstruována každá dceřiná třída, dokud není jako poslední zkonstruována ta nejvíce odvozená třída (zcela dole v dědickém stromu).</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b13",
       "type": "paragraph",
       "html": "<p>So when we instantiate an instance of Derived, first the Base portion of Derived is constructed (using the Base default constructor). Once the Base portion is finished, the Derived portion is constructed (using the Derived default constructor). At this point, there are no more derived classes, so we are done.</p>",
       "preview": "So when we instantiate an instance of Derived, first the Base portion of Derived",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když tedy vytváříme instanci třídy Derived, nejprve se zkonstruuje část Base třídy Derived (pomocí výchozího konstruktoru Base). Jakmile je část Base hotová, zkonstruuje se část Derived (pomocí výchozího konstruktoru Derived). V tomto bodě již žádné další odvozené třídy nejsou, takže máme hotovo.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b14",
       "type": "paragraph",
       "html": "<p>This process is actually easy to illustrate.</p>",
       "preview": "This process is actually easy to illustrate.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento proces lze velmi snadno demonstrovat.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b15",
@@ -123,42 +138,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    int m_id {};\n\n    Base(int id=0)\n        : m_id { id }\n    {\n        std::cout << \"Base\\n\";\n    }\n\n    int getId() const { return m_id; }\n};\n\nclass Derived: public Base\n{\npublic:\n    double m_cost {};\n\n    Derived(double cost=0.0)\n        : m_cost { cost }\n    {\n        std::cout << \"Derived\\n\";\n    }\n\n    double getCost() const { return m_cost; }\n};\n\nint main()\n{\n    std::cout << \"Instantiating Base\\n\";\n    Base base;\n\n    std::cout << \"Instantiating Derived\\n\";\n    Derived derived;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    int m_id {};\n\n    Base(int id=0)\n        : m_id { id }\n    {\n        std::cout &lt;&lt; \"Base\\n\";\n    }\n\n    int getId() const { return m_id; }\n};\n\nclass Derived: public Base\n{\npublic:\n    double m_cost {};\n\n    Derived(double cost=0.0)\n        : m_cost { cost }\n    {\n        std::cout &lt;&lt; \"Derived\\n\";\n    }\n\n    double getCost() const { return m_cost; }\n};\n\nint main()\n{\n    std::cout &lt;&lt; \"Instantiating Base\\n\";\n    Base base;\n\n    std::cout &lt;&lt; \"Instantiating Derived\\n\";\n    Derived derived;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    int m_id {};\n\n    Základ(int id=0)\n        : m_id { id }\n    {\n        std::cout << \"Základ\\n\";\n    }\n\n    int getId() const { return m_id; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    double m_cost {};\n\n    Odvozeno (dvojitá cena = 0,0)\n        : m_cost { cost }\n    {\n        std::cout << \"Odvozeno\\n\";\n    }\n\n    double getCost() const { return m_cost; }\n};\n\nint main()\n{\n    std::cout << \"Instantiating Base\\n\";\n    Základní základna;\n\n    std::cout << \"Odvozeno instancí\\n\";\n    Odvozený odvozený;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b16",
       "type": "paragraph",
       "html": "<p>This program produces the following result:</p>",
       "preview": "This program produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b17",
       "type": "output",
       "text": "Instantiating Base\nBase\nInstantiating Derived\nBase\nDerived\n",
       "html": "<pre>Instantiating Base\nBase\nInstantiating Derived\nBase\nDerived\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Instantiating Base\nBase\nInstantiating Derived\nBase\nDerived\n</pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b18",
       "type": "paragraph",
       "html": "<p>As you can see, when we constructed Derived, the Base portion of Derived got constructed first. This makes sense: logically, a child can not exist without a parent. It’s also the safe way to do things: the child class often uses variables and functions from the parent, but the parent class knows nothing about the child. Instantiating the parent class first ensures those variables are already initialized by the time the derived class is created and ready to use them.</p>",
       "preview": "As you can see, when we constructed Derived, the Base portion of Derived got con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, při vytváření Derived byla nejprve zkonstruována část Base třídy Derived. To dává smysl: logicky nemůže potomek existovat bez rodiče. Je to také bezpečný způsob: dceřiná třída často používá proměnné a funkce od rodiče, ale rodičovská třída o dceřiné třídě nic neví. Vytvoření instance rodičovské třídy jako první zajišťuje, že tyto proměnné jsou již inicializovány v okamžiku, kdy je odvozená třída vytvořena a připravena je používat.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b19",
       "type": "paragraph",
       "html": "<p><strong>Order of construction for inheritance chains</strong></p>",
       "preview": "Order of construction for inheritance chains",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Pořadí konstrukce v řetězcích dědičnosti</strong></p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b20",
       "type": "paragraph",
       "html": "<p>It is sometimes the case that classes are derived from other classes, which are themselves derived from other classes. For example:</p>",
       "preview": "It is sometimes the case that classes are derived from other classes, which are ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Někdy nastává situace, kdy jsou třídy odvozeny z jiných tříd, které jsou samy odvozeny z dalších tříd. Například:</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b21",
@@ -166,21 +187,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass A\n{\npublic:\n    A()\n    {\n        std::cout << \"A\\n\";\n    }\n};\n\nclass B: public A\n{\npublic:\n    B()\n    {\n        std::cout << \"B\\n\";\n    }\n};\n\nclass C: public B\n{\npublic:\n    C()\n    {\n        std::cout << \"C\\n\";\n    }\n};\n\nclass D: public C\n{\npublic:\n    D()\n    {\n        std::cout << \"D\\n\";\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass A\n{\npublic:\n    A()\n    {\n        std::cout &lt;&lt; \"A\\n\";\n    }\n};\n\nclass B: public A\n{\npublic:\n    B()\n    {\n        std::cout &lt;&lt; \"B\\n\";\n    }\n};\n\nclass C: public B\n{\npublic:\n    C()\n    {\n        std::cout &lt;&lt; \"C\\n\";\n    }\n};\n\nclass D: public C\n{\npublic:\n    D()\n    {\n        std::cout &lt;&lt; \"D\\n\";\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída A\n{\nveřejnost:\n    A()\n    {\n        std::cout << \"A\\n\";\n    }\n};\n\ntřída B: veřejná A\n{\nveřejnost:\n    B()\n    {\n        std::cout << \"B\\n\";\n    }\n};\n\ntřída C: veřejná B\n{\nveřejnost:\n    C()\n    {\n        std::cout << \"C\\n\";\n    }\n};\n\ntřída D: veřejná C\n{\nveřejnost:\n    D()\n    {\n        std::cout << \"D\\n\";\n    }\n};</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b22",
       "type": "paragraph",
       "html": "<p>Remember that C++ always constructs the “first” or “most base” class first. It then walks through the inheritance tree in order and constructs each successive derived class.</p>",
       "preview": "Remember that C++ always constructs the “first” or “most base” class first. It t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte, že C++ vždy nejprve konstruuje „první“ neboli „nejbazičtější“ třídu. Poté postupně prochází stromem dědičnosti a konstruuje každou další odvozenou třídu.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b23",
       "type": "paragraph",
       "html": "<p>Here’s a short program that illustrates the order of creation all along the inheritance chain.</p>",
       "preview": "Here’s a short program that illustrates the order of creation all along the inhe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je krátký program, který ilustruje pořadí vytváření v celém řetězci dědičnosti.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b24",
@@ -188,42 +212,49 @@
       "language": "cpp",
       "code": "int main()\n{\n    std::cout << \"Constructing A: \\n\";\n    A a;\n\n    std::cout << \"Constructing B: \\n\";\n    B b;\n\n    std::cout << \"Constructing C: \\n\";\n    C c;\n\n    std::cout << \"Constructing D: \\n\";\n    D d;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::cout &lt;&lt; \"Constructing A: \\n\";\n    A a;\n\n    std::cout &lt;&lt; \"Constructing B: \\n\";\n    B b;\n\n    std::cout &lt;&lt; \"Constructing C: \\n\";\n    C c;\n\n    std::cout &lt;&lt; \"Constructing D: \\n\";\n    D d;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::cout << \"Konstrukce A: \\n\";\n    A a;\n\n    std::cout << \"Konstrukce B: \\n\";\n    Bb;\n\n    std::cout << \"Konstrukce C: \\n\";\n    C c;\n\n    std::cout << \"Konstrukce D: \\n\";\n    D d;\n}</code></pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b25",
       "type": "paragraph",
       "html": "<p>This code prints the following:</p>",
       "preview": "This code prints the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše následující:</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b26",
       "type": "output",
       "text": "Constructing A:\nA\nConstructing B:\nA\nB\nConstructing C:\nA\nB\nC\nConstructing D:\nA\nB\nC\nD\n",
       "html": "<pre>Constructing A:\nA\nConstructing B:\nA\nB\nConstructing C:\nA\nB\nC\nConstructing D:\nA\nB\nC\nD\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Constructing A:\nA\nConstructing B:\nA\nB\nConstructing C:\nA\nB\nC\nConstructing D:\nA\nB\nC\nD\n</pre>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b27",
       "type": "paragraph",
       "html": "<p><strong>Conclusion</strong></p>",
       "preview": "Conclusion",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Závěr</strong></p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b28",
       "type": "paragraph",
       "html": "<p>C++ constructs derived classes in phases, starting with the most-base class (at the top of the inheritance tree) and finishing with the most-child class (at the bottom of the inheritance tree). As each class is constructed, the appropriate constructor from that class is called to initialize that part of the class.</p>",
       "preview": "C++ constructs derived classes in phases, starting with the most-base class (at ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ konstruuje odvozené třídy po fázích, počínaje nejbazičtější třídou (na vrcholu stromu dědičnosti) a konče nejvíce odvozenou třídou (na samém spodku stromu dědičnosti). Během konstrukce každé třídy se zavolá příslušný konstruktor dané třídy, který inicializuje její část objektu.</p>"
     },
     {
       "id": "order-of-construction-of-derived-classes_b29",
       "type": "paragraph",
       "html": "<p>You will note that our example classes in this section have all used base class default constructors (for simplicity). In the next lesson, we will take a closer look at the role of constructors in the process of constructing derived classes (including how to explicitly choose which base class constructor you want your derived class to use).</p>",
       "preview": "You will note that our example classes in this section have all used base class ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že naše ukázkové třídy v této kapitole (pro zjednodušení) používaly pouze výchozí konstruktory bázových tříd. V příští lekci se podrobněji podíváme na roli konstruktorů v procesu vytváření odvozených tříd (včetně toho, jak explicitně zvolit, který konstruktor bázové třídy má vaše odvozená třída použít).</p>"
     }
-  ]
+  ],
+  "title_cs": "24.3 — Pořadí konstrukce odvozených tříd"
 }

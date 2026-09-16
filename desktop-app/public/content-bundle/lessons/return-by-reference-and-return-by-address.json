@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In previous lessons, we discussed that when passing an argument by value, a copy of the argument is made into the function parameter. For fundamental types (which are cheap to copy), this is fine. But copying is typically expensive for class types (such as <code>std::string</code>). We can avoid making an expensive copy by utilizing passing by (const) reference (or pass by address) instead.</p>",
       "preview": "In previous lessons, we discussed that when passing an argument by value, a copy",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích jsme probírali, že při předávání argumentu hodnotou se vytváří kopie argumentu do parametru funkce. U fundamentálních typů (jejichž kopírování je levné) je to v pořádku. Kopírování je však obvykle nákladné u třídních typů (jako je například <code>std::string</code>). Vytvoření nákladné kopie se můžeme vyhnout tím, že místo toho použijeme předání (const) referencí (nebo předání adresou).</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b1",
       "type": "paragraph",
       "html": "<p>We encounter a similar situation when returning by value: a copy of the return value is passed back to the caller. If the return type of the function is a class type, this can be expensive.</p>",
       "preview": "We encounter a similar situation when returning by value: a copy of the return v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S podobnou situací se setkáváme při návratu hodnotou: volajícímu je předána kopie návratové hodnoty. Pokud je návratovým typem funkce třídní typ, může to být nákladné.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b2",
@@ -29,21 +31,25 @@
       "language": "cpp",
       "code": "std::string returnByValue(); // returns a copy of a std::string (expensive)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string returnByValue(); // returns a copy of a std::string (expensive)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string returnByValue(); // vrátí kopii std::string (drahé)</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b3",
       "type": "section",
       "title": "Return by reference",
       "html": "<h3 class=\"cpp-section-heading\">Return by reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návrat referencí</h3>",
+      "title_cs": "Návrat odkazem"
     },
     {
       "id": "return-by-reference-and-return-by-address_b4",
       "type": "paragraph",
       "html": "<p>In cases where we’re passing a class type back to the caller, we may (or may not) want to return by reference instead. <strong>Return by reference</strong> returns a reference that is bound to the object being returned, which avoids making a copy of the return value. To return by reference, we simply define the return value of the function to be a reference type:</p>",
       "preview": "In cases where we’re passing a class type back to the caller, we may (or may not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případech, kdy volajícímu vracíme třídní typ, můžeme (nebo nemusíme) chtít místo toho použít návrat referencí. <strong>Návrat referencí</strong> vrací referenci navázanou na vracený objekt, čímž se vyhneme vytvoření kopie návratové hodnoty. Abychom vraceli referencí, jednoduše definujeme návratový typ funkce jako referenční typ:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b5",
@@ -51,14 +57,16 @@
       "language": "cpp",
       "code": "std::string&       returnByReference(); // returns a reference to an existing std::string (cheap)\nconst std::string& returnByReferenceToConst(); // returns a const reference to an existing std::string (cheap)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string&amp;       returnByReference(); // returns a reference to an existing std::string (cheap)\nconst std::string&amp; returnByReferenceToConst(); // returns a const reference to an existing std::string (cheap)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string& returnByReference(); // vrátí odkaz na existující std::string (levné)\nconst std::string& returnByReferenceToConst(); // vrátí const odkaz na existující std::string (levné)</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b6",
       "type": "paragraph",
       "html": "<p>Here is an academic program to demonstrate the mechanics of return by reference:</p>",
       "preview": "Here is an academic program to demonstrate the mechanics of return by reference:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový program demonstrující mechaniku návratu referencí:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b7",
@@ -66,56 +74,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst std::string& getProgramName() // returns a const reference\n{\n    static const std::string s_programName { \"Calculator\" }; // has static duration, destroyed at end of program\n\n    return s_programName;\n}\n\nint main()\n{\n    std::cout << \"This program is named \" << getProgramName();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst std::string&amp; getProgramName() // returns a const reference\n{\n    static const std::string s_programName { \"Calculator\" }; // has static duration, destroyed at end of program\n\n    return s_programName;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"This program is named \" &lt;&lt; getProgramName();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst std::string& getProgramName() // vrací const odkaz\n{\n    static const std::string název_programu { \"Kalkulačka\" }; // má statické trvání, zničeno na konci programu\n\n    return s_název_programu;\n}\n\nint main()\n{\n    std::cout << \"Tento program se jmenuje \" << getProgramName();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b8",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b9",
       "type": "output",
       "text": "This program is named Calculator\n",
       "html": "<pre>This program is named Calculator\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>This program is named Calculator\n</pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b10",
       "type": "paragraph",
       "html": "<p>Because <code>getProgramName()</code> returns a const reference, when the line <code>return s_programName</code> is executed, <code>getProgramName()</code> will return a const reference to <code>s_programName</code> (thus avoiding making a copy). That const reference can then be used by the caller to access the value of <code>s_programName</code>, which is printed.</p>",
       "preview": "Because getProgramName() returns a const reference, when the line return s_progr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>getProgramName()</code> vrací const referenci, při vykonání řádku <code>return s_programName</code> vrátí <code>getProgramName()</code> const referenci na <code>s_programName</code> (čímž se vyhne vytvoření kopie). Tuto const referenci pak může volající použít pro přístup k hodnotě <code>s_programName</code>, která se následně vypíše.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b11",
       "type": "section",
       "title": "The object being returned by reference must exist after the function returns",
       "html": "<h3 class=\"cpp-section-heading\">The object being returned by reference must exist after the function returns</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Objekt vracený referencí musí existovat i po návratu z funkce</h3>",
+      "title_cs": "Objekt vracený odkazem musí existovat poté, co funkce vrátí"
     },
     {
       "id": "return-by-reference-and-return-by-address_b12",
       "type": "paragraph",
       "html": "<p>Using return by reference has one major caveat: the programmer <em>must</em> be sure that the object being referenced outlives the function returning the reference. Otherwise, the reference being returned will be left dangling (referencing an object that has been destroyed), and use of that reference will result in undefined behavior.</p>",
       "preview": "Using return by reference has one major caveat: the programmer must be sure that",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Návrat referencí má jedno zásadní úskalí: programátor si <em>musí</em> být jistý, že odkazovaný objekt přežije funkci, která referenci vrací. V opačném případě bude vrácená reference visící (dangling – odkazující na objekt, který byl již zničen) a její použití povede k nedefinovanému chování.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b13",
       "type": "paragraph",
       "html": "<p>In the program above, because <code>s_programName</code> has static duration, <code>s_programName</code> will exist until the end of the program. When <code>main()</code> accesses the returned reference, it is actually accessing <code>s_programName</code>, which is fine, because <code>s_programName</code> won’t be destroyed until later.</p>",
       "preview": "In the program above, because s_programName has static duration, s_programName w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu existuje <code>s_programName</code> až do konce programu, protože má statickou dobu trvání (static duration). Když <code>main()</code> přistupuje k vrácené referenci, ve skutečnosti přistupuje k <code>s_programName</code>, což je v pořádku, protože <code>s_programName</code> bude zničena až později.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b14",
       "type": "paragraph",
       "html": "<p>Now let’s modify the above program to show what happens in the case where our function returns a dangling reference:</p>",
       "preview": "Now let’s modify the above program to show what happens in the case where our fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní výše uvedený program upravme, abychom si ukázali, co se stane v případě, kdy naše funkce vrátí visící referenci (dangling reference):</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b15",
@@ -123,21 +140,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst std::string& getProgramName()\n{\n    const std::string programName { \"Calculator\" }; // now a non-static local variable, destroyed when function ends\n\n    return programName;\n}\n\nint main()\n{\n    std::cout << \"This program is named \" << getProgramName(); // undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst std::string&amp; getProgramName()\n{\n    const std::string programName { \"Calculator\" }; // now a non-static local variable, destroyed when function ends\n\n    return programName;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"This program is named \" &lt;&lt; getProgramName(); // undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst std::string& getProgramName()\n{\n    const std::string název_programu { \"Kalkulačka\" }; // nyní nestatická lokální proměnná, zničená, když funkce skončí\n\n    vrátit název programu;\n}\n\nint main()\n{\n    std::cout << \"Tento program se jmenuje \" << getProgramName(); // nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b16",
       "type": "paragraph",
       "html": "<p>The result of this program is undefined. When <code>getProgramName()</code> returns, a reference bound to local variable <code>programName</code> is returned. Then, because <code>programName</code> is a local variable with automatic duration, <code>programName</code> is destroyed at the end of the function. That means the returned reference is now dangling, and use of <code>programName</code> in the <code>main()</code> function results in undefined behavior.</p>",
       "preview": "The result of this program is undefined. When getProgramName() returns, a refere",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledek tohoto programu je nedefinovaný. Když se <code>getProgramName()</code> vrátí, je vrácena reference navázaná na lokální proměnnou <code>programName</code>. Protože je <code>programName</code> lokální proměnná s automatickou dobou života (automatic duration), je na konci funkce zničena. To znamená, že vrácená reference je nyní visící (dangling) a použití <code>programName</code> ve funkci <code>main()</code> vede k nedefinovanému chování.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b17",
       "type": "paragraph",
       "html": "<p>Modern compilers will produce a warning or error if you try to return a local variable by reference (so the above program may not even compile), but compilers sometimes have trouble detecting more complicated cases.</p>",
       "preview": "Modern compilers will produce a warning or error if you try to return a local va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Moderní kompilátory vygenerují varování nebo chybu, pokud se pokusíte vrátit lokální proměnnou referencí (takže výše uvedený program se možná ani nezkompiluje), ale v komplikovanějších případech mohou mít kompilátory s detekcí potíže.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b18",
@@ -145,21 +165,25 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Objects returned by reference must live beyond the scope of the function returning the reference, or a dangling reference will result. Never return a (non-static) local variable or temporary by reference.</p></div>",
       "preview": "WarningObjects returned by reference must live beyond the scope of the function returning the refere",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Objekty vracené referencí musí existovat i mimo rozsah platnosti funkce, která referenci vrací, jinak vznikne visící reference. Nikdy nevracejte referencí (nestatickou) lokální proměnnou ani dočasný objekt.</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b19",
       "type": "section",
       "title": "Lifetime extension doesn’t work across function boundaries",
       "html": "<h3 class=\"cpp-section-heading\">Lifetime extension doesn’t work across function boundaries</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Prodloužení doby života (lifetime extension) nefunguje přes hranice funkcí</h3>",
+      "title_cs": "Prodloužení životnosti nefunguje přes hranice funkcí"
     },
     {
       "id": "return-by-reference-and-return-by-address_b20",
       "type": "paragraph",
       "html": "<p>Let’s take a look at an example where we return a temporary by reference:</p>",
       "preview": "Let’s take a look at an example where we return a temporary by reference:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na příklad, kde vracíme dočasný objekt referencí:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b21",
@@ -167,28 +191,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nconst int& returnByConstReference()\n{\n    return 5; // returns const reference to temporary object\n}\n\nint main()\n{\n    const int& ref { returnByConstReference() };\n\n    std::cout << ref; // undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconst int&amp; returnByConstReference()\n{\n    return 5; // returns const reference to temporary object\n}\n\nint main()\n{\n    const int&amp; ref { returnByConstReference() };\n\n    std::cout &lt;&lt; ref; // undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nconst int& returnByConstReference()\n{\n    návrat 5; // vrátí const odkaz na dočasný objekt\n}\n\nint main()\n{\n    const int& ref { returnByConstReference() };\n\n    std::cout << ref; // nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b22",
       "type": "paragraph",
       "html": "<p>In the above program, <code>returnByConstReference()</code> is returning an integer literal, but the return type of the function is <code>const int&amp;</code>. This results in the creation and return of a temporary reference bound to a temporary object holding value 5. This returned reference is copied into a temporary reference in the scope of the caller. The temporary object then goes out of scope, leaving the temporary reference in the scope of the caller dangling.</p>",
       "preview": "In the above program, returnByConstReference() is returning an integer literal, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu funkce <code>returnByConstReference()</code> vrací celočíselný literál, ale návratový typ funkce je <code>const int&amp;</code>. Výsledkem je vytvoření a vrácení dočasné reference navázané na dočasný objekt uchovávající hodnotu 5. Tato vrácená reference se zkopíruje do dočasné reference v rozsahu platnosti volajícího. Dočasný objekt následně zanikne, takže dočasná reference v rozsahu volajícího zůstane visící (dangling).</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b23",
       "type": "paragraph",
       "html": "<p>By the time the temporary reference in the scope of the caller is bound to const reference variable <code>ref</code> (in <code>main()</code>), it is too late to extend the lifetime of the temporary object -- as it has already been destroyed. Thus <code>ref</code> is a dangling reference, and use of the value of <code>ref</code> will result in undefined behavior.</p>",
       "preview": "By the time the temporary reference in the scope of the caller is bound to const",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve chvíli, kdy je dočasná reference v rozsahu platnosti volajícího navázána na proměnnou konstantní reference <code>ref</code> (v <code>main()</code>), je na prodloužení doby životnosti dočasného objektu již příliš pozdě – ten už byl totiž zničen. Proměnná <code>ref</code> je tedy visící referencí (dangling reference) a použití hodnoty <code>ref</code> povede k nedefinovanému chování (undefined behavior).</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b24",
       "type": "paragraph",
       "html": "<p>Here’s a less obvious example that similarly doesn’t work:</p>",
       "preview": "Here’s a less obvious example that similarly doesn’t work:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je méně zřejmý příklad, který rovněž nefunguje:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b25",
@@ -196,14 +224,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nconst int& returnByConstReference(const int& ref)\n{\n    return ref;\n}\n\nint main()\n{\n    // case 1: direct binding\n    const int& ref1 { 5 }; // extends lifetime\n    std::cout << ref1 << '\\n'; // okay\n\n    // case 2: indirect binding\n    const int& ref2 { returnByConstReference(5) }; // binds to dangling reference\n    std::cout << ref2 << '\\n'; // undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconst int&amp; returnByConstReference(const int&amp; ref)\n{\n    return ref;\n}\n\nint main()\n{\n    // case 1: direct binding\n    const int&amp; ref1 { 5 }; // extends lifetime\n    std::cout &lt;&lt; ref1 &lt;&lt; '\\n'; // okay\n\n    // case 2: indirect binding\n    const int&amp; ref2 { returnByConstReference(5) }; // binds to dangling reference\n    std::cout &lt;&lt; ref2 &lt;&lt; '\\n'; // undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nconst int& returnByConstReference(const int& ref)\n{\n    návrat ref;\n}\n\nint main()\n{\n    // případ 1: přímá vazba\n    const int& ref1 { 5 }; // prodlužuje životnost\n    std::cout << ref1 << '\\n'; // dobře\n\n    // případ 2: nepřímá vazba\n    const int& ref2 { returnByConstReference(5) }; // se váže na visící odkaz\n    std::cout << ref2 << '\\n'; // nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b26",
       "type": "paragraph",
       "html": "<p>In case 2, a temporary object is created to hold value <code>5</code>, which function parameter <code>ref</code> binds to. The function just returns this reference back to the caller, which then uses the reference to initialize <code>ref2</code>. Because this is not a direct binding to the temporary object (as the refrence was bounced through a function), lifetime extension doesn’t apply. This leaves <code>ref2</code> dangling, and its subsequent use is undefined behavior.</p>",
       "preview": "In case 2, a temporary object is created to hold value 5, which function paramet",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě 2 je vytvořen dočasný objekt pro uchování hodnoty <code>5</code>, na který se naváže parametr funkce <code>ref</code>. Funkce pouze vrátí tuto referenci zpět volajícímu, který ji pak použije k inicializaci <code>ref2</code>. Protože se nejedná o přímé navázání na dočasný objekt (jelikož reference prošla skrze funkci), prodloužení doby životnosti (lifetime extension) se neuplatní. Tím zůstane <code>ref2</code> visící a její následné použití je nedefinovaným chováním.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b27",
@@ -211,21 +241,25 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Reference lifetime extension does not work across function boundaries.</p></div>",
       "preview": "WarningReference lifetime extension does not work across function boundaries.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Prodloužení doby životnosti pomocí reference nefunguje přes hranice funkcí.</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b28",
       "type": "section",
       "title": "Don’t return non-const static local variables by reference",
       "html": "<h3 class=\"cpp-section-heading\">Don’t return non-const static local variables by reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nevracejte nekonstantní statické lokální proměnné referencí</h3>",
+      "title_cs": "Nevracejte nekonstantní statické lokální proměnné odkazem"
     },
     {
       "id": "return-by-reference-and-return-by-address_b29",
       "type": "paragraph",
       "html": "<p>In the original example above, we returned a const static local variable by reference to illustrate the mechanics of return by reference in a simple way. However, returning non-const static local variables by reference is fairly non-idiomatic, and should generally be avoided. Here’s a simplified example that illustrates one such problem that can occur:</p>",
       "preview": "In the original example above, we returned a const static local variable by refe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V původním výše uvedeném příkladu jsme referencí vraceli konstantní statickou lokální proměnnou, abychom jednoduše ilustrovali mechaniku vracení referencí. Vracení nekonstantních statických lokálních proměnných referencí je však značně neidiomatické a obecně byste se mu měli vyhýbat. Zde je zjednodušený příklad, který ilustruje jeden z problémů, jež mohou nastat:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b30",
@@ -233,35 +267,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst int& getNextId()\n{\n    static int s_x{ 0 }; // note: variable is non-const\n    ++s_x; // generate the next id\n    return s_x; // and return a reference to it\n}\n\nint main()\n{\n    const int& id1 { getNextId() }; // id1 is a reference\n    const int& id2 { getNextId() }; // id2 is a reference\n\n    std::cout << id1 << id2 << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst int&amp; getNextId()\n{\n    static int s_x{ 0 }; // note: variable is non-const\n    ++s_x; // generate the next id\n    return s_x; // and return a reference to it\n}\n\nint main()\n{\n    const int&amp; id1 { getNextId() }; // id1 is a reference\n    const int&amp; id2 { getNextId() }; // id2 is a reference\n\n    std::cout &lt;&lt; id1 &lt;&lt; id2 &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst int& getNextId()\n{\n    static int s_x{ 0 }; // poznámka: proměnná je nekonst\n    ++s_x; // vygeneruje další id\n    návrat s_x; // a vrátí odkaz na něj\n}\n\nint main()\n{\n    const int& id1 { getNextId() }; // id1 je odkaz\n    const int& id2 { getNextId() }; // id2 je odkaz\n\n    std::cout << id1 << id2 << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b31",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b32",
       "type": "output",
       "text": "22\n",
       "html": "<pre>22\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>22\n</pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b33",
       "type": "paragraph",
       "html": "<p>This happens because <code>id1</code> and <code>id2</code> are referencing the same object (the static variable <code>s_x</code>), so when anything (e.g. <code>getNextId()</code>) modifies that value, all references are now accessing the modified value.</p>",
       "preview": "This happens because id1 and id2 are referencing the same object (the static var",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K tomu dochází proto, že <code>id1</code> a <code>id2</code> odkazují na stejný objekt (statickou proměnnou <code>s_x</code>), takže když cokoli (např. <code>getNextId()</code>) tuto hodnotu změní, všechny reference nyní přistupují k této upravené hodnotě.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b34",
       "type": "paragraph",
       "html": "<p>This above example can be fixed by making <code>id1</code> and <code>id2</code> normal variables (rather than references) so they save a copy of the return value rather than a reference to <code>s_x</code>.</p>",
       "preview": "This above example can be fixed by making id1 and id2 normal variables (rather t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad lze opravit tím, že z <code>id1</code> a <code>id2</code> uděláme běžné proměnné (namísto referencí), takže uloží kopii návratové hodnoty namísto reference na <code>s_x</code>.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b35",
@@ -269,14 +308,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Here’s another example with a less obvious version of the same problem:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nstd::string&amp; getName()\n{\n    static std::string s_name{};\n    std::cout &lt;&lt; \"Enter a name: \";\n    std::cin &gt;&gt; s_name;\n    return s_name;\n}\n\nvoid printFirstAlphabetical(const std::string&amp; s1, const std::string&amp; s2)\n{\n    if (s1 &lt; s2)\n        std::cout &lt;&lt; s1 &lt;&lt; \" comes before \" &lt;&lt; s2 &lt;&lt; '\\n';\n    else\n        std::cout &lt;&lt; s2 &lt;&lt; \" comes before \" &lt;&lt; s1 &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printFirstAlphabetical(getName(), getName());\n    \n    return 0;\n}</code></pre><p>Here’s the result from one run of this program:</p><pre>Enter a name: Dave\nEnter a name: Stan\nStan comes before Stan\n</pre><p>In this example, <code>getName()</code> returns a reference to static local <code>s_name</code>. Initializing a <code>const std::string&amp;</code> with a reference to <code>s_name</code> causes that <code>std::string&amp;</code> to bind to <code>s_name</code> (not make a copy of it).</p><p>Thus, both <code>s1</code> and <code>s2</code> end up viewing <code>s_name</code> (which was assigned the last name we entered).</p><p>Note that if we use <code>std::string_view</code> parameters instead, the first <code>std::string_view</code> parameter will be invalidated when the underlying <code>std::string</code> is changed.</p></div>",
       "preview": "For advanced readersHere’s another example with a less obvious version of the same problem:#include ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Zde je další příklad s méně zjevnou variantou stejného problému:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nstd::string&amp; getName()\n{\n    static std::string s_name{};\n    std::cout &lt;&lt; \"Enter a name: \";\n    std::cin &gt;&gt; s_name;\n    return s_name;\n}\n\nvoid printFirstAlphabetical(const std::string&amp; s1, const std::string&amp; s2)\n{\n    if (s1 &lt; s2)\n        std::cout &lt;&lt; s1 &lt;&lt; \" comes before \" &lt;&lt; s2 &lt;&lt; '\\n';\n    else\n        std::cout &lt;&lt; s2 &lt;&lt; \" comes before \" &lt;&lt; s1 &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printFirstAlphabetical(getName(), getName());\n    \n    return 0;\n}</code></pre><p>Zde je výsledek jednoho spuštění tohoto programu:</p><pre>Enter a name: Dave\nEnter a name: Stan\nStan comes before Stan\n</pre><p>V tomto příkladu funkce <code>getName()</code> vrací referenci na lokální statickou proměnnou <code>s_name</code>. Inicializace <code>const std::string&amp;</code> pomocí reference na <code>s_name</code> způsobí, že se tato <code>std::string&amp;</code> naváže na <code>s_name</code> (místo aby vytvořila její kopii).</p><p>Tím pádem jak <code>s1</code>, tak <code>s2</code> nakonec odkazují na <code>s_name</code> (do které bylo přiřazeno naposledy zadané jméno).</p><p>Všimněte si, že pokud bychom místo toho použili parametry typu <code>std::string_view</code>, první parametr <code>std::string_view</code> by byl zneplatněn (invalidován) ve chvíli, kdy se podkladový <code>std::string</code> změní.</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b36",
       "type": "paragraph",
       "html": "<p>Another issue that commonly occurs with programs that return a non-const static local by reference is that there is no standardized way to reset <code>s_x</code> back to the default state. Such programs must either use a non-conventional solution (e.g. a reset function parameter), or can only be reset by quitting and restarting the program.</p>",
       "preview": "Another issue that commonly occurs with programs that return a non-const static ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dalším problémem, který se běžně vyskytuje u programů vracejících nekonstantní lokální statickou proměnnou referencí, je absence standardizovaného způsobu, jak resetovat <code>s_x</code> zpět do výchozího stavu. Takové programy musí buď použít nekonvenční řešení (např. parametr funkce pro reset), nebo je lze resetovat pouze ukončením a restartováním programu.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b37",
@@ -284,35 +325,41 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid returning references to non-const local static variables.</p></div>",
       "preview": "Best practiceAvoid returning references to non-const local static variables.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vyhněte se vracení referencí na nekonstantní lokální statické proměnné.</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b38",
       "type": "paragraph",
       "html": "<p>Returning a const reference to a <em>const</em> local static variable is sometimes done if the local variable being returned by reference is expensive to create and/or initialize (so we don’t have to recreate the variable every function call). But this is rare.</p>",
       "preview": "Returning a const reference to a const local static variable is sometimes done i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vracení konstantní reference na <em>konstantní</em> lokální statickou proměnnou se občas používá v případech, kdy je vytvoření a/nebo inicializace lokální proměnné vracené referencí nákladná (abychom nemuseli proměnnou znovu vytvářet při každém volání funkce). To je však vzácné.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b39",
       "type": "paragraph",
       "html": "<p>Returning a const reference to a <em>const</em> global variable is also sometimes done as a way to encapsulate access to a global variable. We discuss this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/\">7.8 -- Why (non-const) global variables are evil</a>. When used intentionally and carefully, this is also okay.</p>",
       "preview": "Returning a const reference to a const global variable is also sometimes done as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vracení konstantní reference na <em>const</em> globální proměnnou se také někdy používá jako způsob, jak zapouzdřit přístup ke globální proměnné. Tomuto tématu se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/why-non-const-global-variables-are-evil/\">7.8 – Proč jsou (nekonstantní) globální proměnné zlé</a>. Při záměrném a opatrném použití je to také v pořádku.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b40",
       "type": "section",
       "title": "Assigning/initializing a normal variable with a returned reference makes a copy",
       "html": "<h3 class=\"cpp-section-heading\">Assigning/initializing a normal variable with a returned reference makes a copy</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přiřazení/inicializace běžné proměnné vrácenou referencí vytvoří kopii</h3>",
+      "title_cs": "Přiřazení/inicializace normální proměnné s vráceným odkazem vytvoří kopii"
     },
     {
       "id": "return-by-reference-and-return-by-address_b41",
       "type": "paragraph",
       "html": "<p>If a function returns a reference, and that reference is used to initialize or assign to a non-reference variable, the return value will be copied (as if it had been returned by value).</p>",
       "preview": "If a function returns a reference, and that reference is used to initialize or a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud funkce vrací referenci a tato reference je použita k inicializaci nebo přiřazení do nereferenční proměnné, návratová hodnota se zkopíruje (jako by byla vrácena hodnotou).</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b42",
@@ -320,28 +367,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst int& getNextId()\n{\n    static int s_x{ 0 };\n    ++s_x;\n    return s_x;\n}\n\nint main()\n{\n    const int id1 { getNextId() }; // id1 is a normal variable now and receives a copy of the value returned by reference from getNextId()\n    const int id2 { getNextId() }; // id2 is a normal variable now and receives a copy of the value returned by reference from getNextId()\n\n    std::cout << id1 << id2 << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst int&amp; getNextId()\n{\n    static int s_x{ 0 };\n    ++s_x;\n    return s_x;\n}\n\nint main()\n{\n    const int id1 { getNextId() }; // id1 is a normal variable now and receives a copy of the value returned by reference from getNextId()\n    const int id2 { getNextId() }; // id2 is a normal variable now and receives a copy of the value returned by reference from getNextId()\n\n    std::cout &lt;&lt; id1 &lt;&lt; id2 &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst int& getNextId()\n{\n    static int s_x{ 0 };\n    ++s_x;\n    návrat s_x;\n}\n\nint main()\n{\n    const int id1 { getNextId() }; // id1 je nyní normální proměnná a přijímá kopii hodnoty vrácené odkazem z getNextId()\n    const int id2 { getNextId() }; // id2 je nyní normální proměnná a přijímá kopii hodnoty vrácené odkazem z getNextId()\n\n    std::cout << id1 << id2 << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b43",
       "type": "paragraph",
       "html": "<p>In the above example, <code>getNextId()</code> is returning a reference, but <code>id1</code> and <code>id2</code> are non-reference variables. In such a case, the value of the returned reference is copied into the normal variable. Thus, this program prints:</p>",
       "preview": "In the above example, getNextId() is returning a reference, but id1 and id2 are ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu <code>getNextId()</code> vrací referenci, ale <code>id1</code> a <code>id2</code> jsou nereferenční proměnné. V takovém případě se hodnota vrácené reference zkopíruje do běžné proměnné. Tento program tedy vypíše:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b44",
       "type": "output",
       "text": "12\n",
       "html": "<pre>12\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>12\n</pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b45",
       "type": "paragraph",
       "html": "<p>Also note that if a program returns a dangling reference, the reference is left dangling before the copy is made, which will lead to undefined behavior:</p>",
       "preview": "Also note that if a program returns a dangling reference, the reference is left ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si také, že pokud program vrátí visící referenci (dangling reference), reference se stane neplatnou (visící) ještě před vytvořením kopie, což povede k nedefinovanému chování:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b46",
@@ -349,35 +400,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst std::string& getProgramName() // will return a const reference\n{\n    const std::string programName{ \"Calculator\" };\n\n    return programName;\n}\n\nint main()\n{\n    std::string name { getProgramName() }; // makes a copy of a dangling reference\n    std::cout << \"This program is named \" << name << '\\n'; // undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst std::string&amp; getProgramName() // will return a const reference\n{\n    const std::string programName{ \"Calculator\" };\n\n    return programName;\n}\n\nint main()\n{\n    std::string name { getProgramName() }; // makes a copy of a dangling reference\n    std::cout &lt;&lt; \"This program is named \" &lt;&lt; name &lt;&lt; '\\n'; // undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst std::string& getProgramName() // vrátí const odkaz\n{\n    const std::string název_programu{ \"Kalkulačka\" };\n\n    vrátit název programu;\n}\n\nint main()\n{\n    std::string name { getProgramName() }; // vytvoří kopii visící reference\n    std::cout << \"Tento program se jmenuje \" << název << '\\n'; // nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b47",
       "type": "section",
       "title": "It’s okay to return reference parameters by reference",
       "html": "<h3 class=\"cpp-section-heading\">It’s okay to return reference parameters by reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vracení referenčních parametrů referencí je v pořádku</h3>",
+      "title_cs": "Je v pořádku vracet referenční parametry odkazem"
     },
     {
       "id": "return-by-reference-and-return-by-address_b48",
       "type": "paragraph",
       "html": "<p>There are quite a few cases where returning objects by reference makes sense, and we’ll encounter many of those in future lessons. However, there is one useful example that we can show now.</p>",
       "preview": "There are quite a few cases where returning objects by reference makes sense, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje poměrně dost případů, kdy vracení objektů referencí dává smysl, a s mnoha z nich se setkáme v budoucích lekcích. Ukázat si však můžeme jeden užitečný příklad již nyní.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b49",
       "type": "paragraph",
       "html": "<p>If a parameter is passed into a function by reference, it’s safe to return that parameter by reference. This makes sense: in order to pass an argument to a function, the argument must exist in the scope of the caller. When the called function returns, that object must still exist in the scope of the caller.</p>",
       "preview": "If a parameter is passed into a function by reference, it’s safe to return that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je parametr předán do funkce referencí, je bezpečné tento parametr referencí i vrátit. Dává to smysl: aby bylo možné argument funkci předat, musí existovat v oboru platnosti volajícího. Když se volaná funkce vrátí, daný objekt musí v oboru platnosti volajícího stále existovat.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b50",
       "type": "paragraph",
       "html": "<p>Here is a simple example of such a function:</p>",
       "preview": "Here is a simple example of such a function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je jednoduchý příklad takové funkce:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b51",
@@ -385,56 +442,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\n// Takes two std::string objects, returns the one that comes first alphabetically\nconst std::string& firstAlphabetical(const std::string& a, const std::string& b)\n{\n\treturn (a < b) ? a : b; // We can use operator< on std::string to determine which comes first alphabetically\n}\n\nint main()\n{\n\tstd::string hello { \"Hello\" };\n\tstd::string world { \"World\" };\n\n\tstd::cout << firstAlphabetical(hello, world) << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\n// Takes two std::string objects, returns the one that comes first alphabetically\nconst std::string&amp; firstAlphabetical(const std::string&amp; a, const std::string&amp; b)\n{\n\treturn (a &lt; b) ? a : b; // We can use operator&lt; on std::string to determine which comes first alphabetically\n}\n\nint main()\n{\n\tstd::string hello { \"Hello\" };\n\tstd::string world { \"World\" };\n\n\tstd::cout &lt;&lt; firstAlphabetical(hello, world) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\n// Vezme dva objekty std::string, vrátí ten, který je podle abecedy první\nconst std::string& firstAlphabetical(const std::string& a, const std::string& b)\n{\n\tnávrat (a < b) ? a: b; // Můžeme použít operátor< na std::string, abychom určili, která je první podle abecedy\n}\n\nint main()\n{\n\tstd::string ahoj { \"Ahoj\" };\n\tstd::string world { \"Svět\" };\n\n\tstd::cout << prvníAbecedně(ahoj, světe) << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b52",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b53",
       "type": "output",
       "text": "Hello\n",
       "html": "<pre>Hello\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Hello\n</pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b54",
       "type": "paragraph",
       "html": "<p>In the above function, the caller passes in two std::string objects by const reference, and whichever of these strings comes first alphabetically is passed back by const reference. If we had used pass by value and return by value, we would have made up to 3 copies of std::string (one for each parameter, one for the return value). By using pass by reference/return by reference, we can avoid those copies.</p>",
       "preview": "In the above function, the caller passes in two std::string objects by const ref",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedené funkci volající předává dva objekty std::string konstantní referencí a ten z těchto řetězců, který je abecedně první, je vrácen zpět konstantní referencí. Pokud bychom použili předávání hodnotou a návrat hodnotou, vytvořili bychom až 3 kopie std::string (jednu pro každý parametr a jednu pro návratovou hodnotu). Použitím předávání referencí / návratu referencí se těmto kopiím můžeme vyhnout.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b55",
       "type": "section",
       "title": "It’s okay for an rvalue passed by const reference to be returned by const reference",
       "html": "<h3 class=\"cpp-section-heading\">It’s okay for an rvalue passed by const reference to be returned by const reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Je v pořádku, aby rvalue předaná konstantní referencí byla vrácena konstantní referencí</h3>",
+      "title_cs": "Je v pořádku, že rvalue předaná odkazem const bude vrácena odkazem const"
     },
     {
       "id": "return-by-reference-and-return-by-address_b56",
       "type": "paragraph",
       "html": "<p>When an argument for a const reference parameter is an rvalue, it’s still okay to return that parameter by const reference.</p>",
       "preview": "When an argument for a const reference parameter is an rvalue, it’s still okay t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je argumentem pro parametr předávaný konstantní referencí rvalue, je stále v pořádku tento parametr vrátit konstantní referencí.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b57",
       "type": "paragraph",
       "html": "<p>This is because rvalues are not destroyed until the end of the full expression in which they are created.</p>",
       "preview": "This is because rvalues are not destroyed until the end of the full expression i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je to proto, že rvalue nejsou zničeny dříve než na konci celého výrazu (full expression), ve kterém byly vytvořeny.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b58",
       "type": "paragraph",
       "html": "<p>First, let’s look at this example:</p>",
       "preview": "First, let’s look at this example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se podívejme na tento příklad:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b59",
@@ -442,21 +508,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nstd::string getHello()\n{\n    return \"Hello\"; // implicit conversion to std::string\n}\n\nint main()\n{\n    const std::string s{ getHello() };\n\n    std::cout << s;\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nstd::string getHello()\n{\n    return \"Hello\"; // implicit conversion to std::string\n}\n\nint main()\n{\n    const std::string s{ getHello() };\n\n    std::cout &lt;&lt; s;\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nstd::string getHello()\n{\n    návrat \"Ahoj\"; // implicitní převod na std::string\n}\n\nint main()\n{\n    const std::string s{ getHello() };\n\n    std::cout << s;\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b60",
       "type": "paragraph",
       "html": "<p>In this case, <code>getHello()</code> returns a <code>std::string</code> by value, which is an rvalue. This rvalue is then used to initialize <code>s</code>. After the initialization of <code>s</code>, the expression in which the rvalue was created has finished evaluating, and the rvalue is destroyed.</p>",
       "preview": "In this case, getHello() returns a std::string by value, which is an rvalue. Thi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě <code>getHello()</code> vrací <code>std::string</code> hodnotou, což je r-hodnota (rvalue). Tato r-hodnota je pak použita k inicializaci <code>s</code>. Po inicializaci <code>s</code> je vyhodnocování výrazu, ve kterém byla r-hodnota vytvořena, dokončeno a r-hodnota je zničena.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b61",
       "type": "paragraph",
       "html": "<p>Now let’s take a look at this similar example:</p>",
       "preview": "Now let’s take a look at this similar example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na tento podobný příklad:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b62",
@@ -464,49 +533,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nconst std::string& foo(const std::string& s)\n{\n    return s;\n}\n\nstd::string getHello()\n{\n    return \"Hello\"; // implicit conversion to std::string\n}\n\nint main()\n{\n    const std::string s{ foo(getHello()) };\n\n    std::cout << s;\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nconst std::string&amp; foo(const std::string&amp; s)\n{\n    return s;\n}\n\nstd::string getHello()\n{\n    return \"Hello\"; // implicit conversion to std::string\n}\n\nint main()\n{\n    const std::string s{ foo(getHello()) };\n\n    std::cout &lt;&lt; s;\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nconst std::string& foo(const std::string& s)\n{\n    návrat s;\n}\n\nstd::string getHello()\n{\n    návrat \"Ahoj\"; // implicitní převod na std::string\n}\n\nint main()\n{\n    const std::string s{ foo(getHello()) };\n\n    std::cout << s;\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b63",
       "type": "paragraph",
       "html": "<p>The only difference in this case is that the rvalue is passed by const reference to <code>foo()</code> and then returned by const reference back to the caller before it is used to initialize <code>s</code>. Everything else works identically.</p>",
       "preview": "The only difference in this case is that the rvalue is passed by const reference",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jediný rozdíl v tomto případě je, že r-hodnota je předána konstantní referencí do <code>foo()</code> a poté vrácena konstantní referencí zpět volajícímu předtím, než je použita k inicializaci <code>s</code>. Všechno ostatní funguje identicky.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b64",
       "type": "paragraph",
       "html": "<p>We discuss a similar case in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/access-functions/\">14.6 -- Access functions</a>.</p>",
       "preview": "We discuss a similar case in lesson 14.6 -- Access functions.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobný případ probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/access-functions/\">14.6 -- Přístupové funkce</a>.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b65",
       "type": "section",
       "title": "The caller can modify values through the reference",
       "html": "<h3 class=\"cpp-section-heading\">The caller can modify values through the reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Volající může modifikovat hodnoty prostřednictvím reference</h3>",
+      "title_cs": "Volající může upravit hodnoty pomocí odkazu"
     },
     {
       "id": "return-by-reference-and-return-by-address_b66",
       "type": "paragraph",
       "html": "<p>When an argument is passed to a function by non-const reference, the function can use the reference to modify the value of the argument.</p>",
       "preview": "When an argument is passed to a function by non-const reference, the function ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je argument předán funkci nekonstantní referencí, funkce může tuto referenci použít k modifikaci hodnoty argumentu.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b67",
       "type": "paragraph",
       "html": "<p>Similarly, when a non-const reference is returned from a function, the caller can use the reference to modify the value being returned.</p>",
       "preview": "Similarly, when a non-const reference is returned from a function, the caller ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně, když je z funkce vrácena nekonstantní reference, volající může tuto referenci použít k modifikaci vracené hodnoty.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b68",
       "type": "paragraph",
       "html": "<p>Here’s an illustrative example:</p>",
       "preview": "Here’s an illustrative example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je názorný příklad:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b69",
@@ -514,63 +591,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// takes two integers by non-const reference, and returns the greater by reference\nint& max(int& x, int& y)\n{\n    return (x > y) ? x : y;\n}\n\nint main()\n{\n    int a{ 5 };\n    int b{ 6 };\n\n    max(a, b) = 7; // sets the greater of a or b to 7\n\n    std::cout << a << b << '\\n';\n        \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// takes two integers by non-const reference, and returns the greater by reference\nint&amp; max(int&amp; x, int&amp; y)\n{\n    return (x &gt; y) ? x : y;\n}\n\nint main()\n{\n    int a{ 5 };\n    int b{ 6 };\n\n    max(a, b) = 7; // sets the greater of a or b to 7\n\n    std::cout &lt;&lt; a &lt;&lt; b &lt;&lt; '\\n';\n        \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// vezme dvě celá čísla jako nekonstantní odkaz a vrátí větší odkazem\nint& max(int& x, int& y)\n{\n    návrat (x > y) ? x : y;\n}\n\nint main()\n{\n    int a{ 5 };\n    int b{6};\n\n    max(a, b) = 7; // nastaví větší z a nebo b na 7\n\n    std::cout << a << b << '\\n';\n        \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b70",
       "type": "paragraph",
       "html": "<p>In the above program, <code>max(a, b)</code> calls the <code>max()</code> function with <code>a</code> and <code>b</code> as arguments. Reference parameter <code>x</code> binds to argument <code>a</code>, and reference parameter <code>y</code> binds to argument <code>b</code>. The function then determines which of <code>x</code> (<code>5</code>) and <code>y</code> (<code>6</code>) is greater. In this case, that’s <code>y</code>, so the function returns <code>y</code> (which is still bound to <code>b</code>) back to the caller. The caller then assigns the value <code>7</code> to this returned reference.</p>",
       "preview": "In the above program, max(a, b) calls the max() function with a and b as argumen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu volá <code>max(a, b)</code> funkci <code>max()</code> s argumenty <code>a</code> a <code>b</code>. Referenční parametr <code>x</code> se naváže na argument <code>a</code> a referenční parametr <code>y</code> se naváže na argument <code>b</code>. Funkce poté určí, která z hodnot <code>x</code> (<code>5</code>) a <code>y</code> (<code>6</code>) je větší. V tomto případě je to <code>y</code>, takže funkce vrátí <code>y</code> (která je stále navázána na <code>b</code>) zpět volajícímu. Volající pak této vrácené referenci přiřadí hodnotu <code>7</code>.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b71",
       "type": "paragraph",
       "html": "<p>Therefore, the expression <code>max(a, b) = 7</code> effectively resolves to <code>b = 7</code>.</p>",
       "preview": "Therefore, the expression max(a, b) = 7 effectively resolves to b = 7.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výraz <code>max(a, b) = 7</code> se proto efektivně vyhodnotí jako <code>b = 7</code>.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b72",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b73",
       "type": "output",
       "text": "57\n",
       "html": "<pre>57\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>57\n</pre>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b74",
       "type": "section",
       "title": "Return by address",
       "html": "<h3 class=\"cpp-section-heading\">Return by address</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návrat adresou (Return by address)</h3>",
+      "title_cs": "Návrat podle adresy"
     },
     {
       "id": "return-by-reference-and-return-by-address_b75",
       "type": "paragraph",
       "html": "<p><strong>Return by address</strong> works almost identically to return by reference, except a pointer to an object is returned instead of a reference to an object. Return by address has the same primary caveat as return by reference -- the object being returned by address must outlive the scope of the function returning the address, otherwise the caller will receive a dangling pointer.</p>",
       "preview": "Return by address works almost identically to return by reference, except a poin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Návrat adresou</strong> funguje téměř identicky jako návrat referencí, s tím rozdílem, že se místo reference na objekt vrací ukazatel na objekt. Návrat adresou má stejné hlavní úskalí jako návrat referencí – objekt vracený adresou musí přetrvat déle než rozsah platnosti (scope) funkce, která adresu vrací, jinak volající obdrží visící ukazatel (dangling pointer).</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b76",
       "type": "paragraph",
       "html": "<p>The major advantage of return by address over return by reference is that we can have the function return <code>nullptr</code> if there is no valid object to return. For example, let’s say we have a list of students that we want to search. If we find the student we are looking for in the list, we can return a pointer to the object representing the matching student. If we don’t find any students matching, we can return <code>nullptr</code> to indicate a matching student object was not found.</p>",
       "preview": "The major advantage of return by address over return by reference is that we can",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hlavní výhodou návratu adresou oproti návratu referencí je, že funkce může vrátit <code>nullptr</code>, pokud neexistuje žádný platný objekt k vrácení. Řekněme například, že máme seznam studentů, v němž chceme vyhledávat. Pokud v seznamu najdeme hledaného studenta, můžeme vrátit ukazatel na objekt představující odpovídajícího studenta. Pokud žádného odpovídajícího studenta nenajdeme, můžeme vrátit <code>nullptr</code>, abychom dali najevo, že odpovídající objekt studenta nebyl nalezen.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b77",
       "type": "paragraph",
       "html": "<p>The major disadvantage of return by address is that the caller has to remember to do a <code>nullptr</code> check before dereferencing the return value, otherwise a null pointer dereference may occur and undefined behavior will result. Because of this danger, return by reference should be preferred over return by address unless the ability to return “no object” is needed.</p>",
       "preview": "The major disadvantage of return by address is that the caller has to remember t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hlavní nevýhodou návratu adresou je, že volající musí před dereferencováním návratové hodnoty pamatovat na kontrolu na <code>nullptr</code>, jinak může dojít k dereferenci nulového ukazatele a následnému nedefinovanému chování. Kvůli tomuto nebezpečí by se měl návrat referencí preferovat před návratem adresou, pokud není vyžadována možnost vrátit „žádný objekt“.</p>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b78",
@@ -578,7 +665,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer return by reference over return by address unless the ability to return “no object” (using <code>nullptr</code>) is important.</p></div>",
       "preview": "Best practicePrefer return by reference over return by address unless the ability to return “no obje",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost návratu referencí před návratem adresou, pokud není důležitá možnost vrátit „žádný objekt“ (pomocí <code>nullptr</code>).</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b79",
@@ -586,7 +674,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>If you need the ability to return “no object” or a value (rather than an object) <a href=\"https://www.learncpp.com/cpp-tutorial/stdoptional/\">12.15 -- std::optional</a> describes a good alternative.</p></div>",
       "preview": "Related contentIf you need the ability to return “no object” or a value (rather than an object) 12.1",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Pokud potřebujete možnost vrátit „žádný objekt“ nebo hodnotu (namísto objektu), lekce <a href=\"https://www.learncpp.com/cpp-tutorial/stdoptional/\">12.15 -- std::optional</a> popisuje dobrou alternativu.</p></div>"
     },
     {
       "id": "return-by-reference-and-return-by-address_b80",
@@ -594,7 +683,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>See <a href=\"https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/#stringvsstringview\">5.9 -- std::string_view (part 2)</a> for a quick guide on when to return <code>std::string_view</code> vs <code>const std::string&amp;</code> .</p></div>",
       "preview": "Related contentSee 5.9 -- std::string_view (part 2) for a quick guide on when to return std::string_",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Stručný přehled toho, kdy vracet <code>std::string_view</code> oproti <code>const std::string&amp;</code>, naleznete v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/#stringvsstringview\">5.9 -- std::string_view (2. část)</a>.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "12.12 — Návrat referencí a návrat adresou"
 }

@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Although unscoped enumerations are distinct types in C++, they are not type safe, and in some cases will allow you to do things that don’t make sense. Consider the following case:</p>",
       "preview": "Although unscoped enumerations are distinct types in C++, they are not type safe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli jsou neoborové výčty (unscoped enumerations) v C++ samostatnými typy, nejsou typově bezpečné a v některých případech vám umožní dělat věci, které nedávají smysl. Zvažte následující případ:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b1",
@@ -22,70 +23,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    enum Color\n    {\n        red,\n        blue,\n    };\n\n    enum Fruit\n    {\n        banana,\n        apple,\n    };\n\t\n    Color color { red };\n    Fruit fruit { banana };\n\n    if (color == fruit) // The compiler will compare color and fruit as integers\n        std::cout << \"color and fruit are equal\\n\"; // and find they are equal!\n    else\n        std::cout << \"color and fruit are not equal\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    enum Color\n    {\n        red,\n        blue,\n    };\n\n    enum Fruit\n    {\n        banana,\n        apple,\n    };\n\t\n    Color color { red };\n    Fruit fruit { banana };\n\n    if (color == fruit) // The compiler will compare color and fruit as integers\n        std::cout &lt;&lt; \"color and fruit are equal\\n\"; // and find they are equal!\n    else\n        std::cout &lt;&lt; \"color and fruit are not equal\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    výčet Barva\n    {\n        červená,\n        modrá,\n    };\n\n    enum Ovoce\n    {\n        banán,\n        jablko,\n    };\n\t\n    Barva barva { červená };\n    Ovoce ovoce { banán };\n\n    if (color == fruit) // Překladač porovná barvu a ovoce jako celá čísla\n        std::cout << \"barva a ovoce jsou si rovny\\n\"; // a zjistíme, že jsou si rovni!\n    jinak\n        std::cout << \"barva a ovoce se nerovnají\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b2",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b3",
       "type": "output",
       "text": "color and fruit are equal\n",
       "html": "<pre>color and fruit are equal\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>color and fruit are equal\n</pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b4",
       "type": "paragraph",
       "html": "<p>When <code>color</code> and <code>fruit</code> are compared, the compiler will look to see if it knows how to compare a <code>Color</code> and a <code>Fruit</code>. It doesn’t. Next, it will try converting <code>Color</code> and/or <code>Fruit</code> to integers to see if it can find a match. Eventually the compiler will determine that if it converts both to integers, it can do the comparison. Since <code>color</code> and <code>fruit</code> are both set to enumerators that convert to integer value <code>0</code>, <code>color</code> will equal <code>fruit</code>.</p>",
       "preview": "When color and fruit are compared, the compiler will look to see if it knows how",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když jsou <code>color</code> a <code>fruit</code> porovnávány, kompilátor zjišťuje, zda ví, jak porovnat <code>Color</code> a <code>Fruit</code>. To neví. Dále se pokusí převést <code>Color</code> a/nebo <code>Fruit</code> na celá čísla, aby zjistil, zda najde shodu. Nakonec kompilátor vyhodnotí, že pokud obojí převede na celá čísla, může porovnání provést. Vzhledem k tomu, že <code>color</code> i <code>fruit</code> jsou nastaveny na enumerátory, které se převádějí na celočíselnou hodnotu <code>0</code>, <code>color</code> se bude rovnat <code>fruit</code>.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b5",
       "type": "paragraph",
       "html": "<p>This doesn’t make sense semantically since <code>color</code> and <code>fruit</code> are from different enumerations and are not intended to be comparable. With standard enumerators, there’s no easy way to prevent this.</p>",
       "preview": "This doesn’t make sense semantically since color and fruit are from different en",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To sémanticky nedává smysl, protože <code>color</code> a <code>fruit</code> pocházejí z různých výčtů a nemají být vzájemně porovnatelné. U standardních výčtů neexistuje snadný způsob, jak tomu zabránit.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b6",
       "type": "paragraph",
       "html": "<p>Because of such challenges, as well as the namespace pollution problem (unscoped enumerations defined in the global scope put their enumerators in the global namespace), the C++ designers determined that a cleaner solution for enumerations would be of use.</p>",
       "preview": "Because of such challenges, as well as the namespace pollution problem (unscoped",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kvůli těmto úskalím a také kvůli problému se znečištěním jmenného prostoru (neoborové výčty definované v globálním rozsahu platnosti umisťují své enumerátory do globálního jmenného prostoru) tvůrci C++ dospěli k závěru, že by bylo užitečné čistší řešení pro výčtové typy.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b7",
       "type": "section",
       "title": "Scoped enumerations",
       "html": "<h3 class=\"cpp-section-heading\">Scoped enumerations</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Oborové výčty (Scoped enumerations)</h3>",
+      "title_cs": "Rozsah výčtů"
     },
     {
       "id": "scoped-enumerations-enum-classes_b8",
       "type": "paragraph",
       "html": "<p>That solution is the <strong>scoped enumeration</strong> (often called an <strong>enum class</strong> in C++ for reasons that will become obvious shortly).</p>",
       "preview": "That solution is the scoped enumeration (often called an enum class in C++ for r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto řešením je <strong>oborový výčet</strong> (<strong>scoped enumeration</strong>, v C++ často nazývaný <strong>enum class</strong> z důvodů, které budou brzy zřejmé).</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b9",
       "type": "paragraph",
       "html": "<p>Scoped enumerations work similarly to unscoped enumerations (<a href=\"https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/\">13.2 -- Unscoped enumerations</a>), but have two primary differences: They won’t implicitly convert to integers, and the enumerators are <em>only</em> placed into the scope region of the enumeration (not into the scope region where the enumeration is defined).</p>",
       "preview": "Scoped enumerations work similarly to unscoped enumerations (13.2 -- Unscoped en",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Scoped výčtové typy fungují podobně jako neoborové výčtové typy (<a href=\"https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/\">13.2 -- Neoborové výčtové typy (unscoped enumerations)</a>), mají však dva zásadní rozdíly: neprovádí se u nich implicitní převod na celá čísla a jejich enumerátory jsou umístěny <em>pouze</em> do rozsahu platnosti (scope) samotného výčtu (nikoli do rozsahu platnosti, kde je výčet definován).</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b10",
       "type": "paragraph",
       "html": "<p>To make a scoped enumeration, we use the keywords <code>enum class</code>. The rest of the scoped enumeration definition is the same as an unscoped enumeration definition. Here’s an example:</p>",
       "preview": "To make a scoped enumeration, we use the keywords enum class. The rest of the sc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro vytvoření scoped výčtu použijeme klíčová slova <code>enum class</code>. Zbytek definice scoped výčtu je stejný jako definice neoborového výčtu. Zde je příklad:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b11",
@@ -93,14 +105,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint main()\n{\n    enum class Color // \"enum class\" defines this as a scoped enumeration rather than an unscoped enumeration\n    {\n        red, // red is considered part of Color's scope region\n        blue,\n    };\n\n    enum class Fruit\n    {\n        banana, // banana is considered part of Fruit's scope region\n        apple,\n    };\n\n    Color color { Color::red }; // note: red is not directly accessible, we have to use Color::red\n    Fruit fruit { Fruit::banana }; // note: banana is not directly accessible, we have to use Fruit::banana\n\t\n    if (color == fruit) // compile error: the compiler doesn't know how to compare different types Color and Fruit\n        std::cout << \"color and fruit are equal\\n\";\n    else\n        std::cout << \"color and fruit are not equal\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint main()\n{\n    enum class Color // \"enum class\" defines this as a scoped enumeration rather than an unscoped enumeration\n    {\n        red, // red is considered part of Color's scope region\n        blue,\n    };\n\n    enum class Fruit\n    {\n        banana, // banana is considered part of Fruit's scope region\n        apple,\n    };\n\n    Color color { Color::red }; // note: red is not directly accessible, we have to use Color::red\n    Fruit fruit { Fruit::banana }; // note: banana is not directly accessible, we have to use Fruit::banana\n\t\n    if (color == fruit) // compile error: the compiler doesn't know how to compare different types Color and Fruit\n        std::cout &lt;&lt; \"color and fruit are equal\\n\";\n    else\n        std::cout &lt;&lt; \"color and fruit are not equal\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint main()\n{\n    třída výčtu Barva // \"třída výčtu\" to definuje jako výčet s rozsahem spíše než výčet bez rozsahu\n    {\n        červená, // červená je považována za součást oblasti působnosti Color\n        modrá,\n    };\n\n    enum class Ovoce\n    {\n        banán, // banán je považován za součást oblasti působnosti ovoce\n        jablko,\n    };\n\n    Barva barva { Barva::červená }; // poznámka: červená není přímo přístupná, musíme použít Color::red\n    Fruit fruit { Fruit::banana }; // poznámka: banán není přímo přístupný, musíme použít Fruit::banana\n\t\n    if (color == fruit) // chyba kompilace: kompilátor neví, jak porovnat různé typy Color a Fruit\n        std::cout << \"barva a ovoce jsou si rovny\\n\";\n    jinak\n        std::cout << \"barva a ovoce se nerovnají\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b12",
       "type": "paragraph",
       "html": "<p>This program produces a compile error on line 19, since the scoped enumeration won’t convert to any type that can be compared with another type.</p>",
       "preview": "This program produces a compile error on line 19, since the scoped enumeration w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program způsobí chybu při překladu na řádku 19, protože scoped výčet se nepřevede na žádný typ, který by bylo možné porovnat s jiným typem.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b13",
@@ -108,28 +122,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The <code>class</code> keyword (along with the <code>static</code> keyword), is one of the most overloaded keywords in the C++ language, and can have different meanings depending on context. Although scoped enumerations use the <code>class</code> keyword, they aren’t considered to be a “class type” (which is reserved for structs, classes, and unions).</p><p><code>enum struct</code> also works in this context, and behaves identically to <code>enum class</code>. However, use of <code>enum struct</code> is non-idiomatic, so avoid its use.</p></div>",
       "preview": "As an aside…The class keyword (along with the static keyword), is one of the most overloaded keyword",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Klíčové slovo <code>class</code> (společně s klíčovým slovem <code>static</code>) je jedním z nejvíce přetěžovaných klíčových slov v jazyce C++ a může mít různé významy v závislosti na kontextu. Ačkoli scoped výčty používají klíčové slovo <code>class</code>, nejsou považovány za „třídní typ“ (class type – což je vyhrazeno pro struktury, třídy a unie).</p><p><code>enum struct</code> v tomto kontextu funguje také a chová se identicky jako <code>enum class</code>. Použití <code>enum struct</code> je však neidiomatické, a proto se mu vyhněte.</p></div>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b14",
       "type": "section",
       "title": "Scoped enumerations define their own scope regions",
       "html": "<h3 class=\"cpp-section-heading\">Scoped enumerations define their own scope regions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Scoped výčty definují svůj vlastní rozsah platnosti</h3>",
+      "title_cs": "Rozsahové výčty definují své vlastní oblasti rozsahu"
     },
     {
       "id": "scoped-enumerations-enum-classes_b15",
       "type": "paragraph",
       "html": "<p>Unlike unscoped enumerations, which place their enumerators in the same scope as the enumeration itself, scoped enumerations place their enumerators <em>only</em> in the scope region of the enumeration. In other words, scoped enumerations act like a namespace for their enumerators. This built-in namespacing helps reduce global namespace pollution and the potential for name conflicts when scoped enumerations are used in the global scope.</p>",
       "preview": "Unlike unscoped enumerations, which place their enumerators in the same scope as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od neoborových výčtů, které umisťují své enumerátory do stejného rozsahu platnosti (scope) jako samotný výčet, scoped výčty umisťují své enumerátory <em>pouze</em> do rozsahu platnosti daného výčtu. Jinými slovy, scoped výčty fungují pro své enumerátory jako jmenný prostor (namespace). Toto vestavěné vytváření jmenných prostorů pomáhá snižovat znečištění globálního jmenného prostoru a riziko konfliktů názvů, když jsou scoped výčty použity v globálním rozsahu platnosti.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b16",
       "type": "paragraph",
       "html": "<p>To access a scoped enumerator, we do so just as if it was in a namespace having the same name as the scoped enumeration:</p>",
       "preview": "To access a scoped enumerator, we do so just as if it was in a namespace having ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K enumerátoru scoped výčtu přistupujeme stejně, jako by byl ve jmenném prostoru se stejným názvem, jaký má daný scoped výčet:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b17",
@@ -137,35 +156,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    enum class Color // \"enum class\" defines this as a scoped enum rather than an unscoped enum\n    {\n        red, // red is considered part of Color's scope region\n        blue,\n    };\n\n    std::cout << red << '\\n';        // compile error: red not defined in this scope region\n    std::cout << Color::red << '\\n'; // compile error: std::cout doesn't know how to print this (will not implicitly convert to int)\n\n    Color color { Color::blue }; // okay\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    enum class Color // \"enum class\" defines this as a scoped enum rather than an unscoped enum\n    {\n        red, // red is considered part of Color's scope region\n        blue,\n    };\n\n    std::cout &lt;&lt; red &lt;&lt; '\\n';        // compile error: red not defined in this scope region\n    std::cout &lt;&lt; Color::red &lt;&lt; '\\n'; // compile error: std::cout doesn't know how to print this (will not implicitly convert to int)\n\n    Color color { Color::blue }; // okay\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    třída výčtu Barva // \"třída výčtu\" to definuje jako výčet s rozsahem spíše než výčet bez rozsahu\n    {\n        červená, // červená je považována za součást oblasti působnosti Color\n        modrá,\n    };\n\n    std::cout << red << '\\n';        // chyba kompilace: červená není v této oblasti rozsahu definována\n    std::cout << Barva::červená << '\\n'; // chyba kompilace: std::cout neví, jak to vytisknout (nebude implicitně převedeno na int)\n\n    Barva barva { Barva::modrá }; // dobře\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b18",
       "type": "paragraph",
       "html": "<p>Because scoped enumerations offer their own implicit namespacing for enumerators, there’s no need to put scoped enumerations inside another scope region (such as a namespace), unless there’s some other compelling reason to do so, as it would be redundant.</p>",
       "preview": "Because scoped enumerations offer their own implicit namespacing for enumerators",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože scoped výčty nabízejí pro své enumerátory vlastní implicitní jmenný prostor, není nutné vkládat scoped výčty do jiného rozsahu platnosti (například do jmenného prostoru), pokud pro to neexistuje jiný pádný důvod, jelikož by to bylo redundantní.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b19",
       "type": "section",
       "title": "Scoped enumerations don’t implicitly convert to integers",
       "html": "<h3 class=\"cpp-section-heading\">Scoped enumerations don’t implicitly convert to integers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Scoped výčty se implicitně nepřevádějí na celá čísla</h3>",
+      "title_cs": "Rozsahové výčty se implicitně nepřevádějí na celá čísla"
     },
     {
       "id": "scoped-enumerations-enum-classes_b20",
       "type": "paragraph",
       "html": "<p>Unlike non-scoped enumerators, scoped enumerators won’t implicitly convert to integers. In most cases, this is a good thing because it rarely makes sense to do so, and it helps prevent semantic errors, such as comparing enumerators from different enumerations, or expressions such as <code>red + 5</code>.</p>",
       "preview": "Unlike non-scoped enumerators, scoped enumerators won’t implicitly convert to in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od neoborových výčtových prvků se scoped prvky implicitně nepřevádějí na celá čísla. Ve většině případů je to dobře, protože takový převod dává smysl jen zřídka a pomáhá to předcházet sémantickým chybám, jako je porovnávání prvků z různých výčtů nebo výrazům jako <code>red + 5</code>.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b21",
       "type": "paragraph",
       "html": "<p>Note that you can still compare enumerators from within the same scoped enumeration (since they are of the same type):</p>",
       "preview": "Note that you can still compare enumerators from within the same scoped enumerat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že stále můžete porovnávat prvky v rámci stejného scoped výčtu (protože jsou stejného typu):</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b22",
@@ -173,14 +198,16 @@
       "language": "cpp",
       "code": "#include <iostream>\nint main()\n{\n    enum class Color\n    {\n        red,\n        blue,\n    };\n\n    Color shirt { Color::red };\n\n    if (shirt == Color::red) // this Color to Color comparison is okay\n        std::cout << \"The shirt is red!\\n\";\n    else if (shirt == Color::blue)\n        std::cout << \"The shirt is blue!\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint main()\n{\n    enum class Color\n    {\n        red,\n        blue,\n    };\n\n    Color shirt { Color::red };\n\n    if (shirt == Color::red) // this Color to Color comparison is okay\n        std::cout &lt;&lt; \"The shirt is red!\\n\";\n    else if (shirt == Color::blue)\n        std::cout &lt;&lt; \"The shirt is blue!\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint main()\n{\n    enum třída Barva\n    {\n        červená,\n        modrá,\n    };\n\n    Barva košile { Barva::červená };\n\n    if (tričko == Barva::červená) // toto srovnání barvy s barvou je v pořádku\n        std::cout << \"Košile je červená!\\n\";\n    else if (tričko == Barva::modrá)\n        std::cout << \"Košile je modrá!\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b23",
       "type": "paragraph",
       "html": "<p>There are occasionally cases where it is useful to be able to treat a scoped enumerator as an integral value. In these cases, you can explicitly convert a scoped enumerator to an integer by using a <code>static_cast</code>. A better choice in C++23 is to use <code>std::to_underlying()</code> (defined in the &lt;utility&gt; header), which converts an enumerator to a value of the underlying type of the enumeration.</p>",
       "preview": "There are occasionally cases where it is useful to be able to treat a scoped enu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Občas nastanou případy, kdy je užitečné moci pracovat se scoped výčtovým prvkem jako s celočíselnou hodnotou. V těchto situacích můžete scoped prvek explicitně převést na celé číslo pomocí <code>static_cast</code>. Lepší volbou v C++23 je použít <code>std::to_underlying()</code> (definované v hlavičkovém souboru &lt;utility&gt;), což převede výčtový prvek na hodnotu podkladového typu daného výčtu.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b24",
@@ -188,14 +215,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <utility> // for std::to_underlying() (C++23)\n\nint main()\n{\n    enum class Color\n    {\n        red,\n        blue,\n    };\n\n    Color color { Color::blue };\n\n    std::cout << color << '\\n'; // won't work, because there's no implicit conversion to int\n    std::cout << static_cast<int>(color) << '\\n';   // explicit conversion to int, will print 1\n    std::cout << std::to_underlying(color) << '\\n'; // convert to underlying type, will print 1 (C++23)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;utility&gt; // for std::to_underlying() (C++23)\n\nint main()\n{\n    enum class Color\n    {\n        red,\n        blue,\n    };\n\n    Color color { Color::blue };\n\n    std::cout &lt;&lt; color &lt;&lt; '\\n'; // won't work, because there's no implicit conversion to int\n    std::cout &lt;&lt; static_cast&lt;int&gt;(color) &lt;&lt; '\\n';   // explicit conversion to int, will print 1\n    std::cout &lt;&lt; std::to_underlying(color) &lt;&lt; '\\n'; // convert to underlying type, will print 1 (C++23)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <utility> // pro std::to_underlying() (C++23)\n\nint main()\n{\n    enum třída Barva\n    {\n        červená,\n        modrá,\n    };\n\n    Barva barva { Barva::modrá };\n\n    std::cout << barva << '\\n'; // nebude fungovat, protože nedochází k žádné implicitní konverzi na int\n    std::cout << static_cast<int>(barva) << '\\n';   // explicitní převod na int, vypíše 1\n    std::cout << std::to_underlying(color) << '\\n'; // převést na základní typ, vypíše 1 (C++23)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b25",
       "type": "paragraph",
       "html": "<p>Conversely, you can also <code>static_cast</code> an integer to a scoped enumerator, which can be useful when doing input from users:</p>",
       "preview": "Conversely, you can also static_cast an integer to a scoped enumerator, which ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obráceně můžete také provést <code>static_cast</code> celého čísla na scoped výčtový prvek, což se může hodit při zpracování vstupu od uživatelů:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b26",
@@ -203,14 +232,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    enum class Pet\n    {\n        cat, // assigned 0\n        dog, // assigned 1\n        pig, // assigned 2\n        whale, // assigned 3\n    };\n\n    std::cout << \"Enter a pet (0=cat, 1=dog, 2=pig, 3=whale): \";\n\n    int input{};\n    std::cin >> input; // input an integer\n\n    Pet pet{ static_cast<Pet>(input) }; // static_cast our integer to a Pet\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    enum class Pet\n    {\n        cat, // assigned 0\n        dog, // assigned 1\n        pig, // assigned 2\n        whale, // assigned 3\n    };\n\n    std::cout &lt;&lt; \"Enter a pet (0=cat, 1=dog, 2=pig, 3=whale): \";\n\n    int input{};\n    std::cin &gt;&gt; input; // input an integer\n\n    Pet pet{ static_cast&lt;Pet&gt;(input) }; // static_cast our integer to a Pet\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    enum class Pet\n    {\n        kočka, // přiřazeno 0\n        pes, // přiřazeno 1\n        prase, // přiřazeno 2\n        velryba, // přiřazeno 3\n    };\n\n    std::cout << \"Zadejte domácího mazlíčka (0=kočka, 1=pes, 2=prase, 3=velryba): \";\n\n    vstup int{};\n    std::cin >> vstup; // zadejte celé číslo\n\n    Domácí mazlíček{ static_cast<Mazlík>(vstup) }; // static_cast naše celé číslo na mazlíčka\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b27",
       "type": "paragraph",
       "html": "<p>As of C++17, you can list initialize a scoped enumeration using an integral value without the static_cast (and unlike an unscoped enumeration, you don’t need to specify a base):</p>",
       "preview": "As of C++17, you can list initialize a scoped enumeration using an integral valu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Od C++17 můžete scoped výčet inicializovat pomocí seznamu (list initialization) s celočíselnou hodnotou bez static_cast (a na rozdíl od neoborového výčtu nemusíte specifikovat podkladový typ):</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b28",
@@ -218,7 +249,8 @@
       "language": "cpp",
       "code": "   // using enum class Pet from prior example\n   Pet pet { 1 }; // okay",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">   // using enum class Pet from prior example\n   Pet pet { 1 }; // okay</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> // pomocí třídy enum Pet z předchozího příkladu\n   Domácí mazlíček { 1 }; // dobře</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b29",
@@ -226,35 +258,41 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Favor scoped enumerations over unscoped enumerations unless there’s a compelling reason to do otherwise.</p></div>",
       "preview": "Best practiceFavor scoped enumerations over unscoped enumerations unless there’s a compelling reason",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost scoped výčtům před neoborovými výčty, pokud nemáte pádný důvod postupovat jinak.</p></div>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b30",
       "type": "paragraph",
       "html": "<p>Despite the benefits that scoped enumerations offer, unscoped enumerations are still commonly used in C++ because there are situations where we desire the implicit conversion to int (doing lots of static_casting gets annoying) and we don’t need the extra namespacing.</p>",
       "preview": "Despite the benefits that scoped enumerations offer, unscoped enumerations are s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Navzdory výhodám, které scoped výčty nabízejí, se neoborové výčty v C++ stále běžně používají, protože existují situace, kdy je implicitní převod na int žádoucí (neustálé psaní static_cast začne být otravné) a nepotřebujeme dodatečné vymezení jmenného prostoru.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b31",
       "type": "section",
       "title": "Easing the conversion of scoped enumerators to integers (advanced)",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"operatorplus\"></a>Easing the conversion of scoped enumerators to integers (advanced) <a href=\"#operatorplus\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"operatorplus\"></a>Usnadnění převodu scoped enumerátorů na celá čísla (pokročilé) <a href=\"#operatorplus\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "Usnadnění převodu rozsahových enumerátorů na celá čísla (pokročilé)"
     },
     {
       "id": "scoped-enumerations-enum-classes_b32",
       "type": "paragraph",
       "html": "<p>Scoped enumerations are great, but the lack of implicit conversion to integers can sometimes be a pain point. If we need to convert a scoped enumeration to integers often (e.g. cases where we want to use scoped enumerators as array indices), having to use static_cast every time we want a conversion can clutter our code significantly.</p>",
       "preview": "Scoped enumerations are great, but the lack of implicit conversion to integers c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Scoped výčtové typy jsou skvělé, ale absence implicitní konverze na celá čísla může být někdy nepříjemná. Pokud potřebujeme převádět scoped výčet na celá čísla často (např. v případech, kdy chceme použít scoped enumerátory jako indexy pole), nutnost použít static_cast při každé konverzi může náš kód značně znepřehlednit.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b33",
       "type": "paragraph",
       "html": "<p>If you find yourself in the situation where it would be useful to make conversion of scoped enumerators to integers easier, a useful hack is to overload the unary <code>operator+</code> to perform this conversion:</p>",
       "preview": "If you find yourself in the situation where it would be useful to make conversio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud se ocitnete v situaci, kdy by se hodilo usnadnit převod scoped enumerátorů na celá čísla, užitečným trikem je přetížit unární <code>operator+</code>, který tuto konverzi provede:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b34",
@@ -262,49 +300,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <type_traits> // for std::underlying_type_t\n\nenum class Animals\n{\n    chicken, // 0\n    dog, // 1\n    cat, // 2\n    elephant, // 3\n    duck, // 4\n    snake, // 5\n\n    maxAnimals,\n};\n\n// Overload the unary + operator to convert an enum to the underlying type\n// adapted from https://stackoverflow.com/a/42198760, thanks to Pixelchemist for the idea\n// In C++23, you can #include <utility> and return std::to_underlying(a) instead\ntemplate <typename T>\nconstexpr auto operator+(T a) noexcept\n{\n    return static_cast<std::underlying_type_t<T>>(a);\n}\n\nint main()\n{\n    std::cout << +Animals::elephant << '\\n'; // convert Animals::elephant to an integer using unary operator+\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;type_traits&gt; // for std::underlying_type_t\n\nenum class Animals\n{\n    chicken, // 0\n    dog, // 1\n    cat, // 2\n    elephant, // 3\n    duck, // 4\n    snake, // 5\n\n    maxAnimals,\n};\n\n// Overload the unary + operator to convert an enum to the underlying type\n// adapted from https://stackoverflow.com/a/42198760, thanks to Pixelchemist for the idea\n// In C++23, you can #include &lt;utility&gt; and return std::to_underlying(a) instead\ntemplate &lt;typename T&gt;\nconstexpr auto operator+(T a) noexcept\n{\n    return static_cast&lt;std::underlying_type_t&lt;T&gt;&gt;(a);\n}\n\nint main()\n{\n    std::cout &lt;&lt; +Animals::elephant &lt;&lt; '\\n'; // convert Animals::elephant to an integer using unary operator+\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <type_traits> // pro std::underlying_type_t\n\nenum třída Zvířata\n{\n    kuře, // 0\n    pes, // 1\n    kočka, // 2\n    slon, // 3\n    kachna, // 4\n    had, // 5\n\n    maxAnimals,\n};\n\n// Přetížení unárního operátoru + pro převod výčtu na základní typ\n// upraveno z https://stackoverflow.com/a/42198760, díky Pixelchemist za nápad\n// V C++23 můžete #include <utility> a místo toho vrátit std::to_underlying(a)\nšablona <název typu T>\nconstexpr auto operator+(T a) novyj\n{\n    return static_cast<std::underlying_type_t<T>>(a);\n}\n\nint main()\n{\n    std::cout << +Zvířata::slon << '\\n'; // převod Animals::elephant na celé číslo pomocí unárního operátoru+\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b35",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto vypíše:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b36",
       "type": "output",
       "text": "3\n",
       "html": "<pre>3\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>3\n</pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b37",
       "type": "paragraph",
       "html": "<p>This method prevents unintended implicit conversions to an integral type, but provides a convenient way to explicitly request such conversions as needed.</p>",
       "preview": "This method prevents unintended implicit conversions to an integral type, but pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato metoda zabraňuje neúmyslným implicitním konverzím na celočíselný typ, ale poskytuje pohodlný způsob, jak si takové konverze v případě potřeby explicitně vyžádat.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b38",
       "type": "section",
       "title": "using enum statements C++20",
       "html": "<h3 class=\"cpp-section-heading\"><code>using enum</code> statements <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Příkazy <code>using enum</code> <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
+      "title_cs": "pomocí výčtových příkazů C++20"
     },
     {
       "id": "scoped-enumerations-enum-classes_b39",
       "type": "paragraph",
       "html": "<p>Introduced in C++20, a <code>using enum</code> statement imports all of the enumerators from an enum into the current scope. When used with an enum class type, this allows us to access the enum class enumerators without having to prefix each with the name of the enum class.</p>",
       "preview": "Introduced in C++20, a using enum statement imports all of the enumerators from ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příkaz <code>using enum</code>, představený v C++20, importuje všechny enumerátory z výčtového typu do aktuálního oboru platnosti. Při použití s typem enum class nám to umožňuje přistupovat k enumerátorům dané enum class bez nutnosti uvádět před každým z nich název této enum class jako prefix.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b40",
       "type": "paragraph",
       "html": "<p>This can be useful in cases where we would otherwise have many identical, repeated prefixes, such as within a switch statement:</p>",
       "preview": "This can be useful in cases where we would otherwise have many identical, repeat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To může být užitečné v případech, kdy bychom jinak měli mnoho stejných, opakujících se prefixů, například uvnitř příkazu switch:</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b41",
@@ -312,28 +358,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n\nenum class Color\n{\n    black,\n    red,\n    blue,\n};\n\nconstexpr std::string_view getColor(Color color)\n{\n    using enum Color; // bring all Color enumerators into current scope (C++20)\n    // We can now access the enumerators of Color without using a Color:: prefix\n\n    switch (color)\n    {\n    case black: return \"black\"; // note: black instead of Color::black\n    case red:   return \"red\";\n    case blue:  return \"blue\";\n    default:    return \"???\";\n    }\n}\n\nint main()\n{\n    Color shirt{ Color::blue };\n\n    std::cout << \"Your shirt is \" << getColor(shirt) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nenum class Color\n{\n    black,\n    red,\n    blue,\n};\n\nconstexpr std::string_view getColor(Color color)\n{\n    using enum Color; // bring all Color enumerators into current scope (C++20)\n    // We can now access the enumerators of Color without using a Color:: prefix\n\n    switch (color)\n    {\n    case black: return \"black\"; // note: black instead of Color::black\n    case red:   return \"red\";\n    case blue:  return \"blue\";\n    default:    return \"???\";\n    }\n}\n\nint main()\n{\n    Color shirt{ Color::blue };\n\n    std::cout &lt;&lt; \"Your shirt is \" &lt;&lt; getColor(shirt) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n\nenum třída Barva\n{\n    černá,\n    červená,\n    modrá,\n};\n\nconstexpr std::string_view getColor(barva barvy)\n{\n    pomocí enum Color; // převedení všech barevných enumerátorů do aktuálního rozsahu (C++20)\n    // Nyní máme přístup k enumerátorům Color bez použití předpony Color::\n\n    vypínač (barva)\n    {\n    pouzdro černé: návrat \"černý\"; // poznámka: černá místo Barva::černá\n    případ červená: návrat \"červená\";\n    případ modrý: návrat \"modrý\";\n    výchozí: return \"???\";\n    }\n}\n\nint main()\n{\n    Barva košile{ Barva::modrá };\n\n    std::cout << \"Vaše košile je \" << getColor(tričko) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b42",
       "type": "paragraph",
       "html": "<p>In the above example, <code>Color</code> is an enum class, so we normally would access the enumerators using a fully qualified name (e.g. <code>Color::blue</code>). However, within function <code>getColor()</code>, we’ve added the statement <code>using enum Color;</code>, which allows us to access those enumerators without the <code>Color::</code> prefix.</p>",
       "preview": "In the above example, Color is an enum class, so we normally would access the en",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu je <code>Color</code> enum class, takže bychom k enumerátorům běžně přistupovali pomocí plně kvalifikovaného názvu (např. <code>Color::blue</code>). Uvnitř funkce <code>getColor()</code> jsme však přidali příkaz <code>using enum Color;</code>, který nám umožňuje přistupovat k těmto enumerátorům bez prefixu <code>Color::</code>.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b43",
       "type": "paragraph",
       "html": "<p>This saves us from having multiple, redundant, obvious prefixes inside the switch statement.</p>",
       "preview": "This saves us from having multiple, redundant, obvious prefixes inside the switc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nám ušetří psaní mnoha redundantních a zřejmých prefixů uvnitř příkazu switch.</p>"
     },
     {
       "id": "scoped-enumerations-enum-classes_b44",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "scoped-enumerations-enum-classes_b45",
@@ -349,7 +400,9 @@
       "type": "output",
       "text": "A cat has 4 legs.\nA chicken has 2 legs.\n",
       "html": "<pre>A cat has 4 legs.\nA chicken has 2 legs.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>A cat has 4 legs.\nA chicken has 2 legs.\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "13.6 — Výčtové typy s oborem platnosti (enum classes)"
 }

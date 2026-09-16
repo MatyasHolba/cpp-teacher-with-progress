@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/public-and-private-members-and-access-specifiers/\">14.5 -- Public and private members and access specifiers</a>, we discussed the public and private access levels. As a reminder, classes typically make their data members private, and private members can not be directly accessed by the public.</p>",
       "preview": "In previous lesson 14.5 -- Public and private members and access specifiers, we ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/public-and-private-members-and-access-specifiers/\">14.5 -- Veřejné a privátní členy a specifikátory přístupu</a> jsme probírali úrovně přístupu public a private. Pro připomenutí: třídy obvykle mívají své datové členy privátní a k privátním členům nelze přímo přistupovat z veřejné části kódu (public).</p>"
     },
     {
       "id": "access-functions_b1",
       "type": "paragraph",
       "html": "<p>Consider the following <code>Date</code> class:</p>",
       "preview": "Consider the following Date class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující třídu <code>Date</code>:</p>"
     },
     {
       "id": "access-functions_b2",
@@ -29,42 +31,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Date\n{\nprivate:\n    int m_year{ 2020 };\n    int m_month{ 10 };\n    int m_day{ 14 };\n\npublic:\n    void print() const\n    {\n        std::cout << m_year << '/' << m_month << '/' << m_day << '\\n';\n    }\n};\n\nint main()\n{\n    Date d{};  // create a Date object\n    d.print(); // print the date\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Date\n{\nprivate:\n    int m_year{ 2020 };\n    int m_month{ 10 };\n    int m_day{ 14 };\n\npublic:\n    void print() const\n    {\n        std::cout &lt;&lt; m_year &lt;&lt; '/' &lt;&lt; m_month &lt;&lt; '/' &lt;&lt; m_day &lt;&lt; '\\n';\n    }\n};\n\nint main()\n{\n    Date d{};  // create a Date object\n    d.print(); // print the date\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Datum\n{\nsoukromé:\n    int m_rok{ 2020 };\n    int m_měsíc{ 10 };\n    int m_den{ 14 };\n\nveřejnost:\n    void print() konst\n    {\n        std::cout << m_rok << '/' << m_měsíc << '/' << m_den << '\\n';\n    }\n};\n\nint main()\n{\n    Datum d{};  // vytvoření objektu Date\n    d.print(); // vytiskne datum\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "access-functions_b3",
       "type": "paragraph",
       "html": "<p>While this class provides a <code>print()</code> member function to print the entire date, this may not be sufficient for what the user wants to do. For example, what if the user of a <code>Date</code> object wanted to get the year? Or to change the year to a different value? They would be unable to do so, as <code>m_year</code> is private (and thus can’t be directly accessed by the public).</p>",
       "preview": "While this class provides a print() member function to print the entire date, th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli tato třída poskytuje členskou funkci <code>print()</code> pro výpis celého data, nemusí to stačit pro vše, co uživatel potřebuje udělat. Co když chce uživatel objektu <code>Date</code> například získat rok? Nebo změnit rok na jinou hodnotu? To by nebylo možné, protože <code>m_year</code> je private (a tudíž k němu nelze přímo veřejně přistupovat).</p>"
     },
     {
       "id": "access-functions_b4",
       "type": "paragraph",
       "html": "<p>For some classes, it can be appropriate (in the context of what the class does) for us to be able to get or set the value of a private member variable.</p>",
       "preview": "For some classes, it can be appropriate (in the context of what the class does) ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U některých tříd může být vhodné (v kontextu toho, co třída dělá), abychom měli možnost získat nebo nastavit hodnotu privátní členské proměnné.</p>"
     },
     {
       "id": "access-functions_b5",
       "type": "section",
       "title": "Access functions",
       "html": "<h3 class=\"cpp-section-heading\">Access functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přístupové funkce</h3>",
+      "title_cs": "Přístupové funkce"
     },
     {
       "id": "access-functions_b6",
       "type": "paragraph",
       "html": "<p>An <strong>access function</strong> is a trivial public member function whose job is to retrieve or change the value of a private member variable.</p>",
       "preview": "An access function is a trivial public member function whose job is to retrieve ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přístupová funkce</strong> (access function) je triviální veřejná členská funkce, jejímž úkolem je získat nebo změnit hodnotu privátní členské proměnné.</p>"
     },
     {
       "id": "access-functions_b7",
       "type": "paragraph",
       "html": "<p>Access functions come in two flavors: getters and setters. <strong>Getters</strong> (also sometimes called <strong>accessors</strong>) are public member functions that return the value of a private member variable. <strong>Setters</strong> (also sometimes called <strong>mutators</strong>) are public member functions that set the value of a private member variable.</p>",
       "preview": "Access functions come in two flavors: getters and setters. Getters (also sometim",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přístupové funkce existují ve dvou variantách: gettery a settery. <strong>Gettery</strong> (někdy nazývané také <strong>accessory</strong>) jsou veřejné členské funkce, které vrací hodnotu privátní členské proměnné. <strong>Settery</strong> (někdy nazývané také <strong>mutátory</strong>) jsou veřejné členské funkce, které nastavují hodnotu privátní členské proměnné.</p>"
     },
     {
       "id": "access-functions_b8",
@@ -72,21 +81,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>The term “mutator” is often used interchangably with “setter”. But more broadly, a <strong>mutator</strong> is any member function that modifies (mutates) the state of the object. Under this definition, a setter is a specific kind of mutator. However, it is also possible to have non-setter functions that qualify as mutators.</p></div>",
       "preview": "NomenclatureThe term “mutator” is often used interchangably with “setter”. But more broadly, a mutat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Pojem „mutátor“ se často používá zaměnitelně se slovem „setter“. V širším smyslu je však <strong>mutátor</strong> jakákoli členská funkce, která modifikuje (mění) stav objektu. Podle této definice je setter specifickým druhem mutátoru. Je však také možné mít funkce, které nejsou settery, ale přesto se kvalifikují jako mutátory.</p></div>"
     },
     {
       "id": "access-functions_b9",
       "type": "paragraph",
       "html": "<p>Getters are usually made const, so they can be called on both const and non-const objects. Setters should be non-const, so they can modify the data members.</p>",
       "preview": "Getters are usually made const, so they can be called on both const and non-cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Gettery se obvykle označují jako const, aby je bylo možné volat jak na const, tak na non-const objektech. Settery by měly být non-const, aby mohly modifikovat datové členy.</p>"
     },
     {
       "id": "access-functions_b10",
       "type": "paragraph",
       "html": "<p>For illustrative purposes, let’s update our <code>Date</code> class to have a full set of getters and setters:</p>",
       "preview": "For illustrative purposes, let’s update our Date class to have a full set of get",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro ilustraci aktualizujme naši třídu <code>Date</code> tak, aby měla kompletní sadu getterů a setterů:</p>"
     },
     {
       "id": "access-functions_b11",
@@ -94,42 +106,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Date\n{\nprivate:\n    int m_year { 2020 };\n    int m_month { 10 };\n    int m_day { 14 };\n\npublic:\n    void print()\n    {\n        std::cout << m_year << '/' << m_month << '/' << m_day << '\\n';\n    }\n\n    int getYear() const { return m_year; }        // getter for year\n    void setYear(int year) { m_year = year; }     // setter for year\n\n    int getMonth() const  { return m_month; }     // getter for month\n    void setMonth(int month) { m_month = month; } // setter for month\n\n    int getDay() const { return m_day; }          // getter for day\n    void setDay(int day) { m_day = day; }         // setter for day\n};\n\nint main()\n{\n    Date d{};\n    d.setYear(2021);\n    std::cout << \"The year is: \" << d.getYear() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Date\n{\nprivate:\n    int m_year { 2020 };\n    int m_month { 10 };\n    int m_day { 14 };\n\npublic:\n    void print()\n    {\n        std::cout &lt;&lt; m_year &lt;&lt; '/' &lt;&lt; m_month &lt;&lt; '/' &lt;&lt; m_day &lt;&lt; '\\n';\n    }\n\n    int getYear() const { return m_year; }        // getter for year\n    void setYear(int year) { m_year = year; }     // setter for year\n\n    int getMonth() const  { return m_month; }     // getter for month\n    void setMonth(int month) { m_month = month; } // setter for month\n\n    int getDay() const { return m_day; }          // getter for day\n    void setDay(int day) { m_day = day; }         // setter for day\n};\n\nint main()\n{\n    Date d{};\n    d.setYear(2021);\n    std::cout &lt;&lt; \"The year is: \" &lt;&lt; d.getYear() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Datum\n{\nsoukromé:\n    int m_rok { 2020 };\n    int m_měsíc { 10 };\n    int m_den { 14 };\n\nveřejnost:\n    void print()\n    {\n        std::cout << m_rok << '/' << m_měsíc << '/' << m_den << '\\n';\n    }\n\n    int getYear() const { return m_year; } // getter pro rok\n    void setYear(int year) { m_year = rok; } // setter pro rok\n\n    int getMonth() const { return m_měsíc; } // getter za měsíc\n    void setMonth(int month) { m_měsíc = měsíc; } // setter pro měsíc\n\n    int getDay() const { return m_day; } // getter pro den\n    void setDay(int day) { m_day = den; } // setter pro den\n};\n\nint main()\n{\n    Datum d{};\n    d.setYear(2021);\n    std::cout << \"Rok je: \" << d.getYear() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "access-functions_b12",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "access-functions_b13",
       "type": "output",
       "text": "The year is: 2021\n",
       "html": "<pre>The year is: 2021\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The year is: 2021\n</pre>"
     },
     {
       "id": "access-functions_b14",
       "type": "section",
       "title": "Access function naming",
       "html": "<h3 class=\"cpp-section-heading\">Access function naming</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pojmenování přístupových funkcí</h3>",
+      "title_cs": "Přístup k pojmenování funkcí"
     },
     {
       "id": "access-functions_b15",
       "type": "paragraph",
       "html": "<p>There is no common convention for naming access functions. However, there are a few naming conventions that are more popular than others.</p>",
       "preview": "There is no common convention for naming access functions. However, there are a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Neexistuje žádná jednotná konvence pro pojmenování přístupových funkcí. Existuje však několik konvencí, které jsou populárnější než ostatní.</p>"
     },
     {
       "id": "access-functions_b16",
       "type": "list",
       "html": "<ul><li>Prefixed with “get” and “set”:</li></ul>",
       "preview": "Prefixed with “get” and “set”:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>S předponou „get“ a „set“:</li></ul>"
     },
     {
       "id": "access-functions_b17",
@@ -137,21 +156,24 @@
       "language": "cpp",
       "code": "    int getDay() const { return m_day; }  // getter\n    void setDay(int day) { m_day = day; } // setter",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int getDay() const { return m_day; }  // getter\n    void setDay(int day) { m_day = day; } // setter</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> int getDay() const { return m_day; } // getter\n    void setDay(int day) { m_day = den; } // setter</code></pre>"
     },
     {
       "id": "access-functions_b18",
       "type": "paragraph",
       "html": "<p>The advantage of using “get” and “set” prefixes is that it makes it clear that these are access functions (and should be inexpensive to call).</p>",
       "preview": "The advantage of using “get” and “set” prefixes is that it makes it clear that t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výhodou použití předpon „get“ a „set“ je, že je z nich jasné, že se jedná o přístupové funkce (a jejich volání by mělo být nenáročné).</p>"
     },
     {
       "id": "access-functions_b19",
       "type": "list",
       "html": "<ul><li>No prefix:</li></ul>",
       "preview": "No prefix:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Bez prefixu:</li></ul>"
     },
     {
       "id": "access-functions_b20",
@@ -159,21 +181,24 @@
       "language": "cpp",
       "code": "    int day() const { return m_day; }  // getter\n    void day(int day) { m_day = day; } // setter",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int day() const { return m_day; }  // getter\n    void day(int day) { m_day = day; } // setter</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> int den() const { return m_day; } // getter\n    void day(int day) { m_day = den; } // setter</code></pre>"
     },
     {
       "id": "access-functions_b21",
       "type": "paragraph",
       "html": "<p>This style is more concise, and uses the same name for both the getter and setter (relying on function overloading to differentiate the two). The C++ standard library uses this convention.</p>",
       "preview": "This style is more concise, and uses the same name for both the getter and sette",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento styl je stručnější a používá stejný název pro getter i setter (přičemž spoléhá na přetěžování funkcí, které je od sebe odliší). Standardní knihovna C++ používá právě tuto konvenci.</p>"
     },
     {
       "id": "access-functions_b22",
       "type": "paragraph",
       "html": "<p>The downside of the no-prefix convention is that it is not particularly obvious that this is setting the value of the day member:</p>",
       "preview": "The downside of the no-prefix convention is that it is not particularly obvious ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou konvence bez prefixu je, že není příliš zřejmé, že jde o nastavení hodnoty členské proměnné day:</p>"
     },
     {
       "id": "access-functions_b23",
@@ -181,7 +206,8 @@
       "language": "cpp",
       "code": "d.day(5); // does this look like it's setting the day member to 5?",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">d.day(5); // does this look like it's setting the day member to 5?</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">d.day(5); // vypadá to, že to nastavuje člen dne na 5?</code></pre>"
     },
     {
       "id": "access-functions_b24",
@@ -189,14 +215,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>One of the best reasons to prefix private data members with “m_” is to avoid having data members and getters with the same name (something C++ doesn’t support, although other languages like Java do).</p></div>",
       "preview": "Key insightOne of the best reasons to prefix private data members with “m_” is to avoid having data ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Jedním z nejlepších důvodů, proč u privátních členských proměnných používat prefix „m_“, je vyhnout se situaci, kdy mají členské proměnné a gettery stejný název (což C++ nepodporuje, ačkoliv jiné jazyky jako Java ano).</p></div>"
     },
     {
       "id": "access-functions_b25",
       "type": "list",
       "html": "<ul><li>“set” prefix only:</li></ul>",
       "preview": "“set” prefix only:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pouze prefix „set“:</li></ul>"
     },
     {
       "id": "access-functions_b26",
@@ -204,14 +232,16 @@
       "language": "cpp",
       "code": "    int day() const { return m_day; }     // getter\n    void setDay(int day) { m_day = day; } // setter",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int day() const { return m_day; }     // getter\n    void setDay(int day) { m_day = day; } // setter</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> int den() const { return m_day; } // getter\n    void setDay(int day) { m_day = den; } // setter</code></pre>"
     },
     {
       "id": "access-functions_b27",
       "type": "paragraph",
       "html": "<p>Which of the above you choose is a matter of personal preference. However, we highly recommend using the “set” prefix for setters. Getters can use either a “get” prefix or no prefix.</p>",
       "preview": "Which of the above you choose is a matter of personal preference. However, we hi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, kterou z výše uvedených možností zvolíte, je otázkou osobních preferencí. Velmi však doporučujeme používat pro settery prefix „set“. Gettery mohou používat buď prefix „get“, nebo být zcela bez prefixu.</p>"
     },
     {
       "id": "access-functions_b28",
@@ -219,70 +249,84 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Use a “set” prefix on your setters to make it more obvious that they are changing the state of the object.</p></div>",
       "preview": "TipUse a “set” prefix on your setters to make it more obvious that they are changing the state of th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Používejte u svých setterů prefix „set“, aby bylo zřetelnější, že mění stav objektu.</p></div>"
     },
     {
       "id": "access-functions_b29",
       "type": "section",
       "title": "Getters should return by value or by const lvalue reference",
       "html": "<h3 class=\"cpp-section-heading\">Getters should return by value or by const lvalue reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Gettery by měly vracet hodnotou nebo konstantní l-hodnotovou referencí</h3>",
+      "title_cs": "Gettry by se měly vracet podle hodnoty nebo podle reference const lvalue"
     },
     {
       "id": "access-functions_b30",
       "type": "paragraph",
       "html": "<p>Getters should provide “read-only” access to data. Therefore, the best practice is that they should return by either value (if making a copy of the member is inexpensive) or by const lvalue reference (if making a copy of the member is expensive).</p>",
       "preview": "Getters should provide “read-only” access to data. Therefore, the best practice ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Gettery by měly poskytovat přístup k datům „pouze pro čtení“. Osvědčeným postupem proto je, aby vracely buď hodnotou (pokud je vytvoření kopie člena nenáročné), nebo pomocí const l-hodnotové reference (pokud je vytvoření kopie člena nákladné).</p>"
     },
     {
       "id": "access-functions_b31",
       "type": "paragraph",
       "html": "<p>Because returning data members by reference is a non-trivial topic, we’ll cover that topic in more detail in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/member-functions-returning-references-to-data-members/\">14.7 -- Member functions returning references to data members</a>.</p>",
       "preview": "Because returning data members by reference is a non-trivial topic, we’ll cover ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože vracení datových členů referencí je netriviální téma, podrobněji se mu budeme věnovat v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/member-functions-returning-references-to-data-members/\">14.7 – Členské funkce vracející reference na datové členy</a>.</p>"
     },
     {
       "id": "access-functions_b32",
       "type": "section",
       "title": "Access functions concerns",
       "html": "<h3 class=\"cpp-section-heading\">Access functions concerns</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výhrady k přístupovým funkcím</h3>",
+      "title_cs": "Přístupové funkce se týkají"
     },
     {
       "id": "access-functions_b33",
       "type": "paragraph",
       "html": "<p>There is a fair bit of discussion around cases in which access functions should be used or avoided. Many developers would argue that use of access functions violates good class design (a topic that could easily fill an entire book).</p>",
       "preview": "There is a fair bit of discussion around cases in which access functions should ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kolem případů, kdy by se přístupové funkce měly používat a kdy naopak ne, se vede poměrně dost diskusí. Mnoho vývojářů by namítlo, že používání přístupových funkcí porušuje správný návrh tříd (což je téma, které by snadno vydalo na celou knihu).</p>"
     },
     {
       "id": "access-functions_b34",
       "type": "paragraph",
       "html": "<p>For now, we’ll recommend a pragmatic approach. As you create your classes, consider the following:</p>",
       "preview": "For now, we’ll recommend a pragmatic approach. As you create your classes, consi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prozatím doporučíme pragmatický přístup. Při vytváření svých tříd zvažte následující:</p>"
     },
     {
       "id": "access-functions_b35",
       "type": "list",
       "html": "<ul><li>If your class has no invariants and requires a lot of access functions, consider using a struct (whose data members are public) and providing direct access to members instead.</li><li>Prefer implementing behaviors or actions instead of access functions. For example, instead of a <code>setAlive(bool)</code> setter, implement a <code>kill()</code> and a <code>revive()</code> function.</li><li>Only provide access functions in cases where the public would reasonably need to get or set the value of an individual member.</li></ul>",
       "preview": "If your class has no invariants and requires a lot of access functions, consider",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pokud vaše třída nemá žádné invarianty a vyžaduje spoustu přístupových funkcí, zvažte místo toho použití struktury (<code>struct</code>, jejíž datové členy jsou veřejné) a poskytnutí přímého přístupu k členům.</li><li>Dávejte přednost implementaci chování nebo akcí před přístupovými funkcemi. Například místo setteru <code>setAlive(bool)</code> implementujte funkce <code>kill()</code> a <code>revive()</code>.</li><li>Přístupové funkce poskytujte pouze v případech, kdy je skutečně opodstatněné, aby vnější kód získával nebo nastavoval hodnotu jednotlivého člena.</li></ul>"
     },
     {
       "id": "access-functions_b36",
       "type": "section",
       "title": "Why make data private if we’re going to provide a public access function to it?",
       "html": "<h3 class=\"cpp-section-heading\">Why make data private if we’re going to provide a public access function to it?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proč dělat data private, když k nim stejně poskytneme veřejnou přístupovou funkci?</h3>",
+      "title_cs": "Proč dělat data soukromá, když k nim budeme poskytovat funkci veřejného přístupu?"
     },
     {
       "id": "access-functions_b37",
       "type": "paragraph",
       "html": "<p>So glad you asked. We’ll answer this question in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/the-benefits-of-data-hiding-encapsulation/\">14.8 -- The benefits of data hiding (encapsulation)</a>.</p>",
       "preview": "So glad you asked. We’ll answer this question in upcoming lesson 14.8 -- The ben",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jsme rádi, že se ptáte. Tuto otázku zodpovíme v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/the-benefits-of-data-hiding-encapsulation/\">14.8 – Výhody skrývání dat (zapouzdření)</a>.</p>"
     }
-  ]
+  ],
+  "title_cs": "14.6 — Přístupové funkce"
 }

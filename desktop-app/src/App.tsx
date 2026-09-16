@@ -5,12 +5,16 @@ import { LessonView } from './components/LessonView';
 import { SettingsModal } from './components/SettingsModal';
 import { loadProgress, saveProgress, loadSettings, saveSettings } from './services/storage';
 import { useTimeTracker } from './hooks/useTimeTracker';
-import { Sparkles, Loader2, PanelLeft, PanelLeftClose } from 'lucide-react';
+import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages } from 'lucide-react';
 import { GithubIcon } from './components/GithubIcon';
+import { HighlightTranslator } from './components/HighlightTranslator';
+import { LanguageSettingsModal } from './components/LanguageSettingsModal';
+import { getT } from './utils/i18n';
 
 export function App() {
   const [progress, setProgress] = useState<UserProgress>(loadProgress);
   const [settings, setSettings] = useState<SyncSettings>(loadSettings);
+  const t = getT(settings.uiLanguage || 'cs');
   const activeTheme = settings.theme || "dark";
   const [toc, setToc] = useState<TOCData | null>(null);
   const [currentSlug, setCurrentSlug] = useState<string>('introduction-to-these-tutorials');
@@ -21,6 +25,7 @@ export function App() {
   
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isLanguageSettingsOpen, setIsLanguageSettingsOpen] = useState(false);
   // Load TOC on startup
   useEffect(() => {
     fetch('/content-bundle/toc.json')
@@ -208,6 +213,7 @@ export function App() {
           activeLessonSlug={currentSlug}
           onSelectLesson={slug => setCurrentSlug(slug)}
           onToggleSidebar={() => setIsSidebarOpen(false)}
+          uiLanguage={settings.uiLanguage || 'cs'}
         />
       )}
 
@@ -216,7 +222,7 @@ export function App() {
         {/* Top Navbar */}
         <div className="h-12 border-b border-[var(--border-color)] bg-[var(--bg-header)] px-6 flex items-center justify-between select-none flex-shrink-0">
           <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">
-            {!isSidebarOpen && <button onClick={() => setIsSidebarOpen(true)} className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors" title="Zobrazit panel"><PanelLeft className="w-5 h-5" /></button>}
+            {!isSidebarOpen && <button onClick={() => setIsSidebarOpen(true)} className="text-[var(--text-muted)] hover:text-[var(--text-main)] p-1 rounded hover:bg-[var(--bg-hover)] transition-colors" title={t('toggleSidebar')}><PanelLeft className="w-5 h-5" /></button>}
             <span className="text-[var(--text-main)] font-medium">C++ Study Book</span>
             <span>/</span>
             <span className="text-blue-400 font-mono">{currentLesson?.number || ''}</span>
@@ -232,20 +238,28 @@ export function App() {
                 }}
                 className="bg-transparent text-[var(--text-main)] border border-[var(--border-color)] rounded-md px-2 py-1 text-xs outline-none cursor-pointer hover:bg-[var(--bg-hover)]"
               >
-                <option value="light">☀️ Světlý</option>
-                <option value="dark">🌙 Tmavý</option>
-                <option value="oled">🖤 OLED Black</option>
-                <option value="sepia">☕ Sepia</option>
+                <option value="light">{t('themeLight')}</option>
+                <option value="dark">{t('themeDark')}</option>
+                <option value="oled">{t('themeOLED')}</option>
+                <option value="sepia">{t('themeSepia')}</option>
               </select>
+              
+              <button
+                onClick={() => setIsLanguageSettingsOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--bg-hover)] text-[var(--text-main)] border border-[var(--border-color)] text-xs font-medium transition-colors hover:bg-[var(--border-color)]"
+              >
+                <Languages className="w-3.5 h-3.5 text-blue-400" />
+                <span>{t('languageSettings')}</span>
+              </button>
 
               <button
                 onClick={() => setIsSettingsOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-800 hover:bg-[var(--bg-hover)] text-gray-200 border border-gray-700 text-xs font-medium transition-colors"
               >
                 <GithubIcon className="w-3.5 h-3.5 text-blue-400" />
-                <span>GitHub Sync</span>
+                <span>{t('githubSync')}</span>
                 {settings.lastSyncAt && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title="Synchronizováno" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title={settings.uiLanguage === 'en' ? 'Synchronized' : 'Synchronizováno'} />
                 )}
               </button>
             </div>
@@ -255,7 +269,7 @@ export function App() {
         {isLoadingLesson ? (
           <div className="flex-1 flex items-center justify-center text-[var(--text-muted)] text-sm gap-2">
             <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
-            <span>Načítání lekce...</span>
+            <span>{settings.uiLanguage === 'en' ? 'Loading lesson...' : 'Načítání lekce...'}</span>
           </div>
         ) : currentLesson ? (
             <LessonView
@@ -316,8 +330,17 @@ export function App() {
         onProgressUpdated={newProgress => setProgress(newProgress)}
       />
 
+      <LanguageSettingsModal
+        isOpen={isLanguageSettingsOpen}
+        settings={settings}
+        onClose={() => setIsLanguageSettingsOpen(false)}
+        onSaveSettings={handleSaveSettings}
+      />
+
       {/* Portfolio Widget Modal */}
       
+      {/* Global Highlight Translator */}
+      <HighlightTranslator uiLanguage={settings.uiLanguage || 'cs'} />
     </div>
   );
 }

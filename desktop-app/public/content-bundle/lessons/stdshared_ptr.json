@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>Unlike std::unique_ptr, which is designed to singly own and manage a resource, std::shared_ptr is meant to solve the case where you need multiple smart pointers co-owning a resource.</p>",
       "preview": "Unlike std::unique_ptr, which is designed to singly own and manage a resource, s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od std::unique_ptr, který je navržen k výhradnímu vlastnictví a správě prostředku, je std::shared_ptr určen k řešení případů, kdy potřebujete, aby daný prostředek spoluvlastnilo více inteligentních ukazatelů (smart pointerů).</p>"
     },
     {
       "id": "stdshared_ptr_b1",
       "type": "paragraph",
       "html": "<p>This means that it is fine to have multiple std::shared_ptr pointing to the same resource. Internally, std::shared_ptr keeps track of how many std::shared_ptr are sharing the resource. As long as at least one std::shared_ptr is pointing to the resource, the resource will not be deallocated, even if individual std::shared_ptr are destroyed. As soon as the last std::shared_ptr managing the resource goes out of scope (or is reassigned to point at something else), the resource will be deallocated.</p>",
       "preview": "This means that it is fine to have multiple std::shared_ptr pointing to the same",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že je zcela v pořádku mít více ukazatelů std::shared_ptr ukazujících na stejný prostředek. Vnitřně si std::shared_ptr udržuje přehled o tom, kolik instancí std::shared_ptr daný prostředek sdílí. Dokud alespoň jeden std::shared_ptr na prostředek ukazuje, prostředek nebude dealokován, a to ani v případě, že jsou jednotlivé std::shared_ptr zničeny. Jakmile poslední std::shared_ptr spravující daný prostředek opustí svůj rozsah platnosti (nebo je přenastaven tak, aby ukazoval na něco jiného), prostředek se dealokuje.</p>"
     },
     {
       "id": "stdshared_ptr_b2",
       "type": "paragraph",
       "html": "<p>Like std::unique_ptr, std::shared_ptr lives in the &lt;memory&gt; header.</p>",
       "preview": "Like std::unique_ptr, std::shared_ptr lives in the <memory> header.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako std::unique_ptr se i std::shared_ptr nachází v hlavičkovém souboru &lt;memory&gt;.</p>"
     },
     {
       "id": "stdshared_ptr_b3",
@@ -36,35 +39,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\t// allocate a Resource object and have it owned by std::shared_ptr\n\tResource* res { new Resource };\n\tstd::shared_ptr<Resource> ptr1{ res };\n\t{\n\t\tstd::shared_ptr<Resource> ptr2 { ptr1 }; // make another std::shared_ptr pointing to the same thing\n\n\t\tstd::cout << \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, but nothing happens\n\n\tstd::cout << \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\t// allocate a Resource object and have it owned by std::shared_ptr\n\tResource* res { new Resource };\n\tstd::shared_ptr&lt;Resource&gt; ptr1{ res };\n\t{\n\t\tstd::shared_ptr&lt;Resource&gt; ptr2 { ptr1 }; // make another std::shared_ptr pointing to the same thing\n\n\t\tstd::cout &lt;&lt; \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, but nothing happens\n\n\tstd::cout &lt;&lt; \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <paměť> // pro std::shared_ptr\n\ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\t// přidělí objekt Resource a nechá jej vlastnit std::shared_ptr\n\tZdroj* res { nový zdroj };\n\tstd::shared_ptr<Zdroj> ptr1{ res };\n\t{\n\t\tstd::shared_ptr<Zdroj> ptr2 { ptr1 }; // vytvoří další std::shared_ptr ukazující na stejnou věc\n\n\t\tstd::cout << \"Zabití jednoho sdíleného ukazatele\\n\";\n\t} // ptr2 zde přejde mimo rozsah, ale nic se nestane\n\n\tstd::cout << \"Zabíjení dalšího sdíleného ukazatele\\n\";\n\n\tnávrat 0;\n} // ptr1 zde přejde mimo rozsah a přidělený zdroj je zničen</code></pre>"
     },
     {
       "id": "stdshared_ptr_b4",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "stdshared_ptr_b5",
       "type": "output",
       "text": "Resource acquired\nKilling one shared pointer\nKilling another shared pointer\nResource destroyed\n",
       "html": "<pre>Resource acquired\nKilling one shared pointer\nKilling another shared pointer\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nKilling one shared pointer\nKilling another shared pointer\nResource destroyed\n</pre>"
     },
     {
       "id": "stdshared_ptr_b6",
       "type": "paragraph",
       "html": "<p>In the above code, we create a dynamic Resource object, and set a std::shared_ptr named ptr1 to manage it. Inside the nested block, we use the copy constructor to create a second std::shared_ptr (ptr2) that points to the same Resource. When ptr2 goes out of scope, the Resource is not deallocated, because ptr1 is still pointing at the Resource. When ptr1 goes out of scope, ptr1 notices there are no more std::shared_ptr managing the Resource, so it deallocates the Resource.</p>",
       "preview": "In the above code, we create a dynamic Resource object, and set a std::shared_pt",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném kódu vytvoříme dynamický objekt Resource a nastavíme std::shared_ptr s názvem ptr1, aby jej spravoval. Uvnitř vnořeného bloku použijeme kopírovací konstruktor k vytvoření druhého std::shared_ptr (ptr2), který ukazuje na stejný Resource. Když ptr2 opustí svůj rozsah platnosti, Resource dealokován není, protože ptr1 na něj stále ukazuje. Když rozsah platnosti opustí ptr1, zjistí, že již neexistují žádné další std::shared_ptr spravující Resource, a proto Resource dealokuje.</p>"
     },
     {
       "id": "stdshared_ptr_b7",
       "type": "paragraph",
       "html": "<p>Note that we created a second shared pointer from the first shared pointer. This is important. Consider the following similar program:</p>",
       "preview": "Note that we created a second shared pointer from the first shared pointer. This",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že jsme druhý sdílený ukazatel vytvořili z prvního sdíleného ukazatele. To je důležité. Uvažujme následující podobný program:</p>"
     },
     {
       "id": "stdshared_ptr_b8",
@@ -72,42 +80,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tResource* res { new Resource };\n\tstd::shared_ptr<Resource> ptr1 { res };\n\t{\n\t\tstd::shared_ptr<Resource> ptr2 { res }; // create ptr2 directly from res (instead of ptr1)\n\n\t\tstd::cout << \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, and the allocated Resource is destroyed\n\n\tstd::cout << \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed again",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tResource* res { new Resource };\n\tstd::shared_ptr&lt;Resource&gt; ptr1 { res };\n\t{\n\t\tstd::shared_ptr&lt;Resource&gt; ptr2 { res }; // create ptr2 directly from res (instead of ptr1)\n\n\t\tstd::cout &lt;&lt; \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, and the allocated Resource is destroyed\n\n\tstd::cout &lt;&lt; \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed again</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <paměť> // pro std::shared_ptr\n\ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\tZdroj* res { nový zdroj };\n\tstd::shared_ptr<Zdroj> ptr1 { res };\n\t{\n\t\tstd::shared_ptr<Zdroj> ptr2 { res }; // vytvořit ptr2 přímo z res (místo ptr1)\n\n\t\tstd::cout << \"Zabití jednoho sdíleného ukazatele\\n\";\n\t} // ptr2 zde přejde mimo rozsah a přidělený zdroj je zničen\n\n\tstd::cout << \"Zabíjení dalšího sdíleného ukazatele\\n\";\n\n\tnávrat 0;\n} // ptr1 zde přejde mimo rozsah a přidělený zdroj je znovu zničen</code></pre>"
     },
     {
       "id": "stdshared_ptr_b9",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "stdshared_ptr_b10",
       "type": "output",
       "text": "Resource acquired\nKilling one shared pointer\nResource destroyed\nKilling another shared pointer\nResource destroyed\n",
       "html": "<pre>Resource acquired\nKilling one shared pointer\nResource destroyed\nKilling another shared pointer\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nKilling one shared pointer\nResource destroyed\nKilling another shared pointer\nResource destroyed\n</pre>"
     },
     {
       "id": "stdshared_ptr_b11",
       "type": "paragraph",
       "html": "<p>and then crashes (at least on the author’s machine).</p>",
       "preview": "and then crashes (at least on the author’s machine).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a poté spadne (alespoň na autorově počítači).</p>"
     },
     {
       "id": "stdshared_ptr_b12",
       "type": "paragraph",
       "html": "<p>The difference here is that we created two std::shared_ptr independently from each other. As a consequence, even though they’re both pointing to the same Resource, they aren’t aware of each other. When ptr2 goes out of scope, it thinks it’s the only owner of the Resource, and deallocates it. When ptr1 later goes out of the scope, it thinks the same thing, and tries to delete the Resource again. Then bad things happen.</p>",
       "preview": "The difference here is that we created two std::shared_ptr independently from ea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Rozdíl je zde v tom, že jsme vytvořili dva <code>std::shared_ptr</code> nezávisle na sobě. V důsledku toho, ačkoli oba ukazují na stejný <code>Resource</code>, navzájem o sobě nevědí. Když <code>ptr2</code> opustí rozsah platnosti, myslí si, že je jediným vlastníkem <code>Resource</code>, a dealokuje jej. Když později opustí rozsah platnosti <code>ptr1</code>, myslí si totéž a pokusí se <code>Resource</code> smazat znovu. A pak nastanou problémy.</p>"
     },
     {
       "id": "stdshared_ptr_b13",
       "type": "paragraph",
       "html": "<p>Fortunately, this is easily avoided: if you need more than one std::shared_ptr to a given resource, copy an existing std::shared_ptr.</p>",
       "preview": "Fortunately, this is easily avoided: if you need more than one std::shared_ptr t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tomu se naštěstí lze snadno vyhnout: pokud potřebujete více než jeden <code>std::shared_ptr</code> pro daný prostředek, zkopírujte existující <code>std::shared_ptr</code>.</p>"
     },
     {
       "id": "stdshared_ptr_b14",
@@ -115,35 +129,41 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Always make a copy of an existing std::shared_ptr if you need more than one std::shared_ptr pointing to the same resource.</p></div>",
       "preview": "Best practiceAlways make a copy of an existing std::shared_ptr if you need more than one std::shared",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vždy vytvořte kopii existujícího <code>std::shared_ptr</code>, pokud potřebujete více než jeden <code>std::shared_ptr</code> ukazující na stejný prostředek.</p></div>"
     },
     {
       "id": "stdshared_ptr_b15",
       "type": "paragraph",
       "html": "<p>Just like with std::unique_ptr, std::shared_ptr can be a null pointer, so check to make sure it is valid before using it.</p>",
       "preview": "Just like with std::unique_ptr, std::shared_ptr can be a null pointer, so check ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u <code>std::unique_ptr</code> může být i <code>std::shared_ptr</code> nulovým ukazatelem (null pointer), takže se před jeho použitím ujistěte, že je platný.</p>"
     },
     {
       "id": "stdshared_ptr_b16",
       "type": "section",
       "title": "std::make_shared",
       "html": "<h3 class=\"cpp-section-heading\">std::make_shared</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::make_shared</h3>",
+      "title_cs": "std::make_shared"
     },
     {
       "id": "stdshared_ptr_b17",
       "type": "paragraph",
       "html": "<p>Much like std::make_unique() can be used to create a std::unique_ptr in C++14, std::make_shared() can (and should) be used to make a std::shared_ptr. std::make_shared() is available in C++11.</p>",
       "preview": "Much like std::make_unique() can be used to create a std::unique_ptr in C++14, s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako lze v C++14 použít <code>std::make_unique()</code> k vytvoření <code>std::unique_ptr</code>, lze (a mělo by se) použít <code>std::make_shared()</code> k vytvoření <code>std::shared_ptr</code>. <code>std::make_shared()</code> je k dispozici od C++11.</p>"
     },
     {
       "id": "stdshared_ptr_b18",
       "type": "paragraph",
       "html": "<p>Here’s our original example, using std::make_shared():</p>",
       "preview": "Here’s our original example, using std::make_shared():",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je náš původní příklad s použitím std::make_shared():</p>"
     },
     {
       "id": "stdshared_ptr_b19",
@@ -151,105 +171,126 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\t// allocate a Resource object and have it owned by std::shared_ptr\n\tauto ptr1 { std::make_shared<Resource>() };\n\t{\n\t\tauto ptr2 { ptr1 }; // create ptr2 using copy of ptr1\n\n\t\tstd::cout << \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, but nothing happens\n\n\tstd::cout << \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n\nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\t// allocate a Resource object and have it owned by std::shared_ptr\n\tauto ptr1 { std::make_shared&lt;Resource&gt;() };\n\t{\n\t\tauto ptr2 { ptr1 }; // create ptr2 using copy of ptr1\n\n\t\tstd::cout &lt;&lt; \"Killing one shared pointer\\n\";\n\t} // ptr2 goes out of scope here, but nothing happens\n\n\tstd::cout &lt;&lt; \"Killing another shared pointer\\n\";\n\n\treturn 0;\n} // ptr1 goes out of scope here, and the allocated Resource is destroyed</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <paměť> // pro std::shared_ptr\n\ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\t// přidělí objekt Resource a nechá jej vlastnit std::shared_ptr\n\tauto ptr1 { std::make_shared<Zdroj>() };\n\t{\n\t\tauto ptr2 { ptr1 }; // vytvořit ptr2 pomocí kopie ptr1\n\n\t\tstd::cout << \"Zabití jednoho sdíleného ukazatele\\n\";\n\t} // ptr2 zde přejde mimo rozsah, ale nic se nestane\n\n\tstd::cout << \"Zabíjení dalšího sdíleného ukazatele\\n\";\n\n\tnávrat 0;\n} // ptr1 zde přejde mimo rozsah a přidělený zdroj je zničen</code></pre>"
     },
     {
       "id": "stdshared_ptr_b20",
       "type": "paragraph",
       "html": "<p>The reasons for using std::make_shared() are the same as std::make_unique() -- std::make_shared() is simpler and safer (there’s no way to create two independent std::shared_ptr pointing to the same resource but unaware of each other using this method). However, std::make_shared() is also more performant than not using it. The reasons for this lie in the way that std::shared_ptr keeps track of how many pointers are pointing at a given resource.</p>",
       "preview": "The reasons for using std::make_shared() are the same as std::make_unique() -- s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Důvody pro použití std::make_shared() jsou stejné jako u std::make_unique() – std::make_shared() je jednodušší a bezpečnější (při použití této metody není možné vytvořit dva nezávislé std::shared_ptr ukazující na stejný prostředek, které by o sobě nevěděly). std::make_shared() je navíc také výkonnější. Důvody spočívají ve způsobu, jakým std::shared_ptr sleduje, kolik ukazatelů na daný prostředek ukazuje.</p>"
     },
     {
       "id": "stdshared_ptr_b21",
       "type": "section",
       "title": "Digging into std::shared_ptr",
       "html": "<h3 class=\"cpp-section-heading\">Digging into std::shared_ptr</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Podrobnější pohled na std::shared_ptr</h3>",
+      "title_cs": "Kopání do std::shared_ptr"
     },
     {
       "id": "stdshared_ptr_b22",
       "type": "paragraph",
       "html": "<p>Unlike std::unique_ptr, which uses a single pointer internally, std::shared_ptr uses two pointers internally. One pointer points at the resource being managed. The other points at a “control block”, which is a dynamically allocated object that tracks of a bunch of stuff, including how many std::shared_ptr are pointing at the resource. When a std::shared_ptr is created via a std::shared_ptr constructor, the memory for the managed object (which is usually passed in) and control block (which the constructor creates) are allocated separately. However, when using std::make_shared(), this can be optimized into a single memory allocation, which leads to better performance.</p>",
       "preview": "Unlike std::unique_ptr, which uses a single pointer internally, std::shared_ptr ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od std::unique_ptr, který vnitřně používá jediný ukazatel, std::shared_ptr vnitřně používá ukazatele dva. Jeden ukazatel ukazuje na spravovaný prostředek. Druhý ukazuje na „řídicí blok“ (control block), což je dynamicky alokovaný objekt, který sleduje celou řadu věcí, včetně toho, kolik std::shared_ptr na daný prostředek ukazuje. Když je std::shared_ptr vytvořen pomocí konstruktoru std::shared_ptr, paměť pro spravovaný objekt (který je obvykle předán) a řídicí blok (který konstruktor vytvoří) se alokují odděleně. Při použití std::make_shared() však lze toto optimalizovat do jediné alokace paměti, což vede k lepšímu výkonu.</p>"
     },
     {
       "id": "stdshared_ptr_b23",
       "type": "paragraph",
       "html": "<p>This also explains why independently creating two std::shared_ptr pointed to the same resource gets us into trouble. Each std::shared_ptr will have one pointer pointing at the resource. However, each std::shared_ptr will independently allocate its own control block, which will indicate that it is the only pointer owning that resource. Thus, when that std::shared_ptr goes out of scope, it will deallocate the resource, not realizing there are other std::shared_ptr also trying to manage that resource.</p>",
       "preview": "This also explains why independently creating two std::shared_ptr pointed to the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To také vysvětluje, proč nás nezávislé vytvoření dvou std::shared_ptr ukazujících na stejný prostředek dostane do problémů. Každý std::shared_ptr bude mít jeden ukazatel ukazující na prostředek. Každý std::shared_ptr si však nezávisle alokuje svůj vlastní řídicí blok, který bude indikovat, že je jediným ukazatelem vlastnícím daný prostředek. Když pak takový std::shared_ptr zanikne (opustí svůj rozsah platnosti), dealokuje daný prostředek, aniž by si uvědomil, že existují další std::shared_ptr, které se tento prostředek také pokoušejí spravovat.</p>"
     },
     {
       "id": "stdshared_ptr_b24",
       "type": "paragraph",
       "html": "<p>However, when a std::shared_ptr is cloned using copy assignment, the data in the control block can be appropriately updated to indicate that there are now additional std::shared_ptr co-managing the resource.</p>",
       "preview": "However, when a std::shared_ptr is cloned using copy assignment, the data in the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je však std::shared_ptr naklonován pomocí kopírovacího přiřazení, data v řídicím bloku se patřičně aktualizují, aby indikovala, že prostředek nyní spoluspravují další std::shared_ptr.</p>"
     },
     {
       "id": "stdshared_ptr_b25",
       "type": "section",
       "title": "Shared pointers can be created from unique pointers",
       "html": "<h3 class=\"cpp-section-heading\">Shared pointers can be created from unique pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Sdílené ukazatele lze vytvořit z unikátních ukazatelů</h3>",
+      "title_cs": "Sdílené ukazatele lze vytvořit z jedinečných ukazatelů"
     },
     {
       "id": "stdshared_ptr_b26",
       "type": "paragraph",
       "html": "<p>A std::unique_ptr can be converted into a std::shared_ptr via a special std::shared_ptr constructor that accepts a std::unique_ptr r-value. The contents of the std::unique_ptr will be moved to the std::shared_ptr.</p>",
       "preview": "A std::unique_ptr can be converted into a std::shared_ptr via a special std::sha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::unique_ptr lze převést na std::shared_ptr prostřednictvím speciálního konstruktoru std::shared_ptr, který přijímá r-value std::unique_ptr. Obsah std::unique_ptr bude přesunut (moved) do std::shared_ptr.</p>"
     },
     {
       "id": "stdshared_ptr_b27",
       "type": "paragraph",
       "html": "<p>However, std::shared_ptr can not be safely converted to a std::unique_ptr. This means that if you’re creating a function that is going to return a smart pointer, you’re better off returning a std::unique_ptr and assigning it to a std::shared_ptr if and when that’s appropriate.</p>",
       "preview": "However, std::shared_ptr can not be safely converted to a std::unique_ptr. This ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nicméně <code>std::shared_ptr</code> nelze bezpečně převést na <code>std::unique_ptr</code>. To znamená, že pokud vytváříte funkci, která má vracet chytrý ukazatel, je lepší vracet <code>std::unique_ptr</code> a přiřadit jej do <code>std::shared_ptr</code> pouze v případě, kdy je to vhodné.</p>"
     },
     {
       "id": "stdshared_ptr_b28",
       "type": "section",
       "title": "The perils of std::shared_ptr",
       "html": "<h3 class=\"cpp-section-heading\">The perils of std::shared_ptr</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Úskalí std::shared_ptr</h3>",
+      "title_cs": "Nebezpečí std::shared_ptr"
     },
     {
       "id": "stdshared_ptr_b29",
       "type": "paragraph",
       "html": "<p>std::shared_ptr has some of the same challenges as std::unique_ptr -- if the std::shared_ptr is not properly disposed of (either because it was dynamically allocated and never deleted, or it was part of an object that was dynamically allocated and never deleted) then the resource it is managing won’t be deallocated either. With std::unique_ptr, you only have to worry about one smart pointer being properly disposed of. With std::shared_ptr, you have to worry about them all. If any of the std::shared_ptr managing a resource are not properly destroyed, the resource will not be deallocated properly.</p>",
       "preview": "std::shared_ptr has some of the same challenges as std::unique_ptr -- if the std",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::shared_ptr</code> má některá stejná úskalí jako <code>std::unique_ptr</code> – pokud <code>std::shared_ptr</code> není řádně zlikvidován (buď proto, že byl dynamicky alokován a nikdy smazán, nebo byl součástí objektu, který byl dynamicky alokován a nikdy smazán), pak ani spravovaný prostředek nebude dealokován. U <code>std::unique_ptr</code> se musíte starat pouze o to, aby byl řádně zlikvidován jeden chytrý ukazatel. U <code>std::shared_ptr</code> se musíte starat o všechny. Pokud kterýkoli z <code>std::shared_ptr</code> spravujících daný prostředek není řádně zničen, prostředek nebude správně dealokován.</p>"
     },
     {
       "id": "stdshared_ptr_b30",
       "type": "section",
       "title": "std::shared_ptr and arrays",
       "html": "<h3 class=\"cpp-section-heading\">std::shared_ptr and arrays</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::shared_ptr a pole</h3>",
+      "title_cs": "std::shared_ptr a pole"
     },
     {
       "id": "stdshared_ptr_b31",
       "type": "paragraph",
       "html": "<p>In C++17 and earlier, std::shared_ptr does not have proper support for managing arrays, and should not be used to manage a C-style array. As of C++20, std::shared_ptr does have support for arrays.</p>",
       "preview": "In C++17 and earlier, std::shared_ptr does not have proper support for managing ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++17 a starších verzích nemá std::shared_ptr plnou podporu pro správu polí a neměl by se používat ke správě polí ve stylu C. Počínaje C++20 již std::shared_ptr podporu pro pole má.</p>"
     },
     {
       "id": "stdshared_ptr_b32",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "stdshared_ptr_b33",
       "type": "paragraph",
       "html": "<p>std::shared_ptr is designed for the case where you need multiple smart pointers co-managing the same resource. The resource will be deallocated when the last std::shared_ptr managing the resource is destroyed.</p>",
       "preview": "std::shared_ptr is designed for the case where you need multiple smart pointers ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::shared_ptr je navržen pro případ, kdy potřebujete, aby stejný prostředek společně spravovalo více chytrých ukazatelů. Prostředek bude dealokován ve chvíli, kdy je zničen poslední std::shared_ptr, který jej spravuje.</p>"
     }
-  ]
+  ],
+  "title_cs": "22.6 — std::shared_ptr"
 }

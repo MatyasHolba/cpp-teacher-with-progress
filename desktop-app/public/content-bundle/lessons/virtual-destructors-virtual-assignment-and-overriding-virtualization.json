@@ -14,14 +14,17 @@
       "type": "section",
       "title": "Virtual destructors",
       "html": "<h3 class=\"cpp-section-heading\">Virtual destructors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Virtuální destruktory</h3>",
+      "title_cs": "Virtuální destruktory"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b1",
       "type": "paragraph",
       "html": "<p>Although C++ provides a default destructor for your classes if you do not provide one yourself, it is sometimes the case that you will want to provide your own destructor (particularly if the class needs to deallocate memory). You should <em>always</em> make your destructors virtual if you’re dealing with inheritance. Consider the following example:</p>",
       "preview": "Although C++ provides a default destructor for your classes if you do not provid",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli C++ poskytuje pro vaše třídy výchozí destruktor, pokud neposkytnete vlastní, někdy nastane situace, kdy budete chtít definovat svůj vlastní destruktor (zejména pokud třída potřebuje dealokovat paměť). Pokud pracujete s dědičností, měli byste své destruktory <em>vždy</em> označit jako virtuální. Uvažujme následující příklad:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b2",
@@ -29,35 +32,40 @@
       "language": "cpp",
       "code": "#include <iostream>\nclass Base\n{\npublic:\n    ~Base() // note: not virtual\n    {\n        std::cout << \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    ~Derived() // note: not virtual (your compiler may warn you about this)\n    {\n        std::cout << \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    ~Base() // note: not virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    ~Derived() // note: not virtual (your compiler may warn you about this)\n    {\n        std::cout &lt;&lt; \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\ntřída Základní\n{\nveřejnost:\n    ~Base() // poznámka: není virtuální\n    {\n        std::cout << \"Volání ~Base()\\n\";\n    }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nsoukromé:\n    int* m_array {};\n\nveřejnost:\n    Odvozeno (int délka)\n      : m_array{ new int[length] }\n    {\n    }\n\n    ~Derived() // poznámka: není virtuální (váš kompilátor vás na to může upozornit)\n    {\n        std::cout << \"Volání ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Zaklad* zaklad { odvozeno };\n\n    odstranit základnu;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b3",
       "type": "paragraph",
       "html": "<p>Note: If you compile the above example, your compiler may warn you about the non-virtual destructor (which is intentional for this example). You may need to disable the compiler flag that treats warnings as errors to proceed.</p>",
       "preview": "Note: If you compile the above example, your compiler may warn you about the non",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Poznámka: Pokud výše uvedený příklad zkompilujete, váš kompilátor vás může varovat před nevirtuálním destruktorem (což je pro tento příklad záměr). Aby bylo možné pokračovat, možná budete muset zakázat příznak kompilátoru, který zachází s varováními jako s chybami.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b4",
       "type": "paragraph",
       "html": "<p>Because base is a Base pointer, when base is deleted, the program looks to see if the Base destructor is virtual. It’s not, so it assumes it only needs to call the Base destructor. We can see this in the fact that the above example prints:</p>",
       "preview": "Because base is a Base pointer, when base is deleted, the program looks to see i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože base je ukazatel na Base, když je base smazán pomocí delete, program zkontroluje, zda je destruktor Base virtuální. Není, takže předpokládá, že stačí zavolat pouze destruktor Base. To můžeme vidět na faktu, že výše uvedený příklad vypíše:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b5",
       "type": "output",
       "text": "Calling ~Base()\n",
       "html": "<pre>Calling ~Base()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Calling ~Base()\n</pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b6",
       "type": "paragraph",
       "html": "<p>However, we really want the delete function to call Derived’s destructor (which will call Base’s destructor in turn), otherwise m_array will not be deleted. We do this by making Base’s destructor virtual:</p>",
       "preview": "However, we really want the delete function to call Derived’s destructor (which ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>My však doopravdy chceme, aby operátor delete zavolal destruktor třídy Derived (který následně zavolá destruktor třídy Base), jinak nedojde ke smazání m_array. Toho docílíme tím, že destruktor třídy Base označíme jako virtuální:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b7",
@@ -65,21 +73,24 @@
       "language": "cpp",
       "code": "#include <iostream>\nclass Base\n{\npublic:\n    virtual ~Base() // note: virtual\n    {\n        std::cout << \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    virtual ~Derived() // note: virtual\n    {\n        std::cout << \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nclass Base\n{\npublic:\n    virtual ~Base() // note: virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Base()\\n\";\n    }\n};\n\nclass Derived: public Base\n{\nprivate:\n    int* m_array {};\n\npublic:\n    Derived(int length)\n      : m_array{ new int[length] }\n    {\n    }\n\n    virtual ~Derived() // note: virtual\n    {\n        std::cout &lt;&lt; \"Calling ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Base* base { derived };\n\n    delete base;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\ntřída Základní\n{\nveřejnost:\n    virtual ~Base() // poznámka: virtual\n    {\n        std::cout << \"Volání ~Base()\\n\";\n    }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nsoukromé:\n    int* m_array {};\n\nveřejnost:\n    Odvozeno (int délka)\n      : m_array{ new int[length] }\n    {\n    }\n\n    virtual ~Derived() // poznámka: virtual\n    {\n        std::cout << \"Volání ~Derived()\\n\";\n        delete[] m_array;\n    }\n};\n\nint main()\n{\n    Derived* derived { new Derived(5) };\n    Zaklad* zaklad { odvozeno };\n\n    odstranit základnu;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b8",
       "type": "paragraph",
       "html": "<p>Now this program produces the following result:</p>",
       "preview": "Now this program produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b9",
       "type": "output",
       "text": "Calling ~Derived()\nCalling ~Base()\n",
       "html": "<pre>Calling ~Derived()\nCalling ~Base()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Calling ~Derived()\nCalling ~Base()\n</pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b10",
@@ -87,21 +98,24 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Whenever you are dealing with inheritance, you should make any explicit destructors virtual.</p></div>",
       "preview": "RuleWhenever you are dealing with inheritance, you should make any explicit destructors virtual.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Kdykoli pracujete s dědičností, měli byste všechny explicitní destruktory označit jako virtuální.</p></div>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b11",
       "type": "paragraph",
       "html": "<p>As with normal virtual member functions, if a base class function is virtual, all derived overrides will be considered virtual regardless of whether they are specified as such. It is not necessary to create an empty derived class destructor just to mark it as virtual.</p>",
       "preview": "As with normal virtual member functions, if a base class function is virtual, al",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u běžných virtuálních členských funkcí platí, že pokud je funkce bázové třídy virtuální, budou všechny její přepsané verze (overrides) v odvozených třídách považovány za virtuální bez ohledu na to, zda jsou tak explicitně označeny. Není nutné vytvářet prázdný destruktor v odvozené třídě jen proto, abyste jej označili jako virtuální.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b12",
       "type": "paragraph",
       "html": "<p>Note that if you want your base class to have a virtual destructor that is otherwise empty, you can define your destructor this way:</p>",
       "preview": "Note that if you want your base class to have a virtual destructor that is other",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že pokud chcete, aby vaše bázová třída měla virtuální destruktor, který je jinak prázdný, můžete jej definovat takto:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b13",
@@ -109,35 +123,42 @@
       "language": "cpp",
       "code": "    virtual ~Base() = default; // generate a virtual default destructor",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    virtual ~Base() = default; // generate a virtual default destructor</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> virtuální ~Base() = výchozí; // vygenerování virtuálního výchozího destruktoru</code></pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b14",
       "type": "section",
       "title": "Virtual assignment",
       "html": "<h3 class=\"cpp-section-heading\">Virtual assignment</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Virtuální přiřazení</h3>",
+      "title_cs": "Virtuální zadání"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b15",
       "type": "paragraph",
       "html": "<p>It is possible to make the assignment operator virtual. However, unlike the destructor case where virtualization is always a good idea, virtualizing the assignment operator really opens up a bag full of worms and gets into some advanced topics outside of the scope of this tutorial. Consequently, we are going to recommend you leave your assignments non-virtual for now, in the interest of simplicity.</p>",
       "preview": "It is possible to make the assignment operator virtual. However, unlike the dest",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Operátor přiřazení je možné učinit virtuálním. Na rozdíl od případu s destruktorem, kde je virtualizace vždy dobrý nápad, však virtualizace operátoru přiřazení otevírá pověstnou Pandořinu skříňku a zabíhá do pokročilých témat, která jsou mimo rámec tohoto tutoriálu. V zájmu jednoduchosti vám proto prozatím doporučujeme ponechat přiřazení nevirtuální.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b16",
       "type": "section",
       "title": "Ignoring virtualization",
       "html": "<h3 class=\"cpp-section-heading\">Ignoring virtualization</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ignorování virtualizace</h3>",
+      "title_cs": "Ignorování virtualizace"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b17",
       "type": "paragraph",
       "html": "<p>Very rarely you may want to ignore the virtualization of a function. For example, consider the following code:</p>",
       "preview": "Very rarely you may want to ignore the virtualization of a function. For example",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve velmi vzácných případech můžete chtít virtualizaci funkce ignorovat. Zvažte například následující kód:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b18",
@@ -145,14 +166,16 @@
       "language": "cpp",
       "code": "#include <string_view>\nclass Base\n{\npublic:\n    virtual ~Base() = default;\n    virtual std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\nclass Base\n{\npublic:\n    virtual ~Base() = default;\n    virtual std::string_view getName() const { return \"Base\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    virtual std::string_view getName() const { return \"Derived\"; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string_view>\ntřída Základní\n{\nveřejnost:\n    virtual ~Base() = výchozí;\n    virtual std::string_view getName() const { return \"Základ\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    virtual std::string_view getName() const { return \"Odvozeno\"; }\n};</code></pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b19",
       "type": "paragraph",
       "html": "<p>There may be cases where you want a Base pointer to a Derived object to call Base::getName() instead of Derived::getName(). To do so, simply use the scope resolution operator:</p>",
       "preview": "There may be cases where you want a Base pointer to a Derived object to call Bas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mohou nastat případy, kdy budete chtít, aby ukazatel typu Base na objekt typu Derived volal Base::getName() místo Derived::getName(). Chcete-li tak učinit, jednoduše použijte operátor rozlišení oboru platnosti (scope resolution operator):</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b20",
@@ -160,91 +183,106 @@
       "language": "cpp",
       "code": "#include <iostream>\nint main()\n{\n    Derived derived {};\n    const Base& base { derived };\n\n    // Calls Base::getName() instead of the virtualized Derived::getName()\n    std::cout << base.Base::getName() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\nint main()\n{\n    Derived derived {};\n    const Base&amp; base { derived };\n\n    // Calls Base::getName() instead of the virtualized Derived::getName()\n    std::cout &lt;&lt; base.Base::getName() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\nint main()\n{\n    Odvozené odvozené {};\n    const Base& base { odvozeno };\n\n    // Volá Base::getName() místo virtualizovaného Derived::getName()\n    std::cout << base.Base::getName() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b21",
       "type": "paragraph",
       "html": "<p>You probably won’t use this very often, but it’s good to know it’s at least possible.</p>",
       "preview": "You probably won’t use this very often, but it’s good to know it’s at least poss",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pravděpodobně to nebudete používat příliš často, ale je dobré vědět, že je to alespoň možné.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b22",
       "type": "section",
       "title": "Should we make all destructors virtual?",
       "html": "<h3 class=\"cpp-section-heading\">Should we make all destructors virtual?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Měli bychom všechny destruktory označit jako virtuální?</h3>",
+      "title_cs": "Měli bychom všechny destruktory učinit virtuálními?"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b23",
       "type": "paragraph",
       "html": "<p>This is a common question asked by new programmers. As noted in the top example, if the base class destructor isn’t marked as virtual, then the program is at risk for leaking memory if a programmer later deletes a base class pointer that is pointing to a derived object. One way to avoid this is to mark all your destructors as virtual. But should you?</p>",
       "preview": "This is a common question asked by new programmers. As noted in the top example,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na tuto otázku se začínající programátoři ptají často. Jak bylo uvedeno ve výše uvedeném příkladu, pokud destruktor bázové třídy není označen jako virtuální, hrozí riziko úniku paměti, pokud programátor později smaže ukazatel na bázovou třídu, který ukazuje na odvozený objekt. Jedním ze způsobů, jak se tomu vyhnout, je označit všechny své destruktory jako virtuální. Ale měli byste to dělat?</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b24",
       "type": "paragraph",
       "html": "<p>It’s easy to say yes, so that way you can later use any class as a base class -- but there’s a performance penalty for doing so (a virtual pointer added to every instance of your class). So you have to balance that cost, as well as your intent.</p>",
       "preview": "It’s easy to say yes, so that way you can later use any class as a base class --",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je snadné odpovědět ano, abyste později mohli jakoukoli třídu použít jako bázovou – ale pojí se s tím výkonnostní penalizace (ke každé instanci vaší třídy přibude virtuální ukazatel). Musíte tedy tyto náklady zvážit s ohledem na svůj záměr.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b25",
       "type": "paragraph",
       "html": "<p>We’d suggest the following: If a class isn’t explicitly designed to be a base class, then it’s generally better to have no virtual members and no virtual destructor. The class can still be used via composition. If a class is designed to be used as a base class and/or has any virtual functions, then it should always have a virtual destructor.</p>",
       "preview": "We’d suggest the following: If a class isn’t explicitly designed to be a base cl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Doporučujeme následující: Pokud třída není výslovně navržena jako bázová třída, je obecně lepší nemít žádné virtuální členy ani virtuální destruktor. Třídu lze stále používat prostřednictvím kompozice. Pokud je třída navržena pro použití jako bázová třída a/nebo obsahuje jakékoli virtuální funkce, pak by měla mít virtuální destruktor vždy.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b26",
       "type": "paragraph",
       "html": "<p>If the decision is made to have a class not be inheritable, then the next question is whether it’s possible to enforce this.</p>",
       "preview": "If the decision is made to have a class not be inheritable, then the next questi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud padne rozhodnutí, že třída nemá být dědičná, další otázkou je, zda je možné to vynutit.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b27",
       "type": "paragraph",
       "html": "<p>Conventional wisdom (as initially put forth by Herb Sutter, a highly regarded C++ guru) has suggested avoiding the non-virtual destructor memory leak situation as follows, “A base class destructor should be either public and virtual, or protected and non-virtual.” A base class with a protected destructor can’t be deleted using a base class pointer, which prevents deleting a derived class object through a base class pointer.</p>",
       "preview": "Conventional wisdom (as initially put forth by Herb Sutter, a highly regarded C+",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně uznávané doporučení (původně formulované Herbem Sutterem, vysoce uznávaným C++ guru) navrhuje vyhnout se situaci s únikem paměti u nevirtuálního destruktoru následovně: „Destruktor bázové třídy by měl být buď public a virtuální, nebo protected a nevirtuální.“ Bázovou třídu s protected destruktorem nelze smazat pomocí ukazatele na bázovou třídu, což zabraňuje smazání objektu odvozené třídy skrze ukazatel na bázovou třídu.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b28",
       "type": "paragraph",
       "html": "<p>Unfortunately, this also prevents <em>any</em> use of the base class destructor by the public. That means:</p>",
       "preview": "Unfortunately, this also prevents any use of the base class destructor by the pu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bohužel to také brání <em>jakémukoli</em> veřejnému použití destruktoru bázové třídy. To znamená:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b29",
       "type": "list",
       "html": "<ul><li>We shouldn’t dynamically allocate base class objects by we have no conventional way to delete them (there are non-conventional workarounds, but yuck).</li><li>We can’t even statically allocate base class objects because the destructor isn’t accessible when they go out of scope.</li></ul>",
       "preview": "We shouldn’t dynamically allocate base class objects by we have no conventional ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Neměli bychom dynamicky alokovat objekty bázové třídy, protože nemáme žádný konvenční způsob, jak je smazat (existují sice nekonvenční obezličky, ale fuj).</li><li>Objekty bázové třídy nemůžeme dokonce ani alokovat staticky, protože destruktor není přístupný ve chvíli, kdy opustí rozsah platnosti.</li></ul>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b30",
       "type": "paragraph",
       "html": "<p>In other words, using this method, to make the derived class safe, we have to make the base class practically unusable by itself.</p>",
       "preview": "In other words, using this method, to make the derived class safe, we have to ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinými slovy, při použití této metody musíme – abychom zajistili bezpečnost odvozené třídy – učinit bázovou třídu samotnou prakticky nepoužitelnou.</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b31",
       "type": "paragraph",
       "html": "<p>Now that the <code>final</code> specifier has been introduced into the language, our recommendations are as follows:</p>",
       "preview": "Now that the final specifier has been introduced into the language, our recommen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když byl do jazyka zaveden specifikátor <code>final</code>, znějí naše doporučení následovně:</p>"
     },
     {
       "id": "virtual-destructors-virtual-assignment-and-overriding-virtualization_b32",
       "type": "list",
       "html": "<ul><li>If you intend your class to be inherited from, make sure your destructor is virtual and public.</li><li>If you do not intend your class to be inherited from, mark your class as final. This will prevent other classes from inheriting from it in the first place, without imposing any other use restrictions on the class itself.</li></ul>",
       "preview": "If you intend your class to be inherited from, make sure your destructor is virt",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pokud zamýšlíte, aby se z vaší třídy dědilo, ujistěte se, že její destruktor je virtuální a veřejný.</li><li>Pokud nezamýšlíte, aby se z vaší třídy dědilo, označte ji jako <code>final</code>. Tím v prvé řadě zabráníte ostatním třídám z ní dědit, aniž by to na samotnou třídu kladlo jakákoli jiná omezení použití.</li></ul>"
     }
-  ]
+  ],
+  "title_cs": "25.4 — Virtuální destruktory, virtuální přiřazení a potlačení virtualizace"
 }

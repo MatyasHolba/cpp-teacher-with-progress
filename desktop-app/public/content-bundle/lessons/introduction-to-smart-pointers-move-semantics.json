@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Consider a function in which we dynamically allocate a value:</p>",
       "preview": "Consider a function in which we dynamically allocate a value:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme funkci, ve které dynamicky alokujeme hodnotu:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "void someFunction()\n{\n    Resource* ptr = new Resource(); // Resource is a struct or class\n\n    // do stuff with ptr here\n\n    delete ptr;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction()\n{\n    Resource* ptr = new Resource(); // Resource is a struct or class\n\n    // do stuff with ptr here\n\n    delete ptr;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction()\n{\n    Zdroj* ptr = new Resource(); // Zdroj je struktura nebo třída\n\n    // zde udělejte věci s ptr\n\n    odstranit ptr;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b2",
       "type": "paragraph",
       "html": "<p>Although the above code seems fairly straightforward, it’s fairly easy to forget to deallocate ptr. Even if you do remember to delete ptr at the end of the function, there are a myriad of ways that ptr may not be deleted if the function exits early. This can happen via an early return:</p>",
       "preview": "Although the above code seems fairly straightforward, it’s fairly easy to forget",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli výše uvedený kód vypadá poměrně přímočaře, je celkem snadné zapomenout <code>ptr</code> dealokovat. I když nezapomenete zavolat <code>delete ptr</code> na konci funkce, existuje nespočet způsobů, jak se může stát, že se <code>ptr</code> nesmaže, pokud funkce skončí předčasně. K tomu může dojít prostřednictvím předčasného návratu (early return):</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b3",
@@ -37,14 +40,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid someFunction()\n{\n    Resource* ptr = new Resource();\n\n    int x;\n    std::cout << \"Enter an integer: \";\n    std::cin >> x;\n\n    if (x == 0)\n        return; // the function returns early, and ptr won’t be deleted!\n\n    // do stuff with ptr here\n\n    delete ptr;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid someFunction()\n{\n    Resource* ptr = new Resource();\n\n    int x;\n    std::cout &lt;&lt; \"Enter an integer: \";\n    std::cin &gt;&gt; x;\n\n    if (x == 0)\n        return; // the function returns early, and ptr won’t be deleted!\n\n    // do stuff with ptr here\n\n    delete ptr;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid someFunction()\n{\n    Zdroj* ptr = new Resource();\n\n    int x;\n    std::cout << \"Zadejte celé číslo: \";\n    std::cin >> x;\n\n    if (x == 0)\n        návrat; // funkce se vrátí dříve a ptr nebude odstraněn!\n\n    // zde udělejte věci s ptr\n\n    odstranit ptr;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b4",
       "type": "paragraph",
       "html": "<p>or via a thrown exception:</p>",
       "preview": "or via a thrown exception:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>nebo prostřednictvím vyhozené výjimky:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b5",
@@ -52,56 +57,64 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid someFunction()\n{\n    Resource* ptr = new Resource();\n\n    int x;\n    std::cout << \"Enter an integer: \";\n    std::cin >> x;\n\n    if (x == 0)\n        throw 0; // the function returns early, and ptr won’t be deleted!\n\n    // do stuff with ptr here\n\n    delete ptr;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid someFunction()\n{\n    Resource* ptr = new Resource();\n\n    int x;\n    std::cout &lt;&lt; \"Enter an integer: \";\n    std::cin &gt;&gt; x;\n\n    if (x == 0)\n        throw 0; // the function returns early, and ptr won’t be deleted!\n\n    // do stuff with ptr here\n\n    delete ptr;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid someFunction()\n{\n    Zdroj* ptr = new Resource();\n\n    int x;\n    std::cout << \"Zadejte celé číslo: \";\n    std::cin >> x;\n\n    if (x == 0)\n        hodit 0; // funkce se vrátí dříve a ptr nebude odstraněn!\n\n    // zde udělejte věci s ptr\n\n    odstranit ptr;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b6",
       "type": "paragraph",
       "html": "<p>In the above two programs, the early return or throw statement execute, causing the function to terminate without variable ptr being deleted. Consequently, the memory allocated for variable ptr is now leaked (and will be leaked again every time this function is called and returns early).</p>",
       "preview": "In the above two programs, the early return or throw statement execute, causing ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedených dvou programech se provede předčasný příkaz <code>return</code> nebo <code>throw</code>, což způsobí ukončení funkce, aniž by byla proměnná <code>ptr</code> smazána. V důsledku toho paměť alokovaná pro proměnnou <code>ptr</code> unikne (a unikne znovu při každém dalším volání této funkce, které skončí předčasně).</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b7",
       "type": "paragraph",
       "html": "<p>At heart, these kinds of issues occur because pointer variables have no inherent mechanism to clean up after themselves.</p>",
       "preview": "At heart, these kinds of issues occur because pointer variables have no inherent",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tyto typy problémů v jádru vznikají proto, že ukazatelové proměnné nemají žádný inherentní mechanismus, jak po sobě uklidit.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b8",
       "type": "paragraph",
       "html": "<p><strong>Smart pointer classes to the rescue?</strong></p>",
       "preview": "Smart pointer classes to the rescue?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přicházejí třídy chytrých ukazatelů na pomoc?</strong></p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b9",
       "type": "paragraph",
       "html": "<p>One of the best things about classes is that they contain destructors that automatically get executed when an object of the class goes out of scope. So if you allocate (or acquire) memory in your constructor, you can deallocate it in your destructor, and be guaranteed that the memory will be deallocated when the class object is destroyed (regardless of whether it goes out of scope, gets explicitly deleted, etc…). This is at the heart of the RAII programming paradigm that we talked about in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 -- Destructors</a>.</p>",
       "preview": "One of the best things about classes is that they contain destructors that autom",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou z nejlepších vlastností tříd je, že obsahují destruktory, které se automaticky spustí, když objekt dané třídy opustí rozsah platnosti (scope). Pokud tedy alokujete (nebo získáte) paměť ve svém konstruktoru, můžete ji dealokovat ve svém destruktoru a mít jistotu, že paměť bude uvolněna, jakmile bude objekt třídy zničen (bez ohledu na to, zda opustí rozsah platnosti, je explicitně smazán atd.). To je samotnou podstatou programovacího paradigmatu RAII, o kterém jsme hovořili v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 -- Destruktory</a>.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b10",
       "type": "paragraph",
       "html": "<p>So can we use a class to help us manage and clean up our pointers? We can!</p>",
       "preview": "So can we use a class to help us manage and clean up our pointers? We can!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme tedy použít třídu, která by nám pomohla spravovat a uklízet naše ukazatele? Můžeme!</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b11",
       "type": "paragraph",
       "html": "<p>Consider a class whose sole job was to hold and “own” a pointer passed to it, and then deallocate that pointer when the class object went out of scope. As long as objects of that class were only created as local variables, we could guarantee that the class would properly go out of scope (regardless of when or how our functions terminate) and the owned pointer would get destroyed.</p>",
       "preview": "Consider a class whose sole job was to hold and “own” a pointer passed to it, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si třídu, jejímž jediným úkolem by bylo držet a „vlastnit“ ukazatel, který jí byl předán, a poté tento ukazatel dealokovat, jakmile objekt třídy opustí svůj rozsah platnosti (scope). Dokud by objekty této třídy byly vytvářeny pouze jako lokální proměnné, mohli bychom zaručit, že tato třída řádně opustí svůj rozsah platnosti (bez ohledu na to, kdy nebo jak naše funkce skončí) a vlastněný ukazatel bude zničen.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b12",
       "type": "paragraph",
       "html": "<p>Here’s a first draft of the idea:</p>",
       "preview": "Here’s a first draft of the idea:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je první nástin této myšlenky:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b13",
@@ -109,49 +122,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\t// Pass in a pointer to \"own\" via the constructor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// The destructor will make sure it gets deallocated\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Overload dereference and operator-> so we can use Auto_ptr1 like m_ptr.\n\tT& operator*() const { return *m_ptr; }\n\tT* operator->() const { return m_ptr; }\n};\n\n// A sample class to prove the above works\nclass Resource\n{\npublic:\n    Resource() { std::cout << \"Resource acquired\\n\"; }\n    ~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1<Resource> res(new Resource()); // Note the allocation of memory here\n\n        // ... but no explicit delete needed\n\n\t// Also note that we use <Resource>, not <Resource*>\n        // This is because we've defined m_ptr to have type T* (not T)\n\n\treturn 0;\n} // res goes out of scope here, and destroys the allocated Resource for us",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\t// Pass in a pointer to \"own\" via the constructor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// The destructor will make sure it gets deallocated\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Overload dereference and operator-&gt; so we can use Auto_ptr1 like m_ptr.\n\tT&amp; operator*() const { return *m_ptr; }\n\tT* operator-&gt;() const { return m_ptr; }\n};\n\n// A sample class to prove the above works\nclass Resource\n{\npublic:\n    Resource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n    ~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1&lt;Resource&gt; res(new Resource()); // Note the allocation of memory here\n\n        // ... but no explicit delete needed\n\n\t// Also note that we use &lt;Resource&gt;, not &lt;Resource*&gt;\n        // This is because we've defined m_ptr to have type T* (not T)\n\n\treturn 0;\n} // res goes out of scope here, and destroys the allocated Resource for us</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Auto_ptr1\n{\n\tT* m_ptr {};\nveřejnost:\n\t// Předání ukazatele na \"vlastní\" přes konstruktor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// Destruktor zajistí, že bude uvolněna\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Přetížení dereference a operátor-> takže můžeme použít Auto_ptr1 jako m_ptr.\n\tT& operator*() const { return *m_ptr; }\n\tT* operátor->() const { return m_ptr; }\n};\n\n// Ukázková třída k prokázání výše uvedených prací\ntřída Zdroj\n{\nveřejnost:\n    Zdroj() { std::cout << \"Zdroj získán\\n\"; }\n    ~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1<Zdroj> res(new Resource()); // Zde si všimněte přidělení paměti\n\n        // ... ale není třeba explicitně mazat\n\n\t// Všimněte si také, že používáme <zdroj>, nikoli <zdroj*>\n        // Je to proto, že jsme definovali m_ptr tak, aby měl typ T* (ne T)\n\n\tnávrat 0;\n} // res jde mimo rozsah a zničí nám přidělený zdroj</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b14",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b15",
       "type": "output",
       "text": "Resource acquired\nResource destroyed\n",
       "html": "<pre>Resource acquired\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nResource destroyed\n</pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b16",
       "type": "paragraph",
       "html": "<p>Consider how this program and class work. First, we dynamically create a Resource, and pass it as a parameter to our templated Auto_ptr1 class. From that point forward, our Auto_ptr1 variable res owns that Resource object (Auto_ptr1 has a composition relationship with m_ptr). Because res is declared as a local variable and has block scope, it will go out of scope when the block ends, and be destroyed (no worries about forgetting to deallocate it). And because it is a class, when it is destroyed, the Auto_ptr1 destructor will be called. That destructor will ensure that the Resource pointer it is holding gets deleted!</p>",
       "preview": "Consider how this program and class work. First, we dynamically create a Resourc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se, jak tento program a třída fungují. Nejprve dynamicky vytvoříme Resource a předáme jej jako parametr naší šablonové třídě Auto_ptr1. Od tohoto okamžiku naše proměnná Auto_ptr1 res tento objekt Resource vlastní (Auto_ptr1 má s m_ptr kompoziční vztah). Protože je res deklarována jako lokální proměnná a má platnost na úrovni bloku (block scope), při skončení bloku opustí svůj rozsah platnosti a bude zničena (nemusíme se bát, že bychom ji zapomněli dealokovat). A protože se jedná o třídu, při jejím zničení se zavolá destruktor Auto_ptr1. Tento destruktor zajistí, že ukazatel na Resource, který drží, bude smazán!</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b17",
       "type": "paragraph",
       "html": "<p>As long as Auto_ptr1 is defined as a local variable (with automatic duration, hence the “Auto” part of the class name), the Resource will be guaranteed to be destroyed at the end of the block it is declared in, regardless of how the function terminates (even if it terminates early).</p>",
       "preview": "As long as Auto_ptr1 is defined as a local variable (with automatic duration, he",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dokud je Auto_ptr1 definována jako lokální proměnná (s automatickou dobou života – automatic duration, odtud část „Auto“ v názvu třídy), Resource bude zaručeně zničen na konci bloku, ve kterém je deklarován, bez ohledu na to, jak funkce skončí (dokonce i když skončí předčasně).</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b18",
       "type": "paragraph",
       "html": "<p>Such a class is called a smart pointer. A <strong>Smart pointer</strong> is a composition class that is designed to manage dynamically allocated memory and ensure that memory gets deleted when the smart pointer object goes out of scope. (Relatedly, built-in pointers are sometimes called “dumb pointers” because they can’t clean up after themselves).</p>",
       "preview": "Such a class is called a smart pointer. A Smart pointer is a composition class t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Taková třída se nazývá chytrý ukazatel (smart pointer). <strong>Smart pointer</strong> (chytrý ukazatel) je kompozitní třída navržená ke správě dynamicky alokované paměti a k zajištění toho, že tato paměť bude uvolněna, jakmile objekt chytrého ukazatele opustí svůj rozsah platnosti. (V této souvislosti se vestavěným ukazatelům někdy říká „hloupé ukazatele“ neboli dumb pointers, protože po sobě neumí uklidit).</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b19",
       "type": "paragraph",
       "html": "<p>Now let’s go back to our someFunction() example above, and show how a smart pointer class can solve our challenge:</p>",
       "preview": "Now let’s go back to our someFunction() example above, and show how a smart poin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se vraťme k našemu výše uvedenému příkladu someFunction() a ukažme si, jak může třída chytrého ukazatele vyřešit náš problém:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b20",
@@ -159,91 +179,104 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\t// Pass in a pointer to \"own\" via the constructor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// The destructor will make sure it gets deallocated\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Overload dereference and operator-> so we can use Auto_ptr1 like m_ptr.\n\tT& operator*() const { return *m_ptr; }\n\tT* operator->() const { return m_ptr; }\n};\n\n// A sample class to prove the above works\nclass Resource\n{\npublic:\n    Resource() { std::cout << \"Resource acquired\\n\"; }\n    ~Resource() { std::cout << \"Resource destroyed\\n\"; }\n    void sayHi() { std::cout << \"Hi!\\n\"; }\n};\n\nvoid someFunction()\n{\n    Auto_ptr1<Resource> ptr(new Resource()); // ptr now owns the Resource\n \n    int x;\n    std::cout << \"Enter an integer: \";\n    std::cin >> x;\n \n    if (x == 0)\n        return; // the function returns early\n \n    // do stuff with ptr here\n    ptr->sayHi();\n}\n\nint main()\n{\n    someFunction();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\t// Pass in a pointer to \"own\" via the constructor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// The destructor will make sure it gets deallocated\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Overload dereference and operator-&gt; so we can use Auto_ptr1 like m_ptr.\n\tT&amp; operator*() const { return *m_ptr; }\n\tT* operator-&gt;() const { return m_ptr; }\n};\n\n// A sample class to prove the above works\nclass Resource\n{\npublic:\n    Resource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n    ~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n    void sayHi() { std::cout &lt;&lt; \"Hi!\\n\"; }\n};\n\nvoid someFunction()\n{\n    Auto_ptr1&lt;Resource&gt; ptr(new Resource()); // ptr now owns the Resource\n \n    int x;\n    std::cout &lt;&lt; \"Enter an integer: \";\n    std::cin &gt;&gt; x;\n \n    if (x == 0)\n        return; // the function returns early\n \n    // do stuff with ptr here\n    ptr-&gt;sayHi();\n}\n\nint main()\n{\n    someFunction();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Auto_ptr1\n{\n\tT* m_ptr {};\nveřejnost:\n\t// Předání ukazatele na \"vlastní\" přes konstruktor\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t// Destruktor zajistí, že bude uvolněna\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Přetížení dereference a operátor-> takže můžeme použít Auto_ptr1 jako m_ptr.\n\tT& operator*() const { return *m_ptr; }\n\tT* operátor->() const { return m_ptr; }\n};\n\n// Ukázková třída k prokázání výše uvedených prací\ntřída Zdroj\n{\nveřejnost:\n    Zdroj() { std::cout << \"Zdroj získán\\n\"; }\n    ~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n    void sayHi() { std::cout << \"Ahoj!\\n\"; }\n};\n\nvoid someFunction()\n{\n    Auto_ptr1<zdroj> ptr(nový zdroj()); // ptr nyní vlastní zdroj\n \n    int x;\n    std::cout << \"Zadejte celé číslo: \";\n    std::cin >> x;\n \n    if (x == 0)\n        návrat; // funkce se vrátí brzy\n \n    // zde udělejte věci s ptr\n    ptr->sayHi();\n}\n\nint main()\n{\n    someFunction();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b21",
       "type": "paragraph",
       "html": "<p>If the user enters a non-zero integer, the above program will print:</p>",
       "preview": "If the user enters a non-zero integer, the above program will print:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud uživatel zadá nenulové celé číslo, výše uvedený program vypíše:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b22",
       "type": "output",
       "text": "Resource acquired\nHi!\nResource destroyed\n",
       "html": "<pre>Resource acquired\nHi!\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nHi!\nResource destroyed\n</pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b23",
       "type": "paragraph",
       "html": "<p>If the user enters zero, the above program will terminate early, printing:</p>",
       "preview": "If the user enters zero, the above program will terminate early, printing:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud uživatel zadá nulu, výše uvedený program se předčasně ukončí a vypíše:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b24",
       "type": "output",
       "text": "Resource acquired\nResource destroyed\n",
       "html": "<pre>Resource acquired\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nResource destroyed\n</pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b25",
       "type": "paragraph",
       "html": "<p>Note that even in the case where the user enters zero and the function terminates early, the Resource is still properly deallocated.</p>",
       "preview": "Note that even in the case where the user enters zero and the function terminate",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že i v případě, kdy uživatel zadá nulu a funkce se předčasně ukončí, je Resource stále správně dealokován.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b26",
       "type": "paragraph",
       "html": "<p>Because the ptr variable is a local variable, ptr will be destroyed when the function terminates (regardless of how it terminates). And because the Auto_ptr1 destructor will clean up the Resource, we are assured that the Resource will be properly cleaned up.</p>",
       "preview": "Because the ptr variable is a local variable, ptr will be destroyed when the fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože proměnná ptr je lokální proměnná, ptr bude zničena při ukončení funkce (bez ohledu na to, jakým způsobem skončí). A protože destruktor Auto_ptr1 provede úklid Resource, máme jistotu, že Resource bude řádně uklizen.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b27",
       "type": "paragraph",
       "html": "<p><strong>A critical flaw</strong></p>",
       "preview": "A critical flaw",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Kritická chyba</strong></p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b28",
       "type": "paragraph",
       "html": "<p>The Auto_ptr1 class has a critical flaw lurking behind some auto-generated code. Before reading further, see if you can identify what it is. We’ll wait…</p>",
       "preview": "The Auto_ptr1 class has a critical flaw lurking behind some auto-generated code.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída Auto_ptr1 má kritickou vadu číhající za automaticky generovaným kódem. Než budete číst dál, zkuste zjistit, o co se jedná. Počkáme…</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b29",
       "type": "paragraph",
       "html": "<p>(Hint: consider what parts of a class get auto-generated if you don’t supply them)</p>",
       "preview": "(Hint: consider what parts of a class get auto-generated if you don’t supply the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>(Nápověda: zamyslete se nad tím, jaké části třídy se automaticky vygenerují, pokud je sami nedodáte)</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b30",
       "type": "paragraph",
       "html": "<p>(Jeopardy music)</p>",
       "preview": "(Jeopardy music)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>(Znělka z Jeopardy)</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b31",
       "type": "paragraph",
       "html": "<p>Okay, time’s up.</p>",
       "preview": "Okay, time’s up.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dobrá, čas vypršel.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b32",
       "type": "paragraph",
       "html": "<p>Rather than tell you, we’ll show you. Consider the following program:</p>",
       "preview": "Rather than tell you, we’ll show you. Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než abychom vám to jen řekli, raději vám to ukážeme. Podívejte se na následující program:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b33",
@@ -251,35 +284,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// Same as above\ntemplate <typename T>\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\tT& operator*() const { return *m_ptr; }\n\tT* operator->() const { return m_ptr; }\n};\n\nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1<Resource> res1(new Resource());\n\tAuto_ptr1<Resource> res2(res1); // Alternatively, don't initialize res2 and then assign res2 = res1;\n\n\treturn 0;\n} // res1 and res2 go out of scope here",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Same as above\ntemplate &lt;typename T&gt;\nclass Auto_ptr1\n{\n\tT* m_ptr {};\npublic:\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\tT&amp; operator*() const { return *m_ptr; }\n\tT* operator-&gt;() const { return m_ptr; }\n};\n\nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1&lt;Resource&gt; res1(new Resource());\n\tAuto_ptr1&lt;Resource&gt; res2(res1); // Alternatively, don't initialize res2 and then assign res2 = res1;\n\n\treturn 0;\n} // res1 and res2 go out of scope here</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Stejné jako výše\nšablona <název typu T>\ntřída Auto_ptr1\n{\n\tT* m_ptr {};\nveřejnost:\n\tAuto_ptr1(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr1()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\tT& operator*() const { return *m_ptr; }\n\tT* operátor->() const { return m_ptr; }\n};\n\ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr1<Resource> res1(new Resource());\n\tAuto_ptr1<zdroj> res2(res1); // Případně neinicializovat res2 a pak přiřadit res2 = res1;\n\n\tnávrat 0;\n} // res1 a res2 přejdou zde mimo rozsah</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b34",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b35",
       "type": "output",
       "text": "Resource acquired\nResource destroyed\nResource destroyed\n",
       "html": "<pre>Resource acquired\nResource destroyed\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nResource destroyed\nResource destroyed\n</pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b36",
       "type": "paragraph",
       "html": "<p>Very likely (but not necessarily) your program will crash at this point. See the problem now? Because we haven’t supplied a copy constructor or an assignment operator, C++ provides one for us. And the functions it provides do shallow copies. So when we initialize res2 with res1, both Auto_ptr1 variables are pointed at the same Resource. When res2 goes out of the scope, it deletes the resource, leaving res1 with a dangling pointer. When res1 goes to delete its (already deleted) Resource, undefined behavior will result (probably a crash)!</p>",
       "preview": "Very likely (but not necessarily) your program will crash at this point. See the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je velmi pravděpodobné (i když ne jisté), že váš program v tomto bodě spadne. Vidíte už ten problém? Protože jsme nedodali kopírovací konstruktor ani operátor přiřazení, C++ je vytvoří za nás. A funkce, které poskytne, provádějí mělkou kopii (shallow copy). Když tedy inicializujeme res2 pomocí res1, obě proměnné Auto_ptr1 ukazují na stejný Resource. Jakmile res2 opustí rozsah platnosti (scope), uvolní daný Resource, čímž v res1 zanechá visící ukazatel (dangling pointer). Když se pak res1 pokusí smazat svůj (již smazaný) Resource, dojde k nedefinovanému chování (pravděpodobně k pádu)!</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b37",
       "type": "paragraph",
       "html": "<p>You’d run into a similar problem with a function like this:</p>",
       "preview": "You’d run into a similar problem with a function like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na podobný problém byste narazili i u funkce jako je tato:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b38",
@@ -287,42 +325,48 @@
       "language": "cpp",
       "code": "void passByValue(Auto_ptr1<Resource> res)\n{\n}\n\nint main()\n{\n\tAuto_ptr1<Resource> res1(new Resource());\n\tpassByValue(res1);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void passByValue(Auto_ptr1&lt;Resource&gt; res)\n{\n}\n\nint main()\n{\n\tAuto_ptr1&lt;Resource&gt; res1(new Resource());\n\tpassByValue(res1);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void passByValue(Auto_ptr1<Resource> res)\n{\n}\n\nint main()\n{\n\tAuto_ptr1<Resource> res1(new Resource());\n\tpassByValue(res1);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b39",
       "type": "paragraph",
       "html": "<p>In this program, <code>res1</code> will be copied by value into parameter <code>res</code>, so both <code>res1.m_ptr</code> and <code>res.m_ptr</code> will hold the same address.</p>",
       "preview": "In this program, res1 will be copied by value into parameter res, so both res1.m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto programu se <code>res1</code> zkopíruje hodnotou do parametru <code>res</code>, takže jak <code>res1.m_ptr</code>, tak <code>res.m_ptr</code> budou obsahovat stejnou adresu.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b40",
       "type": "paragraph",
       "html": "<p>When <code>res</code> is destroyed at the end of the function, <code>res1.m_ptr</code> is left dangling. When <code>res1.m_ptr</code> is later deleted, undefined behavior will result.</p>",
       "preview": "When res is destroyed at the end of the function, res1.m_ptr is left dangling. W",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je <code>res</code> na konci funkce zničen, <code>res1.m_ptr</code> zůstane visící (dangling). Když je <code>res1.m_ptr</code> později smazán pomocí delete, dojde k nedefinovanému chování.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b41",
       "type": "paragraph",
       "html": "<p>So clearly this isn’t good. How can we address this?</p>",
       "preview": "So clearly this isn’t good. How can we address this?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je tedy zřejmé, že to není v pořádku. Jak to můžeme vyřešit?</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b42",
       "type": "paragraph",
       "html": "<p>Well, one thing we could do would be to explicitly define and delete the copy constructor and assignment operator, thereby preventing any copies from being made in the first place. That would prevent the pass by value case (which is good, we probably shouldn’t be passing these by value anyway).</p>",
       "preview": "Well, one thing we could do would be to explicitly define and delete the copy co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou z možností by bylo explicitně definovat a smazat (delete) kopírovací konstruktor a operátor přiřazení, čímž bychom předem zabránili vytváření jakýchkoli kopií. To by vyřešilo případ předávání hodnotou (což je dobře, protože tyto objekty bychom hodnotou stejně předávat neměli).</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b43",
       "type": "paragraph",
       "html": "<p>But then how would we return an Auto_ptr1 from a function back to the caller?</p>",
       "preview": "But then how would we return an Auto_ptr1 from a function back to the caller?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale jak bychom potom vrátili Auto_ptr1 z funkce zpět volajícímu?</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b44",
@@ -330,49 +374,56 @@
       "language": "cpp",
       "code": "??? generateResource()\n{\n     Resource* r{ new Resource() };\n     return Auto_ptr1(r);\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">??? generateResource()\n{\n     Resource* r{ new Resource() };\n     return Auto_ptr1(r);\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">??? createResource()\n{\n     Zdroj* r{ new Resource() };\n     return Auto_ptr1(r);\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b45",
       "type": "paragraph",
       "html": "<p>We can’t return our Auto_ptr1 by reference, because the local Auto_ptr1 will be destroyed at the end of the function, and the caller will be left with a dangling reference. We could return pointer r as <code>Resource*</code>, but then we might forget to delete r later, which is the whole point of using smart pointers in the first place. So that’s out. Returning the Auto_ptr1 by value is the only option that makes sense -- but then we end up with shallow copies, duplicated pointers, and crashes.</p>",
       "preview": "We can’t return our Auto_ptr1 by reference, because the local Auto_ptr1 will be ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nemůžeme vrátit náš Auto_ptr1 referencí, protože lokální Auto_ptr1 bude na konci funkce zničen a volajícímu by zbyla visící reference. Mohli bychom vrátit ukazatel r jako <code>Resource*</code>, ale pak bychom mohli r později zapomenout smazat, což je přesně to, kvůli čemu chytré ukazatele vůbec používáme. Tato možnost tedy odpadá. Vrácení Auto_ptr1 hodnotou je jediná možnost, která dává smysl – ale pak skončíme u mělkých kopií, duplicitních ukazatelů a pádů programu.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b46",
       "type": "paragraph",
       "html": "<p>Another option would be to overload the copy constructor and assignment operator to make deep copies. In this way, we’d at least guarantee to avoid duplicate pointers to the same object. But copying can be expensive (and may not be desirable or even possible), and we don’t want to make needless copies of objects just to return an Auto_ptr1 from a function. Plus assigning or initializing a dumb pointer doesn’t copy the object being pointed to, so why would we expect smart pointers to behave differently?</p>",
       "preview": "Another option would be to overload the copy constructor and assignment operator",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Další možností by bylo přetížit kopírovací konstruktor a operátor přiřazení tak, aby prováděly hluboké kopie. Tímto způsobem bychom alespoň zaručili, že se vyhneme duplicitním ukazatelům na stejný objekt. Kopírování však může být nákladné (a nemusí být žádoucí, nebo dokonce ani možné) a nechceme vytvářet zbytečné kopie objektů jen proto, abychom vrátili Auto_ptr1 z funkce. Navíc přiřazení nebo inicializace obyčejného (hloupého) ukazatele nekopíruje odkazovaný objekt, tak proč bychom měli očekávat, že se chytré ukazatele budou chovat jinak?</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b47",
       "type": "paragraph",
       "html": "<p>What do we do?</p>",
       "preview": "What do we do?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co tedy uděláme?</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b48",
       "type": "paragraph",
       "html": "<p><strong>Move semantics</strong></p>",
       "preview": "Move semantics",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Sémantika přesunu</strong></p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b49",
       "type": "paragraph",
       "html": "<p>What if, instead of having our copy constructor and assignment operator copy the pointer (“copy semantics”), we instead transfer/move ownership of the pointer from the source to the destination object? This is the core idea behind move semantics. <strong>Move semantics</strong> means the class will transfer ownership of the object rather than making a copy.</p>",
       "preview": "What if, instead of having our copy constructor and assignment operator copy the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co kdyby náš kopírovací konstruktor a operátor přiřazení místo kopírování ukazatele („sémantika kopírování“) raději převedly/přesunuly vlastnictví ukazatele ze zdrojového do cílového objektu? To je hlavní myšlenka sémantiky přesunu. <strong>Sémantika přesunu</strong> (move semantics) znamená, že třída převede vlastnictví objektu, místo aby vytvářela jeho kopii.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b50",
       "type": "paragraph",
       "html": "<p>Let’s update our Auto_ptr1 class to show how this can be done:</p>",
       "preview": "Let’s update our Auto_ptr1 class to show how this can be done:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme upravit naši třídu Auto_ptr1, abychom si ukázali, jak toho lze dosáhnout:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b51",
@@ -380,28 +431,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nclass Auto_ptr2\n{\n\tT* m_ptr {};\npublic:\n\tAuto_ptr2(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr2()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// A copy constructor that implements move semantics\n\tAuto_ptr2(Auto_ptr2& a) // note: not const\n\t{\n\t\t// We don't need to delete m_ptr here.  This constructor is only called when we're creating a new object, and m_ptr can't be set prior to this.\n\t\tm_ptr = a.m_ptr; // transfer our dumb pointer from the source to our local object\n\t\ta.m_ptr = nullptr; // make sure the source no longer owns the pointer\n\t}\n\t\n\t// An assignment operator that implements move semantics\n\tAuto_ptr2& operator=(Auto_ptr2& a) // note: not const\n\t{\n\t\tif (&a == this)\n\t\t\treturn *this;\n\n\t\tdelete m_ptr; // make sure we deallocate any pointer the destination is already holding first\n\t\tm_ptr = a.m_ptr; // then transfer our dumb pointer from the source to the local object\n\t\ta.m_ptr = nullptr; // make sure the source no longer owns the pointer\n\t\treturn *this;\n\t}\n\n\tT& operator*() const { return *m_ptr; }\n\tT* operator->() const { return m_ptr; }\n\tbool isNull() const { return m_ptr == nullptr; }\n};\n\nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr2<Resource> res1(new Resource());\n\tAuto_ptr2<Resource> res2; // Start as nullptr\n\n\tstd::cout << \"res1 is \" << (res1.isNull() ? \"null\\n\" : \"not null\\n\");\n\tstd::cout << \"res2 is \" << (res2.isNull() ? \"null\\n\" : \"not null\\n\");\n\n\tres2 = res1; // res2 assumes ownership, res1 is set to null\n\n\tstd::cout << \"Ownership transferred\\n\";\n\n\tstd::cout << \"res1 is \" << (res1.isNull() ? \"null\\n\" : \"not null\\n\");\n\tstd::cout << \"res2 is \" << (res2.isNull() ? \"null\\n\" : \"not null\\n\");\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nclass Auto_ptr2\n{\n\tT* m_ptr {};\npublic:\n\tAuto_ptr2(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr2()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// A copy constructor that implements move semantics\n\tAuto_ptr2(Auto_ptr2&amp; a) // note: not const\n\t{\n\t\t// We don't need to delete m_ptr here.  This constructor is only called when we're creating a new object, and m_ptr can't be set prior to this.\n\t\tm_ptr = a.m_ptr; // transfer our dumb pointer from the source to our local object\n\t\ta.m_ptr = nullptr; // make sure the source no longer owns the pointer\n\t}\n\t\n\t// An assignment operator that implements move semantics\n\tAuto_ptr2&amp; operator=(Auto_ptr2&amp; a) // note: not const\n\t{\n\t\tif (&amp;a == this)\n\t\t\treturn *this;\n\n\t\tdelete m_ptr; // make sure we deallocate any pointer the destination is already holding first\n\t\tm_ptr = a.m_ptr; // then transfer our dumb pointer from the source to the local object\n\t\ta.m_ptr = nullptr; // make sure the source no longer owns the pointer\n\t\treturn *this;\n\t}\n\n\tT&amp; operator*() const { return *m_ptr; }\n\tT* operator-&gt;() const { return m_ptr; }\n\tbool isNull() const { return m_ptr == nullptr; }\n};\n\nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr2&lt;Resource&gt; res1(new Resource());\n\tAuto_ptr2&lt;Resource&gt; res2; // Start as nullptr\n\n\tstd::cout &lt;&lt; \"res1 is \" &lt;&lt; (res1.isNull() ? \"null\\n\" : \"not null\\n\");\n\tstd::cout &lt;&lt; \"res2 is \" &lt;&lt; (res2.isNull() ? \"null\\n\" : \"not null\\n\");\n\n\tres2 = res1; // res2 assumes ownership, res1 is set to null\n\n\tstd::cout &lt;&lt; \"Ownership transferred\\n\";\n\n\tstd::cout &lt;&lt; \"res1 is \" &lt;&lt; (res1.isNull() ? \"null\\n\" : \"not null\\n\");\n\tstd::cout &lt;&lt; \"res2 is \" &lt;&lt; (res2.isNull() ? \"null\\n\" : \"not null\\n\");\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\ntřída Auto_ptr2\n{\n\tT* m_ptr {};\nveřejnost:\n\tAuto_ptr2(T* ptr=nullptr)\n\t\t:m_ptr(ptr)\n\t{\n\t}\n\t\n\t~Auto_ptr2()\n\t{\n\t\tdelete m_ptr;\n\t}\n\n\t// Kopírovací konstruktor, který implementuje sémantiku přesunu\n\tAuto_ptr2(Auto_ptr2& a) // poznámka: ne konst\n\t{\n\t\t// Nemusíme zde mazat m_ptr.  Tento konstruktor je volán pouze při vytváření nového objektu a m_ptr nelze nastavit dříve.\n\t\tm_ptr = a.m_ptr; // přenese náš hloupý ukazatel ze zdroje do našeho místního objektu\n\t\ta.m_ptr = nullptr; // ujistěte se, že zdroj již nevlastní ukazatel\n\t}\n\t\n\t// Operátor přiřazení, který implementuje sémantiku pohybu\n\tAuto_ptr2& operator=(Auto_ptr2& a) // poznámka: ne konst\n\t{\n\t\tif (&a == toto)\n\t\t\tvrátit *toto;\n\n\t\tdelete m_ptr; // ujistěte se, že nejprve uvolníme jakýkoli ukazatel, který cíl již drží\n\t\tm_ptr = a.m_ptr; // pak přeneste náš hloupý ukazatel ze zdroje do místního objektu\n\t\ta.m_ptr = nullptr; // ujistěte se, že zdroj již nevlastní ukazatel\n\t\tvrátit *toto;\n\t}\n\n\tT& operator*() const { return *m_ptr; }\n\tT* operátor->() const { return m_ptr; }\n\tbool isNull() const { return m_ptr == nullptr; }\n};\n\ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n\nint main()\n{\n\tAuto_ptr2<zdroj> res1(nový zdroj());\n\tAuto_ptr2<zdroj> res2; // Spustit jako nullptr\n\n\tstd::cout << \"res1 je \" << (res1.isNull() ? \"null\\n\" : \"není null\\n\");\n\tstd::cout << \"res2 je \" << (res2.isNull() ? \"null\\n\" : \"není null\\n\");\n\n\tres2 = res1; // res2 převezme vlastnictví, res1 je nastaveno na null\n\n\tstd::cout << \"Vlastnictví převedeno\\n\";\n\n\tstd::cout << \"res1 je \" << (res1.isNull() ? \"null\\n\" : \"není null\\n\");\n\tstd::cout << \"res2 je \" << (res2.isNull() ? \"null\\n\" : \"není null\\n\");\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b52",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b53",
       "type": "output",
       "text": "Resource acquired\nres1 is not null\nres2 is null\nOwnership transferred\nres1 is null\nres2 is not null\nResource destroyed\n",
       "html": "<pre>Resource acquired\nres1 is not null\nres2 is null\nOwnership transferred\nres1 is null\nres2 is not null\nResource destroyed\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Resource acquired\nres1 is not null\nres2 is null\nOwnership transferred\nres1 is null\nres2 is not null\nResource destroyed\n</pre>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b54",
       "type": "paragraph",
       "html": "<p>Note that our overloaded operator= gave ownership of m_ptr from res1 to res2! Consequently, we don’t end up with duplicate copies of the pointer, and everything gets tidily cleaned up.</p>",
       "preview": "Note that our overloaded operator= gave ownership of m_ptr from res1 to res2! Co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že náš přetížený operator= předal vlastnictví m_ptr z res1 na res2! V důsledku toho nezískáme duplicitní kopie ukazatele a vše se řádně uklidí.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b55",
@@ -409,84 +464,97 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Deleting a nullptr is okay, as it does nothing.</p></div>",
       "preview": "A reminderDeleting a nullptr is okay, as it does nothing.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Volání delete na nullptr je zcela v pořádku, protože nic neprovede.</p></div>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b56",
       "type": "paragraph",
       "html": "<p><strong>std::auto_ptr, and why it was a bad idea</strong></p>",
       "preview": "std::auto_ptr, and why it was a bad idea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>std::auto_ptr a proč to byl špatný nápad</strong></p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b57",
       "type": "paragraph",
       "html": "<p>Now would be an appropriate time to talk about std::auto_ptr. std::auto_ptr, introduced in C++98 and removed in C++17, was C++’s first attempt at a standardized smart pointer. std::auto_ptr opted to implement move semantics just like the Auto_ptr2 class does.</p>",
       "preview": "Now would be an appropriate time to talk about std::auto_ptr. std::auto_ptr, int",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní je vhodný čas promluvit si o std::auto_ptr. std::auto_ptr, představený v C++98 a odstraněný v C++17, byl prvním pokusem C++ o standardizovaný chytrý ukazatel (smart pointer). std::auto_ptr se rozhodl implementovat sémantiku přesunu (move semantics) přesně tak, jak to dělá třída Auto_ptr2.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b58",
       "type": "paragraph",
       "html": "<p>However, std::auto_ptr (and our Auto_ptr2 class) has a number of problems that makes using it dangerous.</p>",
       "preview": "However, std::auto_ptr (and our Auto_ptr2 class) has a number of problems that m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nicméně std::auto_ptr (a naše třída Auto_ptr2) má řadu problémů, kvůli kterým je jeho používání nebezpečné.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b59",
       "type": "paragraph",
       "html": "<p>First, because std::auto_ptr implements move semantics through the copy constructor and assignment operator, passing a std::auto_ptr by value to a function will cause your resource to get moved to the function parameter (and be destroyed at the end of the function when the function parameters go out of scope). Then when you go to access your auto_ptr argument from the caller (not realizing it was transferred and deleted), you’re suddenly dereferencing a null pointer. Crash!</p>",
       "preview": "First, because std::auto_ptr implements move semantics through the copy construc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, protože std::auto_ptr implementuje sémantiku přesunu prostřednictvím kopírovacího konstruktoru a operátoru přiřazení, předání std::auto_ptr hodnotou do funkce způsobí, že se váš prostředek přesune do parametru funkce (a bude zničen na konci funkce, jakmile parametry funkce opustí svůj rozsah platnosti). Když se pak pokusíte přistoupit ke svému argumentu auto_ptr z volajícího kódu (aniž byste si uvědomili, že byl přesunut a smazán), náhle dereferencujete nulový ukazatel (null pointer). Pád programu!</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b60",
       "type": "paragraph",
       "html": "<p>Second, std::auto_ptr always deletes its contents using non-array delete. This means auto_ptr won’t work correctly with dynamically allocated arrays, because it uses the wrong kind of deallocation. Worse, it won’t prevent you from passing it a dynamic array, which it will then mismanage, leading to memory leaks.</p>",
       "preview": "Second, std::auto_ptr always deletes its contents using non-array delete. This m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, std::auto_ptr vždy maže svůj obsah pomocí ne-polové varianty delete. To znamená, že auto_ptr nebude správně fungovat s dynamicky alokovanými poli, protože používá nesprávný způsob dealokace. Co je horší, nezabrání vám v předání dynamického pole, které pak spravuje nesprávně, což vede k únikům paměti.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b61",
       "type": "paragraph",
       "html": "<p>Finally, auto_ptr doesn’t play nice with a lot of the other classes in the standard library, including most of the containers and algorithms. This occurs because those standard library classes assume that when they copy an item, it actually makes a copy, not a move.</p>",
       "preview": "Finally, auto_ptr doesn’t play nice with a lot of the other classes in the stand",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A konečně, auto_ptr si nerozumí s mnoha dalšími třídami ve standardní knihovně, včetně většiny kontejnerů a algoritmů. K tomu dochází proto, že tyto třídy standardní knihovny předpokládají, že když položku zkopírují, skutečně se vytvoří kopie, nikoli přesun.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b62",
       "type": "paragraph",
       "html": "<p>Because of the above mentioned shortcomings, std::auto_ptr has been deprecated in C++11 and removed in C++17.</p>",
       "preview": "Because of the above mentioned shortcomings, std::auto_ptr has been deprecated i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kvůli výše uvedeným nedostatkům byl std::auto_ptr v C++11 označen jako zastaralý (deprecated) a v C++17 byl zcela odstraněn.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b63",
       "type": "paragraph",
       "html": "<p><strong>Moving forward</strong></p>",
       "preview": "Moving forward",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Posun kupředu</strong></p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b64",
       "type": "paragraph",
       "html": "<p>The core problem with the design of std::auto_ptr is that prior to C++11, the C++ language simply had no mechanism to differentiate “copy semantics” from “move semantics”. Overriding the copy semantics to implement move semantics leads to weird edge cases and inadvertent bugs. For example, you can write <code>res1 = res2</code> and have no idea whether res2 will be changed or not!</p>",
       "preview": "The core problem with the design of std::auto_ptr is that prior to C++11, the C+",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Základním problémem návrhu std::auto_ptr je, že před C++11 jazyk C++ jednoduše neměl žádný mechanismus k odlišení „sémantiky kopírování“ od „sémantiky přesunu“. Přetížení sémantiky kopírování za účelem implementace sémantiky přesunu vede k podivným hraničním případům a neúmyslným chybám. Můžete například napsat <code>res1 = res2</code> a nemít tušení, zda se res2 změní, nebo ne!</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b65",
       "type": "paragraph",
       "html": "<p>Because of this, in C++11, the concept of “move” was formally defined, and “move semantics” were added to the language to properly differentiate copying from moving. Now that we’ve set the stage for why move semantics can be useful, we’ll explore the topic of move semantics throughout the rest of this chapter. We’ll also fix our Auto_ptr2 class using move semantics.</p>",
       "preview": "Because of this, in C++11, the concept of “move” was formally defined, and “move",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Z tohoto důvodu byl v C++11 formálně definován koncept „přesunu“ a do jazyka byla přidána „sémantika přesunu“ (move semantics), aby bylo možné řádně odlišit kopírování od přesouvání. Nyní, když jsme si ukázali, proč může být sémantika přesunu užitečná, se tomuto tématu budeme věnovat po zbytek této kapitoly. Pomocí sémantiky přesunu také opravíme naši třídu Auto_ptr2.</p>"
     },
     {
       "id": "introduction-to-smart-pointers-move-semantics_b66",
       "type": "paragraph",
       "html": "<p>In C++11, std::auto_ptr has been replaced by a bunch of other types of “move-aware” smart pointers: std::unique_ptr, std::weak_ptr, and std::shared_ptr. We’ll also explore the two most popular of these: unique_ptr (which is a direct replacement for auto_ptr) and shared_ptr.</p>",
       "preview": "In C++11, std::auto_ptr has been replaced by a bunch of other types of “move-awa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++11 byl std::auto_ptr nahrazen několika jinými typy chytrých ukazatelů podporujících přesun („move-aware“): std::unique_ptr, std::weak_ptr a std::shared_ptr. Prozkoumáme také dva nejpoužívanější z nich: unique_ptr (který je přímou náhradou za auto_ptr) a shared_ptr.</p>"
     }
-  ]
+  ],
+  "title_cs": "22.1 — Úvod do chytrých ukazatelů a sémantiky přesunu"
 }

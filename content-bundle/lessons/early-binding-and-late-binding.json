@@ -14,56 +14,65 @@
       "type": "paragraph",
       "html": "<p>In this lesson and the next, we are going to take a closer look at how virtual functions are implemented. While this information is not strictly necessary to effectively use virtual functions, it is interesting. Nevertheless, you can consider both sections optional reading.</p>",
       "preview": "In this lesson and the next, we are going to take a closer look at how virtual f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této a následující lekci se podrobněji podíváme na to, jak jsou implementovány virtuální funkce. Ačkoli tyto informace nejsou nezbytně nutné k efektivnímu používání virtuálních funkcí, jsou zajímavé. Přesto můžete obě tyto části považovat za volitelné čtení.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b1",
       "type": "paragraph",
       "html": "<p>When a C++ program is executed, it executes sequentially, beginning at the top of <code>main()</code>. When a function call is encountered, the point of execution jumps to the beginning of the function being called. How does the CPU know to do this?</p>",
       "preview": "When a C++ program is executed, it executes sequentially, beginning at the top o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je program v C++ spuštěn, vykonává se sekvenčně, počínaje začátkem funkce <code>main()</code>. Když dojde k volání funkce, bod vykonávání programu skočí na začátek volané funkce. Jak procesor (CPU) ví, že to má udělat?</p>"
     },
     {
       "id": "early-binding-and-late-binding_b2",
       "type": "paragraph",
       "html": "<p>When a program is compiled, the compiler converts each statement in your C++ program into one or more lines of machine language. Each line of machine language is given its own unique sequential address. This is no different for functions -- when a function is encountered, it is converted into machine language and given the next available address. Thus, each function ends up with a unique address.</p>",
       "preview": "When a program is compiled, the compiler converts each statement in your C++ pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při kompilaci programu překladač převede každý příkaz ve vašem C++ programu na jeden nebo více řádků strojového kódu. Každý řádek strojového kódu dostane svou vlastní unikátní sekvenční adresu. Pro funkce to platí stejně – jakmile překladač narazí na funkci, převede ji do strojového kódu a přidělí jí další dostupnou adresu. Každá funkce tak nakonec získá unikátní adresu.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b3",
       "type": "section",
       "title": "Binding and dispatching",
       "html": "<h3 class=\"cpp-section-heading\">Binding and dispatching</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vazba a dispečink (Binding and dispatching)</h3>",
+      "title_cs": "Vazba a expedice"
     },
     {
       "id": "early-binding-and-late-binding_b4",
       "type": "paragraph",
       "html": "<p>Our programs contain many names (identifiers, keywords, etc…). Each name has a set of associated properties: for example, if the name represents a variable, that variable has a type, a value, a memory address, etc…</p>",
       "preview": "Our programs contain many names (identifiers, keywords, etc…). Each name has a s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naše programy obsahují mnoho názvů (identifikátory, klíčová slova atd.). Každý název má sadu přidružených vlastností: například pokud název představuje proměnnou, má tato proměnná typ, hodnotu, paměťovou adresu atd.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b5",
       "type": "paragraph",
       "html": "<p>For example, when we say <code>int x</code>, we’re telling the compiler to associate the name <code>x</code> with the type <code>int</code>. Later if we say <code>x = 5</code>, the compiler can use this association to type check the assignment to ensure it is valid.</p>",
       "preview": "For example, when we say int x, we’re telling the compiler to associate the name",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například když napíšeme <code>int x</code>, říkáme překladači, aby spojil název <code>x</code> s typem <code>int</code>. Pokud později napíšeme <code>x = 5</code>, překladač může toto propojení použít k typové kontrole přiřazení a ověřit, zda je platné.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b6",
       "type": "paragraph",
       "html": "<p>In general programming, <strong>binding</strong> is the process of associating names with such properties. <strong>Function binding</strong> (or <strong>method binding</strong>) is the process that determines what function definition is associated with a function call. The process of actually invoking a bound function is called <strong>dispatching</strong>.</p>",
       "preview": "In general programming, binding is the process of associating names with such pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V obecném programování je <strong>vazba</strong> (binding) proces přiřazování názvů k těmto vlastnostem. <strong>Vazba funkcí</strong> (nebo <strong>vazba metod</strong>) je proces, který určuje, která definice funkce je přiřazena k danému volání funkce. Samotný proces vyvolání svázané funkce se nazývá <strong>dispečink</strong> (dispatching).</p>"
     },
     {
       "id": "early-binding-and-late-binding_b7",
       "type": "paragraph",
       "html": "<p>In C++, the term binding is used more casually (and dispatching is usually considered part of binding). We’ll explore the C++ use of the terms below.</p>",
       "preview": "In C++, the term binding is used more casually (and dispatching is usually consi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ se termín vazba (binding) používá volněji (a dispečink je obvykle považován za součást vazby). Na použití těchto termínů v C++ se podíváme níže.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b8",
@@ -71,21 +80,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>Binding is an overloaded term. In other contexts, binding may refer to:</p><ul><li>The binding of a reference to an object</li><li><code>std::bind</code></li><li>Language binding</li></ul></div>",
       "preview": "NomenclatureBinding is an overloaded term. In other contexts, binding may refer to:The binding of a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Vazba (binding) je přetížený pojem. V jiných kontextech může vazba označovat:</p><ul><li>Navázání reference na objekt (binding a reference)</li><li><code>std::bind</code></li><li>Jazykovou vazbu (language binding)</li></ul></div>"
     },
     {
       "id": "early-binding-and-late-binding_b9",
       "type": "section",
       "title": "Early binding",
       "html": "<h3 class=\"cpp-section-heading\">Early binding</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Časná vazba (Early binding)</h3>",
+      "title_cs": "Předčasná vazba"
     },
     {
       "id": "early-binding-and-late-binding_b10",
       "type": "paragraph",
       "html": "<p>Most of the function calls the compiler encounters will be direct function calls. A direct function call is a statement that directly calls a function. For example:</p>",
       "preview": "Most of the function calls the compiler encounters will be direct function calls",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Většina volání funkcí, se kterými se kompilátor setká, budou přímá volání funkcí. Přímé volání funkce je příkaz, který funkci volá přímo. Například:</p>"
     },
     {
       "id": "early-binding-and-late-binding_b11",
@@ -93,14 +106,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Foo\n{\n    void printValue(int value)\n    {\n        std::cout << value;\n    }\n};\n\nvoid printValue(int value)\n{\n    std::cout << value;\n}\n\nint main()\n{\n    printValue(5);   // direct function call to printValue(int)\n\n    Foo f{};\n    f.printValue(5); // direct function call to Foo::printValue(int)\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Foo\n{\n    void printValue(int value)\n    {\n        std::cout &lt;&lt; value;\n    }\n};\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value;\n}\n\nint main()\n{\n    printValue(5);   // direct function call to printValue(int)\n\n    Foo f{};\n    f.printValue(5); // direct function call to Foo::printValue(int)\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Foo\n{\n    void printValue (hodnota int)\n    {\n        std::cout << hodnota;\n    }\n};\n\nvoid printValue (hodnota int)\n{\n    std::cout << hodnota;\n}\n\nint main()\n{\n    printValue(5);   // přímé volání funkce na printValue(int)\n\n    Foo f{};\n    f.printValue(5); // přímé volání funkce na Foo::printValue(int)\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "early-binding-and-late-binding_b12",
       "type": "paragraph",
       "html": "<p>In C++, when a direct call is made to a non-member function or a non-virtual member function, the compiler can determine which function definition should be matched to the call. This is sometimes called <strong>early binding</strong> (or <strong>static binding</strong>), as it can be performed at compile-time. The compiler (or linker) can then generate machine language instructions that tells the CPU to jump directly to the address of the function.</p>",
       "preview": "In C++, when a direct call is made to a non-member function or a non-virtual mem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je v C++ provedeno přímé volání nečlenské funkce nebo nevirtuální členské funkce, kompilátor dokáže určit, která definice funkce má být k tomuto volání přiřazena. Tomuto procesu se někdy říká <strong>časná vazba</strong> (nebo <strong>statická vazba</strong>), protože jej lze provést již v době překladu (compile-time). Kompilátor (nebo linker) pak může vygenerovat instrukce ve strojovém kódu, které procesoru řeknou, aby skočil přímo na adresu dané funkce.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b13",
@@ -108,14 +123,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>If we look at the assembly code generated for the call to <code>printValue(5)</code> (using clang x86-64), we see something like this:</p><pre>        mov     edi, 5           ; copy argument 5 into edi register in preparation for function call\n        call    printValue(int)  ; directly call printValue(int)\n</pre><p>You can clearly see that this is a direct function call to printValue(int).</p></div>",
       "preview": "For advanced readersIf we look at the assembly code generated for the call to printValue(5) (using c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Pokud se podíváme na kód v assembleru vygenerovaný pro volání <code>printValue(5)</code> (pomocí Clangu x86-64), uvidíme něco takového:</p><pre>        mov     edi, 5           ; zkopíruj argument 5 do registru edi v rámci přípravy na volání funkce\n        call    printValue(int)  ; přímo zavolej printValue(int)\n</pre><p>Jasně vidíte, že se jedná o přímé volání funkce printValue(int).</p></div>"
     },
     {
       "id": "early-binding-and-late-binding_b14",
       "type": "paragraph",
       "html": "<p>Calls to overloaded functions and function templates can also be resolved at compile-time:</p>",
       "preview": "Calls to overloaded functions and function templates can also be resolved at com",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání přetížených funkcí a šablon funkcí lze rovněž vyřešit v době překladu:</p>"
     },
     {
       "id": "early-binding-and-late-binding_b15",
@@ -123,14 +140,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntemplate <typename T>\nvoid printValue(T value)\n{\n    std::cout << value << '\\n';\n}\n\nvoid printValue(double value)\n{\n    std::cout << value << '\\n';\n}\n\nvoid printValue(int value)\n{\n    std::cout << value << '\\n';\n}\n\nint main()\n{\n    printValue(5);   // direct function call to printValue(int)\n    printValue<>(5); // direct function call to printValue<int>(int)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntemplate &lt;typename T&gt;\nvoid printValue(T value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nvoid printValue(double value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printValue(5);   // direct function call to printValue(int)\n    printValue&lt;&gt;(5); // direct function call to printValue&lt;int&gt;(int)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nšablona <název typu T>\nvoid printValue (hodnota T)\n{\n    std::cout << hodnota << '\\n';\n}\n\nvoid printValue (dvojitá hodnota)\n{\n    std::cout << hodnota << '\\n';\n}\n\nvoid printValue (hodnota int)\n{\n    std::cout << hodnota << '\\n';\n}\n\nint main()\n{\n    printValue(5);   // přímé volání funkce na printValue(int)\n    printValue<>(5); // přímé volání funkce na printValue<int>(int)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "early-binding-and-late-binding_b16",
       "type": "paragraph",
       "html": "<p>Let’s take a look at a simple calculator program that uses early binding:</p>",
       "preview": "Let’s take a look at a simple calculator program that uses early binding:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na jednoduchý program kalkulačky, který využívá časnou vazbu:</p>"
     },
     {
       "id": "early-binding-and-late-binding_b17",
@@ -138,35 +157,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout << \"Enter a number: \";\n    std::cin >> x;\n\n    int y{};\n    std::cout << \"Enter another number: \";\n    std::cin >> y;\n\n    int op{};\n    std::cout << \"Enter an operation (0=add, 1=subtract, 2=multiply): \";\n    std::cin >> op;\n\n    int result {};\n    switch (op)\n    {\n        // call the target function directly using early binding\n        case 0: result = add(x, y); break;\n        case 1: result = subtract(x, y); break;\n        case 2: result = multiply(x, y); break;\n        default:\n            std::cout << \"Invalid operator\\n\";\n            return 1;\n    }\n\n    std::cout << \"The answer is: \" << result << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout &lt;&lt; \"Enter a number: \";\n    std::cin &gt;&gt; x;\n\n    int y{};\n    std::cout &lt;&lt; \"Enter another number: \";\n    std::cin &gt;&gt; y;\n\n    int op{};\n    std::cout &lt;&lt; \"Enter an operation (0=add, 1=subtract, 2=multiply): \";\n    std::cin &gt;&gt; op;\n\n    int result {};\n    switch (op)\n    {\n        // call the target function directly using early binding\n        case 0: result = add(x, y); break;\n        case 1: result = subtract(x, y); break;\n        case 2: result = multiply(x, y); break;\n        default:\n            std::cout &lt;&lt; \"Invalid operator\\n\";\n            return 1;\n    }\n\n    std::cout &lt;&lt; \"The answer is: \" &lt;&lt; result &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}\n\nint odečíst (int x, int y)\n{\n    návrat x - y;\n}\n\nint násobit (int x, int y)\n{\n    návrat x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout << \"Zadejte číslo: \";\n    std::cin >> x;\n\n    int y{};\n    std::cout << \"Zadejte jiné číslo: \";\n    std::cin >> y;\n\n    int op{};\n    std::cout << \"Zadejte operaci (0=přičíst, 1=odečíst, 2=násobit): \";\n    std::cin >> op;\n\n    int vysledek {};\n    vypínač (op)\n    {\n        // zavolá cílovou funkci přímo pomocí včasné vazby\n        případ 0: výsledek = add(x, y); přerušení;\n        případ 1: výsledek = odečíst(x, y); přerušení;\n        případ 2: výsledek = multiply(x, y); přerušení;\n        výchozí:\n            std::cout << \"Neplatný operátor\\n\";\n            návrat 1;\n    }\n\n    std::cout << \"Odpověď je: \" << výsledek << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "early-binding-and-late-binding_b18",
       "type": "paragraph",
       "html": "<p>Because <code>add()</code>, <code>subtract()</code>, and <code>multiply()</code> are all direct function calls to non-member functions, the compiler will match these function calls to their respective function definitions at compile-time.</p>",
       "preview": "Because add(), subtract(), and multiply() are all direct function calls to non-m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>add()</code>, <code>subtract()</code> a <code>multiply()</code> jsou všechno přímá volání nečlenských funkcí, kompilátor tato volání přiřadí k jejich příslušným definicím funkcí již v době překladu.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b19",
       "type": "paragraph",
       "html": "<p>Note that because of the switch statement, which function is actually called is not determined until runtime. However, that is a path of execution issue, not a binding issue.</p>",
       "preview": "Note that because of the switch statement, which function is actually called is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že kvůli příkazu switch se to, která funkce je skutečně zavolána, určí až za běhu programu (runtime). Jde však o záležitost cesty vykonávání kódu (path of execution), nikoli o problém s vazbou (binding).</p>"
     },
     {
       "id": "early-binding-and-late-binding_b20",
       "type": "section",
       "title": "Late binding",
       "html": "<h3 class=\"cpp-section-heading\">Late binding</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pozdní vazba (Late binding)</h3>",
+      "title_cs": "Pozdní vazba"
     },
     {
       "id": "early-binding-and-late-binding_b21",
       "type": "paragraph",
       "html": "<p>In some cases, a function call can’t be resolved until runtime. In C++, this is sometimes known as <strong>late binding</strong> (or in the case of virtual function resolution, <strong>dynamic dispatch</strong>).</p>",
       "preview": "In some cases, a function call can’t be resolved until runtime. In C++, this is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V některých případech nelze volání funkce vyřešit až do doby běhu programu. V C++ se tomu někdy říká <strong>pozdní vazba</strong> (<strong>late binding</strong>, případně v případě vyhodnocování virtuálních funkcí <strong>dynamický dispatch / dynamické odesílání</strong>).</p>"
     },
     {
       "id": "early-binding-and-late-binding_b22",
@@ -174,21 +199,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>In general programming terminology, the term “late binding” usually means that the function being called can’t be determined based on static type information alone, but must be resolved using dynamic type information.</p><p>In C++, the term tends to be used more loosely to mean any function call where the actual function being called is not known by the compiler or linker at the point where the function call is actually being made.</p></div>",
       "preview": "Author’s noteIn general programming terminology, the term “late binding” usually means that the func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>V obecné programátorské terminologii pojem „pozdní vazba“ obvykle znamená, že volanou funkci nelze určit pouze na základě statických informací o typech, ale musí být vyřešena pomocí dynamických typových informací.</p><p>V C++ se tento termín obvykle používá volněji ve smyslu jakéhokoli volání funkce, kde skutečně volaná funkce není kompilátoru ani linkeru známa v místě, kde k samotnému volání funkce dochází.</p></div>"
     },
     {
       "id": "early-binding-and-late-binding_b23",
       "type": "paragraph",
       "html": "<p>In C++, one way to get late binding is to use function pointers. To review function pointers briefly, a function pointer is a type of pointer that points to a function instead of a variable. The function that a function pointer points to can be called by using the function call operator <code>()</code> on the pointer.</p>",
       "preview": "In C++, one way to get late binding is to use function pointers. To review funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ je jedním ze způsobů, jak dosáhnout pozdní vazby, použití ukazatelů na funkce (function pointers). Pro stručné zopakování: ukazatel na funkci je typ ukazatele, který místo na proměnnou ukazuje na funkci. Funkci, na kterou ukazatel ukazuje, lze zavolat pomocí operátoru volání funkce <code>()</code> aplikovaného na tento ukazatel.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b24",
       "type": "paragraph",
       "html": "<p>For example, the following code calls the <code>printValue()</code> function through a function pointer:</p>",
       "preview": "For example, the following code calls the printValue() function through a functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující kód například volá funkci <code>printValue()</code> prostřednictvím ukazatele na funkci:</p>"
     },
     {
       "id": "early-binding-and-late-binding_b25",
@@ -196,14 +224,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printValue(int value)\n{\n    std::cout << value << '\\n';\n}\n\nint main()\n{\n    auto fcn { printValue }; // create a function pointer and make it point to function printValue\n    fcn(5);                  // invoke printValue indirectly through the function pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printValue(int value)\n{\n    std::cout &lt;&lt; value &lt;&lt; '\\n';\n}\n\nint main()\n{\n    auto fcn { printValue }; // create a function pointer and make it point to function printValue\n    fcn(5);                  // invoke printValue indirectly through the function pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printValue (hodnota int)\n{\n    std::cout << hodnota << '\\n';\n}\n\nint main()\n{\n    auto fcn { printValue }; // vytvořte ukazatel funkce a nastavte jej na funkci printValue\n    fcn(5);                  // vyvolání printValue nepřímo přes ukazatel funkce\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "early-binding-and-late-binding_b26",
       "type": "paragraph",
       "html": "<p>Calling a function via a function pointer is also known as an indirect function call. At the point where <code>fcn(5)</code> is actually called, the compiler does not know at compile-time what function is being called. Instead, at runtime, an indirect function call is made to whatever function exists at the address held by the function pointer.</p>",
       "preview": "Calling a function via a function pointer is also known as an indirect function ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání funkce prostřednictvím ukazatele na funkci je známé také jako nepřímé volání funkce (indirect function call). V místě, kde je <code>fcn(5)</code> skutečně voláno, kompilátor v době překladu neví, jaká funkce je volána. Místo toho je za běhu programu provedeno nepřímé volání funkce na adresu, kterou ukazatel na funkci zrovna obsahuje.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b27",
@@ -211,14 +241,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>If we look at the assembly code generated for the call to <code>fcn(5)</code> (using clang x86-64), we see something like this:</p><pre>        lea     rax, [rip + printValue(int)] ; determine address of printValue and place into rax register\n        mov     qword ptr [rbp - 8], rax     ; move value in rax register into memory associated with variable fcn\n\n        mov     edi, 5                       ; copy argument 5 into edi register in preparation for function call\n        call    qword ptr [rbp - 8]          ; invoke the function at the address held by variable fcn\n</pre><p>You can clearly see that this is a indirect function call to printValue(int) via its address.</p></div>",
       "preview": "For advanced readersIf we look at the assembly code generated for the call to fcn(5) (using clang x8",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Pokud se podíváme na kód v assembleru vygenerovaný pro volání <code>fcn(5)</code> (pomocí clang x86-64), uvidíme něco takového:</p><pre>        lea     rax, [rip + printValue(int)] ; determine address of printValue and place into rax register\n        mov     qword ptr [rbp - 8], rax     ; move value in rax register into memory associated with variable fcn\n\n        mov     edi, 5                       ; copy argument 5 into edi register in preparation for function call\n        call    qword ptr [rbp - 8]          ; invoke the function at the address held by variable fcn\n</pre><p>Jasně vidíte, že se jedná o nepřímé volání funkce printValue(int) prostřednictvím její adresy.</p></div>"
     },
     {
       "id": "early-binding-and-late-binding_b28",
       "type": "paragraph",
       "html": "<p>The following calculator program is functionally identical to the calculator example above, except it uses a function pointer instead of a direct function call:</p>",
       "preview": "The following calculator program is functionally identical to the calculator exa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující program kalkulačky je funkčně identický s příkladem kalkulačky výše, kromě toho, že místo přímého volání funkce používá ukazatel funkce:</p>"
     },
     {
       "id": "early-binding-and-late-binding_b29",
@@ -226,35 +258,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout << \"Enter a number: \";\n    std::cin >> x;\n\n    int y{};\n    std::cout << \"Enter another number: \";\n    std::cin >> y;\n\n    int op{};\n    std::cout << \"Enter an operation (0=add, 1=subtract, 2=multiply): \";\n    std::cin >> op;\n\n    using FcnPtr = int (*)(int, int); // alias ugly function pointer type\n    FcnPtr fcn { nullptr }; // create a function pointer object, set to nullptr initially\n\n    // Set fcn to point to the function the user chose\n    switch (op)\n    {\n        case 0: fcn = add; break;\n        case 1: fcn = subtract; break;\n        case 2: fcn = multiply; break;\n        default:\n            std::cout << \"Invalid operator\\n\";\n            return 1;\n    }\n\n    // Call the function that fcn is pointing to with x and y as parameters\n    std::cout << \"The answer is: \" << fcn(x, y) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint subtract(int x, int y)\n{\n    return x - y;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout &lt;&lt; \"Enter a number: \";\n    std::cin &gt;&gt; x;\n\n    int y{};\n    std::cout &lt;&lt; \"Enter another number: \";\n    std::cin &gt;&gt; y;\n\n    int op{};\n    std::cout &lt;&lt; \"Enter an operation (0=add, 1=subtract, 2=multiply): \";\n    std::cin &gt;&gt; op;\n\n    using FcnPtr = int (*)(int, int); // alias ugly function pointer type\n    FcnPtr fcn { nullptr }; // create a function pointer object, set to nullptr initially\n\n    // Set fcn to point to the function the user chose\n    switch (op)\n    {\n        case 0: fcn = add; break;\n        case 1: fcn = subtract; break;\n        case 2: fcn = multiply; break;\n        default:\n            std::cout &lt;&lt; \"Invalid operator\\n\";\n            return 1;\n    }\n\n    // Call the function that fcn is pointing to with x and y as parameters\n    std::cout &lt;&lt; \"The answer is: \" &lt;&lt; fcn(x, y) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}\n\nint odečíst (int x, int y)\n{\n    návrat x - y;\n}\n\nint násobit (int x, int y)\n{\n    návrat x * y;\n}\n\nint main()\n{\n    int x{};\n    std::cout << \"Zadejte číslo: \";\n    std::cin >> x;\n\n    int y{};\n    std::cout << \"Zadejte jiné číslo: \";\n    std::cin >> y;\n\n    int op{};\n    std::cout << \"Zadejte operaci (0=přičíst, 1=odečíst, 2=násobit): \";\n    std::cin >> op;\n\n    pomocí FcnPtr = int (*) (int, int); // alias ošklivý typ ukazatele funkce\n    FcnPtr fcn { nullptr }; // vytvoří objekt ukazatele funkce, zpočátku nastavený na nullptr\n\n    // Nastaví fcn tak, aby ukazoval na funkci, kterou si uživatel vybral\n    vypínač (op)\n    {\n        případ 0: fcn = přidat; přerušení;\n        případ 1: fcn = odečíst; přerušení;\n        případ 2: fcn = násobit; přerušení;\n        výchozí:\n            std::cout << \"Neplatný operátor\\n\";\n            návrat 1;\n    }\n\n    // Volání funkce, na kterou fcn ukazuje s parametry x a y\n    std::cout << \"Odpověď je: \" << fcn(x, y) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "early-binding-and-late-binding_b30",
       "type": "paragraph",
       "html": "<p>In this example, instead of calling the <code>add()</code>, <code>subtract()</code>, or <code>multiply()</code> function directly, we’ve instead set <code>fcn</code> to point at the function we wish to call. Then we call the function through the pointer.</p>",
       "preview": "In this example, instead of calling the add(), subtract(), or multiply() functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu místo přímého volání funkcí <code>add()</code>, <code>subtract()</code> nebo <code>multiply()</code> jsme místo toho nastavili <code>fcn</code> tak, aby ukazoval na funkci, kterou chceme volat. Poté funkci zavoláme přes ukazatel.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b31",
       "type": "paragraph",
       "html": "<p>The compiler is unable to use early binding to resolve the function call <code>fcn(x, y)</code> because it can not tell which function <code>fcn</code> will be pointing to at compile time!</p>",
       "preview": "The compiler is unable to use early binding to resolve the function call fcn(x, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompilátor nemůže použít včasnou vazbu k vyřešení volání funkce <code>fcn(x, y)</code>, protože nemůže určit, na kterou funkci bude <code>fcn</code> v době kompilace ukazovat!</p>"
     },
     {
       "id": "early-binding-and-late-binding_b32",
       "type": "paragraph",
       "html": "<p>Late binding is slightly less efficient since it involves an extra level of indirection. With early binding, the CPU can jump directly to the function’s address. With late binding, the program has to read the address held in the pointer and then jump to that address. This involves one extra step, making it slightly slower. However, the advantage of late binding is that it is more flexible than early binding, because decisions about what function to call do not need to be made until runtime.</p>",
       "preview": "Late binding is slightly less efficient since it involves an extra level of indi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pozdní vazba je o něco méně účinná, protože zahrnuje další úroveň nepřímosti. S včasnou vazbou může CPU skočit přímo na adresu funkce. Při pozdním vázání musí program načíst adresu uloženou v ukazateli a poté na tuto adresu skočit. To zahrnuje jeden krok navíc, takže je o něco pomalejší. Výhodou pozdní vazby je však to, že je flexibilnější než časná vazba, protože rozhodnutí o tom, jakou funkci volat, není třeba dělat až za běhu.</p>"
     },
     {
       "id": "early-binding-and-late-binding_b33",
       "type": "paragraph",
       "html": "<p>In the next lesson, we’ll take a look at how late binding is used to implement virtual functions.</p>",
       "preview": "In the next lesson, we’ll take a look at how late binding is used to implement v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V další lekci se podíváme na to, jak se pozdní vazba používá k implementaci virtuálních funkcí.</p>"
     }
-  ]
+  ],
+  "title_cs": "25.5 — Časná vazba a pozdní vazba"
 }

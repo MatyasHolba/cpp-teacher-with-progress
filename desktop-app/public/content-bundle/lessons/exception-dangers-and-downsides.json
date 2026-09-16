@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>As with almost everything that has benefits, there are some potential downsides to exceptions as well. This article is not meant to be comprehensive, but just to point out some of the major issues that should be considered when using exceptions (or deciding whether to use them).</p>",
       "preview": "As with almost everything that has benefits, there are some potential downsides ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako téměř vše, co má výhody, existují i ​​výjimky. Tento článek nemá být vyčerpávající, ale pouze poukázat na některé z hlavních problémů, které je třeba vzít v úvahu při používání výjimek (nebo při rozhodování, zda je použít).</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b1",
       "type": "paragraph",
       "html": "<p><strong>Cleaning up resources</strong></p>",
       "preview": "Cleaning up resources",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Čištění zdrojů</strong></p>"
     },
     {
       "id": "exception-dangers-and-downsides_b2",
       "type": "paragraph",
       "html": "<p>One of the biggest problems that new programmers run into when using exceptions is the issue of cleaning up resources when an exception occurs. Consider the following example:</p>",
       "preview": "One of the biggest problems that new programmers run into when using exceptions ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z největších problémů, se kterými se noví programátoři při používání výjimek setkávají, je problém čištění prostředků, když dojde k výjimce. Zvažte následující příklad:</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b3",
@@ -36,14 +39,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntry\n{\n    openFile(filename);\n    writeFile(filename, data);\n    closeFile(filename);\n}\ncatch (const FileException& exception)\n{\n    std::cerr << \"Failed to write to file: \" << exception.what() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntry\n{\n    openFile(filename);\n    writeFile(filename, data);\n    closeFile(filename);\n}\ncatch (const FileException&amp; exception)\n{\n    std::cerr &lt;&lt; \"Failed to write to file: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nzkusit\n{\n    openFile(název souboru);\n    writeFile(název souboru, data);\n    closeFile(název souboru);\n}\ncatch (const FileException & výjimka)\n{\n    std::cerr << \"Zápis do souboru se nezdařil: \" << výjimka.what() << '\\n';\n}</code></pre>"
     },
     {
       "id": "exception-dangers-and-downsides_b4",
       "type": "paragraph",
       "html": "<p>What happens if WriteFile() fails and throws a FileException? At this point, we’ve already opened the file, and now control flow jumps to the FileException handler, which prints an error and exits. Note that the file was never closed! This example should be rewritten as follows:</p>",
       "preview": "What happens if WriteFile() fails and throws a FileException? At this point, we’",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se stane, když WriteFile() selže a vyvolá výjimku FileException? V tomto okamžiku jsme již soubor otevřeli a řídicí tok nyní přeskočí na obslužnou rutinu FileException, která vypíše chybu a ukončí se. Všimněte si, že soubor nebyl nikdy uzavřen! Tento příklad by měl být přepsán následovně:</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b5",
@@ -51,14 +56,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntry\n{\n    openFile(filename);\n    writeFile(filename, data);\n}\ncatch (const FileException& exception)\n{\n    std::cerr << \"Failed to write to file: \" << exception.what() << '\\n';\n}\n\n// Make sure file is closed\ncloseFile(filename);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntry\n{\n    openFile(filename);\n    writeFile(filename, data);\n}\ncatch (const FileException&amp; exception)\n{\n    std::cerr &lt;&lt; \"Failed to write to file: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}\n\n// Make sure file is closed\ncloseFile(filename);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nzkusit\n{\n    openFile(název souboru);\n    writeFile(název souboru, data);\n}\ncatch (const FileException & výjimka)\n{\n    std::cerr << \"Zápis do souboru se nezdařil: \" << výjimka.what() << '\\n';\n}\n\n// Ujistěte se, že je soubor uzavřen\ncloseFile(název souboru);</code></pre>"
     },
     {
       "id": "exception-dangers-and-downsides_b6",
       "type": "paragraph",
       "html": "<p>This kind of error often crops up in another form when dealing with dynamically allocated memory:</p>",
       "preview": "This kind of error often crops up in another form when dealing with dynamically ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento druh chyby se při práci s dynamicky alokovanou pamětí často objevuje v jiné podobě:</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b7",
@@ -66,21 +73,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ntry\n{\n    auto* john { new Person{ \"John\", 18, PERSON_MALE } };\n    processPerson(john);\n    delete john;\n}\ncatch (const PersonException& exception)\n{\n    std::cerr << \"Failed to process person: \" << exception.what() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ntry\n{\n    auto* john { new Person{ \"John\", 18, PERSON_MALE } };\n    processPerson(john);\n    delete john;\n}\ncatch (const PersonException&amp; exception)\n{\n    std::cerr &lt;&lt; \"Failed to process person: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nzkusit\n{\n    auto* john { nová osoba{ \"John\", 18, PERSON_MALE } };\n    processPerson(john);\n    smazat john;\n}\ncatch (const PersonException & výjimka)\n{\n    std::cerr << \"Nepodařilo se zpracovat osobu: \" << výjimka.what() << '\\n';\n}</code></pre>"
     },
     {
       "id": "exception-dangers-and-downsides_b8",
       "type": "paragraph",
       "html": "<p>If processPerson() throws an exception, control flow jumps to the catch handler. As a result, john is never deallocated! This example is a little more tricky than the previous one -- because john is local to the try block, it goes out of scope when the try block exits. That means the exception handler can not access john at all (its been destroyed already), so there’s no way for it to deallocate the memory.</p>",
       "preview": "If processPerson() throws an exception, control flow jumps to the catch handler.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud processPerson() vyvolá výjimku, řídicí tok přeskočí na handler catch. Výsledkem je, že John není nikdy uvolněn! Tento příklad je o něco složitější než předchozí – protože john je lokální pro blok try, přejde mimo rozsah, když blok try opustí. To znamená, že obslužná rutina výjimky nemá vůbec přístup k Johnovi (už byla zničena), takže neexistuje způsob, jak uvolnit paměť.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b9",
       "type": "paragraph",
       "html": "<p>However, there are two relatively easy ways to fix this. First, declare john outside of the try block so it does not go out of scope when the try block exits:</p>",
       "preview": "However, there are two relatively easy ways to fix this. First, declare john out",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existují však dva relativně snadné způsoby, jak to napravit. Nejprve deklarujte Johna mimo blok try, aby při ukončení bloku try nevyšel mimo rozsah:</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b10",
@@ -88,21 +98,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nPerson* john{ nullptr };\n\ntry\n{\n    john = new Person(\"John\", 18, PERSON_MALE);\n    processPerson(john);\n}\ncatch (const PersonException& exception)\n{\n    std::cerr << \"Failed to process person: \" << exception.what() << '\\n';\n}\n\ndelete john;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nPerson* john{ nullptr };\n\ntry\n{\n    john = new Person(\"John\", 18, PERSON_MALE);\n    processPerson(john);\n}\ncatch (const PersonException&amp; exception)\n{\n    std::cerr &lt;&lt; \"Failed to process person: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}\n\ndelete john;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nOsoba* john{ nullptr };\n\nzkusit\n{\n    john = nová osoba(\"Jan\", 18, PERSON_MALE);\n    processPerson(john);\n}\ncatch (const PersonException & výjimka)\n{\n    std::cerr << \"Nepodařilo se zpracovat osobu: \" << výjimka.what() << '\\n';\n}\n\nsmazat john;</code></pre>"
     },
     {
       "id": "exception-dangers-and-downsides_b11",
       "type": "paragraph",
       "html": "<p>Because john is declared outside the try block, it is accessible both within the try block and the catch handlers. This means the catch handler can do cleanup properly.</p>",
       "preview": "Because john is declared outside the try block, it is accessible both within the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože john je deklarován mimo blok try, je přístupný jak v bloku try, tak v handleru catch. To znamená, že handler catch může provést vyčištění správně.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b12",
       "type": "paragraph",
       "html": "<p>The second way is to use a local variable of a class that knows how to cleanup itself when it goes out of scope (often called a “smart pointer”). The standard library provides a class called std::unique_ptr that can be used for this purpose. <strong>std::unique_ptr</strong> is a template class that holds a pointer, and deallocates it when it goes out of scope.</p>",
       "preview": "The second way is to use a local variable of a class that knows how to cleanup i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhým způsobem je použití lokální proměnné třídy, která ví, jak se sama vyčistit, když překročí rozsah (často nazývaná „chytrý ukazatel“). Standardní knihovna poskytuje třídu nazvanou std::unique_ptr, kterou lze pro tento účel použít. <strong>std::unique_ptr</strong> je třída šablony, která obsahuje ukazatel a uvolňuje jej, když překročí rozsah.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b13",
@@ -110,7 +123,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <memory> // for std::unique_ptr\n\ntry\n{\n    auto* john { new Person(\"John\", 18, PERSON_MALE) };\n    std::unique_ptr<Person> upJohn { john }; // upJohn now owns john\n\n    ProcessPerson(john);\n\n    // when upJohn goes out of scope, it will delete john\n}\ncatch (const PersonException& exception)\n{\n    std::cerr << \"Failed to process person: \" << exception.what() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::unique_ptr\n\ntry\n{\n    auto* john { new Person(\"John\", 18, PERSON_MALE) };\n    std::unique_ptr&lt;Person&gt; upJohn { john }; // upJohn now owns john\n\n    ProcessPerson(john);\n\n    // when upJohn goes out of scope, it will delete john\n}\ncatch (const PersonException&amp; exception)\n{\n    std::cerr &lt;&lt; \"Failed to process person: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <paměť> // pro std::unique_ptr\n\nzkusit\n{\n    auto* john { new Person(\"John\", 18, PERSON_MALE) };\n    std::unique_ptr<Person> upJohn { john }; // upJohn nyní vlastní john\n\n    ProcessPerson(john);\n\n    // když upJohn přejde mimo rozsah, smaže john\n}\ncatch (const PersonException & výjimka)\n{\n    std::cerr << \"Nepodařilo se zpracovat osobu: \" << výjimka.what() << '\\n';\n}</code></pre>"
     },
     {
       "id": "exception-dangers-and-downsides_b14",
@@ -118,42 +132,48 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We cover <code>std::unique_ptr</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdunique_ptr/\">22.5 -- std::unique_ptr</a>.</p></div>",
       "preview": "Related contentWe cover std::unique_ptr in lesson 22.5 -- std::unique_ptr.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Pokrýváme <code>std::unique_ptr</code> v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdunique_ptr --/\">22. std::unique_ptr</a>.</p></div>"
     },
     {
       "id": "exception-dangers-and-downsides_b15",
       "type": "paragraph",
       "html": "<p>The best option (whenever possible) is to prefer to stack allocate objects that implement RAII (automatically allocate resources on construction, deallocate resource on destruction). That way when the object managing the resource goes out of scope for any reason, it will automatically deallocate as appropriate, so we don’t have to worry about such things!</p>",
       "preview": "The best option (whenever possible) is to prefer to stack allocate objects that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejlepší možností (kdykoli je to možné) je upřednostnit skládání alokačních objektů, které implementují RAII (automaticky alokovat zdroje při výstavbě, uvolnit zdroje při zničení). Tímto způsobem, když objekt spravující zdroj z jakéhokoli důvodu přejde mimo rozsah, automaticky se uvolní podle potřeby, takže se o takové věci nemusíme starat!</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b16",
       "type": "paragraph",
       "html": "<p><strong>Exceptions and destructors</strong></p>",
       "preview": "Exceptions and destructors",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výjimky a destruktory</strong></p>"
     },
     {
       "id": "exception-dangers-and-downsides_b17",
       "type": "paragraph",
       "html": "<p>Unlike constructors, where throwing exceptions can be a useful way to indicate that object creation did not succeed, exceptions should <em>never</em> be thrown in destructors.</p>",
       "preview": "Unlike constructors, where throwing exceptions can be a useful way to indicate t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od konstruktorů, kde může být vyvolání výjimek užitečným způsobem, jak indikovat, že vytvoření objektu nebylo úspěšné, výjimky by v destruktorech <em>nikdy</em> neměly být vyvolány.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b18",
       "type": "paragraph",
       "html": "<p>The problem occurs when an exception is thrown out of a destructor during the stack unwinding process. If that happens, the compiler is put in a situation where it doesn’t know whether to continue the stack unwinding process or handle the new exception. The end result is that your program will be terminated immediately.</p>",
       "preview": "The problem occurs when an exception is thrown out of a destructor during the st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Problém nastává, když je výjimka vyvolána z destruktoru během procesu odvíjení zásobníku. Pokud k tomu dojde, kompilátor se dostane do situace, kdy neví, zda má pokračovat v procesu odvíjení zásobníku nebo zpracovat novou výjimku. Konečným výsledkem je, že váš program bude okamžitě ukončen.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b19",
       "type": "paragraph",
       "html": "<p>Consequently, the best course of action is just to abstain from using exceptions in destructors altogether. Write a message to a log file instead.</p>",
       "preview": "Consequently, the best course of action is just to abstain from using exceptions",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V důsledku toho je nejlepším postupem prostě se zdržet používání výjimek v destruktorech úplně. Místo toho napište zprávu do souboru protokolu.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b20",
@@ -161,63 +181,73 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>If an exception is thrown out of a destructor during stack unwinding, the program will be halted.</p></div>",
       "preview": "RuleIf an exception is thrown out of a destructor during stack unwinding, the program will be halted",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Pokud je během odvíjení zásobníku vyvolána výjimka z destruktoru, program se zastaví.</p></div>"
     },
     {
       "id": "exception-dangers-and-downsides_b21",
       "type": "paragraph",
       "html": "<p><strong>Performance concerns</strong></p>",
       "preview": "Performance concerns",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Otázky ohledně výkonu</strong></p>"
     },
     {
       "id": "exception-dangers-and-downsides_b22",
       "type": "paragraph",
       "html": "<p>Exceptions do come with a small performance price to pay. They increase the size of your executable, and they may also cause it to run slower due to the additional checking that has to be performed. However, the main performance penalty for exceptions happens when an exception is actually thrown. In this case, the stack must be unwound and an appropriate exception handler found, which is a relatively expensive operation.</p>",
       "preview": "Exceptions do come with a small performance price to pay. They increase the size",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výjimky přicházejí s nízkou cenou za výkon. Zvětšují velikost spustitelného souboru a mohou také způsobit jeho pomalejší běh kvůli dodatečné kontrole, kterou je třeba provést. Hlavní penalizace výkonu za výjimky však nastane, když je výjimka skutečně vyvolána. V tomto případě je třeba odvinout zásobník a najít vhodnou obsluhu výjimek, což je poměrně nákladná operace.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b23",
       "type": "paragraph",
       "html": "<p>As a note, some modern computer architectures support an exception model called zero-cost exceptions. Zero-cost exceptions, if supported, have no additional runtime cost in the non-error case (which is the case we most care about performance). However, they incur an even larger penalty in the case where an exception is found.</p>",
       "preview": "As a note, some modern computer architectures support an exception model called ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Upozorňujeme, že některé moderní počítačové architektury podporují model výjimek nazývaný výjimky s nulovými náklady. Výjimky s nulovými náklady, pokud jsou podporovány, nemají žádné další náklady za běh v případě, že se nejedná o chybu (což je případ, kdy nám nejvíce záleží na výkonu). V případě, že se najde výjimka, jim však hrozí ještě vyšší trest.</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b24",
       "type": "paragraph",
       "html": "<p><strong>So when should I use exceptions?</strong></p>",
       "preview": "So when should I use exceptions?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Kdy bych tedy měl použít výjimky?</strong></p>"
     },
     {
       "id": "exception-dangers-and-downsides_b25",
       "type": "paragraph",
       "html": "<p>Exception handling is best used when all of the following are true:</p>",
       "preview": "Exception handling is best used when all of the following are true:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zpracování výjimek je nejlepší použít, když jsou splněny všechny následující podmínky:</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b26",
       "type": "list",
       "html": "<ul><li>The error being handled is likely to occur only infrequently.</li><li>The error is serious and execution could not continue otherwise.</li><li>The error cannot be handled at the place where it occurs.</li><li>There isn’t a good alternative way to return an error code back to the caller.</li></ul>",
       "preview": "The error being handled is likely to occur only infrequently.The error is seriou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Zpracovaná chyba se pravděpodobně vyskytuje jen zřídka.</li><li>Chyba je závažná a provádění by jinak nemohlo pokračovat.</li><li>Chybu nelze ošetřit v místě, kde k ní došlo.</li><li>Neexistuje dobrý alternativní způsob, jak vrátit kód chyby zpět volajícímu.</li></ul>"
     },
     {
       "id": "exception-dangers-and-downsides_b27",
       "type": "paragraph",
       "html": "<p>As an example, let’s consider the case where you’ve written a function that expects the user to pass in the name of a file on disk. Your function will open this file, read some data, close the file, and pass back some result to the caller. Now, let’s say the user passes in the name of a file that doesn’t exist, or a null string. Is this a good candidate for an exception?</p>",
       "preview": "As an example, let’s consider the case where you’ve written a function that expe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako příklad si vezměme případ, kdy jste napsali funkci, která očekává, že uživatel předá jméno souboru na disku. Vaše funkce tento soubor otevře, přečte některá data, zavře soubor a předá zpět nějaký výsledek volajícímu. Nyní řekněme, že uživatel předá jméno souboru, který neexistuje, nebo prázdný řetězec. Je to dobrý kandidát na výjimku?</p>"
     },
     {
       "id": "exception-dangers-and-downsides_b28",
       "type": "paragraph",
       "html": "<p>In this case, the first two bullets above are trivially met -- this isn’t something that’s going to happen often, and your function can’t calculate a result when it doesn’t have any data to work with. The function can’t handle the error either -- it’s not the job of the function to re-prompt the user for a new filename, and that might not even be appropriate, depending on how your program is designed. The fourth bullet is the key -- is there a good alternative way to return an error code back to the caller? It depends on the details of your program. If so (e.g. you can return a null pointer, or a status code to indicate failure), that’s probably the better choice. If not, then an exception would be reasonable.</p>",
       "preview": "In this case, the first two bullets above are trivially met -- this isn’t someth",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě jsou první dvě výše uvedené odrážky triviálně splněny – to se nestává často a vaše funkce nemůže vypočítat výsledek, když nemá žádná data, se kterými by mohla pracovat. Funkce si s chybou také neporadí – úkolem funkce není znovu vyzvat uživatele k zadání nového souboru, a to ani nemusí být vhodné v závislosti na tom, jak je váš program navržen. Čtvrtá odrážka je klíčová – existuje dobrý alternativní způsob, jak vrátit chybový kód zpět volajícímu? Záleží na detailech vašeho programu. Pokud ano (např. můžete vrátit nulový ukazatel nebo stavový kód k označení selhání), je to pravděpodobně lepší volba. Pokud ne, byla by rozumná výjimka.</p>"
     }
-  ]
+  ],
+  "title_cs": "27.8 — Exception dangers and downsides"
 }

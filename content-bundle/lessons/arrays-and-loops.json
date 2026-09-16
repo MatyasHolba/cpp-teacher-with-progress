@@ -14,28 +14,33 @@
       "type": "paragraph",
       "html": "<p>In the introductory lesson for this chapter (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-containers-and-arrays/\">16.1 -- Introduction to containers and arrays</a>), we introduced the scalability challenges that occur when we have many related individual variables. In this lesson, we’ll reintroduce the problem, and then discuss how arrays can help us elegantly solve problems such as these.</p>",
       "preview": "In the introductory lesson for this chapter (16.1 -- Introduction to containers ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V úvodní lekci této kapitoly (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-containers-and-arrays/\">16.1 -- Úvod do kontejnerů a polí</a>) jsme si představili problémy se škálovatelností, které nastávají, když máme mnoho souvisejících samostatných proměnných. V této lekci si tento problém připomeneme a následně si ukážeme, jak nám pole mohou pomoci takové problémy elegantně vyřešit.</p>"
     },
     {
       "id": "arrays-and-loops_b1",
       "type": "section",
       "title": "The variable scalability challenge, revisited",
       "html": "<h3 class=\"cpp-section-heading\">The variable scalability challenge, revisited</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Znovu k problému se škálovatelností proměnných</h3>",
+      "title_cs": "Výzva variabilní škálovatelnosti, znovu přezkoumána"
     },
     {
       "id": "arrays-and-loops_b2",
       "type": "paragraph",
       "html": "<p>Consider the case where we want to find the average test score for a class of students. To keep these examples concise, we’ll assume the class has only 5 students.</p>",
       "preview": "Consider the case where we want to find the average test score for a class of st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si situaci, kdy chceme zjistit průměrný výsledek testu pro celou třídu studentů. Aby byly tyto příklady co nejstručnější, budeme předpokládat, že třída má pouze 5 studentů.</p>"
     },
     {
       "id": "arrays-and-loops_b3",
       "type": "paragraph",
       "html": "<p>Here’s how we might solve this using individual variables:</p>",
       "preview": "Here’s how we might solve this using individual variables:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázka, jak bychom to mohli vyřešit pomocí samostatných proměnných:</p>"
     },
     {
       "id": "arrays-and-loops_b4",
@@ -43,21 +48,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    // allocate 5 integer variables (each with a different name)\n    int testScore1{ 84 };\n    int testScore2{ 92 };\n    int testScore3{ 76 };\n    int testScore4{ 81 };\n    int testScore5{ 56 };\n\n    int average { (testScore1 + testScore2 + testScore3 + testScore4 + testScore5) / 5 };\n\n    std::cout << \"The class average is: \" << average << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    // allocate 5 integer variables (each with a different name)\n    int testScore1{ 84 };\n    int testScore2{ 92 };\n    int testScore3{ 76 };\n    int testScore4{ 81 };\n    int testScore5{ 56 };\n\n    int average { (testScore1 + testScore2 + testScore3 + testScore4 + testScore5) / 5 };\n\n    std::cout &lt;&lt; \"The class average is: \" &lt;&lt; average &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    // přidělte 5 celočíselných proměnných (každá s jiným názvem)\n    int testScore1{ 84 };\n    int testScore2{ 92 };\n    int testScore3{ 76 };\n    int testScore4{ 81 };\n    int testScore5{ 56 };\n\n    int průměr { (testScore1 + testScore2 + testScore3 + testScore4 + testScore5) / 5 };\n\n    std::cout << \"Průměr třídy je: \" << průměr << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b5",
       "type": "paragraph",
       "html": "<p>That’s a lot of variables and a lot of typing. Imagine how much work we’d have to do for 30 students, or 600. Furthermore, if a new test score is added, a new variable has to be declared, initialized, and added to the average calculation. And did you remember to update the divisor? If you forgot, you now have a semantic error. Any time you have to modify existing code, you run the risk of introducing errors.</p>",
       "preview": "That’s a lot of variables and a lot of typing. Imagine how much work we’d have t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je spousta proměnných a spousta psaní. Představte si, kolik práce bychom měli pro 30 studentů nebo pro 600. Navíc, pokud přibude nový výsledek testu, je nutné deklarovat novou proměnnou, inicializovat ji a přidat ji do výpočtu průměru. A nezapomněli jste aktualizovat dělitel? Pokud jste zapomněli, vyrobili jste sémantickou chybu. Kdykoli musíte upravovat existující kód, riskujete zanesení chyb.</p>"
     },
     {
       "id": "arrays-and-loops_b6",
       "type": "paragraph",
       "html": "<p>By now, you know that we should be using an array when we have a bunch of related variables. So let’s replace our individual variables with a <code>std::vector</code>:</p>",
       "preview": "By now, you know that we should be using an array when we have a bunch of relate",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této chvíli již víte, že když máme skupinu souvisejících proměnných, měli bychom použít pole. Nahraďme tedy naše samostatné proměnné za <code>std::vector</code>:</p>"
     },
     {
       "id": "arrays-and-loops_b7",
@@ -65,49 +73,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n    \n    int average { (testScore[0] + testScore[1] + testScore[2] + testScore[3] + testScore[4])\n        / static_cast<int>(length) };\n\n    std::cout << \"The class average is: \" << average << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n    \n    int average { (testScore[0] + testScore[1] + testScore[2] + testScore[3] + testScore[4])\n        / static_cast&lt;int&gt;(length) };\n\n    std::cout &lt;&lt; \"The class average is: \" &lt;&lt; average &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n    \n    int průměr { (testScore[0] + testScore[1] + testScore[2] + testScore[3] + testScore[4])\n        / static_cast<int>(délka) };\n\n    std::cout << \"Průměr třídy je: \" << průměr << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b8",
       "type": "paragraph",
       "html": "<p>This is better -- we’ve cut down on the number of variables defined significantly, and the divisor for the average calculation is now determined directly from the length of the array.</p>",
       "preview": "This is better -- we’ve cut down on the number of variables defined significantl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tohle je lepší – výrazně jsme snížili počet definovaných proměnných a dělitel pro výpočet průměru je nyní určen přímo z délky pole.</p>"
     },
     {
       "id": "arrays-and-loops_b9",
       "type": "paragraph",
       "html": "<p>But the average calculation is still a problem, as we’re having to manually list each element individually. And because we have to list each element explicitly, our average calculation only works for arrays with exactly as many elements as we list. If we also want to be able to average arrays of other lengths, we’ll need to write a new average calculation for each different array length.</p>",
       "preview": "But the average calculation is still a problem, as we’re having to manually list",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výpočet průměru je však stále problém, protože musíme ručně vypsat každý prvek zvlášť. A protože musíme každý prvek uvést explicitně, náš výpočet průměru funguje pouze pro pole s přesně tolika prvky, kolik jich vypíšeme. Pokud bychom chtěli průměrovat pole jiných délek, museli bychom pro každou různou délku pole napsat nový výpočet průměru.</p>"
     },
     {
       "id": "arrays-and-loops_b10",
       "type": "paragraph",
       "html": "<p>What we really need is some way to access each array element without having to explicitly list each one.</p>",
       "preview": "What we really need is some way to access each array element without having to e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, co opravdu potřebujeme, je nějaký způsob, jak přistupovat ke každému prvku pole, aniž bychom museli každý z nich explicitně vypisovat.</p>"
     },
     {
       "id": "arrays-and-loops_b11",
       "type": "section",
       "title": "Arrays and loops",
       "html": "<h3 class=\"cpp-section-heading\">Arrays and loops</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pole a cykly</h3>",
+      "title_cs": "Pole a smyčky"
     },
     {
       "id": "arrays-and-loops_b12",
       "type": "paragraph",
       "html": "<p>In previous lessons, we noted that array subscripts do not need to be constant expressions -- they can be runtime expressions. This means we can use the value of a variable as an index.</p>",
       "preview": "In previous lessons, we noted that array subscripts do not need to be constant e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích jsme si všimli, že indexy polí nemusí být konstantní výrazy – mohou to být výrazy vyhodnocované za běhu (runtime výrazy). To znamená, že jako index můžeme použít hodnotu proměnné.</p>"
     },
     {
       "id": "arrays-and-loops_b13",
       "type": "paragraph",
       "html": "<p>Also note that the array indices used in the average calculation of the previous example are an ascending sequence: 0, 1, 2, 3, 4. Therefore, if we had some way to set a variable to values 0, 1, 2, 3, and 4 in sequence, then we could just use that variable as our array index instead of literals. And we already know how to do that -- with a for-loop.</p>",
       "preview": "Also note that the array indices used in the average calculation of the previous",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si také, že indexy pole použité při výpočtu průměru v předchozím příkladu tvoří vzestupnou posloupnost: 0, 1, 2, 3, 4. Pokud bychom tedy měli způsob, jak postupně nastavit proměnnou na hodnoty 0, 1, 2, 3 a 4, mohli bychom tuto proměnnou jednoduše použít jako index pole namísto literálů. A to už umíme – pomocí for-cyklu.</p>"
     },
     {
       "id": "arrays-and-loops_b14",
@@ -115,14 +131,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We covered for loops in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/for-statements/\">8.10 -- For statements</a>.</p></div>",
       "preview": "Related contentWe covered for loops in lesson 8.10 -- For statements.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>For cykly jsme probírali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/for-statements/\">8.10 -- Příkazy for</a>.</p></div>"
     },
     {
       "id": "arrays-and-loops_b15",
       "type": "paragraph",
       "html": "<p>Let’s rewrite the above example using a for-loop, where the loop variable is used as the array index:</p>",
       "preview": "Let’s rewrite the above example using a for-loop, where the loop variable is use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme přepsat výše uvedený příklad pomocí for-cyklu, kde je řídicí proměnná cyklu použita jako index pole:</p>"
     },
     {
       "id": "arrays-and-loops_b16",
@@ -130,49 +148,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n\n    int average { 0 };\n    for (std::size_t index{ 0 }; index < length; ++index) // index from 0 to length-1\n        average += testScore[index];                      // add the value of element with index `index`\n    average /= static_cast<int>(length);                  // calculate the average\n\n    std::cout << \"The class average is: \" << average << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n\n    int average { 0 };\n    for (std::size_t index{ 0 }; index &lt; length; ++index) // index from 0 to length-1\n        average += testScore[index];                      // add the value of element with index `index`\n    average /= static_cast&lt;int&gt;(length);                  // calculate the average\n\n    std::cout &lt;&lt; \"The class average is: \" &lt;&lt; average &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector testScore { 84, 92, 76, 81, 56 };\n    std::size_t length { testScore.size() };\n\n    int průměr { 0 };\n    for (std::size_t index{ 0 }; index < délka; ++index) // index od 0 do délky-1\n        průměr += testScore[index];                      // přidání hodnoty prvku s indexem `index`\n    průměr /= static_cast<int>(délka);                  // vypočítat průměr\n\n    std::cout << \"Průměr třídy je: \" << průměr << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b17",
       "type": "paragraph",
       "html": "<p>This should be pretty straightforward. <code>index</code> starts at <code>0</code>, <code>testScore[0]</code> is added to <code>average</code>, and <code>index</code> is incremeted to <code>1</code>. <code>testScore[1]</code> is added to <code>average</code>, and <code>index</code> is incremented to <code>2</code>. Eventually, when <code>index</code> is incremented to <code>5</code>, <code>index &lt; length</code> is false, and the loop terminates.</p>",
       "preview": "This should be pretty straightforward. index starts at 0, testScore[0] is added ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To by mělo být zcela přímočaré. <code>index</code> začíná na <code>0</code>, <code>testScore[0]</code> se přičte k <code>average</code> a <code>index</code> se inkrementuje na <code>1</code>. <code>testScore[1]</code> se přičte k <code>average</code> a <code>index</code> se inkrementuje na <code>2</code>. Nakonec, když se <code>index</code> inkrementuje na <code>5</code>, podmínka <code>index &lt; length</code> je nepravdivá (false) a cyklus skončí.</p>"
     },
     {
       "id": "arrays-and-loops_b18",
       "type": "paragraph",
       "html": "<p>At this point, the loop has added the values of <code>testScore[0]</code>, <code>testScore[1]</code>, <code>testScore[2]</code>, <code>testScore[3]</code>, and <code>testScore[4]</code> to <code>average</code>.</p>",
       "preview": "At this point, the loop has added the values of testScore[0], testScore[1], test",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto okamžiku cyklus přičetl hodnoty <code>testScore[0]</code>, <code>testScore[1]</code>, <code>testScore[2]</code>, <code>testScore[3]</code> a <code>testScore[4]</code> do <code>average</code>.</p>"
     },
     {
       "id": "arrays-and-loops_b19",
       "type": "paragraph",
       "html": "<p>Finally, we calculate our average by dividing the accumulated values by the array length.</p>",
       "preview": "Finally, we calculate our average by dividing the accumulated values by the arra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nakonec vypočítáme průměr vydělením naakumulovaných hodnot délkou pole.</p>"
     },
     {
       "id": "arrays-and-loops_b20",
       "type": "paragraph",
       "html": "<p>This solution is ideal in terms of maintainability. The number of times the loop iterates is determined from the length of the array, and the loop variable is used to do all of the array indexing. We no longer have to manually list each array element.</p>",
       "preview": "This solution is ideal in terms of maintainability. The number of times the loop",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto řešení je ideální z hlediska udržovatelnosti. Počet iterací cyklu je odvozen z délky pole a proměnná cyklu se používá pro veškeré indexování pole. Už nemusíme ručně vypisovat každý prvek pole.</p>"
     },
     {
       "id": "arrays-and-loops_b21",
       "type": "paragraph",
       "html": "<p>If we want to add or remove a test score, we can just modify the number of array initializers, and the rest of the code will still work without further changes!</p>",
       "preview": "If we want to add or remove a test score, we can just modify the number of array",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud chceme přidat nebo odebrat výsledek testu, stačí upravit počet inicializátorů pole a zbytek kódu bude stále fungovat bez dalších změn!</p>"
     },
     {
       "id": "arrays-and-loops_b22",
       "type": "paragraph",
       "html": "<p>Accessing each element of a container in some order is called <strong>traversal</strong>, or <strong>traversing</strong> the container. Traversal is often called <strong>iteration</strong>, or <strong>iterating over</strong> or <strong>iterating through</strong> the container.</p>",
       "preview": "Accessing each element of a container in some order is called traversal, or trav",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přístup ke každému prvku kontejneru v určitém pořadí se nazývá <strong>průchod</strong> (<strong>traversal</strong>) neboli <strong>procházení</strong> kontejneru (<strong>traversing</strong>). Průchod se často označuje jako <strong>iterace</strong> (<strong>iteration</strong>) neboli <strong>iterování přes</strong> (<strong>iterating over</strong>) či <strong>iterování skrze</strong> (<strong>iterating through</strong>) kontejner.</p>"
     },
     {
       "id": "arrays-and-loops_b23",
@@ -180,49 +205,57 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Since the container classes use type <code>size_t</code> for length and indices, in this lesson, we’ll do the same. We’ll discuss using signed lengths and indices in upcoming lesson <a href=\"https://www.learncpp.com/cpp-tutorial/arrays-loops-and-sign-challenge-solutions/\">16.7 -- Arrays, loops, and sign challenge solutions</a>.</p></div>",
       "preview": "Author’s noteSince the container classes use type size_t for length and indices, in this lesson, we’",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Vzhledem k tomu, že třídy kontejnerů používají typ <code>size_t</code> pro délku a indexy, budeme v této lekci dělat totéž. Použití znaménkových (signed) délek a indexů probereme v nadcházející lekci <a href=\"https://www.learncpp.com/cpp-tutorial/arrays-loops-and-sign-challenge-solutions/\">16.7 – Pole, cykly a řešení problémů se znaménky</a>.</p></div>"
     },
     {
       "id": "arrays-and-loops_b24",
       "type": "section",
       "title": "Templates, arrays, and loops unlock scalability",
       "html": "<h3 class=\"cpp-section-heading\">Templates, arrays, and loops unlock scalability</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Šablony, pole a cykly otevírají cestu ke škálovatelnosti</h3>",
+      "title_cs": "Šablony, pole a smyčky odemykají škálovatelnost"
     },
     {
       "id": "arrays-and-loops_b25",
       "type": "paragraph",
       "html": "<p>Arrays provide a way to store multiple objects without having to name each element.</p>",
       "preview": "Arrays provide a way to store multiple objects without having to name each eleme",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole poskytují způsob, jak ukládat více objektů, aniž by bylo nutné pojmenovávat každý prvek.</p>"
     },
     {
       "id": "arrays-and-loops_b26",
       "type": "paragraph",
       "html": "<p>Loops provide a way to traverse an array without having to explicitly list each element.</p>",
       "preview": "Loops provide a way to traverse an array without having to explicitly list each ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Cykly poskytují způsob, jak procházet pole, aniž by bylo nutné explicitně vypisovat každý prvek.</p>"
     },
     {
       "id": "arrays-and-loops_b27",
       "type": "paragraph",
       "html": "<p>Templates provide a way to parameterize the element type.</p>",
       "preview": "Templates provide a way to parameterize the element type.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Šablony (templates) poskytují způsob, jak parametrizovat typ prvků.</p>"
     },
     {
       "id": "arrays-and-loops_b28",
       "type": "paragraph",
       "html": "<p>Together, templates, arrays, and loops allow us to write code that can operate on a container of elements, regardless of the element type or number of elements in the container!</p>",
       "preview": "Together, templates, arrays, and loops allow us to write code that can operate o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Šablony, pole a cykly nám dohromady umožňují psát kód, který dokáže pracovat s kontejnerem prvků bez ohledu na typ těchto prvků nebo jejich počet v kontejneru!</p>"
     },
     {
       "id": "arrays-and-loops_b29",
       "type": "paragraph",
       "html": "<p>To illustrate this further, let’s rewrite the above example, refactoring the average calculation into a function template:</p>",
       "preview": "To illustrate this further, let’s rewrite the above example, refactoring the ave",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro další ilustraci přepišme výše uvedený příklad a refaktorujme výpočet průměru do šablony funkce:</p>"
     },
     {
       "id": "arrays-and-loops_b30",
@@ -230,112 +263,131 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\n// Function template to calculate the average of the values in a std::vector\ntemplate <typename T>\nT calculateAverage(const std::vector<T>& arr)\n{\n    std::size_t length { arr.size() };\n    \n    T average { 0 };                                      // if our array has elements of type T, our average should have type T too\n    for (std::size_t index{ 0 }; index < length; ++index) // iterate through all the elements\n        average += arr[index];                            // sum up all the elements\n    average /= static_cast<int>(length);                  // divide by count of items (integral in nature)\n    \n    return average;\n}\n\nint main()\n{\n    std::vector class1 { 84, 92, 76, 81, 56 };\n    std::cout << \"The class 1 average is: \" << calculateAverage(class1) << '\\n'; // calc average of 5 ints\n\n    std::vector class2 { 93.2, 88.6, 64.2, 81.0 };\n    std::cout << \"The class 2 average is: \" << calculateAverage(class2) << '\\n'; // calc average of 4 doubles\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\n// Function template to calculate the average of the values in a std::vector\ntemplate &lt;typename T&gt;\nT calculateAverage(const std::vector&lt;T&gt;&amp; arr)\n{\n    std::size_t length { arr.size() };\n    \n    T average { 0 };                                      // if our array has elements of type T, our average should have type T too\n    for (std::size_t index{ 0 }; index &lt; length; ++index) // iterate through all the elements\n        average += arr[index];                            // sum up all the elements\n    average /= static_cast&lt;int&gt;(length);                  // divide by count of items (integral in nature)\n    \n    return average;\n}\n\nint main()\n{\n    std::vector class1 { 84, 92, 76, 81, 56 };\n    std::cout &lt;&lt; \"The class 1 average is: \" &lt;&lt; calculateAverage(class1) &lt;&lt; '\\n'; // calc average of 5 ints\n\n    std::vector class2 { 93.2, 88.6, 64.2, 81.0 };\n    std::cout &lt;&lt; \"The class 2 average is: \" &lt;&lt; calculateAverage(class2) &lt;&lt; '\\n'; // calc average of 4 doubles\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\n// Šablona funkce pro výpočet průměru hodnot v std::vector\nšablona <název typu T>\nT vypočítatPrůměr(const std::vector<T>& arr)\n{\n    std::size_t length { arr.size() };\n    \n    T průměr { 0 };                                      // pokud má naše pole prvky typu T, náš průměr by měl mít také typ T\n    for (std::size_t index{ 0 }; index < délka; ++index) // iterace přes všechny prvky\n        průměr += arr[index];                            // shrnout všechny prvky\n    průměr /= static_cast<int>(délka);                  // vydělte počtem položek (ve své podstatě integrální)\n    \n    průměrná návratnost;\n}\n\nint main()\n{\n    std::vektor class1 { 84, 92, 76, 81, 56 };\n    std::cout << \"Průměr třídy 1 je: \" << vypočítatPrůměr(třída1) << '\\n'; // vypočítejte průměr 5 ints\n\n    std::vector class2 { 93,2, 88,6, 64,2, 81,0 };\n    std::cout << \"Průměr třídy 2 je: \" << vypočítatPrůměr(třída2) << '\\n'; // vypočítejte průměr 4 dvojnásobků\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b31",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "arrays-and-loops_b32",
       "type": "output",
       "text": "The class 1 average is: 77\nThe class 2 average is: 81.75\n",
       "html": "<pre>The class 1 average is: 77\nThe class 2 average is: 81.75\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The class 1 average is: 77\nThe class 2 average is: 81.75\n</pre>"
     },
     {
       "id": "arrays-and-loops_b33",
       "type": "paragraph",
       "html": "<p>In the above example, we’ve created function template <code>calculateAverage()</code>, which takes a <code>std::vector</code> of any element type and any length, and returns the average. In <code>main()</code>, we demonstrate that this function works equally well when called with an array of 5 <code>int</code> elements or an array of 4 <code>double</code> elements!</p>",
       "preview": "In the above example, we’ve created function template calculateAverage(), which ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu jsme vytvořili šablonu funkce <code>calculateAverage()</code>, která přijímá <code>std::vector</code> s libovolným typem prvků a libovolnou délkou a vrací průměr. V <code>main()</code> demonstrujeme, že tato funkce funguje stejně dobře, ať už je zavolána s polem 5 prvků typu <code>int</code>, nebo s polem 4 prvků typu <code>double</code>!</p>"
     },
     {
       "id": "arrays-and-loops_b34",
       "type": "paragraph",
       "html": "<p><code>calculateAverage()</code> will work for any type <code>T</code> that supports the operators used inside the function (<code>operator+=(T)</code>, <code>operator/=(int)</code>). If you try to use a <code>T</code> that does not support these operators, the compiler will error when trying to compile the instantiated function template.</p>",
       "preview": "calculateAverage() will work for any type T that supports the operators used ins",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>calculateAverage()</code> bude fungovat pro jakýkoli typ <code>T</code>, který podporuje operátory použité uvnitř funkce (<code>operator+=(T)</code>, <code>operator/=(int)</code>). Pokud se pokusíte použít <code>T</code>, který tyto operátory nepodporuje, kompilátor při pokusu o kompilaci instanciovProcessované šablony funkce ohlásí chybu.</p>"
     },
     {
       "id": "arrays-and-loops_b35",
       "type": "paragraph",
       "html": "<p>You might be wondering why we cast <code>length</code> to an <code>int</code> rather than a <code>T</code>. When we calculate the average, we divide the sum by the count of items. The count of items is an integral value. Therefore, semantically, it makes more sense to divide by an <code>int</code>.</p>",
       "preview": "You might be wondering why we cast length to an int rather than a T. When we cal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná se ptáte, proč přetypováváme <code>length</code> na <code>int</code> a ne na <code>T</code>. Když počítáme průměr, dělíme součet počtem položek. Počet položek je celočíselná hodnota. Z sémantického hlediska tedy dává větší smysl dělit hodnotou typu <code>int</code>.</p>"
     },
     {
       "id": "arrays-and-loops_b36",
       "type": "section",
       "title": "What we can do with arrays and loops",
       "html": "<h3 class=\"cpp-section-heading\">What we can do with arrays and loops</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Co můžeme dělat s poli a cykly</h3>",
+      "title_cs": "Co můžeme dělat s poli a smyčkami"
     },
     {
       "id": "arrays-and-loops_b37",
       "type": "paragraph",
       "html": "<p>Now that we know how to traverse a container of elements using a loop, let’s look at the most common things that we can use container traversal for. We typically traverse a container in order to do one of four things:</p>",
       "preview": "Now that we know how to traverse a container of elements using a loop, let’s loo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když už víme, jak procházet kontejner prvků pomocí cyklu, se podívejme na nejběžnější způsoby využití průchodu kontejnerem. Kontejner obvykle procházíme za jedním ze čtyř účelů:</p>"
     },
     {
       "id": "arrays-and-loops_b38",
       "type": "list",
       "html": "<ol start=\"1\"><li>Calculate a new value based on the value of existing elements (e.g. average value, sum of values).</li><li>Search for an existing element (e.g. has exact match, count number of matches, find highest value).</li><li>Operate on each element (e.g. output each element, multiply all elements by 2).</li><li>Reorder the elements (e.g. sort the elements in ascending order).</li></ol>",
       "preview": "Calculate a new value based on the value of existing elements (e.g. average valu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Výpočet nové hodnoty na základě hodnoty existujících prvků (např. průměrná hodnota, součet hodnot).</li><li>Vyhledání existujícího prvku (např. nalezení přesné shody, spočítání počtu shod, nalezení nejvyšší hodnoty).</li><li>Provedení operace s každým prvkem (např. vypsání každého prvku, vynásobení všech prvků 2).</li><li>Změna pořadí prvků (např. seřazení prvků vzestupně).</li></ol>"
     },
     {
       "id": "arrays-and-loops_b39",
       "type": "paragraph",
       "html": "<p>The first three of these are fairly straightforward. We can use a single loop to traverse the array, inspecting or modifying each element as appropriate.</p>",
       "preview": "The first three of these are fairly straightforward. We can use a single loop to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První tři z nich jsou poměrně přímočaré. K průchodu polem můžeme použít jediný cyklus a podle potřeby každý prvek prozkoumat nebo upravit.</p>"
     },
     {
       "id": "arrays-and-loops_b40",
       "type": "paragraph",
       "html": "<p>Reordering the elements of a container is quite a bit more tricky, as doing so typically involves using a loop inside another loop. While we can do this manually, it’s usually better to use an existing algorithm from the standard library to do this. We’ll cover this in more detail in a future chapter when we discuss algorithms.</p>",
       "preview": "Reordering the elements of a container is quite a bit more tricky, as doing so t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Změna pořadí prvků v kontejneru je o dost složitější, protože obvykle vyžaduje použití cyklu uvnitř jiného cyklu. Ačkoli to můžeme udělat ručně, obvykle je lepší k tomu použít existující algoritmus ze standardní knihovny. Podrobněji se tomu budeme věnovat v budoucí kapitole, kde probereme algoritmy.</p>"
     },
     {
       "id": "arrays-and-loops_b41",
       "type": "section",
       "title": "Arrays and off-by-one errors",
       "html": "<h3 class=\"cpp-section-heading\">Arrays and off-by-one errors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pole a chyby o jedničku (off-by-one errors)</h3>",
+      "title_cs": "Pole a chyby off-by-one"
     },
     {
       "id": "arrays-and-loops_b42",
       "type": "paragraph",
       "html": "<p>When traversing a container using an index, you must take care to ensure the loop executes the proper number of times. Off-by-one errors (where the loop body executes one too many or one too few times) are easy to make.</p>",
       "preview": "When traversing a container using an index, you must take care to ensure the loo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při procházení kontejneru pomocí indexu musíte dbát na to, aby se cyklus provedl správný početkrát. Chyby o jedničku (off-by-one errors, kdy se tělo cyklu provede o jednou vícekrát nebo o jednou méněkrát) je velmi snadné udělat.</p>"
     },
     {
       "id": "arrays-and-loops_b43",
       "type": "paragraph",
       "html": "<p>Typically, when traversing a container using an index, we will start the index at <code>0</code> and loop until <code>index &lt; length</code>.</p>",
       "preview": "Typically, when traversing a container using an index, we will start the index a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Typicky při procházení kontejneru pomocí indexu začínáme s indexem na <code>0</code> a iterujeme, dokud platí <code>index &lt; length</code>.</p>"
     },
     {
       "id": "arrays-and-loops_b44",
       "type": "paragraph",
       "html": "<p>New programmers sometimes accidentally use <code>index &lt;= length</code> as the loop condition. This will cause the loop to execute when <code>index == length</code>, which will result in an out of bounds subscript and undefined behavior.</p>",
       "preview": "New programmers sometimes accidentally use index <= length as the loop condition",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začínající programátoři někdy omylem použijí jako podmínku cyklu <code>index &lt;= length</code>. To způsobí, že se cyklus vykoná i pro <code>index == length</code>, což povede k indexování mimo meze pole a nedefinovanému chování.</p>"
     },
     {
       "id": "arrays-and-loops_b45",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "arrays-and-loops_b46",
@@ -352,21 +404,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    // Add your code here\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    // Add your code here\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    // Sem přidejte svůj kód\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b48",
       "type": "paragraph",
       "html": "<p>The output should look like this:</p>",
       "preview": "The output should look like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup by měl vypadat takto:</p>"
     },
     {
       "id": "arrays-and-loops_b49",
       "type": "output",
       "text": "4 6 7 3 8 2 1 9\n",
       "html": "<pre>4 6 7 3 8 2 1 9\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>4 6 7 3 8 2 1 9\n</pre>"
     },
     {
       "id": "arrays-and-loops_b50",
@@ -383,7 +438,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\n// Implement printArray() here\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printArray(arr); // use function template to print array\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\n// Implement printArray() here\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printArray(arr); // use function template to print array\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\n// Zde implementujte printArray().\n\nint main()\n{\n    std::vector arr{ 4, 6, 7, 3, 8, 2, 1, 9 };\n\n    printArray(arr); // použití šablony funkce pro tisk pole\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b52",
@@ -399,35 +455,40 @@
       "type": "list",
       "html": "<ul><li>Ask the user for a value between 1 and 9. If the user does not enter a value between 1 and 9, repeatedly ask for an integer value until they do. If the user enters a number followed by extraneous input, ignore the extraneous input.</li><li>Print the array.</li><li>Write a function template to search the array for the value that the user entered. If the value is in the array, return the index of that element. If the value is not in the array, return an appropriate value.</li><li>If the value was found, print the value and index. If the value was not found, print the value and that it was not found.</li></ul>",
       "preview": "Ask the user for a value between 1 and 9. If the user does not enter a value bet",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Požádejte uživatele o hodnotu mezi 1 a 9. Pokud uživatel nezadá hodnotu mezi 1 a 9, opakovaně jej žádejte o celočíselnou hodnotu, dokud ji nezadá. Pokud uživatel zadá číslo následované nadbytečným vstupem, ignorujte tento nadbytečný vstup.</li><li>Vypište pole.</li><li>Napište šablonu funkce pro vyhledání hodnoty zadané uživatelem v poli. Pokud se hodnota v poli nachází, vraťte index tohoto prvku. Pokud se hodnota v poli nenachází, vraťte vhodnou hodnotu.</li><li>Pokud byla hodnota nalezena, vypište danou hodnotu a její index. Pokud hodnota nalezena nebyla, vypište danou hodnotu a informaci o tom, že nebyla nalezena.</li></ul>"
     },
     {
       "id": "arrays-and-loops_b54",
       "type": "paragraph",
       "html": "<p>We cover how to handle invalid input in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdcin-and-handling-invalid-input/\">9.5 -- std::cin and handling invalid input</a>.</p>",
       "preview": "We cover how to handle invalid input in lesson 9.5 -- std::cin and handling inva",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak ošetřovat neplatný vstup probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdcin-and-handling-invalid-input/\">9.5 -- std::cin a ošetření neplatného vstupu</a>.</p>"
     },
     {
       "id": "arrays-and-loops_b55",
       "type": "paragraph",
       "html": "<p>Here are two sample runs of this program:</p>",
       "preview": "Here are two sample runs of this program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde jsou dvě ukázky běhu tohoto programu:</p>"
     },
     {
       "id": "arrays-and-loops_b56",
       "type": "output",
       "text": "Enter a number between 1 and 9: d\nEnter a number between 1 and 9: 6\n4 6 7 3 8 2 1 9\nThe number 6 has index 1\n",
       "html": "<pre>Enter a number between 1 and 9: d\nEnter a number between 1 and 9: 6\n4 6 7 3 8 2 1 9\nThe number 6 has index 1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Enter a number between 1 and 9: d\nEnter a number between 1 and 9: 6\n4 6 7 3 8 2 1 9\nThe number 6 has index 1\n</pre>"
     },
     {
       "id": "arrays-and-loops_b57",
       "type": "output",
       "text": "Enter a number between 1 and 9: 5\n4 6 7 3 8 2 1 9\nThe number 5 was not found\n",
       "html": "<pre>Enter a number between 1 and 9: 5\n4 6 7 3 8 2 1 9\nThe number 5 was not found\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Enter a number between 1 and 9: 5\n4 6 7 3 8 2 1 9\nThe number 5 was not found\n</pre>"
     },
     {
       "id": "arrays-and-loops_b58",
@@ -452,7 +513,8 @@
       "type": "paragraph",
       "html": "<p>The following code should execute:</p>",
       "preview": "The following code should execute:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující kód by se měl spustit:</p>"
     },
     {
       "id": "arrays-and-loops_b61",
@@ -460,21 +522,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    std::vector data1 { 84, 92, 76, 81, 56 };\n    std::cout << findMax(data1) << '\\n';\n\n    std::vector data2 { -13.0, -26.7, -105.5, -14.8 };\n    std::cout << findMax(data2) << '\\n';\n\n    std::vector<int> data3 { };\n    std::cout << findMax(data3) << '\\n';\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::vector data1 { 84, 92, 76, 81, 56 };\n    std::cout &lt;&lt; findMax(data1) &lt;&lt; '\\n';\n\n    std::vector data2 { -13.0, -26.7, -105.5, -14.8 };\n    std::cout &lt;&lt; findMax(data2) &lt;&lt; '\\n';\n\n    std::vector&lt;int&gt; data3 { };\n    std::cout &lt;&lt; findMax(data3) &lt;&lt; '\\n';\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::vektorová data1 { 84, 92, 76, 81, 56 };\n    std::cout << findMax(data1) << '\\n';\n\n    std::vektorová data2 { -13,0, -26,7, -105,5, -14,8 };\n    std::cout << findMax(data2) << '\\n';\n\n    std::vector<int> data3 { };\n    std::cout << findMax(data3) << '\\n';\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "arrays-and-loops_b62",
       "type": "paragraph",
       "html": "<p>And print the following result:</p>",
       "preview": "And print the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A vypsat následující výsledek:</p>"
     },
     {
       "id": "arrays-and-loops_b63",
       "type": "output",
       "text": "92\n-13\n0\n",
       "html": "<pre>92\n-13\n0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>92\n-13\n0\n</pre>"
     },
     {
       "id": "arrays-and-loops_b64",
@@ -490,35 +555,41 @@
       "type": "paragraph",
       "html": "<p>In this quiz, implement the game as follows:</p>",
       "preview": "In this quiz, implement the game as follows:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto kvízu naimplementujte hru následujícím způsobem:</p>"
     },
     {
       "id": "arrays-and-loops_b66",
       "type": "list",
       "html": "<ul><li>Numbers divisible by only 3 should print “fizz”.</li><li>Numbers divisible by only 5 should print “buzz”.</li><li>Numbers divisible by only 7 should print “pop”.</li><li>Numbers divisible by only 11 should print “bang”.</li><li>Numbers divisible by only 13 should print “jazz”.</li><li>Numbers divisible by only 17 should print “pow”.</li><li>Numbers divisible by only 19 should print “boom”.</li><li>Numbers divisible by more than one of the above should print each of the words associated with its divisors.</li><li>Numbers not divisible by any of the above should just print the number.</li></ul>",
       "preview": "Numbers divisible by only 3 should print “fizz”.Numbers divisible by only 5 shou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pro čísla dělitelná pouze 3 by se mělo vypsat „fizz“.</li><li>Pro čísla dělitelná pouze 5 by se mělo vypsat „buzz“.</li><li>Pro čísla dělitelná pouze 7 by se mělo vypsat „pop“.</li><li>Pro čísla dělitelná pouze 11 by se mělo vypsat „bang“.</li><li>Pro čísla dělitelná pouze 13 by se mělo vypsat „jazz“.</li><li>Pro čísla dělitelná pouze 17 by se mělo vypsat „pow“.</li><li>Pro čísla dělitelná pouze 19 by se mělo vypsat „boom“.</li><li>Pro čísla dělitelná více než jedním z výše uvedených by se měla vypsat všechna slova spojená s jejich děliteli.</li><li>U čísel, která nejsou dělitelná žádným z výše uvedených, by se mělo pouze vypsat dané číslo.</li></ul>"
     },
     {
       "id": "arrays-and-loops_b67",
       "type": "paragraph",
       "html": "<p>Use a <code>std::vector</code> to hold the divisors, and another <code>std::vector</code> to hold the words (as type <code>std::string_view</code>). If the arrays do not have the same length, the program should assert. Produce output for 150 numbers.</p>",
       "preview": "Use a std::vector to hold the divisors, and another std::vector to hold the word",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použijte <code>std::vector</code> pro uložení dělitelů a další <code>std::vector</code> pro uložení slov (jako typ <code>std::string_view</code>). Pokud pole nemají stejnou délku, program by měl vyvolat assert. Vygenerujte výstup pro 150 čísel.</p>"
     },
     {
       "id": "arrays-and-loops_b68",
       "type": "paragraph",
       "html": "<p>Here’s the expected output from the first 21 iterations:</p>",
       "preview": "Here’s the expected output from the first 21 iterations:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je očekávaný výstup z prvních 21 iterací:</p>"
     },
     {
       "id": "arrays-and-loops_b69",
       "type": "output",
       "text": "1\n2\nfizz\n4\nbuzz\nfizz\npop\n8\nfizz\nbuzz\nbang\nfizz\njazz\npop\nfizzbuzz\n16\npow\nfizz\nboom\nbuzz\nfizzpop\n",
       "html": "<pre>1\n2\nfizz\n4\nbuzz\nfizz\npop\n8\nfizz\nbuzz\nbang\nfizz\njazz\npop\nfizzbuzz\n16\npow\nfizz\nboom\nbuzz\nfizzpop\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>1\n2\nfizz\n4\nbuzz\nfizz\npop\n8\nfizz\nbuzz\nbang\nfizz\njazz\npop\nfizzbuzz\n16\npow\nfizz\nboom\nbuzz\nfizzpop\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "16.6 — Pole a cykly"
 }

@@ -3,10 +3,13 @@ import { TOCData, UserProgress } from '../types';
 import { BookOpen, CheckCircle2, ChevronDown, ChevronRight, Search, Clock, PanelLeftClose } from 'lucide-react';
 import { formatDuration } from '../services/storage';
 
+import { getT } from '../utils/i18n';
+
 interface SidebarProps {
   toc: TOCData;
   progress: UserProgress;
   activeLessonSlug: string;
+  uiLanguage: 'cs' | 'en';
   onSelectLesson: (slug: string) => void;
   onToggleSidebar: () => void;
 }
@@ -15,9 +18,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toc,
   progress,
   activeLessonSlug,
+  uiLanguage,
   onSelectLesson,
   onToggleSidebar
 }) => {
+  const t = getT(uiLanguage);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({
     '0': true,
@@ -41,8 +46,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
     let readSecs = 0;
     let codeSecs = 0;
     for (const l of lessons) {
-      readSecs += progress.timeSpentPerLesson[l.slug] || 0;
-      codeSecs += progress.codingTimePerLesson?.[l.slug] || 0;
+      readSecs += (progress.timeSpentPerLesson[l.slug] || 0) + (progress.timeSpentPerLessonEN?.[l.slug] || 0);
+      codeSecs += (progress.codingTimePerLesson?.[l.slug] || 0) + (progress.codingTimePerLessonEN?.[l.slug] || 0);
     }
     return { readSecs, codeSecs, totalSecs: readSecs + codeSecs };
   };
@@ -85,7 +90,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <input
                   type="text"
                   autoFocus
-                  placeholder="Hledat lekci..."
+                  placeholder={t('searchPlaceholder')}
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="w-full bg-[var(--bg-app)] text-xs text-[var(--text-main)] pl-3 pr-8 py-1.5 rounded-md border border-[var(--border-color)] focus:outline-none focus:border-blue-500"
@@ -99,7 +104,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div
           onClick={() => setShowGlobalStats(!showGlobalStats)}
           className="cursor-pointer group/stat py-1"
-          title="Klikněte pro zobrazení detailních statistik"
+          title={t('showDetailsHint') || 'Klikněte pro zobrazení detailních statistik'}
         >
           <div className="flex items-center justify-between text-[11px] mb-1">
             <span className="flex items-center gap-1 font-mono text-[10px] text-[var(--text-muted)] group-hover/stat:text-blue-400 transition-colors">
@@ -107,7 +112,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {formatDuration(totalStudySeconds)}
             </span>
             <span className="font-semibold text-blue-400 text-[10px]">
-              {overallPercentage}% ({totalChecked} úkolů)
+              {overallPercentage}% ({totalChecked} {t('tasksSuffix') || 'úkolů'})
             </span>
           </div>
 
@@ -121,23 +126,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {showGlobalStats && (
             <div className="mt-2 p-2.5 bg-[var(--bg-app)] rounded-lg border border-[var(--border-color)] text-[10px] text-[var(--text-muted)] flex flex-col gap-1.5 animate-in fade-in duration-150 shadow-lg">
               <div className="flex justify-between">
-                <span>Celkový čas (studium + kód):</span>
+                <span>{t('totalTime')}</span>
                 <span className="font-mono font-bold text-[var(--text-main)]">{formatDuration(totalStudySeconds)}</span>
               </div>
               <div className="flex justify-between pl-2 border-l border-blue-500/40">
-                <span>📖 Čtení teorie:</span>
+                <span>{t('readingTime')}</span>
                 <span className="font-mono font-medium text-blue-400">{formatDuration(progress.totalSecondsSpent)}</span>
               </div>
               <div className="flex justify-between pl-2 border-l border-emerald-500/40">
-                <span>💻 Psaní kódu (praxe):</span>
+                <span>{t('codingTime')}</span>
                 <span className="font-mono font-medium text-emerald-400">{formatDuration(progress.totalCodingSeconds || 0)}</span>
               </div>
               <div className="flex justify-between pt-1 border-t border-[var(--border-color)]">
-                <span>Splněno úkolů:</span>
+                <span>{t('completedTasks')}</span>
                 <span className="font-bold text-emerald-400">{totalChecked} / {totalCheckpoints}</span>
               </div>
               <div className="flex justify-between">
-                <span>Vlastních poznámek:</span>
+                <span>{t('notesCount')}</span>
                 <span className="font-bold text-amber-400">{totalNotes}</span>
               </div>
             </div>
@@ -182,8 +187,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <div className="mt-0.5 ml-2 pl-2 border-l-2 border-[var(--border-color)] flex flex-col gap-0.5">
                   {chapter.lessons.map(lesson => {
                     const isActive = activeLessonSlug === lesson.slug;
-                    const lessonRead = progress.timeSpentPerLesson[lesson.slug] || 0;
-                    const lessonCode = progress.codingTimePerLesson?.[lesson.slug] || 0;
+                    const lessonReadCS = progress.timeSpentPerLesson[lesson.slug] || 0;
+                    const lessonReadEN = progress.timeSpentPerLessonEN?.[lesson.slug] || 0;
+                    const lessonCodeCS = progress.codingTimePerLesson?.[lesson.slug] || 0;
+                    const lessonCodeEN = progress.codingTimePerLessonEN?.[lesson.slug] || 0;
+                    
+                    const lessonRead = lessonReadCS + lessonReadEN;
+                    const lessonCode = lessonCodeCS + lessonCodeEN;
 
                     return (
                       <button
@@ -204,7 +214,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         {(lessonRead > 0 || lessonCode > 0) && (
                           <div className="flex items-center gap-1 flex-shrink-0 text-[10px] font-mono">
                             {lessonRead > 0 && (
-                              <span className="text-blue-400" title="Čtení">{formatDuration(lessonRead)}</span>
+                              <span className="text-blue-400" title="Čtení">
+                                {lessonReadCS > 0 && lessonReadEN === 0 && '🇨🇿'}
+                                {lessonReadEN > 0 && lessonReadCS === 0 && '🇬🇧'}
+                                {lessonReadCS > 0 && lessonReadEN > 0 && '🌐'}
+                                {formatDuration(lessonRead)}
+                              </span>
                             )}
                             {lessonCode > 0 && (
                               <span className="text-emerald-400 font-semibold" title="Psaní kódu">💻{formatDuration(lessonCode)}</span>

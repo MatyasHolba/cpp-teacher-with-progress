@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>By default, derived classes inherit all of the behaviors defined in a base class. In this lesson, we’ll examine in more detail how member functions are selected, as well as how we can leverage this to change behaviors in a derived class.</p>",
       "preview": "By default, derived classes inherit all of the behaviors defined in a base class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výchozím nastavení odvozené třídy dědí veškeré chování definované v základní třídě. V této lekci se podrobněji podíváme na to, jak jsou vybírány členské funkce a jak toho můžeme využít ke změně chování v odvozené třídě.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b1",
       "type": "paragraph",
       "html": "<p>When a member function is called on a derived class object, the compiler first looks to see if any function with that name exists in the derived class. If so, all overloaded functions with that name are considered, and the function overload resolution process is used to determine whether there is a best match. If not, the compiler walks up the inheritance chain, checking each parent class in turn in the same way.</p>",
       "preview": "When a member function is called on a derived class object, the compiler first l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je na objektu odvozené třídy zavolána členská funkce, kompilátor nejprve zjišťuje, zda v odvozené třídě existuje nějaká funkce s tímto názvem. Pokud ano, vezme v úvahu všechny přetížené funkce s tímto názvem a pomocí procesu rozlišení přetížení (function overload resolution) určí, zda existuje nejlepší shoda. Pokud ne, kompilátor prochází hierarchii dědičnosti směrem nahoru a stejným způsobem postupně kontroluje každou rodičovskou třídu.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b2",
       "type": "paragraph",
       "html": "<p>Put another way, the compiler will select the best matching function from the most-derived class with at least one function with that name.</p>",
       "preview": "Put another way, the compiler will select the best matching function from the mo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jinak řečeno, kompilátor vybere nejlépe odpovídající funkci z nejvíce odvozené třídy, která obsahuje alespoň jednu funkci s daným názvem.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b3",
       "type": "section",
       "title": "Calling a base class function",
       "html": "<h3 class=\"cpp-section-heading\">Calling a base class function</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Volání funkce základní třídy</h3>",
+      "title_cs": "Volání funkce základní třídy"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b4",
       "type": "paragraph",
       "html": "<p>First, let’s explore what happens when the derived class has no matching function, but the base class does:</p>",
       "preview": "First, let’s explore what happens when the derived class has no matching functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se podívejme, co se stane, když odvozená třída nemá žádnou odpovídající funkci, ale základní třída ano:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b5",
@@ -50,77 +56,89 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    Base() { }\n\n    void identifik() const { std::cout << \"Základ::identify()\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Derived() { }\n};\n\nint main()\n{\n    Základní základ {};\n    base.identify();\n\n    Odvozené odvozené {};\n    odvozeno.identifikovat();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b6",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b7",
       "type": "output",
       "text": "Base::identify()\nBase::identify()\n",
       "html": "<pre>Base::identify()\nBase::identify()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Base::identify()\nBase::identify()\n</pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b8",
       "type": "paragraph",
       "html": "<p>When <code>base.identify()</code> is called, the compiler looks to see if a function named <code>identify()</code> has been defined in class <code>Base</code>. It has, so the compiler looks to see if it is a match. It is, so it is called</p>",
       "preview": "When base.identify() is called, the compiler looks to see if a function named id",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při volání <code>base.identify()</code> kompilátor zjišťuje, zda byla ve třídě <code>Base</code> definována funkce s názvem <code>identify()</code>. Byla, takže kompilátor ověří, zda se jedná o shodu. Je to shoda, a proto je zavolána</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b9",
       "type": "paragraph",
       "html": "<p>When <code>derived.identify()</code> is called, the compiler looks to see if a function named <code>identify()</code> has been defined in the <code>Derived</code> class. It hasn’t. So it moves to the parent class (in this case, <code>Base</code>), and tries again there. <code>Base</code> has defined an <code>identify()</code> function, so it uses that one. In other words, <code>Base::identify()</code> was used because <code>Derived::identify()</code> doesn’t exist.</p>",
       "preview": "When derived.identify() is called, the compiler looks to see if a function named",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je zavoláno <code>derived.identify()</code>, kompilátor zjišťuje, zda byla ve třídě <code>Derived</code> definována funkce s názvem <code>identify()</code>. Nebyla. Přesune se tedy do rodičovské třídy (v tomto případě <code>Base</code>) a zkusí to znovu tam. Třída <code>Base</code> funkci <code>identify()</code> definovanou má, takže použije tuto. Jinými slovy, byla použita funkce <code>Base::identify()</code>, protože <code>Derived::identify()</code> neexistuje.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b10",
       "type": "paragraph",
       "html": "<p>This means that if the behavior provided by a base class is sufficient, we can simply use the base class behavior.</p>",
       "preview": "This means that if the behavior provided by a base class is sufficient, we can s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že pokud je chování poskytované bázovou třídou dostačující, můžeme jednoduše použít chování bázové třídy.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b11",
       "type": "section",
       "title": "Redefining behaviors",
       "html": "<h3 class=\"cpp-section-heading\">Redefining behaviors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předefinování chování</h3>",
+      "title_cs": "Předefinování chování"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b12",
       "type": "paragraph",
       "html": "<p>However, if we had defined <code>Derived::identify()</code> in the <code>Derived</code> class, it would have been used instead.</p>",
       "preview": "However, if we had defined Derived::identify() in the Derived class, it would ha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud bychom však ve třídě <code>Derived</code> definovali <code>Derived::identify()</code>, použila by se místo toho tato funkce.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b13",
       "type": "paragraph",
       "html": "<p>This means that we can make functions work differently with our derived classes by redefining them in the derived class!</p>",
       "preview": "This means that we can make functions work differently with our derived classes ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že můžeme zajistit, aby funkce fungovaly v našich odvozených třídách jinak, a to jejich předefinováním v odvozené třídě!</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b14",
       "type": "paragraph",
       "html": "<p>For example, let’s say we want <code>derived.identify()</code> to print <code>Derived::identify()</code>. We can simply add function <code>identify()</code> in the <code>Derived</code> class so it returns the correct response when we call function <code>identify()</code> with a <code>Derived</code> object.</p>",
       "preview": "For example, let’s say we want derived.identify() to print Derived::identify(). ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme například, že chceme, aby <code>derived.identify()</code> vypsalo <code>Derived::identify()</code>. Můžeme jednoduše přidat funkci <code>identify()</code> do třídy <code>Derived</code>, takže při volání funkce <code>identify()</code> nad objektem typu <code>Derived</code> vrátí správnou odpověď.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b15",
       "type": "paragraph",
       "html": "<p>To modify the way a function defined in a base class works in the derived class, simply redefine the function in the derived class.</p>",
       "preview": "To modify the way a function defined in a base class works in the derived class,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li upravit způsob, jakým funkce definovaná v bázové třídě funguje v odvozené třídě, jednoduše tuto funkci v odvozené třídě předefinujte.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b16",
@@ -128,28 +146,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const { std::cout << \"Derived::identify()\\n\"; }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const { std::cout &lt;&lt; \"Derived::identify()\\n\"; }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    Base() { }\n\n    void identifik() const { std::cout << \"Základ::identify()\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Derived() { }\n\n    void identifik() const { std::cout << \"Odvozeno::identify()\\n\"; }\n};\n\nint main()\n{\n    Základní základ {};\n    base.identify();\n\n    Odvozené odvozené {};\n    odvozeno.identifikovat();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b17",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b18",
       "type": "output",
       "text": "Base::identify()\nDerived::identify()\n",
       "html": "<pre>Base::identify()\nDerived::identify()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Base::identify()\nDerived::identify()\n</pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b19",
       "type": "paragraph",
       "html": "<p>Note that when you redefine a function in the derived class, the derived function does not inherit the access specifier of the function with the same name in the base class. It uses whatever access specifier it is defined under in the derived class. Therefore, a function that is defined as private in the base class can be redefined as public in the derived class, or vice-versa!</p>",
       "preview": "Note that when you redefine a function in the derived class, the derived functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že když redefinujete funkci v odvozené třídě, tato odvozená funkce nedědí specifikátor přístupu funkce se stejným názvem v bázové třídě. Použije takový specifikátor přístupu, pod kterým je definována v odvozené třídě. Funkce, která je v bázové třídě definována jako private, tedy může být v odvozené třídě redefinována jako public, nebo naopak!</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b20",
@@ -157,28 +179,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\nprivate:\n\tvoid print() const \n\t{\n\t\tstd::cout << \"Base\";\n\t}\n};\n \nclass Derived : public Base\n{\npublic:\n\tvoid print() const \n\t{\n\t\tstd::cout << \"Derived \";\n\t}\n};\n \n \nint main()\n{\n\tDerived derived {};\n\tderived.print(); // calls derived::print(), which is public\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\nprivate:\n\tvoid print() const \n\t{\n\t\tstd::cout &lt;&lt; \"Base\";\n\t}\n};\n \nclass Derived : public Base\n{\npublic:\n\tvoid print() const \n\t{\n\t\tstd::cout &lt;&lt; \"Derived \";\n\t}\n};\n \n \nint main()\n{\n\tDerived derived {};\n\tderived.print(); // calls derived::print(), which is public\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nsoukromé:\n\tvoid print() konst \n\t{\n\t\tstd::cout << \"Základ\";\n\t}\n};\n \ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n\tvoid print() konst \n\t{\n\t\tstd::cout << \"Odvozeno\";\n\t}\n};\n \n \nint main()\n{\n\tOdvozené odvozené {};\n\todvozeno.tisk(); // volá derivované::print(), které je veřejné\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b21",
       "type": "section",
       "title": "Adding to existing functionality",
       "html": "<h3 class=\"cpp-section-heading\">Adding to existing functionality</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Rozšíření stávající funkcionality</h3>",
+      "title_cs": "Přidání ke stávající funkcionalitě"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b22",
       "type": "paragraph",
       "html": "<p>Sometimes we don’t want to completely replace a base class function, but instead want to add additional functionality to it when called with a derived object. In the above example, note that <code>Derived::identify()</code> completely hides <code>Base::identify()</code>! This may not be what we want. It is possible to have our derived function call the base version of the function of the same name (in order to reuse code) and then add additional functionality to it.</p>",
       "preview": "Sometimes we don’t want to completely replace a base class function, but instead",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Někdy nechceme funkci bázové třídy zcela nahradit, ale chceme k ní při volání s odvozeným objektem přidat další funkcionalitu. V předchozím příkladu si všimněte, že <code>Derived::identify()</code> zcela zastiňuje <code>Base::identify()</code>! To nemusí být to, co chceme. Je možné nechat naši odvozenou funkci zavolat bázovou verzi funkce se stejným názvem (za účelem znovupoužití kódu) a poté k ní přidat další funkcionalitu.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b23",
       "type": "paragraph",
       "html": "<p>To have a derived function call a base function of the same name, simply do a normal function call, but prefix the function with the scope qualifier of the base class. For example:</p>",
       "preview": "To have a derived function call a base function of the same name, simply do a no",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Aby odvozená funkce zavolala bázovou funkci se stejným názvem, jednoduše proveďte běžné volání funkce, ale doplňte před ni kvalifikátor rozsahu platnosti (scope qualifier) bázové třídy. Například:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b24",
@@ -186,35 +213,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout << \"Derived::identify()\\n\";\n        Base::identify(); // note call to Base::identify() here\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout &lt;&lt; \"Derived::identify()\\n\";\n        Base::identify(); // note call to Base::identify() here\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    Base() { }\n\n    void identifik() const { std::cout << \"Základ::identify()\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Derived() { }\n\n    void identifikovat() konst\n    {\n        std::cout << \"Odvozeno::identify()\\n\";\n        Base::identify(); // zde si poznamenejte volání Base::identify().\n    }\n};\n\nint main()\n{\n    Základní základ {};\n    base.identify();\n\n    Odvozené odvozené {};\n    odvozeno.identifikovat();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b25",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b26",
       "type": "output",
       "text": "Base::identify()\nDerived::identify()\nBase::identify()\n",
       "html": "<pre>Base::identify()\nDerived::identify()\nBase::identify()\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Base::identify()\nDerived::identify()\nBase::identify()\n</pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b27",
       "type": "paragraph",
       "html": "<p>When <code>derived.identify()</code> is executed, it resolves to <code>Derived::identify()</code>. After printing <code>Derived::identify()</code>, it then calls <code>Base::identify()</code>, which prints <code>Base::identify()</code>.</p>",
       "preview": "When derived.identify() is executed, it resolves to Derived::identify(). After p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se provede <code>derived.identify()</code>, vyhodnotí se jako <code>Derived::identify()</code>. Po vypsání <code>Derived::identify()</code> následně zavolá <code>Base::identify()</code>, což vypíše <code>Base::identify()</code>.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b28",
       "type": "paragraph",
       "html": "<p>This should be pretty straightforward. Why do we need to use the scope resolution operator (::)? If we had defined <code>Derived::identify()</code> like this:</p>",
       "preview": "This should be pretty straightforward. Why do we need to use the scope resolutio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To by mělo být poměrně přímočaré. Proč vlastně musíme použít operátor rozlišení oboru platnosti (::)? Pokud bychom <code>Derived::identify()</code> definovali takto:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b29",
@@ -222,28 +254,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout << \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout << \"Derived::identify()\\n\";\n        identify(); // no scope resolution results in self-call and infinite recursion\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n    void identify() const { std::cout &lt;&lt; \"Base::identify()\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n    void identify() const\n    {\n        std::cout &lt;&lt; \"Derived::identify()\\n\";\n        identify(); // no scope resolution results in self-call and infinite recursion\n    }\n};\n\nint main()\n{\n    Base base {};\n    base.identify();\n\n    Derived derived {};\n    derived.identify();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    Base() { }\n\n    void identifik() const { std::cout << \"Základ::identify()\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Derived() { }\n\n    void identifikovat() konst\n    {\n        std::cout << \"Odvozeno::identify()\\n\";\n        identifikovat(); // žádné rozlišení rozsahu má za následek samovolné volání a nekonečnou rekurzi\n    }\n};\n\nint main()\n{\n    Základní základ {};\n    base.identify();\n\n    Odvozené odvozené {};\n    odvozeno.identifikovat();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b30",
       "type": "paragraph",
       "html": "<p>Calling function <code>identify()</code> without a scope resolution qualifier would default to the <code>identify()</code> in the current class, which would be <code>Derived::identify()</code>. This would cause <code>Derived::identify()</code> to call itself, which would lead to an infinite recursion!</p>",
       "preview": "Calling function identify() without a scope resolution qualifier would default t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Volání funkce <code>identify()</code> bez kvalifikátoru oboru platnosti by se standardně vyhodnotilo jako <code>identify()</code> v aktuální třídě, což by bylo <code>Derived::identify()</code>. To by způsobilo, že by <code>Derived::identify()</code> volala sama sebe, což by vedlo k nekonečné rekurzi!</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b31",
       "type": "paragraph",
       "html": "<p>There’s one bit of trickiness that we can run into when trying to call friend functions in base classes, such as <code>operator&lt;&lt;</code>. Because friend functions of the base class aren’t actually part of the base class, using the scope resolution qualifier won’t work. Instead, we need a way to make our <code>Derived</code> class temporarily look like the <code>Base</code> class so that the right version of the function can be called.</p>",
       "preview": "There’s one bit of trickiness that we can run into when trying to call friend fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při pokusu o volání spřátelených funkcí (friend functions) v bázových třídách, jako je například <code>operator&lt;&lt;</code>, můžeme narazit na jeden záludný problém. Protože spřátelené funkce bázové třídy nejsou ve skutečnosti součástí samotné bázové třídy, použití kvalifikátoru oboru platnosti nebude fungovat. Místo toho potřebujeme způsob, jak naši třídu <code>Derived</code> dočasně přetvářit na třídu <code>Base</code>, aby bylo možné zavolat správnou verzi funkce.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b32",
       "type": "paragraph",
       "html": "<p>Fortunately, that’s easy to do, using <code>static_cast</code>. Here’s an example:</p>",
       "preview": "Fortunately, that’s easy to do, using static_cast. Here’s an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí to lze snadno provést pomocí <code>static_cast</code>. Zde je příklad:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b33",
@@ -251,49 +287,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() { }\n\n\tfriend std::ostream& operator<< (std::ostream& out, const Base&)\n\t{\n\t\tout << \"In Base\\n\";\n\t\treturn out;\n\t}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n \tfriend std::ostream& operator<< (std::ostream& out, const Derived& d)\n\t{\n\t\tout << \"In Derived\\n\";\n\t\t// static_cast Derived to a Base object, so we call the right version of operator<<\n\t\tout << static_cast<const Base&>(d); \n\t\treturn out;\n    }\n};\n\nint main()\n{\n    Derived derived {};\n\n    std::cout << derived << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() { }\n\n\tfriend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Base&amp;)\n\t{\n\t\tout &lt;&lt; \"In Base\\n\";\n\t\treturn out;\n\t}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() { }\n\n \tfriend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Derived&amp; d)\n\t{\n\t\tout &lt;&lt; \"In Derived\\n\";\n\t\t// static_cast Derived to a Base object, so we call the right version of operator&lt;&lt;\n\t\tout &lt;&lt; static_cast&lt;const Base&amp;&gt;(d); \n\t\treturn out;\n    }\n};\n\nint main()\n{\n    Derived derived {};\n\n    std::cout &lt;&lt; derived &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    Base() { }\n\n\tpřítel std::ostream& operátor<< (std::ostream& out, const Base&)\n\t{\n\t\tout << \"V základně\\n\";\n\t\tvrátit se ven;\n\t}\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Derived() { }\n\n \tpřítel std::ostream& operátor<< (std::ostream& out, const Derived& d)\n\t{\n\t\tout << \"Odvozeno\\n\";\n\t\t// static_cast Odvozeno od objektu Base, takže zavoláme správnou verzi operátoru<<\n\t\tout << static_cast<const Base&>(d); \n\t\tvrátit se ven;\n    }\n};\n\nint main()\n{\n    Odvozené odvozené {};\n\n    std::cout << odvozené << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b34",
       "type": "paragraph",
       "html": "<p>Because a <code>Derived</code> is-a Base, we can <code>static_cast</code> our <code>Derived</code> object into a <code>Base</code> reference, so that the appropriate version of <code>operator&lt;&lt;</code> that uses a <code>Base</code> is called.</p>",
       "preview": "Because a Derived is-a Base, we can static_cast our Derived object into a Base r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>Derived</code> je typu Base (vztah is-a), můžeme náš objekt <code>Derived</code> pomocí <code>static_cast</code> přetypovat na referenci na <code>Base</code>, čímž se zavolá odpovídající verze <code>operator&lt;&lt;</code>, která přijímá <code>Base</code>.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b35",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b36",
       "type": "output",
       "text": "In Derived\nIn Base\n",
       "html": "<pre>In Derived\nIn Base\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>In Derived\nIn Base\n</pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b37",
       "type": "section",
       "title": "Overload resolution in derived classes",
       "html": "<h3 class=\"cpp-section-heading\">Overload resolution in derived classes</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Rozlišování přetížení (overload resolution) v odvozených třídách</h3>",
+      "title_cs": "Rozlišení přetížení v odvozených třídách"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b38",
       "type": "paragraph",
       "html": "<p>As noted at the top of the lesson, the compiler will select the best matching function from the most-derived class with at least one function with that name.</p>",
       "preview": "As noted at the top of the lesson, the compiler will select the best matching fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak bylo uvedeno na začátku lekce, kompilátor vybere nejlépe odpovídající funkci z nejvíce odvozené třídy, která obsahuje alespoň jednu funkci s tímto názvem.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b39",
       "type": "paragraph",
       "html": "<p>First, let’s take a look at a simple case where we have overloaded member functions:</p>",
       "preview": "First, let’s take a look at a simple case where we have overloaded member functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se podívejme na jednoduchý případ, kdy máme přetížené členské funkce:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b40",
@@ -301,21 +345,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    void print(int) { std::cout << \"Základ::print(int)\\n\"; }\n    void print(double) { std::cout << \"Základ::print(double)\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n};\n\n\nint main()\n{\n    Odvozeno d{};\n    d.print(5); // volá Base::print(int)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b41",
       "type": "paragraph",
       "html": "<p>For the call <code>d.print(5)</code>, the compiler doesn’t find a function named <code>print()</code> in <code>Derived</code>, so it checks <code>Base</code> where it finds two functions with that name. It uses the function overload resolution process to determine that <code>Base::print(int)</code> is a better match than <code>Base::print(double)</code>. Therefore, <code>Base::print(int)</code> gets called, just like we’d expect.</p>",
       "preview": "For the call d.print(5), the compiler doesn’t find a function named print() in D",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro volání <code>d.print(5)</code> kompilátor nenajde funkci s názvem <code>print()</code> v <code>Derived</code>, a proto zkontroluje <code>Base</code>, kde najde dvě funkce s tímto názvem. Pomocí procesu řešení přetížení funkcí (overload resolution) určí, že <code>Base::print(int)</code> je lepší shoda než <code>Base::print(double)</code>. Zavolá se tedy <code>Base::print(int)</code>, přesně jak bychom očekávali.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b42",
       "type": "paragraph",
       "html": "<p>Now let’s look at a case that doesn’t behave like we might expect:</p>",
       "preview": "Now let’s look at a case that doesn’t behave like we might expect:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na případ, který se nechová tak, jak bychom mohli očekávat:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b43",
@@ -323,28 +370,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(double) { std::cout << \"Derived::print(double)\"; } // this function added\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(double), not Base::print(int)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; } // this function added\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(double), not Base::print(int)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    void print(int) { std::cout << \"Základ::print(int)\\n\"; }\n    void print(double) { std::cout << \"Základ::print(double)\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    void print(double) { std::cout << \"Odvozeno::print(double)\"; } // tato funkce přidána\n};\n\n\nint main()\n{\n    Odvozené d{};\n    d.print(5); // volá Derived::print(double), ne Base::print(int)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b44",
       "type": "paragraph",
       "html": "<p>For the call <code>d.print(5)</code>, the compiler finds one function named <code>print()</code> in <code>Derived</code>, therefore it will only consider functions in <code>Derived</code> when trying to determine what function to resolve to. This function is also the best matching function in <code>Derived</code> for this function call. Therefore, this calls <code>Derived::print(double)</code>.</p>",
       "preview": "For the call d.print(5), the compiler finds one function named print() in Derive",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro volání <code>d.print(5)</code> kompilátor najde jednu funkci s názvem <code>print()</code> v <code>Derived</code>, a proto bude při určování, na jakou funkci volání přeložit, uvažovat pouze funkce v <code>Derived</code>. Tato funkce je zároveň nejlépe odpovídající funkcí v <code>Derived</code> pro toto volání. Proto se zavolá <code>Derived::print(double)</code>.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b45",
       "type": "paragraph",
       "html": "<p>Since <code>Base::print(int)</code> has a parameter that is a better match for int argument <code>5</code> than <code>Derived::print(double)</code>, you may have been expecting this function call to resolve to <code>Base::print(int)</code>. But because <code>d</code> is a <code>Derived</code>, there is at least one <code>print()</code> function in <code>Derived</code>, and <code>Derived</code> is more derived than <code>Base</code>, the functions in <code>Base</code> are not even considered.</p>",
       "preview": "Since Base::print(int) has a parameter that is a better match for int argument 5",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jelikož <code>Base::print(int)</code> má parametr, který lépe odpovídá celočíselnému argumentu <code>5</code> než <code>Derived::print(double)</code>, možná jste čekali, že se toto volání přeloží na <code>Base::print(int)</code>. Protože je však <code>d</code> typu <code>Derived</code>, v <code>Derived</code> existuje alespoň jedna funkce <code>print()</code> a <code>Derived</code> je více odvozená než <code>Base</code>, funkce v <code>Base</code> se vůbec neberou v úvahu.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b46",
       "type": "paragraph",
       "html": "<p>So what if we actually want <code>d.print(5)</code> to resolve to <code>Base::print(int)</code>? One not-great way is to define a <code>Derived::print(int)</code>:</p>",
       "preview": "So what if we actually want d.print(5) to resolve to Base::print(int)? One not-g",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co když tedy skutečně chceme, aby se <code>d.print(5)</code> přeložilo na <code>Base::print(int)</code>? Jedním z ne příliš ideálních způsobů je definovat <code>Derived::print(int)</code>:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b47",
@@ -352,21 +403,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(int n) { Base::print(n); } // works but not great, as we have to define \n    void print(double) { std::cout << \"Derived::print(double)\"; }\n};\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(int), which calls Base::print(int)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    void print(int n) { Base::print(n); } // works but not great, as we have to define \n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; }\n};\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Derived::print(int), which calls Base::print(int)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    void print(int) { std::cout << \"Základ::print(int)\\n\"; }\n    void print(double) { std::cout << \"Základ::print(double)\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    void print(int n) { Base::print(n); } // funguje, ale ne skvěle, jak musíme definovat \n    void print(double) { std::cout << \"Odvozeno::print(double)\"; }\n};\n\nint main()\n{\n    Odvozené d{};\n    d.print(5); // volá Derived::print(int), což volá Base::print(int)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b48",
       "type": "paragraph",
       "html": "<p>While this works, it’s not great, as we have to add a function to <code>Derived</code> for every overload we want to fall through to <code>Base</code>. That could be a lot of extra functions that essentially just route calls to <code>Base</code>.</p>",
       "preview": "While this works, it’s not great, as we have to add a function to Derived for ev",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I když to funguje, není to ideální, protože musíme do <code>Derived</code> přidat funkci pro každé přetížení, které chceme předat do <code>Base</code>. To by mohlo znamenat spoustu zbytečných funkcí navíc, které v podstatě jen přesměrovávají volání do <code>Base</code>.</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b49",
       "type": "paragraph",
       "html": "<p>A better option is to use a using-declaration in <code>Derived</code> to make all <code>Base</code> functions with a certain name visible from within <code>Derived</code>:</p>",
       "preview": "A better option is to use a using-declaration in Derived to make all Base functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Lepší možností je použít v <code>Derived</code> using-deklaraci, aby byly všechny funkce z <code>Base</code> s daným názvem viditelné uvnitř <code>Derived</code>:</p>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b50",
@@ -374,14 +428,17 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout << \"Base::print(int)\\n\"; }\n    void print(double) { std::cout << \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    using Base::print; // make all Base::print() functions eligible for overload resolution\n    void print(double) { std::cout << \"Derived::print(double)\"; }\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int), which is the best matching function visible in Derived\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    void print(int)    { std::cout &lt;&lt; \"Base::print(int)\\n\"; }\n    void print(double) { std::cout &lt;&lt; \"Base::print(double)\\n\"; }\n};\n\nclass Derived: public Base\n{\npublic:\n    using Base::print; // make all Base::print() functions eligible for overload resolution\n    void print(double) { std::cout &lt;&lt; \"Derived::print(double)\"; }\n};\n\n\nint main()\n{\n    Derived d{};\n    d.print(5); // calls Base::print(int), which is the best matching function visible in Derived\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    void print(int) { std::cout << \"Základ::print(int)\\n\"; }\n    void print(double) { std::cout << \"Základ::print(double)\\n\"; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    pomocí Base::print; // všechny funkce Base::print() budou vhodné pro řešení přetížení\n    void print(double) { std::cout << \"Odvozeno::print(double)\"; }\n};\n\n\nint main()\n{\n    Odvozené d{};\n    d.print(5); // volá Base::print(int), což je nejlépe odpovídající funkce viditelná v Derived\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "calling-inherited-functions-and-overriding-behavior_b51",
       "type": "paragraph",
       "html": "<p>By putting the using-declaration <code>using Base::print;</code> inside <code>Derived</code>, we are telling the compiler that all <code>Base</code> functions named <code>print</code> should be visible in <code>Derived</code>, which will cause them to be eligible for overload resolution. As a result, <code>Base::print(int)</code> is selected over <code>Derived::print(double)</code>.</p>",
       "preview": "By putting the using-declaration using Base::print; inside Derived, we are telli",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vložením using-deklarace <code>using Base::print;</code> do <code>Derived</code> říkáme kompilátoru, že všechny funkce z <code>Base</code> s názvem <code>print</code> mají být viditelné v <code>Derived</code>, což umožní jejich zahrnutí do řešení přetížení (overload resolution). V důsledku toho je vybrána funkce <code>Base::print(int)</code> namísto <code>Derived::print(double)</code>.</p>"
     }
-  ]
+  ],
+  "title_cs": "24.7 — Volání zděděných funkcí a překrývání chování"
 }

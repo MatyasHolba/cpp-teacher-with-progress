@@ -14,49 +14,57 @@
       "type": "section",
       "title": "Chapter Review",
       "html": "<h3 class=\"cpp-section-heading\">Chapter Review</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí kapitoly</h3>",
+      "title_cs": "Recenze kapitoly"
     },
     {
       "id": "chapter-17-summary-and-quiz_b1",
       "type": "paragraph",
       "html": "<p><strong>Fixed-size arrays</strong> (or <strong>fixed-length arrays</strong>) require that the length of the array be known at the point of instantiation, and that length cannot be changed afterward. C-style arrays and <code>std::array</code> are both fixed-size arrays. Dynamic arrays can be resized at runtime. <code>std::vector</code> is a dynamic array.</p>",
       "preview": "Fixed-size arrays (or fixed-length arrays) require that the length of the array ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Pole s pevnou velikostí</strong> (nebo <strong>pole s pevnou délkou</strong>) vyžadují, aby délka pole byla známa v okamžiku instanciace, a tuto délku již nelze poté změnit. Pole ve stylu jazyka C (C-style arrays) i <code>std::array</code> jsou obě pole s pevnou velikostí. Dynamická pole mohou měnit svou velikost za běhu programu. <code>std::vector</code> je dynamické pole.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b2",
       "type": "paragraph",
       "html": "<p>The length of a <code>std::array</code> must be a constant expression. Most often, the value provided for the length will be an integer literal, constexpr variable, or an unscoped enumerator.</p>",
       "preview": "The length of a std::array must be a constant expression. Most often, the value ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Délka kontejneru <code>std::array</code> musí být konstantní výraz (constant expression). Nejčastěji bude hodnotou zadanou pro délku celočíselný literál, proměnná typu constexpr nebo neomezený výčtový prvek (unscoped enumerator).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b3",
       "type": "paragraph",
       "html": "<p><code>std::array</code> is an aggregate. This means it has no constructors, and instead is initialized using aggregate initialization.</p>",
       "preview": "std::array is an aggregate. This means it has no constructors, and instead is in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::array</code> je agregát. To znamená, že nemá žádné konstruktory a místo toho se inicializuje pomocí agregátní inicializace (aggregate initialization).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b4",
       "type": "paragraph",
       "html": "<p>Define your <code>std::array</code> as constexpr whenever possible. If your <code>std::array</code> is not constexpr, consider using a <code>std::vector</code> instead.</p>",
       "preview": "Define your std::array as constexpr whenever possible. If your std::array is not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kdykoli je to možné, definujte svůj <code>std::array</code> jako constexpr. Pokud váš <code>std::array</code> není constexpr, zvažte místo něj použití <code>std::vector</code>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b5",
       "type": "paragraph",
       "html": "<p>Use class template argument deduction (CTAD) to have the compiler deduce the type and length of a std::array from its initializers.</p>",
       "preview": "Use class template argument deduction (CTAD) to have the compiler deduce the typ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použijte dedukci argumentů šablony třídy (CTAD), aby kompilátor odvodil typ a délku std::array z jeho inicializátorů.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b6",
       "type": "paragraph",
       "html": "<p><code>std::array</code> is implemented as a template struct whose declaration looks like this:</p>",
       "preview": "std::array is implemented as a template struct whose declaration looks like this",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::array</code> je implementován jako šablonová struktura, jejíž deklarace vypadá takto:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b7",
@@ -64,210 +72,241 @@
       "language": "cpp",
       "code": "template<typename T, std::size_t N> // N is a non-type template parameter\nstruct array;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template&lt;typename T, std::size_t N&gt; // N is a non-type template parameter\nstruct array;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template<typename T, std::size_t N> // N je netypový parametr šablony\nstruct pole;</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b8",
       "type": "paragraph",
       "html": "<p>The non-type template parameter representing the array length (<code>N</code>) has type <code>std::size_t</code>.</p>",
       "preview": "The non-type template parameter representing the array length (N) has type std::",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Netypový parametr šablony reprezentující délku pole (<code>N</code>) je typu <code>std::size_t</code>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b9",
       "type": "paragraph",
       "html": "<p>To get the length of a <code>std::array</code>:</p>",
       "preview": "To get the length of a std::array:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro získání délky <code>std::array</code>:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b10",
       "type": "list",
       "html": "<ul><li>We can ask a <code>std::array</code> object for its length using the <code>size()</code> member function (which returns the length as unsigned <code>size_type</code>).</li><li>In C++17, we can use the <code>std::size()</code> non-member function (which for <code>std::array</code> just calls the <code>size()</code> member function, thus returning the length as unsigned <code>size_type</code>).</li><li>In C++20, we can use the <code>std::ssize()</code> non-member function, which returns the length as a large <em>signed</em> integral type (usually<code>std::ptrdiff_t</code>).</li></ul>",
       "preview": "We can ask a std::array object for its length using the size() member function (",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Můžeme se objektu <code>std::array</code> dotázat na jeho délku pomocí členské funkce <code>size()</code> (která vrací délku jako bezznaménkový typ <code>size_type</code>).</li><li>V C++17 můžeme použít volnou (nečlenskou) funkci <code>std::size()</code> (která pro <code>std::array</code> pouze volá členskou funkci <code>size()</code>, a vrací tedy délku jako bezznaménkový typ <code>size_type</code>).</li><li>V C++20 můžeme použít volnou funkci <code>std::ssize()</code>, která vrací délku jako velký celočíselný typ <em>se znaménkem</em> (obvykle <code>std::ptrdiff_t</code>).</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b11",
       "type": "paragraph",
       "html": "<p>All three of these functions will return the length as a constexpr value, except when called on a <code>std::array</code> passed by reference. This defect has been addressed in C++23 by <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2280r4.html\">P2280</a>.</p>",
       "preview": "All three of these functions will return the length as a constexpr value, except",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všechny tyto tři funkce vrátí délku jako hodnotu typu constexpr, s výjimkou případu, kdy jsou volány na <code>std::array</code> předané referencí. Tento nedostatek byl v C++23 vyřešen návrhem <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/p2280r4.html\">P2280</a>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b12",
       "type": "paragraph",
       "html": "<p>To index a <code>std::array</code>:</p>",
       "preview": "To index a std::array:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro indexování <code>std::array</code>:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b13",
       "type": "list",
       "html": "<ul><li>Use the subscript operator (<code>operator[]</code>). No bounds checking is done in this case, and passing in an invalid index will result in undefined behavior.</li><li>Use the <code>at()</code> member function that does subscripting with runtime bounds checking. We recommend avoiding this function since we typically want to do bounds checking before indexing, or we want compile-time bounds checking.</li><li>Use the <code>std::get()</code> function template, which takes the index as a non-type template argument, and does compile-time bounds checking.</li></ul>",
       "preview": "Use the subscript operator (operator[]). No bounds checking is done in this case",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Použijte operátor indexování (<code>operator[]</code>). V tomto případě se neprovádí žádná kontrola mezí a předání neplatného indexu povede k nedefinovanému chování.</li><li>Použijte členskou funkci <code>at()</code>, která provádí indexování s kontrolou mezí za běhu programu. Doporučujeme se této funkci vyhýbat, protože obvykle chceme provést kontrolu mezí ještě před indexováním, nebo chceme kontrolu mezí v době překladu.</li><li>Použijte šablonu funkce <code>std::get()</code>, která přebírá index jako netypový parametr šablony a provádí kontrolu mezí v době překladu.</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b14",
       "type": "paragraph",
       "html": "<p>You can pass <code>std::array</code> with different element types and lengths to a function using a function template with the template parameter declaration <code>template &lt;typename T, std::size_t N&gt;</code>. Or in C++20, use <code>template &lt;typename T, auto N&gt;</code>.</p>",
       "preview": "You can pass std::array with different element types and lengths to a function u",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Do funkce můžete předat <code>std::array</code> s různými typy prvků a délkami pomocí šablony funkce s deklarací parametrů šablony <code>template &lt;typename T, std::size_t N&gt;</code>. Nebo v C++20 pomocí <code>template &lt;typename T, auto N&gt;</code>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b15",
       "type": "paragraph",
       "html": "<p>Returning a <code>std::array</code> by value will make a copy of the array and all elements, but this may be okay if the array is small and the elements aren’t expensive to copy. Using an out parameter instead may be a better choice in some contexts.</p>",
       "preview": "Returning a std::array by value will make a copy of the array and all elements, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Návrat <code>std::array</code> hodnotou vytvoří kopii pole a všech jeho prvků, což však nemusí vadit, pokud je pole malé a kopírování prvků není náročné. V některých kontextech může být lepší volbou použít místo toho výstupní parametr (out parameter).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b16",
       "type": "paragraph",
       "html": "<p>When initializing a <code>std::array</code> with a struct, class, or array and not providing the element type with each initializer, you’ll need an extra pair of braces so that the compiler will properly interpret what to initialize. This is an artifact of aggregate initialization, and other standard library container types (that use list constructors) do not require the double braces in these cases.</p>",
       "preview": "When initializing a std::array with a struct, class, or array and not providing ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při inicializaci <code>std::array</code> strukturou, třídou nebo polem bez uvedení typu prvku u každého inicializátoru budete potřebovat další pár složených závorek, aby kompilátor správně interpretoval, co má inicializovat. Jde o artefakt agregátní inicializace; ostatní typy kontejnerů ze standardní knihovny (které používají konstruktory se seznamem prvků) v těchto případech dvojité složené závorky nevyžadují.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b17",
       "type": "paragraph",
       "html": "<p>Aggregates in C++ support a concept called <strong>brace elision</strong>, which lays out some rules for when multiple braces may be omitted. Generally, you can omit braces when initializing a <code>std::array</code> with scalar (single) values, or when initializing with class types or arrays where the type is explicitly named with each element.</p>",
       "preview": "Aggregates in C++ support a concept called brace elision, which lays out some ru",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Agregáty v C++ podporují koncept nazývaný <strong>brace elision</strong> (vynechání složených závorek), který stanovuje pravidla pro to, kdy lze vícenásobné složené závorky vynechat. Obecně můžete složené závorky vynechat při inicializaci <code>std::array</code> skalárními (jednotlivými) hodnotami, nebo při inicializaci třídními typy či poli, kde je typ explicitně uveden u každého prvku.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b18",
       "type": "paragraph",
       "html": "<p>You can not have an array of references, but you can have an array of <code>std::reference_wrapper</code>, which behaves like a modifiable lvalue reference.</p>",
       "preview": "You can not have an array of references, but you can have an array of std::refer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nemůžete mít pole referencí, ale můžete mít pole <code>std::reference_wrapper</code>, které se chová jako modifikovatelná l-value reference.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b19",
       "type": "paragraph",
       "html": "<p>There are a few things worth noting about <code>std::reference_wrapper</code>:</p>",
       "preview": "There are a few things worth noting about std::reference_wrapper:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ohledně <code>std::reference_wrapper</code> stojí za zmínku několik věcí:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b20",
       "type": "list",
       "html": "<ul><li><code>Operator=</code> will reseat a <code>std::reference_wrapper</code> (change which object is being referenced).</li><li><code>std::reference_wrapper&lt;T&gt;</code> will implicitly convert to <code>T&amp;</code>.</li><li>The <code>get()</code> member function can be used to get a <code>T&amp;</code>. This is useful when we want to update the value of the object being referenced.</li></ul>",
       "preview": "Operator= will reseat a std::reference_wrapper (change which object is being ref",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li><code>Operator=</code> u <code>std::reference_wrapper</code> provede „reseat“ (změní odkazovaný objekt).</li><li><code>std::reference_wrapper&lt;T&gt;</code> se implicitně převede na <code>T&amp;</code>.</li><li>Členskou funkci <code>get()</code> lze použít k získání <code>T&amp;</code>. To je užitečné, když chceme aktualizovat hodnotu odkazovaného objektu.</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b21",
       "type": "paragraph",
       "html": "<p>The <code>std::ref()</code> and <code>std::cref()</code> functions were provided as shortcuts to create <code>std::reference_wrapper</code> and <code>const std::reference_wrapper</code> wrapped objects.</p>",
       "preview": "The std::ref() and std::cref() functions were provided as shortcuts to create st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce <code>std::ref()</code> a <code>std::cref()</code> slouží jako zkratky pro vytváření obalených objektů typu <code>std::reference_wrapper</code> a <code>const std::reference_wrapper</code>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b22",
       "type": "paragraph",
       "html": "<p>Use <code>static_assert</code> whenever possible to ensure a <code>constexpr std::array</code> using CTAD has the correct number of initializers.</p>",
       "preview": "Use static_assert whenever possible to ensure a constexpr std::array using CTAD ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kdykoli je to možné, použijte <code>static_assert</code> k ověření, že <code>constexpr std::array</code> využívající CTAD má správný počet inicializátorů.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b23",
       "type": "paragraph",
       "html": "<p>C-style arrays were inherited from the C language, and are built-in to the core language of C++. Because they are part of the core language, C-style arrays have their own special declaration syntax. In an C-style array declaration, we use square brackets ([]) to tell the compiler that a declared object is a C-style array. Inside the square brackets, we can optionally provide the length of the array, which is an integral value of type std::size_t that tells the compiler how many elements are in the array. The length of a C-style array must be a constant expression.</p>",
       "preview": "C-style arrays were inherited from the C language, and are built-in to the core ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole ve stylu C (C-style arrays) byla zděděna z jazyka C a jsou vestavěna do samotného jádra jazyka C++. Protože jsou součástí jádra jazyka, mají pole ve stylu C svou vlastní speciální syntaxi deklarace. V deklaraci pole ve stylu C používáme hranaté závorky ([]), kterými překladači říkáme, že deklarovaný objekt je pole ve stylu C. Uvnitř hranatých závorek můžeme volitelně uvést délku pole, což je celočíselná hodnota typu std::size_t, která překladači říká, kolik prvků pole obsahuje. Délka pole ve stylu C musí být konstantní výraz (constant expression).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b24",
       "type": "paragraph",
       "html": "<p>C-style arrays are aggregates, which means they can be initialized using aggregate initialization. When using an initializer list to initialize all elements of a C-style array, it’s preferable to omit the length and let the compiler calculate the length of the array.</p>",
       "preview": "C-style arrays are aggregates, which means they can be initialized using aggrega",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole ve stylu C jsou agregáty, což znamená, že je lze inicializovat pomocí agregátní inicializace. Pokud k inicializaci všech prvků pole ve stylu C používáte inicializační seznam (initializer list), je vhodnější vynechat délku a nechat překladač délku pole dopočítat.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b25",
       "type": "paragraph",
       "html": "<p>C-style arrays can be indexed via <code>operator[]</code>. The index of a C-style array can be either a signed or an unsigned integer, or an unscoped enumeration. This means that C-style arrays are not subject to all of the sign conversion indexing issues that the standard library container classes have!</p>",
       "preview": "C-style arrays can be indexed via operator[]. The index of a C-style array can b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole ve stylu C (C-style arrays) lze indexovat pomocí <code>operator[]</code>. Index pole ve stylu C může být celé číslo se znaménkem (signed) i bez znaménka (unsigned), případně neomezený výčtový typ (unscoped enumeration). To znamená, že pole ve stylu C netrpí všemi těmi problémy s konverzí znaménka při indexování, které mají kontejnerové třídy standardní knihovny!</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b26",
       "type": "paragraph",
       "html": "<p>C-style arrays can be const or constexpr.</p>",
       "preview": "C-style arrays can be const or constexpr.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole ve stylu C mohou být <code>const</code> nebo <code>constexpr</code>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b27",
       "type": "paragraph",
       "html": "<p>To get the length of a C-style array:</p>",
       "preview": "To get the length of a C-style array:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak získat délku pole ve stylu C:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b28",
       "type": "list",
       "html": "<ul><li>In C++17, we can use the <code>std::size()</code> non-member function, which returns the length as unsigned <code>std::size_t</code>.</li><li>In C++20, we can use the <code>std::ssize()</code> non-member function, which returns the length as a large <em>signed</em> integral type (usually<code>std::ptrdiff_t</code>).</li></ul>",
       "preview": "In C++17, we can use the std::size() non-member function, which returns the leng",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>V C++17 můžeme použít volnou funkci <code>std::size()</code>, která vrací délku jako bezznaménkový typ <code>std::size_t</code>.</li><li>V C++20 můžeme použít volnou funkci <code>std::ssize()</code>, která vrací délku jako velký <em>znaménkový</em> celočíselný typ (obvykle <code>std::ptrdiff_t</code>).</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b29",
       "type": "paragraph",
       "html": "<p>In most cases, when a C-style array is used in an expression, the array will be implicitly converted into a pointer to the element type, initialized with the address of the first element (with index 0). Colloquially, this is called <strong>array decay</strong> (or just decay for short).</p>",
       "preview": "In most cases, when a C-style array is used in an expression, the array will be ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů, kdy je pole ve stylu C použito ve výrazu, se toto pole implicitně převede na ukazatel na typ prvku, inicializovaný adresou prvního prvku (s indexem 0). Hovorově se tomu říká <strong>rozpad pole</strong> (<strong>array decay</strong>, zkráceně jen decay).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b30",
       "type": "paragraph",
       "html": "<p><strong>Pointer arithmetic</strong> is a feature the allows us to apply certain integer arithmetic operators (addition, subtraction, increment, or decrement) to a pointer to produce a new memory address. Given some pointer <code>ptr</code>, <code>ptr + 1</code> returns the address of the next <em>object</em> in memory (based on the type being pointed to).</p>",
       "preview": "Pointer arithmetic is a feature the allows us to apply certain integer arithmeti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Ukazatelová aritmetika</strong> (<strong>pointer arithmetic</strong>) je funkce, která nám umožňuje aplikovat určité celočíselné aritmetické operátory (sčítání, odčítání, inkrementaci nebo dekrementaci) na ukazatel, a získat tak novou paměťovou adresu. Pro nějaký ukazatel <code>ptr</code> výraz <code>ptr + 1</code> vrátí adresu dalšího <em>objektu</em> v paměti (na základě typu, na který je ukazováno).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b31",
       "type": "paragraph",
       "html": "<p>Use subscripting when indexing from the start of the array (element 0), so the array indices line up with the element.<br>Use pointer arithmetic when doing relative positioning from a given element.</p>",
       "preview": "Use subscripting when indexing from the start of the array (element 0), so the a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Indexování pomocí operátoru hranatých závorek (subscripting) používejte při indexování od začátku pole (prvek 0), aby indexy pole odpovídaly prvkům.<br>Ukazatelovou aritmetiku používejte při relativním posunu od daného prvku.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b32",
       "type": "paragraph",
       "html": "<p>C-style strings are just C-style arrays whose element type is <code>char</code> or <code>const char</code>. As such, C-style strings will decay.</p>",
       "preview": "C-style strings are just C-style arrays whose element type is char or const char",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C-stringy (řetězce ve stylu C) jsou pouze pole ve stylu C, jejichž typem prvku je <code>char</code> nebo <code>const char</code>. Z tohoto důvodu u řetězců ve stylu C dochází také k rozpadu (decay).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b33",
       "type": "paragraph",
       "html": "<p>The <strong>dimension</strong> of an array is the number of indices needed to select an element.</p>",
       "preview": "The dimension of an array is the number of indices needed to select an element.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Dimenze</strong> (rozměr) pole je počet indexů potřebných k výběru prvku.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b34",
       "type": "paragraph",
       "html": "<p>An array containing only a single dimension is called a <strong>single-dimensional array</strong> or a <strong>one-dimensional array</strong> (sometimes abbreviated as a <strong>1d array</strong>). An array of arrays is called a <strong>two-dimensional array</strong> (sometimes abbreviated as a <strong>2d array</strong>) because it has two subscripts. Arrays with more than one dimension are called <strong>multidimensional arrays</strong>. <strong>Flattening</strong> an array is a process of reducing the dimensionality of an array (often down to a single dimension).</p>",
       "preview": "An array containing only a single dimension is called a single-dimensional array",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pole obsahující pouze jeden rozměr se nazývá <strong>jednodimenzionální pole</strong> nebo <strong>jednorozměrné pole</strong> (někdy zkracováno jako <strong>1D pole</strong>). Pole polí se nazývá <strong>dvourozměrné pole</strong> (někdy zkracováno jako <strong>2D pole</strong>), protože má dva indexy. Pole s více než jedním rozměrem se nazývají <strong>vícerozměrná pole</strong> (či <strong>multidimenzionální pole</strong>). <strong>Zploštění</strong> (flattening) pole je proces snížení počtu dimenzí pole (často na jednorozměrné pole).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b35",
       "type": "paragraph",
       "html": "<p>In C++23, <code>std::mdspan</code> is a view that provides a multidimensional array interface for a contiguous sequence of elements.</p>",
       "preview": "In C++23, std::mdspan is a view that provides a multidimensional array interface",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++23 je <code>std::mdspan</code> pohled (view), který poskytuje rozhraní vícerozměrného pole pro souvislou sekvenci prvků.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b36",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "chapter-17-summary-and-quiz_b37",
@@ -283,7 +322,8 @@
       "type": "paragraph",
       "html": "<p>a)</p>",
       "preview": "a)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a)</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b39",
@@ -291,14 +331,16 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    std::array arr { 0, 1, 2, 3 };\n\n    for (std::size_t count{ 0 }; count <= std::size(arr); ++count)\n    {\n        std::cout << arr[count] << ' ';\n    }\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::array arr { 0, 1, 2, 3 };\n\n    for (std::size_t count{ 0 }; count &lt;= std::size(arr); ++count)\n    {\n        std::cout &lt;&lt; arr[count] &lt;&lt; ' ';\n    }\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\nint main()\n{\n    std::array arr { 0, 1, 2, 3 };\n\n    for (std::size_t count{ 0 }; count <= std::size(arr); ++count)\n    {\n        std::cout << arr[počet] << ' ';\n    }\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b40",
       "type": "paragraph",
       "html": "<p>b)</p>",
       "preview": "b)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>b)</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b41",
@@ -306,14 +348,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printArray(int array[])\n{\n    for (int element : array)\n    {\n        std::cout << element << ' ';\n    }\n}\n\nint main()\n{\n    int array[] { 9, 7, 5, 3, 1 };\n\n    printArray(array);\n\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printArray(int array[])\n{\n    for (int element : array)\n    {\n        std::cout &lt;&lt; element &lt;&lt; ' ';\n    }\n}\n\nint main()\n{\n    int array[] { 9, 7, 5, 3, 1 };\n\n    printArray(array);\n\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printArray(int pole[])\n{\n    for (prvek int: pole)\n    {\n        std::cout << prvek << ' ';\n    }\n}\n\nint main()\n{\n    int pole[] { 9, 7, 5, 3, 1 };\n\n    printArray(pole);\n\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b42",
       "type": "paragraph",
       "html": "<p>c)</p>",
       "preview": "c)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>c)</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b43",
@@ -321,7 +365,8 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Enter the number of test scores: \";\n    std::size_t length{};\n    std::cin >> length;\n\n    std::array<int, length> scores;\n\n    for (std::size_t i { 0 } ; i < length; ++i)\n    {\n        std::cout << \"Enter score \" << i << \": \";\n        std::cin >> scores[i];\n    }\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter the number of test scores: \";\n    std::size_t length{};\n    std::cin &gt;&gt; length;\n\n    std::array&lt;int, length&gt; scores;\n\n    for (std::size_t i { 0 } ; i &lt; length; ++i)\n    {\n        std::cout &lt;&lt; \"Enter score \" &lt;&lt; i &lt;&lt; \": \";\n        std::cin &gt;&gt; scores[i];\n    }\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\nint main()\n{\n    std::cout << \"Zadejte počet bodů testu: \";\n    std::velikost_t délka{};\n    std::cin >> délka;\n\n    std::array<int, délka> skóre;\n\n    for (std::velikost_t i { 0 } ; i < délka; ++i)\n    {\n        std::cout << \"Zadejte skóre \" << i << \": \";\n        std::cin >> skóre[i];\n    }\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b44",
@@ -337,28 +382,32 @@
       "type": "paragraph",
       "html": "<p>Implement a program that outputs the following:</p>",
       "preview": "Implement a program that outputs the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Implementujte program, který vypíše následující:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b46",
       "type": "output",
       "text": "Welcome to Roscoe's potion emporium!\nEnter your name: Alex\nHello, Alex, you have 85 gold.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: a\nThat is an invalid input.  Try again: 3\nYou purchased a potion of invisibility.  You have 35 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 4\nThat is an invalid input.  Try again: 2\nYou purchased a potion of speed.  You have 23 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 2\nYou purchased a potion of speed.  You have 11 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 4\nYou can not afford that.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: q\n\nYour inventory contains: \n2x potion of speed\n1x potion of invisibility\nYou escaped with 11 gold remaining.\n\nThanks for shopping at Roscoe's potion emporium!\n",
       "html": "<pre>Welcome to Roscoe's potion emporium!\nEnter your name: Alex\nHello, Alex, you have 85 gold.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: a\nThat is an invalid input.  Try again: 3\nYou purchased a potion of invisibility.  You have 35 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 4\nThat is an invalid input.  Try again: 2\nYou purchased a potion of speed.  You have 23 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 2\nYou purchased a potion of speed.  You have 11 gold left.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: 4\nYou can not afford that.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\nEnter the number of the potion you'd like to buy, or 'q' to quit: q\n\nYour inventory contains: \n2x potion of speed\n1x potion of invisibility\nYou escaped with 11 gold remaining.\n\nThanks for shopping at Roscoe's potion emporium!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Vítejte v Roscoeově lektvarovém emporiu!\nZadejte své jméno: Alex\nAhoj, Alexi, máš 85 zlaťáků.\n\nZde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\nZadejte číslo lektvaru, který si chcete koupit, nebo 'q' pro ukončení: a\nTo je neplatný vstup. Zkuste to znovu: 3\nZakoupili jste lektvar neviditelnosti. Zbývá vám 35 zlaťáků.\n\nZde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\nZadejte číslo lektvaru, který si chcete koupit, nebo 'q' pro ukončení: 4\nTo je neplatný vstup. Zkuste to znovu: 2\nZakoupili jste lektvar rychlosti. Zbývá vám 23 zlaťáků.\n\nZde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\nZadejte číslo lektvaru, který si chcete koupit, nebo 'q' pro ukončení: 2\nZakoupili jste lektvar rychlosti. Zbývá vám 11 zlaťáků.\n\nZde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\nZadejte číslo lektvaru, který si chcete koupit, nebo 'q' pro ukončení: 4\nTo si nemůžete dovolit.\n\nZde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\nZadejte číslo lektvaru, který si chcete koupit, nebo 'q' pro ukončení: q\n\nVáš inventář obsahuje: \n2x lektvar rychlosti\n1x lektvar neviditelnosti\nOdešli jste s 11 zbývajícími zlaťáky.\n\nDěkujeme za nákup v Roscoeově lektvarovém emporiu!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b47",
       "type": "paragraph",
       "html": "<p>The player starts with a randomized amount of gold, between 80 and 120.</p>",
       "preview": "The player starts with a randomized amount of gold, between 80 and 120.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Hráč začíná s náhodným množstvím zlaťáků v rozmezí 80 až 120.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b48",
       "type": "paragraph",
       "html": "<p>Sound fun? Let’s do it! Because this will be hard to implement all at once, we’ll develop this in steps.</p>",
       "preview": "Sound fun? Let’s do it! Because this will be hard to implement all at once, we’l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zní to zábavně? Pojďme na to! Protože by bylo obtížné naimplementovat vše najednou, budeme program vyvíjet po jednotlivých krocích.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b49",
@@ -374,21 +423,24 @@
       "type": "paragraph",
       "html": "<p>Also write a function named <code>shop()</code> that enumerates through the list of <code>Potions</code> and prints their numbers, names, and cost.</p>",
       "preview": "Also write a function named shop() that enumerates through the list of Potions a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dále napište funkci s názvem <code>shop()</code>, která projde seznam <code>Potions</code> a vypíše jejich čísla, názvy a cenu.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b51",
       "type": "paragraph",
       "html": "<p>The program should output the following:</p>",
       "preview": "The program should output the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Program by měl vypsat následující:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b52",
       "type": "output",
       "text": "Here is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\n",
       "html": "<pre>Here is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Zde je naše dnešní nabídka:\n0) healing stojí 20\n1) mana stojí 30\n2) speed stojí 12\n3) invisibility stojí 50\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b53",
@@ -404,21 +456,24 @@
       "type": "paragraph",
       "html": "<p>Use the “Random.h” file in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/#RandomH\">8.15 -- Global random numbers (Random.h)</a> to make randomization easy.</p>",
       "preview": "Use the “Random.h” file in lesson 8.15 -- Global random numbers (Random.h) to ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro snadné generování náhodných čísel použijte soubor „Random.h“ z lekce <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/#RandomH\">8.15 – Globální náhodná čísla (Random.h)</a>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b55",
       "type": "paragraph",
       "html": "<p>The program should output the following:</p>",
       "preview": "The program should output the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Program by měl vypsat následující:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b56",
       "type": "output",
       "text": "Welcome to Roscoe's potion emporium!\nEnter your name: Alex\nHello, Alex, you have 84 gold.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\n\nThanks for shopping at Roscoe's potion emporium!\n",
       "html": "<pre>Welcome to Roscoe's potion emporium!\nEnter your name: Alex\nHello, Alex, you have 84 gold.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\n\nThanks for shopping at Roscoe's potion emporium!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Welcome to Roscoe's potion emporium!\nEnter your name: Alex\nHello, Alex, you have 84 gold.\n\nHere is our selection for today:\n0) healing costs 20\n1) mana costs 30\n2) speed costs 12\n3) invisibility costs 50\n\nThanks for shopping at Roscoe's potion emporium!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b57",
@@ -434,21 +489,24 @@
       "type": "paragraph",
       "html": "<p>Make sure you test for the following cases:</p>",
       "preview": "Make sure you test for the following cases:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nezapomeňte otestovat následující případy:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b59",
       "type": "list",
       "html": "<ul><li>User enters an invalid potion number (e.g. ‘d’)</li><li>User enters a valid potion number but with extraneous input (e.g. <code>2d</code>, <code>25</code>)</li></ul>",
       "preview": "User enters an invalid potion number (e.g. ‘d’)User enters a valid potion number",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Uživatel zadá neplatné číslo lektvaru (např. ‚d‘)</li><li>Uživatel zadá platné číslo lektvaru, ale s nadbytečným vstupem (např. <code>2d</code>, <code>25</code>)</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b60",
       "type": "paragraph",
       "html": "<p>We cover invalid input handling in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdcin-and-handling-invalid-input/\">9.5 -- std::cin and handling invalid input</a>.</p>",
       "preview": "We cover invalid input handling in lesson 9.5 -- std::cin and handling invalid i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zpracování neplatného vstupu se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdcin-and-handling-invalid-input/\">9.5 -- std::cin a zpracování neplatného vstupu</a>.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b61",
@@ -464,7 +522,8 @@
       "type": "paragraph",
       "html": "<p>We’ll use it in the next quiz question to actually implement a game.</p>",
       "preview": "We’ll use it in the next quiz question to actually implement a game.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Využijeme ji v další kvízové otázce k samotné implementaci hry.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b63",
@@ -499,21 +558,24 @@
       "language": "cpp",
       "code": "struct Card\n{\n    // Your other stuff here\n\n    friend std::ostream& operator<<(std::ostream& out, const Card &card)\n    {\n        out << // print your card rank and suit here\n        return out;\n    }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Card\n{\n    // Your other stuff here\n\n    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const Card &amp;card)\n    {\n        out &lt;&lt; // print your card rank and suit here\n        return out;\n    }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Card\n{\n    // Vaše další věci zde\n\n    přítel std::ostream& operátor<<(std::ostream& out, const karta &karta)\n    {\n        out << // zde vytiskněte hodnocení a barvu své karty\n        vrátit se ven;\n    }\n};</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b67",
       "type": "paragraph",
       "html": "<p>Second, add a function that returns the value of the Card. Treat an ace as value 11. Finally, add a <code>std::array</code> of Rank and of Suit (named <code>allRanks</code> and <code>allSuits</code> respectively) so they can be iterated over. Because these are part of a struct (not a namespace), make them static so they are only instantiated once (not with each object).</p>",
       "preview": "Second, add a function that returns the value of the Card. Treat an ace as value",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé přidejte funkci, která vrací hodnotu karty (Card). Eso považujte za hodnotu 11. Nakonec přidejte <code>std::array</code> pro Rank a Suit (pojmenované <code>allRanks</code> a <code>allSuits</code>), aby je bylo možné iterovat. Protože jsou součástí struktury (nikoli jmenného prostoru), udělejte je statické, aby se instanciovaly pouze jednou (nikoli s každým objektem).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b68",
       "type": "paragraph",
       "html": "<p>The following should compile:</p>",
       "preview": "The following should compile:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující kód by se měl zkompilovat:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b69",
@@ -521,21 +583,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    // Print one card\n    Card card { Card::rank_5, Card::suit_heart };\n    std::cout << card << '\\n';\n\n    // Print all cards\n    for (auto suit : Card::allSuits)\n        for (auto rank : Card::allRanks)\n            std::cout << Card { rank, suit } << ' ';\n    std::cout << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    // Print one card\n    Card card { Card::rank_5, Card::suit_heart };\n    std::cout &lt;&lt; card &lt;&lt; '\\n';\n\n    // Print all cards\n    for (auto suit : Card::allSuits)\n        for (auto rank : Card::allRanks)\n            std::cout &lt;&lt; Card { rank, suit } &lt;&lt; ' ';\n    std::cout &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    // Tisk jedné karty\n    Card card { Card::rank_5, Card::suit_heart };\n    std::cout << karta << '\\n';\n\n    // Tisk všech karet\n    pro (auto oblek : Card::allSuits)\n        pro (automatické hodnocení: Card::allRanks)\n            std::cout << Karta { hodnost, barva } << ' ';\n    std::cout << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b70",
       "type": "paragraph",
       "html": "<p>and produce the following output:</p>",
       "preview": "and produce the following output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a vygenerovat následující výstup:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b71",
       "type": "output",
       "text": "5H\nAC 2C 3C 4C 5C 6C 7C 8C 9C TC JC QC KC AD 2D 3D 4D 5D 6D 7D 8D 9D TD JD QD KD AH 2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH AS 2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS \n",
       "html": "<pre>5H\nAC 2C 3C 4C 5C 6C 7C 8C 9C TC JC QC KC AD 2D 3D 4D 5D 6D 7D 8D 9D TD JD QD KD AH 2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH AS 2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS \n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5H\nAC 2C 3C 4C 5C 6C 7C 8C 9C TC JC QC KC AD 2D 3D 4D 5D 6D 7D 8D 9D TD JD QD KD AH 2H 3H 4H 5H 6H 7H 8H 9H TH JH QH KH AS 2S 3S 4S 5S 6S 7S 8S 9S TS JS QS KS \n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b72",
@@ -551,28 +616,32 @@
       "type": "paragraph",
       "html": "<p>The Deck should have three functions:</p>",
       "preview": "The Deck should have three functions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída Deck by měla mít tři funkce:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b74",
       "type": "paragraph",
       "html": "<p>First, the default constructor should initialize the array of cards. You can use a ranged-for loop similar to the one in the main() function of the prior example to traverse through all the suits and ranks.</p>",
       "preview": "First, the default constructor should initialize the array of cards. You can use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, výchozí konstruktor by měl inicializovat pole karet. K procházení všech barev a hodnot můžete použít range-based for cyklus podobný tomu ve funkci main() z předchozího příkladu.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b75",
       "type": "paragraph",
       "html": "<p>Second, add a <code>dealCard()</code> function that returns the next card in the Deck by value. Since <code>std::array</code> is a fixed-size array, think about how you will keep track of where the next card is. This function should assert out if it is called when the Deck has gone through all the cards.</p>",
       "preview": "Second, add a dealCard() function that returns the next card in the Deck by valu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé přidejte funkci <code>dealCard()</code>, která vrátí hodnotou další kartu z balíčku. Jelikož <code>std::array</code> je pole s pevnou velikostí, zamyslete se nad tím, jak budete sledovat pozici další karty. Tato funkce by měla vyvolat assert, pokud je zavolána ve chvíli, kdy balíček již prošel všemi kartami.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b76",
       "type": "paragraph",
       "html": "<p>Third, write a <code>shuffle()</code> member function that shuffles the deck. To make this easy, we will enlist the help of <code>std::shuffle</code>:</p>",
       "preview": "Third, write a shuffle() member function that shuffles the deck. To make this ea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí napište členskou funkci <code>shuffle()</code>, která balíček zamíchá. Abychom si to usnadnili, vezmeme si na pomoc <code>std::shuffle</code>:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b77",
@@ -580,21 +649,24 @@
       "language": "cpp",
       "code": "#include <algorithm> // for std::shuffle\n#include \"Random.h\"  // for Random::mt\n\n    // Put this line in your shuffle function to shuffle m_cards using the Random::mt Mersenne Twister\n    // This will rearrange all the Cards in the deck randomly\n    std::shuffle(m_cards.begin(), m_cards.end(), Random::mt);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;algorithm&gt; // for std::shuffle\n#include \"Random.h\"  // for Random::mt\n\n    // Put this line in your shuffle function to shuffle m_cards using the Random::mt Mersenne Twister\n    // This will rearrange all the Cards in the deck randomly\n    std::shuffle(m_cards.begin(), m_cards.end(), Random::mt);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <algorithm> // pro std::shuffle\n#include \"Random.h\" // pro Random::mt\n\n    // Vložte tento řádek do vaší funkce zamíchat, abyste zamíchali m_karty pomocí Random::mt Mersenne Twister\n    // Toto náhodně přeuspořádá všechny karty v balíčku\n    std::shuffle(m_cards.begin(), m_cards.end(), Random::mt);</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b78",
       "type": "paragraph",
       "html": "<p>The <code>shuffle()</code> function should also reset however you are tracking where the next card is back to the start of the deck.</p>",
       "preview": "The shuffle() function should also reset however you are tracking where the next",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce <code>shuffle()</code> by také měla resetovat způsob, jakým sledujete další kartu, zpět na začátek balíčku.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b79",
       "type": "paragraph",
       "html": "<p>The following program should run:</p>",
       "preview": "The following program should run:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující program by měl jít spustit:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b80",
@@ -602,21 +674,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    Deck deck{};\n    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\\n';\n\n    deck.shuffle();\n    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Deck deck{};\n    std::cout &lt;&lt; deck.dealCard() &lt;&lt; ' ' &lt;&lt; deck.dealCard() &lt;&lt; ' ' &lt;&lt; deck.dealCard() &lt;&lt; '\\n';\n\n    deck.shuffle();\n    std::cout &lt;&lt; deck.dealCard() &lt;&lt; ' ' &lt;&lt; deck.dealCard() &lt;&lt; ' ' &lt;&lt; deck.dealCard() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    Paluba paluby{};\n    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\\n';\n\n    deck.shuffle();\n    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b81",
       "type": "paragraph",
       "html": "<p>and produce the following output (the last 3 cards should be randomized):</p>",
       "preview": "and produce the following output (the last 3 cards should be randomized):",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a vytvořit následující výstup (poslední 3 karty by měly být náhodné):</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b82",
       "type": "output",
       "text": "AC 2C 3C\n2H 7H 9C\n",
       "html": "<pre>AC 2C 3C\n2H 7H 9C\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>AC 2C 3C\n2H 7H 9C\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b83",
@@ -632,28 +707,32 @@
       "type": "paragraph",
       "html": "<p>Here are the rules for our version of Blackjack:</p>",
       "preview": "Here are the rules for our version of Blackjack:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde jsou pravidla pro naši verzi Blackjacku:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b85",
       "type": "list",
       "html": "<ul><li>The dealer gets one card to start (in real life, the dealer gets two, but one is face down so it doesn’t matter at this point).</li><li>The player gets two cards to start.</li><li>The player goes first.</li><li>A player can repeatedly “hit” or “stand”.</li><li>If the player “stands”, their turn is over, and their score is calculated based on the cards they have been dealt.</li><li>If the player “hits”, they get another card and the value of that card is added to their total score.</li><li>An ace normally counts as a 1 or an 11 (whichever is better for the total score). For simplicity, we’ll count it as an 11 here.</li><li>If the player goes over a score of 21, they bust and lose immediately.</li><li>When the player is done, it is the dealer’s turn.</li><li>The dealer repeatedly draws until they reach a score of 17 or more, at which point they must stop drawing.</li><li>If the dealer goes over a score of 21, they bust and the player wins immediately.</li><li>Otherwise, if the player has a higher score than the dealer, the player wins. Otherwise, the player loses (we’ll consider ties as dealer wins for simplicity).</li></ul>",
       "preview": "The dealer gets one card to start (in real life, the dealer gets two, but one is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Dealer dostane na začátku jednu kartu (ve skutečnosti dealer dostane dvě, ale jedna je lícem dolů, takže na tom v tuto chvíli nezáleží).</li><li>Hráč dostane na začátku dvě karty.</li><li>Hráč hraje jako první.</li><li>Hráč může opakovaně zvolit „hit“ (vzít kartu) nebo „stand“ (stát).</li><li>Pokud hráč zvolí „stand“, jeho tah končí a jeho skóre se vypočítá na základě karet, které mu byly rozdány.</li><li>Pokud hráč zvolí „hit“, dostane další kartu a hodnota této karty se přičte k jeho celkovému skóre.</li><li>Eso se obvykle počítá jako 1 nebo 11 (podle toho, co je pro celkové skóre výhodnější). Pro jednoduchost ho zde budeme počítat jako 11.</li><li>Pokud hráč překročí skóre 21, přetáhne („bust“) a okamžitě prohrává.</li><li>Jakmile hráč skončí, je na řadě dealer.</li><li>Dealer si opakovaně táhne karty, dokud nedosáhne skóre 17 nebo více, v tomto bodě musí tahání karet ukončit.</li><li>Pokud dealer překročí skóre 21, přetáhne a hráč okamžitě vyhrává.</li><li>V opačném případě, má-li hráč vyšší skóre než dealer, vyhrává hráč. Jinak hráč prohrává (remízy pro jednoduchost považujeme za výhru dealera).</li></ul>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b86",
       "type": "paragraph",
       "html": "<p>In our simplified version of Blackjack, we’re not going to keep track of which specific cards the player and the dealer have been dealt. We’ll only track the sum of the values of the cards they have been dealt for the player and dealer. This keeps things simpler.</p>",
       "preview": "In our simplified version of Blackjack, we’re not going to keep track of which s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V naší zjednodušené verzi Blackjacku nebudeme sledovat, jaké konkrétní karty hráč a dealer dostali. Budeme sledovat pouze součet hodnot karet, které byly hráči a dealerovi rozdány. Díky tomu zůstanou věci jednodušší.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b87",
       "type": "paragraph",
       "html": "<p>Start with the code you wrote in the prior quiz (or use our reference solution).</p>",
       "preview": "Start with the code you wrote in the prior quiz (or use our reference solution).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začněte s kódem, který jste napsali v předchozím kvízu (nebo použijte naše referenční řešení).</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b88",
@@ -669,28 +748,32 @@
       "type": "paragraph",
       "html": "<p>Write a function that will (eventually) play a round of Blackjack. For now, this function should draw one randomized card for the dealer and two randomized cards for the player. It should return a bool value indicating who has the greater score.</p>",
       "preview": "Write a function that will (eventually) play a round of Blackjack. For now, this",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Napište funkci, která (nakonec) odehraje jedno kolo Blackjacku. Prozatím by tato funkce měla líznout jednu náhodně vybranou kartu pro dealera a dvě náhodně vybrané karty pro hráče. Měla by vracet hodnotu bool indikující, kdo má vyšší skóre.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b90",
       "type": "paragraph",
       "html": "<p>The code should output the following:</p>",
       "preview": "The code should output the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kód by měl vypsat následující:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b91",
       "type": "output",
       "text": "The dealer is showing: 10\nYou have score: 13\nYou win!\n",
       "html": "<pre>The dealer is showing: 10\nYou have score: 13\nYou win!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 10\nYou have score: 13\nYou win!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b92",
       "type": "output",
       "text": "The dealer is showing: 10\nYou have score: 8\nYou lose!\n",
       "html": "<pre>The dealer is showing: 10\nYou have score: 8\nYou lose!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 10\nYou have score: 8\nYou lose!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b93",
@@ -706,35 +789,40 @@
       "type": "paragraph",
       "html": "<p>Add the logic that handles the dealer’s turn. The dealer will draw cards until they hit 17, then they must stop. If they bust, the player wins.</p>",
       "preview": "Add the logic that handles the dealer’s turn. The dealer will draw cards until t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přidejte logiku, která obsluhuje tah dealera (krupiera). Dealer si bude lízat karty, dokud nedosáhne alespoň hodnoty 17, poté musí přestat. Pokud přesáhne 21 (bust), hráč vyhrává.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b95",
       "type": "paragraph",
       "html": "<p>Here is some sample output:</p>",
       "preview": "Here is some sample output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový výstup:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b96",
       "type": "output",
       "text": "The dealer is showing: 8\nYou have score: 9\nThe dealer flips a 4D.  They now have: 12\nThe dealer flips a JS.  They now have: 22\nThe dealer went bust!\nYou win!\n",
       "html": "<pre>The dealer is showing: 8\nYou have score: 9\nThe dealer flips a 4D.  They now have: 12\nThe dealer flips a JS.  They now have: 22\nThe dealer went bust!\nYou win!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 8\nYou have score: 9\nThe dealer flips a 4D.  They now have: 12\nThe dealer flips a JS.  They now have: 22\nThe dealer went bust!\nYou win!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b97",
       "type": "output",
       "text": "The dealer is showing: 6\nYou have score: 13\nThe dealer flips a 3D.  They now have: 9\nThe dealer flips a 3H.  They now have: 12\nThe dealer flips a 9S.  They now have: 21\nYou lose!\n",
       "html": "<pre>The dealer is showing: 6\nYou have score: 13\nThe dealer flips a 3D.  They now have: 9\nThe dealer flips a 3H.  They now have: 12\nThe dealer flips a 9S.  They now have: 21\nYou lose!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 6\nYou have score: 13\nThe dealer flips a 3D.  They now have: 9\nThe dealer flips a 3H.  They now have: 12\nThe dealer flips a 9S.  They now have: 21\nYou lose!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b98",
       "type": "output",
       "text": "The dealer is showing: 7\nYou have score: 21\nThe dealer flips a JC.  They now have: 17\nYou win!\n",
       "html": "<pre>The dealer is showing: 7\nYou have score: 21\nThe dealer flips a JC.  They now have: 17\nYou win!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 7\nYou have score: 21\nThe dealer flips a JC.  They now have: 17\nYou win!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b99",
@@ -750,28 +838,32 @@
       "type": "paragraph",
       "html": "<p>Here is some sample output:</p>",
       "preview": "Here is some sample output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový výstup:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b101",
       "type": "output",
       "text": "The dealer is showing: 2\nYou have score: 14\n(h) to hit, or (s) to stand: h\nYou were dealt KH.  You now have: 24\nYou went bust!\nYou lose!\n",
       "html": "<pre>The dealer is showing: 2\nYou have score: 14\n(h) to hit, or (s) to stand: h\nYou were dealt KH.  You now have: 24\nYou went bust!\nYou lose!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 2\nYou have score: 14\n(h) to hit, or (s) to stand: h\nYou were dealt KH.  You now have: 24\nYou went bust!\nYou lose!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b102",
       "type": "output",
       "text": "The dealer is showing: 10\nYou have score: 9\n(h) to hit, or (s) to stand: h\nYou were dealt TH.  You now have: 19\n(h) to hit, or (s) to stand: s\nThe dealer flips a 3D.  They now have: 13\nThe dealer flips a 7H.  They now have: 20\nYou lose!\n",
       "html": "<pre>The dealer is showing: 10\nYou have score: 9\n(h) to hit, or (s) to stand: h\nYou were dealt TH.  You now have: 19\n(h) to hit, or (s) to stand: s\nThe dealer flips a 3D.  They now have: 13\nThe dealer flips a 7H.  They now have: 20\nYou lose!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 10\nYou have score: 9\n(h) to hit, or (s) to stand: h\nYou were dealt TH.  You now have: 19\n(h) to hit, or (s) to stand: s\nThe dealer flips a 3D.  They now have: 13\nThe dealer flips a 7H.  They now have: 20\nYou lose!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b103",
       "type": "output",
       "text": "The dealer is showing: 7\nYou have score: 12\n(h) to hit, or (s) to stand: h\nYou were dealt 7S.  You now have: 19\n(h) to hit, or (s) to stand: h\nYou were dealt 2D.  You now have: 21\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6H.  They now have: 13\nThe dealer flips a QC.  They now have: 23\nThe dealer went bust!\nYou win!\n",
       "html": "<pre>The dealer is showing: 7\nYou have score: 12\n(h) to hit, or (s) to stand: h\nYou were dealt 7S.  You now have: 19\n(h) to hit, or (s) to stand: h\nYou were dealt 2D.  You now have: 21\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6H.  They now have: 13\nThe dealer flips a QC.  They now have: 23\nThe dealer went bust!\nYou win!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing: 7\nYou have score: 12\n(h) to hit, or (s) to stand: h\nYou were dealt 7S.  You now have: 19\n(h) to hit, or (s) to stand: h\nYou were dealt 2D.  You now have: 21\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6H.  They now have: 13\nThe dealer flips a QC.  They now have: 23\nThe dealer went bust!\nYou win!\n</pre>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b104",
@@ -787,35 +879,41 @@
       "type": "paragraph",
       "html": "<p>It’s important to note that we’re only keeping track of the sum of the cards, not which specific cards the user has.</p>",
       "preview": "It’s important to note that we’re only keeping track of the sum of the cards, no",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je důležité si uvědomit, že sledujeme pouze součet karet, nikoli to, jaké konkrétní karty uživatel má.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b106",
       "type": "paragraph",
       "html": "<p>b) In actual blackjack, if the player and dealer have the same score (and the player has not gone bust), the result is a tie and neither wins. Describe how you’d modify the above program to account for this.</p>",
       "preview": "b) In actual blackjack, if the player and dealer have the same score (and the pl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>b) Ve skutečném blackjacku platí, že pokud mají hráč i krupiér stejné skóre (a hráč nepřekročil 21), výsledkem je remíza (tie) a nevyhrává nikdo. Popište, jak byste výše uvedený program upravili, aby toto zohledňoval.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b107",
       "type": "paragraph",
       "html": "<p>c) Extra credit: implement the above two ideas into your blackjack game. Note that you will need to show the dealer’s initial card and the player’s initial two cards so they know whether they have an ace or not.</p>",
       "preview": "c) Extra credit: implement the above two ideas into your blackjack game. Note th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>c) Bonusový úkol: implementujte výše uvedené dva nápady do své hry blackjack. Všimněte si, že budete muset zobrazit počáteční kartu krupiéra a dvě počáteční karty hráče, aby věděli, zda mají eso, či nikoli.</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b108",
       "type": "paragraph",
       "html": "<p>Here’s a sample output:</p>",
       "preview": "Here’s a sample output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový výstup:</p>"
     },
     {
       "id": "chapter-17-summary-and-quiz_b109",
       "type": "output",
       "text": "The dealer is showing JH (10)\nYou are showing AH 7D (18)\n(h) to hit, or (s) to stand: h\nYou were dealt JD.  You now have: 18\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6C.  They now have: 16\nThe dealer flips a AD.  They now have: 17\nYou win!\n",
       "html": "<pre>The dealer is showing JH (10)\nYou are showing AH 7D (18)\n(h) to hit, or (s) to stand: h\nYou were dealt JD.  You now have: 18\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6C.  They now have: 16\nThe dealer flips a AD.  They now have: 17\nYou win!\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>The dealer is showing JH (10)\nYou are showing AH 7D (18)\n(h) to hit, or (s) to stand: h\nYou were dealt JD.  You now have: 18\n(h) to hit, or (s) to stand: s\nThe dealer flips a 6C.  They now have: 16\nThe dealer flips a AD.  They now have: 17\nYou win!\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "17.x — Shrnutí a kvíz 17. kapitoly"
 }

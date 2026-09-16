@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>When debugging a program, in most cases the vast majority of your time will be spent trying to find where the error actually is. Once the issue is found, the remaining steps (fixing the issue and validating that the issue was fixed) are often trivial in comparison.</p>",
       "preview": "When debugging a program, in most cases the vast majority of your time will be s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při ladění programu strávíte ve většině případů převážnou většinu času snahou zjistit, kde se chyba ve skutečnosti nachází. Jakmile problém najdete, zbývající kroky (oprava problému a ověření, že byl opraven) jsou v porovnání s tím často triviální.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll start exploring how to find errors.</p>",
       "preview": "In this lesson, we’ll start exploring how to find errors.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci začneme zkoumat, jak chyby hledat.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b2",
       "type": "section",
       "title": "Finding problems via code inspection",
       "html": "<h3 class=\"cpp-section-heading\">Finding problems via code inspection</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Hledání problémů pomocí inspekce kódu</h3>",
+      "title_cs": "Hledání problémů pomocí kontroly kódu"
     },
     {
       "id": "a-strategy-for-debugging_b3",
       "type": "paragraph",
       "html": "<p>Let’s say you’ve noticed a problem, and you want to track the cause of that specific problem down. In many cases (especially in smaller programs), we can approximate where the issue is likely to be based on the nature of the error and the way the program is structured.</p>",
       "preview": "Let’s say you’ve noticed a problem, and you want to track the cause of that spec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že jste si všimli problému a chcete vypátrat jeho konkrétní příčinu. V mnoha případech (zejména u menších programů) můžeme přibližně odhadnout, kde se chyba pravděpodobně nachází, a to na základě povahy chyby a struktury programu.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b4",
       "type": "paragraph",
       "html": "<p>Consider the following program snippet:</p>",
       "preview": "Consider the following program snippet:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující úryvek programu:</p>"
     },
     {
       "id": "a-strategy-for-debugging_b5",
@@ -50,189 +56,220 @@
       "language": "cpp",
       "code": "int main()\n{\n    getNames(); // ask user to enter a bunch of names\n    sortNames(); // sort them in alphabetical order\n    printNames(); // print the sorted list of names\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    getNames(); // ask user to enter a bunch of names\n    sortNames(); // sort them in alphabetical order\n    printNames(); // print the sorted list of names\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    getNames(); // požádá uživatele, aby zadal spoustu jmen\n    sortNames(); // seřadit je v abecedním pořadí\n    printJmena(); // vytiskne seřazený seznam jmen\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "a-strategy-for-debugging_b6",
       "type": "paragraph",
       "html": "<p>If you expected this program to print the names in alphabetical order, but it printed them in opposite order instead, the problem is probably in the <em>sortNames</em> function. In cases where you can narrow the problem down to a specific function, you may be able to spot the issue just by looking at the code.</p>",
       "preview": "If you expected this program to print the names in alphabetical order, but it pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud jste očekávali, že tento program vypíše jména v abecedním pořadí, ale místo toho je vypsal v opačném pořadí, problém je pravděpodobně ve funkci <em>sortNames</em>. V případech, kdy můžete problém zúžit na konkrétní funkci, můžete být schopni chybu odhalit pouhým pohledem na kód.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b7",
       "type": "paragraph",
       "html": "<p>However, as programs get more complex, finding issues by code inspection becomes more complex as well.</p>",
       "preview": "However, as programs get more complex, finding issues by code inspection becomes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak se však programy stávají složitějšími, hledání problémů pouhou kontrolou kódu se stává také složitějším.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b8",
       "type": "paragraph",
       "html": "<p>First, there’s a lot more code to look at. Looking at every line of code in a program that is thousands of lines long can take a really long time (not to mention it’s incredibly boring). Second, the code itself tends to be more complex, with more possible places for things to go wrong. Third, the code’s behavior may not give you many clues as to where things are going wrong. If you wrote a program to output stock recommendations and it actually output nothing at all, you probably wouldn’t have much of a lead on where to start looking for the problem.</p>",
       "preview": "First, there’s a lot more code to look at. Looking at every line of code in a pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé je potřeba projít mnohem více kódu. Procházení každého řádku kódu v programu, který má tisíce řádků, může trvat opravdu dlouho (nemluvě o tom, že je to neuvěřitelně nudné). Zadruhé samotný kód bývá složitější a nabízí více míst, kde se může něco pokazit. Zatřetí vám chování kódu nemusí poskytnout příliš mnoho vodítek k tomu, kde dochází k chybě. Pokud byste napsali program, který má vypisovat investiční doporučení k akciím, a on by nevypsal vůbec nic, pravděpodobně byste neměli moc záchytných bodů, kde začít problém hledat.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b9",
       "type": "paragraph",
       "html": "<p>Finally, bugs can be caused by making bad assumptions. It’s almost impossible to visually spot a bug caused by a bad assumption, because you’re likely to make the same bad assumption when inspecting the code, and not notice the error. So if we have an issue that we can’t find via code inspection, how do we find it?</p>",
       "preview": "Finally, bugs can be caused by making bad assumptions. It’s almost impossible to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A konečně, chyby mohou být způsobeny mylnými předpoklady. Odhalit pouhým okem chybu způsobenou mylným předpokladem je téměř nemožné, protože při kontrole kódu pravděpodobně uděláte tentýž mylný předpoklad a chyby si nevšimnete. Pokud tedy máme problém, který nedokážeme najít kontrolou kódu, jak jej tedy najdeme?</p>"
     },
     {
       "id": "a-strategy-for-debugging_b10",
       "type": "section",
       "title": "Finding problems by running the program",
       "html": "<h3 class=\"cpp-section-heading\">Finding problems by running the program</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Hledání problémů spuštěním programu</h3>",
+      "title_cs": "Hledání problémů spuštěním programu"
     },
     {
       "id": "a-strategy-for-debugging_b11",
       "type": "paragraph",
       "html": "<p>Fortunately, if we can’t find an issue via code inspection, there is another avenue we can take: we can watch the behavior of the program as it runs, and try to diagnose the issue from that. This approach can be generalized as:</p>",
       "preview": "Fortunately, if we can’t find an issue via code inspection, there is another ave",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud se nám problém nepodaří najít kontrolou kódu, máme naštěstí k dispozici ještě další cestu: můžeme sledovat chování programu za běhu a pokusit se problém diagnostikovat na základě toho. Tento přístup lze zobecnit následovně:</p>"
     },
     {
       "id": "a-strategy-for-debugging_b12",
       "type": "list",
       "html": "<ol><li>Figure out how to reproduce the problem</li><li>Run the program and gather information to narrow down where the problem is</li><li>Repeat the prior step until you find the problem</li></ol>",
       "preview": "Figure out how to reproduce the problemRun the program and gather information to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol><li>Zjistěte, jak problém reprodukovat</li><li>Spusťte program a sbírejte informace, abyste zúžili okruh míst, kde se problém nachází</li><li>Opakujte předchozí krok, dokud problém nenajdete</li></ol>"
     },
     {
       "id": "a-strategy-for-debugging_b13",
       "type": "paragraph",
       "html": "<p>For the rest of this chapter, we’ll discuss techniques to facilitate this approach.</p>",
       "preview": "For the rest of this chapter, we’ll discuss techniques to facilitate this approa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve zbytku této kapitoly probereme techniky, které tento přístup usnadňují.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b14",
       "type": "section",
       "title": "Reproducing the problem",
       "html": "<h3 class=\"cpp-section-heading\">Reproducing the problem</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Reprodukce problému</h3>",
+      "title_cs": "Reprodukce problému"
     },
     {
       "id": "a-strategy-for-debugging_b15",
       "type": "paragraph",
       "html": "<p>The first and most important step in finding a problem is to be able to <em>reproduce the problem</em>. Reproducing the problem means making the problem appear in a consistent manner. The reason is simple: it’s extremely hard to find an issue unless you can observe it occurring.</p>",
       "preview": "The first and most important step in finding a problem is to be able to reproduc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prvním a nejdůležitějším krokem při hledání problému je schopnost <em>problém reprodukovat</em>. Reprodukovat problém znamená dosáhnout toho, aby se projevoval konzistentním způsobem. Důvod je jednoduchý: je nesmírně obtížné najít chybu, pokud nemůžete přímo pozorovat, jak k ní dochází.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b16",
       "type": "paragraph",
       "html": "<p>Back to our ice dispenser analogy -- let’s say one day your friend tells you that your ice dispenser isn’t working. You go to look at it, and it works fine. How would you diagnose the problem? It would be very difficult. However, if you could actually see the issue of the ice dispenser not working, then you could start to diagnose why it wasn’t working much more effectively.</p>",
       "preview": "Back to our ice dispenser analogy -- let’s say one day your friend tells you tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vraťme se k naší analogii s dávkovačem ledu – řekněme, že vám jednoho dne kamarád řekne, že váš dávkovač ledu nefunguje. Jdete se na něj podívat a funguje bez problému. Jak byste takový problém diagnostikovali? Bylo by to velmi obtížné. Pokud byste však nefunkčnost dávkovače ledu viděli na vlastní oči, mohli byste mnohem efektivněji začít diagnostikovat, proč vlastně nefunguje.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b17",
       "type": "paragraph",
       "html": "<p>If a software issue is blatant (e.g. the program crashes in the same place every time you run it) then reproducing the problem can be trivial. However, sometimes reproducing an issue can be a lot more difficult. The problem may only occur on certain computers, or in particular circumstances (e.g. when the user enters certain input). In such cases, generating a set of reproduction steps can be helpful. <strong>Reproduction steps</strong> are a list of clear and precise steps that can be followed to cause an issue to recur with a high level of predictability. The goal is to be able to cause the issue to reoccur as much as possible, so we can run our program over and over and look for clues to determine what’s causing the problem. If the issue can be reproduced 100% of the time, that’s ideal, but less than 100% reproducibility can be okay. An issue that occurs only 50% of the time simply means it’ll take twice as long to diagnose the issue, as half the time the program won’t exhibit the problem and thus not contribute any useful diagnostic information.</p>",
       "preview": "If a software issue is blatant (e.g. the program crashes in the same place every",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je softwarový problém zjevný (např. program spadne na stejném místě při každém spuštění), pak může být reprodukce problému triviální. Někdy však může být reprodukce problému mnohem obtížnější. Problém se může vyskytovat pouze na určitých počítačích nebo za specifických okolností (např. když uživatel zadá určitý vstup). V takových případech může pomoci vytvoření sady kroků k reprodukci. <strong>Kroky k reprodukci</strong> (reproduction steps) představují seznam jasných a přesných kroků, jejichž dodržením lze docílit toho, že se problém s vysokou mírou předvídatelnosti zopakuje. Cílem je vyvolat opakování problému co nejčastěji, abychom mohli program spouštět znovu a znovu a hledat vodítka k určení jeho příčiny. Pokud lze problém reprodukovat ve 100 % případů, je to ideální, ale i méně než 100% reprodukovatelnost může stačit. Problém, který se vyskytuje pouze v 50 % případů, jednoduše znamená, že jeho diagnostika zabere dvakrát tolik času, protože v polovině případů se problém neprojeví a neposkytne žádné užitečné diagnostické informace.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b18",
       "type": "section",
       "title": "Homing in on issues",
       "html": "<h3 class=\"cpp-section-heading\">Homing in on issues</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zacílení na problém</h3>",
+      "title_cs": "Vracet se k problémům"
     },
     {
       "id": "a-strategy-for-debugging_b19",
       "type": "paragraph",
       "html": "<p>Once we can reasonably reproduce the problem, the next step is to figure out where in the code the problem is. Based on the nature of the problem, this may be easy or difficult. For the sake of example, let’s say we don’t have much of an idea where the problem actually is. How do we find it?</p>",
       "preview": "Once we can reasonably reproduce the problem, the next step is to figure out whe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile dokážeme problém spolehlivě reprodukovat, dalším krokem je zjistit, kde v kódu se nachází. V závislosti na povaze problému to může být snadné i obtížné. Pro účely našeho příkladu předpokládejme, že příliš netušíme, kde se problém vlastně nachází. Jak ho najdeme?</p>"
     },
     {
       "id": "a-strategy-for-debugging_b20",
       "type": "paragraph",
       "html": "<p>An analogy will serve us well here. Let’s play a game of hi-lo. I’m going to ask you to guess a number between 1 and 10. For each guess you make, I’ll tell you whether each guess is too high, too low, or correct. An instance of this game might look like this:</p>",
       "preview": "An analogy will serve us well here. Let’s play a game of hi-lo. I’m going to ask",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde nám dobře poslouží analogie. Zahrajme si hru vyšší–nižší (hi-lo). Požádám vás, abyste hádali číslo od 1 do 10. Při každém vašem tipu vám řeknu, zda je příliš vysoký, příliš nízký, nebo správný. Průběh takové hry by mohl vypadat následovně:</p>"
     },
     {
       "id": "a-strategy-for-debugging_b21",
       "type": "output",
       "text": "You: 5\nMe: Too low\nYou: 8\nMe: Too high\nYou: 6\nMe: Too low\nYou: 7\nMe: Correct\n",
       "html": "<pre>You: 5\nMe: Too low\nYou: 8\nMe: Too high\nYou: 6\nMe: Too low\nYou: 7\nMe: Correct\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Vy: 5\nJá: Příliš nízké\nVy: 8\nJá: Příliš vysoké\nVy: 6\nJá: Příliš nízké\nVy: 7\nJá: Správně\n</pre>"
     },
     {
       "id": "a-strategy-for-debugging_b22",
       "type": "paragraph",
       "html": "<p>In the above game, you don’t have to guess every number to find the number I was thinking of. Through the process of making guesses and considering the information you learn from each guess, you can “home in” on the correct number with only a few guesses (if you use an optimal strategy, you can always find the number I’m thinking of in 4 or fewer guesses).</p>",
       "preview": "In the above game, you don’t have to guess every number to find the number I was",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedené hře nemusíte hádat každé číslo, abyste zjistili, na které číslo jsem myslel. Díky postupnému hádání a vyhodnocování informací získaných z každého pokusu se můžete ke správnému číslu „dopracovat“ během pouhých několika tipů (pokud použijete optimální strategii, můžete myšlené číslo najít vždy na 4 nebo méně pokusů).</p>"
     },
     {
       "id": "a-strategy-for-debugging_b23",
       "type": "paragraph",
       "html": "<p>We can use a similar process to debug programs. In the worst case, we may have no idea where the bug is. However, we do know that the problem must be somewhere in the code that executes between the beginning of the program and the point where the program exhibits the first incorrect symptom that we can observe. That at least rules out the parts of the program that execute after the first observable symptom. But that still potentially leaves a lot of code to cover. To diagnose the issue, we’ll make some educated guesses about where the problem is, with the goal of homing in on the problem quickly.</p>",
       "preview": "We can use a similar process to debug programs. In the worst case, we may have n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobný postup můžeme použít i při ladění programů. V nejhorším případě nemusíme mít vůbec tušení, kde se chyba nachází. Víme však, že problém musí být někde v kódu, který se vykoná mezi začátkem programu a okamžikem, kdy program projeví první pozorovatelný nesprávný příznak. To alespoň vylučuje části programu, které se vykonávají až po tomto prvním pozorovatelném příznaku. I tak nám ale potenciálně zbývá projít spousta kódu. K diagnostice problému provedeme několik kvalifikovaných odhadů o tom, kde se problém nachází, s cílem jej rychle lokalizovat.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b24",
       "type": "paragraph",
       "html": "<p>Often, whatever it was that caused us to notice the problem will give us an initial guess that’s close to where the actual problem is. For example, if the program isn’t writing data to a file when it should be, then the issue is probably somewhere in the code that handles writing to a file (duh!). Then we can use a hi-lo like strategy to try and isolate where the problem actually is.</p>",
       "preview": "Often, whatever it was that caused us to notice the problem will give us an init",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Často nám právě to, co nás na problém upozornilo, poskytne výchozí odhad, který je blízko skutečnému místu chyby. Pokud například program nezapisuje data do souboru, ačkoliv by měl, problém bude pravděpodobně někde v kódu, který zajišťuje zápis do souboru (jak jinak!). Následně můžeme použít strategii podobnou hře „víc nebo míň“ (hi-lo) a pokusit se přesně určit, kde se problém ve skutečnosti nachází.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b25",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "a-strategy-for-debugging_b26",
       "type": "list",
       "html": "<ul><li>If at some point in our program, we can prove that the problem has not occurred yet, this is analogous to receiving a “too low” hi-lo result -- we know the problem must be somewhere later in the program. For example, if our program is crashing in the same place every time, and we can prove that the program has not crashed at a particular point in the execution of the program, then the crash must be later in the code.</li><li>If at some point in our program we can observe incorrect behavior related to the problem, then this is analogous to receiving a “too high” hi-lo result, and we know the problem must be somewhere earlier in the program. For example, let’s say a program prints the value of some variable <em>x</em>. You were expecting it to print value <em>2</em>, but it printed <em>8</em> instead. Variable <em>x</em> must have the wrong value. If, at some point during the execution of our program, we can see that variable <em>x</em> already has value <em>8</em>, then we know the problem must have occurred before that point.</li></ul>",
       "preview": "If at some point in our program, we can prove that the problem has not occurred ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pokud v určitém bodě našeho programu dokážeme prokázat, že k problému ještě nedošlo, je to analogické k obdržení výsledku „příliš málo“ (too low) ve hře hi-lo – víme, že problém musí být někde dále v programu. Pokud například náš program padá pokaždé na stejném místě a my dokážeme prokázat, že v určitém bodě běhu programu k pádu ještě nedošlo, pak musí k pádu docházet až dále v kódu.</li><li>Pokud v určitém bodě našeho programu můžeme pozorovat nesprávné chování související s problémem, je to analogické k obdržení výsledku „příliš mnoho“ (too high) a víme, že problém musí být někde dříve v programu. Řekněme například, že program vypisuje hodnotu nějaké proměnné <em>x</em>. Očekávali jste, že vypíše hodnotu <em>2</em>, ale místo toho vypsal <em>8</em>. Proměnná <em>x</em> musí mít nesprávnou hodnotu. Pokud v určitém bodě během běhu programu vidíme, že proměnná <em>x</em> již má hodnotu <em>8</em>, pak víme, že k problému muselo dojít před tímto bodem.</li></ul>"
     },
     {
       "id": "a-strategy-for-debugging_b27",
       "type": "paragraph",
       "html": "<p>The hi-lo analogy isn’t perfect -- we can also sometimes remove entire sections of our code from consideration without gaining any information on whether the actual problem is before or after that point.</p>",
       "preview": "The hi-lo analogy isn’t perfect -- we can also sometimes remove entire sections ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Analogie se hrou hi-lo není dokonalá – někdy také můžeme z prověřování zcela vyloučit celé části našeho kódu, aniž bychom získali jakoukoli informaci o tom, zda se skutečný problém nachází před tímto bodem nebo za ním.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b28",
       "type": "paragraph",
       "html": "<p>We’ll show examples of all three of these cases in the next lesson.</p>",
       "preview": "We’ll show examples of all three of these cases in the next lesson.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příklady všech těchto tří případů si ukážeme v příští lekci.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b29",
       "type": "paragraph",
       "html": "<p>Eventually, with enough guesses and some good technique, we can home in on the exact line causing the problem! If we’ve made any bad assumptions, this will help us discover where. When you’ve excluded everything else, the only thing left must be causing the problem. Then it’s just a matter of understanding why.</p>",
       "preview": "Eventually, with enough guesses and some good technique, we can home in on the e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nakonec se s dostatkem odhadů a dobrou technikou dokážeme zaměřit na přesný řádek způsobující problém! Pokud jsme učinili nějaké chybné předpoklady, pomůže nám to zjistit kde. Jakmile vyloučíte vše ostatní, to jediné, co zbývá, musí být příčinou problému. Pak už jde jen o to pochopit proč.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b30",
       "type": "paragraph",
       "html": "<p>What guessing strategy you want to use is up to you -- the best one depends on what type of bug it is, so you’ll likely want to try many different approaches to narrow down the issue. As you gain experience in debugging issues, your intuition will help guide you.</p>",
       "preview": "What guessing strategy you want to use is up to you -- the best one depends on w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakou strategii odhadování zvolíte, je na vás – ta nejlepší závisí na typu chyby, takže pravděpodobně budete chtít vyzkoušet mnoho různých přístupů, abyste problém zúžili. Jak budete získávat zkušenosti s laděním problémů, vaše intuice vás sama navede.</p>"
     },
     {
       "id": "a-strategy-for-debugging_b31",
       "type": "paragraph",
       "html": "<p>So how do we “make guesses”? There are many ways to do so. We’re going to start with some simple approaches in the next chapter, and then we’ll build on these and explore others in future chapters.</p>",
       "preview": "So how do we “make guesses”? There are many ways to do so. We’re going to start ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak tedy „vytvářet odhady“? Existuje mnoho způsobů, jak na to. V příští kapitole začneme několika jednoduchými přístupy a v dalších kapitolách na ně navážeme a prozkoumáme další.</p>"
     }
-  ]
+  ],
+  "title_cs": "3.3 — Strategie ladění"
 }

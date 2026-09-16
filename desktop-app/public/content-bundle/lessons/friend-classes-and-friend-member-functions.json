@@ -14,21 +14,25 @@
       "type": "section",
       "title": "Friend classes",
       "html": "<h3 class=\"cpp-section-heading\">Friend classes</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Spřátelené třídy (Friend classes)</h3>",
+      "title_cs": "Přátelské třídy"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b1",
       "type": "paragraph",
       "html": "<p>A <strong>friend class</strong> is a class that can access the private and protected members of another class.</p>",
       "preview": "A friend class is a class that can access the private and protected members of a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Spřátelená třída</strong> (friend class) je třída, která má přístup k privátním (private) a chráněným (protected) členům jiné třídy.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b2",
       "type": "paragraph",
       "html": "<p>Here is an example:</p>",
       "preview": "Here is an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad:</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b3",
@@ -36,49 +40,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Storage\n{\nprivate:\n    int m_nValue {};\n    double m_dValue {};\npublic:\n    Storage(int nValue, double dValue)\n       : m_nValue { nValue }, m_dValue { dValue }\n    { }\n\n    // Make the Display class a friend of Storage\n    friend class Display;\n};\n\nclass Display\n{\nprivate:\n    bool m_displayIntFirst {};\n\npublic:\n    Display(bool displayIntFirst)\n         : m_displayIntFirst { displayIntFirst }\n    {\n    }\n\n    // Because Display is a friend of Storage, Display members can access the private members of Storage\n    void displayStorage(const Storage& storage)\n    {\n        if (m_displayIntFirst)\n            std::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n        else // display double first\n            std::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n    }\n\n    void setDisplayIntFirst(bool b)\n    {\n         m_displayIntFirst = b;\n    }\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n\n    display.displayStorage(storage);\n\n    display.setDisplayIntFirst(true);\n    display.displayStorage(storage);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Storage\n{\nprivate:\n    int m_nValue {};\n    double m_dValue {};\npublic:\n    Storage(int nValue, double dValue)\n       : m_nValue { nValue }, m_dValue { dValue }\n    { }\n\n    // Make the Display class a friend of Storage\n    friend class Display;\n};\n\nclass Display\n{\nprivate:\n    bool m_displayIntFirst {};\n\npublic:\n    Display(bool displayIntFirst)\n         : m_displayIntFirst { displayIntFirst }\n    {\n    }\n\n    // Because Display is a friend of Storage, Display members can access the private members of Storage\n    void displayStorage(const Storage&amp; storage)\n    {\n        if (m_displayIntFirst)\n            std::cout &lt;&lt; storage.m_nValue &lt;&lt; ' ' &lt;&lt; storage.m_dValue &lt;&lt; '\\n';\n        else // display double first\n            std::cout &lt;&lt; storage.m_dValue &lt;&lt; ' ' &lt;&lt; storage.m_nValue &lt;&lt; '\\n';\n    }\n\n    void setDisplayIntFirst(bool b)\n    {\n         m_displayIntFirst = b;\n    }\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n\n    display.displayStorage(storage);\n\n    display.setDisplayIntFirst(true);\n    display.displayStorage(storage);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Skladování\n{\nsoukromé:\n    int m_nHodnota {};\n    double m_dValue {};\nveřejnost:\n    Úložiště (int nValue, double dValue)\n       : m_nValue { nValue }, m_dValue { dValue }\n    { }\n\n    // Udělejte z třídy Display přítele úložiště\n    Zobrazení třídy přátel;\n};\n\nTřída Displej\n{\nsoukromé:\n    bool m_displayIntFirst {};\n\nveřejnost:\n    Displej (bool displayIntFirst)\n         : m_displayIntFirst { displayIntFirst }\n    {\n    }\n\n    // Protože Display je přítel úložiště, členové Display mohou přistupovat k soukromým členům úložiště\n    void displayStorage (const Storage& storage)\n    {\n        if (m_displayIntFirst)\n            std::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n        else // zobrazí double first\n            std::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n    }\n\n    void setDisplayIntFirst(bool b)\n    {\n         m_displayIntFirst = b;\n    }\n};\n\nint main()\n{\n    Úložný prostor { 5, 6.7 };\n    Display display { false };\n\n    display.displayStorage(úložiště);\n\n    display.setDisplayIntFirst(true);\n    display.displayStorage(úložiště);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b4",
       "type": "paragraph",
       "html": "<p>Because the <code>Display</code> class is a friend of <code>Storage</code>, <code>Display</code> members can access the private members of any <code>Storage</code> object they have access to.</p>",
       "preview": "Because the Display class is a friend of Storage, Display members can access the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je třída <code>Display</code> spřátelená s třídou <code>Storage</code>, mohou členové třídy <code>Display</code> přistupovat k privátním členům libovolného objektu třídy <code>Storage</code>, ke kterému mají přístup.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b5",
       "type": "paragraph",
       "html": "<p>This program produces the following result:</p>",
       "preview": "This program produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b6",
       "type": "output",
       "text": "6.7 5\n5 6.7\n",
       "html": "<pre>6.7 5\n5 6.7\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>6.7 5\n5 6.7\n</pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b7",
       "type": "paragraph",
       "html": "<p>A few additional notes on friend classes.</p>",
       "preview": "A few additional notes on friend classes.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Několik dalších poznámek ke spřáteleným třídám.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b8",
       "type": "paragraph",
       "html": "<p>First, even though <code>Display</code> is a friend of <code>Storage</code>, <code>Display</code> has no access to the <code>*this</code> pointer of <code>Storage</code> objects (because <code>*this</code> is actually a function parameter).</p>",
       "preview": "First, even though Display is a friend of Storage, Display has no access to the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, i když je <code>Display</code> přítelem <code>Storage</code>, <code>Display</code> nemá přístup k ukazateli <code>*this</code> objektů třídy <code>Storage</code> (protože <code>*this</code> je ve skutečnosti parametrem funkce).</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b9",
       "type": "paragraph",
       "html": "<p>Second, friendship is not reciprocal. Just because <code>Display</code> is a friend of <code>Storage</code> does not mean <code>Storage</code> is also a friend of <code>Display</code>. If you want two classes to be friends of each other, both must declare the other as a friend.</p>",
       "preview": "Second, friendship is not reciprocal. Just because Display is a friend of Storag",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, přátelství není vzájemné (reciproční). Jen proto, že je <code>Display</code> přítelem třídy <code>Storage</code>, neznamená to, že je <code>Storage</code> také přítelem třídy <code>Display</code>. Pokud chcete, aby byly dvě třídy vzájemnými přáteli, musí obě deklarovat tu druhou jako svého přítele.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b10",
@@ -86,14 +97,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Sorry if this one hits a little close to home!</p></div>",
       "preview": "Author’s noteSorry if this one hits a little close to home!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Omlouvám se, pokud tohle míří až příliš do živého!</p></div>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b11",
       "type": "paragraph",
       "html": "<p>Class friendship is also not transitive. If class A is a friend of B, and B is a friend of C, that does not mean A is a friend of C.</p>",
       "preview": "Class friendship is also not transitive. If class A is a friend of B, and B is a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přátelství tříd také není tranzitivní. Pokud je třída A přítelem třídy B a B je přítelem třídy C, neznamená to, že je A přítelem třídy C.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b12",
@@ -101,35 +114,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Nor is friendship inherited. If class A makes B a friend, classes derived from B are not friends of A.</p></div>",
       "preview": "For advanced readersNor is friendship inherited. If class A makes B a friend, classes derived from B",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Přátelství se ani nedědí. Pokud třída A učiní třídu B svým přítelem, třídy odvozené z B nejsou přáteli třídy A.</p></div>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b13",
       "type": "paragraph",
       "html": "<p>A friend class declaration acts as a forward declaration for the class being friended. This means we do not need to forward declare the class being friended before friending it. In the example above, <code>friend class Display</code> acts as both a forward declaration of <code>Display</code> and a friend declaration.</p>",
       "preview": "A friend class declaration acts as a forward declaration for the class being fri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Deklarace spřátelené třídy (friend class) funguje jako dopředná deklarace pro třídu, které přátelství udělujeme. To znamená, že před udělením přátelství nemusíme danou třídu dopředně deklarovat. Ve výše uvedeném příkladu funguje <code>friend class Display</code> jak jako dopředná deklarace třídy <code>Display</code>, tak jako deklarace přátelství.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b14",
       "type": "section",
       "title": "Friend member functions",
       "html": "<h3 class=\"cpp-section-heading\">Friend member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Spřátelené členské funkce</h3>",
+      "title_cs": "Funkce člena přátel"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b15",
       "type": "paragraph",
       "html": "<p>Instead of making an entire class a friend, you can make a single member function a friend. This is done similarly to making a non-member function a friend, except the name of the member function is used instead.</p>",
       "preview": "Instead of making an entire class a friend, you can make a single member functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo toho, abyste učinili přítelem celou třídu, můžete za přítele prohlásit pouze jednotlivou členskou funkci. Dělá se to podobně jako při vytváření spřátelené nečlenské funkce, pouze se místo toho použije plně kvalifikovaný název dané členské funkce.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b16",
       "type": "paragraph",
       "html": "<p>However, in actuality, this can be a little trickier than expected. Let’s convert the previous example to make <code>Display::displayStorage</code> a friend member function. You might try something like this:</p>",
       "preview": "However, in actuality, this can be a little trickier than expected. Let’s conver",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve skutečnosti to však může být o něco složitější, než by se čekalo. Upravme předchozí příklad tak, aby se <code>Display::displayStorage</code> stala spřátelenou členskou funkcí. Mohli byste zkusit něco takového:</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b17",
@@ -137,21 +156,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Display; // forward declaration for class Display\n\nclass Storage\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\tfriend void Display::displayStorage(const Storage& storage); // error: Storage hasn't seen the full definition of class Display\n};\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage& storage)\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\t\telse // display double first\n\t\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n\t}\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Display; // forward declaration for class Display\n\nclass Storage\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\tfriend void Display::displayStorage(const Storage&amp; storage); // error: Storage hasn't seen the full definition of class Display\n};\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage&amp; storage)\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout &lt;&lt; storage.m_nValue &lt;&lt; ' ' &lt;&lt; storage.m_dValue &lt;&lt; '\\n';\n\t\telse // display double first\n\t\t\tstd::cout &lt;&lt; storage.m_dValue &lt;&lt; ' ' &lt;&lt; storage.m_nValue &lt;&lt; '\\n';\n\t}\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Displej; // dopředná deklarace pro třídu Display\n\ntřída Skladování\n{\nsoukromé:\n\tint m_nHodnota {};\n\tdouble m_dValue {};\nveřejnost:\n\tÚložiště (int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Udělejte z členské funkce Display::displayStorage přítele třídy Storage\n\tfriend void Display::displayStorage(const Storage& storage); // chyba: Úložiště nevidělo úplnou definici třídy Display\n};\n\nTřída Displej\n{\nsoukromé:\n\tbool m_displayIntFirst {};\n\nveřejnost:\n\tDisplej (bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage (const Storage& storage)\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\t\telse // zobrazí double first\n\t\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n\t}\n};\n\nint main()\n{\n    Úložný prostor { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(úložiště);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b18",
       "type": "paragraph",
       "html": "<p>However, it turns out this won’t work. In order to make a single member function a friend, the compiler has to have seen the full definition for the class of the friend member function (not just a forward declaration). Since class <code>Storage</code> hasn’t seen the full definition for class <code>Display</code> yet, the compiler will error at the point where we try to make the member function a friend.</p>",
       "preview": "However, it turns out this won’t work. In order to make a single member function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazuje se však, že to nebude fungovat. Aby bylo možné označit konkrétní členskou funkci za spřátelenou (friend), kompilátor musí mít k dispozici úplnou definici třídy této spřátelené funkce (nestačí pouhá dopředná deklarace). Jelikož třída <code>Storage</code> ještě neviděla úplnou definici třídy <code>Display</code>, kompilátor ohlásí chybu v místě, kde se pokoušíme danou členskou funkci označit za friend.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b19",
       "type": "paragraph",
       "html": "<p>Fortunately, this is easily resolved by moving the definition of class <code>Display</code> before the definition of class <code>Storage</code> (either in the same file, or by moving the definition of <code>Display</code> to a header file and #including it before <code>Storage</code> is defined).</p>",
       "preview": "Fortunately, this is easily resolved by moving the definition of class Display b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí to lze snadno vyřešit přesunutím definice třídy <code>Display</code> před definici třídy <code>Storage</code> (buď ve stejném souboru, nebo přesunutím definice třídy <code>Display</code> do hlavičkového souboru a jeho vložením pomocí #include před definici <code>Storage</code>).</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b20",
@@ -159,35 +181,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage& storage) // compile error: compiler doesn't know what a Storage is\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\t\telse // display double first\n\t\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n\t}\n};\n\nclass Storage\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\tfriend void Display::displayStorage(const Storage& storage); // okay now\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage&amp; storage) // compile error: compiler doesn't know what a Storage is\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout &lt;&lt; storage.m_nValue &lt;&lt; ' ' &lt;&lt; storage.m_dValue &lt;&lt; '\\n';\n\t\telse // display double first\n\t\t\tstd::cout &lt;&lt; storage.m_dValue &lt;&lt; ' ' &lt;&lt; storage.m_nValue &lt;&lt; '\\n';\n\t}\n};\n\nclass Storage\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\tfriend void Display::displayStorage(const Storage&amp; storage); // okay now\n};\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nTřída Displej\n{\nsoukromé:\n\tbool m_displayIntFirst {};\n\nveřejnost:\n\tDisplej (bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage& storage) // chyba kompilace: kompilátor neví, co je úložiště\n\t{\n\t\tif (m_displayIntFirst)\n\t\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\t\telse // zobrazí double first\n\t\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n\t}\n};\n\ntřída Skladování\n{\nsoukromé:\n\tint m_nHodnota {};\n\tdouble m_dValue {};\nveřejnost:\n\tÚložiště (int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Udělejte z členské funkce Display::displayStorage přítele třídy Storage\n\tfriend void Display::displayStorage(const Storage& storage); // teď dobře\n};\n\nint main()\n{\n    Úložný prostor { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(úložiště);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b21",
       "type": "paragraph",
       "html": "<p>However, we now have another problem. Because member function <code>Display::displayStorage()</code> uses <code>Storage</code> as a reference parameter, and we just moved the definition of <code>Storage</code> below the definition of <code>Display</code>, the compiler will complain it doesn’t know what a <code>Storage</code> is. We can’t fix this one by rearranging the definition order, because then we’ll undo our previous fix.</p>",
       "preview": "However, we now have another problem. Because member function Display::displaySt",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní však máme další problém. Protože členská funkce <code>Display::displayStorage()</code> používá <code>Storage</code> jako referenční parametr a my jsme právě přesunuli definici <code>Storage</code> až za definici <code>Display</code>, kompilátor si bude stěžovat, že neví, co je <code>Storage</code>. To nemůžeme vyřešit pouhou změnou pořadí definic, protože bychom tím zrušili naši předchozí opravu.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b22",
       "type": "paragraph",
       "html": "<p>Fortunately, this is also fixable in a couple of simple steps. First, we can add <code>class Storage</code> as a forward declaration so the compiler will be okay with a reference to <code>Storage</code> before it has seen the full definition of the class.</p>",
       "preview": "Fortunately, this is also fixable in a couple of simple steps. First, we can add",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí i toto lze vyřešit v několika jednoduchých krocích. Nejprve můžeme přidat <code>class Storage</code> jako dopřednou deklaraci (forward declaration), takže kompilátor nebude mít problém s referencí na <code>Storage</code> ještě předtím, než uvidí úplnou definici této třídy.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b23",
       "type": "paragraph",
       "html": "<p>Second, we can move the definition of <code>Display::displayStorage()</code> out of the class, after the full definition of <code>Storage</code> class.</p>",
       "preview": "Second, we can move the definition of Display::displayStorage() out of the class",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé můžeme definici <code>Display::displayStorage()</code> přesunout vně třídy až za úplnou definici třídy <code>Storage</code>.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b24",
       "type": "paragraph",
       "html": "<p>Here’s what this looks like:</p>",
       "preview": "Here’s what this looks like:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázka, jak to vypadá:</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b25",
@@ -195,35 +222,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Storage; // forward declaration for class Storage\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage& storage); // forward declaration for Storage needed for reference here\n};\n\nclass Storage // full definition of Storage class\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\t// Requires seeing the full definition of class Display (as displayStorage is a member)\n\tfriend void Display::displayStorage(const Storage& storage);\n};\n\n// Now we can define Display::displayStorage\n// Requires seeing the full definition of class Storage (as we access Storage members)\nvoid Display::displayStorage(const Storage& storage)\n{\n\tif (m_displayIntFirst)\n\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\telse // display double first\n\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n}\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Storage; // forward declaration for class Storage\n\nclass Display\n{\nprivate:\n\tbool m_displayIntFirst {};\n\npublic:\n\tDisplay(bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage&amp; storage); // forward declaration for Storage needed for reference here\n};\n\nclass Storage // full definition of Storage class\n{\nprivate:\n\tint m_nValue {};\n\tdouble m_dValue {};\npublic:\n\tStorage(int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Make the Display::displayStorage member function a friend of the Storage class\n\t// Requires seeing the full definition of class Display (as displayStorage is a member)\n\tfriend void Display::displayStorage(const Storage&amp; storage);\n};\n\n// Now we can define Display::displayStorage\n// Requires seeing the full definition of class Storage (as we access Storage members)\nvoid Display::displayStorage(const Storage&amp; storage)\n{\n\tif (m_displayIntFirst)\n\t\tstd::cout &lt;&lt; storage.m_nValue &lt;&lt; ' ' &lt;&lt; storage.m_dValue &lt;&lt; '\\n';\n\telse // display double first\n\t\tstd::cout &lt;&lt; storage.m_dValue &lt;&lt; ' ' &lt;&lt; storage.m_nValue &lt;&lt; '\\n';\n}\n\nint main()\n{\n    Storage storage { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(storage);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Skladování; // dopředná deklarace pro třídu Storage\n\nTřída Displej\n{\nsoukromé:\n\tbool m_displayIntFirst {};\n\nveřejnost:\n\tDisplej (bool displayIntFirst)\n\t\t: m_displayIntFirst { displayIntFirst }\n\t{\n\t}\n\n\tvoid displayStorage(const Storage& storage); // předání deklarace pro úložiště potřebné pro odkaz zde\n};\n\nclass Storage // úplná definice třídy Storage\n{\nsoukromé:\n\tint m_nHodnota {};\n\tdouble m_dValue {};\nveřejnost:\n\tÚložiště (int nValue, double dValue)\n\t\t: m_nValue { nValue }, m_dValue { dValue }\n\t{\n\t}\n\n\t// Udělejte z členské funkce Display::displayStorage přítele třídy Storage\n\t// Vyžaduje zobrazení úplné definice třídy Display (protože displayStorage je členem)\n\tfriend void Display::displayStorage(const Storage& storage);\n};\n\n// Nyní můžeme definovat Display::displayStorage\n// Vyžaduje zobrazení úplné definice třídy Storage (při přístupu k členům úložiště)\nvoid Display::displayStorage(const Storage& storage)\n{\n\tif (m_displayIntFirst)\n\t\tstd::cout << storage.m_nValue << ' ' << storage.m_dValue << '\\n';\n\telse // zobrazí double first\n\t\tstd::cout << storage.m_dValue << ' ' << storage.m_nValue << '\\n';\n}\n\nint main()\n{\n    Úložný prostor { 5, 6.7 };\n    Display display { false };\n    display.displayStorage(úložiště);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b26",
       "type": "paragraph",
       "html": "<p>Now everything will compile properly: the forward declaration of <code>class Storage</code> is enough to satisfy the declaration of <code>Display::displayStorage()</code> inside the <code>Display</code> class. The full definition of <code>Display</code> satisfies declaring <code>Display::displayStorage()</code> as a friend of <code>Storage</code>. And the full definition of class <code>Storage</code> is enough to satisfy the definition of member function <code>Display::displayStorage()</code>.</p>",
       "preview": "Now everything will compile properly: the forward declaration of class Storage i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se vše zkompiluje správně: dopředná deklarace <code>class Storage</code> postačuje pro deklaraci <code>Display::displayStorage()</code> uvnitř třídy <code>Display</code>. Úplná definice třídy <code>Display</code> postačuje k deklarování <code>Display::displayStorage()</code> jako spřátelené funkce (friend) třídy <code>Storage</code>. A úplná definice třídy <code>Storage</code> je dostatečná pro definici členské funkce <code>Display::displayStorage()</code>.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b27",
       "type": "paragraph",
       "html": "<p>If that’s a bit confusing, see the comments in the program above. The key points are that a class forward declaration satisfies references to the class. However, accessing members of a class requires that the compiler have seen the full class definition.</p>",
       "preview": "If that’s a bit confusing, see the comments in the program above. The key points",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je to poněkud matoucí, podívejte se na komentáře ve výše uvedeném programu. Klíčovým poznatkem je, že dopředná deklarace třídy postačuje pro reference na danou třídu. Přístup ke členům třídy však vyžaduje, aby kompilátor již viděl úplnou definici třídy.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b28",
       "type": "paragraph",
       "html": "<p>If this seems like a pain -- it is. Fortunately, this dance is only necessary because we’re trying to do everything in a single file. A better solution is to put each class definition in a separate header file, with the member function definitions in corresponding .cpp files. That way, all of the class definitions would be available in the .cpp files, and no rearranging of classes or functions is necessary!</p>",
       "preview": "If this seems like a pain -- it is. Fortunately, this dance is only necessary be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud vám to připadá jako otrava – taky že je. Naštěstí je tento tanec nutný jen proto, že se snažíme dělat vše v jediném souboru. Lepším řešením je umístit každou definici třídy do samostatného hlavičkového souboru a definice členských funkcí do odpovídajících .cpp souborů. Tímto způsobem by byly všechny definice tříd dostupné v .cpp souborech a nebylo by nutné žádné přeskládávání tříd nebo funkcí!</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b29",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b30",
@@ -239,28 +272,32 @@
       "type": "paragraph",
       "html": "<p>In physics, a vector is a quantity that has a magnitude (length) and a direction (but no position). We can define a vector in 3d-space as an x, y, and z value representing the direction of the vector along the x, y, and z axis (the length can be derived from these). For example, <code>Vector { 2.0, 0.0, 0.0 }</code> would be a vector representing a direction along the positive x-axis (only), with length 2.0.</p>",
       "preview": "In physics, a vector is a quantity that has a magnitude (length) and a direction",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve fyzice je vektor veličina, která má velikost (délku) a směr (ale nikoli pozici). Vektor v 3D prostoru můžeme definovat jako hodnoty x, y a z představující směr vektoru podél os x, y a z (délku lze z nich odvodit). Například <code>Vector { 2.0, 0.0, 0.0 }</code> by byl vektor představující směr (pouze) podél kladné osy x s délkou 2.0.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b32",
       "type": "paragraph",
       "html": "<p>A <code>Vector</code> can be applied to a <code>Point</code> to move the <code>Point</code> to a new position. This is done by adding the vector’s direction to the point’s position to yield a new position. For example, <code>Point { 2.0, 1.0, 0.0 }</code> + <code>Vector { 2.0, 0.0, 0.0 }</code> would yield <code>Point { 4.0, 1.0, 0.0 }</code>.</p>",
       "preview": "A Vector can be applied to a Point to move the Point to a new position. This is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>Vector</code> lze aplikovat na <code>Point</code> a posunout tak <code>Point</code> na novou pozici. To se provede přičtením směru vektoru k pozici bodu, čímž vznikne nová pozice. Například <code>Point { 2.0, 1.0, 0.0 }</code> + <code>Vector { 2.0, 0.0, 0.0 }</code> dá <code>Point { 4.0, 1.0, 0.0 }</code>.</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b33",
       "type": "paragraph",
       "html": "<p>Such points and vectors are often used in computer graphics (with points representing the vertices of a shape, and vectors represent movement of the shape).</p>",
       "preview": "Such points and vectors are often used in computer graphics (with points represe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Takové body a vektory se často používají v počítačové grafice (kde body představují vrcholy tvaru a vektory představují pohyb tvaru).</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b34",
       "type": "paragraph",
       "html": "<p>Given the following program:</p>",
       "preview": "Given the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mějme následující program:</p>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b35",
@@ -268,7 +305,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Vector3d\n{\nprivate:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\npublic:\n\tVector3d(double x, double y, double z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{\n\t}\n\n\tvoid print() const\n\t{\n\t\tstd::cout << \"Vector(\" << m_x << \", \" << m_y << \", \" << m_z << \")\\n\";\n\t}\n};\n\nclass Point3d\n{\nprivate:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\npublic:\n\tPoint3d(double x, double y, double z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{ }\n\n\tvoid print() const\n\t{\n\t\tstd::cout << \"Point(\" << m_x << \", \" << m_y << \", \" << m_z << \")\\n\";\n\t}\n\n\tvoid moveByVector(const Vector3d& v)\n\t{\n\t\t// implement this function as a friend of class Vector3d\n\t}\n};\n\nint main()\n{\n\tPoint3d p { 1.0, 2.0, 3.0 };\n\tVector3d v { 2.0, 2.0, -3.0 };\n\n\tp.print();\n\tp.moveByVector(v);\n\tp.print();\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Vector3d\n{\nprivate:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\npublic:\n\tVector3d(double x, double y, double z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{\n\t}\n\n\tvoid print() const\n\t{\n\t\tstd::cout &lt;&lt; \"Vector(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \", \" &lt;&lt; m_z &lt;&lt; \")\\n\";\n\t}\n};\n\nclass Point3d\n{\nprivate:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\npublic:\n\tPoint3d(double x, double y, double z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{ }\n\n\tvoid print() const\n\t{\n\t\tstd::cout &lt;&lt; \"Point(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \", \" &lt;&lt; m_z &lt;&lt; \")\\n\";\n\t}\n\n\tvoid moveByVector(const Vector3d&amp; v)\n\t{\n\t\t// implement this function as a friend of class Vector3d\n\t}\n};\n\nint main()\n{\n\tPoint3d p { 1.0, 2.0, 3.0 };\n\tVector3d v { 2.0, 2.0, -3.0 };\n\n\tp.print();\n\tp.moveByVector(v);\n\tp.print();\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Vector3d\n{\nsoukromé:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\nveřejnost:\n\tVector3d(dvojité x, dvojité y, dvojité z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{\n\t}\n\n\tvoid print() konst\n\t{\n\t\tstd::cout << \"Vektor(\" << m_x << \", \" << m_y << \", \" << m_z << \")\\n\";\n\t}\n};\n\ntřída Point3d\n{\nsoukromé:\n\tdouble m_x{};\n\tdouble m_y{};\n\tdouble m_z{};\n\nveřejnost:\n\tPoint3d(dvojité x, dvojité y, dvojité z)\n\t\t: m_x{x}, m_y{y}, m_z{z}\n\t{ }\n\n\tvoid print() konst\n\t{\n\t\tstd::cout << \"Point(\" << m_x << \", \" << m_y << \", \" << m_z << \")\\n\";\n\t}\n\n\tvoid moveByVector(const Vector3d& v)\n\t{\n\t\t// implementujte tuto funkci jako přítele třídy Vector3d\n\t}\n};\n\nint main()\n{\n\tPoint3d p { 1,0, 2,0, 3,0 };\n\tVector3d v { 2.0, 2.0, -3.0 };\n\n\tp.print();\n\tp.moveByVector(v);\n\tp.print();\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "friend-classes-and-friend-member-functions_b36",
@@ -302,7 +340,9 @@
       "type": "paragraph",
       "html": "<p>Thanks to reader Shiva for the suggestion and solution.</p>",
       "preview": "Thanks to reader Shiva for the suggestion and solution.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Děkujeme čtenáři Shivovi za návrh a řešení.</p>"
     }
-  ]
+  ],
+  "title_cs": "15.9 — Spřátelené třídy a spřátelené členské funkce"
 }

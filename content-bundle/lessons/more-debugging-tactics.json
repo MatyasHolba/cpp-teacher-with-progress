@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/basic-debugging-tactics/\">3.4 -- Basic debugging tactics</a>), we started exploring how to manually debug problems. In that lesson, we offered some criticisms of using statements to print debug text:</p>",
       "preview": "In the previous lesson (3.4 -- Basic debugging tactics), we started exploring ho",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/basic-debugging-tactics/\">3.4 -- Základní taktiky ladění</a>) jsme začali zkoumat, jak ručně ladit problémy. V oné lekci jsme uvedli několik výhrad k používání příkazů pro výpis ladicího textu:</p>"
     },
     {
       "id": "more-debugging-tactics_b1",
       "type": "list",
       "html": "<ol><li>Debug statements clutter your code.</li><li>Debug statements clutter the output of your program.</li><li>Debug statements require modification of your code to both add and to remove, which can introduce new bugs.</li><li>Debug statements must be removed after you’re done with them, which makes them non-reusable.</li></ol>",
       "preview": "Debug statements clutter your code.Debug statements clutter the output of your p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol><li>Ladicí příkazy znepřehledňují váš kód.</li><li>Ladicí příkazy zahlcují výstup vašeho programu.</li><li>Ladicí příkazy vyžadují úpravu vašeho kódu jak při jejich přidávání, tak při odstraňování, což může zanést nové chyby.</li><li>Ladicí příkazy musí být po dokončení práce odstraněny, což znemožňuje jejich opětovné použití.</li></ol>"
     },
     {
       "id": "more-debugging-tactics_b2",
       "type": "paragraph",
       "html": "<p>We can mitigate some of these issues. In this lesson, we’ll explore some basic techniques for doing so.</p>",
       "preview": "We can mitigate some of these issues. In this lesson, we’ll explore some basic t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Některé z těchto problémů můžeme zmírnit. V této lekci prozkoumáme několik základních technik, jak toho dosáhnout.</p>"
     },
     {
       "id": "more-debugging-tactics_b3",
       "type": "section",
       "title": "Conditionalizing your debugging code",
       "html": "<h3 class=\"cpp-section-heading\">Conditionalizing your debugging code</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Podmínění ladicího kódu</h3>",
+      "title_cs": "Kondicionování vašeho ladícího kódu"
     },
     {
       "id": "more-debugging-tactics_b4",
       "type": "paragraph",
       "html": "<p>Consider the following program that contains some debug statements:</p>",
       "preview": "Consider the following program that contains some debug statements:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program, který obsahuje několik ladicích příkazů:</p>"
     },
     {
       "id": "more-debugging-tactics_b5",
@@ -50,21 +56,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nint getUserInput()\n{\nstd::cerr << \"getUserInput() called\\n\";\n\tstd::cout << \"Enter a number: \";\n\tint x{};\n\tstd::cin >> x;\n\treturn x;\n}\n \nint main()\n{\nstd::cerr << \"main() called\\n\";\n    int x{ getUserInput() };\n    std::cout << \"You entered: \" << x << '\\n';\n \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nint getUserInput()\n{\nstd::cerr &lt;&lt; \"getUserInput() called\\n\";\n\tstd::cout &lt;&lt; \"Enter a number: \";\n\tint x{};\n\tstd::cin &gt;&gt; x;\n\treturn x;\n}\n \nint main()\n{\nstd::cerr &lt;&lt; \"main() called\\n\";\n    int x{ getUserInput() };\n    std::cout &lt;&lt; \"You entered: \" &lt;&lt; x &lt;&lt; '\\n';\n \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \nint getUserInput()\n{\nstd::cerr << \"getUserInput() voláno\\n\";\n\tstd::cout << \"Zadejte číslo: \";\n\tint x{};\n\tstd::cin >> x;\n\tnávrat x;\n}\n \nint main()\n{\nstd::cerr << \"main() voláno\\n\";\n    int x{ getUserInput() };\n    std::cout << \"Zadali jste: \" << x << '\\n';\n \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "more-debugging-tactics_b6",
       "type": "paragraph",
       "html": "<p>When you’re done with the debugging statement, you’ll either need to remove them, or comment them out. Then if you want them again later, you’ll have to add them back, or uncomment them.</p>",
       "preview": "When you’re done with the debugging statement, you’ll either need to remove them",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile budete s ladicími příkazy hotovi, budete je muset buď odstranit, nebo zakomentovat. Pokud je pak budete chtít později znovu použít, budete je muset přidat zpět, nebo odkomentovat.</p>"
     },
     {
       "id": "more-debugging-tactics_b7",
       "type": "paragraph",
       "html": "<p>One way to make it easier to disable and enable debugging throughout your program is to make your debugging statements conditional using preprocessor directives:</p>",
       "preview": "One way to make it easier to disable and enable debugging throughout your progra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze způsobů, jak si usnadnit vypínání a zapínání ladění v celém programu, je podmínit ladicí příkazy pomocí direktiv preprocesoru:</p>"
     },
     {
       "id": "more-debugging-tactics_b8",
@@ -72,56 +81,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n \n#define ENABLE_DEBUG // comment out to disable debugging\n\nint getUserInput()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr << \"getUserInput() called\\n\";\n#endif\n\tstd::cout << \"Enter a number: \";\n\tint x{};\n\tstd::cin >> x;\n\treturn x;\n}\n \nint main()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr << \"main() called\\n\";\n#endif\n    int x{ getUserInput() };\n    std::cout << \"You entered: \" << x << '\\n';\n \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \n#define ENABLE_DEBUG // comment out to disable debugging\n\nint getUserInput()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr &lt;&lt; \"getUserInput() called\\n\";\n#endif\n\tstd::cout &lt;&lt; \"Enter a number: \";\n\tint x{};\n\tstd::cin &gt;&gt; x;\n\treturn x;\n}\n \nint main()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr &lt;&lt; \"main() called\\n\";\n#endif\n    int x{ getUserInput() };\n    std::cout &lt;&lt; \"You entered: \" &lt;&lt; x &lt;&lt; '\\n';\n \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \n#define ENABLE_DEBUG // komentář zakáže ladění\n\nint getUserInput()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr << \"getUserInput() voláno\\n\";\n#endif\n\tstd::cout << \"Zadejte číslo: \";\n\tint x{};\n\tstd::cin >> x;\n\tnávrat x;\n}\n \nint main()\n{\n#ifdef ENABLE_DEBUG\nstd::cerr << \"main() voláno\\n\";\n#endif\n    int x{ getUserInput() };\n    std::cout << \"Zadali jste: \" << x << '\\n';\n \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "more-debugging-tactics_b9",
       "type": "paragraph",
       "html": "<p>Now we can enable debugging simply by commenting / uncommenting <em>#define ENABLE_DEBUG</em>. This allows us to reuse previously added debug statements and then just disable them when we’re done with them, rather than having to actually remove them from the code. If this were a multi-file program, the #define ENABLE_DEBUG would go in a header file that’s included into all code files so we can comment / uncomment the #define in a single location and have it propagate to all code files.</p>",
       "preview": "Now we can enable debugging simply by commenting / uncommenting #define ENABLE_D",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní můžeme ladění zapnout jednoduše zakomentováním / odkomentováním <em>#define ENABLE_DEBUG</em>. To nám umožňuje znovu použít dříve přidané ladicí příkazy a po dokončení práce je pouze vypnout, místo abychom je museli z kódu fyzicky odstraňovat. Pokud by šlo o vícesouborový program, direktiva #define ENABLE_DEBUG by se umístila do hlavičkového souboru vkládaného do všech zdrojových souborů, takže bychom mohli tento #define zakomentovat / odkomentovat na jediném místě a změna by se projevila ve všech souborech.</p>"
     },
     {
       "id": "more-debugging-tactics_b10",
       "type": "paragraph",
       "html": "<p>This addresses the issue with having to remove debug statements and the risk in doing so, but at the cost of even more code clutter. Another downside of this approach is that if you make a typo (e.g. misspell “DEBUG”) or forget to include the header into a code file, some or all of the debugging for that file may not be enabled. So although this is better than the unconditionalized version, there’s still room to improve.</p>",
       "preview": "This addresses the issue with having to remove debug statements and the risk in ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto se sice řeší problém s nutností odstraňovat ladicí příkazy i s riziky, která z toho plynou, ale za cenu ještě většího znepřehlednění kódu. Další nevýhodou tohoto přístupu je, že pokud uděláte překlep (např. špatně napíšete „DEBUG“) nebo zapomenete vložit hlavičkový soubor do zdrojového souboru, nemusí se část ladění nebo veškeré ladění pro daný soubor vůbec aktivovat. Ačkoli je to tedy lepší než nepodmíněná verze, stále je zde prostor pro zlepšení.</p>"
     },
     {
       "id": "more-debugging-tactics_b11",
       "type": "section",
       "title": "Using a logger",
       "html": "<h3 class=\"cpp-section-heading\">Using a logger</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití loggeru</h3>",
+      "title_cs": "Použití loggeru"
     },
     {
       "id": "more-debugging-tactics_b12",
       "type": "paragraph",
       "html": "<p>An alternative approach to conditionalized debugging via the preprocessor is to send your debugging information to a log. A <strong>log</strong> is a sequential record of events that have happened, usually time-stamped. The process of generating a log is called <strong>logging</strong>. Typically, logs are written to a file on disk (called a <strong>log file</strong>) so they can be reviewed later. Most applications and operating systems write log files that can be used to help diagnose issues that occur.</p>",
       "preview": "An alternative approach to conditionalized debugging via the preprocessor is to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Alternativním přístupem k podmíněnému ladění pomocí preprocesoru je odesílání informací o ladění do logu. <strong>Log</strong> (nebo záznam) je sekvenční sled událostí, které nastaly, obvykle opatřený časovými razítky. Proces generování logu se nazývá <strong>logování</strong> (zaznamenávání). Logy se obvykle zapisují do souboru na disku (nazývaného <strong>logovací soubor</strong> nebo <em>log file</em>), aby bylo možné je zkontrolovat později. Většina aplikací a operačních systémů zapisuje logovací soubory, které lze použít k diagnostice vzniklých problémů.</p>"
     },
     {
       "id": "more-debugging-tactics_b13",
       "type": "paragraph",
       "html": "<p>Log files have a few advantages. Because the information written to a log file is separated from your program’s output, you can avoid the clutter caused by mingling your normal output and debug output. Log files can also be easily sent to other people for diagnosis -- so if someone using your software has an issue, you can ask them to send you the log file, and it might help give you a clue where the issue is.</p>",
       "preview": "Log files have a few advantages. Because the information written to a log file i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Logovací soubory mají několik výhod. Vzhledem k tomu, že informace zapsané do logovacího souboru jsou odděleny od výstupu vašeho programu, vyhnete se nepřehlednosti způsobené smícháním běžného výstupu s tím ladicím. Logovací soubory lze také snadno poslat dalším lidem k diagnostice – pokud má tedy někdo při používání vašeho softwaru problém, můžete ho požádat o zaslání logovacího souboru, což vám může napovědět, kde se problém nachází.</p>"
     },
     {
       "id": "more-debugging-tactics_b14",
       "type": "paragraph",
       "html": "<p>C++ contains an output stream named <code>std::clog</code> that is intended to be used for writing logging information. However, by default, <code>std::clog</code> writes to the standard error stream (the same as <code>std::cerr</code>). And while you can redirect it to file instead, this is one area where you’re generally better off using one of the many existing third-party logging tools available. Which one you use is up to you.</p>",
       "preview": "C++ contains an output stream named std::clog that is intended to be used for wr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ obsahuje výstupní proud nazvaný <code>std::clog</code>, který je určen pro zápis logovacích informací. Ve výchozím nastavení však <code>std::clog</code> zapisuje do standardního chybového proudu (stejně jako <code>std::cerr</code>). A ačkoliv jej můžete místo toho přesměrovat do souboru, toto je oblast, kde je obecně lepší použít některý z mnoha existujících logovacích nástrojů třetích stran. Který z nich použijete, je na vás.</p>"
     },
     {
       "id": "more-debugging-tactics_b15",
       "type": "paragraph",
       "html": "<p>For illustrative purposes, we’ll show what outputting to a logger looks like using the <a href=\"https://github.com/SergiusTheBest/plog\">plog</a> logger. Plog is implemented as a set of header files, so it’s easy to include anywhere you need it, and it’s lightweight and easy to use.</p>",
       "preview": "For illustrative purposes, we’ll show what outputting to a logger looks like usi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro názornost si ukážeme, jak vypadá výstup do loggeru pomocí knihovny <a href=\"https://github.com/SergiusTheBest/plog\">plog</a>. Plog je implementován jako sada hlavičkových souborů (header-only), takže jej lze snadno vložit kamkoliv, kde jej potřebujete, a navíc je lehký a snadno se používá.</p>"
     },
     {
       "id": "more-debugging-tactics_b16",
@@ -129,35 +147,40 @@
       "language": "cpp",
       "code": "#include <plog/Log.h> // Step 1: include the logger headers\n#include <plog/Initializers/RollingFileInitializer.h>\n#include <iostream>\n\nint getUserInput()\n{\n\tPLOGD << \"getUserInput() called\"; // PLOGD is defined by the plog library\n\n\tstd::cout << \"Enter a number: \";\n\tint x{};\n\tstd::cin >> x;\n\treturn x;\n}\n\nint main()\n{\n\tplog::init(plog::debug, \"Logfile.txt\"); // Step 2: initialize the logger\n\n\tPLOGD << \"main() called\"; // Step 3: Output to the log as if you were writing to the console\n\n\tint x{ getUserInput() };\n\tstd::cout << \"You entered: \" << x << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;plog/Log.h&gt; // Step 1: include the logger headers\n#include &lt;plog/Initializers/RollingFileInitializer.h&gt;\n#include &lt;iostream&gt;\n\nint getUserInput()\n{\n\tPLOGD &lt;&lt; \"getUserInput() called\"; // PLOGD is defined by the plog library\n\n\tstd::cout &lt;&lt; \"Enter a number: \";\n\tint x{};\n\tstd::cin &gt;&gt; x;\n\treturn x;\n}\n\nint main()\n{\n\tplog::init(plog::debug, \"Logfile.txt\"); // Step 2: initialize the logger\n\n\tPLOGD &lt;&lt; \"main() called\"; // Step 3: Output to the log as if you were writing to the console\n\n\tint x{ getUserInput() };\n\tstd::cout &lt;&lt; \"You entered: \" &lt;&lt; x &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <plog/Log.h> // Krok 1: zahrňte záhlaví loggeru\n#include <plog/Initializers/RollingFileInitializer.h>\n#include <iostream>\n\nint getUserInput()\n{\n\tPLOGD << \"voláno getUserInput()\"; // PLOGD je definován knihovnou plog\n\n\tstd::cout << \"Zadejte číslo: \";\n\tint x{};\n\tstd::cin >> x;\n\tnávrat x;\n}\n\nint main()\n{\n\tplog::init(plog::debug, \"Logfile.txt\"); // Krok 2: inicializujte logger\n\n\tPLOGD << \"hlavní() voláno\"; // Krok 3: Výstup do protokolu, jako byste zapisovali do konzole\n\n\tint x{ getUserInput() };\n\tstd::cout << \"Zadali jste: \" << x << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "more-debugging-tactics_b17",
       "type": "paragraph",
       "html": "<p>Here’s output from the above logger (in the <code>Logfile.txt</code> file):</p>",
       "preview": "Here’s output from the above logger (in the Logfile.txt file):",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je výstup z výše uvedeného loggeru (v souboru <code>Logfile.txt</code>):</p>"
     },
     {
       "id": "more-debugging-tactics_b18",
       "type": "output",
       "text": "2018-12-26 20:03:33.295 DEBUG [4752] [main@19] main() called\n2018-12-26 20:03:33.296 DEBUG [4752] [getUserInput@7] getUserInput() called\n",
       "html": "<pre>2018-12-26 20:03:33.295 DEBUG [4752] [main@19] main() called\n2018-12-26 20:03:33.296 DEBUG [4752] [getUserInput@7] getUserInput() called\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>2018-12-26 20:03:33.295 DEBUG [4752] [main@19] main() called\n2018-12-26 20:03:33.296 DEBUG [4752] [getUserInput@7] getUserInput() called\n</pre>"
     },
     {
       "id": "more-debugging-tactics_b19",
       "type": "paragraph",
       "html": "<p>How you include, initialize, and use a logger will vary depending on the specific logger you select.</p>",
       "preview": "How you include, initialize, and use a logger will vary depending on the specifi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Způsob, jakým logger zahrnete, inicializujete a používáte, se bude lišit v závislosti na konkrétním loggeru, který si vyberete.</p>"
     },
     {
       "id": "more-debugging-tactics_b20",
       "type": "paragraph",
       "html": "<p>Note that conditional compilation directives are also not required using this method, as most loggers have a method to reduce/eliminate writing output to the log. This makes the code a lot easier to read, as the conditional compilation lines add a lot of clutter. With plog, logging can be temporarily disabled by changing the init statement to the following:</p>",
       "preview": "Note that conditional compilation directives are also not required using this me",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že při použití této metody také nejsou vyžadovány direktivy podmíněného překladu, protože většina loggerů nabízí způsob, jak omezit nebo zcela potlačit zápis výstupu do logu. Díky tomu je kód mnohem čitelnější, jelikož řádky podmíněného překladu vnášejí do kódu značný nepřehledný balast. V knihovně plog lze logování dočasně zakázat změnou inicializačního příkazu na následující:</p>"
     },
     {
       "id": "more-debugging-tactics_b21",
@@ -165,14 +188,16 @@
       "language": "cpp",
       "code": "\tplog::init(plog::none , \"Logfile.txt\"); // plog::none eliminates writing of most messages, essentially turning logging off",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">\tplog::init(plog::none , \"Logfile.txt\"); // plog::none eliminates writing of most messages, essentially turning logging off</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> plog::init(plog::none , \"Logfile.txt\"); // plog::none eliminuje psaní většiny zpráv, v podstatě vypne odhlašování</code></pre>"
     },
     {
       "id": "more-debugging-tactics_b22",
       "type": "paragraph",
       "html": "<p>We won’t use plog in any future lessons, so you don’t need to worry about learning it.</p>",
       "preview": "We won’t use plog in any future lessons, so you don’t need to worry about learni",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Knihovnu plog v žádných dalších lekcích používat nebudeme, takže se nemusíte bát, že byste se ji museli učit.</p>"
     },
     {
       "id": "more-debugging-tactics_b23",
@@ -180,7 +205,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>If you want to compile the above example yourself, or use plog in your own projects, you can follow these instructions to install it:</p><p>First, get the latest plog release:</p><ul><li>Visit the <a href=\"https://github.com/SergiusTheBest/plog\">plog</a> repo.</li><li>Click the green Code button in the top right corner, and choose “Download zip”</li></ul><p>Next, unzip the entire archive to <code>somewhere</code> on your hard drive.</p><p>Finally, for each project, set the <code>somewhere\\plog-master\\include\\</code> directory as an <code>include directory</code> inside your IDE. There are instructions on how to do this for Visual Studio here: <a href=\"https://www.learncpp.com/cpp-tutorial/a2-using-libraries-with-visual-studio-2005-express/\">A.2 -- Using libraries with Visual Studio</a> and Code::Blocks here: <a href=\"https://www.learncpp.com/cpp-tutorial/a3-using-libraries-with-codeblocks/\">A.3 -- Using libraries with Code::Blocks</a>. Since plog doesn’t have a precompiled library file, you can skip the parts related to precompiled library files.</p><p>The log file will generally be created in the same directory as your executable.</p></div>",
       "preview": "As an aside…If you want to compile the above example yourself, or use plog in your own projects, you",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Pokud si chcete výše uvedený příklad sami zkompilovat nebo použít plog ve svých vlastních projektech, můžete jej nainstalovat podle těchto pokynů:</p><p>Nejprve si stáhněte nejnovější verzi plog:</p><ul><li>Navštivte repozitář <a href=\"https://github.com/SergiusTheBest/plog\">plog</a>.</li><li>Klikněte na zelené tlačítko Code v pravém horním rohu a vyberte „Download zip“.</li></ul><p>Dále rozbalte celý archiv <code>někam</code> na svůj pevný disk.</p><p>Nakonec pro každý projekt nastavte složku <code>nekam\\plog-master\\include\\</code> jako <code>include directory</code> ve svém IDE. Pokyny, jak to provést pro Visual Studio, najdete zde: <a href=\"https://www.learncpp.com/cpp-tutorial/a2-using-libraries-with-visual-studio-2005-express/\">A.2 – Používání knihoven s Visual Studiem</a> a pro Code::Blocks zde: <a href=\"https://www.learncpp.com/cpp-tutorial/a3-using-libraries-with-codeblocks/\">A.3 – Používání knihoven s Code::Blocks</a>. Vzhledem k tomu, že plog nemá předkompilovaný soubor knihovny, můžete části týkající se předkompilovaných knihoven přeskočit.</p><p>Soubor protokolu (log) se obvykle vytvoří ve stejném adresáři jako váš spustitelný soubor.</p></div>"
     },
     {
       "id": "more-debugging-tactics_b24",
@@ -188,7 +214,9 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>In larger or performance-sensitive projects, faster and more feature-rich loggers may be preferred, such as <a href=\"https://github.com/gabime/spdlog\">spdlog</a>.</p></div>",
       "preview": "TipIn larger or performance-sensitive projects, faster and more feature-rich loggers may be preferre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Ve větších projektech nebo v projektech náročných na výkon mohou být preferovány rychlejší a funkcemi bohatší logovací nástroje, jako je například <a href=\"https://github.com/gabime/spdlog\">spdlog</a>.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "3.5 — Další taktiky ladění"
 }

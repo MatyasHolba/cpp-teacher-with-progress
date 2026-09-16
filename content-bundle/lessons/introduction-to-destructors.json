@@ -14,14 +14,17 @@
       "type": "section",
       "title": "The cleanup problem",
       "html": "<h3 class=\"cpp-section-heading\">The cleanup problem</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problém s úklidem</h3>",
+      "title_cs": "Problém s čištěním"
     },
     {
       "id": "introduction-to-destructors_b1",
       "type": "paragraph",
       "html": "<p>Let’s say that you are writing a program that needs to send some data over a network. However, establishing a connection to the server is expensive, so you want to collect a bunch of data and then send it all at once. Such a class might be structured like this:</p>",
       "preview": "Let’s say that you are writing a program that needs to send some data over a net",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že píšete program, který potřebuje odesílat data po síti. Navázání spojení se serverem je však náročné, takže chcete shromáždit hromadu dat a odeslat je všechna najednou. Taková třída by mohla vypadat například takto:</p>"
     },
     {
       "id": "introduction-to-destructors_b2",
@@ -29,14 +32,16 @@
       "language": "cpp",
       "code": "// This example won't compile because it is (intentionally) incomplete\nclass NetworkData\n{\nprivate:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\npublic:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// connect to server\n\t\t// send all data\n\t\t// clear data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    n.sendData();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// This example won't compile because it is (intentionally) incomplete\nclass NetworkData\n{\nprivate:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\npublic:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// connect to server\n\t\t// send all data\n\t\t// clear data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    n.sendData();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Tento příklad nelze zkompilovat, protože je (záměrně) neúplný\ntřída NetworkData\n{\nsoukromé:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\nveřejnost:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// připojení k serveru\n\t\t// odeslat všechna data\n\t\t// vymazat data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"nějakádata1\");\n    n.addData(\"somedata2\");\n\n    n.sendData();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-destructors_b3",
       "type": "paragraph",
       "html": "<p>However, this <code>NetworkData</code> has a potential issue. It relies on <code>sendData()</code> being explicitly called before the program is shut down. If the user of <code>NetworkData</code> forgets to do this, the data will not be sent to the server, and will be lost when the program exits. Now, you might say, “well, it’s not hard to remember to do this!”, and in this particular case, you’d be right. But consider a slightly more complex example, like this function:</p>",
       "preview": "However, this NetworkData has a potential issue. It relies on sendData() being e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato třída <code>NetworkData</code> má však potenciální problém. Spoléhá na to, že <code>sendData()</code> bude explicitně zavolána před ukončením programu. Pokud uživatel třídy <code>NetworkData</code> na toto zapomene, data na server odeslána nebudou a při ukončení programu se ztratí. Možná si řeknete: „vždyť není těžké si na to vzpomenout!“, a v tomto konkrétním případě byste měli pravdu. Zvažte však o něco složitější příklad, jako je tato funkce:</p>"
     },
     {
       "id": "introduction-to-destructors_b4",
@@ -44,98 +49,115 @@
       "language": "cpp",
       "code": "bool someFunction()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    if (someCondition)\n        return false;\n\n    n.sendData();\n    return true;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool someFunction()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    if (someCondition)\n        return false;\n\n    n.sendData();\n    return true;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">bool someFunction()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"nějakádata1\");\n    n.addData(\"somedata2\");\n\n    pokud (nějaká podmínka)\n        vrátit false;\n\n    n.sendData();\n    vrátit true;\n}</code></pre>"
     },
     {
       "id": "introduction-to-destructors_b5",
       "type": "paragraph",
       "html": "<p>In this case, if <code>someCondition</code> is <code>true</code>, then the function will return early, and <code>sendData()</code> will not be called. This is an easier mistake to make, because the <code>sendData()</code> call is present, the program just isn’t pathing to it in all cases.</p>",
       "preview": "In this case, if someCondition is true, then the function will return early, and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě, pokud je <code>someCondition</code> vyhodnocena jako <code>true</code>, funkce se ukončí předčasně (early return) a <code>sendData()</code> se nezavolá. Takovou chybu je mnohem snazší udělat, protože volání <code>sendData()</code> v kódu přítomno je, jen se k němu program nedostane ve všech větvích běhu.</p>"
     },
     {
       "id": "introduction-to-destructors_b6",
       "type": "paragraph",
       "html": "<p>To generalize this issue, classes that use a resource (most often memory, but sometimes files, databases, network connections, etc…) often need to be explicitly sent or closed before the class object using them is destroyed. In other cases, we may want to do some record-keeping prior to the destruction of the object, such as writing information to a log file, or sending a piece of telemetry to a server. The term “clean up” is often used to refer to any set of tasks that a class must perform before an object of the class is destroyed in order to behave as expected. If we have to rely on the user of such a class to ensure that the function that performs clean up is called prior to the object being destroyed, we are likely to run into errors somewhere.</p>",
       "preview": "To generalize this issue, classes that use a resource (most often memory, but so",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zobecníme-li tento problém, třídy, které využívají nějaký prostředek (nejčastěji paměť, ale někdy soubory, databáze, síťová spojení atd.), jej často potřebují explicitně odeslat nebo uzavřít dříve, než je objekt třídy, který je používá, zničen. V jiných případech můžeme chtít před zničením objektu provést nějaké zaznamenání, například zapsat informace do logovacího souboru nebo odeslat telemetrii na server. Pojem „úklid“ (clean up) se často používá pro označení jakékoli sady úkolů, které musí třída provést před zničením svého objektu, aby se chovala podle očekávání. Pokud musíme spoléhat na to, že uživatel takové třídy zajistí zavolání úklidové funkce před zničením objektu, je velmi pravděpodobné, že někde dojde k chybě.</p>"
     },
     {
       "id": "introduction-to-destructors_b7",
       "type": "paragraph",
       "html": "<p>But why are we even requiring the user to ensure this? If the object is being destroyed, then we know that cleanup needs to be performed at that point. Should that cleanup happen automatically?</p>",
       "preview": "But why are we even requiring the user to ensure this? If the object is being de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale proč to vůbec požadujeme po uživateli? Pokud je objekt ničen, víme, že právě v tomto okamžiku musí proběhnout úklid. Neměl by tento úklid probíhat automaticky?</p>"
     },
     {
       "id": "introduction-to-destructors_b8",
       "type": "section",
       "title": "Destructors to the rescue",
       "html": "<h3 class=\"cpp-section-heading\">Destructors to the rescue</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Destruktory přicházejí na pomoc</h3>",
+      "title_cs": "Destruktory na záchranu"
     },
     {
       "id": "introduction-to-destructors_b9",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 -- Introduction to constructors</a> we covered constructors, which are special member functions that are called when an object of a non-aggregate class type is created. Constructors are used to initialize members variables, and do any other set up tasks required to ensure objects of the class are ready for use.</p>",
       "preview": "In lesson 14.9 -- Introduction to constructors we covered constructors, which ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 -- Úvod do konstruktorů</a> jsme se věnovali konstruktorům, což jsou speciální členské funkce, které se volají při vytvoření objektu neagregátního typu třídy. Konstruktory slouží k inicializaci členských proměnných a k provádění jakýchkoli dalších inicializačních úkonů nutných k tomu, aby byly objekty dané třídy připraveny k použití.</p>"
     },
     {
       "id": "introduction-to-destructors_b10",
       "type": "paragraph",
       "html": "<p>Analogously, classes have another type of special member function that is called automatically when an object of a non-aggregate class type is destroyed. This function is called a <strong>destructor</strong>. Destructors are designed to allow a class to do any necessary clean up before an object of the class is destroyed.</p>",
       "preview": "Analogously, classes have another type of special member function that is called",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Analogicky mají třídy další typ speciální členské funkce, která je automaticky zavolána, když je objekt neagregátního typu třídy zničen. Tato funkce se nazývá <strong>destruktor</strong>. Destruktory jsou navrženy tak, aby třídě umožnily provést jakýkoli nezbytný úklid předtím, než je objekt dané třídy zničen.</p>"
     },
     {
       "id": "introduction-to-destructors_b11",
       "type": "section",
       "title": "Destructor naming",
       "html": "<h3 class=\"cpp-section-heading\">Destructor naming</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pojmenování destruktoru</h3>",
+      "title_cs": "Pojmenování destruktoru"
     },
     {
       "id": "introduction-to-destructors_b12",
       "type": "paragraph",
       "html": "<p>Like constructors, destructors have specific naming rules:</p>",
       "preview": "Like constructors, destructors have specific naming rules:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako konstruktory mají i destruktory specifická pravidla pro pojmenování:</p>"
     },
     {
       "id": "introduction-to-destructors_b13",
       "type": "list",
       "html": "<ol start=\"1\"><li>The destructor must have the same name as the class, preceded by a tilde (~).</li><li>The destructor can not take arguments.</li><li>The destructor has no return type.</li></ol>",
       "preview": "The destructor must have the same name as the class, preceded by a tilde (~).The",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Destruktor musí mít stejný název jako třída, před kterým je uvedena vlnovka (~).</li><li>Destruktor nemůže přijímat žádné argumenty.</li><li>Destruktor nemá žádný návratový typ.</li></ol>"
     },
     {
       "id": "introduction-to-destructors_b14",
       "type": "paragraph",
       "html": "<p>A class can only have a single destructor.</p>",
       "preview": "A class can only have a single destructor.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída může mít pouze jeden jediný destruktor.</p>"
     },
     {
       "id": "introduction-to-destructors_b15",
       "type": "paragraph",
       "html": "<p>Generally you should not call a destructor explicitly (as it will be called automatically when the object is destroyed), since there are rarely cases where you’d want to clean up an object more than once.</p>",
       "preview": "Generally you should not call a destructor explicitly (as it will be called auto",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně byste neměli volat destruktor explicitně (protože bude zavolán automaticky při zničení objektu), jelikož existuje jen velmi málo případů, kdy byste chtěli po objektu uklízet více než jednou.</p>"
     },
     {
       "id": "introduction-to-destructors_b16",
       "type": "paragraph",
       "html": "<p>Destructors may safely call other member functions since the object isn’t destroyed until after the destructor executes.</p>",
       "preview": "Destructors may safely call other member functions since the object isn’t destro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Destruktory mohou bezpečně volat jiné členské funkce, protože objekt není zničen dříve, než se destruktor vykoná.</p>"
     },
     {
       "id": "introduction-to-destructors_b17",
       "type": "section",
       "title": "A destructor example",
       "html": "<h3 class=\"cpp-section-heading\">A destructor example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Příklad destruktoru</h3>",
+      "title_cs": "Příklad destruktoru"
     },
     {
       "id": "introduction-to-destructors_b18",
@@ -143,49 +165,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Simple\n{\nprivate:\n    int m_id {};\n\npublic:\n    Simple(int id)\n        : m_id { id }\n    {\n        std::cout << \"Constructing Simple \" << m_id << '\\n';\n    }\n\n    ~Simple() // here's our destructor\n    {\n        std::cout << \"Destructing Simple \" << m_id << '\\n';\n    }\n\n    int getID() const { return m_id; }\n};\n\nint main()\n{\n    // Allocate a Simple\n    Simple simple1{ 1 };\n    {\n        Simple simple2{ 2 };\n    } // simple2 dies here\n\n    return 0;\n} // simple1 dies here",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Simple\n{\nprivate:\n    int m_id {};\n\npublic:\n    Simple(int id)\n        : m_id { id }\n    {\n        std::cout &lt;&lt; \"Constructing Simple \" &lt;&lt; m_id &lt;&lt; '\\n';\n    }\n\n    ~Simple() // here's our destructor\n    {\n        std::cout &lt;&lt; \"Destructing Simple \" &lt;&lt; m_id &lt;&lt; '\\n';\n    }\n\n    int getID() const { return m_id; }\n};\n\nint main()\n{\n    // Allocate a Simple\n    Simple simple1{ 1 };\n    {\n        Simple simple2{ 2 };\n    } // simple2 dies here\n\n    return 0;\n} // simple1 dies here</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Jednoduchá\n{\nsoukromé:\n    int m_id {};\n\nveřejnost:\n    Jednoduché (int id)\n        : m_id { id }\n    {\n        std::cout << \"Jednoduchá konstrukce\" << m_id << '\\n';\n    }\n\n    ~Simple() // zde je náš destruktor\n    {\n        std::cout << \"Jednoduché zničení\" << m_id << '\\n';\n    }\n\n    int getID() const { return m_id; }\n};\n\nint main()\n{\n    // Přidělte Simple\n    Jednoduché jednoduché1{ 1 };\n    {\n        Jednoduché jednoduché2{ 2 };\n    } // simple2 zde zemře\n\n    návrat 0;\n} // zde umírá simple1</code></pre>"
     },
     {
       "id": "introduction-to-destructors_b19",
       "type": "paragraph",
       "html": "<p>This program produces the following result:</p>",
       "preview": "This program produces the following result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "introduction-to-destructors_b20",
       "type": "output",
       "text": "Constructing Simple 1\nConstructing Simple 2\nDestructing Simple 2\nDestructing Simple 1\n",
       "html": "<pre>Constructing Simple 1\nConstructing Simple 2\nDestructing Simple 2\nDestructing Simple 1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Constructing Simple 1\nConstructing Simple 2\nDestructing Simple 2\nDestructing Simple 1\n</pre>"
     },
     {
       "id": "introduction-to-destructors_b21",
       "type": "paragraph",
       "html": "<p>Note that when each <code>Simple</code> object is destroyed, the destructor is called, which prints a message. “Destructing Simple 1” is printed after “Destructing Simple 2” because <code>simple2</code> was destroyed before the end of the function, whereas <code>simple1</code> was not destroyed until the end of <code>main()</code>.</p>",
       "preview": "Note that when each Simple object is destroyed, the destructor is called, which ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že když je každý objekt typu <code>Simple</code> zničen, zavolá se destruktor, který vypíše zprávu. Zpráva „Destructing Simple 1“ se vypíše až po „Destructing Simple 2“, protože <code>simple2</code> byl zničen ještě před koncem funkce, zatímco <code>simple1</code> byl zničen až na samém konci funkce <code>main()</code>.</p>"
     },
     {
       "id": "introduction-to-destructors_b22",
       "type": "paragraph",
       "html": "<p>Remember that static variables (including global variables and static local variables) are constructed at program startup and destroyed at program shutdown.</p>",
       "preview": "Remember that static variables (including global variables and static local vari",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte, že statické proměnné (včetně globálních proměnných a statických lokálních proměnných) jsou konstruovány při spuštění programu a ničeny při jeho ukončení.</p>"
     },
     {
       "id": "introduction-to-destructors_b23",
       "type": "section",
       "title": "Improving the NetworkData program",
       "html": "<h3 class=\"cpp-section-heading\">Improving the NetworkData program</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vylepšení programu NetworkData</h3>",
+      "title_cs": "Vylepšení programu NetworkData"
     },
     {
       "id": "introduction-to-destructors_b24",
       "type": "paragraph",
       "html": "<p>Back to our example at the top of the lesson, we can remove the need for the user to explicitly call <code>sendData()</code> by having a destructor call that function:</p>",
       "preview": "Back to our example at the top of the lesson, we can remove the need for the use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vrátíme-li se k našemu příkladu ze začátku lekce, můžeme odstranit nutnost, aby uživatel explicitně volal <code>sendData()</code>, tím, že tuto funkci necháme zavolat v destruktoru:</p>"
     },
     {
       "id": "introduction-to-destructors_b25",
@@ -193,49 +223,58 @@
       "language": "cpp",
       "code": "class NetworkData\n{\nprivate:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\npublic:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\t~NetworkData()\n\t{\n\t\tsendData(); // make sure all data is sent before object is destroyed\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// connect to server\n\t\t// send all data\n\t\t// clear data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class NetworkData\n{\nprivate:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\npublic:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\t~NetworkData()\n\t{\n\t\tsendData(); // make sure all data is sent before object is destroyed\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// connect to server\n\t\t// send all data\n\t\t// clear data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"somedata1\");\n    n.addData(\"somedata2\");\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class NetworkData\n{\nsoukromé:\n    std::string m_serverName{};\n    DataStore m_dataQueue{};\n\nveřejnost:\n\tNetworkData(std::string_view serverName)\n\t\t: m_serverName { serverName }\n\t{\n\t}\n\n\t~NetworkData()\n\t{\n\t\tsendData(); // ujistěte se, že jsou všechna data odeslána před zničením objektu\n\t}\n\n\tvoid addData(std::string_view data)\n\t{\n\t\tm_dataQueue.add(data);\n\t}\n\n\tvoid sendData()\n\t{\n\t\t// připojení k serveru\n\t\t// odeslat všechna data\n\t\t// vymazat data\n\t}\n};\n\nint main()\n{\n    NetworkData n(\"someipAddress\");\n\n    n.addData(\"nějakádata1\");\n    n.addData(\"somedata2\");\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-destructors_b26",
       "type": "paragraph",
       "html": "<p>With such a destructor, our <code>NetworkData</code> object will always send whatever data it has before the object is destroyed! The cleanup happens automatically, which means less chance for errors, and less things to think about.</p>",
       "preview": "With such a destructor, our NetworkData object will always send whatever data it",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S takovým destruktorem náš objekt <code>NetworkData</code> vždy odešle všechna data, která má, ještě předtím, než je zničen! Úklid probíhá automaticky, což znamená méně prostoru pro chyby a méně věcí, na které musíte myslet.</p>"
     },
     {
       "id": "introduction-to-destructors_b27",
       "type": "section",
       "title": "An implicit destructor",
       "html": "<h3 class=\"cpp-section-heading\">An implicit destructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Implicitní destruktor</h3>",
+      "title_cs": "Implicitní destruktor"
     },
     {
       "id": "introduction-to-destructors_b28",
       "type": "paragraph",
       "html": "<p>If a non-aggregate class type object has no user-declared destructor, the compiler will generate a destructor with an empty body. This destructor is called an implicit destructor, and it is effectively just a placeholder.</p>",
       "preview": "If a non-aggregate class type object has no user-declared destructor, the compil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud objekt neagregátního třídního typu nemá žádný uživatelem deklarovaný destruktor, kompilátor vygeneruje destruktor s prázdným tělem. Tento destruktor se nazývá implicitní destruktor a je fakticky pouze zástupným symbolem.</p>"
     },
     {
       "id": "introduction-to-destructors_b29",
       "type": "paragraph",
       "html": "<p>If your class does not need to do any cleanup on destruction, it’s fine to not define a destructor at all, and let the compiler generate an implicit destructor for your class.</p>",
       "preview": "If your class does not need to do any cleanup on destruction, it’s fine to not d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud vaše třída při svém zániku nepotřebuje provádět žádný úklid, je zcela v pořádku nedefinovat žádný destruktor a nechat kompilátor, aby pro vaši třídu vygeneroval implicitní destruktor.</p>"
     },
     {
       "id": "introduction-to-destructors_b30",
       "type": "section",
       "title": "A warning about the std::exit() function",
       "html": "<h3 class=\"cpp-section-heading\">A warning about the <code>std::exit()</code> function</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Varování ohledně funkce <code>std::exit()</code></h3>",
+      "title_cs": "Upozornění na funkci std::exit()."
     },
     {
       "id": "introduction-to-destructors_b31",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/halts-exiting-your-program-early/\">8.12 -- Halts (exiting your program early)</a>, we discussed the <code>std::exit()</code> function, can be used to terminate your program immediately. When the program is terminated immediately, the program just ends. Local variables are not destroyed first, and because of this, no destructors will be called. Be wary if you’re relying on your destructors to do necessary cleanup work in such a case.</p>",
       "preview": "In lesson 8.12 -- Halts (exiting your program early), we discussed the std::exit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/halts-exiting-your-program-early/\">8.12 -- Zastavení (předčasné ukončení programu)</a> jsme probírali funkci <code>std::exit()</code>, kterou lze použít k okamžitému ukončení programu. Při okamžitém ukončení se program prostě ihned ukončí. Lokální proměnné nejsou nejprve zničeny, a proto nebudou zavolány žádné destruktory. Mějte se na pozoru, pokud v takovém případě spoléháte na to, že vaše destruktory provedou nezbytný úklid.</p>"
     },
     {
       "id": "introduction-to-destructors_b32",
@@ -243,7 +282,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Unhandled exceptions will also cause the program to terminate, and may not unwind the stack before doing so. If stack unwinding does not happen, destructors will not be called prior to the termination of the program.</p></div>",
       "preview": "For advanced readersUnhandled exceptions will also cause the program to terminate, and may not unwin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Neošetřené výjimky také způsobí ukončení programu a nemusí předtím provést odvíjení zásobníku (stack unwinding). Pokud k odvíjení zásobníku nedojde, destruktory před ukončením programu zavolány nebudou.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "15.4 — Úvod do destruktorů"
 }

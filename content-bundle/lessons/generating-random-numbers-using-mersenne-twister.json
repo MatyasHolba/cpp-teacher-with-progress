@@ -14,42 +14,49 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/\">8.13 -- Introduction to random number generation</a>, we introduced the concept of random number generation, and discussed how PRNG algorithms are typically used to simulate randomness in programs.</p>",
       "preview": "In the previous lesson 8.13 -- Introduction to random number generation, we intr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/\">8.13 – Úvod do generování náhodných čísel</a> jsme si představili koncept generování náhodných čísel a probrali, jak se k simulaci náhodnosti v programech obvykle používají algoritmy PRNG.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll take a look at how to generate random numbers in your programs. To access any of the randomization capabilities in C++, we include the <code>&lt;random&gt;</code> header of the standard library.</p>",
       "preview": "In this lesson, we’ll take a look at how to generate random numbers in your prog",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci se podíváme na to, jak generovat náhodná čísla ve vašich programech. Pro přístup k jakýmkoli funkcím randomizace v C++ vložíme hlavičkový soubor <code>&lt;random&gt;</code> ze standardní knihovny.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b2",
       "type": "section",
       "title": "Generating random numbers in C++ using Mersenne Twister",
       "html": "<h3 class=\"cpp-section-heading\">Generating random numbers in C++ using Mersenne Twister</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Generování náhodných čísel v C++ pomocí Mersenne Twisteru</h3>",
+      "title_cs": "Generování náhodných čísel v C++ pomocí Mersenne Twister"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b3",
       "type": "paragraph",
       "html": "<p>The Mersenne Twister PRNG, besides having a great name, is probably the most popular PRNG across all programming languages. Although it is a bit old by today’s standards, it generally produces quality results and has decent performance. The random library has support for two Mersenne Twister types:</p>",
       "preview": "The Mersenne Twister PRNG, besides having a great name, is probably the most pop",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>PRNG Mersenne Twister je, kromě toho, že má skvělé jméno, pravděpodobně nejpopulárnějším PRNG napříč všemi programovacími jazyky. Ačkoli je na dnešní poměry už poněkud starý, obecně produkuje kvalitní výsledky a má slušný výkon. Knihovna pro náhodná čísla podporuje dva typy Mersenne Twisteru:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b4",
       "type": "list",
       "html": "<ul><li><code>mt19937</code> is a Mersenne Twister that generates 32-bit unsigned integers</li><li><code>mt19937_64</code> is a Mersenne Twister that generates 64-bit unsigned integers</li></ul>",
       "preview": "mt19937 is a Mersenne Twister that generates 32-bit unsigned integersmt19937_64 ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li><code>mt19937</code> je Mersenne Twister, který generuje 32bitová celá čísla bez znaménka (unsigned int)</li><li><code>mt19937_64</code> je Mersenne Twister, který generuje 64bitová celá čísla bez znaménka (unsigned int)</li></ul>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b5",
       "type": "paragraph",
       "html": "<p>Using Mersenne Twister is straightforward:</p>",
       "preview": "Using Mersenne Twister is straightforward:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití Mersenne Twisteru je přímočaré:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b6",
@@ -57,28 +64,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random> // for std::mt19937\n\nint main()\n{\n\tstd::mt19937 mt{}; // Instantiate a 32-bit Mersenne Twister\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count <= 40; ++count)\n\t{\n\t\tstd::cout << mt() << '\\t'; // generate a random number\n\n\t\t// If we've printed 5 numbers, start a new row\n\t\tif (count % 5 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt; // for std::mt19937\n\nint main()\n{\n\tstd::mt19937 mt{}; // Instantiate a 32-bit Mersenne Twister\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count &lt;= 40; ++count)\n\t{\n\t\tstd::cout &lt;&lt; mt() &lt;&lt; '\\t'; // generate a random number\n\n\t\t// If we've printed 5 numbers, start a new row\n\t\tif (count % 5 == 0)\n\t\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <random> // pro std::mt19937\n\nint main()\n{\n\tstd::mt19937 mt{}; // Vytvořte 32bitový Mersenne Twister\n\n\t// Vytiskne hromadu náhodných čísel\n\tfor (int počet{ 1 }; počet <= 40; ++počet)\n\t{\n\t\tstd::cout << mt() << '\\t'; // vygenerování náhodného čísla\n\n\t\t// Pokud jsme vytiskli 5 čísel, začněte nový řádek\n\t\tif (počet % 5 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b7",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím získáme výsledek:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b8",
       "type": "output",
       "text": "3499211612      581869302       3890346734      3586334585      545404204\n4161255391      3922919429      949333985       2715962298      1323567403\n418932835       2350294565      1196140740      809094426       2348838239\n4264392720      4112460519      4279768804      4144164697      4156218106\n676943009       3117454609      4168664243      4213834039      4111000746\n471852626       2084672536      3427838553      3437178460      1275731771\n609397212       20544909        1811450929      483031418       3933054126\n2747762695      3402504553      3772830893      4120988587      2163214728\n",
       "html": "<pre>3499211612      581869302       3890346734      3586334585      545404204\n4161255391      3922919429      949333985       2715962298      1323567403\n418932835       2350294565      1196140740      809094426       2348838239\n4264392720      4112460519      4279768804      4144164697      4156218106\n676943009       3117454609      4168664243      4213834039      4111000746\n471852626       2084672536      3427838553      3437178460      1275731771\n609397212       20544909        1811450929      483031418       3933054126\n2747762695      3402504553      3772830893      4120988587      2163214728\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>3499211612      581869302       3890346734      3586334585      545404204\n4161255391      3922919429      949333985       2715962298      1323567403\n418932835       2350294565      1196140740      809094426       2348838239\n4264392720      4112460519      4279768804      4144164697      4156218106\n676943009       3117454609      4168664243      4213834039      4111000746\n471852626       2084672536      3427838553      3437178460      1275731771\n609397212       20544909        1811450929      483031418       3933054126\n2747762695      3402504553      3772830893      4120988587      2163214728\n</pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b9",
       "type": "paragraph",
       "html": "<p>First, we include the &lt;random&gt; header, since that’s where all the random number capabilities live. Next, we instantiate a 32-bit Mersenne Twister engine via the statement <code>std::mt19937 mt</code>. Then, each time we want to generate a random 32-bit unsigned integer, we call <code>mt()</code>.</p>",
       "preview": "First, we include the <random> header, since that’s where all the random number ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve vložíme hlavičkový soubor &lt;random&gt;, protože právě tam se nachází veškerá funkcionalita pro generování náhodných čísel. Dále vytvoříme instanci 32bitového generátoru Mersenne Twister pomocí příkazu <code>std::mt19937 mt</code>. Poté pokaždé, když chceme vygenerovat náhodné 32bitové neznaménkové celé číslo, zavoláme <code>mt()</code>.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b10",
@@ -86,35 +97,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Since <code>mt</code> is a variable, you may be wondering what <code>mt()</code> means.</p><p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 -- Introduction to std::string</a>, we showed an example where we called the function <code>name.length()</code>, which invoked the <code>length()</code> function on <code>std::string</code> variable <code>name</code>.</p><p><code>mt()</code> is a concise syntax for calling the function <code>mt.operator()</code>, which for these PRNG types has been defined to return the next random result in the sequence. The advantage of using <code>operator()</code> instead of a named function is that we don’t need to remember the function’s name, and the concise syntax is less typing.</p></div>",
       "preview": "As an aside…Since mt is a variable, you may be wondering what mt() means.In lesson 5.7 -- Introducti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Jelikož <code>mt</code> je proměnná, možná se ptáte, co vlastně znamená <code>mt()</code>.</p><p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-stdstring/\">5.7 – Úvod do std::string</a> jsme si ukázali příklad, kde jsme volali funkci <code>name.length()</code>, která vyvolala funkci <code>length()</code> na proměnné <code>name</code> typu <code>std::string</code>.</p><p><code>mt()</code> je stručná syntaxe pro volání funkce <code>mt.operator()</code>, která je u těchto typů PRNG definována tak, aby vracela další náhodný výsledek v posloupnosti. Výhodou použití <code>operator()</code> místo pojmenované funkce je, že si nemusíme pamatovat název funkce, a stručnější syntaxe vyžaduje méně psaní.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b11",
       "type": "section",
       "title": "Rolling a dice using Mersenne Twister",
       "html": "<h3 class=\"cpp-section-heading\">Rolling a dice using Mersenne Twister</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Hod kostkou pomocí Mersenne Twisteru</h3>",
+      "title_cs": "Házení kostkou pomocí Mersenne Twister"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b12",
       "type": "paragraph",
       "html": "<p>A 32-bit PRNG will generate random numbers between 0 and 4,294,967,295, but we do not always want numbers in that range. If our program was simulating a board game or a dice game, we’d probably want to simulate the roll of a 6-sided dice by generating random numbers between 1 and 6. If our program was a dungeon adventure, and the player had a sword that did between 7 and 11 damage to monsters, then we’d want to generate random numbers between 7 and 11 whenever the player hit a monster.</p>",
       "preview": "A 32-bit PRNG will generate random numbers between 0 and 4,294,967,295, but we d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>32bitový PRNG generuje náhodná čísla mezi 0 a 4 294 967 295, ale ne vždy chceme čísla v tomto rozsahu. Pokud by náš program simuloval deskovou hru nebo hru v kostky, pravděpodobně bychom chtěli simulovat hod šestistěnnou kostkou generováním náhodných čísel mezi 1 a 6. Kdyby byl náš program dobrodružnou hrou v podzemí a hráč by měl meč, který příšerám uděluje poškození v rozmezí 7 až 11, chtěli bychom vygenerovat náhodné číslo mezi 7 a 11 pokaždé, když hráč zasáhne příšeru.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b13",
       "type": "paragraph",
       "html": "<p>Unfortunately, PRNGs can’t do this. They can only generate numbers that use the full range. What we need is some way to convert a number that is output from our PRNG into a value in the smaller range we want (with an even probability of each value occurring). While we could write a function to do this ourselves, doing so in a way that produces non-biased results is non-trivial.</p>",
       "preview": "Unfortunately, PRNGs can’t do this. They can only generate numbers that use the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Generátory PRNG to bohužel samy o sobě neumí. Dokáží generovat pouze čísla v plném rozsahu. Potřebujeme tedy nějaký způsob, jak převést číslo, které je výstupem z našeho PRNG, na hodnotu v menším požadovaném rozsahu (se stejnou pravděpodobností výskytu každé hodnoty). Ačkoli bychom si na to mohli napsat vlastní funkci, udělat to tak, aby poskytovala nezkreslené výsledky, není triviální.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b14",
       "type": "paragraph",
       "html": "<p>Fortunately, the random library can help us here, in the form of random number distributions. A <strong>random number distribution</strong> converts the output of a PRNG into some other distribution of numbers.</p>",
       "preview": "Fortunately, the random library can help us here, in the form of random number d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí nám v tomto může pomoci knihovna random, a to v podobě distribucí náhodných čísel. <strong>Distribuce náhodných čísel</strong> převádí výstup PRNG na nějaké jiné rozdělení čísel.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b15",
@@ -122,21 +139,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>For the stats geeks: a random number distribution is just a probability distribution designed to take PRNG values as input.</p></div>",
       "preview": "As an aside…For the stats geeks: a random number distribution is just a probability distribution des",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Pro statistické nadšence: distribuce náhodných čísel je prostě pravděpodobnostní rozdělení navržené tak, aby jako vstup přijímalo hodnoty z PRNG.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b16",
       "type": "paragraph",
       "html": "<p>The random library has many random numbers distributions, most of which you will never use unless you’re doing some kind of statistical analysis. But there’s one random number distribution that’s extremely useful: a <strong>uniform distribution</strong> is a random number distribution that produces outputs between two numbers X and Y (inclusive) with equal probability.</p>",
       "preview": "The random library has many random numbers distributions, most of which you will",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Knihovna random obsahuje mnoho distribucí náhodných čísel, z nichž většinu nikdy nepoužijete, pokud zrovna neprovádíte nějakou statistickou analýzu. Existuje však jedna distribuce náhodných čísel, která je mimořádně užitečná: <strong>rovnoměrná distribuce</strong> (uniform distribution) je distribuce náhodných čísel, která se stejnou pravděpodobností generuje výstupy mezi dvěma čísly X a Y (včetně).</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b17",
       "type": "paragraph",
       "html": "<p>Here’s a similar program to the one above, using a uniform distribution to simulate the roll of a 6-sided dice:</p>",
       "preview": "Here’s a similar program to the one above, using a uniform distribution to simul",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je podobný program jako výše, který používá rovnoměrné rozdělení k simulaci hodu šestistěnnou kostkou:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b18",
@@ -144,119 +164,138 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random> // for std::mt19937 and std::uniform_int_distribution\n\nint main()\n{\n\tstd::mt19937 mt{};\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count <= 40; ++count)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt; // for std::mt19937 and std::uniform_int_distribution\n\nint main()\n{\n\tstd::mt19937 mt{};\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution&lt;&gt; die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count &lt;= 40; ++count)\n\t{\n\t\tstd::cout &lt;&lt; die6(mt) &lt;&lt; '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <random> // pro std::mt19937 a std::uniform_int_distribution\n\nint main()\n{\n\tstd::mt19937 mt{};\n\n\t// Vytvoří znovu použitelný generátor náhodných čísel, který generuje jednotná čísla mezi 1 a 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // pro C++14 použijte std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Vytiskne hromadu náhodných čísel\n\tfor (int počet{ 1 }; počet <= 40; ++počet)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // zde vygenerujte hod kostkou\n\n\t\t// Pokud jsme vytiskli 10 čísel, začněte nový řádek\n\t\tif (počet % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b19",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vytvoří následující výstup:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b20",
       "type": "output",
       "text": "3       1       3       6       5       2       6       6       1       2\n2       6       1       1       6       1       4       5       2       5\n6       2       6       2       1       3       5       4       5       6\n1       4       2       3       1       2       2       6       2       1\n",
       "html": "<pre>3       1       3       6       5       2       6       6       1       2\n2       6       1       1       6       1       4       5       2       5\n6       2       6       2       1       3       5       4       5       6\n1       4       2       3       1       2       2       6       2       1\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>3       1       3       6       5       2       6       6       1       2\n2       6       1       1       6       1       4       5       2       5\n6       2       6       2       1       3       5       4       5       6\n1       4       2       3       1       2       2       6       2       1\n</pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b21",
       "type": "paragraph",
       "html": "<p>There are only two noteworthy differences in this example compared to the previous one. First, we’ve created a uniform distribution variable (named <code>die6</code>) to generate numbers between 1 and 6. Second, instead of calling <code>mt()</code> to generate 32-bit unsigned integer random numbers, we’re now calling <code>die6(mt)</code> to generate a value between 1 and 6.</p>",
       "preview": "There are only two noteworthy differences in this example compared to the previo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu jsou oproti předchozímu pouze dva významné rozdíly. Zaprvé jsme vytvořili proměnnou rovnoměrného rozdělení (pojmenovanou <code>die6</code>) pro generování čísel mezi 1 a 6. Zadruhé, místo volání <code>mt()</code> pro generování 32bitových náhodných celých čísel bez znaménka nyní voláme <code>die6(mt)</code> pro vygenerování hodnoty mezi 1 a 6.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b22",
       "type": "section",
       "title": "The above program isn’t as random as it seems",
       "html": "<h3 class=\"cpp-section-heading\">The above program isn’t as random as it seems</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výše uvedený program není tak náhodný, jak se zdá</h3>",
+      "title_cs": "Výše uvedený program není tak náhodný, jak se zdá"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b23",
       "type": "paragraph",
       "html": "<p>Although the results of our dice rolling example above are pretty random, there’s a major flaw with the program. Run the program 3 times and see if you can figure out what it is. Go ahead, we’ll wait.</p>",
       "preview": "Although the results of our dice rolling example above are pretty random, there’",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli jsou výsledky našeho příkladu s házením kostkou výše poměrně náhodné, program má jednu zásadní vadu. Spusťte program 3krát a zkuste zjistit, o co jde. Jen do toho, my počkáme.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b24",
       "type": "paragraph",
       "html": "<p><em>Jeopardy music</em></p>",
       "preview": "Jeopardy music",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><em>Znělka z Jeopardy</em></p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b25",
       "type": "paragraph",
       "html": "<p>If you run the program multiple times, you will note that it prints the same numbers every time! While each number in the sequence is random with regards to the previous one, the entire sequence is not random at all! Each run of our program produces the exact same result.</p>",
       "preview": "If you run the program multiple times, you will note that it prints the same num",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud program spustíte vícekrát, všimnete si, že pokaždé vypíše úplně stejná čísla! I když je každé číslo v posloupnosti náhodné vzhledem k tomu předchozímu, celá posloupnost vůbec náhodná není! Každé spuštění našeho programu vyprodukuje naprosto stejný výsledek.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b26",
       "type": "paragraph",
       "html": "<p>Imagine that you’re writing a game of hi-lo, where the user has 10 tries to guess a number that has been picked randomly, and the computer tells the user whether their guess is too high or too low. If the computer picks the same random number every time, the game won’t be interesting past the first time it is played. So let’s take a deeper look at why this is happening, and how we can fix it.</p>",
       "preview": "Imagine that you’re writing a game of hi-lo, where the user has 10 tries to gues",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si, že píšete hru „myslím si číslo“ (hi-lo), kde má uživatel 10 pokusů na uhodnutí náhodně vybraného čísla a počítač mu říká, zda je jeho tip příliš vysoký, nebo příliš nízký. Pokud počítač vybere pokaždé stejné náhodné číslo, hra přestane být po prvním odehrání zajímavá. Pojďme se tedy podrobněji podívat na to, proč k tomu dochází a jak to můžeme napravit.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b27",
       "type": "paragraph",
       "html": "<p>In the prior lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/\">8.13 -- Introduction to random number generation</a>), we covered that each number in a PRNG sequence is in a deterministic way. And that the state of the PRNG is initialized from the seed value. Thus, given any starting seed number, PRNGs will always generate the same sequence of numbers from that seed as a result.</p>",
       "preview": "In the prior lesson (8.13 -- Introduction to random number generation), we cover",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-random-number-generation/\">8.13 -- Úvod do generování náhodných čísel</a>) jsme si vysvětlili, že každé číslo v sekvenci PRNG je generováno deterministickým způsobem. A také to, že stav PRNG se inicializuje z hodnoty seedu (počátečního stavu). Z libovolného počátečního seedu tedy PRNG jako výsledek vždy vygeneruje tutéž sekvenci čísel.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b28",
       "type": "paragraph",
       "html": "<p>Because we are value initializing our Mersenne Twister, it is being initialized with the same seed every time the program is run. And because the seed is the same, the random numbers being generated are also the same.</p>",
       "preview": "Because we are value initializing our Mersenne Twister, it is being initialized ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože náš Mersenne Twister inicializujeme hodnotou (value initialization), inicializuje se při každém spuštění programu se stejným seedem. A protože je seed stejný, jsou stejná i generovaná náhodná čísla.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b29",
       "type": "paragraph",
       "html": "<p>In order to make our entire sequence randomized differently each time the program is run, we need to pick a seed that’s not a fixed number. The first answer that probably comes to mind is that we need a random number for our seed! That’s a good thought, but if we need a random number to generate random numbers, then we’re in a catch-22. It turns out, we really don’t need our seed to be a random number -- we just need to pick something that changes each time the program is run. Then we can use our PRNG to generate a unique sequence of pseudo-random numbers from that seed.</p>",
       "preview": "In order to make our entire sequence randomized differently each time the progra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom dosáhli toho, že celá naše sekvence bude při každém spuštění programu jiná, musíme zvolit seed, který není fixním číslem. První odpověď, která vás pravděpodobně napadne, je, že jako seed potřebujeme náhodné číslo! To je dobrá úvaha, ale pokud potřebujeme náhodné číslo k tomu, abychom mohli generovat náhodná čísla, ocitáme se v pasti (Hlava 22). Ukazuje se však, že ve skutečnosti nepotřebujeme, aby byl náš seed náhodným číslem – stačí vybrat něco, co se mění při každém spuštění programu. Náš PRNG pak můžeme použít k vygenerování unikátní sekvence pseudonáhodných čísel z tohoto seedu.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b30",
       "type": "paragraph",
       "html": "<p>There are two methods that are commonly used to do this:</p>",
       "preview": "There are two methods that are commonly used to do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K tomu se běžně používají dvě metody:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b31",
       "type": "list",
       "html": "<ul><li>Use the system clock</li><li>Use the system’s random device</li></ul>",
       "preview": "Use the system clockUse the system’s random device",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Použití systémových hodin</li><li>Použití systémového zařízení pro generování náhodnosti (random device)</li></ul>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b32",
       "type": "section",
       "title": "Seeding with the system clock",
       "html": "<h3 class=\"cpp-section-heading\">Seeding with the system clock</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Inicializace seedu pomocí systémových hodin</h3>",
+      "title_cs": "Nasazování pomocí systémových hodin"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b33",
       "type": "paragraph",
       "html": "<p>What’s one thing that’s different every time you run your program? Unless you manage to run your program twice at exactly the same moment in time, the answer is that the current time is different. Therefore, if we use the current time as our seed value, then our program will produce a different set of random numbers each time it is run. C and C++ have a long history of PRNGs being seeded using the current time (using the <code>std::time()</code> function), so you will probably see this in a lot of existing code.</p>",
       "preview": "What’s one thing that’s different every time you run your program? Unless you ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co je tím, co se při každém spuštění vašeho programu liší? Pokud se vám nepodaří spustit program dvakrát v naprosto identický okamžik, odpovědí je, že se liší aktuální čas. Pokud tedy jako hodnotu seedu použijeme aktuální čas, náš program při každém spuštění vygeneruje jinou sadu náhodných čísel. Jazyky C a C++ mají dlouhou historii inicializace PRNG pomocí aktuálního času (pomocí funkce <code>std::time()</code>), takže se s tím pravděpodobně setkáte ve spoustě existujícího kódu.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b34",
       "type": "paragraph",
       "html": "<p>Fortunately, C++ has a chrono library containing various clocks that we can use to generate a seed value. To minimize the chance of two time values being identical if the program is run quickly in succession, we want to use some time measure that changes as quickly as possible. For this, we’ll ask the clock how much time has passed since the earliest time it can measure. This time is measured in “ticks”, which is a very small unit of time (usually nanoseconds, but could be milliseconds).</p>",
       "preview": "Fortunately, C++ has a chrono library containing various clocks that we can use ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ naštěstí obsahuje knihovnu chrono s různými hodinami, které můžeme použít k vygenerování inicializační hodnoty (seed). Abychom minimalizovali šanci, že dvě časové hodnoty budou totožné, pokud je program spuštěn rychle za sebou, chceme použít měřítko času, které se mění co nejrychleji. K tomu se hodin zeptáme, kolik času uplynulo od nejranějšího okamžiku, který dokážou měřit. Tento čas se měří v „ticích“ (ticks), což je velmi malá jednotka času (obvykle nanosekundy, ale mohou to být i milisekundy).</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b35",
@@ -264,28 +303,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random> // for std::mt19937\n#include <chrono> // for std::chrono\n\nint main()\n{\n\t// Seed our Mersenne Twister using steady_clock\n\tstd::mt19937 mt{ static_cast<std::mt19937::result_type>(\n\t\tstd::chrono::steady_clock::now().time_since_epoch().count()\n\t\t) };\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count <= 40; ++count)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt; // for std::mt19937\n#include &lt;chrono&gt; // for std::chrono\n\nint main()\n{\n\t// Seed our Mersenne Twister using steady_clock\n\tstd::mt19937 mt{ static_cast&lt;std::mt19937::result_type&gt;(\n\t\tstd::chrono::steady_clock::now().time_since_epoch().count()\n\t\t) };\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution&lt;&gt; die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count &lt;= 40; ++count)\n\t{\n\t\tstd::cout &lt;&lt; die6(mt) &lt;&lt; '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <random> // pro std::mt19937\n#include <chrono> // pro std::chrono\n\nint main()\n{\n\t// Nasávejte náš Mersenne Twister pomocí steady_clock\n\tstd::mt19937 mt{ static_cast<std::mt19937::result_type>(\n\t\tstd::chrono::steady_clock::now().time_since_epoch().count()\n\t\t) };\n\n\t// Vytvoří znovu použitelný generátor náhodných čísel, který generuje jednotná čísla mezi 1 a 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // pro C++14 použijte std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Vytiskne hromadu náhodných čísel\n\tfor (int počet{ 1 }; počet <= 40; ++počet)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // zde vygenerujte hod kostkou\n\n\t\t// Pokud jsme vytiskli 10 čísel, začněte nový řádek\n\t\tif (počet % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b36",
       "type": "paragraph",
       "html": "<p>The above program has only two changes from the prior. First, we’re including &lt;chrono&gt;, which gives us access to the clock. Second, we’re using the current time from the clock as a seed value for our Mersenne Twister.</p>",
       "preview": "The above program has only two changes from the prior. First, we’re including <c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený program má oproti předchozímu pouze dvě změny. Zaprvé vkládáme hlavičkový soubor &lt;chrono&gt;, což nám dává přístup k hodinám. Zadruhé používáme aktuální čas z hodin jako inicializační hodnotu (seed) pro náš Mersenne Twister.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b37",
       "type": "paragraph",
       "html": "<p>The results generated by this program should now be different each time it is run, which you can verify experimentally by running it several times.</p>",
       "preview": "The results generated by this program should now be different each time it is ru",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledky generované tímto programem by nyní měly být při každém spuštění jiné, což si můžete experimentálně ověřit několikanásobným spuštěním.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b38",
       "type": "paragraph",
       "html": "<p>The downside of this approach is that if the program is run several times in quick succession, the seeds generated for each run won’t be that different, which can impact the quality of the random results from a statistical standpoint. For normal programs, this doesn’t matter, but for programs that require high quality, independent results, this method of seeding may be insufficient.</p>",
       "preview": "The downside of this approach is that if the program is run several times in qui",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou tohoto přístupu je, že pokud je program spuštěn několikrát rychle za sebou, vygenerované seedy pro jednotlivá spuštění se od sebe nebudou příliš lišit, což může ze statistického hlediska ovlivnit kvalitu náhodných výsledků. U běžných programů to nevadí, ale pro programy, které vyžadují vysoce kvalitní a nezávislé výsledky, může být tento způsob inicializace nedostatečný.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b39",
@@ -293,21 +336,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p><code>std::chrono::high_resolution_clock</code> is a popular choice instead of <code>std::chrono::steady_clock</code>. <code>std::chrono::high_resolution_clock</code> is the clock that uses the most granular unit of time, but it may use the system clock for the current time, which can be changed or rolled back by users. <code>std::chrono::steady_clock</code> may have a less granular tick time, but is the only clock with a guarantee that users cannot adjust it.</p></div>",
       "preview": "Tipstd::chrono::high_resolution_clock is a popular choice instead of std::chrono::steady_clock. std:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p><code>std::chrono::high_resolution_clock</code> je oblíbenou volbou namísto <code>std::chrono::steady_clock</code>. <code>std::chrono::high_resolution_clock</code> jsou hodiny, které používají nejjemnější časovou jednotku, ale pro aktuální čas mohou využívat systémové hodiny, které mohou uživatelé změnit nebo posunout zpět. <code>std::chrono::steady_clock</code> mohou mít méně jemný časový krok (tick), ale jsou jedinými hodinami se zárukou, že je uživatelé nemohou přenastavit.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b40",
       "type": "section",
       "title": "Seeding with the random device",
       "html": "<h3 class=\"cpp-section-heading\">Seeding with the random device</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Inicializace pomocí random device</h3>",
+      "title_cs": "Výsev pomocí náhodného zařízení"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b41",
       "type": "paragraph",
       "html": "<p>The random library contains a type called <code>std::random_device</code> that is an implementation-defined PRNG. Normally we avoid implementation-defined capabilities because they have no guarantees about quality or portability, but this is one of the exception cases. Typically <code>std::random_device</code> will ask the OS for a pseudo-random number (how it does this depends on the OS).</p>",
       "preview": "The random library contains a type called std::random_device that is an implemen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Knihovna random obsahuje typ nazvaný <code>std::random_device</code>, což je implementačně definovaný PRNG. Obvykle se implementačně definovaným funkcionalitám vyhýbáme, protože neposkytují žádné záruky ohledně kvality nebo přenositelnosti, ale toto je jeden z výjimečných případů. <code>std::random_device</code> typicky požádá operační systém o pseudonáhodné číslo (způsob, jakým to provede, závisí na operačním systému).</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b42",
@@ -315,28 +362,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random> // for std::mt19937 and std::random_device\n\nint main()\n{\n\tstd::mt19937 mt{ std::random_device{}() };\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count <= 40; ++count)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt; // for std::mt19937 and std::random_device\n\nint main()\n{\n\tstd::mt19937 mt{ std::random_device{}() };\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution&lt;&gt; die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count &lt;= 40; ++count)\n\t{\n\t\tstd::cout &lt;&lt; die6(mt) &lt;&lt; '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <random> // pro std::mt19937 a std::random_device\n\nint main()\n{\n\tstd::mt19937 mt{ std::náhodné_zařízení{}() };\n\n\t// Vytvoří znovu použitelný generátor náhodných čísel, který generuje jednotná čísla mezi 1 a 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // pro C++14 použijte std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Vytiskne hromadu náhodných čísel\n\tfor (int počet{ 1 }; počet <= 40; ++počet)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // zde vygenerujte hod kostkou\n\n\t\t// Pokud jsme vytiskli 10 čísel, začněte nový řádek\n\t\tif (počet % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b43",
       "type": "paragraph",
       "html": "<p>In the above program, we’re seeding our Mersenne Twister with one random number generated from a temporary instance of <code>std::random_device</code>. If you run this program multiple times, it should also produce different results each time.</p>",
       "preview": "In the above program, we’re seeding our Mersenne Twister with one random number ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu inicializujeme náš Mersenne Twister jedním náhodným číslem vygenerovaným z dočasné instance <code>std::random_device</code>. Pokud tento program spustíte vícekrát, měl by pokaždé také vygenerovat jiné výsledky.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b44",
       "type": "paragraph",
       "html": "<p>One potential problem with <code>std::random_device</code>: it isn’t required to be non-deterministic, meaning it <em>could</em>, on some systems, produce the same sequence every time the program is run, which is exactly what we’re trying to avoid. There was a <a href=\"https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85494\">bug in MinGW</a> (fixed in GCC 9.2) that would do exactly this, making <code>std::random_device</code> useless.</p>",
       "preview": "One potential problem with std::random_device: it isn’t required to be non-deter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jeden potenciální problém s <code>std::random_device</code>: není vyžadováno, aby byl nedeterministický, což znamená, že by na některých systémech <em>mohl</em> vyprodukovat stejnou sekvenci při každém spuštění programu – což je přesně to, čemu se snažíme vyhnout. V MinGW existovala <a href=\"https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85494\">chyba</a> (opravená v GCC 9.2), která dělala přesně tohle, což činilo <code>std::random_device</code> nepoužitelným.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b45",
       "type": "paragraph",
       "html": "<p>However, the latest versions of the most popular compilers (GCC/MinGW, Clang, Visual Studio) support proper implementations of <code>std::random_device</code>.</p>",
       "preview": "However, the latest versions of the most popular compilers (GCC/MinGW, Clang, Vi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejnovější verze nejpopulárnějších překladačů (GCC/MinGW, Clang, Visual Studio) však již podporují správné implementace <code>std::random_device</code>.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b46",
@@ -344,7 +395,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use <code>std::random_device</code> to seed your PRNGs (unless it’s not implemented properly for your target compiler/architecture).</p></div>",
       "preview": "Best practiceUse std::random_device to seed your PRNGs (unless it’s not implemented properly for you",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>K inicializaci (seedování) svých PRNG používejte <code>std::random_device</code> (pokud pro váš cílový překladač/architekturu není implementován chybně).</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b47",
@@ -352,7 +404,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Q: What does <code>std::random_device{}()</code> mean?</p><p><code>std::random_device{}</code> creates a value-initialized temporary object of type <code>std::random_device</code>. The <code>()</code> then calls <code>operator()</code> on that temporary object, which returns a randomized value (which we use as an initializer for our Mersenne Twister)</p><p>It’s the equivalent of the calling the following function, which uses a syntax you should be more familiar with:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">unsigned int getRandomDeviceValue()\n{\n   std::random_device rd{}; // create a value initialized std::random_device object\n   return rd(); // return the result of operator() to the caller\n}</code></pre><p>Using <code>std::random_device{}()</code> allows us to get the same result without creating a named function or named variable, so it’s much more concise.</p></div>",
       "preview": "Q: What does std::random_device{}() mean?std::random_device{} creates a value-initialized temporary ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Otázka: Co znamená <code>std::random_device{}()</code>?</p><p><code>std::random_device{}</code> vytvoří hodnotově inicializovaný dočasný objekt typu <code>std::random_device</code>. Následné <code>()</code> pak na tomto dočasném objektu zavolá <code>operator()</code>, který vrátí náhodnou hodnotu (kterou použijeme jako inicializátor pro náš Mersenne Twister).</p><p>Je to ekvivalent volání následující funkce, která využívá syntaxi, jež by vám měla být povědomější:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">unsigned int getRandomDeviceValue()\n{\n   std::random_device rd{}; // vytvoří hodnotově inicializovaný objekt std::random_device\n   return rd(); // vrátí výsledek operator() volajícímu\n}</code></pre><p>Použití <code>std::random_device{}()</code> nám umožňuje dosáhnout stejného výsledku bez vytváření pojmenované funkce nebo proměnné, takže je zápis mnohem stručnější.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b48",
@@ -360,21 +413,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Q: If std::random_device is random itself, why don’t we just use that instead of Mersenne Twister?</p><p>Because std::random_device is implementation defined, we can’t assume much about it. It may be expensive to access or it may cause our program to pause while waiting for more random numbers to become available. The pool of numbers that it draws from may also be depleted quickly, which would impact the random results for other applications requesting random numbers via the same method. For this reason, std::random_device is better used to seed other PRNGs rather than as a PRNG itself.</p></div>",
       "preview": "Q: If std::random_device is random itself, why don’t we just use that instead of Mersenne Twister?Be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Otázka: Pokud je std::random_device sám o sobě náhodný, proč nepoužíváme přímo ten namísto Mersenne Twisteru?</p><p>Protože je std::random_device definován implementací (implementation-defined), nemůžeme o něm téměř nic předpokládat. Přístup k němu může být výpočetně náročný, nebo může způsobit pozastavení programu při čekání na dostupnost dalších náhodných čísel. Zásobník náhodných čísel, ze kterého čerpá, se také může rychle vyčerpat, což by ovlivnilo náhodné výsledky pro ostatní aplikace žádající o náhodná čísla stejným způsobem. Z tohoto důvodu je lepší používat std::random_device k inicializaci (seedování) jiných PRNG než jako PRNG samotný.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b49",
       "type": "section",
       "title": "Only seed a PRNG once",
       "html": "<h3 class=\"cpp-section-heading\">Only seed a PRNG once</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">PRNG inicializujte pouze jednou</h3>",
+      "title_cs": "Nasadit PRNG pouze jednou"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b50",
       "type": "paragraph",
       "html": "<p>Many PRNGs can be reseeded after the initial seeding. This essentially re-initializes the state of the random number generator, causing it to generate results starting from the new seed state. Reseeding should generally be avoided unless you have a specific reason to do so, as it can cause the results to be less random, or not random at all.</p>",
       "preview": "Many PRNGs can be reseeded after the initial seeding. This essentially re-initia",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho PRNG lze po počáteční inicializaci znovu reinicializovat novým seedem (reseedovat). Tím se v podstatě reinicializuje stav generátoru náhodných čísel, což způsobí, že začne generovat výsledky od nového stavu seedu. Opětovné inicializaci (reseedování) byste se měli obecně vyhýbat, pokud k tomu nemáte konkrétní důvod, protože může vést k tomu, že výsledky budou méně náhodné, nebo dokonce zcela nenáhodné.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b51",
@@ -382,14 +439,16 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Only seed a given pseudo-random number generator once, and do not reseed it.</p></div>",
       "preview": "Best practiceOnly seed a given pseudo-random number generator once, and do not reseed it.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Daný generátor pseudonáhodných čísel inicializujte (seedujte) pouze jednou a znovu jej nereinicializujte.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b52",
       "type": "paragraph",
       "html": "<p>Here’s an example of a common mistake that new programmers make:</p>",
       "preview": "Here’s an example of a common mistake that new programmers make:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad časté chyby, které se začínající programátoři dopouštějí:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b53",
@@ -397,28 +456,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random>\n\nint getCard()\n{\n    std::mt19937 mt{ std::random_device{}() }; // this gets created and seeded every time the function is called\n    std::uniform_int_distribution card{ 1, 52 };\n    return card(mt);\n}\n\nint main()\n{\n    std::cout << getCard() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt;\n\nint getCard()\n{\n    std::mt19937 mt{ std::random_device{}() }; // this gets created and seeded every time the function is called\n    std::uniform_int_distribution card{ 1, 52 };\n    return card(mt);\n}\n\nint main()\n{\n    std::cout &lt;&lt; getCard() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <náhodné>\n\nint getCard()\n{\n    std::mt19937 mt{ std::náhodné_zařízení{}() }; // toto se vytvoří a nasadí pokaždé, když je funkce volána\n    std::uniform_int_distribution card{ 1, 52 };\n    návratová karta (mt);\n}\n\nint main()\n{\n    std::cout << getCard() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b54",
       "type": "paragraph",
       "html": "<p>In the <code>getCard()</code> function, the random number generator is being created and seeded every time the function is called. This is inefficient at best, and will likely cause poor random results.</p>",
       "preview": "In the getCard() function, the random number generator is being created and seed",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve funkci <code>getCard()</code> se generátor náhodných čísel vytváří a inicializuje (seeduje) při každém jejím volání. To je přinejlepším neefektivní a velmi pravděpodobně to povede ke špatným (nekvalitním) náhodným výsledkům.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b55",
       "type": "section",
       "title": "Mersenne Twister and underseeding issues",
       "html": "<h3 class=\"cpp-section-heading\">Mersenne Twister and underseeding issues</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Mersenne Twister a problémy s nedostatečným seedováním (underseeding)</h3>",
+      "title_cs": "Mersenne Twister a problémy s nedoséváním"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b56",
       "type": "paragraph",
       "html": "<p>The internal state of a Mersenne Twister requires 19937 bits (2493 bytes), which is 624 32-bit values or 312 64-bit values. As a result, <code>std::mt19937</code> allocates 624 integers, whereas <code>std::mt19937_64</code> allocates 312 integers.</p>",
       "preview": "The internal state of a Mersenne Twister requires 19937 bits (2493 bytes), which",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vnitřní stav algoritmu Mersenne Twister vyžaduje 19937 bitů (2493 bajtů), což odpovídá 624 32bitovým hodnotám nebo 312 64bitovým hodnotám. Výsledkem je, že <code>std::mt19937</code> alokuje 624 celých čísel, zatímco <code>std::mt19937_64</code> alokuje 312 celých čísel.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b57",
@@ -426,35 +490,40 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The integers allocated by <code>std::mt19937</code> are defined to be of type <code>std::uint_fast32_t</code>, which could be 32-bit or 64-bit integers depending on the architecture. If <code>std::uint_fast32_t</code> resolves to a 64-bit integer, <code>std::mt19937</code> will use 624 64-bit integers, making it double the size it needs to be.</p></div>",
       "preview": "As an aside…The integers allocated by std::mt19937 are defined to be of type std::uint_fast32_t, whi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Jen tak na okraj…</p><p>Celá čísla alokovaná generátorem <code>std::mt19937</code> jsou definována jako typ <code>std::uint_fast32_t</code>, což mohou být v závislosti na architektuře 32bitová nebo 64bitová celá čísla. Pokud je <code>std::uint_fast32_t</code> vyhodnocen jako 64bitové celé číslo, <code>std::mt19937</code> použije 624 64bitových celých čísel, čímž bude dvakrát větší, než by musel být.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b58",
       "type": "paragraph",
       "html": "<p>In the examples above, where we seed our <code>std::mt19937</code> from the clock or std::random_device, our seed is only a single integer. This means we’re essentially initializing 624 integers using a single integer, which is significantly underseeding the Mersenne Twister PRNG. The Random library does the best it can to fill in the remaining 623 values with “random” data… but it can’t work magic. Underseeded PRNG can generate results that are suboptimal for applications that need the highest quality results. For example, seeding <code>std::mt19937</code> with a single 32-bit value will never generate the number <code>42</code> as its first output.</p>",
       "preview": "In the examples above, where we seed our std::mt19937 from the clock or std::ran",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedených příkladech, kde seedujeme náš <code>std::mt19937</code> pomocí hodin nebo std::random_device, je náš seed pouze jedno celé číslo. To znamená, že v podstatě inicializujeme 624 celých čísel pomocí jediného celého čísla, což představuje výrazné podseedování (underseeding) PRNG Mersenne Twister. Knihovna Random dělá maximum pro to, aby zbývajících 623 hodnot vyplnila „náhodnými“ daty… ale zázraky dělat nedokáže. Nedostatečně naseedovaný PRNG může generovat výsledky, které jsou suboptimální pro aplikace vyžadující nejvyšší kvalitu náhodnosti. Například inicializace <code>std::mt19937</code> jedinou 32bitovou hodnotou nikdy nevygeneruje číslo <code>42</code> jako svůj první výstup.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b59",
       "type": "paragraph",
       "html": "<p>So how do we fix this? As of C++20, there’s no easy way. But we do have some suggestions.</p>",
       "preview": "So how do we fix this? As of C++20, there’s no easy way. But we do have some sug",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak to tedy napravit? Od C++20 na to neexistuje žádný snadný způsob. Máme však několik doporučení.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b60",
       "type": "paragraph",
       "html": "<p>First, let’s talk about <code>std::seed_seq</code> (which stands for “seed sequence”). In the prior lesson, we mentioned that ideally we want our seed data to be as many bits as the state of our PRNG, or our PRNG will be underseeded. But in many cases (especially when our PRNG has a large state), we won’t have that many bits of randomized seed data.</p>",
       "preview": "First, let’s talk about std::seed_seq (which stands for “seed sequence”). In the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve si povězme o <code>std::seed_seq</code> (což znamená „seed sequence“, tedy sekvence seedů). V předchozí lekci jsme zmínili, že v ideálním případě chceme, aby naše seedovací data měla tolik bitů, kolik má stav našeho PRNG, jinak bude náš PRNG podseedovaný. V mnoha případech (zejména když má náš PRNG velký stav) ale tolik bitů náhodných seedovacích dat k dispozici mít nebudeme.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b61",
       "type": "paragraph",
       "html": "<p><code>std::seed_seq</code> is a type that was designed to help with this. We can pass it as many randomized values as we have, and then it will generate as many additional unbiased seed values as needed to initialize a PRNG’s state. If you initialize <code>std::seed_seq</code> with a single value (e.g. from <code>std::random_device</code>) and then initialize a Mersenne Twister with the <code>std::seed_seq</code> object, <code>std::seed_seq</code> will generate 623 values of additional seed data. This won’t add randomness, but it will give us a better mix of 0 and 1 bits. However, the more random data we can provide <code>std::seed_seq</code>, the better job it will do for us. So the easiest idea is to simply use <code>std::random_device</code> to give <code>std::seed_seq</code> more data to work with. If we initialize <code>std::seed_seq</code> with 8 values from <code>std::random_device</code> instead of 1, then the remaining values generated by <code>std::seed_seq</code> should be much better:</p>",
       "preview": "std::seed_seq is a type that was designed to help with this. We can pass it as m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::seed_seq</code> je typ, který byl navržen přesně k tomu, aby s tímto pomohl. Můžeme mu předat tolik náhodných hodnot, kolik máme k dispozici, a on pak vygeneruje tolik dalších nezkreslených inicializačních hodnot (seedů), kolik je potřeba k inicializaci stavu PRNG. Pokud inicializujete <code>std::seed_seq</code> jednou hodnotou (např. ze <code>std::random_device</code>) a poté inicializujete Mersenne Twister objektem <code>std::seed_seq</code>, <code>std::seed_seq</code> vygeneruje 623 hodnot dalších inicializačních dat. Tím se sice nepřidá náhodnost, ale získáme lepší poměr bitů 0 a 1. Čím více náhodných dat však dokážeme <code>std::seed_seq</code> poskytnout, tím lepší práci odvede. Nejjednodušším nápadem je tedy použít <code>std::random_device</code> a předat <code>std::seed_seq</code> více dat ke zpracování. Pokud inicializujeme <code>std::seed_seq</code> 8 hodnotami ze <code>std::random_device</code> místo 1, zbývající hodnoty vygenerované pomocí <code>std::seed_seq</code> by měly být mnohem kvalitnější:</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b62",
@@ -462,14 +531,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <random>\n\nint main()\n{\n\tstd::random_device rd{};\n\tstd::seed_seq ss{ rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd() }; // get 8 integers of random numbers from std::random_device for our seed\n\tstd::mt19937 mt{ ss }; // initialize our Mersenne Twister with the std::seed_seq\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count <= 40; ++count)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;random&gt;\n\nint main()\n{\n\tstd::random_device rd{};\n\tstd::seed_seq ss{ rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd() }; // get 8 integers of random numbers from std::random_device for our seed\n\tstd::mt19937 mt{ ss }; // initialize our Mersenne Twister with the std::seed_seq\n\n\t// Create a reusable random number generator that generates uniform numbers between 1 and 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // for C++14, use std::uniform_int_distribution&lt;&gt; die6{ 1, 6 };\n\n\t// Print a bunch of random numbers\n\tfor (int count{ 1 }; count &lt;= 40; ++count)\n\t{\n\t\tstd::cout &lt;&lt; die6(mt) &lt;&lt; '\\t'; // generate a roll of the die here\n\n\t\t// If we've printed 10 numbers, start a new row\n\t\tif (count % 10 == 0)\n\t\t\tstd::cout &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <náhodné>\n\nint main()\n{\n\tstd::náhodné_zařízení rd{};\n\tstd::seed_seq ss{ rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd() }; // získáme 8 celých čísel náhodných čísel ze std::random_device pro náš seed\n\tstd::mt19937 mt{ ss }; // inicializujte náš Mersenne Twister pomocí std::seed_seq\n\n\t// Vytvoří znovu použitelný generátor náhodných čísel, který generuje jednotná čísla mezi 1 a 6\n\tstd::uniform_int_distribution die6{ 1, 6 }; // pro C++14 použijte std::uniform_int_distribution<> die6{ 1, 6 };\n\n\t// Vytiskne hromadu náhodných čísel\n\tfor (int počet{ 1 }; počet <= 40; ++počet)\n\t{\n\t\tstd::cout << die6(mt) << '\\t'; // zde vygenerujte hod kostkou\n\n\t\t// Pokud jsme vytiskli 10 čísel, začněte nový řádek\n\t\tif (počet % 10 == 0)\n\t\t\tstd::cout << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b63",
       "type": "paragraph",
       "html": "<p>This is pretty straightforward so there isn’t much reason not to do this at a minimum.</p>",
       "preview": "This is pretty straightforward so there isn’t much reason not to do this at a mi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je poměrně přímočaré, takže není moc důvodů, proč to neudělat alespoň v tomto minimálním rozsahu.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b64",
@@ -477,35 +548,41 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Q: Why not give std::seed_seq 624 values from <code>std::random_device</code>?</p><p>You can, but this is likely to be slow, and risks depleting the pool of random numbers that <code>std::random_device</code> uses.</p></div>",
       "preview": "Q: Why not give std::seed_seq 624 values from std::random_device?You can, but this is likely to be s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Otázka: Proč nepředat std::seed_seq 624 hodnot ze <code>std::random_device</code>?</p><p>Můžete to udělat, ale pravděpodobně to bude pomalé a hrozí vyčerpání fondu náhodných čísel (entropy pool), který <code>std::random_device</code> využívá.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b65",
       "type": "paragraph",
       "html": "<p>You can also use other “random” inputs to <code>std::seed_seq</code>. We’ve already shown you how to get a value from the clock, so you can throw that in easily. Other things that are sometimes used include the current thread id, the address of particular functions, the user’s id, the process id, etc… Doing that is beyond the scope of this article, but <a href=\"https://www.pcg-random.org/posts/ease-of-use-without-loss-of-power.html\">this article</a> has some context and a link to <a href=\"https://gist.github.com/imneme/540829265469e673d045\">randutils.hpp</a> that implements this.</p>",
       "preview": "You can also use other “random” inputs to std::seed_seq. We’ve already shown you",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako vstup do <code>std::seed_seq</code> můžete použít i jiné „náhodné“ hodnoty. Již jsme si ukázali, jak získat hodnotu z hodin, takže ji tam můžete snadno přidat. Mezi další věci, které se někdy používají, patří ID aktuálního vlákna, adresa konkrétních funkcí, ID uživatele, ID procesu atd. To už je nad rámec tohoto článku, ale <a href=\"https://www.pcg-random.org/posts/ease-of-use-without-loss-of-power.html\">tento článek</a> poskytuje určitý kontext a odkaz na knihovnu <a href=\"https://gist.github.com/imneme/540829265469e673d045\">randutils.hpp</a>, která toto implementuje.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b66",
       "type": "paragraph",
       "html": "<p>An alternate path is to use a different PRNG with a smaller state. Many good PRNGs use 64 or 128 bits of state, which can easily be initialized using <code>std::seed_seq</code> filled with 8 calls to <code>std::random_device</code>.</p>",
       "preview": "An alternate path is to use a different PRNG with a smaller state. Many good PRN",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Alternativní cestou je použít jiný PRNG s menším vnitřním stavem. Mnoho kvalitních PRNG používá 64 nebo 128 bitů stavu, které lze snadno inicializovat pomocí <code>std::seed_seq</code> naplněného 8 voláními <code>std::random_device</code>.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b67",
       "type": "section",
       "title": "Warming up a PRNG",
       "html": "<h3 class=\"cpp-section-heading\">Warming up a PRNG</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zahřátí PRNG (warming up)</h3>",
+      "title_cs": "Zahřívání PRNG"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b68",
       "type": "paragraph",
       "html": "<p>When a PRNG is given a poor quality seed (or underseeded), the initial results of the PRNG may not be high quality. For this reason, some PRNGs benefit from being “warmed up”, which is a technique where the first N results generated from the PRNG are discarded. This allows the internal state of the PRNG to be mixed up such that the subsequent results should be of higher quality. Typically a few hundred to a few thousand initial results are discarded. The longer the period of the PRNG, the more initial results should be discarded.</p>",
       "preview": "When a PRNG is given a poor quality seed (or underseeded), the initial results o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když PRNG obdrží nekvalitní seed (nebo je nedostatečně inicializován / underseeded), počáteční výsledky PRNG nemusí mít vysokou kvalitu. Z tohoto důvodu některým PRNG prospívá tzv. „zahřátí“ (warming up), což je technika, při které se prvních N vygenerovaných výsledků z PRNG jednoduše zahodí. To umožní vnitřnímu stavu PRNG se dostatečně promíchat, takže následující výsledky by již měly být vyšší kvality. Obvykle se zahazuje několik stovek až několik tisíc počátečních výsledků. Čím delší je perioda PRNG, tím více počátečních výsledků by se mělo zahodit.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b69",
@@ -513,56 +590,67 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>Visual Studio’s implementation of <code>rand()</code> had (or still has?) a bug where the first generated result would not be sufficiently randomized. You may see older programs that use <code>rand()</code> discard a single result as a way to avoid this issue.</p></div>",
       "preview": "As an aside…Visual Studio’s implementation of rand() had (or still has?) a bug where the first gener",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Jen tak mimochodem…</p><p>Implementace funkce <code>rand()</code> ve Visual Studiu měla (nebo stále má?) chybu, kdy první vygenerovaný výsledek nebyl dostatečně náhodný. U starších programů používajících <code>rand()</code> můžete narazit na to, že zahazují jeden výsledek, aby se tomuto problému vyhnuly.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b70",
       "type": "paragraph",
       "html": "<p>The <code>seed_seq</code> initialization used by <code>std::mt19937</code> performs a warm up, so we don’t need to explicitly warm up <code>std::mt19937</code> objects.</p>",
       "preview": "The seed_seq initialization used by std::mt19937 performs a warm up, so we don’t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Inicializace pomocí <code>seed_seq</code> používaná v <code>std::mt19937</code> provádí zahřátí (warm up), takže objekty <code>std::mt19937</code> nemusíme explicitně zahřívat.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b71",
       "type": "section",
       "title": "Random numbers across multiple functions or files (Random.h)",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"RandomH\"></a>Random numbers across multiple functions or files (Random.h) <a href=\"#RandomH\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"RandomH\"></a>Náhodná čísla napříč více funkcemi nebo soubory (Random.h) <a href=\"#RandomH\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "Náhodná čísla ve více funkcích nebo souborech (Random.h)"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b72",
       "type": "paragraph",
       "html": "<p>This content was moved to <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Global random numbers (Random.h)</a>.</p>",
       "preview": "This content was moved to 8.15 -- Global random numbers (Random.h).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento obsah byl přesunut do <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 – Globální náhodná čísla (Random.h)</a>.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b73",
       "type": "section",
       "title": "Debugging programs that use random numbers",
       "html": "<h3 class=\"cpp-section-heading\">Debugging programs that use random numbers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ladění programů, které používají náhodná čísla</h3>",
+      "title_cs": "Ladění programů, které používají náhodná čísla"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b74",
       "type": "paragraph",
       "html": "<p>Programs that use random numbers can be difficult to debug because the program may exhibit different behaviors each time it is run. When this is the case, the erroneous behavior you may happen, or it may not. This can waste a lot of time. When debugging, it’s helpful to ensure your program executes the same (incorrect) way each time. That way, you can run the program as many times as needed to isolate where the error is.</p>",
       "preview": "Programs that use random numbers can be difficult to debug because the program m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Programy, které používají náhodná čísla, může být obtížné ladit, protože program může při každém spuštění vykazovat jiné chování. V takovém případě se chybné chování může projevit, ale také nemusí. To může vést ke ztrátě spousty času. Při ladění je užitečné zajistit, aby program pokaždé proběhl stejným (nesprávným) způsobem. Díky tomu můžete program spustit tolikrát, kolikrát je potřeba k izolování chyby.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b75",
       "type": "paragraph",
       "html": "<p>For this reason, when debugging, it’s a useful technique to seed your PRNG with a specific fixed value (e.g. <code>5</code>) that causes the erroneous behavior to occur. If a given seed doesn’t cause your program to exhibit the error, keep incrementing the seed value until you find one that does. This will ensure your program generates the same results each time, making debugging easier. Once you’ve found the error, you can use your normal seeding method to start generating randomized results again.</p>",
       "preview": "For this reason, when debugging, it’s a useful technique to seed your PRNG with ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Z tohoto důvodu je při ladění užitečnou technikou inicializovat (seedovat) váš PRNG konkrétní pevnou hodnotou (např. <code>5</code>), která vede k výskytu chybného chování. Pokud daný seed nezpůsobí, že program chybu projeví, postupně hodnotu seedu zvyšujte, dokud nenajdete takovou, která ji vyvolá. Tím zajistíte, že váš program bude pokaždé generovat stejné výsledky, což ladění usnadní. Jakmile chybu najdete, můžete se vrátit k běžné metodě inicializace a začít opět generovat náhodné výsledky.</p>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b76",
       "type": "section",
       "title": "Random FAQ",
       "html": "<h3 class=\"cpp-section-heading\">Random FAQ</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">FAQ k náhodným číslům</h3>",
+      "title_cs": "Náhodné FAQ"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b77",
@@ -570,7 +658,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Q: Help! My random number generator is generating the same sequence of random numbers.</p><p>If your random number generator is generating the same sequence of random numbers every time your program is run, you probably didn’t seed it properly (or at all). Make sure you’re seeding it with a value that changes each time the program is run.</p></div>",
       "preview": "Q: Help! My random number generator is generating the same sequence of random numbers.If your random",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Otázka: Pomoc! Můj generátor náhodných čísel generuje pokaždé stejnou posloupnost náhodných čísel.</p><p>Pokud váš generátor náhodných čísel generuje stejnou posloupnost náhodných čísel při každém spuštění programu, pravděpodobně jste jej nenainicializovali správně (nebo vůbec). Ujistěte se, že jej inicializujete (seedujete) hodnotou, která se při každém spuštění programu mění.</p></div>"
     },
     {
       "id": "generating-random-numbers-using-mersenne-twister_b78",
@@ -578,7 +667,9 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Q: Help! My random number generator keeps generating the same number over and over.</p><p>If your random number generator is generating the same number every time you ask it for a random number, then you are probably either reseeding the random number generator before generating a random number, or you’re creating a new random generator for each random number.</p></div>",
       "preview": "Q: Help! My random number generator keeps generating the same number over and over.If your random nu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Otázka: Pomoc! Můj generátor náhodných čísel generuje stále dokola to stejné číslo.</p><p>Pokud váš generátor náhodných čísel generuje stejné číslo pokaždé, když jej požádáte o náhodné číslo, pak pravděpodobně buď generátor náhodných čísel před vygenerováním náhodného čísla pokaždé znovu inicializujete (reseedujete), nebo pro každé náhodné číslo vytváříte nový generátor.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "8.14 — Generování náhodných čísel pomocí Mersenne Twister"
 }

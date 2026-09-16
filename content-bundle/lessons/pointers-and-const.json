@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Consider the following code snippet:</p>",
       "preview": "Consider the following code snippet:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující ukázku kódu:</p>"
     },
     {
       "id": "pointers-and-const_b1",
@@ -22,21 +23,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x { 5 };\n    int* ptr { &x }; // ptr is a normal (non-const) pointer\n\n    int y { 6 };\n    ptr = &y; // we can point at another value\n\n    *ptr = 7; // we can change the value at the address being held\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 5 };\n    int* ptr { &amp;x }; // ptr is a normal (non-const) pointer\n\n    int y { 6 };\n    ptr = &amp;y; // we can point at another value\n\n    *ptr = 7; // we can change the value at the address being held\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 5 };\n    int* ptr { &x }; // ptr je normální (non-const) ukazatel\n\n    int y { 6 };\n    ptr = &y; // můžeme ukázat na jinou hodnotu\n\n    *ptr = 7; // můžeme změnit hodnotu na držené adrese\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b2",
       "type": "paragraph",
       "html": "<p>With normal (non-const) pointers, we can change both what the pointer is pointing at (by assigning the pointer a new address to hold) or change the value at the address being held (by assigning a new value to the dereferenced pointer).</p>",
       "preview": "With normal (non-const) pointers, we can change both what the pointer is pointin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U běžných (ne-const) ukazatelů můžeme měnit jak to, na co ukazatel ukazuje (přiřazením nové adresy ukazateli), tak i hodnotu na uložené adrese (přiřazením nové hodnoty dereferencovanému ukazateli).</p>"
     },
     {
       "id": "pointers-and-const_b3",
       "type": "paragraph",
       "html": "<p>However, what happens if the value we want to point at is const?</p>",
       "preview": "However, what happens if the value we want to point at is const?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se však stane, pokud je hodnota, na kterou chceme ukazovat, const?</p>"
     },
     {
       "id": "pointers-and-const_b4",
@@ -44,35 +48,41 @@
       "language": "cpp",
       "code": "int main()\n{\n    const int x { 5 }; // x is now const\n    int* ptr { &x };   // compile error: cannot convert from const int* to int*\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x { 5 }; // x is now const\n    int* ptr { &amp;x };   // compile error: cannot convert from const int* to int*\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x { 5 }; // x je nyní konst\n    int* ptr { &x };   // chyba kompilace: nelze převést z const int* na int*\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b5",
       "type": "paragraph",
       "html": "<p>The above snippet won’t compile -- we can’t set a normal pointer to point at a const variable. This makes sense: a const variable is one whose value cannot be changed. Allowing the programmer to set a non-const pointer to a const value would allow the programmer to dereference the pointer and change the value. That would violate the const-ness of the variable.</p>",
       "preview": "The above snippet won’t compile -- we can’t set a normal pointer to point at a c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený kód se nezkompiluje – běžný ukazatel nemůžeme nastavit tak, aby ukazoval na const proměnnou. To dává smysl: const proměnná je taková, jejíž hodnotu nelze měnit. Kdybychom programátorovi dovolili nastavit ne-const ukazatel na const hodnotu, mohl by ukazatel dereferencovat a hodnotu změnit. To by porušilo konstantnost (const-ness) dané proměnné.</p>"
     },
     {
       "id": "pointers-and-const_b6",
       "type": "section",
       "title": "Pointer to const value",
       "html": "<h3 class=\"cpp-section-heading\">Pointer to const value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ukazatel na const hodnotu</h3>",
+      "title_cs": "Ukazatel na konstantní hodnotu"
     },
     {
       "id": "pointers-and-const_b7",
       "type": "paragraph",
       "html": "<p>A <strong>pointer to a const value</strong> (sometimes called a <code>pointer to const</code> for short) is a (non-const) pointer that points to a constant value.</p>",
       "preview": "A pointer to a const value (sometimes called a pointer to const for short) is a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Ukazatel na const hodnotu</strong> (zkráceně někdy nazývaný <code>pointer to const</code>) je (nekonstantní) ukazatel, který ukazuje na konstantní hodnotu.</p>"
     },
     {
       "id": "pointers-and-const_b8",
       "type": "paragraph",
       "html": "<p>To declare a pointer to a const value, use the <code>const</code> keyword before the pointer’s data type:</p>",
       "preview": "To declare a pointer to a const value, use the const keyword before the pointer’",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li deklarovat ukazatel na const hodnotu, použijte klíčové slovo <code>const</code> před datovým typem ukazatele:</p>"
     },
     {
       "id": "pointers-and-const_b9",
@@ -80,21 +90,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // okay: ptr is pointing to a \"const int\"\n\n    *ptr = 6; // not allowed: we can't change a const value\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &amp;x }; // okay: ptr is pointing to a \"const int\"\n\n    *ptr = 6; // not allowed: we can't change a const value\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // dobře: ptr ukazuje na \"const int\"\n\n    *ptr = 6; // není povoleno: nemůžeme změnit hodnotu const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b10",
       "type": "paragraph",
       "html": "<p>In the above example, <code>ptr</code> points to a <code>const int</code>. Because the data type being pointed to is const, the value being pointed to can’t be changed.</p>",
       "preview": "In the above example, ptr points to a const int. Because the data type being poi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu ukazuje <code>ptr</code> na <code>const int</code>. Protože datový typ, na který se ukazuje, je const, hodnotu, na kterou se ukazuje, nelze změnit.</p>"
     },
     {
       "id": "pointers-and-const_b11",
       "type": "paragraph",
       "html": "<p>However, because a pointer to const is not const itself (it just points to a const value), we can change what the pointer is pointing at by assigning the pointer a new address:</p>",
       "preview": "However, because a pointer to const is not const itself (it just points to a con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože však ukazatel na const není sám o sobě konstantní (pouze ukazuje na konstantní hodnotu), můžeme změnit to, na co ukazatel ukazuje, přiřazením nové adresy:</p>"
     },
     {
       "id": "pointers-and-const_b12",
@@ -102,14 +115,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // ptr points to const int x\n\n    const int y{ 6 };\n    ptr = &y; // okay: ptr now points at const int y\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &amp;x }; // ptr points to const int x\n\n    const int y{ 6 };\n    ptr = &amp;y; // okay: ptr now points at const int y\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const int x{ 5 };\n    const int* ptr { &x }; // ptr ukazuje na const int x\n\n    const int y{ 6 };\n    ptr = &y; // dobře: ptr nyní ukazuje na const int y\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b13",
       "type": "paragraph",
       "html": "<p>Just like a reference to const, a pointer to const can point to non-const variables too. A pointer to const treats the value being pointed to as constant, regardless of whether the object at that address was initially defined as const or not:</p>",
       "preview": "Just like a reference to const, a pointer to const can point to non-const variab",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako reference na const může i ukazatel na const ukazovat na nekonstantní proměnné. Ukazatel na const zachází s odkazovanou hodnotou jako s konstantní bez ohledu na to, zda byl objekt na dané adrese původně definován jako const či nikoli:</p>"
     },
     {
       "id": "pointers-and-const_b14",
@@ -117,28 +132,33 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x{ 5 }; // non-const\n    const int* ptr { &x }; // ptr points to a \"const int\"\n\n    *ptr = 6;  // not allowed: ptr points to a \"const int\" so we can't change the value through ptr\n    x = 6; // allowed: the value is still non-const when accessed through non-const identifier x\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 }; // non-const\n    const int* ptr { &amp;x }; // ptr points to a \"const int\"\n\n    *ptr = 6;  // not allowed: ptr points to a \"const int\" so we can't change the value through ptr\n    x = 6; // allowed: the value is still non-const when accessed through non-const identifier x\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{5}; // non-konst\n    const int* ptr { &x }; // ptr ukazuje na \"const int\"\n\n    *ptr = 6;  // není povoleno: ptr ukazuje na \"const int\", takže nemůžeme změnit hodnotu prostřednictvím ptr\n    x = 6; // povoleno: hodnota je stále non-const při přístupu přes non-const identifikátor x\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b15",
       "type": "section",
       "title": "Const pointers",
       "html": "<h3 class=\"cpp-section-heading\">Const pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní ukazatele</h3>",
+      "title_cs": "Const ukazatele"
     },
     {
       "id": "pointers-and-const_b16",
       "type": "paragraph",
       "html": "<p>We can also make a pointer itself constant. A <strong>const pointer</strong> is a pointer whose address can not be changed after initialization.</p>",
       "preview": "We can also make a pointer itself constant. A const pointer is a pointer whose a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme také učinit konstantním samotný ukazatel. <strong>Konstantní ukazatel</strong> (const pointer) je ukazatel, jehož adresu nelze po inicializaci změnit.</p>"
     },
     {
       "id": "pointers-and-const_b17",
       "type": "paragraph",
       "html": "<p>To declare a const pointer, use the <code>const</code> keyword after the asterisk in the pointer declaration:</p>",
       "preview": "To declare a const pointer, use the const keyword after the asterisk in the poin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro deklaraci konstantního ukazatele použijte klíčové slovo <code>const</code> za hvězdičkou v deklaraci ukazatele:</p>"
     },
     {
       "id": "pointers-and-const_b18",
@@ -146,21 +166,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x{ 5 };\n    int* const ptr { &x }; // const after the asterisk means this is a const pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int* const ptr { &amp;x }; // const after the asterisk means this is a const pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{5};\n    int* const ptr { &x }; // const za hvězdičkou znamená, že se jedná o ukazatel const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b19",
       "type": "paragraph",
       "html": "<p>In the above case, <code>ptr</code> is a const pointer to a (non-const) int value.</p>",
       "preview": "In the above case, ptr is a const pointer to a (non-const) int value.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném případě je <code>ptr</code> konstantní ukazatel na (nekonstantní) hodnotu typu int.</p>"
     },
     {
       "id": "pointers-and-const_b20",
       "type": "paragraph",
       "html": "<p>Just like a normal const variable, a const pointer must be initialized upon definition, and this value can’t be changed via assignment:</p>",
       "preview": "Just like a normal const variable, a const pointer must be initialized upon defi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako běžná const proměnná musí být i konstantní ukazatel inicializován při definici a tuto hodnotu nelze změnit přiřazením:</p>"
     },
     {
       "id": "pointers-and-const_b21",
@@ -168,14 +191,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x{ 5 };\n    int y{ 6 };\n\n    int* const ptr { &x }; // okay: the const pointer is initialized to the address of x\n    ptr = &y; // error: once initialized, a const pointer can not be changed.\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int y{ 6 };\n\n    int* const ptr { &amp;x }; // okay: the const pointer is initialized to the address of x\n    ptr = &amp;y; // error: once initialized, a const pointer can not be changed.\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{5};\n    int y{6};\n\n    int* const ptr { &x }; // dobře: ukazatel const je inicializován na adresu x\n    ptr = &y; // chyba: po inicializaci nelze ukazatel const změnit.\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b22",
       "type": "paragraph",
       "html": "<p>However, because the <em>value</em> being pointed to is non-const, it is possible to change the value being pointed to via dereferencing the const pointer:</p>",
       "preview": "However, because the value being pointed to is non-const, it is possible to chan",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je však <em>hodnota</em>, na kterou se ukazuje, nekonstantní, je možné ji změnit dereferencováním tohoto konstantního ukazatele:</p>"
     },
     {
       "id": "pointers-and-const_b23",
@@ -183,21 +208,25 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x{ 5 };\n    int* const ptr { &x }; // ptr will always point to x\n\n    *ptr = 6; // okay: the value being pointed to is non-const\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n    int* const ptr { &amp;x }; // ptr will always point to x\n\n    *ptr = 6; // okay: the value being pointed to is non-const\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{5};\n    int* const ptr { &x }; // ptr bude vždy ukazovat na x\n\n    *ptr = 6; // dobře: hodnota, na kterou se ukazuje, je non-const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b24",
       "type": "section",
       "title": "Const pointer to a const value",
       "html": "<h3 class=\"cpp-section-heading\">Const pointer to a const value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní ukazatel na konstantní hodnotu</h3>",
+      "title_cs": "Const ukazatel na konstantní hodnotu"
     },
     {
       "id": "pointers-and-const_b25",
       "type": "paragraph",
       "html": "<p>Finally, it is possible to declare a <strong>const pointer to a const value</strong> by using the <code>const</code> keyword both before the type and after the asterisk:</p>",
       "preview": "Finally, it is possible to declare a const pointer to a const value by using the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A nakonec je možné deklarovat <strong>konstantní ukazatel na konstantní hodnotu</strong> použitím klíčového slova <code>const</code> jak před typem, tak za hvězdičkou:</p>"
     },
     {
       "id": "pointers-and-const_b26",
@@ -205,56 +234,65 @@
       "language": "cpp",
       "code": "int main()\n{\n    int value { 5 };\n    const int* const ptr { &value }; // a const pointer to a const value\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int value { 5 };\n    const int* const ptr { &amp;value }; // a const pointer to a const value\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int hodnota { 5 };\n    const int* const ptr { &value }; // ukazatel const na hodnotu const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-const_b27",
       "type": "paragraph",
       "html": "<p>A const pointer to a const value can not have its address changed, nor can the value it is pointing to be changed through the pointer. It can only be dereferenced to get the value it is pointing at.</p>",
       "preview": "A const pointer to a const value can not have its address changed, nor can the v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstantnímu ukazateli na konstantní hodnotu nelze změnit adresu, na kterou ukazuje, ani nelze skrze tento ukazatel změnit cílovou hodnotu. Lze jej pouze dereferencovat pro získání hodnoty, na kterou ukazuje.</p>"
     },
     {
       "id": "pointers-and-const_b28",
       "type": "section",
       "title": "Pointer and const recap",
       "html": "<h3 class=\"cpp-section-heading\">Pointer and const recap</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí: Ukazatele a const</h3>",
+      "title_cs": "Ukazatel a rekapitulace konst"
     },
     {
       "id": "pointers-and-const_b29",
       "type": "paragraph",
       "html": "<p>To summarize, you only need to remember 4 rules, and they are pretty logical:</p>",
       "preview": "To summarize, you only need to remember 4 rules, and they are pretty logical:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stručně řečeno si stačí pamatovat pouze 4 pravidla, která jsou zcela logická:</p>"
     },
     {
       "id": "pointers-and-const_b30",
       "type": "list",
       "html": "<ul><li>A non-const pointer (e.g. <code>int* ptr</code>) can be assigned another address to change what it is pointing at.</li><li>A const pointer (e.g. <code>int* const ptr</code>) always points to the same address, and this address can not be changed.</li></ul>",
       "preview": "A non-const pointer (e.g. int* ptr) can be assigned another address to change wh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Nekonstantnímu ukazateli (např. <code>int* ptr</code>) lze přiřadit jinou adresu, a změnit tak, na co ukazuje.</li><li>Konstantní ukazatel (např. <code>int* const ptr</code>) ukazuje vždy na stejnou adresu a tuto adresu nelze změnit.</li></ul>"
     },
     {
       "id": "pointers-and-const_b31",
       "type": "list",
       "html": "<ul><li>A pointer to a non-const value (e.g. <code>int* ptr</code>) can change the value it is pointing to. These can not point to a const value.</li><li>A pointer to a const value (e.g. <code>const int* ptr</code>) treats the value as const when accessed through the pointer, and thus can not change the value it is pointing to. These can be pointed to const or non-const l-values (but not r-values, which don’t have an address).</li></ul>",
       "preview": "A pointer to a non-const value (e.g. int* ptr) can change the value it is pointi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Ukazatel na nekonstantní hodnotu (např. <code>int* ptr</code>) může změnit hodnotu, na kterou ukazuje. Tyto ukazatele nemohou ukazovat na konstantní hodnotu.</li><li>Ukazatel na konstantní hodnotu (např. <code>const int* ptr</code>) přistupuje k dané hodnotě jako ke konstantní, a proto nemůže hodnotu, na kterou ukazuje, změnit. Tyto ukazatele mohou ukazovat na konstantní i nekonstantní l-hodnoty (nikoli však na r-hodnoty, které nemají adresu).</li></ul>"
     },
     {
       "id": "pointers-and-const_b32",
       "type": "paragraph",
       "html": "<p>Keeping the declaration syntax straight can be a bit challenging:</p>",
       "preview": "Keeping the declaration syntax straight can be a bit challenging:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Udržet si přehled v syntaxi deklarací může být trochu náročné:</p>"
     },
     {
       "id": "pointers-and-const_b33",
       "type": "list",
       "html": "<ul><li>A <code>const</code> before the asterisk (e.g. <code>const int* ptr</code>) is associated with the type being pointed to. Therefore, this is a pointer to a const value, and the value cannot be modified through the pointer.</li><li>A <code>const</code> after the asterisk (e.g. <code>int* const ptr</code>) is associated with the pointer itself. Therefore, this pointer cannot be assigned a new address.</li></ul>",
       "preview": "A const before the asterisk (e.g. const int* ptr) is associated with the type be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li><code>const</code> před hvězdičkou (např. <code>const int* ptr</code>) se vztahuje k typu, na který se ukazuje. Jedná se tedy o ukazatel na konstantní hodnotu a tuto hodnotu nelze prostřednictvím ukazatele měnit.</li><li><code>const</code> za hvězdičkou (např. <code>int* const ptr</code>) se vztahuje k samotnému ukazateli. Tomuto ukazateli proto nelze přiřadit novou adresu.</li></ul>"
     },
     {
       "id": "pointers-and-const_b34",
@@ -262,7 +300,9 @@
       "language": "cpp",
       "code": "int main()\n{\n    int v{ 5 };\n   \n    int* ptr0 { &v };             // points to an \"int\" but is not const itself.  We can modify the value or the address.\n    const int* ptr1 { &v };       // points to a \"const int\" but is not const itself.  We can only modify the address.\n    int* const ptr2 { &v };       // points to an \"int\" and is const itself.   We can only modify the value.\n    const int* const ptr3 { &v }; // points to a \"const int\" and is const itself.  We can't modify the value nor the address.\n\n    // if the const is on the left side of the *, the const belongs to the value\n    // if the const is on the right side of the *, the const belongs to the pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int v{ 5 };\n   \n    int* ptr0 { &amp;v };             // points to an \"int\" but is not const itself.  We can modify the value or the address.\n    const int* ptr1 { &amp;v };       // points to a \"const int\" but is not const itself.  We can only modify the address.\n    int* const ptr2 { &amp;v };       // points to an \"int\" and is const itself.   We can only modify the value.\n    const int* const ptr3 { &amp;v }; // points to a \"const int\" and is const itself.  We can't modify the value nor the address.\n\n    // if the const is on the left side of the *, the const belongs to the value\n    // if the const is on the right side of the *, the const belongs to the pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int v{ 5 };\n   \n    int* ptr0 { &v };             // ukazuje na \"int\", ale sám o sobě není const.  Můžeme upravit hodnotu nebo adresu.\n    const int* ptr1 { &v };       // ukazuje na \"const int\", ale není to const sám.  Můžeme pouze upravit adresu.\n    int* const ptr2 { &v };       // ukazuje na \"int\" a je sám o sobě const.   Hodnotu můžeme pouze upravit.\n    const int* const ptr3 { &v }; // ukazuje na \"const int\" a je sám o sobě const.  Nemůžeme změnit hodnotu ani adresu.\n\n    // pokud je const na levé straně *, const patří do hodnoty\n    // pokud je const na pravé straně *, patří const k ukazateli\n\n    návrat 0;\n}</code></pre>"
     }
-  ]
+  ],
+  "title_cs": "12.9 — Ukazatele a const"
 }

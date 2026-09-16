@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Once you start using move semantics more regularly, you’ll start to find cases where you want to invoke move semantics, but the objects you have to work with are l-values, not r-values. Consider the following swap function as an example:</p>",
       "preview": "Once you start using move semantics more regularly, you’ll start to find cases w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile začnete sémantiku přesunu používat pravidelněji, začnete narážet na případy, kdy ji budete chtít vyvolat, ale objekty, se kterými musíte pracovat, jsou l-hodnoty, nikoli r-hodnoty. Jako příklad si vezměme následující funkci swap:</p>"
     },
     {
       "id": "stdmove_b1",
@@ -22,63 +23,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\ntemplate <typename T>\nvoid mySwapCopy(T& a, T& b) \n{ \n\tT tmp { a }; // invokes copy constructor\n\ta = b; // invokes copy assignment\n\tb = tmp; // invokes copy assignment\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tmySwapCopy(x, y);\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\ntemplate &lt;typename T&gt;\nvoid mySwapCopy(T&amp; a, T&amp; b) \n{ \n\tT tmp { a }; // invokes copy constructor\n\ta = b; // invokes copy assignment\n\tb = tmp; // invokes copy assignment\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout &lt;&lt; \"x: \" &lt;&lt; x &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"y: \" &lt;&lt; y &lt;&lt; '\\n';\n\n\tmySwapCopy(x, y);\n\n\tstd::cout &lt;&lt; \"x: \" &lt;&lt; x &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"y: \" &lt;&lt; y &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nšablona <název typu T>\nvoid mySwapCopy (T& a, T& b) \n{ \n\tT tmp { a }; // vyvolá kopírovací konstruktor\n\ta = b; // vyvolá přiřazení kopírování\n\tb = tmp; // vyvolá přiřazení kopírování\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tmySwapCopy(x, y);\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdmove_b2",
       "type": "paragraph",
       "html": "<p>Passed in two objects of type T (in this case, std::string), this function swaps their values by making three copies. Consequently, this program prints:</p>",
       "preview": "Passed in two objects of type T (in this case, std::string), this function swaps",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato funkce, které jsou předány dva objekty typu T (v tomto případě std::string), prohodí jejich hodnoty vytvořením tří kopií. V důsledku toho program vypíše:</p>"
     },
     {
       "id": "stdmove_b3",
       "type": "output",
       "text": "x: abc\ny: de\nx: de\ny: abc\n",
       "html": "<pre>x: abc\ny: de\nx: de\ny: abc\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>x: abc\ny: de\nx: de\ny: abc\n</pre>"
     },
     {
       "id": "stdmove_b4",
       "type": "paragraph",
       "html": "<p>As we showed last lesson, making copies can be inefficient. And this version of swap makes 3 copies. That leads to a lot of excessive string creation and destruction, which is slow.</p>",
       "preview": "As we showed last lesson, making copies can be inefficient. And this version of ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak jsme si ukázali v minulé lekci, vytváření kopií může být neefektivní. A tato verze funkce swap vytváří 3 kopie. To vede ke spoustě zbytečného vytváření a rušení řetězců, což je pomalé.</p>"
     },
     {
       "id": "stdmove_b5",
       "type": "paragraph",
       "html": "<p>However, doing copies isn’t necessary here. All we’re really trying to do is swap the values of a and b, which can be accomplished just as well using 3 moves instead! So if we switch from copy semantics to move semantics, we can make our code more performant.</p>",
       "preview": "However, doing copies isn’t necessary here. All we’re really trying to do is swa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopírování zde však není nutné. Vše, o co se ve skutečnosti snažíme, je prohodit hodnoty a a b, čehož lze stejně dobře dosáhnout pomocí 3 přesunů! Pokud tedy přejdeme od sémantiky kopírování k sémantice přesunu, můžeme náš kód zefektivnit.</p>"
     },
     {
       "id": "stdmove_b6",
       "type": "paragraph",
       "html": "<p>But how? The problem here is that parameters a and b are l-value references, not r-value references, so we don’t have a way to invoke the move constructor and move assignment operator instead of copy constructor and copy assignment. By default, we get the copy constructor and copy assignment behaviors. What are we to do?</p>",
       "preview": "But how? The problem here is that parameters a and b are l-value references, not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale jak? Problém je v tom, že parametry a a b jsou l-value reference, nikoli r-value reference, takže nemáme způsob, jak vyvolat přesouvací konstruktor a přesouvací operátor přiřazení místo kopírovacího konstruktoru a kopírovacího přiřazení. Ve výchozím stavu se uplatní chování kopírovacího konstruktoru a kopírovacího přiřazení. Co s tím?</p>"
     },
     {
       "id": "stdmove_b7",
       "type": "section",
       "title": "std::move",
       "html": "<h3 class=\"cpp-section-heading\">std::move</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::move</h3>",
+      "title_cs": "std::přesunout"
     },
     {
       "id": "stdmove_b8",
       "type": "paragraph",
       "html": "<p>In C++11, std::move is a standard library function that casts (using static_cast) its argument into an r-value reference, so that move semantics can be invoked. Thus, we can use std::move to cast an l-value into a type that will prefer being moved over being copied. std::move is defined in the utility header.</p>",
       "preview": "In C++11, std::move is a standard library function that casts (using static_cast",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++11 je std::move funkce standardní knihovny, která přetypuje (pomocí static_cast) svůj argument na r-value referenci, aby bylo možné vyvolat sémantiku přesunu. Můžeme tedy použít std::move k přetypování l-hodnoty na typ, který bude preferovat přesun před kopírováním. std::move je definována v hlavičkovém souboru utility.</p>"
     },
     {
       "id": "stdmove_b9",
       "type": "paragraph",
       "html": "<p>Here’s the same program as above, but with a mySwapMove() function that uses std::move to convert our l-values into r-values so we can invoke move semantics:</p>",
       "preview": "Here’s the same program as above, but with a mySwapMove() function that uses std",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je stejný program jako výše, ale s funkcí mySwapMove(), která používá std::move k převodu našich l-hodnot na r-hodnoty, abychom mohli uplatnit sémantiku přesunu:</p>"
     },
     {
       "id": "stdmove_b10",
@@ -86,56 +97,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <utility> // for std::move\n\ntemplate <typename T>\nvoid mySwapMove(T& a, T& b) \n{ \n\tT tmp { std::move(a) }; // invokes move constructor\n\ta = std::move(b); // invokes move assignment\n\tb = std::move(tmp); // invokes move assignment\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tmySwapMove(x, y);\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;utility&gt; // for std::move\n\ntemplate &lt;typename T&gt;\nvoid mySwapMove(T&amp; a, T&amp; b) \n{ \n\tT tmp { std::move(a) }; // invokes move constructor\n\ta = std::move(b); // invokes move assignment\n\tb = std::move(tmp); // invokes move assignment\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout &lt;&lt; \"x: \" &lt;&lt; x &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"y: \" &lt;&lt; y &lt;&lt; '\\n';\n\n\tmySwapMove(x, y);\n\n\tstd::cout &lt;&lt; \"x: \" &lt;&lt; x &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"y: \" &lt;&lt; y &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <utility> // pro std::move\n\nšablona <název typu T>\nvoid mySwapMove(T& a, T& b) \n{ \n\tT tmp { std::move(a) }; // vyvolá konstruktor přesunu\n\ta = std::move(b); // vyvolá přiřazení přesunu\n\tb = std::move(tmp); // vyvolá přiřazení přesunu\n}\n\nint main()\n{\n\tstd::string x{ \"abc\" };\n\tstd::string y{ \"de\" };\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tmySwapMove(x, y);\n\n\tstd::cout << \"x: \" << x << '\\n';\n\tstd::cout << \"y: \" << y << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdmove_b11",
       "type": "paragraph",
       "html": "<p>This prints the same result as above:</p>",
       "preview": "This prints the same result as above:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše stejný výsledek jako výše:</p>"
     },
     {
       "id": "stdmove_b12",
       "type": "output",
       "text": "x: abc\ny: de\nx: de\ny: abc\n",
       "html": "<pre>x: abc\ny: de\nx: de\ny: abc\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>x: abc\ny: de\nx: de\ny: abc\n</pre>"
     },
     {
       "id": "stdmove_b13",
       "type": "paragraph",
       "html": "<p>But it’s much more efficient about it. When tmp is initialized, instead of making a copy of x, we use std::move to convert l-value variable x into an r-value. Since the parameter is an r-value, move semantics are invoked, and x is moved into tmp.</p>",
       "preview": "But it’s much more efficient about it. When tmp is initialized, instead of makin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dělá to však mnohem efektivněji. Když je tmp inicializována, místo vytvoření kopie x použijeme std::move k převodu l-hodnotové proměnné x na r-hodnotu. Jelikož je parametr r-hodnotou, uplatní se sémantika přesunu a x se přesune do tmp.</p>"
     },
     {
       "id": "stdmove_b14",
       "type": "paragraph",
       "html": "<p>With a couple of more swaps, the value of variable x has been moved to y, and the value of y has been moved to x.</p>",
       "preview": "With a couple of more swaps, the value of variable x has been moved to y, and th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pomocí několika dalších prohození byla hodnota proměnné x přesunuta do y a hodnota y byla přesunuta do x.</p>"
     },
     {
       "id": "stdmove_b15",
       "type": "section",
       "title": "Another example",
       "html": "<h3 class=\"cpp-section-heading\">Another example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další příklad</h3>",
+      "title_cs": "Další příklad"
     },
     {
       "id": "stdmove_b16",
       "type": "paragraph",
       "html": "<p>We can also use std::move when filling elements of a container, such as std::vector, with l-values.</p>",
       "preview": "We can also use std::move when filling elements of a container, such as std::vec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::move můžeme použít také při plnění prvků kontejneru, jako je std::vector, l-hodnotami.</p>"
     },
     {
       "id": "stdmove_b17",
       "type": "paragraph",
       "html": "<p>In the following program, we first add an element to a vector using copy semantics. Then we add an element to the vector using move semantics.</p>",
       "preview": "In the following program, we first add an element to a vector using copy semanti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V následujícím programu nejprve přidáme prvek do vektoru pomocí sémantiky kopírování. Poté do vektoru přidáme prvek pomocí sémantiky přesunu.</p>"
     },
     {
       "id": "stdmove_b18",
@@ -143,91 +163,105 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <utility> // for std::move\n#include <vector>\n\nint main()\n{\n\tstd::vector<std::string> v;\n\n\t// We use std::string because it is movable (std::string_view is not)\n\tstd::string str { \"Knock\" };\n\n\tstd::cout << \"Copying str\\n\";\n\tv.push_back(str); // calls l-value version of push_back, which copies str into the array element\n\t\n\tstd::cout << \"str: \" << str << '\\n';\n\tstd::cout << \"vector: \" << v[0] << '\\n';\n\n\tstd::cout << \"\\nMoving str\\n\";\n\n\tv.push_back(std::move(str)); // calls r-value version of push_back, which moves str into the array element\n\t\n\tstd::cout << \"str: \" << str << '\\n'; // The result of this is indeterminate\n\tstd::cout << \"vector:\" << v[0] << ' ' << v[1] << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;utility&gt; // for std::move\n#include &lt;vector&gt;\n\nint main()\n{\n\tstd::vector&lt;std::string&gt; v;\n\n\t// We use std::string because it is movable (std::string_view is not)\n\tstd::string str { \"Knock\" };\n\n\tstd::cout &lt;&lt; \"Copying str\\n\";\n\tv.push_back(str); // calls l-value version of push_back, which copies str into the array element\n\t\n\tstd::cout &lt;&lt; \"str: \" &lt;&lt; str &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"vector: \" &lt;&lt; v[0] &lt;&lt; '\\n';\n\n\tstd::cout &lt;&lt; \"\\nMoving str\\n\";\n\n\tv.push_back(std::move(str)); // calls r-value version of push_back, which moves str into the array element\n\t\n\tstd::cout &lt;&lt; \"str: \" &lt;&lt; str &lt;&lt; '\\n'; // The result of this is indeterminate\n\tstd::cout &lt;&lt; \"vector:\" &lt;&lt; v[0] &lt;&lt; ' ' &lt;&lt; v[1] &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <utility> // pro std::move\n#include <vektor>\n\nint main()\n{\n\tstd::vector<std::string> v;\n\n\t// Používáme std::string, protože je pohyblivý (std::string_view není)\n\tstd::string str { \"Zaklepat\" };\n\n\tstd::cout << \"Kopírování str\\n\";\n\tv.push_back(str); // zavolá l-value verzi push_back, která zkopíruje str do prvku pole\n\t\n\tstd::cout << \"str: \" << str << '\\n';\n\tstd::cout << \"vector: \" << v[0] << '\\n';\n\n\tstd::cout << \"\\nMoving str\\n\";\n\n\tv.push_back(std::move(str)); // zavolá r-value verzi push_back, která přesune str do prvku pole\n\t\n\tstd::cout << \"str: \" << str << '\\n'; // Výsledek je neurčitý\n\tstd::cout << \"vector:\" << v[0] << ' ' << v[1] << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdmove_b19",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this program prints:</p>",
       "preview": "On the author’s machine, this program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači tento program vypíše:</p>"
     },
     {
       "id": "stdmove_b20",
       "type": "output",
       "text": "Copying str\nstr: Knock\nvector: Knock\n\nMoving str\nstr:\nvector: Knock Knock\n",
       "html": "<pre>Copying str\nstr: Knock\nvector: Knock\n\nMoving str\nstr:\nvector: Knock Knock\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Copying str\nstr: Knock\nvector: Knock\n\nMoving str\nstr:\nvector: Knock Knock\n</pre>"
     },
     {
       "id": "stdmove_b21",
       "type": "paragraph",
       "html": "<p>In the first case, we passed push_back() an l-value, so it used copy semantics to add an element to the vector. For this reason, the value in str is left alone.</p>",
       "preview": "In the first case, we passed push_back() an l-value, so it used copy semantics t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V prvním případě jsme push_back() předali l-hodnotu, takže k přidání prvku do vektoru použil sémantiku kopírování. Z tohoto důvodu zůstala hodnota v str nedotčena.</p>"
     },
     {
       "id": "stdmove_b22",
       "type": "paragraph",
       "html": "<p>In the second case, we passed push_back() an r-value (actually an l-value converted via std::move), so it used move semantics to add an element to the vector. This is more efficient, as the vector element can steal the string’s value rather than having to copy it.</p>",
       "preview": "In the second case, we passed push_back() an r-value (actually an l-value conver",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve druhém případě jsme push_back() předali r-hodnotu (ve skutečnosti l-hodnotu převedenou pomocí std::move), takže k přidání prvku do vektoru použil sémantiku přesunu. To je efektivnější, protože prvek vektoru může hodnotu řetězce „ukrást“, místo aby ji musel kopírovat.</p>"
     },
     {
       "id": "stdmove_b23",
       "type": "section",
       "title": "Moved from objects will be in a valid, but possibly indeterminate state",
       "html": "<h3 class=\"cpp-section-heading\">Moved from objects will be in a valid, but possibly indeterminate state</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Objekty, ze kterých bylo přesunuto, budou v platném, ale možná neurčeném stavu</h3>",
+      "title_cs": "Přesunutý z objektů bude v platném, ale možná neurčitém stavu"
     },
     {
       "id": "stdmove_b24",
       "type": "paragraph",
       "html": "<p>When we move the value from a temporary object, it doesn’t matter what value the moved-from object is left with, because the temporary object will be destroyed immediately anyway. But what about lvalue objects that we’ve used std::move() on? Because we can continue to access these objects after their values have been moved (e.g. in the example above, we print the value of <code>str</code> after it has been moved), it is useful to know what value they are left with.</p>",
       "preview": "When we move the value from a temporary object, it doesn’t matter what value the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když přesouváme hodnotu z dočasného objektu, nezáleží na tom, jaká hodnota v objektu po přesunu zůstane, protože dočasný objekt bude stejně okamžitě zničen. Ale co l-hodnoty (lvalue objekty), na které jsme použili std::move()? Protože k těmto objektům můžeme přistupovat i po přesunutí jejich hodnot (např. ve výše uvedeném příkladu vypisujeme hodnotu <code>str</code> poté, co byla přesunuta), je užitečné vědět, jaká hodnota v nich zůstane.</p>"
     },
     {
       "id": "stdmove_b25",
       "type": "paragraph",
       "html": "<p>There are two schools of thought here. One school believes that objects that have been moved from should be reset back to some default / zero state, where the object does not own a resource any more. We see an example of this above, where <code>str</code> has been cleared to the empty string.</p>",
       "preview": "There are two schools of thought here. One school believes that objects that hav",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde existují dva myšlenkové proudy. Jeden směr zastává názor, že objekty, ze kterých bylo přesunuto, by měly být resetovány zpět do nějakého výchozího / nulového stavu, kdy objekt již nevlastní žádný prostředek (resource). Příklad toho vidíme výše, kde byl <code>str</code> vyčištěn na prázdný řetězec.</p>"
     },
     {
       "id": "stdmove_b26",
       "type": "paragraph",
       "html": "<p>The other school believes that we should do whatever is most convenient, and not constrain ourselves to having to clear the moved-from object if its not convenient to do so.</p>",
       "preview": "The other school believes that we should do whatever is most convenient, and not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhý směr se domnívá, že bychom měli udělat to, co je nejpraktičtější, a neomezovat se nutností vyčistit objekt po přesunu, pokud to není praktické.</p>"
     },
     {
       "id": "stdmove_b27",
       "type": "paragraph",
       "html": "<p>So what does the standard library do in this case? About this, the C++ standard says, “Unless otherwise specified, moved-from objects [of types defined in the C++ standard library] shall be placed in a valid but unspecified state.”</p>",
       "preview": "So what does the standard library do in this case? About this, the C++ standard ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co tedy v tomto případě dělá standardní knihovna? Standard C++ k tomu uvádí: „Není-li stanoveno jinak, přesunuté objekty [typů definovaných ve standardní knihovně C++] musí být uvedeny do platného, ale blíže neurčeného stavu.“</p>"
     },
     {
       "id": "stdmove_b28",
       "type": "paragraph",
       "html": "<p>In our example above, when the author printed the value of <code>str</code> after calling <code>std::move</code> on it, it printed an empty string. However, this is not required, and it could have printed any valid string, including an empty string, the original string, or any other valid string. Therefore, we should avoid using the value of a moved-from object, as the results will be implementation-specific.</p>",
       "preview": "In our example above, when the author printed the value of str after calling std",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V našem výše uvedeném příkladu, když autor vypsal hodnotu <code>str</code> po volání <code>std::move</code>, vypsal se prázdný řetězec. To se však striktně nevyžaduje a mohl se vypsat jakýkoli platný řetězec, včetně prázdného řetězce, původního řetězce nebo jakéhokoli jiného platného řetězce. Proto bychom se měli vyvarovat používání hodnoty přesunutého objektu (moved-from object), jelikož výsledky budou závislé na konkrétní implementaci.</p>"
     },
     {
       "id": "stdmove_b29",
       "type": "paragraph",
       "html": "<p>In some cases, we want to reuse an object whose value has been moved (rather than allocating a new object). For example, in the implementation of mySwapMove() above, we first move the resource out of <code>a</code>, and then we move another resource into <code>a</code>. This is fine because we never use the value of <code>a</code> between the time where we move it out and the time where we give <code>a</code> a new determinate value.</p>",
       "preview": "In some cases, we want to reuse an object whose value has been moved (rather tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V některých případech chceme znovu použít objekt, jehož hodnota byla přesunuta (namísto alokace nového objektu). Například ve výše uvedené implementaci mySwapMove() nejprve přesuneme prostředek z <code>a</code> a poté do <code>a</code> přesuneme jiný prostředek. To je zcela v pořádku, protože hodnotu <code>a</code> nikdy nepoužijeme mezi okamžikem, kdy z něj prostředek přesuneme, a okamžikem, kdy <code>a</code> získá novou jednoznačnou hodnotu.</p>"
     },
     {
       "id": "stdmove_b30",
       "type": "paragraph",
       "html": "<p>With a moved-from object, it is safe to call any function that does not depend on the current value of the object. This means we can set or reset the value of the moved-from object (using <code>operator=</code>, or any kind of <code>clear()</code> or <code>reset()</code> member function). We can also test the state of the moved-from object (e.g. using <code>empty()</code> to see if the object has a value). However, we should avoid functions like <code>operator[]</code> or <code>front()</code> (which returns the first element in a container), because these functions depend on the container having elements, and a moved-from container may or may not have elements.</p>",
       "preview": "With a moved-from object, it is safe to call any function that does not depend o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U přesunutého objektu (moved-from object) je bezpečné volat jakoukoli funkci, která nezávisí na jeho aktuální hodnotě. To znamená, že hodnotu přesunutého objektu můžeme nastavit nebo resetovat (pomocí <code>operator=</code> nebo jakékoliv členské funkce typu <code>clear()</code> či <code>reset()</code>). Můžeme také testovat stav přesunutého objektu (např. pomocí <code>empty()</code>, abychom zjistili, zda objekt obsahuje hodnotu). Měli bychom se však vyvarovat funkcí jako <code>operator[]</code> nebo <code>front()</code> (která vrací první prvek v kontejneru), protože tyto funkce předpokládají, že kontejner obsahuje prvky, přičemž přesunutý kontejner prvky mít může, ale nemusí.</p>"
     },
     {
       "id": "stdmove_b31",
@@ -235,28 +269,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p><code>std::move()</code> gives a hint to the compiler that the programmer doesn’t need the value of an object any more. Only use <code>std::move()</code> on persistent objects whose value you want to move, and do not make any assumptions about the value of the object beyond that point. It is okay to give a moved-from object a new value (e.g. using <code>operator=</code>) after the current value has been moved.</p></div>",
       "preview": "Key insightstd::move() gives a hint to the compiler that the programmer doesn’t need the value of an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p><code>std::move()</code> dává kompilátoru nápovědu, že programátor již hodnotu daného objektu nepotřebuje. <code>std::move()</code> používejte pouze na persistentní objekty, jejichž hodnotu chcete přesunout, a po tomto okamžiku již o hodnotě objektu nic nepředpokládejte. Je v pořádku přiřadit přesunutému objektu novou hodnotu (např. pomocí <code>operator=</code>) poté, co byla jeho původní hodnota přesunuta.</p></div>"
     },
     {
       "id": "stdmove_b32",
       "type": "section",
       "title": "Where else is std::move useful?",
       "html": "<h3 class=\"cpp-section-heading\">Where else is std::move useful?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kde jinde je std::move užitečné?</h3>",
+      "title_cs": "Kde jinde je std::move užitečné?"
     },
     {
       "id": "stdmove_b33",
       "type": "paragraph",
       "html": "<p>std::move can also be useful when sorting an array of elements. Many sorting algorithms (such as selection sort and bubble sort) work by swapping pairs of elements. In previous lessons, we’ve had to resort to copy-semantics to do the swapping. Now we can use move semantics, which is more efficient.</p>",
       "preview": "std::move can also be useful when sorting an array of elements. Many sorting alg",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::move může být užitečné také při řazení pole prvků. Mnoho řadicích algoritmů (například selection sort a bubble sort) funguje na principu prohazování dvojic prvků. V předchozích lekcích jsme se při prohazování museli uchýlit ke sémantice kopírování. Nyní můžeme použít sémantiku přesunu, což je efektivnější.</p>"
     },
     {
       "id": "stdmove_b34",
       "type": "paragraph",
       "html": "<p>It can also be useful if we want to move the contents managed by one smart pointer to another.</p>",
       "preview": "It can also be useful if we want to move the contents managed by one smart point",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Může se také hodit, pokud chceme přesunout obsah spravovaný jedním smart pointerem do jiného.</p>"
     },
     {
       "id": "stdmove_b35",
@@ -264,21 +303,26 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>There is a useful variant of <code>std::move()</code> called <code>std::move_if_noexcept()</code> that returns a movable r-value if the object has a <code>noexcept</code> move constructor, otherwise it returns a copyable l-value. We cover this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove_if_noexcept/\">27.10 -- std::move_if_noexcept</a>.</p></div>",
       "preview": "Related contentThere is a useful variant of std::move() called std::move_if_noexcept() that returns ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Existuje užitečná varianta <code>std::move()</code> nazvaná <code>std::move_if_noexcept()</code>, která vrací přesunutelnou r-hodnotu, pokud má objekt <code>noexcept</code> přesouvací konstruktor, v opačném případě vrací kopírovatelnou l-hodnotu. Tomu se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove_if_noexcept/\">27.10 -- std::move_if_noexcept</a>.</p></div>"
     },
     {
       "id": "stdmove_b36",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "stdmove_b37",
       "type": "paragraph",
       "html": "<p>std::move can be used whenever we want to treat an l-value like an r-value for the purpose of invoking move semantics instead of copy semantics.</p>",
       "preview": "std::move can be used whenever we want to treat an l-value like an r-value for t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::move lze použít kdykoli, kdy chceme s l-hodnotou zacházet jako s r-hodnotou za účelem vyvolání přesouvací sémantiky namísto sémantiky kopírování.</p>"
     }
-  ]
+  ],
+  "title_cs": "22.4 — std::move"
 }

@@ -14,49 +14,57 @@
       "type": "paragraph",
       "html": "<p>(h/t to reader Koe for providing the first draft of this lesson!)</p>",
       "preview": "(h/t to reader Koe for providing the first draft of this lesson!)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>(h/t čtenáři Koe za poskytnutí prvního konceptu této lekce!)</p>"
     },
     {
       "id": "stdmove_if_noexcept_b1",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove/\">22.4 -- std::move</a>, we covered <code>std::move</code>, which casts its lvalue argument to an rvalue so that we can invoke move semantics. And in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/exception-specifications-and-noexcept/\">27.9 -- Exception specifications and noexcept</a>, we covered the <code>noexcept</code> exception specifier and operator. This lesson builds on both concepts.</p>",
       "preview": "In lesson 22.4 -- std::move, we covered std::move, which casts its lvalue argume",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove/\">22.4 -- std::move</a> jsme probrali <code>std::move</code>, který převádí svůj argument lvalue na rvalue, abychom mohli vyvolat sémantiku pohybu. A v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/exception-specifications-and-noexcept/\">27.9 -- Specifikace výjimek a noexcept</a> jsme se zabývali specifikátorem a operátorem výjimky <code>noexcept</code>. Tato lekce staví na obou konceptech.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b2",
       "type": "paragraph",
       "html": "<p>We also covered the <code>strong exception guarantee</code>, which guarantees that if a function is interrupted by an exception, no memory will be leaked and the program state will not be changed. In particular, all constructors should uphold the strong exception guarantee, so that the rest of the program won’t be left in an altered state if construction of an object fails.</p>",
       "preview": "We also covered the strong exception guarantee, which guarantees that if a funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokryli jsme také <code>záruku silné výjimky</code>, která zaručuje, že pokud je funkce přerušena výjimkou, nedojde k úniku paměti a nezmění se stav programu. Zejména by všichni konstruktéři měli dodržovat silnou záruku výjimek, aby zbytek programu nezůstal ve změněném stavu, pokud selže konstrukce objektu.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b3",
       "type": "section",
       "title": "The move constructors exception problem",
       "html": "<h3 class=\"cpp-section-heading\">The move constructors exception problem</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problém výjimky konstruktorů přesunu</h3>",
+      "title_cs": "Problém výjimky konstruktorů přesunu"
     },
     {
       "id": "stdmove_if_noexcept_b4",
       "type": "paragraph",
       "html": "<p>Consider the case where we are copying some object, and the copy fails for some reason (e.g. the machine is out of memory). In such a case, the object being copied is not harmed in any way, because the source object doesn’t need to be modified to create a copy. We can discard the failed copy, and move on. The <code>strong exception guarantee</code> is upheld.</p>",
       "preview": "Consider the case where we are copying some object, and the copy fails for some ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vezměte si případ, kdy kopírujeme nějaký objekt a kopírování se z nějakého důvodu nezdaří (např. má počítač nedostatek paměti). V takovém případě není kopírovaný objekt nijak poškozen, protože zdrojový objekt není třeba upravovat, aby se vytvořila kopie. Můžeme zahodit neúspěšnou kopii a jít dál. <code>záruka silné výjimky</code> je dodržována.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b5",
       "type": "paragraph",
       "html": "<p>Now consider the case where we are instead moving an object. A move operation transfers ownership of a given resource from the source to the destination object. If the move operation is interrupted by an exception after the transfer of ownership occurs, then our source object will be left in a modified state. This isn’t a problem if the source object is a temporary object and going to be discarded after the move anyway -- but for non-temporary objects, we’ve now damaged the source object. To comply with the <code>strong exception guarantee</code>, we’d need to move the resource back to the source object, but if the move failed the first time, there’s no guarantee the move back will succeed either.</p>",
       "preview": "Now consider the case where we are instead moving an object. A move operation tr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní zvažte případ, kdy místo toho pohybujeme objektem. Operace přesunutí převádí vlastnictví daného zdroje ze zdroje na cílový objekt. Pokud je operace přesunu přerušena výjimkou poté, co dojde k převodu vlastnictví, bude náš zdrojový objekt ponechán v upraveném stavu. To není problém, pokud je zdrojový objekt dočasným objektem a bude po přesunu stejně vyřazen – ale u nedočasných objektů jsme nyní zdrojový objekt poškodili. Abychom vyhověli <code>záruce silné výjimky</code>, museli bychom přesunout zdroj zpět do zdrojového objektu, ale pokud se přesun napoprvé nezdařil, neexistuje žádná záruka, že přesun zpět bude úspěšný.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b6",
       "type": "paragraph",
       "html": "<p>How can we give move constructors the <code>strong exception guarantee</code>? It is simple enough to avoid throwing exceptions in the body of a move constructor, but a move constructor may invoke other constructors that are <code>potentially throwing</code>. Take for example the move constructor for <code>std::pair</code>, which must try to move each subobject in the source pair into the new pair object.</p>",
       "preview": "How can we give move constructors the strong exception guarantee? It is simple e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak můžeme poskytnout konstruktorům přesunu <code>záruku silné výjimky</code>? Je to dost jednoduché, aby se zabránilo vyvolání výjimek v těle konstruktoru pohybu, ale konstruktor pohybu může vyvolat jiné konstruktory, které <code>potenciálně hází</code>. Vezměme si například konstruktor přesunu pro <code>std::pair</code>, který se musí pokusit přesunout každý dílčí objekt ve zdrojovém páru do nového objektu páru.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b7",
@@ -64,14 +72,16 @@
       "language": "cpp",
       "code": "// Example move constructor definition for std::pair\n// Take in an 'old' pair, and then move construct the new pair's 'first' and 'second' subobjects from the 'old' ones\ntemplate <typename T1, typename T2>\npair<T1,T2>::pair(pair&& old)\n  : first(std::move(old.first)),\n    second(std::move(old.second))\n{}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Example move constructor definition for std::pair\n// Take in an 'old' pair, and then move construct the new pair's 'first' and 'second' subobjects from the 'old' ones\ntemplate &lt;typename T1, typename T2&gt;\npair&lt;T1,T2&gt;::pair(pair&amp;&amp; old)\n  : first(std::move(old.first)),\n    second(std::move(old.second))\n{}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Příklad definice konstruktoru přesunu pro std::pair\n// Vezměte „starý“ pár a poté přesuňte konstrukci „prvního“ a „druhého“ podobjektu nového páru ze „starých“\nšablona <název typu T1, název typu T2>\npár<T1,T2>::pár(pár&& starý)\n  : first(std::move(starý.first)),\n    second(std::move(starý.second))\n{}</code></pre>"
     },
     {
       "id": "stdmove_if_noexcept_b8",
       "type": "paragraph",
       "html": "<p>Now lets use two classes, <code>MoveClass</code> and <code>CopyClass</code>, which we will <code>pair</code> together to demonstrate the <code>strong exception guarantee</code> problem with move constructors:</p>",
       "preview": "Now lets use two classes, MoveClass and CopyClass, which we will pair together t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní použijeme dvě třídy, <code>MoveClass</code> a <code>CopyClass</code>, které společně <code>spárujeme</code>, abychom demonstrovali problém <code>silné záruky výjimek</code> s konstruktory přesunu:</p>"
     },
     {
       "id": "stdmove_if_noexcept_b9",
@@ -79,98 +89,113 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <utility> // For std::pair, std::make_pair, std::move, std::move_if_noexcept\n#include <stdexcept> // std::runtime_error\n\nclass MoveClass\n{\nprivate:\n  int* m_resource{};\n\npublic:\n  MoveClass() = default;\n\n  MoveClass(int resource)\n    : m_resource{ new int{ resource } }\n  {}\n\n  // Copy constructor\n  MoveClass(const MoveClass& that)\n  {\n    // deep copy\n    if (that.m_resource != nullptr)\n    {\n      m_resource = new int{ *that.m_resource };\n    }\n  }\n\n  // Move constructor\n  MoveClass(MoveClass&& that) noexcept\n    : m_resource{ that.m_resource }\n  {\n    that.m_resource = nullptr;\n  }\n\n  ~MoveClass()\n  {\n    std::cout << \"destroying \" << *this << '\\n';\n\n    delete m_resource;\n  }\n\n  friend std::ostream& operator<<(std::ostream& out, const MoveClass& moveClass)\n  {\n    out << \"MoveClass(\";\n\n    if (moveClass.m_resource == nullptr)\n    {\n      out << \"empty\";\n    }\n    else\n    {\n      out << *moveClass.m_resource;\n    }\n\n    out << ')';\n    \n    return out;\n  }\n};\n\n\nclass CopyClass\n{\npublic:\n  bool m_throw{};\n\n  CopyClass() = default;\n\n  // Copy constructor throws an exception when copying from\n  // a CopyClass object where its m_throw is 'true'\n  CopyClass(const CopyClass& that)\n    : m_throw{ that.m_throw }\n  {\n    if (m_throw)\n    {\n      throw std::runtime_error{ \"abort!\" };\n    }\n  }\n};\n\nint main()\n{\n  // We can make a std::pair without any problems:\n  std::pair my_pair{ MoveClass{ 13 }, CopyClass{} };\n\n  std::cout << \"my_pair.first: \" << my_pair.first << '\\n';\n\n  // But the problem arises when we try to move that pair into another pair.\n  try\n  {\n    my_pair.second.m_throw = true; // To trigger copy constructor exception\n\n    // The following line will throw an exception\n    std::pair moved_pair{ std::move(my_pair) }; // We'll comment out this line later\n    // std::pair moved_pair{ std::move_if_noexcept(my_pair) }; // We'll uncomment this later\n\n    std::cout << \"moved pair exists\\n\"; // Never prints\n  }\n  catch (const std::exception& ex)\n  {\n      std::cerr << \"Error found: \" << ex.what() << '\\n';\n  }\n\n  std::cout << \"my_pair.first: \" << my_pair.first << '\\n';\n\n  return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;utility&gt; // For std::pair, std::make_pair, std::move, std::move_if_noexcept\n#include &lt;stdexcept&gt; // std::runtime_error\n\nclass MoveClass\n{\nprivate:\n  int* m_resource{};\n\npublic:\n  MoveClass() = default;\n\n  MoveClass(int resource)\n    : m_resource{ new int{ resource } }\n  {}\n\n  // Copy constructor\n  MoveClass(const MoveClass&amp; that)\n  {\n    // deep copy\n    if (that.m_resource != nullptr)\n    {\n      m_resource = new int{ *that.m_resource };\n    }\n  }\n\n  // Move constructor\n  MoveClass(MoveClass&amp;&amp; that) noexcept\n    : m_resource{ that.m_resource }\n  {\n    that.m_resource = nullptr;\n  }\n\n  ~MoveClass()\n  {\n    std::cout &lt;&lt; \"destroying \" &lt;&lt; *this &lt;&lt; '\\n';\n\n    delete m_resource;\n  }\n\n  friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, const MoveClass&amp; moveClass)\n  {\n    out &lt;&lt; \"MoveClass(\";\n\n    if (moveClass.m_resource == nullptr)\n    {\n      out &lt;&lt; \"empty\";\n    }\n    else\n    {\n      out &lt;&lt; *moveClass.m_resource;\n    }\n\n    out &lt;&lt; ')';\n    \n    return out;\n  }\n};\n\n\nclass CopyClass\n{\npublic:\n  bool m_throw{};\n\n  CopyClass() = default;\n\n  // Copy constructor throws an exception when copying from\n  // a CopyClass object where its m_throw is 'true'\n  CopyClass(const CopyClass&amp; that)\n    : m_throw{ that.m_throw }\n  {\n    if (m_throw)\n    {\n      throw std::runtime_error{ \"abort!\" };\n    }\n  }\n};\n\nint main()\n{\n  // We can make a std::pair without any problems:\n  std::pair my_pair{ MoveClass{ 13 }, CopyClass{} };\n\n  std::cout &lt;&lt; \"my_pair.first: \" &lt;&lt; my_pair.first &lt;&lt; '\\n';\n\n  // But the problem arises when we try to move that pair into another pair.\n  try\n  {\n    my_pair.second.m_throw = true; // To trigger copy constructor exception\n\n    // The following line will throw an exception\n    std::pair moved_pair{ std::move(my_pair) }; // We'll comment out this line later\n    // std::pair moved_pair{ std::move_if_noexcept(my_pair) }; // We'll uncomment this later\n\n    std::cout &lt;&lt; \"moved pair exists\\n\"; // Never prints\n  }\n  catch (const std::exception&amp; ex)\n  {\n      std::cerr &lt;&lt; \"Error found: \" &lt;&lt; ex.what() &lt;&lt; '\\n';\n  }\n\n  std::cout &lt;&lt; \"my_pair.first: \" &lt;&lt; my_pair.first &lt;&lt; '\\n';\n\n  return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <utility> // Pro std::pair, std::make_pair, std::move, std::move_if_noexcept\n#include <stdexcept> // std::runtime_error\n\ntřídy MoveClass\n{\nsoukromé:\n  int* m_resource{};\n\nveřejnost:\n  MoveClass() = výchozí;\n\n  MoveClass (zdroj int)\n    : m_resource{ new int{ resource } }\n  {}\n\n  // Kopírovat konstruktor\n  MoveClass(const MoveClass& that)\n  {\n    // hluboká kopie\n    if (that.m_resource != nullptr)\n    {\n      m_zdroj = new int{ *ten.m_zdroj };\n    }\n  }\n\n  // Přesunout konstruktor\n  MoveClass(MoveClass&& that) noexcept\n    : m_resource{ that.m_resource }\n  {\n    that.m_resource = nullptr;\n  }\n\n  ~MoveClass()\n  {\n    std::cout << \"ničí \" << *toto << '\\n';\n\n    smazat m_resource;\n  }\n\n  přítel std::ostream& operátor<<(std::ostream& out, const MoveClass& moveClass)\n  {\n    out << \"MoveClass(\";\n\n    if (moveClass.m_resource == nullptr)\n    {\n      out << \"prázdný\";\n    }\n    jinak\n    {\n      out << *moveClass.m_resource;\n    }\n\n    out << ')';\n    \n    vrátit se ven;\n  }\n};\n\n\ntřída CopyClass\n{\nveřejnost:\n  bool m_throw{};\n\n  CopyClass() = výchozí;\n\n  // Kopírovací konstruktor vyvolá výjimku při kopírování z\n  // objekt CopyClass, kde jeho m_throw je 'true'\n  CopyClass(const CopyClass& that)\n    : m_throw{ that.m_throw }\n  {\n    if (m_throw)\n    {\n      throw std::runtime_error{ \"přerušit!\" };\n    }\n  }\n};\n\nint main()\n{\n  // Můžeme bez problémů vytvořit std::pair:\n  std::pair my_pair{ MoveClass{ 13 }, CopyClass{} };\n\n  std::cout << \"my_pair.first: \" << my_pair.first << '\\n';\n\n  // Problém ale nastává, když se pokusíme tento pár přesunout do jiného páru.\n  zkusit\n  {\n    my_pair.second.m_throw = true; // Spuštění výjimky konstruktoru kopírování\n\n    // Následující řádek vyvolá výjimku\n    std::pair move_pair{ std::move(my_pair) }; // Tento řádek okomentujeme později\n    // std::pair move_pair{ std::move_if_noexcept(my_pair) }; // Odkomentujeme to později\n\n    std::cout << \"přesunutý pár existuje\\n\"; // Nikdy se netiskne\n  }\n  catch (const std::exception& ex)\n  {\n      std::cerr << \"Chyba nalezena: \" << ex.what() << '\\n';\n  }\n\n  std::cout << \"my_pair.first: \" << my_pair.first << '\\n';\n\n  návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdmove_if_noexcept_b10",
       "type": "paragraph",
       "html": "<p>The above program prints:</p>",
       "preview": "The above program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený program vypíše:</p>"
     },
     {
       "id": "stdmove_if_noexcept_b11",
       "type": "output",
       "text": "destroying MoveClass(empty)\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\nError found: abort!\nmy_pair.first: MoveClass(empty)\ndestroying MoveClass(empty)\n",
       "html": "<pre>destroying MoveClass(empty)\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\nError found: abort!\nmy_pair.first: MoveClass(empty)\ndestroying MoveClass(empty)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>zničení MoveClass(prázdné)\nmy_pair.first: MoveClass(13)\nzničení MoveClass(13)\nNalezena chyba: přerušit!\nmy_pair.first: MoveClass(prázdné)\nzničení MoveClass (prázdné)\n</pre>"
     },
     {
       "id": "stdmove_if_noexcept_b12",
       "type": "paragraph",
       "html": "<p>Let’s explore what happened. The first printed line shows the temporary <code>MoveClass</code> object used to initialize <code>my_pair</code> gets destroyed as soon as the <code>my_pair</code> instantiation statement has been executed. It is <code>empty</code> since the <code>MoveClass</code> subobject in <code>my_pair</code> was move constructed from it, demonstrated by the next line which shows <code>my_pair.first</code> contains the <code>MoveClass</code> object with value <code>13</code>.</p>",
       "preview": "Let’s explore what happened. The first printed line shows the temporary MoveClas",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se, co se stalo. První vytištěný řádek ukazuje, že dočasný objekt <code>MoveClass</code> používaný k inicializaci <code>my_pair</code> bude zničen, jakmile bude proveden příkaz k vytvoření instance <code>my_pair</code>. Je <code>prázdný</code>, protože z něj byl vytvořen podobjekt <code>MoveClass</code> v <code>my_pair</code>, což demonstruje další řádek, který ukazuje <code>my_pair.first</code> obsahuje objekt <code>MoveClass</code> s hodnotou <code>13</code>.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b13",
       "type": "paragraph",
       "html": "<p>It gets interesting in the third line. We created <code>moved_pair</code> by copy constructing its <code>CopyClass</code> subobject (it doesn’t have a move constructor), but that copy construction threw an exception since we changed the Boolean flag. Construction of <code>moved_pair</code> was aborted by the exception, and its already-constructed members were destroyed. In this case, the <code>MoveClass</code> member was destroyed, printing <code>destroying MoveClass(13) variable</code>. Next we see the <code>Error found: abort!</code> message printed by <code>main()</code>.</p>",
       "preview": "It gets interesting in the third line. We created moved_pair by copy constructin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve třetím řádku to začíná být zajímavé. Vytvořili jsme <code>moved_pair</code> zkopírováním konstrukce jejího podobjektu <code>CopyClass</code> (nemá konstruktor přesunu), ale tato konstrukce kopie vyvolala výjimku, protože jsme změnili booleovský příznak. Konstrukce <code>moved_pair</code> byla výjimkou přerušena a její již vytvořené členy byly zničeny. V tomto případě byl člen <code>MoveClass</code> zničen a vytištěno <code>zničení proměnné MoveClass(13)</code>. Dále vidíme zprávu <code>Chyba nalezena: přerušit!</code> vytištěnou pomocí <code>main()</code>.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b14",
       "type": "paragraph",
       "html": "<p>When we try to print <code>my_pair.first</code> again, it shows the <code>MoveClass</code> member is empty. Since <code>moved_pair</code> was initialized with <code>std::move</code>, the <code>MoveClass</code> member (which has a move constructor) got move constructed and <code>my_pair.first</code> was nulled.</p>",
       "preview": "When we try to print my_pair.first again, it shows the MoveClass member is empty",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se pokusíme znovu vytisknout <code>my_pair.first</code>, ukáže se, že člen <code>MoveClass</code> je prázdný. Protože <code>moved_pair</code> byl inicializován pomocí <code>std::move</code>, člen <code>MoveClass</code> (který má konstruktor přesunu) byl zkonstruován a <code>my_pair.first</code> byl vynulován.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b15",
       "type": "paragraph",
       "html": "<p>Finally, <code>my_pair</code> was destroyed at the end of main().</p>",
       "preview": "Finally, my_pair was destroyed at the end of main().",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nakonec byl <code>my_pair</code> zničen na konci main().</p>"
     },
     {
       "id": "stdmove_if_noexcept_b16",
       "type": "paragraph",
       "html": "<p>To summarize the above results: the move constructor of <code>std::pair</code> used the throwing copy constructor of <code>CopyClass</code>. This copy constructor threw an exception, causing the creation of <code>moved_pair</code> to abort, and <code>my_pair.first</code> to be permanently damaged. The <code>strong exception guarantee</code> was not preserved.</p>",
       "preview": "To summarize the above results: the move constructor of std::pair used the throw",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom shrnuli výše uvedené výsledky: konstruktor přesunu <code>std::pair</code> použil konstruktor pro vytváření kopií z <code>CopyClass</code>. Tento konstruktor kopírování vyvolal výjimku, která způsobila přerušení vytváření <code>moved_pair</code> a trvalé poškození <code>my_pair.first</code>. <code>záruka silné výjimky</code> nebyla zachována.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b17",
       "type": "section",
       "title": "std::move_if_noexcept to the rescue",
       "html": "<h3 class=\"cpp-section-heading\">std::move_if_noexcept to the rescue</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::move_if_noexcept k záchraně</h3>",
+      "title_cs": "std::move_if_noexcept k záchraně"
     },
     {
       "id": "stdmove_if_noexcept_b18",
       "type": "paragraph",
       "html": "<p>Note that the above problem could have been avoided if <code>std::pair</code> had tried to do a copy instead of a move. In that case, <code>moved_pair</code> would have failed to construct, but <code>my_pair</code> would not have been altered.</p>",
       "preview": "Note that the above problem could have been avoided if std::pair had tried to do",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že výše uvedenému problému by se dalo předejít, pokud by se <code>std::pair</code> místo přesunu pokusil o zkopírování. V takovém případě by se nepodařilo vytvořit <code>moved_pair</code>, ale <code>my_pair</code> by se nezměnil.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b19",
       "type": "paragraph",
       "html": "<p>But copying instead of moving has a performance cost that we don’t want to pay for all objects -- ideally we want to do a move if we can do so safely, and a copy otherwise.</p>",
       "preview": "But copying instead of moving has a performance cost that we don’t want to pay f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopírování místo přesouvání má však náklady na výkon, které nechceme platit za všechny objekty – v ideálním případě chceme přesun provést, pokud to můžeme udělat bezpečně, a jinak zkopírovat.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b20",
       "type": "paragraph",
       "html": "<p>Fortunately, C++ has two mechanisms that, when used in combination, let us do exactly that. First, because <code>noexcept</code> functions are no-throw/no-fail, they implicitly meet the criteria for the <code>strong exception guarantee</code>. Thus, a <code>noexcept</code> move constructor is guaranteed to succeed.</p>",
       "preview": "Fortunately, C++ has two mechanisms that, when used in combination, let us do ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí má C++ dva mechanismy, které při kombinaci umožňují přesně to. Za prvé, protože funkce <code>noexcept</code> jsou no-throw/no-fail, implicitně splňují kritéria pro <code>záruku silné výjimky</code>. Konstruktor přesunu <code>noexcept</code> tedy zaručeně uspěje.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b21",
       "type": "paragraph",
       "html": "<p>Second, we can use the standard library function <code>std::move_if_noexcept()</code> to determine whether a move or a copy should be performed. <code>std::move_if_noexcept</code> is a counterpart to <code>std::move</code>, and is used in the same way.</p>",
       "preview": "Second, we can use the standard library function std::move_if_noexcept() to dete",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé můžeme použít standardní knihovní funkci <code>std::move_if_noexcept()</code> k určení, zda se má provést přesun nebo kopie. <code>std::move_if_noexcept</code> je protějšek <code>std::move</code> a používá se stejným způsobem.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b22",
       "type": "paragraph",
       "html": "<p>If the compiler can tell that an object passed as an argument to <code>std::move_if_noexcept</code> won’t throw an exception when it is move constructed (or if the object is move-only and has no copy constructor), then <code>std::move_if_noexcept</code> will perform identically to <code>std::move()</code> (and return the object converted to an r-value). Otherwise, <code>std::move_if_noexcept</code> will return a normal l-value reference to the object.</p>",
       "preview": "If the compiler can tell that an object passed as an argument to std::move_if_no",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud kompilátor dokáže říct, že objekt předaný jako argument do <code>std::move_if_noexcept</code> nevyvolá výjimku, když je zkonstruován přesunem (nebo pokud je objekt pouze pro přesun a nemá konstruktor kopírování), potom <code>std::move_if_noexcept</code> bude fungovat stejně jako <code>std</code> an converted to object. V opačném případě <code>std::move_if_noexcept</code> vrátí normální odkaz na objekt s hodnotou l.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b23",
@@ -178,14 +203,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p><code>std::move_if_noexcept</code> will return a movable r-value if the object has a noexcept move constructor, otherwise it will return a copyable l-value. We can use the <code>noexcept</code> specifier in conjunction with <code>std::move_if_noexcept</code> to use move semantics only when a strong exception guarantee exists (and use copy semantics otherwise).</p></div>",
       "preview": "Key insightstd::move_if_noexcept will return a movable r-value if the object has a noexcept move con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový přehled</p><p><code>std::move_if_noexcept</code> vrátí pohyblivou r-hodnotu, pokud má objekt konstruktor přesunu noexcept, jinak vrátí kopírovatelnou l-hodnotu. Můžeme použít specifikátor <code>noexcept</code> ve spojení s <code>std::move_if_noexcept</code> k použití sémantiky přesunu pouze v případě, že existuje záruka silné výjimky (a jinak použít sémantiku kopírování).</p></div>"
     },
     {
       "id": "stdmove_if_noexcept_b24",
       "type": "paragraph",
       "html": "<p>Let’s update the code in the previous example as follows:</p>",
       "preview": "Let’s update the code in the previous example as follows:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme aktualizovat kód v předchozím příkladu následovně:</p>"
     },
     {
       "id": "stdmove_if_noexcept_b25",
@@ -193,42 +220,48 @@
       "language": "cpp",
       "code": "//std::pair moved_pair{std::move(my_pair)}; // comment out this line now\nstd::pair moved_pair{std::move_if_noexcept(my_pair)}; // and uncomment this line",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">//std::pair moved_pair{std::move(my_pair)}; // comment out this line now\nstd::pair moved_pair{std::move_if_noexcept(my_pair)}; // and uncomment this line</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">//std::pair move_pair{std::move(my_pair)}; // zakomentujte tento řádek nyní\nstd::pair move_pair{std::move_if_noexcept(my_pair)}; // a odkomentujte tento řádek</code></pre>"
     },
     {
       "id": "stdmove_if_noexcept_b26",
       "type": "paragraph",
       "html": "<p>Running the program again prints:</p>",
       "preview": "Running the program again prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Opětovné spuštění programu vypíše:</p>"
     },
     {
       "id": "stdmove_if_noexcept_b27",
       "type": "output",
       "text": "destroying MoveClass(empty)\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\nError found: abort!\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\n",
       "html": "<pre>destroying MoveClass(empty)\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\nError found: abort!\nmy_pair.first: MoveClass(13)\ndestroying MoveClass(13)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>zničení MoveClass(prázdné)\nmy_pair.first: MoveClass(13)\nzničení MoveClass(13)\nNalezena chyba: přerušit!\nmy_pair.first: MoveClass(13)\nzničení MoveClass(13)\n</pre>"
     },
     {
       "id": "stdmove_if_noexcept_b28",
       "type": "paragraph",
       "html": "<p>As you can see, after the exception was thrown, the subobject <code>my_pair.first</code> still points to the value <code>13</code>.</p>",
       "preview": "As you can see, after the exception was thrown, the subobject my_pair.first stil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, po vyvolání výjimky podobjekt <code>my_pair.first</code> stále ukazuje na hodnotu <code>13</code>.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b29",
       "type": "paragraph",
       "html": "<p>The move constructor of <code>std::pair</code> isn’t <code>noexcept</code> (as of C++20), so <code>std::move_if_noexcept</code> returns <code>my_pair</code> as an l-value reference. This causes <code>moved_pair</code> to be created via the copy constructor (rather than the move constructor). The copy constructor can throw safely, because it doesn’t modify the source object.</p>",
       "preview": "The move constructor of std::pair isn’t noexcept (as of C++20), so std::move_if_",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstruktor přesunu <code>std::pair</code> není <code>noexcept</code> (od C++20), takže <code>std::move_if_noexcept</code> vrací <code>my_pair</code> jako odkaz na hodnotu l. To způsobí, že <code>moved_pair</code> se vytvoří pomocí konstruktoru kopírování (spíše než konstruktoru přesunu). Kopírovací konstruktor může házet bezpečně, protože nemění zdrojový objekt.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b30",
       "type": "paragraph",
       "html": "<p>The standard library uses <code>std::move_if_noexcept</code> often to optimize for functions that are <code>noexcept</code>. For example, <code>std::vector::resize</code> will use move semantics if the element type has a <code>noexcept</code> move constructor, and copy semantics otherwise. This means <code>std::vector</code> will generally operate faster with objects that have a <code>noexcept</code> move constructor.</p>",
       "preview": "The standard library uses std::move_if_noexcept often to optimize for functions ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Standardní knihovna často používá <code>std::move_if_noexcept</code> k optimalizaci pro funkce, které jsou <code>noexcept</code>. Například <code>std::vector::resize</code> použije sémantiku přesunu, pokud má typ prvku konstruktor přesunu <code>noexcept</code>, a jinak sémantiku zkopíruje. To znamená, že <code>std::vector</code> bude obecně pracovat rychleji s objekty, které mají konstruktor přesunu <code>noexcept</code>.</p>"
     },
     {
       "id": "stdmove_if_noexcept_b31",
@@ -236,7 +269,9 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>If a type has both potentially throwing move semantics and deleted copy semantics (the copy constructor and copy assignment operator are unavailable), then <code>std::move_if_noexcept</code> will waive the strong guarantee and invoke move semantics. This conditional waiving of the strong guarantee is ubiquitous in the standard library container classes, since they use std::move_if_noexcept often.</p></div>",
       "preview": "WarningIf a type has both potentially throwing move semantics and deleted copy semantics (the copy c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Upozornění</p><p>Pokud má typ potenciálně vyvolávající sémantiku přesunu i sémantiku smazaného kopírování (konstruktor kopírování a operátor přiřazení kopírování nejsou k dispozici), pak <code>std::move_if_nowaexcept incode> zaručí silné přesunutí a semantic incode> Toto podmíněné zřeknutí se silné záruky je všudypřítomné ve standardních třídách kontejnerů knihoven, protože často používají std::move_if_noexcept.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "27.10 — std::move_if_noexcept"
 }

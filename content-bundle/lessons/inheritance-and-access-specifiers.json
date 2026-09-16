@@ -14,21 +14,24 @@
       "type": "paragraph",
       "html": "<p>In the previous lessons in this chapter, you’ve learned a bit about how base inheritance works. In all of our examples so far, we’ve used public inheritance. That is, our derived class publicly inherits the base class.</p>",
       "preview": "In the previous lessons in this chapter, you’ve learned a bit about how base inh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích této kapitoly jste se dozvěděli něco o tom, jak funguje dědičnost. Ve všech našich dosavadních příkladech jsme používali veřejnou dědičnost (public inheritance). To znamená, že naše odvozená třída veřejně dědí ze základní třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll take a closer look at public inheritance, as well as the two other kinds of inheritance (private and protected). We’ll also explore how the different kinds of inheritance interact with access specifiers to allow or restrict access to members.</p>",
       "preview": "In this lesson, we’ll take a closer look at public inheritance, as well as the t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci se blíže podíváme na veřejnou dědičnost a také na další dva druhy dědičnosti (private a protected). Prozkoumáme také, jak různé druhy dědičnosti interagují se specifikátory přístupu za účelem povolení nebo omezení přístupu ke členům.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b2",
       "type": "paragraph",
       "html": "<p>To this point, you’ve seen the private and public access specifiers, which determine who can access the members of a class. As a quick refresher, public members can be accessed by anybody. Private members can only be accessed by member functions of the same class or friends. This means derived classes can not access private members of the base class directly!</p>",
       "preview": "To this point, you’ve seen the private and public access specifiers, which deter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Až do této chvíle jste viděli specifikátory přístupu private a public, které určují, kdo může přistupovat ke členům třídy. Pro rychlé zopakování: k veřejným členům (public) může přistupovat kdokoli. K privátním členům (private) mohou přistupovat pouze členské funkce stejné třídy nebo friends. To znamená, že odvozené třídy nemohou přistupovat k privátním členům základní třídy přímo!</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b3",
@@ -36,35 +39,41 @@
       "language": "cpp",
       "code": "class Base\n{\nprivate:\n    int m_private {}; // can only be accessed by Base members and friends (not derived classes)\npublic:\n    int m_public {}; // can be accessed by anybody\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nprivate:\n    int m_private {}; // can only be accessed by Base members and friends (not derived classes)\npublic:\n    int m_public {}; // can be accessed by anybody\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nsoukromé:\n    int m_private {}; // mohou mít přístup pouze členové a přátelé Base (ne odvozené třídy)\nveřejnost:\n    int m_public {}; // může mít přístup kdokoli\n};</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b4",
       "type": "paragraph",
       "html": "<p>This is pretty straightforward, and you should be quite used to it by now.</p>",
       "preview": "This is pretty straightforward, and you should be quite used to it by now.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je celkem přímočaré a v tuto chvíli byste na to již měli být zvyklí.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b5",
       "type": "section",
       "title": "The protected access specifier",
       "html": "<h3 class=\"cpp-section-heading\">The protected access specifier</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specifikátor přístupu protected</h3>",
+      "title_cs": "Specifikátor chráněného přístupu"
     },
     {
       "id": "inheritance-and-access-specifiers_b6",
       "type": "paragraph",
       "html": "<p>When dealing with inherited classes, things get a bit more complex.</p>",
       "preview": "When dealing with inherited classes, things get a bit more complex.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při práci s děděnými třídami se věci poněkud komplikují.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b7",
       "type": "paragraph",
       "html": "<p>C++ has a third access specifier that we have yet to talk about because it’s only useful in an inheritance context. The <strong>protected</strong> access specifier allows the class the member belongs to, friends, and derived classes to access the member. However, protected members are not accessible from outside the class.</p>",
       "preview": "C++ has a third access specifier that we have yet to talk about because it’s onl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ má třetí specifikátor přístupu, o kterém jsme zatím nemluvili, protože je užitečný pouze v kontextu dědičnosti. Specifikátor přístupu <strong>protected</strong> umožňuje přístup ke členu třídě, které člen patří, spřáteleným funkcím a třídám (friends) a odvozeným třídám. Členové chránění specifikátorem protected však nejsou přístupní z vnějšku třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b8",
@@ -72,49 +81,57 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    int m_public {}; // can be accessed by anybody\nprotected:\n    int m_protected {}; // can be accessed by Base members, friends, and derived classes\nprivate:\n    int m_private {}; // can only be accessed by Base members and friends (but not derived classes)\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived()\n    {\n        m_public = 1; // allowed: can access public base members from derived class\n        m_protected = 2; // allowed: can access protected base members from derived class\n        m_private = 3; // not allowed: can not access private base members from derived class\n    }\n};\n\nint main()\n{\n    Base base;\n    base.m_public = 1; // allowed: can access public members from outside class\n    base.m_protected = 2; // not allowed: can not access protected members from outside class\n    base.m_private = 3; // not allowed: can not access private members from outside class\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    int m_public {}; // can be accessed by anybody\nprotected:\n    int m_protected {}; // can be accessed by Base members, friends, and derived classes\nprivate:\n    int m_private {}; // can only be accessed by Base members and friends (but not derived classes)\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived()\n    {\n        m_public = 1; // allowed: can access public base members from derived class\n        m_protected = 2; // allowed: can access protected base members from derived class\n        m_private = 3; // not allowed: can not access private base members from derived class\n    }\n};\n\nint main()\n{\n    Base base;\n    base.m_public = 1; // allowed: can access public members from outside class\n    base.m_protected = 2; // not allowed: can not access protected members from outside class\n    base.m_private = 3; // not allowed: can not access private members from outside class\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    int m_public {}; // může mít přístup kdokoli\nchráněno:\n    int m_protected {}; // mohou být přístupní členům Base, přátelům a odvozeným třídám\nsoukromé:\n    int m_private {}; // mohou mít přístup pouze členové a přátelé Base (ale ne odvozené třídy)\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno()\n    {\n        m_public = 1; // povoleno: má přístup k veřejným členům báze z odvozené třídy\n        m_chráněno = 2; // povoleno: může přistupovat k chráněným základním členům z odvozené třídy\n        m_private = 3; // není povoleno: nemá přístup k soukromým základním členům z odvozené třídy\n    }\n};\n\nint main()\n{\n    Základní základna;\n    base.m_public = 1; // povoleno: má přístup k veřejným členům z vnější třídy\n    base.m_protected = 2; // není povoleno: nemůže přistupovat k chráněným členům z vnější třídy\n    base.m_private = 3; // není povoleno: nemá přístup k soukromým členům mimo třídu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b9",
       "type": "paragraph",
       "html": "<p>In the above example, you can see that the protected base member m_protected is directly accessible by the derived class, but not by the public.</p>",
       "preview": "In the above example, you can see that the protected base member m_protected is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu můžete vidět, že protected člen základní třídy m_protected je přímo přístupný pro odvozenou třídu, nikoli však pro veřejnost (zvenčí).</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b10",
       "type": "section",
       "title": "So when should I use the protected access specifier?",
       "html": "<h3 class=\"cpp-section-heading\">So when should I use the protected access specifier?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy tedy použít specifikátor přístupu protected?</h3>",
+      "title_cs": "Kdy bych tedy měl použít specifikátor chráněného přístupu?"
     },
     {
       "id": "inheritance-and-access-specifiers_b11",
       "type": "paragraph",
       "html": "<p>With a protected attribute in a base class, derived classes can access that member directly. This means that if you later change anything about that protected attribute (the type, what the value means, etc…), you’ll probably need to change both the base class AND all of the derived classes.</p>",
       "preview": "With a protected attribute in a base class, derived classes can access that memb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S protected atributem v bázové třídě mohou odvozené třídy k tomuto členu přistupovat přímo. To znamená, že pokud na tomto protected atributu později cokoliv změníte (typ, význam hodnoty atd.), pravděpodobně budete muset změnit jak bázovou třídu, TAK všechny odvozené třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b12",
       "type": "paragraph",
       "html": "<p>Therefore, using the protected access specifier is most useful when you (or your team) are going to be the ones deriving from your own classes, and the number of derived classes is reasonable. That way, if you make a change to the implementation of the base class, and updates to the derived classes are necessary as a result, you can make the updates yourself (and have it not take forever, since the number of derived classes is limited).</p>",
       "preview": "Therefore, using the protected access specifier is most useful when you (or your",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití specifikátoru přístupu protected je proto nejužitečnější tehdy, když vy (nebo váš tým) budete ti, kdo z vašich vlastních tříd dědí, a počet odvozených tříd je přiměřený. Tímto způsobem, pokud provedete změnu v implementaci bázové třídy a v důsledku toho budou nutné úpravy odvozených tříd, můžete tyto úpravy provést sami (a nebude to trvat věčně, protože počet odvozených tříd je omezený).</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b13",
       "type": "paragraph",
       "html": "<p>Making your members private means the public and derived classes can’t directly make changes to the base class. This is good for insulating the public or derived classes from implementation changes, and for ensuring invariants are maintained properly. However, it also means your class may need a larger public (or protected) interface to support all of the functions that the public or derived classes need for operation, which has its own cost to build, test, and maintain.</p>",
       "preview": "Making your members private means the public and derived classes can’t directly ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nastavení členů jako private znamená, že okolní kód ani odvozené třídy nemohou v bázové třídě přímo provádět změny. To je dobré pro izolaci veřejného kódu i odvozených tříd od změn v implementaci a pro zajištění správného dodržování invariantů. Znamená to však také, že vaše třída může potřebovat rozsáhlejší public (nebo protected) rozhraní, aby podporovala všechny funkce, které okolní kód nebo odvozené třídy potřebují ke svému fungování, což s sebou nese vlastní náklady na vytvoření, testování a údržbu.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b14",
       "type": "paragraph",
       "html": "<p>In general, it’s better to make your members private if you can, and only use protected when derived classes are planned and the cost to build and maintain an interface to those private members is too high.</p>",
       "preview": "In general, it’s better to make your members private if you can, and only use pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obecně je lepší nastavit členy jako private, pokud můžete, a protected používat pouze tehdy, když se plánují odvozené třídy a náklady na vytvoření a údržbu rozhraní k těmto private členům jsou příliš vysoké.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b15",
@@ -122,28 +139,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Favor private members over protected members.</p></div>",
       "preview": "Best practiceFavor private members over protected members.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost private členům před protected členy.</p></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b16",
       "type": "section",
       "title": "Different kinds of inheritance, and their impact on access",
       "html": "<h3 class=\"cpp-section-heading\">Different kinds of inheritance, and their impact on access</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Různé druhy dědičnosti a jejich vliv na přístup</h3>",
+      "title_cs": "Různé druhy dědičnosti a jejich dopad na přístup"
     },
     {
       "id": "inheritance-and-access-specifiers_b17",
       "type": "paragraph",
       "html": "<p>First, there are three different ways for classes to inherit from other classes: public, protected, and private.</p>",
       "preview": "First, there are three different ways for classes to inherit from other classes:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Předně existují tři různé způsoby, jak mohou třídy dědit z jiných tříd: public, protected a private.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b18",
       "type": "paragraph",
       "html": "<p>To do so, simply specify which type of access you want when choosing the class to inherit from:</p>",
       "preview": "To do so, simply specify which type of access you want when choosing the class t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li tak učinit, jednoduše specifikujte požadovaný typ přístupu při výběru třídy, ze které chcete dědit:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b19",
@@ -151,77 +173,89 @@
       "language": "cpp",
       "code": "// Inherit from Base publicly\nclass Pub: public Base\n{\n};\n\n// Inherit from Base protectedly\nclass Pro: protected Base\n{\n};\n\n// Inherit from Base privately\nclass Pri: private Base\n{\n};\n\nclass Def: Base // Defaults to private inheritance\n{\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Inherit from Base publicly\nclass Pub: public Base\n{\n};\n\n// Inherit from Base protectedly\nclass Pro: protected Base\n{\n};\n\n// Inherit from Base privately\nclass Pri: private Base\n{\n};\n\nclass Def: Base // Defaults to private inheritance\n{\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Veřejně dědit ze základny\ntřída Hospoda: veřejná Základna\n{\n};\n\n// Chráněně dědit z Base\ntřída Pro: chráněná základna\n{\n};\n\n// Zdědit z Base soukromě\ntřída Pri: soukromá Základna\n{\n};\n\nclass Def: Base // Výchozí nastavení pro soukromou dědičnost\n{\n};</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b20",
       "type": "paragraph",
       "html": "<p>If you do not choose an inheritance type, C++ defaults to private inheritance (just like members default to private access if you do not specify otherwise).</p>",
       "preview": "If you do not choose an inheritance type, C++ defaults to private inheritance (j",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud typ dědičnosti nezvolíte, C++ jako výchozí použije privátní dědičnost (stejně jako jsou členové standardně privátní, pokud nespecifikujete jinak).</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b21",
       "type": "paragraph",
       "html": "<p>That gives us 9 combinations: 3 member access specifiers (public, private, and protected), and 3 inheritance types (public, private, and protected).</p>",
       "preview": "That gives us 9 combinations: 3 member access specifiers (public, private, and p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nám dává 9 kombinací: 3 specifikátory přístupu ke členům (public, private a protected) a 3 typy dědičnosti (public, private a protected).</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b22",
       "type": "paragraph",
       "html": "<p>So what’s the difference between these? In a nutshell, when members are inherited, the access specifier for an inherited member may be changed (in the derived class only) depending on the type of inheritance used. Put another way, members that were public or protected in the base class may change access specifiers in the derived class.</p>",
       "preview": "So what’s the difference between these? In a nutshell, when members are inherite",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jaký je tedy mezi nimi rozdíl? Stručně řečeno, při dědění členů se může specifikátor přístupu ke zděděnému členu změnit (pouze v odvozené třídě) v závislosti na použitém typu dědičnosti. Jinak řečeno, členové, kteří byli v bázové třídě public nebo protected, mohou v odvozené třídě změnit svůj specifikátor přístupu.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b23",
       "type": "paragraph",
       "html": "<p>This might seem a little confusing, but it’s not that bad. We’ll spend the rest of this lesson exploring this in detail.</p>",
       "preview": "This might seem a little confusing, but it’s not that bad. We’ll spend the rest ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Může to působit trochu matoucí, ale není to tak zlé. Po zbytek této lekce se tomu budeme věnovat podrobně.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b24",
       "type": "paragraph",
       "html": "<p>Keep in mind the following rules as we step through the examples:</p>",
       "preview": "Keep in mind the following rules as we step through the examples:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při procházení příkladů mějte na paměti následující pravidla:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b25",
       "type": "list",
       "html": "<ul><li>A class can always access its own (non-inherited) members.</li><li>The public accesses the members of a class based on the access specifiers of the class it is accessing.</li><li>A derived class accesses inherited members based on the access specifier inherited from the parent class. This varies depending on the access specifier and type of inheritance used.</li></ul>",
       "preview": "A class can always access its own (non-inherited) members.The public accesses th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Třída má vždy přístup ke svým vlastním (nezděděným) členům.</li><li>Vnější kód přistupuje ke členům třídy na základě specifikátorů přístupu třídy, ke které přistupuje.</li><li>Odvozená třída přistupuje ke zděděným členům na základě specifikátoru přístupu zděděného z rodičovské třídy. To se liší v závislosti na specifikátoru přístupu a použitém typu dědičnosti.</li></ul>"
     },
     {
       "id": "inheritance-and-access-specifiers_b26",
       "type": "section",
       "title": "Public inheritance",
       "html": "<h3 class=\"cpp-section-heading\">Public inheritance</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Veřejná dědičnost (public inheritance)</h3>",
+      "title_cs": "Veřejné dědictví"
     },
     {
       "id": "inheritance-and-access-specifiers_b27",
       "type": "paragraph",
       "html": "<p>Public inheritance is by far the most commonly used type of inheritance. In fact, very rarely will you see or use the other types of inheritance, so your primary focus should be on understanding this section. Fortunately, public inheritance is also the easiest to understand. When you inherit a base class publicly, inherited public members stay public, and inherited protected members stay protected. Inherited private members, which were inaccessible because they were private in the base class, stay inaccessible.</p>",
       "preview": "Public inheritance is by far the most commonly used type of inheritance. In fact",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Veřejná dědičnost (public inheritance) je zdaleka nejpoužívanějším typem dědičnosti. Ve skutečnosti ostatní typy dědičnosti uvidíte nebo použijete jen velmi zřídka, takže vaše hlavní pozornost by se měla soustředit na pochopení této části. Veřejná dědičnost je naštěstí také nejsnadněji pochopitelná. Když dědíte ze základní třídy veřejně, zděděné veřejné (public) členy zůstávají veřejné a zděděné chráněné (protected) členy zůstávají chráněné. Zděděné privátní (private) členy, které byly nepřístupné, protože byly privátní v základní třídě, zůstávají nepřístupné.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b28",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Access specifier in base class</th><th>Access specifier when inherited publicly</th></tr><tr><td>Public</td><td>Public</td></tr><tr><td>Protected</td><td>Protected</td></tr><tr><td>Private</td><td>Inaccessible</td></tr></tbody></table></div>",
       "preview": "Access specifier in base classAccess specifier when inherited publiclyPublicPubl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Specifikátor přístupu v základní třídě</th><th>Specifikátor přístupu při veřejné dědičnosti</th></tr><tr><td>Public</td><td>Public</td></tr><tr><td>Protected</td><td>Protected</td></tr><tr><td>Private</td><td>Nepřístupný</td></tr></tbody></table></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b29",
       "type": "paragraph",
       "html": "<p>Here’s an example showing how things work:</p>",
       "preview": "Here’s an example showing how things work:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad ukazující, jak to funguje:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b30",
@@ -229,21 +263,24 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    int m_public {};\nprotected:\n    int m_protected {};\nprivate:\n    int m_private {};\n};\n\nclass Pub: public Base // note: public inheritance\n{\n    // Public inheritance means:\n    // Public inherited members stay public (so m_public is treated as public)\n    // Protected inherited members stay protected (so m_protected is treated as protected)\n    // Private inherited members stay inaccessible (so m_private is inaccessible)\npublic:\n    Pub()\n    {\n        m_public = 1; // okay: m_public was inherited as public\n        m_protected = 2; // okay: m_protected was inherited as protected\n        m_private = 3; // not okay: m_private is inaccessible from derived class\n    }\n};\n\nint main()\n{\n    // Outside access uses the access specifiers of the class being accessed.\n    Base base;\n    base.m_public = 1; // okay: m_public is public in Base\n    base.m_protected = 2; // not okay: m_protected is protected in Base\n    base.m_private = 3; // not okay: m_private is private in Base\n\n    Pub pub;\n    pub.m_public = 1; // okay: m_public is public in Pub\n    pub.m_protected = 2; // not okay: m_protected is protected in Pub\n    pub.m_private = 3; // not okay: m_private is inaccessible in Pub\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    int m_public {};\nprotected:\n    int m_protected {};\nprivate:\n    int m_private {};\n};\n\nclass Pub: public Base // note: public inheritance\n{\n    // Public inheritance means:\n    // Public inherited members stay public (so m_public is treated as public)\n    // Protected inherited members stay protected (so m_protected is treated as protected)\n    // Private inherited members stay inaccessible (so m_private is inaccessible)\npublic:\n    Pub()\n    {\n        m_public = 1; // okay: m_public was inherited as public\n        m_protected = 2; // okay: m_protected was inherited as protected\n        m_private = 3; // not okay: m_private is inaccessible from derived class\n    }\n};\n\nint main()\n{\n    // Outside access uses the access specifiers of the class being accessed.\n    Base base;\n    base.m_public = 1; // okay: m_public is public in Base\n    base.m_protected = 2; // not okay: m_protected is protected in Base\n    base.m_private = 3; // not okay: m_private is private in Base\n\n    Pub pub;\n    pub.m_public = 1; // okay: m_public is public in Pub\n    pub.m_protected = 2; // not okay: m_protected is protected in Pub\n    pub.m_private = 3; // not okay: m_private is inaccessible in Pub\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    int m_public {};\nchráněno:\n    int m_protected {};\nsoukromé:\n    int m_private {};\n};\n\nclass Pub: public Base // poznámka: veřejné dědictví\n{\n    // Veřejné dědictví znamená:\n    // Veřejní zdědění členové zůstávají veřejní (takže m_public je považováno za veřejné)\n    // Chráněné zděděné členy zůstávají chráněny (takže m_protected je považováno za chráněné)\n    // Soukromí zdědění členové zůstávají nepřístupní (takže m_private je nepřístupný)\nveřejnost:\n    hospoda()\n    {\n        m_public = 1; // dobře: m_public bylo zděděno jako veřejné\n        m_chráněno = 2; // v pořádku: m_protected bylo zděděno jako chráněné\n        m_private = 3; // není v pořádku: m_private je nepřístupné z odvozené třídy\n    }\n};\n\nint main()\n{\n    // Vnější přístup používá specifikátory přístupu třídy, ke které se přistupuje.\n    Základní základna;\n    base.m_public = 1; // dobře: m_public je v Base veřejné\n    base.m_protected = 2; // není v pořádku: m_protected je chráněn v Base\n    base.m_private = 3; // není v pořádku: m_private je v Base soukromé\n\n    Hospoda hospoda;\n    pub.m_public = 1; // v pořádku: m_public je veřejný v Pub\n    pub.m_protected = 2; // není v pořádku: m_protected je chráněn v Pub\n    pub.m_private = 3; // není v pořádku: m_private je v Pubu nedostupné\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b31",
       "type": "paragraph",
       "html": "<p>This is the same as the example above where we introduced the protected access specifier, except that we’ve instantiated the derived class as well, just to show that with public inheritance, things work identically in the base and derived class.</p>",
       "preview": "This is the same as the example above where we introduced the protected access s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad je stejný jako výše uvedený, kde jsme představili specifikátor přístupu protected, s tím rozdílem, že jsme navíc vytvořili instanci odvozené třídy, abychom ukázali, že při veřejné dědičnosti fungují věci v základní i odvozené třídě identicky.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b32",
       "type": "paragraph",
       "html": "<p>Public inheritance is what you should be using unless you have a specific reason not to.</p>",
       "preview": "Public inheritance is what you should be using unless you have a specific reason",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Veřejná dědičnost je to, co byste měli používat, pokud nemáte konkrétní důvod postupovat jinak.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b33",
@@ -251,56 +288,66 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use public inheritance unless you have a specific reason to do otherwise.</p></div>",
       "preview": "Best practiceUse public inheritance unless you have a specific reason to do otherwise.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Používejte veřejnou dědičnost, pokud nemáte konkrétní důvod postupovat jinak.</p></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b34",
       "type": "section",
       "title": "Protected inheritance",
       "html": "<h3 class=\"cpp-section-heading\">Protected inheritance</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Chráněná dědičnost (Protected inheritance)</h3>",
+      "title_cs": "Chráněné dědictví"
     },
     {
       "id": "inheritance-and-access-specifiers_b35",
       "type": "paragraph",
       "html": "<p>Protected inheritance is the least common method of inheritance. It is almost never used, except in very particular cases. With protected inheritance, the public and protected members become protected, and private members stay inaccessible.</p>",
       "preview": "Protected inheritance is the least common method of inheritance. It is almost ne",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chráněná dědičnost je nejméně běžný způsob dědičnosti. Téměř nikdy se nepoužívá, s výjimkou velmi specifických případů. Při chráněné dědičnosti se veřejné i chráněné členy stávají chráněnými (protected) a privátní členy zůstávají nepřístupné.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b36",
       "type": "paragraph",
       "html": "<p>Because this form of inheritance is so rare, we’ll skip the example and just summarize with a table:</p>",
       "preview": "Because this form of inheritance is so rare, we’ll skip the example and just sum",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k tomu, že tato forma dědičnosti je tak vzácná, přeskočíme příklad a shrneme jej do tabulky:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b37",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Access specifier in base class</th><th>Access specifier when inherited protectedly</th></tr><tr><td>Public</td><td>Protected</td></tr><tr><td>Protected</td><td>Protected</td></tr><tr><td>Private</td><td>Inaccessible</td></tr></tbody></table></div>",
       "preview": "Access specifier in base classAccess specifier when inherited protectedlyPublicP",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Specifikátor přístupu v základní třídě</th><th>Specifikátor přístupu při zdědění protectedly</th></tr><tr><td>Veřejné</td><td>Chráněno</td></tr><tr><td>Chráněno</td><td>Chráněno</td></tr><tr><td>Soukromé</td><td>Nepřístupné</td></tr></tbody></table></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b38",
       "type": "section",
       "title": "Private inheritance",
       "html": "<h3 class=\"cpp-section-heading\">Private inheritance</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Soukromá dědičnost</h3>",
+      "title_cs": "Soukromé dědictví"
     },
     {
       "id": "inheritance-and-access-specifiers_b39",
       "type": "paragraph",
       "html": "<p>With private inheritance, all members from the base class are inherited as private. This means private members are inaccessible, and protected and public members become private.</p>",
       "preview": "With private inheritance, all members from the base class are inherited as priva",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při soukromém dědění se všichni členové ze základní třídy dědí jako soukromí. To znamená, že soukromí členové jsou nepřístupní a chránění a veřejní členové se stanou soukromými.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b40",
       "type": "paragraph",
       "html": "<p>Note that this does not affect the way that the derived class accesses members inherited from its parent! It only affects the code trying to access those members through the derived class.</p>",
       "preview": "Note that this does not affect the way that the derived class accesses members i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že to neovlivňuje způsob, jakým odvozená třída přistupuje k členům zděděným od svého rodiče! Ovlivňuje pouze kód, který se pokouší o přístup k těmto členům prostřednictvím odvozené třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b41",
@@ -308,42 +355,49 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n    int m_public {};\nprotected:\n    int m_protected {};\nprivate:\n    int m_private {};\n};\n\nclass Pri: private Base // note: private inheritance\n{\n    // Private inheritance means:\n    // Public inherited members become private (so m_public is treated as private)\n    // Protected inherited members become private (so m_protected is treated as private)\n    // Private inherited members stay inaccessible (so m_private is inaccessible)\npublic:\n    Pri()\n    {\n        m_public = 1; // okay: m_public is now private in Pri\n        m_protected = 2; // okay: m_protected is now private in Pri\n        m_private = 3; // not okay: derived classes can't access private members in the base class\n    }\n};\n\nint main()\n{\n    // Outside access uses the access specifiers of the class being accessed.\n    // In this case, the access specifiers of base.\n    Base base;\n    base.m_public = 1; // okay: m_public is public in Base\n    base.m_protected = 2; // not okay: m_protected is protected in Base\n    base.m_private = 3; // not okay: m_private is private in Base\n\n    Pri pri;\n    pri.m_public = 1; // not okay: m_public is now private in Pri\n    pri.m_protected = 2; // not okay: m_protected is now private in Pri\n    pri.m_private = 3; // not okay: m_private is inaccessible in Pri\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n    int m_public {};\nprotected:\n    int m_protected {};\nprivate:\n    int m_private {};\n};\n\nclass Pri: private Base // note: private inheritance\n{\n    // Private inheritance means:\n    // Public inherited members become private (so m_public is treated as private)\n    // Protected inherited members become private (so m_protected is treated as private)\n    // Private inherited members stay inaccessible (so m_private is inaccessible)\npublic:\n    Pri()\n    {\n        m_public = 1; // okay: m_public is now private in Pri\n        m_protected = 2; // okay: m_protected is now private in Pri\n        m_private = 3; // not okay: derived classes can't access private members in the base class\n    }\n};\n\nint main()\n{\n    // Outside access uses the access specifiers of the class being accessed.\n    // In this case, the access specifiers of base.\n    Base base;\n    base.m_public = 1; // okay: m_public is public in Base\n    base.m_protected = 2; // not okay: m_protected is protected in Base\n    base.m_private = 3; // not okay: m_private is private in Base\n\n    Pri pri;\n    pri.m_public = 1; // not okay: m_public is now private in Pri\n    pri.m_protected = 2; // not okay: m_protected is now private in Pri\n    pri.m_private = 3; // not okay: m_private is inaccessible in Pri\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n    int m_public {};\nchráněno:\n    int m_protected {};\nsoukromé:\n    int m_private {};\n};\n\nclass Pri: private Base // poznámka: soukromé dědictví\n{\n    // Soukromé dědictví znamená:\n    // Veřejní zdědění členové se stanou soukromými (takže m_public je považováno za soukromé)\n    // Chráněné zděděné členy se stanou soukromými (takže m_protected je považováno za soukromé)\n    // Soukromí zdědění členové zůstávají nepřístupní (takže m_private je nepřístupný)\nveřejnost:\n    Pri()\n    {\n        m_public = 1; // dobře: m_public je nyní v Pri\n        m_chráněno = 2; // dobře: m_protected je nyní soukromý v Pri\n        m_private = 3; // není v pořádku: odvozené třídy nemají přístup k soukromým členům v základní třídě\n    }\n};\n\nint main()\n{\n    // Vnější přístup používá specifikátory přístupu třídy, ke které se přistupuje.\n    // V tomto případě se jedná o specifikátory přístupu base.\n    Základní základna;\n    base.m_public = 1; // dobře: m_public je v Base veřejné\n    base.m_protected = 2; // není v pořádku: m_protected je chráněn v Base\n    base.m_private = 3; // není v pořádku: m_private je v Base soukromé\n\n    Při při;\n    pri.m_public = 1; // není v pořádku: m_public je nyní v Pri\n    pri.m_protected = 2; // není v pořádku: m_protected je nyní soukromý v Pri\n    pri.m_private = 3; // není v pořádku: m_private je v Pri nepřístupné\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b42",
       "type": "paragraph",
       "html": "<p>To summarize in table form:</p>",
       "preview": "To summarize in table form:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Shrnutí ve formě tabulky:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b43",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Access specifier in base class</th><th>Access specifier when inherited privately</th></tr><tr><td>Public</td><td>Private</td></tr><tr><td>Protected</td><td>Private</td></tr><tr><td>Private</td><td>Inaccessible</td></tr></tbody></table></div>",
       "preview": "Access specifier in base classAccess specifier when inherited privatelyPublicPri",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Specifikátor přístupu v základní třídě</th><th>Specifikátor přístupu při zdědění privately</th></tr><tr><td>Veřejné</td><td>Soukromé</td></tr><tr><td>Chráněno</td><td>Soukromé</td></tr><tr><td>Soukromé</td><td>Nepřístupné</td></tr></tbody></table></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b44",
       "type": "paragraph",
       "html": "<p>Private inheritance can be useful when the derived class has no obvious relationship to the base class, but uses the base class for implementation internally. In such a case, we probably don’t want the public interface of the base class to be exposed through objects of the derived class (as it would be if we inherited publicly).</p>",
       "preview": "Private inheritance can be useful when the derived class has no obvious relation",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Soukromá dědičnost může být užitečná, když odvozená třída nemá zjevný vztah k základní třídě, ale používá základní třídu pro interní implementaci. V takovém případě pravděpodobně nechceme, aby bylo veřejné rozhraní základní třídy vystaveno prostřednictvím objektů odvozené třídy (jak by tomu bylo, kdybychom dědili veřejně).</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b45",
       "type": "paragraph",
       "html": "<p>In practice, private inheritance is rarely used.</p>",
       "preview": "In practice, private inheritance is rarely used.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V praxi se soukromé dědictví používá zřídka.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b46",
       "type": "section",
       "title": "A final example",
       "html": "<h3 class=\"cpp-section-heading\">A final example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Poslední příklad</h3>",
+      "title_cs": "Poslední příklad"
     },
     {
       "id": "inheritance-and-access-specifiers_b47",
@@ -351,14 +405,16 @@
       "language": "cpp",
       "code": "class Base\n{\npublic:\n\tint m_public {};\nprotected:\n\tint m_protected {};\nprivate:\n\tint m_private {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\npublic:\n\tint m_public {};\nprotected:\n\tint m_protected {};\nprivate:\n\tint m_private {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Base\n{\nveřejnost:\n\tint m_public {};\nchráněno:\n\tint m_protected {};\nsoukromé:\n\tint m_private {};\n};</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b48",
       "type": "paragraph",
       "html": "<p>Base can access its own members without restriction. The public can only access m_public. Derived classes can access m_public and m_protected.</p>",
       "preview": "Base can access its own members without restriction. The public can only access ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Base má přístup ke svým vlastním členům bez omezení. Veřejnost má přístup pouze k m_public. Odvozené třídy mají přístup k m_public a m_protected.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b49",
@@ -366,14 +422,16 @@
       "language": "cpp",
       "code": "class D2 : private Base // note: private inheritance\n{\n\t// Private inheritance means:\n\t// Public inherited members become private\n\t// Protected inherited members become private\n\t// Private inherited members stay inaccessible\npublic:\n\tint m_public2 {};\nprotected:\n\tint m_protected2 {};\nprivate:\n\tint m_private2 {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class D2 : private Base // note: private inheritance\n{\n\t// Private inheritance means:\n\t// Public inherited members become private\n\t// Protected inherited members become private\n\t// Private inherited members stay inaccessible\npublic:\n\tint m_public2 {};\nprotected:\n\tint m_protected2 {};\nprivate:\n\tint m_private2 {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída D2 : soukromý základ // poznámka: soukromé dědictví\n{\n\t// Soukromé dědictví znamená:\n\t// Veřejní zdědění členové se stanou soukromými\n\t// Chráněné zděděné členy se stanou soukromými\n\t// Soukromí zdědění členové zůstanou nepřístupní\nveřejnost:\n\tint m_public2 {};\nchráněno:\n\tint m_protected2 {};\nsoukromé:\n\tint m_private2 {};\n};</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b50",
       "type": "paragraph",
       "html": "<p>D2 can access its own members without restriction. D2 can access Base’s m_public and m_protected members, but not m_private. Because D2 inherited Base privately, m_public and m_protected are now considered private when accessed through D2. This means the public can not access these variables when using a D2 object, nor can any classes derived from D2.</p>",
       "preview": "D2 can access its own members without restriction. D2 can access Base’s m_public",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>D2 má přístup ke svým vlastním členům bez omezení. D2 má přístup k m_public a m_protected členům Base, ale ne k m_private. Protože D2 zdědil Base soukromě, m_public a m_protected jsou nyní považovány za soukromé při přístupu přes D2. To znamená, že veřejnost nemůže přistupovat k těmto proměnným při použití objektu D2 ani žádné třídy odvozené z D2.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b51",
@@ -381,63 +439,74 @@
       "language": "cpp",
       "code": "class D3 : public D2\n{\n\t// Public inheritance means:\n\t// Public inherited members stay public\n\t// Protected inherited members stay protected\n\t// Private inherited members stay inaccessible\npublic:\n\tint m_public3 {};\nprotected:\n\tint m_protected3 {};\nprivate:\n\tint m_private3 {};\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class D3 : public D2\n{\n\t// Public inheritance means:\n\t// Public inherited members stay public\n\t// Protected inherited members stay protected\n\t// Private inherited members stay inaccessible\npublic:\n\tint m_public3 {};\nprotected:\n\tint m_protected3 {};\nprivate:\n\tint m_private3 {};\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">třída D3 : veřejná D2\n{\n\t// Veřejné dědictví znamená:\n\t// Veřejní zdědění členové zůstanou veřejní\n\t// Chráněné zděděné členy zůstanou chráněny\n\t// Soukromí zdědění členové zůstanou nepřístupní\nveřejnost:\n\tint m_public3 {};\nchráněno:\n\tint m_protected3 {};\nsoukromé:\n\tint m_private3 {};\n};</code></pre>"
     },
     {
       "id": "inheritance-and-access-specifiers_b52",
       "type": "paragraph",
       "html": "<p>D3 can access its own members without restriction. D3 can access D2’s m_public2 and m_protected2 members, but not m_private2. Because D3 inherited D2 publicly, m_public2 and m_protected2 keep their access specifiers when accessed through D3. D3 has no access to Base’s m_private, which was already private in Base. Nor does it have access to Base’s m_protected or m_public, both of which became private when D2 inherited them.</p>",
       "preview": "D3 can access its own members without restriction. D3 can access D2’s m_public2 ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>D3 má přístup ke svým vlastním členům bez omezení. D3 má přístup k členům m_public2 a m_protected2 D2, ale ne k m_private2. Protože D3 zdědil D2 veřejně, m_public2 a m_protected2 si při přístupu přes D3 ponechají své specifikátory přístupu. D3 nemá přístup k základně m_private, která již byla soukromá na Základně. Nemá ani přístup k m_protected nebo m_public Base, které se oba staly soukromými, když je zdědil D2.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b53",
       "type": "section",
       "title": "Summary",
       "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí</h3>",
+      "title_cs": "Shrnutí"
     },
     {
       "id": "inheritance-and-access-specifiers_b54",
       "type": "paragraph",
       "html": "<p>The way that the access specifiers, inheritance types, and derived classes interact causes a lot of confusion. To try and clarify things as much as possible:</p>",
       "preview": "The way that the access specifiers, inheritance types, and derived classes inter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Způsob interakce specifikátorů přístupu, typů dědičnosti a odvozených tříd způsobuje mnoho zmatků. Abychom se pokusili věci co nejvíce objasnit:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b55",
       "type": "paragraph",
       "html": "<p>First, a class (and friends) can always access its own non-inherited members. The access specifiers only affect whether outsiders and derived classes can access those members.</p>",
       "preview": "First, a class (and friends) can always access its own non-inherited members. Th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za prvé, třída (a přátelé) mají vždy přístup ke svým nezděděným členům. Specifikátory přístupu ovlivňují pouze to, zda mají k těmto členům přístup cizí a odvozené třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b56",
       "type": "paragraph",
       "html": "<p>Second, when derived classes inherit members, those members may change access specifiers in the derived class. This does not affect the derived classes’ own (non-inherited) members (which have their own access specifiers). It only affects whether outsiders and classes derived from the derived class can access those inherited members.</p>",
       "preview": "Second, when derived classes inherit members, those members may change access sp",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, když odvozené třídy zdědí členy, mohou tito členové změnit specifikátory přístupu v odvozené třídě. To nemá vliv na vlastní (nezděděné) členy odvozených tříd (které mají své vlastní specifikátory přístupu). Ovlivňuje pouze to, zda mají k těmto zděděným členům přístup cizí osoby a třídy odvozené z odvozené třídy.</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b57",
       "type": "paragraph",
       "html": "<p>Here’s a table of all of the access specifier and inheritance types combinations:</p>",
       "preview": "Here’s a table of all of the access specifier and inheritance types combinations",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tady je tabulka všech kombinací specifikátoru přístupu a typů dědičnosti:</p>"
     },
     {
       "id": "inheritance-and-access-specifiers_b58",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Access specifier in base class</th><th>Access specifier when inherited publicly</th><th>Access specifier when inherited privately</th><th>Access specifier when inherited protectedly</th></tr><tr><td>Public</td><td>Public</td><td>Private</td><td>Protected</td></tr><tr><td>Protected</td><td>Protected</td><td>Private</td><td>Protected</td></tr><tr><td>Private</td><td>Inaccessible</td><td>Inaccessible</td><td>Inaccessible</td></tr></tbody></table></div>",
       "preview": "Access specifier in base classAccess specifier when inherited publiclyAccess spe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><th>Specifikátor přístupu v základní třídě</th><th>Specifikátor přístupu při veřejném dědění</th><th>Specifikátor přístupu při soukromém dědění</th><th>Specifikátor přístupu při dědění protectedly</th></tr><tr><td>Veřejné</td><td>Veřejné</td><td>Soukromé</td><td>Chráněno</td></tr><tr><td>Chráněno</td><td>Chráněno</td><td>Pri vate</td><td>Chráněno</td></tr><tr><td>Soukromé</td><td>Nepřístupné</td><td>Nepřístupné</td><td>Nepřístupné</td></tr></tbody></table></div>"
     },
     {
       "id": "inheritance-and-access-specifiers_b59",
       "type": "paragraph",
       "html": "<p>As a final note, although in the examples above, we’ve only shown examples using member variables, these access rules hold true for all members (e.g. member functions and types declared inside the class).</p>",
       "preview": "As a final note, although in the examples above, we’ve only shown examples using",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako poslední poznámka, ačkoli jsme ve výše uvedených příkladech ukázali pouze příklady využívající členské proměnné, tato pravidla přístupu platí pro všechny členy (např. členské funkce a typy deklarované uvnitř třídy).</p>"
     }
-  ]
+  ],
+  "title_cs": "24.5 — Dědičnost a specifikátory přístupu"
 }

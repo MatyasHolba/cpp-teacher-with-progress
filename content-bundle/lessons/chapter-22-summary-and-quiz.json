@@ -14,182 +14,208 @@
       "type": "paragraph",
       "html": "<p>A smart pointer class is a composition class that is designed to manage dynamically allocated memory, and ensure that memory gets deleted when the smart pointer object goes out of scope.</p>",
       "preview": "A smart pointer class is a composition class that is designed to manage dynamica",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Třída chytrého ukazatele (smart pointer) je kompoziční třída navržená ke správě dynamicky alokované paměti a k zajištění, že se tato paměť uvolní, jakmile objekt chytrého ukazatele opustí svůj rozsah platnosti (scope).</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b1",
       "type": "paragraph",
       "html": "<p>Copy semantics allow our classes to be copied. This is done primarily via the copy constructor and copy assignment operator.</p>",
       "preview": "Copy semantics allow our classes to be copied. This is done primarily via the co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Sémantika kopírování (copy semantics) umožňuje kopírování našich tříd. Děje se tak především prostřednictvím kopírovacího konstruktoru a operátoru přiřazení kopií (copy assignment operator).</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b2",
       "type": "paragraph",
       "html": "<p>Move semantics mean a class will transfer ownership of the object rather than making a copy. This is done primarily via the move constructor and move assignment operator.</p>",
       "preview": "Move semantics mean a class will transfer ownership of the object rather than ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Sémantika přesunu (move semantics) znamená, že třída namísto vytvoření kopie převede vlastnictví objektu. Děje se tak především prostřednictvím přesunovacího konstruktoru (move constructor) a operátoru přesunovacího přiřazení (move assignment operator).</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b3",
       "type": "paragraph",
       "html": "<p>std::auto_ptr is deprecated and should be avoided.</p>",
       "preview": "std::auto_ptr is deprecated and should be avoided.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::auto_ptr je zastaralý (deprecated) a měli byste se mu vyhýbat.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b4",
       "type": "paragraph",
       "html": "<p>An r-value reference is a reference that is designed to be initialized with an r-value. An r-value reference is created using a double ampersand. It’s fine to write functions that take r-value reference parameters, but you should almost never return an r-value reference.</p>",
       "preview": "An r-value reference is a reference that is designed to be initialized with an r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>R-value reference je reference navržená tak, aby byla inicializována pomocí r-value. Vytváří se pomocí dvojitého ampersandu. Je zcela v pořádku psát funkce, které přijímají r-value referenci jako parametr, ale téměř nikdy byste neměli r-value referenci vracet.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b5",
       "type": "paragraph",
       "html": "<p>If we construct an object or do an assignment where the argument is an l-value, the only thing we can reasonably do is copy the l-value. We can’t assume it’s safe to alter the l-value, because it may be used again later in the program. If we have an expression “a = b”, we wouldn’t reasonably expect b to be changed in any way.</p>",
       "preview": "If we construct an object or do an assignment where the argument is an l-value, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud vytváříme objekt nebo provádíme přiřazení, kde je argumentem l-value, jediné rozumné, co můžeme udělat, je danou l-value zkopírovat. Nemůžeme předpokládat, že je bezpečné l-value měnit, protože může být v programu použita později znovu. Pokud máme výraz „a = b“, rozumně bychom neočekávali, že se b jakkoli změní.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b6",
       "type": "paragraph",
       "html": "<p>However, if we construct an object or do an assignment where the argument is an r-value, then we know that r-value is just a temporary object of some kind. Instead of copying it (which can be expensive), we can simply transfer its resources (which is cheap) to the object we’re constructing or assigning. This is safe to do because the temporary will be destroyed at the end of the expression anyway, so we know it will never be used again!</p>",
       "preview": "However, if we construct an object or do an assignment where the argument is an ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však vytváříme objekt nebo provádíme přiřazení, kde je argumentem r-value, víme, že tato r-value je pouze nějakým dočasným objektem. Místo jejího kopírování (které může být nákladné) můžeme její prostředky jednoduše převést (což je levné) do objektu, který vytváříme nebo do nějž přiřazujeme. To je bezpečné, protože dočasný objekt bude na konci výrazu stejně zničen, takže víme, že již nikdy znovu použit nebude!</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b7",
       "type": "paragraph",
       "html": "<p>You can use the delete keyword to disable copy semantics for classes you create by deleting the copy constructor and copy assignment operator.</p>",
       "preview": "You can use the delete keyword to disable copy semantics for classes you create ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Klíčové slovo delete můžete použít k zakázání sémantiky kopírování u vámi vytvořených tříd smazáním kopírovacího konstruktoru a operátoru přiřazení kopií.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b8",
       "type": "paragraph",
       "html": "<p>std::move allows you to treat an l-value as r-value. This is useful when we want to invoke move semantics instead of copy semantics on an l-value.</p>",
       "preview": "std::move allows you to treat an l-value as r-value. This is useful when we want",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::move vám umožňuje pracovat s l-value jako s r-value. To je užitečné, když chceme pro l-value uplatnit sémantiku přesunu namísto sémantiky kopírování.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b9",
       "type": "paragraph",
       "html": "<p>std::unique_ptr is the smart pointer class that you should probably be using. It manages a single non-shareable resource. std::make_unique() (in C++14) should be preferred to create new std::unique_ptr. std::unique_ptr disables copy semantics.</p>",
       "preview": "std::unique_ptr is the smart pointer class that you should probably be using. It",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::unique_ptr je třída chytrého ukazatele, kterou byste měli pravděpodobně používat nejčastěji. Spravuje jeden nesdílitelný prostředek. Pro vytváření nových std::unique_ptr by mělo být upřednostňováno std::make_unique() (v C++14). std::unique_ptr zakazuje sémantiku kopírování.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b10",
       "type": "paragraph",
       "html": "<p>std::shared_ptr is the smart pointer class used when you need multiple objects accessing the same resource. The resource will not be destroyed until the last std::shared_ptr managing it is destroyed. std::make_shared() should be preferred to create new std::shared_ptr. With std::shared_ptr, copy semantics should be used to create additional std::shared_ptr pointing to the same object.</p>",
       "preview": "std::shared_ptr is the smart pointer class used when you need multiple objects a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::shared_ptr je třída chytrého ukazatele, která se používá, když potřebujete, aby k témuž prostředku přistupovalo více objektů. Prostředek nebude zničen, dokud nebude zničen poslední std::shared_ptr, který jej spravuje. Pro vytváření nových std::shared_ptr by mělo být upřednostňováno std::make_shared(). U std::shared_ptr by se měla pro vytváření dalších std::shared_ptr ukazujících na stejný objekt používat sémantika kopírování.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b11",
       "type": "paragraph",
       "html": "<p>std::weak_ptr is the smart pointer class used when you need one or more objects with the ability to view and access a resource managed by a std::shared_ptr, but unlike std::shared_ptr, std::weak_ptr is not considered when determining whether the resource should be destroyed.</p>",
       "preview": "std::weak_ptr is the smart pointer class used when you need one or more objects ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::weak_ptr je třída chytrého ukazatele, která se používá, když potřebujete jeden nebo více objektů se schopností nahlížet a přistupovat k prostředku spravovanému pomocí std::shared_ptr, ale na rozdíl od std::shared_ptr se std::weak_ptr nebere v úvahu při rozhodování, zda má být prostředek zničen.</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b12",
       "type": "paragraph",
       "html": "<p><strong>Quiz time</strong></p>",
       "preview": "Quiz time",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Čas na kvíz</strong></p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b13",
       "type": "list",
       "html": "<ol start=\"1\"><li>Explain when you should use the following types of pointers.</li></ol>",
       "preview": "Explain when you should use the following types of pointers.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Vysvětlete, kdy byste měli použít následující typy ukazatelů.</li></ol>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b14",
       "type": "paragraph",
       "html": "<p>1a) std::unique_ptr</p>",
       "preview": "1a) std::unique_ptr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1a) std::unique_ptr</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b15",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>std::unique_ptr should be used when you want a smart pointer to manage a dynamic object that is not going to be shared.</p></div>",
       "preview": "std::unique_ptr should be used when you want a smart pointer to manage a dynamic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><p>std::unique_ptr by se měl použít tehdy, když chcete, aby chytrý ukazatel spravoval dynamický objekt, který nebude sdílen.</p></div>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b16",
       "type": "paragraph",
       "html": "<p>1b) std::shared_ptr</p>",
       "preview": "1b) std::shared_ptr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1b) std::shared_ptr</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b17",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>std::shared_ptr should be used when you want a smart pointer to manage a dynamic object that may be shared. The object won’t be deallocated until all std::shared_ptr holding the object are destroyed.</p></div>",
       "preview": "std::shared_ptr should be used when you want a smart pointer to manage a dynamic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><p>std::shared_ptr by se měl použít, když chcete, aby chytrý ukazatel spravoval dynamický objekt, který může být sdílen. Objekt nebude uvolněn z paměti, dokud nebudou zničeny všechny std::shared_ptr, které jej spravují.</p></div>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b18",
       "type": "paragraph",
       "html": "<p>1c) std::weak_ptr</p>",
       "preview": "1c) std::weak_ptr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1c) std::weak_ptr</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b19",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><p>std::weak_ptr should be used when you want access to an object that is being managed by a std::shared_ptr, but don’t want the lifetime of the std::shared_ptr to be tied to the lifetime of the std::weak_ptr.</p></div>",
       "preview": "std::weak_ptr should be used when you want access to an object that is being man",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><p>std::weak_ptr by se měl použít, když chcete přístup k objektu, který je spravován pomocí std::shared_ptr, ale nechcete, aby byla doba života std::shared_ptr vázána na dobu života std::weak_ptr.</p></div>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b20",
       "type": "paragraph",
       "html": "<p>1d) std::auto_ptr</p>",
       "preview": "1d) std::auto_ptr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1d) std::auto_ptr</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b21",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>std::auto_ptr has been deprecated and was removed in C++17. It should not be used.</p></div>",
       "preview": "std::auto_ptr has been deprecated and was removed in C++17. It should not be use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>std::auto_ptr byl označen jako zastaralý a v C++17 byl zcela odstraněn. Neměl by se používat.</p></div>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b22",
       "type": "list",
       "html": "<ol start=\"2\"><li>Explain why move semantics is focused around r-values.</li></ol>",
       "preview": "Explain why move semantics is focused around r-values.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"2\"><li>Vysvětlete, proč je sémantika přesunu (move semantics) zaměřena na r-values.</li></ol>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b23",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><p>Because r-values are temporary, we know they are going to get destroyed after they are used. When passing or returning an r-value by value, it’s wasteful to make a copy and then destroy the original. Instead, we can simply move (steal) the r-value’s resources, which is generally more efficient.</p></div>",
       "preview": "Because r-values are temporary, we know they are going to get destroyed after th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><p>Protože r-values jsou dočasné, víme, že po svém použití zaniknou. Při předávání nebo vracení r-value hodnotou je neefektivní vytvářet kopii a následně zničit originál. Místo toho můžeme prostředky r-value jednoduše přesunout (převzít), což je obecně podstatně efektivnější.</p></div>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b24",
       "type": "list",
       "html": "<ol start=\"3\"><li>What’s wrong with the following code? Update the program to be best practices compliant.</li></ol>",
       "preview": "What’s wrong with the following code? Update the program to be best practices co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"3\"><li>Co je špatně na následujícím kódu? Upravte program tak, aby odpovídal doporučeným postupům (best practices).</li></ol>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b25",
       "type": "paragraph",
       "html": "<p>3a)</p>",
       "preview": "3a)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>3a)</p>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b26",
@@ -197,14 +223,17 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <memory> // for std::shared_ptr\n \nclass Resource\n{\npublic:\n\tResource() { std::cout << \"Resource acquired\\n\"; }\n\t~Resource() { std::cout << \"Resource destroyed\\n\"; }\n};\n \nint main()\n{\n\tauto* res{ new Resource{} };\n\tstd::shared_ptr<Resource> ptr1{ res };\n\tstd::shared_ptr<Resource> ptr2{ res };\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n \nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n \nint main()\n{\n\tauto* res{ new Resource{} };\n\tstd::shared_ptr&lt;Resource&gt; ptr1{ res };\n\tstd::shared_ptr&lt;Resource&gt; ptr2{ res };\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <paměť> // pro std::shared_ptr\n \ntřída Zdroj\n{\nveřejnost:\n\tZdroj() { std::cout << \"Zdroj získán\\n\"; }\n\t~Zdroj() { std::cout << \"Zdroj zničen\\n\"; }\n};\n \nint main()\n{\n\tauto* res{ nový zdroj{} };\n\tstd::shared_ptr<Zdroj> ptr1{ res };\n\tstd::shared_ptr<Zdroj> ptr2{ res };\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "chapter-22-summary-and-quiz_b27",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\"><p><code>ptr2</code> was created from <code>res</code> instead of from <code>ptr1</code>. This means that you now have two <code>std::shared_ptr</code> each independently trying to manage the <code>Resource</code> (they are not aware of each other). When one goes out of scope, the other will be left with a dangling pointer.</p><p><code>ptr2</code> should instead be initialized with <code>ptr1</code> instead of from <code>res</code>. This will allow both <code>ptr1</code> and <code>ptr2</code> to share ownership of <code>res</code>. <code>std::make_shared()</code> should be used instead of manual dynamic allocation.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n \nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n \nint main()\n{\n\tauto ptr1{ std::make_shared&lt;Resource&gt;() };\n\tauto ptr2{ ptr1 };\n\n\treturn 0;\n}</code></pre></div>",
       "preview": "ptr2 was created from res instead of from ptr1. This means that you now have two",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_5\" style=\"display:none\"><p><code>ptr2</code> byl vytvořen z <code>res</code> namísto z <code>ptr1</code>. To znamená, že nyní máte dva <code>std::shared_ptr</code>, kde se každý nezávisle snaží spravovat <code>Resource</code> (navzájem o sobě nevědí). Když jeden opustí rozsah platnosti (scope), druhému zůstane visící ukazatel (dangling pointer).</p><p><code>ptr2</code> by měl být místo toho inicializován pomocí <code>ptr1</code> namísto z <code>res</code>. To umožní oběma ukazatelům <code>ptr1</code> a <code>ptr2</code> sdílet vlastnictví <code>res</code>. Namísto manuální dynamické alokace by se mělo použít <code>std::make_shared()</code>.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;memory&gt; // for std::shared_ptr\n \nclass Resource\n{\npublic:\n\tResource() { std::cout &lt;&lt; \"Resource acquired\\n\"; }\n\t~Resource() { std::cout &lt;&lt; \"Resource destroyed\\n\"; }\n};\n \nint main()\n{\n\tauto ptr1{ std::make_shared&lt;Resource&gt;() };\n\tauto ptr2{ ptr1 };\n\n\treturn 0;\n}</code></pre></div>"
     }
-  ]
+  ],
+  "title_cs": "22.x — Shrnutí a kvíz 22. kapitoly"
 }

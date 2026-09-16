@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>Pointers are one of C++’s historical boogeymen, and a place where many aspiring C++ learners have gotten stuck. However, as you’ll see shortly, pointers are nothing to be scared of.</p>",
       "preview": "Pointers are one of C++’s historical boogeymen, and a place where many aspiring ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele (pointers) jsou jedním z historických strašáků C++ a místem, kde uvízlo mnoho začínajících studentů C++. Jak však brzy uvidíte, ukazatelů se není třeba bát.</p>"
     },
     {
       "id": "introduction-to-pointers_b1",
       "type": "paragraph",
       "html": "<p>In fact, pointers behave a lot like lvalue references. But before we explain that further, let’s do some setup.</p>",
       "preview": "In fact, pointers behave a lot like lvalue references. But before we explain tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele se ve skutečnosti chovají velmi podobně jako lvalue reference. Než si to však vysvětlíme podrobněji, udělejme si malou přípravu.</p>"
     },
     {
       "id": "introduction-to-pointers_b2",
@@ -29,14 +31,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>If you’re rusty or not familiar with lvalue references, now would be a good time to review them. We cover lvalue references in lessons <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue references</a>, <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references-to-const/\">12.4 -- Lvalue references to const</a>, and <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Pass by lvalue reference</a>.</p></div>",
       "preview": "Related contentIf you’re rusty or not familiar with lvalue references, now would be a good time to r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Pokud jste lvalue reference pozapomněli nebo je neznáte, právě teď je vhodný čas si je zopakovat. Lvalue referencím se věnujeme v lekcích <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references/\">12.3 -- Lvalue reference</a>, <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references-to-const/\">12.4 -- Lvalue reference na const</a> a <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Předávání pomocí lvalue reference</a>.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b3",
       "type": "paragraph",
       "html": "<p>Consider a normal variable, like this one:</p>",
       "preview": "Consider a normal variable, like this one:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme běžnou proměnnou, jako je tato:</p>"
     },
     {
       "id": "introduction-to-pointers_b4",
@@ -44,28 +48,32 @@
       "language": "cpp",
       "code": "char x {}; // chars use 1 byte of memory",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">char x {}; // chars use 1 byte of memory</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">char x {}; // znaky využívají 1 bajt paměti</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b5",
       "type": "paragraph",
       "html": "<p>Simplifying a bit, when the code generated for this definition is executed, a piece of memory from RAM will be assigned to this object. For the sake of example, let’s say that the variable <code>x</code> is assigned memory address <code>140</code>. Whenever we use variable <code>x</code> in an expression or statement, the program will go to memory address <code>140</code> to access the value stored there.</p>",
       "preview": "Simplifying a bit, when the code generated for this definition is executed, a pi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zjednodušeně řečeno, když se provede kód vygenerovaný pro tuto definici, bude tomuto objektu přidělena část paměti RAM. Pro účely tohoto příkladu řekněme, že proměnné <code>x</code> je přiřazena paměťová adresa <code>140</code>. Kdykoli použijeme proměnnou <code>x</code> ve výrazu nebo příkazu, program přistoupí na paměťovou adresu <code>140</code>, aby získal zde uloženou hodnotu.</p>"
     },
     {
       "id": "introduction-to-pointers_b6",
       "type": "paragraph",
       "html": "<p>The nice thing about variables is that we don’t need to worry about what specific memory addresses are assigned, or how many bytes are required to store the object’s value. We just refer to the variable by its given identifier, and the compiler translates this name into the appropriately assigned memory address. The compiler takes care of all the addressing.</p>",
       "preview": "The nice thing about variables is that we don’t need to worry about what specifi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příjemné na proměnných je, že se nemusíme starat o to, jaké konkrétní paměťové adresy jsou přiděleny, ani kolik bajtů je potřeba k uložení hodnoty objektu. Na proměnnou jednoduše odkazujeme jejím daným identifikátorem a kompilátor tento název přeloží na příslušnou přiřazenou paměťovou adresu. Kompilátor se postará o veškeré adresování.</p>"
     },
     {
       "id": "introduction-to-pointers_b7",
       "type": "paragraph",
       "html": "<p>This is also true with references:</p>",
       "preview": "This is also true with references:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To platí také pro reference:</p>"
     },
     {
       "id": "introduction-to-pointers_b8",
@@ -73,28 +81,33 @@
       "language": "cpp",
       "code": "int main()\n{\n    char x {}; // assume this is assigned memory address 140\n    char& ref { x }; // ref is an lvalue reference to x (when used with a type, & means lvalue reference)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    char x {}; // assume this is assigned memory address 140\n    char&amp; ref { x }; // ref is an lvalue reference to x (when used with a type, &amp; means lvalue reference)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    char x {}; // předpokládejme, že toto je přiřazena adresa paměti 140\n    char& ref { x }; // ref je odkaz lvalue na x (při použití s typem & znamená odkaz lvalue)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b9",
       "type": "paragraph",
       "html": "<p>Because <code>ref</code> acts as an alias for <code>x</code>, whenever we use <code>ref</code>, the program will go to memory address <code>140</code> to access the value. Again the compiler takes care of the addressing, so that we don’t have to think about it.</p>",
       "preview": "Because ref acts as an alias for x, whenever we use ref, the program will go to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>ref</code> funguje jako alias pro <code>x</code>, kdykoli použijeme <code>ref</code>, program přistoupí na paměťovou adresu <code>140</code>, aby získal danou hodnotu. Kompilátor se opět postará o adresování, takže na to nemusíme myslet.</p>"
     },
     {
       "id": "introduction-to-pointers_b10",
       "type": "section",
       "title": "The address-of operator (&)",
       "html": "<h3 class=\"cpp-section-heading\">The address-of operator (&amp;)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Operátor získání adresy (&amp;)</h3>",
+      "title_cs": "Adresa operátora (&)"
     },
     {
       "id": "introduction-to-pointers_b11",
       "type": "paragraph",
       "html": "<p>Although the memory addresses used by variables aren’t exposed to us by default, we do have access to this information. The <strong>address-of operator</strong> (&amp;) returns the memory address of its operand. This is pretty straightforward:</p>",
       "preview": "Although the memory addresses used by variables aren’t exposed to us by default,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli nám paměťové adresy využívané proměnnými nejsou ve výchozím stavu přímo přístupné, máme k této informaci přístup. <strong>Operátor získání adresy</strong> (&amp;) vrací paměťovou adresu svého operandu. To je celkem přímočaré:</p>"
     },
     {
       "id": "introduction-to-pointers_b12",
@@ -102,35 +115,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    std::cout << x << '\\n';  // print the value of variable x\n    std::cout << &x << '\\n'; // print the memory address of variable x\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    std::cout &lt;&lt; x &lt;&lt; '\\n';  // print the value of variable x\n    std::cout &lt;&lt; &amp;x &lt;&lt; '\\n'; // print the memory address of variable x\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    std::cout << x << '\\n';  // vypíše hodnotu proměnné x\n    std::cout << &x << '\\n'; // vypíše paměťovou adresu proměnné x\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b13",
       "type": "paragraph",
       "html": "<p>On the author’s machine, the above program printed:</p>",
       "preview": "On the author’s machine, the above program printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na počítači autora výše uvedený program vypsal:</p>"
     },
     {
       "id": "introduction-to-pointers_b14",
       "type": "output",
       "text": "5\n0027FEA0\n",
       "html": "<pre>5\n0027FEA0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n0027FEA0\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b15",
       "type": "paragraph",
       "html": "<p>In the above example, we use the address-of operator (&amp;) to retrieve the address assigned to variable <code>x</code> and print that address to the console. Memory addresses are typically printed as hexadecimal values (we covered hex in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 -- Numeral systems (decimal, binary, hexadecimal, and octal)</a>), often without the 0x prefix.</p>",
       "preview": "In the above example, we use the address-of operator (&) to retrieve the address",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu používáme operátor získání adresy (&amp;) k získání adresy přiřazené proměnné <code>x</code> a tuto adresu vypíšeme do konzole. Paměťové adresy se obvykle vypisují jako hexadecimální hodnoty (šestnáctkovou soustavu jsme probírali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/numeral-systems-decimal-binary-hexadecimal-and-octal/\">5.3 – Číselné soustavy (desítková, dvojková, šestnáctková a osmičková)</a>), často bez předpony 0x.</p>"
     },
     {
       "id": "introduction-to-pointers_b16",
       "type": "paragraph",
       "html": "<p>For objects that use more than one byte of memory, address-of will return the memory address of the first byte used by the object.</p>",
       "preview": "For objects that use more than one byte of memory, address-of will return the me",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U objektů, které zabírají více než jeden bajt paměti, vrátí operátor získání adresy paměťovou adresu prvního bajtu použitého daným objektem.</p>"
     },
     {
       "id": "introduction-to-pointers_b17",
@@ -138,28 +156,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>The &amp; symbol tends to cause confusion because it has different meanings depending on context:</p><ul><li>When following a type name, &amp; denotes an lvalue reference: <code>int&amp; ref</code>.</li><li>When used in a unary context in an expression, &amp; is the address-of operator: <code>std::cout &lt;&lt; &amp;x</code>.</li><li>When used in a binary context in an expression, &amp; is the Bitwise AND operator: <code>std::cout &lt;&lt; x &amp; y</code>.</li></ul></div>",
       "preview": "TipThe & symbol tends to cause confusion because it has different meanings depending on context:When",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Symbol &amp; bývá častým zdrojem nejasností, protože má různé významy v závislosti na kontextu:</p><ul><li>Když následuje za názvem typu, &amp; označuje l-hodnotovou referenci (lvalue reference): <code>int&amp; ref</code>.</li><li>Při použití v unárním kontextu ve výrazu je &amp; operátorem získání adresy: <code>std::cout &lt;&lt; &amp;x</code>.</li><li>Při použití v binárním kontextu ve výrazu je &amp; operátorem bitového AND: <code>std::cout &lt;&lt; x &amp; y</code>.</li></ul></div>"
     },
     {
       "id": "introduction-to-pointers_b18",
       "type": "section",
       "title": "The dereference operator (*)",
       "html": "<h3 class=\"cpp-section-heading\">The dereference operator (*)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dereferenční operátor (*)</h3>",
+      "title_cs": "Operátor dereference (*)"
     },
     {
       "id": "introduction-to-pointers_b19",
       "type": "paragraph",
       "html": "<p>Getting the address of a variable isn’t very useful by itself.</p>",
       "preview": "Getting the address of a variable isn’t very useful by itself.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Získání adresy proměnné samo o sobě není příliš užitečné.</p>"
     },
     {
       "id": "introduction-to-pointers_b20",
       "type": "paragraph",
       "html": "<p>The most useful thing we can do with an address is access the value stored at that address. The <strong>dereference operator</strong> (*) (also occasionally called the <strong>indirection operator</strong>) returns the value at a given memory address as an lvalue:</p>",
       "preview": "The most useful thing we can do with an address is access the value stored at th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nejužitečnější, co můžeme s adresou udělat, je přistoupit k hodnotě, která je na ní uložena. <strong>Dereferenční operátor</strong> (*) (občas nazývaný také <strong>operátor indirekce</strong>) vrací hodnotu na dané paměťové adrese jako l-hodnotu (lvalue):</p>"
     },
     {
       "id": "introduction-to-pointers_b21",
@@ -167,28 +190,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    std::cout << x << '\\n';  // print the value of variable x\n    std::cout << &x << '\\n'; // print the memory address of variable x\n\n    std::cout << *(&x) << '\\n'; // print the value at the memory address of variable x (parentheses not required, but make it easier to read)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    std::cout &lt;&lt; x &lt;&lt; '\\n';  // print the value of variable x\n    std::cout &lt;&lt; &amp;x &lt;&lt; '\\n'; // print the memory address of variable x\n\n    std::cout &lt;&lt; *(&amp;x) &lt;&lt; '\\n'; // print the value at the memory address of variable x (parentheses not required, but make it easier to read)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    std::cout << x << '\\n';  // vypíše hodnotu proměnné x\n    std::cout << &x << '\\n'; // vypíše paměťovou adresu proměnné x\n\n    std::cout << *(&x) << '\\n'; // vypíše hodnotu na paměťovou adresu proměnné x (závorky nejsou nutné, ale usnadňují čtení)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b22",
       "type": "paragraph",
       "html": "<p>On the author’s machine, the above program printed:</p>",
       "preview": "On the author’s machine, the above program printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na počítači autora výše uvedený program vypsal:</p>"
     },
     {
       "id": "introduction-to-pointers_b23",
       "type": "output",
       "text": "5\n0027FEA0\n5\n",
       "html": "<pre>5\n0027FEA0\n5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n0027FEA0\n5\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b24",
       "type": "paragraph",
       "html": "<p>This program is pretty simple. First we declare a variable <code>x</code> and print its value. Then we print the address of variable <code>x</code>. Finally, we use the dereference operator to get the value at the memory address of variable <code>x</code> (which is just the value of <code>x</code>), which we print to the console.</p>",
       "preview": "This program is pretty simple. First we declare a variable x and print its value",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program je celkem jednoduchý. Nejprve deklarujeme proměnnou <code>x</code> a vypíšeme její hodnotu. Poté vypíšeme adresu proměnné <code>x</code>. Nakonec použijeme dereferenční operátor k získání hodnoty na paměťové adrese proměnné <code>x</code> (což je prostě hodnota <code>x</code>), kterou vypíšeme do konzole.</p>"
     },
     {
       "id": "introduction-to-pointers_b25",
@@ -196,7 +223,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Given a memory address, we can use the dereference operator (*) to get the value at that address (as an lvalue).</p><p>The address-of operator (&amp;) and dereference operator (*) work as opposites: address-of gets the address of an object, and dereference gets the object at an address.</p></div>",
       "preview": "Key insightGiven a memory address, we can use the dereference operator (*) to get the value at that ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Máme-li paměťovou adresu, můžeme pomocí dereferenčního operátoru (*) získat hodnotu na této adrese (jako l-hodnotu).</p><p>Operátor získání adresy (&amp;) a dereferenční operátor (*) fungují opačně: operátor získání adresy získá adresu objektu a dereference získá objekt na dané adrese.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b26",
@@ -204,35 +232,41 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Although the dereference operator looks just like the multiplication operator, you can distinguish them because the dereference operator is unary, whereas the multiplication operator is binary.</p></div>",
       "preview": "TipAlthough the dereference operator looks just like the multiplication operator, you can distinguis",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Ačkoli dereferenční operátor vypadá stejně jako operátor násobení, můžete je rozlišit podle toho, že dereferenční operátor je unární, zatímco operátor násobení je binární.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b27",
       "type": "paragraph",
       "html": "<p>Getting the memory address of a variable and then immediately dereferencing that address to get a value isn’t that useful either (after all, we can just use the variable to access the value).</p>",
       "preview": "Getting the memory address of a variable and then immediately dereferencing that",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Získat paměťovou adresu proměnné a pak tuto adresu okamžitě dereferencovat pro získání hodnoty také není příliš užitečné (koneckonců k přístupu k hodnotě můžeme jednoduše použít samotnou proměnnou).</p>"
     },
     {
       "id": "introduction-to-pointers_b28",
       "type": "paragraph",
       "html": "<p>But now that we have the address-of operator (&amp;) and dereference operator (*) added to our toolkits, we’re ready to talk about pointers.</p>",
       "preview": "But now that we have the address-of operator (&) and dereference operator (*) ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když máme v naší výbavě operátor získání adresy (&amp;) a dereferenční operátor (*), jsme připraveni mluvit o ukazatelích (pointerech).</p>"
     },
     {
       "id": "introduction-to-pointers_b29",
       "type": "section",
       "title": "Pointers",
       "html": "<h3 class=\"cpp-section-heading\">Pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ukazatele (Pointers)</h3>",
+      "title_cs": "Ukazatele"
     },
     {
       "id": "introduction-to-pointers_b30",
       "type": "paragraph",
       "html": "<p>A <strong>pointer</strong> is an object that holds a <em>memory address</em> (typically of another variable) as its value. This allows us to store the address of some other object to use later.</p>",
       "preview": "A pointer is an object that holds a memory address (typically of another variabl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Ukazatel</strong> (pointer) je objekt, který jako svou hodnotu uchovává <em>paměťovou adresu</em> (obvykle jiné proměnné). To nám umožňuje uložit adresu jiného objektu a použít ji později.</p>"
     },
     {
       "id": "introduction-to-pointers_b31",
@@ -240,14 +274,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>In modern C++, the pointers we are talking about here are sometimes called “raw pointers” or “dumb pointers”, to help differentiate them from “smart pointers” that were introduced into the language more recently. We cover smart pointers in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>.</p></div>",
       "preview": "As an aside…In modern C++, the pointers we are talking about here are sometimes called “raw pointers",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>V moderním C++ se ukazatelům, o kterých zde mluvíme, někdy říká „surové ukazatele“ (raw pointers) nebo „hloupé ukazatele“ (dumb pointers), aby se odlišily od „chytrých ukazatelů“ (smart pointers), které byly do jazyka přidány později. Chytrým ukazatelům se věnujeme v <a href=\"https://www.learncpp.com#Chapter22\">kapitole 22</a>.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b32",
       "type": "paragraph",
       "html": "<p>A type that specifies a pointer (e.g. <code>int*</code>) is called a <strong>pointer type</strong>. Much like reference types are declared using an ampersand (&amp;) character, pointer types are declared using an asterisk (*):</p>",
       "preview": "A type that specifies a pointer (e.g. int*) is called a pointer type. Much like ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Typ, který specifikuje ukazatel (např. <code>int*</code>), se nazývá <strong>ukazatelový typ</strong> (pointer type). Podobně jako se referenční typy deklarují pomocí znaku ampersand (&amp;), ukazatelové typy se deklarují pomocí hvězdičky (*):</p>"
     },
     {
       "id": "introduction-to-pointers_b33",
@@ -255,14 +291,16 @@
       "language": "cpp",
       "code": "int;  // a normal int\nint&; // an lvalue reference to an int value\n\nint*; // a pointer to an int value (holds the address of an integer value)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int;  // a normal int\nint&amp;; // an lvalue reference to an int value\n\nint*; // a pointer to an int value (holds the address of an integer value)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int;  // normální int\nint&; // odkaz lvalue na hodnotu int\n\nint*; // ukazatel na hodnotu int (uchovává adresu celočíselné hodnoty)</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b34",
       "type": "paragraph",
       "html": "<p>To create a pointer variable, we simply define a variable with a pointer type:</p>",
       "preview": "To create a pointer variable, we simply define a variable with a pointer type:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chceme-li vytvořit proměnnou typu ukazatel, jednoduše definujeme proměnnou s ukazatelovým typem:</p>"
     },
     {
       "id": "introduction-to-pointers_b35",
@@ -270,14 +308,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x { 5 };    // normal variable\n    int& ref { x }; // a reference to an integer (bound to x)\n\n    int* ptr;       // a pointer to an integer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 5 };    // normal variable\n    int&amp; ref { x }; // a reference to an integer (bound to x)\n\n    int* ptr;       // a pointer to an integer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x { 5 };    // normální proměnná\n    int& ref { x }; // odkaz na celé číslo (vázáno na x)\n\n    int* ptr;       // ukazatel na celé číslo\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b36",
       "type": "paragraph",
       "html": "<p>Note that this asterisk is part of the declaration syntax for pointers, not a use of the dereference operator.</p>",
       "preview": "Note that this asterisk is part of the declaration syntax for pointers, not a us",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že tato hvězdička je součástí syntaxe deklarace ukazatelů, nikoli použitím dereferenčního operátoru.</p>"
     },
     {
       "id": "introduction-to-pointers_b37",
@@ -285,7 +325,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When declaring a pointer type, place the asterisk next to the type name.</p></div>",
       "preview": "Best practiceWhen declaring a pointer type, place the asterisk next to the type name.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup (Best practice)</p><p>Při deklaraci ukazatelového typu umístěte hvězdičku hned za název typu.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b38",
@@ -293,21 +334,25 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Although you generally should not declare multiple variables on a single line, if you do, the asterisk has to be included with each variable.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1, ptr2;   // incorrect: ptr1 is a pointer to an int, but ptr2 is just a plain int!\nint* ptr3, * ptr4; // correct: ptr3 and ptr4 are both pointers to an int</code></pre><p>Although this is sometimes used as an argument to not place the asterisk with the type name (instead placing it next to the variable name), it’s a better argument for avoiding defining multiple variables in the same statement.</p></div>",
       "preview": "WarningAlthough you generally should not declare multiple variables on a single line, if you do, the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Ačkoli byste obecně neměli deklarovat více proměnných na jednom řádku, pokud tak učiníte, hvězdička musí být uvedena u každé proměnné.</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1, ptr2;   // nesprávné: ptr1 je ukazatel na int, ale ptr2 je pouze obyčejný int!\nint* ptr3, * ptr4; // správné: ptr3 i ptr4 jsou ukazatele na int</code></pre><p>Ačkoli se toto někdy používá jako argument pro neumisťování hvězdičky k názvu typu (ale raději k názvu proměnné), je to spíše pádný důvod, proč se definování více proměnných v jednom příkazu zcela vyhnout.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b39",
       "type": "section",
       "title": "Pointer initialization",
       "html": "<h3 class=\"cpp-section-heading\">Pointer initialization</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Inicializace ukazatelů</h3>",
+      "title_cs": "Inicializace ukazatele"
     },
     {
       "id": "introduction-to-pointers_b40",
       "type": "paragraph",
       "html": "<p>Like normal variables, pointers are <em>not</em> initialized by default. A pointer that has not been initialized is sometimes called a <strong>wild pointer</strong>. Wild pointers contain a garbage address, and dereferencing a wild pointer will result in undefined behavior. Because of this, you should always initialize your pointers to a known value.</p>",
       "preview": "Like normal variables, pointers are not initialized by default. A pointer that h",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako běžné proměnné, ani ukazatele <em>nejsou</em> ve výchozím stavu inicializovány. Ukazatel, který nebyl inicializován, se někdy označuje jako <strong>divoký ukazatel</strong> (wild pointer). Divoké ukazatele obsahují náhodnou adresu („smetí“) a dereference takového ukazatele povede k nedefinovanému chování. Z tohoto důvodu byste měli své ukazatele vždy inicializovat na známou hodnotu.</p>"
     },
     {
       "id": "introduction-to-pointers_b41",
@@ -315,7 +360,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Always initialize your pointers.</p></div>",
       "preview": "Best practiceAlways initialize your pointers.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vždy své ukazatele inicializujte.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b42",
@@ -323,21 +369,24 @@
       "language": "cpp",
       "code": "int main()\n{\n    int x{ 5 };\n\n    int* ptr;        // an uninitialized pointer (holds a garbage address)\n    int* ptr2{};     // a null pointer (we'll discuss these in the next lesson)\n    int* ptr3{ &x }; // a pointer initialized with the address of variable x\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{ 5 };\n\n    int* ptr;        // an uninitialized pointer (holds a garbage address)\n    int* ptr2{};     // a null pointer (we'll discuss these in the next lesson)\n    int* ptr3{ &amp;x }; // a pointer initialized with the address of variable x\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int x{5};\n\n    int* ptr;        // neinicializovaný ukazatel (obsahuje nesmyslnou adresu)\n    int* ptr2{};     // nulový ukazatel (probereme je v příští lekci)\n    int* ptr3{ &x }; // ukazatel inicializovaný s adresou proměnné x\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b43",
       "type": "paragraph",
       "html": "<p>Since pointers hold addresses, when we initialize or assign a value to a pointer, that value has to be an address. Typically, pointers are used to hold the address of another variable (which we can get using the address-of operator (&amp;)).</p>",
       "preview": "Since pointers hold addresses, when we initialize or assign a value to a pointer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože ukazatele uchovávají adresy, musí být při inicializaci nebo přiřazení hodnoty ukazateli touto hodnotou adresa. Typicky se ukazatele používají k uložení adresy jiné proměnné (kterou můžeme získat pomocí operátoru získání adresy (&amp;)).</p>"
     },
     {
       "id": "introduction-to-pointers_b44",
       "type": "paragraph",
       "html": "<p>Once we have a pointer holding the address of another object, we can then use the dereference operator (*) to access the value at that address. For example:</p>",
       "preview": "Once we have a pointer holding the address of another object, we can then use th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile máme ukazatel uchovávající adresu jiného objektu, můžeme použít operátor dereference (*) k přístupu k hodnotě na dané adrese. Například:</p>"
     },
     {
       "id": "introduction-to-pointers_b45",
@@ -345,35 +394,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    std::cout << x << '\\n'; // print the value of variable x\n\n    int* ptr{ &x }; // ptr holds the address of x\n    std::cout << *ptr << '\\n'; // use dereference operator to print the value at the address that ptr is holding (which is x's address)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    std::cout &lt;&lt; x &lt;&lt; '\\n'; // print the value of variable x\n\n    int* ptr{ &amp;x }; // ptr holds the address of x\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // use dereference operator to print the value at the address that ptr is holding (which is x's address)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    std::cout << x << '\\n'; // vypíše hodnotu proměnné x\n\n    int* ptr{ &x }; // ptr obsahuje adresu x\n    std::cout << *ptr << '\\n'; // použijte operátor dereference k vytištění hodnoty na adrese, kterou drží ptr (což je adresa x)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b46",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "introduction-to-pointers_b47",
       "type": "output",
       "text": "5\n5\n",
       "html": "<pre>5\n5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n5\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b48",
       "type": "paragraph",
       "html": "<p>Conceptually, you can think of the above snippet like this:<br><img src=\"https://www.learncpp.com/images/CppTutorial/Section6/6-Pointer.png\"></p>",
       "preview": "Conceptually, you can think of the above snippet like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Koncepčně si výše uvedený úryvek můžete představit takto:<br><img src=\"https://www.learncpp.com/images/CppTutorial/Section6/6-Pointer.png\"></p>"
     },
     {
       "id": "introduction-to-pointers_b49",
       "type": "paragraph",
       "html": "<p>This is where pointers get their name from -- <code>ptr</code> is holding the address of <code>x</code>, so we say that <code>ptr</code> is “pointing to” <code>x</code>.</p>",
       "preview": "This is where pointers get their name from -- ptr is holding the address of x, s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odtud ukazatele (pointers) získaly svůj název – <code>ptr</code> uchovává adresu proměnné <code>x</code>, takže říkáme, že <code>ptr</code> „ukazuje na“ (pointing to) <code>x</code>.</p>"
     },
     {
       "id": "introduction-to-pointers_b50",
@@ -381,14 +435,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>A note on pointer nomenclature: “X pointer” (where X is some type) is a commonly used shorthand for “pointer to an X”. So when we say, “an integer pointer”, we really mean “a pointer to an integer”. This understanding will be valuable when we talk about const pointers.</p></div>",
       "preview": "Author’s noteA note on pointer nomenclature: “X pointer” (where X is some type) is a commonly used s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Poznámka k názvosloví ukazatelů: „X pointer“ (kde X je nějaký typ) je běžně používaná zkratka pro „pointer to an X“ (ukazatel na X). Když tedy říkáme „integer pointer“ (celočíselný ukazatel), máme ve skutečnosti na mysli „ukazatel na integer“. Toto pochopení bude velmi užitečné, až budeme probírat const ukazatele.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b51",
       "type": "paragraph",
       "html": "<p>Much like the type of a reference has to match the type of object being referred to, the type of the pointer has to match the type of the object being pointed to:</p>",
       "preview": "Much like the type of a reference has to match the type of object being referred",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako se typ reference musí shodovat s typem odkazovaného objektu, musí se i typ ukazatele shodovat s typem objektu, na který ukazuje:</p>"
     },
     {
       "id": "introduction-to-pointers_b52",
@@ -396,14 +452,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    int i{ 5 };\n    double d{ 7.0 };\n\n    int* iPtr{ &i };     // ok: a pointer to an int can point to an int object\n    int* iPtr2 { &d };   // not okay: a pointer to an int can't point to a double object\n    double* dPtr{ &d };  // ok: a pointer to a double can point to a double object\n    double* dPtr2{ &i }; // not okay: a pointer to a double can't point to an int object\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int i{ 5 };\n    double d{ 7.0 };\n\n    int* iPtr{ &amp;i };     // ok: a pointer to an int can point to an int object\n    int* iPtr2 { &amp;d };   // not okay: a pointer to an int can't point to a double object\n    double* dPtr{ &amp;d };  // ok: a pointer to a double can point to a double object\n    double* dPtr2{ &amp;i }; // not okay: a pointer to a double can't point to an int object\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int i{ 5 };\n    dvojité d{ 7,0 };\n\n    int* iPtr{ &i };     // ok: ukazatel na int může ukazovat na objekt int\n    int* iPtr2 { &d };   // není v pořádku: ukazatel na int nemůže ukazovat na dvojitý objekt\n    double* dPtr{ &d };  // ok: ukazatel na dvojitý může ukazovat na dvojitý objekt\n    double* dPtr2{ &i }; // není v pořádku: ukazatel na double nemůže ukazovat na objekt typu int\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b53",
       "type": "paragraph",
       "html": "<p>With one exception that we’ll discuss next lesson, initializing a pointer with a literal value is disallowed:</p>",
       "preview": "With one exception that we’ll discuss next lesson, initializing a pointer with a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Až na jednu výjimku, kterou probereme v příští lekci, je inicializace ukazatele literální hodnotou zakázána:</p>"
     },
     {
       "id": "introduction-to-pointers_b54",
@@ -411,35 +469,41 @@
       "language": "cpp",
       "code": "int* ptr{ 5 }; // not okay\nint* ptr{ 0x0012FF7C }; // not okay, 0x0012FF7C is treated as an integer literal",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ 5 }; // not okay\nint* ptr{ 0x0012FF7C }; // not okay, 0x0012FF7C is treated as an integer literal</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ 5 }; // není v pořádku\nint* ptr{ 0x0012FF7C }; // není v pořádku, 0x0012FF7C je považováno za celočíselný literál</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b55",
       "type": "section",
       "title": "Pointers and assignment",
       "html": "<h3 class=\"cpp-section-heading\">Pointers and assignment</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ukazatele a přiřazení</h3>",
+      "title_cs": "Ukazatele a přiřazení"
     },
     {
       "id": "introduction-to-pointers_b56",
       "type": "paragraph",
       "html": "<p>We can use assignment with pointers in two different ways:</p>",
       "preview": "We can use assignment with pointers in two different ways:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přiřazení můžeme u ukazatelů použít dvěma různými způsoby:</p>"
     },
     {
       "id": "introduction-to-pointers_b57",
       "type": "list",
       "html": "<ol start=\"1\"><li>To change what the pointer is pointing at (by assigning the pointer a new address)</li><li>To change the value being pointed at (by assigning the dereferenced pointer a new value)</li></ol>",
       "preview": "To change what the pointer is pointing at (by assigning the pointer a new addres",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Ke změně toho, na co ukazatel ukazuje (přiřazením nové adresy ukazateli)</li><li>Ke změně hodnoty, na kterou ukazatel ukazuje (přiřazením nové hodnoty dereferencovanému ukazateli)</li></ol>"
     },
     {
       "id": "introduction-to-pointers_b58",
       "type": "paragraph",
       "html": "<p>First, let’s look at a case where a pointer is changed to point at a different object:</p>",
       "preview": "First, let’s look at a case where a pointer is changed to point at a different o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve se podívejme na případ, kdy se ukazatel změní tak, aby ukazoval na jiný objekt:</p>"
     },
     {
       "id": "introduction-to-pointers_b59",
@@ -447,35 +511,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &x }; // ptr initialized to point at x\n\n    std::cout << *ptr << '\\n'; // print the value at the address being pointed to (x's address)\n\n    int y{ 6 };\n    ptr = &y; // // change ptr to point at y\n\n    std::cout << *ptr << '\\n'; // print the value at the address being pointed to (y's address)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &amp;x }; // ptr initialized to point at x\n\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value at the address being pointed to (x's address)\n\n    int y{ 6 };\n    ptr = &amp;y; // // change ptr to point at y\n\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value at the address being pointed to (y's address)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    int* ptr{ &x }; // ptr inicializován na bod v x\n\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu na adrese, na kterou ukazuje (adresa x)\n\n    int y{6};\n    ptr = &y; // // změň ptr tak, aby ukazoval na y\n\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu na adrese, na kterou ukazuje (adresa y)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b60",
       "type": "paragraph",
       "html": "<p>The above prints:</p>",
       "preview": "The above prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený kód vypíše:</p>"
     },
     {
       "id": "introduction-to-pointers_b61",
       "type": "output",
       "text": "5\n6\n",
       "html": "<pre>5\n6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n6\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b62",
       "type": "paragraph",
       "html": "<p>In the above example, we define pointer <code>ptr</code>, initialize it with the address of <code>x</code>, and dereference the pointer to print the value being pointed to (<code>5</code>). We then use the assignment operator to change the address that <code>ptr</code> is holding to the address of <code>y</code>. We then dereference the pointer again to print the value being pointed to (which is now <code>6</code>).</p>",
       "preview": "In the above example, we define pointer ptr, initialize it with the address of x",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu definujeme ukazatel <code>ptr</code>, inicializujeme jej adresou proměnné <code>x</code> a dereferencujeme jej, abychom vypsali hodnotu, na kterou ukazuje (<code>5</code>). Poté pomocí operátoru přiřazení změníme adresu, kterou <code>ptr</code> uchovává, na adresu proměnné <code>y</code>. Následně ukazatel znovu dereferencujeme a vypíšeme hodnotu, na kterou ukazuje (což je nyní <code>6</code>).</p>"
     },
     {
       "id": "introduction-to-pointers_b63",
       "type": "paragraph",
       "html": "<p>Now let’s look at how we can also use a pointer to change the value being pointed at:</p>",
       "preview": "Now let’s look at how we can also use a pointer to change the value being pointe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na to, jak můžeme pomocí ukazatele také změnit hodnotu, na kterou ukazuje:</p>"
     },
     {
       "id": "introduction-to-pointers_b64",
@@ -483,28 +552,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &x }; // initialize ptr with address of variable x\n\n    std::cout << x << '\\n';    // print x's value\n    std::cout << *ptr << '\\n'; // print the value at the address that ptr is holding (x's address)\n\n    *ptr = 6; // The object at the address held by ptr (x) assigned value 6 (note that ptr is dereferenced here)\n\n    std::cout << x << '\\n';\n    std::cout << *ptr << '\\n'; // print the value at the address that ptr is holding (x's address)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &amp;x }; // initialize ptr with address of variable x\n\n    std::cout &lt;&lt; x &lt;&lt; '\\n';    // print x's value\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value at the address that ptr is holding (x's address)\n\n    *ptr = 6; // The object at the address held by ptr (x) assigned value 6 (note that ptr is dereferenced here)\n\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value at the address that ptr is holding (x's address)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    int* ptr{ &x }; // inicializuje ptr s adresou proměnné x\n\n    std::cout << x << '\\n';    // vypíše hodnotu x\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu na adrese, kterou drží ptr (adresa x)\n\n    *ptr = 6; // Objekt na adrese, kterou drží ptr (x), má přiřazenou hodnotu 6 (všimněte si, že ptr je zde dereferencován)\n\n    std::cout << x << '\\n';\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu na adrese, kterou drží ptr (adresa x)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b65",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "introduction-to-pointers_b66",
       "type": "output",
       "text": "5\n5\n6\n6\n",
       "html": "<pre>5\n5\n6\n6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n5\n6\n6\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b67",
       "type": "paragraph",
       "html": "<p>In this example, we define pointer <code>ptr</code>, initialize it with the address of <code>x</code>, and then print the value of both <code>x</code> and <code>*ptr</code> (<code>5</code>). Because <code>*ptr</code> returns an lvalue, we can use this on the left hand side of an assignment statement, which we do to change the value being pointed at by <code>ptr</code> to <code>6</code>. We then print the value of both <code>x</code> and <code>*ptr</code> again to show that the value has been updated as expected.</p>",
       "preview": "In this example, we define pointer ptr, initialize it with the address of x, and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu definujeme ukazatel <code>ptr</code>, inicializujeme jej adresou proměnné <code>x</code> a poté vypíšeme hodnotu jak <code>x</code>, tak <code>*ptr</code> (<code>5</code>). Protože <code>*ptr</code> vrací l-hodnotu (lvalue), můžeme tento výraz použít na levé straně přiřazovacího příkazu, čímž změníme hodnotu, na kterou <code>ptr</code> ukazuje, na <code>6</code>. Poté znovu vypíšeme hodnotu jak <code>x</code>, tak <code>*ptr</code>, abychom ukázali, že byla hodnota podle očekávání aktualizována.</p>"
     },
     {
       "id": "introduction-to-pointers_b68",
@@ -512,21 +585,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>When we use a pointer without a dereference (<code>ptr</code>), we are accessing the address held by the pointer. Modifying this (<code>ptr = &amp;y</code>) changes what the pointer is pointing at.</p><p>When we dereference a pointer (<code>*ptr</code>), we are accessing the object being pointed at. Modifying this (<code>*ptr = 6;</code>) changes the value of the object being pointed at.</p></div>",
       "preview": "Key insightWhen we use a pointer without a dereference (ptr), we are accessing the address held by t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Když použijeme ukazatel bez dereference (<code>ptr</code>), přistupujeme k adrese, kterou ukazatel uchovává. Její úprava (<code>ptr = &amp;y</code>) změní to, na co ukazatel ukazuje.</p><p>Když ukazatel dereferencujeme (<code>*ptr</code>), přistupujeme k objektu, na který ukazuje. Úprava této hodnoty (<code>*ptr = 6;</code>) změní hodnotu objektu, na který je ukazováno.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b69",
       "type": "section",
       "title": "Pointers behave much like lvalue references",
       "html": "<h3 class=\"cpp-section-heading\">Pointers behave much like lvalue references</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ukazatele se chovají velmi podobně jako l-value reference</h3>",
+      "title_cs": "Ukazatele se chovají podobně jako odkazy lvalue"
     },
     {
       "id": "introduction-to-pointers_b70",
       "type": "paragraph",
       "html": "<p>Pointers and lvalue references behave similarly. Consider the following program:</p>",
       "preview": "Pointers and lvalue references behave similarly. Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele a l-value reference se chovají podobně. Uvažujme následující program:</p>"
     },
     {
       "id": "introduction-to-pointers_b71",
@@ -534,70 +611,81 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    int& ref { x };  // get a reference to x\n    int* ptr { &x }; // get a pointer to x\n\n    std::cout << x;\n    std::cout << ref;  // use the reference to print x's value (5)\n    std::cout << *ptr << '\\n'; // use the pointer to print x's value (5)\n\n    ref = 6; // use the reference to change the value of x\n    std::cout << x;\n    std::cout << ref;  // use the reference to print x's value (6)\n    std::cout << *ptr << '\\n'; // use the pointer to print x's value (6)\n\n    *ptr = 7; // use the pointer to change the value of x\n    std::cout << x;\n    std::cout << ref;  // use the reference to print x's value (7)\n    std::cout << *ptr << '\\n'; // use the pointer to print x's value (7)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    int&amp; ref { x };  // get a reference to x\n    int* ptr { &amp;x }; // get a pointer to x\n\n    std::cout &lt;&lt; x;\n    std::cout &lt;&lt; ref;  // use the reference to print x's value (5)\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // use the pointer to print x's value (5)\n\n    ref = 6; // use the reference to change the value of x\n    std::cout &lt;&lt; x;\n    std::cout &lt;&lt; ref;  // use the reference to print x's value (6)\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // use the pointer to print x's value (6)\n\n    *ptr = 7; // use the pointer to change the value of x\n    std::cout &lt;&lt; x;\n    std::cout &lt;&lt; ref;  // use the reference to print x's value (7)\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // use the pointer to print x's value (7)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    int& ref { x };  // získat odkaz na x\n    int* ptr { &x }; // získat ukazatel na x\n\n    std::cout << x;\n    std::cout << ref;  // použijte odkaz k vytištění hodnoty x (5)\n    std::cout << *ptr << '\\n'; // pomocí ukazatele vytiskne hodnotu x (5)\n\n    ref = 6; // použijte odkaz ke změně hodnoty x\n    std::cout << x;\n    std::cout << ref;  // použijte odkaz k vytištění hodnoty x (6)\n    std::cout << *ptr << '\\n'; // pomocí ukazatele vytiskne hodnotu x (6)\n\n    *ptr = 7; // pomocí ukazatele změníme hodnotu x\n    std::cout << x;\n    std::cout << ref;  // použijte odkaz k vytištění hodnoty x (7)\n    std::cout << *ptr << '\\n'; // pomocí ukazatele vytiskne hodnotu x (7)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b72",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "introduction-to-pointers_b73",
       "type": "output",
       "text": "555\n666\n777\n",
       "html": "<pre>555\n666\n777\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>555\n666\n777\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b74",
       "type": "paragraph",
       "html": "<p>In the above program, we create a normal variable <code>x</code> with value <code>5</code>, and then create an lvalue reference and a pointer to <code>x</code>. Next, we use the lvalue reference to change the value from <code>5</code> to <code>6</code>, and show that we can access that updated value via all three methods. Finally, we use the dereferenced pointer to change the value from <code>6</code> to <code>7</code>, and again show that we can access the updated value via all three methods.</p>",
       "preview": "In the above program, we create a normal variable x with value 5, and then creat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu vytvoříme běžnou proměnnou <code>x</code> s hodnotou <code>5</code> a poté vytvoříme l-value referenci a ukazatel na <code>x</code>. Dále použijeme l-value referenci ke změně hodnoty z <code>5</code> na <code>6</code> a ukážeme, že k této aktualizované hodnotě můžeme přistupovat všemi třemi způsoby. Nakonec použijeme dereferencovaný ukazatel ke změně hodnoty z <code>6</code> na <code>7</code> a znovu ukážeme, že k aktualizované hodnotě máme přístup pomocí všech tří způsobů.</p>"
     },
     {
       "id": "introduction-to-pointers_b75",
       "type": "paragraph",
       "html": "<p>Thus, pointers and references both provide a way to indirectly access another object. The primary difference is that with pointers, we need to explicitly get the address to point at, and we have to explicitly dereference the pointer to get the value. With references, the address-of and dereference happens implicitly.</p>",
       "preview": "Thus, pointers and references both provide a way to indirectly access another ob",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele i reference tedy poskytují způsob, jak nepřímo přistupovat k jinému objektu. Hlavní rozdíl spočívá v tom, že u ukazatelů musíme explicitně získat adresu, na kterou chceme ukazovat, a pro získání hodnoty musíme ukazatel explicitně dereferencovat. U referencí dochází k získání adresy i dereferenci implicitně.</p>"
     },
     {
       "id": "introduction-to-pointers_b76",
       "type": "paragraph",
       "html": "<p>There are some other differences between pointers and references worth mentioning:</p>",
       "preview": "There are some other differences between pointers and references worth mentionin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mezi ukazateli a referencemi existují ještě další rozdíly, které stojí za zmínku:</p>"
     },
     {
       "id": "introduction-to-pointers_b77",
       "type": "list",
       "html": "<ul><li>References must be initialized, pointers are not required to be initialized (but should be).</li><li>References are not objects, pointers are.</li><li>References can not be reseated (changed to reference something else), pointers can change what they are pointing at.</li><li>References must always be bound to an object, pointers can point to nothing (we’ll see an example of this in the next lesson).</li><li>References are “safe” (outside of dangling references), pointers are inherently dangerous (we’ll also discuss this in the next lesson).</li></ul>",
       "preview": "References must be initialized, pointers are not required to be initialized (but",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Reference musí být inicializovány, ukazatele inicializovány být nemusí (ale měly by být).</li><li>Reference nejsou objekty, ukazatele ano.</li><li>Reference nelze přesměrovat (změnit tak, aby odkazovaly na něco jiného), ukazatele mohou změnit to, na co ukazují.</li><li>Reference musí být vždy navázány na nějaký objekt, ukazatele mohou ukazovat na nic (příklad uvidíme v příští lekci).</li><li>Reference jsou „bezpečné“ (až na visící reference), ukazatele jsou ze své podstaty nebezpečné (o tom budeme hovořit také v příští lekci).</li></ul>"
     },
     {
       "id": "introduction-to-pointers_b78",
       "type": "section",
       "title": "The address-of operator returns a pointer",
       "html": "<h3 class=\"cpp-section-heading\">The address-of operator returns a pointer</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Operátor adresy vrací ukazatel</h3>",
+      "title_cs": "Operátor address-of vrací ukazatel"
     },
     {
       "id": "introduction-to-pointers_b79",
       "type": "paragraph",
       "html": "<p>It’s worth noting that the address-of operator (&amp;) doesn’t return the address of its operand as a literal (as C++ doesn’t support address literals). Instead, it returns a pointer to the operand (whose value is the address of the operand). In other words, given variable <code>int x</code>, <code>&amp;x</code> returns an <code>int*</code> holding the address of <code>x</code>.</p>",
       "preview": "It’s worth noting that the address-of operator (&) doesn’t return the address of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stojí za zmínku, že operátor adresy (&amp;) nevrací adresu svého operandu jako literál (protože C++ nepodporuje adresní literály). Místo toho vrací ukazatel na operand (jehož hodnotou je adresa daného operandu). Jinými slovy, pro proměnnou <code>int x</code> výraz <code>&amp;x</code> vrací <code>int*</code> obsahující adresu <code>x</code>.</p>"
     },
     {
       "id": "introduction-to-pointers_b80",
       "type": "paragraph",
       "html": "<p>We can see this in the following example:</p>",
       "preview": "We can see this in the following example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme to vidět v následujícím příkladu:</p>"
     },
     {
       "id": "introduction-to-pointers_b81",
@@ -605,42 +693,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <typeinfo>\n\nint main()\n{\n\tint x{ 4 };\n\tstd::cout << typeid(x).name() << '\\n';  // print the type of x\n\tstd::cout << typeid(&x).name() << '\\n'; // print the type of &x\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;typeinfo&gt;\n\nint main()\n{\n\tint x{ 4 };\n\tstd::cout &lt;&lt; typeid(x).name() &lt;&lt; '\\n';  // print the type of x\n\tstd::cout &lt;&lt; typeid(&amp;x).name() &lt;&lt; '\\n'; // print the type of &amp;x\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <typeinfo>\n\nint main()\n{\n\tint x{ 4};\n\tstd::cout << typeid(x).name() << '\\n';  // vypíše typ x\n\tstd::cout << typeid(&x).name() << '\\n'; // vypíše typ &x\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b82",
       "type": "paragraph",
       "html": "<p>On Visual Studio, this printed:</p>",
       "preview": "On Visual Studio, this printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve Visual Studiu se vypsalo:</p>"
     },
     {
       "id": "introduction-to-pointers_b83",
       "type": "output",
       "text": "int\nint *\n",
       "html": "<pre>int\nint *\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>int\nint *\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b84",
       "type": "paragraph",
       "html": "<p>With gcc, this printed <code>i</code> (int) and <code>pi</code> (pointer to int) instead. Because the result of typeid().name() is compiler-dependent, your compiler may print something different, but it will have the same meaning.</p>",
       "preview": "With gcc, this printed i (int) and pi (pointer to int) instead. Because the resu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V gcc se místo toho vypsalo <code>i</code> (int) a <code>pi</code> (ukazatel na int). Protože výsledek typeid().name() závisí na kompilátoru, váš kompilátor může vypsat něco jiného, ale bude to mít stejný význam.</p>"
     },
     {
       "id": "introduction-to-pointers_b85",
       "type": "section",
       "title": "The size of pointers",
       "html": "<h3 class=\"cpp-section-heading\">The size of pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Velikost ukazatelů</h3>",
+      "title_cs": "Velikost ukazatelů"
     },
     {
       "id": "introduction-to-pointers_b86",
       "type": "paragraph",
       "html": "<p>The size of a pointer is dependent upon the architecture the executable is compiled for -- a 32-bit executable uses 32-bit memory addresses -- consequently, a pointer on a 32-bit machine is 32 bits (4 bytes). With a 64-bit executable, a pointer would be 64 bits (8 bytes). Note that this is true regardless of the size of the object being pointed to:</p>",
       "preview": "The size of a pointer is dependent upon the architecture the executable is compi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Velikost ukazatele závisí na architektuře, pro kterou je spustitelný soubor zkompilován – 32bitový spustitelný soubor používá 32bitové paměťové adresy – v důsledku toho má ukazatel na 32bitovém stroji 32 bitů (4 bajty). U 64bitového spustitelného souboru má ukazatel 64 bitů (8 bajtů). Všimněte si, že to platí bez ohledu na velikost ukazovaného objektu:</p>"
     },
     {
       "id": "introduction-to-pointers_b87",
@@ -648,42 +743,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main() // assume a 32-bit application\n{\n    char* chPtr{};        // chars are 1 byte\n    int* iPtr{};          // ints are usually 4 bytes\n    long double* ldPtr{}; // long doubles are usually 8 or 12 bytes\n\n    std::cout << sizeof(chPtr) << '\\n'; // prints 4\n    std::cout << sizeof(iPtr) << '\\n';  // prints 4\n    std::cout << sizeof(ldPtr) << '\\n'; // prints 4\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main() // assume a 32-bit application\n{\n    char* chPtr{};        // chars are 1 byte\n    int* iPtr{};          // ints are usually 4 bytes\n    long double* ldPtr{}; // long doubles are usually 8 or 12 bytes\n\n    std::cout &lt;&lt; sizeof(chPtr) &lt;&lt; '\\n'; // prints 4\n    std::cout &lt;&lt; sizeof(iPtr) &lt;&lt; '\\n';  // prints 4\n    std::cout &lt;&lt; sizeof(ldPtr) &lt;&lt; '\\n'; // prints 4\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main() // předpokládá 32bitovou aplikaci\n{\n    char* chPtr{};        // znaky jsou 1 bajt\n    int* iPtr{};          // ints mají obvykle 4 bajty\n    long double* ldPtr{}; // dlouhé dvojky mají obvykle 8 nebo 12 bajtů\n\n    std::cout << sizeof(chPtr) << '\\n'; // vytiskne 4\n    std::cout << sizeof(iPtr) << '\\n';  // vytiskne 4\n    std::cout << sizeof(ldPtr) << '\\n'; // vytiskne 4\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b88",
       "type": "paragraph",
       "html": "<p>The size of the pointer is always the same. This is because a pointer is just a memory address, and the number of bits needed to access a memory address is constant.</p>",
       "preview": "The size of the pointer is always the same. This is because a pointer is just a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Velikost ukazatele je vždy stejná. Je to proto, že ukazatel je pouhá paměťová adresa a počet bitů potřebných pro přístup k paměťové adrese je konstantní.</p>"
     },
     {
       "id": "introduction-to-pointers_b89",
       "type": "section",
       "title": "Dangling pointers",
       "html": "<h3 class=\"cpp-section-heading\">Dangling pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Visící ukazatele (dangling pointers)</h3>",
+      "title_cs": "Visící ukazatele"
     },
     {
       "id": "introduction-to-pointers_b90",
       "type": "paragraph",
       "html": "<p>Much like a dangling reference, a <strong>dangling pointer</strong> is a pointer that is holding the address of an object that is no longer valid (e.g. because it has been destroyed).</p>",
       "preview": "Much like a dangling reference, a dangling pointer is a pointer that is holding ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako u visící reference je <strong>visící ukazatel</strong> (dangling pointer) ukazatel, který uchovává adresu objektu, jenž již není platný (např. proto, že byl zničen).</p>"
     },
     {
       "id": "introduction-to-pointers_b91",
       "type": "paragraph",
       "html": "<p>Dereferencing a dangling pointer (e.g. in order to print the value being pointed at) will lead to undefined behavior, as you are trying to access an object that is no longer valid.</p>",
       "preview": "Dereferencing a dangling pointer (e.g. in order to print the value being pointed",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dereference visícího ukazatele (např. za účelem vypsání hodnoty, na kterou ukazuje) povede k nedefinovanému chování (undefined behavior), protože se pokoušíte přistoupit k objektu, který již není platný.</p>"
     },
     {
       "id": "introduction-to-pointers_b92",
       "type": "paragraph",
       "html": "<p>Perhaps surprisingly, the standard says “Any other use of an invalid pointer <em>value</em> has implementation-defined behavior”. This means that you can assign an invalid pointer a new value, such as nullptr (because this doesn’t use the invalid pointer’s value). However, any other operations that use the invalid pointer’s value (such as copying or incrementing an invalid pointer) will yield implementation-defined behavior.</p>",
       "preview": "Perhaps surprisingly, the standard says “Any other use of an invalid pointer val",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná poněkud překvapivě standard uvádí: „Jakékoli jiné použití neplatné <em>hodnoty</em> ukazatele má chování definované implementací“. To znamená, že neplatnému ukazateli můžete přiřadit novou hodnotu, například nullptr (protože se tím nepoužívá hodnota neplatného ukazatele). Jakékoli jiné operace, které hodnotu neplatného ukazatele používají (jako je kopírování nebo inkrementace neplatného ukazatele), však povedou k chování definovanému implementací (implementation-defined behavior).</p>"
     },
     {
       "id": "introduction-to-pointers_b93",
@@ -691,14 +793,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Dereferencing an invalid pointer will lead to undefined behavior. Any other use of an invalid pointer value is implementation-defined.</p></div>",
       "preview": "Key insightDereferencing an invalid pointer will lead to undefined behavior. Any other use of an inv",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Dereference neplatného ukazatele povede k nedefinovanému chování. Jakékoli jiné použití hodnoty neplatného ukazatele je definováno implementací.</p></div>"
     },
     {
       "id": "introduction-to-pointers_b94",
       "type": "paragraph",
       "html": "<p>Here’s an example of creating a dangling pointer:</p>",
       "preview": "Here’s an example of creating a dangling pointer:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad vytvoření visícího ukazatele:</p>"
     },
     {
       "id": "introduction-to-pointers_b95",
@@ -706,56 +810,66 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &x };\n\n    std::cout << *ptr << '\\n'; // valid\n\n    {\n        int y{ 6 };\n        ptr = &y;\n\n        std::cout << *ptr << '\\n'; // valid\n    } // y goes out of scope, and ptr is now dangling\n\n    std::cout << *ptr << '\\n'; // undefined behavior from dereferencing a dangling pointer\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x{ 5 };\n    int* ptr{ &amp;x };\n\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // valid\n\n    {\n        int y{ 6 };\n        ptr = &amp;y;\n\n        std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // valid\n    } // y goes out of scope, and ptr is now dangling\n\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // undefined behavior from dereferencing a dangling pointer\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x{5};\n    int* ptr{ &x };\n\n    std::cout << *ptr << '\\n'; // platný\n\n    {\n        int y{6};\n        ptr = &y;\n\n        std::cout << *ptr << '\\n'; // platný\n    } // y přejde mimo rozsah a ptr nyní visí\n\n    std::cout << *ptr << '\\n'; // nedefinované chování z dereferencování visícího ukazatele\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b96",
       "type": "paragraph",
       "html": "<p>The above program will probably print:</p>",
       "preview": "The above program will probably print:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený program pravděpodobně vypíše:</p>"
     },
     {
       "id": "introduction-to-pointers_b97",
       "type": "output",
       "text": "5\n6\n6\n",
       "html": "<pre>5\n6\n6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n6\n6\n</pre>"
     },
     {
       "id": "introduction-to-pointers_b98",
       "type": "paragraph",
       "html": "<p>But it may not, as the object that <code>ptr</code> was pointing at went out of scope and was destroyed at the end of the inner block, leaving <code>ptr</code> dangling.</p>",
       "preview": "But it may not, as the object that ptr was pointing at went out of scope and was",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nemusí tomu tak ale být, protože objekt, na který <code>ptr</code> ukazoval, opustil rozsah platnosti (scope) a byl na konci vnitřního bloku zničen, což zanechalo <code>ptr</code> visící (dangling).</p>"
     },
     {
       "id": "introduction-to-pointers_b99",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "introduction-to-pointers_b100",
       "type": "paragraph",
       "html": "<p>Pointers are variables that hold a memory address. They can be dereferenced using the dereference operator (*) to retrieve the value at the address they are holding. Dereferencing a wild or dangling (or null) pointer will result in undefined behavior and will probably crash your application.</p>",
       "preview": "Pointers are variables that hold a memory address. They can be dereferenced usin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele (pointery) jsou proměnné, které uchovávají paměťovou adresu. Lze je dereferencovat pomocí dereferenčního operátoru (*), čímž získáte hodnotu na adrese, kterou uchovávají. Dereference neinicializovaného (wild) nebo visícího (dangling), případně nulového (null) ukazatele povede k nedefinovanému chování (undefined behavior) a pravděpodobně způsobí pád vaší aplikace.</p>"
     },
     {
       "id": "introduction-to-pointers_b101",
       "type": "paragraph",
       "html": "<p>Pointers are both more flexible than references and more dangerous. We’ll continue to explore this in the upcoming lessons.</p>",
       "preview": "Pointers are both more flexible than references and more dangerous. We’ll contin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatele jsou flexibilnější než reference, ale zároveň nebezpečnější. Tomuto tématu se budeme podrobněji věnovat v následujících lekcích.</p>"
     },
     {
       "id": "introduction-to-pointers_b102",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "introduction-to-pointers_b103",
@@ -772,7 +886,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n\tshort value{ 7 }; // &value = 0012FF60\n\tshort otherValue{ 3 }; // &otherValue = 0012FF54\n\n\tshort* ptr{ &value };\n\n\tstd::cout << &value << '\\n';\n\tstd::cout << value << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\t*ptr = 9;\n\n\tstd::cout << &value << '\\n';\n\tstd::cout << value << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\tptr = &otherValue;\n\n\tstd::cout << &otherValue << '\\n';\n\tstd::cout << otherValue << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\tstd::cout << sizeof(ptr) << '\\n';\n\tstd::cout << sizeof(*ptr) << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tshort value{ 7 }; // &amp;value = 0012FF60\n\tshort otherValue{ 3 }; // &amp;otherValue = 0012FF54\n\n\tshort* ptr{ &amp;value };\n\n\tstd::cout &lt;&lt; &amp;value &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; value &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; '\\n';\n\n\t*ptr = 9;\n\n\tstd::cout &lt;&lt; &amp;value &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; value &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; '\\n';\n\n\tptr = &amp;otherValue;\n\n\tstd::cout &lt;&lt; &amp;otherValue &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; otherValue &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; '\\n';\n\n\tstd::cout &lt;&lt; sizeof(ptr) &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; sizeof(*ptr) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n\tkrátká hodnota{ 7 }; // &value = 0012FF60\n\tshort otherValue{ 3 }; // &otherValue = 0012FF54\n\n\tshort* ptr{ &value };\n\n\tstd::cout << &hodnota << '\\n';\n\tstd::cout << hodnota << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\t*ptr = 9;\n\n\tstd::cout << &hodnota << '\\n';\n\tstd::cout << hodnota << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\tptr = &otherValue;\n\n\tstd::cout << &otherValue << '\\n';\n\tstd::cout << jináHodnota << '\\n';\n\tstd::cout << ptr << '\\n';\n\tstd::cout << *ptr << '\\n';\n\tstd::cout << '\\n';\n\n\tstd::cout << sizeof(ptr) << '\\n';\n\tstd::cout << sizeof(*ptr) << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-pointers_b105",
@@ -789,7 +904,9 @@
       "language": "cpp",
       "code": "int v1{ 45 };\nint* ptr{ &v1 }; // initialize ptr with address of v1\n\nint v2 { 78 };\n*ptr = &v2;     // assign ptr to address of v2",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int v1{ 45 };\nint* ptr{ &amp;v1 }; // initialize ptr with address of v1\n\nint v2 { 78 };\n*ptr = &amp;v2;     // assign ptr to address of v2</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int v1{ 45 };\nint* ptr{ &v1 }; // inicializuje ptr s adresou v1\n\nint v2 { 78 };\n*ptr = &v2;     // přiřadit ptr k adrese v2</code></pre>"
     }
-  ]
+  ],
+  "title_cs": "12.7 — Úvod do ukazatelů"
 }

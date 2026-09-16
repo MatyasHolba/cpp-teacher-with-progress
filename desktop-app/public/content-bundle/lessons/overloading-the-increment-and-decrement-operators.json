@@ -14,28 +14,32 @@
       "type": "paragraph",
       "html": "<p>Overloading the increment (<code>++</code>) and decrement (<code>--</code>) operators is pretty straightforward, with one small exception. There are actually two versions of the increment and decrement operators: a prefix increment and decrement (e.g. <code>++x; --y;</code>) and a postfix increment and decrement (e.g. <code>x++; y--;</code>).</p>",
       "preview": "Overloading the increment (++) and decrement (--) operators is pretty straightfo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetěžování operátorů inkrementace (<code>++</code>) a dekrementace (<code>--</code>) je poměrně přímočaré, až na jednu malou výjimku. Ve skutečnosti totiž existují dvě verze těchto operátorů: prefixová inkrementace a dekrementace (např. <code>++x; --y;</code>) a postfixová inkrementace a dekrementace (např. <code>x++; y--;</code>).</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b1",
       "type": "paragraph",
       "html": "<p>Because the increment and decrement operators are both unary operators and they modify their operands, they’re best overloaded as member functions. We’ll tackle the prefix versions first because they’re the most straightforward.</p>",
       "preview": "Because the increment and decrement operators are both unary operators and they ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože operátory inkrementace i dekrementace jsou unární operátory a modifikují své operandy, je nejvhodnější je přetěžovat jako členské funkce. Nejprve se podíváme na prefixové verze, protože jsou přímočařejší.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b2",
       "type": "paragraph",
       "html": "<p><strong>Overloading prefix increment and decrement</strong></p>",
       "preview": "Overloading prefix increment and decrement",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přetěžování prefixové inkrementace a dekrementace</strong></p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b3",
       "type": "paragraph",
       "html": "<p>Prefix increment and decrement are overloaded exactly the same as any normal unary operator. We’ll do this one by example:</p>",
       "preview": "Prefix increment and decrement are overloaded exactly the same as any normal una",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prefixová inkrementace a dekrementace se přetěžují úplně stejně jako jakýkoli běžný unární operátor. Ukážeme si to na příkladu:</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b4",
@@ -43,63 +47,72 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit& operator++();\n    Digit& operator--();\n\n    friend std::ostream& operator<< (std::ostream& out, const Digit& d);\n};\n\nDigit& Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\nDigit& Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\nstd::ostream& operator<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 8 };\n\n    std::cout << digit;\n    std::cout << ++digit;\n    std::cout << ++digit;\n    std::cout << --digit;\n    std::cout << --digit;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit&amp; operator++();\n    Digit&amp; operator--();\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d);\n};\n\nDigit&amp; Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\nDigit&amp; Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d)\n{\n\tout &lt;&lt; d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 8 };\n\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; ++digit;\n    std::cout &lt;&lt; ++digit;\n    std::cout &lt;&lt; --digit;\n    std::cout &lt;&lt; --digit;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Číslice\n{\nsoukromé:\n    int m_číslice{};\nveřejnost:\n    Číslice (int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Číslice& operátor++();\n    Číslice& operátor--();\n\n    přítel std::ostream& operátor<< (std::ostream& out, const Digit& d);\n};\n\nDigit& Digit::operator++()\n{\n    // Pokud je naše číslo již 9, zabalíme do 0\n    if (m_digit == 9)\n        m_číslice = 0;\n    // jinak stačí zvýšit na další číslo\n    jinak\n        ++m_číslice;\n\n    vrátit *toto;\n}\n\nDigit& Digit::operátor--()\n{\n    // Pokud je naše číslo již 0, zabalte se do 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // jinak stačí snížit na další číslo\n    jinak\n        --m_číslice;\n\n    vrátit *toto;\n}\n\nstd::ostream& operátor<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\tvrátit se ven;\n}\n\nint main()\n{\n    Číslice { 8 };\n\n    std::cout << číslice;\n    std::cout << ++digit;\n    std::cout << ++digit;\n    std::cout << --digit;\n    std::cout << --digit;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b5",
       "type": "paragraph",
       "html": "<p>Our Digit class holds a number between 0 and 9. We’ve overloaded increment and decrement so they increment/decrement the digit, wrapping around if the digit is incremented/decremented out of range.</p>",
       "preview": "Our Digit class holds a number between 0 and 9. We’ve overloaded increment and d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naše třída Digit uchovává číslo mezi 0 a 9. Přetížili jsme inkrementaci a dekrementaci tak, aby číslici inkrementovaly/dekrementovaly, přičemž při překročení rozsahu dojde k přetečení zpět na začátek či konec (tzv. wrap around).</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b6",
       "type": "paragraph",
       "html": "<p>This example prints:</p>",
       "preview": "This example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento příklad vypíše:</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b7",
       "type": "output",
       "text": "89098\n",
       "html": "<pre>89098\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>89098\n</pre>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b8",
       "type": "paragraph",
       "html": "<p>Note that we return *this. The overloaded increment and decrement operators return the current implicit object so multiple operators can be “chained” together.</p>",
       "preview": "Note that we return *this. The overloaded increment and decrement operators retu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že vracíme *this. Přetížené operátory inkrementace a dekrementace vracejí aktuální implicitní objekt, takže lze zřetězit více operátorů za sebou.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b9",
       "type": "paragraph",
       "html": "<p><strong>Overloading postfix increment and decrement</strong></p>",
       "preview": "Overloading postfix increment and decrement",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Přetěžování postfixové inkrementace a dekrementace</strong></p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b10",
       "type": "paragraph",
       "html": "<p>Normally, functions can be overloaded when they have the same name but a different number and/or different type of parameters. However, consider the case of the prefix and postfix increment and decrement operators. Both have the same name (eg. operator++), are unary, and take one parameter of the same type. So how it is possible to differentiate the two when overloading?</p>",
       "preview": "Normally, functions can be overloaded when they have the same name but a differe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Běžně lze funkce přetěžovat, pokud mají stejný název, ale odlišný počet a/nebo typ parametrů. Uvažme však případ prefixových a postfixových operátorů inkrementace a dekrementace. Všechny mají stejný název (např. operator++), jsou unární a přijímají jeden parametr stejného typu. Jak je tedy možné je při přetěžování rozlišit?</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b11",
       "type": "paragraph",
       "html": "<p>The C++ language specification has a special case that provides the answer: the compiler looks to see if the overloaded operator has an int parameter. If the overloaded operator has an int parameter, the operator is a postfix overload. If the overloaded operator has no parameter, the operator is a prefix overload.</p>",
       "preview": "The C++ language specification has a special case that provides the answer: the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Specifikace jazyka C++ nabízí řešení v podobě speciálního případu: kompilátor zjišťuje, zda má přetížený operátor parametr typu int. Pokud přetížený operátor má parametr typu int, jedná se o postfixové přetížení. Pokud přetížený operátor žádný parametr nemá, jedná se o prefixové přetížení.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b12",
       "type": "paragraph",
       "html": "<p>Here is the above Digit class with both prefix and postfix overloads:</p>",
       "preview": "Here is the above Digit class with both prefix and postfix overloads:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je výše uvedená třída Digit s prefixovými i postfixovými přetíženími:</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b13",
@@ -107,56 +120,65 @@
       "language": "cpp",
       "code": "class Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit& operator++(); // prefix has no parameter\n    Digit& operator--(); // prefix has no parameter\n\n    Digit operator++(int); // postfix has an int parameter\n    Digit operator--(int); // postfix has an int parameter\n\n    friend std::ostream& operator<< (std::ostream& out, const Digit& d);\n};\n\n// No parameter means this is prefix operator++\nDigit& Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\n// No parameter means this is prefix operator--\nDigit& Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\n// int parameter means this is postfix operator++\nDigit Digit::operator++(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to increment this digit\n    ++(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\n// int parameter means this is postfix operator--\nDigit Digit::operator--(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to decrement this digit\n    --(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\nstd::ostream& operator<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 5 };\n\n    std::cout << digit;\n    std::cout << ++digit; // calls Digit::operator++();\n    std::cout << digit++; // calls Digit::operator++(int);\n    std::cout << digit;\n    std::cout << --digit; // calls Digit::operator--();\n    std::cout << digit--; // calls Digit::operator--(int);\n    std::cout << digit;\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Digit\n{\nprivate:\n    int m_digit{};\npublic:\n    Digit(int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Digit&amp; operator++(); // prefix has no parameter\n    Digit&amp; operator--(); // prefix has no parameter\n\n    Digit operator++(int); // postfix has an int parameter\n    Digit operator--(int); // postfix has an int parameter\n\n    friend std::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d);\n};\n\n// No parameter means this is prefix operator++\nDigit&amp; Digit::operator++()\n{\n    // If our number is already at 9, wrap around to 0\n    if (m_digit == 9)\n        m_digit = 0;\n    // otherwise just increment to next number\n    else\n        ++m_digit;\n\n    return *this;\n}\n\n// No parameter means this is prefix operator--\nDigit&amp; Digit::operator--()\n{\n    // If our number is already at 0, wrap around to 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // otherwise just decrement to next number\n    else\n        --m_digit;\n\n    return *this;\n}\n\n// int parameter means this is postfix operator++\nDigit Digit::operator++(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to increment this digit\n    ++(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\n// int parameter means this is postfix operator--\nDigit Digit::operator--(int)\n{\n    // Create a temporary variable with our current digit\n    Digit temp{*this};\n\n    // Use prefix operator to decrement this digit\n    --(*this); // apply operator\n\n    // return temporary result\n    return temp; // return saved state\n}\n\nstd::ostream&amp; operator&lt;&lt; (std::ostream&amp; out, const Digit&amp; d)\n{\n\tout &lt;&lt; d.m_digit;\n\treturn out;\n}\n\nint main()\n{\n    Digit digit { 5 };\n\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; ++digit; // calls Digit::operator++();\n    std::cout &lt;&lt; digit++; // calls Digit::operator++(int);\n    std::cout &lt;&lt; digit;\n    std::cout &lt;&lt; --digit; // calls Digit::operator--();\n    std::cout &lt;&lt; digit--; // calls Digit::operator--(int);\n    std::cout &lt;&lt; digit;\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">číslice třídy\n{\nsoukromé:\n    int m_číslice{};\nveřejnost:\n    Číslice (int digit=0)\n        : m_digit{digit}\n    {\n    }\n\n    Číslice& operátor++(); // prefix nemá žádný parametr\n    Číslice& operátor--(); // prefix nemá žádný parametr\n\n    Číselný operátor++(int); // postfix má parametr int\n    Číselný operátor--(int); // postfix má parametr int\n\n    přítel std::ostream& operátor<< (std::ostream& out, const Digit& d);\n};\n\n// Žádný parametr znamená, že se jedná o prefix operator++\nDigit& Digit::operator++()\n{\n    // Pokud je naše číslo již 9, zabalíme do 0\n    if (m_digit == 9)\n        m_číslice = 0;\n    // jinak stačí zvýšit na další číslo\n    jinak\n        ++m_číslice;\n\n    vrátit *toto;\n}\n\n// Žádný parametr znamená, že se jedná o operátor předpony --\nDigit& Digit::operátor--()\n{\n    // Pokud je naše číslo již 0, zabalte se do 9\n    if (m_digit == 0)\n        m_digit = 9;\n    // jinak stačí snížit na další číslo\n    jinak\n        --m_číslice;\n\n    vrátit *toto;\n}\n\n// parametr int znamená, že se jedná o postfixový operátor++\nČíslice Číslice::operator++(int)\n{\n    // Vytvořte dočasnou proměnnou s naší aktuální číslicí\n    Číslice temp{*this};\n\n    // Ke zvýšení této číslice použijte prefixový operátor\n    ++(*toto); // použít operátor\n\n    // vrátí dočasný výsledek\n    návratová teplota; // vrátí uložený stav\n}\n\n// parametr int znamená, že se jedná o postfixový operátor --\nČíslice Číslice::operátor--(int)\n{\n    // Vytvořte dočasnou proměnnou s naší aktuální číslicí\n    Číslice temp{*this};\n\n    // Ke snížení této číslice použijte prefixový operátor\n    ---(*toto); // použít operátor\n\n    // vrátí dočasný výsledek\n    návratová teplota; // vrátí uložený stav\n}\n\nstd::ostream& operátor<< (std::ostream& out, const Digit& d)\n{\n\tout << d.m_digit;\n\tvrátit se ven;\n}\n\nint main()\n{\n    Číslice { 5 };\n\n    std::cout << číslice;\n    std::cout << ++digit; // volá Digit::operator++();\n    std::cout << digit++; // volá Digit::operator++(int);\n    std::cout << číslice;\n    std::cout << --digit; // volá Digit::operator--();\n    std::cout << číslice--; // volá Digit::operator--(int);\n    std::cout << číslice;\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b14",
       "type": "paragraph",
       "html": "<p>This prints</p>",
       "preview": "This prints",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b15",
       "type": "output",
       "text": "5667665\n",
       "html": "<pre>5667665\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5667665\n</pre>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b16",
       "type": "paragraph",
       "html": "<p>There are a few interesting things going on here. First, note that we’ve distinguished the prefix from the postfix operators by providing an integer dummy parameter on the postfix version. Second, because the dummy parameter is not used in the function implementation, we have not even given it a name. This tells the compiler to treat this variable as a placeholder, which means it won’t warn us that we declared a variable but never used it.</p>",
       "preview": "There are a few interesting things going on here. First, note that we’ve disting",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde se děje několik zajímavých věcí. Zaprvé si všimněte, že jsme prefixové operátory od postfixových odlišili zadáním fiktivního celočíselného parametru (dummy parameter) u postfixové verze. Zadruhé, protože tento fiktivní parametr v implementaci funkce nepoužíváme, ani jsme mu nedali jméno. Tím kompilátoru říkáme, aby s touto proměnnou zacházel jako se zástupným symbolem (placeholder), což znamená, že nás nebude varovat před deklarovanou, ale nepoužitou proměnnou.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b17",
       "type": "paragraph",
       "html": "<p>Third, note that the prefix and postfix operators do the same job -- they both increment or decrement the object. The difference between the two is in the value they return. The overloaded prefix operators return the object after it has been incremented or decremented. Consequently, overloading these is fairly straightforward. We simply increment or decrement our member variables, and then return *this.</p>",
       "preview": "Third, note that the prefix and postfix operators do the same job -- they both i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí si všimněte, že prefixové i postfixové operátory dělají stejnou práci – oba objekt inkrementují nebo dekrementují. Rozdíl mezi nimi spočívá v hodnotě, kterou vracejí. Přetížené prefixové operátory vracejí objekt poté, co byl inkrementován či dekrementován. Přetížení těchto operátorů je proto poměrně přímočaré. Jednoduše inkrementujeme nebo dekrementujeme naše členské proměnné a poté vrátíme *this.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b18",
       "type": "paragraph",
       "html": "<p>The postfix operators, on the other hand, need to return the state of the object <em>before</em> it is incremented or decremented. This leads to a bit of a conundrum -- if we increment or decrement the object, we won’t be able to return the state of the object before it was incremented or decremented. On the other hand, if we return the state of the object before we increment or decrement it, the increment or decrement will never be called.</p>",
       "preview": "The postfix operators, on the other hand, need to return the state of the object",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Postfixové operátory naproti tomu musí vrátit stav objektu <em>předtím</em>, než je inkrementován nebo dekrementován. To vede k menšímu dilematu – pokud objekt inkrementujeme nebo dekrementujeme, nebudeme moci vrátit stav objektu před jeho inkrementací či dekrementací. Na druhou stranu, pokud stav objektu vrátíme před jeho inkrementací nebo dekrementací, k samotné inkrementaci či dekrementaci nikdy nedojde.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b19",
       "type": "paragraph",
       "html": "<p>The typical way this problem is solved is to use a temporary variable that holds the value of the object before it is incremented or decremented. Then the object itself can be incremented or decremented. And finally, the temporary variable is returned to the caller. In this way, the caller receives a copy of the object before it was incremented or decremented, but the object itself is incremented or decremented. Note that this means the return value of the overloaded operator must be a non-reference, because we can’t return a reference to a local variable that will be destroyed when the function exits. Also note that this means the postfix operators are typically less efficient than the prefix operators because of the added overhead of instantiating a temporary variable and returning by value instead of reference.</p>",
       "preview": "The typical way this problem is solved is to use a temporary variable that holds",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Typickým řešením tohoto problému je použití dočasné proměnné, která uchovává hodnotu objektu před jeho inkrementací či dekrementací. Poté může být inkrementován či dekrementován samotný objekt. A nakonec je volajícímu vrácena ona dočasná proměnná. Volající tímto způsobem obdrží kopii objektu před provedením inkrementace či dekrementace, přičemž samotný objekt je již inkrementován či dekrementován. Všimněte si, že to znamená, že návratová hodnota přetíženého operátoru nesmí být reference, protože nemůžeme vrátit referenci na lokální proměnnou, která zanikne při ukončení funkce. Dále si všimněte, že to znamená, že postfixové operátory jsou obvykle méně efektivní než prefixové operátory kvůli dodatečné režii spojené s vytvořením dočasné proměnné a vracením hodnotou namísto referencí.</p>"
     },
     {
       "id": "overloading-the-increment-and-decrement-operators_b20",
       "type": "paragraph",
       "html": "<p>Finally, note that we’ve written the post-increment and post-decrement in such a way that it calls the pre-increment and pre-decrement to do most of the work. This cuts down on duplicate code, and makes our class easier to modify in the future.</p>",
       "preview": "Finally, note that we’ve written the post-increment and post-decrement in such a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na závěr si všimněte, že jsme postfixovou inkrementaci a dekrementaci napsali tak, že pro většinu práce volají prefixovou inkrementaci a dekrementaci. Tím se omezuje duplicitní kód a naše třída se v budoucnu snáze upravuje.</p>"
     }
-  ]
+  ],
+  "title_cs": "21.8 — Přetěžování operátorů inkrementace a dekrementace"
 }

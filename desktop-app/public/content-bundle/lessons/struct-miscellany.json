@@ -14,21 +14,25 @@
       "type": "section",
       "title": "Structs with program-defined members",
       "html": "<h3 class=\"cpp-section-heading\">Structs with program-defined members</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Struktury s uživatelsky definovanými členy</h3>",
+      "title_cs": "Struktury s programově definovanými členy"
     },
     {
       "id": "struct-miscellany_b1",
       "type": "paragraph",
       "html": "<p>In C++, structs (and classes) can have members that are other program-defined types. There are two ways to do this.</p>",
       "preview": "In C++, structs (and classes) can have members that are other program-defined ty",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ mohou mít struktury (a třídy) členy, které jsou jinými uživatelsky definovanými typy. Existují dva způsoby, jak toho dosáhnout.</p>"
     },
     {
       "id": "struct-miscellany_b2",
       "type": "paragraph",
       "html": "<p>First, we can define one program-defined type (in the global scope) and then use it as a member of another program-defined type:</p>",
       "preview": "First, we can define one program-defined type (in the global scope) and then use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé můžeme definovat jeden uživatelsky definovaný typ (v globálním rozsahu platnosti) a poté jej použít jako člena jiného uživatelsky definovaného typu:</p>"
     },
     {
       "id": "struct-miscellany_b3",
@@ -36,21 +40,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nstruct Company\n{\n    int numberOfEmployees {};\n    Employee CEO {}; // Employee is a struct within the Company struct\n};\n\nint main()\n{\n    Company myCompany{ 7, { 1, 32, 55000.0 } }; // Nested initialization list to initialize Employee\n    std::cout << myCompany.CEO.wage << '\\n'; // print the CEO's wage\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Employee\n{\n    int id {};\n    int age {};\n    double wage {};\n};\n\nstruct Company\n{\n    int numberOfEmployees {};\n    Employee CEO {}; // Employee is a struct within the Company struct\n};\n\nint main()\n{\n    Company myCompany{ 7, { 1, 32, 55000.0 } }; // Nested initialization list to initialize Employee\n    std::cout &lt;&lt; myCompany.CEO.wage &lt;&lt; '\\n'; // print the CEO's wage\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Zaměstnanec\n{\n    int id {};\n    int věk {};\n    dvojnásobná mzda {};\n};\n\nstruct Company\n{\n    int početZaměstnanců {};\n    Zaměstnanec CEO {}; // Zaměstnanec je struktura v rámci firemní struktury\n};\n\nint main()\n{\n    Společnost mojeSpolečnost{ 7, { 1, 32, 55000,0 } }; // Vnořený inicializační seznam pro inicializaci Zaměstnance\n    std::cout << mojeSpolecnost.CEO.mzda << '\\n'; // tisk mzdy generálního ředitele\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "struct-miscellany_b4",
       "type": "paragraph",
       "html": "<p>In the above case, we’ve defined an <code>Employee</code> struct, and then used that as a member in a <code>Company</code> struct. When we initialize our <code>Company</code>, we can also initialize our <code>Employee</code> by using a nested initialization list. And if we want to know what the CEO’s salary was, we simply use the member selection operator twice: <code>myCompany.CEO.wage;</code></p>",
       "preview": "In the above case, we’ve defined an Employee struct, and then used that as a mem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném případě jsme definovali strukturu <code>Employee</code> a poté ji použili jako člena ve struktuře <code>Company</code>. Když inicializujeme naši <code>Company</code>, můžeme také inicializovat našeho <code>Employee</code> pomocí vnořeného inicializačního seznamu. A pokud chceme zjistit, jaký byl plat CEO, jednoduše použijeme operátor výběru členu dvakrát: <code>myCompany.CEO.wage;</code></p>"
     },
     {
       "id": "struct-miscellany_b5",
       "type": "paragraph",
       "html": "<p>Second, types can also be nested inside other types, so if an Employee only existed as part of a Company, the Employee type could be nested inside the Company struct:</p>",
       "preview": "Second, types can also be nested inside other types, so if an Employee only exis",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé mohou být typy také vnořeny do jiných typů, takže pokud by <code>Employee</code> existoval pouze jako součást <code>Company</code>, mohl by být typ <code>Employee</code> vnořen do struktury <code>Company</code>:</p>"
     },
     {
       "id": "struct-miscellany_b6",
@@ -58,56 +65,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Company\n{\n    struct Employee // accessed via Company::Employee\n    {\n        int id{};\n        int age{};\n        double wage{};\n    };\n\n    int numberOfEmployees{};\n    Employee CEO{}; // Employee is a struct within the Company struct\n};\n\nint main()\n{\n    Company myCompany{ 7, { 1, 32, 55000.0 } }; // Nested initialization list to initialize Employee\n    std::cout << myCompany.CEO.wage << '\\n'; // print the CEO's wage\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Company\n{\n    struct Employee // accessed via Company::Employee\n    {\n        int id{};\n        int age{};\n        double wage{};\n    };\n\n    int numberOfEmployees{};\n    Employee CEO{}; // Employee is a struct within the Company struct\n};\n\nint main()\n{\n    Company myCompany{ 7, { 1, 32, 55000.0 } }; // Nested initialization list to initialize Employee\n    std::cout &lt;&lt; myCompany.CEO.wage &lt;&lt; '\\n'; // print the CEO's wage\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Company\n{\n    struct Zaměstnanec // přístup přes Company::Employee\n    {\n        int id{};\n        int věk{};\n        dvojnásobná mzda{};\n    };\n\n    int početZaměstnanců{};\n    zaměstnanec CEO{}; // Zaměstnanec je struktura v rámci firemní struktury\n};\n\nint main()\n{\n    Společnost mojeSpolečnost{ 7, { 1, 32, 55000,0 } }; // Vnořený inicializační seznam pro inicializaci Zaměstnance\n    std::cout << mojeSpolecnost.CEO.mzda << '\\n'; // tisk mzdy generálního ředitele\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "struct-miscellany_b7",
       "type": "paragraph",
       "html": "<p>This is more often done with classes, so we’ll talk more about this in a future lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/nested-types-member-types/\">15.3 -- Nested types (member types)</a>).</p>",
       "preview": "This is more often done with classes, so we’ll talk more about this in a future ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To se častěji dělá u tříd, takže si o tom povíme více v budoucí lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/nested-types-member-types/\">15.3 -- Vnořené typy (členské typy)</a>).</p>"
     },
     {
       "id": "struct-miscellany_b8",
       "type": "section",
       "title": "Structs that are owners should have data members that are owners",
       "html": "<h3 class=\"cpp-section-heading\">Structs that are owners should have data members that are owners</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Struktury, které jsou vlastníky, by měly mít datové členy, které jsou vlastníky</h3>",
+      "title_cs": "Struktury, které jsou vlastníky, by měly mít datové členy, kteří jsou vlastníky"
     },
     {
       "id": "struct-miscellany_b9",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/\">5.9 -- std::string_view (part 2)</a>, we introduced the dual concepts of owners and viewers. Owners manage their own data, and control when it is destroyed. Viewers view someone else’s data, and do not control when it is altered or destroyed.</p>",
       "preview": "In lesson 5.9 -- std::string_view (part 2), we introduced the dual concepts of o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdstring_view-part-2/\">5.9 -- std::string_view (2. část)</a> jsme představili duální koncept vlastníků (owners) a prohlížitelů (viewers). Vlastníci spravují svá vlastní data a řídí, kdy jsou zničena. Prohlížitelé nahlížejí na cizí data a nemají kontrolu nad tím, kdy jsou změněna nebo zničena.</p>"
     },
     {
       "id": "struct-miscellany_b10",
       "type": "paragraph",
       "html": "<p>In most cases, we want our structs (and classes) to be owners of the data they contain. This provides a few useful benefits:</p>",
       "preview": "In most cases, we want our structs (and classes) to be owners of the data they c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů chceme, aby naše struktury (a třídy) byly vlastníky dat, která obsahují. To přináší několik užitečných výhod:</p>"
     },
     {
       "id": "struct-miscellany_b11",
       "type": "list",
       "html": "<ul><li>The data members will be valid for as long as the struct (or class) is.</li><li>The value of those data members won’t change unexpectedly.</li></ul>",
       "preview": "The data members will be valid for as long as the struct (or class) is.The value",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Členské proměnné budou platné po celou dobu existence dané struktury (nebo třídy).</li><li>Hodnota těchto členských proměnných se neočekávaně nezmění.</li></ul>"
     },
     {
       "id": "struct-miscellany_b12",
       "type": "paragraph",
       "html": "<p>The easiest way to make a struct (or class) an owner is to give each data member a type that is an owner (e.g. not a viewer, pointer, or reference). If a struct or class has data members that are all owners, then the struct or class itself is automatically an owner.</p>",
       "preview": "The easiest way to make a struct (or class) an owner is to give each data member",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejjednodušší způsob, jak ze struktury (nebo třídy) udělat vlastníka, je nastavit každé členské proměnné vlastnický typ (např. nikoli viewer, ukazatel nebo referenci). Pokud má struktura nebo třída členské proměnné, které jsou všechny vlastníky, pak je samotná struktura nebo třída automaticky také vlastníkem.</p>"
     },
     {
       "id": "struct-miscellany_b13",
       "type": "paragraph",
       "html": "<p>If a struct (or class) has a data member that is a viewer, it is possible that the object being viewed by that member will be destroyed before the data member that is viewing it. If this happens, the struct will be left with a dangling member, and accessing that member will lead to undefined behavior.</p>",
       "preview": "If a struct (or class) has a data member that is a viewer, it is possible that t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud má struktura (nebo třída) členskou proměnnou typu viewer, může se stát, že sledovaný objekt bude zničen dříve než členská proměnná, která jej sleduje. Pokud k tomu dojde, struktuře zůstane visící člen (dangling member) a přístup k němu povede k nedefinovanému chování.</p>"
     },
     {
       "id": "struct-miscellany_b14",
@@ -115,7 +131,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>In most cases, we want our structs (and classes) to be owners. The easiest way to enable this is to ensure each data member has an owning type (e.g. not a viewer, pointer, or reference).</p></div>",
       "preview": "Best practiceIn most cases, we want our structs (and classes) to be owners. The easiest way to enabl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Ve většině případů chceme, aby naše struktury (a třídy) byly vlastníky. Nejjednodušší způsob, jak toho dosáhnout, je zajistit, aby každá členská proměnná měla vlastnický typ (např. nikoli viewer, ukazatel nebo referenci).</p></div>"
     },
     {
       "id": "struct-miscellany_b15",
@@ -123,14 +140,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Practice safe structs. Don’t let your member dangle.</p></div>",
       "preview": "Author’s notePractice safe structs. Don’t let your member dangle.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Praktikujte bezpečné struktury. Nenechte své členy viset (don’t let your member dangle).</p></div>"
     },
     {
       "id": "struct-miscellany_b16",
       "type": "paragraph",
       "html": "<p>This is why string data members are almost always of type <code>std::string</code> (which is an owner), and not of type <code>std::string_view</code> (which is a viewer). The following example illustrates a case where this matters:</p>",
       "preview": "This is why string data members are almost always of type std::string (which is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proto jsou řetězcové členské proměnné téměř vždy typu <code>std::string</code> (což je vlastník), a nikoli typu <code>std::string_view</code> (což je viewer). Následující příklad ilustruje případ, kdy na tom záleží:</p>"
     },
     {
       "id": "struct-miscellany_b17",
@@ -138,49 +157,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nstruct Owner\n{\n    std::string name{}; // std::string is an owner\n};\n\nstruct Viewer\n{\n    std::string_view name {}; // std::string_view is a viewer\n};\n\n// getName() returns the user-entered string as a temporary std::string\n// This temporary std::string will be destroyed at the end of the full expression\n// containing the function call.\nstd::string getName()\n{\n    std::cout << \"Enter a name: \";\n    std::string name{};\n    std::cin >> name;\n    return name;\n}\n\nint main()\n{\n    Owner o { getName() };  // The return value of getName() is destroyed just after initialization\n    std::cout << \"The owners name is \" << o.name << '\\n';  // ok\n\n    Viewer v { getName() }; // The return value of getName() is destroyed just after initialization\n    std::cout << \"The viewers name is \" << v.name << '\\n'; // undefined behavior\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nstruct Owner\n{\n    std::string name{}; // std::string is an owner\n};\n\nstruct Viewer\n{\n    std::string_view name {}; // std::string_view is a viewer\n};\n\n// getName() returns the user-entered string as a temporary std::string\n// This temporary std::string will be destroyed at the end of the full expression\n// containing the function call.\nstd::string getName()\n{\n    std::cout &lt;&lt; \"Enter a name: \";\n    std::string name{};\n    std::cin &gt;&gt; name;\n    return name;\n}\n\nint main()\n{\n    Owner o { getName() };  // The return value of getName() is destroyed just after initialization\n    std::cout &lt;&lt; \"The owners name is \" &lt;&lt; o.name &lt;&lt; '\\n';  // ok\n\n    Viewer v { getName() }; // The return value of getName() is destroyed just after initialization\n    std::cout &lt;&lt; \"The viewers name is \" &lt;&lt; v.name &lt;&lt; '\\n'; // undefined behavior\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\nvlastník struktury\n{\n    std::string name{}; // std::string je vlastník\n};\n\nProhlížeč struktur\n{\n    std::string_view name {}; // std::string_view je prohlížeč\n};\n\n// getName() vrátí uživatelem zadaný řetězec jako dočasný std::string\n// Tento dočasný std::string bude na konci úplného výrazu zničen\n// obsahující volání funkce.\nstd::string getName()\n{\n    std::cout << \"Zadejte jméno: \";\n    std::string name{};\n    std::cin >> jméno;\n    návratové jméno;\n}\n\nint main()\n{\n    Vlastník o { getName() };  // Návratová hodnota getName() je zničena hned po inicializaci\n    std::cout << \"Jméno vlastníka je \" << o.name << '\\n';  // dobře\n\n    Prohlížeč v { getName() }; // Návratová hodnota getName() je zničena hned po inicializaci\n    std::cout << \"Jméno diváků je \" << v.name << '\\n'; // nedefinované chování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "struct-miscellany_b18",
       "type": "paragraph",
       "html": "<p>The <code>getName()</code> function returns the name the user entered as a temporary <code>std::string</code>. This temporary return value is destroyed at the end of the full expression in which the function is called.</p>",
       "preview": "The getName() function returns the name the user entered as a temporary std::str",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce <code>getName()</code> vrací jméno zadané uživatelem jako dočasný <code>std::string</code>. Tato dočasná návratová hodnota je zničena na konci celého výrazu (full expression), ve kterém je funkce volána.</p>"
     },
     {
       "id": "struct-miscellany_b19",
       "type": "paragraph",
       "html": "<p>In the case of <code>o</code>, this temporary <code>std::string</code> is used to initialize <code>o.name</code>. Since <code>o.name</code> is a <code>std::string</code>, <code>o.name</code> makes a copy of the temporary <code>std::string</code>. The temporary <code>std::string</code> then dies, but <code>o.name</code> is not affected since it’s a copy. When we print <code>o.name</code> in the subsequent statement, it works as we expect.</p>",
       "preview": "In the case of o, this temporary std::string is used to initialize o.name. Since",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě <code>o</code> je tento dočasný <code>std::string</code> použit k inicializaci <code>o.name</code>. Protože <code>o.name</code> je <code>std::string</code>, vytvoří <code>o.name</code> kopii tohoto dočasného <code>std::string</code>. Dočasný <code>std::string</code> následně zanikne, ale <code>o.name</code> to nijak neovlivní, jelikož jde o kopii. Když v následujícím příkazu <code>o.name</code> vypíšeme, funguje to podle očekávání.</p>"
     },
     {
       "id": "struct-miscellany_b20",
       "type": "paragraph",
       "html": "<p>In the case of <code>v</code>, this temporary <code>std::string</code> is used to initialize <code>v.name</code>. Since <code>v.name</code> is a <code>std::string_view</code>, <code>v.name</code> is just a view of the temporary <code>std::string</code>, not a copy. The temporary <code>std::string</code> then dies, leaving <code>v.name</code> dangling. When we print <code>v.name</code> in the subsequent statement, we get undefined behavior.</p>",
       "preview": "In the case of v, this temporary std::string is used to initialize v.name. Since",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě <code>v</code> je tento dočasný <code>std::string</code> použit k inicializaci <code>v.name</code>. Protože <code>v.name</code> je <code>std::string_view</code>, je <code>v.name</code> pouhým pohledem na tento dočasný <code>std::string</code>, nikoli kopií. Dočasný <code>std::string</code> pak zanikne a zanechá <code>v.name</code> visící (dangling). Když v následujícím příkazu <code>v.name</code> vypíšeme, dojde k nedefinovanému chování.</p>"
     },
     {
       "id": "struct-miscellany_b21",
       "type": "section",
       "title": "Struct size and data structure alignment",
       "html": "<h3 class=\"cpp-section-heading\">Struct size and data structure alignment</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Velikost struktur a zarovnání datových struktur</h3>",
+      "title_cs": "Velikost struktury a zarovnání datové struktury"
     },
     {
       "id": "struct-miscellany_b22",
       "type": "paragraph",
       "html": "<p>Typically, the size of a struct is the sum of the size of all its members, but not always!</p>",
       "preview": "Typically, the size of a struct is the sum of the size of all its members, but n",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obvykle je velikost struktury součtem velikostí všech jejích členů, ale neplatí to vždy!</p>"
     },
     {
       "id": "struct-miscellany_b23",
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "struct-miscellany_b24",
@@ -188,14 +215,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Foo\n{\n    short a {};\n    int b {};\n    double c {};\n};\n\nint main()\n{\n    std::cout << \"The size of short is \" << sizeof(short) << \" bytes\\n\";\n    std::cout << \"The size of int is \" << sizeof(int) << \" bytes\\n\";\n    std::cout << \"The size of double is \" << sizeof(double) << \" bytes\\n\";\n\n    std::cout << \"The size of Foo is \" << sizeof(Foo) << \" bytes\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Foo\n{\n    short a {};\n    int b {};\n    double c {};\n};\n\nint main()\n{\n    std::cout &lt;&lt; \"The size of short is \" &lt;&lt; sizeof(short) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; \"The size of int is \" &lt;&lt; sizeof(int) &lt;&lt; \" bytes\\n\";\n    std::cout &lt;&lt; \"The size of double is \" &lt;&lt; sizeof(double) &lt;&lt; \" bytes\\n\";\n\n    std::cout &lt;&lt; \"The size of Foo is \" &lt;&lt; sizeof(Foo) &lt;&lt; \" bytes\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Foo\n{\n    krátké a {};\n    int b {};\n    double c {};\n};\n\nint main()\n{\n    std::cout << \"Velikost short je \" << sizeof(short) << \" bytes\\n\";\n    std::cout << \"Velikost int je \" << sizeof(int) << \" bytes\\n\";\n    std::cout << \"Velikost double je \" << sizeof(double) << \" bytes\\n\";\n\n    std::cout << \"Velikost Foo je \" << sizeof(Foo) << \" bytes\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "struct-miscellany_b25",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this printed:</p>",
       "preview": "On the author’s machine, this printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači se vypsalo:</p>"
     },
     {
       "id": "struct-miscellany_b26",
@@ -203,28 +232,32 @@
       "language": "cpp",
       "code": "The size of short is 2 bytes\nThe size of int is 4 bytes\nThe size of double is 8 bytes\nThe size of Foo is 16 bytes",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">The size of short is 2 bytes\nThe size of int is 4 bytes\nThe size of double is 8 bytes\nThe size of Foo is 16 bytes</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">Velikost zkratky je 2 bajty\nVelikost int je 4 bajty\nVelikost double je 8 bajtů\nVelikost Foo je 16 bajtů</code></pre>"
     },
     {
       "id": "struct-miscellany_b27",
       "type": "paragraph",
       "html": "<p>Note that the size of <code>short</code> + <code>int</code> + <code>double</code> is 14 bytes, but the size of <code>Foo</code> is 16 bytes!</p>",
       "preview": "Note that the size of short + int + double is 14 bytes, but the size of Foo is 1",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že velikost <code>short</code> + <code>int</code> + <code>double</code> je 14 bajtů, ale velikost <code>Foo</code> je 16 bajtů!</p>"
     },
     {
       "id": "struct-miscellany_b28",
       "type": "paragraph",
       "html": "<p>It turns out, we can only say that the size of a struct will be <em>at least</em> as large as the size of all the variables it contains. But it could be larger! For performance reasons, the compiler will sometimes add gaps into structures (this is called <strong>padding</strong>).</p>",
       "preview": "It turns out, we can only say that the size of a struct will be at least as larg",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazuje se, že můžeme s jistotou říci pouze to, že velikost struktury bude <em>alespoň</em> tak velká jako velikost všech proměnných, které obsahuje. Může však být větší! Z výkonnostních důvodů překladač někdy vkládá do struktur mezery (tomu se říká <strong>padding</strong>).</p>"
     },
     {
       "id": "struct-miscellany_b29",
       "type": "paragraph",
       "html": "<p>In the <code>Foo</code> struct above, the compiler is invisibly adding 2 bytes of padding after member <code>a</code>, making the size of the structure 16 bytes instead of 14.</p>",
       "preview": "In the Foo struct above, the compiler is invisibly adding 2 bytes of padding aft",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedené struktuře <code>Foo</code> kompilátor neviditelně přidává 2 bajty paddingu za člen <code>a</code>, čímž je velikost struktury 16 bajtů namísto 14.</p>"
     },
     {
       "id": "struct-miscellany_b30",
@@ -232,14 +265,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The reason compilers may add padding is beyond the scope of this tutorial, but readers who want to learn more can read about <a href=\"https://en.wikipedia.org/wiki/Data_structure_alignment\">data structure alignment</a> on Wikipedia. This is optional reading and not required to understand structures or C++!</p></div>",
       "preview": "For advanced readersThe reason compilers may add padding is beyond the scope of this tutorial, but r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Důvod, proč kompilátory mohou přidávat padding, přesahuje rámec tohoto tutoriálu, ale čtenáři, kteří se chtějí dozvědět více, si mohou přečíst o <a href=\"https://en.wikipedia.org/wiki/Data_structure_alignment\">zarovnání datových struktur (data structure alignment)</a> na Wikipedii. Jedná se o volitelné čtení a není vyžadováno pro pochopení struktur ani jazyka C++!</p></div>"
     },
     {
       "id": "struct-miscellany_b31",
       "type": "paragraph",
       "html": "<p>This can actually have a pretty significant impact on the size of the struct, as the following program demonstrates:</p>",
       "preview": "This can actually have a pretty significant impact on the size of the struct, as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To může mít ve skutečnosti poměrně významný dopad na velikost struktury, jak ukazuje následující program:</p>"
     },
     {
       "id": "struct-miscellany_b32",
@@ -247,28 +282,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Foo1\n{\n    short a{}; // will have 2 bytes of padding after a\n    int b{};\n    short c{}; // will have 2 bytes of padding after c\n};\n\nstruct Foo2\n{\n    int b{};\n    short a{};\n    short c{};\n};\n\nint main()\n{\n    std::cout << sizeof(Foo1) << '\\n'; // prints 12\n    std::cout << sizeof(Foo2) << '\\n'; // prints 8\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Foo1\n{\n    short a{}; // will have 2 bytes of padding after a\n    int b{};\n    short c{}; // will have 2 bytes of padding after c\n};\n\nstruct Foo2\n{\n    int b{};\n    short a{};\n    short c{};\n};\n\nint main()\n{\n    std::cout &lt;&lt; sizeof(Foo1) &lt;&lt; '\\n'; // prints 12\n    std::cout &lt;&lt; sizeof(Foo2) &lt;&lt; '\\n'; // prints 8\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Foo1\n{\n    krátké a{}; // bude mít po a 2 bajty výplně\n    int b{};\n    krátké c{}; // bude mít po c 2 bajty výplně\n};\n\nstruct Foo2\n{\n    int b{};\n    krátké a{};\n    krátké c{};\n};\n\nint main()\n{\n    std::cout << sizeof(Foo1) << '\\n'; // vytiskne 12\n    std::cout << sizeof(Foo2) << '\\n'; // vytiskne 8\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "struct-miscellany_b33",
       "type": "paragraph",
       "html": "<p>This program prints:</p>",
       "preview": "This program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vypíše:</p>"
     },
     {
       "id": "struct-miscellany_b34",
       "type": "output",
       "text": "12\n8\n",
       "html": "<pre>12\n8\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>12\n8\n</pre>"
     },
     {
       "id": "struct-miscellany_b35",
       "type": "paragraph",
       "html": "<p>Note that <code>Foo1</code> and <code>Foo2</code> have the same members, the only difference being the declaration order. Yet <code>Foo1</code> is 50% larger due to the added padding.</p>",
       "preview": "Note that Foo1 and Foo2 have the same members, the only difference being the dec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že <code>Foo1</code> a <code>Foo2</code> mají stejné členy, přičemž jediným rozdílem je pořadí jejich deklarace. Přesto je <code>Foo1</code> kvůli přidanému paddingu o 50 % větší.</p>"
     },
     {
       "id": "struct-miscellany_b36",
@@ -276,7 +315,9 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>You can minimize padding by defining your members in decreasing order of size.</p><p>The C++ compiler is not allowed to reorder members, so this has to be done manually.</p></div>",
       "preview": "TipYou can minimize padding by defining your members in decreasing order of size.The C++ compiler is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Padding můžete minimalizovat definováním členů v sestupném pořadí podle jejich velikosti.</p><p>Kompilátor jazyka C++ nesmí měnit pořadí členů, takže to musí být provedeno ručně.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "13.11 — Různé o strukturách"
 }

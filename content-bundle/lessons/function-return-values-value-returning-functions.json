@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b1",
@@ -22,28 +23,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n\t// get a value from the user\n\tstd::cout << \"Enter an integer: \";\n\tint num{};\n\tstd::cin >> num;\n\n\t// print the value doubled\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\t// get a value from the user\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint num{};\n\tstd::cin &gt;&gt; num;\n\n\t// print the value doubled\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n\t// získat hodnotu od uživatele\n\tstd::cout << \"Zadejte celé číslo: \";\n\tint num{};\n\tstd::cin >> num;\n\n\t// vytiskne hodnotu zdvojenou\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b2",
       "type": "paragraph",
       "html": "<p>This program is composed of two conceptual parts: First, we get a value from the user. Then we tell the user what double that value is.</p>",
       "preview": "This program is composed of two conceptual parts: First, we get a value from the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se skládá ze dvou konceptuálních částí: Nejprve získáme hodnotu od uživatele. Poté uživateli sdělíme, jaký je dvojnásobek této hodnoty.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b3",
       "type": "paragraph",
       "html": "<p>Although this program is trivial enough that we don’t need to break it into multiple functions, what if we wanted to? Getting an integer value from the user is a well-defined job that we want our program to do, so it would make a good candidate for a function.</p>",
       "preview": "Although this program is trivial enough that we don’t need to break it into mult",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli je tento program natolik triviální, že jej nepotřebujeme rozdělovat do více funkcí, co kdybychom chtěli? Získání celočíselné hodnoty od uživatele je jasně definovaná úloha, kterou má náš program provést, takže by byla dobrým kandidátem na funkci.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b4",
       "type": "paragraph",
       "html": "<p>So let’s write a program to do this:</p>",
       "preview": "So let’s write a program to do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme tedy napsat program, který to udělá:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b5",
@@ -51,49 +56,57 @@
       "language": "cpp",
       "code": "// This program doesn't work\n#include <iostream>\n\nvoid getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n}\n\nint main()\n{\n\tgetValueFromUser(); // Ask user for input\n\n\tint num{}; // How do we get the value from getValueFromUser() and use it to initialize this variable?\n\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// This program doesn't work\n#include &lt;iostream&gt;\n\nvoid getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n}\n\nint main()\n{\n\tgetValueFromUser(); // Ask user for input\n\n\tint num{}; // How do we get the value from getValueFromUser() and use it to initialize this variable?\n\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Tento program nefunguje\n#include <iostream>\n\nvoid getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n}\n\nint main()\n{\n\tgetValueFromUser(); // Požádejte uživatele o vstup\n\n\tint num{}; // Jak získáme hodnotu z getValueFromUser() a použijeme ji k inicializaci této proměnné?\n\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b6",
       "type": "paragraph",
       "html": "<p>While this program is a good attempt at a solution, it doesn’t quite work.</p>",
       "preview": "While this program is a good attempt at a solution, it doesn’t quite work.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli je tento program dobrým pokusem o řešení, úplně nefunguje.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b7",
       "type": "paragraph",
       "html": "<p>When function <code>getValueFromUser</code> is called, the user is asked to enter an integer as expected. But the value they enter is lost when <code>getValueFromUser</code> terminates and control returns to <code>main</code>. Variable <code>num</code> never gets initialized with the value the user entered, and so the program always prints the answer <code>0</code>.</p>",
       "preview": "When function getValueFromUser is called, the user is asked to enter an integer ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je zavolána funkce <code>getValueFromUser</code>, uživatel je podle očekávání vyzván k zadání celého čísla. Hodnota, kterou zadá, se však ztratí, jakmile <code>getValueFromUser</code> skončí a řízení se vrátí do <code>main</code>. Proměnná <code>num</code> se nikdy neinicializuje hodnotou, kterou uživatel zadal, a program proto vždy vypíše výsledek <code>0</code>.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b8",
       "type": "paragraph",
       "html": "<p>What we’re missing is some way for <code>getValueFromUser</code> to return the value the user entered back to <code>main</code> so that <code>main</code> can make use of that data.</p>",
       "preview": "What we’re missing is some way for getValueFromUser to return the value the user",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, co nám chybí, je způsob, jakým by <code>getValueFromUser</code> vrátila hodnotu zadanou uživatelem zpět do <code>main</code>, aby <code>main</code> mohla tato data využít.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b9",
       "type": "section",
       "title": "Return values",
       "html": "<h3 class=\"cpp-section-heading\">Return values</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návratové hodnoty</h3>",
+      "title_cs": "Návratové hodnoty"
     },
     {
       "id": "function-return-values-value-returning-functions_b10",
       "type": "paragraph",
       "html": "<p>When you write a user-defined function, you get to determine whether your function will return a value back to the caller or not. To return a value back to the caller, two things are needed.</p>",
       "preview": "When you write a user-defined function, you get to determine whether your functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když píšete uživatelsky definovanou funkci, můžete určit, zda vaše funkce bude vracet hodnotu zpět volajícímu, nebo ne. K vrácení hodnoty zpět volajícímu jsou potřeba dvě věci.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b11",
       "type": "paragraph",
       "html": "<p>First, your function has to indicate what type of value will be returned. This is done by setting the function’s <strong>return type</strong>, which is the type that is defined before the function’s name. In the example above, function <code>getValueFromUser</code> has a return type of <code>void</code> (meaning no value will be returned to the caller), and function <code>main</code> has a return type of <code>int</code> (meaning a value of type <code>int</code> will be returned to the caller). Note that this doesn’t determine what specific value is returned -- it only determines what <em>type</em> of value will be returned.</p>",
       "preview": "First, your function has to indicate what type of value will be returned. This i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé musí vaše funkce určit, jaký typ hodnoty bude vrácen. To se provádí nastavením <strong>návratového typu</strong> funkce, což je typ uvedený před jejím názvem. Ve výše uvedeném příkladu má funkce <code>getValueFromUser</code> návratový typ <code>void</code> (což znamená, že volajícímu nebude vrácena žádná hodnota) a funkce <code>main</code> má návratový typ <code>int</code> (což znamená, že volajícímu bude vrácena hodnota typu <code>int</code>). Všimněte si, že tímto se neurčuje konkrétní vrácená hodnota – určuje to pouze to, jaký <em>typ</em> hodnoty bude vrácen.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b12",
@@ -101,35 +114,40 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We explore functions that return <code>void</code> further in the next lesson (<a href=\"https://www.learncpp.com/cpp-tutorial/void-functions-non-value-returning-functions/\">2.3 -- Void functions (non-value returning functions)</a>).</p></div>",
       "preview": "Related contentWe explore functions that return void further in the next lesson (2.3 -- Void functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Funkcím vracejícím <code>void</code> se budeme podrobněji věnovat v další lekci (<a href=\"https://www.learncpp.com/cpp-tutorial/void-functions-non-value-returning-functions/\">2.3 – Funkce typu void (funkce nevracející hodnotu)</a>).</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b13",
       "type": "paragraph",
       "html": "<p>Second, inside the function that will return a value, we use a <strong>return statement</strong> to indicate the specific value being returned to the caller. The return statement consists of the <code>return</code> keyword, followed by an expression (sometimes called the <strong>return expression</strong>), ending with a semicolon.</p>",
       "preview": "Second, inside the function that will return a value, we use a return statement ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé uvnitř funkce, která vrací hodnotu, používáme <strong>příkaz return</strong> (návratový příkaz), kterým určíme konkrétní hodnotu vrácenou volajícímu. Příkaz return se skládá z klíčového slova <code>return</code>, za nímž následuje výraz (někdy označovaný jako <strong>návratový výraz</strong>), a je zakončen středníkem.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b14",
       "type": "paragraph",
       "html": "<p>When the return statement is executed:</p>",
       "preview": "When the return statement is executed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vykonán příkaz return:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b15",
       "type": "list",
       "html": "<ul><li>The return expression is evaluated to produce a value.</li><li>The value produced by the return expression is copied back to the caller. This copy is called the <strong>return value</strong> of the function.</li><li>The function exits, and control returns to the caller.</li></ul>",
       "preview": "The return expression is evaluated to produce a value.The value produced by the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Vyhodnotí se návratový výraz a vytvoří se hodnota.</li><li>Hodnota vytvořená návratovým výrazem je zkopírována zpět volajícímu. Tato kopie se nazývá <strong>návratová hodnota</strong> funkce.</li><li>Funkce se ukončí a řízení se vrátí volajícímu.</li></ul>"
     },
     {
       "id": "function-return-values-value-returning-functions_b16",
       "type": "paragraph",
       "html": "<p>The process of returning a copied value back to the caller is named <strong>return by value</strong>.</p>",
       "preview": "The process of returning a copied value back to the caller is named return by va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proces vrácení zkopírované hodnoty zpět volajícímu se nazývá <strong>návrat hodnotou</strong>.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b17",
@@ -137,21 +155,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>The return expression produces the value to be returned. The return value is a copy of that value.</p></div>",
       "preview": "NomenclatureThe return expression produces the value to be returned. The return value is a copy of t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Návratový výraz produkuje hodnotu, která má být vrácena. Návratová hodnota je kopií této hodnoty.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b18",
       "type": "paragraph",
       "html": "<p>A value-returning function will return a value each time it is called.</p>",
       "preview": "A value-returning function will return a value each time it is called.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce vracející hodnotu vrátí hodnotu při každém svém volání.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b19",
       "type": "paragraph",
       "html": "<p>Let’s take a look at a simple function that returns an integer value, and a sample program that calls it:</p>",
       "preview": "Let’s take a look at a simple function that returns an integer value, and a samp",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na jednoduchou funkci, která vrací celočíselnou hodnotu, a ukázkový program, který ji volá:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b20",
@@ -159,49 +180,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// int is the return type\n// A return type of int means the function will return some integer value to the caller (the specific value is not specified here)\nint returnFive()\n{\n    // the return statement provides the value that will be returned\n    return 5; // return the value 5 back to the caller\n}\n\nint main()\n{\n    std::cout << returnFive() << '\\n'; // prints 5\n    std::cout << returnFive() + 2 << '\\n'; // prints 7\n\n    returnFive(); // okay: the value 5 is returned, but is ignored since main() doesn't do anything with it\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// int is the return type\n// A return type of int means the function will return some integer value to the caller (the specific value is not specified here)\nint returnFive()\n{\n    // the return statement provides the value that will be returned\n    return 5; // return the value 5 back to the caller\n}\n\nint main()\n{\n    std::cout &lt;&lt; returnFive() &lt;&lt; '\\n'; // prints 5\n    std::cout &lt;&lt; returnFive() + 2 &lt;&lt; '\\n'; // prints 7\n\n    returnFive(); // okay: the value 5 is returned, but is ignored since main() doesn't do anything with it\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// int je návratový typ\n// Návratový typ int znamená, že funkce vrátí volajícímu nějakou celočíselnou hodnotu (konkrétní hodnota zde není uvedena)\nint returnFive()\n{\n    // příkaz return poskytuje hodnotu, která bude vrácena\n    návrat 5; // vrátí hodnotu 5 zpět volajícímu\n}\n\nint main()\n{\n    std::cout << returnFive() << '\\n'; // vytiskne 5\n    std::cout << returnFive() + 2 << '\\n'; // vytiskne 7\n\n    returnFive(); // v pořádku: hodnota 5 je vrácena, ale je ignorována, protože main() s ní nic nedělá\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b21",
       "type": "paragraph",
       "html": "<p>When run, this program prints:</p>",
       "preview": "When run, this program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po spuštění tento program vypíše:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b22",
       "type": "output",
       "text": "5\n7\n",
       "html": "<pre>5\n7\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>5\n7\n</pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b23",
       "type": "paragraph",
       "html": "<p>Execution starts at the top of <code>main</code>. In the first statement, the function call to <code>returnFive()</code> is evaluated, which results in function <code>returnFive()</code> being called. The return expression <code>5</code> is evaluated to produce the value <code>5</code>, which is returned back to the caller and printed to the console via <code>std::cout</code>.</p>",
       "preview": "Execution starts at the top of main. In the first statement, the function call t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vykonávání začíná na začátku <code>main</code>. V prvním příkazu se vyhodnotí volání funkce <code>returnFive()</code>, což vede k zavolání funkce <code>returnFive()</code>. Návratový výraz <code>5</code> se vyhodnotí na hodnotu <code>5</code>, která je vrácena zpět volajícímu a vypsána do konzole pomocí <code>std::cout</code>.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b24",
       "type": "paragraph",
       "html": "<p>In the second function call, the function call to <code>returnFive</code> is evaluated, which results in function <code>returnFive</code> being called again. Function <code>returnFive</code> returns the value of <code>5</code> back to the caller. The expression <code>5 + 2</code> is evaluated to produce the result <code>7</code>, which is then printed to the console via <code>std::cout</code>.</p>",
       "preview": "In the second function call, the function call to returnFive is evaluated, which",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při druhém volání funkce se vyhodnotí volání funkce <code>returnFive</code>, což vede k jejímu opětovnému zavolání. Funkce <code>returnFive</code> vrátí volajícímu hodnotu <code>5</code>. Výraz <code>5 + 2</code> se vyhodnotí na výsledek <code>7</code>, který se následně vypíše do konzole pomocí <code>std::cout</code>.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b25",
       "type": "paragraph",
       "html": "<p>In the third statement, function <code>returnFive</code> is called again, resulting in the value <code>5</code> being returned back to the caller. However, function <code>main</code> does nothing with the return value, so nothing further happens (the return value is ignored).</p>",
       "preview": "In the third statement, function returnFive is called again, resulting in the va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve třetím příkazu je funkce <code>returnFive</code> zavolána znovu, což má za následek vrácení hodnoty <code>5</code> zpět volajícímu. Funkce <code>main</code> však s návratovou hodnotou nic nedělá, takže se dále nic nestane (návratová hodnota je ignorována).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b26",
       "type": "paragraph",
       "html": "<p>Note: Return values will not be printed unless the caller sends them to the console via <code>std::cout</code>. In the last case above, the return value is not sent to <code>std::cout</code>, so nothing is printed.</p>",
       "preview": "Note: Return values will not be printed unless the caller sends them to the cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Poznámka: Návratové hodnoty se nevypíšou, pokud je volající nepošle do konzole pomocí <code>std::cout</code>. V posledním výše uvedeném případě není návratová hodnota odeslána do <code>std::cout</code>, takže se nic nevytiskne.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b27",
@@ -209,21 +237,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>When a called function returns a value, the caller may decide to use that value in an expression or statement (e.g. by using it to initialize a variable, or sending it to <code>std::cout</code>) or ignore it (by doing nothing else). If the caller ignores the return value, it is discarded (nothing is done with it).</p></div>",
       "preview": "TipWhen a called function returns a value, the caller may decide to use that value in an expression ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Když volaná funkce vrátí hodnotu, volající se může rozhodnout tuto hodnotu použít ve výrazu nebo příkazu (např. k inicializaci proměnné nebo jejím odesláním do <code>std::cout</code>), anebo ji ignorovat (nedělat s ní nic dalšího). Pokud volající návratovou hodnotu ignoruje, je zahozena (nic se s ní neprovede).</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b28",
       "type": "section",
       "title": "Fixing our challenge program",
       "html": "<h3 class=\"cpp-section-heading\">Fixing our challenge program</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Oprava našeho programu z výzvy</h3>",
+      "title_cs": "Opravujeme náš program výzev"
     },
     {
       "id": "function-return-values-value-returning-functions_b29",
       "type": "paragraph",
       "html": "<p>With this in mind, we can fix the program we presented at the top of the lesson:</p>",
       "preview": "With this in mind, we can fix the program we presented at the top of the lesson:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S tímto vědomím můžeme opravit program, který jsme uvedli na začátku lekce:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b30",
@@ -231,14 +263,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser() // this function now returns an integer value\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input; // return the value the user entered back to the caller\n}\n\nint main()\n{\n\tint num { getValueFromUser() }; // initialize num with the return value of getValueFromUser()\n\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser() // this function now returns an integer value\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input; // return the value the user entered back to the caller\n}\n\nint main()\n{\n\tint num { getValueFromUser() }; // initialize num with the return value of getValueFromUser()\n\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser() // tato funkce nyní vrací celočíselnou hodnotu\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup; // vrátí hodnotu, kterou uživatel zadal, zpět volajícímu\n}\n\nint main()\n{\n\tint num { getValueFromUser() }; // inicializuje num s návratovou hodnotou getValueFromUser()\n\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b31",
       "type": "paragraph",
       "html": "<p>When this program executes, the first statement in <code>main</code> will create an <code>int</code> variable named <code>num</code>. When the program goes to initialize <code>num</code>, it will see that there is a function call to <code>getValueFromUser()</code>, so it will go execute that function. Function <code>getValueFromUser</code>, asks the user to enter a value, and then it returns that value back to the caller (<code>main()</code>). This return value is used as the initialization value for variable <code>num</code>. <code>num</code> can then be used as many times as needed within <code>main()</code>.</p>",
       "preview": "When this program executes, the first statement in main will create an int varia",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se tento program spustí, první příkaz v <code>main</code> vytvoří proměnnou typu <code>int</code> pojmenovanou <code>num</code>. Když program přistoupí k inicializaci proměnné <code>num</code>, uvidí volání funkce <code>getValueFromUser()</code>, takže tuto funkci vykoná. Funkce <code>getValueFromUser</code> požádá uživatele o zadání hodnoty a poté tuto hodnotu vrátí zpět volajícímu (<code>main()</code>). Tato návratová hodnota se použije jako inicializační hodnota proměnné <code>num</code>. Proměnnou <code>num</code> pak lze uvnitř <code>main()</code> použít tolikrát, kolikrát je potřeba.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b32",
@@ -246,42 +280,49 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>If you need to use the return value of a function call more than once, initialize a variable with the return value, and then use that variable as many times as needed.</p></div>",
       "preview": "TipIf you need to use the return value of a function call more than once, initialize a variable with",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Pokud potřebujete použít návratovou hodnotu volání funkce více než jednou, inicializujte touto návratovou hodnotou proměnnou a poté tuto proměnnou použijte tolikrát, kolikrát je potřeba.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b33",
       "type": "paragraph",
       "html": "<p>Compile this program yourself and run it a few times to prove to yourself that it works.</p>",
       "preview": "Compile this program yourself and run it a few times to prove to yourself that i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zkompilujte si tento program sami a několikrát jej spusťte, abyste se přesvědčili, že funguje.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b34",
       "type": "section",
       "title": "Revisiting main()",
       "html": "<h3 class=\"cpp-section-heading\">Revisiting main()</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návrat k funkci main()</h3>",
+      "title_cs": "Opětovná návštěva main()"
     },
     {
       "id": "function-return-values-value-returning-functions_b35",
       "type": "paragraph",
       "html": "<p>You now have the conceptual tools to understand how the <code>main()</code> function actually works. When the program is executed, the operating system makes a function call to <code>main()</code>. Execution then jumps to the top of <code>main()</code>. The statements in <code>main()</code> are executed sequentially. Finally, <code>main()</code> returns an integer value (usually <code>0</code>), and your program terminates.</p>",
       "preview": "You now have the conceptual tools to understand how the main() function actually",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní již máte potřebné konceptuální znalosti k tomu, abyste pochopili, jak funkce <code>main()</code> ve skutečnosti funguje. Při spuštění programu operační systém provede volání funkce <code>main()</code>. Vykonávání programu pak skočí na začátek <code>main()</code>. Příkazy v <code>main()</code> se provádějí postupně (sekvenčně). Nakonec <code>main()</code> vrátí celočíselnou hodnotu (obvykle <code>0</code>) a váš program se ukončí.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b36",
       "type": "paragraph",
       "html": "<p>In C++, there are two special requirements for <code>main()</code>:</p>",
       "preview": "In C++, there are two special requirements for main():",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ existují pro <code>main()</code> dva speciální požadavky:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b37",
       "type": "list",
       "html": "<ul><li><code>main()</code> is required to return an <code>int</code>.</li><li>Explicit function calls to <code>main()</code> are disallowed.</li></ul>",
       "preview": "main() is required to return an int.Explicit function calls to main() are disall",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Funkce <code>main()</code> musí vracet <code>int</code>.</li><li>Explicitní volání funkce <code>main()</code> jsou zakázána.</li></ul>"
     },
     {
       "id": "function-return-values-value-returning-functions_b38",
@@ -289,7 +330,8 @@
       "language": "cpp",
       "code": "void foo()\n{\n    main(); // Compile error: main not allowed to be called explicitly\n}\n\nvoid main() // Compile error: main not allowed to have non-int return type\n{\n    foo();\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo()\n{\n    main(); // Compile error: main not allowed to be called explicitly\n}\n\nvoid main() // Compile error: main not allowed to have non-int return type\n{\n    foo();\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo()\n{\n    main(); // Chyba kompilace: nelze explicitně volat main\n}\n\nvoid main() // Chyba kompilace: main nesmí mít návratový typ non-int\n{\n    foo();\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b39",
@@ -297,14 +339,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>C does allow <code>main()</code> to be called explicitly, so some C++ compilers will allow this for compatibility reasons.</p></div>",
       "preview": "Key insightC does allow main() to be called explicitly, so some C++ compilers will allow this for co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Jazyk C explicitní volání <code>main()</code> umožňuje, takže některé C++ kompilátory to z důvodů kompatibility dovolují.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b40",
       "type": "paragraph",
       "html": "<p>For now, you should also define your <code>main()</code> function at the bottom of your code file, below other functions, and avoid calling it explicitly.</p>",
       "preview": "For now, you should also define your main() function at the bottom of your code ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Prozatím byste měli funkci <code>main()</code> definovat na konci souboru s kódem, pod ostatními funkcemi, a vyvarovat se jejího explicitního volání.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b41",
@@ -312,35 +356,41 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>It is a common misconception that <code>main</code> is always the first function that executes.</p><p>Global variables are initialized prior to the execution of <code>main</code>. If the initializer for such a variable invokes a function, then that function will execute prior to <code>main</code>. We discuss global variables in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-global-variables/\">7.4 -- Introduction to global variables</a>.</p></div>",
       "preview": "For advanced readersIt is a common misconception that main is always the first function that execute",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Častým omylem je představa, že <code>main</code> je vždy první funkcí, která se vykoná.</p><p>Globální proměnné jsou inicializovány ještě před spuštěním <code>main</code>. Pokud inicializátor takové proměnné volá nějakou funkci, pak se tato funkce vykoná ještě před <code>main</code>. Globální proměnné probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-global-variables/\">7.4 -- Úvod do globálních proměnných</a>.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b42",
       "type": "section",
       "title": "Status codes",
       "html": "<h3 class=\"cpp-section-heading\">Status codes</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Stavové kódy</h3>",
+      "title_cs": "Stavové kódy"
     },
     {
       "id": "function-return-values-value-returning-functions_b43",
       "type": "paragraph",
       "html": "<p>You may be wondering why we return 0 from <code>main()</code>, and when we might return something else.</p>",
       "preview": "You may be wondering why we return 0 from main(), and when we might return somet",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná si říkáte, proč z <code>main()</code> vracíme 0 a kdy bychom mohli vracet něco jiného.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b44",
       "type": "paragraph",
       "html": "<p>The return value from <code>main()</code> is sometimes called a <strong>status code</strong> (or less commonly, an <strong>exit code</strong>, or rarely a <strong>return code</strong>). The status code is used to signal whether your program was successful or not.</p>",
       "preview": "The return value from main() is sometimes called a status code (or less commonly",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Návratová hodnota z funkce <code>main()</code> se někdy nazývá <strong>stavový kód</strong> (anglicky <strong>status code</strong>, méně často <strong>exit code</strong> nebo zřídka <strong>return code</strong>). Stavový kód slouží k signalizaci toho, zda program proběhl úspěšně, či nikoli.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b45",
       "type": "paragraph",
       "html": "<p>By convention, a status code of <code>0</code> means the program ran normally (meaning the program executed and behaved as expected).</p>",
       "preview": "By convention, a status code of 0 means the program ran normally (meaning the pr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podle konvence stavový kód <code>0</code> znamená, že program proběhl normálně (což znamená, že se program vykonal a choval podle očekávání).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b46",
@@ -348,14 +398,16 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Your <code>main</code> function should return the value <code>0</code> if the program ran normally.</p></div>",
       "preview": "Best practiceYour main function should return the value 0 if the program ran normally.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vaše funkce <code>main</code> by měla vrátit hodnotu <code>0</code>, pokud program proběhl normálně.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b47",
       "type": "paragraph",
       "html": "<p>A non-zero status code is often used to indicate some kind of failure (and while this works fine on most operating systems, strictly speaking, it’s not guaranteed to be portable).</p>",
       "preview": "A non-zero status code is often used to indicate some kind of failure (and while",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nenulový stavový kód se často používá k indikaci nějakého druhu selhání (a ačkoli to na většině operačních systémů funguje bez problémů, přísně vzato není zaručeno, že je to přenositelné).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b48",
@@ -363,7 +415,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The C++ standard only defines the meaning of 3 status codes: <code>0</code>, <code>EXIT_SUCCESS</code>, and <code>EXIT_FAILURE</code>. <code>0</code> and <code>EXIT_SUCCESS</code> both mean the program executed successfully. <code>EXIT_FAILURE</code> means the program did not execute successfully.</p><p><code>EXIT_SUCCESS</code> and <code>EXIT_FAILURE</code> are preprocessor macros defined in the &lt;cstdlib&gt; header:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdlib&gt; // for EXIT_SUCCESS and EXIT_FAILURE\n\nint main()\n{\n    return EXIT_SUCCESS;\n}</code></pre><p>If you want to maximize portability, you should only use <code>0</code> or <code>EXIT_SUCCESS</code> to indicate a successful termination, or <code>EXIT_FAILURE</code> to indicate an unsuccessful termination.</p><p>We cover the preprocessor and preprocessor macros in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/\">2.10 -- Introduction to the preprocessor</a>.</p></div>",
       "preview": "For advanced readersThe C++ standard only defines the meaning of 3 status codes: 0, EXIT_SUCCESS, an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Standard C++ definuje význam pouze 3 stavových kódů: <code>0</code>, <code>EXIT_SUCCESS</code> a <code>EXIT_FAILURE</code>. <code>0</code> i <code>EXIT_SUCCESS</code> znamenají, že program proběhl úspěšně. <code>EXIT_FAILURE</code> znamená, že program neproběhl úspěšně.</p><p><code>EXIT_SUCCESS</code> a <code>EXIT_FAILURE</code> jsou makra preprocesoru definovaná v hlavičkovém souboru &lt;cstdlib&gt;:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdlib&gt; // pro EXIT_SUCCESS a EXIT_FAILURE\n\nint main()\n{\n    return EXIT_SUCCESS;\n}</code></pre><p>Pokud chcete maximalizovat přenositelnost, měli byste k indikaci úspěšného ukončení používat pouze <code>0</code> nebo <code>EXIT_SUCCESS</code> a k indikaci neúspěšného ukončení <code>EXIT_FAILURE</code>.</p><p>Preprocesoru a makrům preprocesoru se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-the-preprocessor/\">2.10 – Úvod do preprocesoru</a>.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b49",
@@ -371,28 +424,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The status code is passed back to the operating system. The OS will typically make the status code available to whichever program launched the program returning the status code. This provides a crude mechanism for any program launching another program to determine whether the launched program ran successfully or not.</p></div>",
       "preview": "As an aside…The status code is passed back to the operating system. The OS will typically make the s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Na okraj…</p><p>Stavový kód se předává zpět operačnímu systému. OS tento stavový kód obvykle zpřístupní programu, který spustil daný program vracející tento kód. To poskytuje základní mechanismus, díky němuž může jakýkoli program spouštějící jiný program zjistit, zda spuštěný program proběhl úspěšně, či nikoli.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b50",
       "type": "section",
       "title": "A value-returning function that does not return a value will produce undefined behavior",
       "html": "<h3 class=\"cpp-section-heading\">A value-returning function that does not return a value will produce undefined behavior</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Funkce vracející hodnotu, která žádnou hodnotu nevrátí, způsobí nedefinované chování</h3>",
+      "title_cs": "Funkce vracející hodnotu, která nevrací hodnotu, způsobí nedefinované chování"
     },
     {
       "id": "function-return-values-value-returning-functions_b51",
       "type": "paragraph",
       "html": "<p>A function that returns a value is called a <strong>value-returning function</strong>. A function is value-returning if the return type is anything other than <code>void</code>.</p>",
       "preview": "A function that returns a value is called a value-returning function. A function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce, která vrací hodnotu, se nazývá <strong>funkce vracející hodnotu</strong>. Funkce vrací hodnotu, pokud je její návratový typ jakýkoli jiný než <code>void</code>.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b52",
       "type": "paragraph",
       "html": "<p>A value-returning function <em>must</em> return a value of that type (using a return statement), otherwise undefined behavior will result.</p>",
       "preview": "A value-returning function must return a value of that type (using a return stat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce vracející hodnotu <em>musí</em> vrátit hodnotu daného typu (pomocí příkazu return), jinak dojde k nedefinovanému chování.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b53",
@@ -400,14 +458,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss undefined behavior in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/\">1.6 -- Uninitialized variables and undefined behavior</a>.</p></div>",
       "preview": "Related contentWe discuss undefined behavior in lesson 1.6 -- Uninitialized variables and undefined ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Nedefinovanému chování se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/uninitialized-variables-and-undefined-behavior/\">1.6 – Neinicializované proměnné a nedefinované chování</a>.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b54",
       "type": "paragraph",
       "html": "<p>Here’s an example of a function that produces undefined behavior:</p>",
       "preview": "Here’s an example of a function that produces undefined behavior:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad funkce, která vede k nedefinovanému chování:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b55",
@@ -415,21 +475,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUserUB() // this function returns an integer value\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;\n\n\t// note: no return statement\n}\n\nint main()\n{\n\tint num { getValueFromUserUB() }; // initialize num with the return value of getValueFromUserUB()\n\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUserUB() // this function returns an integer value\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;\n\n\t// note: no return statement\n}\n\nint main()\n{\n\tint num { getValueFromUserUB() }; // initialize num with the return value of getValueFromUserUB()\n\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUserUB() // tato funkce vrací celočíselnou hodnotu\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;\n\n\t// poznámka: žádný příkaz return\n}\n\nint main()\n{\n\tint num { getValueFromUserUB() }; // inicializuje num s návratovou hodnotou getValueFromUserUB()\n\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b56",
       "type": "paragraph",
       "html": "<p>A modern compiler should generate a warning because <code>getValueFromUserUB</code> is defined as returning an <code>int</code> but no return statement is provided. Running such a program would produce undefined behavior, because <code>getValueFromUserUB()</code> is a value-returning function that does not return a value.</p>",
       "preview": "A modern compiler should generate a warning because getValueFromUserUB is define",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Moderní kompilátor by měl vygenerovat varování, protože <code>getValueFromUserUB</code> je definována tak, že vrací <code>int</code>, ale neobsahuje žádný příkaz return. Spuštění takového programu by vedlo k nedefinovanému chování, protože <code>getValueFromUserUB()</code> je funkce vracející hodnotu, která však žádnou hodnotu nevrací.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b57",
       "type": "paragraph",
       "html": "<p>In most cases, compilers will detect if you’ve forgotten to return a value. However, in some complicated cases, the compiler may not be able to properly determine whether your function returns a value or not in all cases, so you should not rely on this.</p>",
       "preview": "In most cases, compilers will detect if you’ve forgotten to return a value. Howe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů kompilátory rozpoznají, pokud jste zapomněli vrátit hodnotu. V některých složitých případech však kompilátor nemusí být schopen spolehlivě určit, zda vaše funkce vrací hodnotu za všech okolností, takže byste na to neměli spoléhat.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b58",
@@ -437,70 +500,83 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Make sure your functions with non-void return types return a value in all cases.</p><p>Failure to return a value from a value-returning function will cause undefined behavior.</p></div>",
       "preview": "Best practiceMake sure your functions with non-void return types return a value in all cases.Failure",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Ujistěte se, že vaše funkce s návratovým typem jiným než void vracejí hodnotu ve všech případech.</p><p>Pokud z funkce vracející hodnotu nevrátíte žádnou hodnotu, povede to k nedefinovanému chování (undefined behavior).</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b59",
       "type": "section",
       "title": "Function main will implicitly return 0 if no return statement is provided",
       "html": "<h3 class=\"cpp-section-heading\">Function main will implicitly return 0 if no return statement is provided</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Funkce main implicitně vrátí 0, pokud není uveden žádný příkaz return</h3>",
+      "title_cs": "Funkce main implicitně vrátí 0, pokud není zadán žádný příkaz return"
     },
     {
       "id": "function-return-values-value-returning-functions_b60",
       "type": "paragraph",
       "html": "<p>The only exception to the rule that a value-returning function must return a value via a return statement is for function <code>main()</code>. The function <code>main()</code> will implicitly return the value <code>0</code> if no return statement is provided. That said, it is best practice to explicitly return a value from <code>main</code>, both to show your intent, and for consistency with other functions (which will exhibit undefined behavior if a return value is not specified).</p>",
       "preview": "The only exception to the rule that a value-returning function must return a val",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedinou výjimkou z pravidla, že funkce vracející hodnotu musí vrátit hodnotu pomocí příkazu return, je funkce <code>main()</code>. Funkce <code>main()</code> implicitně vrátí hodnotu <code>0</code>, pokud není uveden žádný příkaz return. Přesto je osvědčeným postupem explicitně vracet hodnotu z <code>main</code>, a to jak pro vyjádření vašeho záměru, tak kvůli konzistenci s ostatními funkcemi (které budou vykazovat nedefinované chování, pokud návratová hodnota není specifikována).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b61",
       "type": "section",
       "title": "Functions can only return a single value",
       "html": "<h3 class=\"cpp-section-heading\">Functions can only return a single value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Funkce mohou vracet pouze jednu hodnotu</h3>",
+      "title_cs": "Funkce mohou vrátit pouze jednu hodnotu"
     },
     {
       "id": "function-return-values-value-returning-functions_b62",
       "type": "paragraph",
       "html": "<p>A value-returning function can only return a single value back to the caller each time it is called.</p>",
       "preview": "A value-returning function can only return a single value back to the caller eac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce vracející hodnotu může volajícímu při každém svém zavolání vrátit pouze jednu hodnotu.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b63",
       "type": "paragraph",
       "html": "<p>Note that the value provided in a return statement doesn’t need to be literal -- it can be the result of any valid expression, including a variable or even a call to another function that returns a value. In the <code>getValueFromUser()</code> example above, we returned a variable <code>input</code>, which held the number the user input.</p>",
       "preview": "Note that the value provided in a return statement doesn’t need to be literal --",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že hodnota uvedená v příkazu return nemusí být literál -- může to být výsledek jakéhokoli platného výrazu, včetně proměnné nebo dokonce volání jiné funkce, která vrací hodnotu. Ve výše uvedeném příkladu <code>getValueFromUser()</code> jsme vrátili proměnnou <code>input</code>, která obsahovala číslo zadané uživatelem.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b64",
       "type": "paragraph",
       "html": "<p>There are various ways to work around the limitation of functions only being able to return a single value, which we’ll cover in future lessons.</p>",
       "preview": "There are various ways to work around the limitation of functions only being abl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existují různé způsoby, jak obejít omezení, že funkce mohou vracet pouze jednu hodnotu, kterým se budeme věnovat v budoucích lekcích.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b65",
       "type": "section",
       "title": "The function author can decide what the return value means",
       "html": "<h3 class=\"cpp-section-heading\">The function author can decide what the return value means</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Autor funkce může rozhodnout, co návratová hodnota znamená</h3>",
+      "title_cs": "Autor funkce může rozhodnout, co znamená návratová hodnota"
     },
     {
       "id": "function-return-values-value-returning-functions_b66",
       "type": "paragraph",
       "html": "<p>The meaning of the value returned by a function is determined by the function’s author. Some functions use return values as status codes, to indicate whether they succeeded or failed. Other functions return a calculated or selected value. Other functions return nothing (we’ll see examples of these in the next lesson).</p>",
       "preview": "The meaning of the value returned by a function is determined by the function’s ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Význam hodnoty vrácené funkcí určuje autor dané funkce. Některé funkce používají návratové hodnoty jako stavové kódy, aby signalizovaly, zda uspěly, nebo selhaly. Jiné funkce vracejí vypočítanou nebo vybranou hodnotu. Další funkce nevracejí nic (příklady takových uvidíme v další lekci).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b67",
       "type": "paragraph",
       "html": "<p>Because of the wide variety of possibilities here, it’s a good idea to document your function with a comment indicating what the return values mean. For example:</p>",
       "preview": "Because of the wide variety of possibilities here, it’s a good idea to document ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k široké škále možností je dobrým zvykem zdokumentovat vaši funkci komentářem, který vysvětluje, co návratové hodnoty znamenají. Například:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b68",
@@ -508,21 +584,25 @@
       "language": "cpp",
       "code": "// Function asks user to enter a value\n// Return value is the integer entered by the user from the keyboard\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input; // return the value the user entered back to the caller\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Function asks user to enter a value\n// Return value is the integer entered by the user from the keyboard\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input; // return the value the user entered back to the caller\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Funkce požádá uživatele o zadání hodnoty\n// Návratová hodnota je celé číslo zadané uživatelem z klávesnice\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup; // vrátí hodnotu, kterou uživatel zadal, zpět volajícímu\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b69",
       "type": "section",
       "title": "Reusing functions",
       "html": "<h3 class=\"cpp-section-heading\">Reusing functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Opětovné použití funkcí</h3>",
+      "title_cs": "Opětovné použití funkcí"
     },
     {
       "id": "function-return-values-value-returning-functions_b70",
       "type": "paragraph",
       "html": "<p>Now we can illustrate a good case for function reuse. Consider the following program:</p>",
       "preview": "Now we can illustrate a good case for function reuse. Consider the following pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si můžeme ukázat vhodný příklad pro opětovné použití funkcí. Podívejme se na následující program:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b71",
@@ -530,28 +610,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n\tint x{};\n\tstd::cout << \"Enter an integer: \";\n\tstd::cin >> x; \n\n\tint y{};\n\tstd::cout << \"Enter an integer: \";\n\tstd::cin >> y; \n\n\tstd::cout << x << \" + \" << y << \" = \" << x + y << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n\tint x{};\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tstd::cin &gt;&gt; x; \n\n\tint y{};\n\tstd::cout &lt;&lt; \"Enter an integer: \";\n\tstd::cin &gt;&gt; y; \n\n\tstd::cout &lt;&lt; x &lt;&lt; \" + \" &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; x + y &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n\tint x{};\n\tstd::cout << \"Zadejte celé číslo: \";\n\tstd::cin >> x; \n\n\tint y{};\n\tstd::cout << \"Zadejte celé číslo: \";\n\tstd::cin >> y; \n\n\tstd::cout << x << \" + \" << y << \" = \" << x + y << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b72",
       "type": "paragraph",
       "html": "<p>While this program works, it’s a little redundant. In fact, this program violates one of the central tenets of good programming: <strong>Don’t Repeat Yourself</strong> (often abbreviated <strong>DRY</strong>).</p>",
       "preview": "While this program works, it’s a little redundant. In fact, this program violate",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli tento program funguje, je poněkud redundantní. Ve skutečnosti tento program porušuje jednu z hlavních zásad dobrého programování: <strong>Don’t Repeat Yourself</strong> (často zkracováno jako <strong>DRY</strong>).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b73",
       "type": "paragraph",
       "html": "<p>Why is repeated code bad? If we wanted to change the text “Enter an integer:” to something else, we’d have to update it in two locations. And what if we wanted to initialize 10 variables instead of 2? That would be a lot of redundant code (making our programs longer and harder to understand), and a lot of room for typos to creep in.</p>",
       "preview": "Why is repeated code bad? If we wanted to change the text “Enter an integer:” to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proč je duplicitní kód špatný? Kdybychom chtěli změnit text „Enter an integer:“ na něco jiného, museli bychom jej upravit na dvou místech. A co kdybychom chtěli inicializovat 10 proměnných místo 2? To by vedlo ke spoustě redundantního kódu (programy by byly delší a hůře srozumitelné) a velkému prostoru pro vznik překlepů a chyb.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b74",
       "type": "paragraph",
       "html": "<p>Let’s update this program to use our <code>getValueFromUser</code> function that we developed above:</p>",
       "preview": "Let’s update this program to use our getValueFromUser function that we developed",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Aktualizujme tento program tak, aby používal naši funkci <code>getValueFromUser</code>, kterou jsme vytvořili výše:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b75",
@@ -559,35 +643,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input;\n}\n\nint main()\n{\n    int x{ getValueFromUser() }; // first call to getValueFromUser\n    int y{ getValueFromUser() }; // second call to getValueFromUser\n\n    std::cout << x << \" + \" << y << \" = \" << x + y << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input;\n}\n\nint main()\n{\n    int x{ getValueFromUser() }; // first call to getValueFromUser\n    int y{ getValueFromUser() }; // second call to getValueFromUser\n\n    std::cout &lt;&lt; x &lt;&lt; \" + \" &lt;&lt; y &lt;&lt; \" = \" &lt;&lt; x + y &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup;\n}\n\nint main()\n{\n    int x{ getValueFromUser() }; // první volání getValueFromUser\n    int y{ getValueFromUser() }; // druhé volání getValueFromUser\n\n    std::cout << x << \" + \" << y << \" = \" << x + y << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b76",
       "type": "paragraph",
       "html": "<p>This program produces the following output:</p>",
       "preview": "This program produces the following output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b77",
       "type": "output",
       "text": "Enter an integer: 5\nEnter an integer: 7\n5 + 7 = 12\n",
       "html": "<pre>Enter an integer: 5\nEnter an integer: 7\n5 + 7 = 12\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Enter an integer: 5\nEnter an integer: 7\n5 + 7 = 12\n</pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b78",
       "type": "paragraph",
       "html": "<p>In this program, we call <code>getValueFromUser</code> twice, once to initialize variable <code>x</code>, and once to initialize variable <code>y</code>. That saves us from duplicating the code to get user input, and reduces the odds of making a mistake. Once we know <code>getValueFromUser</code> works, we can call it as many times as we desire.</p>",
       "preview": "In this program, we call getValueFromUser twice, once to initialize variable x, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto programu voláme <code>getValueFromUser</code> dvakrát – jednou pro inicializaci proměnné <code>x</code> a jednou pro inicializaci proměnné <code>y</code>. To nám ušetří duplikování kódu pro získání vstupu od uživatele a snižuje pravděpodobnost, že uděláme chybu. Jakmile víme, že <code>getValueFromUser</code> funguje, můžeme ji volat tolikrát, kolikrát potřebujeme.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b79",
       "type": "paragraph",
       "html": "<p>This is the essence of modular programming: the ability to write a function, test it, ensure that it works, and then know that we can reuse it as many times as we want and it will continue to work (so long as we don’t modify the function -- at which point we’ll have to retest it).</p>",
       "preview": "This is the essence of modular programming: the ability to write a function, tes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tom spočívá podstata modulárního programování: schopnost napsat funkci, otestovat ji, ujistit se, že funguje, a pak vědět, že ji můžeme znovu použít tolikrát, kolikrát chceme, a bude fungovat i nadále (pokud funkci neupravíme – v takovém případě ji budeme muset otestovat znovu).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b80",
@@ -595,7 +684,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Follow DRY: “Don’t repeat yourself”. If you need to do something more than once, consider how to modify your code to remove as much redundancy as possible. Variables can be used to store the results of calculations that need to be used more than once (so we don’t have to repeat the calculation). Functions can be used to define a sequence of statements we want to execute more than once. And loops (which we’ll cover in a later chapter) can be used to execute a statement more than once.</p><p>Like all best practices, DRY is meant to be a guideline, not an absolute. Reader Yariv has <a href=\"https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/#comment-593257\">noted</a> that DRY can harm overall comprehension when code is broken into pieces that are too small.</p></div>",
       "preview": "Best practiceFollow DRY: “Don’t repeat yourself”. If you need to do something more than once, consid",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup (Best practice)</p><p>Dodržujte princip DRY: „Don’t repeat yourself“ (Neopakujte se). Pokud potřebujete něco udělat více než jednou, zvažte, jak kód upravit, abyste odstranili co nejvíce redundance. Proměnné lze použít k uložení výsledků výpočtů, které je třeba použít vícekrát (abychom nemuseli výpočet opakovat). Funkce lze použít k definování posloupnosti příkazů, které chceme provést vícekrát. A cykly (které probereme v pozdější kapitole) lze použít k vícenásobnému provedení příkazu.</p><p>Stejně jako všechny doporučené postupy má i DRY sloužit jako vodítko, nikoli jako absolutní pravidlo. Čtenář Yariv <a href=\"https://www.learncpp.com/cpp-tutorial/function-return-values-value-returning-functions/#comment-593257\">poznamenal</a>, že DRY může uškodit celkové srozumitelnosti, pokud je kód rozdělen na příliš malé části.</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b81",
@@ -603,35 +693,42 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The (snarky) opposite of DRY is WET (“Write everything twice”).</p></div>",
       "preview": "As an aside…The (snarky) opposite of DRY is WET (“Write everything twice”).",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Jen tak mimochodem…</p><p>(Uštěpačným) protikladem k DRY je WET („Write everything twice“ – napiš všechno dvakrát).</p></div>"
     },
     {
       "id": "function-return-values-value-returning-functions_b82",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "function-return-values-value-returning-functions_b83",
       "type": "paragraph",
       "html": "<p>Return values provide a way for functions to return a single value back to the function’s caller.</p>",
       "preview": "Return values provide a way for functions to return a single value back to the f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Návratové hodnoty představují způsob, jakým funkce vrací jednu hodnotu zpět volajícímu.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b84",
       "type": "paragraph",
       "html": "<p>Functions provide a way to minimize redundancy in our programs.</p>",
       "preview": "Functions provide a way to minimize redundancy in our programs.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce poskytují způsob, jak v našich programech minimalizovat redundanci.</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b85",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "function-return-values-value-returning-functions_b86",
@@ -647,14 +744,16 @@
       "type": "paragraph",
       "html": "<p>Assume you have “treat warnings as errors” turned off.</p>",
       "preview": "Assume you have “treat warnings as errors” turned off.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Předpokládejte, že máte vypnutou volbu „považovat varování za chyby“ (treat warnings as errors).</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b88",
       "type": "paragraph",
       "html": "<p>1a)</p>",
       "preview": "1a)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1a)</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b89",
@@ -662,14 +761,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint return7()\n{\n    return 7;\n}\n\nint return9()\n{\n    return 9;\n}\n\nint main()\n{\n    std::cout << return7() + return9() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint return7()\n{\n    return 7;\n}\n\nint return9()\n{\n    return 9;\n}\n\nint main()\n{\n    std::cout &lt;&lt; return7() + return9() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint return7()\n{\n    návrat 7;\n}\n\nint return9()\n{\n    návrat 9;\n}\n\nint main()\n{\n    std::cout << return7() + return9() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b90",
       "type": "paragraph",
       "html": "<p>1b)</p>",
       "preview": "1b)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1b)</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b91",
@@ -677,14 +778,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint return7()\n{\n    return 7;\n\n    int return9()\n    {\n        return 9;\n    }\n}\n\nint main()\n{\n    std::cout << return7() + return9() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint return7()\n{\n    return 7;\n\n    int return9()\n    {\n        return 9;\n    }\n}\n\nint main()\n{\n    std::cout &lt;&lt; return7() + return9() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint return7()\n{\n    návrat 7;\n\n    int return9()\n    {\n        návrat 9;\n    }\n}\n\nint main()\n{\n    std::cout << return7() + return9() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b92",
       "type": "paragraph",
       "html": "<p>1c)</p>",
       "preview": "1c)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1c)</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b93",
@@ -692,14 +795,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint return7()\n{\n    return 7;\n}\n\nint return9()\n{\n    return 9;\n}\n\nint main()\n{\n    return7();\n    return9();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint return7()\n{\n    return 7;\n}\n\nint return9()\n{\n    return 9;\n}\n\nint main()\n{\n    return7();\n    return9();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint return7()\n{\n    návrat 7;\n}\n\nint return9()\n{\n    návrat 9;\n}\n\nint main()\n{\n    return7();\n    return9();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b94",
       "type": "paragraph",
       "html": "<p>1d)</p>",
       "preview": "1d)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1d)</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b95",
@@ -707,14 +812,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getNumbers()\n{\n    return 5;\n    return 7;\n}\n\nint main()\n{\n    std::cout << getNumbers() << '\\n';\n    std::cout << getNumbers() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getNumbers()\n{\n    return 5;\n    return 7;\n}\n\nint main()\n{\n    std::cout &lt;&lt; getNumbers() &lt;&lt; '\\n';\n    std::cout &lt;&lt; getNumbers() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getNumbers()\n{\n    návrat 5;\n    návrat 7;\n}\n\nint main()\n{\n    std::cout << getNumbers() << '\\n';\n    std::cout << getNumbers() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b96",
       "type": "paragraph",
       "html": "<p>1e)</p>",
       "preview": "1e)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>1e)</p>"
     },
     {
       "id": "function-return-values-value-returning-functions_b97",
@@ -722,7 +829,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint return 5()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout << return 5() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint return 5()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; return 5() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint return 5()\n{\n    návrat 5;\n}\n\nint main()\n{\n    std::cout << return 5() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "function-return-values-value-returning-functions_b98",
@@ -733,5 +841,6 @@
       "solutionHtml": "DRY stands for “Don’t Repeat Yourself”. It is a practice that involves writing your code in such a way so as to minimize redundancy. This makes your programs more concise, less error prone, and more maintainable.",
       "canCheck": true
     }
-  ]
+  ],
+  "title_cs": "2.2 — Návratové hodnoty funkcí (funkce vracející hodnotu)"
 }

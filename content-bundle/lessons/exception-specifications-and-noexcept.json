@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>(h/t to reader Koe for providing the first draft of this lesson!)</p>",
       "preview": "(h/t to reader Koe for providing the first draft of this lesson!)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>(h/t čtenáři Koe za poskytnutí prvního konceptu této lekce!)</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b1",
       "type": "paragraph",
       "html": "<p>Looking at a typical function declaration, it is not possible to determine whether a function might throw an exception or not:</p>",
       "preview": "Looking at a typical function declaration, it is not possible to determine wheth",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při pohledu na typickou deklaraci funkce není možné určit, zda funkce může vyvolat výjimku nebo ne:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b2",
@@ -29,49 +31,57 @@
       "language": "cpp",
       "code": "int doSomething(); // can this function throw an exception or not?",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doSomething(); // can this function throw an exception or not?</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doSomething(); // může tato funkce vyvolat výjimku nebo ne?</code></pre>"
     },
     {
       "id": "exception-specifications-and-noexcept_b3",
       "type": "paragraph",
       "html": "<p>In the above example, can <code>doSomething()</code> throw an exception? It’s not clear. But the answer is important in some contexts. In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/exception-dangers-and-downsides/\">27.8 -- Exception dangers and downsides</a>, we described how an exception that is thrown out of a destructor during stack unwinding will cause the program to halt. If <code>doSomething()</code> can throw an exception, then calling it from a destructor (or any other place where a thrown exception is undesirable) is risky. Although we could have the destructor handle exceptions thrown by <code>doSomething()</code> (so those exceptions don’t propagate out of the destructor), we have to remember to do this, and we have to ensure we cover all the different types of exceptions that may be thrown.</p>",
       "preview": "In the above example, can doSomething() throw an exception? It’s not clear. But ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Může ve výše uvedeném příkladu <code>doSomething()</code> vyvolat výjimku? není to jasné. Ale odpověď je v některých kontextech důležitá. V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/exception-dangers-and-downsides/\">27.8 -- Nebezpečí a nevýhody výjimek</a> jsme popsali, jak výjimka, která je vyhozena z destruktoru během odvíjení zásobníku, způsobí zastavení programu. Pokud může <code>doSomething()</code> vyvolat výjimku, pak je její volání z destruktoru (nebo jakéhokoli jiného místa, kde je vyvolání výjimky nežádoucí) riskantní. Ačkoli bychom mohli nechat destruktor zpracovávat výjimky vyvolané <code>doSomething()</code> (takže se tyto výjimky nešíří z destruktoru), musíme si to zapamatovat a musíme zajistit, abychom pokryli všechny různé typy výjimek, které mohou být vyvolány.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b4",
       "type": "paragraph",
       "html": "<p>While comments may help enumerate whether a function throws exceptions or not (and if so, what kind of exceptions), documentation can grow stale and there is no compiler enforcement for comments.</p>",
       "preview": "While comments may help enumerate whether a function throws exceptions or not (a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>I když komentáře mohou pomoci vyjmenovat, zda funkce vyvolává výjimky nebo ne (a pokud ano, jaký druh výjimek), dokumentace může být zastaralá a není zde žádný kompilátor pro komentáře.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b5",
       "type": "paragraph",
       "html": "<p><strong>Exception specifications</strong> are a language mechanism that was originally designed to document what kind of exceptions a function might throw as part of a function specification. While most of the exception specifications have now been deprecated or removed, one useful exception specification was added as a replacement, which we’ll cover in this lesson.</p>",
       "preview": "Exception specifications are a language mechanism that was originally designed t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Specifikace výjimek</strong> jsou jazykový mechanismus, který byl původně navržen tak, aby dokumentoval, jaké druhy výjimek může funkce vyvolat jako součást specifikace funkce. Zatímco většina specifikací výjimek byla nyní zastaralá nebo odstraněna, byla jako náhrada přidána jedna užitečná specifikace výjimek, které se budeme věnovat v této lekci.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b6",
       "type": "section",
       "title": "The noexcept specifier",
       "html": "<h3 class=\"cpp-section-heading\">The noexcept specifier</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specifikátor noexcept</h3>",
+      "title_cs": "Specifikátor noexcept"
     },
     {
       "id": "exception-specifications-and-noexcept_b7",
       "type": "paragraph",
       "html": "<p>In C++, all functions are classified as either <em>non-throwing</em> or <em>potentially throwing</em>. A <strong>non-throwing function</strong> is one that promises not to throw exceptions that are visible to the caller. A <strong>potentially throwing function</strong> may throw exceptions that are visible to the caller.</p>",
       "preview": "In C++, all functions are classified as either non-throwing or potentially throw",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ jsou všechny funkce klasifikovány jako <em>nevyhazovací</em> nebo <em>potenciálně vyhazovací</em>. <strong>Funkce bez vyvolání</strong> je taková, která slibuje, že nebude vyvolávat výjimky, které jsou viditelné pro volajícího. <strong>Potenciálně vyvolávající funkce</strong> může vyvolávat výjimky, které jsou viditelné pro volajícího.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b8",
       "type": "paragraph",
       "html": "<p>To define a function as non-throwing, we can use the <strong>noexcept specifier</strong>. To do so, we use the <code>noexcept</code> keyword in the function declaration, placed to the right of the function parameter list:</p>",
       "preview": "To define a function as non-throwing, we can use the noexcept specifier. To do s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chceme-li definovat funkci jako neházící, můžeme použít <strong>specifikátor noexcept</strong>. K tomu používáme klíčové slovo <code>noexcept</code> v deklaraci funkce umístěné napravo od seznamu parametrů funkce:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b9",
@@ -79,21 +89,24 @@
       "language": "cpp",
       "code": "void doSomething() noexcept; // this function is specified as non-throwing",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething() noexcept; // this function is specified as non-throwing</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething() noexcept; // tato funkce je specifikována jako non-throwing</code></pre>"
     },
     {
       "id": "exception-specifications-and-noexcept_b10",
       "type": "paragraph",
       "html": "<p>Note that <code>noexcept</code> doesn’t actually prevent the function from throwing exceptions or calling other functions that are potentially throwing. This is allowed so long as the noexcept function catches and handles those exceptions internally, and those exceptions do not exit the noexcept function.</p>",
       "preview": "Note that noexcept doesn’t actually prevent the function from throwing exception",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že <code>noexcept</code> ve skutečnosti nebrání funkci ve vyvolání výjimek nebo volání jiných funkcí, které potenciálně vyvolávají. To je povoleno, pokud funkce noexcept zachytí a zpracuje tyto výjimky interně a tyto výjimky neopustí funkci noexcept.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b11",
       "type": "paragraph",
       "html": "<p>If an unhandled exception would exit a noexcept function, <code>std::terminate</code> will be called (even if there is an exception handler that would otherwise handle such an exception somewhere up the stack). And if <code>std::terminate</code> is called from inside a noexcept function, stack unwinding may or may not occur (depending on implementation and optimizations), which means your objects may or may not be destructed properly prior to termination.</p>",
       "preview": "If an unhandled exception would exit a noexcept function, std::terminate will be",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud by neošetřená výjimka ukončila funkci noexcept, zavolá se <code>std::terminate</code> (i když existuje obsluha výjimky, která by jinak takovou výjimku zpracovala někde v zásobníku). A pokud je <code>std::terminate</code> voláno zevnitř funkce noexcept, může nebo nemusí dojít k odvíjení zásobníku (v závislosti na implementaci a optimalizacích), což znamená, že vaše objekty mohou nebo nemusí být před ukončením správně zničeny.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b12",
@@ -101,28 +114,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The promise that a noexcept function makes to not throw exceptions that are visible to the caller is a contractual promise, not a promise enforced by the compiler. So while calling a noexcept function should be safe, any exception handling bugs in the noexcept function that cause the contract to be broken will result in termination of the program! This shouldn’t happen, but neither should bugs.</p><p>For this reason, it’s best that noexcept functions don’t mess with exceptions at all, or call potentially throwing functions that could raise an exception. A noexcept function can’t have an exception handling bug if no exceptions can possibly be raised in the first place!</p></div>",
       "preview": "Key insightThe promise that a noexcept function makes to not throw exceptions that are visible to th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Slib funkce noexcept, že nebude vyvolávat výjimky, které jsou viditelné pro volajícího, je smluvním příslibem, nikoli příslibem vynuceným kompilátorem. I když by tedy volání funkce noexcept mělo být bezpečné, jakékoli chyby týkající se zpracování výjimek ve funkci noexcept, které způsobí porušení smlouvy, budou mít za následek ukončení programu! To by se nemělo stávat, ale ani chyby.</p><p>Z tohoto důvodu je nejlepší, aby se funkce noexcept vůbec nepletly s výjimkami nebo nevolaly potenciálně vyvolávající funkce, které by mohly vyvolat výjimku. Funkce noexcept nemůže mít chybu zpracování výjimek, pokud nelze v první řadě vyvolat žádné výjimky!</p></div>"
     },
     {
       "id": "exception-specifications-and-noexcept_b13",
       "type": "paragraph",
       "html": "<p>Much like functions that differ only in their return values can not be overloaded, functions differing only in their exception specification can not be overloaded.</p>",
       "preview": "Much like functions that differ only in their return values can not be overloade",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně jako funkce, které se liší pouze svými návratovými hodnotami, nelze přetížit, ani funkce lišící se pouze specifikací výjimky nelze přetížit.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b14",
       "type": "section",
       "title": "Illustrating the behavior of noexcept functions and exceptions",
       "html": "<h3 class=\"cpp-section-heading\">Illustrating the behavior of noexcept functions and exceptions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Ilustrace chování funkcí noexcept a výjimek</h3>",
+      "title_cs": "Ilustrující chování funkcí noexcept a výjimek"
     },
     {
       "id": "exception-specifications-and-noexcept_b15",
       "type": "paragraph",
       "html": "<p>The following program illustrates the behavior of noexcept functions and exceptions in various cases:</p>",
       "preview": "The following program illustrates the behavior of noexcept functions and excepti",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující program ilustruje chování funkcí noexcept a výjimek v různých případech:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b16",
@@ -130,133 +148,155 @@
       "language": "cpp",
       "code": "// h/t to reader yellowEmu for the first draft of this program\n#include <iostream>\n\nclass Doomed\n{\npublic:\n    ~Doomed()\n    {\n        std::cout << \"Doomed destructed\\n\";\n    }\n};\n\nvoid thrower()\n{\n    std::cout << \"Throwing exception\\n\";\n    throw 1;\n}\n\nvoid pt()\n{\n    std::cout << \"pt (potentally throwing) called\\n\";\n    //This object will be destroyed during stack unwinding (if it occurs)\n    Doomed doomed{};\n    thrower();\n    std::cout << \"This never prints\\n\";\n}\n\nvoid nt() noexcept\n{\n    std::cout << \"nt (noexcept) called\\n\";\n    //This object will be destroyed during stack unwinding (if it occurs)\n    Doomed doomed{};\n    thrower();\n    std::cout << \"this never prints\\n\";\n}\n\nvoid tester(int c) noexcept\n{\n    std::cout << \"tester (noexcept) case \" << c << \" called\\n\";\n    try\n    {\n        (c == 1) ? pt() : nt();\n    }\n    catch (...)\n    {\n        std::cout << \"tester caught exception\\n\";\n    }\n}\n\nint main()\n{\n    std::cout << std::unitbuf; // flush buffer after each insertion\n    std::cout << std::boolalpha; // print boolean as true/false\n    tester(1);\n    std::cout << \"Test successful\\n\\n\";\n    tester(2);\n    std::cout << \"Test successful\\n\";\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t to reader yellowEmu for the first draft of this program\n#include &lt;iostream&gt;\n\nclass Doomed\n{\npublic:\n    ~Doomed()\n    {\n        std::cout &lt;&lt; \"Doomed destructed\\n\";\n    }\n};\n\nvoid thrower()\n{\n    std::cout &lt;&lt; \"Throwing exception\\n\";\n    throw 1;\n}\n\nvoid pt()\n{\n    std::cout &lt;&lt; \"pt (potentally throwing) called\\n\";\n    //This object will be destroyed during stack unwinding (if it occurs)\n    Doomed doomed{};\n    thrower();\n    std::cout &lt;&lt; \"This never prints\\n\";\n}\n\nvoid nt() noexcept\n{\n    std::cout &lt;&lt; \"nt (noexcept) called\\n\";\n    //This object will be destroyed during stack unwinding (if it occurs)\n    Doomed doomed{};\n    thrower();\n    std::cout &lt;&lt; \"this never prints\\n\";\n}\n\nvoid tester(int c) noexcept\n{\n    std::cout &lt;&lt; \"tester (noexcept) case \" &lt;&lt; c &lt;&lt; \" called\\n\";\n    try\n    {\n        (c == 1) ? pt() : nt();\n    }\n    catch (...)\n    {\n        std::cout &lt;&lt; \"tester caught exception\\n\";\n    }\n}\n\nint main()\n{\n    std::cout &lt;&lt; std::unitbuf; // flush buffer after each insertion\n    std::cout &lt;&lt; std::boolalpha; // print boolean as true/false\n    tester(1);\n    std::cout &lt;&lt; \"Test successful\\n\\n\";\n    tester(2);\n    std::cout &lt;&lt; \"Test successful\\n\";\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// h/t čtenáři yellowEmu pro první verzi tohoto programu\n#include <iostream>\n\ntřída odsouzena k záhubě\n{\nveřejnost:\n    ~Odsoudil()\n    {\n        std::cout << \"Odsouzeno zničeno\\n\";\n    }\n};\n\nvoid vrhač()\n{\n    std::cout << \"Vyhození výjimky\\n\";\n    hodit 1;\n}\n\nvoid pt()\n{\n    std::cout << \"pt (potenciálně hází) voláno\\n\";\n    //Tento objekt bude zničen během odvíjení zásobníku (pokud k němu dojde)\n    odsouzený k záhubě{};\n    vrhač();\n    std::cout << \"Toto se nikdy nevytiskne\\n\";\n}\n\nvoid nt() noexcept\n{\n    std::cout << \"nt (noexcept) voláno\\n\";\n    //Tento objekt bude zničen během odvíjení zásobníku (pokud k němu dojde)\n    odsouzený k záhubě{};\n    vrhač();\n    std::cout << \"toto se nikdy nevytiskne\\n\";\n}\n\nvoid tester(int c) noexcept\n{\n    std::cout << \"tester (noexcept) case \" << c << \" volán\\n\";\n    zkusit\n    {\n        (c == 1) ? pt(): nt();\n    }\n    chytit (...)\n    {\n        std::cout << \"tester chytil výjimku\\n\";\n    }\n}\n\nint main()\n{\n    std::cout << std::unitbuf; // po každém vložení vyprázdní vyrovnávací paměť\n    std::cout << std::boolalpha; // vypíše logickou hodnotu jako true/false\n    tester(1);\n    std::cout << \"Test úspěšný\\n\\n\";\n    tester(2);\n    std::cout << \"Test úspěšný\\n\";\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "exception-specifications-and-noexcept_b17",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this program printed:</p>",
       "preview": "On the author’s machine, this program printed:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači tento program vytiskl:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b18",
       "type": "output",
       "text": "tester (noexcept) case 1 called\npt (potentially throwing) called\nThrowing exception\nDoomed destructed\ntester caught exception\nTest successful\n\ntester (noexcept) case 2 called\nnt (noexcept) called\nthrowing exception\nterminate called after throwing an instance of 'int'\n",
       "html": "<pre>tester (noexcept) case 1 called\npt (potentially throwing) called\nThrowing exception\nDoomed destructed\ntester caught exception\nTest successful\n\ntester (noexcept) case 2 called\nnt (noexcept) called\nthrowing exception\nterminate called after throwing an instance of 'int'\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>tester (noexcept) případ 1 volán\npt (potenciálně házení) dorovnáno\nVyhození výjimky\nOdsouzeno zničeno\ntester zachytil výjimku\nTest byl úspěšný\n\ntester (noexcept) případ 2 volán\nnt (noexcept) volal\nvyvolání výjimky\ntermin zavolán po vyvolání instance 'int'\n</pre>"
     },
     {
       "id": "exception-specifications-and-noexcept_b19",
       "type": "paragraph",
       "html": "<p>and then the program aborted.</p>",
       "preview": "and then the program aborted.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>a pak se program přerušil.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b20",
       "type": "paragraph",
       "html": "<p>Let’s explore what’s happening here in more detail. Note that <code>tester</code> is a noexcept function, and thus promises not to expose any exception to the caller (<code>main</code>).</p>",
       "preview": "Let’s explore what’s happening here in more detail. Note that tester is a noexce",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme prozkoumat, co se zde děje, podrobněji. Všimněte si, že <code>tester</code> je funkce noexcept, a proto slibuje, že volajícímu neprozradí žádnou výjimku (<code>main</code>).</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b21",
       "type": "paragraph",
       "html": "<p>The first case illustrates that noexcept functions can call potentially throwing functions and even handle any exceptions those functions throw. First, <code>tester(1)</code> is called, which calls potentially throwing function <code>pt</code> , which calls <code>thrower</code>, which throws an exception. The first handler for this exception is in <code>tester</code>, so the exception unwinds the stack (destroying local variable <code>doomed</code> in the process), and the exception is caught and handled within <code>tester</code>. Because <code>tester</code> does not expose this exception to the caller (<code>main</code>), there is no violation of noexcept here, and control returns to <code>main</code>.</p>",
       "preview": "The first case illustrates that noexcept functions can call potentially throwing",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První případ ukazuje, že funkce noexcept mohou volat potenciálně vyvolávající funkce a dokonce zpracovávat všechny výjimky, které tyto funkce vyvolávají. Nejprve se zavolá <code>tester(1)</code>, která zavolá potenciálně vyvolávací funkci <code>pt</code> , která zavolá <code>thrower</code>, která vyvolá výjimku. První obslužný program pro tuto výjimku je v <code>tester</code>, takže výjimka rozbalí zásobník (zničí místní proměnnou <code>doomed</code> v procesu) a výjimka je zachycena a zpracována v rámci <code>tester</code>. Protože <code>tester</code> tuto výjimku nevystaví volajícímu (<code>main</code>), nedochází zde k porušení noexcept a řízení se vrací na <code>main</code>.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b22",
       "type": "paragraph",
       "html": "<p>The second case illustrates what happens when a noexcept function tries to pass an exception back to its caller. First, <code>tester(2)</code> is called, which calls non-throwing function <code>nt</code>, which calls <code>thrower</code>, which throws an exception. The first handler for this exception is in <code>tester</code>. However, <code>nt</code> is noexcept, and to get to the handler in <code>tester</code>, the exception would have to propagate to the caller of <code>nt</code>. That is a violation of the noexcept of <code>nt</code>, and so <code>std::terminate</code> is called, and our program is aborted immediately. On the author’s machine, the stack was not unwound (as illustrated by <code>doomed</code> not being destroyed).</p>",
       "preview": "The second case illustrates what happens when a noexcept function tries to pass ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhý případ ilustruje, co se stane, když se funkce noexcept pokusí předat výjimku zpět svému volajícímu. Nejprve se zavolá <code>tester(2)</code>, která zavolá neházící funkci <code>nt</code>, která zavolá <code>thrower</code>, která vyvolá výjimku. První obslužný program pro tuto výjimku je v <code>tester</code>. Nicméně <code>nt</code> je noexcept, a abyste se dostali k obsluze v <code>tester</code>, musela by se výjimka rozšířit na volajícího <code>nt</code>. To je porušení noexcept <code>nt</code>, a tak je voláno <code>std::terminate</code> a náš program je okamžitě přerušen. Na autorově počítači nebyl stoh odvinut (jak je znázorněno tím, že <code>odsouzeno</code> není zničeno).</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b23",
       "type": "section",
       "title": "The noexcept specifier with a Boolean parameter",
       "html": "<h3 class=\"cpp-section-heading\">The noexcept specifier with a Boolean parameter</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specifikátor noexcept s booleovským parametrem</h3>",
+      "title_cs": "Specifikátor noexcept s booleovským parametrem"
     },
     {
       "id": "exception-specifications-and-noexcept_b24",
       "type": "paragraph",
       "html": "<p>The <code>noexcept</code> specifier has an optional Boolean parameter. <code>noexcept(true)</code> is equivalent to <code>noexcept</code>, meaning the function is non-throwing. <code>noexcept(false)</code> means the function is potentially throwing. These parameters are typically only used in template functions, so that a template function can be dynamically created as non-throwing or potentially throwing based on some parameterized value.</p>",
       "preview": "The noexcept specifier has an optional Boolean parameter. noexcept(true) is equi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Specifikátor <code>noexcept</code> má volitelný booleovský parametr. <code>noexcept(true)</code> je ekvivalentní k <code>noexcept</code>, což znamená, že funkce není spouštěcí. <code>noexcept(false)</code> znamená, že funkce potenciálně vyvolává. Tyto parametry se obvykle používají pouze ve funkcích šablony, takže funkce šablony může být dynamicky vytvořena jako nevyhazovací nebo potenciálně vyhazovací na základě nějaké parametrizované hodnoty.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b25",
       "type": "section",
       "title": "Which functions are non-throwing and potentially-throwing",
       "html": "<h3 class=\"cpp-section-heading\">Which functions are non-throwing and potentially-throwing</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Které funkce jsou nevyhazovací a potenciálně vyhazovací</h3>",
+      "title_cs": "Které funkce jsou nevyhazovací a potenciálně vyhazovací"
     },
     {
       "id": "exception-specifications-and-noexcept_b26",
       "type": "paragraph",
       "html": "<p>Functions that are implicitly non-throwing:</p>",
       "preview": "Functions that are implicitly non-throwing:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce, které jsou implicitně nespouštěcí:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b27",
       "type": "list",
       "html": "<ul><li>Destructors</li></ul>",
       "preview": "Destructors",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Destruktory</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b28",
       "type": "paragraph",
       "html": "<p>Functions that are non-throwing by default for implicitly-declared or defaulted functions:</p>",
       "preview": "Functions that are non-throwing by default for implicitly-declared or defaulted ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce, které jsou ve výchozím nastavení nespouštěcí pro implicitně deklarované nebo výchozí funkce:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b29",
       "type": "list",
       "html": "<ul><li>Constructors: default, copy, move</li><li>Assignments: copy, move</li><li>Comparison operators (as of C++20)</li></ul>",
       "preview": "Constructors: default, copy, moveAssignments: copy, moveComparison operators (as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Konstruktory: výchozí, kopírovat, přesouvat</li><li>Přiřazení: kopírovat, přesouvat</li><li>Porovnávací operátory (od C++20)</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b30",
       "type": "paragraph",
       "html": "<p>However, if any of these functions call (explicitly or implicitly) another function which is potentially throwing, then the listed function will be treated as potentially throwing as well. For example, if a class has a data member with a potentially throwing constructor, then the class’s constructors will be treated as potentially throwing as well. As another example, if a copy assignment operator calls a potentially throwing assignment operator, then the copy assignment will be potentially throwing as well.</p>",
       "preview": "However, if any of these functions call (explicitly or implicitly) another funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však některá z těchto funkcí zavolá (explicitně nebo implicitně) jinou funkci, která je potenciálně házející, pak se s uvedenou funkcí bude zacházet také jako s potenciálně házejícím. Pokud má například třída datový člen s potenciálně vyvolávajícím konstruktorem, budou konstruktory třídy považovány také za potenciálně vyvolávající. Dalším příkladem je, že pokud operátor přiřazení kopírování zavolá potenciálně házející operátor přiřazení, pak i přiřazení kopírování bude potenciálně házet.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b31",
       "type": "paragraph",
       "html": "<p>Functions that are potentially throwing (if not implicitly-declared or defaulted):</p>",
       "preview": "Functions that are potentially throwing (if not implicitly-declared or defaulted",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkce, které jsou potenciálně vyvolány (pokud nejsou implicitně deklarovány nebo implicitně nastaveny):</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b32",
       "type": "list",
       "html": "<ul><li>Normal functions</li><li>User-defined constructors</li><li>User-defined operators</li></ul>",
       "preview": "Normal functionsUser-defined constructorsUser-defined operators",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Normální funkce</li><li>Uživatelem definované konstruktory</li><li>Uživatelsky definované operátory</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b33",
       "type": "section",
       "title": "The noexcept operator",
       "html": "<h3 class=\"cpp-section-heading\">The noexcept operator</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Operátor noexcept</h3>",
+      "title_cs": "Operátor noexcept"
     },
     {
       "id": "exception-specifications-and-noexcept_b34",
       "type": "paragraph",
       "html": "<p>The noexcept operator can also be used inside expressions. It takes an expression as an argument, and returns <code>true</code> or <code>false</code> if the compiler thinks it will throw an exception or not. The noexcept operator is checked statically at compile-time, and doesn’t actually evaluate the input expression.</p>",
       "preview": "The noexcept operator can also be used inside expressions. It takes an expressio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Operátor noexcept lze také použít uvnitř výrazů. Vezme výraz jako argument a vrátí <code>true</code> nebo <code>false</code>, pokud si kompilátor myslí, že vyvolá výjimku nebo ne. Operátor noexcept je kontrolován staticky při kompilaci a ve skutečnosti nevyhodnocuje vstupní výraz.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b35",
@@ -264,133 +304,154 @@
       "language": "cpp",
       "code": "void foo() {throw -1;}\nvoid boo() {};\nvoid goo() noexcept {};\nstruct S{};\n\nconstexpr bool b1{ noexcept(5 + 3) }; // true; ints are non-throwing\nconstexpr bool b2{ noexcept(foo()) }; // false; foo() throws an exception\nconstexpr bool b3{ noexcept(boo()) }; // false; boo() is implicitly noexcept(false)\nconstexpr bool b4{ noexcept(goo()) }; // true; goo() is explicitly noexcept(true)\nconstexpr bool b5{ noexcept(S{}) };   // true; a struct's default constructor is noexcept by default",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo() {throw -1;}\nvoid boo() {};\nvoid goo() noexcept {};\nstruct S{};\n\nconstexpr bool b1{ noexcept(5 + 3) }; // true; ints are non-throwing\nconstexpr bool b2{ noexcept(foo()) }; // false; foo() throws an exception\nconstexpr bool b3{ noexcept(boo()) }; // false; boo() is implicitly noexcept(false)\nconstexpr bool b4{ noexcept(goo()) }; // true; goo() is explicitly noexcept(true)\nconstexpr bool b5{ noexcept(S{}) };   // true; a struct's default constructor is noexcept by default</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo() {throw -1;}\nvoid boo() {};\nvoid goo() noexcept {};\nstruktura S{};\n\nconstexpr bool b1{ noexcept(5 + 3) }; // pravda; ints jsou neházivé\nconstexpr bool b2{ noexcept(foo()) }; // false; foo() vyvolá výjimku\nconstexpr bool b3{ noexcept(boo()) }; // false; boo() je implicitně noexcept(false)\nconstexpr bool b4{ noexcept(goo()) }; // pravda; goo() je výslovně noexcept (true)\nconstexpr bool b5{ noexcept(S{}) };   // pravda; výchozí konstruktor struktury je standardně noexcept</code></pre>"
     },
     {
       "id": "exception-specifications-and-noexcept_b36",
       "type": "paragraph",
       "html": "<p>The noexcept operator can be used to conditionally execute code depending on whether it is potentially throwing or not. This is required to fulfill certain <strong>exception safety guarantees</strong>, which we’ll talk about in the next section.</p>",
       "preview": "The noexcept operator can be used to conditionally execute code depending on whe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Operátor noexcept lze použít k podmíněnému spuštění kódu v závislosti na tom, zda je potenciálně vyvolán nebo ne. To je nutné pro splnění určitých <strong>výjimek bezpečnostních záruk</strong>, o kterých budeme hovořit v další části.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b37",
       "type": "section",
       "title": "Exception safety guarantees",
       "html": "<h3 class=\"cpp-section-heading\">Exception safety guarantees</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výjimečné záruky bezpečnosti</h3>",
+      "title_cs": "Výjimečné záruky bezpečnosti"
     },
     {
       "id": "exception-specifications-and-noexcept_b38",
       "type": "paragraph",
       "html": "<p>An <strong>exception safety guarantee</strong> is a contractual guideline about how functions or classes will behave in the event an exception occurs. There are four levels of exception safety guarantees:</p>",
       "preview": "An exception safety guarantee is a contractual guideline about how functions or ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Záruka bezpečnosti výjimek</strong> je smluvní vodítko o tom, jak se funkce nebo třídy budou chovat v případě, že dojde k výjimce. Existují čtyři úrovně výjimečných bezpečnostních záruk:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b39",
       "type": "list",
       "html": "<ul><li>No guarantee -- There are no guarantees about what will happen if an exception is thrown (e.g. a class may be left in an unusable state)</li><li>Basic guarantee -- If an exception is thrown, no memory will be leaked and the object is still usable, but the program may be left in a modified state.</li><li>Strong guarantee -- If an exception is thrown, no memory will be leaked and the program state will not be changed. This means the function must either completely succeed or have no side effects if it fails. This is easy if the failure happens before anything is modified in the first place, but can also be achieved by rolling back any changes so the program is returned to the pre-failure state.</li><li>No throw / No fail guarantee -- The function will always succeed (no-fail) or fail without throwing an exception that is exposed to the caller (no-throw). Exceptions may be thrown internally if not exposed. The <code>noexcept</code> specifier maps to this level of exception safety guarantee.</li></ul>",
       "preview": "No guarantee -- There are no guarantees about what will happen if an exception i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Žádná záruka -- Neexistují žádné záruky ohledně toho, co se stane, pokud je vyvolána výjimka (např. třída může zůstat v nepoužitelném stavu)</li><li>Základní záruka -- Pokud je vyvolána výjimka, žádná paměť neunikne a objekt je stále použitelný, ale program může být ponechán v upraveném stavu.</li><li>Silná záruka stavu není -- Pokud nebude vyvolána žádná výjimka, nebude vyvolána žádná výjimka. To znamená, že funkce musí být buď zcela úspěšná, nebo mít žádné vedlejší účinky, pokud selže. To je snadné, pokud k selhání dojde ještě předtím, než je cokoli upraveno, ale lze jej také dosáhnout vrácením jakýchkoli změn zpět, takže se program vrátí do stavu před selháním.</li><li>Žádné vyvolání / Žádná záruka selhání -- Funkce bude vždy úspěšná (bez selhání) nebo selže bez vyvolání výjimky, která je vystavena volajícímu (bez vyvolání). Výjimky mohou být vyhozeny interně, pokud nejsou odhaleny. Specifikátor <code>noexcept</code> mapuje na tuto úroveň záruky bezpečnosti výjimky.</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b40",
       "type": "paragraph",
       "html": "<p>Let’s look at the no-throw/no-fail guarantees in more detail:</p>",
       "preview": "Let’s look at the no-throw/no-fail guarantees in more detail:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na záruky bez vyhození/neselhání podrobněji:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b41",
       "type": "paragraph",
       "html": "<p>The no-throw guarantee: if a function fails, then it won’t throw an exception. Instead, it will return an error code or ignore the problem. No-throw guarantees are required during stack unwinding when an exception is already being handled; for example, all destructors should have a no-throw guarantee (as should any functions those destructors call). Examples of code that should be no-throw:</p>",
       "preview": "The no-throw guarantee: if a function fails, then it won’t throw an exception. I",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Záruka bez vyvolání: pokud funkce selže, nevyvolá výjimku. Místo toho vrátí kód chyby nebo bude problém ignorovat. Během odvíjení zásobníku, když se již zpracovává výjimka, jsou vyžadovány záruky bez házení; například všechny destruktory by měly mít záruku neházení (stejně jako všechny funkce, které tyto destruktory volají). Příklady kódu, který by měl být neházet:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b42",
       "type": "list",
       "html": "<ul><li>destructors and memory deallocation/cleanup functions</li><li>functions that higher-level no-throw functions need to call</li></ul>",
       "preview": "destructors and memory deallocation/cleanup functionsfunctions that higher-level",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>destruktory a funkce uvolnění/čištění paměti</li><li>funkce, které musí volat funkce bez vyvolání vyšší úrovně</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b43",
       "type": "paragraph",
       "html": "<p>The no-fail guarantee: a function will always succeed in what it tries to do (and thus never has a need to throw an exception, thus, no-fail is a slightly stronger form of no-throw). Examples of code that should be no-fail:</p>",
       "preview": "The no-fail guarantee: a function will always succeed in what it tries to do (an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Záruka no-fail: funkce vždy uspěje v tom, o co se pokusí (a proto nikdy nemusí házet výjimku, takže no-fail je o něco silnější forma no-throw). Příklady kódu, který by měl být bezchybný:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b44",
       "type": "list",
       "html": "<ul><li>move constructors and move assignment (move semantics, covered in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>)</li><li>swap functions</li><li>clear/erase/reset functions on containers</li><li>operations on std::unique_ptr (also covered in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>)</li><li>functions that higher-level no-fail functions need to call</li></ul>",
       "preview": "move constructors and move assignment (move semantics, covered in chapter 22)swa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>přesunout konstruktory a přesunout přiřazení (sémantika přesunu, popsaná v <a href=\"https://www.learncpp.com#Chapter22\">kapitole 22</a>)</li><li>swapovací funkce</li><li>vymazat/vymazat/resetovat funkce na kontejnerech</li><li>operace na std::unique_ptr (also krytý inptr href=\"https://www.learncpp.com#Chapter22\">kapitola 22</a>)</li><li>funkce, které musí volat funkce bez selhání vyšší úrovně</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b45",
       "type": "section",
       "title": "When to use noexcept",
       "html": "<h3 class=\"cpp-section-heading\">When to use noexcept</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy použít noexcept</h3>",
+      "title_cs": "Kdy použít noexcept"
     },
     {
       "id": "exception-specifications-and-noexcept_b46",
       "type": "paragraph",
       "html": "<p>Just because your code doesn’t explicitly throw any exceptions doesn’t mean you should start sprinkling <code>noexcept</code> around your code. By default, most functions are potentially throwing, so if your function calls other functions, there is a good chance it calls a function that is potentially throwing, and thus is potentially throwing too.</p>",
       "preview": "Just because your code doesn’t explicitly throw any exceptions doesn’t mean you ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jenom proto, že váš kód explicitně negeneruje žádné výjimky, neznamená, že byste měli svůj kód začít šířit <code>noexcept</code>. Ve výchozím nastavení většina funkcí potenciálně hází, takže pokud vaše funkce volá jiné funkce, je velká šance, že zavolá funkci, která potenciálně hází, a tedy také potenciálně hází.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b47",
       "type": "paragraph",
       "html": "<p>There are a few good reasons to mark functions a non-throwing:</p>",
       "preview": "There are a few good reasons to mark functions a non-throwing:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje několik dobrých důvodů, proč označit funkce jako nevhodné:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b48",
       "type": "list",
       "html": "<ul><li>Non-throwing functions can be safely called from functions that are not exception-safe, such as destructors</li><li>Functions that are noexcept can enable the compiler to perform some optimizations that would not otherwise be available. Because a noexcept function cannot throw an exception outside the function, the compiler doesn’t have to worry about keeping the runtime stack in an unwindable state, which can allow it to produce faster code.</li><li>There are significant cases where knowing a function is noexcept allows us to produce more efficient implementations in our own code: the standard library containers (such as <code>std::vector</code>) are noexcept aware and will use the noexcept operator to determine whether to use <code>move semantics</code> (faster) or <code>copy semantics</code> (slower) in some places. We cover move semantics in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>, and this optimization in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove_if_noexcept/\">27.10 -- std::move_if_noexcept</a>.</li></ul>",
       "preview": "Non-throwing functions can be safely called from functions that are not exceptio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Nevyhazovací funkce lze bezpečně volat z funkcí, které nejsou bezpečné pro výjimky, jako jsou destruktory</li><li>Funkce, které jsou noexcept, mohou kompilátoru umožnit provádět některé optimalizace, které by jinak nebyly dostupné. Protože funkce noexcept nemůže vyvolat výjimku mimo funkci, kompilátor se nemusí starat o udržování zásobníku běhového prostředí v nerozvinutém stavu, což mu může umožnit vytvářet rychlejší kód.</li><li>Existují významné případy, kdy znalost funkce noexcept nám umožňuje vytvářet efektivnější implementace v našem vlastním kódu: standardní kontejnery knihoven (jako je <code>std:vector to use noex to use) Na některých místech <code>přesunout sémantiku</code> (rychleji) nebo <code>kopírovat sémantiku</code> (pomalejší). Sémantiku pohybu pokryjeme v <a href=\"https://www.learncpp.com#Chapter22\">kapitole 22</a> a tuto optimalizaci v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/stdmove_if_noexcept/\">27.10 -- std::move_if_ul_noexcept.</li></noexcept."
     },
     {
       "id": "exception-specifications-and-noexcept_b49",
       "type": "paragraph",
       "html": "<p>The standard library’s policy is to use <code>noexcept</code> only on functions that <em>must not</em> throw or fail. Functions that are potentially throwing but do not actually throw exceptions (due to implementation) typically are not marked as <code>noexcept</code>.</p>",
       "preview": "The standard library’s policy is to use noexcept only on functions that must not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Standardní zásadou knihovny je používat <code>noexcept</code> pouze u funkcí, které <em>nesmí</em> házet nebo selhat. Funkce, které potenciálně vyvolávají, ale ve skutečnosti nevyvolávají výjimky (kvůli implementaci), obvykle nejsou označeny jako <code>noexcept</code>.</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b50",
       "type": "paragraph",
       "html": "<p>For your own code, always mark the following as <code>noexcept</code>:</p>",
       "preview": "For your own code, always mark the following as noexcept:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro svůj vlastní kód vždy označte následující jako <code>noexcept</code>:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b51",
       "type": "list",
       "html": "<ul><li>Move constructors</li><li>Move assignment operators</li><li>Swap functions</li></ul>",
       "preview": "Move constructorsMove assignment operatorsSwap functions",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Přesunout konstruktory</li><li>Přesunout operátory přiřazení</li><li>Zaměnit funkce</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b52",
       "type": "paragraph",
       "html": "<p>For your code, consider marking the following as <code>noexcept</code>:</p>",
       "preview": "For your code, consider marking the following as noexcept:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro svůj kód zvažte označení následující položky jako <code>noexcept</code>:</p>"
     },
     {
       "id": "exception-specifications-and-noexcept_b53",
       "type": "list",
       "html": "<ul><li>Functions for which you want to express a no-throw or no-fail guarantee (e.g. to document that they can be safely called from destructors or other noexcept functions)</li><li>Copy constructors and copy assignment operators that are no-throw (to take advantage of optimizations).</li><li>Destructors. Destructors are implicitly noexcept so long as all members have noexcept destructors</li></ul>",
       "preview": "Functions for which you want to express a no-throw or no-fail guarantee (e.g. to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Funkce, u kterých chcete vyjádřit garanci neházení nebo neselhání (např. zdokumentovat, že je lze bezpečně volat z destruktorů nebo jiných funkcí noexcept)</li><li>Kopírovat konstruktory a operátory přiřazení, které jsou bez házení (pro využití optimalizací).</li><li>Destruktory. Destruktory jsou implicitně noexcept, pokud všichni členové mají noexception destructors</li></ul>"
     },
     {
       "id": "exception-specifications-and-noexcept_b54",
@@ -398,7 +459,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Always make move constructors, move assignment, and swap functions <code>noexcept</code>.</p><p>Make copy constructors and copy assignment operators <code>noexcept</code> when you can.</p><p>Use <code>noexcept</code> on other functions to express a no-fail or no-throw guarantee.</p></div>",
       "preview": "Best practiceAlways make move constructors, move assignment, and swap functions noexcept.Make copy c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Osvědčený postup</p><p>Vždy provádějte konstruktory přesunu, přiřazení přesunu a zaměňte funkce <code>noexcept</code>.</p><p>Vytvářejte konstruktory kopírování a operátory přiřazení <code>noexcept</code>, když můžete.</p><p> záruka bez selhání nebo bez vyhození.</p></div>"
     },
     {
       "id": "exception-specifications-and-noexcept_b55",
@@ -406,14 +468,17 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you are uncertain whether a function should have a no-fail/no-throw guarantee, err on the side of caution and do not mark it with <code>noexcept</code>. Reversing a decision to use noexcept violates an interface commitment to the user about the behavior of the function, and may break existing code. Making guarantees stronger by later adding noexcept to a function that was not originally noexcept is considered safe.</p></div>",
       "preview": "Best practiceIf you are uncertain whether a function should have a no-fail/no-throw guarantee, err o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Osvědčený postup</p><p>Pokud si nejste jisti, zda by funkce měla mít záruku neselhání/bez házení, buďte opatrní a neoznačujte ji <code>noexcept</code>. Zrušení rozhodnutí použít noexcept porušuje závazek rozhraní vůči uživateli ohledně chování funkce a může narušit stávající kód. Posílení záruk pozdějším přidáním noexcept do funkce, která původně noexcept nebyla, se považuje za bezpečné.</p></div>"
     },
     {
       "id": "exception-specifications-and-noexcept_b56",
       "type": "section",
       "title": "Dynamic exception specifications",
       "html": "<h3 class=\"cpp-section-heading\">Dynamic exception specifications</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Specifikace dynamických výjimek</h3>",
+      "title_cs": "Specifikace dynamických výjimek"
     },
     {
       "id": "exception-specifications-and-noexcept_b57",
@@ -421,7 +486,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Optional reading</p><p>Before C++11, and until C++17, <em>dynamic exception specifications</em> were used in place of <code>noexcept</code>. The <strong>dynamic exception specifications</strong> syntax uses the <code>throw</code> keyword to list which exception types a function might directly or indirectly throw:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doSomething() throw(); // does not throw exceptions\nint doSomething() throw(std::out_of_range, int*); // may throw either std::out_of_range or a pointer to an integer\nint doSomething() throw(...); // may throw anything</code></pre><p>Due to factors such as incomplete compiler implementations, some incompatibility with template functions, common misunderstandings about how they worked, and the fact that the standard library mostly didn’t use them, the dynamic exception specifications were deprecated in C++11 and removed from the language in C++17 and C++20. See <a href=\"http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0003r0.html#2.0\">this paper</a> for more context.</p></div>",
       "preview": "Optional readingBefore C++11, and until C++17, dynamic exception specifications were used in place o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Volitelné čtení</p><p>Před C++11 a až do C++17 se místo <code>noexcept</code> používaly <em>specifikace dynamických výjimek</em>. Syntaxe <strong>specifikací dynamických výjimek</strong> používá klíčové slovo <code>throw</code> k seznamu typů výjimek, které může funkce přímo nebo nepřímo vyvolat:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doSomething() throw(); // nevyvolává výjimky\nint doSomething() throw(std::out_of_range, int*); // může vyvolat buď std::out_of_range nebo ukazatel na celé číslo\nint doSomething() throw(...); // může vyhodit cokoli</code></pre><p>Kvůli faktorům, jako jsou neúplné implementace kompilátoru, určitá nekompatibilita s funkcemi šablony, běžná nedorozumění ohledně toho, jak fungovaly, a skutečnost, že je standardní knihovna většinou nepoužívala, byly specifikace dynamických výjimek v C++11 zastaralé a odstraněny z jazyka v C++17 a C++20. Další kontext naleznete v <a href=\"http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/p0003r0.html#2.0\">tomto dokumentu</a>.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "27.9 — Exception specifications and noexcept"
 }

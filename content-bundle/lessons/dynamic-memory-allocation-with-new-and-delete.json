@@ -14,56 +14,65 @@
       "type": "section",
       "title": "The need for dynamic memory allocation",
       "html": "<h3 class=\"cpp-section-heading\">The need for dynamic memory allocation</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Potřeba dynamické alokace paměti</h3>",
+      "title_cs": "Potřeba dynamické alokace paměti"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b1",
       "type": "paragraph",
       "html": "<p>C++ supports three basic types of memory allocation, of which you’ve already seen two.</p>",
       "preview": "C++ supports three basic types of memory allocation, of which you’ve already see",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ podporuje tři základní typy alokace paměti, z nichž dva jste již viděli.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b2",
       "type": "list",
       "html": "<ul><li><strong>Static memory allocation</strong> happens for static and global variables. Memory for these types of variables is allocated once when your program is run and persists throughout the life of your program.</li><li><strong>Automatic memory allocation</strong> happens for function parameters and local variables. Memory for these types of variables is allocated when the relevant block is entered, and freed when the block is exited, as many times as necessary.</li><li><strong>Dynamic memory allocation</strong> is the topic of this article.</li></ul>",
       "preview": "Static memory allocation happens for static and global variables. Memory for the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li><strong>Statická alokace paměti</strong> probíhá u statických a globálních proměnných. Paměť pro tyto typy proměnných je alokována jednou při spuštění programu a přetrvává po celou dobu jeho běhu.</li><li><strong>Automatická alokace paměti</strong> probíhá u parametrů funkcí a lokálních proměnných. Paměť pro tyto typy proměnných je alokována při vstupu do příslušného bloku a uvolněna při jeho opuštění, a to tolikrát, kolikrát je potřeba.</li><li><strong>Dynamická alokace paměti</strong> je tématem tohoto článku.</li></ul>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b3",
       "type": "paragraph",
       "html": "<p>Both static and automatic allocation have two things in common:</p>",
       "preview": "Both static and automatic allocation have two things in common:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak statická, tak automatická alokace mají dvě společné věci:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b4",
       "type": "list",
       "html": "<ul><li>The size of the variable / array must be known at compile time.</li><li>Memory allocation and deallocation happens automatically (when the variable is instantiated / destroyed).</li></ul>",
       "preview": "The size of the variable / array must be known at compile time.Memory allocation",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Velikost proměnné / pole musí být známa v době překladu (compile time).</li><li>Alokace a dealokace paměti probíhá automaticky (při vytvoření / zániku proměnné).</li></ul>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b5",
       "type": "paragraph",
       "html": "<p>Most of the time, this is just fine. However, you will come across situations where one or both of these constraints cause problems, usually when dealing with external (user or file) input.</p>",
       "preview": "Most of the time, this is just fine. However, you will come across situations wh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Většinou to zcela postačuje. Nicméně narazíte na situace, kdy jedno nebo obě tato omezení způsobí problémy, obvykle při práci s externím vstupem (od uživatele nebo ze souboru).</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b6",
       "type": "paragraph",
       "html": "<p>For example, we may want to use a string to hold someone’s name, but we do not know how long their name is until they enter it. Or we may want to read in a number of records from disk, but we don’t know in advance how many records there are. Or we may be creating a game, with a variable number of monsters (that changes over time as some monsters die and new ones are spawned) trying to kill the player.</p>",
       "preview": "For example, we may want to use a string to hold someone’s name, but we do not k",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme například chtít použít řetězec pro uložení něčího jména, ale nevíme, jak dlouhé jméno bude, dokud ho dotyčný nezadá. Nebo můžeme chtít načíst určitý počet záznamů z disku, ale předem nevíme, kolik záznamů tam je. Nebo můžeme vytvářet hru s proměnným počtem monster (který se v čase mění, jak některé příšery umírají a nové se rodí), jež se snaží zabít hráče.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b7",
       "type": "paragraph",
       "html": "<p>If we have to declare the size of everything at compile time, the best we can do is try to make a guess the maximum size of variables we’ll need and hope that’s enough:</p>",
       "preview": "If we have to declare the size of everything at compile time, the best we can do",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud musíme deklarovat velikost všeho v době překladu, to nejlepší, co můžeme udělat, je pokusit se odhadnout maximální velikost proměnných, kterou budeme potřebovat, a doufat, že to bude stačit:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b8",
@@ -71,42 +80,48 @@
       "language": "cpp",
       "code": "char name[25]; // let's hope their name is less than 25 chars!\nRecord record[500]; // let's hope there are less than 500 records!\nMonster monster[40]; // 40 monsters maximum\nPolygon rendering[30000]; // this 3d rendering better not have more than 30,000 polygons!",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">char name[25]; // let's hope their name is less than 25 chars!\nRecord record[500]; // let's hope there are less than 500 records!\nMonster monster[40]; // 40 monsters maximum\nPolygon rendering[30000]; // this 3d rendering better not have more than 30,000 polygons!</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">název znaku[25]; // doufejme, že jejich jméno bude mít méně než 25 znaků!\nZáznam záznamu[500]; // doufejme, že bude méně než 500 záznamů!\nMonster monster[40]; // maximálně 40 monster\nPolygonové vykreslování[30000]; // toto 3D vykreslování by nemělo mít více než 30 000 polygonů!</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b9",
       "type": "paragraph",
       "html": "<p>This is a poor solution for at least four reasons:</p>",
       "preview": "This is a poor solution for at least four reasons:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto je špatné řešení přinejmenším ze čtyř důvodů:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b10",
       "type": "paragraph",
       "html": "<p>First, it leads to wasted memory if the variables aren’t actually used. For example, if we allocate 25 chars for every name, but names on average are only 12 chars long, we’re using over twice what we really need. Or consider the rendering array above: if a rendering only uses 10,000 polygons, we have 20,000 Polygons worth of memory not being used!</p>",
       "preview": "First, it leads to wasted memory if the variables aren’t actually used. For exam",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé to vede k plýtvání pamětí, pokud se proměnné ve skutečnosti nepoužijí. Pokud například pro každé jméno alokujeme 25 znaků, ale jména mají v průměru pouze 12 znaků, využíváme více než dvojnásobek toho, co opravdu potřebujeme. Nebo se podívejte na výše uvedené pole pro vykreslování: pokud vykreslování využívá pouze 10 000 polygonů, máme nevyužitou paměť o velikosti 20 000 Polygonů!</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b11",
       "type": "paragraph",
       "html": "<p>Second, how do we tell which bits of memory are actually used? For strings, it’s easy: a string that starts with a \\0 is clearly not being used. But what about monster[24]? Is it alive or dead right now? Has it even been initialized in the first place? That necessitates having some way to tell the status of each monster, which adds complexity and can use up additional memory.</p>",
       "preview": "Second, how do we tell which bits of memory are actually used? For strings, it’s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, jak poznáme, které části paměti se skutečně používají? U řetězců je to snadné: řetězec začínající znakem \\0 se zjevně nepoužívá. Ale co třeba monster[24]? Je právě teď naživu, nebo mrtvé? Bylo vůbec inicializováno? To vyžaduje mít nějaký způsob, jak zjistit stav každého monstra, což zvyšuje složitost a může spotřebovávat další paměť.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b12",
       "type": "paragraph",
       "html": "<p>Third, most normal variables (including fixed arrays) are allocated in a portion of memory called the <strong>stack</strong>. The amount of stack memory for a program is generally quite small -- Visual Studio defaults the stack size to 1MB. If you exceed this number, stack overflow will result, and the operating system will probably close down the program.</p>",
       "preview": "Third, most normal variables (including fixed arrays) are allocated in a portion",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí, většina běžných proměnných (včetně polí s pevnou velikostí) se alokuje v části paměti zvané <strong>zásobník</strong> (stack). Velikost paměti zásobníku pro program je obecně poměrně malá – Visual Studio má výchozí velikost zásobníku nastavenou na 1 MB. Pokud tuto hodnotu překročíte, dojde k přetečení zásobníku (stack overflow) a operační systém program pravděpodobně ukončí.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b13",
       "type": "paragraph",
       "html": "<p>On Visual Studio, you can see this happen when running this program:</p>",
       "preview": "On Visual Studio, you can see this happen when running this program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve Visual Studiu můžete vidět, jak k tomu dochází, při spuštění tohoto programu:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b14",
@@ -114,42 +129,49 @@
       "language": "cpp",
       "code": "int main()\n{\n    int array[1000000]; // allocate 1 million integers (probably 4MB of memory)\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int array[1000000]; // allocate 1 million integers (probably 4MB of memory)\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    pole int[1000000]; // přidělte 1 milion celých čísel (pravděpodobně 4 MB paměti)\n}</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b15",
       "type": "paragraph",
       "html": "<p>Being limited to just 1MB of memory would be problematic for many programs, especially those that deal with graphics.</p>",
       "preview": "Being limited to just 1MB of memory would be problematic for many programs, espe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Omezení na pouhý 1 MB paměti by bylo problematické pro mnoho programů, zejména pro ty, které pracují s grafikou.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b16",
       "type": "paragraph",
       "html": "<p>Fourth, and most importantly, it can lead to artificial limitations and/or array overflows. What happens when the user tries to read in 600 records from disk, but we’ve only allocated memory for a maximum of 500 records? Either we have to give the user an error, only read the 500 records, or (in the worst case where we don’t handle this case at all) overflow the record array and watch something bad happen.</p>",
       "preview": "Fourth, and most importantly, it can lead to artificial limitations and/or array",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začtvrté, a to je nejdůležitější, to může vést k umělým omezením a/nebo k přetečení pole. Co se stane, když se uživatel pokusí načíst z disku 600 záznamů, ale my máme alokovanou paměť maximálně pro 500 záznamů? Buď musíme uživateli vypsat chybu, načíst pouze 500 záznamů, nebo (v nejhorším případě, kdy tuto situaci vůbec neošetříme) přeteče pole záznamů a stane se něco ošklivého.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b17",
       "type": "paragraph",
       "html": "<p>Fortunately, these problems are easily addressed via dynamic memory allocation. <strong>Dynamic memory allocation</strong> is a way for running programs to request memory from the operating system when needed. This memory does not come from the program’s limited stack memory -- instead, it is allocated from a much larger pool of memory managed by the operating system called the <strong>heap</strong>. On modern machines, the heap can be gigabytes in size.</p>",
       "preview": "Fortunately, these problems are easily addressed via dynamic memory allocation. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tyto problémy lze naštěstí snadno vyřešit pomocí dynamické alokace paměti. <strong>Dynamická alokace paměti</strong> je způsob, jakým mohou běžící programy v případě potřeby žádat o paměť operační systém. Tato paměť nepochází z omezené paměti zásobníku programu – místo toho je alokována z mnohem většího fondu paměti spravovaného operačním systémem, který se nazývá <strong>haldou</strong> (heap). Na moderních počítačích může mít halda velikost v řádu gigabajtů.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b18",
       "type": "section",
       "title": "Dynamically allocating single variables",
       "html": "<h3 class=\"cpp-section-heading\">Dynamically allocating single variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dynamická alokace jednotlivých proměnných</h3>",
+      "title_cs": "Dynamická alokace jednotlivých proměnných"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b19",
       "type": "paragraph",
       "html": "<p>To allocate a <em>single</em> variable dynamically, we use the scalar (non-array) form of the <strong>new</strong> operator:</p>",
       "preview": "To allocate a single variable dynamically, we use the scalar (non-array) form of",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro dynamickou alokaci <em>jediné</em> proměnné používáme skalární (nepolní) formu operátoru <strong>new</strong>:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b20",
@@ -157,21 +179,24 @@
       "language": "cpp",
       "code": "new int; // dynamically allocate an integer (and discard the result)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">new int; // dynamically allocate an integer (and discard the result)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">new int; // dynamicky přidělí celé číslo (a zahodí výsledek)</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b21",
       "type": "paragraph",
       "html": "<p>In the above case, we’re requesting an integer’s worth of memory from the operating system. The new operator creates the object using that memory, and then returns a pointer containing the <i>address</i> of the memory that has been allocated.</p>",
       "preview": "In the above case, we’re requesting an integer’s worth of memory from the operat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném případě žádáme operační systém o paměť o velikosti celého čísla (integer). Operátor new pomocí této paměti vytvoří objekt a poté vrátí ukazatel obsahující <i>adresu</i> paměti, která byla alokována.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b22",
       "type": "paragraph",
       "html": "<p>Most often, we’ll assign the return value to our own pointer variable so we can access the allocated memory later.</p>",
       "preview": "Most often, we’ll assign the return value to our own pointer variable so we can ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejčastěji tuto návratovou hodnotu přiřadíme do naší vlastní proměnné typu ukazatel, abychom k alokované paměti měli přístup i později.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b23",
@@ -179,14 +204,16 @@
       "language": "cpp",
       "code": "int* ptr{ new int }; // dynamically allocate an integer and assign the address to ptr so we can access it later",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ new int }; // dynamically allocate an integer and assign the address to ptr so we can access it later</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ new int }; // dynamicky přidělí celé číslo a přiřadí adresu ptr, abychom k němu měli přístup později</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b24",
       "type": "paragraph",
       "html": "<p>We can then dereference the pointer to access the memory:</p>",
       "preview": "We can then dereference the pointer to access the memory:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Poté můžeme ukazatel dereferencovat a přistoupit tak k paměti:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b25",
@@ -194,49 +221,57 @@
       "language": "cpp",
       "code": "*ptr = 7; // assign value of 7 to allocated memory",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">*ptr = 7; // assign value of 7 to allocated memory</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">*ptr = 7; // přidělené paměti přiřadí hodnotu 7</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b26",
       "type": "paragraph",
       "html": "<p>If it wasn’t before, it should now be clear at least one case in which pointers are useful. Without a pointer to hold the address of the memory that was just allocated, we’d have no way to access the memory that was just allocated for us!</p>",
       "preview": "If it wasn’t before, it should now be clear at least one case in which pointers ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud to nebylo jasné dříve, nyní by měl být zřejmý alespoň jeden případ, kdy jsou ukazatele užitečné. Bez ukazatele, který by držel adresu právě alokované paměti, bychom k této paměti, jež pro nás byla alokována, neměli žádný přístup!</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b27",
       "type": "paragraph",
       "html": "<p>Note that accessing heap-allocated objects is generally slower than accessing stack-allocated objects. Because the compiler knows the address of stack-allocated objects, it can go directly to that address to get a value. Heap allocated objects are typically accessed via pointer. This requires two steps: one to get the address of the object (from the pointer), and another to get the value.</p>",
       "preview": "Note that accessing heap-allocated objects is generally slower than accessing st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mějte na paměti, že přístup k objektům alokovaným na haldě (heap) je obecně pomalejší než přístup k objektům na zásobníku (stack). Protože překladač zná adresu objektů alokovaných na zásobníku, může jít přímo na tuto adresu a získat hodnotu. K objektům alokovaným na haldě se obvykle přistupuje přes ukazatel. To vyžaduje dva kroky: jeden k získání adresy objektu (z ukazatele) a druhý k získání samotné hodnoty.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b28",
       "type": "section",
       "title": "How does dynamic memory allocation work?",
       "html": "<h3 class=\"cpp-section-heading\">How does dynamic memory allocation work?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak dynamická alokace paměti funguje?</h3>",
+      "title_cs": "Jak funguje dynamické přidělování paměti?"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b29",
       "type": "paragraph",
       "html": "<p>Your computer has memory (probably lots of it) that is available for applications to use. When you run an application, your operating system loads the application into some of that memory. This memory used by your application is divided into different areas, each of which serves a different purpose. One area contains your code. Another area is used for normal operations (keeping track of which functions were called, creating and destroying global and local variables, etc…). We’ll talk more about those later. However, much of the memory available just sits there, waiting to be handed out to programs that request it.</p>",
       "preview": "Your computer has memory (probably lots of it) that is available for application",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Váš počítač má paměť (pravděpodobně spoustu), která je k dispozici pro použití aplikacemi. Když spustíte aplikaci, váš operační systém ji načte do části této paměti. Tato paměť využívaná vaší aplikací je rozdělena do různých oblastí, z nichž každá slouží jinému účelu. Jedna oblast obsahuje váš kód. Další oblast se používá pro běžné operace (sledování toho, které funkce byly volány, vytváření a rušení globálních a lokálních proměnných atd…). O těch si povíme více později. Velká část dostupné paměti však jen tak leží a čeká, až bude přidělena programům, které o ni požádají.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b30",
       "type": "paragraph",
       "html": "<p>When you dynamically allocate memory, you’re asking the operating system to reserve some of that memory for your program’s use. If it can fulfill this request, it will return the address of that memory to your application. From that point forward, your application can use this memory as it wishes. When your application is done with the memory, it can return the memory back to the operating system to be given to another program.</p>",
       "preview": "When you dynamically allocate memory, you’re asking the operating system to rese",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když dynamicky alokujete paměť, žádáte operační systém, aby část této paměti rezervoval pro potřeby vašeho programu. Pokud může tomuto požadavku vyhovět, vrátí vaší aplikaci adresu této paměti. Od tohoto okamžiku může vaše aplikace tuto paměť používat podle svého uvážení. Jakmile aplikace s pamětí skončí, může ji vrátit zpět operačnímu systému, aby mohla být poskytnuta jinému programu.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b31",
       "type": "paragraph",
       "html": "<p>Unlike static or automatic memory, the program itself is responsible for requesting and disposing of dynamically allocated memory.</p>",
       "preview": "Unlike static or automatic memory, the program itself is responsible for request",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od statické nebo automatické paměti je za vyžádání a uvolnění dynamicky alokované paměti zodpovědný samotný program.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b32",
@@ -244,21 +279,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The allocation and deallocation for stack objects is done automatically. There is no need for us to deal with memory addresses -- the code the compiler writes can do this for us.</p><p>The allocation and deallocation for heap objects is not done automatically. We need to be involved. That means we need some unambiguous way to refer to a specific heap allocated object, so that we can request its destruction when we’re ready. And the way we reference such objects is via memory address.</p><p>When we use operator new, it returns a pointer containing the memory address of the newly allocated object. We generally want to store that in a pointer so we can use that address later to access the object (and eventually, request its destruction).</p></div>",
       "preview": "Key insightThe allocation and deallocation for stack objects is done automatically. There is no need",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Alokace a dealokace pro objekty na zásobníku (stack) probíhá automaticky. Není potřeba, abychom se zabývali paměťovými adresami – kód, který vygeneruje překladač, to udělá za nás.</p><p>Alokace a dealokace pro objekty na haldě (heap) automaticky neprobíhá. Musíme se do toho zapojit my. To znamená, že potřebujeme nějaký jednoznačný způsob, jak odkazovat na konkrétní objekt alokovaný na haldě, abychom mohli požádat o jeho zničení, jakmile budeme připraveni. A způsob, jakým na takové objekty odkazujeme, je prostřednictvím paměťové adresy.</p><p>Když použijeme operátor new, vrátí ukazatel (pointer) obsahující paměťovou adresu nově alokovaného objektu. Obvykle ji chceme uložit do ukazatele, abychom tuto adresu mohli později použít pro přístup k objektu (a nakonec požádat o jeho zničení).</p></div>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b33",
       "type": "section",
       "title": "Initializing a dynamically allocated variable",
       "html": "<h3 class=\"cpp-section-heading\">Initializing a dynamically allocated variable</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Inicializace dynamicky alokované proměnné</h3>",
+      "title_cs": "Inicializace dynamicky alokované proměnné"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b34",
       "type": "paragraph",
       "html": "<p>When you dynamically allocate a variable, you can also initialize it via direct initialization or uniform initialization:</p>",
       "preview": "When you dynamically allocate a variable, you can also initialize it via direct ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když dynamicky alokujete proměnnou, můžete ji také inicializovat pomocí přímé inicializace (direct initialization) nebo unifikované inicializace (uniform initialization):</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b35",
@@ -266,21 +305,25 @@
       "language": "cpp",
       "code": "int* ptr1{ new int (5) }; // use direct initialization\nint* ptr2{ new int { 6 } }; // use uniform initialization",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1{ new int (5) }; // use direct initialization\nint* ptr2{ new int { 6 } }; // use uniform initialization</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr1{ new int (5) }; // použít přímou inicializaci\nint* ptr2{ new int { 6 } }; // použít jednotnou inicializaci</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b36",
       "type": "section",
       "title": "Deleting a single variable",
       "html": "<h3 class=\"cpp-section-heading\">Deleting a single variable</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Smazání jedné proměnné</h3>",
+      "title_cs": "Smazání jedné proměnné"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b37",
       "type": "paragraph",
       "html": "<p>When we are done with a dynamically allocated variable, we need to explicitly tell C++ to free the memory for reuse. For single variables, this is done via the scalar (non-array) form of the <strong>delete</strong> operator:</p>",
       "preview": "When we are done with a dynamically allocated variable, we need to explicitly te",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když s dynamicky alokovanou proměnnou skončíme, musíme C++ explicitně říct, aby paměť uvolnilo pro další použití. U jednotlivých proměnných se to provádí pomocí skalární (nepolové) formy operátoru <strong>delete</strong>:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b38",
@@ -288,56 +331,66 @@
       "language": "cpp",
       "code": "// assume ptr has previously been allocated with operator new\ndelete ptr; // return the memory pointed to by ptr to the operating system\nptr = nullptr; // set ptr to be a null pointer",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// assume ptr has previously been allocated with operator new\ndelete ptr; // return the memory pointed to by ptr to the operating system\nptr = nullptr; // set ptr to be a null pointer</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// předpokládejme, že ptr bylo dříve přiděleno operátoru new\nodstranit ptr; // vrátí paměť, na kterou ukazuje ptr, operačnímu systému\nptr = nullptr; // nastaví ptr na nulový ukazatel</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b39",
       "type": "section",
       "title": "What does it mean to delete memory?",
       "html": "<h3 class=\"cpp-section-heading\">What does it mean to delete memory?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Co znamená smazat paměť?</h3>",
+      "title_cs": "Co to znamená vymazat paměť?"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b40",
       "type": "paragraph",
       "html": "<p>The delete operator does not <em>actually</em> delete anything. It simply returns the memory being pointed to back to the operating system. The operating system is then free to reassign that memory to another application (or to this application again later).</p>",
       "preview": "The delete operator does not actually delete anything. It simply returns the mem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Operátor delete ve skutečnosti <em>nic</em> nemaže. Pouze vrací paměť, na kterou ukazatel odkazuje, zpět operačnímu systému. Operační systém pak může tuto paměť volně přiřadit jiné aplikaci (nebo později znovu této aplikaci).</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b41",
       "type": "paragraph",
       "html": "<p>Although the syntax makes it look like we’re deleting a <em>variable</em>, this is not the case! The pointer variable still has the same scope as before, and can be assigned a new value (e.g. <code>nullptr</code>) just like any other variable.</p>",
       "preview": "Although the syntax makes it look like we’re deleting a variable, this is not th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli to podle syntaxe vypadá, že mažeme <em>proměnnou</em>, není tomu tak! Ukazatelová proměnná má stále stejný rozsah platnosti jako dříve a lze jí přiřadit novou hodnotu (např. <code>nullptr</code>) stejně jako jakékoli jiné proměnné.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b42",
       "type": "paragraph",
       "html": "<p>Note that deleting a pointer that is not pointing to dynamically allocated memory may cause bad things to happen.</p>",
       "preview": "Note that deleting a pointer that is not pointing to dynamically allocated memor",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mějte na paměti, že volání delete na ukazateli, který neukazuje na dynamicky alokovanou paměť, může způsobit vážné problémy.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b43",
       "type": "section",
       "title": "Dangling pointers",
       "html": "<h3 class=\"cpp-section-heading\">Dangling pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Visící ukazatele (dangling pointers)</h3>",
+      "title_cs": "Visící ukazatele"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b44",
       "type": "paragraph",
       "html": "<p>C++ does not make any guarantees about what will happen to the contents of deallocated memory, or to the value of the pointer being deleted. In most cases, the memory returned to the operating system will contain the same values it had before it was returned, and the pointer will be left pointing to the now deallocated memory.</p>",
       "preview": "C++ does not make any guarantees about what will happen to the contents of deall",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ neposkytuje žádné záruky ohledně toho, co se stane s obsahem dealokované paměti nebo s hodnotou mazaného ukazatele. Ve většině případů bude paměť vrácená operačnímu systému obsahovat stejné hodnoty, jaké měla před vrácením, a ukazatel zůstane ukazovat na nyní již dealokovanou paměť.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b45",
       "type": "paragraph",
       "html": "<p>A pointer that is pointing to deallocated memory is called a <strong>dangling pointer</strong>. Dereferencing or deleting a dangling pointer will lead to undefined behavior. Consider the following program:</p>",
       "preview": "A pointer that is pointing to deallocated memory is called a dangling pointer. D",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukazatel, který ukazuje na dealokovanou paměť, se nazývá <strong>visící ukazatel</strong> (dangling pointer). Dereference nebo smazání visícího ukazatele povede k nedefinovanému chování (undefined behavior). Uvažujme následující program:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b46",
@@ -345,21 +398,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int* ptr{ new int }; // dynamically allocate an integer\n    *ptr = 7; // put a value in that memory location\n\n    delete ptr; // return the memory to the operating system.  ptr is now a dangling pointer.\n\n    std::cout << *ptr; // Dereferencing a dangling pointer will cause undefined behavior\n    delete ptr; // trying to deallocate the memory again will also lead to undefined behavior.\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int* ptr{ new int }; // dynamically allocate an integer\n    *ptr = 7; // put a value in that memory location\n\n    delete ptr; // return the memory to the operating system.  ptr is now a dangling pointer.\n\n    std::cout &lt;&lt; *ptr; // Dereferencing a dangling pointer will cause undefined behavior\n    delete ptr; // trying to deallocate the memory again will also lead to undefined behavior.\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int* ptr{ new int }; // dynamicky přiděluje celé číslo\n    *ptr = 7; // vložte hodnotu do tohoto paměťového místa\n\n    odstranit ptr; // vrátí paměť operačnímu systému.  ptr je nyní visící ukazatel.\n\n    std::cout << *ptr; // Dereferencování visícího ukazatele způsobí nedefinované chování\n    odstranit ptr; // pokus o opětovné přidělení paměti také povede k nedefinovanému chování.\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b47",
       "type": "paragraph",
       "html": "<p>In the above program, the value of 7 that was previously assigned to the allocated memory will probably still be there, but it’s possible that the value at that memory address could have changed. It’s also possible the memory could be allocated to another application (or for the operating system’s own usage), and trying to access that memory will cause the operating system to shut the program down.</p>",
       "preview": "In the above program, the value of 7 that was previously assigned to the allocat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu se hodnota 7, která byla dříve přiřazena alokované paměti, na daném místě pravděpodobně stále nachází, ale je také možné, že se hodnota na této paměťové adrese již změnila. Stejně tak je možné, že paměť byla přidělena jiné aplikaci (nebo pro potřeby samotného operačního systému), a pokus o přístup k této paměti způsobí, že operační systém program ukončí.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b48",
       "type": "paragraph",
       "html": "<p>Deallocating memory may create multiple dangling pointers. Consider the following example:</p>",
       "preview": "Deallocating memory may create multiple dangling pointers. Consider the followin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dealokace paměti může vytvořit více visících ukazatelů (dangling pointers). Uvažujme následující příklad:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b49",
@@ -367,28 +423,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int* ptr{ new int{} }; // dynamically allocate an integer\n    int* otherPtr{ ptr }; // otherPtr is now pointed at that same memory location\n\n    delete ptr; // return the memory to the operating system.  ptr and otherPtr are now dangling pointers.\n    ptr = nullptr; // ptr is now a nullptr\n\n    // however, otherPtr is still a dangling pointer!\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int* ptr{ new int{} }; // dynamically allocate an integer\n    int* otherPtr{ ptr }; // otherPtr is now pointed at that same memory location\n\n    delete ptr; // return the memory to the operating system.  ptr and otherPtr are now dangling pointers.\n    ptr = nullptr; // ptr is now a nullptr\n\n    // however, otherPtr is still a dangling pointer!\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int* ptr{ new int{} }; // dynamicky přiděluje celé číslo\n    int* otherPtr{ ptr }; // otherPtr nyní ukazuje na stejné místo v paměti\n\n    odstranit ptr; // vrátí paměť operačnímu systému.  ptr a otherPtr jsou nyní visící ukazatele.\n    ptr = nullptr; // ptr je nyní nullptr\n\n    // však otherPtr je stále visící ukazatel!\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b50",
       "type": "paragraph",
       "html": "<p>There are a few best practices that can help here.</p>",
       "preview": "There are a few best practices that can help here.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde může pomoci několik osvědčených postupů (best practices).</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b51",
       "type": "paragraph",
       "html": "<p>First, try to avoid having multiple pointers point at the same piece of dynamic memory. If this is not possible, be clear about which pointer “owns” the memory (and is responsible for deleting it) and which pointers are just accessing it.</p>",
       "preview": "First, try to avoid having multiple pointers point at the same piece of dynamic ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za prvé, snažte se vyhnout tomu, aby na stejný blok dynamické paměti ukazovalo více ukazatelů. Pokud to není možné, mějte jasně určeno, který ukazatel paměť „vlastní“ (a je zodpovědný za její smazání) a které ukazatele k ní pouze přistupují.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b52",
       "type": "paragraph",
       "html": "<p>Second, when you delete a pointer, if that pointer is not going out of scope immediately afterward, set the pointer to nullptr. We’ll talk more about null pointers, and why they are useful in a bit.</p>",
       "preview": "Second, when you delete a pointer, if that pointer is not going out of scope imm",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, když ukazatel smažete (pomocí delete), a tento ukazatel bezprostředně poté nezaniká (neopouští svůj scope), nastavte jej na <code>nullptr</code>. O nulových ukazatelích a o tom, proč jsou užitečné, si povíme za chvíli.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b53",
@@ -396,35 +456,41 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Set deleted pointers to nullptr unless they are going out of scope immediately afterward.</p></div>",
       "preview": "Best practiceSet deleted pointers to nullptr unless they are going out of scope immediately afterwar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Smazané ukazatele nastavte na <code>nullptr</code>, pokud bezprostředně poté nezanikají (neopouštějí scope).</p></div>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b54",
       "type": "section",
       "title": "Operator new can fail",
       "html": "<h3 class=\"cpp-section-heading\">Operator new can fail</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Operátor new může selhat</h3>",
+      "title_cs": "Nový operátor může selhat"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b55",
       "type": "paragraph",
       "html": "<p>When requesting memory from the operating system, in rare circumstances, the operating system may not have any memory to grant the request with.</p>",
       "preview": "When requesting memory from the operating system, in rare circumstances, the ope",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při žádosti o paměť od operačního systému se ve vzácných případech může stát, že operační systém nemá k dispozici žádnou paměť, kterou by požadavku vyhověl.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b56",
       "type": "paragraph",
       "html": "<p>By default, if new fails, a <em>bad_alloc</em> exception is thrown. If this exception isn’t properly handled (and it won’t be, since we haven’t covered exceptions or exception handling yet), the program will simply terminate (crash) with an unhandled exception error.</p>",
       "preview": "By default, if new fails, a bad_alloc exception is thrown. If this exception isn",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výchozím nastavení je při selhání <code>new</code> vyhozena výjimka <em>bad_alloc</em>. Pokud tato výjimka není řádně ošetřena (a nebude, protože jsme výjimky a jejich ošetřování ještě neprobírali), program se jednoduše ukončí (spadne) s chybou neošetřené výjimky (unhandled exception).</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b57",
       "type": "paragraph",
       "html": "<p>In many cases, having new throw an exception (or having your program crash) is undesirable, so there’s an alternate form of new that can be used instead to tell new to return a null pointer if memory can’t be allocated. This is done by adding the constant std::nothrow between the new keyword and the allocation type:</p>",
       "preview": "In many cases, having new throw an exception (or having your program crash) is u",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V mnoha případech je nežádoucí, aby operátor new vyhazoval výjimku (nebo aby váš program spadl), a proto existuje alternativní forma operátoru new, kterou lze použít k tomu, aby new v případě neúspěšné alokace paměti vrátil nulový ukazatel (null pointer). Toho se dosáhne přidáním konstanty std::nothrow mezi klíčové slovo new a alokovaný typ:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b58",
@@ -432,21 +498,24 @@
       "language": "cpp",
       "code": "int* value { new (std::nothrow) int }; // value will be set to a null pointer if the integer allocation fails",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* value { new (std::nothrow) int }; // value will be set to a null pointer if the integer allocation fails</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* hodnota { new (std::nothrow) int }; // hodnota bude nastavena na nulový ukazatel, pokud alokace celého čísla selže</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b59",
       "type": "paragraph",
       "html": "<p>In the above example, if new fails to allocate memory, it will return a null pointer instead of the address of the allocated memory.</p>",
       "preview": "In the above example, if new fails to allocate memory, it will return a null poi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu vrátí new v případě selhání alokace paměti nulový ukazatel namísto adresy alokované paměti.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b60",
       "type": "paragraph",
       "html": "<p>Note that if you then attempt to dereference this pointer, undefined behavior will result (most likely, your program will crash). Consequently, the best practice is to check all memory requests to ensure they actually succeeded before using the allocated memory.</p>",
       "preview": "Note that if you then attempt to dereference this pointer, undefined behavior wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mějte na paměti, že pokud se následně pokusíte tento ukazatel dereferencovat, dojde k nedefinovanému chování (nejpravděpodobněji váš program spadne). Nejlepším postupem je proto před použitím alokované paměti zkontrolovat všechny požadavky na alokaci a ujistit se, že skutečně uspěly.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b61",
@@ -454,28 +523,33 @@
       "language": "cpp",
       "code": "int* value { new (std::nothrow) int{} }; // ask for an integer's worth of memory\nif (!value) // handle case where new returned null\n{\n    // Do error handling here\n    std::cerr << \"Could not allocate memory\\n\";\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* value { new (std::nothrow) int{} }; // ask for an integer's worth of memory\nif (!value) // handle case where new returned null\n{\n    // Do error handling here\n    std::cerr &lt;&lt; \"Could not allocate memory\\n\";\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* hodnota { new (std::nothrow) int{} }; // požádat o celočíselnou hodnotu paměti\nif (!value) // řeší případ, kdy new vrátil null\n{\n    // Zde proveďte zpracování chyb\n    std::cerr << \"Nelze alokovat paměť\\n\";\n}</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b62",
       "type": "paragraph",
       "html": "<p>Because asking new for memory only fails rarely (and almost never in a dev environment), it’s common to forget to do this check!</p>",
       "preview": "Because asking new for memory only fails rarely (and almost never in a dev envir",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože žádost o paměť přes new selhává jen zřídka (a ve vývojovém prostředí téměř nikdy), je běžné na tuto kontrolu zapomínat!</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b63",
       "type": "section",
       "title": "Null pointers and dynamic memory allocation",
       "html": "<h3 class=\"cpp-section-heading\">Null pointers and dynamic memory allocation</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nulové ukazatele a dynamická alokace paměti</h3>",
+      "title_cs": "Nulové ukazatele a dynamická alokace paměti"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b64",
       "type": "paragraph",
       "html": "<p>Null pointers (pointers set to nullptr) are particularly useful when dealing with dynamic memory allocation. In the context of dynamic memory allocation, a null pointer basically says “no memory has been allocated to this pointer”. This allows us to do things like conditionally allocate memory:</p>",
       "preview": "Null pointers (pointers set to nullptr) are particularly useful when dealing wit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nulové ukazatele (ukazatele nastavené na nullptr) jsou obzvláště užitečné při práci s dynamickou alokací paměti. V kontextu dynamické alokace paměti nulový ukazatel v podstatě říká: „tomuto ukazateli nebyla alokována žádná paměť“. To nám umožňuje provádět například podmíněnou alokaci paměti:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b65",
@@ -483,14 +557,16 @@
       "language": "cpp",
       "code": "// If ptr isn't already allocated, allocate it\nif (!ptr)\n    ptr = new int;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// If ptr isn't already allocated, allocate it\nif (!ptr)\n    ptr = new int;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Pokud ptr ještě není přiděleno, přidělte jej\npokud (!ptr)\n    ptr = new int;</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b66",
       "type": "paragraph",
       "html": "<p>Deleting a null pointer has no effect. Thus, there is no need for the following:</p>",
       "preview": "Deleting a null pointer has no effect. Thus, there is no need for the following:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Smazání nulového ukazatele nemá žádný efekt. Není tedy nutné dělat následující:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b67",
@@ -498,14 +574,16 @@
       "language": "cpp",
       "code": "if (ptr) // if ptr is not a null pointer\n    delete ptr; // delete it\n// otherwise do nothing",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (ptr) // if ptr is not a null pointer\n    delete ptr; // delete it\n// otherwise do nothing</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (ptr) // pokud ptr není nulový ukazatel\n    odstranit ptr; // smazat to\n// jinak nedělat nic</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b68",
       "type": "paragraph",
       "html": "<p>Instead, you can just write:</p>",
       "preview": "Instead, you can just write:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo toho můžete jednoduše napsat:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b69",
@@ -513,14 +591,16 @@
       "language": "cpp",
       "code": "delete ptr;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">delete ptr;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">delete ptr;</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b70",
       "type": "paragraph",
       "html": "<p>If ptr is non-null, the dynamically allocated memory will be deleted. If ptr is null, nothing will happen.</p>",
       "preview": "If ptr is non-null, the dynamically allocated memory will be deleted. If ptr is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud ptr není nulový, dynamicky alokovaná paměť se uvolní. Pokud je ptr nulový, nic se nestane.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b71",
@@ -528,28 +608,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Deleting a null pointer is okay, and does nothing. There is no need to conditionalize your delete statements.</p></div>",
       "preview": "Best practiceDeleting a null pointer is okay, and does nothing. There is no need to conditionalize y",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Uvolnění nulového ukazatele (null pointer) je v pořádku a nic neprovede. Není tedy nutné podmiňovat příkazy delete.</p></div>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b72",
       "type": "section",
       "title": "Memory leaks",
       "html": "<h3 class=\"cpp-section-heading\">Memory leaks</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Úniky paměti</h3>",
+      "title_cs": "Úniky paměti"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b73",
       "type": "paragraph",
       "html": "<p>Dynamically allocated memory stays allocated until it is explicitly deallocated or until the program ends (and the operating system cleans it up, assuming your operating system does that). However, the pointers used to hold dynamically allocated memory addresses follow the normal scoping rules for local variables. This mismatch can create interesting problems.</p>",
       "preview": "Dynamically allocated memory stays allocated until it is explicitly deallocated ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dynamicky alokovaná paměť zůstává alokována, dokud není explicitně dealokována nebo dokud program neskončí (a operační systém ji neuklidí – za předpokladu, že to váš operační systém dělá). Ukazatele používané k uchování adres dynamicky alokované paměti se však řídí běžnými pravidly pro rozsah platnosti lokálních proměnných. Tento nesoulad může způsobit zajímavé problémy.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b74",
       "type": "paragraph",
       "html": "<p>Consider the following function:</p>",
       "preview": "Consider the following function:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující funkci:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b75",
@@ -557,35 +642,40 @@
       "language": "cpp",
       "code": "void doSomething()\n{\n    int* ptr{ new int{} };\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething()\n{\n    int* ptr{ new int{} };\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething()\n{\n    int* ptr{ new int{} };\n}</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b76",
       "type": "paragraph",
       "html": "<p>This function allocates an integer dynamically, but never frees it using delete. Because pointers variables are just normal variables, when the function ends, ptr will go out of scope. And because ptr is the only variable holding the address of the dynamically allocated integer, when ptr is destroyed there are no more references to the dynamically allocated memory. This means the program has now “lost” the address of the dynamically allocated memory. As a result, this dynamically allocated integer can not be deleted.</p>",
       "preview": "This function allocates an integer dynamically, but never frees it using delete.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tato funkce alokuje celé číslo (integer) dynamicky, ale nikdy jej neuvolní pomocí delete. Protože proměnné ukazatelů jsou jen běžné proměnné, po skončení funkce ptr zanikne (vyjde z rozsahu platnosti). A protože ptr je jedinou proměnnou uchovávající adresu dynamicky alokovaného integeru, po zániku ptr již na dynamicky alokovanou paměť neexistují žádné reference. To znamená, že program nyní adresu dynamicky alokované paměti „ztratil“. V důsledku toho již tento dynamicky alokovaný integer nelze uvolnit.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b77",
       "type": "paragraph",
       "html": "<p>This is called a <strong>memory leak</strong>. Memory leaks happen when your program loses the address of some bit of dynamically allocated memory before giving it back to the operating system. When this happens, your program can’t delete the dynamically allocated memory, because it no longer knows where it is. The operating system also can’t use this memory, because that memory is considered to be still in use by your program.</p>",
       "preview": "This is called a memory leak. Memory leaks happen when your program loses the ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tomu se říká <strong>únik paměti</strong> (memory leak). K únikům paměti dochází, když váš program ztratí adresu nějaké části dynamicky alokované paměti dříve, než ji vrátí operačnímu systému. Když k tomu dojde, program nemůže dynamicky alokovanou paměť uvolnit, protože už neví, kde se nachází. Operační systém tuto paměť také nemůže použít, protože ji stále považuje za využívanou vaším programem.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b78",
       "type": "paragraph",
       "html": "<p>Memory leaks eat up free memory while the program is running, making less memory available not only to this program, but to other programs as well. Programs with severe memory leak problems can eat all the available memory, causing the entire machine to run slowly or even crash. Only after your program terminates is the operating system able to clean up and “reclaim” all leaked memory.</p>",
       "preview": "Memory leaks eat up free memory while the program is running, making less memory",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Úniky paměti spotřebovávají volnou paměť za běhu programu, takže zbývá méně paměti nejen pro tento program, ale i pro ostatní programy. Programy se závažnými úniky paměti mohou vyčerpat veškerou dostupnou paměť, což způsobí zpomalení celého počítače nebo dokonce jeho pád. Teprve po ukončení vašeho programu je operační systém schopen veškerou uniklou paměť uklidit a „získat zpět“.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b79",
       "type": "paragraph",
       "html": "<p>Although memory leaks can result from a pointer going out of scope, there are other ways that memory leaks can result. For example, a memory leak can occur if a pointer holding the address of the dynamically allocated memory is assigned another value:</p>",
       "preview": "Although memory leaks can result from a pointer going out of scope, there are ot",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli úniky paměti mohou vzniknout tím, že ukazatel opustí rozsah platnosti (scope), existují i jiné způsoby, jak k nim může dojít. K úniku paměti může například dojít, pokud je ukazateli uchovávajícímu adresu dynamicky alokované paměti přiřazena jiná hodnota:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b80",
@@ -593,14 +683,16 @@
       "language": "cpp",
       "code": "int value = 5;\nint* ptr{ new int{} }; // allocate memory\nptr = &value; // old address lost, memory leak results",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int value = 5;\nint* ptr{ new int{} }; // allocate memory\nptr = &amp;value; // old address lost, memory leak results</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int value = 5;\nint* ptr{ new int{} }; // přidělení paměti\nptr = &value; // stará adresa ztracena, výsledky úniku paměti</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b81",
       "type": "paragraph",
       "html": "<p>This can be fixed by deleting the pointer before reassigning it:</p>",
       "preview": "This can be fixed by deleting the pointer before reassigning it:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To lze napravit dealokací ukazatele před jeho opětovným přiřazením:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b82",
@@ -608,14 +700,16 @@
       "language": "cpp",
       "code": "int value{ 5 };\nint* ptr{ new int{} }; // allocate memory\ndelete ptr; // return memory back to operating system\nptr = &value; // reassign pointer to address of value",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int value{ 5 };\nint* ptr{ new int{} }; // allocate memory\ndelete ptr; // return memory back to operating system\nptr = &amp;value; // reassign pointer to address of value</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">hodnota int{ 5 };\nint* ptr{ new int{} }; // přidělení paměti\nodstranit ptr; // návrat paměti zpět do operačního systému\nptr = &value; // přeřazení ukazatele na adresu hodnoty</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b83",
       "type": "paragraph",
       "html": "<p>Relatedly, it is also possible to get a memory leak via double-allocation:</p>",
       "preview": "Relatedly, it is also possible to get a memory leak via double-allocation:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S tím souvisí i možnost způsobit únik paměti prostřednictvím dvojité alokace:</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b84",
@@ -623,56 +717,66 @@
       "language": "cpp",
       "code": "int* ptr{ new int{} };\nptr = new int{}; // old address lost, memory leak results",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ new int{} };\nptr = new int{}; // old address lost, memory leak results</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int* ptr{ new int{} };\nptr = new int{}; // stará adresa ztracena, výsledky úniku paměti</code></pre>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b85",
       "type": "paragraph",
       "html": "<p>The address returned from the second allocation overwrites the address of the first allocation. Consequently, the first allocation becomes a memory leak!</p>",
       "preview": "The address returned from the second allocation overwrites the address of the fi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Adresa vrácená z druhé alokace přepíše adresu z první alokace. V důsledku toho se z první alokace stane únik paměti!</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b86",
       "type": "paragraph",
       "html": "<p>Similarly, this can be avoided by ensuring you delete the pointer before reassigning.</p>",
       "preview": "Similarly, this can be avoided by ensuring you delete the pointer before reassig",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně se tomu lze vyhnout tím, že zajistíte dealokaci ukazatele před jeho opětovným přiřazením.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b87",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b88",
       "type": "paragraph",
       "html": "<p>Operators new and delete allow us to dynamically allocate single variables for our programs.</p>",
       "preview": "Operators new and delete allow us to dynamically allocate single variables for o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Operátory new a delete nám umožňují dynamicky alokovat jednotlivé proměnné pro naše programy.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b89",
       "type": "paragraph",
       "html": "<p>Dynamically allocated memory has dynamic duration and will stay allocated until you deallocate it or the program terminates.</p>",
       "preview": "Dynamically allocated memory has dynamic duration and will stay allocated until ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dynamicky alokovaná paměť má dynamickou dobu života (dynamic duration) a zůstane alokována, dokud ji nedealokujete nebo dokud se program neukončí.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b90",
       "type": "paragraph",
       "html": "<p>Be careful not to perform dereference a dangling or null pointers.</p>",
       "preview": "Be careful not to perform dereference a dangling or null pointers.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dávejte pozor, abyste nedereferencovali visící (dangling) ani nulové ukazatele.</p>"
     },
     {
       "id": "dynamic-memory-allocation-with-new-and-delete_b91",
       "type": "paragraph",
       "html": "<p>In the next lesson, we’ll take a look at using new and delete to allocate and delete arrays.</p>",
       "preview": "In the next lesson, we’ll take a look at using new and delete to allocate and de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V příští lekci se podíváme na použití new a delete k alokaci a uvolňování polí.</p>"
     }
-  ]
+  ],
+  "title_cs": "19.1 — Dynamická alokace paměti pomocí new a delete"
 }

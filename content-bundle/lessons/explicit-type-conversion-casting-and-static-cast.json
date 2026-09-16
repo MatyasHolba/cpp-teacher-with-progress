@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicit type conversion</a>, we discussed that the compiler can use implicit type conversion to convert a value from one data type to another. When you want to numerically promote a value from one data type to a wider data type, using implicit type conversion is fine.</p>",
       "preview": "In lesson 10.1 -- Implicit type conversion, we discussed that the compiler can u",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicitní typová konverze</a> jsme si řekli, že kompilátor může použít implicitní typovou konverzi k převodu hodnoty z jednoho datového typu na jiný. Pokud chcete hodnotu numericky povýšit z jednoho datového typu na širší datový typ, je použití implicitní typové konverze zcela v pořádku.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b1",
       "type": "paragraph",
       "html": "<p>Many new C++ programmers try something like this:</p>",
       "preview": "Many new C++ programmers try something like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho začínajících C++ programátorů zkouší něco takového:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b2",
@@ -29,21 +31,24 @@
       "language": "cpp",
       "code": "double d = 10 / 4; // does integer division, initializes d with value 2.0",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double d = 10 / 4; // does integer division, initializes d with value 2.0</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">dvojité d = 10/4; // provede celočíselné dělení, inicializuje d hodnotou 2.0</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b3",
       "type": "paragraph",
       "html": "<p>Because <code>10</code> and <code>4</code> are both of type <code>int</code>, integer division is performed, and the expression evaluates to <code>int</code> value <code>2</code>. This value then undergoes numeric conversion to <code>double</code> value <code>2.0</code> before being used to initialize variable <code>d</code>. Most likely, this isn’t what was intended.</p>",
       "preview": "Because 10 and 4 are both of type int, integer division is performed, and the ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože <code>10</code> i <code>4</code> jsou typu <code>int</code>, provede se celočíselné dělení a výraz se vyhodnotí na hodnotu <code>2</code> typu <code>int</code>. Tato hodnota pak projde numerickou konverzí na hodnotu <code>2.0</code> typu <code>double</code> předtím, než je použita k inicializaci proměnné <code>d</code>. S největší pravděpodobností to nebylo to, co bylo zamýšleno.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b4",
       "type": "paragraph",
       "html": "<p>In the case where you are using literal operands, replacing one or both of the integer literals with double literals will cause floating point division to happen instead:</p>",
       "preview": "In the case where you are using literal operands, replacing one or both of the i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě, kdy používáte literálové operandy, nahrazení jednoho nebo obou celočíselných literálů literály typu double způsobí, že se místo toho provede dělení s plovoucí řádovou čárkou:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b5",
@@ -51,14 +56,16 @@
       "language": "cpp",
       "code": "double d = 10.0 / 4.0; // does floating point division, initializes d with value 2.5",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">double d = 10.0 / 4.0; // does floating point division, initializes d with value 2.5</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">dvojité d = 10,0 / 4,0; // provede dělení s pohyblivou řádovou čárkou, inicializuje d hodnotou 2.5</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b6",
       "type": "paragraph",
       "html": "<p>But what if you are using variables instead of literals? Consider this case:</p>",
       "preview": "But what if you are using variables instead of literals? Consider this case:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale co když místo literálů používáte proměnné? Zvažte tento případ:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b7",
@@ -66,35 +73,41 @@
       "language": "cpp",
       "code": "int x { 10 };\nint y { 4 };\ndouble d = x / y; // does integer division, initializes d with value 2.0",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x { 10 };\nint y { 4 };\ndouble d = x / y; // does integer division, initializes d with value 2.0</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int x { 10 };\nint y { 4 };\ndvojité d = x/y; // provede celočíselné dělení, inicializuje d hodnotou 2.0</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b8",
       "type": "paragraph",
       "html": "<p>Because integer division is used here, variable <code>d</code> will end up with the value of <code>2.0</code>. How do we tell the compiler that we want to use floating point division instead of integer division in this case? Literal suffixes can’t be used with variables. We need some way to convert one (or both) of the variable operands to a floating point type, so that floating point division will be used instead.</p>",
       "preview": "Because integer division is used here, variable d will end up with the value of ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je zde použito celočíselné dělení, proměnná <code>d</code> skončí s hodnotou <code>2.0</code>. Jak v tomto případě kompilátoru sdělíme, že chceme místo celočíselného dělení použít dělení s plovoucí řádovou čárkou? U proměnných nelze použít literálové přípony. Potřebujeme nějaký způsob, jak převést jeden (nebo oba) operandy s proměnnými na typ s plovoucí řádovou čárkou, aby se místo toho použilo dělení s plovoucí řádovou čárkou.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b9",
       "type": "paragraph",
       "html": "<p>Fortunately, C++ comes with a number of different <strong>type casting operators</strong> (more commonly called <strong>casts</strong>) that can be used by the programmer to have the compiler perform type conversion. Because casts are explicit requests by the programmer, this form of type conversion is often called an <strong>explicit type conversion</strong> (as opposed to implicit type conversion, where the compiler performs a type conversion automatically).</p>",
       "preview": "Fortunately, C++ comes with a number of different type casting operators (more c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí C++ nabízí řadu různých <strong>operátorů přetypování</strong> (častěji označovaných jako <strong>přetypování</strong> neboli <strong>casty</strong>), které může programátor použít k tomu, aby kompilátor provedl typovou konverzi. Protože přetypování představuje explicitní požadavek programátora, tato forma typové konverze se často nazývá <strong>explicitní typová konverze</strong> (na rozdíl od implicitní typové konverze, kde kompilátor provádí typovou konverzi automaticky).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b10",
       "type": "section",
       "title": "Type casting",
       "html": "<h3 class=\"cpp-section-heading\">Type casting</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetypování (Type casting)</h3>",
+      "title_cs": "Typ odlévání"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b11",
       "type": "paragraph",
       "html": "<p>C++ supports 5 different types of casts: <code>static_cast</code>, <code>dynamic_cast</code>, <code>const_cast</code>, <code>reinterpret_cast</code>, and C-style casts. The first four are sometimes referred to as <strong>named casts</strong>.</p>",
       "preview": "C++ supports 5 different types of casts: static_cast, dynamic_cast, const_cast, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ podporuje 5 různých typů přetypování: <code>static_cast</code>, <code>dynamic_cast</code>, <code>const_cast</code>, <code>reinterpret_cast</code> a přetypování ve stylu jazyka C (C-style cast). První čtyři jsou někdy označovány jako <strong>pojmenovaná přetypování</strong> (named casts).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b12",
@@ -102,21 +115,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Cast</th><th>Description</th><th>Safe?</th></tr><tr><td>static_cast</td><td>Performs compile-time type conversions between related types.</td><td>Yes</td></tr><tr><td>dynamic_cast</td><td>Performs runtime type conversions on pointers or references in an polymorphic (inheritance) hierarchy</td><td>Yes</td></tr><tr><td>const_cast</td><td>Adds or removes const.</td><td>Only for adding const</td></tr><tr><td>reinterpret_cast</td><td>Reinterprets the bit-level representation of one type as if it were another type</td><td>No</td></tr><tr><td>C-style casts</td><td>Performs some combination of <code>static_cast</code>, <code>const_cast</code>, or <code>reinterpret_cast</code>.</td><td>No</td></tr></tbody></table></div></div>",
       "preview": "For advanced readersCastDescriptionSafe?static_castPerforms compile-time type conversions between re",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Přetypování</th><th>Popis</th><th>Bezpečné?</th></tr><tr><td>static_cast</td><td>Provádí typové konverze v době překladu mezi příbuznými typy.</td><td>Ano</td></tr><tr><td>dynamic_cast</td><td>Provádí typové konverze za běhu programu na ukazatelích nebo referencích v polymorfní hierarchii (dědičnosti).</td><td>Ano</td></tr><tr><td>const_cast</td><td>Přidává nebo odebírá const.</td><td>Pouze pro přidání const</td></tr><tr><td>reinterpret_cast</td><td>Reinterpretuje bitovou reprezentaci jednoho typu, jako by šlo o jiný typ.</td><td>Ne</td></tr><tr><td>C-style casts</td><td>Provádí určitou kombinaci <code>static_cast</code>, <code>const_cast</code> nebo <code>reinterpret_cast</code>.</td><td>Ne</td></tr></tbody></table></div></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b13",
       "type": "paragraph",
       "html": "<p>Each cast works the same way. As input, the cast takes an expression (that evaluates to a value or an object), and a target type. As output, the cast returns the result of the conversion.</p>",
       "preview": "Each cast works the same way. As input, the cast takes an expression (that evalu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Každé přetypování funguje stejným způsobem. Na vstupu přetypování přijímá výraz (který se vyhodnotí na hodnotu nebo objekt) a cílový typ. Na výstupu přetypování vrací výsledek konverze.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b14",
       "type": "paragraph",
       "html": "<p>Because they are the most commonly used casts, we’ll cover C-style casts and <code>static_cast</code> in this lesson.</p>",
       "preview": "Because they are the most commonly used casts, we’ll cover C-style casts and sta",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože se jedná o nejpoužívanější přetypování, probereme v této lekci přetypování ve stylu jazyka C a <code>static_cast</code>.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b15",
@@ -124,14 +140,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss <code>dynamic_cast</code> in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/dynamic-casting/\">25.10 -- Dynamic casting</a>, after we’ve covered other prerequisite topics.</p></div>",
       "preview": "Related contentWe discuss dynamic_cast in lesson 25.10 -- Dynamic casting, after we’ve covered other",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p><code>dynamic_cast</code> rozebíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/dynamic-casting/\">25.10 -- Dynamické přetypování</a>, jakmile probereme další prerekvizitní témata.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b16",
       "type": "paragraph",
       "html": "<p><code>const_cast</code> and <code>reinterpret_cast</code> should generally be avoided because they are only useful in rare cases and can be harmful if used incorrectly.</p>",
       "preview": "const_cast and reinterpret_cast should generally be avoided because they are onl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>const_cast</code> a <code>reinterpret_cast</code> byste se měli obecně vyhýbat, protože jsou užitečné pouze ve vzácných případech a při nesprávném použití mohou napáchat škody.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b17",
@@ -139,28 +157,33 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Avoid <code>const_cast</code> and <code>reinterpret_cast</code> unless you have a very good reason to use them.</p></div>",
       "preview": "WarningAvoid const_cast and reinterpret_cast unless you have a very good reason to use them.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Vyhněte se <code>const_cast</code> a <code>reinterpret_cast</code>, pokud nemáte opravdu dobrý důvod je použít.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b18",
       "type": "section",
       "title": "C-style cast",
       "html": "<h3 class=\"cpp-section-heading\">C-style cast</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetypování ve stylu C (C-style cast)</h3>",
+      "title_cs": "Obsazení ve stylu C"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b19",
       "type": "paragraph",
       "html": "<p>In standard C programming, casting is done via <code>operator()</code>, with the name of the type to convert to placed inside the parentheses, and the value to convert to placed immediately to the right of the closing parenthesis. In C++, this type of cast is called a <strong>C-style cast</strong>. You may still see these used in code that has been converted from C.</p>",
       "preview": "In standard C programming, casting is done via operator(), with the name of the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve standardním programování v C se přetypování provádí pomocí <code>operator()</code>, přičemž název cílového typu je umístěn uvnitř závorek a hodnota určená k převodu se nachází bezprostředně vpravo za uzavírací závorkou. V C++ se tomuto typu přetypování říká <strong>přetypování ve stylu C</strong> (C-style cast). Stále se s ním můžete setkat v kódu, který byl převeden z C.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b20",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b21",
@@ -168,21 +191,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    std::cout << (double)x / y << '\\n'; // C-style cast of x to double\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    std::cout &lt;&lt; (double)x / y &lt;&lt; '\\n'; // C-style cast of x to double\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x {10};\n    int y { 4 };\n\n    std::cout << (double)x / y << '\\n'; // Přetypování x ve stylu C na dvojnásobek\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b22",
       "type": "paragraph",
       "html": "<p>In the above program, we use a C-style cast to tell the compiler to convert <code>x</code> to a <code>double</code>. Because the left operand of <code>operator/</code> now evaluates to a floating point value, the right operand will be converted to a floating point value as well, and the division will be done using floating point division instead of integer division.</p>",
       "preview": "In the above program, we use a C-style cast to tell the compiler to convert x to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu používáme přetypování ve stylu C, abychom kompilátoru řekli, že má převést <code>x</code> na <code>double</code>. Protože se levý operand operátoru <code>operator/</code> nyní vyhodnotí jako hodnota s plovoucí řádovou čárkou, pravý operand bude také převeden na hodnotu s plovoucí řádovou čárkou a dělení proběhne jako dělení s plovoucí řádovou čárkou namísto celočíselného dělení.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b23",
       "type": "paragraph",
       "html": "<p>C++ also provides an alternative form of C-style cast known as a <strong>function-style cast</strong>, which resembles a function call:</p>",
       "preview": "C++ also provides an alternative form of C-style cast known as a function-style ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ nabízí také alternativní formu přetypování ve stylu C známou jako <strong>funkcionální přetypování</strong> (function-style cast), které připomíná volání funkce:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b24",
@@ -190,42 +216,48 @@
       "language": "cpp",
       "code": "    std::cout << double(x) / y << '\\n'; //  // function-style cast of x to double",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; double(x) / y &lt;&lt; '\\n'; //  // function-style cast of x to double</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> std::cout << double(x) / y << '\\n'; // // přetypování ve stylu funkce x na double</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b25",
       "type": "paragraph",
       "html": "<p>The function-style cast makes it a bit easier to tell what is being converted (as it looks like a standard function argument).</p>",
       "preview": "The function-style cast makes it a bit easier to tell what is being converted (a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Funkcionální přetypování usnadňuje rozpoznání toho, co je převáděno (protože vypadá jako standardní argument funkce).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b26",
       "type": "paragraph",
       "html": "<p>There are a couple of significant reasons that C-style casts are generally avoided in modern C++.</p>",
       "preview": "There are a couple of significant reasons that C-style casts are generally avoid",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje několik zásadních důvodů, proč se přetypování ve stylu C v moderním C++ obecně vyhýbáme.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b27",
       "type": "paragraph",
       "html": "<p>First, although a C-style cast appears to be a single cast, it can actually perform a variety of different conversions depending on how it is used. This can include a static cast, a const cast, or a reinterpret cast (the latter two of which we mentioned above you should avoid). A C-style cast does not make it clear which cast(s) will actual be performed, which not only makes your code that much harder to understand, but also opens the door for inadvertent misuse (where you think you’re implementing a simple cast and you end up doing something dangerous instead). Often this will end up producing an error that isn’t discovered until runtime.</p>",
       "preview": "First, although a C-style cast appears to be a single cast, it can actually perf",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, ačkoli přetypování ve stylu C vypadá jako jediný druh přetypování, ve skutečnosti může provádět celou řadu různých konverzí v závislosti na tom, jak je použito. To může zahrnovat static cast, const cast nebo reinterpret cast (přičemž posledním dvěma byste se, jak bylo zmíněno výše, měli vyhýbat). Přetypování ve stylu C nedává jasně najevo, které přetypování bude skutečně provedeno, což nejen znesnadňuje pochopení vašeho kódu, ale také otevírá dveře neúmyslným chybám (kdy si myslíte, že provádíte jednoduché přetypování, a místo toho provedete něco nebezpečného). To často vede k chybě, která je odhalena až za běhu programu.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b28",
       "type": "paragraph",
       "html": "<p>Also, because C-style casts are just a type name, parenthesis, and variable or value, they are both difficult to identify (making your code harder to read) and even more difficult to search for.</p>",
       "preview": "Also, because C-style casts are just a type name, parenthesis, and variable or v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dále, protože přetypování ve stylu C tvoří pouze název typu, závorky a proměnná nebo hodnota, je obtížné jej jak vizuálně identifikovat (což zhoršuje čitelnost kódu), tak ještě obtížnější jej v kódu vyhledávat.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b29",
       "type": "paragraph",
       "html": "<p>In contrast, the named casts are easy to spot and search for, make it clear what they are doing, are limited in their abilities, and will produce a compilation error if you try to misuse them.</p>",
       "preview": "In contrast, the named casts are easy to spot and search for, make it clear what",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naproti tomu pojmenovaná přetypování lze v kódu snadno zahlédnout a vyhledat, jasně vyjadřují svůj účel, mají omezené schopnosti a při nesprávném použití způsobí chybu při kompilaci.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b30",
@@ -233,7 +265,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Avoid using C-style casts.</p></div>",
       "preview": "Best practiceAvoid using C-style casts.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Vyhněte se používání přetypování ve stylu jazyka C (C-style cast).</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b31",
@@ -241,28 +274,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>A C-style cast tries to perform the following C++ casts, in order:</p><ul><li><code>const_cast</code></li><li><code>static_cast</code></li><li><code>static_cast</code>, followed by <code>const_cast</code></li><li><code>reinterpret_cast</code></li><li><code>reinterpret_cast</code>, followed by <code>const_cast</code></li></ul><p>There is one thing you can do with a C-style cast that you can’t do with C++ casts: C-style casts can convert a derived object to a base class that is inaccessible (e.g. because it was privately inherited).</p></div>",
       "preview": "For advanced readersA C-style cast tries to perform the following C++ casts, in order:const_caststat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Přetypování ve stylu jazyka C se pokouší provést následující C++ přetypování v tomto pořadí:</p><ul><li><code>const_cast</code></li><li><code>static_cast</code></li><li><code>static_cast</code>, následovaný <code>const_cast</code></li><li><code>reinterpret_cast</code></li><li><code>reinterpret_cast</code>, následovaný <code>const_cast</code></li></ul><p>Existuje jedna věc, kterou můžete s přetypováním ve stylu jazyka C udělat a s C++ přetypováními nikoli: přetypování ve stylu C dokáže převést odvozený objekt na základní třídu, která je nepřístupná (např. protože byla děděna privátně).</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b32",
       "type": "section",
       "title": "static_cast should be used to cast most values",
       "html": "<h3 class=\"cpp-section-heading\"><code>static_cast</code> should be used to cast most values</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">K přetypování většiny hodnot by se měl používat <code>static_cast</code></h3>",
+      "title_cs": "static_cast by měl být použit k přetypování většiny hodnot"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b33",
       "type": "paragraph",
       "html": "<p>By far the most used cast in C++ is the <strong>static cast</strong> operator, which is accessed via the <code>static_cast</code> keyword. <code>static_cast</code> is used when we want to explicitly convert a value of one type into a value of another type.</p>",
       "preview": "By far the most used cast in C++ is the static cast operator, which is accessed ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zdaleka nejpoužívanějším přetypováním v C++ je operátor <strong>statického přetypování</strong> (static cast), ke kterému se přistupuje pomocí klíčového slova <code>static_cast</code>. <code>static_cast</code> se používá, když chceme explicitně převést hodnotu jednoho typu na hodnotu jiného typu.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b34",
       "type": "paragraph",
       "html": "<p>You’ve previously seen <code>static_cast</code> used to convert a <code>char</code> into an <code>int</code> so that <code>std::cout</code> prints it as an integer instead of a character:</p>",
       "preview": "You’ve previously seen static_cast used to convert a char into an int so that st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Již dříve jste viděli použití <code>static_cast</code> k převodu <code>char</code> na <code>int</code>, aby jej <code>std::cout</code> vypsal jako celé číslo namísto znaku:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b35",
@@ -270,21 +308,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    char c { 'a' };\n    std::cout << static_cast<int>(c) << '\\n'; // prints 97 rather than a\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    char c { 'a' };\n    std::cout &lt;&lt; static_cast&lt;int&gt;(c) &lt;&lt; '\\n'; // prints 97 rather than a\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    char c { 'a' };\n    std::cout << static_cast<int>(c) << '\\n'; // vypíše 97 místo a\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b36",
       "type": "paragraph",
       "html": "<p>To perform a static cast, we start with the <code>static_cast</code> keyword, and then place the type to convert to inside angled brackets. Then inside parenthesis, we place the expression whose value will be converted. Note how much the syntax looks like a function call to a function named <code>static_cast&lt;type&gt;()</code> with the expression whose value will be converted provided as an argument! Static casting a value to another type of value returns a temporary object that has been direct-initialized with the converted value.</p>",
       "preview": "To perform a static cast, we start with the static_cast keyword, and then place ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro provedení statického přetypování začneme klíčovým slovem <code>static_cast</code> a do špičatých závorek vložíme typ, na který chceme převádět. Poté do kulatých závorek vložíme výraz, jehož hodnota má být převedena. Všimněte si, jak moc tato syntaxe připomíná volání funkce s názvem <code>static_cast&lt;type&gt;()</code>, kde je výraz, jehož hodnota má být převedena, předán jako argument! Statické přetypování hodnoty na jiný typ vrací dočasný objekt, který byl přímo inicializován převedenou hodnotou.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b37",
       "type": "paragraph",
       "html": "<p>Here’s how we’d use <code>static_cast</code> to solve the problem we introduced in the introduction of this lesson:</p>",
       "preview": "Here’s how we’d use static_cast to solve the problem we introduced in the introd",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázka, jak bychom použili <code>static_cast</code> k vyřešení problému, který jsme představili v úvodu této lekce:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b38",
@@ -292,28 +333,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    // static cast x to a double so we get floating point division\n    std::cout << static_cast<double>(x) / y << '\\n'; // prints 2.5\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    // static cast x to a double so we get floating point division\n    std::cout &lt;&lt; static_cast&lt;double&gt;(x) / y &lt;&lt; '\\n'; // prints 2.5\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x {10};\n    int y { 4 };\n\n    // statické přetypování x na dvojnásobek, takže dostaneme dělení s plovoucí desetinnou čárkou\n    std::cout << static_cast<double>(x) / y << '\\n'; // vytiskne 2.5\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b39",
       "type": "paragraph",
       "html": "<p><code>static_cast&lt;double&gt;(x)</code> returns a temporary <code>double</code> object containing the converted value <code>10.0</code>. This temporary is then used as the left-operand of the floating point division.</p>",
       "preview": "static_cast<double>(x) returns a temporary double object containing the converte",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>static_cast&lt;double&gt;(x)</code> vrací dočasný objekt typu <code>double</code> obsahující převedenou hodnotu <code>10.0</code>. Tento dočasný objekt je poté použit jako levý operand dělení s plovoucí řádovou čárkou.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b40",
       "type": "paragraph",
       "html": "<p>There are two important properties of <code>static_cast</code>.</p>",
       "preview": "There are two important properties of static_cast.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>static_cast</code> má dvě důležité vlastnosti.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b41",
       "type": "paragraph",
       "html": "<p>First, <code>static_cast</code> provides compile-time type checking. If we try to convert a value to a type and the compiler doesn’t know how to perform that conversion, we will get a compilation error.</p>",
       "preview": "First, static_cast provides compile-time type checking. If we try to convert a v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, <code>static_cast</code> poskytuje typovou kontrolu v době překladu. Pokud se pokusíme převést hodnotu na typ a kompilátor neví, jak tuto konverzi provést, dojde k chybě při kompilaci.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b42",
@@ -321,14 +366,16 @@
       "language": "cpp",
       "code": "    // a C-style string literal can't be converted to an int, so the following is an invalid conversion\n    int x { static_cast<int>(\"Hello\") }; // invalid: will produce compilation error",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    // a C-style string literal can't be converted to an int, so the following is an invalid conversion\n    int x { static_cast&lt;int&gt;(\"Hello\") }; // invalid: will produce compilation error</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> // řetězcový literál ve stylu C nelze převést na int, takže následující převod je neplatný\n    int x { static_cast<int>(\"Dobrý den\") }; // neplatný: způsobí chybu kompilace</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b43",
       "type": "paragraph",
       "html": "<p>Second, <code>static_cast</code> is (intentionally) less powerful than a C-style cast, as it will prevent certain kinds of dangerous conversions (such as those that require reinterpretation or discarding const).</p>",
       "preview": "Second, static_cast is (intentionally) less powerful than a C-style cast, as it ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, <code>static_cast</code> je (záměrně) méně mocný než přetypování ve stylu jazyka C (C-style cast), protože zabrání určitým druhům nebezpečných konverzí (jako jsou ty, které vyžadují reinterpretaci nebo odstranění <code>const</code>).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b44",
@@ -336,7 +383,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Favor <code>static_cast</code> when you need to convert a value from one type to another type.</p></div>",
       "preview": "Best practiceFavor static_cast when you need to convert a value from one type to another type.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud potřebujete převést hodnotu z jednoho typu na jiný, dávejte přednost <code>static_cast</code>.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b45",
@@ -344,21 +392,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Since static_cast uses direct initialization, any explicit constructors of the target class type will be considered when initializing the temporary object to be returned. We discuss explicit constructors in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/converting-constructors-and-the-explicit-keyword/\">14.16 -- Converting constructors and the explicit keyword</a>.</p></div>",
       "preview": "For advanced readersSince static_cast uses direct initialization, any explicit constructors of the t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Jelikož <code>static_cast</code> používá přímou inicializaci (direct initialization), budou při inicializaci vraceného dočasného objektu brány v úvahu i případné explicitní konstruktory cílového třídního typu. Explicitní konstruktory probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/converting-constructors-and-the-explicit-keyword/\">14.16 -- Konverzní konstruktory a klíčové slovo explicit</a>.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b46",
       "type": "section",
       "title": "Using static_cast to make narrowing conversions explicit",
       "html": "<h3 class=\"cpp-section-heading\">Using <code>static_cast</code> to make narrowing conversions explicit</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití <code>static_cast</code> k explicitnímu vyjádření zužujících konverzí</h3>",
+      "title_cs": "Použití static_cast k explicitnímu převodu zúžení"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b47",
       "type": "paragraph",
       "html": "<p>Compilers will often issue warnings when a potentially unsafe (narrowing) implicit type conversion is performed. For example, consider the following snippet:</p>",
       "preview": "Compilers will often issue warnings when a potentially unsafe (narrowing) implic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompilátory často vydávají varování, když se provádí potenciálně nebezpečná (zužující) implicitní typová konverze. Podívejte se například na následující úryvek kódu:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b48",
@@ -366,21 +418,24 @@
       "language": "cpp",
       "code": "int i { 48 };\nchar ch = i; // implicit narrowing conversion",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 48 };\nchar ch = i; // implicit narrowing conversion</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 48 };\nchar ch = i; // převod implicitního zúžení</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b49",
       "type": "paragraph",
       "html": "<p>Casting an <code>int</code> (2 or 4 bytes) to a <code>char</code> (1 byte) is potentially unsafe (as the compiler can’t tell whether the integer value will overflow the range of the <code>char</code> or not), and so the compiler will typically print a warning. If we used list initialization, the compiler would yield an error.</p>",
       "preview": "Casting an int (2 or 4 bytes) to a char (1 byte) is potentially unsafe (as the c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetypování <code>int</code> (2 nebo 4 bajty) na <code>char</code> (1 bajt) je potenciálně nebezpečné (protože kompilátor nedokáže určit, zda celočíselná hodnota nepřeteče rozsah typu <code>char</code>), a proto kompilátor obvykle vypíše varování. Pokud bychom použili inicializaci seznamem (list initialization), kompilátor by ohlásil chybu.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b50",
       "type": "paragraph",
       "html": "<p>To get around this, we can use a static cast to explicitly convert our integer to a <code>char</code>:</p>",
       "preview": "To get around this, we can use a static cast to explicitly convert our integer t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom to obešli, můžeme použít statické přetypování (static cast) k explicitní konverzi našeho celého čísla na <code>char</code>:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b51",
@@ -388,21 +443,24 @@
       "language": "cpp",
       "code": "int i { 48 };\n\n// explicit conversion from int to char, so that a char is assigned to variable ch\nchar ch { static_cast<char>(i) };",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 48 };\n\n// explicit conversion from int to char, so that a char is assigned to variable ch\nchar ch { static_cast&lt;char&gt;(i) };</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 48 };\n\n// explicitní převod z int na char, takže char je přiřazen proměnné ch\nchar ch { static_cast<char>(i) };</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b52",
       "type": "paragraph",
       "html": "<p>When we do this, we’re explicitly telling the compiler that this conversion is intended, and we accept responsibility for the consequences (e.g. overflowing the range of a <code>char</code> if that happens). Since the output of this static cast is of type <code>char</code>, the initialization of variable <code>ch</code> doesn’t generate any type mismatches, and hence no warnings or errors.</p>",
       "preview": "When we do this, we’re explicitly telling the compiler that this conversion is i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když to uděláme, explicitně říkáme kompilátoru, že tato konverze je záměrná a že přijímáme zodpovědnost za následky (např. přetečení rozsahu typu <code>char</code>, pokud k tomu dojde). Vzhledem k tomu, že výstup tohoto statického přetypování je typu <code>char</code>, inicializace proměnné <code>ch</code> nevyvolá žádnou typovou neshodu, a tudíž ani žádná varování nebo chyby.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b53",
       "type": "paragraph",
       "html": "<p>Here’s another example where the compiler will typically complain that converting a <code>double</code> to an <code>int</code> may result in loss of data:</p>",
       "preview": "Here’s another example where the compiler will typically complain that convertin",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další příklad, kde si kompilátor obvykle postěžuje, že převod <code>double</code> na <code>int</code> může vést ke ztrátě dat:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b54",
@@ -410,14 +468,16 @@
       "language": "cpp",
       "code": "int i { 100 };\ni = i / 2.5;",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 100 };\ni = i / 2.5;</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 100 };\ni = i / 2,5;</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b55",
       "type": "paragraph",
       "html": "<p>To tell the compiler that we explicitly mean to do this:</p>",
       "preview": "To tell the compiler that we explicitly mean to do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom kompilátoru řekli, že to máme explicitně v úmyslu:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b56",
@@ -425,7 +485,8 @@
       "language": "cpp",
       "code": "int i { 100 };\ni = static_cast<int>(i / 2.5);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 100 };\ni = static_cast&lt;int&gt;(i / 2.5);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int i { 100 };\ni = static_cast<int>(i / 2.5);</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b57",
@@ -433,56 +494,65 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss more uses of static_cast in relation to class types in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/temporary-class-objects/\">14.13 -- Temporary class objects</a>.</p></div>",
       "preview": "Related contentWe discuss more uses of static_cast in relation to class types in lesson 14.13 -- Tem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Další využití static_cast v souvislosti s třídními typy probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/temporary-class-objects/\">14.13 -- Dočasné objekty tříd</a>.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b58",
       "type": "section",
       "title": "Casting vs initializing a temporary object",
       "html": "<h3 class=\"cpp-section-heading\">Casting vs initializing a temporary object</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetypování vs. inicializace dočasného objektu</h3>",
+      "title_cs": "Casting vs inicializace dočasného objektu"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b59",
       "type": "paragraph",
       "html": "<p>Let’s say we have some variable <code>x</code> that we need to convert to an <code>int</code>. There are two conventional ways we can do this:</p>",
       "preview": "Let’s say we have some variable x that we need to convert to an int. There are t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Řekněme, že máme nějakou proměnnou <code>x</code>, kterou potřebujeme převést na <code>int</code>. Existují dva konvenční způsoby, jak to můžeme udělat:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b60",
       "type": "list",
       "html": "<ol start=\"1\"><li><code>static_cast&lt;int&gt;(x)</code>, which returns a temporary <code>int</code> object <em>direct-initialized</em> with <code>x</code>.</li><li><code>int { x }</code>, which creates a temporary <code>int</code> object <em>direct-list-initialized</em> with <code>x</code>.</li></ol>",
       "preview": "static_cast<int>(x), which returns a temporary int object direct-initialized wit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li><code>static_cast&lt;int&gt;(x)</code>, což vrací dočasný objekt typu <code>int</code> <em>přímo inicializovaný</em> hodnotou <code>x</code>.</li><li><code>int { x }</code>, což vytvoří dočasný objekt typu <code>int</code> <em>přímo inicializovaný seznamem</em> hodnotou <code>x</code>.</li></ol>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b61",
       "type": "paragraph",
       "html": "<p>We should avoid <code>int ( x )</code>, which is a C-style cast. This will return a temporary <code>int</code> direct-initialized with the value of <code>x</code> (like we’d expect from the syntax), but it also has the other downsides mentioned in the C-style cast section (like allowing the possibility of performing a dangerous conversion).</p>",
       "preview": "We should avoid int ( x ), which is a C-style cast. This will return a temporary",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Měli bychom se vyhnout zápisu <code>int ( x )</code>, což je přetypování ve stylu C (C-style cast). To vrátí dočasný <code>int</code> přímo inicializovaný hodnotou <code>x</code> (jak bychom od této syntaxe očekávali), ale má také další nevýhody zmíněné v sekci o přetypování ve stylu C (například umožnění potenciálně nebezpečné konverze).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b62",
       "type": "paragraph",
       "html": "<p>There are (at least) three notable differences between the <code>static_cast</code> and the direct-list-initialized temporary:</p>",
       "preview": "There are (at least) three notable differences between the static_cast and the d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mezi <code>static_cast</code> a dočasným objektem přímo inicializovaným seznamem existují (nejméně) tři významné rozdíly:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b63",
       "type": "list",
       "html": "<ol start=\"1\"><li><code>int { x }</code> uses list initialization, which disallows narrowing conversions. This is great when initializing a variable, because we rarely intend to lose data in such cases. But when using a cast, it is presumed we know what we’re doing, and if we want to do a cast that might lose some data, we should be able to do that. The narrowing conversion restriction can be an impediment in this case.</li></ol>",
       "preview": "int { x } uses list initialization, which disallows narrowing conversions. This ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li><code>int { x }</code> používá inicializaci seznamem (list initialization), která zakazuje zužující konverze (narrowing conversions). To je skvělé při inicializaci proměnné, protože v takových případech zřídka chceme přijít o data. Když ale používáme přetypování, předpokládá se, že víme, co děláme, a pokud chceme provést přetypování, které může část dat ztratit, měli bychom mít možnost to udělat. Omezení zužujících konverzí může být v tomto případě na překážku.</li></ol>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b64",
       "type": "paragraph",
       "html": "<p>Let’s show an example of this, including how it can lead to platform-specific issues:</p>",
       "preview": "Let’s show an example of this, including how it can lead to platform-specific is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukažme si na to příklad včetně toho, jak to může vést k problémům specifickým pro danou platformu:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b65",
@@ -490,28 +560,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    // We want to do floating point division, so one of the operands needs to be a floating point type\n    std::cout << double{x} / y << '\\n'; // okay if int is 32-bit, narrowing if x is 64-bit\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    int x { 10 };\n    int y { 4 };\n\n    // We want to do floating point division, so one of the operands needs to be a floating point type\n    std::cout &lt;&lt; double{x} / y &lt;&lt; '\\n'; // okay if int is 32-bit, narrowing if x is 64-bit\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    int x {10};\n    int y { 4 };\n\n    // Chceme provést dělení s pohyblivou řádovou čárkou, takže jeden z operandů musí být typu s plovoucí řádovou čárkou\n    std::cout << double{x} / y << '\\n'; // v pořádku, pokud je int 32bitové, zúžení, pokud je x 64bitové\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b66",
       "type": "paragraph",
       "html": "<p>In this example, we have decided to convert <code>x</code> to a <code>double</code> so we can do floating-point division rather than integer division. On a 32-bit architecture, this will work fine (because a <code>double</code> can represent all the values that can be stored in a 32-bit <code>int</code>, so it isn’t a narrowing conversion). But on a 64-bit architecture, this is not the case, so converting a 64-bit <code>int</code> to a <code>double</code> is a narrowing conversion. And since list initialization disallows narrowing conversions, this won’t compile on architectures where <code>int</code> is 64-bits.</p>",
       "preview": "In this example, we have decided to convert x to a double so we can do floating-",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu jsme se rozhodli převést <code>x</code> na <code>double</code>, abychom mohli provést dělení s plovoucí řádovou čárkou namísto celočíselného dělení. Na 32bitové architektuře to bude fungovat bez problémů (protože <code>double</code> dokáže reprezentovat všechny hodnoty, které lze uložit do 32bitového <code>int</code>, takže se nejedná o zužující konverzi). Na 64bitové architektuře tomu tak ale není, takže převod 64bitového <code>int</code> na <code>double</code> je zužující konverzí. A jelikož inicializace seznamem zužující konverze zakazuje, na architekturách, kde má <code>int</code> 64 bitů, se tento kód nezkompiluje.</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b67",
       "type": "list",
       "html": "<ol start=\"2\"><li><code>static_cast</code> makes it clearer that we are intending to perform a conversion. Although the <code>static_cast</code> is more verbose than the direct-list-initialized alternative, in this case, that’s a good thing, as it makes the conversion easier to spot and search for. That ultimately makes your code safer and easier to understand.</li><li>Direct-list-initializion of a temporary only allows single-word type names. Due to a weird syntax quirk, there are several places within C++ where only single-word type names are allowed (the C++ standard calls these names “simple type specifiers”). So while <code>int { x }</code> is a valid conversion syntax, <code>unsigned int { x }</code> is not.</li></ol>",
       "preview": "static_cast makes it clearer that we are intending to perform a conversion. Alth",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"2\"><li><code>static_cast</code> dává jasněji najevo, že máme v úmyslu provést konverzi. Ačkoli je <code>static_cast</code> upovídanější než alternativa s přímou inicializací seznamem, v tomto případě je to dobře, protože je díky tomu konverze lépe viditelná a snáze se vyhledává. V konečném důsledku to činí váš kód bezpečnějším a srozumitelnějším.</li><li>Přímá inicializace dočasného objektu seznamem umožňuje pouze jednoslovné názvy typů. Kvůli zvláštní syntaktické anomálii existuje v C++ několik míst, kde jsou povoleny pouze jednoslovné názvy typů (standard C++ tyto názvy označuje jako „simple type specifiers“). Takže zatímco <code>int { x }</code> je platná syntaxe konverze, <code>unsigned int { x }</code> nikoli.</li></ol>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b68",
       "type": "paragraph",
       "html": "<p>You can see this for yourself in the following example, which produces a compile error:</p>",
       "preview": "You can see this for yourself in the following example, which produces a compile",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Sami se o tom můžete přesvědčit v následujícím příkladu, který způsobí chybu při kompilaci:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b69",
@@ -519,14 +593,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    unsigned char c { 'a' };\n    std::cout << unsigned int { c } << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    unsigned char c { 'a' };\n    std::cout &lt;&lt; unsigned int { c } &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    unsigned char c { 'a' };\n    std::cout << unsigned int { c } << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b70",
       "type": "paragraph",
       "html": "<p>There are simple ways to work around this, the easiest of which is to use a single-word type alias:</p>",
       "preview": "There are simple ways to work around this, the easiest of which is to use a sing",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existují jednoduché způsoby, jak to obejít, přičemž nejjednodušší z nich je použít jednoslovný typový alias:</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b71",
@@ -534,21 +610,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    unsigned char c { 'a' };\n    using uint = unsigned int;\n    std::cout << uint { c } << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    unsigned char c { 'a' };\n    using uint = unsigned int;\n    std::cout &lt;&lt; uint { c } &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    unsigned char c { 'a' };\n    pomocí uint = unsigned int;\n    std::cout << uint { c } << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b72",
       "type": "paragraph",
       "html": "<p>But why go to the trouble when you can just <code>static_cast</code>?</p>",
       "preview": "But why go to the trouble when you can just static_cast?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale proč se s tím namáhat, když můžete jednoduše použít <code>static_cast</code>?</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b73",
       "type": "paragraph",
       "html": "<p>For all these reasons, we generally prefer <code>static_cast</code> over direct-list-initialization of a temporary.</p>",
       "preview": "For all these reasons, we generally prefer static_cast over direct-list-initiali",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ze všech těchto důvodů obecně dáváme přednost <code>static_cast</code> před přímou inicializací dočasného objektu pomocí seznamu (direct-list-initialization).</p>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b74",
@@ -556,14 +635,17 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer <code>static_cast</code> over initializing a temporary object when a conversion is desired.</p></div>",
       "preview": "Best practicePrefer static_cast over initializing a temporary object when a conversion is desired.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud je požadována konverze, dejte přednost <code>static_cast</code> před inicializací dočasného objektu.</p></div>"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b75",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "explicit-type-conversion-casting-and-static-cast_b76",
@@ -574,5 +656,6 @@
       "solutionHtml": "<p>Implicit type conversion is automatically performed whenever one data type is expected, but a different data type is supplied.<br>Explicit type conversion happens when the programmer uses a type cast to explicitly convert a value from one type to another type.</p>",
       "canCheck": true
     }
-  ]
+  ],
+  "title_cs": "10.6 — Explicitní typová konverze (přetypování) a static_cast"
 }

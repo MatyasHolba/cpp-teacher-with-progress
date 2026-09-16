@@ -46,6 +46,7 @@ export interface LessonData {
   chapterId: string;
   number: string;
   title: string;
+  title_cs?: string;
   url: string;
   slug: string;
   scrapedAt: string;
@@ -84,6 +85,9 @@ export interface SyncSettings {
   theme?: 'light' | 'dark' | 'oled' | 'sepia';
   uiLanguage?: 'cs' | 'en';
   contentLanguage?: 'cs' | 'en';
+  githubExportContentLang?: 'cs' | 'en';
+  githubExportUiLang?: 'cs' | 'en';
+  githubReadmeLang?: 'cs' | 'en';
   lastSyncAt?: string;
 }
 

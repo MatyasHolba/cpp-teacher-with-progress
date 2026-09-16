@@ -14,21 +14,25 @@
       "type": "paragraph",
       "html": "<p>A <strong>constexpr</strong> function is a function that is allowed to be called in a constant expression. To make a function a constexpr function, we simply use the <code>constexpr</code> keyword in front of the return type. Constexpr functions are only guaranteed to be evaluated at compile-time when used in a context that requires a constant expression. Otherwise they may be evaluated at compile-time (if eligible) or runtime. Constexpr functions are implicitly inline, and the compiler must see the full definition of the constexpr function to call it at compile-time.</p>",
       "preview": "A constexpr function is a function that is allowed to be called in a constant ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Constexpr</strong> funkce je funkce, kterou je dovoleno volat v konstantním výrazu. Abychom z funkce udělali constexpr funkci, jednoduše použijeme klíčové slovo <code>constexpr</code> před návratovým typem. U constexpr funkcí je zaručeno vyhodnocení v době překladu pouze tehdy, jsou-li použity v kontextu, který konstantní výraz vyžaduje. V opačném případě mohou být vyhodnoceny v době překladu (pokud jsou k tomu způsobilé), nebo za běhu programu. Constexpr funkce jsou implicitně inline a překladač musí vidět úplnou definici constexpr funkce, aby ji mohl volat v době překladu.</p>"
     },
     {
       "id": "chapter-f-summary-and-quiz_b1",
       "type": "paragraph",
       "html": "<p>A <strong>consteval function</strong> is a function that must evaluate at compile-time. Consteval functions otherwise follow the same rules as constexpr functions.</p>",
       "preview": "A consteval function is a function that must evaluate at compile-time. Consteval",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Consteval funkce</strong> je funkce, která se musí vyhodnotit v době překladu. Jinak se consteval funkce řídí stejnými pravidly jako constexpr funkce.</p>"
     },
     {
       "id": "chapter-f-summary-and-quiz_b2",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas kvízu"
     },
     {
       "id": "chapter-f-summary-and-quiz_b3",
@@ -45,7 +49,9 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// gets tower height from user and returns it\ndouble getTowerHeight()\n{\n\tstd::cout << \"Enter the height of the tower in meters: \";\n\tdouble towerHeight{};\n\tstd::cin >> towerHeight;\n\treturn towerHeight;\n}\n\n// Returns ball height from ground after \"seconds\" seconds\ndouble calculateBallHeight(double towerHeight, int seconds)\n{\n\tdouble gravity{ 9.8 };\n\n\t// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0\n\tdouble distanceFallen{ (gravity * (seconds * seconds)) / 2.0 };\n\tdouble currentHeight{ towerHeight - distanceFallen };\n\n\treturn currentHeight;\n}\n\n// Prints ball height above ground\nvoid printBallHeight(double ballHeight, int seconds)\n{\n\tif (ballHeight > 0.0)\n\t\tstd::cout << \"At \" << seconds << \" seconds, the ball is at height: \" << ballHeight << \" meters\\n\";\n\telse\n\t\tstd::cout << \"At \" << seconds << \" seconds, the ball is on the ground.\\n\";\n}\n\n// Calculates the current ball height and then prints it\n// This is a helper function to make it easier to do this\nvoid printCalculatedBallHeight(double towerHeight, int seconds)\n{\n\tdouble ballHeight{ calculateBallHeight(towerHeight, seconds) };\n\tprintBallHeight(ballHeight, seconds);\n}\n\nint main()\n{\n\tdouble towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// gets tower height from user and returns it\ndouble getTowerHeight()\n{\n\tstd::cout &lt;&lt; \"Enter the height of the tower in meters: \";\n\tdouble towerHeight{};\n\tstd::cin &gt;&gt; towerHeight;\n\treturn towerHeight;\n}\n\n// Returns ball height from ground after \"seconds\" seconds\ndouble calculateBallHeight(double towerHeight, int seconds)\n{\n\tdouble gravity{ 9.8 };\n\n\t// Using formula: [ s = u * t + (a * t^2) / 2 ], here u(initial velocity) = 0\n\tdouble distanceFallen{ (gravity * (seconds * seconds)) / 2.0 };\n\tdouble currentHeight{ towerHeight - distanceFallen };\n\n\treturn currentHeight;\n}\n\n// Prints ball height above ground\nvoid printBallHeight(double ballHeight, int seconds)\n{\n\tif (ballHeight &gt; 0.0)\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is at height: \" &lt;&lt; ballHeight &lt;&lt; \" meters\\n\";\n\telse\n\t\tstd::cout &lt;&lt; \"At \" &lt;&lt; seconds &lt;&lt; \" seconds, the ball is on the ground.\\n\";\n}\n\n// Calculates the current ball height and then prints it\n// This is a helper function to make it easier to do this\nvoid printCalculatedBallHeight(double towerHeight, int seconds)\n{\n\tdouble ballHeight{ calculateBallHeight(towerHeight, seconds) };\n\tprintBallHeight(ballHeight, seconds);\n}\n\nint main()\n{\n\tdouble towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// získá výšku věže od uživatele a vrátí ji\ndouble getTowerHeight()\n{\n\tstd::cout << \"Zadejte výšku věže v metrech: \";\n\tdouble towerHeight{};\n\tstd::cin >> towerHeight;\n\tvýška vratné věže;\n}\n\n// Vrátí výšku míče od země po \"sekundách\" sekundách\ndouble countBallHeight(double towerHeight, int seconds)\n{\n\tdvojitá gravitace{ 9,8 };\n\n\t// Použití vzorce: [ s = u * t + (a * t^2) / 2 ], zde u(počáteční rychlost) = 0\n\tdouble distanceFallen{ (gravitace * (sekundy * sekundy)) / 2,0 };\n\tdouble currentHeight{ towerHeight - distanceFallen };\n\n\tnávratový proudVýška;\n}\n\n// Vytiskne výšku míče nad zemí\nvoid printBallHeight (výška dvojité kuličky, int sekund)\n{\n\tif (výška míče > 0,0)\n\t\tstd::cout << \"V \" << sekund << \" sekund je míč ve výšce: \" << ballHeight << \" metry\\n\";\n\tjinak\n\t\tstd::cout << \"V \" << sekund << \" sekund je míč na zemi.\\n\";\n}\n\n// Vypočítá aktuální výšku koule a poté ji vytiskne\n// Toto je pomocná funkce, která vám to usnadní\nvoid printCalculatedBallHeight(dvojitá výška věže, int sekund)\n{\n\tdouble ballHeight{ vypocitajVyskaKule(towerHeight, sekundy) };\n\tprintBallHeight(ballHeight, sekund);\n}\n\nint main()\n{\n\tdouble towerHeight{ getTowerHeight() };\n\n\tprintCalculatedBallHeight(towerHeight, 0);\n\tprintCalculatedBallHeight(towerHeight, 1);\n\tprintCalculatedBallHeight(towerHeight, 2);\n\tprintCalculatedBallHeight(towerHeight, 3);\n\tprintCalculatedBallHeight(towerHeight, 4);\n\tprintCalculatedBallHeight(towerHeight, 5);\n\n\tnávrat 0;\n}</code></pre>"
     }
-  ]
+  ],
+  "title_cs": "F.X — Shrnutí kapitoly F a kvíz"
 }

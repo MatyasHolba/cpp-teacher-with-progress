@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p>In prior lessons, we’ve covered two different ways to pass an argument to a function: pass by value (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/\">2.4 -- Introduction to function parameters and arguments</a>) and pass by reference (<a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Pass by lvalue reference</a>).</p>",
       "preview": "In prior lessons, we’ve covered two different ways to pass an argument to a func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozích lekcích jsme probrali dva různé způsoby předávání argumentů funkcím: předávání hodnotou (<a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-function-parameters-and-arguments/\">2.4 -- Úvod do parametrů a argumentů funkcí</a>) a předávání referencí (<a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Předávání l-hodnotovou referencí</a>).</p>"
     },
     {
       "id": "pass-by-address_b1",
       "type": "paragraph",
       "html": "<p>Here’s a sample program that shows a <code>std::string</code> object being passed by value and by reference:</p>",
       "preview": "Here’s a sample program that shows a std::string object being passed by value an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkový program, který demonstruje předání objektu <code>std::string</code> hodnotou a referencí:</p>"
     },
     {
       "id": "pass-by-address_b2",
@@ -29,49 +31,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nvoid printByValue(std::string val) // The function parameter is a copy of str\n{\n    std::cout << val << '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const std::string& ref) // The function parameter is a reference that binds to str\n{\n    std::cout << ref << '\\n'; // print the value via the reference\n}\n\nint main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nvoid printByValue(std::string val) // The function parameter is a copy of str\n{\n    std::cout &lt;&lt; val &lt;&lt; '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const std::string&amp; ref) // The function parameter is a reference that binds to str\n{\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // print the value via the reference\n}\n\nint main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nvoid printByValue(std::string val) // Parametr funkce je kopií str\n{\n    std::cout << val << '\\n'; // vytiskne hodnotu přes kopii\n}\n\nvoid printByReference(const std::string& ref) // Parametr funkce je odkaz, který se váže na str\n{\n    std::cout << ref << '\\n'; // vytiskne hodnotu přes odkaz\n}\n\nint main()\n{\n    std::string str{ \"Ahoj světe!\" };\n    \n    printByValue(str); // předá str podle hodnoty, vytvoří kopii str\n    printByReference(str); // předá str odkazem, nevytváří kopii str\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b3",
       "type": "paragraph",
       "html": "<p>When we pass argument <code>str</code> by value, the function parameter <code>val</code> receives a copy of the argument. Because the parameter is a copy of the argument, any changes to the <code>val</code> are made to the copy, not the original argument.</p>",
       "preview": "When we pass argument str by value, the function parameter val receives a copy o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když předáme argument <code>str</code> hodnotou, parametr funkce <code>val</code> obdrží kopii tohoto argumentu. Protože je parametr kopií argumentu, jakékoli změny v <code>val</code> se projeví pouze na této kopii, nikoli na původním argumentu.</p>"
     },
     {
       "id": "pass-by-address_b4",
       "type": "paragraph",
       "html": "<p>When we pass argument <code>str</code> by reference, the reference parameter <code>ref</code> is bound to the actual argument. This avoids making a copy of the argument. Because our reference parameter is const, we are not allowed to change <code>ref</code>. But if <code>ref</code> were non-const, any changes we made to <code>ref</code> would change <code>str</code>.</p>",
       "preview": "When we pass argument str by reference, the reference parameter ref is bound to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když předáme argument <code>str</code> referencí, referenční parametr <code>ref</code> je navázán přímo na daný argument. Tím se vyhneme vytvoření kopie argumentu. Protože je náš referenční parametr const, nemáme dovoleno <code>ref</code> měnit. Pokud by však <code>ref</code> nebyl const, jakékoli změny provedené v <code>ref</code> by změnily i <code>str</code>.</p>"
     },
     {
       "id": "pass-by-address_b5",
       "type": "paragraph",
       "html": "<p>In both cases, the caller is providing the actual object (<code>str</code>) to be passed as an argument to the function call.</p>",
       "preview": "In both cases, the caller is providing the actual object (str) to be passed as a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V obou případech volající poskytuje samotný objekt (<code>str</code>), který je předán jako argument při volání funkce.</p>"
     },
     {
       "id": "pass-by-address_b6",
       "type": "section",
       "title": "Pass by address",
       "html": "<h3 class=\"cpp-section-heading\">Pass by address</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání adresou</h3>",
+      "title_cs": "Projeďte adresou"
     },
     {
       "id": "pass-by-address_b7",
       "type": "paragraph",
       "html": "<p>C++ provides a third way to pass values to a function, called pass by address. With <strong>pass by address</strong>, instead of providing an object as an argument, the caller provides an object’s <em>address</em> (via a pointer). This pointer (holding the address of the object) is copied into a pointer parameter of the called function (which now also holds the address of the object). The function can then dereference that pointer to access the object whose address was passed.</p>",
       "preview": "C++ provides a third way to pass values to a function, called pass by address. W",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ poskytuje třetí způsob předávání hodnot funkci, který se nazývá předávání adresou. Při <strong>předávání adresou</strong> volající namísto samotného objektu předá jako argument <em>adresu</em> objektu (prostřednictvím ukazatele). Tento ukazatel (uchovávající adresu objektu) se zkopíruje do ukazatelového parametru volané funkce (který nyní rovněž uchovává adresu objektu). Funkce pak může tento ukazatel dereferencovat a přistupovat tak k objektu, jehož adresa byla předána.</p>"
     },
     {
       "id": "pass-by-address_b8",
       "type": "paragraph",
       "html": "<p>Here’s a version of the above program that adds a pass by address variant:</p>",
       "preview": "Here’s a version of the above program that adds a pass by address variant:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je verze výše uvedeného programu, která přidává variantu s předáváním adresou:</p>"
     },
     {
       "id": "pass-by-address_b9",
@@ -79,21 +89,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n\nvoid printByValue(std::string val) // The function parameter is a copy of str\n{\n    std::cout << val << '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const std::string& ref) // The function parameter is a reference that binds to str\n{\n    std::cout << ref << '\\n'; // print the value via the reference\n}\n\nvoid printByAddress(const std::string* ptr) // The function parameter is a pointer that holds the address of str\n{\n    std::cout << *ptr << '\\n'; // print the value via the dereferenced pointer\n}\n\nint main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n    printByAddress(&str); // pass str by address, does not make a copy of str\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nvoid printByValue(std::string val) // The function parameter is a copy of str\n{\n    std::cout &lt;&lt; val &lt;&lt; '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const std::string&amp; ref) // The function parameter is a reference that binds to str\n{\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // print the value via the reference\n}\n\nvoid printByAddress(const std::string* ptr) // The function parameter is a pointer that holds the address of str\n{\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value via the dereferenced pointer\n}\n\nint main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n    printByAddress(&amp;str); // pass str by address, does not make a copy of str\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n\nvoid printByValue(std::string val) // Parametr funkce je kopií str\n{\n    std::cout << val << '\\n'; // vytiskne hodnotu přes kopii\n}\n\nvoid printByReference(const std::string& ref) // Parametr funkce je odkaz, který se váže na str\n{\n    std::cout << ref << '\\n'; // vytiskne hodnotu přes odkaz\n}\n\nvoid printByAddress(const std::string* ptr) // Parametr funkce je ukazatel, který obsahuje adresu str\n{\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu přes dereferencovaný ukazatel\n}\n\nint main()\n{\n    std::string str{ \"Ahoj světe!\" };\n    \n    printByValue(str); // předá str podle hodnoty, vytvoří kopii str\n    printByReference(str); // předá str odkazem, nevytváří kopii str\n    printByAddress(&str); // předá str podle adresy, nevytváří kopii str\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b10",
       "type": "paragraph",
       "html": "<p>Note how similar all three of these versions are. Let’s explore the pass by address version in more detail.</p>",
       "preview": "Note how similar all three of these versions are. Let’s explore the pass by addr",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, jak jsou si všechny tyto tři verze podobné. Pojďme se na verzi s předáváním adresou (pass by address) podívat podrobněji.</p>"
     },
     {
       "id": "pass-by-address_b11",
       "type": "paragraph",
       "html": "<p>First, because we want our <code>printByAddress()</code> function to use pass by address, we’ve made our function parameter a pointer named <code>ptr</code>. Since <code>printByAddress()</code> will use <code>ptr</code> in a read-only manner, <code>ptr</code> is a pointer to a const value.</p>",
       "preview": "First, because we want our printByAddress() function to use pass by address, we’",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, protože chceme, aby naše funkce <code>printByAddress()</code> používala předávání adresou, vytvořili jsme parametr funkce jako ukazatel s názvem <code>ptr</code>. Vzhledem k tomu, že <code>printByAddress()</code> bude <code>ptr</code> používat pouze pro čtení, je <code>ptr</code> ukazatelem na konstantní hodnotu.</p>"
     },
     {
       "id": "pass-by-address_b12",
@@ -101,21 +114,24 @@
       "language": "cpp",
       "code": "void printByAddress(const std::string* ptr)\n{\n    std::cout << *ptr << '\\n'; // print the value via the dereferenced pointer\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printByAddress(const std::string* ptr)\n{\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value via the dereferenced pointer\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printByAddress(const std::string* ptr)\n{\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu přes dereferencovaný ukazatel\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b13",
       "type": "paragraph",
       "html": "<p>Inside the <code>printByAddress()</code> function, we dereference <code>ptr</code> parameter to access the value of the object being pointed to.</p>",
       "preview": "Inside the printByAddress() function, we dereference ptr parameter to access the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvnitř funkce <code>printByAddress()</code> dereferencujeme parametr <code>ptr</code>, abychom získali přístup k hodnotě objektu, na který ukazuje.</p>"
     },
     {
       "id": "pass-by-address_b14",
       "type": "paragraph",
       "html": "<p>Second, when the function is called, we can’t just pass in the <code>str</code> object -- we need to pass in the address of <code>str</code>. The easiest way to do that is to use the address-of operator (&amp;) to get a pointer holding the address of <code>str</code>:</p>",
       "preview": "Second, when the function is called, we can’t just pass in the str object -- we ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, při volání funkce nemůžeme jednoduše předat objekt <code>str</code> – musíme předat adresu <code>str</code>. Nejjednodušší způsob, jak toho dosáhnout, je použít operátor získání adresy (&amp;) k získání ukazatele nesoucího adresu <code>str</code>:</p>"
     },
     {
       "id": "pass-by-address_b15",
@@ -123,28 +139,32 @@
       "language": "cpp",
       "code": "printByAddress(&str); // use address-of operator (&) to get pointer holding address of str",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">printByAddress(&amp;str); // use address-of operator (&amp;) to get pointer holding address of str</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">printByAddress(&str); // pomocí operátoru address-of (&) získáte adresu ukazatele str</code></pre>"
     },
     {
       "id": "pass-by-address_b16",
       "type": "paragraph",
       "html": "<p>When this call is executed, <code>&amp;str</code> will create a pointer holding the address of <code>str</code>. This address is then copied into function parameter <code>ptr</code> as part of the function call. Because <code>ptr</code> now holds the address of <code>str</code>, when the function dereferences <code>ptr</code>, it will get the value of <code>str</code>, which the function prints to the console.</p>",
       "preview": "When this call is executed, &str will create a pointer holding the address of st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při provedení tohoto volání vytvoří výraz <code>&amp;str</code> ukazatel obsahující adresu <code>str</code>. Tato adresa je pak v rámci volání funkce zkopírována do parametru funkce <code>ptr</code>. Protože <code>ptr</code> nyní obsahuje adresu <code>str</code>, když funkce dereferencuje <code>ptr</code>, získá hodnotu <code>str</code>, kterou funkce vypíše do konzole.</p>"
     },
     {
       "id": "pass-by-address_b17",
       "type": "paragraph",
       "html": "<p>That’s it.</p>",
       "preview": "That’s it.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A to je vše.</p>"
     },
     {
       "id": "pass-by-address_b18",
       "type": "paragraph",
       "html": "<p>Although we use the address-of operator in the above example to get the address of <code>str</code>, if we already had a pointer variable holding the address of <code>str</code>, we could use that instead:</p>",
       "preview": "Although we use the address-of operator in the above example to get the address ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli ve výše uvedeném příkladu používáme operátor získání adresy k získání adresy <code>str</code>, pokud bychom již měli proměnnou typu ukazatel uchovávající adresu <code>str</code>, mohli bychom místo toho použít ji:</p>"
     },
     {
       "id": "pass-by-address_b19",
@@ -152,7 +172,8 @@
       "language": "cpp",
       "code": "int main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n    printByAddress(&str); // pass str by address, does not make a copy of str\n\n    std::string* ptr { &str }; // define a pointer variable holding the address of str\n    printByAddress(ptr); // pass str by address, does not make a copy of str    \n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::string str{ \"Hello, world!\" };\n    \n    printByValue(str); // pass str by value, makes a copy of str\n    printByReference(str); // pass str by reference, does not make a copy of str\n    printByAddress(&amp;str); // pass str by address, does not make a copy of str\n\n    std::string* ptr { &amp;str }; // define a pointer variable holding the address of str\n    printByAddress(ptr); // pass str by address, does not make a copy of str    \n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    std::string str{ \"Ahoj světe!\" };\n    \n    printByValue(str); // předá str podle hodnoty, vytvoří kopii str\n    printByReference(str); // předá str odkazem, nevytváří kopii str\n    printByAddress(&str); // předá str podle adresy, nevytváří kopii str\n\n    std::string* ptr { &str }; // definuje proměnnou ukazatele obsahující adresu str\n    printByAddress(ptr); // předá str podle adresy, nevytváří kopii str    \n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b20",
@@ -160,21 +181,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>When we pass the address of a variable as an argument using <code>operator&amp;</code>, we say the variable is passed by address.</p><p>When we have a pointer variable holding the address of an object, and we pass the pointer as an argument to a parameter of the same type, we say the object is passed by address, and the pointer is passed by value.</p></div>",
       "preview": "NomenclatureWhen we pass the address of a variable as an argument using operator&, we say the variab",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Když předáváme adresu proměnné jako argument pomocí <code>operator&amp;</code>, říkáme, že proměnná je předána adresou (pass by address).</p><p>Když máme proměnnou typu ukazatel uchovávající adresu objektu a tento ukazatel předáme jako argument do parametru stejného typu, říkáme, že objekt je předán adresou a samotný ukazatel je předán hodnotou (pass by value).</p></div>"
     },
     {
       "id": "pass-by-address_b21",
       "type": "section",
       "title": "Pass by address does not make a copy of the object being pointed to",
       "html": "<h3 class=\"cpp-section-heading\">Pass by address does not make a copy of the object being pointed to</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předání adresou nevytváří kopii objektu, na který se ukazuje</h3>",
+      "title_cs": "Pass by address nevytváří kopii objektu, na který ukazujete"
     },
     {
       "id": "pass-by-address_b22",
       "type": "paragraph",
       "html": "<p>Consider the following statements:</p>",
       "preview": "Consider the following statements:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující příkazy:</p>"
     },
     {
       "id": "pass-by-address_b23",
@@ -182,35 +207,41 @@
       "language": "cpp",
       "code": "std::string str{ \"Hello, world!\" };\nprintByAddress(&str); // use address-of operator (&) to get pointer holding address of str",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string str{ \"Hello, world!\" };\nprintByAddress(&amp;str); // use address-of operator (&amp;) to get pointer holding address of str</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::string str{ \"Ahoj světe!\" };\nprintByAddress(&str); // pomocí operátoru address-of (&) získáte adresu ukazatele str</code></pre>"
     },
     {
       "id": "pass-by-address_b24",
       "type": "paragraph",
       "html": "<p>As we noted in <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Pass by lvalue reference</a>, copying a <code>std::string</code> is expensive, so that’s something we want to avoid. When we pass a <code>std::string</code> by address, we’re not copying the actual <code>std::string</code> object -- we’re just copying the pointer (holding the address of the object) from the caller to the called function. Since an address is typically only 4 or 8 bytes, a pointer is only 4 or 8 bytes, so copying a pointer is always fast.</p>",
       "preview": "As we noted in 12.5 -- Pass by lvalue reference, copying a std::string is expens",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak jsme uvedli v <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Předávání l-hodnotovou referencí</a>, kopírování <code>std::string</code> je nákladné, takže se mu chceme vyhnout. Když předáváme <code>std::string</code> adresou, nekopírujeme samotný objekt <code>std::string</code> – pouze kopírujeme ukazatel (který nese adresu objektu) z volajícího do volané funkce. Vzhledem k tomu, že adresa má obvykle pouze 4 nebo 8 bajtů, má ukazatel také pouze 4 nebo 8 bajtů, a proto je kopírování ukazatele vždy rychlé.</p>"
     },
     {
       "id": "pass-by-address_b25",
       "type": "paragraph",
       "html": "<p>Thus, just like pass by reference, pass by address is fast, and avoids making a copy of the argument object.</p>",
       "preview": "Thus, just like pass by reference, pass by address is fast, and avoids making a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako předávání referencí je tedy i předávání adresou rychlé a nevytváří kopii objektu argumentu.</p>"
     },
     {
       "id": "pass-by-address_b26",
       "type": "section",
       "title": "Pass by address allows the function to modify the argument’s value",
       "html": "<h3 class=\"cpp-section-heading\">Pass by address allows the function to modify the argument’s value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předání adresou umožňuje funkci upravit hodnotu argumentu</h3>",
+      "title_cs": "Pass by address umožňuje funkci upravit hodnotu argumentu"
     },
     {
       "id": "pass-by-address_b27",
       "type": "paragraph",
       "html": "<p>When we pass an object by address, the function receives the address of the passed object, which it can access via dereferencing. Because this is the address of the actual argument object being passed (not a copy of the object), if the function parameter is a pointer to non-const, the function can modify the argument via the pointer parameter:</p>",
       "preview": "When we pass an object by address, the function receives the address of the pass",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když předáme objekt adresou, funkce obdrží adresu předaného objektu, ke kterému může přistupovat pomocí dereference. Protože se jedná o adresu skutečného předávaného objektu argumentu (nikoli o kopii objektu), může funkce v případě, že je parametr funkce ukazatelem na nekonstantní hodnotu (non-const), argument prostřednictvím tohoto parametru modifikovat:</p>"
     },
     {
       "id": "pass-by-address_b28",
@@ -218,35 +249,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid changeValue(int* ptr) // note: ptr is a pointer to non-const in this example\n{\n    *ptr = 6; // change the value to 6\n}\n\nint main()\n{\n    int x{ 5 };\n\n    std::cout << \"x = \" << x << '\\n';\n\n    changeValue(&x); // we're passing the address of x to the function\n\n    std::cout << \"x = \" << x << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid changeValue(int* ptr) // note: ptr is a pointer to non-const in this example\n{\n    *ptr = 6; // change the value to 6\n}\n\nint main()\n{\n    int x{ 5 };\n\n    std::cout &lt;&lt; \"x = \" &lt;&lt; x &lt;&lt; '\\n';\n\n    changeValue(&amp;x); // we're passing the address of x to the function\n\n    std::cout &lt;&lt; \"x = \" &lt;&lt; x &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid changeValue(int* ptr) // poznámka: ptr je v tomto příkladu ukazatel na non-const\n{\n    *ptr = 6; // změňte hodnotu na 6\n}\n\nint main()\n{\n    int x{5};\n\n    std::cout << \"x = \" << x << '\\n';\n\n    changeValue(&x); // předáváme adresu x funkci\n\n    std::cout << \"x = \" << x << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b29",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "pass-by-address_b30",
       "type": "output",
       "text": "x = 5\nx = 6\n",
       "html": "<pre>x = 5\nx = 6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>x = 5\nx = 6\n</pre>"
     },
     {
       "id": "pass-by-address_b31",
       "type": "paragraph",
       "html": "<p>As you can see, the argument is modified and this modification persists even after <code>changeValue()</code> has finished running.</p>",
       "preview": "As you can see, the argument is modified and this modification persists even aft",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak vidíte, argument je modifikován a tato změna přetrvává i poté, co <code>changeValue()</code> dokončí svůj běh.</p>"
     },
     {
       "id": "pass-by-address_b32",
       "type": "paragraph",
       "html": "<p>If a function is not supposed to modify the object being passed in, the function parameter should be made a pointer-to-const:</p>",
       "preview": "If a function is not supposed to modify the object being passed in, the function",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud funkce nemá předávaný objekt modifikovat, měl by být parametr funkce ukazatelem na konstantu (pointer-to-const):</p>"
     },
     {
       "id": "pass-by-address_b33",
@@ -254,28 +290,32 @@
       "language": "cpp",
       "code": "void changeValue(const int* ptr) // note: ptr is now a pointer to a const\n{\n    *ptr = 6; // error: can not change const value\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void changeValue(const int* ptr) // note: ptr is now a pointer to a const\n{\n    *ptr = 6; // error: can not change const value\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void changeValue(const int* ptr) // poznámka: ptr je nyní ukazatel na const\n{\n    *ptr = 6; // chyba: nelze změnit hodnotu const\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b34",
       "type": "paragraph",
       "html": "<p>For many of the same reasons we typically don’t <code>const</code> regular (non-pointer, non-reference) function parameters (discussed in <a href=\"https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/\">5.1 -- Constant variables (named constants)</a>), we also typically don’t <code>const</code> pointer function parameters. Let’s make two assertions:</p>",
       "preview": "For many of the same reasons we typically don’t const regular (non-pointer, non-",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Z mnoha stejných důvodů, proč obvykle neoznačujeme jako <code>const</code> běžné (neukazatelové, nereferenční) parametry funkcí (probíráno v <a href=\"https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/\">5.1 -- Konstantní proměnné (pojmenované konstanty)</a>), obvykle neoznačujeme klíčovým slovem <code>const</code> ani ukazatelové parametry funkcí. Uveďme si dvě tvrzení:</p>"
     },
     {
       "id": "pass-by-address_b35",
       "type": "list",
       "html": "<ul><li>A <code>const</code> keyword used to make a pointer function parameter a const pointer provides little value (since it has no impact on the caller, and mostly serves as documentation that the pointer won’t change).</li><li>A <code>const</code> keyword used to differentiate a pointer-to-const from a pointer-to-non-const that can modify the object passed in is significant (as the caller needs to know if the function could change the value of the argument).</li></ul>",
       "preview": "A const keyword used to make a pointer function parameter a const pointer provid",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Klíčové slovo <code>const</code> použité k tomu, aby byl ukazatelový parametr funkce konstantním ukazatelem (const pointer), přináší jen malý užitek (protože nemá žádný vliv na volajícího a slouží převážně jen jako dokumentace toho, že se ukazatel nezmění).</li><li>Klíčové slovo <code>const</code> použité k odlišení ukazatele na konstantu (pointer-to-const) od ukazatele na nekonstantní hodnotu (pointer-to-non-const), který může předaný objekt modifikovat, je zásadní (protože volající potřebuje vědět, zda funkce může změnit hodnotu argumentu).</li></ul>"
     },
     {
       "id": "pass-by-address_b36",
       "type": "paragraph",
       "html": "<p>If we only use non-const pointer function parameters, then all uses of <code>const</code> are significant. As soon as we start using <code>const</code> for const pointer function parameters, then it becomes more difficult to determine whether a given use of <code>const</code> is significant or not. More importantly, it also makes it harder to notice pointer-to-non-const parameters. For example:</p>",
       "preview": "If we only use non-const pointer function parameters, then all uses of const are",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud jako parametry funkcí používáme pouze nekonstantní ukazatele, pak jsou všechna použití <code>const</code> významná. Jakmile však začneme používat <code>const</code> pro konstantní ukazatelové parametry funkcí, začne být obtížnější určit, zda je dané použití <code>const</code> podstatné či nikoli. A co je ještě důležitější, ztěžuje to také postřehnutí parametrů, které jsou ukazateli na nekonstantní hodnoty (pointer-to-non-const). Například:</p>"
     },
     {
       "id": "pass-by-address_b37",
@@ -283,14 +323,16 @@
       "language": "cpp",
       "code": "void foo(const char* source, char* dest, int count);             // Using non-const pointers, all consts are significant.\nvoid foo(const char* const source, char* const dest, int count); // Using const pointers, `dest` being a pointer-to-non-const may go unnoticed amongst the sea of spurious consts.",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(const char* source, char* dest, int count);             // Using non-const pointers, all consts are significant.\nvoid foo(const char* const source, char* const dest, int count); // Using const pointers, `dest` being a pointer-to-non-const may go unnoticed amongst the sea of spurious consts.</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(const char* source, char* dest, int count);             // Při použití non-const ukazatelů jsou všechny const významné.\nvoid foo(const char* const source, char* const dest, int count); // Při použití ukazatelů const může `dest`, který je ukazatelem na non-const, zůstat bez povšimnutí v moři falešných const.</code></pre>"
     },
     {
       "id": "pass-by-address_b38",
       "type": "paragraph",
       "html": "<p>In the former case, it’s easy to see that <code>source</code> is a pointer-to-const and <code>dest</code> is a pointer-to-non-const. In the latter case, it’s much harder to see that <code>dest</code> is a const-pointer-to-non-const, whose pointed-to object can be modified by the function!</p>",
       "preview": "In the former case, it’s easy to see that source is a pointer-to-const and dest ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V prvním případě je snadné vidět, že <code>source</code> je ukazatel na konstantu (pointer-to-const) a <code>dest</code> je ukazatel na nekonstantu (pointer-to-non-const). V druhém případě je mnohem těžší postřehnout, že <code>dest</code> je konstantní ukazatel na nekonstantní hodnotu (const-pointer-to-non-const), jehož odkazovaný objekt může funkce modifikovat!</p>"
     },
     {
       "id": "pass-by-address_b39",
@@ -298,21 +340,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer pointer-to-const function parameters over pointer-to-non-const function parameters, unless the function needs to modify the object passed in.<br>Do not make function parameters const pointers unless there is some specific reason to do so.</p></div>",
       "preview": "Best practicePrefer pointer-to-const function parameters over pointer-to-non-const function paramete",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost parametrům funkcí typu ukazatel na konstantu (pointer-to-const) před ukazateli na nekonstantní hodnoty (pointer-to-non-const), pokud funkce nepotřebuje předaný objekt modifikovat.<br>Nevytvářejte parametry funkcí jako konstantní ukazatele (const pointers), pokud k tomu nemáte konkrétní důvod.</p></div>"
     },
     {
       "id": "pass-by-address_b40",
       "type": "section",
       "title": "Null checking",
       "html": "<h3 class=\"cpp-section-heading\">Null checking</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kontrola hodnoty null</h3>",
+      "title_cs": "Nulová kontrola"
     },
     {
       "id": "pass-by-address_b41",
       "type": "paragraph",
       "html": "<p>Now consider this fairly innocent looking program:</p>",
       "preview": "Now consider this fairly innocent looking program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na tento poměrně nevinně vyhlížející program:</p>"
     },
     {
       "id": "pass-by-address_b42",
@@ -320,28 +366,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int* ptr)\n{\n\tstd::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\tprint(&x);\n\n\tint* myPtr {};\n\tprint(myPtr);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int* ptr)\n{\n\tstd::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\tprint(&amp;x);\n\n\tint* myPtr {};\n\tprint(myPtr);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int* ptr)\n{\n\tstd::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{5};\n\tprint(&x);\n\n\tint* myPtr {};\n\tprint(myPtr);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b43",
       "type": "paragraph",
       "html": "<p>When this program is run, it will print the value <code>5</code> and then most likely crash.</p>",
       "preview": "When this program is run, it will print the value 5 and then most likely crash.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se tento program spustí, vypíše hodnotu <code>5</code> a poté s největší pravděpodobností spadne.</p>"
     },
     {
       "id": "pass-by-address_b44",
       "type": "paragraph",
       "html": "<p>In the call to <code>print(myPtr)</code>, <code>myPtr</code> is a null pointer, so function parameter <code>ptr</code> will also be a null pointer. When this null pointer is dereferenced in the body of the function, undefined behavior results.</p>",
       "preview": "In the call to print(myPtr), myPtr is a null pointer, so function parameter ptr ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při volání <code>print(myPtr)</code> je <code>myPtr</code> nulový ukazatel, takže parametr funkce <code>ptr</code> bude také nulový ukazatel. Jakmile je tento nulový ukazatel v těle funkce dereferencován, dojde k nedefinovanému chování.</p>"
     },
     {
       "id": "pass-by-address_b45",
       "type": "paragraph",
       "html": "<p>When passing a parameter by address, care should be taken to ensure the pointer is not a null pointer before you dereference the value. One way to do that is to use a conditional statement:</p>",
       "preview": "When passing a parameter by address, care should be taken to ensure the pointer ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při předávání parametru adresou je třeba dbát na to, aby ukazatel nebyl nulovým ukazatelem, ještě než hodnotu dereferencujete. Jedním ze způsobů, jak toho dosáhnout, je použít podmíněný příkaz:</p>"
     },
     {
       "id": "pass-by-address_b46",
@@ -349,21 +399,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int* ptr)\n{\n    if (ptr) // if ptr is not a null pointer\n    {\n        std::cout << *ptr << '\\n';\n    }\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int* ptr)\n{\n    if (ptr) // if ptr is not a null pointer\n    {\n        std::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n    }\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&amp;x);\n\tprint(nullptr);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int* ptr)\n{\n    if (ptr) // pokud ptr není nulový ukazatel\n    {\n        std::cout << *ptr << '\\n';\n    }\n}\n\nint main()\n{\n\tint x{5};\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b47",
       "type": "paragraph",
       "html": "<p>In the above program, we’re testing <code>ptr</code> to ensure it is not null before we dereference it. While this is fine for such a simple function, in more complicated functions this can result in redundant logic (testing if ptr is not null multiple times) or nesting of the primary logic of the function (if contained in a block).</p>",
       "preview": "In the above program, we’re testing ptr to ensure it is not null before we deref",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu testujeme <code>ptr</code>, abychom se ujistili, že není null, ještě než jej dereferencujeme. I když je to u takto jednoduché funkce v pořádku, ve složitějších funkcích to může vést k redundantní logice (opakované testování, zda ptr není null) nebo ke zbytečnému zanořování hlavní logiky funkce (pokud je obsažena v bloku).</p>"
     },
     {
       "id": "pass-by-address_b48",
       "type": "paragraph",
       "html": "<p>In most cases, it is more effective to do the opposite: test whether the function parameter is null as a precondition (<a href=\"https://www.learncpp.com/cpp-tutorial/assert-and-static_assert/\">9.6 -- Assert and static_assert</a>) and handle the negative case immediately:</p>",
       "preview": "In most cases, it is more effective to do the opposite: test whether the functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů je efektivnější udělat opak: otestovat, zda je parametr funkce null jako vstupní podmínku (precondition, viz <a href=\"https://www.learncpp.com/cpp-tutorial/assert-and-static_assert/\">9.6 – Assert a static_assert</a>), a negativní případ vyřešit okamžitě:</p>"
     },
     {
       "id": "pass-by-address_b49",
@@ -371,14 +424,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid print(int* ptr)\n{\n    if (!ptr) // if ptr is a null pointer, early return back to the caller\n        return;\n\n    // if we reached this point, we can assume ptr is valid\n    // so no more testing or nesting required\n\n    std::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid print(int* ptr)\n{\n    if (!ptr) // if ptr is a null pointer, early return back to the caller\n        return;\n\n    // if we reached this point, we can assume ptr is valid\n    // so no more testing or nesting required\n\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&amp;x);\n\tprint(nullptr);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nneplatný tisk (int* ptr)\n{\n    if (!ptr) // pokud ptr je nulový ukazatel, vraťte se brzy zpět k volajícímu\n        návrat;\n\n    // pokud jsme dosáhli tohoto bodu, můžeme předpokládat, že ptr je platný\n    // takže není potřeba žádné další testování nebo vnoření\n\n    std::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{5};\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b50",
       "type": "paragraph",
       "html": "<p>If a null pointer should never be passed to the function, an <code>assert</code> (which we covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/assert-and-static_assert/\">9.6 -- Assert and static_assert</a>) can be used instead (or also) (as asserts are intended to document things that should never happen):</p>",
       "preview": "If a null pointer should never be passed to the function, an assert (which we co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud by funkci nikdy neměl být předán nulový ukazatel, lze místo toho (nebo také) použít <code>assert</code> (který jsme probírali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/assert-and-static_assert/\">9.6 – Assert a static_assert</a>), jelikož asserty slouží k zachycení stavů, které by nikdy neměly nastat:</p>"
     },
     {
       "id": "pass-by-address_b51",
@@ -386,35 +441,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <cassert>\n\nvoid print(const int* ptr) // now a pointer to a const int\n{\n\tassert(ptr); // fail the program in debug mode if a null pointer is passed (since this should never happen)\n\n\t// (optionally) handle this as an error case in production mode so we don't crash if it does happen\n\tif (!ptr)\n\t\treturn;\n\n\tstd::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;cassert&gt;\n\nvoid print(const int* ptr) // now a pointer to a const int\n{\n\tassert(ptr); // fail the program in debug mode if a null pointer is passed (since this should never happen)\n\n\t// (optionally) handle this as an error case in production mode so we don't crash if it does happen\n\tif (!ptr)\n\t\treturn;\n\n\tstd::cout &lt;&lt; *ptr &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tint x{ 5 };\n\t\n\tprint(&amp;x);\n\tprint(nullptr);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <cassert>\n\nvoid print(const int* ptr) // nyní ukazatel na const int\n{\n\ttvrdit(ptr); // selhání programu v režimu ladění, pokud je předán nulový ukazatel (protože by se to nikdy nemělo stát)\n\n\t// (volitelně) zpracujte to jako případ chyby v produkčním režimu, takže pokud k tomu dojde, nezhroutíme se\n\tpokud (!ptr)\n\t\tnávrat;\n\n\tstd::cout << *ptr << '\\n';\n}\n\nint main()\n{\n\tint x{5};\n\t\n\tprint(&x);\n\tprint(nullptr);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b52",
       "type": "section",
       "title": "Prefer pass by (const) reference",
       "html": "<h3 class=\"cpp-section-heading\">Prefer pass by (const) reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Preferujte předávání (const) referencí</h3>",
+      "title_cs": "Preferovat průchod (konst) odkaz"
     },
     {
       "id": "pass-by-address_b53",
       "type": "paragraph",
       "html": "<p>Note that function <code>print()</code> in the example above doesn’t handle null values very well -- it effectively just aborts the function. Given this, why allow a user to pass in a null value at all? Pass by reference has the same benefits as pass by address without the risk of inadvertently dereferencing a null pointer.</p>",
       "preview": "Note that function print() in the example above doesn’t handle null values very ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že funkce <code>print()</code> ve výše uvedeném příkladu nezpracovává nulové hodnoty příliš dobře – v podstatě pouze ukončí vykonávání funkce. Proč tedy uživateli vůbec dovolovat předávat hodnotu null? Předávání referencí má stejné výhody jako předávání adresou, ale bez rizika neúmyslného dereferencování nulového ukazatele.</p>"
     },
     {
       "id": "pass-by-address_b54",
       "type": "paragraph",
       "html": "<p>Pass by const reference has a few other advantages over pass by address.</p>",
       "preview": "Pass by const reference has a few other advantages over pass by address.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Předávání konstantní referencí má oproti předávání adresou několik dalších výhod.</p>"
     },
     {
       "id": "pass-by-address_b55",
       "type": "paragraph",
       "html": "<p>First, because an object being passed by address must have an address, only lvalues can be passed by address (as rvalues don’t have addresses). Pass by const reference is more flexible, as it can accept lvalues and rvalues:</p>",
       "preview": "First, because an object being passed by address must have an address, only lval",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, protože objekt předávaný adresou musí mít adresu, lze adresou předávat pouze l-hodnoty (lvalues, jelikož r-hodnoty adresu nemají). Předávání konstantní referencí je flexibilnější, protože může přijímat l-hodnoty i r-hodnoty:</p>"
     },
     {
       "id": "pass-by-address_b56",
@@ -422,21 +483,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nvoid printByValue(int val) // The function parameter is a copy of the argument\n{\n    std::cout << val << '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const int& ref) // The function parameter is a reference that binds to the argument\n{\n    std::cout << ref << '\\n'; // print the value via the reference\n}\n\nvoid printByAddress(const int* ptr) // The function parameter is a pointer that holds the address of the argument\n{\n    std::cout << *ptr << '\\n'; // print the value via the dereferenced pointer\n}\n\nint main()\n{\n    printByValue(5);     // valid (but makes a copy)\n    printByReference(5); // valid (because the parameter is a const reference)\n    printByAddress(&5);  // error: can't take address of r-value\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid printByValue(int val) // The function parameter is a copy of the argument\n{\n    std::cout &lt;&lt; val &lt;&lt; '\\n'; // print the value via the copy\n}\n\nvoid printByReference(const int&amp; ref) // The function parameter is a reference that binds to the argument\n{\n    std::cout &lt;&lt; ref &lt;&lt; '\\n'; // print the value via the reference\n}\n\nvoid printByAddress(const int* ptr) // The function parameter is a pointer that holds the address of the argument\n{\n    std::cout &lt;&lt; *ptr &lt;&lt; '\\n'; // print the value via the dereferenced pointer\n}\n\nint main()\n{\n    printByValue(5);     // valid (but makes a copy)\n    printByReference(5); // valid (because the parameter is a const reference)\n    printByAddress(&amp;5);  // error: can't take address of r-value\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nvoid printByValue(int val) // Parametr funkce je kopií argumentu\n{\n    std::cout << val << '\\n'; // vytiskne hodnotu přes kopii\n}\n\nvoid printByReference(const int& ref) // Parametr funkce je odkaz, který se váže na argument\n{\n    std::cout << ref << '\\n'; // vytiskne hodnotu přes odkaz\n}\n\nvoid printByAddress(const int* ptr) // Parametr funkce je ukazatel, který obsahuje adresu argumentu\n{\n    std::cout << *ptr << '\\n'; // vytiskne hodnotu přes dereferencovaný ukazatel\n}\n\nint main()\n{\n    printByValue(5);     // platné (ale vytvoří kopii)\n    printByReference(5); // platné (protože parametr je odkaz const)\n    printByAddress(&5);  // chyba: nelze vzít adresu r-hodnoty\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pass-by-address_b57",
       "type": "paragraph",
       "html": "<p>Second, the syntax for pass by reference is natural, as we can just pass in literals or objects. With pass by address, our code ends up littered with ampersands (&amp;) and asterisks (*).</p>",
       "preview": "Second, the syntax for pass by reference is natural, as we can just pass in lite",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zadruhé, syntaxe pro předávání referencí je přirozená, protože můžeme jednoduše předat literály nebo objekty. Při předávání adresou je náš kód zaplaven ampersandy (&amp;) a hvězdičkami (*).</p>"
     },
     {
       "id": "pass-by-address_b58",
       "type": "paragraph",
       "html": "<p>In modern C++, most things that can be done with pass by address are better accomplished through other methods. Follow this common maxim: “Pass by reference when you can, pass by address when you must”.</p>",
       "preview": "In modern C++, most things that can be done with pass by address are better acco",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V moderním C++ lze většinu věcí, které lze provést předáváním adresou, vyřešit lépe jinými způsoby. Řiďte se tímto běžným pravidlem: „Předávejte referencí, kdykoli můžete, a adresou jen tehdy, kdy musíte“.</p>"
     },
     {
       "id": "pass-by-address_b59",
@@ -444,7 +508,9 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer pass by reference to pass by address unless you have a specific reason to use pass by address.</p></div>",
       "preview": "Best practicePrefer pass by reference to pass by address unless you have a specific reason to use pa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Preferujte předávání referencí před předáváním adresou, pokud nemáte konkrétní důvod k použití předání adresou.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "12.10 — Předávání adresou"
 }

@@ -14,42 +14,49 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson <a href=\"https://www.learncpp.com/cpp-tutorial/constant-expressions/#whywecare\">5.5 -- Constant expressions</a>, we defined what a constant expression is, discussed why constant expressions are desirable, and concluded with when constant expressions actually evaluate at compile-time.</p>",
       "preview": "In the previous lesson 5.5 -- Constant expressions, we defined what a constant e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci <a href=\"https://www.learncpp.com/cpp-tutorial/constant-expressions/#whywecare\">5.5 -- Konstantní výrazy</a> jsme definovali, co je to konstantní výraz, rozebrali jsme, proč jsou konstantní výrazy žádoucí, a na závěr jsme si řekli, kdy se konstantní výrazy skutečně vyhodnocují v době překladu.</p>"
     },
     {
       "id": "constexpr-variables_b1",
       "type": "paragraph",
       "html": "<p>In this lesson, we’ll take a closer look at how we create variables that can be used in constant expressions in modern C++. We’ll also explore our first method for ensuring that code actually executes at compile-time.</p>",
       "preview": "In this lesson, we’ll take a closer look at how we create variables that can be ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V této lekci se podrobněji podíváme na to, jak v moderním C++ vytvářet proměnné, které lze použít v konstantních výrazech. Prozkoumáme také naši první metodu, jak zajistit, aby se kód skutečně vykonal v době překladu.</p>"
     },
     {
       "id": "constexpr-variables_b2",
       "type": "section",
       "title": "The compile-time const challenge",
       "html": "<h3 class=\"cpp-section-heading\">The compile-time <code>const</code> challenge</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Úskalí <code>const</code> v době překladu</h3>",
+      "title_cs": "Výzva v době kompilace"
     },
     {
       "id": "constexpr-variables_b3",
       "type": "paragraph",
       "html": "<p>In the prior lesson, we noted that one way to create a variable that can be used in a constant expression is to use the <code>const</code> keyword. A <code>const</code> variable with an integral type and a constant expression initializer can be used in a constant expression. All other <code>const</code> variables cannot be used in constant expressions.</p>",
       "preview": "In the prior lesson, we noted that one way to create a variable that can be used",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci jsme uvedli, že jedním ze způsobů, jak vytvořit proměnnou, kterou lze použít v konstantním výrazu, je použít klíčové slovo <code>const</code>. Proměnnou <code>const</code> s celočíselným typem a inicializátorem tvořeným konstantním výrazem lze v konstantním výrazu použít. Všechny ostatní proměnné <code>const</code> v konstantních výrazech použít nelze.</p>"
     },
     {
       "id": "constexpr-variables_b4",
       "type": "paragraph",
       "html": "<p>However, the use of <code>const</code> to create variables that can be used in constant expressions has a few challenges.</p>",
       "preview": "However, the use of const to create variables that can be used in constant expre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použití <code>const</code> k vytváření proměnných, které lze použít v konstantních výrazech, má však několik úskalí.</p>"
     },
     {
       "id": "constexpr-variables_b5",
       "type": "paragraph",
       "html": "<p>First, use of <code>const</code> does not make it immediately clear whether the variable is usable in a constant expression or not. In some cases, we can figure it out fairly easily:</p>",
       "preview": "First, use of const does not make it immediately clear whether the variable is u",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, z použití <code>const</code> není na první pohled zřejmé, zda je proměnná v konstantním výrazu použitelná, či nikoli. V některých případech to sice dokážeme zjistit poměrně snadno:</p>"
     },
     {
       "id": "constexpr-variables_b6",
@@ -57,14 +64,16 @@
       "language": "cpp",
       "code": "int a { 5 };       // not const at all\nconst int b { a }; // clearly not a constant expression (since initializer is non-const)\nconst int c { 5 }; // clearly a constant expression (since initializer is a constant expression)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int a { 5 };       // not const at all\nconst int b { a }; // clearly not a constant expression (since initializer is non-const)\nconst int c { 5 }; // clearly a constant expression (since initializer is a constant expression)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int a { 5 };       // vůbec ne konst\nconst int b { a }; // zjevně to není konstantní výraz (protože inicializátor je non-const)\nconst int c { 5 }; // jasně konstantní výraz (protože inicializátor je konstantní výraz)</code></pre>"
     },
     {
       "id": "constexpr-variables_b7",
       "type": "paragraph",
       "html": "<p>In other cases, it can be quite difficult:</p>",
       "preview": "In other cases, it can be quite difficult:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V jiných případech to může být poměrně obtížné:</p>"
     },
     {
       "id": "constexpr-variables_b8",
@@ -72,49 +81,57 @@
       "language": "cpp",
       "code": "const int d { someVar };    // not obvious whether d is usable in a constant expression or not\nconst int e { getValue() }; // not obvious whether e is usable in a constant expression or not",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int d { someVar };    // not obvious whether d is usable in a constant expression or not\nconst int e { getValue() }; // not obvious whether e is usable in a constant expression or not</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int d { someVar };    // není zřejmé, zda je d použitelné v konstantním výrazu nebo ne\nconst int e { getValue() }; // není zřejmé, zda je e použitelné v konstantním výrazu nebo ne</code></pre>"
     },
     {
       "id": "constexpr-variables_b9",
       "type": "paragraph",
       "html": "<p>In the above example, variables <code>d</code> and <code>e</code> may or may not be usable in a constant expressions, depending on how <code>someVar</code> and <code>getValue()</code> are defined. That means we have to go inspect the definitions of those initializers and infer what case we’re in. And that may not even be sufficient -- if <code>someVar</code> is const and initialized with a variable or a function call, we’ll have to go inspect the definition of its initializer too!</p>",
       "preview": "In the above example, variables d and e may or may not be usable in a constant e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu proměnné <code>d</code> a <code>e</code> mohou, ale nemusí být použitelné v konstantních výrazech, v závislosti na tom, jak jsou <code>someVar</code> a <code>getValue()</code> definovány. To znamená, že musíme prozkoumat definice těchto inicializátorů a odvodit, o jaký případ se jedná. A ani to nemusí stačit – pokud je <code>someVar</code> const a je inicializována proměnnou nebo voláním funkce, budeme muset prozkoumat i definici jejího inicializátoru!</p>"
     },
     {
       "id": "constexpr-variables_b10",
       "type": "paragraph",
       "html": "<p>Second, use of <code>const</code> does not provide a way to inform the compiler that we require a variable that is usable in a constant expression (and that it should halt compilation if it isn’t). Instead, it will just silently create a variable that can only be used in runtime expressions.</p>",
       "preview": "Second, use of const does not provide a way to inform the compiler that we requi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, použití <code>const</code> neposkytuje způsob, jak kompilátoru sdělit, že požadujeme proměnnou použitelnou v konstantním výrazu (a že by měl zastavit kompilaci, pokud tomu tak není). Místo toho pouze tiše vytvoří proměnnou, kterou lze použít pouze v runtime výrazech.</p>"
     },
     {
       "id": "constexpr-variables_b11",
       "type": "paragraph",
       "html": "<p>Third, the use of <code>const</code> to create compile-time constant variables does not extend to non-integral variables. And there are many cases where we would like non-integral variables to be compile-time constants too.</p>",
       "preview": "Third, the use of const to create compile-time constant variables does not exten",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí, použití <code>const</code> k vytváření proměnných, které jsou konstantami v čase překladu (compile-time), se nevztahuje na neceločíselné proměnné. A existuje mnoho případů, kdy bychom chtěli, aby i neceločíselné proměnné byly konstantami v čase překladu.</p>"
     },
     {
       "id": "constexpr-variables_b12",
       "type": "section",
       "title": "The constexpr keyword",
       "html": "<h3 class=\"cpp-section-heading\">The <code>constexpr</code> keyword</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Klíčové slovo <code>constexpr</code></h3>",
+      "title_cs": "Klíčové slovo constexpr"
     },
     {
       "id": "constexpr-variables_b13",
       "type": "paragraph",
       "html": "<p>Fortunately, we can enlist the compiler’s help to ensure we get a compile-time constant variable where we desire one. To do so, we use the <code>constexpr</code> keyword (which is shorthand for “constant expression”) instead of <code>const</code> in a variable’s declaration. A <strong>constexpr</strong> variable is always a compile-time constant. As a result, a constexpr variable must be initialized with a constant expression, otherwise a compilation error will result.</p>",
       "preview": "Fortunately, we can enlist the compiler’s help to ensure we get a compile-time c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí můžeme využít pomoc překladače, abychom zajistili, že získáme proměnnou konstantní v čase překladu tam, kde si to přejeme. K tomu v deklaraci proměnné použijeme klíčové slovo <code>constexpr</code> (což je zkratka pro „constant expression“) namísto <code>const</code>. Proměnná typu <strong>constexpr</strong> je vždy konstantou v čase překladu. V důsledku toho musí být proměnná constexpr inicializována konstantním výrazem, jinak dojde k chybě při překladu.</p>"
     },
     {
       "id": "constexpr-variables_b14",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "constexpr-variables_b15",
@@ -122,14 +139,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// The return value of a non-constexpr function is not constexpr\nint five()\n{\n    return 5;\n}\n\nint main()\n{\n    constexpr double gravity { 9.8 }; // ok: 9.8 is a constant expression\n    constexpr int sum { 4 + 5 };      // ok: 4 + 5 is a constant expression\n    constexpr int something { sum };  // ok: sum is a constant expression\n\n    std::cout << \"Enter your age: \";\n    int age{};\n    std::cin >> age;\n\n    constexpr int myAge { age };      // compile error: age is not a constant expression\n    constexpr int f { five() };       // compile error: return value of five() is not constexpr\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// The return value of a non-constexpr function is not constexpr\nint five()\n{\n    return 5;\n}\n\nint main()\n{\n    constexpr double gravity { 9.8 }; // ok: 9.8 is a constant expression\n    constexpr int sum { 4 + 5 };      // ok: 4 + 5 is a constant expression\n    constexpr int something { sum };  // ok: sum is a constant expression\n\n    std::cout &lt;&lt; \"Enter your age: \";\n    int age{};\n    std::cin &gt;&gt; age;\n\n    constexpr int myAge { age };      // compile error: age is not a constant expression\n    constexpr int f { five() };       // compile error: return value of five() is not constexpr\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Návratová hodnota funkce, která není constexpr, není constexpr\nint pět()\n{\n    návrat 5;\n}\n\nint main()\n{\n    constexpr dvojitá gravitace { 9,8 }; // ok: 9.8 je konstantní výraz\n    constexpr int součet { 4 + 5 };      // ok: 4 + 5 je konstantní výraz\n    constexpr int něco { suma };  // ok: součet je konstantní výraz\n\n    std::cout << \"Zadejte svůj věk: \";\n    int věk{};\n    std::cin >> věk;\n\n    constexpr int můjVěk { věk };      // chyba kompilace: věk není konstantní výraz\n    constexpr int f { pět() };       // chyba kompilace: návratová hodnota Five() není constexpr\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "constexpr-variables_b16",
       "type": "paragraph",
       "html": "<p>Because functions normally execute at runtime, the return value of a function is not constexpr (even when the return expression is a constant expression). This is why <code>five()</code> is not a legal initialization value for <code>constexpr int f</code>.</p>",
       "preview": "Because functions normally execute at runtime, the return value of a function is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože se funkce obvykle vykonávají za běhu programu (runtime), návratová hodnota funkce není constexpr (ani když je návratový výraz konstantním výrazem). Z tohoto důvodu není <code>five()</code> platnou inicializační hodnotou pro <code>constexpr int f</code>.</p>"
     },
     {
       "id": "constexpr-variables_b17",
@@ -137,14 +156,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk about functions whose return values can be used in constant expressions in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/constexpr-functions/\">F.1 -- Constexpr functions</a>.</p></div>",
       "preview": "Related contentWe talk about functions whose return values can be used in constant expressions in le",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>O funkcích, jejichž návratové hodnoty lze použít v konstantních výrazech, pojednáváme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/constexpr-functions/\">F.1 – Constexpr funkce</a>.</p></div>"
     },
     {
       "id": "constexpr-variables_b18",
       "type": "paragraph",
       "html": "<p>Additionally, <code>constexpr</code> works for variables with non-integral types:</p>",
       "preview": "Additionally, constexpr works for variables with non-integral types:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Navíc <code>constexpr</code> funguje i pro proměnné neceločíselných typů:</p>"
     },
     {
       "id": "constexpr-variables_b19",
@@ -152,42 +173,49 @@
       "language": "cpp",
       "code": "constexpr double d { 1.2 }; // d can be used in constant expressions!",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr double d { 1.2 }; // d can be used in constant expressions!</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr double d { 1.2 }; // d lze použít v konstantních výrazech!</code></pre>"
     },
     {
       "id": "constexpr-variables_b20",
       "type": "section",
       "title": "The meaning of const vs constexpr for variables",
       "html": "<h3 class=\"cpp-section-heading\">The meaning of const vs constexpr for variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Význam const vs constexpr u proměnných</h3>",
+      "title_cs": "Význam const vs constexpr pro proměnné"
     },
     {
       "id": "constexpr-variables_b21",
       "type": "paragraph",
       "html": "<p>For variables:</p>",
       "preview": "For variables:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U proměnných:</p>"
     },
     {
       "id": "constexpr-variables_b22",
       "type": "list",
       "html": "<ul><li><code>const</code> means that the value of an object cannot be changed after initialization. The value of the initializer may be known at compile-time or runtime. The const object can be evaluated at runtime.</li><li><code>constexpr</code> means that the object can be used in a constant expression. The value of the initializer must be known at compile-time. The constexpr object can be evaluated at runtime or compile-time.</li></ul>",
       "preview": "const means that the value of an object cannot be changed after initialization. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li><code>const</code> znamená, že hodnotu objektu nelze po inicializaci změnit. Hodnota inicializátoru může být známa v době překladu nebo za běhu programu. Objekt typu const může být vyhodnocen za běhu.</li><li><code>constexpr</code> znamená, že objekt lze použít v konstantním výrazu. Hodnota inicializátoru musí být známa v době překladu. Objekt typu constexpr může být vyhodnocen za běhu nebo v době překladu.</li></ul>"
     },
     {
       "id": "constexpr-variables_b23",
       "type": "paragraph",
       "html": "<p>Constexpr variables are implicitly const. Const variables are not implicitly constexpr (except for const integral variables with a constant expression initializer). Although a variable can be defined as both <code>constexpr</code> and <code>const</code>, in most cases this is redundant, and we only need to use either <code>const</code> or <code>constexpr</code>.</p>",
       "preview": "Constexpr variables are implicitly const. Const variables are not implicitly con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proměnné typu constexpr jsou implicitně const. Proměnné typu const nejsou implicitně constexpr (s výjimkou celočíselných const proměnných s inicializátorem v podobě konstantního výrazu). Ačkoli proměnná může být definována jak jako <code>constexpr</code>, tak jako <code>const</code>, ve většině případů je to redundantní a stačí použít buď <code>const</code>, nebo <code>constexpr</code>.</p>"
     },
     {
       "id": "constexpr-variables_b24",
       "type": "paragraph",
       "html": "<p>Unlike <code>const</code>, <code>constexpr</code> is not part of an object’s type. Therefore a variable defined as <code>constexpr int</code> actually has type <code>const int</code> (due to the implicit <code>const</code> that <code>constexpr</code> provides for objects).</p>",
       "preview": "Unlike const, constexpr is not part of an object’s type. Therefore a variable de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od <code>const</code> není <code>constexpr</code> součástí typu objektu. Proměnná definovaná jako <code>constexpr int</code> má proto ve skutečnosti typ <code>const int</code> (díky implicitnímu <code>const</code>, které <code>constexpr</code> objektům poskytuje).</p>"
     },
     {
       "id": "constexpr-variables_b25",
@@ -195,7 +223,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Any constant variable whose initializer is a constant expression should be declared as <code>constexpr</code>.</p><p>Any constant variable whose initializer is not a constant expression (making it a runtime constant) should be declared as <code>const</code>.</p><p>Caveat: In the future we will discuss some types that are not fully compatible with <code>constexpr</code> (including <code>std::string</code>, <code>std::vector</code>, and other types that use dynamic memory allocation). For constant objects of these types, either use <code>const</code> instead of <code>constexpr</code>, or pick a different type that is constexpr compatible (e.g. <code>std::string_view</code> or <code>std::array</code>).</p></div>",
       "preview": "Best practiceAny constant variable whose initializer is a constant expression should be declared as ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup (Best practice)</p><p>Každá konstantní proměnná, jejíž inicializátor je konstantní výraz (constant expression), by měla být deklarována jako <code>constexpr</code>.</p><p>Každá konstantní proměnná, jejíž inicializátor není konstantní výraz (což z ní činí runtime konstantu), by měla být deklarována jako <code>const</code>.</p><p>Upozornění: V budoucnu budeme probírat některé typy, které nejsou plně kompatibilní s <code>constexpr</code> (včetně <code>std::string</code>, <code>std::vector</code> a dalších typů využívajících dynamickou alokaci paměti). Pro konstantní objekty těchto typů použijte buď <code>const</code> místo <code>constexpr</code>, nebo zvolte jiný typ, který je s constexpr kompatibilní (např. <code>std::string_view</code> nebo <code>std::array</code>).</p></div>"
     },
     {
       "id": "constexpr-variables_b26",
@@ -203,7 +232,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>The term <code>constexpr</code> is a portmanteau of “constant expression”. This name was picked because constexpr objects (and functions) can be used in constant expressions.</p><p>Formally, the keyword <code>constexpr</code> applies only to objects and functions. Conventionally, the term <code>constexpr</code> is used as shorthand for any constant expression (such as <code>1 + 2</code>).</p></div>",
       "preview": "NomenclatureThe term constexpr is a portmanteau of “constant expression”. This name was picked becau",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Termín <code>constexpr</code> je zkratkové slovo (portmanteau) z „constant expression“ (konstantní výraz). Tento název byl vybrán proto, že objekty (a funkce) s constexpr lze použít v konstantních výrazech.</p><p>Formálně se klíčové slovo <code>constexpr</code> vztahuje pouze na objekty a funkce. V praxi se však termín <code>constexpr</code> běžně používá jako zkratka pro jakýkoli konstantní výraz (například <code>1 + 2</code>).</p></div>"
     },
     {
       "id": "constexpr-variables_b27",
@@ -211,7 +241,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>Some of the examples on this site were written prior to the best practice to use <code>constexpr</code> -- as a result, you will note that some examples do not follow the above best practice. We are currently in the process of updating non-compliant examples as we run across them.</p></div>",
       "preview": "Author’s noteSome of the examples on this site were written prior to the best practice to use conste",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Některé příklady na tomto webu byly napsány ještě předtím, než se používání <code>constexpr</code> stalo osvědčeným postupem – v důsledku toho si můžete všimnout, že některé příklady výše uvedený doporučený postup nedodržují. V současné době pracujeme na aktualizaci těchto nevyhovujících příkladů, jakmile na ně narazíme.</p></div>"
     },
     {
       "id": "constexpr-variables_b28",
@@ -219,28 +250,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>In C and C++, the declaration of an array object (an object can hold multiple values) requires the length of the array (the number of values that it can hold) be known at compile-time (so the compiler can ensure the correct amount of memory is allocated for array objects).</p><p>Since literals are known at compile-time, they can be used as an array length:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int arr[5]; // an array of 5 int values, length of 5 is known at compile-time</code></pre><p>In many cases, it would be preferable to use a symbolic constant as an array length (e.g. to avoid magic numbers and make the array length easier to change if it is used in multiple places). In C, this can be done via a preprocessor macro, or via an enumerator, but not via a const variable (excluding VLA’s, which have other downsides). C++, looking to improve on this situation, wanted to allow the use of const variables instead of macros. But the value of variables was generally assumed to be known only at runtime, which made them ineligible to be used as array lengths.</p><p>To solve this problem, the C++ language standard added an exemption so that const integral types with a constant expression initializer would be treated as values known at compile-time, and thus be usable as array lengths:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int arrLen = 5;\nint arr[arrLen]; // ok: array of 5 ints</code></pre><p>When C++11 introduced constant expressions, it made sense for a const int with a constant expression initializer to be grandfathered into that definition. The committee discussed whether other types should be included as well, but ultimately decided not to.</p></div>",
       "preview": "For advanced readersIn C and C++, the declaration of an array object (an object can hold multiple va",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>V jazycích C a C++ vyžaduje deklarace objektu typu pole (objekt, který může obsahovat více hodnot), aby byla délka pole (počet hodnot, které může obsahovat) známa v době kompilace (aby překladač mohl zajistit alokaci správného množství paměti pro objekty polí).</p><p>Jelikož literály jsou známy v době kompilace, lze je použít jako délku pole:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int arr[5]; // pole 5 hodnot typu int, délka 5 je známa v době kompilace</code></pre><p>V mnoha případech by bylo vhodnější použít jako délku pole symbolickou konstantu (např. abychom se vyhnuli magickým číslům a usnadnili změnu délky pole, pokud je použita na více místech). V jazyce C toho lze dosáhnout pomocí makra preprocesoru nebo pomocí enumerátoru, nikoli však pomocí const proměnné (s výjimkou VLA – polí s proměnnou délkou, která však mají jiné nevýhody). Jazyk C++, ve snaze tuto situaci zlepšit, chtěl umožnit použití const proměnných namísto maker. Obecně se však předpokládalo, že hodnota proměnných je známa až za běhu (runtime), což znemožňovalo jejich použití jako délek polí.</p><p>K vyřešení tohoto problému zavedl standard jazyka C++ výjimku, podle které jsou celočíselné typy s modifikátorem const a inicializátorem ve formě konstantního výrazu považovány za hodnoty známé v době kompilace, a jsou tedy použitelné jako délky polí:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int arrLen = 5;\nint arr[arrLen]; // v pořádku: pole o 5 prvcích typu int</code></pre><p>Když standard C++11 zavedl konstantní výrazy, dávalo smysl, aby byl const int s inicializátorem ve formě konstantního výrazu do této definice historicky začleněn. Výbor diskutoval o tom, zda by měly být zahrnuty i další typy, ale nakonec se rozhodl, že nikoli.</p></div>"
     },
     {
       "id": "constexpr-variables_b29",
       "type": "section",
       "title": "Const and constexpr function parameters",
       "html": "<h3 class=\"cpp-section-heading\">Const and constexpr function parameters</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Const a constexpr parametry funkcí</h3>",
+      "title_cs": "Parametry funkcí Const a constexpr"
     },
     {
       "id": "constexpr-variables_b30",
       "type": "paragraph",
       "html": "<p>Normal function calls are evaluated at runtime, with the supplied arguments being used to initialize the function’s parameters. Because the initialization of function parameters happens at runtime, this leads to two consequences:</p>",
       "preview": "Normal function calls are evaluated at runtime, with the supplied arguments bein",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Běžná volání funkcí se vyhodnocují za běhu programu, přičemž předané argumenty slouží k inicializaci parametrů funkce. Protože k inicializaci parametrů funkce dochází za běhu, má to dva důsledky:</p>"
     },
     {
       "id": "constexpr-variables_b31",
       "type": "list",
       "html": "<ol start=\"1\"><li><code>const</code> function parameters are treated as runtime constants (even when the supplied argument is a compile-time constant).</li><li>Function parameters cannot be declared as <code>constexpr</code>, since their initialization value isn’t determined until runtime.</li></ol>",
       "preview": "const function parameters are treated as runtime constants (even when the suppli",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Parametry funkcí typu <code>const</code> jsou považovány za runtime konstanty (i když předaný argument je konstanta známá v době překladu).</li><li>Parametry funkcí nelze deklarovat jako <code>constexpr</code>, protože hodnota jejich inicializace není známa až do doby běhu programu.</li></ol>"
     },
     {
       "id": "constexpr-variables_b32",
@@ -248,42 +284,50 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss functions that can be evaluated at compile-time (and thus be used in constant expressions) below.</p><p>C++ also supports a way to pass compile-time constants to a function. We discuss these in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/non-type-template-parameters/\">11.9 -- Non-type template parameters</a>.</p></div>",
       "preview": "Related contentWe discuss functions that can be evaluated at compile-time (and thus be used in const",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Funkce, které lze vyhodnotit v době překladu (a lze je tak použít v konstantních výrazech), rozebíráme níže.</p><p>C++ také podporuje způsob, jak předávat konstanty známé v době překladu do funkcí. Těm se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/non-type-template-parameters/\">11.9 – Netypové parametry šablon (non-type template parameters)</a>.</p></div>"
     },
     {
       "id": "constexpr-variables_b33",
       "type": "section",
       "title": "Nomenclature recap",
       "html": "<h3 class=\"cpp-section-heading\">Nomenclature recap</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Rekapitulace názvosloví</h3>",
+      "title_cs": "Shrnutí nomenklatury"
     },
     {
       "id": "constexpr-variables_b34",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Term</th><th>Definition</th></tr><tr><td>Compile-time constant</td><td>A value or non-modifiable object whose value must be known at compile time (e.g. literals and constexpr variables).</td></tr><tr><td>Constexpr</td><td>Keyword that declares objects as compile-time constants (and functions that can be evaluated at compile-time). Informally, shorthand for “constant expression”.</td></tr><tr><td>Constant expression</td><td>An expression that contains only compile-time constants and operators/functions that support compile-time evaluation.</td></tr><tr><td>Runtime expression</td><td>An expression that is not a constant expression.</td></tr><tr><td>Runtime constant</td><td>A value or non-modifiable object that is not a compile-time constant.</td></tr></tbody></table></div>",
       "preview": "TermDefinitionCompile-time constantA value or non-modifiable object whose value ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Pojem</th><th>Definice</th></tr><tr><td>Konstanta doby překladu (Compile-time constant)</td><td>Hodnota nebo neměnný objekt, jehož hodnota musí být známa v době překladu (např. literály a constexpr proměnné).</td></tr><tr><td>Constexpr</td><td>Klíčové slovo, které deklaruje objekty jako konstanty doby překladu (a funkce, které lze vyhodnotit v době překladu). Neformálně zkratka pro „constant expression“ (konstantní výraz).</td></tr><tr><td>Konstantní výraz (Constant expression)</td><td>Výraz, který obsahuje pouze konstanty doby překladu a operátory/funkce podporující vyhodnocení v době překladu.</td></tr><tr><td>Výraz doby běhu (Runtime expression)</td><td>Výraz, který není konstantním výrazem.</td></tr><tr><td>Konstanta doby běhu (Runtime constant)</td><td>Hodnota nebo neměnný objekt, který není konstantou doby překladu.</td></tr></tbody></table></div>"
     },
     {
       "id": "constexpr-variables_b35",
       "type": "section",
       "title": "A brief introduction to constexpr functions",
       "html": "<h3 class=\"cpp-section-heading\">A brief introduction to constexpr functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Stručný úvod do constexpr funkcí</h3>",
+      "title_cs": "Stručný úvod do funkcí constexpr"
     },
     {
       "id": "constexpr-variables_b36",
       "type": "paragraph",
       "html": "<p>A <strong>constexpr function</strong> is a function that can be called in a constant expression. A constexpr function must evaluate at compile-time when the constant expression it is part of must evaluate at compile time (e.g. in the initializer of a constexpr variable). Otherwise, a constexpr function may be evaluated at either compile-time (if eligible) or runtime. To be eligible for compile-time execution, all arguments must be constant expressions.</p>",
       "preview": "A constexpr function is a function that can be called in a constant expression. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>constexpr funkce</strong> je funkce, kterou lze volat v konstantním výrazu. constexpr funkce se musí vyhodnotit v době překladu, pokud se v době překladu musí vyhodnotit konstantní výraz, jehož je součástí (např. v inicializátoru constexpr proměnné). V opačném případě může být constexpr funkce vyhodnocena buď v době překladu (pokud splňuje podmínky), nebo v době běhu. Aby byla způsobilá k vykonání v době překladu, musí být všechny její argumenty konstantními výrazy.</p>"
     },
     {
       "id": "constexpr-variables_b37",
       "type": "paragraph",
       "html": "<p>To make a constexpr function, the <code>constexpr</code> keyword is placed in the function declaration before the return type:</p>",
       "preview": "To make a constexpr function, the constexpr keyword is placed in the function de",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete-li vytvořit constexpr funkci, klíčové slovo <code>constexpr</code> se umístí do deklarace funkce před návratový typ:</p>"
     },
     {
       "id": "constexpr-variables_b38",
@@ -291,7 +335,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint max(int x, int y) // this is a non-constexpr function\n{\n    if (x > y)\n        return x;\n    else\n        return y;\n}\n\nconstexpr int cmax(int x, int y) // this is a constexpr function\n{\n    if (x > y)\n        return x;\n    else\n        return y;\n}\n\nint main()\n{\n    int m1 { max(5, 6) };            // ok\n    const int m2 { max(5, 6) };      // ok\n    constexpr int m3 { max(5, 6) };  // compile error: max(5, 6) not a constant expression\n\n    int m4 { cmax(5, 6) };           // ok: may evaluate at compile-time or runtime\n    const int m5 { cmax(5, 6) };     // ok: may evaluate at compile-time or runtime\n    constexpr int m6 { cmax(5, 6) }; // okay: must evaluate at compile-time\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint max(int x, int y) // this is a non-constexpr function\n{\n    if (x &gt; y)\n        return x;\n    else\n        return y;\n}\n\nconstexpr int cmax(int x, int y) // this is a constexpr function\n{\n    if (x &gt; y)\n        return x;\n    else\n        return y;\n}\n\nint main()\n{\n    int m1 { max(5, 6) };            // ok\n    const int m2 { max(5, 6) };      // ok\n    constexpr int m3 { max(5, 6) };  // compile error: max(5, 6) not a constant expression\n\n    int m4 { cmax(5, 6) };           // ok: may evaluate at compile-time or runtime\n    const int m5 { cmax(5, 6) };     // ok: may evaluate at compile-time or runtime\n    constexpr int m6 { cmax(5, 6) }; // okay: must evaluate at compile-time\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint max(int x, int y) // toto je non-constexpr funkce\n{\n    pokud (x > y)\n        návrat x;\n    jinak\n        vrátit y;\n}\n\nconstexpr int cmax(int x, int y) // toto je funkce constexpr\n{\n    pokud (x > y)\n        návrat x;\n    jinak\n        vrátit y;\n}\n\nint main()\n{\n    int m1 { max(5, 6) };            // dobře\n    const int m2 { max(5, 6) };      // dobře\n    constexpr int m3 { max(5, 6) };  // chyba kompilace: max(5, 6) není konstantní výraz\n\n    int m4 { cmax(5, 6) };           // ok: může se vyhodnotit v době kompilace nebo za běhu\n    const int m5 { cmax(5, 6) };     // ok: může se vyhodnotit v době kompilace nebo za běhu\n    constexpr int m6 { cmax(5, 6) }; // v pořádku: musí se vyhodnotit v době kompilace\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "constexpr-variables_b39",
@@ -299,7 +344,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>We used to discuss constexpr functions in detail in this chapter, but feedback from readers indicated that the topic was too long and nuanced to present this early in the tutorial series. As a result, we’ve moved the full discussion back to lesson <a href=\"https://www.learncpp.com/cpp-tutorial/constexpr-functions/\">F.1 -- Constexpr functions</a>.</p><p>The key thing to take away from this introduction is that a constexpr function may be called in constant expressions.</p><p>You will see constexpr functions used in some future examples (where appropriate), but we will not expect you to understand them further or write your own constexpr functions until we’ve formally covered the topic.</p></div>",
       "preview": "Author’s noteWe used to discuss constexpr functions in detail in this chapter, but feedback from rea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Dříve jsme constexpr funkce v této kapitole probírali podrobně, ale zpětná vazba od čtenářů ukázala, že toto téma bylo příliš dlouhé a plné nuancí na to, aby bylo prezentováno takto brzy v sérii tutoriálů. V důsledku toho jsme celou diskuzi přesunuli dále do lekce <a href=\"https://www.learncpp.com/cpp-tutorial/constexpr-functions/\">F.1 -- Constexpr funkce</a>.</p><p>Klíčovým poznatkem z tohoto úvodu je, že constexpr funkci lze volat v konstantních výrazech.</p><p>V některých budoucích příkladech (kde se to hodí) uvidíte constexpr funkce použité, ale nebudeme od vás očekávat, že jim budete rozumět hlouběji nebo že budete psát vlastní constexpr funkce, dokud toto téma formálně neprobereme.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "5.6 — Proměnné constexpr"
 }

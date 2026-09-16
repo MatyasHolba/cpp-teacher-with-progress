@@ -14,77 +14,90 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson on bitwise operators (<a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitwise operators</a>), we discussed how the various bitwise operators apply logical operators to each bit within the operands. Now that we understand how they function, let’s take a look at how they’re more commonly used.</p>",
       "preview": "In the previous lesson on bitwise operators (O.2 -- Bitwise operators), we discu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci o bitových operátorech (<a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitové operátory</a>) jsme probírali, jak různé bitové operátory aplikují logické operátory na jednotlivé bity v operandech. Nyní, když chápeme, jak fungují, se podívejme na jejich běžnější využití.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b1",
       "type": "section",
       "title": "Bit masks",
       "html": "<h3 class=\"cpp-section-heading\">Bit masks</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Bitové masky</h3>",
+      "title_cs": "Bitové masky"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b2",
       "type": "paragraph",
       "html": "<p>In order to manipulate individual bits (e.g. turn them on or off), we need some way to identify the specific bits we want to manipulate. Unfortunately, the bitwise operators don’t know how to work with bit positions. Instead they work with bit masks.</p>",
       "preview": "In order to manipulate individual bits (e.g. turn them on or off), we need some ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom mohli manipulovat s jednotlivými bity (např. je zapínat nebo vypínat), potřebujeme nějaký způsob, jak identifikovat konkrétní bity, se kterými chceme pracovat. Bitové operátory bohužel neumí pracovat s pozicemi bitů. Místo toho pracují s bitovými maskami.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b3",
       "type": "paragraph",
       "html": "<p>A <strong>bit mask</strong> is a predefined set of bits that is used to select which specific bits will be modified by subsequent operations.</p>",
       "preview": "A bit mask is a predefined set of bits that is used to select which specific bit",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Bitová maska</strong> je předdefinovaná sada bitů, která slouží k určení, jaké konkrétní bity budou modifikovány následnými operacemi.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b4",
       "type": "paragraph",
       "html": "<p>Consider a real-life case where you want to paint a window frame. If you’re not careful, you risk painting not only the window frame, but also the glass itself. You might buy some masking tape and apply it to the glass and any other parts you don’t want painted. Then when you paint, the masking tape blocks the paint from reaching anything you don’t want painted. In the end, only the non-masked parts (the parts you want painted) get painted.</p>",
       "preview": "Consider a real-life case where you want to paint a window frame. If you’re not ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si situaci z reálného života, kdy chcete natřít okenní rám. Pokud nebudete opatrní, riskujete, že natřete nejen rám, ale i samotné sklo. Můžete si koupit maskovací pásku a nalepit ji na sklo a všechny ostatní části, které natřít nechcete. Když pak natíráte, maskovací páska zabrání barvě dostat se na cokoliv, co natřít nechcete. Ve výsledku zůstanou natřené pouze nezakryté části (ty, které jste natřít chtěli).</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b5",
       "type": "paragraph",
       "html": "<p>A bit mask essentially performs the same function for bits -- the bit mask blocks the bitwise operators from touching bits we don’t want modified, and allows access to the ones we do want modified.</p>",
       "preview": "A bit mask essentially performs the same function for bits -- the bit mask block",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bitová maska v podstatě plní stejnou funkci pro bity – brání bitovým operátorům zasahovat do bitů, které nechceme měnit, a umožňuje přístup k těm, které upravit chceme.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b6",
       "type": "paragraph",
       "html": "<p>Let’s first explore how to define some simple bit masks, and then we’ll show you how to use them.</p>",
       "preview": "Let’s first explore how to define some simple bit masks, and then we’ll show you",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme nejprve prozkoumat, jak definovat jednoduché bitové masky, a poté si ukážeme, jak je používat.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b7",
       "type": "section",
       "title": "Defining bit masks in C++14",
       "html": "<h3 class=\"cpp-section-heading\">Defining bit masks in C++14</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Definování bitových masek v C++14</h3>",
+      "title_cs": "Definování bitových masek v C++14"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b8",
       "type": "paragraph",
       "html": "<p>The simplest set of bit masks is to define one bit mask for each bit position. We use 0s to mask out the bits we don’t care about, and 1s to denote the bits we want modified.</p>",
       "preview": "The simplest set of bit masks is to define one bit mask for each bit position. W",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejjednodušší sadou bitových masek je definice jedné bitové masky pro každou bitovou pozici. Pomocí 0 odmaskujeme bity, které nás nezajímají, a pomocí 1 označíme bity, které chceme modifikovat.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b9",
       "type": "paragraph",
       "html": "<p>Although bit masks can be literals, they’re often defined as symbolic constants so they can be given a meaningful name and easily reused.</p>",
       "preview": "Although bit masks can be literals, they’re often defined as symbolic constants ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli bitové masky mohou být literály, často se definují jako symbolické konstanty, aby jim bylo možné dát smysluplný název a snadno je znovu použít.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b10",
       "type": "paragraph",
       "html": "<p>Because C++14 supports binary literals, defining these bit masks is easy:</p>",
       "preview": "Because C++14 supports binary literals, defining these bit masks is easy:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože C++14 podporuje binární literály, je definování těchto bitových masek snadné:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b11",
@@ -92,35 +105,41 @@
       "language": "cpp",
       "code": "#include <cstdint>\n\nconstexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\nconstexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\nconstexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \nconstexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\nconstexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\nconstexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\nconstexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\nconstexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n\nconstexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\nconstexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\nconstexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \nconstexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\nconstexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\nconstexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\nconstexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\nconstexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n\nconstexpr std::uint8_t mask0{ 0b0000'0001 }; // představuje bit 0\nconstexpr std::uint8_t maska1{ 0b0000'0010 }; // představuje bit 1\nconstexpr std::uint8_t maska2{ 0b0000'0100 }; // představuje bit 2 \nconstexpr std::uint8_t maska3{ 0b0000'1000 }; // představuje bit 3\nconstexpr std::uint8_t maska4{ 0b0001'0000 }; // představuje bit 4\nconstexpr std::uint8_t mask5{ 0b0010'0000 }; // představuje bit 5\nconstexpr std::uint8_t maska6{ 0b0100'0000 }; // představuje bit 6\nconstexpr std::uint8_t maska7{ 0b1000'0000 }; // představuje bit 7</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b12",
       "type": "paragraph",
       "html": "<p>Now we have a set of symbolic constants that represents each bit position. We can use these to manipulate the bits (which we’ll show how to do in just a moment).</p>",
       "preview": "Now we have a set of symbolic constants that represents each bit position. We ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní máme sadu symbolických konstant, které reprezentují jednotlivé bitové pozice. Můžeme je použít k manipulaci s bity (což si ukážeme za okamžik).</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b13",
       "type": "section",
       "title": "Defining bit masks in C++11 or earlier",
       "html": "<h3 class=\"cpp-section-heading\">Defining bit masks in C++11 or earlier</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Definování bitových masek v C++11 nebo starších</h3>",
+      "title_cs": "Definování bitových masek v C++ 11 nebo dřívějších"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b14",
       "type": "paragraph",
       "html": "<p>Because C++11 doesn’t support binary literals, we have to use other methods to set the symbolic constants. There are two good methods for doing this.</p>",
       "preview": "Because C++11 doesn’t support binary literals, we have to use other methods to s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože C++11 nepodporuje binární literály, musíme pro nastavení symbolických konstant použít jiné metody. Existují pro to dva dobré způsoby.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b15",
       "type": "paragraph",
       "html": "<p>The first method is to use hexadecimal literals.</p>",
       "preview": "The first method is to use hexadecimal literals.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První metodou je použití hexadecimálních literálů.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b16",
@@ -128,28 +147,32 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We talk about hexadecimal in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literals</a>.</p></div>",
       "preview": "Related contentWe talk about hexadecimal in lesson 5.2 -- Literals.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Hexadecimální soustavou se zabýváme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/literals/\">5.2 -- Literály</a>.</p></div>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b17",
       "type": "paragraph",
       "html": "<p>Here’s how hexadecimal converts to binary:</p>",
       "preview": "Here’s how hexadecimal converts to binary:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázka převodu hexadecimálních hodnot na binární:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b18",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><td>Hexadecimal</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr><tr><td>Binary</td><td>0000</td><td>0001</td><td>0010</td><td>0011</td><td>0100</td><td>0101</td><td>0110</td><td>0111</td><td>1000</td><td>1001</td><td>1010</td><td>1011</td><td>1100</td><td>1101</td><td>1110</td><td>1111</td></tr></tbody></table></div>",
       "preview": "Hexadecimal0123456789ABCDEFBinary00000001001000110100010101100111100010011010101",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><td>Hexadecimální</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr><tr><td>Binární</td><td>0000</td><td>0001</td><td>0010</td><td>0011</td><td>0100</td><td>0101</td><td>0110</td><td>0111</td><td>1000</td><td>1001</td><td>1010</td><td>1011</td><td>1100</td><td>1101</td><td>1110</td><td>1111</td></tr></tbody></table></div>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b19",
       "type": "paragraph",
       "html": "<p>Therefore, we can define bit masks using hexadecimal like this:</p>",
       "preview": "Therefore, we can define bit masks using hexadecimal like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bitové masky tedy můžeme definovat pomocí hexadecimálního zápisu takto:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b20",
@@ -157,21 +180,24 @@
       "language": "cpp",
       "code": "constexpr std::uint8_t mask0{ 0x01 }; // hex for 0000 0001\nconstexpr std::uint8_t mask1{ 0x02 }; // hex for 0000 0010\nconstexpr std::uint8_t mask2{ 0x04 }; // hex for 0000 0100\nconstexpr std::uint8_t mask3{ 0x08 }; // hex for 0000 1000\nconstexpr std::uint8_t mask4{ 0x10 }; // hex for 0001 0000\nconstexpr std::uint8_t mask5{ 0x20 }; // hex for 0010 0000\nconstexpr std::uint8_t mask6{ 0x40 }; // hex for 0100 0000\nconstexpr std::uint8_t mask7{ 0x80 }; // hex for 1000 0000",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::uint8_t mask0{ 0x01 }; // hex for 0000 0001\nconstexpr std::uint8_t mask1{ 0x02 }; // hex for 0000 0010\nconstexpr std::uint8_t mask2{ 0x04 }; // hex for 0000 0100\nconstexpr std::uint8_t mask3{ 0x08 }; // hex for 0000 1000\nconstexpr std::uint8_t mask4{ 0x10 }; // hex for 0001 0000\nconstexpr std::uint8_t mask5{ 0x20 }; // hex for 0010 0000\nconstexpr std::uint8_t mask6{ 0x40 }; // hex for 0100 0000\nconstexpr std::uint8_t mask7{ 0x80 }; // hex for 1000 0000</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::uint8_t mask0{ 0x01 }; // hex pro 0000 0001\nconstexpr std::uint8_t maska1{ 0x02 }; // hex pro 0000 0010\nconstexpr std::uint8_t maska2{ 0x04 }; // hex pro 0000 0100\nconstexpr std::uint8_t maska3{ 0x08 }; // hex za 0000 1000\nconstexpr std::uint8_t mask4{ 0x10 }; // hex pro 0001 0000\nconstexpr std::uint8_t mask5{ 0x20 }; // hex pro 0010 0000\nconstexpr std::uint8_t maska6{ 0x40 }; // hex pro 0100 0000\nconstexpr std::uint8_t maska7{ 0x80 }; // hex za 1000 0000</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b21",
       "type": "paragraph",
       "html": "<p>Sometimes leading hexadecimal 0s will be omitted (e.g. instead of <code>0x01</code> you’ll just see <code>0x1</code>). Either way, this can be a little hard to read if you’re not familiar with hexadecimal to binary conversion.</p>",
       "preview": "Sometimes leading hexadecimal 0s will be omitted (e.g. instead of 0x01 you’ll ju",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Někdy bývají úvodní hexadecimální nuly vynechány (např. místo <code>0x01</code> uvidíte pouze <code>0x1</code>). V obou případech to však může být poněkud obtížně čitelné, pokud nejste zvyklí na převod z hexadecimální do binární soustavy.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b22",
       "type": "paragraph",
       "html": "<p>An easier method is to use the left-shift operator to shift a single bit into the proper location:</p>",
       "preview": "An easier method is to use the left-shift operator to shift a single bit into th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednodušší metodou je použít operátor bitového posunu doleva k posunutí jednoho bitu na správnou pozici:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b23",
@@ -179,28 +205,33 @@
       "language": "cpp",
       "code": "constexpr std::uint8_t mask0{ 1 << 0 }; // 0000 0001 \nconstexpr std::uint8_t mask1{ 1 << 1 }; // 0000 0010\nconstexpr std::uint8_t mask2{ 1 << 2 }; // 0000 0100\nconstexpr std::uint8_t mask3{ 1 << 3 }; // 0000 1000\nconstexpr std::uint8_t mask4{ 1 << 4 }; // 0001 0000\nconstexpr std::uint8_t mask5{ 1 << 5 }; // 0010 0000\nconstexpr std::uint8_t mask6{ 1 << 6 }; // 0100 0000\nconstexpr std::uint8_t mask7{ 1 << 7 }; // 1000 0000",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::uint8_t mask0{ 1 &lt;&lt; 0 }; // 0000 0001 \nconstexpr std::uint8_t mask1{ 1 &lt;&lt; 1 }; // 0000 0010\nconstexpr std::uint8_t mask2{ 1 &lt;&lt; 2 }; // 0000 0100\nconstexpr std::uint8_t mask3{ 1 &lt;&lt; 3 }; // 0000 1000\nconstexpr std::uint8_t mask4{ 1 &lt;&lt; 4 }; // 0001 0000\nconstexpr std::uint8_t mask5{ 1 &lt;&lt; 5 }; // 0010 0000\nconstexpr std::uint8_t mask6{ 1 &lt;&lt; 6 }; // 0100 0000\nconstexpr std::uint8_t mask7{ 1 &lt;&lt; 7 }; // 1000 0000</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::uint8_t mask0{ 1 << 0 }; // 0000 0001 \nconstexpr std::uint8_t maska1{ 1 << 1 }; // 0000 0010\nconstexpr std::uint8_t maska2{ 1 << 2 }; // 0000 0100\nconstexpr std::uint8_t maska3{ 1 << 3 }; // 0000 1000\nconstexpr std::uint8_t mask4{ 1 << 4 }; // 0001 0000\nconstexpr std::uint8_t mask5{ 1 << 5 }; // 0010 0000\nconstexpr std::uint8_t mask6{ 1 << 6 }; // 0100 0000\nconstexpr std::uint8_t mask7{ 1 << 7 }; // 1000 0000</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b24",
       "type": "section",
       "title": "Testing a bit (to see if it is on or off)",
       "html": "<h3 class=\"cpp-section-heading\">Testing a bit (to see if it is on or off)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Testování bitu (zjištění, zda je zapnutý nebo vypnutý)</h3>",
+      "title_cs": "Trochu se testuje (aby se zjistilo, zda je zapnuto nebo vypnuto)"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b25",
       "type": "paragraph",
       "html": "<p>Now that we have a set of bit masks, we can use these in conjunction with a bit flag variable to manipulate our bit flags.</p>",
       "preview": "Now that we have a set of bit masks, we can use these in conjunction with a bit ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když máme sadu bitových masek, můžeme je použít ve spojení s proměnnou bitových příznaků k manipulaci s našimi bitovými příznaky.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b26",
       "type": "paragraph",
       "html": "<p>To determine if a bit is on or off, we use <em>bitwise AND</em> in conjunction with the bit mask for the appropriate bit:</p>",
       "preview": "To determine if a bit is on or off, we use bitwise AND in conjunction with the b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro zjištění, zda je bit zapnutý nebo vypnutý, použijeme <em>bitový AND</em> ve spojení s bitovou maskou pro příslušný bit:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b27",
@@ -208,84 +239,97 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n\t[[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n\t[[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n\t[[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n\t[[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n\t[[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n\t[[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n\t[[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n\t[[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n\n\tstd::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n\tstd::cout << \"bit 0 is \" << (static_cast<bool>(flags & mask0) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 1 is \" << (static_cast<bool>(flags & mask1) ? \"on\\n\" : \"off\\n\");\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n\t[[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n\t[[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n\t[[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n\t[[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n\t[[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n\t[[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n\t[[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n\t[[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n\n\tstd::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n\tstd::cout &lt;&lt; \"bit 0 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask0) ? \"on\\n\" : \"off\\n\");\n\tstd::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask1) ? \"on\\n\" : \"off\\n\");\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n\t[[možná_nepoužité]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // představuje bit 0\n\t[[možná_nepoužité]] constexpr std::uint8_t maska1{ 0b0000'0010 }; // představuje bit 1\n\t[[možná_nepoužité]] constexpr std::uint8_t maska2{ 0b0000'0100 }; // představuje bit 2 \n\t[[možná_nepoužité]] constexpr std::uint8_t maska3{ 0b0000'1000 }; // představuje bit 3\n\t[[možná_nepoužité]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // představuje bit 4\n\t[[možná_nepoužité]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // představuje bit 5\n\t[[možná_nepoužité]] constexpr std::uint8_t maska6{ 0b0100'0000 }; // představuje bit 6\n\t[[možná_nepoužité]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // představuje bit 7\n\n\tpříznaky std::uint8_t{ 0b0000'0101 }; // Velikost 8 bitů znamená prostor pro 8 příznaků\n\n\tstd::cout << \"bit 0 je \" << (static_cast<bool>(flags & mask0) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 1 je \" << (static_cast<bool>(příznaky a maska1) ? \"on\\n\" : \"off\\n\");\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b28",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b29",
       "type": "output",
       "text": "bit 0 is on\nbit 1 is off\n",
       "html": "<pre>bit 0 is on\nbit 1 is off\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>bit 0 is on\nbit 1 is off\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b30",
       "type": "paragraph",
       "html": "<p>Let’s examine how this works.</p>",
       "preview": "Let’s examine how this works.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme se podívat na to, jak to funguje.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b31",
       "type": "paragraph",
       "html": "<p>In the case of <code>flags &amp; mask0</code>, we have <code>0000'0101</code> &amp; <code>0000'0001</code>. Let’s line these up:</p>",
       "preview": "In the case of flags & mask0, we have 0000'0101 & 0000'0001. Let’s line these up",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě <code>flags &amp; mask0</code> máme <code>0000'0101</code> &amp; <code>0000'0001</code>. Pojďme si je srovnat pod sebe:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b32",
       "type": "output",
       "text": "0000'0101 &\n0000'0001\n---------\n0000'0001\n",
       "html": "<pre>0000'0101 &amp;\n0000'0001\n---------\n0000'0001\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0000'0101 &amp;\n0000'0001\n---------\n0000'0001\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b33",
       "type": "paragraph",
       "html": "<p>We are then casting <code>0000'0001</code> to a <code>bool</code>. Since any non-zero number converts to <code>true</code> and this value has a non-zero digit, this evaluates to <code>true</code>.</p>",
       "preview": "We are then casting 0000'0001 to a bool. Since any non-zero number converts to t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následně přetypujeme <code>0000'0001</code> na <code>bool</code>. Vzhledem k tomu, že se jakékoli nenulové číslo převádí na <code>true</code> a tato hodnota obsahuje nenulovou číslici, vyhodnotí se výraz jako <code>true</code>.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b34",
       "type": "paragraph",
       "html": "<p>In the case of <code>flags &amp; mask1</code>, we have <code>0000'0101</code> &amp; <code>0000'0010</code>. Let’s line these up:</p>",
       "preview": "In the case of flags & mask1, we have 0000'0101 & 0000'0010. Let’s line these up",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě <code>flags &amp; mask1</code> máme <code>0000'0101</code> &amp; <code>0000'0010</code>. Srovnejme si je pod sebe:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b35",
       "type": "output",
       "text": "0000'0101 &\n0000'0010\n---------\n0000'0000\n",
       "html": "<pre>0000'0101 &amp;\n0000'0010\n---------\n0000'0000\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0000'0101 &amp;\n0000'0010\n---------\n0000'0000\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b36",
       "type": "paragraph",
       "html": "<p>Since a zero value converts to <code>false</code> and this value has only zero digits, this evaluates to <code>false</code>.</p>",
       "preview": "Since a zero value converts to false and this value has only zero digits, this e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vzhledem k tomu, že nulová hodnota se převádí na <code>false</code> a tato hodnota obsahuje pouze nuly, vyhodnotí se tento výraz jako <code>false</code>.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b37",
       "type": "section",
       "title": "Setting a bit",
       "html": "<h3 class=\"cpp-section-heading\">Setting a bit</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Nastavení bitu</h3>",
+      "title_cs": "Nastavení bit"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b38",
       "type": "paragraph",
       "html": "<p>To set (turn on) a bit (to value 1), we use bitwise OR equals (operator |=) in conjunction with the bit mask for the appropriate bit:</p>",
       "preview": "To set (turn on) a bit (to value 1), we use bitwise OR equals (operator |=) in c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>K nastavení (zapnutí) bitu (na hodnotu 1) používáme bitové OR s přiřazením (operátor |=) ve spojení s bitovou maskou pro příslušný bit:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b39",
@@ -293,28 +337,32 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n    \n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout << \"bit 1 is \" << (static_cast<bool>(flags & mask1) ? \"on\\n\" : \"off\\n\");\n\n    flags |= mask1; // turn on bit 1\n\n    std::cout << \"bit 1 is \" << (static_cast<bool>(flags & mask1) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n    \n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask1) ? \"on\\n\" : \"off\\n\");\n\n    flags |= mask1; // turn on bit 1\n\n    std::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask1) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[možná_nepoužité]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // představuje bit 0\n    [[možná_nepoužité]] constexpr std::uint8_t maska1{ 0b0000'0010 }; // představuje bit 1\n    [[možná_nepoužité]] constexpr std::uint8_t maska2{ 0b0000'0100 }; // představuje bit 2 \n    [[možná_nepoužité]] constexpr std::uint8_t maska3{ 0b0000'1000 }; // představuje bit 3\n    [[možná_nepoužité]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // představuje bit 4\n    [[možná_nepoužité]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // představuje bit 5\n    [[možná_nepoužité]] constexpr std::uint8_t maska6{ 0b0100'0000 }; // představuje bit 6\n    [[možná_nepoužité]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // představuje bit 7\n    \n    příznaky std::uint8_t{ 0b0000'0101 }; // Velikost 8 bitů znamená prostor pro 8 příznaků\n\n    std::cout << \"bit 1 je \" << (static_cast<bool>(příznaky a maska1) ? \"on\\n\" : \"off\\n\");\n\n    příznaky |= mask1; // zapni bit 1\n\n    std::cout << \"bit 1 je \" << (static_cast<bool>(příznaky a maska1) ? \"on\\n\" : \"off\\n\");\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b40",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b41",
       "type": "output",
       "text": "bit 1 is off\nbit 1 is on\n",
       "html": "<pre>bit 1 is off\nbit 1 is on\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>bit 1 je vypnutý\nbit 1 je zapnutý\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b42",
       "type": "paragraph",
       "html": "<p>We can also turn on multiple bits at the same time using <em>Bitwise OR</em>:</p>",
       "preview": "We can also turn on multiple bits at the same time using Bitwise OR:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme také zapnout více bitů současně pomocí <em>bitového OR</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b43",
@@ -322,21 +370,25 @@
       "language": "cpp",
       "code": "flags |= (mask4 | mask5); // turn bits 4 and 5 on at the same time",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags |= (mask4 | mask5); // turn bits 4 and 5 on at the same time</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky |= (maska4 | maska5); // zapněte bity 4 a 5 současně</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b44",
       "type": "section",
       "title": "Resetting a bit",
       "html": "<h3 class=\"cpp-section-heading\">Resetting a bit</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vynulování bitu</h3>",
+      "title_cs": "Trochu se resetuje"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b45",
       "type": "paragraph",
       "html": "<p>To reset (clear) a bit (to value 0), we use <em>Bitwise AND</em> and <em>Bitwise NOT</em> together:</p>",
       "preview": "To reset (clear) a bit (to value 0), we use Bitwise AND and Bitwise NOT together",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro resetování (vynulování) bitu (na hodnotu 0) používáme společně <em>bitový AND</em> a <em>bitový NOT</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b46",
@@ -344,28 +396,32 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n    \n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout << \"bit 2 is \" << (static_cast<bool>(flags & mask2) ? \"on\\n\" : \"off\\n\");\n\n    flags &= ~mask2; // turn off bit 2\n\n    std::cout << \"bit 2 is \" << (static_cast<bool>(flags & mask2) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n    \n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask2) ? \"on\\n\" : \"off\\n\");\n\n    flags &amp;= ~mask2; // turn off bit 2\n\n    std::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask2) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[možná_nepoužité]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // představuje bit 0\n    [[možná_nepoužité]] constexpr std::uint8_t maska1{ 0b0000'0010 }; // představuje bit 1\n    [[možná_nepoužité]] constexpr std::uint8_t maska2{ 0b0000'0100 }; // představuje bit 2 \n    [[možná_nepoužité]] constexpr std::uint8_t maska3{ 0b0000'1000 }; // představuje bit 3\n    [[možná_nepoužité]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // představuje bit 4\n    [[možná_nepoužité]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // představuje bit 5\n    [[možná_nepoužité]] constexpr std::uint8_t maska6{ 0b0100'0000 }; // představuje bit 6\n    [[možná_nepoužité]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // představuje bit 7\n    \n    příznaky std::uint8_t{ 0b0000'0101 }; // Velikost 8 bitů znamená prostor pro 8 příznaků\n\n    std::cout << \"bit 2 je \" << (static_cast<bool>(příznaky a maska2) ? \"on\\n\" : \"off\\n\");\n\n    příznaky &= ~mask2; // vypnout bit 2\n\n    std::cout << \"bit 2 je \" << (static_cast<bool>(příznaky a maska2) ? \"on\\n\" : \"off\\n\");\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b47",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b48",
       "type": "output",
       "text": "bit 2 is on\nbit 2 is off\n",
       "html": "<pre>bit 2 is on\nbit 2 is off\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>bit 2 is on\nbit 2 is off\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b49",
       "type": "paragraph",
       "html": "<p>We can turn off multiple bits at the same time:</p>",
       "preview": "We can turn off multiple bits at the same time:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme vypnout více bitů současně:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b50",
@@ -373,7 +429,8 @@
       "language": "cpp",
       "code": "flags &= ~(mask4 | mask5); // turn bits 4 and 5 off at the same time",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags &amp;= ~(mask4 | mask5); // turn bits 4 and 5 off at the same time</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky &= ~(mask4 | mask5); // současné vypnutí bitů 4 a 5</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b51",
@@ -381,21 +438,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Some compilers may complain about a sign conversion with this line:</p><pre>flags &amp;= ~mask2;\n</pre><p>Because the type of <code>mask2</code> is smaller than <code>int</code>, <code>operator~</code> causes operand <code>mask2</code> to undergo integral promotion to type <code>int</code>. Then the compiler complains that we’re trying to use <code>operator&amp;=</code> where the left operand is unsigned and the right operand is signed.</p><p>If this is the case, try the following:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags &amp;= static_cast&lt;std::uint8_t&gt;(~mask2);</code></pre><p>We discuss this issue in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitwise operators</a>.</p></div>",
       "preview": "Key insightSome compilers may complain about a sign conversion with this line:flags &= ~mask2; Becau",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Některé kompilátory mohou u tohoto řádku hlásit varování ohledně konverze znaménka:</p><pre>flags &amp;= ~mask2;\n</pre><p>Protože je typ <code>mask2</code> menší než <code>int</code>, způsobí <code>operator~</code> celočíselné povýšení (integral promotion) operandu <code>mask2</code> na typ <code>int</code>. Kompilátor si pak stěžuje, že se pokoušíme použít <code>operator&amp;=</code>, kde je levý operand bez znaménka (unsigned) a pravý operand se znaménkem (signed).</p><p>Pokud k tomu dojde, zkuste následující:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags &amp;= static_cast&lt;std::uint8_t&gt;(~mask2);</code></pre><p>Tuto problematiku probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/bitwise-operators/\">O.2 -- Bitové operátory</a>.</p></div>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b52",
       "type": "section",
       "title": "Flipping a bit",
       "html": "<h3 class=\"cpp-section-heading\">Flipping a bit</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Převrácení bitu</h3>",
+      "title_cs": "Trochu převrácení"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b53",
       "type": "paragraph",
       "html": "<p>To toggle (flip) a bit state (from 0 to 1 or from 1 to 0), we use <em>Bitwise XOR</em>:</p>",
       "preview": "To toggle (flip) a bit state (from 0 to 1 or from 1 to 0), we use Bitwise XOR:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro přepnutí (překlopení) stavu bitu (z 0 na 1 nebo z 1 na 0) používáme <em>bitový XOR</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b54",
@@ -403,28 +464,32 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n\n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout << \"bit 2 is \" << (static_cast<bool>(flags & mask2) ? \"on\\n\" : \"off\\n\");\n    flags ^= mask2; // flip bit 2\n    std::cout << \"bit 2 is \" << (static_cast<bool>(flags & mask2) ? \"on\\n\" : \"off\\n\");\n    flags ^= mask2; // flip bit 2\n    std::cout << \"bit 2 is \" << (static_cast<bool>(flags & mask2) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // represents bit 0\n    [[maybe_unused]] constexpr std::uint8_t mask1{ 0b0000'0010 }; // represents bit 1\n    [[maybe_unused]] constexpr std::uint8_t mask2{ 0b0000'0100 }; // represents bit 2 \n    [[maybe_unused]] constexpr std::uint8_t mask3{ 0b0000'1000 }; // represents bit 3\n    [[maybe_unused]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // represents bit 4\n    [[maybe_unused]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // represents bit 5\n    [[maybe_unused]] constexpr std::uint8_t mask6{ 0b0100'0000 }; // represents bit 6\n    [[maybe_unused]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // represents bit 7\n\n    std::uint8_t flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\n    std::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask2) ? \"on\\n\" : \"off\\n\");\n    flags ^= mask2; // flip bit 2\n    std::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask2) ? \"on\\n\" : \"off\\n\");\n    flags ^= mask2; // flip bit 2\n    std::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (static_cast&lt;bool&gt;(flags &amp; mask2) ? \"on\\n\" : \"off\\n\");\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n    [[možná_nepoužité]] constexpr std::uint8_t mask0{ 0b0000'0001 }; // představuje bit 0\n    [[možná_nepoužité]] constexpr std::uint8_t maska1{ 0b0000'0010 }; // představuje bit 1\n    [[možná_nepoužité]] constexpr std::uint8_t maska2{ 0b0000'0100 }; // představuje bit 2 \n    [[možná_nepoužité]] constexpr std::uint8_t maska3{ 0b0000'1000 }; // představuje bit 3\n    [[možná_nepoužité]] constexpr std::uint8_t mask4{ 0b0001'0000 }; // představuje bit 4\n    [[možná_nepoužité]] constexpr std::uint8_t mask5{ 0b0010'0000 }; // představuje bit 5\n    [[možná_nepoužité]] constexpr std::uint8_t maska6{ 0b0100'0000 }; // představuje bit 6\n    [[možná_nepoužité]] constexpr std::uint8_t mask7{ 0b1000'0000 }; // představuje bit 7\n\n    příznaky std::uint8_t{ 0b0000'0101 }; // Velikost 8 bitů znamená prostor pro 8 příznaků\n\n    std::cout << \"bit 2 je \" << (static_cast<bool>(příznaky a maska2) ? \"on\\n\" : \"off\\n\");\n    příznaky ^= mask2; // překlopit bit 2\n    std::cout << \"bit 2 je \" << (static_cast<bool>(příznaky a maska2) ? \"on\\n\" : \"off\\n\");\n    příznaky ^= mask2; // překlopit bit 2\n    std::cout << \"bit 2 je \" << (static_cast<bool>(příznaky a maska2) ? \"on\\n\" : \"off\\n\");\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b55",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b56",
       "type": "output",
       "text": "bit 2 is on\nbit 2 is off\nbit 2 is on\n",
       "html": "<pre>bit 2 is on\nbit 2 is off\nbit 2 is on\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>bit 2 is on\nbit 2 is off\nbit 2 is on\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b57",
       "type": "paragraph",
       "html": "<p>We can flip multiple bits simultaneously:</p>",
       "preview": "We can flip multiple bits simultaneously:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme invertovat (překlopit) více bitů současně:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b58",
@@ -432,28 +497,33 @@
       "language": "cpp",
       "code": "flags ^= (mask4 | mask5); // flip bits 4 and 5 at the same time",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags ^= (mask4 | mask5); // flip bits 4 and 5 at the same time</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky ^= (maska4 | maska5); // překlopí bity 4 a 5 současně</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b59",
       "type": "section",
       "title": "Bit masks and std::bitset",
       "html": "<h3 class=\"cpp-section-heading\">Bit masks and std::bitset</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Bitové masky a std::bitset</h3>",
+      "title_cs": "Bitové masky a std::bitset"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b60",
       "type": "paragraph",
       "html": "<p>std::bitset supports the full set of bitwise operators. So even though it’s easier to use the functions (test, set, reset, and flip) to modify individual bits, you can use bitwise operators and bit masks if you want.</p>",
       "preview": "std::bitset supports the full set of bitwise operators. So even though it’s easi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::bitset</code> podporuje kompletní sadu bitových operátorů. Ačkoli je tedy jednodušší použít členské funkce (test, set, reset a flip) pro úpravu jednotlivých bitů, můžete podle potřeby použít i bitové operátory a bitové masky.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b61",
       "type": "paragraph",
       "html": "<p>Why would you want to? The functions only allow you to modify individual bits. The bitwise operators allow you to modify multiple bits at once.</p>",
       "preview": "Why would you want to? The functions only allow you to modify individual bits. T",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proč byste to dělali? Tyto funkce umožňují upravovat pouze jednotlivé bity. Bitové operátory umožňují upravovat více bitů najednou.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b62",
@@ -461,42 +531,49 @@
       "language": "cpp",
       "code": "#include <bitset>\n#include <iostream>\n\nint main()\n{\n\t[[maybe_unused]] constexpr std::bitset<8> mask0{ 0b0000'0001 }; // represents bit 0\n\t[[maybe_unused]] constexpr std::bitset<8> mask1{ 0b0000'0010 }; // represents bit 1\n\t[[maybe_unused]] constexpr std::bitset<8> mask2{ 0b0000'0100 }; // represents bit 2 \n\t[[maybe_unused]] constexpr std::bitset<8> mask3{ 0b0000'1000 }; // represents bit 3\n\t[[maybe_unused]] constexpr std::bitset<8> mask4{ 0b0001'0000 }; // represents bit 4\n\t[[maybe_unused]] constexpr std::bitset<8> mask5{ 0b0010'0000 }; // represents bit 5\n\t[[maybe_unused]] constexpr std::bitset<8> mask6{ 0b0100'0000 }; // represents bit 6\n\t[[maybe_unused]] constexpr std::bitset<8> mask7{ 0b1000'0000 }; // represents bit 7\n\n\tstd::bitset<8> flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\tstd::cout << \"bit 1 is \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 is \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags ^= (mask1 | mask2); // flip bits 1 and 2\n\tstd::cout << \"bit 1 is \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 is \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags |= (mask1 | mask2); // turn bits 1 and 2 on\n\tstd::cout << \"bit 1 is \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 is \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags &= ~(mask1 | mask2); // turn bits 1 and 2 off\n\tstd::cout << \"bit 1 is \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 is \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask0{ 0b0000'0001 }; // represents bit 0\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask1{ 0b0000'0010 }; // represents bit 1\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask2{ 0b0000'0100 }; // represents bit 2 \n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask3{ 0b0000'1000 }; // represents bit 3\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask4{ 0b0001'0000 }; // represents bit 4\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask5{ 0b0010'0000 }; // represents bit 5\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask6{ 0b0100'0000 }; // represents bit 6\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; mask7{ 0b1000'0000 }; // represents bit 7\n\n\tstd::bitset&lt;8&gt; flags{ 0b0000'0101 }; // 8 bits in size means room for 8 flags\n\tstd::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags ^= (mask1 | mask2); // flip bits 1 and 2\n\tstd::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags |= (mask1 | mask2); // turn bits 1 and 2 on\n\tstd::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tflags &amp;= ~(mask1 | mask2); // turn bits 1 and 2 off\n\tstd::cout &lt;&lt; \"bit 1 is \" &lt;&lt; (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout &lt;&lt; \"bit 2 is \" &lt;&lt; (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset>\n#include <iostream>\n\nint main()\n{\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask0{ 0b0000'0001 }; // představuje bit 0\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask1{ 0b0000'0010 }; // představuje bit 1\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask2{ 0b0000'0100 }; // představuje bit 2 \n\t[[možná_nepoužité]] constexpr std::bitset<8> mask3{ 0b0000'1000 }; // představuje bit 3\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask4{ 0b0001'0000 }; // představuje bit 4\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask5{ 0b0010'0000 }; // představuje bit 5\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask6{ 0b0100'0000 }; // představuje bit 6\n\t[[možná_nepoužité]] constexpr std::bitset<8> mask7{ 0b1000'0000 }; // představuje bit 7\n\n\tstd::bitset<8> příznaky{ 0b0000'0101 }; // Velikost 8 bitů znamená prostor pro 8 příznaků\n\tstd::cout << \"bit 1 je \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 je \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tpříznaky ^= (maska1 | maska2); // přehození bitů 1 a 2\n\tstd::cout << \"bit 1 je \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 je \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tpříznaky |= (maska1 | maska2); // zapněte bity 1 a 2\n\tstd::cout << \"bit 1 je \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 je \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tpříznaky &= ~(maska1 | maska2); // vypněte bity 1 a 2\n\tstd::cout << \"bit 1 je \" << (flags.test(1) ? \"on\\n\" : \"off\\n\");\n\tstd::cout << \"bit 2 je \" << (flags.test(2) ? \"on\\n\" : \"off\\n\");\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b63",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b64",
       "type": "output",
       "text": "bit 1 is off\nbit 2 is on\nbit 1 is on\nbit 2 is off\nbit 1 is on\nbit 2 is on\nbit 1 is off\nbit 2 is off\n",
       "html": "<pre>bit 1 is off\nbit 2 is on\nbit 1 is on\nbit 2 is off\nbit 1 is on\nbit 2 is on\nbit 1 is off\nbit 2 is off\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>bit 1 is off\nbit 2 is on\nbit 1 is on\nbit 2 is off\nbit 1 is on\nbit 2 is on\nbit 1 is off\nbit 2 is off\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b65",
       "type": "section",
       "title": "Making bit masks meaningful",
       "html": "<h3 class=\"cpp-section-heading\">Making bit masks meaningful</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Smysluplné pojmenování bitových masek</h3>",
+      "title_cs": "Aby bitové masky měly smysl"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b66",
       "type": "paragraph",
       "html": "<p>Naming our bit masks “mask1” or “mask2” tells us what bit is being manipulated, but doesn’t give us any indication of what that bit flag is actually being used for.</p>",
       "preview": "Naming our bit masks “mask1” or “mask2” tells us what bit is being manipulated, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojmenování našich bitových masek jako „mask1“ nebo „mask2“ nám sice říká, se kterým bitem se manipuluje, ale vůbec nenapovídá, k čemu se daný bitový příznak (flag) ve skutečnosti používá.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b67",
       "type": "paragraph",
       "html": "<p>A best practice is to give your bit masks useful names as a way to document the meaning of your bit flags. Here’s an example from a game we might write:</p>",
       "preview": "A best practice is to give your bit masks useful names as a way to document the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Osvědčeným postupem (best practice) je dávat bitovým maskám smysluplné názvy, což slouží jako způsob dokumentace významu vašich bitových příznaků. Zde je příklad ze hry, kterou bychom mohli napsat:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b68",
@@ -504,14 +581,16 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n        // Define a bunch of physical/emotional states\n\t[[maybe_unused]] constexpr std::uint8_t isHungry   { 1 << 0 }; // 0000 0001\n\t[[maybe_unused]] constexpr std::uint8_t isSad      { 1 << 1 }; // 0000 0010\n\t[[maybe_unused]] constexpr std::uint8_t isMad      { 1 << 2 }; // 0000 0100\n\t[[maybe_unused]] constexpr std::uint8_t isHappy    { 1 << 3 }; // 0000 1000\n\t[[maybe_unused]] constexpr std::uint8_t isLaughing { 1 << 4 }; // 0001 0000\n\t[[maybe_unused]] constexpr std::uint8_t isAsleep   { 1 << 5 }; // 0010 0000\n\t[[maybe_unused]] constexpr std::uint8_t isDead     { 1 << 6 }; // 0100 0000\n\t[[maybe_unused]] constexpr std::uint8_t isCrying   { 1 << 7 }; // 1000 0000\n\n\tstd::uint8_t me{}; // all flags/options turned off to start\n\tme |= (isHappy | isLaughing); // I am happy and laughing\n\tme &= ~isLaughing; // I am no longer laughing\n\n\t// Query a few states\n\t// (we'll use static_cast<bool> to interpret the results as a boolean value)\n\tstd::cout << std::boolalpha; // print true or false instead of 1 or 0\n\tstd::cout << \"I am happy? \" << static_cast<bool>(me & isHappy) << '\\n';\n\tstd::cout << \"I am laughing? \" << static_cast<bool>(me & isLaughing) << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n        // Define a bunch of physical/emotional states\n\t[[maybe_unused]] constexpr std::uint8_t isHungry   { 1 &lt;&lt; 0 }; // 0000 0001\n\t[[maybe_unused]] constexpr std::uint8_t isSad      { 1 &lt;&lt; 1 }; // 0000 0010\n\t[[maybe_unused]] constexpr std::uint8_t isMad      { 1 &lt;&lt; 2 }; // 0000 0100\n\t[[maybe_unused]] constexpr std::uint8_t isHappy    { 1 &lt;&lt; 3 }; // 0000 1000\n\t[[maybe_unused]] constexpr std::uint8_t isLaughing { 1 &lt;&lt; 4 }; // 0001 0000\n\t[[maybe_unused]] constexpr std::uint8_t isAsleep   { 1 &lt;&lt; 5 }; // 0010 0000\n\t[[maybe_unused]] constexpr std::uint8_t isDead     { 1 &lt;&lt; 6 }; // 0100 0000\n\t[[maybe_unused]] constexpr std::uint8_t isCrying   { 1 &lt;&lt; 7 }; // 1000 0000\n\n\tstd::uint8_t me{}; // all flags/options turned off to start\n\tme |= (isHappy | isLaughing); // I am happy and laughing\n\tme &amp;= ~isLaughing; // I am no longer laughing\n\n\t// Query a few states\n\t// (we'll use static_cast&lt;bool&gt; to interpret the results as a boolean value)\n\tstd::cout &lt;&lt; std::boolalpha; // print true or false instead of 1 or 0\n\tstd::cout &lt;&lt; \"I am happy? \" &lt;&lt; static_cast&lt;bool&gt;(me &amp; isHappy) &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"I am laughing? \" &lt;&lt; static_cast&lt;bool&gt;(me &amp; isLaughing) &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n        // Definujte spoustu fyzických/emocionálních stavů\n\t[[možná_nepoužité]] constexpr std::uint8_t isHungry { 1 << 0 }; // 0000 0001\n\t[[možná_nepoužité]] constexpr std::uint8_t isSad { 1 << 1 }; // 0000 0010\n\t[[možná_nepoužité]] constexpr std::uint8_t isMad { 1 << 2 }; // 0000 0100\n\t[[možná_nepoužité]] constexpr std::uint8_t isHappy { 1 << 3 }; // 0000 1000\n\t[[možná_unused]] constexpr std::uint8_t isLaughing { 1 << 4 }; // 0001 0000\n\t[[možná_nepoužité]] constexpr std::uint8_t spí { 1 << 5 }; // 0010 0000\n\t[[možná_nepoužité]] constexpr std::uint8_t isDead { 1 << 6 }; // 0100 0000\n\t[[možná_nepoužité]] constexpr std::uint8_t isCrying { 1 << 7 }; // 1000 0000\n\n\tstd::uint8_t me{}; // všechny příznaky/volby jsou vypnuty pro spuštění\n\tjá |= (je šťastný | směje se); // Jsem šťastný a směji se\n\tjá &= ~isLaughing; // Už se nesměju\n\n\t// Dotaz na několik stavů\n\t// (k interpretaci výsledků jako booleovské hodnoty použijeme static_cast<bool>)\n\tstd::cout << std::boolalpha; // tiskne true nebo false místo 1 nebo 0\n\tstd::cout << \"Jsem šťastný?\" << static_cast<bool>(me & isHappy) << '\\n';\n\tstd::cout << \"Směju se?\" << static_cast<bool>(me & isLaughing) << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b69",
       "type": "paragraph",
       "html": "<p>Here’s the same example implemented using std::bitset:</p>",
       "preview": "Here’s the same example implemented using std::bitset:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je stejný příklad implementovaný pomocí std::bitset:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b70",
@@ -519,49 +598,57 @@
       "language": "cpp",
       "code": "#include <bitset>\n#include <iostream>\n\nint main()\n{\n        // Define a bunch of physical/emotional states\n\t[[maybe_unused]] constexpr std::bitset<8> isHungry   { 0b0000'0001 };\n\t[[maybe_unused]] constexpr std::bitset<8> isSad      { 0b0000'0010 };\n\t[[maybe_unused]] constexpr std::bitset<8> isMad      { 0b0000'0100 };\n\t[[maybe_unused]] constexpr std::bitset<8> isHappy    { 0b0000'1000 };\n\t[[maybe_unused]] constexpr std::bitset<8> isLaughing { 0b0001'0000 };\n\t[[maybe_unused]] constexpr std::bitset<8> isAsleep   { 0b0010'0000 };\n\t[[maybe_unused]] constexpr std::bitset<8> isDead     { 0b0100'0000 };\n\t[[maybe_unused]] constexpr std::bitset<8> isCrying   { 0b1000'0000 };\n\n\n\tstd::bitset<8> me{}; // all flags/options turned off to start\n\tme |= (isHappy | isLaughing); // I am happy and laughing\n\tme &= ~isLaughing; // I am no longer laughing\n\n\t// Query a few states (we use the any() function to see if any bits remain set)\n\tstd::cout << std::boolalpha; // print true or false instead of 1 or 0\n\tstd::cout << \"I am happy? \" << (me & isHappy).any() << '\\n';\n\tstd::cout << \"I am laughing? \" << (me & isLaughing).any() << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n        // Define a bunch of physical/emotional states\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isHungry   { 0b0000'0001 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isSad      { 0b0000'0010 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isMad      { 0b0000'0100 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isHappy    { 0b0000'1000 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isLaughing { 0b0001'0000 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isAsleep   { 0b0010'0000 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isDead     { 0b0100'0000 };\n\t[[maybe_unused]] constexpr std::bitset&lt;8&gt; isCrying   { 0b1000'0000 };\n\n\n\tstd::bitset&lt;8&gt; me{}; // all flags/options turned off to start\n\tme |= (isHappy | isLaughing); // I am happy and laughing\n\tme &amp;= ~isLaughing; // I am no longer laughing\n\n\t// Query a few states (we use the any() function to see if any bits remain set)\n\tstd::cout &lt;&lt; std::boolalpha; // print true or false instead of 1 or 0\n\tstd::cout &lt;&lt; \"I am happy? \" &lt;&lt; (me &amp; isHappy).any() &lt;&lt; '\\n';\n\tstd::cout &lt;&lt; \"I am laughing? \" &lt;&lt; (me &amp; isLaughing).any() &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <bitset>\n#include <iostream>\n\nint main()\n{\n        // Definujte spoustu fyzických/emocionálních stavů\n\t[[možná_nepoužité]] constexpr std::bitset<8> isHungry { 0b0000'0001 };\n\t[[možná_nepoužité]] constexpr std::bitset<8> isSad { 0b0000'0010 };\n\t[[možná_nepoužité]] constexpr std::bitset<8> isMad { 0b0000'0100 };\n\t[[možná_nepoužité]] constexpr std::bitset<8> isHappy { 0b0000'1000 };\n\t[[možná_unused]] constexpr std::bitset<8> isLaughing { 0b0001'0000 };\n\t[[možná_nepoužité]] constexpr std::bitset<8> isSleep { 0b0010'0000 };\n\t[[možná_nepoužité]] constexpr std::bitset<8> isDead { 0b0100'0000 };\n\t[[možná_unused]] constexpr std::bitset<8> isCrying { 0b1000'0000 };\n\n\n\tstd::bitset<8> me{}; // všechny příznaky/volby jsou vypnuty pro spuštění\n\tjá |= (je šťastný | směje se); // Jsem šťastný a směji se\n\tjá &= ~isLaughing; // Už se nesměju\n\n\t// Dotaz na několik stavů (používáme funkci any(), abychom zjistili, zda nějaké bity zůstávají nastavené)\n\tstd::cout << std::boolalpha; // tiskne true nebo false místo 1 nebo 0\n\tstd::cout << \"Jsem šťastný?\" << (me & isHappy).any() << '\\n';\n\tstd::cout << \"Směju se?\" << (me & isLaughing).any() << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b71",
       "type": "paragraph",
       "html": "<p>Two notes here: First, std::bitset doesn’t have a nice function that allows you to query bits using a bit mask. So if you want to use bit masks rather than positional indexes, you’ll have to use <em>Bitwise AND</em> to query bits. Second, we make use of the any() function, which returns true if any bits are set, and false otherwise to see if the bit we queried remains on or off.</p>",
       "preview": "Two notes here: First, std::bitset doesn’t have a nice function that allows you ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde jsou dvě poznámky: Zaprvé, std::bitset nemá žádnou šikovnou funkci, která by umožňovala dotazovat se na bity pomocí bitové masky. Pokud tedy chcete místo pozičních indexů používat bitové masky, budete muset k dotazování na bity použít <em>bitový AND</em>. Zadruhé využíváme funkci any(), která vrací true, pokud je nastaven jakýkoli bit, a jinak false, abychom zjistili, zda dotazovaný bit zůstává zapnutý nebo vypnutý.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b72",
       "type": "section",
       "title": "When are bit flags most useful?",
       "html": "<h3 class=\"cpp-section-heading\">When are bit flags most useful?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy jsou bitové příznaky nejužitečnější?</h3>",
+      "title_cs": "Kdy jsou bitové příznaky nejužitečnější?"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b73",
       "type": "paragraph",
       "html": "<p>Astute readers may note that the above examples don’t actually save any memory. 8 separate booleans values would normally take 8 bytes. But the examples above (using std::uint8_t) use 9 bytes -- 8 bytes to define the bit masks, and 1 byte for the flag variable!</p>",
       "preview": "Astute readers may note that the above examples don’t actually save any memory. ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bystří čtenáři si možná všimli, že výše uvedené příklady ve skutečnosti žádnou paměť neušetří. 8 samostatných booleovských hodnot by normálně zabíralo 8 bajtů. Výše uvedené příklady (používající std::uint8_t) však zabírají 9 bajtů – 8 bajtů na definici bitových masek a 1 bajt pro proměnnou s příznaky!</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b74",
       "type": "paragraph",
       "html": "<p>Bit flags make the most sense when you have many identical flag variables. For example, in the example above, imagine that instead of having one person (me), you had 100. If you used 8 Booleans per person (one for each possible state), you’d use 800 bytes of memory. With bit flags, you’d use 8 bytes for the bit masks, and 100 bytes for the bit flag variables, for a total of 108 bytes of memory -- approximately 8 times less memory.</p>",
       "preview": "Bit flags make the most sense when you have many identical flag variables. For e",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bitové příznaky dávají největší smysl, když máte mnoho identických proměnných s příznaky. Představte si například ve výše uvedeném příkladu, že místo jedné osoby (mě) byste jich měli 100. Pokud byste pro každou osobu použili 8 booleovských hodnot (jednu pro každý možný stav), spotřebovali byste 800 bajtů paměti. S bitovými příznaky byste použili 8 bajtů na bitové masky a 100 bajtů na proměnné s bitovými příznaky, tedy celkem 108 bajtů paměti – přibližně 8krát méně paměti.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b75",
       "type": "paragraph",
       "html": "<p>For most programs, the amount of memory saved using bit flags is not worth the added complexity. But in programs where there are tens of thousands or even millions of similar objects, using bit flags can reduce memory use substantially. It’s a useful optimization to have in your toolkit if you need it.</p>",
       "preview": "For most programs, the amount of memory saved using bit flags is not worth the a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U většiny programů množství paměti ušetřené pomocí bitových příznaků nestojí za přidanou složitost. V programech, kde existují desítky tisíc nebo dokonce miliony podobných objektů, však použití bitových příznaků může spotřebu paměti podstatně snížit. Je to užitečná optimalizace, kterou se hodí mít ve své výbavě, pokud ji budete potřebovat.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b76",
       "type": "paragraph",
       "html": "<p>There’s another case where bit flags and bit masks can make sense. Imagine you had a function that could take any combination of 32 different options. One way to write that function would be to use 32 individual Boolean parameters:</p>",
       "preview": "There’s another case where bit flags and bit masks can make sense. Imagine you h",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje ještě další případ, kdy bitové příznaky a bitové masky dávají smysl. Představte si, že máte funkci, která může přijmout libovolnou kombinaci 32 různých voleb. Jedním ze způsobů, jak takovou funkci napsat, by bylo použít 32 samostatných booleovských parametrů:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b77",
@@ -569,21 +656,24 @@
       "language": "cpp",
       "code": "void someFunction(bool option1, bool option2, bool option3, bool option4, bool option5, bool option6, bool option7, bool option8, bool option9, bool option10, bool option11, bool option12, bool option13, bool option14, bool option15, bool option16, bool option17, bool option18, bool option19, bool option20, bool option21, bool option22, bool option23, bool option24, bool option25, bool option26, bool option27, bool option28, bool option29, bool option30, bool option31, bool option32);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction(bool option1, bool option2, bool option3, bool option4, bool option5, bool option6, bool option7, bool option8, bool option9, bool option10, bool option11, bool option12, bool option13, bool option14, bool option15, bool option16, bool option17, bool option18, bool option19, bool option20, bool option21, bool option22, bool option23, bool option24, bool option25, bool option26, bool option27, bool option28, bool option29, bool option30, bool option31, bool option32);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction(bool option1, bool option2, bool option3, bool option4, bool option5, bool option6, bool option7, bool option8, bool option9, bool option10, bool option13, bool možnost13, bool možnost13, bool option15, bool option16, bool option17, bool option18, bool option19, bool option20, bool option21, bool option22, bool option23, bool option24, bool option25, bool option26, bool option27, bool option28, bool option29, bool option30,</33 bool option30,</3"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b78",
       "type": "paragraph",
       "html": "<p>Hopefully you’d give your parameters more descriptive names, but the point here is to show you how obnoxiously long the parameter list is.</p>",
       "preview": "Hopefully you’d give your parameters more descriptive names, but the point here ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Snad byste svým parametrům dali popisnější názvy, ale smyslem je zde ukázat, jak neúnosně dlouhý takový seznam parametrů je.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b79",
       "type": "paragraph",
       "html": "<p>Then when you wanted to call the function with options 10 and 32 set to true, you’d have to do so like this:</p>",
       "preview": "Then when you wanted to call the function with options 10 and 32 set to true, yo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když byste pak chtěli funkci zavolat s volbami 10 a 32 nastavenými na true, museli byste to udělat takto:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b80",
@@ -591,21 +681,24 @@
       "language": "cpp",
       "code": "someFunction(false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">someFunction(false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">someFunction(nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, pravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, nepravda, lež nepravda, nepravda, nepravda, nepravda, pravda);</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b81",
       "type": "paragraph",
       "html": "<p>This is ridiculously difficult to read (is that option 9, 10, or 11 that’s set to true?), and also means you have to remember which argument corresponds to which option (is setting the “edit flag” the 9th, 10th, or 11th parameter?).</p>",
       "preview": "This is ridiculously difficult to read (is that option 9, 10, or 11 that’s set t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tohle je neuvěřitelně těžko čitelné (je na true nastavena volba 9, 10, nebo 11?) a také to znamená, že si musíte pamatovat, který argument odpovídá které volbě (je nastavení „edit flagu“ 9., 10., nebo 11. parametr?).</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b82",
       "type": "paragraph",
       "html": "<p>Instead, if you defined the function using bit flags like this:</p>",
       "preview": "Instead, if you defined the function using bit flags like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud byste místo toho funkci definovali pomocí bitových příznaků takto:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b83",
@@ -613,14 +706,16 @@
       "language": "cpp",
       "code": "void someFunction(std::bitset<32> options);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction(std::bitset&lt;32&gt; options);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction(std::bitset<32> options);</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b84",
       "type": "paragraph",
       "html": "<p>Then you could use bit flags to pass in only the options you wanted:</p>",
       "preview": "Then you could use bit flags to pass in only the options you wanted:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pak byste mohli pomocí bitových příznaků předat pouze ty volby, které opravdu chcete:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b85",
@@ -628,28 +723,32 @@
       "language": "cpp",
       "code": "someFunction(option10 | option32);",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">someFunction(option10 | option32);</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">someFunction(option10 | option32);</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b86",
       "type": "paragraph",
       "html": "<p>This is much more readable.</p>",
       "preview": "This is much more readable.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tohle je mnohem čitelnější.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b87",
       "type": "paragraph",
       "html": "<p>This is one of the reasons OpenGL, a well regarded 3d graphic library, opted to use bit flag parameters instead of many consecutive Boolean parameters.</p>",
       "preview": "This is one of the reasons OpenGL, a well regarded 3d graphic library, opted to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je jeden z důvodů, proč se OpenGL, uznávaná 3D grafická knihovna, rozhodla používat parametry v podobě bitových příznaků namísto mnoha po sobě jdoucích booleovských parametrů.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b88",
       "type": "paragraph",
       "html": "<p>Here’s a sample function call from OpenGL:</p>",
       "preview": "Here’s a sample function call from OpenGL:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je ukázkové volání funkce z OpenGL:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b89",
@@ -657,14 +756,16 @@
       "language": "cpp",
       "code": "glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color and the depth buffer",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the color and the depth buffer</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // vymaže barvu a vyrovnávací paměť hloubky</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b90",
       "type": "paragraph",
       "html": "<p>GL_COLOR_BUFFER_BIT and GL_DEPTH_BUFFER_BIT are bit masks defined as follows (in gl2.h):</p>",
       "preview": "GL_COLOR_BUFFER_BIT and GL_DEPTH_BUFFER_BIT are bit masks defined as follows (in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>GL_COLOR_BUFFER_BIT a GL_DEPTH_BUFFER_BIT jsou bitové masky definované následovně (v gl2.h):</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b91",
@@ -672,63 +773,73 @@
       "language": "cpp",
       "code": "#define GL_DEPTH_BUFFER_BIT               0x00000100\n#define GL_STENCIL_BUFFER_BIT             0x00000400\n#define GL_COLOR_BUFFER_BIT               0x00004000",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#define GL_DEPTH_BUFFER_BIT               0x00000100\n#define GL_STENCIL_BUFFER_BIT             0x00000400\n#define GL_COLOR_BUFFER_BIT               0x00004000</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp složené závorky\">#define GL_DEPTH_BUFFER_BIT 0x00000100\n#define GL_STENCIL_BUFFER_BIT 0x00000400\n#define GL_COLOR_BUFFER_BIT 0x00004000</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b92",
       "type": "section",
       "title": "Bit masks involving multiple bits",
       "html": "<h3 class=\"cpp-section-heading\">Bit masks involving multiple bits</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Bitové masky zahrnující více bitů</h3>",
+      "title_cs": "Bitové masky zahrnující více bitů"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b93",
       "type": "paragraph",
       "html": "<p>Although bit masks often are used to select a single bit, they can also be used to select multiple bits. Lets take a look at a slightly more complicated example where we do this.</p>",
       "preview": "Although bit masks often are used to select a single bit, they can also be used ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli se bitové masky často používají k výběru jediného bitu, lze je použít i k výběru více bitů. Pojďme se podívat na o něco složitější příklad, kde přesně toto děláme.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b94",
       "type": "paragraph",
       "html": "<p>Color display devices such as TVs and monitors are composed of millions of pixels, each of which can display a dot of color. Each dot of color is the result of combining three beams of light: one red, one green, and one blue (RGB). The intensity of these lights are varied to produce different colors.</p>",
       "preview": "Color display devices such as TVs and monitors are composed of millions of pixel",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Barevná zobrazovací zařízení, jako jsou televizory a monitory, se skládají z milionů pixelů, z nichž každý dokáže zobrazit barevný bod. Každý barevný bod je výsledkem kombinace tří světelných paprsků: jednoho červeného, jednoho zeleného a jednoho modrého (RGB). Změnou intenzity těchto světel se vytvářejí různé barvy.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b95",
       "type": "paragraph",
       "html": "<p>Typically, the intensity of R, G, and B for a given pixel is represented by an 8-bit unsigned integer. For example, a red pixel would have R=255, G=0, B=0. A purple pixel would have R=255, G=0, B=255. A medium-grey pixel would have R=127, G=127, B=127.</p>",
       "preview": "Typically, the intensity of R, G, and B for a given pixel is represented by an 8",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Intenzita složek R, G a B pro daný pixel je obvykle reprezentována 8bitovým bezznaménkovým celým číslem. Například červený pixel by měl R=255, G=0, B=0. Fialový pixel by měl R=255, G=0, B=255. Středně šedý pixel by měl R=127, G=127, B=127.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b96",
       "type": "paragraph",
       "html": "<p>When assigning color values to a pixel, in addition to R, G, and B, a 4th value called A is often used. “A” stands for “alpha”, and it controls how transparent the color is. If A=0, the color is fully transparent. If A=255, the color is opaque.</p>",
       "preview": "When assigning color values to a pixel, in addition to R, G, and B, a 4th value ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při přiřazování barevných hodnot pixelu se kromě R, G a B často používá také 4. hodnota zvaná A. „A“ znamená „alpha“ a určuje, jak je daná barva průhledná. Pokud je A=0, barva je zcela průhledná. Pokud je A=255, barva je zcela neprůhledná.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b97",
       "type": "paragraph",
       "html": "<p>R, G, B, and A are normally stored as a single 32-bit integer, with 8 bits used for each component:</p>",
       "preview": "R, G, B, and A are normally stored as a single 32-bit integer, with 8 bits used ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Složky R, G, B a A jsou obvykle uloženy jako jedno 32bitové celé číslo, přičemž pro každou složku je použito 8 bitů:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b98",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td colspan=\"4\" style=\"text-align:center\">32-bit RGBA value</td></tr><tr><td>bits 31-24</td><td>bits 23-16</td><td>bits 15-8</td><td>bits 7-0</td></tr><tr><td>RRRRRRRR</td><td>GGGGGGGG</td><td>BBBBBBBB</td><td>AAAAAAAA</td></tr><tr><td>red</td><td>green</td><td>blue</td><td>alpha</td></tr></tbody></table></div>",
       "preview": "32-bit RGBA valuebits 31-24bits 23-16bits 15-8bits 7-0RRRRRRRRGGGGGGGGBBBBBBBBAA",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><p></p><p></p><table class=\"cpp-table\"><tbody><tr><td colspan=\"4\" style=\"text-align:center\">32bitová hodnota RGBA</td></tr><tr><td>bity 31-24</td><td>bity 23-16</td><td>bity 15-8</td><td>bity 7-0</td></tr><tr><td>RRRRRRRR</td><td>GGGGGGGG</td><td>BBBBBBBB</td><td>AAAAAAAA</td></tr><tr><td>červená (red)</td><td>zelená (green)</td><td>modrá (blue)</td><td>alfa (alpha)</td></tr></tbody></table></div>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b99",
       "type": "paragraph",
       "html": "<p>The following program asks the user to enter a 32-bit hexadecimal value, and then extracts the 8-bit color values for R, G, B, and A.</p>",
       "preview": "The following program asks the user to enter a 32-bit hexadecimal value, and the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující program vyzve uživatele k zadání 32bitové hexadecimální hodnoty a poté extrahuje 8bitové barevné složky pro R, G, B a A.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b100",
@@ -736,49 +847,57 @@
       "language": "cpp",
       "code": "#include <cstdint>\n#include <iostream>\n\nint main()\n{\n\tconstexpr std::uint32_t redBits{ 0xFF000000 };\n\tconstexpr std::uint32_t greenBits{ 0x00FF0000 };\n\tconstexpr std::uint32_t blueBits{ 0x0000FF00 };\n\tconstexpr std::uint32_t alphaBits{ 0x000000FF };\n\n\tstd::cout << \"Enter a 32-bit RGBA color value in hexadecimal (e.g. FF7F3300): \";\n\tstd::uint32_t pixel{};\n\tstd::cin >> std::hex >> pixel; // std::hex allows us to read in a hex value\n\n\t// use Bitwise AND to isolate the pixels for our given color,\n\t// then right shift the value into the lower 8 bits\n\tconst std::uint8_t red{ static_cast<std::uint8_t>((pixel & redBits) >> 24) };\n\tconst std::uint8_t green{ static_cast<std::uint8_t>((pixel & greenBits) >> 16) };\n\tconst std::uint8_t blue{ static_cast<std::uint8_t>((pixel & blueBits) >> 8) };\n\tconst std::uint8_t alpha{ static_cast<std::uint8_t>(pixel & alphaBits) };\n\n\tstd::cout << \"Your color contains:\\n\";\n\tstd::cout << std::hex; // print the following values in hex\n\n        // reminder: std::uint8_t will likely print as a char\n        // we static_cast to int to ensure it prints as an integer\n\tstd::cout << static_cast<int>(red)   << \" red\\n\";\n\tstd::cout << static_cast<int>(green) << \" green\\n\";\n\tstd::cout << static_cast<int>(blue)  << \" blue\\n\";\n\tstd::cout << static_cast<int>(alpha) << \" alpha\\n\";\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n\tconstexpr std::uint32_t redBits{ 0xFF000000 };\n\tconstexpr std::uint32_t greenBits{ 0x00FF0000 };\n\tconstexpr std::uint32_t blueBits{ 0x0000FF00 };\n\tconstexpr std::uint32_t alphaBits{ 0x000000FF };\n\n\tstd::cout &lt;&lt; \"Enter a 32-bit RGBA color value in hexadecimal (e.g. FF7F3300): \";\n\tstd::uint32_t pixel{};\n\tstd::cin &gt;&gt; std::hex &gt;&gt; pixel; // std::hex allows us to read in a hex value\n\n\t// use Bitwise AND to isolate the pixels for our given color,\n\t// then right shift the value into the lower 8 bits\n\tconst std::uint8_t red{ static_cast&lt;std::uint8_t&gt;((pixel &amp; redBits) &gt;&gt; 24) };\n\tconst std::uint8_t green{ static_cast&lt;std::uint8_t&gt;((pixel &amp; greenBits) &gt;&gt; 16) };\n\tconst std::uint8_t blue{ static_cast&lt;std::uint8_t&gt;((pixel &amp; blueBits) &gt;&gt; 8) };\n\tconst std::uint8_t alpha{ static_cast&lt;std::uint8_t&gt;(pixel &amp; alphaBits) };\n\n\tstd::cout &lt;&lt; \"Your color contains:\\n\";\n\tstd::cout &lt;&lt; std::hex; // print the following values in hex\n\n        // reminder: std::uint8_t will likely print as a char\n        // we static_cast to int to ensure it prints as an integer\n\tstd::cout &lt;&lt; static_cast&lt;int&gt;(red)   &lt;&lt; \" red\\n\";\n\tstd::cout &lt;&lt; static_cast&lt;int&gt;(green) &lt;&lt; \" green\\n\";\n\tstd::cout &lt;&lt; static_cast&lt;int&gt;(blue)  &lt;&lt; \" blue\\n\";\n\tstd::cout &lt;&lt; static_cast&lt;int&gt;(alpha) &lt;&lt; \" alpha\\n\";\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstdint>\n#include <iostream>\n\nint main()\n{\n\tconstexpr std::uint32_t redBits{ 0xFF000000 };\n\tconstexpr std::uint32_t greenBits{ 0x00FF0000 };\n\tconstexpr std::uint32_t blueBits{ 0x0000FF00 };\n\tconstexpr std::uint32_t alphaBits{ 0x000000FF };\n\n\tstd::cout << \"Zadejte 32bitovou hodnotu barvy RGBA v hexadecimální soustavě (např. FF7F3300): \";\n\tstd::uint32_t pixel{};\n\tstd::cin >> std::hex >> pixel; // std::hex nám umožňuje číst hexadecimální hodnotu\n\n\t// použijte Bitwise AND k izolaci pixelů pro naši danou barvu,\n\t// poté vpravo posuňte hodnotu na nižších 8 bitů\n\tconst std::uint8_t red{ static_cast<std::uint8_t>((pixel & redBits) >> 24) };\n\tconst std::uint8_t green{ static_cast<std::uint8_t>((pixel & greenBits) >> 16) };\n\tconst std::uint8_t blue{ static_cast<std::uint8_t>((pixel & blueBits) >> 8) };\n\tconst std::uint8_t alpha{ static_cast<std::uint8_t>(pixel & alphaBits) };\n\n\tstd::cout << \"Vaše barva obsahuje:\\n\";\n\tstd::cout << std::hex; // vypíše následující hodnoty v hex\n\n        // připomenutí: std::uint8_t se pravděpodobně vytiskne jako znak\n        // static_cast na int zajistíme, že se vytiskne jako celé číslo\n\tstd::cout << static_cast<int>(red) << \" red\\n\";\n\tstd::cout << static_cast<int>(zelená) << \"zelená\\n\";\n\tstd::cout << static_cast<int>(modrá) << \"modrá\\n\";\n\tstd::cout << static_cast<int>(alfa) << \"alfa\\n\";\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b101",
       "type": "paragraph",
       "html": "<p>This produces the output:</p>",
       "preview": "This produces the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím získáme následující výstup:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b102",
       "type": "output",
       "text": "Enter a 32-bit RGBA color value in hexadecimal (e.g. FF7F3300): FF7F3300\nYour color contains:\nff red\n7f green\n33 blue\n0 alpha\n",
       "html": "<pre>Enter a 32-bit RGBA color value in hexadecimal (e.g. FF7F3300): FF7F3300\nYour color contains:\nff red\n7f green\n33 blue\n0 alpha\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Zadejte 32bitovou hodnotu barvy RGBA v hexadecimálním formátu (např. FF7F3300): FF7F3300\nVaše barva obsahuje:\nff červené\n7f zelené\n33 modré\n0 alfa\n</pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b103",
       "type": "paragraph",
       "html": "<p>In the above program, we use a <em>bitwise AND</em> to query the set of 8 bits we’re interested in, and then we <em>right shift</em> them into an 8-bit value so we can print them back as hex values.</p>",
       "preview": "In the above program, we use a bitwise AND to query the set of 8 bits we’re inte",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném programu používáme <em>bitové AND</em> k získání sady 8 bitů, které nás zajímají, a poté je <em>posuneme doprava</em> do 8bitové hodnoty, abychom je mohli vypsat jako hexadecimální hodnoty.</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b104",
       "type": "section",
       "title": "Summary",
       "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí</h3>",
+      "title_cs": "Shrnutí"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b105",
       "type": "paragraph",
       "html": "<p>Summarizing how to set, clear, toggle, and query bit flags:</p>",
       "preview": "Summarizing how to set, clear, toggle, and query bit flags:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Shrnutí toho, jak nastavovat (set), mazat (clear), přepínat (toggle) a zjišťovat (query) stav bitových příznaků:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b106",
       "type": "paragraph",
       "html": "<p>To query bit states, we use <em>bitwise AND</em>:</p>",
       "preview": "To query bit states, we use bitwise AND:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro zjištění stavu bitů používáme <em>bitové AND</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b107",
@@ -786,14 +905,16 @@
       "language": "cpp",
       "code": "if (flags & option4) ... // if option4 is set, do something",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (flags &amp; option4) ... // if option4 is set, do something</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (příznaky a volba4) ... // pokud je nastavena volba4, něco udělejte</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b108",
       "type": "paragraph",
       "html": "<p>To set bits (turn on), we use <em>bitwise OR</em>:</p>",
       "preview": "To set bits (turn on), we use bitwise OR:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro nastavení bitů (zapnutí) používáme <em>bitový OR</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b109",
@@ -801,14 +922,16 @@
       "language": "cpp",
       "code": "flags |= option4; // turn option 4 on.\nflags |= (option4 | option5); // turn options 4 and 5 on.",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags |= option4; // turn option 4 on.\nflags |= (option4 | option5); // turn options 4 and 5 on.</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky |= option4; // zapněte volbu 4.\npříznaky |= (volba4 | volba5); // zapněte možnosti 4 a 5.</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b110",
       "type": "paragraph",
       "html": "<p>To clear bits (turn off), we use <em>bitwise AND</em> with <em>bitwise NOT</em>:</p>",
       "preview": "To clear bits (turn off), we use bitwise AND with bitwise NOT:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro vynulování bitů (vypnutí) používáme <em>bitový AND</em> s <em>bitovým NOT</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b111",
@@ -816,14 +939,16 @@
       "language": "cpp",
       "code": "flags &= ~option4; // turn option 4 off\nflags &= ~(option4 | option5); // turn options 4 and 5 off",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags &amp;= ~option4; // turn option 4 off\nflags &amp;= ~(option4 | option5); // turn options 4 and 5 off</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky &= ~option4; // vypněte možnost 4\npříznaky &= ~(volba4 | volba5); // vypnutí možností 4 a 5</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b112",
       "type": "paragraph",
       "html": "<p>To flip bit states, we use <em>bitwise XOR</em>:</p>",
       "preview": "To flip bit states, we use bitwise XOR:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pro převrácení stavu bitů používáme <em>bitový XOR</em>:</p>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b113",
@@ -831,21 +956,26 @@
       "language": "cpp",
       "code": "flags ^= option4; // flip option4 from on to off, or vice versa\nflags ^= (option4 | option5); // flip options 4 and 5",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">flags ^= option4; // flip option4 from on to off, or vice versa\nflags ^= (option4 | option5); // flip options 4 and 5</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">příznaky ^= volba4; // překlopí volbu4 ze zapnuto na vypnuto nebo naopak\npříznaky ^= (volba4 | volba5); // překlopit možnosti 4 a 5</code></pre>"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b114",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "bit-manipulation-with-bitwise-operators-and-bit-masks_b115",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>Do not use <code>std::bitset</code> in this quiz. We’re only using <code>std::bitset</code> for printing.</p><p>Given the following program:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };\n    [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };\n    [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };\n    [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };\n    [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };\n\n    std::uint8_t myArticleFlags{ option_favorited };\n\n    // Place all lines of code for the following quiz here\n\n    std::cout &lt;&lt; std::bitset&lt;8&gt;{ myArticleFlags } &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p>a) Add a line of code to set the article as viewed.<br>Expected output:</p><pre>00000101\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myArticleFlags |= option_viewed;</code></pre></div><p>b) Add a line of code to check if the article was deleted.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (myArticleFlags &amp; option_deleted) ...</code></pre></div><p>c) Add a line of code to clear the article as a favorite.<br>Expected output (Assuming you did quiz (a)):</p><pre>00000001\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myArticleFlags &amp;= static_cast&lt;std::uint8_t&gt;(~option_favorited);</code></pre><p>If you got <code>00000000</code>, check two things:</p><ul><li>That the solution for quiz (a) has not been removed.</li><li>That you cleared <code>option_favorited</code>, not <code>option_viewed</code>.</li></ul></div><p>1d) Extra credit: why are the following two lines identical?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myflags &amp;= ~(option4 | option5); // turn options 4 and 5 off\nmyflags &amp;= ~option4 &amp; ~option5; // turn options 4 and 5 off</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>De Morgan’s laws says that if we distribute a NOT, we need to flip ORs and ANDs to the other. So <code>~(option4 | option5)</code> becomes <code>~option4 &amp; ~option5</code>.</p></div><p></p></div>",
       "preview": "Question #1Do not use std::bitset in this quiz. We’re only using std::bitset for",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 1</p><p>V tomto kvízu nepoužívejte <code>std::bitset</code>. <code>std::bitset</code> používáme pouze pro výpis.</p><p>Mějme následující program:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;bitset&gt;\n#include &lt;cstdint&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };\n    [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };\n    [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };\n    [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };\n    [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };\n\n    std::uint8_t myArticleFlags{ option_favorited };\n\n    // Zde vložte všechny řádky kódu pro následující podotázky\n\n    std::cout &lt;&lt; std::bitset&lt;8&gt;{ myArticleFlags } &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p>a) Přidejte řádek kódu, který nastaví článek jako zobrazený (viewed).<br>Očekávaný výstup:</p><pre>00000101\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myArticleFlags |= option_viewed;</code></pre></div><p>b) Přidejte řádek kódu, který zkontroluje, zda byl článek smazán (deleted).</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">if (myArticleFlags &amp; option_deleted) ...</code></pre></div><p>c) Přidejte řádek kódu, který zruší označení článku jako oblíbeného (favorite).<br>Očekávaný výstup (za předpokladu, že jste vyřešili podotázku a)):</p><pre>00000001\n</pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myArticleFlags &amp;= static_cast&lt;std::uint8_t&gt;(~option_favorited);</code></pre><p>Pokud jste získali <code>00000000</code>, zkontrolujte dvě věci:</p><ul><li>Že řešení pro podotázku (a) nebylo odstraněno.</li><li>Že jste vynulovali <code>option_favorited</code>, nikoli <code>option_viewed</code>.</li></ul></div><p>1d) Bonusová otázka: proč jsou následující dva řádky identické?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">myflags &amp;= ~(option4 | option5); // turn options 4 and 5 off\nmyflags &amp;= ~option4 &amp; ~option5; // turn options 4 and 5 off</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><p>De Morganovy zákony říkají, že pokud roznásobujeme negaci (NOT), musíme zaměnit operátory OR a AND navzájem. Výraz <code>~(option4 | option5)</code> se tedy změní na <code>~option4 &amp; ~option5</code>.</p></div><p></p></div>"
     }
-  ]
+  ],
+  "title_cs": "O.3 — Manipulace s bity pomocí bitových operátorů a bitových masek"
 }

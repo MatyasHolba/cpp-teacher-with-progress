@@ -14,28 +14,32 @@
       "type": "paragraph",
       "html": "<p>In the previous chapter, you learned all about how to use inheritance to derive new classes from existing classes. In this chapter, we are going to focus on one of the most important and powerful aspects of inheritance -- virtual functions.</p>",
       "preview": "In the previous chapter, you learned all about how to use inheritance to derive ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí kapitole jste se naučili vše o tom, jak používat dědičnost k odvození nových tříd z existujících tříd. V této kapitole se zaměříme na jeden z nejdůležitějších a nejmocnějších aspektů dědičnosti – virtuální funkce.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b1",
       "type": "paragraph",
       "html": "<p>But before we discuss what virtual functions are, let’s first set the table for why we need them.</p>",
       "preview": "But before we discuss what virtual functions are, let’s first set the table for ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než si ale probereme, co jsou virtuální funkce, pojďme si nejprve stanovit, proč je potřebujeme.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b2",
       "type": "paragraph",
       "html": "<p>In the chapter on <a href=\"https://www.learncpp.com/cpp-tutorial/113-order-of-construction-of-derived-classes/\">construction of derived classes</a>, you learned that when you create a derived class, it is composed of multiple parts: one part for each inherited class, and a part for itself.</p>",
       "preview": "In the chapter on construction of derived classes, you learned that when you cre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V kapitole o <a href=\"https://www.learncpp.com/cpp-tutorial/113-order-of-construction-of-derived-classes/\">konstrukci odvozených tříd</a> jste se dozvěděli, že když vytvoříte odvozenou třídu, skládá se z několika částí: jedna část pro každou zděděnou třídu a část sama pro sebe.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b3",
       "type": "paragraph",
       "html": "<p>For example, here’s a simple case:</p>",
       "preview": "For example, here’s a simple case:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například zde je jednoduchý případ:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b4",
@@ -43,28 +47,32 @@
       "language": "cpp",
       "code": "#include <string_view>\n\nclass Base\n{\nprotected:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n\n    std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n\n    std::string_view getName() const { return \"Derived\"; }\n    int getValueDoubled() const { return m_value * 2; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n\nclass Base\n{\nprotected:\n    int m_value {};\n\npublic:\n    Base(int value)\n        : m_value{ value }\n    {\n    }\n\n    std::string_view getName() const { return \"Base\"; }\n    int getValue() const { return m_value; }\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived(int value)\n        : Base{ value }\n    {\n    }\n\n    std::string_view getName() const { return \"Derived\"; }\n    int getValueDoubled() const { return m_value * 2; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string_view>\n\ntřída Základní\n{\nchráněno:\n    int m_hodnota {};\n\nveřejnost:\n    základ (hodnota int)\n        : m_value{ hodnota }\n    {\n    }\n\n    std::string_view getName() const { return \"Základ\"; }\n    int getValue() const { return m_value; }\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno (hodnota int)\n        : Základní{ hodnota }\n    {\n    }\n\n    std::string_view getName() const { return \"Odvozeno\"; }\n    int getValueDoubled() const { return m_value * 2; }\n};</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b5",
       "type": "paragraph",
       "html": "<p>When we create a Derived object, it contains a Base part (which is constructed first), and a Derived part (which is constructed second). Remember that inheritance implies an is-a relationship between two classes. Since a Derived is-a Base, it is appropriate that Derived contain a Base part.</p>",
       "preview": "When we create a Derived object, it contains a Base part (which is constructed f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když vytvoříme Odvozený objekt, obsahuje Základní část (která je vytvořena jako první) a Odvozená část (která je vytvořena jako druhá). Pamatujte, že dědičnost implikuje is-vztah mezi dvěma třídami. Vzhledem k tomu, že Derived je-Base, je vhodné, aby Derived obsahoval Base Part.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b6",
       "type": "paragraph",
       "html": "<p><strong>Pointers, references, and derived classes</strong></p>",
       "preview": "Pointers, references, and derived classes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Ukazatele, odkazy a odvozené třídy</strong></p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b7",
       "type": "paragraph",
       "html": "<p>It should be fairly intuitive that we can set Derived pointers and references to Derived objects:</p>",
       "preview": "It should be fairly intuitive that we can set Derived pointers and references to",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mělo by být poměrně intuitivní, že můžeme nastavit odvozené ukazatele a odkazy na odvozené objekty:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b8",
@@ -72,28 +80,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    Derived derived{ 5 };\n    std::cout << \"derived is a \" << derived.getName() << \" and has value \" << derived.getValue() << '\\n';\n\n    Derived& rDerived{ derived };\n    std::cout << \"rDerived is a \" << rDerived.getName() << \" and has value \" << rDerived.getValue() << '\\n';\n\n    Derived* pDerived{ &derived };\n    std::cout << \"pDerived is a \" << pDerived->getName() << \" and has value \" << pDerived->getValue() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Derived derived{ 5 };\n    std::cout &lt;&lt; \"derived is a \" &lt;&lt; derived.getName() &lt;&lt; \" and has value \" &lt;&lt; derived.getValue() &lt;&lt; '\\n';\n\n    Derived&amp; rDerived{ derived };\n    std::cout &lt;&lt; \"rDerived is a \" &lt;&lt; rDerived.getName() &lt;&lt; \" and has value \" &lt;&lt; rDerived.getValue() &lt;&lt; '\\n';\n\n    Derived* pDerived{ &amp;derived };\n    std::cout &lt;&lt; \"pDerived is a \" &lt;&lt; pDerived-&gt;getName() &lt;&lt; \" and has value \" &lt;&lt; pDerived-&gt;getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    Odvozené odvozené{ 5 };\n    std::cout << \"derived je \" << odvozené.getName() << \" a má hodnotu \" << derivované.getValue() << '\\n';\n\n    Odvozeno& rOdvozeno{ odvozeno };\n    std::cout << \"rDerived je \" << rDerived.getName() << \" a má hodnotu \" << rDerived.getValue() << '\\n';\n\n    Odvozeno* pOdvozeno{ &odvozeno };\n    std::cout << \"pDerived je \" << pDerived->getName() << \" a má hodnotu \" << pDerived->getValue() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b9",
       "type": "paragraph",
       "html": "<p>This produces the following output:</p>",
       "preview": "This produces the following output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tím vznikne následující výstup:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b10",
       "type": "output",
       "text": "derived is a Derived and has value 5\nrDerived is a Derived and has value 5\npDerived is a Derived and has value 5\n",
       "html": "<pre>derived is a Derived and has value 5\nrDerived is a Derived and has value 5\npDerived is a Derived and has value 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>derived je odvozeno a má hodnotu 5\nrDerived je odvozeno a má hodnotu 5\npDerived je odvozeno a má hodnotu 5\n</pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b11",
       "type": "paragraph",
       "html": "<p>However, since Derived has a Base part, a more interesting question is whether C++ will let us set a Base pointer or reference to a Derived object. It turns out, we can!</p>",
       "preview": "However, since Derived has a Base part, a more interesting question is whether C",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nicméně, protože Derived má základní část, zajímavější otázkou je, zda nám C++ umožní nastavit ukazatel Base nebo odkaz na odvozený objekt. Ukázalo se, že můžeme!</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b12",
@@ -101,49 +113,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint main()\n{\n    Derived derived{ 5 };\n\n    // These are both legal!\n    Base& rBase{ derived }; // rBase is an lvalue reference (not an rvalue reference)\n    Base* pBase{ &derived };\n\n    std::cout << \"derived is a \" << derived.getName() << \" and has value \" << derived.getValue() << '\\n';\n    std::cout << \"rBase is a \" << rBase.getName() << \" and has value \" << rBase.getValue() << '\\n';\n    std::cout << \"pBase is a \" << pBase->getName() << \" and has value \" << pBase->getValue() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint main()\n{\n    Derived derived{ 5 };\n\n    // These are both legal!\n    Base&amp; rBase{ derived }; // rBase is an lvalue reference (not an rvalue reference)\n    Base* pBase{ &amp;derived };\n\n    std::cout &lt;&lt; \"derived is a \" &lt;&lt; derived.getName() &lt;&lt; \" and has value \" &lt;&lt; derived.getValue() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"rBase is a \" &lt;&lt; rBase.getName() &lt;&lt; \" and has value \" &lt;&lt; rBase.getValue() &lt;&lt; '\\n';\n    std::cout &lt;&lt; \"pBase is a \" &lt;&lt; pBase-&gt;getName() &lt;&lt; \" and has value \" &lt;&lt; pBase-&gt;getValue() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint main()\n{\n    Odvozené odvozené{ 5 };\n\n    // Oba jsou legální!\n    Base& rBase{ odvozeno }; // rBase je reference lvalue (nikoli reference rvalue)\n    Base* pBase{ &derived };\n\n    std::cout << \"derived je \" << odvozené.getName() << \" a má hodnotu \" << derivované.getValue() << '\\n';\n    std::cout << \"rBase je \" << rBase.getName() << \" a má hodnotu \" << rBase.getValue() << '\\n';\n    std::cout << \"pBase je \" << pBase->getName() << \" a má hodnotu \" << pBase->getValue() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b13",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b14",
       "type": "output",
       "text": "derived is a Derived and has value 5\nrBase is a Base and has value 5\npBase is a Base and has value 5\n",
       "html": "<pre>derived is a Derived and has value 5\nrBase is a Base and has value 5\npBase is a Base and has value 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>derived je odvozeno a má hodnotu 5\nrBase je báze a má hodnotu 5\npBase je báze a má hodnotu 5\n</pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b15",
       "type": "paragraph",
       "html": "<p>This result may not be quite what you were expecting at first!</p>",
       "preview": "This result may not be quite what you were expecting at first!",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento výsledek nemusí být úplně takový, jaký jste zpočátku očekávali!</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b16",
       "type": "paragraph",
       "html": "<p>It turns out that because rBase and pBase are a Base reference and pointer, they can only see members of Base (or any classes that Base inherited). So even though Derived::getName() shadows (hides) Base::getName() for Derived objects, the Base pointer/reference can not see Derived::getName(). Consequently, they call Base::getName(), which is why rBase and pBase report that they are a Base rather than a Derived.</p>",
       "preview": "It turns out that because rBase and pBase are a Base reference and pointer, they",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ukázalo se, že protože rBase a pBase jsou reference a ukazatel Base, mohou vidět pouze členy Base (nebo jakékoli třídy, které Base zdědila). Takže i když Derived::getName() stínuje (skrývá) Base::getName() pro odvozené objekty, ukazatel/odkaz Base nevidí Derived::getName(). V důsledku toho volají Base::getName(), což je důvod, proč rBase a pBase hlásí, že jsou spíše bází než odvozenou.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b17",
       "type": "paragraph",
       "html": "<p>Note that this also means it is not possible to call Derived::getValueDoubled() using rBase or pBase. They are unable to see anything in Derived.</p>",
       "preview": "Note that this also means it is not possible to call Derived::getValueDoubled() ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že to také znamená, že není možné volat Derived::getValueDoubled() pomocí rBase nebo pBase. V Derived nic nevidí.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b18",
       "type": "paragraph",
       "html": "<p>Here’s another slightly more complex example that we’ll build on in the next lesson:</p>",
       "preview": "Here’s another slightly more complex example that we’ll build on in the next les",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je další trochu složitější příklad, na kterém budeme stavět v další lekci:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b19",
@@ -151,49 +170,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string_view>\n#include <string>\n\nclass Animal\n{\nprotected:\n    std::string m_name;\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n    \n    // To prevent slicing (covered later)\n    Animal(const Animal&) = delete;\n    Animal& operator=(const Animal&) = delete;\n\npublic:\n    std::string_view getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Woof\"; }\n};\n\nint main()\n{\n    const Cat cat{ \"Fred\" };\n    std::cout << \"cat is named \" << cat.getName() << \", and it says \" << cat.speak() << '\\n';\n\n    const Dog dog{ \"Garbo\" };\n    std::cout << \"dog is named \" << dog.getName() << \", and it says \" << dog.speak() << '\\n';\n\n    const Animal* pAnimal{ &cat };\n    std::cout << \"pAnimal is named \" << pAnimal->getName() << \", and it says \" << pAnimal->speak() << '\\n';\n\n    pAnimal = &dog;\n    std::cout << \"pAnimal is named \" << pAnimal->getName() << \", and it says \" << pAnimal->speak() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n#include &lt;string&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name;\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name)\n        : m_name{ name }\n    {\n    }\n    \n    // To prevent slicing (covered later)\n    Animal(const Animal&amp;) = delete;\n    Animal&amp; operator=(const Animal&amp;) = delete;\n\npublic:\n    std::string_view getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Meow\"; }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name }\n    {\n    }\n\n    std::string_view speak() const { return \"Woof\"; }\n};\n\nint main()\n{\n    const Cat cat{ \"Fred\" };\n    std::cout &lt;&lt; \"cat is named \" &lt;&lt; cat.getName() &lt;&lt; \", and it says \" &lt;&lt; cat.speak() &lt;&lt; '\\n';\n\n    const Dog dog{ \"Garbo\" };\n    std::cout &lt;&lt; \"dog is named \" &lt;&lt; dog.getName() &lt;&lt; \", and it says \" &lt;&lt; dog.speak() &lt;&lt; '\\n';\n\n    const Animal* pAnimal{ &amp;cat };\n    std::cout &lt;&lt; \"pAnimal is named \" &lt;&lt; pAnimal-&gt;getName() &lt;&lt; \", and it says \" &lt;&lt; pAnimal-&gt;speak() &lt;&lt; '\\n';\n\n    pAnimal = &amp;dog;\n    std::cout &lt;&lt; \"pAnimal is named \" &lt;&lt; pAnimal-&gt;getName() &lt;&lt; \", and it says \" &lt;&lt; pAnimal-&gt;speak() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <string_view>\n#include <řetězec>\n\ntřída Zvíře\n{\nchráněno:\n    std::string m_name;\n\n    // Děláme tento konstruktor chráněný, protože\n    // nechceme, aby lidé vytvářeli objekty zvířat přímo,\n    // ale přesto chceme, aby to mohly používat odvozené třídy.\n    Animal(std::string_view name)\n        : m_name{ jméno }\n    {\n    }\n    \n    // Aby se zabránilo krájení (převzato později)\n    Animal(const Animal&) = delete;\n    Animal& operator=(const Animal&) = delete;\n\nveřejnost:\n    std::string_view getName() const { return m_name; }\n    std::string_view speak() const { return \"???\"; }\n};\n\ntřída Kočka: veřejná Zvíř\n{\nveřejnost:\n    Cat(std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    std::string_view speak() const { return \"Mňau\"; }\n};\n\ntřída Pes: veřejný Zvíř\n{\nveřejnost:\n    Pes (std::string_view name)\n        : Zvíře{ jméno }\n    {\n    }\n\n    std::string_view speak() const { return \"Fuj\"; }\n};\n\nint main()\n{\n    const Cat cat{ \"Fred\" };\n    std::cout << \"kočka se jmenuje \" << cat.getName() << \"a říká \" << cat.speak() << '\\n';\n\n    const Pes pes{ \"Garbo\" };\n    std::cout << \"pes se jmenuje \" << dog.getName() << \" a říká \" << dog.speak() << '\\n';\n\n    const Animal* pAnimal{ &cat };\n    std::cout << \"pAnimal se jmenuje \" << pAnimal->getName() << \"a říká \" << pAnimal->speak() << '\\n';\n\n    pZvíře = &pes;\n    std::cout << \"pAnimal se jmenuje \" << pAnimal->getName() << \"a říká \" << pAnimal->speak() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b20",
       "type": "paragraph",
       "html": "<p>This produces the result:</p>",
       "preview": "This produces the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b21",
       "type": "output",
       "text": "cat is named Fred, and it says Meow\ndog is named Garbo, and it says Woof\npAnimal is named Fred, and it says ???\npAnimal is named Garbo, and it says ???\n",
       "html": "<pre>cat is named Fred, and it says Meow\ndog is named Garbo, and it says Woof\npAnimal is named Fred, and it says ???\npAnimal is named Garbo, and it says ???\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>kočka se jmenuje Fred a říká Mňau\npes se jmenuje Garbo a říká Woof\npZvíře se jmenuje Fred a je na něm napsáno???\npZvíře se jmenuje Garbo a říká ???\n</pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b22",
       "type": "paragraph",
       "html": "<p>We see the same issue here. Because pAnimal is an Animal pointer, it can only see the Animal portion of the class. Consequently, <code>pAnimal-&gt;speak()</code> calls Animal::speak() rather than the Dog::Speak() or Cat::speak() function.</p>",
       "preview": "We see the same issue here. Because pAnimal is an Animal pointer, it can only se",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde vidíme stejný problém. Protože pAnimal je ukazatel zvířete, může vidět pouze část třídy Animal. V důsledku toho <code>pAnimal->speak()</code> volá Animal::speak() místo funkce Dog::Speak() nebo Cat::speak().</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b23",
       "type": "paragraph",
       "html": "<p><strong>Use for pointers and references to base classes</strong></p>",
       "preview": "Use for pointers and references to base classes",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Používejte pro ukazatele a odkazy na základní třídy</strong></p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b24",
       "type": "paragraph",
       "html": "<p>Now you might be saying, “The above examples seem kind of silly. Why would I set a pointer or reference to the base class of a derived object when I can just use the derived object?” It turns out that there are quite a few good reasons.</p>",
       "preview": "Now you might be saying, “The above examples seem kind of silly. Why would I set",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si možná říkáte: \"Výše uvedené příklady se zdají být poněkud hloupé. Proč bych nastavoval ukazatel nebo odkaz na základní třídu odvozeného objektu, když mohu použít pouze odvozený objekt?\" Ukazuje se, že existuje několik dobrých důvodů.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b25",
       "type": "paragraph",
       "html": "<p>First, let’s say you wanted to write a function that printed an animal’s name and sound. Without using a pointer to a base class, you’d have to write it using overloaded functions, like this:</p>",
       "preview": "First, let’s say you wanted to write a function that printed an animal’s name an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve řekněme, že chcete napsat funkci, která vytiskne jméno a zvuk zvířete. Bez použití ukazatele na základní třídu byste ji museli napsat pomocí přetížených funkcí, jako je tato:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b26",
@@ -201,21 +227,24 @@
       "language": "cpp",
       "code": "void report(const Cat& cat)\n{\n    std::cout << cat.getName() << \" says \" << cat.speak() << '\\n';\n}\n\nvoid report(const Dog& dog)\n{\n    std::cout << dog.getName() << \" says \" << dog.speak() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void report(const Cat&amp; cat)\n{\n    std::cout &lt;&lt; cat.getName() &lt;&lt; \" says \" &lt;&lt; cat.speak() &lt;&lt; '\\n';\n}\n\nvoid report(const Dog&amp; dog)\n{\n    std::cout &lt;&lt; dog.getName() &lt;&lt; \" says \" &lt;&lt; dog.speak() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void report (const Cat&cat)\n{\n    std::cout << cat.getName() << \" říká \" << cat.speak() << '\\n';\n}\n\nneplatná zpráva (konst Pes a pes)\n{\n    std::cout << dog.getName() << \" říká \" << dog.speak() << '\\n';\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b27",
       "type": "paragraph",
       "html": "<p>Not too difficult, but consider what would happen if we had 30 different animal types instead of 2. You’d have to write 30 almost identical functions! Plus, if you ever added a new type of animal, you’d have to write a new function for that one too. This is a huge waste of time considering the only real difference is the type of the parameter.</p>",
       "preview": "Not too difficult, but consider what would happen if we had 30 different animal ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Není to příliš obtížné, ale zvažte, co by se stalo, kdybychom měli 30 různých druhů zvířat místo 2. Museli byste napsat 30 téměř stejných funkcí! Navíc, pokud jste někdy přidali nový typ zvířete, museli byste pro něj také napsat novou funkci. To je obrovská ztráta času, vezmeme-li v úvahu, že jediným skutečným rozdílem je typ parametru.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b28",
       "type": "paragraph",
       "html": "<p>However, because Cat and Dog are derived from Animal, Cat and Dog have an Animal part. Therefore, it makes sense that we should be able to do something like this:</p>",
       "preview": "However, because Cat and Dog are derived from Animal, Cat and Dog have an Animal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Avšak protože kočka a pes jsou odvozeny od zvířete, kočka a pes mají část zvíře. Proto dává smysl, že bychom měli být schopni udělat něco takového:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b29",
@@ -223,21 +252,24 @@
       "language": "cpp",
       "code": "void report(const Animal& rAnimal)\n{\n    std::cout << rAnimal.getName() << \" says \" << rAnimal.speak() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void report(const Animal&amp; rAnimal)\n{\n    std::cout &lt;&lt; rAnimal.getName() &lt;&lt; \" says \" &lt;&lt; rAnimal.speak() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void report (const Animal& rAnimal)\n{\n    std::cout << rAnimal.getName() << \" říká \" << rAnimal.speak() << '\\n';\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b30",
       "type": "paragraph",
       "html": "<p>This would let us pass in any class derived from Animal, even ones that we created after we wrote the function! Instead of one function per derived class, we get one function that works with all classes derived from Animal!</p>",
       "preview": "This would let us pass in any class derived from Animal, even ones that we creat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To by nám umožnilo projít v jakékoli třídě odvozené od Animal, dokonce i v těch, které jsme vytvořili poté, co jsme napsali funkci! Místo jedné funkce na odvozenou třídu dostáváme jednu funkci, která funguje se všemi třídami odvozenými od Animal!</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b31",
       "type": "paragraph",
       "html": "<p>The problem is, of course, that because rAnimal is an Animal reference, <code>rAnimal.speak()</code> will call Animal::speak() instead of the derived version of speak().</p>",
       "preview": "The problem is, of course, that because rAnimal is an Animal reference, rAnimal.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Problém je samozřejmě v tom, že protože rAnimal je reference Animal, <code>rAnimal.speak()</code> zavolá Animal::speak() místo odvozené verze speak().</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b32",
@@ -245,14 +277,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>We could also use a template function to reduce the number of overloaded functions we need to write:</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">template &lt;typename T&gt;\nvoid report(const T&amp; rAnimal)\n{\n    std::cout &lt;&lt; rAnimal.getName() &lt;&lt; \" says \" &lt;&lt; rAnimal.speak() &lt;&lt; '\\n';\n}</code></pre><p>And while this works, it has its own issues:</p><ol start=\"1\"><li>It’s not clear what type <code>T</code> is supposed to be, as we’ve lost the documentation that <code>T</code> is intended to be an <code>Animal</code>.</li><li>This function does not enforce that <code>T</code> is an <code>Animal</code>. Rather, it will accept an object of any type that contains a <code>getName()</code> and <code>speak()</code> member function, whether that makes sense or not.</li></ol></div>",
       "preview": "As an aside…We could also use a template function to reduce the number of overloaded functions we ne",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Kromě toho…</p><p>Mohli bychom také použít funkci šablony, abychom snížili počet přetížených funkcí, které potřebujeme napsat:</p><pre class=\"language-cpp line-numbers\"><code Ttemplate name=\"language-cpp match-braces\">\nneplatná zpráva (const T& rAnimal)\n{\n    std::cout << rAnimal.getName() << \" říká \" << rAnimal.speak() << '\\n';\n}</code></pre><p>A když to funguje, má to své vlastní problémy:</p><ol start=\"1\"><li>Není jasné, jaký typ <code>T</code> má být, protože jsme ztratili dokumentaci, že <code>T</code> má být <code>Zvíře</code>.</li><li>Tato funkce nevynucuje, že je <code>T</code> <code>T</code>. Spíše přijme objekt jakéhokoli typu, který obsahuje členské funkce <code>getName()</code> a <code>speak()</code>, ať už to dává smysl nebo ne.</li></ol></div>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b33",
       "type": "paragraph",
       "html": "<p>Second, let’s say you had 3 cats and 3 dogs that you wanted to keep in an array for easy access. Because arrays can only hold objects of one type, without a pointer or reference to a base class, you’d have to create a different array for each derived type, like this:</p>",
       "preview": "Second, let’s say you had 3 cats and 3 dogs that you wanted to keep in an array ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, řekněme, že jste měli 3 kočky a 3 psy, které jste chtěli chovat v poli pro snadný přístup. Protože pole mohou obsahovat pouze objekty jednoho typu, bez ukazatele nebo odkazu na základní třídu, museli byste pro každý odvozený typ vytvořit jiné pole, například takto:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b34",
@@ -260,21 +294,24 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\n// Cat and Dog from the example above\n\nint main()\n{\n    const auto& cats{ std::to_array<Cat>({{ \"Fred\" }, { \"Misty\" }, { \"Zeke\" }}) };\n    const auto& dogs{ std::to_array<Dog>({{ \"Garbo\" }, { \"Pooky\" }, { \"Truffle\" }}) };\n    \n    // Before C++20\n    // const std::array<Cat, 3> cats{{ { \"Fred\" }, { \"Misty\" }, { \"Zeke\" } }};\n    // const std::array<Dog, 3> dogs{{ { \"Garbo\" }, { \"Pooky\" }, { \"Truffle\" } }};\n\n    for (const auto& cat : cats)\n    {\n        std::cout << cat.getName() << \" says \" << cat.speak() << '\\n';\n    }\n\n    for (const auto& dog : dogs)\n    {\n        std::cout << dog.getName() << \" says \" << dog.speak() << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\n// Cat and Dog from the example above\n\nint main()\n{\n    const auto&amp; cats{ std::to_array&lt;Cat&gt;({{ \"Fred\" }, { \"Misty\" }, { \"Zeke\" }}) };\n    const auto&amp; dogs{ std::to_array&lt;Dog&gt;({{ \"Garbo\" }, { \"Pooky\" }, { \"Truffle\" }}) };\n    \n    // Before C++20\n    // const std::array&lt;Cat, 3&gt; cats{{ { \"Fred\" }, { \"Misty\" }, { \"Zeke\" } }};\n    // const std::array&lt;Dog, 3&gt; dogs{{ { \"Garbo\" }, { \"Pooky\" }, { \"Truffle\" } }};\n\n    for (const auto&amp; cat : cats)\n    {\n        std::cout &lt;&lt; cat.getName() &lt;&lt; \" says \" &lt;&lt; cat.speak() &lt;&lt; '\\n';\n    }\n\n    for (const auto&amp; dog : dogs)\n    {\n        std::cout &lt;&lt; dog.getName() &lt;&lt; \" says \" &lt;&lt; dog.speak() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\n// Kočka a pes z příkladu výše\n\nint main()\n{\n    const auto& cats{ std::to_array<Cat>({{ \"Fred\" }, { \"Misty\" }, { \"Zeke\" }}) };\n    const auto& dogs{ std::to_array<Pes>({{ \"Garbo\" }, { \"Pooky\" }, { \"Lanýž\" }}) };\n    \n    // Před C++20\n    // const std::array<Cat, 3> cats{{ { \"Fred\" }, { \"Misty\" }, { \"Zeke\" } }};\n    // const std::array<Pes, 3> psi{{ { \"Garbo\" }, { \"Pooky\" }, { \"Lanýž\" } }};\n\n    pro (const auto& cat : kočky)\n    {\n        std::cout << cat.getName() << \" říká \" << cat.speak() << '\\n';\n    }\n\n    pro (const auto & dog : dogs)\n    {\n        std::cout << dog.getName() << \" říká \" << dog.speak() << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b35",
       "type": "paragraph",
       "html": "<p>Now, consider what would happen if you had 30 different types of animals. You’d need 30 arrays, one for each type of animal!</p>",
       "preview": "Now, consider what would happen if you had 30 different types of animals. You’d ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní zvažte, co by se stalo, kdybyste měli 30 různých druhů zvířat. Potřebovali byste 30 polí, jedno pro každý druh zvířete!</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b36",
       "type": "paragraph",
       "html": "<p>However, because both Cat and Dog are derived from Animal, it makes sense that we should be able to do something like this:</p>",
       "preview": "However, because both Cat and Dog are derived from Animal, it makes sense that w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože však kočka i pes pocházejí ze zvířete, dává smysl, že bychom měli být schopni udělat něco takového:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b37",
@@ -282,56 +319,64 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\n// Cat and Dog from the example above\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Dog garbo{ \"Garbo\" };\n    const Dog pooky{ \"Pooky\" };\n    const Dog truffle{ \"Truffle\" };\n\n    // Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\n    const auto animals{ std::to_array<const Animal*>({&fred, &garbo, &misty, &pooky, &truffle, &zeke }) };\n    \n    // Before C++20, with the array size being explicitly specified\n    // const std::array<const Animal*, 6> animals{ &fred, &garbo, &misty, &pooky, &truffle, &zeke };\n    \n    for (const auto animal : animals)\n    {\n        std::cout << animal->getName() << \" says \" << animal->speak() << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\n// Cat and Dog from the example above\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Dog garbo{ \"Garbo\" };\n    const Dog pooky{ \"Pooky\" };\n    const Dog truffle{ \"Truffle\" };\n\n    // Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\n    const auto animals{ std::to_array&lt;const Animal*&gt;({&amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke }) };\n    \n    // Before C++20, with the array size being explicitly specified\n    // const std::array&lt;const Animal*, 6&gt; animals{ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke };\n    \n    for (const auto animal : animals)\n    {\n        std::cout &lt;&lt; animal-&gt;getName() &lt;&lt; \" says \" &lt;&lt; animal-&gt;speak() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\n// Kočka a pes z příkladu výše\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Psí garbo{ \"Garbo\" };\n    const Pes pooky{ \"Pooky\" };\n    const Psí lanýž{ \"Lanýž\" };\n\n    // Nastavte pole ukazatelů na zvířata a nastavte tyto ukazatele na naše objekty kočka a pes\n    const auto animals{ std::to_array<const Animal*>({&fred, &garbo, &misty, &pooky, &lanýž, &zeke }) };\n    \n    // Před C++20 s explicitně specifikovanou velikostí pole\n    // const std::array<const Animal*, 6> zvířata{ &fred, &garbo, &misty, &pooky, &lanýž, &zeke };\n    \n    pro (konst auto zvíře: zvířata)\n    {\n        std::cout << zvíře->getName() << \" říká \" << zvíře->mluv() << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b38",
       "type": "paragraph",
       "html": "<p>While this compiles and executes, unfortunately the fact that each element of array “animals” is a pointer to an Animal means that <code>animal-&gt;speak()</code> will call Animal::speak() instead of the derived class version of speak() that we want. The output is</p>",
       "preview": "While this compiles and executes, unfortunately the fact that each element of ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatímco se to kompiluje a spouští, bohužel skutečnost, že každý prvek pole „animals“ je ukazatelem na zvíře, znamená, že <code>animal->speak()</code> bude volat Animal::speak() namísto odvozené verze třídy speak(), kterou chceme. Výstup je</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b39",
       "type": "output",
       "text": "Fred says ???\nGarbo says ???\nMisty says ???\nPooky says ???\nTruffle says ???\nZeke says ???\n",
       "html": "<pre>Fred says ???\nGarbo says ???\nMisty says ???\nPooky says ???\nTruffle says ???\nZeke says ???\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Fred říká ???\nGarbo říká???\nMisty říká???\nPooky říká???\nLanýž říká ???\nZeke říká???\n</pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b40",
       "type": "paragraph",
       "html": "<p>Although both of these techniques could save us a lot of time and energy, they have the same problem. The pointer or reference to the base class calls the base version of the function rather than the derived version. If only there was some way to make those base pointers call the derived version of a function instead of the base version…</p>",
       "preview": "Although both of these techniques could save us a lot of time and energy, they h",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože by nám obě tyto techniky mohly ušetřit spoustu času a energie, mají stejný problém. Ukazatel nebo odkaz na základní třídu volá základní verzi funkce spíše než odvozenou verzi. Kdyby jen existoval nějaký způsob, jak přimět tyto základní ukazatele volat odvozenou verzi funkce místo základní verze…</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b41",
       "type": "paragraph",
       "html": "<p>Want to take a guess what virtual functions are for? :)</p>",
       "preview": "Want to take a guess what virtual functions are for? :)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chcete hádat, k čemu jsou virtuální funkce? :)</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b42",
       "type": "paragraph",
       "html": "<p><strong>Quiz time</strong></p>",
       "preview": "Quiz time",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Čas kvízu</strong></p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b43",
       "type": "list",
       "html": "<ol start=\"1\"><li>Our Animal/Cat/Dog example above doesn’t work like we want because a reference or pointer to an Animal can’t access the derived version of speak() needed to return the right value for the Cat or Dog. One way to work around this issue would be to make the data returned by the speak() function accessible as part of the Animal base class (much like the Animal’s name is accessible via member m_name).</li></ol>",
       "preview": "Our Animal/Cat/Dog example above doesn’t work like we want because a reference o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Náš výše uvedený příklad Zvíře/Kočka/Pes nefunguje, jak bychom chtěli, protože odkaz nebo ukazatel na Zvíře nemá přístup k odvozené verzi speak() potřebné k vrácení správné hodnoty pro kočku nebo psa. Jedním ze způsobů, jak tento problém vyřešit, by bylo zpřístupnit data vrácená funkcí speak() jako součást základní třídy Animal (podobně jako je jméno zvířete přístupné prostřednictvím člena m_name).</li></ol>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b44",
       "type": "paragraph",
       "html": "<p>Update the Animal, Cat, and Dog classes in the lesson above by adding a new member to Animal named m_speak. Initialize it appropriately. The following program should work properly:</p>",
       "preview": "Update the Animal, Cat, and Dog classes in the lesson above by adding a new memb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Aktualizujte třídy Zvíře, Kočka a Pes ve výše uvedené lekci přidáním nového člena do Zvíře s názvem m_speak. Inicializujte jej správně. Následující program by měl fungovat správně:</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b45",
@@ -339,35 +384,41 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Dog garbo{ \"Garbo\" };\n    const Dog pooky{ \"Pooky\" };\n    const Dog truffle{ \"Truffle\" };\n\n    // Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\n    const auto animals{ std::to_array<const Animal*>({ &fred, &garbo, &misty, &pooky, &truffle, &zeke }) };\n    \n    // Before C++20, with the array size being explicitly specified\n    // const std::array<const Animal*, 6> animals{ &fred, &garbo, &misty, &pooky, &truffle, &zeke };\n    \n    for (const auto animal : animals)\n    {\n        std::cout << animal->getName() << \" says \" << animal->speak() << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Dog garbo{ \"Garbo\" };\n    const Dog pooky{ \"Pooky\" };\n    const Dog truffle{ \"Truffle\" };\n\n    // Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\n    const auto animals{ std::to_array&lt;const Animal*&gt;({ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke }) };\n    \n    // Before C++20, with the array size being explicitly specified\n    // const std::array&lt;const Animal*, 6&gt; animals{ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke };\n    \n    for (const auto animal : animals)\n    {\n        std::cout &lt;&lt; animal-&gt;getName() &lt;&lt; \" says \" &lt;&lt; animal-&gt;speak() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Psí garbo{ \"Garbo\" };\n    const Pes pooky{ \"Pooky\" };\n    const Psí lanýž{ \"Lanýž\" };\n\n    // Nastavte pole ukazatelů na zvířata a nastavte tyto ukazatele na naše objekty kočka a pes\n    const auto animals{ std::to_array<const Animal*>({ &fred, &garbo, &misty, &pooky, &lanýž, &zeke }) };\n    \n    // Před C++20 s explicitně specifikovanou velikostí pole\n    // const std::array<const Animal*, 6> zvířata{ &fred, &garbo, &misty, &pooky, &lanýž, &zeke };\n    \n    pro (konst auto zvíře: zvířata)\n    {\n        std::cout << zvíře->getName() << \" říká \" << zvíře->mluv() << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b46",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n#include &lt;iostream&gt;\n\nclass Animal\n{\nprotected:\n    std::string m_name;\n    std::string m_speak;\n\n    // We're making this constructor protected because\n    // we don't want people creating Animal objects directly,\n    // but we still want derived classes to be able to use it.\n    Animal(std::string_view name, std::string_view speak)\n        : m_name{ name }, m_speak{ speak }\n    {\n    }\n    \n    // To prevent slicing (covered later)\n    Animal(const Animal&amp;) = delete;\n    Animal&amp; operator=(const Animal&amp;) = delete;\n\npublic:\n    std::string_view getName() const { return m_name; }\n    std::string_view speak() const { return m_speak; }\n};\n\nclass Cat: public Animal\n{\npublic:\n    Cat(std::string_view name)\n        : Animal{ name, \"Meow\" }\n    {\n    }\n};\n\nclass Dog: public Animal\n{\npublic:\n    Dog(std::string_view name)\n        : Animal{ name, \"Woof\" }\n    {\n    }\n};\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Dog garbo{ \"Garbo\" };\n    const Dog pooky{ \"Pooky\" };\n    const Dog truffle{ \"Truffle\" };\n\n    // Set up an array of pointers to animals, and set those pointers to our Cat and Dog objects\n    const auto animals{ std::to_array&lt;const Animal*&gt;({ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke }) };\n    \n    // Before C++20, with the array size being explicitly specified\n    // const std::array&lt;const Animal*, 6&gt; animals{ &amp;fred, &amp;garbo, &amp;misty, &amp;pooky, &amp;truffle, &amp;zeke };\n    \n    // animal is not a reference, because we're looping over pointers\n    for (const auto animal : animals)\n    {\n        std::cout &lt;&lt; animal-&gt;getName() &lt;&lt; \" says \" &lt;&lt; animal-&gt;speak() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre></div>",
       "preview": "#include <array> #include <string> #include <string_view> #include <iostream> cl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <řetězec>\n#include <string_view>\n#include <iostream>\n\ntřída Zvíře\n{\nchráněno:\n    std::string m_name;\n    std::string m_speak;\n\n    // Děláme tento konstruktor chráněný, protože\n    // nechceme, aby lidé vytvářeli objekty zvířat přímo,\n    // ale přesto chceme, aby to mohly používat odvozené třídy.\n    Animal(std::string_view name, std::string_view speak)\n        : m_name{ name }, m_speak{ speak }\n    {\n    }\n    \n    // Aby se zabránilo krájení (převzato později)\n    Animal(const Animal&) = delete;\n    Animal& operator=(const Animal&) = delete;\n\nveřejnost:\n    std::string_view getName() const { return m_name; }\n    std::string_view speak() const { return m_speak; }\n};\n\ntřída Kočka: veřejná Zvíř\n{\nveřejnost:\n    Cat(std::string_view name)\n        : Zvíře{ name, \"Mňau\" }\n    {\n    }\n};\n\ntřída Pes: veřejný Zvíř\n{\nveřejnost:\n    Pes (std::string_view name)\n        : Zvíře{ jméno, \"Páni\" }\n    {\n    }\n};\n\nint main()\n{\n    const Cat fred{ \"Fred\" };\n    const Cat misty{ \"Misty\" };\n    const Cat zeke{ \"Zeke\" };\n\n    const Psí garbo{ \"Garbo\" };\n    const Pes pooky{ \"Pooky\" };\n    const Psí lanýž{ \"Lanýž\" };\n\n    // Nastavte pole ukazatelů na zvířata a nastavte tyto ukazatele na naše objekty kočka a pes\n    const auto animals{ std::to_array<const Animal*>({ &fred, &garbo, &misty, &pooky, &lanýž, &zeke }) };\n    \n    // Před C++20 s explicitně specifikovanou velikostí pole\n    // const std::array<const Animal*, 6> zvířata{ &fred, &garbo, &misty, &pooky, &lanýž, &zeke };\n    \n    // zvíře není odkaz, protože procházíme ukazateli\n    pro (konst auto zvíře: zvířata)\n    {\n        std::cout << zvíře->getName() << \" říká \" << zvíře->mluv() << '\\n';\n    }\n\n    návrat 0;\n}</code></pre></div>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b47",
       "type": "list",
       "html": "<ol start=\"2\"><li>Why is the above solution non-optimal?</li></ol>",
       "preview": "Why is the above solution non-optimal?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"2\"><li>Proč je výše uvedené řešení neoptimální?</li></ol>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b48",
       "type": "paragraph",
       "html": "<p>Hint: Think about the future state of Cat and Dog where we want to differentiate Cats and Dogs in more ways.<br>Hint: Think about the ways in which having a member that needs to be set at initialization limits you.</p>",
       "preview": "Hint: Think about the future state of Cat and Dog where we want to differentiate",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tip: Přemýšlejte o budoucím stavu kočky a psa, kde chceme rozlišovat kočky a psy více způsoby.<br>Tip: Přemýšlejte o tom, jak vás omezuje přítomnost člena, který musí být nastaven na inicializaci.</p>"
     },
     {
       "id": "pointers-and-references-to-the-base-class-of-derived-objects_b49",
       "type": "paragraph",
       "html": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">The current solution is non-optimal for a number of reasons.<p></p><p>First, we need to add a member to Animal for each way we want to differentiate Cat and Dog. Over time, our Animal class could become quite large memory-wise, and complicated!</p><p>Second, this solution only works if the base class member can be determined at initialization time. For example, if speak() returned a randomized result for each Animal (e.g. calling Dog::speak() could return “woof”, “arf”, or “yip”), this kind of solution starts to get awkward and fall apart.</p><p>Third, because speak() is a member of Animal, speak() will have the same behavior for Cats and Dogs (that is, it will always return m_speak). If we wanted <code>speak()</code> to have different behavior for Cats and Dogs (e.g. have Dogs return a random sound), we’d have to put all that extra logic in Animal, which makes Animal even more complex.</p></div>",
       "preview": "The current solution is non-optimal for a number of reasons.First, we need to ad",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">Současné řešení není z mnoha důvodů optimální.<p></p><p>Nejprve musíme do Zvíře přidat člena pro každý způsob, jak chceme odlišit kočku a psa. Postupem času by se naše třída Animal mohla stát poměrně velkou pamětí a komplikovanou!</p><p>Zadruhé, toto řešení funguje pouze tehdy, pokud lze člen základní třídy určit v době inicializace. Pokud například speak() vrátí náhodný výsledek pro každé zvíře (např. volání Dog::speak() by mohlo vrátit „woof“, „arf“ nebo „yip“), tento druh řešení začne být trapný a rozpadat se.</p><p>Zatřetí, protože speak() je členem Animal, speak() bude mít stejné chování pro kočky, itspe (to se vrátí vždy). Pokud bychom chtěli, aby <code>speak()</code> mělo jiné chování pro kočky a psy (např. aby Psi vraceli náhodný zvuk), museli bychom do Zvíře vložit všechnu tu logiku navíc, což dělá Zvíře ještě složitější.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "25.1 — Ukazatele a reference na bázovou třídu odvozených objektů"
 }

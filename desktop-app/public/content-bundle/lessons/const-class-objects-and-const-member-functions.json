@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/\">5.1 -- Constant variables (named constants)</a>, you learned that objects of a fundamental data type (<code>int</code>, <code>double</code>, <code>char</code>, etc…) can be made constant via the <code>const</code> keyword. All const variables must be initialized at time of creation.</p>",
       "preview": "In lesson 5.1 -- Constant variables (named constants), you learned that objects ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/constant-variables-named-constants/\">5.1 -- Konstantní proměnné (pojmenované konstanty)</a> jste se dozvěděli, že objekty fundamentálních datových typů (<code>int</code>, <code>double</code>, <code>char</code> atd.) lze označit jako konstantní pomocí klíčového slova <code>const</code>. Všechny konstantní proměnné musí být inicializovány v okamžiku vytvoření.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "const int x;      // compile error: not initialized\nconst int y{};    // ok: value initialized\nconst int z{ 5 }; // ok: list initialized",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int x;      // compile error: not initialized\nconst int y{};    // ok: value initialized\nconst int z{ 5 }; // ok: list initialized</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int x;      // chyba kompilace: neinicializováno\nconst int y{};    // ok: hodnota inicializována\nconst int z{ 5 }; // ok: seznam inicializován</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b2",
       "type": "paragraph",
       "html": "<p>Similarly, class type objects (struct, classes, and unions) can also be made const by using the <code>const</code> keyword. Such objects must also be initialized at the time of creation.</p>",
       "preview": "Similarly, class type objects (struct, classes, and unions) can also be made con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podobně mohou být pomocí klíčového slova <code>const</code> označeny jako konstantní také objekty třídních typů (struktury, třídy a unie). Tyto objekty musí být rovněž inicializovány v okamžiku vytvoření.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b3",
@@ -37,28 +40,33 @@
       "language": "cpp",
       "code": "struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const class type object\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const class type object\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n};\n\nint main()\n{\n    const Datum dnes { 2020, 10, 14 }; // objekt typu const class\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b4",
       "type": "paragraph",
       "html": "<p>Just like with normal variables, you’ll generally want to make your class type objects const (or constexpr) when you need to ensure they aren’t modified after creation.</p>",
       "preview": "Just like with normal variables, you’ll generally want to make your class type o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u běžných proměnných budete obvykle chtít vytvořit objekty třídních typů jako const (nebo constexpr) tehdy, když potřebujete zajistit, aby po svém vytvoření nemohly být modifikovány.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b5",
       "type": "section",
       "title": "Modifying the data members of const objects is disallowed",
       "html": "<h3 class=\"cpp-section-heading\">Modifying the data members of const objects is disallowed</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Modifikace členských proměnných u konstantních objektů je zakázána</h3>",
+      "title_cs": "Úprava datových členů objektů const je zakázána"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b6",
       "type": "paragraph",
       "html": "<p>Once a const class type object has been initialized, any attempt to modify the data members of the object is disallowed, as it would violate the const-ness of the object. This includes both changing member variables directly (if they are public), or calling member functions that set the value of member variables.</p>",
       "preview": "Once a const class type object has been initialized, any attempt to modify the d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile je konstantní objekt třídního typu inicializován, jakýkoli pokus o modifikaci jeho členských proměnných (datových členů) je zakázán, protože by to porušilo konstantnost objektu. To zahrnuje jak přímou změnu členských proměnných (pokud jsou veřejné), tak volání členských funkcí, které hodnoty členských proměnných nastavují.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b7",
@@ -66,21 +74,25 @@
       "language": "cpp",
       "code": "struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void incrementDay()\n    {\n        ++day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.day += 1;        // compile error: can't modify member of const object\n    today.incrementDay();  // compile error: can't call member function that modifies member of const object\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void incrementDay()\n    {\n        ++day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.day += 1;        // compile error: can't modify member of const object\n    today.incrementDay();  // compile error: can't call member function that modifies member of const object\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void incrementDay()\n    {\n        ++den;\n    }\n};\n\nint main()\n{\n    const Datum dnes { 2020, 10, 14 }; // konst\n\n    dnes.den += 1;        // chyba kompilace: nelze změnit člen const objektu\n    dnes.incrementDay();  // chyba kompilace: nelze zavolat členskou funkci, která upravuje člen objektu const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b8",
       "type": "section",
       "title": "Const objects may not call non-const member functions",
       "html": "<h3 class=\"cpp-section-heading\">Const objects may not call non-const member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní objekty nemohou volat nekonstantní členské funkce</h3>",
+      "title_cs": "Objekty Const nesmí volat jiné než const členské funkce"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b9",
       "type": "paragraph",
       "html": "<p>You may be surprised to find that this code also causes a compilation error:</p>",
       "preview": "You may be surprised to find that this code also causes a compilation error:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná vás překvapí, že následující kód také způsobí chybu při kompilaci:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b10",
@@ -88,35 +100,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print()\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.print();  // compile error: can't call non-const member function\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print()\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.print();  // compile error: can't call non-const member function\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print()\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nint main()\n{\n    const Datum dnes { 2020, 10, 14 }; // konst\n\n    dnes.tisk();  // chyba kompilace: nelze zavolat nekonstantní členskou funkci\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b11",
       "type": "paragraph",
       "html": "<p>Even though <code>print()</code> does not try to modify a member variable, our call to <code>today.print()</code> is still a const violation. This happens because the <code>print()</code> member function itself is not declared as const. The compiler won’t let us call a non-const member function on a const object.</p>",
       "preview": "Even though print() does not try to modify a member variable, our call to today.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože se funkce <code>print()</code> nesnaží modifikovat žádnou členskou proměnnou, naše volání <code>today.print()</code> je stále porušením konstantnosti. Důvodem je to, že samotná členská funkce <code>print()</code> není deklarována jako const. Kompilátor nám nedovolí volat nekonstantní členskou funkci na konstantním objektu.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b12",
       "type": "section",
       "title": "Const member functions",
       "html": "<h3 class=\"cpp-section-heading\">Const member functions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní členské funkce</h3>",
+      "title_cs": "Const členské funkce"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b13",
       "type": "paragraph",
       "html": "<p>To address the above issue, we need to make <code>print()</code> a const member function. A <strong>const member function</strong> is a member function that guarantees it will not modify the object or call any non-const member functions (as they may modify the object).</p>",
       "preview": "To address the above issue, we need to make print() a const member function. A c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom výše uvedený problém vyřešili, musíme z <code>print()</code> udělat konstantní členskou funkci. <strong>Konstantní členská funkce</strong> je členská funkce, která garantuje, že nebude modifikovat objekt ani volat žádné nekonstantní členské funkce (protože ty by mohly objekt modifikovat).</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b14",
       "type": "paragraph",
       "html": "<p>Making <code>print()</code> a const member function is easy -- we simply append the <code>const</code> keyword to the function prototype, after the parameter list, but before the function body:</p>",
       "preview": "Making print() a const member function is easy -- we simply append the const key",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Udělat z <code>print()</code> konstantní členskou funkci je snadné – jednoduše připojíme klíčové slovo <code>const</code> k prototypu funkce za seznam parametrů, ale před tělo funkce:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b15",
@@ -124,14 +142,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // now a const member function\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.print();  // ok: const object can call const member function\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // now a const member function\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.print();  // ok: const object can call const member function\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print() const // nyní členská funkce const\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nint main()\n{\n    const Datum dnes { 2020, 10, 14 }; // konst\n\n    dnes.tisk();  // ok: objekt const může volat členskou funkci const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b16",
       "type": "paragraph",
       "html": "<p>In the above example, <code>print()</code> has been made a const member function, which means we can call it on const objects (such as <code>today</code>).</p>",
       "preview": "In the above example, print() has been made a const member function, which means",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu byla funkce <code>print()</code> vytvořena jako konstantní členská funkce, což znamená, že ji můžeme volat i na konstantních objektech (jako je <code>today</code>).</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b17",
@@ -139,14 +159,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>For member functions defined outside of the class definition, the <code>const</code> keyword must be used on both the function declaration in the class definition, and on the function definition outside the class definition. We show an example of this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 -- Classes and header files</a>.</p><p>Constructors may not be made const, as they need to initialize the members of the object, which requires modifying them. We cover constructors in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 -- Introduction to constructors</a>.</p></div>",
       "preview": "For advanced readersFor member functions defined outside of the class definition, the const keyword ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>U členských funkcí definovaných mimo definici třídy musí být klíčové slovo <code>const</code> použito jak v deklaraci funkce v definici třídy, tak v definici funkce mimo definici třídy. Příklad si ukážeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/classes-and-header-files/\">15.2 – Třídy a hlavičkové soubory</a>.</p><p>Konstruktory nelze označit jako const, protože musí inicializovat členy objektu, což vyžaduje jejich modifikaci. Konstruktorům se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-constructors/\">14.9 – Úvod do konstruktorů</a>.</p></div>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b18",
       "type": "paragraph",
       "html": "<p>A const member function that attempts to change a data member or call a non-const member function will cause a compiler error to occur. For example:</p>",
       "preview": "A const member function that attempts to change a data member or call a non-cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstantní členská funkce, která se pokusí změnit datového člena nebo zavolat nekonstantní členskou funkci, způsobí chybu při překladu. Například:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b19",
@@ -154,21 +176,24 @@
       "language": "cpp",
       "code": "struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void incrementDay() const // made const\n    {\n        ++day; // compile error: const function can't modify member\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.incrementDay();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void incrementDay() const // made const\n    {\n        ++day; // compile error: const function can't modify member\n    }\n};\n\nint main()\n{\n    const Date today { 2020, 10, 14 }; // const\n\n    today.incrementDay();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void incrementDay() const // vytvořeno const\n    {\n        ++den; // chyba kompilace: funkce const nemůže upravit člen\n    }\n};\n\nint main()\n{\n    const Datum dnes { 2020, 10, 14 }; // konst\n\n    dnes.incrementDay();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b20",
       "type": "paragraph",
       "html": "<p>In this example, <code>incrementDay()</code> has been marked as a const member function, but it attempts to change <code>day</code>. This will cause a compiler error.</p>",
       "preview": "In this example, incrementDay() has been marked as a const member function, but ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu byla funkce <code>incrementDay()</code> označena jako konstantní členská funkce, ale pokouší se změnit <code>day</code>. To způsobí chybu při překladu.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b21",
       "type": "paragraph",
       "html": "<p>Const member functions can modify non-members (such as local variables and function parameters) and call non-member functions per usual. The const only applies to members.</p>",
       "preview": "Const member functions can modify non-members (such as local variables and funct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstantní členské funkce mohou jako obvykle modifikovat nečleny (například lokální proměnné a parametry funkcí) a volat nečlenské funkce. Vlastnost const se vztahuje pouze na členy.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b22",
@@ -176,21 +201,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>A const member function may not: modify the implicit object, call non-const member functions.<br>A const member function may: modify objects that aren’t the implicit object, call const member functions, call non-member functions.</p></div>",
       "preview": "Key insightA const member function may not: modify the implicit object, call non-const member functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Konstantní členská funkce nesmí: modifikovat implicitní objekt, volat nekonstantní členské funkce.<br>Konstantní členská funkce smí: modifikovat objekty, které nejsou implicitním objektem, volat konstantní členské funkce, volat nečlenské funkce.</p></div>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b23",
       "type": "section",
       "title": "Const member functions may be called on non-const objects",
       "html": "<h3 class=\"cpp-section-heading\">Const member functions may be called on non-const objects</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní členské funkce lze volat na nekonstantních objektech</h3>",
+      "title_cs": "Const členské funkce mohou být volány na non-const objektů"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b24",
       "type": "paragraph",
       "html": "<p>Const member functions may also be called on non-const objects:</p>",
       "preview": "Const member functions may also be called on non-const objects:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstantní členské funkce lze volat také na nekonstantních objektech:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b25",
@@ -198,14 +227,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // const\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n\n    today.print();  // ok: can call const member function on non-const object\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // const\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n\n    today.print();  // ok: can call const member function on non-const object\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print() const // const\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 }; // non-konst\n\n    dnes.tisk();  // ok: může volat členskou funkci const na non-const objektu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b26",
       "type": "paragraph",
       "html": "<p>Because const member functions can be called on both const and non-const objects, if a member function does not modify the state of the object, it should be made const.</p>",
       "preview": "Because const member functions can be called on both const and non-const objects",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože konstantní členské funkce lze volat na konstantních i nekonstantních objektech, pokud členská funkce nemění stav objektu, měla by být označena jako const.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b27",
@@ -213,42 +244,49 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>A member function that does not (and will not ever) modify the state of the object should be made const, so that it can be called on both const and non-const objects.</p></div>",
       "preview": "Best practiceA member function that does not (and will not ever) modify the state of the object shou",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Členská funkce, která nemění (a nikdy nebude měnit) stav objektu, by měla být označena jako const, aby ji bylo možné volat jak na konstantních, tak na nekonstantních objektech.</p></div>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b28",
       "type": "paragraph",
       "html": "<p>Be careful about what member functions you apply <code>const</code> to. Once a member function is made const, that function can be called on const objects. Later removal of <code>const</code> on a member function will break any code that calls that member function on a const object.</p>",
       "preview": "Be careful about what member functions you apply const to. Once a member functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dávejte pozor na to, u kterých členských funkcí použijete <code>const</code>. Jakmile je členská funkce označena jako const, lze ji volat na konstantních objektech. Pozdější odebrání <code>const</code> z členské funkce rozbije jakýkoli kód, který tuto členskou funkci volá na konstantním objektu.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b29",
       "type": "section",
       "title": "Const objects via pass by const reference",
       "html": "<h3 class=\"cpp-section-heading\">Const objects via pass by const reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstantní objekty prostřednictvím předání konstantní referencí</h3>",
+      "title_cs": "Const objekty přes pass by const reference"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b30",
       "type": "paragraph",
       "html": "<p>Although instantiating const local variables is one way to create const objects, a more common way to get a const object is by passing an object to a function by const reference.</p>",
       "preview": "Although instantiating const local variables is one way to create const objects,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli vytvoření konstantních lokálních proměnných je jedním ze způsobů, jak vytvořit konstantní objekty, běžnějším způsobem, jak získat konstantní objekt, je předání objektu do funkce pomocí konstantní reference.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b31",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Pass by lvalue reference</a>, we covered the merits of passing class type arguments by const reference instead of by value. To recap, passing a class type argument by value causes a copy of the class to be made (which is slow) -- most of the time, we don’t need a copy, a reference to the original argument works just fine and avoids making a copy. We typically make the reference const to allow the function to accept const lvalue arguments and rvalue arguments (e.g. literals and temporary objects).</p>",
       "preview": "In lesson 12.5 -- Pass by lvalue reference, we covered the merits of passing cla",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/\">12.5 -- Předávání l-hodnotou referencí</a> jsme probrali výhody předávání argumentů třídních typů konstantní referencí namísto hodnotou. Pro zopakování: předání argumentu třídního typu hodnotou způsobí vytvoření kopie dané třídy (což je pomalé) – většinou přitom kopii nepotřebujeme, reference na původní argument funguje naprosto v pořádku a vyhne se vytváření kopie. Referenci obvykle nastavujeme jako const, aby funkce mohla přijímat i konstantní l-hodnoty a r-hodnoty (např. literály a dočasné objekty).</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b32",
       "type": "paragraph",
       "html": "<p>Can you figure out what’s wrong with the following code?</p>",
       "preview": "Can you figure out what’s wrong with the following code?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dokážete přijít na to, co je v následujícím kódu špatně?</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b33",
@@ -256,21 +294,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() // non-const\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nvoid doSomething(const Date& date)\n{\n    date.print();\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n    today.print();\n\n    doSomething(today);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() // non-const\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nvoid doSomething(const Date&amp; date)\n{\n    date.print();\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n    today.print();\n\n    doSomething(today);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print() // non-const\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nvoid doSomething (konst Datum a datum)\n{\n    datum.tisk();\n}\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 }; // non-konst\n    dnes.tisk();\n\n    udělat něco (dnes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b34",
       "type": "paragraph",
       "html": "<p>The answer is that inside of the <code>doSomething()</code> function, <code>date</code> is treated as a const object (because it was passed by const reference). And with that const <code>date</code>, we’re calling non-const member function <code>print()</code>. Since we can’t call non-const member functions on const objects, this will cause a compile error.</p>",
       "preview": "The answer is that inside of the doSomething() function, date is treated as a co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odpověď je, že uvnitř funkce <code>doSomething()</code> se s <code>date</code> zachází jako s konstantním objektem (protože byl předán konstantní referencí). A nad tímto const <code>date</code> voláme nekonstantní členskou funkci <code>print()</code>. Jelikož na konstantních objektech nemůžeme volat nekonstantní členské funkce, způsobí to chybu při kompilaci.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b35",
       "type": "paragraph",
       "html": "<p>The fix is simple: make <code>print()</code> const:</p>",
       "preview": "The fix is simple: make print() const:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Náprava je jednoduchá: označte funkci <code>print()</code> jako const:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b36",
@@ -278,28 +319,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // now const\n    {\n        std::cout << year << '/' << month << '/' << day;\n    }\n};\n\nvoid doSomething(const Date& date)\n{\n    date.print();\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n    today.print();\n\n    doSomething(today);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Date\n{\n    int year {};\n    int month {};\n    int day {};\n\n    void print() const // now const\n    {\n        std::cout &lt;&lt; year &lt;&lt; '/' &lt;&lt; month &lt;&lt; '/' &lt;&lt; day;\n    }\n};\n\nvoid doSomething(const Date&amp; date)\n{\n    date.print();\n}\n\nint main()\n{\n    Date today { 2020, 10, 14 }; // non-const\n    today.print();\n\n    doSomething(today);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Datum\n{\n    int rok {};\n    int měsíc {};\n    int den {};\n\n    void print() const // now const\n    {\n        std::cout << rok << '/' << mesic << '/' << den;\n    }\n};\n\nvoid doSomething (konst Datum a datum)\n{\n    datum.tisk();\n}\n\nint main()\n{\n    Datum dnes { 2020, 10, 14 }; // non-konst\n    dnes.tisk();\n\n    udělat něco (dnes);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b37",
       "type": "paragraph",
       "html": "<p>Now in function <code>doSomething()</code>, <code>const date</code> will be able to successfully call const member function <code>print()</code>.</p>",
       "preview": "Now in function doSomething(), const date will be able to successfully call cons",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní bude moci <code>const date</code> ve funkci <code>doSomething()</code> úspěšně zavolat konstantní členskou funkci <code>print()</code>.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b38",
       "type": "section",
       "title": "Member function const and non-const overloading",
       "html": "<h3 class=\"cpp-section-heading\">Member function const and non-const overloading</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přetěžování členských funkcí pro const a non-const</h3>",
+      "title_cs": "Členská funkce const a non-const přetížení"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b39",
       "type": "paragraph",
       "html": "<p>Finally, although it is not done very often, it is possible to overload a member function to have a const and non-const version of the same function. This works because the const qualifier is considered part of the function’s signature, so two functions which differ only in their const-ness are considered distinct.</p>",
       "preview": "Finally, although it is not done very often, it is possible to overload a member",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A nakonec, i když se to nedělá příliš často, je možné členskou funkci přetížit a vytvořit tak const i non-const verzi téže funkce. Funguje to proto, že kvalifikátor const je považován za součást signatury funkce, takže dvě funkce, které se liší pouze svou konstantností (const-ness), jsou považovány za odlišné.</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b40",
@@ -307,14 +353,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nstruct Something\n{\n    void print()\n    {\n        std::cout << \"non-const\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"const\\n\";\n    }\n};\n\nint main()\n{\n    Something s1{};\n    s1.print(); // calls print()\n\n    const Something s2{};\n    s2.print(); // calls print() const\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nstruct Something\n{\n    void print()\n    {\n        std::cout &lt;&lt; \"non-const\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"const\\n\";\n    }\n};\n\nint main()\n{\n    Something s1{};\n    s1.print(); // calls print()\n\n    const Something s2{};\n    s2.print(); // calls print() const\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nstruct Něco\n{\n    void print()\n    {\n        std::cout << \"non-const\\n\";\n    }\n\n    void print() konst\n    {\n        std::cout << \"const\\n\";\n    }\n};\n\nint main()\n{\n    Něco s1{};\n    s1.print(); // volá print()\n\n    const Něco s2{};\n    s2.print(); // volá print() const\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b41",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b42",
@@ -322,14 +370,17 @@
       "language": "cpp",
       "code": "non-const\nconst",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">non-const\nconst</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">nekonst.\nconst</code></pre>"
     },
     {
       "id": "const-class-objects-and-const-member-functions_b43",
       "type": "paragraph",
       "html": "<p>Overloading a function with a const and non-const version is typically done when the return value needs to differ in constness. This is pretty rare.</p>",
       "preview": "Overloading a function with a const and non-const version is typically done when",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přetěžování funkce const a non-const verzí se typicky provádí tehdy, když se návratová hodnota musí lišit v konstantnosti. To je poměrně vzácné.</p>"
     }
-  ]
+  ],
+  "title_cs": "14.4 — Konstantní objekty tříd a konstantní členské funkce"
 }

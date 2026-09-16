@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/array-indexing-and-length-using-enumerators/\">16.9 -- Array indexing and length using enumerators</a>, we discussed arrays and enumerations.</p>",
       "preview": "In lesson 16.9 -- Array indexing and length using enumerators, we discussed arra",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/array-indexing-and-length-using-enumerators/\">16.9 -- Indexování a délka pole pomocí enumerátorů</a> jsme probírali pole a výčtové typy.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b1",
       "type": "paragraph",
       "html": "<p>Now that we have <code>constexpr std::array</code> in our toolkit, we’re going to continue that discussion and show a few additional tricks.</p>",
       "preview": "Now that we have constexpr std::array in our toolkit, we’re going to continue th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když máme v naší výbavě <code>constexpr std::array</code>, budeme v této diskuzi pokračovat a ukážeme si několik dalších triků.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b2",
       "type": "section",
       "title": "Using static assert to ensure the proper number of array initializers",
       "html": "<h3 class=\"cpp-section-heading\">Using static assert to ensure the proper number of array initializers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití static assert k zajištění správného počtu inicializátorů pole</h3>",
+      "title_cs": "Použití statického příkazu k zajištění správného počtu inicializátorů pole"
     },
     {
       "id": "stdarray-and-enumerations_b3",
       "type": "paragraph",
       "html": "<p>When initializing a <code>constexpr std::array</code> using CTAD, the compiler will deduce how long the array should be from the number of initializers. If less initializers are provided than there should be, the array will be shorter than expected, and indexing it can lead to undefined behavior.</p>",
       "preview": "When initializing a constexpr std::array using CTAD, the compiler will deduce ho",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při inicializaci <code>constexpr std::array</code> pomocí CTAD kompilátor odvodí délku pole z počtu inicializátorů. Pokud je zadáno méně inicializátorů, než by mělo být, pole bude kratší, než se očekává, a jeho indexování může vést k nedefinovanému chování.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b4",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b5",
@@ -50,14 +56,16 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\nenum StudentNames\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    butters, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 }; // oops, only 4 values\n\n    std::cout << \"Cartman got a score of \" << testScores[StudentNames::cartman] << '\\n'; // undefined behavior due to invalid index\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nenum StudentNames\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    butters, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 }; // oops, only 4 values\n\n    std::cout &lt;&lt; \"Cartman got a score of \" &lt;&lt; testScores[StudentNames::cartman] &lt;&lt; '\\n'; // undefined behavior due to invalid index\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\nvyjmenovat jména studentů\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    másla, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 }; // jejda, pouze 4 hodnoty\n\n    std::cout << \"Cartman získal skóre \" << testScores[StudentNames::cartman] << '\\n'; // nedefinované chování kvůli neplatnému indexu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b6",
       "type": "paragraph",
       "html": "<p>Whenever the number of initializers in a <code>constexpr std::array</code> can be reasonably sanity checked, you can do so using a static assert:</p>",
       "preview": "Whenever the number of initializers in a constexpr std::array can be reasonably ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kdykoli lze počet inicializátorů v <code>constexpr std::array</code> rozumně zkontrolovat, můžete tak učinit pomocí statického assertu:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b7",
@@ -65,35 +73,41 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n\nenum StudentNames\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    butters, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 };\n\n    // Ensure the number of test scores is the same as the number of students\n    static_assert(std::size(testScores) == max_students); // compile error: static_assert condition failed\n\n    std::cout << \"Cartman got a score of \" << testScores[StudentNames::cartman] << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n\nenum StudentNames\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    butters, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 };\n\n    // Ensure the number of test scores is the same as the number of students\n    static_assert(std::size(testScores) == max_students); // compile error: static_assert condition failed\n\n    std::cout &lt;&lt; \"Cartman got a score of \" &lt;&lt; testScores[StudentNames::cartman] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n\nvyjmenovat jména studentů\n{\n    kenny, // 0\n    kyle, // 1\n    stan, // 2\n    másla, // 3\n    cartman, // 4\n    max_students // 5\n};\n\nint main()\n{\n    constexpr std::array testScores { 78, 94, 66, 77 };\n\n    // Zajistěte, aby počet výsledků testů byl stejný jako počet studentů\n    static_assert(std::size(testScores) == max_students); // chyba kompilace: podmínka static_assert selhala\n\n    std::cout << \"Cartman získal skóre \" << testScores[StudentNames::cartman] << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b8",
       "type": "paragraph",
       "html": "<p>That way, if you add a new enumerator later but forget to add a corresponding initializer to <code>testScores</code>, the program will fail to compile.</p>",
       "preview": "That way, if you add a new enumerator later but forget to add a corresponding in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto způsobem, pokud později přidáte nový enumerátor, ale zapomenete přidat odpovídající inicializátor do <code>testScores</code>, program se nepodaří zkompilovat.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b9",
       "type": "paragraph",
       "html": "<p>You can also use a static assert to ensure two different <code>constexpr std::array</code> have the same length.</p>",
       "preview": "You can also use a static assert to ensure two different constexpr std::array ha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Statický assert můžete také použít k zajištění toho, aby dvě různá pole <code>constexpr std::array</code> měla stejnou délku.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b10",
       "type": "section",
       "title": "Using constexpr arrays for better enumeration input and output",
       "html": "<h3 class=\"cpp-section-heading\">Using constexpr arrays for better enumeration input and output</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití polí constexpr pro lepší vstup a výstup výčtových typů</h3>",
+      "title_cs": "Použití polí constexpr pro lepší vstup a výstup výčtu"
     },
     {
       "id": "stdarray-and-enumerations_b11",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-overloading-the-i-o-operators/\">13.5 -- Introduction to overloading the I/O operators</a>, we covered a few ways to input and output the names of enumerators. To assist in this task, we had helper functions that converted an enumerator to a string and vice-versa. These functions each had their own (duplicate) set of string literals, and we had to specifically code logic to check each:</p>",
       "preview": "In lesson 13.5 -- Introduction to overloading the I/O operators, we covered a fe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-overloading-the-i-o-operators/\">13.5 -- Úvod do přetěžování I/O operátorů</a> jsme si ukázali několik způsobů, jak načítat a vypisovat názvy prvků výčtu (enumerátorů). K tomuto účelu jsme měli pomocné funkce, které převáděly enumerátor na řetězec a naopak. Každá z těchto funkcí měla svou vlastní (duplicitní) sadu řetězcových literálů a museli jsme pro každý případ explicitně psát logiku porovnávání:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b12",
@@ -101,35 +115,40 @@
       "language": "cpp",
       "code": "constexpr std::string_view getPetName(Pet pet)\n{\n    switch (pet)\n    {\n    case cat:   return \"cat\";\n    case dog:   return \"dog\";\n    case pig:   return \"pig\";\n    case whale: return \"whale\";\n    default:    return \"???\";\n    }\n}\n\nconstexpr std::optional<Pet> getPetFromString(std::string_view sv)\n{\n    if (sv == \"cat\")   return cat;\n    if (sv == \"dog\")   return dog;\n    if (sv == \"pig\")   return pig;\n    if (sv == \"whale\") return whale;\n\n    return {};\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::string_view getPetName(Pet pet)\n{\n    switch (pet)\n    {\n    case cat:   return \"cat\";\n    case dog:   return \"dog\";\n    case pig:   return \"pig\";\n    case whale: return \"whale\";\n    default:    return \"???\";\n    }\n}\n\nconstexpr std::optional&lt;Pet&gt; getPetFromString(std::string_view sv)\n{\n    if (sv == \"cat\")   return cat;\n    if (sv == \"dog\")   return dog;\n    if (sv == \"pig\")   return pig;\n    if (sv == \"whale\") return whale;\n\n    return {};\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">constexpr std::string_view getPetName(pet pet)\n{\n    vypínač (zvířátko)\n    {\n    case cat: return \"cat\";\n    případ pes: návrat \"pes\";\n    případ prase: vrátit \"prase\";\n    případ velryba: návrat \"velryba\";\n    výchozí: return \"???\";\n    }\n}\n\nconstexpr std::volitelné<Pet> getPetFromString(std::string_view sv)\n{\n    if (sv == \"kočka\") return cat;\n    if (sv == \"pes\") return dog;\n    if (sv == \"prase\") return prase;\n    if (sv == \"velryba\") return velryba;\n\n    return {};\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b13",
       "type": "paragraph",
       "html": "<p>This means that if we were to add a new enumerator, we’d have to remember to update these functions.</p>",
       "preview": "This means that if we were to add a new enumerator, we’d have to remember to upd",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že kdybychom přidali nový enumerátor, museli bychom pamatovat na aktualizaci těchto funkcí.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b14",
       "type": "paragraph",
       "html": "<p>Let’s improve these functions a bit. In cases where the value of our enumerators start at 0 and proceed sequentially (which is true for most enumerations), we can use an array to hold the name of each enumerator.</p>",
       "preview": "Let’s improve these functions a bit. In cases where the value of our enumerators",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme tyto funkce trochu vylepšit. V případech, kdy hodnoty našich enumerátorů začínají na 0 a následují sekvenčně za sebou (což platí pro většinu výčtů), můžeme k uložení názvu každého enumerátoru použít pole.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b15",
       "type": "paragraph",
       "html": "<p>This allows us to do two things:</p>",
       "preview": "This allows us to do two things:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To nám umožňuje dvě věci:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b16",
       "type": "list",
       "html": "<ol start=\"1\"><li>Index the array using the enumerator’s value to get the name of that enumerator.</li><li>Use a loop to iterate through all of the names, and be able to correlate a name back to the enumerator based on index.</li></ol>",
       "preview": "Index the array using the enumerator’s value to get the name of that enumerator.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Indexovat pole pomocí hodnoty enumerátoru a získat tak název tohoto enumerátoru.</li><li>Použít cyklus k procházení všech názvů a na základě indexu přiřadit název zpět k danému enumerátoru.</li></ol>"
     },
     {
       "id": "stdarray-and-enumerations_b17",
@@ -137,35 +156,41 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n#include <string>\n#include <string_view>\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    // We can index the array using the enumerator to get the name of the enumerator\n    return Color::colorName[static_cast<std::size_t>(color)];\n}\n\n// Teach operator<< how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream& operator<<(std::ostream& out, Color::Type color)\n{\n    return out << getColorName(color);\n}\n\n// Teach operator>> how to input a Color by name\n// We pass color by non-const reference so we can have the function modify its value\nstd::istream& operator>> (std::istream& in, Color::Type& color)\n{\n    std::string input {};\n    std::getline(in >> std::ws, input);\n\n    // Iterate through the list of names to see if we can find a matching name\n    for (std::size_t index=0; index < Color::colorName.size(); ++index)\n    {\n        if (input == Color::colorName[index])\n        {\n            // If we found a matching name, we can get the enumerator value based on its index\n            color = static_cast<Color::Type>(index);\n            return in;\n        }\n    }\n\n    // We didn't find a match, so input must have been invalid\n    // so we will set input stream to fail state\n    in.setstate(std::ios_base::failbit);\n\n    // On an extraction failure, operator>> zero-initializes fundamental types\n    // Uncomment the following line to make this operator do the same thing\n    // color = {};\n    return in;\n}\n\nint main()\n{\n    auto shirt{ Color::blue };\n    std::cout << \"Your shirt is \" << shirt << '\\n';\n\n    std::cout << \"Enter a new color: \";\n    std::cin >> shirt;\n    if (!std::cin)\n        std::cout << \"Invalid\\n\";\n    else\n        std::cout << \"Your shirt is now \" << shirt << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    // We can index the array using the enumerator to get the name of the enumerator\n    return Color::colorName[static_cast&lt;std::size_t&gt;(color)];\n}\n\n// Teach operator&lt;&lt; how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, Color::Type color)\n{\n    return out &lt;&lt; getColorName(color);\n}\n\n// Teach operator&gt;&gt; how to input a Color by name\n// We pass color by non-const reference so we can have the function modify its value\nstd::istream&amp; operator&gt;&gt; (std::istream&amp; in, Color::Type&amp; color)\n{\n    std::string input {};\n    std::getline(in &gt;&gt; std::ws, input);\n\n    // Iterate through the list of names to see if we can find a matching name\n    for (std::size_t index=0; index &lt; Color::colorName.size(); ++index)\n    {\n        if (input == Color::colorName[index])\n        {\n            // If we found a matching name, we can get the enumerator value based on its index\n            color = static_cast&lt;Color::Type&gt;(index);\n            return in;\n        }\n    }\n\n    // We didn't find a match, so input must have been invalid\n    // so we will set input stream to fail state\n    in.setstate(std::ios_base::failbit);\n\n    // On an extraction failure, operator&gt;&gt; zero-initializes fundamental types\n    // Uncomment the following line to make this operator do the same thing\n    // color = {};\n    return in;\n}\n\nint main()\n{\n    auto shirt{ Color::blue };\n    std::cout &lt;&lt; \"Your shirt is \" &lt;&lt; shirt &lt;&lt; '\\n';\n\n    std::cout &lt;&lt; \"Enter a new color: \";\n    std::cin &gt;&gt; shirt;\n    if (!std::cin)\n        std::cout &lt;&lt; \"Invalid\\n\";\n    else\n        std::cout &lt;&lt; \"Your shirt is now \" &lt;&lt; shirt &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n#include <řetězec>\n#include <string_view>\n\njmenný prostor Barva\n{\n    Typ výčtu\n    {\n        černá,\n        červená,\n        modrá,\n        max_colors\n    };\n\n    // použijte příponu sv, takže std::array odvodí typ jako std::string_view\n    pomocí jmenného prostoru std::string_view_literals; // pro příponu sv\n    constexpr std::array jmeno_barvy { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Ujistěte se, že jsme definovali řetězce pro všechny naše barvy\n    static_assert(std::size(název barvy) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    // Můžeme indexovat pole pomocí enumerátoru, abychom získali jméno enumerátoru\n    return Barva::název_barvy[statické_obsazení<std::velikost_t>(barva)];\n}\n\n// Naučte operátora<< tisknout barvu\n// std::ostream je typ std::cout\n// Návratový typ a typ parametru jsou odkazy (aby se zabránilo vytváření kopií)!\nstd::ostream& operátor<<(std::ostream& out, Barva::Barva typu)\n{\n    vrátit se << getColorName(color);\n}\n\n// Naučte operátora>> jak zadat barvu podle názvu\n// Předáme barvu nekonstantní referencí, abychom mohli nechat funkci upravit její hodnotu\nstd::istream& operator>> (std::istream& in, Color::Type& color)\n{\n    std::string input {};\n    std::getline(v >> std::ws, vstup);\n\n    // Projděte seznam jmen, abyste zjistili, zda najdeme odpovídající jméno\n    for (std::size_t index=0; index < Color::colorName.size(); ++index)\n    {\n        if (vstup == Barva::Název barvy[index])\n        {\n            // Pokud jsme našli odpovídající jméno, můžeme získat hodnotu enumerátoru na základě jeho indexu\n            color = static_cast<Color::Type>(index);\n            vrátit se;\n        }\n    }\n\n    // Nenašli jsme shodu, takže vstup musel být neplatný\n    // tedy nastavíme vstupní proud do stavu selhání\n    in.setstate(std::ios_base::failbit);\n\n    // Při selhání extrakce operátor>> nulově inicializuje základní typy\n    // Odkomentujte následující řádek, aby tento operátor udělal totéž\n    // barva = {};\n    vrátit se;\n}\n\nint main()\n{\n    auto triko{ Barva::modrá };\n    std::cout << \"Vaše košile je \" << košile << '\\n';\n\n    std::cout << \"Zadejte novou barvu: \";\n    std::cin >> triko;\n    pokud (!std::cin)\n        std::cout << \"Neplatný\\n\";\n    jinak\n        std::cout << \"Vaše košile je nyní \" << košile << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b18",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód vypíše:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b19",
       "type": "output",
       "text": "Your shirt is blue\nEnter a new color: red\nYour shirt is now red\n",
       "html": "<pre>Your shirt is blue\nEnter a new color: red\nYour shirt is now red\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Your shirt is blue\nEnter a new color: red\nYour shirt is now red\n</pre>"
     },
     {
       "id": "stdarray-and-enumerations_b20",
       "type": "section",
       "title": "Range-based for-loops and enumerations",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"rangedEnumeration\"></a>Range-based for-loops and enumerations <a href=\"#rangedEnumeration\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"rangedEnumeration\"></a>Range-based for cykly a výčtové typy <a href=\"#rangedEnumeration\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "Smyčky for a výčty založené na rozsahu"
     },
     {
       "id": "stdarray-and-enumerations_b21",
       "type": "paragraph",
       "html": "<p>Occasionally we run across situations where it would be useful to iterate through the enumerators of an enumeration. While we can do this using a for-loop with an integer index, this is likely to require a lot of static casting of the integer index to our enumeration type.</p>",
       "preview": "Occasionally we run across situations where it would be useful to iterate throug",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Občas narazíme na situace, kdy by se hodilo iterovat přes jednotlivé prvky (enumerátory) výčtového typu. Ačkoli to můžeme udělat pomocí for cyklu s celočíselným indexem, pravděpodobně to bude vyžadovat spoustu statického přetypování celočíselného indexu na náš výčtový typ.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b22",
@@ -173,14 +198,16 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n#include <string_view>\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator<< how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream& operator<<(std::ostream& out, Color::Type color)\n{\n    return out << getColorName(color);\n}\n\nint main()\n{\n    // Use a for loop to iterate through all our colors\n    for (int i=0; i < Color::max_colors; ++i )\n        std::cout << static_cast<Color::Type>(i) << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator&lt;&lt; how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, Color::Type color)\n{\n    return out &lt;&lt; getColorName(color);\n}\n\nint main()\n{\n    // Use a for loop to iterate through all our colors\n    for (int i=0; i &lt; Color::max_colors; ++i )\n        std::cout &lt;&lt; static_cast&lt;Color::Type&gt;(i) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n#include <string_view>\n\njmenný prostor Barva\n{\n    Typ výčtu\n    {\n        černá,\n        červená,\n        modrá,\n        max_colors\n    };\n\n    // použijte příponu sv, takže std::array odvodí typ jako std::string_view\n    pomocí jmenného prostoru std::string_view_literals; // pro příponu sv\n    constexpr std::array jmeno_barvy { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Ujistěte se, že jsme definovali řetězce pro všechny naše barvy\n    static_assert(std::size(název barvy) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[barva];\n}\n\n// Naučte operátora<< tisknout barvu\n// std::ostream je typ std::cout\n// Návratový typ a typ parametru jsou odkazy (aby se zabránilo vytváření kopií)!\nstd::ostream& operátor<<(std::ostream& out, Barva::Barva typu)\n{\n    vrátit se << getColorName(color);\n}\n\nint main()\n{\n    // Použijte cyklus for k iteraci všemi našimi barvami\n    for (int i=0; i < Color::max_colors; ++i )\n        std::cout << static_cast<Color::Type>(i) << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b23",
       "type": "paragraph",
       "html": "<p>Unfortunately, range-based for-loops won’t allow you to iterate over the enumerators of an enumeration:</p>",
       "preview": "Unfortunately, range-based for-loops won’t allow you to iterate over the enumera",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Bohužel, range-based for cykly neumožňují přímo iterovat přes prvky výčtového typu:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b24",
@@ -188,14 +215,16 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n#include <string_view>\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator<< how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream& operator<<(std::ostream& out, Color::Type color)\n{\n    return out << getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::Type) // compile error: can't traverse enumeration\n        std::cout << c < '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nnamespace Color\n{\n    enum Type\n    {\n        black,\n        red,\n        blue,\n        max_colors\n    };\n\n    // use sv suffix so std::array will infer type as std::string_view\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Make sure we've defined strings for all our colors\n    static_assert(std::size(colorName) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator&lt;&lt; how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, Color::Type color)\n{\n    return out &lt;&lt; getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::Type) // compile error: can't traverse enumeration\n        std::cout &lt;&lt; c &lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n#include <string_view>\n\njmenný prostor Barva\n{\n    Typ výčtu\n    {\n        černá,\n        červená,\n        modrá,\n        max_colors\n    };\n\n    // použijte příponu sv, takže std::array odvodí typ jako std::string_view\n    pomocí jmenného prostoru std::string_view_literals; // pro příponu sv\n    constexpr std::array jmeno_barvy { \"black\"sv, \"red\"sv, \"blue\"sv };\n\n    // Ujistěte se, že jsme definovali řetězce pro všechny naše barvy\n    static_assert(std::size(název barvy) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[barva];\n}\n\n// Naučte operátora<< tisknout barvu\n// std::ostream je typ std::cout\n// Návratový typ a typ parametru jsou odkazy (aby se zabránilo vytváření kopií)!\nstd::ostream& operátor<<(std::ostream& out, Barva::Barva typu)\n{\n    vrátit se << getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::Type) // chyba kompilace: nelze procházet výčtem\n        std::cout << c < '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b25",
       "type": "paragraph",
       "html": "<p>There are many creative solutions for this. Since we can use a range-based for-loop on an array, one of the most straightforward solutions is to create a <code>constexpr std::array</code> containing each of our enumerators, and then iterate over that. This method only works if the enumerators have unique values.</p>",
       "preview": "There are many creative solutions for this. Since we can use a range-based for-l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje pro to mnoho kreativních řešení. Jelikož můžeme range-based for cyklus použít na pole, jedním z nejpřímočařejších řešení je vytvořit <code>constexpr std::array</code> obsahující každý z našich enumerátorů a poté iterovat přes něj. Tato metoda funguje pouze v případě, že mají enumerátory unikátní hodnoty.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b26",
@@ -203,70 +232,81 @@
       "language": "cpp",
       "code": "#include <array>\n#include <iostream>\n#include <string_view>\n\nnamespace Color\n{\n    enum Type\n    {\n        black,     // 0\n        red,       // 1\n        blue,      // 2\n        max_colors // 3\n    };\n\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n    static_assert(std::size(colorName) == max_colors);\n\n    constexpr std::array types { black, red, blue }; // A std::array containing all our enumerators\n    static_assert(std::size(types) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator<< how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream& operator<<(std::ostream& out, Color::Type color)\n{\n    return out << getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::types) // ok: we can do a range-based for on a std::array\n        std::cout << c << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string_view&gt;\n\nnamespace Color\n{\n    enum Type\n    {\n        black,     // 0\n        red,       // 1\n        blue,      // 2\n        max_colors // 3\n    };\n\n    using namespace std::string_view_literals; // for sv suffix\n    constexpr std::array colorName { \"black\"sv, \"red\"sv, \"blue\"sv };\n    static_assert(std::size(colorName) == max_colors);\n\n    constexpr std::array types { black, red, blue }; // A std::array containing all our enumerators\n    static_assert(std::size(types) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[color];\n}\n\n// Teach operator&lt;&lt; how to print a Color\n// std::ostream is the type of std::cout\n// The return type and parameter type are references (to prevent copies from being made)!\nstd::ostream&amp; operator&lt;&lt;(std::ostream&amp; out, Color::Type color)\n{\n    return out &lt;&lt; getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::types) // ok: we can do a range-based for on a std::array\n        std::cout &lt;&lt; c &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <array>\n#include <iostream>\n#include <string_view>\n\njmenný prostor Barva\n{\n    Typ výčtu\n    {\n        černá, // 0\n        červená, // 1\n        modrá, // 2\n        max_colors // 3\n    };\n\n    pomocí jmenného prostoru std::string_view_literals; // pro příponu sv\n    constexpr std::array jmeno_barvy { \"black\"sv, \"red\"sv, \"blue\"sv };\n    static_assert(std::size(název barvy) == max_colors);\n\n    constexpr std::typy pole { černá, červená, modrá }; // std::array obsahující všechny naše enumerátory\n    static_assert(std::velikost(typy) == max_colors);\n};\n\nconstexpr std::string_view getColorName(Color::Type color)\n{\n    return Color::colorName[barva];\n}\n\n// Naučte operátora<< tisknout barvu\n// std::ostream je typ std::cout\n// Návratový typ a typ parametru jsou odkazy (aby se zabránilo vytváření kopií)!\nstd::ostream& operátor<<(std::ostream& out, Barva::Barva typu)\n{\n    vrátit se << getColorName(color);\n}\n\nint main()\n{\n    for (auto c: Color::types) // ok: můžeme udělat rozsah založený na for na std::array\n        std::cout << c << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "stdarray-and-enumerations_b27",
       "type": "paragraph",
       "html": "<p>In the above example, since the element type of <code>Color::types</code> is <code>Color::Type</code>, variable <code>c</code> will be deduced as a <code>Color::Type</code>, which is exactly what we want!</p>",
       "preview": "In the above example, since the element type of Color::types is Color::Type, var",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu je typ prvků <code>Color::types</code> roven <code>Color::Type</code>, takže proměnná <code>c</code> bude odvozena jako <code>Color::Type</code>, což je přesně to, co chceme!</p>"
     },
     {
       "id": "stdarray-and-enumerations_b28",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b29",
       "type": "output",
       "text": "black\nred\nblue\n",
       "html": "<pre>black\nred\nblue\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>black\nred\nblue\n</pre>"
     },
     {
       "id": "stdarray-and-enumerations_b30",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "stdarray-and-enumerations_b31",
       "type": "paragraph",
       "html": "<p>Define a namespace named <code>Animal</code>. Inside it, define an enum containing the following animals: chicken, dog, cat, elephant, duck, and snake. Also create a struct named <code>Data</code> to store each animal’s name, number of legs, and the sound it makes. Create a <code>std::array</code> of Data and fill out a Data element for each animal.</p>",
       "preview": "Define a namespace named Animal. Inside it, define an enum containing the follow",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Definujte jmenný prostor s názvem <code>Animal</code>. Uvnitř něj definujte výčtový typ (enum) obsahující následující zvířata: chicken, dog, cat, elephant, duck a snake. Vytvořte také strukturu s názvem <code>Data</code> pro uložení jména každého zvířete, počtu jeho nohou a zvuku, který vydává. Vytvořte <code>std::array</code> struktur Data a vyplňte prvek Data pro každé zvíře.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b32",
       "type": "paragraph",
       "html": "<p>Ask the user to enter the name of an animal. If the name does not match the name of one of our animals, tell them so. Otherwise, print the data for that animal. Then print the data for all of the other animals that didn’t match their input.</p>",
       "preview": "Ask the user to enter the name of an animal. If the name does not match the name",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Požádejte uživatele o zadání jména zvířete. Pokud jméno neodpovídá žádnému z našich zvířat, informujte ho o tom. V opačném případě vypište data pro dané zvíře. Poté vypište data pro všechna ostatní zvířata, která neodpovídala jeho vstupu.</p>"
     },
     {
       "id": "stdarray-and-enumerations_b33",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "stdarray-and-enumerations_b34",
       "type": "output",
       "text": "Enter an animal: dog\nA dog has 4 legs and says woof.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n",
       "html": "<pre>Enter an animal: dog\nA dog has 4 legs and says woof.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Enter an animal: dog\nA dog has 4 legs and says woof.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n</pre>"
     },
     {
       "id": "stdarray-and-enumerations_b35",
       "type": "output",
       "text": "Enter an animal: frog\nThat animal couldn't be found.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA dog has 4 legs and says woof.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n",
       "html": "<pre>Enter an animal: frog\nThat animal couldn't be found.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA dog has 4 legs and says woof.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Enter an animal: frog\nThat animal couldn't be found.\n\nHere is the data for the rest of the animals:\nA chicken has 2 legs and says cluck.\nA dog has 4 legs and says woof.\nA cat has 4 legs and says meow.\nA elephant has 4 legs and says pawoo.\nA duck has 2 legs and says quack.\nA snake has 0 legs and says hissss.\n</pre>"
     },
     {
       "id": "stdarray-and-enumerations_b36",
@@ -277,5 +317,6 @@
       "solutionHtml": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;array&gt;\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nnamespace Animal\n{\n    enum Type\n    {\n        chicken,\n        dog,\n        cat,\n        elephant,\n        duck,\n        snake,\n        max_animals\n    };\n\n    struct Data\n    {\n        std::string_view name{};\n        int legs{};\n        std::string_view sound{};\n    };\n\n    constexpr std::array types { chicken, dog, cat, elephant, duck, snake };\n    constexpr std::array data {\n        Data{ \"chicken\",    2, \"cluck\" },\n        Data{ \"dog\",        4, \"woof\" },\n        Data{ \"cat\",        4, \"meow\" },\n        Data{ \"elephant\",   4, \"pawoo\" },\n        Data{ \"duck\",       2, \"quack\" },\n        Data{ \"snake\",      0, \"hissss\" },\n    };\n\n    static_assert(std::size(types) == max_animals);\n    static_assert(std::size(data) == max_animals);\n}\n\n// Teach operator&gt;&gt; how to input an Animal by name\n// We pass animal by non-const reference so we can have the function modify its value\nstd::istream&amp; operator&gt;&gt; (std::istream&amp; in, Animal::Type&amp; animal)\n{\n    std::string input {};\n    std::getline(in &gt;&gt; std::ws, input);\n\n    // See if we can find a match\n    for (std::size_t index=0; index &lt; Animal::data.size(); ++index)\n    {\n        if (input == Animal::data[index].name)\n        {\n            animal = static_cast&lt;Animal::Type&gt;(index);\n            return in;\n        }\n    }\n\n    // We didn't find a match, so input must have been invalid\n    // so we will set input stream to fail state\n    in.setstate(std::ios_base::failbit);\n    return in;\n}\n\nvoid printAnimalData(Animal::Type type)\n{\n    const Animal::Data&amp; animal { Animal::data[type] };\n    std::cout &lt;&lt; \"A \" &lt;&lt; animal.name &lt;&lt; \" has \" &lt;&lt; animal.legs &lt;&lt; \" legs and says \" &lt;&lt; animal.sound &lt;&lt; \".\\n\";    \n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter an animal: \";\n    Animal::Type type{};\n    std::cin &gt;&gt; type;\n\n    // If users input didn't match\n    if (!std::cin)\n    {\n        std::cin.clear();\n        std::cout &lt;&lt; \"That animal couldn't be found.\\n\";\n        type = Animal::max_animals; // set to invalid option so we don't match below\n    }\n    else\n        printAnimalData(type);\n\n\n    std::cout &lt;&lt; \"\\nHere is the data for the rest of the animals:\\n\";\n    for (auto a : Animal::types)\n    {\n        if (a != type)\n            printAnimalData(a);\n    }\n\n    return 0;\n}</code></pre>",
       "canCheck": true
     }
-  ]
+  ],
+  "title_cs": "17.6 — std::array a výčtové typy"
 }

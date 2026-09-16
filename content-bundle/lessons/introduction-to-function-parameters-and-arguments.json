@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In the previous lesson, we learned that we could have a function return a value back to the function’s caller. We used that to create a modular <em>getValueFromUser</em> function that we used in this program:</p>",
       "preview": "In the previous lesson, we learned that we could have a function return a value ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V předchozí lekci jsme se dozvěděli, že funkce může vrátit hodnotu zpět svému volajícímu. To jsme využili k vytvoření modulární funkce <em>getValueFromUser</em>, kterou jsme použili v tomto programu:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input;\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input;\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup;\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b2",
       "type": "paragraph",
       "html": "<p>However, what if we wanted to put the output line into its own function as well? You might try something like this:</p>",
       "preview": "However, what if we wanted to put the output line into its own function as well?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co kdybychom však chtěli přesunout výstupní řádek také do samostatné funkce? Mohli byste zkusit něco takového:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b3",
@@ -37,14 +40,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input;\n}\n\n// This function won't compile\nvoid printDouble()\n{\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble();\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input;\n}\n\n// This function won't compile\nvoid printDouble()\n{\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble();\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup;\n}\n\n// Tato funkce se nezkompiluje\nvoid printDouble()\n{\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble();\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b4",
       "type": "paragraph",
       "html": "<p>This won’t compile, because function <em>printDouble</em> doesn’t know what identifier <em>num</em> is. You might try defining num as a variable inside function printDouble():</p>",
       "preview": "This won’t compile, because function printDouble doesn’t know what identifier nu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento kód se nezkompiluje, protože funkce <em>printDouble</em> neví, co je identifikátor <em>num</em>. Mohli byste zkusit definovat num jako proměnnou uvnitř funkce printDouble():</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b5",
@@ -52,56 +57,65 @@
       "language": "cpp",
       "code": "void printDouble()\n{\n\tint num{}; // we added this line\n\tstd::cout << num << \" doubled is: \" << num * 2 << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printDouble()\n{\n\tint num{}; // we added this line\n\tstd::cout &lt;&lt; num &lt;&lt; \" doubled is: \" &lt;&lt; num * 2 &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void printDouble()\n{\n\tint num{}; // tento řádek jsme přidali\n\tstd::cout << num << \" zdvojené je: \" << num * 2 << '\\n';\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b6",
       "type": "paragraph",
       "html": "<p>While this addresses the compiler error and makes the program compile-able, the program still doesn’t work correctly (it always prints “0 doubled is: 0”). The core of the problem here is that function <em>printDouble</em> doesn’t have a way to access the value the user entered.</p>",
       "preview": "While this addresses the compiler error and makes the program compile-able, the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli se tímto vyřeší chyba kompilátoru a program lze zkompilovat, stále nefunguje správně (vždy vypíše „0 doubled is: 0“). Jádrem problému je, že funkce <em>printDouble</em> nemá způsob, jak přistoupit k hodnotě zadané uživatelem.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b7",
       "type": "paragraph",
       "html": "<p>We need some way to pass the value of variable <em>num</em> to function <em>printDouble</em> so that <em>printDouble</em> can use that value in the function body.</p>",
       "preview": "We need some way to pass the value of variable num to function printDouble so th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Potřebujeme nějaký způsob, jak předat hodnotu proměnné <em>num</em> do funkce <em>printDouble</em>, aby <em>printDouble</em> mohla tuto hodnotu použít ve svém těle.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b8",
       "type": "section",
       "title": "Function parameters and arguments",
       "html": "<h3 class=\"cpp-section-heading\">Function parameters and arguments</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Parametry a argumenty funkcí</h3>",
+      "title_cs": "Parametry a argumenty funkcí"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b9",
       "type": "paragraph",
       "html": "<p>In many cases, it is useful to be able to pass information <em>to</em> a function being called, so that the function has data to work with. For example, if we wanted to write a function to add two numbers, we need some way to tell the function which two numbers to add when we call it. Otherwise, how would the function know what to add? We do that via function parameters and arguments.</p>",
       "preview": "In many cases, it is useful to be able to pass information to a function being c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V mnoha případech je užitečné mít možnost předat informace <em>do</em> volané funkce, aby měla data, se kterými může pracovat. Pokud bychom například chtěli napsat funkci pro sečtení dvou čísel, potřebujeme nějaký způsob, jak funkci při jejím volání sdělit, která dvě čísla má sečíst. Jak jinak by funkce věděla, co má sčítat? To děláme prostřednictvím parametrů a argumentů funkcí.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b10",
       "type": "paragraph",
       "html": "<p>A <strong>function parameter</strong> is a variable used in the header of a function. Function parameters work almost identically to variables defined inside the function, but with one difference: they are initialized with a value provided by the caller of the function.</p>",
       "preview": "A function parameter is a variable used in the header of a function. Function pa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Parametr funkce</strong> je proměnná použitá v hlavičce funkce. Parametry funkcí fungují téměř identicky jako proměnné definované uvnitř funkce, ale s jedním rozdílem: jsou inicializovány hodnotou, kterou poskytne volající dané funkce.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b11",
       "type": "paragraph",
       "html": "<p>Function parameters are defined in the function header by placing them in between the parenthesis after the function name, with multiple parameters being separated by commas.</p>",
       "preview": "Function parameters are defined in the function header by placing them in betwee",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Parametry funkce se definují v hlavičce funkce tak, že se umístí do závorek za názvem funkce, přičemž více parametrů se odděluje čárkami.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b12",
       "type": "paragraph",
       "html": "<p>Here are some examples of functions with different numbers of parameters:</p>",
       "preview": "Here are some examples of functions with different numbers of parameters:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je několik příkladů funkcí s různým počtem parametrů:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b13",
@@ -109,14 +123,16 @@
       "language": "cpp",
       "code": "// This function takes no parameters\n// It does not rely on the caller for anything\nvoid doPrint()\n{\n    std::cout << \"In doPrint()\\n\";\n}\n\n// This function takes one integer parameter named x\n// The caller will supply the value of x\nvoid printValue(int x)\n{\n    std::cout << x << '\\n';\n}\n\n// This function has two integer parameters, one named x, and one named y\n// The caller will supply the value of both x and y\nint add(int x, int y)\n{\n    return x + y;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// This function takes no parameters\n// It does not rely on the caller for anything\nvoid doPrint()\n{\n    std::cout &lt;&lt; \"In doPrint()\\n\";\n}\n\n// This function takes one integer parameter named x\n// The caller will supply the value of x\nvoid printValue(int x)\n{\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n}\n\n// This function has two integer parameters, one named x, and one named y\n// The caller will supply the value of both x and y\nint add(int x, int y)\n{\n    return x + y;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Tato funkce nemá žádné parametry\n// V ničem se nespoléhá na volajícího\nvoid doPrint()\n{\n    std::cout << \"V doPrint()\\n\";\n}\n\n// Tato funkce přebírá jeden celočíselný parametr s názvem x\n// Volající dodá hodnotu x\nvoid printValue(int x)\n{\n    std::cout << x << '\\n';\n}\n\n// Tato funkce má dva celočíselné parametry, jeden s názvem x a druhý s názvem y\n// Volající dodá hodnotu x i y\nint přidat (int x, int y)\n{\n    návrat x + y;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b14",
       "type": "paragraph",
       "html": "<p>An <strong>argument</strong> is a value that is passed <em>from</em> the caller <em>to</em> the function when a function call is made:</p>",
       "preview": "An argument is a value that is passed from the caller to the function when a fun",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Argument</strong> je hodnota, která se předává <em>z</em> volajícího <em>do</em> funkce při volání funkce:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b15",
@@ -124,35 +140,41 @@
       "language": "cpp",
       "code": "doPrint(); // this call has no arguments\nprintValue(6); // 6 is the argument passed to function printValue()\nadd(2, 3); // 2 and 3 are the arguments passed to function add()",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">doPrint(); // this call has no arguments\nprintValue(6); // 6 is the argument passed to function printValue()\nadd(2, 3); // 2 and 3 are the arguments passed to function add()</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">doPrint(); // toto volání nemá žádné argumenty\nprintValue(6); // 6 je argument předaný funkci printValue()\nadd(2, 3); // 2 a 3 jsou argumenty předané funkci add()</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b16",
       "type": "paragraph",
       "html": "<p>Note that multiple arguments are also separated by commas.</p>",
       "preview": "Note that multiple arguments are also separated by commas.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že více argumentů se také odděluje čárkami.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b17",
       "type": "section",
       "title": "How parameters and arguments work together",
       "html": "<h3 class=\"cpp-section-heading\">How parameters and arguments work together</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak spolu fungují parametry a argumenty</h3>",
+      "title_cs": "Jak parametry a argumenty spolupracují"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b18",
       "type": "paragraph",
       "html": "<p>When a function is called, all of the parameters of the function are created as variables, and the value of each of the arguments is <em>copied</em> into the matching parameter (using copy initialization). This process is called <strong>pass by value</strong>. Function parameters that utilize pass by value are called <strong>value parameters</strong>.</p>",
       "preview": "When a function is called, all of the parameters of the function are created as ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při volání funkce jsou všechny parametry funkce vytvořeny jako proměnné a hodnota každého z argumentů je <em>zkopírována</em> do odpovídajícího parametru (pomocí kopírovací inicializace). Tento proces se nazývá <strong>předávání hodnotou</strong> (pass by value). Parametry funkce, které využívají předávání hodnotou, se nazývají <strong>hodnotové parametry</strong> (value parameters).</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b19",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b20",
@@ -160,49 +182,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// This function has two integer parameters, one named x, and one named y\n// The values of x and y are passed in by the caller\nvoid printValues(int x, int y)\n{\n    std::cout << x << '\\n';\n    std::cout << y << '\\n';\n}\n\nint main()\n{\n    printValues(6, 7); // This function call has two arguments, 6 and 7\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// This function has two integer parameters, one named x, and one named y\n// The values of x and y are passed in by the caller\nvoid printValues(int x, int y)\n{\n    std::cout &lt;&lt; x &lt;&lt; '\\n';\n    std::cout &lt;&lt; y &lt;&lt; '\\n';\n}\n\nint main()\n{\n    printValues(6, 7); // This function call has two arguments, 6 and 7\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Tato funkce má dva celočíselné parametry, jeden s názvem x a druhý s názvem y\n// Hodnoty x a y jsou předány volajícím\nvoid printValues(int x, int y)\n{\n    std::cout << x << '\\n';\n    std::cout << y << '\\n';\n}\n\nint main()\n{\n    printValues(6, 7); // Toto volání funkce má dva argumenty, 6 a 7\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b21",
       "type": "paragraph",
       "html": "<p>When function <em>printValues</em> is called with arguments <em>6</em> and <em>7</em>, <em>printValues</em>‘s parameter <em>x</em> is created and initialized with the value of <em>6</em>, and <em>printValues</em>‘s parameter <em>y</em> is created and initialized with the value of <em>7</em>.</p>",
       "preview": "When function printValues is called with arguments 6 and 7, printValues‘s parame",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je funkce <em>printValues</em> zavolána s argumenty <em>6</em> a <em>7</em>, vytvoří se parametr <em>x</em> funkce <em>printValues</em> a inicializuje se na hodnotu <em>6</em> a parametr <em>y</em> funkce <em>printValues</em> se vytvoří a inicializuje na hodnotu <em>7</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b22",
       "type": "paragraph",
       "html": "<p>This results in the output:</p>",
       "preview": "This results in the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výsledkem je následující výstup:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b23",
       "type": "output",
       "text": "6\n7\n",
       "html": "<pre>6\n7\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>6\n7\n</pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b24",
       "type": "paragraph",
       "html": "<p>Note that the number of arguments must generally match the number of function parameters, or the compiler will throw an error. The argument passed to a function can be any valid expression (as the argument is essentially just an initializer for the parameter, and initializers can be any valid expression).</p>",
       "preview": "Note that the number of arguments must generally match the number of function pa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že počet argumentů musí obecně odpovídat počtu parametrů funkce, jinak kompilátor ohlásí chybu. Argument předaný funkci může být libovolný platný výraz (protože argument je v podstatě jen inicializátorem pro parametr a inicializátorem může být jakýkoli platný výraz).</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b25",
       "type": "section",
       "title": "Fixing our challenge program",
       "html": "<h3 class=\"cpp-section-heading\">Fixing our challenge program</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Oprava našeho programu z výzvy</h3>",
+      "title_cs": "Opravujeme náš program výzev"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b26",
       "type": "paragraph",
       "html": "<p>We now have the tool we need to fix the program we presented at the top of the lesson:</p>",
       "preview": "We now have the tool we need to fix the program we presented at the top of the l",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní máme k dispozici nástroj, který potřebujeme k opravě programu představeného na začátku lekce:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b27",
@@ -210,35 +240,41 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input;\n}\n\nvoid printDouble(int value) // This function now has an integer parameter\n{\n\tstd::cout << value << \" doubled is: \" << value * 2 << '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble(num);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input;\n}\n\nvoid printDouble(int value) // This function now has an integer parameter\n{\n\tstd::cout &lt;&lt; value &lt;&lt; \" doubled is: \" &lt;&lt; value * 2 &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble(num);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup;\n}\n\nvoid printDouble(int value) // Tato funkce má nyní celočíselný parametr\n{\n\tstd::cout << hodnota << \" doubled is: \" << hodnota * 2 << '\\n';\n}\n\nint main()\n{\n\tint num { getValueFromUser() };\n\n\tprintDouble(num);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b28",
       "type": "paragraph",
       "html": "<p>In this program, variable <em>num</em> is first initialized with the value entered by the user. Then, function <em>printDouble</em> is called, and the value of argument <em>num</em> is copied into the <em>value</em> parameter of function <em>printDouble</em>. Function <em>printDouble</em> then uses the value of parameter <em>value</em>.</p>",
       "preview": "In this program, variable num is first initialized with the value entered by the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto programu je proměnná <em>num</em> nejprve inicializována hodnotou zadanou uživatelem. Poté je zavolána funkce <em>printDouble</em> a hodnota argumentu <em>num</em> je zkopírována do parametru <em>value</em> funkce <em>printDouble</em>. Funkce <em>printDouble</em> pak použije hodnotu parametru <em>value</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b29",
       "type": "section",
       "title": "Using return values as arguments",
       "html": "<h3 class=\"cpp-section-heading\">Using return values as arguments</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití návratových hodnot jako argumentů</h3>",
+      "title_cs": "Použití návratových hodnot jako argumentů"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b30",
       "type": "paragraph",
       "html": "<p>In the above problem, we can see that variable <em>num</em> is only used once, to transport the return value of function <em>getValueFromUser</em> to the argument of the call to function <em>printDouble</em>.</p>",
       "preview": "In the above problem, we can see that variable num is only used once, to transpo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném problému vidíme, že proměnná <em>num</em> je použita pouze jednou, k předání návratové hodnoty funkce <em>getValueFromUser</em> do argumentu volání funkce <em>printDouble</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b31",
       "type": "paragraph",
       "html": "<p>We can simplify the above example slightly as follows:</p>",
       "preview": "We can simplify the above example slightly as follows:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad můžeme mírně zjednodušit následovně:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b32",
@@ -246,42 +282,49 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Enter an integer: \";\n\tint input{};\n\tstd::cin >> input;  \n\n\treturn input;\n}\n\nvoid printDouble(int value)\n{\n\tstd::cout << value << \" doubled is: \" << value * 2 << '\\n';\n}\n\nint main()\n{\n\tprintDouble(getValueFromUser());\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint getValueFromUser()\n{\n \tstd::cout &lt;&lt; \"Enter an integer: \";\n\tint input{};\n\tstd::cin &gt;&gt; input;  \n\n\treturn input;\n}\n\nvoid printDouble(int value)\n{\n\tstd::cout &lt;&lt; value &lt;&lt; \" doubled is: \" &lt;&lt; value * 2 &lt;&lt; '\\n';\n}\n\nint main()\n{\n\tprintDouble(getValueFromUser());\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint getValueFromUser()\n{\n \tstd::cout << \"Zadejte celé číslo: \";\n\tvstup int{};\n\tstd::cin >> vstup;  \n\n\tnávratový vstup;\n}\n\nvoid printDouble (hodnota int)\n{\n\tstd::cout << hodnota << \" doubled is: \" << hodnota * 2 << '\\n';\n}\n\nint main()\n{\n\tprintDouble(getValueFromUser());\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b33",
       "type": "paragraph",
       "html": "<p>Now, we’re using the return value of function <em>getValueFromUser</em> directly as an argument to function <em>printDouble</em>!</p>",
       "preview": "Now, we’re using the return value of function getValueFromUser directly as an ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní používáme návratovou hodnotu funkce <em>getValueFromUser</em> přímo jako argument funkce <em>printDouble</em>!</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b34",
       "type": "paragraph",
       "html": "<p>Although this program is more concise (and makes it clear that the value read by the user will be used for nothing else), you may also find this “compact syntax” a bit hard to read. If you’re more comfortable sticking with the version that uses the variable instead, that’s fine.</p>",
       "preview": "Although this program is more concise (and makes it clear that the value read by",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ačkoli je tento program stručnější (a jasně ukazuje, že hodnota načtená od uživatele nebude použita k ničemu jinému), může vám tato „kompaktní syntaxe“ připadat trochu hůře čitelná. Pokud se cítíte lépe u verze, která místo toho používá proměnnou, je to naprosto v pořádku.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b35",
       "type": "section",
       "title": "How parameters and return values work together",
       "html": "<h3 class=\"cpp-section-heading\">How parameters and return values work together</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak parametry a návratové hodnoty spolupracují</h3>",
+      "title_cs": "Jak parametry a návratové hodnoty spolupracují"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b36",
       "type": "paragraph",
       "html": "<p>By using both parameters and a return value, we can create functions that take data as input, do some calculation with it, and return the value to the caller.</p>",
       "preview": "By using both parameters and a return value, we can create functions that take d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Použitím parametrů i návratové hodnoty můžeme vytvářet funkce, které přijímají data jako vstup, provedou s nimi určitý výpočet a vrátí hodnotu volajícímu.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b37",
       "type": "paragraph",
       "html": "<p>Here is an example of a very simple function that adds two numbers together and returns the result to the caller:</p>",
       "preview": "Here is an example of a very simple function that adds two numbers together and ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad velmi jednoduché funkce, která sečte dvě čísla a vrátí výsledek volajícímu:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b38",
@@ -289,63 +332,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// add() takes two integers as parameters, and returns the result of their sum\n// The values of x and y are determined by the function that calls add()\nint add(int x, int y)\n{\n    return x + y;\n}\n\n// main takes no parameters\nint main()\n{\n    std::cout << add(4, 5) << '\\n'; // Arguments 4 and 5 are passed to function add()\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// add() takes two integers as parameters, and returns the result of their sum\n// The values of x and y are determined by the function that calls add()\nint add(int x, int y)\n{\n    return x + y;\n}\n\n// main takes no parameters\nint main()\n{\n    std::cout &lt;&lt; add(4, 5) &lt;&lt; '\\n'; // Arguments 4 and 5 are passed to function add()\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// add() vezme dvě celá čísla jako parametry a vrátí výsledek jejich součtu\n// Hodnoty x a y jsou určeny funkcí, která volá add()\nint přidat (int x, int y)\n{\n    návrat x + y;\n}\n\n// main nemá žádné parametry\nint main()\n{\n    std::cout << add(4, 5) << '\\n'; // Argumenty 4 a 5 jsou předány funkci add()\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b39",
       "type": "paragraph",
       "html": "<p>Execution starts at the top of <em>main</em>. When <code>add(4, 5)</code> is evaluated, function <em>add</em> is called, with parameter <em>x</em> being initialized with value <em>4</em>, and parameter <em>y</em> being initialized with value <em>5</em>.</p>",
       "preview": "Execution starts at the top of main. When add(4, 5) is evaluated, function add i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Provádění začíná na začátku <em>main</em>. Při vyhodnocení <code>add(4, 5)</code> je zavolána funkce <em>add</em>, přičemž parametr <em>x</em> je inicializován hodnotou <em>4</em> a parametr <em>y</em> hodnotou <em>5</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b40",
       "type": "paragraph",
       "html": "<p>The <em>return statement</em> in function <em>add</em> evaluates <em>x + y</em> to produce the value <em>9</em>, which is then returned back to <em>main</em>. This value of <em>9</em> is then sent to <em>std::cout</em> to be printed on the console.</p>",
       "preview": "The return statement in function add evaluates x + y to produce the value 9, whi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příkaz <em>return</em> ve funkci <em>add</em> vyhodnotí výraz <em>x + y</em> na hodnotu <em>9</em>, která se následně vrátí zpět do funkce <em>main</em>. Tato hodnota <em>9</em> je poté odeslána do <em>std::cout</em>, aby se vypsala na konzoli.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b41",
       "type": "paragraph",
       "html": "<p>Output:</p>",
       "preview": "Output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výstup:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b42",
       "type": "output",
       "text": "9\n",
       "html": "<pre>9\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>9\n</pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b43",
       "type": "paragraph",
       "html": "<p>In pictorial format:</p>",
       "preview": "In pictorial format:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V obrázkové podobě:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b44",
       "type": "paragraph",
       "html": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter2/ParametersReturn.png\" alt=\"\"></div>",
       "preview": "",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-image-wrapper\"><img src=\"https://www.learncpp.com/images/CppTutorial/Chapter2/ParametersReturn.png\" alt=\"\"></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b45",
       "type": "section",
       "title": "More examples",
       "html": "<h3 class=\"cpp-section-heading\">More examples</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Další příklady</h3>",
+      "title_cs": "Další příklady"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b46",
       "type": "paragraph",
       "html": "<p>Let’s take a look at some more function calls:</p>",
       "preview": "Let’s take a look at some more function calls:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na několik dalších volání funkcí:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b47",
@@ -353,42 +406,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint multiply(int z, int w)\n{\n    return z * w;\n}\n\nint main()\n{\n    std::cout << add(4, 5) << '\\n'; // within add() x=4, y=5, so x+y=9\n    std::cout << add(1 + 2, 3 * 4) << '\\n'; // within add() x=3, y=12, so x+y=15\n\n    int a{ 5 };\n    std::cout << add(a, a) << '\\n'; // evaluates (5 + 5)\n\n    std::cout << add(1, multiply(2, 3)) << '\\n'; // evaluates 1 + (2 * 3)\n    std::cout << add(1, add(2, 3)) << '\\n'; // evaluates 1 + (2 + 3)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y)\n{\n    return x + y;\n}\n\nint multiply(int z, int w)\n{\n    return z * w;\n}\n\nint main()\n{\n    std::cout &lt;&lt; add(4, 5) &lt;&lt; '\\n'; // within add() x=4, y=5, so x+y=9\n    std::cout &lt;&lt; add(1 + 2, 3 * 4) &lt;&lt; '\\n'; // within add() x=3, y=12, so x+y=15\n\n    int a{ 5 };\n    std::cout &lt;&lt; add(a, a) &lt;&lt; '\\n'; // evaluates (5 + 5)\n\n    std::cout &lt;&lt; add(1, multiply(2, 3)) &lt;&lt; '\\n'; // evaluates 1 + (2 * 3)\n    std::cout &lt;&lt; add(1, add(2, 3)) &lt;&lt; '\\n'; // evaluates 1 + (2 + 3)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint přidat (int x, int y)\n{\n    návrat x + y;\n}\n\nint násobit (int z, int w)\n{\n    návrat z * w;\n}\n\nint main()\n{\n    std::cout << add(4, 5) << '\\n'; // v rámci add() x=4, y=5, takže x+y=9\n    std::cout << add(1 + 2, 3 * 4) << '\\n'; // v rámci add() x=3, y=12, takže x+y=15\n\n    int a{ 5 };\n    std::cout << add(a, a) << '\\n'; // vyhodnotí (5 + 5)\n\n    std::cout << add(1, multiply(2, 3)) << '\\n'; // vyhodnotí 1 + (2 * 3)\n    std::cout << add(1, add(2, 3)) << '\\n'; // vyhodnotí 1 + (2 + 3)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b48",
       "type": "paragraph",
       "html": "<p>This program produces the output:</p>",
       "preview": "This program produces the output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program vytvoří následující výstup:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b49",
       "type": "output",
       "text": "9\n15\n10\n7\n6\n",
       "html": "<pre>9\n15\n10\n7\n6\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>9\n15\n10\n7\n6\n</pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b50",
       "type": "paragraph",
       "html": "<p>The first statement is straightforward.</p>",
       "preview": "The first statement is straightforward.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První příkaz je přímočarý.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b51",
       "type": "paragraph",
       "html": "<p>In the second statement, the arguments are expressions that get evaluated before being passed. In this case, <em>1 + 2</em> evaluates to <em>3</em>, so <em>3</em> is copied to parameter <em>x</em>. <em>3 * 4</em> evaluates to <em>12</em>, so <em>12</em> is copied to parameter <em>y</em>. <em>add(3, 12)</em> resolves to <em>15</em>.</p>",
       "preview": "In the second statement, the arguments are expressions that get evaluated before",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve druhém příkazu jsou argumenty výrazy, které se před předáním vyhodnotí. V tomto případě se <em>1 + 2</em> vyhodnotí na <em>3</em>, takže se <em>3</em> zkopíruje do parametru <em>x</em>. <em>3 * 4</em> se vyhodnotí na <em>12</em>, takže se <em>12</em> zkopíruje do parametru <em>y</em>. <em>add(3, 12)</em> se vyhodnotí na <em>15</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b52",
       "type": "paragraph",
       "html": "<p>The next pair of statements is relatively easy as well:</p>",
       "preview": "The next pair of statements is relatively easy as well:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Další dvojice příkazů je také poměrně jednoduchá:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b53",
@@ -396,21 +455,24 @@
       "language": "cpp",
       "code": "    int a{ 5 };\n    std::cout << add(a, a) << '\\n'; // evaluates (5 + 5)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    int a{ 5 };\n    std::cout &lt;&lt; add(a, a) &lt;&lt; '\\n'; // evaluates (5 + 5)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> int a{ 5 };\n    std::cout << add(a, a) << '\\n'; // vyhodnotí (5 + 5)</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b54",
       "type": "paragraph",
       "html": "<p>In this case, <em>add()</em> is called where the value of <em>a</em> is copied into both parameters <em>x</em> and <em>y</em>. Since <em>a</em> has value <em>5</em>, <em>add(a, a)</em> = <em>add(5, 5)</em>, which resolves to value <em>10</em>.</p>",
       "preview": "In this case, add() is called where the value of a is copied into both parameter",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto případě se volá funkce <em>add()</em>, kde je hodnota <em>a</em> zkopírována do obou parametrů <em>x</em> i <em>y</em>. Protože <em>a</em> má hodnotu <em>5</em>, <em>add(a, a)</em> = <em>add(5, 5)</em>, což se vyhodnotí na hodnotu <em>10</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b55",
       "type": "paragraph",
       "html": "<p>Let’s take a look at the first tricky statement in the bunch:</p>",
       "preview": "Let’s take a look at the first tricky statement in the bunch:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na první záludný příkaz z této skupiny:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b56",
@@ -418,28 +480,32 @@
       "language": "cpp",
       "code": "    std::cout << add(1, multiply(2, 3)) << '\\n'; // evaluates 1 + (2 * 3)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; add(1, multiply(2, 3)) &lt;&lt; '\\n'; // evaluates 1 + (2 * 3)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> std::cout << add(1, multiply(2, 3)) << '\\n'; // vyhodnotí 1 + (2 * 3)</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b57",
       "type": "paragraph",
       "html": "<p>When the function <em>add</em> is executed, the program needs to determine what the values for parameters <em>x</em> and <em>y</em> are. <em>x</em> is simple since we just passed it the integer <em>1</em>. To get a value for parameter <em>y</em>, it needs to evaluate <em>multiply(2, 3)</em> first. The program calls <em>multiply</em> and initializes <em>z</em> = <em>2</em> and <em>w</em> = <em>3</em>, so <em>multiply(2, 3)</em> returns the integer value <em>6</em>. That return value of <em>6</em> can now be used to initialize the <em>y</em> parameter of the <em>add</em> function. <em>add(1, 6)</em> returns the integer <em>7</em>, which is then passed to std::cout for printing.</p>",
       "preview": "When the function add is executed, the program needs to determine what the value",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se funkce <em>add</em> vykonává, program potřebuje zjistit, jaké jsou hodnoty parametrů <em>x</em> a <em>y</em>. <em>x</em> je jednoduché, protože jsme mu prostě předali celé číslo <em>1</em>. Aby získal hodnotu pro parametr <em>y</em>, musí nejprve vyhodnotit <em>multiply(2, 3)</em>. Program zavolá funkci <em>multiply</em> a inicializuje <em>z</em> = <em>2</em> a <em>w</em> = <em>3</em>, takže <em>multiply(2, 3)</em> vrátí celočíselnou hodnotu <em>6</em>. Tuto návratovou hodnotu <em>6</em> lze nyní použít k inicializaci parametru <em>y</em> funkce <em>add</em>. <em>add(1, 6)</em> vrátí celé číslo <em>7</em>, které se pak předá do std::cout k vypsání.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b58",
       "type": "paragraph",
       "html": "<p>Put less verbosely:<br><em>add(1, multiply(2, 3))</em> evaluates to <em>add(1, 6)</em> evaluates to <em>7</em></p>",
       "preview": "Put less verbosely:add(1, multiply(2, 3)) evaluates to add(1, 6) evaluates to 7",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stručněji řečeno:<br><em>add(1, multiply(2, 3))</em> se vyhodnotí jako <em>add(1, 6)</em>, což se vyhodnotí jako <em>7</em></p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b59",
       "type": "paragraph",
       "html": "<p>The following statement looks tricky because one of the arguments given to <em>add</em> is another call to <em>add</em>.</p>",
       "preview": "The following statement looks tricky because one of the arguments given to add i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující příkaz vypadá záludně, protože jeden z argumentů předaných funkci <em>add</em> je další volání funkce <em>add</em>.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b60",
@@ -447,42 +513,49 @@
       "language": "cpp",
       "code": "    std::cout << add(1, add(2, 3)) << '\\n'; // evaluates 1 + (2 + 3)",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">    std::cout &lt;&lt; add(1, add(2, 3)) &lt;&lt; '\\n'; // evaluates 1 + (2 + 3)</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\"> std::cout << add(1, add(2, 3)) << '\\n'; // vyhodnotí 1 + (2 + 3)</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b61",
       "type": "paragraph",
       "html": "<p>But this case works exactly the same as the prior case. add(2, 3) resolves first, resulting in the return value of <em>5</em>. Now it can resolve add(1, 5), which evaluates to the value <em>6</em>, which is passed to std::cout for printing.</p>",
       "preview": "But this case works exactly the same as the prior case. add(2, 3) resolves first",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento případ však funguje úplně stejně jako ten předchozí. Nejprve se vyhodnotí add(2, 3), což vede k návratové hodnotě <em>5</em>. Nyní se může vyhodnotit add(1, 5), což se vyhodnotí na hodnotu <em>6</em>, která je předána do std::cout k vypsání.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b62",
       "type": "paragraph",
       "html": "<p>Less verbosely:<br><em>add(1, add(2, 3))</em> evaluates to <em>add(1, 5)</em> =&gt; evaluates to <em>6</em></p>",
       "preview": "Less verbosely:add(1, add(2, 3)) evaluates to add(1, 5) => evaluates to 6",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stručněji:<br><em>add(1, add(2, 3))</em> se vyhodnotí na <em>add(1, 5)</em> =&gt; vyhodnotí se na <em>6</em></p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b63",
       "type": "section",
       "title": "Unreferenced parameters and unnamed parameters",
       "html": "<h3 class=\"cpp-section-heading\">Unreferenced parameters and unnamed parameters</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Neodkazované parametry a nepojmenované parametry</h3>",
+      "title_cs": "Neodkazované parametry a nepojmenované parametry"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b64",
       "type": "paragraph",
       "html": "<p>In certain cases, you will encounter functions that have parameters that are not used in the body of the function. These are called <strong>unreferenced parameters</strong>.</p>",
       "preview": "In certain cases, you will encounter functions that have parameters that are not",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V určitých případech narazíte na funkce, které mají parametry, jež nejsou v těle funkce použity. Tyto parametry se nazývají <strong>neodkazované parametry</strong> (unreferenced parameters).</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b65",
       "type": "paragraph",
       "html": "<p>As a trivial example:</p>",
       "preview": "As a trivial example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako triviální příklad:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b66",
@@ -490,21 +563,24 @@
       "language": "cpp",
       "code": "void doSomething(int count) // warning: unreferenced parameter count\n{\n    // This function used to do something with count but it is not used any longer\n}\n\nint main()\n{\n    doSomething(4);\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int count) // warning: unreferenced parameter count\n{\n    // This function used to do something with count but it is not used any longer\n}\n\nint main()\n{\n    doSomething(4);\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int count) // warning: unreferenced parameter count\n{\n    // Tato funkce kdysi dělala něco s počtem, ale už se nepoužívá\n}\n\nint main()\n{\n    doSomething(4);\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b67",
       "type": "paragraph",
       "html": "<p>Just like with unused local variables, your compiler will probably warn that variable <code>count</code> has been defined but not used.</p>",
       "preview": "Just like with unused local variables, your compiler will probably warn that var",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u nepoužitých lokálních proměnných vás kompilátor pravděpodobně upozorní, že proměnná <code>count</code> byla definována, ale nebyla použita.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b68",
       "type": "paragraph",
       "html": "<p>In a function definition, the name of a function parameter is optional. Therefore, in cases where a function parameter needs to exist but is not used in the body of the function, you can simply omit the name. A parameter without a name is called an <strong>unnamed parameter</strong>:</p>",
       "preview": "In a function definition, the name of a function parameter is optional. Therefor",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V definici funkce je název parametru volitelný. V případech, kdy parametr funkce musí existovat, ale v těle funkce není použit, můžete jeho název jednoduše vynechat. Parametr bez názvu se nazývá <strong>nepojmenovaný parametr</strong>:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b69",
@@ -512,14 +588,16 @@
       "language": "cpp",
       "code": "void doSomething(int) // ok: unnamed parameter will not generate warning\n{\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int) // ok: unnamed parameter will not generate warning\n{\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int) // ok: nepojmenovaný parametr nevygeneruje varování\n{\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b70",
       "type": "paragraph",
       "html": "<p>The Google C++ style guide recommends using a comment to document what the unnamed parameter was:</p>",
       "preview": "The Google C++ style guide recommends using a comment to document what the unnam",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Google C++ style guide doporučuje pomocí komentáře zdokumentovat, jaký význam tento nepojmenovaný parametr měl:</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b71",
@@ -527,7 +605,8 @@
       "language": "cpp",
       "code": "void doSomething(int /*count*/)\n{\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int /*count*/)\n{\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void doSomething(int /*count*/)\n{\n}</code></pre>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b72",
@@ -535,7 +614,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>You’re probably wondering why we’d write a function that has a parameter whose value isn’t used. This happens most often in cases similar to the following:</p><ol start=\"1\"><li>Let’s say we have a function with a single parameter. Later, the function is updated in some way, and the value of the parameter is no longer needed. If the now-unused function parameter were simply removed, then every existing call to the function would break (because the function call would be supplying more arguments than the function could accept). This would require us to find every call to the function and remove the unneeded argument. This might be a lot of work (and require a lot of retesting). It also might not even be possible (in cases where we did not control all of the code calling the function). So instead, we might leave the parameter as it is, and just have it do nothing.</li></ol></div>",
       "preview": "Author’s noteYou’re probably wondering why we’d write a function that has a parameter whose value is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Pravděpodobně se ptáte, proč bychom psali funkci, která má parametr, jehož hodnota se nepoužívá. K tomu dochází nejčastěji v případech podobných následujícím:</p><ol start=\"1\"><li>Řekněme, že máme funkci s jedním parametrem. Později je funkce nějakým způsobem upravena a hodnota tohoto parametru již není potřeba. Pokud by byl nyní nevyužívaný parametr funkce jednoduše odstraněn, rozbila by se všechna existující volání této funkce (protože volání funkce by předávala více argumentů, než může funkce přijmout). To by od nás vyžadovalo najít každé volání funkce a nepotřebný argument odstranit. To by mohlo představovat spoustu práce (a vyžadovat rozsáhlé přetestování). Nemusí to být dokonce ani možné (v případech, kdy nemáme pod kontrolou veškerý kód, který danou funkci volá). Místo toho tedy můžeme parametr ponechat tak, jak je, a jednoduše s ním nic nedělat.</li></ol></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b73",
@@ -543,7 +623,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>Other cases where this occurs:</p><ol start=\"2\"><li>Operators <code>++</code> and <code>--</code> have prefix and postfix variants (e.g. <code>++foo</code> vs <code>foo++</code>). An unreferenced function parameter is used to differentiate whether an overload of such an operator is for the prefix or postfix case. We cover this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-the-increment-and-decrement-operators/\">21.8 -- Overloading the increment and decrement operators</a>.</li><li>When we need to determine something from the type (rather than the value) of a type template parameter.</li></ol></div>",
       "preview": "For advanced readersOther cases where this occurs:Operators ++ and -- have prefix and postfix varian",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Další případy, kdy k tomu dochází:</p><ol start=\"2\"><li>Operátory <code>++</code> a <code>--</code> mají prefixové a postfixové varianty (např. <code>++foo</code> vs. <code>foo++</code>). Nepoužitý parametr funkce se používá k rozlišení, zda je přetížení takového operátoru určeno pro prefixovou, nebo postfixovou variantu. Tomuto tématu se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-the-increment-and-decrement-operators/\">21.8 – Přetěžování operátorů inkrementace a dekrementace</a>.</li><li>Když potřebujeme něco určit z typu (spíše než z hodnoty) typového parametru šablony.</li></ol></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b74",
@@ -551,7 +632,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Author’s note</p><p>If unnamed parameters still don’t make sense to you yet, don’t worry. We’ll encounter them again in future lessons, when we have more context to explain when they are useful.</p></div>",
       "preview": "Author’s noteIf unnamed parameters still don’t make sense to you yet, don’t worry. We’ll encounter t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Poznámka autora</p><p>Pokud vám nepojmenované parametry zatím nedávají smysl, nedělejte si starosti. V budoucích lekcích se s nimi setkáme znovu, až budeme mít více kontextu k vysvětlení, kdy jsou užitečné.</p></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b75",
@@ -559,63 +641,75 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>When a function parameter exists but is not used in the body of the function, do not give it a name. You can optionally put a name inside a comment.</p></div>",
       "preview": "Best practiceWhen a function parameter exists but is not used in the body of the function, do not gi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud parametr funkce existuje, ale v těle funkce se nepoužívá, nepojmenovávejte jej. Název můžete volitelně uvést v komentáři.</p></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b76",
       "type": "section",
       "title": "Conclusion",
       "html": "<h3 class=\"cpp-section-heading\">Conclusion</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Závěr</h3>",
+      "title_cs": "Závěr"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b77",
       "type": "paragraph",
       "html": "<p>Function parameters and return values are the key mechanisms by which functions can be written in a reusable way, as it allows us to write functions that can perform tasks and return retrieved or calculated results back to the caller without knowing what the specific inputs or outputs are ahead of time.</p>",
       "preview": "Function parameters and return values are the key mechanisms by which functions ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Parametry funkcí a návratové hodnoty jsou klíčovými mechanismy, díky nimž lze funkce psát znovupoužitelným způsobem. Umožňují nám totiž vytvářet funkce, které mohou provádět úkoly a vracet získané či vypočítané výsledky zpět volajícímu, aniž by předem znaly konkrétní vstupy nebo výstupy.</p>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b78",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b79",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #1</p><p>What’s wrong with this program fragment?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(4, 5) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\">multiply() has a return type of void, meaning it is a non-value returning function. Since the function is trying to return a value (via a return statement), this function will produce a compiler error. The return type should be int.</div><p></p></div>",
       "preview": "Question #1What’s wrong with this program fragment?#include <iostream> void mult",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka #1</p><p>Co je špatně na tomto fragmentu programu?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nvoid multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(4, 5) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_0'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_0\" style=\"display:none\">multiply() má návratový typ void, což znamená, že jde o funkci, která nevrací žádnou hodnotu. Protože se funkce pokouší vrátit hodnotu (pomocí příkazu return), vyvolá tato funkce chybu při překladu (compiler error). Návratový typ by měl být int.</div><p></p></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b80",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #2</p><p>What two things are wrong with this program fragment?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint multiply(int x, int y)\n{\n    int product { x * y };\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">Problem 1: main() passes one argument to multiply(), but multiply() requires two arguments. Problem 2: multiply() doesn’t have a return statement.</div><p></p></div>",
       "preview": "Question #2What two things are wrong with this program fragment?#include <iostre",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka #2</p><p>Které dvě věci jsou na tomto fragmentu programu špatně?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint multiply(int x, int y)\n{\n    int product { x * y };\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_1'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_1\" style=\"display:none\">Problém 1: main() předává funkci multiply() jeden argument, ale multiply() vyžaduje argumenty dva. Problém 2: multiply() neobsahuje příkaz return.</div><p></p></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b81",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #3</p><p>What value does the following program print?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(add(1, 2, 3), 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\">multiply is called where x = add(1, 2, 3), and y = 4. First, the CPU resolves x = add(1, 2, 3), which returns 1 + 2 + 3, or x = 6. multiply(6, 4) = 24, which is the answer.</div><p></p></div>",
       "preview": "Question #3What value does the following program print?#include <iostream> int a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka #3</p><p>Jakou hodnotu vypíše následující program?</p><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint add(int x, int y, int z)\n{\n    return x + y + z;\n}\n\nint multiply(int x, int y)\n{\n    return x * y;\n}\n\nint main()\n{\n    std::cout &lt;&lt; multiply(add(1, 2, 3), 4) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_2'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_2\" style=\"display:none\">multiply je volána tak, že x = add(1, 2, 3) a y = 4. Nejprve procesor vyhodnotí x = add(1, 2, 3), což vrátí 1 + 2 + 3, tedy x = 6. multiply(6, 4) = 24, což je výsledná odpověď.</div><p></p></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b82",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #4</p><p>Write a function called doubleNumber() that takes one integer parameter. The function should return double the value of the parameter.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doubleNumber(int x)\n{\n    return 2 * x;\n}</code></pre></div></div>",
       "preview": "Question #4Write a function called doubleNumber() that takes one integer paramet",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 4</p><p>Napište funkci s názvem doubleNumber(), která přijímá jeden celočíselný parametr. Funkce by měla vrátit dvojnásobek hodnoty tohoto parametru.</p><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_3'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_3\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int doubleNumber(int x)\n{\n    return 2 * x;\n}</code></pre></div></div>"
     },
     {
       "id": "introduction-to-function-parameters-and-arguments_b83",
       "type": "paragraph",
       "html": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Question #5</p><ol start=\"5\"><li>Write a complete program that reads an integer from the user, doubles it using the doubleNumber() function you wrote in the previous quiz question, and then prints the doubled value out to the console.</li></ol><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_4'),this,'Show Solution','Hide Solution')\">Show Solution</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint doubleNumber(int x)\n{\n    return 2 * x;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter an integer value: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    std::cout &lt;&lt; doubleNumber(x) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p>Note: You may come up with other (similar) solutions. There are often many ways to do the same thing in C++.</p></div><p></p></div>",
       "preview": "Question #5Write a complete program that reads an integer from the user, doubles",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"quiz\" style=\"clear:both\"><p class=\"quiz-header\">Otázka č. 5</p><ol start=\"5\"><li>Napište kompletní program, který načte celé číslo od uživatele, zdvojnásobí ho pomocí funkce doubleNumber(), kterou jste napsali v předchozí otázce kvízu, a poté zdvojnásobenou hodnotu vypíše do konzole.</li></ol><p><a class=\"solution_link_show\" href=\"javascript:void(0)\" onclick=\"cppSolutionToggle(document.getElementById('cpp_solution_id_4'),this,'Show Solution','Hide Solution')\">Ukázat řešení</a></p><div class=\"wpsolution\" id=\"cpp_solution_id_4\" style=\"display:none\"><pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint doubleNumber(int x)\n{\n    return 2 * x;\n}\n\nint main()\n{\n    std::cout &lt;&lt; \"Enter an integer value: \";\n    int x{};\n    std::cin &gt;&gt; x;\n    std::cout &lt;&lt; doubleNumber(x) &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre><p>Poznámka: Možná jste vymysleli jiné (podobné) řešení. V C++ často existuje mnoho způsobů, jak udělat totéž.</p></div><p></p></div>"
     }
-  ]
+  ],
+  "title_cs": "2.4 — Úvod do parametrů a argumentů funkcí"
 }

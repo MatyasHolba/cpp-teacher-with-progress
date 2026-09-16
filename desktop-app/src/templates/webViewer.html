@@ -667,7 +667,8 @@
     });
 
     // Language Management
-    let currentLanguage = localStorage.getItem('cpp_web_lang') || 'cs';
+    const defaultContentLang = (window.EXPORT_SETTINGS && window.EXPORT_SETTINGS.contentLanguage) ? window.EXPORT_SETTINGS.contentLanguage : 'cs';
+    let currentLanguage = localStorage.getItem('cpp_web_lang') || defaultContentLang;
     let blockLangOverrides = {}; // blockId -> 'cs' | 'en'
     const langSelect = document.getElementById('lang-select');
     if (langSelect) {

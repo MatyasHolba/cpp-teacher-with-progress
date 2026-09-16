@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>If you were to ask a veteran programmer for <em>one</em> piece of advice on good programming practices, after some thought, the most likely answer would be, “Avoid global variables!”. And with good reason: global variables are one of the most historically abused concepts in the language. Although they may seem harmless in small academic programs, they are often problematic in larger ones.</p>",
       "preview": "If you were to ask a veteran programmer for one piece of advice on good programm",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kdybyste se zkušeného programátora zeptali na <em>jednu</em> radu ohledně správných programátorských postupů, po chvíli přemýšlení by vám s největší pravděpodobností odpověděl: „Vyhýbejte se globálním proměnným!“. A má to dobrý důvod: globální proměnné patří k historicky nejvíce zneužívaným konceptům v jazyce. Ačkoli se v malých akademických programech mohou zdát neškodné, ve větších projektech bývají často problematické.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b1",
       "type": "paragraph",
       "html": "<p>New programmers are often tempted to use lots of global variables, because they are easy to work with, especially when many calls to different functions are involved (passing data through function parameters is a pain). However, this is generally a bad idea. Many developers believe non-const global variables should be avoided completely!</p>",
       "preview": "New programmers are often tempted to use lots of global variables, because they ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začínající programátoři jsou často v pokušení používat spoustu globálních proměnných, protože se s nimi snadno pracuje, zejména pokud dochází k mnoha voláním různých funkcí (předávání dat přes parametry funkcí je přece otrava). Obecně je to však špatný nápad. Mnoho vývojářů se domnívá, že by se non-const globálním proměnným mělo zcela vyhnout!</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b2",
       "type": "paragraph",
       "html": "<p>But before we go into why, we should make a clarification. When developers tell you that global variables are evil, they’re usually not talking about <em>all</em> global variables. They’re mostly talking about non-const global variables.</p>",
       "preview": "But before we go into why, we should make a clarification. When developers tell ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než se však pustíme do vysvětlování proč, měli bychom si ujasnit jednu věc. Když vám vývojáři říkají, že globální proměnné jsou zlo, obvykle tím nemyslí <em>všechny</em> globální proměnné. Mluví především o non-const globálních proměnných.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b3",
       "type": "section",
       "title": "Why (non-const) global variables are evil",
       "html": "<h3 class=\"cpp-section-heading\">Why (non-const) global variables are evil</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Proč jsou (non-const) globální proměnné zlé</h3>",
+      "title_cs": "Proč jsou (nekonstantní) globální proměnné zlé"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b4",
       "type": "paragraph",
       "html": "<p>By far the biggest reason non-const global variables are dangerous is because their values can be changed by <em>any</em> function that is called, and there is no easy way for the programmer to know that this will happen. Consider the following program:</p>",
       "preview": "By far the biggest reason non-const global variables are dangerous is because th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zdaleka největším důvodem, proč jsou nekonstantní globální proměnné nebezpečné, je to, že jejich hodnotu může změnit <em>jakákoli</em> volaná funkce a programátor nemá žádný snadný způsob, jak zjistit, že k tomu dojde. Uvažujme následující program:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b5",
@@ -50,35 +56,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint g_mode; // declare global variable (will be zero-initialized by default)\n\nvoid doSomething()\n{\n    g_mode = 2; // set the global g_mode variable to 2\n}\n\nint main()\n{\n    g_mode = 1; // note: this sets the global g_mode variable to 1.  It does not declare a local g_mode variable!\n\n    doSomething();\n\n    // Programmer still expects g_mode to be 1\n    // But doSomething changed it to 2!\n\n    if (g_mode == 1)\n    {\n        std::cout << \"No threat detected.\\n\";\n    }\n    else\n    {\n        std::cout << \"Launching nuclear missiles...\\n\";\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint g_mode; // declare global variable (will be zero-initialized by default)\n\nvoid doSomething()\n{\n    g_mode = 2; // set the global g_mode variable to 2\n}\n\nint main()\n{\n    g_mode = 1; // note: this sets the global g_mode variable to 1.  It does not declare a local g_mode variable!\n\n    doSomething();\n\n    // Programmer still expects g_mode to be 1\n    // But doSomething changed it to 2!\n\n    if (g_mode == 1)\n    {\n        std::cout &lt;&lt; \"No threat detected.\\n\";\n    }\n    else\n    {\n        std::cout &lt;&lt; \"Launching nuclear missiles...\\n\";\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint g_mode; // deklarovat globální proměnnou (ve výchozím nastavení bude nulová inicializována)\n\nvoid doSomething()\n{\n    g_mode = 2; // nastaví globální proměnnou g_mode na 2\n}\n\nint main()\n{\n    g_mode = 1; // poznámka: toto nastaví globální proměnnou g_mode na 1. Nedeklaruje lokální proměnnou g_mode!\n\n    doSomething();\n\n    // Programátor stále očekává, že g_mode bude 1\n    // Ale doSomething to změnilo na 2!\n\n    if (g_mode == 1)\n    {\n        std::cout << \"Nebyla zjištěna žádná hrozba.\\n\";\n    }\n    jinak\n    {\n        std::cout << \"Odpalování jaderných střel...\\n\";\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b6",
       "type": "paragraph",
       "html": "<p>Note that the programmer set variable <code>g_mode</code> to <em>1</em>, and then called <code>doSomething()</code>. Unless the programmer had explicit knowledge that <code>doSomething()</code> was going to change the value of <code>g_mode</code>, he or she was probably not expecting <code>doSomething()</code> to change the value! Consequently, the rest of <code>main()</code> doesn’t work like the programmer expects (and the world is obliterated).</p>",
       "preview": "Note that the programmer set variable g_mode to 1, and then called doSomething()",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že programátor nastavil proměnnou <code>g_mode</code> na <em>1</em> a poté zavolal <code>doSomething()</code>. Pokud programátor výslovně nevěděl, že <code>doSomething()</code> změní hodnotu <code>g_mode</code>, pravděpodobně vůbec nečekal, že <code>doSomething()</code> tuto hodnotu změní! V důsledku toho zbytek funkce <code>main()</code> nefunguje tak, jak programátor očekává (a svět zanikne).</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b7",
       "type": "paragraph",
       "html": "<p>In short, global variables make the program’s state unpredictable. Every function call becomes potentially dangerous, and the programmer has no easy way of knowing which ones are dangerous and which ones aren’t! Local variables are much safer because other functions can not affect them directly.</p>",
       "preview": "In short, global variables make the program’s state unpredictable. Every functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stručně řečeno, globální proměnné činí stav programu nepředvídatelným. Každé volání funkce se stává potenciálně nebezpečným a programátor nemá snadný způsob, jak zjistit, která jsou nebezpečná a která ne! Lokální proměnné jsou mnohem bezpečnější, protože je ostatní funkce nemohou přímo ovlivnit.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b8",
       "type": "paragraph",
       "html": "<p>There are plenty of other good reasons not to use non-const globals.</p>",
       "preview": "There are plenty of other good reasons not to use non-const globals.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Existuje spousta dalších dobrých důvodů, proč nepoužívat non-const globální proměnné.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b9",
       "type": "paragraph",
       "html": "<p>With global variables, it’s not uncommon to find a piece of code that looks like this:</p>",
       "preview": "With global variables, it’s not uncommon to find a piece of code that looks like",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U globálních proměnných není neobvyklé narazit na kód, který vypadá nějak takto:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b10",
@@ -86,42 +97,48 @@
       "language": "cpp",
       "code": "void someFunction()\n{\n    // useful code\n\n    if (g_mode == 4)\n    {\n        // do something good\n    }\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction()\n{\n    // useful code\n\n    if (g_mode == 4)\n    {\n        // do something good\n    }\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void someFunction()\n{\n    // užitečný kód\n\n    if (g_mode == 4)\n    {\n        // udělej něco dobrého\n    }\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b11",
       "type": "paragraph",
       "html": "<p>After debugging, you determine that your program isn’t working correctly because <code>g_mode</code> has value <code>3</code>, not <em>4</em>. How do you fix it? Now you need to find all of the places <code>g_mode</code> could possibly be set to <code>3</code>, and trace through how it got set in the first place. It’s possible this may be in a totally unrelated piece of code!</p>",
       "preview": "After debugging, you determine that your program isn’t working correctly because",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po ladění zjistíte, že váš program nefunguje správně, protože <code>g_mode</code> má hodnotu <code>3</code>, nikoli <em>4</em>. Jak to opravíte? Nyní musíte najít všechna místa, kde by <code>g_mode</code> mohl být potenciálně nastaven na <code>3</code>, a vysledovat, jak k jeho nastavení vůbec došlo. Je docela možné, že se tak stalo v naprosto nesouvisející části kódu!</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b12",
       "type": "paragraph",
       "html": "<p>One of the key reasons to declare local variables as close to where they are used as possible is because doing so minimizes the amount of code you need to look through to understand what the variable does. Global variables are at the opposite end of the spectrum -- because they can be accessed anywhere, you might have to look through the entire program to understand their usage. In small programs, this might not be an issue. In large ones, it will be.</p>",
       "preview": "One of the key reasons to declare local variables as close to where they are use",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z hlavních důvodů, proč deklarovat lokální proměnné co nejblíže místu jejich použití, je minimalizace množství kódu, který musíte projít, abyste pochopili, co daná proměnná dělá. Globální proměnné jsou na opačném konci spektra – protože k nim lze přistupovat odkudkoli, možná budete muset projít celý program, abyste jejich použití porozuměli. V malých programech to nemusí být problém. Ve velkých ale bude.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b13",
       "type": "paragraph",
       "html": "<p>For example, you might find <code>g_mode</code> is referenced 442 times in your program. Unless <code>g_mode</code> is well documented, you’ll potentially have to look through every use of <code>g_mode</code> to understand how it’s being used in different cases, what its valid values are, and what its overall function is.</p>",
       "preview": "For example, you might find g_mode is referenced 442 times in your program. Unle",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete například zjistit, že na <code>g_mode</code> se ve vašem programu odkazuje 442krát. Pokud není <code>g_mode</code> dobře zdokumentován, budete muset potenciálně projít každé použití <code>g_mode</code>, abyste pochopili, jak se v různých případech používá, jaké jsou jeho platné hodnoty a jaká je jeho celková funkce.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b14",
       "type": "paragraph",
       "html": "<p>Global variables also make your program less modular and less flexible. A function that utilizes nothing but its parameters and has no side effects is perfectly modular. Modularity helps both in understanding what a program does, as well as with reusability. Global variables reduce modularity significantly.</p>",
       "preview": "Global variables also make your program less modular and less flexible. A functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Globální proměnné také snižují modularitu a flexibilitu vašeho programu. Funkce, která nevyužívá nic jiného než své parametry a nemá žádné vedlejší účinky, je dokonale modulární. Modularita napomáhá jak porozumění tomu, co program dělá, tak i jeho znovupoužitelnosti. Globální proměnné modularitu výrazně snižují.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b15",
       "type": "paragraph",
       "html": "<p>In particular, avoid using global variables for important “decision-point” variables (e.g. variables you’d use in a conditional statement, like variable <code>g_mode</code> in the example above). Your program isn’t likely to break if a global variable holding an informational value changes (e.g. like the user’s name). It is much more likely to break if you change a global variable that impacts <em>how</em> your program actually functions.</p>",
       "preview": "In particular, avoid using global variables for important “decision-point” varia",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obzvláště se vyhněte používání globálních proměnných pro důležité „rozhodovací“ proměnné (např. proměnné, které byste použili v podmíněném příkazu, jako je proměnná <code>g_mode</code> ve výše uvedeném příkladu). Není příliš pravděpodobné, že se váš program rozbije, pokud se změní globální proměnná nesoucí informativní hodnotu (např. jméno uživatele). Je však mnohem pravděpodobnější, že se rozbije, pokud změníte globální proměnnou, která ovlivňuje to, <em>jak</em> váš program skutečně funguje.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b16",
@@ -129,49 +146,57 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use local variables instead of global variables whenever possible.</p></div>",
       "preview": "Best practiceUse local variables instead of global variables whenever possible.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Kdykoli je to možné, používejte místo globálních proměnných lokální proměnné.</p></div>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b17",
       "type": "section",
       "title": "The initialization order problem of global variables",
       "html": "<h3 class=\"cpp-section-heading\">The initialization order problem of global variables</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Problém s pořadím inicializace globálních proměnných</h3>",
+      "title_cs": "Problém pořadí inicializace globálních proměnných"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b18",
       "type": "paragraph",
       "html": "<p>Initialization of static variables (which includes global variables) happens as part of program startup, before execution of the <code>main</code> function. This proceeds in two phases.</p>",
       "preview": "Initialization of static variables (which includes global variables) happens as ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Inicializace statických proměnných (což zahrnuje i globální proměnné) probíhá v rámci spouštění programu, ještě před vykonáním funkce <code>main</code>. Tento proces probíhá ve dvou fázích.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b19",
       "type": "paragraph",
       "html": "<p>The first phase is called <strong>static initialization</strong>. Static initialization proceeds in two phases:</p>",
       "preview": "The first phase is called static initialization. Static initialization proceeds ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>První fáze se nazývá <strong>statická inicializace</strong>. Statická inicializace probíhá ve dvou fázích:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b20",
       "type": "list",
       "html": "<ul><li>Global variables with constexpr initializers (including literals) are initialized to those values. This is called <strong>constant initialization</strong>.</li><li>Global variables without initializers are zero-initialized. Zero-initialization is considered to be a form of static-initialization since <code>0</code> is a constexpr value.</li></ul>",
       "preview": "Global variables with constexpr initializers (including literals) are initialize",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Globální proměnné s constexpr inicializátory (včetně literálů) jsou inicializovány na tyto hodnoty. Tomu se říká <strong>konstantní inicializace</strong> (constant initialization).</li><li>Globální proměnné bez inicializátorů jsou inicializovány nulou (zero-initialized). Nulová inicializace je považována za formu statické inicializace, protože <code>0</code> je hodnota constexpr.</li></ul>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b21",
       "type": "paragraph",
       "html": "<p>The second phase is called <strong>dynamic initialization</strong>. This phase is more complex and nuanced, but the gist of it is that global variables with non-constexpr initializers are initialized.</p>",
       "preview": "The second phase is called dynamic initialization. This phase is more complex an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Druhá fáze se nazývá <strong>dynamická inicializace</strong> (dynamic initialization). Tato fáze je složitější a má více nuancí, ale její podstatou je, že se inicializují globální proměnné s inicializátory, které nejsou typu constexpr.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b22",
       "type": "paragraph",
       "html": "<p>Here’s an example of a non-constexpr initializer:</p>",
       "preview": "Here’s an example of a non-constexpr initializer:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad inicializátoru, který není constexpr:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b23",
@@ -179,14 +204,16 @@
       "language": "cpp",
       "code": "int init()\n{\n    return 5;\n}\n\nint g_something{ init() }; // non-constexpr initialization",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int init()\n{\n    return 5;\n}\n\nint g_something{ init() }; // non-constexpr initialization</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int init()\n{\n    návrat 5;\n}\n\nint g_něco{ init() }; // inicializace bez constexpru</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b24",
       "type": "paragraph",
       "html": "<p>Within a single file, for each phase, global variables are generally initialized in order of definition (there are a few exceptions to this rule for the dynamic initialization phase). Given this, you need to be careful not to have variables dependent on the initialization value of other variables that won’t be initialized until later. For example:</p>",
       "preview": "Within a single file, for each phase, global variables are generally initialized",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V rámci jednoho souboru jsou globální proměnné pro každou fázi obecně inicializovány v pořadí jejich definice (pro fázi dynamické inicializace existuje z tohoto pravidla několik výjimek). Vzhledem k tomu si musíte dávat pozor, aby proměnné nezávisely na inicializační hodnotě jiných proměnných, které budou inicializovány až později. Například:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b25",
@@ -194,35 +221,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nint initX();  // forward declaration\nint initY();  // forward declaration\n\nint g_x{ initX() }; // g_x is initialized first\nint g_y{ initY() };\n\nint initX()\n{\n    return g_y; // g_y isn't initialized when this is called\n}\n\nint initY()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout << g_x << ' ' << g_y << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nint initX();  // forward declaration\nint initY();  // forward declaration\n\nint g_x{ initX() }; // g_x is initialized first\nint g_y{ initY() };\n\nint initX()\n{\n    return g_y; // g_y isn't initialized when this is called\n}\n\nint initY()\n{\n    return 5;\n}\n\nint main()\n{\n    std::cout &lt;&lt; g_x &lt;&lt; ' ' &lt;&lt; g_y &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nint initX();  // dopředné prohlášení\nint initY();  // dopředné prohlášení\n\nint g_x{ initX() }; // g_x je inicializován jako první\nint g_y{ initY() };\n\nint initX()\n{\n    návrat g_y; // g_y není inicializován, když je to voláno\n}\n\nint initY()\n{\n    návrat 5;\n}\n\nint main()\n{\n    std::cout << g_x << ' ' << g_y << '\\n';\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b26",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vypíše:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b27",
       "type": "output",
       "text": "0 5\n",
       "html": "<pre>0 5\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0 5\n</pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b28",
       "type": "paragraph",
       "html": "<p>Much more of a problem, the order in which static objects are initialized across different translation units is ambiguous.</p>",
       "preview": "Much more of a problem, the order in which static objects are initialized across",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnohem větším problémem je, že pořadí, v jakém jsou statické objekty inicializovány napříč různými překladovými jednotkami, je nejednoznačné.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b29",
       "type": "paragraph",
       "html": "<p>Given two files, <em>a.cpp</em> and <em>b.cpp</em>, either could have its global variables initialized first. If some variable with static duration in <em>a.cpp</em> is initialized with a static duration variable defined in <em>b.cpp</em>, there’s a 50% chance that the variable in <em>b.cpp</em> won’t be initialized yet.</p>",
       "preview": "Given two files, a.cpp and b.cpp, either could have its global variables initial",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Máme-li dva soubory, <em>a.cpp</em> a <em>b.cpp</em>, globální proměnné v kterémkoli z nich mohou být inicializovány jako první. Pokud je nějaká proměnná se statickou dobou trvání v <em>a.cpp</em> inicializována pomocí proměnné se statickou dobou trvání definované v <em>b.cpp</em>, existuje 50% šance, že proměnná v <em>b.cpp</em> ještě inicializována nebude.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b30",
@@ -230,7 +262,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Nomenclature</p><p>The ambiguity in the order that objects with static storage duration in different translation units are initialized is often called the <a href=\"https://en.cppreference.com/w/cpp/language/siof\">static initialization order fiasco</a>.</p></div>",
       "preview": "NomenclatureThe ambiguity in the order that objects with static storage duration in different transl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Názvosloví</p><p>Nejednoznačnost v pořadí, v jakém jsou inicializovány objekty se statickou dobou uložení v různých překladových jednotkách, se často označuje jako <a href=\"https://en.cppreference.com/w/cpp/language/siof\">static initialization order fiasco</a> (fiasko s pořadím statické inicializace).</p></div>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b31",
@@ -238,77 +271,90 @@
       "calloutType": "warning",
       "html": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Warning</p><p>Avoid initializing objects with static duration using other objects with static duration from a different translation unit.</p><p>Dynamic initialization of global variables is also susceptible to initialization order issues and should be avoided whenever possible.</p></div>",
       "preview": "WarningAvoid initializing objects with static duration using other objects with static duration from",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightredbackground\"><p class=\"cpp-note-title cpp-bottomline\">Varování</p><p>Vyhněte se inicializaci objektů se statickou dobou trvání (static duration) pomocí jiných objektů se statickou dobou trvání z jiné překladové jednotky.</p><p>Dynamická inicializace globálních proměnných je také náchylná k problémům s pořadím inicializace a měli byste se jí vyhnout, kdykoli je to možné.</p></div>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b32",
       "type": "section",
       "title": "So what are very good reasons to use non-const global variables?",
       "html": "<h3 class=\"cpp-section-heading\">So what are very good reasons to use non-const global variables?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jaké jsou tedy opravdu dobré důvody pro použití nekonstantních globálních proměnných?</h3>",
+      "title_cs": "Jaké jsou tedy velmi dobré důvody pro použití non-const globálních proměnných?"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b33",
       "type": "paragraph",
       "html": "<p>There aren’t many. In most cases, using local variables and passing them as arguments to other functions is preferable. But in some cases, judicious use of non-const global variables <em>can</em> actually reduce program complexity, and in these rare cases, their use may be better than the alternatives.</p>",
       "preview": "There aren’t many. In most cases, using local variables and passing them as argu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho jich není. Ve většině případů je vhodnější používat lokální proměnné a předávat je jako argumenty dalším funkcím. V některých případech však uvážlivé použití nekonstantních globálních proměnných <em>může</em> složitost programu ve skutečnosti snížit a v těchto vzácných případech může být jejich použití lepší než alternativy.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b34",
       "type": "paragraph",
       "html": "<p>A good example is a log file, where you can dump error or debug information. It probably makes sense to define this as a global, because you’re likely to only have one such log in a program and it will likely be used everywhere in your program. Another good example would be a random number generator (we show an example of this in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Global random numbers (Random.h)</a>).</p>",
       "preview": "A good example is a log file, where you can dump error or debug information. It ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dobrým příkladem je logovací soubor, do kterého můžete zapisovat chybové nebo ladicí informace. Pravděpodobně dává smysl jej definovat jako globální proměnnou, protože v programu budete mít s největší pravděpodobností pouze jeden takový log a ten se bude pravděpodobně používat napříč celým programem. Dalším dobrým příkladem by byl generátor náhodných čísel (ukázku uvádíme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/global-random-numbers-random-h/\">8.15 -- Globální náhodná čísla (Random.h)</a>).</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b35",
       "type": "paragraph",
       "html": "<p>For what it’s worth, the std::cout and std::cin objects are implemented as global variables (inside the <em>std</em> namespace).</p>",
       "preview": "For what it’s worth, the std::cout and std::cin objects are implemented as globa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jen pro zajímavost, objekty std::cout a std::cin jsou implementovány jako globální proměnné (uvnitř jmenného prostoru <em>std</em>).</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b36",
       "type": "paragraph",
       "html": "<p>As a rule of thumb, any use of a global variable should meet at least the following two criteria: There should only ever be one of the thing the variable represents in your program, and its use should be ubiquitous throughout your program.</p>",
       "preview": "As a rule of thumb, any use of a global variable should meet at least the follow",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podle osvědčeného pravidla by jakékoli použití globální proměnné mělo splňovat alespoň následující dvě kritéria: V programu by měla vždy existovat pouze jedna instance věci, kterou proměnná reprezentuje, a její použití by mělo být všudypřítomné v celém vašem programu.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b37",
       "type": "paragraph",
       "html": "<p>Many new programmers make the mistake of thinking that something can be implemented as a global because only one is needed <em>right now</em>. For example, you might think that because you’re implementing a single player game, you only need one player. But what happens later when you want to add a multiplayer mode (versus or hotseat)?</p>",
       "preview": "Many new programmers make the mistake of thinking that something can be implemen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho začínajících programátorů dělá tu chybu, že si myslí, že něco může být implementováno jako globální proměnná, protože je potřeba jen jedna <em>právě teď</em>. Můžete si například říct, že jelikož implementujete hru pro jednoho hráče, potřebujete pouze jednoho hráče. Co se ale stane později, až budete chtít přidat režim pro více hráčů (versus nebo hotseat)?</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b38",
       "type": "section",
       "title": "Protecting yourself from global destruction",
       "html": "<h3 class=\"cpp-section-heading\">Protecting yourself from global destruction</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak se chránit před globální zkázou</h3>",
+      "title_cs": "Chraňte se před globálním zničením"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b39",
       "type": "paragraph",
       "html": "<p>If you do find a good use for a non-const global variable, a few useful bits of advice will minimize the amount of trouble you can get into. This advice isn’t only for non-const global variables, but can help with all global variables.</p>",
       "preview": "If you do find a good use for a non-const global variable, a few useful bits of ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud přece jen najdete dobré uplatnění pro nekonstantní globální proměnnou, několik užitečných rad minimalizuje množství problémů, do kterých se můžete dostat. Tyto rady se netýkají pouze nekonstantních globálních proměnných, ale mohou pomoci se všemi globálními proměnnými.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b40",
       "type": "paragraph",
       "html": "<p>First, prefix all non-namespaced global variables with “g” or “g_”, or better yet, put them in a namespace (discussed in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/user-defined-namespaces-and-the-scope-resolution-operator/\">7.2 -- User-defined namespaces and the scope resolution operator</a>), to reduce the chance of naming collisions.</p>",
       "preview": "First, prefix all non-namespaced global variables with “g” or “g_”, or better ye",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zaprvé, přidejte ke všem globálním proměnným, které nejsou v namespace, prefix „g“ nebo „g_“, nebo ještě lépe, vložte je do namespace (probíráno v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/user-defined-namespaces-and-the-scope-resolution-operator/\">7.2 – Uživatelsky definované namespaces a operátor rozlišení rozsahu</a>), abyste snížili šanci na kolize názvů.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b41",
       "type": "paragraph",
       "html": "<p>For example, instead of:</p>",
       "preview": "For example, instead of:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například místo:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b42",
@@ -316,14 +362,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nconstexpr double gravity { 9.8 }; // risk of collision with some other global variable named gravity\n\nint main()\n{\n    std::cout << gravity << '\\n'; // unclear if this is a local or global variable from the name\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconstexpr double gravity { 9.8 }; // risk of collision with some other global variable named gravity\n\nint main()\n{\n    std::cout &lt;&lt; gravity &lt;&lt; '\\n'; // unclear if this is a local or global variable from the name\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nconstexpr dvojitá gravitace { 9,8 }; // riziko kolize s nějakou jinou globální proměnnou jménem gravitace\n\nint main()\n{\n    std::cout << gravitace << '\\n'; // z názvu není jasné, zda se jedná o lokální nebo globální proměnnou\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b43",
       "type": "paragraph",
       "html": "<p>Do this:</p>",
       "preview": "Do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Udělejte toto:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b44",
@@ -331,28 +379,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 }; // will not collide with other global variables named gravity\n}\n\nint main()\n{\n    std::cout << constants::gravity << '\\n'; // clear this is a global variable (since namespaces are global)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 }; // will not collide with other global variables named gravity\n}\n\nint main()\n{\n    std::cout &lt;&lt; constants::gravity &lt;&lt; '\\n'; // clear this is a global variable (since namespaces are global)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nkonstanty jmenného prostoru\n{\n    constexpr dvojitá gravitace { 9,8 }; // nebude kolidovat s jinými globálními proměnnými jménem gravitace\n}\n\nint main()\n{\n    std::cout << konstanty::gravitace << '\\n'; // clear toto je globální proměnná (protože jmenné prostory jsou globální)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b45",
       "type": "paragraph",
       "html": "<p>Second, instead of allowing direct access to the global variable, it’s a better practice to “encapsulate” the variable. Make sure the variable can only be accessed from within the file it’s declared in, e.g. by making the variable static or const, then provide external global “access functions” to work with the variable. These functions can ensure proper usage is maintained (e.g. do input validation, range checking, etc…). Also, if you ever decide to change the underlying implementation (e.g. move from one database to another), you only have to update the access functions instead of every piece of code that uses the global variable directly.</p>",
       "preview": "Second, instead of allowing direct access to the global variable, it’s a better ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, místo povolení přímého přístupu ke globální proměnné je lepším postupem proměnnou „zapouzdřit“. Zajistěte, aby k proměnné bylo možné přistupovat pouze ze souboru, ve kterém je deklarována, např. nastavením proměnné jako static nebo const, a poté poskytněte externí globální „přístupové funkce“ pro práci s touto proměnnou. Tyto funkce mohou zajistit dodržení správného použití (např. provádět validaci vstupu, kontrolu mezí atd.). Pokud se navíc někdy rozhodnete změnit podkladovou implementaci (např. přejít z jedné databáze na jinou), stačí aktualizovat pouze přístupové funkce namísto každého kusu kódu, který globální proměnnou používá přímo.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b46",
       "type": "paragraph",
       "html": "<p>For example, instead of this:</p>",
       "preview": "For example, instead of this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například místo tohoto:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b47",
       "type": "paragraph",
       "html": "<p>constants.cpp:</p>",
       "preview": "constants.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>constants.cpp:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b48",
@@ -360,14 +412,16 @@
       "language": "cpp",
       "code": "namespace constants\n{\n    extern const double gravity { 9.8 }; // has external linkage, can be accessed by other files\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace constants\n{\n    extern const double gravity { 9.8 }; // has external linkage, can be accessed by other files\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">konstanty jmenného prostoru\n{\n    extern const double gravity { 9,8 }; // má externí propojení, lze k němu přistupovat jinými soubory\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b49",
       "type": "paragraph",
       "html": "<p>main.cpp:</p>",
       "preview": "main.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>main.cpp:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b50",
@@ -375,21 +429,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nnamespace constants\n{\n    extern const double gravity; // forward declaration\n}\n\nint main()\n{\n    std::cout << constants::gravity << '\\n'; // direct access to global variable\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    extern const double gravity; // forward declaration\n}\n\nint main()\n{\n    std::cout &lt;&lt; constants::gravity &lt;&lt; '\\n'; // direct access to global variable\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nkonstanty jmenného prostoru\n{\n    vnější konst dvojitá gravitace; // dopředné prohlášení\n}\n\nint main()\n{\n    std::cout << konstanty::gravitace << '\\n'; // přímý přístup ke globální proměnné\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b51",
       "type": "paragraph",
       "html": "<p>Do this:</p>",
       "preview": "Do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Udělejte toto:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b52",
       "type": "paragraph",
       "html": "<p>contants.cpp:</p>",
       "preview": "contants.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>contants.cpp:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b53",
@@ -397,14 +454,16 @@
       "language": "cpp",
       "code": "namespace constants\n{\n    constexpr double gravity { 9.8 }; // has internal linkage, is accessible only within this file\n}\n\ndouble getGravity() // has external linkage, can be accessed by other files\n{\n    // We could add logic here if needed later\n    // or change the implementation transparently to the callers\n    return constants::gravity;\n} ",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">namespace constants\n{\n    constexpr double gravity { 9.8 }; // has internal linkage, is accessible only within this file\n}\n\ndouble getGravity() // has external linkage, can be accessed by other files\n{\n    // We could add logic here if needed later\n    // or change the implementation transparently to the callers\n    return constants::gravity;\n} </code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">konstanty jmenného prostoru\n{\n    constexpr dvojitá gravitace { 9,8 }; // má vnitřní propojení, je přístupné pouze v tomto souboru\n}\n\ndouble getGravity() // má externí propojení, lze k němu přistupovat jinými soubory\n{\n    // V případě potřeby bychom sem mohli přidat logiku později\n    // nebo změnit implementaci transparentně pro volající\n    návratové konstanty::gravitace;\n} </code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b54",
       "type": "paragraph",
       "html": "<p>main.cpp:</p>",
       "preview": "main.cpp:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>main.cpp:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b55",
@@ -412,7 +471,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\ndouble getGravity(); // forward declaration\n\nint main()\n{\n    std::cout << getGravity() << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\ndouble getGravity(); // forward declaration\n\nint main()\n{\n    std::cout &lt;&lt; getGravity() &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ndouble getGravity(); // dopředné prohlášení\n\nint main()\n{\n    std::cout << getGravity() << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b56",
@@ -420,21 +480,24 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Global <code>const</code> variables have internal linkage by default, <code>gravity</code> doesn’t need to be <code>static</code>.</p></div>",
       "preview": "A reminderGlobal const variables have internal linkage by default, gravity doesn’t need to be static",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Globální <code>const</code> proměnné mají ve výchozím nastavení interní vazbu (internal linkage), <code>gravity</code> tedy nemusí být <code>static</code>.</p></div>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b57",
       "type": "paragraph",
       "html": "<p>Third, when writing an otherwise standalone function that uses the global variable, don’t use the variable directly in your function body. Pass it in as an argument instead. That way, if your function ever needs to use a different value for some circumstance, you can simply vary the argument. This helps maintain modularity.</p>",
       "preview": "Third, when writing an otherwise standalone function that uses the global variab",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zatřetí, když píšete jinak samostatnou funkci, která globální proměnnou využívá, nepoužívejte tuto proměnnou přímo v těle funkce. Místo toho ji předejte jako argument. Tímto způsobem, pokud vaše funkce bude někdy za určitých okolností potřebovat použít jinou hodnotu, můžete jednoduše změnit předaný argument. To pomáhá udržovat modularitu.</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b58",
       "type": "paragraph",
       "html": "<p>Instead of:</p>",
       "preview": "Instead of:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Místo:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b59",
@@ -442,14 +505,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function is only useful for calculating your instant velocity based on the global gravity\ndouble instantVelocity(int time)\n{\n    return constants::gravity * time;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5) << '\\n';\n\n    return 0;\n\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function is only useful for calculating your instant velocity based on the global gravity\ndouble instantVelocity(int time)\n{\n    return constants::gravity * time;\n}\n\nint main()\n{\n    std::cout &lt;&lt; instantVelocity(5) &lt;&lt; '\\n';\n\n    return 0;\n\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nkonstanty jmenného prostoru\n{\n    constexpr dvojitá gravitace { 9,8 };\n}\n\n// Tato funkce je užitečná pouze pro výpočet vaší okamžité rychlosti na základě globální gravitace\ndouble instantVelocity (int time)\n{\n    návratové konstanty::gravitace * čas;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5) << '\\n';\n\n    návrat 0;\n\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b60",
       "type": "paragraph",
       "html": "<p>Do this:</p>",
       "preview": "Do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Udělejte toto:</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b61",
@@ -457,35 +522,42 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function can calculate the instant velocity for any gravity value (more useful)\ndouble instantVelocity(int time, double gravity)\n{\n    return gravity * time;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5, constants::gravity) << '\\n'; // pass our constant to the function as a parameter\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nnamespace constants\n{\n    constexpr double gravity { 9.8 };\n}\n\n// This function can calculate the instant velocity for any gravity value (more useful)\ndouble instantVelocity(int time, double gravity)\n{\n    return gravity * time;\n}\n\nint main()\n{\n    std::cout &lt;&lt; instantVelocity(5, constants::gravity) &lt;&lt; '\\n'; // pass our constant to the function as a parameter\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nkonstanty jmenného prostoru\n{\n    constexpr dvojitá gravitace { 9,8 };\n}\n\n// Tato funkce dokáže vypočítat okamžitou rychlost pro jakoukoli hodnotu gravitace (užitečnější)\ndouble instantVelocity (int čas, dvojitá gravitace)\n{\n    návrat gravitace * čas;\n}\n\nint main()\n{\n    std::cout << instantVelocity(5, konstanty::gravitace) << '\\n'; // předáme funkci jako parametr naši konstantu\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b62",
       "type": "section",
       "title": "A C++ joke",
       "html": "<h3 class=\"cpp-section-heading\">A C++ joke</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vtip o C++</h3>",
+      "title_cs": "C++ vtip"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b63",
       "type": "paragraph",
       "html": "<p>What’s the best naming prefix for a global variable?</p>",
       "preview": "What’s the best naming prefix for a global variable?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jaký je nejlepší prefix pro pojmenování globální proměnné?</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b64",
       "type": "paragraph",
       "html": "<p>Answer: //</p>",
       "preview": "Answer: //",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odpověď: //</p>"
     },
     {
       "id": "why-non-const-global-variables-are-evil_b65",
       "type": "paragraph",
       "html": "<p>This joke is worth all the comments.</p>",
       "preview": "This joke is worth all the comments.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento vtip stojí za všechny ty komentáře.</p>"
     }
-  ]
+  ],
+  "title_cs": "7.8 — Proč jsou (nekonstantní) globální proměnné zlo"
 }

@@ -14,175 +14,203 @@
       "type": "paragraph",
       "html": "<p>Consider the case where you are writing a program where the user will enter a list of values (such as a bunch of test scores). In this case, the number of values that they will be entering is not known at compile time, and could vary every time they run the program. You will be storing these values in a <code>std::vector</code> for display and/or processing.</p>",
       "preview": "Consider the case where you are writing a program where the user will enter a li",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Představte si situaci, kdy píšete program, do kterého uživatel zadává seznam hodnot (například sadu výsledků testů). V tomto případě není počet zadávaných hodnot v době překladu znám a může se při každém spuštění programu lišit. Tyto hodnoty budete ukládat do <code>std::vector</code> pro jejich zobrazení a/nebo zpracování.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b1",
       "type": "paragraph",
       "html": "<p>Based on what we’ve discussed so far, there are a few ways in which you might approach this:</p>",
       "preview": "Based on what we’ve discussed so far, there are a few ways in which you might ap",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na základě toho, co jsme dosud probrali, existuje několik způsobů, jak k tomu můžete přistoupit:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b2",
       "type": "paragraph",
       "html": "<p>First, you could ask the user how many entries they have, create a vector with that length, and then ask the user to enter that number of values.</p>",
       "preview": "First, you could ask the user how many entries they have, create a vector with t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve byste se mohli uživatele zeptat, kolik položek má, vytvořit vektor o této délce a poté ho požádat o zadání daného počtu hodnot.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b3",
       "type": "paragraph",
       "html": "<p>This isn’t a bad approach, but it requires the user to know exactly how many entries they have ahead of time, and to not have made a mistake in counting. Manually counting more than ten or twenty items can be tedious -- and why ask the user to count the number of values entered when we should be doing that for them?</p>",
       "preview": "This isn’t a bad approach, but it requires the user to know exactly how many ent",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To není špatný přístup, ale vyžaduje, aby uživatel předem přesně věděl, kolik položek má, a nespletl se při jejich počítání. Ruční počítání více než deseti nebo dvaceti položek může být zdlouhavé a únavné – a proč nutit uživatele počítat počet zadaných hodnot, když bychom to měli dělat za něj?</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b4",
       "type": "paragraph",
       "html": "<p>Alternatively, we could just assume the user won’t want to enter more than some number of values (e.g. 30), and create (or resize) a vector with that many elements. Then we can ask the user to enter data until they are done (or until they reach 30 entered values). Because the length of a vector is meant to be the number of used elements, we can then resize the vector to the number of values the user actually entered.</p>",
       "preview": "Alternatively, we could just assume the user won’t want to enter more than some ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případně bychom mohli jednoduše předpokládat, že uživatel nebude chtít zadat více než určitý počet hodnot (např. 30), a vytvořit (nebo změnit velikost) vektor s tímto počtem prvků. Poté můžeme uživatele nechat zadávat data, dokud neskončí (nebo dokud nedosáhne 30 zadaných hodnot). Vzhledem k tomu, že délka vektoru má vyjadřovat počet použitých prvků, můžeme následně velikost vektoru upravit na počet hodnot, které uživatel skutečně zadal.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b5",
       "type": "paragraph",
       "html": "<p>The downside of this approach is that the user is limited to entering 30 values, and we have no idea if that is too many or too few. If the user wants to enter more values, well, too bad.</p>",
       "preview": "The downside of this approach is that the user is limited to entering 30 values,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou tohoto přístupu je, že uživatel je omezen na zadání 30 hodnot a my nemáme tušení, zda je to příliš mnoho, nebo příliš málo. Pokud chce uživatel zadat více hodnot, má zkrátka smůlu.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b6",
       "type": "paragraph",
       "html": "<p>We could address that problem by adding some logic to resize the vector larger whenever the user reaches the maximum number of values. But this means we’re now having to mix array size management with our program logic, and that is going to increase the complexity of our program significantly (which will inevitably lead to bugs).</p>",
       "preview": "We could address that problem by adding some logic to resize the vector larger w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento problém bychom mohli vyřešit přidáním logiky pro zvětšení vektoru, kdykoli uživatel dosáhne maximálního počtu hodnot. To ale znamená, že nyní musíme míchat správu velikosti pole s logikou našeho programu, což výrazně zvýší jeho složitost (a to nevyhnutelně povede k chybám).</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b7",
       "type": "paragraph",
       "html": "<p>The real problem here is that we’re trying to guess how many elements the user may enter, so we can manage the size of the vector appropriately. For situations where the number of elements to be entered is truly not known ahead of time, there is a better approach.</p>",
       "preview": "The real problem here is that we’re trying to guess how many elements the user m",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Skutečným problémem zde je, že se snažíme odhadnout, kolik prvků může uživatel zadat, abychom mohli odpovídajícím způsobem spravovat velikost vektoru. Pro situace, kdy počet zadávaných prvků skutečně není předem znám, existuje lepší přístup.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b8",
       "type": "paragraph",
       "html": "<p>But before we can get there, we need to sidebar briefly.</p>",
       "preview": "But before we can get there, we need to sidebar briefly.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Než se k tomu ale dostaneme, musíme si udělat krátkou odbočku.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b9",
       "type": "section",
       "title": "What is a stack?",
       "html": "<h3 class=\"cpp-section-heading\">What is a stack?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Co je to zásobník?</h3>",
+      "title_cs": "Co je zásobník?"
     },
     {
       "id": "stdvector-and-stack-behavior_b10",
       "type": "paragraph",
       "html": "<p>Analogy time! Consider a stack of plates in a cafeteria. For some unknown reason, these plates are extra heavy and can only be lifted one at a time. Because the plates are stacked and heavy, you can only modify the stack of plates in one of two ways:</p>",
       "preview": "Analogy time! Consider a stack of plates in a cafeteria. For some unknown reason",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Čas na analogii! Představte si stoh talířů v jídelně. Z nějakého neznámého důvodu jsou tyto talíře mimořádně těžké a lze je zvedat pouze po jednom. Vzhledem k tomu, že jsou talíře naskládané na sobě a těžké, můžete tento stoh upravovat pouze dvěma způsoby:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b11",
       "type": "list",
       "html": "<ol start=\"1\"><li>Put a new plate on top of the stack (hiding the plate underneath, if it exists)</li><li>Remove the top plate from the stack (exposing the plate underneath, if it exists)</li></ol>",
       "preview": "Put a new plate on top of the stack (hiding the plate underneath, if it exists)R",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Položit nový talíř na vrchol stohu (čímž se zakryje talíř pod ním, pokud existuje)</li><li>Odebrat vrchní talíř ze stohu (čímž se odkryje talíř pod ním, pokud existuje)</li></ol>"
     },
     {
       "id": "stdvector-and-stack-behavior_b12",
       "type": "paragraph",
       "html": "<p>Adding or removing a plate from the middle or bottom of the stack is not allowed, as that would require lifting more than one plate at a time.</p>",
       "preview": "Adding or removing a plate from the middle or bottom of the stack is not allowed",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přidávání nebo odebírání talíře zprostředka nebo zespodu stohu není povoleno, protože by to vyžadovalo zvednout více než jeden talíř najednou.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b13",
       "type": "paragraph",
       "html": "<p>The order in which items are added to and removed from a stack can be described as <strong>last-in, first-out (LIFO)</strong>. The last plate added onto the stack will be the first plate that is removed.</p>",
       "preview": "The order in which items are added to and removed from a stack can be described ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pořadí, v jakém jsou položky přidávány a odebírány ze zásobníku, lze popsat jako <strong>last-in, first-out (LIFO)</strong>. Poslední talíř přidaný na stoh bude prvním talířem, který bude odebrán.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b14",
       "type": "section",
       "title": "Stacks in programming",
       "html": "<h3 class=\"cpp-section-heading\">Stacks in programming</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zásobníky v programování</h3>",
+      "title_cs": "Zásobníky v programování"
     },
     {
       "id": "stdvector-and-stack-behavior_b15",
       "type": "paragraph",
       "html": "<p>In programming, a <strong>stack</strong> is a container data type where the insertion and removal of elements occurs in a LIFO manner. This is commonly implemented via two operations named <strong>push</strong> and <strong>pop</strong>:</p>",
       "preview": "In programming, a stack is a container data type where the insertion and removal",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V programování je <strong>zásobník</strong> (stack) kontejnerový datový typ, kde vkládání a odebírání prvků probíhá způsobem LIFO. To je běžně implementováno pomocí dvou operací nazvaných <strong>push</strong> a <strong>pop</strong>:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b16",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Operation Name</th><th>Behavior</th><th>Required?</th><th>Notes</th></tr><tr><td>Push</td><td>Put new element on top of stack</td><td>Yes</td><td></td></tr><tr><td>Pop</td><td>Remove the top element from the stack</td><td>Yes</td><td>May return the removed element or void</td></tr></tbody></table></div>",
       "preview": "Operation NameBehaviorRequired?NotesPushPut new element on top of stackYesPopRem",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Název operace</th><th>Chování</th><th>Vyžadováno?</th><th>Poznámky</th></tr><tr><td>Push</td><td>Vloží nový prvek na vrchol zásobníku</td><td>Ano</td><td></td></tr><tr><td>Pop</td><td>Odstraní prvek z vrcholu zásobníku</td><td>Ano</td><td>Může vracet odstraněný prvek nebo void</td></tr></tbody></table></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b17",
       "type": "paragraph",
       "html": "<p>Many stack implementations optionally support other useful operations as well:</p>",
       "preview": "Many stack implementations optionally support other useful operations as well:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho implementací zásobníku volitelně podporuje také další užitečné operace:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b18",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Operation Name</th><th>Behavior</th><th>Required?</th><th>Notes</th></tr><tr><td>Top or Peek</td><td>Get the top element on the stack</td><td>Optional</td><td>Does not remove item</td></tr><tr><td>Empty</td><td>Determine if stack has no elements</td><td>Optional</td><td></td></tr><tr><td>Size</td><td>Count of how many elements are on the stack</td><td>Optional</td><td></td></tr></tbody></table></div>",
       "preview": "Operation NameBehaviorRequired?NotesTop or PeekGet the top element on the stackO",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Název operace</th><th>Chování</th><th>Vyžadováno?</th><th>Poznámky</th></tr><tr><td>Top nebo Peek</td><td>Získá prvek na vrcholu zásobníku</td><td>Volitelné</td><td>Neodebírá prvek</td></tr><tr><td>Empty</td><td>Zjistí, zda zásobník neobsahuje žádné prvky</td><td>Volitelné</td><td></td></tr><tr><td>Size</td><td>Počet prvků, které jsou v zásobníku</td><td>Volitelné</td><td></td></tr></tbody></table></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b19",
       "type": "paragraph",
       "html": "<p>Stacks are common in programming. In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-the-call-stack/\">3.9 -- Using an integrated debugger: The call stack</a>, we discussed the call stack, which keeps track of which functions have been called. The call stack is… a stack! (I know, that reveal was a letdown). When a function is called, an entry with information about that function is added to the top of the call stack. When the function returns, the entry containing information about that function is removed from the top of the call stack. In this way, the top of the call stack always represents the currently executing function, and each subsequent entry represents the function that was previously executing.</p>",
       "preview": "Stacks are common in programming. In lesson 3.9 -- Using an integrated debugger:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zásobníky jsou v programování běžné. V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/using-an-integrated-debugger-the-call-stack/\">3.9 -- Použití integrovaného debuggeru: Zásobník volání (call stack)</a> jsme probírali zásobník volání, který uchovává přehled o tom, které funkce byly zavolány. Zásobník volání je… zásobník! (Já vím, toto odhalení bylo zklamáním). Když je funkce zavolána, na vrchol zásobníku volání je přidán záznam s informacemi o této funkci. Když se funkce vrátí, záznam obsahující informace o této funkci je z vrcholu zásobníku volání odstraněn. Tímto způsobem vrchol zásobníku volání vždy představuje právě vykonávanou funkci a každý další záznam představuje funkci, která se vykonávala dříve.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b20",
       "type": "paragraph",
       "html": "<p>For example, here’s a short sequence showing how pushing and popping on a stack works:</p>",
       "preview": "For example, here’s a short sequence showing how pushing and popping on a stack ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je například krátká sekvence ukazující, jak funguje vkládání (push) a odebírání (pop) na zásobníku:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b21",
       "type": "output",
       "text": "       (Stack: empty)\nPush 1 (Stack: 1)\nPush 2 (Stack: 1 2)\nPush 3 (Stack: 1 2 3)\nPop    (Stack: 1 2)\nPush 4 (Stack: 1 2 4)\nPop    (Stack: 1 2)\nPop    (Stack: 1)\nPop    (Stack: empty)\n",
       "html": "<pre>       (Stack: empty)\nPush 1 (Stack: 1)\nPush 2 (Stack: 1 2)\nPush 3 (Stack: 1 2 3)\nPop    (Stack: 1 2)\nPush 4 (Stack: 1 2 4)\nPop    (Stack: 1 2)\nPop    (Stack: 1)\nPop    (Stack: empty)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>       (Stack: prázdný)\nPush 1 (Stack: 1)\nPush 2 (Stack: 1 2)\nPush 3 (Stack: 1 2 3)\nPop    (Stack: 1 2)\nPush 4 (Stack: 1 2 4)\nPop    (Stack: 1 2)\nPop    (Stack: 1)\nPop    (Stack: prázdný)\n</pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b22",
       "type": "section",
       "title": "Stacks in C++",
       "html": "<h3 class=\"cpp-section-heading\">Stacks in C++</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zásobníky v C++</h3>",
+      "title_cs": "Hromady v C++"
     },
     {
       "id": "stdvector-and-stack-behavior_b23",
       "type": "paragraph",
       "html": "<p>In some languages, a stack is implemented as its own discrete container type (separate from other containers). However, this can be quite limiting. Consider the case where we want to print all the values in a stack without modifying the stack. A pure stack interface does not provide a direct method to do this.</p>",
       "preview": "In some languages, a stack is implemented as its own discrete container type (se",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V některých jazycích je zásobník implementován jako samostatný kontejnerový typ (oddělený od ostatních kontejnerů). To však může být poměrně omezující. Představte si situaci, kdy chceme vypsat všechny hodnoty v zásobníku, aniž bychom zásobník modifikovali. Čisté rozhraní zásobníku k tomu neposkytuje přímou metodu.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b24",
       "type": "paragraph",
       "html": "<p>In C++, stack-like operations were instead added (as member functions) to the existing standard library container classes that support efficient insertion and removal of elements at one end (<code>std::vector</code>, <code>std::deque</code> and <code>std::list</code>). This allows any of these containers to be used as stacks in addition to their native capabilities.</p>",
       "preview": "In C++, stack-like operations were instead added (as member functions) to the ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++ byly operace připomínající zásobník místo toho přidány (jako členské funkce) do existujících kontejnerových tříd standardní knihovny, které podporují efektivní vkládání a odebírání prvků na jednom konci (<code>std::vector</code>, <code>std::deque</code> a <code>std::list</code>). To umožňuje použít kterýkoli z těchto kontejnerů jako zásobník navíc k jejich přirozeným schopnostem.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b25",
@@ -190,42 +218,49 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>The stack of plates analogy is a good one, but we can make a better analogy that will help us understand how a stack can be implemented using an array. Instead of a stack of plates that can vary in the number of plates it is currently holding, consider a column of mailboxes, all stacked on top of each other. Each mailbox can only hold one item, and all mailboxes start out empty. Each mailbox is nailed to the mailbox below it, and the top of the column is covered in poisonous spikes, so no new mailboxes can be inserted anywhere.</p><p>If we can’t change the number of mailboxes, how do we get a stack-like behavior?</p><p>First, we use a marker (like a post-it note) to keep track of where the top of the stack is -- this will always be the lowest empty mailbox. At the start, the stack is empty, so the marker goes on the bottom mailbox.</p><p>When we push an item onto our mailbox stack, we put it in the mailbox that is marked (which is the lowest empty mailbox), and move the marker up one mailbox. When we pop an item off the stack, we move the marker down one mailbox (so it’s pointed at the top non-empty mailbox) and remove the item from that mailbox so that it is now empty.</p><p>Items below the marker are considered “on the stack”. Items at or above the marker are not on the stack.</p><p>Now, call the marker <code>length</code>, and the number of mailboxes <code>capacity</code>…</p></div>",
       "preview": "As an aside…The stack of plates analogy is a good one, but we can make a better analogy that will he",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Analogie se štosy talířů je dobrá, ale můžeme vytvořit ještě lepší analogii, která nám pomůže pochopit, jak lze zásobník implementovat pomocí pole. Místo štosu talířů, kde se může měnit počet talířů, které právě drží, si představte sloupec poštovních schránek naskládaných na sobě. Každá schránka pojme pouze jednu položku a všechny schránky začínají prázdné. Každá schránka je přibita ke schránce pod ní a horní část sloupce je pokryta jedovatými hroty, takže nikam nelze vložit žádné nové schránky.</p><p>Pokud nemůžeme měnit počet schránek, jak docílíme chování podobného zásobníku?</p><p>Nejprve použijeme značku (např. nalepovací papírek), abychom měli přehled o tom, kde je vrchol zásobníku – to bude vždy nejníže položená prázdná schránka. Na začátku je zásobník prázdný, takže značka je na nejspodnější schránce.</p><p>Když vložíme položku do našeho schránkového zásobníku (operace push), vložíme ji do schránky, která je označena (což je nejnižší prázdná schránka), a posuneme značku o jednu schránku nahoru. Když položku ze zásobníku odebereme (operace pop), posuneme značku o jednu schránku dolů (takže ukazuje na nejvyšší neprázdnou schránku) a vyjmeme položku z této schránky, takže je nyní prázdná.</p><p>Položky pod značkou jsou považovány za položky „na zásobníku“. Položky na značce nebo nad ní na zásobníku nejsou.</p><p>Nyní označme značku jako <code>length</code> (délka) a počet schránek jako <code>capacity</code> (kapacita)…</p></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b26",
       "type": "paragraph",
       "html": "<p>In the rest of this lesson, we’ll examine how the stack interface of <code>std::vector</code> works, and then we’ll conclude by showing how it helps us solve the challenge introduced at the top of the lesson.</p>",
       "preview": "In the rest of this lesson, we’ll examine how the stack interface of std::vector",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve zbytku této lekce prozkoumáme, jak funguje zásobníkové rozhraní <code>std::vector</code>, a na závěr si ukážeme, jak nám pomáhá vyřešit výzvu uvedenou na začátku lekce.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b27",
       "type": "section",
       "title": "Stack behavior with std::vector",
       "html": "<h3 class=\"cpp-section-heading\">Stack behavior with <code>std::vector</code></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Chování zásobníku s <code>std::vector</code></h3>",
+      "title_cs": "Chování zásobníku s std::vector"
     },
     {
       "id": "stdvector-and-stack-behavior_b28",
       "type": "paragraph",
       "html": "<p>Stack behavior in <code>std::vector</code> is implemented via the following member functions:</p>",
       "preview": "Stack behavior in std::vector is implemented via the following member functions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Chování zásobníku je v <code>std::vector</code> implementováno pomocí následujících členských funkcí:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b29",
       "type": "paragraph",
       "html": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Function Name</th><th>Stack Operation</th><th>Behavior</th><th>Notes</th></tr><tr><td>push_back()</td><td>Push</td><td>Put new element on top of stack</td><td>Adds the element to end of vector</td></tr><tr><td>pop_back()</td><td>Pop</td><td>Remove the top element from the stack</td><td>Returns void, removes element at end of vector</td></tr><tr><td>back()</td><td>Top or Peek</td><td>Get the top element on the stack</td><td>Does not remove item</td></tr><tr><td>emplace_back()</td><td>Push</td><td>Alternate form of push_back() that can be more efficient (see below)</td><td>Adds element to end of vector</td></tr></tbody></table></div>",
       "preview": "Function NameStack OperationBehaviorNotespush_back()PushPut new element on top o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-table-wrapper\"><table class=\"cpp-table\"><tbody><tr><th>Název funkce</th><th>Operace zásobníku</th><th>Chování</th><th>Poznámky</th></tr><tr><td>push_back()</td><td>Push</td><td>Vloží nový prvek na vrchol zásobníku</td><td>Přidá prvek na konec vektoru</td></tr><tr><td>pop_back()</td><td>Pop</td><td>Odebere vrchní prvek ze zásobníku</td><td>Vrací void, odebere prvek na konci vektoru</td></tr><tr><td>back()</td><td>Top nebo Peek</td><td>Získá vrchní prvek na zásobníku</td><td>Neodebírá položku</td></tr><tr><td>emplace_back()</td><td>Push</td><td>Alternativní forma push_back(), která může být efektivnější (viz níže)</td><td>Přidá prvek na konec vektoru</td></tr></tbody></table></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b30",
       "type": "paragraph",
       "html": "<p>Let’s take a look at an example that uses some of these functions:</p>",
       "preview": "Let’s take a look at an example that uses some of these functions:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se na příklad, který některé z těchto funkcí používá:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b31",
@@ -233,42 +268,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid printStack(const std::vector<int>& stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout << \"Empty\";\n\n\tfor (auto element : stack)\n\t\tstd::cout << element << ' ';\n\n\t// \\t is a tab character, to help align the text\n\tstd::cout << \"\\tCapacity: \" << stack.capacity() << \"  Length \" << stack.size() << \"\\n\";\n}\n\nint main()\n{\n\tstd::vector<int> stack{}; // empty stack\n\n\tprintStack(stack);\n\n\tstack.push_back(1); // push_back() pushes an element on the stack\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout << \"Top: \" << stack.back() << '\\n'; // back() returns the last element\n\n\tstack.pop_back(); // pop_back() pops an element off the stack\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid printStack(const std::vector&lt;int&gt;&amp; stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout &lt;&lt; \"Empty\";\n\n\tfor (auto element : stack)\n\t\tstd::cout &lt;&lt; element &lt;&lt; ' ';\n\n\t// \\t is a tab character, to help align the text\n\tstd::cout &lt;&lt; \"\\tCapacity: \" &lt;&lt; stack.capacity() &lt;&lt; \"  Length \" &lt;&lt; stack.size() &lt;&lt; \"\\n\";\n}\n\nint main()\n{\n\tstd::vector&lt;int&gt; stack{}; // empty stack\n\n\tprintStack(stack);\n\n\tstack.push_back(1); // push_back() pushes an element on the stack\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout &lt;&lt; \"Top: \" &lt;&lt; stack.back() &lt;&lt; '\\n'; // back() returns the last element\n\n\tstack.pop_back(); // pop_back() pops an element off the stack\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid printStack(const std::vector<int>& stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout << \"Prázdný\";\n\n\tpro (automatický prvek: zásobník)\n\t\tstd::cout << prvek << ' ';\n\n\t// \\t je znak tabulátoru, který pomáhá zarovnat text\n\tstd::cout << \"\\tCapacity: \" << stack.capacity() << \"  Length \" << stack.size() << \"\\n\";\n}\n\nint main()\n{\n\tstd::vector<int> stack{}; // prázdný zásobník\n\n\tprintStack(stack);\n\n\tstack.push_back(1); // push_back() vloží prvek do zásobníku\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout << \"Nahoru: \" << stack.back() << '\\n'; // back() vrátí poslední prvek\n\n\tstack.pop_back(); // pop_back() vyjme prvek ze zásobníku\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b32",
       "type": "paragraph",
       "html": "<p>On GCC or Clang, this prints:</p>",
       "preview": "On GCC or Clang, this prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na GCC nebo Clangu se vypíše:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b33",
       "type": "output",
       "text": "Empty   Capacity: 0  Length: 0\n1       Capacity: 1  Length: 1\n1 2     Capacity: 2  Length: 2\n1 2 3   Capacity: 4  Length: 3\nTop:3\n1 2     Capacity: 4  Length: 2\n1       Capacity: 4  Length: 1\nEmpty   Capacity: 4  Length: 0\n",
       "html": "<pre>Empty   Capacity: 0  Length: 0\n1       Capacity: 1  Length: 1\n1 2     Capacity: 2  Length: 2\n1 2 3   Capacity: 4  Length: 3\nTop:3\n1 2     Capacity: 4  Length: 2\n1       Capacity: 4  Length: 1\nEmpty   Capacity: 4  Length: 0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Empty   Capacity: 0  Length: 0\n1       Capacity: 1  Length: 1\n1 2     Capacity: 2  Length: 2\n1 2 3   Capacity: 4  Length: 3\nTop:3\n1 2     Capacity: 4  Length: 2\n1       Capacity: 4  Length: 1\nEmpty   Capacity: 4  Length: 0\n</pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b34",
       "type": "paragraph",
       "html": "<p>Remember, length is the number of elements in the vector, which in this case, is the number of elements on our stack.</p>",
       "preview": "Remember, length is the number of elements in the vector, which in this case, is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pamatujte, že délka (length) je počet prvků ve vektoru, což je v tomto případě počet prvků na našem zásobníku.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b35",
       "type": "paragraph",
       "html": "<p>Unlike the subscript operator <code>operator[]</code> or the <code>at()</code> member function, <code>push_back()</code> (and <code>emplace_back()</code>) will increment the length of the vector, and will cause a reallocation to occur if the capacity is not sufficient to insert the value.</p>",
       "preview": "Unlike the subscript operator operator[] or the at() member function, push_back(",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od indexovacího operátoru <code>operator[]</code> nebo členské funkce <code>at()</code> funkce <code>push_back()</code> (a <code>emplace_back()</code>) zvýší délku vektoru a způsobí realokaci, pokud kapacita pro vložení hodnoty nestačí.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b36",
       "type": "paragraph",
       "html": "<p>In the example above, the vector gets reallocated 3 times (from a capacity of 0 to 1, 1 to 2, and 2 to 4).</p>",
       "preview": "In the example above, the vector gets reallocated 3 times (from a capacity of 0 ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu je vektor realokován třikrát (z kapacity 0 na 1, z 1 na 2 a ze 2 na 4).</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b37",
@@ -276,63 +317,74 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p><code>push_back()</code> and <code>emplace_back()</code> will increment the length of a <code>std::vector</code>, and will cause a reallocation to occur if the capacity is not sufficient to insert the value.</p></div>",
       "preview": "Key insightpush_back() and emplace_back() will increment the length of a std::vector, and will cause",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový postřeh</p><p><code>push_back()</code> a <code>emplace_back()</code> zvýší délku <code>std::vector</code>u a způsobí realokaci, pokud kapacita pro vložení hodnoty nestačí.</p></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b38",
       "type": "section",
       "title": "Extra capacity from pushing",
       "html": "<h3 class=\"cpp-section-heading\">Extra capacity from pushing</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dodatečná kapacita při vkládání</h3>",
+      "title_cs": "Extra kapacita díky tlačení"
     },
     {
       "id": "stdvector-and-stack-behavior_b39",
       "type": "paragraph",
       "html": "<p>In the above output, note that when the last of the three reallocations occurred, the capacity jumped from 2 to 4 (even though we were only pushing one element). When pushing triggers a reallocation, <code>std::vector</code> will typically allocate some extra capacity to allow additional elements to be added without triggering another reallocation the next time an element is added.</p>",
       "preview": "In the above output, note that when the last of the three reallocations occurred",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném výstupu si všimněte, že při poslední ze tří realokací kapacita poskočila ze 2 na 4 (přestože jsme vkládali pouze jeden prvek). Když vložení (push) vyvolá realokaci, <code>std::vector</code> obvykle alokuje určitou dodatečnou kapacitu, aby bylo možné přidat další prvky, aniž by při dalším přidání prvku došlo k další realokaci.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b40",
       "type": "paragraph",
       "html": "<p>How much extra capacity is allocated is left up to the compiler’s implementation of <code>std::vector</code>, and different compilers typically do different things:</p>",
       "preview": "How much extra capacity is allocated is left up to the compiler’s implementation",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kolik dodatečné kapacity se alokuje, závisí na implementaci <code>std::vector</code>u v daném překladači a různé překladače se obvykle chovají odlišně:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b41",
       "type": "list",
       "html": "<ul><li>GCC and Clang doubles the current capacity. When the last resize is triggered, the capacity is doubled from 2 to 4.</li><li>Visual Studio 2022 multiplies the current capacity by 1.5. When the last resize is triggered, the capacity is changed from 2 to 3.</li></ul>",
       "preview": "GCC and Clang doubles the current capacity. When the last resize is triggered, t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>GCC a Clang zdvojnásobují aktuální kapacitu. Když dojde k poslední změně velikosti, kapacita se zdvojnásobí z 2 na 4.</li><li>Visual Studio 2022 násobí aktuální kapacitu číslem 1,5. Když dojde k poslední změně velikosti, kapacita se změní z 2 na 3.</li></ul>"
     },
     {
       "id": "stdvector-and-stack-behavior_b42",
       "type": "paragraph",
       "html": "<p>As a result, the prior program may have a slightly different output depending on what compiler you are using.</p>",
       "preview": "As a result, the prior program may have a slightly different output depending on",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V důsledku toho může mít předchozí program mírně odlišný výstup v závislosti na tom, jaký překladač používáte.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b43",
       "type": "section",
       "title": "Resizing a vector doesn’t work with stack behavior",
       "html": "<h3 class=\"cpp-section-heading\">Resizing a vector doesn’t work with stack behavior</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Změna velikosti vektoru nefunguje s chováním zásobníku</h3>",
+      "title_cs": "Resizing a vector doesn’t work with stack behavior"
     },
     {
       "id": "stdvector-and-stack-behavior_b44",
       "type": "paragraph",
       "html": "<p>Reallocating a vector is computationally expensive (proportional to the length of the vector), so we want to avoid reallocations when reasonable to do so. In the example above, we could avoid the vector being reallocated 3 times if we manually resized the vector to capacity 3 at the start of the program.</p>",
       "preview": "Reallocating a vector is computationally expensive (proportional to the length o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Realokace vektoru je výpočetně náročná (úměrná délce vektoru), proto se chceme realokacím vyhnout, pokud je to rozumné. Ve výše uvedeném příkladu bychom se mohli vyhnout tomu, aby byl vektor realokován 3krát, pokud bychom na začátku programu ručně změnili velikost vektoru na kapacitu 3.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b45",
       "type": "paragraph",
       "html": "<p>Let’s look at what happens if we change line 18 in the above example to the following:</p>",
       "preview": "Let’s look at what happens if we change line 18 in the above example to the foll",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Podívejme se, co se stane, když ve výše uvedeném příkladu změníme řádek 18 na následující:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b46",
@@ -340,63 +392,73 @@
       "language": "cpp",
       "code": "std::vector<int> stack(3); // parenthesis init to set vector's capacity to 3",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector&lt;int&gt; stack(3); // parenthesis init to set vector's capacity to 3</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">std::vector<int> stack(3); // parenthesis init to set vector's capacity to 3</code></pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b47",
       "type": "paragraph",
       "html": "<p>Now when we run the program again, we get the following output:</p>",
       "preview": "Now when we run the program again, we get the following output:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní, když program spustíme znovu, získáme následující výstup:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b48",
       "type": "output",
       "text": "0 0 0 \tCapacity: 3  Length 3\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 2 3 \tCapacity: 6  Length 6\nTop: 3\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 \tCapacity: 6  Length 3\n",
       "html": "<pre>0 0 0 \tCapacity: 3  Length 3\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 2 3 \tCapacity: 6  Length 6\nTop: 3\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 \tCapacity: 6  Length 3\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>0 0 0 \tCapacity: 3  Length 3\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 2 3 \tCapacity: 6  Length 6\nTop: 3\n0 0 0 1 2 \tCapacity: 6  Length 5\n0 0 0 1 \tCapacity: 6  Length 4\n0 0 0 \tCapacity: 6  Length 3\n</pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b49",
       "type": "paragraph",
       "html": "<p>That’s not right -- somehow we have a bunch of <code>0</code> values at the start of our stack! The issue here is that parenthesis initialization (to set the initial size of the vector) and the <code>resize()</code> function set both the capacity AND the length. Our vector is starting with a capacity of 3 (which is what we wanted), but the length is also being set to 3. So our vector is starting with 3 elements having value 0. The elements we push on later are pushed on top of these initial elements.</p>",
       "preview": "That’s not right -- somehow we have a bunch of 0 values at the start of our stac",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To není správně – na začátku našeho zásobníku máme nějakým způsobem spoustu hodnot <code>0</code>! Problém je v tom, že inicializace pomocí kulatých závorek (pro nastavení počáteční velikosti vektoru) a funkce <code>resize()</code> nastavují jak kapacitu, TAK délku. Náš vektor začíná s kapacitou 3 (což jsme chtěli), ale délka je také nastavena na 3. Náš vektor tedy začíná se 3 prvky o hodnotě 0. Prvky, které přidáme (push) později, jsou vloženy až nad tyto počáteční prvky.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b50",
       "type": "paragraph",
       "html": "<p>The <code>resize()</code> member function changing the length of the vector is fine when we’re intending to use subscripts to access elements (since our indices need to be less than the length to be valid), but it causes problems when we’re using the vector as a stack.</p>",
       "preview": "The resize() member function changing the length of the vector is fine when we’r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, že členská funkce <code>resize()</code> mění délku vektoru, je v pořádku, když máme v úmyslu přistupovat k prvkům pomocí indexů (protože naše indexy musí být menší než délka, aby byly platné), ale způsobuje to problémy, když vektor používáme jako zásobník.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b51",
       "type": "paragraph",
       "html": "<p>What we really want is some way to change the capacity (to avoid future reallocations) without changing the length (which has the side effect of adding new elements to our stack).</p>",
       "preview": "What we really want is some way to change the capacity (to avoid future realloca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, co ve skutečnosti chceme, je nějaký způsob, jak změnit kapacitu (abychom se vyhnuli budoucím realokacím), aniž bychom měnili délku (což má za vedlejší efekt přidání nových prvků do našeho zásobníku).</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b52",
       "type": "section",
       "title": "The reserve() member function changes the capacity (but not the length)",
       "html": "<h3 class=\"cpp-section-heading\">The <code>reserve()</code> member function changes the capacity (but not the length)</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Členská funkce <code>reserve()</code> mění kapacitu (ale ne délku)</h3>",
+      "title_cs": "The reserve() member function changes the capacity (but not the length)"
     },
     {
       "id": "stdvector-and-stack-behavior_b53",
       "type": "paragraph",
       "html": "<p>The <code>reserve()</code> member function can be used to reallocate a <code>std::vector</code> without changing the current length.</p>",
       "preview": "The reserve() member function can be used to reallocate a std::vector without ch",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Členskou funkci <code>reserve()</code> lze použít k realokaci <code>std::vector</code> bez změny jeho aktuální délky.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b54",
       "type": "paragraph",
       "html": "<p>Here’s the same example as before, but with an added call to <code>reserve()</code> to set the capacity:</p>",
       "preview": "Here’s the same example as before, but with an added call to reserve() to set th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je stejný příklad jako dříve, ale s přidaným voláním <code>reserve()</code> pro nastavení kapacity:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b55",
@@ -404,28 +466,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nvoid printStack(const std::vector<int>& stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout << \"Empty\";\n\n\tfor (auto element : stack)\n\t\tstd::cout << element << ' ';\n\n\t// \\t is a tab character, to help align the text\n\tstd::cout << \"\\tCapacity: \" << stack.capacity() << \"  Length \" << stack.size() << \"\\n\";\n}\n\nint main()\n{\n\tstd::vector<int> stack{};\n\n\tprintStack(stack);\n\n\tstack.reserve(6); // reserve space for 6 elements (but do not change length)\n\tprintStack(stack);\n\n\tstack.push_back(1);\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout << \"Top: \" << stack.back() << '\\n';\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nvoid printStack(const std::vector&lt;int&gt;&amp; stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout &lt;&lt; \"Empty\";\n\n\tfor (auto element : stack)\n\t\tstd::cout &lt;&lt; element &lt;&lt; ' ';\n\n\t// \\t is a tab character, to help align the text\n\tstd::cout &lt;&lt; \"\\tCapacity: \" &lt;&lt; stack.capacity() &lt;&lt; \"  Length \" &lt;&lt; stack.size() &lt;&lt; \"\\n\";\n}\n\nint main()\n{\n\tstd::vector&lt;int&gt; stack{};\n\n\tprintStack(stack);\n\n\tstack.reserve(6); // reserve space for 6 elements (but do not change length)\n\tprintStack(stack);\n\n\tstack.push_back(1);\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout &lt;&lt; \"Top: \" &lt;&lt; stack.back() &lt;&lt; '\\n';\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nvoid printStack(const std::vector<int>& stack)\n{\n\tif (stack.empty()) // if stack.size == 0\n\t\tstd::cout << \"Prázdný\";\n\n\tpro (automatický prvek: zásobník)\n\t\tstd::cout << prvek << ' ';\n\n\t// \\t je znak tabulátoru, který pomáhá zarovnat text\n\tstd::cout << \"\\tCapacity: \" << stack.capacity() << \"  Length \" << stack.size() << \"\\n\";\n}\n\nint main()\n{\n\tstd::vector<int> stack{};\n\n\tprintStack(stack);\n\n\tzásobník.rezerva(6); // reserve space for 6 elements (but do not change length)\n\tprintStack(stack);\n\n\tstack.push_back(1);\n\tprintStack(stack);\n\n\tstack.push_back(2);\n\tprintStack(stack);\n\n\tstack.push_back(3);\n\tprintStack(stack);\n\n\tstd::cout << \"Nahoru: \" << stack.back() << '\\n';\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tstack.pop_back();\n\tprintStack(stack);\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b56",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this prints:</p>",
       "preview": "On the author’s machine, this prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači tento program vypíše:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b57",
       "type": "output",
       "text": "Empty   Capacity: 0  Length: 0\nEmpty   Capacity: 6  Length: 0\n1       Capacity: 6  Length: 1\n1 2     Capacity: 6  Length: 2\n1 2 3   Capacity: 6  Length: 3\nTop: 3\n1 2     Capacity: 6  Length: 2\n1       Capacity: 6  Length: 1\nEmpty   Capacity: 6  Length: 0\n",
       "html": "<pre>Empty   Capacity: 0  Length: 0\nEmpty   Capacity: 6  Length: 0\n1       Capacity: 6  Length: 1\n1 2     Capacity: 6  Length: 2\n1 2 3   Capacity: 6  Length: 3\nTop: 3\n1 2     Capacity: 6  Length: 2\n1       Capacity: 6  Length: 1\nEmpty   Capacity: 6  Length: 0\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Empty   Capacity: 0  Length: 0\nEmpty   Capacity: 6  Length: 0\n1       Capacity: 6  Length: 1\n1 2     Capacity: 6  Length: 2\n1 2 3   Capacity: 6  Length: 3\nTop: 3\n1 2     Capacity: 6  Length: 2\n1       Capacity: 6  Length: 1\nEmpty   Capacity: 6  Length: 0\n</pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b58",
       "type": "paragraph",
       "html": "<p>You can see that calling <code>reserve(6)</code> changed the capacity to 6, but did not affect the length. No more reallocations occur because the std::vector is large enough to accommodate all of the elements we are pushing.</p>",
       "preview": "You can see that calling reserve(6) changed the capacity to 6, but did not affec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete vidět, že volání <code>reserve(6)</code> změnilo kapacitu na 6, ale neovlivnilo délku. K žádným dalším realokacím nedochází, protože std::vector je dostatečně velký, aby pojal všechny prvky, které vkládáme.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b59",
@@ -433,7 +499,8 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The <code>resize()</code> member function changes the length of the vector, and the capacity (if necessary).<br>The <code>reserve()</code> member function changes just the capacity (if necessary)</p></div>",
       "preview": "Key insightThe resize() member function changes the length of the vector, and the capacity (if neces",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Členská funkce <code>resize()</code> mění délku vektoru a kapacitu (je-li to nutné).<br>Členská funkce <code>reserve()</code> mění pouze kapacitu (je-li to nutné)</p></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b60",
@@ -441,28 +508,33 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>To increase the number of elements in a <code>std::vector</code>:<br>Use <code>resize()</code> when accessing a vector via indexing. This changes the length of the vector so your indices will be valid.<br>Use <code>reserve()</code> when accessing a vector using stack operations. This adds capacity without changing the length of the vector.</p></div>",
       "preview": "TipTo increase the number of elements in a std::vector:Use resize() when accessing a vector via inde",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Pro zvýšení počtu prvků v <code>std::vector</code>:<br>Použijte <code>resize()</code>, pokud k vektoru přistupujete pomocí indexování. Tím se změní délka vektoru, takže vaše indexy budou platné.<br>Použijte <code>reserve()</code>, pokud k vektoru přistupujete pomocí zásobníkových operací. Tím se přidá kapacita beze změny délky vektoru.</p></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b61",
       "type": "section",
       "title": "push_back() vs emplace_back()",
       "html": "<h3 class=\"cpp-section-heading\"><a name=\"push_vs_emplace\"></a><code>push_back()</code> vs <code>emplace_back()</code> <a href=\"#push_vs_emplace\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\"><a name=\"push_vs_emplace\"></a><code>push_back()</code> vs <code>emplace_back()</code> <a href=\"#push_vs_emplace\"><i class=\"fa fa-link\" style=\"font-size:.8em\"></i></a></h3>",
+      "title_cs": "push_back() vs emplace_back()"
     },
     {
       "id": "stdvector-and-stack-behavior_b62",
       "type": "paragraph",
       "html": "<p>Both <code>push_back()</code> and <code>emplace_back()</code> push an element onto the stack. If the object to be pushed already exists, <code>push_back()</code> and <code>emplace_back()</code> are equivalent, and <code>push_back()</code> should be preferred.</p>",
       "preview": "Both push_back() and emplace_back() push an element onto the stack. If the objec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak <code>push_back()</code>, tak <code>emplace_back()</code> vkládají prvek na zásobník. Pokud vkládaný objekt již existuje, jsou <code>push_back()</code> a <code>emplace_back()</code> ekvivalentní a měli byste preferovat <code>push_back()</code>.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b63",
       "type": "paragraph",
       "html": "<p>However, in cases where we are creating a temporary object (of the same type as the vector’s element) for the purpose of pushing it onto the vector, <code>emplace_back()</code> can be more efficient:</p>",
       "preview": "However, in cases where we are creating a temporary object (of the same type as ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případech, kdy však vytváříme dočasný objekt (stejného typu jako prvek vektoru) za účelem jeho vložení do vektoru, může být <code>emplace_back()</code> efektivnější:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b64",
@@ -470,35 +542,40 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n#include <vector>\n\nclass Foo\n{\nprivate:\n    std::string m_a{};\n    int m_b{};\n\npublic:\n    Foo(std::string_view a, int b)\n        : m_a { a }, m_b { b }\n        {}\n\n    explicit Foo(int b)\n        : m_a {}, m_b { b }\n        {};\n};\n\nint main()\n{\n\tstd::vector<Foo> stack{};\n\n\t// When we already have an object, push_back and emplace_back are similar in efficiency\n\tFoo f{ \"a\", 2 };\n\tstack.push_back(f);    // prefer this one\n\tstack.emplace_back(f);\n\n\t// When we need to create a temporary object to push, emplace_back is more efficient\n\tstack.push_back({ \"a\", 2 }); // creates a temporary object, and then copies it into the vector\n\tstack.emplace_back(\"a\", 2);  // forwards the arguments so the object can be created directly in the vector (no copy made)\n\n\t// push_back won't use explicit constructors, emplace_back will\n\tstack.push_back({ 2 }); // compile error: Foo(int) is explicit\n\tstack.emplace_back(2);  // ok\n    \n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n#include &lt;vector&gt;\n\nclass Foo\n{\nprivate:\n    std::string m_a{};\n    int m_b{};\n\npublic:\n    Foo(std::string_view a, int b)\n        : m_a { a }, m_b { b }\n        {}\n\n    explicit Foo(int b)\n        : m_a {}, m_b { b }\n        {};\n};\n\nint main()\n{\n\tstd::vector&lt;Foo&gt; stack{};\n\n\t// When we already have an object, push_back and emplace_back are similar in efficiency\n\tFoo f{ \"a\", 2 };\n\tstack.push_back(f);    // prefer this one\n\tstack.emplace_back(f);\n\n\t// When we need to create a temporary object to push, emplace_back is more efficient\n\tstack.push_back({ \"a\", 2 }); // creates a temporary object, and then copies it into the vector\n\tstack.emplace_back(\"a\", 2);  // forwards the arguments so the object can be created directly in the vector (no copy made)\n\n\t// push_back won't use explicit constructors, emplace_back will\n\tstack.push_back({ 2 }); // compile error: Foo(int) is explicit\n\tstack.emplace_back(2);  // ok\n    \n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n#include <vektor>\n\ntřída Foo\n{\nsoukromé:\n    std::string m_a{};\n    int m_b{};\n\nveřejnost:\n    Foo(std::string_view a, int b)\n        : m_a { a }, m_b { b }\n        {}\n\n    explicitní Foo (int b)\n        : m_a {}, m_b { b }\n        {};\n};\n\nint main()\n{\n\tstd::vector<Foo> stack{};\n\n\t// Když již máme objekt, push_back a emplace_back mají podobnou účinnost\n\tFoo f{ \"a\", 2 };\n\tstack.push_back(f);    // preferuji tento\n\tstack.emplace_back(f);\n\n\t// Když potřebujeme vytvořit dočasný objekt pro push, emplace_back je efektivnější\n\tstack.push_back({ \"a\", 2 }); // vytvoří dočasný objekt a poté jej zkopíruje do vektoru\n\tstack.emplace_back(\"a\", 2);  // předá argumenty, takže objekt lze vytvořit přímo ve vektoru (neprovádí se žádná kopie)\n\n\t// push_back nebude používat explicitní konstruktory, emplace_back ano\n\tstack.push_back({ 2 }); // chyba kompilace: Foo(int) je explicitní\n\tstack.emplace_back(2);  // dobře\n    \n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b65",
       "type": "paragraph",
       "html": "<p>In the above example, we have a vector of <code>Foo</code> objects. With <code>push_back({ \"a\", 2 })</code>, we’re creating and initializing a temporary <code>Foo</code> object, which then gets copied into the vector. For expensive to copy types (like <code>std::string</code>) this copy can result in a performance hit.</p>",
       "preview": "In the above example, we have a vector of Foo objects. With push_back({ \"a\", 2 }",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu máme vektor objektů <code>Foo</code>. Pomocí <code>push_back({ \"a\", 2 })</code> vytváříme a inicializujeme dočasný objekt <code>Foo</code>, který se následně zkopíruje do vektoru. U typů, jejichž kopírování je náročné (jako například <code>std::string</code>), může tato kopie vést k poklesu výkonu.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b66",
       "type": "paragraph",
       "html": "<p>With <code>emplace_back()</code>, we don’t need to create a temporary object to pass. Instead, we pass the arguments that would be used to create the temporary object, and <code>emplace_back()</code> forwards them (using a feature called perfect forwarding) to the vector, where they are used to create and initialize the object inside the vector. This avoids a copy that would have otherwise been made.</p>",
       "preview": "With emplace_back(), we don’t need to create a temporary object to pass. Instead",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>S <code>emplace_back()</code> nemusíme vytvářet dočasný objekt k předání. Místo toho předáme argumenty, které by se použily k vytvoření dočasného objektu, a <code>emplace_back()</code> je přepošle (pomocí mechanismu zvaného perfect forwarding) do vektoru, kde jsou použity k vytvoření a inicializaci objektu přímo uvnitř vektoru. Tím se vyhneme kopírování, ke kterému by jinak došlo.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b67",
       "type": "paragraph",
       "html": "<p>Of note, <code>push_back()</code> won’t use explicit constructors, whereas <code>emplace_back()</code> will. This makes <code>emplace_back</code> more dangerous, as it is easier to accidentally invoke an explicit constructor to perform some conversion that doesn’t make sense.</p>",
       "preview": "Of note, push_back() won’t use explicit constructors, whereas emplace_back() wil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za zmínku stojí, že <code>push_back()</code> nepoužije explicitní konstruktory, zatímco <code>emplace_back()</code> ano. Díky tomu je <code>emplace_back</code> nebezpečnější, protože je snazší nechtěně vyvolat explicitní konstruktor k provedení konverze, která nedává smysl.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b68",
       "type": "paragraph",
       "html": "<p>Prior to C++20, <code>emplace_back()</code> doesn’t work with aggregate initialization.</p>",
       "preview": "Prior to C++20, emplace_back() doesn’t work with aggregate initialization.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Před C++20 <code>emplace_back()</code> nefunguje s agregátní inicializací.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b69",
@@ -506,28 +583,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer <code>emplace_back()</code> when creating a new temporary object to add to the container, or when you need to access an explicit constructor.</p><p>Prefer <code>push_back()</code> otherwise.</p><p><a href=\"https://abseil.io/tips/112\">This article</a> has more explanation for this best practice.</p></div>",
       "preview": "Best practicePrefer emplace_back() when creating a new temporary object to add to the container, or ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost <code>emplace_back()</code>, pokud vytváříte nový dočasný objekt pro přidání do kontejneru nebo pokud potřebujete přístup k explicitnímu konstruktoru.</p><p>V ostatních případech preferujte <code>push_back()</code>.</p><p><a href=\"https://abseil.io/tips/112\">Tento článek</a> nabízí podrobnější vysvětlení tohoto doporučeného postupu.</p></div>"
     },
     {
       "id": "stdvector-and-stack-behavior_b70",
       "type": "section",
       "title": "Addressing our challenge using stack operations",
       "html": "<h3 class=\"cpp-section-heading\">Addressing our challenge using stack operations</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Řešení našeho problému pomocí zásobníkových operací</h3>",
+      "title_cs": "Řešení naší výzvy pomocí operací zásobníku"
     },
     {
       "id": "stdvector-and-stack-behavior_b71",
       "type": "paragraph",
       "html": "<p>It should now be obvious how we should address the challenge introduced at the top of the lesson. If we don’t know in advance how many elements will be added to our <code>std::vector</code>, using the stack functions to insert those elements is the way to go.</p>",
       "preview": "It should now be obvious how we should address the challenge introduced at the t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní by již mělo být zřejmé, jak vyřešit problém představený na začátku lekce. Pokud předem nevíme, kolik prvků bude do našeho <code>std::vector</code> přidáno, správnou cestou je vkládat tyto prvky pomocí zásobníkových funkcí.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b72",
       "type": "paragraph",
       "html": "<p>Here’s an example:</p>",
       "preview": "Here’s an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad:</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b73",
@@ -535,28 +617,33 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <limits>\n#include <vector>\n\nint main()\n{\n\tstd::vector<int> scoreList{};\n\n\twhile (true)\n\t{\n\t\tstd::cout << \"Enter a score (or -1 to finish): \";\n\t\tint x{};\n\t\tstd::cin >> x;\n\n\t\tif (!std::cin) // handle bad input\n\t\t{\n\t\t\tstd::cin.clear();\n\t\t\tstd::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\\n');\n\t\t\tcontinue;\n\t\t}\n\n\t\t// If we're done, break out of loop\n\t\tif (x == -1)\n\t\t\tbreak;\n\n\t\t// The user entered a valid element, so let's push it on the vector\n\t\tscoreList.push_back(x);\n\t}\n\n\tstd::cout << \"Your list of scores: \\n\";\n\n\tfor (const auto& score : scoreList)\n\t\tstd::cout << score << ' ';\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n\tstd::vector&lt;int&gt; scoreList{};\n\n\twhile (true)\n\t{\n\t\tstd::cout &lt;&lt; \"Enter a score (or -1 to finish): \";\n\t\tint x{};\n\t\tstd::cin &gt;&gt; x;\n\n\t\tif (!std::cin) // handle bad input\n\t\t{\n\t\t\tstd::cin.clear();\n\t\t\tstd::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\\n');\n\t\t\tcontinue;\n\t\t}\n\n\t\t// If we're done, break out of loop\n\t\tif (x == -1)\n\t\t\tbreak;\n\n\t\t// The user entered a valid element, so let's push it on the vector\n\t\tscoreList.push_back(x);\n\t}\n\n\tstd::cout &lt;&lt; \"Your list of scores: \\n\";\n\n\tfor (const auto&amp; score : scoreList)\n\t\tstd::cout &lt;&lt; score &lt;&lt; ' ';\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <limity>\n#include <vektor>\n\nint main()\n{\n\tstd::vector<int> scoreList{};\n\n\tzatímco (pravda)\n\t{\n\t\tstd::cout << \"Zadejte skóre (nebo -1 pro dokončení): \";\n\t\tint x{};\n\t\tstd::cin >> x;\n\n\t\tif (!std::cin) // zpracovává špatný vstup\n\t\t{\n\t\t\tstd::cin.clear();\n\t\t\tstd::cin.ignore(std::numerické_limity<std::velikost proudu>::max(), '\\n');\n\t\t\tpokračovat;\n\t\t}\n\n\t\t// Pokud jsme hotovi, přerušte smyčku\n\t\tif (x == -1)\n\t\t\tpřestávka;\n\n\t\t// Uživatel zadal platný prvek, tak jej vložíme na vektor\n\t\tscoreList.push_back(x);\n\t}\n\n\tstd::cout << \"Váš seznam skóre: \\n\";\n\n\tfor (const auto& score : scoreList)\n\t\tstd::cout << skóre << ' ';\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "stdvector-and-stack-behavior_b74",
       "type": "paragraph",
       "html": "<p>This program lets the user enter test scores, adding each score to a vector. After the user has finished adding scores, all the values in the vector are printed.</p>",
       "preview": "This program lets the user enter test scores, adding each score to a vector. Aft",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program umožňuje uživateli zadávat výsledky testů a každé skóre přidává do vektoru. Jakmile uživatel zadávání skóre dokončí, všechny hodnoty ve vektoru se vypíší.</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b75",
       "type": "paragraph",
       "html": "<p>Note how in this program, we don’t have to do any counting, indexing, or deal with array lengths at all! We can just focus on the logic of what we want the program to do, and let the vector handle all of the storage issues!</p>",
       "preview": "Note how in this program, we don’t have to do any counting, indexing, or deal wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že v tomto programu nemusíme vůbec provádět žádné počítání, indexování ani řešit délku pole! Můžeme se jednoduše soustředit na logiku toho, co má program dělat, a všechny záležitosti týkající se ukládání dat nechat na vektoru!</p>"
     },
     {
       "id": "stdvector-and-stack-behavior_b76",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "stdvector-and-stack-behavior_b77",
@@ -572,7 +659,9 @@
       "type": "output",
       "text": "       (Stack: empty)\nPush 1 (Stack: 1)\nPush 2 (Stack: 1 2)\nPush 3 (Stack: 1 2 3)\nPop    (Stack: 1 2)\nPush 4 (Stack: 1 2 4)\nPop    (Stack: 1 2)\nPop    (Stack: 1)\nPop    (Stack: empty)\n",
       "html": "<pre>       (Stack: empty)\nPush 1 (Stack: 1)\nPush 2 (Stack: 1 2)\nPush 3 (Stack: 1 2 3)\nPop    (Stack: 1 2)\nPush 4 (Stack: 1 2 4)\nPop    (Stack: 1 2)\nPop    (Stack: 1)\nPop    (Stack: empty)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>       (Zásobník: prázdný)\nPush 1 (Zásobník: 1)\nPush 2 (Zásobník: 1 2)\nPush 3 (Zásobník: 1 2 3)\nPop    (Zásobník: 1 2)\nPush 4 (Zásobník: 1 2 4)\nPop    (Zásobník: 1 2)\nPop    (Zásobník: 1)\nPop    (Zásobník: prázdný)\n</pre>"
     }
-  ]
+  ],
+  "title_cs": "16.11 — std::vector a chování zásobníku"
 }

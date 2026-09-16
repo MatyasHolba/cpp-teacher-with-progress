@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>When a class type is an aggregate, we can use aggregate initialization to initialize the class type directly:</p>",
       "preview": "When a class type is an aggregate, we can use aggregate initialization to initia",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je třídní typ agregát, můžeme k jeho přímé inicializaci použít agregátní inicializaci:</p>"
     },
     {
       "id": "introduction-to-constructors_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "struct Foo // Foo is an aggregate\n{\n    int x {};\n    int y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // uses aggregate initialization\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo // Foo is an aggregate\n{\n    int x {};\n    int y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // uses aggregate initialization\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">struct Foo // Foo je souhrn\n{\n    int x {};\n    int y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // používá agregovanou inicializaci\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b2",
       "type": "paragraph",
       "html": "<p>Aggregate inititalization does memberwise initialization (members are initialized in the order in which they are defined). So when <code>foo</code> is instantiated in the above example, <code>foo.x</code> is initialized to <code>6</code>, and <code>foo.y</code> is initialized to <code>7</code>.</p>",
       "preview": "Aggregate inititalization does memberwise initialization (members are initialize",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Agregátní inicializace provádí inicializaci po jednotlivých členech (členy jsou inicializovány v pořadí, v jakém jsou definovány). Když je tedy ve výše uvedeném příkladu vytvořena instance <code>foo</code>, <code>foo.x</code> je inicializován na <code>6</code> a <code>foo.y</code> je inicializován na <code>7</code>.</p>"
     },
     {
       "id": "introduction-to-constructors_b3",
@@ -37,14 +40,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss the definition of an aggregate and aggregate initialization in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/struct-aggregate-initialization/\">13.8 -- Struct aggregate initialization</a>.</p></div>",
       "preview": "Related contentWe discuss the definition of an aggregate and aggregate initialization in lesson 13.8",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Definici agregátu a agregátní inicializaci probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/struct-aggregate-initialization/\">13.8 – Agregátní inicializace struktur</a>.</p></div>"
     },
     {
       "id": "introduction-to-constructors_b4",
       "type": "paragraph",
       "html": "<p>However, as soon as we make any member variables private (to hide our data), our class type is no longer an aggregate (because aggregates cannot have private members). And that means we’re no longer able to use aggregate initialization:</p>",
       "preview": "However, as soon as we make any member variables private (to hide our data), our",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jakmile však jakékoli členské proměnné nastavíme jako privátní (abychom skryli naše data), náš třídní typ již není agregátem (protože agregáty nemohou mít privátní členy). A to znamená, že již nemůžeme použít agregátní inicializaci:</p>"
     },
     {
       "id": "introduction-to-constructors_b5",
@@ -52,63 +57,73 @@
       "language": "cpp",
       "code": "class Foo // Foo is not an aggregate (has private members)\n{\n    int m_x {};\n    int m_y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // compile error: can not use aggregate initialization\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo // Foo is not an aggregate (has private members)\n{\n    int m_x {};\n    int m_y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // compile error: can not use aggregate initialization\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo // Foo není souhrn (má soukromé členy)\n{\n    int m_x {};\n    int m_y {};\n};\n\nint main()\n{\n    Foo foo { 6, 7 }; // chyba kompilace: nelze použít agregační inicializaci\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b6",
       "type": "paragraph",
       "html": "<p>Not allowing class types with private members to be initialized via aggregate initialization makes sense for a number of reasons:</p>",
       "preview": "Not allowing class types with private members to be initialized via aggregate in",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, že třídní typy s privátními členy nelze inicializovat pomocí agregátní inicializace, dává smysl z několika důvodů:</p>"
     },
     {
       "id": "introduction-to-constructors_b7",
       "type": "list",
       "html": "<ul><li>Aggregate initialization requires knowing about the implementation of the class (since you have to know what the members are, and what order they were defined in), which we’re intentionally trying to avoid when we hide our data members.</li><li>If our class had some kind of invariant, we’d be relying on the user to initialize the class in a way that preserves the invariant.</li></ul>",
       "preview": "Aggregate initialization requires knowing about the implementation of the class ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Agregátní inicializace vyžaduje znalost implementace třídy (protože musíte vědět, jaké členy obsahuje a v jakém pořadí byly definovány), čemuž se při zapouzdření datových členů záměrně snažíme vyhnout.</li><li>Pokud by naše třída měla nějaký invariant, spoléhali bychom se na to, že uživatel třídu inicializuje způsobem, který tento invariant zachová.</li></ul>"
     },
     {
       "id": "introduction-to-constructors_b8",
       "type": "paragraph",
       "html": "<p>So then how do we initialize a class with private member variables? The error message given by the compiler for the prior example provides a clue: “error: no matching constructor for initialization of ‘Foo'”</p>",
       "preview": "So then how do we initialize a class with private member variables? The error me",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jak tedy inicializovat třídu s privátními členskými proměnnými? Chybová zpráva kompilátoru z předchozího příkladu nám dává nápovědu: „error: no matching constructor for initialization of ‘Foo'“</p>"
     },
     {
       "id": "introduction-to-constructors_b9",
       "type": "paragraph",
       "html": "<p>We must need a matching constructor. But what the heck is that?</p>",
       "preview": "We must need a matching constructor. But what the heck is that?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zřejmě potřebujeme odpovídající konstruktor. Ale co to sakra je?</p>"
     },
     {
       "id": "introduction-to-constructors_b10",
       "type": "section",
       "title": "Constructors",
       "html": "<h3 class=\"cpp-section-heading\">Constructors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstruktory</h3>",
+      "title_cs": "Konstruktéři"
     },
     {
       "id": "introduction-to-constructors_b11",
       "type": "paragraph",
       "html": "<p>A <strong>constructor</strong> is a special member function that is automatically called after a non-aggregate class type object is created.</p>",
       "preview": "A constructor is a special member function that is automatically called after a ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Konstruktor</strong> je speciální členská funkce, která je automaticky zavolána po vytvoření objektu neagregátního typu třídy (class type).</p>"
     },
     {
       "id": "introduction-to-constructors_b12",
       "type": "paragraph",
       "html": "<p>When a non-aggregate class type object is defined, the compiler looks to see if it can find an accessible constructor that is a match for the initialization values provided by the caller (if any).</p>",
       "preview": "When a non-aggregate class type object is defined, the compiler looks to see if ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Při definici objektu neagregátního typu třídy kompilátor zjišťuje, zda dokáže najít přístupný konstruktor, který odpovídá inicializačním hodnotám poskytnutým volajícím (pokud nějaké jsou).</p>"
     },
     {
       "id": "introduction-to-constructors_b13",
       "type": "list",
       "html": "<ul><li>If an accessible matching constructor is found, memory for the object is allocated, and then the constructor function is called.</li><li>If no accessible matching constructor can be found, a compilation error will be generated.</li></ul>",
       "preview": "If an accessible matching constructor is found, memory for the object is allocat",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Pokud je nalezen přístupný odpovídající konstruktor, alokuje se pro objekt paměť a poté je zavolána funkce konstruktoru.</li><li>Pokud nelze nalézt žádný přístupný odpovídající konstruktor, dojde k chybě při kompilaci.</li></ul>"
     },
     {
       "id": "introduction-to-constructors_b14",
@@ -116,77 +131,90 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Many new programmers are confused about whether constructors create the objects or not. They do not -- the compiler sets up the memory allocation for the object prior to the constructor call. The constructor is then called on the uninitialized object.</p><p>However, if a matching constructor cannot be found for a set of initializers, the compiler will error. So while constructors don’t create objects, the lack of a matching constructor will prevent creation of an object.</p></div>",
       "preview": "Key insightMany new programmers are confused about whether constructors create the objects or not. T",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Mnoho začínajících programátorů je zmateno tím, zda konstruktory objekty vytvářejí, či nikoli. Nevytvářejí – kompilátor zajistí alokaci paměti pro objekt ještě před voláním konstruktoru. Konstruktor je pak zavolán nad tímto neinicializovaným objektem.</p><p>Pokud však pro danou sadu inicializátorů nelze nalézt odpovídající konstruktor, kompilátor ohlásí chybu. Ačkoliv tedy konstruktory objekty samy nevytvářejí, absence odpovídajícího konstruktoru vytvoření objektu zabrání.</p></div>"
     },
     {
       "id": "introduction-to-constructors_b15",
       "type": "paragraph",
       "html": "<p>Beyond determining how an object may be created, constructors generally perform two functions:</p>",
       "preview": "Beyond determining how an object may be created, constructors generally perform ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kromě určení toho, jak může být objekt vytvořen, plní konstruktory obecně dvě funkce:</p>"
     },
     {
       "id": "introduction-to-constructors_b16",
       "type": "list",
       "html": "<ul><li>They typically perform initialization of any member variables (via a member initialization list)</li><li>They may perform other setup functions (via statements in the body of the constructor). This might include things such as error checking the initialization values, opening a file or database, etc…</li></ul>",
       "preview": "They typically perform initialization of any member variables (via a member init",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Typicky provádějí inicializaci členských proměnných (pomocí inicializačního seznamu členů – member initialization list).</li><li>Mohou provádět další nastavovací operace (pomocí příkazů v těle konstruktoru). To může zahrnovat například kontrolu správnosti inicializačních hodnot, otevření souboru nebo databáze atd.</li></ul>"
     },
     {
       "id": "introduction-to-constructors_b17",
       "type": "paragraph",
       "html": "<p>After the constructor finishes executing, we say that the object has been “constructed”, and the object should now be in a consistent, usable state.</p>",
       "preview": "After the constructor finishes executing, we say that the object has been “const",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po dokončení vykonávání konstruktoru říkáme, že byl objekt „zkonstruován“ (constructed), a objekt by se nyní měl nacházet v konzistentním, použitelném stavu.</p>"
     },
     {
       "id": "introduction-to-constructors_b18",
       "type": "paragraph",
       "html": "<p>Note that aggregates are not allowed to have constructors -- so if you add a constructor to an aggregate, it is no longer an aggregate.</p>",
       "preview": "Note that aggregates are not allowed to have constructors -- so if you add a con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že agregáty nesmí mít konstruktory – pokud tedy k agregátu přidáte konstruktor, přestává být agregátem.</p>"
     },
     {
       "id": "introduction-to-constructors_b19",
       "type": "section",
       "title": "Naming constructors",
       "html": "<h3 class=\"cpp-section-heading\">Naming constructors</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Pojmenování konstruktorů</h3>",
+      "title_cs": "Pojmenování konstruktorů"
     },
     {
       "id": "introduction-to-constructors_b20",
       "type": "paragraph",
       "html": "<p>Unlike normal member functions, constructors have specific rules for how they must be named:</p>",
       "preview": "Unlike normal member functions, constructors have specific rules for how they mu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od běžných členských funkcí mají konstruktory specifická pravidla pro to, jak musí být pojmenovány:</p>"
     },
     {
       "id": "introduction-to-constructors_b21",
       "type": "list",
       "html": "<ul><li>Constructors must have the same name as the class (with the same capitalization). For template classes, this name excludes the template parameters.</li><li>Constructors have no return type (not even <code>void</code>).</li></ul>",
       "preview": "Constructors must have the same name as the class (with the same capitalization)",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Konstruktory musí mít stejný název jako třída (včetně velikosti písmen). U šablonových tříd tento název nezahrnuje parametry šablony.</li><li>Konstruktory nemají žádný návratový typ (ani <code>void</code>).</li></ul>"
     },
     {
       "id": "introduction-to-constructors_b22",
       "type": "paragraph",
       "html": "<p>Because constructors are typically part of the interface for your class, they are usually public.</p>",
       "preview": "Because constructors are typically part of the interface for your class, they ar",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože jsou konstruktory typicky součástí rozhraní vaší třídy, bývají obvykle public.</p>"
     },
     {
       "id": "introduction-to-constructors_b23",
       "type": "section",
       "title": "A basic constructor example",
       "html": "<h3 class=\"cpp-section-heading\">A basic constructor example</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Základní příklad konstruktoru</h3>",
+      "title_cs": "Příklad základního konstruktoru"
     },
     {
       "id": "introduction-to-constructors_b24",
       "type": "paragraph",
       "html": "<p>Let’s add a basic constructor to our example above:</p>",
       "preview": "Let’s add a basic constructor to our example above:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přidejme k našemu výše uvedenému příkladu základní konstruktor:</p>"
     },
     {
       "id": "introduction-to-constructors_b25",
@@ -194,42 +222,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Foo\n{\nprivate:\n    int m_x {};\n    int m_y {};\n\npublic:\n    Foo(int x, int y) // here's our constructor function that takes two initializers\n    {\n        std::cout << \"Foo(\" << x << \", \" << y << \") constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo{ 6, 7 }; // calls Foo(int, int) constructor\n    foo.print();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Foo\n{\nprivate:\n    int m_x {};\n    int m_y {};\n\npublic:\n    Foo(int x, int y) // here's our constructor function that takes two initializers\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; x &lt;&lt; \", \" &lt;&lt; y &lt;&lt; \") constructed\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Foo(\" &lt;&lt; m_x &lt;&lt; \", \" &lt;&lt; m_y &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo{ 6, 7 }; // calls Foo(int, int) constructor\n    foo.print();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Foo\n{\nsoukromé:\n    int m_x {};\n    int m_y {};\n\nveřejnost:\n    Foo(int x, int y) // zde je naše funkce konstruktoru, která vyžaduje dva inicializátory\n    {\n        std::cout << \"Foo(\" << x << \", \" << y << \") vytvořeno\\n\";\n    }\n\n    void print() konst\n    {\n        std::cout << \"Foo(\" << m_x << \", \" << m_y << \")\\n\";\n    }\n};\n\nint main()\n{\n    Foo foo{ 6, 7 }; // volá konstruktor Foo(int, int).\n    foo.print();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b26",
       "type": "paragraph",
       "html": "<p>This program will now compile and produce the result:</p>",
       "preview": "This program will now compile and produce the result:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento program se nyní zkompiluje a vytvoří výstup:</p>"
     },
     {
       "id": "introduction-to-constructors_b27",
       "type": "output",
       "text": "Foo(6, 7) constructed\nFoo(0, 0)\n",
       "html": "<pre>Foo(6, 7) constructed\nFoo(0, 0)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Foo(6, 7) constructed\nFoo(0, 0)\n</pre>"
     },
     {
       "id": "introduction-to-constructors_b28",
       "type": "paragraph",
       "html": "<p>When the compiler sees the definition <code>Foo foo{ 6, 7 }</code>, it looks for a matching <code>Foo</code> constructor that will accept two <code>int</code> arguments. <code>Foo(int, int)</code> is a match, so the compiler will allow the definition.</p>",
       "preview": "When the compiler sees the definition Foo foo{ 6, 7 }, it looks for a matching F",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když kompilátor vidí definici <code>Foo foo{ 6, 7 }</code>, hledá odpovídající konstruktor <code>Foo</code>, který přijímá dva argumenty typu <code>int</code>. <code>Foo(int, int)</code> této definici odpovídá, takže ji kompilátor povolí.</p>"
     },
     {
       "id": "introduction-to-constructors_b29",
       "type": "paragraph",
       "html": "<p>At runtime, when <code>foo</code> is instantiated, memory for <code>foo</code> is allocated, and then the <code>Foo(int, int)</code> constructor is called with parameter <code>x</code> initialized to <code>6</code> and parameter <code>y</code> initialized to <code>7</code>. The body of the constructor function then executes and prints <code>Foo(6, 7) constructed</code>.</p>",
       "preview": "At runtime, when foo is instantiated, memory for foo is allocated, and then the ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za běhu programu, když je <code>foo</code> instanciován, se alokuje paměť pro <code>foo</code> a poté je zavolán konstruktor <code>Foo(int, int)</code> s parametrem <code>x</code> inicializovaným na <code>6</code> a parametrem <code>y</code> inicializovaným na <code>7</code>. Následně se provede tělo funkce konstruktoru a vypíše <code>Foo(6, 7) constructed</code>.</p>"
     },
     {
       "id": "introduction-to-constructors_b30",
       "type": "paragraph",
       "html": "<p>When we call the <code>print()</code> member function, you’ll note that members <code>m_x</code> and <code>m_y</code> have value 0. This is because although our <code>Foo(int, int)</code> constructor function was called, it did not actually initialize the members. We’ll show how to do that in the next lesson.</p>",
       "preview": "When we call the print() member function, you’ll note that members m_x and m_y h",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když zavoláme členskou funkci <code>print()</code>, všimnete si, že členy <code>m_x</code> a <code>m_y</code> mají hodnotu 0. Je to proto, že ačkoli byla naše funkce konstruktoru <code>Foo(int, int)</code> zavolána, ve skutečnosti tyto členy neinicializovala. Jak to napravit si ukážeme v další lekci.</p>"
     },
     {
       "id": "introduction-to-constructors_b31",
@@ -237,21 +271,25 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We discuss the differences between using copy, direct, and list initialization to initialize objects with a constructor in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Class initialization and copy elision</a>.</p></div>",
       "preview": "Related contentWe discuss the differences between using copy, direct, and list initialization to ini",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Rozdílům mezi použitím copy, direct a list inicializace pro inicializaci objektů pomocí konstruktoru se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Inicializace tříd a vynechání kopírování (copy elision)</a>.</p></div>"
     },
     {
       "id": "introduction-to-constructors_b32",
       "type": "section",
       "title": "Constructor implicit conversion of arguments",
       "html": "<h3 class=\"cpp-section-heading\">Constructor implicit conversion of arguments</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Implicitní konverze argumentů u konstruktoru</h3>",
+      "title_cs": "Konstruktor implicitní konverze argumentů"
     },
     {
       "id": "introduction-to-constructors_b33",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicit type conversion</a>, we noted that the compiler will perform implicit conversion of arguments in a function call (if needed) in order to match a function definition where the parameters are a different type:</p>",
       "preview": "In lesson 10.1 -- Implicit type conversion, we noted that the compiler will perf",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/implicit-type-conversion/\">10.1 -- Implicitní typová konverze</a> jsme si uvedli, že kompilátor provede implicitní konverzi argumentů při volání funkce (pokud je to nutné), aby vyhovovaly definici funkce, kde jsou parametry odlišného typu:</p>"
     },
     {
       "id": "introduction-to-constructors_b34",
@@ -259,14 +297,16 @@
       "language": "cpp",
       "code": "void foo(int, int)\n{\n}\n\nint main()\n{\n    foo('a', true); // will match foo(int, int)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int, int)\n{\n}\n\nint main()\n{\n    foo('a', true); // will match foo(int, int)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">void foo(int, int)\n{\n}\n\nint main()\n{\n    foo('a', pravda); // bude odpovídat foo(int, int)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b35",
       "type": "paragraph",
       "html": "<p>This is no different for constructors: the <code>Foo(int, int)</code> constructor will match any call whose arguments are implicitly convertible to <code>int</code>:</p>",
       "preview": "This is no different for constructors: the Foo(int, int) constructor will match ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U konstruktorů tomu není jinak: konstruktor <code>Foo(int, int)</code> bude vyhovovat jakémukoli volání, jehož argumenty jsou implicitně převoditelné na <code>int</code>:</p>"
     },
     {
       "id": "introduction-to-constructors_b36",
@@ -274,21 +314,25 @@
       "language": "cpp",
       "code": "class Foo\n{\npublic:\n    Foo(int x, int y)\n    {\n    }\n};\n\nint main()\n{\n    Foo foo{ 'a', true }; // will match Foo(int, int) constructor\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\n{\npublic:\n    Foo(int x, int y)\n    {\n    }\n};\n\nint main()\n{\n    Foo foo{ 'a', true }; // will match Foo(int, int) constructor\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\n{\nveřejnost:\n    Foo(int x, int y)\n    {\n    }\n};\n\nint main()\n{\n    Foo foo{ 'a', pravda }; // bude odpovídat konstruktoru Foo(int, int).\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b37",
       "type": "section",
       "title": "Constructors should not be const",
       "html": "<h3 class=\"cpp-section-heading\">Constructors should not be const</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstruktory by neměly být const</h3>",
+      "title_cs": "Konstruktory by neměly být const"
     },
     {
       "id": "introduction-to-constructors_b38",
       "type": "paragraph",
       "html": "<p>A constructor needs to be able to initialize the object being constructed -- therefore, a constructor must not be const.</p>",
       "preview": "A constructor needs to be able to initialize the object being constructed -- the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstruktor musí být schopen inicializovat vytvářený objekt – konstruktor proto nesmí být const.</p>"
     },
     {
       "id": "introduction-to-constructors_b39",
@@ -296,28 +340,34 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Something\n{\nprivate:\n    int m_x{};\n\npublic:\n    Something() // constructors must be non-const\n    {\n        m_x = 5; // okay to modify members in non-const constructor\n    }\n\n    int getX() const { return m_x; } // const\n};\n\nint main()\n{\n    const Something s{}; // const object, implicitly invokes (non-const) constructor\n\n    std::cout << s.getX(); // prints 5\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Something\n{\nprivate:\n    int m_x{};\n\npublic:\n    Something() // constructors must be non-const\n    {\n        m_x = 5; // okay to modify members in non-const constructor\n    }\n\n    int getX() const { return m_x; } // const\n};\n\nint main()\n{\n    const Something s{}; // const object, implicitly invokes (non-const) constructor\n\n    std::cout &lt;&lt; s.getX(); // prints 5\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Něco\n{\nsoukromé:\n    int m_x{};\n\nveřejnost:\n    Konstruktory Something() // musí být non-const\n    {\n        m_x = 5; // v pořádku upravit členy v konstruktoru bez konst\n    }\n\n    int getX() const { return m_x; } // konst\n};\n\nint main()\n{\n    const Něco s{}; // const objekt, implicitně vyvolá (non-const) konstruktor\n\n    std::cout << s.getX(); // vytiskne 5\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-constructors_b40",
       "type": "paragraph",
       "html": "<p>Normally a non-const member function can’t be invoked on a const object. However, the C++ standard explicitly states (per <a href=\"https://eel.is/c++draft/class.ctor.general#5\">class.ctor.general#5</a>) that const doesn’t apply to an object under construction, and only comes into effect after the constructor ends.</p>",
       "preview": "Normally a non-const member function can’t be invoked on a const object. However",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Běžně nelze na objektu typu const volat ne-const členskou funkci. Standard C++ však výslovně uvádí (dle <a href=\"https://eel.is/c++draft/class.ctor.general#5\">class.ctor.general#5</a>), že const se na právě vytvářený objekt nevztahuje a začíná platit až po dokončení konstruktoru.</p>"
     },
     {
       "id": "introduction-to-constructors_b41",
       "type": "section",
       "title": "Constructors vs setters",
       "html": "<h3 class=\"cpp-section-heading\">Constructors vs setters</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Konstruktory vs. settery</h3>",
+      "title_cs": "Konstruktéři vs seřizovači"
     },
     {
       "id": "introduction-to-constructors_b42",
       "type": "paragraph",
       "html": "<p>Constructors are designed to initialize an entire object at the point of instantiation. Setters are designed to assign a value to a single member of an existing object.</p>",
       "preview": "Constructors are designed to initialize an entire object at the point of instant",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstruktory jsou navrženy k inicializaci celého objektu v okamžiku jeho vytvoření. Settery jsou navrženy k přiřazení hodnoty jednotlivému členu již existujícího objektu.</p>"
     }
-  ]
+  ],
+  "title_cs": "14.9 — Úvod do konstruktorů"
 }

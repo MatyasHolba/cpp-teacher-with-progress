@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b1",
@@ -22,112 +23,131 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };  // Calls Fraction(int, int) constructor\n    Fraction fCopy { f }; // What constructor is used here?\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };  // Calls Fraction(int, int) constructor\n    Fraction fCopy { f }; // What constructor is used here?\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel=0, int jmenovatel=1)\n        : m_numerator{numerator}, m_denominator{jmenovatel}\n    {\n    }\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nint main()\n{\n    Zlomek f { 5, 3 };  // Volání konstruktoru Fraction(int, int).\n    Zlomek fKopírovat { f }; // Jaký konstruktor je zde použit?\n\n    f.print();\n    fCopy.print();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b2",
       "type": "paragraph",
       "html": "<p>You might be surprised to find that this program compiles just fine, and produces the result:</p>",
       "preview": "You might be surprised to find that this program compiles just fine, and produce",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná vás překvapí, že se tento program bez problémů zkompiluje a vytvoří výsledek:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b3",
       "type": "output",
       "text": "Fraction(5, 3)\nFraction(5, 3)\n",
       "html": "<pre>Fraction(5, 3)\nFraction(5, 3)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Fraction(5, 3)\nFraction(5, 3)\n</pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b4",
       "type": "paragraph",
       "html": "<p>Let’s take a closer look at how this program works.</p>",
       "preview": "Let’s take a closer look at how this program works.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojďme se blíže podívat na to, jak tento program funguje.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b5",
       "type": "paragraph",
       "html": "<p>The initialization of variable <code>f</code> is just a standard brace initialization that calls the <code>Fraction(int, int)</code> constructor.</p>",
       "preview": "The initialization of variable f is just a standard brace initialization that ca",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Inicializace proměnné <code>f</code> je jen standardní inicializace pomocí složených závorek, která volá konstruktor <code>Fraction(int, int)</code>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b6",
       "type": "paragraph",
       "html": "<p>But what about the next line? The initialization of variable <code>fCopy</code> is also clearly an initialization, and you know that constructor functions are used to initialize classes. So what constructor is this line calling?</p>",
       "preview": "But what about the next line? The initialization of variable fCopy is also clear",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ale co další řádek? Inicializace proměnné <code>fCopy</code> je také očividně inicializací a vy víte, že k inicializaci tříd se používají konstruktory. Jaký konstruktor tedy tento řádek volá?</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b7",
       "type": "paragraph",
       "html": "<p>The answer is: the copy constructor.</p>",
       "preview": "The answer is: the copy constructor.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odpověď zní: kopírovací konstruktor (copy constructor).</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b8",
       "type": "section",
       "title": "The copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">The copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kopírovací konstruktor</h3>",
+      "title_cs": "Kopírovací konstruktor"
     },
     {
       "id": "introduction-to-the-copy-constructor_b9",
       "type": "paragraph",
       "html": "<p>A <strong>copy constructor</strong> is a constructor that is used to initialize an object with an existing object of the same type. After the copy constructor executes, the newly created object should be a copy of the object passed in as the initializer.</p>",
       "preview": "A copy constructor is a constructor that is used to initialize an object with an",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Kopírovací konstruktor</strong> (copy constructor) je konstruktor, který se používá k inicializaci objektu existujícím objektem stejného typu. Po vykonání kopírovacího konstruktoru by nově vytvořený objekt měl být kopií objektu předaného jako inicializátor.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b10",
       "type": "section",
       "title": "An implicit copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">An implicit copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Implicitní kopírovací konstruktor</h3>",
+      "title_cs": "Implicitní kopírovací konstruktor"
     },
     {
       "id": "introduction-to-the-copy-constructor_b11",
       "type": "paragraph",
       "html": "<p>If you do not provide a copy constructor for your classes, C++ will create a public <strong>implicit copy constructor</strong> for you. In the above example, the statement <code>Fraction fCopy { f };</code> is invoking the implicit copy constructor to initialize <code>fCopy</code> with <code>f</code>.</p>",
       "preview": "If you do not provide a copy constructor for your classes, C++ will create a pub",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud pro své třídy neposkytnete kopírovací konstruktor, C++ pro vás vytvoří veřejný <strong>implicitní kopírovací konstruktor</strong>. Ve výše uvedeném příkladu příkaz <code>Fraction fCopy { f };</code> volá implicitní kopírovací konstruktor k inicializaci <code>fCopy</code> pomocí <code>f</code>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b12",
       "type": "paragraph",
       "html": "<p>By default, the implicit copy constructor will do memberwise initialization. This means each member will be initialized using the corresponding member of the class passed in as the initializer. In the example above, <code>fCopy.m_numerator</code> is initialized using <code>f.m_numerator</code> (which has value <code>5</code>), and <code>fCopy.m_denominator</code> is initialized using <code>f.m_denominator</code> (which has value <code>3</code>).</p>",
       "preview": "By default, the implicit copy constructor will do memberwise initialization. Thi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výchozím nastavení provádí implicitní kopírovací konstruktor inicializaci po jednotlivých členech (memberwise initialization). To znamená, že každý člen je inicializován pomocí odpovídajícího členu třídy předané jako inicializátor. Ve výše uvedeném příkladu je <code>fCopy.m_numerator</code> inicializován pomocí <code>f.m_numerator</code> (který má hodnotu <code>5</code>) a <code>fCopy.m_denominator</code> je inicializován pomocí <code>f.m_denominator</code> (který má hodnotu <code>3</code>).</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b13",
       "type": "paragraph",
       "html": "<p>After the copy constructor has executed, the members of <code>f</code> and <code>fCopy</code> have the same values, so <code>fCopy</code> is a copy of <code>f</code>. Thus calling <code>print()</code> on either has the same result.</p>",
       "preview": "After the copy constructor has executed, the members of f and fCopy have the sam",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po vykonání kopírovacího konstruktoru mají členy <code>f</code> a <code>fCopy</code> stejné hodnoty, takže <code>fCopy</code> je kopií <code>f</code>. Zavolání <code>print()</code> na kterémkoli z nich má tedy stejný výsledek.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b14",
       "type": "section",
       "title": "Defining your own copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">Defining your own copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Definování vlastního kopírovacího konstruktoru</h3>",
+      "title_cs": "Definování vlastního kopírovacího konstruktoru"
     },
     {
       "id": "introduction-to-the-copy-constructor_b15",
       "type": "paragraph",
       "html": "<p>We can also explicitly define our own copy constructor. In this lesson, we’ll make our copy constructor print a message, so we can show you that it is indeed executing when copies are made.</p>",
       "preview": "We can also explicitly define our own copy constructor. In this lesson, we’ll ma",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme také explicitně definovat náš vlastní kopírovací konstruktor. V této lekci necháme náš kopírovací konstruktor vypsat zprávu, abychom vám ukázali, že se při vytváření kopií skutečně provádí.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b16",
       "type": "paragraph",
       "html": "<p>The copy constructor looks just like you’d expect it to:</p>",
       "preview": "The copy constructor looks just like you’d expect it to:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopírovací konstruktor vypadá přesně tak, jak byste očekávali:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b17",
@@ -135,28 +155,32 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction& fraction)\n        // Initialize our members using the corresponding member of the parameter\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout << \"Copy constructor called\\n\"; // just to prove it works\n    }\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };  // Calls Fraction(int, int) constructor\n    Fraction fCopy { f }; // Calls Fraction(const Fraction&) copy constructor\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction&amp; fraction)\n        // Initialize our members using the corresponding member of the parameter\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout &lt;&lt; \"Copy constructor called\\n\"; // just to prove it works\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };  // Calls Fraction(int, int) constructor\n    Fraction fCopy { f }; // Calls Fraction(const Fraction&amp;) copy constructor\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel=0, int jmenovatel=1)\n        : m_numerator{numerator}, m_denominator{jmenovatel}\n    {\n    }\n\n    // Kopírovat konstruktor\n    Zlomek (konst Zlomek a zlomek)\n        // Inicializujte naše členy pomocí odpovídajícího členu parametru\n        : m_numerator{ zlomek.m_numerator }\n        , m_jmenovatel{ zlomek.m_jmenovatel }\n    {\n        std::cout << \"Kopírovat konstruktor s názvem\\n\"; // jen abych dokázal, že to funguje\n    }\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nint main()\n{\n    Zlomek f { 5, 3 };  // Volání konstruktoru Fraction(int, int).\n    Zlomek fKopírovat { f }; // Volá konstruktor kopírování Fraction(const Fraction&).\n\n    f.print();\n    fCopy.print();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b18",
       "type": "paragraph",
       "html": "<p>When this program is run, you get:</p>",
       "preview": "When this program is run, you get:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Po spuštění tohoto programu dostanete:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b19",
       "type": "output",
       "text": "Copy constructor called\nFraction(5, 3)\nFraction(5, 3)\n",
       "html": "<pre>Copy constructor called\nFraction(5, 3)\nFraction(5, 3)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Copy constructor called\nFraction(5, 3)\nFraction(5, 3)\n</pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b20",
       "type": "paragraph",
       "html": "<p>The copy constructor we defined above is functionally equivalent to the one we’d get by default, except we’ve added an output statement to prove the copy constructor is actually being called. This copy constructor is invoked when <code>fCopy</code> is initialized with <code>f</code>.</p>",
       "preview": "The copy constructor we defined above is functionally equivalent to the one we’d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopírovací konstruktor, který jsme definovali výše, je funkčně ekvivalentní tomu, který bychom získali ve výchozím stavu, až na to, že jsme přidali výpis, abychom dokázali, že se kopírovací konstruktor skutečně volá. Tento kopírovací konstruktor se zavolá při inicializaci <code>fCopy</code> pomocí <code>f</code>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b21",
@@ -164,14 +188,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>Access controls work on a per-class basis (not a per-object basis). This means the member functions of a class can access the private members of any class object of the same type (not just the implicit object).</p><p>We use that to our advantage in the <code>Fraction</code> copy constructor above in order to directly access the private members of the <code>fraction</code> parameter. Otherwise, we would have no way to access those members directly (without adding access functions, which we might not want to do).</p></div>",
       "preview": "A reminderAccess controls work on a per-class basis (not a per-object basis). This means the member ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Řízení přístupu (access control) funguje na úrovni třídy (nikoli na úrovni jednotlivých objektů). To znamená, že členské funkce třídy mohou přistupovat k privátním členům libovolného objektu dané třídy (nejen k implicitnímu objektu).</p><p>Toho využíváme ve výše uvedeném kopírovacím konstruktoru třídy <code>Fraction</code>, abychom mohli přímo přistupovat k privátním členům parametru <code>fraction</code>. Jinak bychom neměli možnost k těmto členům přistupovat přímo (aniž bychom přidali přístupové metody, což nemusíme chtít dělat).</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b22",
       "type": "paragraph",
       "html": "<p>A copy constructor should not do anything other than copy an object. This is because the compiler may optimize the copy constructor out in certain cases. If you are relying on the copy constructor for some behavior other than just copying, that behavior may or may not occur. We discuss this further in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Class initialization and copy elision</a>.</p>",
       "preview": "A copy constructor should not do anything other than copy an object. This is bec",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopírovací konstruktor by neměl dělat nic jiného než kopírovat objekt. Důvodem je, že kompilátor může v určitých případech volání kopírovacího konstruktoru zcela vynechat v rámci optimalizace. Pokud spoléháte na to, že kopírovací konstruktor provede jiné chování než pouhé kopírování, toto chování může, ale nemusí nastat. Podrobněji se tomu věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 – Inicializace třídy a vynechání kopírování (copy elision)</a>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b23",
@@ -179,21 +205,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Copy constructors should have no side effects beyond copying.</p></div>",
       "preview": "Best practiceCopy constructors should have no side effects beyond copying.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Kopírovací konstruktory by kromě samotného kopírování neměly mít žádné vedlejší účinky.</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b24",
       "type": "section",
       "title": "Prefer the implicit copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">Prefer the implicit copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dávejte přednost implicitnímu kopírovacímu konstruktoru</h3>",
+      "title_cs": "Preferujte implicitní kopírovací konstruktor"
     },
     {
       "id": "introduction-to-the-copy-constructor_b25",
       "type": "paragraph",
       "html": "<p>Unlike the implicit default constructor, which does nothing (and thus is rarely what we want), the memberwise initialization performed by the implicit copy constructor is usually exactly what we want. Therefore, in most cases, using the implicit copy constructor is perfectly fine.</p>",
       "preview": "Unlike the implicit default constructor, which does nothing (and thus is rarely ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od implicitního výchozího konstruktoru, který nedělá nic (a málokdy je tím, co chceme), je inicializace člen po členu prováděná implicitním kopírovacím konstruktorem obvykle přesně to, co potřebujeme. Proto je ve většině případů použití implicitního kopírovacího konstruktoru naprosto v pořádku.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b26",
@@ -201,28 +231,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Prefer the implicit copy constructor, unless you have a specific reason to create your own.</p></div>",
       "preview": "Best practicePrefer the implicit copy constructor, unless you have a specific reason to create your ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Dávejte přednost implicitnímu kopírovacímu konstruktoru, pokud nemáte specifický důvod k vytvoření vlastního.</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b27",
       "type": "paragraph",
       "html": "<p>We’ll see cases where the copy constructor needs to be overwritten when we discuss dynamic memory allocation (<a href=\"https://www.learncpp.com/cpp-tutorial/shallow-vs-deep-copying/\">21.13 -- Shallow vs. deep copying</a>).</p>",
       "preview": "We’ll see cases where the copy constructor needs to be overwritten when we discu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případy, kdy je potřeba kopírovací konstruktor přepsat, uvidíme, až budeme probírat dynamickou alokaci paměti (<a href=\"https://www.learncpp.com/cpp-tutorial/shallow-vs-deep-copying/\">21.13 -- Mělké vs. hluboké kopírování</a>).</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b28",
       "type": "section",
       "title": "The copy constructor’s parameter must be a reference",
       "html": "<h3 class=\"cpp-section-heading\">The copy constructor’s parameter must be a reference</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Parametr kopírovacího konstruktoru musí být reference</h3>",
+      "title_cs": "Parametr konstruktoru kopírování musí být odkaz"
     },
     {
       "id": "introduction-to-the-copy-constructor_b29",
       "type": "paragraph",
       "html": "<p>It is a requirement that the parameter of a copy constructor be an lvalue reference or const lvalue reference. Because the copy constructor should not be modifying the parameter, using a const lvalue reference is preferred.</p>",
       "preview": "It is a requirement that the parameter of a copy constructor be an lvalue refere",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je vyžadováno, aby parametrem kopírovacího konstruktoru byla l-hodnotová reference (lvalue reference) nebo konstantní l-hodnotová reference (const lvalue reference). Protože by kopírovací konstruktor neměl parametr modifikovat, preferuje se použití konstantní l-hodnotové reference.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b30",
@@ -230,28 +265,33 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you write your own copy constructor, the parameter should be a const lvalue reference.</p></div>",
       "preview": "Best practiceIf you write your own copy constructor, the parameter should be a const lvalue referenc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud píšete vlastní kopírovací konstruktor, měl by být parametr konstantní l-hodnotovou referencí (const lvalue reference).</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b31",
       "type": "section",
       "title": "Pass by value and the copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">Pass by value and the copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Předávání hodnotou a kopírovací konstruktor</h3>",
+      "title_cs": "Předejte hodnotu a konstruktor kopírování"
     },
     {
       "id": "introduction-to-the-copy-constructor_b32",
       "type": "paragraph",
       "html": "<p>When an object is passed by value, the argument is copied into the parameter. When the argument and parameter are the same class type, the copy is made by implicitly invoking the copy constructor.</p>",
       "preview": "When an object is passed by value, the argument is copied into the parameter. Wh",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je objekt předán hodnotou, argument se zkopíruje do parametru. Pokud jsou argument i parametr stejného třídního typu, kopie se vytvoří implicitním zavoláním kopírovacího konstruktoru.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b33",
       "type": "paragraph",
       "html": "<p>This is illustrated in the following example:</p>",
       "preview": "This is illustrated in the following example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je znázorněno v následujícím příkladu:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b34",
@@ -259,49 +299,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n\npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }, m_denominator{ denominator }\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction& fraction)\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout << \"Copy constructor called\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nvoid printFraction(Fraction f) // f is pass by value\n{\n    f.print();\n}\n\nint main()\n{\n    Fraction f{ 5, 3 };\n\n    printFraction(f); // f is copied into the function parameter using copy constructor\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n\npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }, m_denominator{ denominator }\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction&amp; fraction)\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout &lt;&lt; \"Copy constructor called\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nvoid printFraction(Fraction f) // f is pass by value\n{\n    f.print();\n}\n\nint main()\n{\n    Fraction f{ 5, 3 };\n\n    printFraction(f); // f is copied into the function parameter using copy constructor\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n\nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel = 0, int jmenovatel = 1)\n        : m_numerator{ numerator }, m_denominator{ jmenovatel }\n    {\n    }\n\n    // Kopírovat konstruktor\n    Zlomek (konst Zlomek a zlomek)\n        : m_numerator{ zlomek.m_numerator }\n        , m_jmenovatel{ zlomek.m_jmenovatel }\n    {\n        std::cout << \"Kopírovat konstruktor s názvem\\n\";\n    }\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nvoid printFraction(Zlomek f) // f je předána hodnotou\n{\n    f.print();\n}\n\nint main()\n{\n    Zlomek f{ 5, 3 };\n\n    printFraction(f); // f se zkopíruje do parametru funkce pomocí konstruktoru kopírování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b35",
       "type": "paragraph",
       "html": "<p>On the author’s machine, this example prints:</p>",
       "preview": "On the author’s machine, this example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na počítači autora tento příklad vypíše:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b36",
       "type": "output",
       "text": "Copy constructor called\nFraction(5, 3)\n",
       "html": "<pre>Copy constructor called\nFraction(5, 3)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Copy constructor called\nFraction(5, 3)\n</pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b37",
       "type": "paragraph",
       "html": "<p>In the above example, the call to <code>printFraction(f)</code> is passing <code>f</code> by value. The copy constructor is invoked to copy <code>f</code> from <code>main</code> into the <code>f</code> parameter of function <code>printFraction()</code>.</p>",
       "preview": "In the above example, the call to printFraction(f) is passing f by value. The co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu předává volání <code>printFraction(f)</code> argument <code>f</code> hodnotou. Kopírovací konstruktor je vyvolán, aby zkopíroval <code>f</code> z <code>main</code> do parametru <code>f</code> funkce <code>printFraction()</code>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b38",
       "type": "section",
       "title": "Return by value and the copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">Return by value and the copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Návrat hodnotou a kopírovací konstruktor</h3>",
+      "title_cs": "Návrat podle hodnoty a konstruktoru kopírování"
     },
     {
       "id": "introduction-to-the-copy-constructor_b39",
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Introduction to local scope</a>, we noted that return by value creates a temporary object (holding a copy of the return value) that is passed back to the caller. When the return type and the return value are the same class type, the temporary object is initialized by implicitly invoking the copy constructor.</p>",
       "preview": "In lesson 2.5 -- Introduction to local scope, we noted that return by value crea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-local-scope/\">2.5 -- Úvod do lokálního rozsahu platnosti (local scope)</a> jsme si uvedli, že návrat hodnotou vytváří dočasný objekt (obsahující kopii návratové hodnoty), který je předán zpět volajícímu. Pokud jsou návratový typ a návratová hodnota stejného třídního typu, je dočasný objekt inicializován implicitním vyvoláním kopírovacího konstruktoru.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b40",
       "type": "paragraph",
       "html": "<p>For example:</p>",
       "preview": "For example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b41",
@@ -309,63 +357,73 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n\npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }, m_denominator{ denominator }\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction& fraction)\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout << \"Copy constructor called\\n\";\n    }\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nvoid printFraction(Fraction f) // f is pass by value\n{\n    f.print();\n}\n\nFraction generateFraction(int n, int d)\n{\n    Fraction f{ n, d };\n    return f;\n}\n\nint main()\n{\n    Fraction f2 { generateFraction(1, 2) }; // Fraction is returned using copy constructor\n\n    printFraction(f2); // f2 is copied into the function parameter using copy constructor\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n\npublic:\n    // Default constructor\n    Fraction(int numerator = 0, int denominator = 1)\n        : m_numerator{ numerator }, m_denominator{ denominator }\n    {\n    }\n\n    // Copy constructor\n    Fraction(const Fraction&amp; fraction)\n        : m_numerator{ fraction.m_numerator }\n        , m_denominator{ fraction.m_denominator }\n    {\n        std::cout &lt;&lt; \"Copy constructor called\\n\";\n    }\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nvoid printFraction(Fraction f) // f is pass by value\n{\n    f.print();\n}\n\nFraction generateFraction(int n, int d)\n{\n    Fraction f{ n, d };\n    return f;\n}\n\nint main()\n{\n    Fraction f2 { generateFraction(1, 2) }; // Fraction is returned using copy constructor\n\n    printFraction(f2); // f2 is copied into the function parameter using copy constructor\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n\nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel = 0, int jmenovatel = 1)\n        : m_numerator{ numerator }, m_denominator{ jmenovatel }\n    {\n    }\n\n    // Kopírovat konstruktor\n    Zlomek (konst Zlomek a zlomek)\n        : m_numerator{ zlomek.m_numerator }\n        , m_jmenovatel{ zlomek.m_jmenovatel }\n    {\n        std::cout << \"Kopírovat konstruktor s názvem\\n\";\n    }\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nvoid printFraction(Zlomek f) // f je předána hodnotou\n{\n    f.print();\n}\n\nZlomek vygenerovatZlomek(int n, int d)\n{\n    Zlomek f{ n, d };\n    návrat f;\n}\n\nint main()\n{\n    Zlomek f2 { vygenerujZlomek(1, 2) }; // Zlomek je vrácen pomocí kopírovacího konstruktoru\n\n    printFraction(f2); // f2 se zkopíruje do parametru funkce pomocí konstruktoru kopírování\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b42",
       "type": "paragraph",
       "html": "<p>When <code>generateFraction</code> returns a <code>Fraction</code> back to <code>main</code>, a temporary <code>Fraction</code> object is created and initialized using the copy constructor.</p>",
       "preview": "When generateFraction returns a Fraction back to main, a temporary Fraction obje",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když <code>generateFraction</code> vrací <code>Fraction</code> zpět do <code>main</code>, vytvoří se dočasný objekt <code>Fraction</code>, který se inicializuje pomocí kopírovacího konstruktoru.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b43",
       "type": "paragraph",
       "html": "<p>Because this temporary is used to initialize <code>Fraction f2</code>, this invokes the copy constructor again to copy the temporary into <code>f2</code>.</p>",
       "preview": "Because this temporary is used to initialize Fraction f2, this invokes the copy ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože se tento dočasný objekt použije k inicializaci <code>Fraction f2</code>, vyvolá se kopírovací konstruktor znovu, aby tento dočasný objekt zkopíroval do <code>f2</code>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b44",
       "type": "paragraph",
       "html": "<p>And when <code>f2</code> is passed to <code>printFraction()</code>, the copy constructor is called a third time.</p>",
       "preview": "And when f2 is passed to printFraction(), the copy constructor is called a third",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A když je <code>f2</code> předáno do <code>printFraction()</code>, kopírovací konstruktor je zavolán potřetí.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b45",
       "type": "paragraph",
       "html": "<p>Thus, on the author’s machine, this example prints:</p>",
       "preview": "Thus, on the author’s machine, this example prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači tedy tento příklad vypíše:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b46",
       "type": "output",
       "text": "Copy constructor called\nCopy constructor called\nCopy constructor called\nFraction(1, 2)\n",
       "html": "<pre>Copy constructor called\nCopy constructor called\nCopy constructor called\nFraction(1, 2)\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Copy constructor called\nCopy constructor called\nCopy constructor called\nFraction(1, 2)\n</pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b47",
       "type": "paragraph",
       "html": "<p>If you compile and execute the above example, you may find that only two calls to the copy constructor occur. This is a compiler optimization known as <em>copy elision</em>. We discuss copy elision further in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Class initialization and copy elision</a>.</p>",
       "preview": "If you compile and execute the above example, you may find that only two calls t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud výše uvedený příklad zkompilujete a spustíte, můžete zjistit, že došlo pouze ke dvěma voláním kopírovacího konstruktoru. Jedná se o optimalizaci kompilátoru známou jako <em>copy elision</em> (vynechání kopírování). Copy elision se podrobněji věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Inicializace třídy a vynechání kopírování (copy elision)</a>.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b48",
       "type": "section",
       "title": "Using = default to generate a default copy constructor",
       "html": "<h3 class=\"cpp-section-heading\">Using <code>= default</code> to generate a default copy constructor</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití <code>= default</code> pro vygenerování výchozího kopírovacího konstruktoru</h3>",
+      "title_cs": "Použití = default ke generování výchozího kopírovacího konstruktoru"
     },
     {
       "id": "introduction-to-the-copy-constructor_b49",
       "type": "paragraph",
       "html": "<p>If a class has no copy constructor, the compiler will implicitly generate one for us. If we prefer, we can explicitly request the compiler create a default copy constructor for us using the <code>= default</code> syntax:</p>",
       "preview": "If a class has no copy constructor, the compiler will implicitly generate one fo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud třída nemá žádný kopírovací konstruktor, kompilátor jej pro nás implicitně vygeneruje. Pokud chceme, můžeme kompilátor explicitně požádat o vytvoření výchozího kopírovacího konstruktoru pomocí syntaxe <code>= default</code>:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b50",
@@ -373,21 +431,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Explicitly request default copy constructor\n    Fraction(const Fraction& fraction) = default;\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };\n    Fraction fCopy { f };\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Explicitly request default copy constructor\n    Fraction(const Fraction&amp; fraction) = default;\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };\n    Fraction fCopy { f };\n\n    f.print();\n    fCopy.print();\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel=0, int jmenovatel=1)\n        : m_numerator{numerator}, m_denominator{jmenovatel}\n    {\n    }\n\n    // Explicitně požaduje výchozí konstruktor kopírování\n    Zlomek(konst Zlomek& zlomek) = výchozí;\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nint main()\n{\n    Zlomek f { 5, 3 };\n    Zlomek fKopírovat { f };\n\n    f.print();\n    fCopy.print();\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b51",
       "type": "section",
       "title": "Using = delete to prevent copies",
       "html": "<h3 class=\"cpp-section-heading\">Using <code>= delete</code> to prevent copies</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití <code>= delete</code> k zabránění kopírování</h3>",
+      "title_cs": "Pomocí = delete zabráníte kopírování"
     },
     {
       "id": "introduction-to-the-copy-constructor_b52",
       "type": "paragraph",
       "html": "<p>Occasionally we run into cases where we do not want objects of a certain class to be copyable. We can prevent this by marking the copy constructor function as deleted, using the <code>= delete</code> syntax:</p>",
       "preview": "Occasionally we run into cases where we do not want objects of a certain class t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Občas narazíme na případy, kdy nechceme, aby objekty určité třídy byly kopírovatelné. Tomu můžeme zabránit označením funkce kopírovacího konstruktoru jako smazané (deleted) pomocí syntaxe <code>= delete</code>:</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b53",
@@ -395,14 +457,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Delete the copy constructor so no copies can be made\n    Fraction(const Fraction& fraction) = delete;\n\n    void print() const\n    {\n        std::cout << \"Fraction(\" << m_numerator << \", \" << m_denominator << \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };\n    Fraction fCopy { f }; // compile error: copy constructor has been deleted\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n \nclass Fraction\n{\nprivate:\n    int m_numerator{ 0 };\n    int m_denominator{ 1 };\n \npublic:\n    // Default constructor\n    Fraction(int numerator=0, int denominator=1)\n        : m_numerator{numerator}, m_denominator{denominator}\n    {\n    }\n\n    // Delete the copy constructor so no copies can be made\n    Fraction(const Fraction&amp; fraction) = delete;\n\n    void print() const\n    {\n        std::cout &lt;&lt; \"Fraction(\" &lt;&lt; m_numerator &lt;&lt; \", \" &lt;&lt; m_denominator &lt;&lt; \")\\n\";\n    }\n};\n\nint main()\n{\n    Fraction f { 5, 3 };\n    Fraction fCopy { f }; // compile error: copy constructor has been deleted\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n \ntřída Zlomek\n{\nsoukromé:\n    int m_numerator{ 0 };\n    int m_jmenovatel{ 1 };\n \nveřejnost:\n    // Výchozí konstruktor\n    Zlomek (int čitatel=0, int jmenovatel=1)\n        : m_numerator{numerator}, m_denominator{jmenovatel}\n    {\n    }\n\n    // Smaže konstruktor kopírování, aby nebylo možné vytvářet žádné kopie\n    Zlomek(konst Zlomek& zlomek) = smazat;\n\n    void print() konst\n    {\n        std::cout << \"Zlomek(\" << m_numerator << \", \" << m_jmenovatel << \")\\n\";\n    }\n};\n\nint main()\n{\n    Zlomek f { 5, 3 };\n    Zlomek fKopírovat { f }; // chyba kompilace: kopírovací konstruktor byl smazán\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b54",
       "type": "paragraph",
       "html": "<p>In the example, when the compiler goes to find a constructor to initialize <code>fCopy</code> with <code>f</code>, it will see that the copy constructor has been deleted. This will cause it to emit a compile error.</p>",
       "preview": "In the example, when the compiler goes to find a constructor to initialize fCopy",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu, když se kompilátor pokusí najít konstruktor pro inicializaci <code>fCopy</code> pomocí <code>f</code>, zjistí, že kopírovací konstruktor byl smazán (deleted). To způsobí chybu při překladu.</p>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b55",
@@ -410,7 +474,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">As an aside…</p><p>You can also prevent the public from making copies of class object by making the copy constructor private (as private functions can’t be used by the public). However, a private copy constructor <em>can</em> still be used by other members of the class, so this solution is not advised unless that is desired.</p></div>",
       "preview": "As an aside…You can also prevent the public from making copies of class object by making the copy co",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Mimochodem…</p><p>Vytváření kopií objektů třídy z vnějšího kódu můžete zabránit také tím, že kopírovací konstruktor označíte jako privátní (protože privátní funkce nemohou být zvenčí volány). Nicméně privátní kopírovací konstruktor <em>stále mohou</em> používat ostatní členové třídy, takže se toto řešení nedoporučuje, pokud to není přímo vaším záměrem.</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b56",
@@ -418,14 +483,17 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>The <strong>rule of three</strong> is a well known C++ principle that states that if a class requires a user-defined copy constructor, destructor, or copy assignment operator, then it probably requires all three. In C++11, this was expanded to the <strong>rule of five</strong>, which adds the move constructor and move assignment operator to the list.</p><p>Not following the rule of three/rule of five is likely to lead to malfunctioning code. We’ll revisit the rule of three and rule of five when we cover dynamic memory allocation.</p><p>We discuss destructors in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-destructors/\">15.4 -- Introduction to destructors</a> and <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 -- Destructors</a>, and copy assignment in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-the-assignment-operator/\">21.12 -- Overloading the assignment operator</a>.</p></div>",
       "preview": "For advanced readersThe rule of three is a well known C++ principle that states that if a class requ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p><strong>Pravidlo tří</strong> (rule of three) je dobře známý princip v C++, který říká, že pokud třída vyžaduje uživatelem definovaný kopírovací konstruktor, destruktor nebo operátor přiřazení kopií (copy assignment operator), pak pravděpodobně vyžaduje všechny tři. V C++11 bylo toto pravidlo rozšířeno na <strong>pravidlo pěti</strong> (rule of five), které na seznam přidává přesunovací konstruktor (move constructor) a operátor přiřazení přesunem (move assignment operator).</p><p>Nedodržení pravidla tří / pravidla pěti pravděpodobně povede k nesprávně fungujícímu kódu. K pravidlu tří a pravidlu pěti se ještě vrátíme, až budeme probírat dynamickou alokaci paměti.</p><p>Destruktory probíráme v lekcích <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-destructors/\">15.4 – Úvod do destruktorů</a> a <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 – Destruktory</a> a operátor přiřazení kopií v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/overloading-the-assignment-operator/\">21.12 – Přetěžování operátoru přiřazení</a>.</p></div>"
     },
     {
       "id": "introduction-to-the-copy-constructor_b57",
       "type": "section",
       "title": "Quiz time",
       "html": "<h3 class=\"cpp-section-heading\">Quiz time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kvíz</h3>",
+      "title_cs": "Čas na kvíz"
     },
     {
       "id": "introduction-to-the-copy-constructor_b58",
@@ -436,5 +504,6 @@
       "solutionHtml": "<p>When we pass a class type argument by value, the copy constructor is implicitly invoked to copy the argument into the parameter.</p><p>If the copy constructor used pass by value, the copy constructor would need to call itself to copy the initializer argument into the copy constructor parameter. But that call to the copy constructor would also be pass by value, so the copy constructor would be invoked again to copy the argument into the function parameter. This would lead to an infinite chain of calls to the copy constructor.</p>",
       "canCheck": true
     }
-  ]
+  ],
+  "title_cs": "14.14 — Úvod do kopírovacího konstruktoru"
 }

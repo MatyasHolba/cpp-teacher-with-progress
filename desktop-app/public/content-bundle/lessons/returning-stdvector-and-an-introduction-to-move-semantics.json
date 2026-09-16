@@ -14,35 +14,41 @@
       "type": "paragraph",
       "html": "<p>When we need to pass a <code>std::vector</code> to a function, we pass it by (const) reference so that we do not make an expensive copy of the array data.</p>",
       "preview": "When we need to pass a std::vector to a function, we pass it by (const) referenc",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když potřebujeme předat <code>std::vector</code> do funkce, předáváme jej (konstantní) referencí, abychom nevytvářeli nákladnou kopii dat pole.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b1",
       "type": "paragraph",
       "html": "<p>Therefore, you will probably be surprised to find that it is okay to return a <code>std::vector</code> by value.</p>",
       "preview": "Therefore, you will probably be surprised to find that it is okay to return a st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proto vás pravděpodobně překvapí zjištění, že vracet <code>std::vector</code> hodnotou je v naprostém pořádku.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b2",
       "type": "paragraph",
       "html": "<p>Say whaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat?</p>",
       "preview": "Say whaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Cožeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee?</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b3",
       "type": "section",
       "title": "Copy semantics",
       "html": "<h3 class=\"cpp-section-heading\">Copy semantics</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kopírovací sémantika</h3>",
+      "title_cs": "Kopírovat sémantiku"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b4",
       "type": "paragraph",
       "html": "<p>Consider the following program:</p>",
       "preview": "Consider the following program:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Uvažujme následující program:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b5",
@@ -50,49 +56,57 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nint main()\n{\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    std::vector arr2 { arr1 };          // copies arr1 into arr2\n\n    arr1[0] = 6; // We can continue to use arr1\n    arr2[0] = 7; // and we can continue to use arr2\n\n    std::cout << arr1[0] << arr2[0] << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nint main()\n{\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    std::vector arr2 { arr1 };          // copies arr1 into arr2\n\n    arr1[0] = 6; // We can continue to use arr1\n    arr2[0] = 7; // and we can continue to use arr2\n\n    std::cout &lt;&lt; arr1[0] &lt;&lt; arr2[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nint main()\n{\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // zkopíruje { 1, 2, 3, 4, 5 } do arr1\n    std::vector arr2 { arr1 };          // zkopíruje arr1 do arr2\n\n    arrl[0] = 6; // Můžeme nadále používat arr1\n    arr2[0] = 7; // a můžeme pokračovat v používání arr2\n\n    std::cout << arr1[0] << arr2[0] << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b6",
       "type": "paragraph",
       "html": "<p>When <code>arr2</code> is initialized with <code>arr1</code>, the copy constructor of <code>std::vector</code> is called, which copies <code>arr1</code> into <code>arr2</code>.</p>",
       "preview": "When arr2 is initialized with arr1, the copy constructor of std::vector is calle",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je <code>arr2</code> inicializován pomocí <code>arr1</code>, zavolá se kopírovací konstruktor třídy <code>std::vector</code>, který zkopíruje <code>arr1</code> do <code>arr2</code>.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b7",
       "type": "paragraph",
       "html": "<p>Making a copy is the only reasonable thing to do in this case, as we need both <code>arr1</code> and <code>arr2</code> to live on independently. This example ends up making two copies, one for each initialization.</p>",
       "preview": "Making a copy is the only reasonable thing to do in this case, as we need both a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvoření kopie je v tomto případě jediná rozumná možnost, protože potřebujeme, aby <code>arr1</code> i <code>arr2</code> existovaly nezávisle na sobě. V tomto příkladu se nakonec vytvoří dvě kopie, jedna pro každou inicializaci.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b8",
       "type": "paragraph",
       "html": "<p>The term <strong>copy semantics</strong> refers to the rules that determine how copies of objects are made. When we say a type supports copy semantics, we mean that objects of that type are copyable, because the rules for making such copies have been defined. When we say copy semantics are being invoked, that means we’ve done something that will make a copy of an object.</p>",
       "preview": "The term copy semantics refers to the rules that determine how copies of objects",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pojem <strong>kopírovací sémantika</strong> odkazuje na pravidla, která určují, jak se vytvářejí kopie objektů. Když říkáme, že typ podporuje kopírovací sémantiku, máme na mysli, že objekty tohoto typu jsou kopírovatelné, protože byla definována pravidla pro vytváření takových kopií. Když říkáme, že se uplatňuje kopírovací sémantika, znamená to, že jsme udělali něco, co vytvoří kopii objektu.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b9",
       "type": "paragraph",
       "html": "<p>For class types, copy semantics are typically implemented via the copy constructor (and copy assignment operator), which defines how objects of that type are copied. Typically this results in each data member of the class type being copied. In the prior example, the statement <code>std::vector arr2 { arr1 };</code> invokes copy semantics, resulting in a call to the copy constructor of <code>std::vector</code>, which then makes a copy of each data member of <code>arr1</code> into <code>arr2</code>. The end result is that <code>arr1</code> is equivalent to (but independent from) <code>arr2</code>.</p>",
       "preview": "For class types, copy semantics are typically implemented via the copy construct",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U třídních typů je kopírovací sémantika obvykle implementována prostřednictvím kopírovacího konstruktoru (a kopírovacího operátoru přiřazení), který definuje, jak se objekty daného typu kopírují. To obvykle vede ke zkopírování každého datového členu dané třídy. V předchozím příkladu příkaz <code>std::vector arr2 { arr1 };</code> vyvolá kopírovací sémantiku, což vede k volání kopírovacího konstruktoru <code>std::vector</code>, který následně zkopíruje každý datový člen z <code>arr1</code> do <code>arr2</code>. Konečným výsledkem je, že <code>arr1</code> je ekvivalentní s <code>arr2</code> (ale nezávislý na něm).</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b10",
       "type": "section",
       "title": "When copy semantics is not optimal",
       "html": "<h3 class=\"cpp-section-heading\">When copy semantics is not optimal</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Kdy kopírovací sémantika není optimální</h3>",
+      "title_cs": "Když sémantika kopírování není optimální"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b11",
       "type": "paragraph",
       "html": "<p>Now consider this related example:</p>",
       "preview": "Now consider this related example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na tento související příklad:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b12",
@@ -100,56 +114,65 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nstd::vector<int> generate() // return by value\n{\n    // We're intentionally using a named object here so mandatory copy elision doesn't apply\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    return arr1;\n}\n\nint main()\n{\n    std::vector arr2 { generate() }; // the return value of generate() dies at the end of the expression\n\n    // There is no way to use the return value of generate() here\n    arr2[0] = 7; // we only have access to arr2\n\n    std::cout << arr2[0] << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nstd::vector&lt;int&gt; generate() // return by value\n{\n    // We're intentionally using a named object here so mandatory copy elision doesn't apply\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // copies { 1, 2, 3, 4, 5 } into arr1\n    return arr1;\n}\n\nint main()\n{\n    std::vector arr2 { generate() }; // the return value of generate() dies at the end of the expression\n\n    // There is no way to use the return value of generate() here\n    arr2[0] = 7; // we only have access to arr2\n\n    std::cout &lt;&lt; arr2[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nstd::vector<int> create() // návrat podle hodnoty\n{\n    // Záměrně zde používáme pojmenovaný objekt, takže se nepoužije povinné kopírování\n    std::vector arr1 { 1, 2, 3, 4, 5 }; // zkopíruje { 1, 2, 3, 4, 5 } do arr1\n    návrat arr1;\n}\n\nint main()\n{\n    std::vector arr2 { vygenerovat() }; // návratová hodnota create() na konci výrazu zemře\n\n    // Neexistuje způsob, jak zde použít návratovou hodnotu create().\n    arr2[0] = 7; // máme přístup pouze k arr2\n\n    std::cout << arr2[0] << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b13",
       "type": "paragraph",
       "html": "<p>When <code>arr2</code> is initialized this time, it is being initialized using a temporary object returned from function <code>generate()</code>. Unlike the prior case, where the initializer was an lvalue that could be used in future statements, in this case, the temporary object is an rvalue will be destroyed at the end of the initialization expression. The temporary object can’t be used beyond that point. Because the temporary (and its data) will be destroyed at the end of the expression, we need some way to get the data out of the temporary and into <code>arr2</code>.</p>",
       "preview": "When arr2 is initialized this time, it is being initialized using a temporary ob",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když se <code>arr2</code> inicializuje tentokrát, inicializuje se pomocí dočasného objektu vráceného z funkce <code>generate()</code>. Na rozdíl od předchozího případu, kdy byl inicializátorem l-hodnota (lvalue), kterou bylo možné použít v dalších příkazech, je v tomto případě dočasný objekt r-hodnotou (rvalue), která bude na konci inicializačního výrazu zničena. Za tímto bodem již dočasný objekt nelze použít. Protože dočasný objekt (a jeho data) bude na konci výrazu zničen, potřebujeme nějaký způsob, jak data z tohoto dočasného objektu dostat do <code>arr2</code>.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b14",
       "type": "paragraph",
       "html": "<p>The usual thing to do here is the same as in the previous example: use copy semantics and make a potentially expensive copy. That way <code>arr2</code> gets its own copy of the data that can be used even after the temporary (and its data) is destroyed.</p>",
       "preview": "The usual thing to do here is the same as in the previous example: use copy sema",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Obvyklým postupem je zde totéž co v předchozím příkladu: použít kopírovací sémantiku a vytvořit potenciálně nákladnou kopii. Tímto způsobem <code>arr2</code> získá svou vlastní kopii dat, kterou lze použít i poté, co je dočasný objekt (a jeho data) zničen.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b15",
       "type": "paragraph",
       "html": "<p>However, what makes this case different than the previous example is that the temporary is going to be destroyed anyway. After initialization is complete, the temporary doesn’t need its data any more (which is why we can destroy it). We don’t need two sets of data to exist simultaneously. In such cases, making a potentially expensive copy and then destroying the original data is suboptimal.</p>",
       "preview": "However, what makes this case different than the previous example is that the te",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tento případ se však od předchozího příkladu liší tím, že dočasný objekt bude stejně zničen. Po dokončení inicializace již dočasný objekt svá data nepotřebuje (proto jej můžeme zničit). Nepotřebujeme, aby současně existovaly dvě sady dat. V takových případech je vytvoření potenciálně nákladné kopie a následné zničení původních dat neoptimální.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b16",
       "type": "section",
       "title": "Introduction to move semantics",
       "html": "<h3 class=\"cpp-section-heading\">Introduction to move semantics</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Úvod do přesunovací sémantiky (move semantics)</h3>",
+      "title_cs": "Úvod do sémantiky pohybu"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b17",
       "type": "paragraph",
       "html": "<p>Instead, what if there was a way for <code>arr2</code> to “steal” the temporary’s data instead of copying it? <code>arr2</code> would then be the new owner of the data, and no copy of the data would need to be made. When ownership of data is transferred from one object to another, we say that data has been <strong>moved</strong>. The cost of such a move is typically trivial (usually just two or three pointer assignments, which is way faster than copying an array of data!).</p>",
       "preview": "Instead, what if there was a way for arr2 to “steal” the temporary’s data instea",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co kdyby místo toho existoval způsob, jak by <code>arr2</code> mohl data dočasného objektu „ukrást“, místo aby je kopíroval? <code>arr2</code> by se pak stal novým vlastníkem dat a nebylo by nutné vytvářet žádnou jejich kopii. Když se vlastnictví dat přenese z jednoho objektu na druhý, říkáme, že data byla <strong>přesunuta</strong> (moved). Náklady na takový přesun jsou obvykle zanedbatelné (obvykle jen dvě nebo tři přiřazení ukazatelů, což je nesrovnatelně rychlejší než kopírování celého pole dat!).</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b18",
       "type": "paragraph",
       "html": "<p>As an added benefit, when the temporary was then destroyed at the end of the expression, it would no longer have any data to destroy, so we wouldn’t have to pay that cost either.</p>",
       "preview": "As an added benefit, when the temporary was then destroyed at the end of the exp",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jako další výhoda: když byl dočasný objekt na konci výrazu zničen, už neměl žádná data ke zničení, takže jsme nemuseli platit ani tyto náklady.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b19",
       "type": "paragraph",
       "html": "<p>This is the essence of <strong>move semantics</strong>, which refers to the rules that determine how the data from one object is moved to another object. When move semantics is invoked, any data member that can be moved is moved, and any data member that can’t be moved is copied. The ability to move data instead of copying it can make move semantics more efficient than copy semantics, especially when we can replace an expensive copy with an inexpensive move.</p>",
       "preview": "This is the essence of move semantics, which refers to the rules that determine ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je podstatou <strong>sémantiky přesunu</strong> (move semantics), která označuje pravidla určující, jak se data z jednoho objektu přesouvají do jiného objektu. Když je uplatněna sémantika přesunu, každý datový člen, který lze přesunout, je přesunut, a každý datový člen, který přesunout nelze, je zkopírován. Schopnost data přesouvat namísto jejich kopírování může učinit sémantiku přesunu efektivnější než sémantiku kopírování, zvláště když můžeme nákladné kopírování nahradit levným přesunem.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b20",
@@ -157,21 +180,25 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Move semantics is an optimization that allows us, under certain circumstances, to inexpensively transfer ownership of some data members from one object to another object (rather than making a more expensive copy).</p><p>Data members that can’t be moved are copied instead.</p></div>",
       "preview": "Key insightMove semantics is an optimization that allows us, under certain circumstances, to inexpen",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Sémantika přesunu je optimalizace, která nám za určitých okolností umožňuje levně převést vlastnictví některých datových členů z jednoho objektu na jiný objekt (namísto vytváření nákladnější kopie).</p><p>Datové členy, které nelze přesunout, jsou místo toho zkopírovány.</p></div>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b21",
       "type": "section",
       "title": "How move semantics is invoked",
       "html": "<h3 class=\"cpp-section-heading\">How move semantics is invoked</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Jak se vyvolává přesunovací sémantika</h3>",
+      "title_cs": "Jak je vyvolána sémantika pohybu"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b22",
       "type": "paragraph",
       "html": "<p>Normally, when an object is being initialized with (or assigned) an object of the same type, copy semantics will be used (assuming the copy isn’t elided).</p>",
       "preview": "Normally, when an object is being initialized with (or assigned) an object of th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Běžně platí, že když je objekt inicializován (nebo je mu přiřazen) objekt stejného typu, použije se sémantika kopírování (za předpokladu, že kopírování není vynecháno).</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b23",
@@ -179,49 +206,57 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Related content</p><p>We covered copy elision in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Class initialization and copy elision</a>.</p></div>",
       "preview": "Related contentWe covered copy elision in lesson 14.15 -- Class initialization and copy elision.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Související obsah</p><p>Vynechání kopírování (copy elision) jsme probrali v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/class-initialization-and-copy-elision/\">14.15 -- Inicializace tříd a vynechání kopírování (copy elision)</a>.</p></div>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b24",
       "type": "paragraph",
       "html": "<p>However, when all of the following are true, move semantics will be invoked instead:</p>",
       "preview": "However, when all of the following are true, move semantics will be invoked inst",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud však platí všechny následující podmínky, uplatní se místo toho přesunovací sémantika:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b25",
       "type": "list",
       "html": "<ul><li>The type of the object supports move semantics.</li><li>The object is being initialized with (or assigned) an rvalue (temporary) object of the same type.</li><li>The move isn’t elided.</li></ul>",
       "preview": "The type of the object supports move semantics.The object is being initialized w",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Typ objektu podporuje přesunovací sémantiku.</li><li>Objekt je inicializován (nebo je do něj přiřazen) rvalue (dočasným) objektem stejného typu.</li><li>Přesun není elidován.</li></ul>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b26",
       "type": "paragraph",
       "html": "<p>Here’s the sad news: not that many types support move semantics. However, <code>std::vector</code> and <code>std::string</code> both do!</p>",
       "preview": "Here’s the sad news: not that many types support move semantics. However, std::v",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tady je ta špatná zpráva: sémantiku přesunu (move semantics) nepodporuje zase tolik typů. Nicméně <code>std::vector</code> i <code>std::string</code> ji podporují oba!</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b27",
       "type": "paragraph",
       "html": "<p>We’ll dig into how move semantics works in more detail in <a href=\"https://www.learncpp.com#Chapter22\">chapter 22</a>. For now, it’s enough to know what move semantics is, and which types are move-capable.</p>",
       "preview": "We’ll dig into how move semantics works in more detail in chapter 22. For now, i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Do toho, jak sémantika přesunu funguje, se podrobněji ponoříme v <a href=\"https://www.learncpp.com#Chapter22\">kapitole 22</a>. Prozatím stačí vědět, co to sémantika přesunu je a které typy ji podporují (jsou move-capable).</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b28",
       "type": "section",
       "title": "We can return move-capable types like std::vector by value",
       "html": "<h3 class=\"cpp-section-heading\">We can return move-capable types like <code>std::vector</code> by value</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Typy podporující přesun, jako je <code>std::vector</code>, můžeme vracet hodnotou</h3>",
+      "title_cs": "Můžeme vrátit typy schopné pohybu jako std::vector hodnotou"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b29",
       "type": "paragraph",
       "html": "<p>Because return by value returns an rvalue, if the returned type supports move semantics, then the returned value can be moved instead of copied into the destination object. This makes return by value extremely inexpensive for these types!</p>",
       "preview": "Because return by value returns an rvalue, if the returned type supports move se",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože návrat hodnotou vrací r-hodnotu (rvalue), pokud vrácený typ podporuje sémantiku přesunu, může být vrácená hodnota do cílového objektu přesunuta namísto zkopírována. Díky tomu je návrat hodnotou pro tyto typy extrémně levný!</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b30",
@@ -229,49 +264,57 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>We can return move-capable types (like <code>std::vector</code> and <code>std::string</code>) by value. Such types will inexpensively move their values instead of making an expensive copy.</p><p>Such types should still be passed by const reference.</p></div>",
       "preview": "Key insightWe can return move-capable types (like std::vector and std::string) by value. Such types ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Typy podporující přesun (jako <code>std::vector</code> a <code>std::string</code>) můžeme vracet hodnotou. Tyto typy své hodnoty levně přesunou, místo aby vytvářely nákladnou kopii.</p><p>Tyto typy by se však měly i nadále předávat konstantní referencí (const reference).</p></div>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b31",
       "type": "section",
       "title": "Wait, wait, wait. Expensive-to-copy types shouldn’t be passed by value, but if they are move-capable they can be returned by value?",
       "html": "<h3 class=\"cpp-section-heading\">Wait, wait, wait. Expensive-to-copy types shouldn’t be passed by value, but if they are move-capable they can be returned by value?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Počkat, počkat, počkat. Typy náročné na kopírování by se neměly předávat hodnotou, ale pokud podporují přesun, mohou se vracet hodnotou?</h3>",
+      "title_cs": "Počkat, počkat, počkat. Typy s drahým kopírováním by se neměly předávat podle hodnoty, ale pokud je lze přesunout, lze je vrátit podle hodnoty?"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b32",
       "type": "paragraph",
       "html": "<p>Correct.</p>",
       "preview": "Correct.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Správně.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b33",
       "type": "paragraph",
       "html": "<p>This following discussion is optional, but may help you understand why this is the case.</p>",
       "preview": "This following discussion is optional, but may help you understand why this is t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující diskuze je volitelná, ale může vám pomoci pochopit, proč tomu tak je.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b34",
       "type": "paragraph",
       "html": "<p>One of the most common things we do in C++ is pass a value to some function, and get a different value back. When the passed values are class types, that process involves 4 steps:</p>",
       "preview": "One of the most common things we do in C++ is pass a value to some function, and",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jednou z nejběžnějších věcí, které v C++ děláme, je předání hodnoty nějaké funkci a získání jiné hodnoty zpět. Pokud jsou předávané hodnoty třídními typy, tento proces zahrnuje 4 kroky:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b35",
       "type": "list",
       "html": "<ol start=\"1\"><li>Construct the value to be passed.</li><li>Actually pass the value to the function.</li><li>Construct the value to be returned.</li><li>Actually pass the return value back to the caller.</li></ol>",
       "preview": "Construct the value to be passed.Actually pass the value to the function.Constru",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Konstrukce hodnoty, která má být předána.</li><li>Samotné předání hodnoty funkci.</li><li>Konstrukce hodnoty, která má být vrácena.</li><li>Samotné předání návratové hodnoty zpět volajícímu.</li></ol>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b36",
       "type": "paragraph",
       "html": "<p>Here’s an example of the above process using <code>std::vector</code>:</p>",
       "preview": "Here’s an example of the above process using std::vector:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad výše uvedeného procesu s použitím <code>std::vector</code>:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b37",
@@ -279,91 +322,105 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <vector>\n\nstd::vector<int> doSomething(std::vector<int> v2)\n{\n    std::vector v3 { v2[0] + v2[0] }; // 3 -- construct value to be returned to caller\n    return v3; // 4 -- actually return value\n}\n\nint main()\n{\n    std::vector v1 { 5 }; // 1 -- construct value to be passed to function\n    std::cout << doSomething(v1)[0] << '\\n'; // 2 -- actually pass value\n\n    std::cout << v1[0] << '\\n';\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;vector&gt;\n\nstd::vector&lt;int&gt; doSomething(std::vector&lt;int&gt; v2)\n{\n    std::vector v3 { v2[0] + v2[0] }; // 3 -- construct value to be returned to caller\n    return v3; // 4 -- actually return value\n}\n\nint main()\n{\n    std::vector v1 { 5 }; // 1 -- construct value to be passed to function\n    std::cout &lt;&lt; doSomething(v1)[0] &lt;&lt; '\\n'; // 2 -- actually pass value\n\n    std::cout &lt;&lt; v1[0] &lt;&lt; '\\n';\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <vektor>\n\nstd::vector<int> doSomething(std::vector<int> v2)\n{\n    std::vector v3 { v2[0] + v2[0] }; // 3 -- hodnota konstrukce, která má být vrácena volajícímu\n    návrat v3; // 4 -- ve skutečnosti vrátí hodnotu\n}\n\nint main()\n{\n    std::vector v1 { 5 }; // 1 -- hodnota konstrukce, která má být předána funkci\n    std::cout << doSomething(v1)[0] << '\\n'; // 2 -- ve skutečnosti předá hodnotu\n\n    std::cout << v1[0] << '\\n';\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b38",
       "type": "paragraph",
       "html": "<p>First, let’s assume <code>std::vector</code> is not move-capable. In that case, the above program makes 4 copies:</p>",
       "preview": "First, let’s assume std::vector is not move-capable. In that case, the above pro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve předpokládejme, že <code>std::vector</code> nepodporuje přesun (není move-capable). V takovém případě výše uvedený program provede 4 kopie:</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b39",
       "type": "list",
       "html": "<ol start=\"1\"><li>Constructing the value to be passed copies the initializer list into <code>v1</code></li><li>Actually passing the value to the function copies argument <code>v1</code> into function parameter <code>v2</code>.</li><li>Constructing the value to be returned copies the initializer into <code>v3</code></li><li>Actually returning the value to the caller copies <code>v3</code> back to the caller.</li></ol>",
       "preview": "Constructing the value to be passed copies the initializer list into v1Actually ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ol start=\"1\"><li>Konstrukce předávané hodnoty zkopíruje inicializační seznam do <code>v1</code></li><li>Samotné předání hodnoty funkci zkopíruje argument <code>v1</code> do parametru funkce <code>v2</code>.</li><li>Konstrukce vracené hodnoty zkopíruje inicializátor do <code>v3</code></li><li>Samotné vrácení hodnoty volajícímu zkopíruje <code>v3</code> zpět volajícímu.</li></ol>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b40",
       "type": "paragraph",
       "html": "<p>Now let’s talk about how we might optimize the above. We have many tools at our disposal here: pass by reference or address, elision, move semantics, and out parameters.</p>",
       "preview": "Now let’s talk about how we might optimize the above. We have many tools at our ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní si povězme o tom, jak bychom výše uvedené mohli optimalizovat. Máme k dispozici mnoho nástrojů: předání referencí nebo adresou, elizi (vynechání kopií), sémantiku přesunu (move semantics) a výstupní parametry (out parameters).</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b41",
       "type": "paragraph",
       "html": "<p>We can’t optimize copies 1 and 3 at all. We need a <code>std::vector</code> to pass to the function, and we need a <code>std::vector</code> to return -- these objects have to be constructed. <code>std::vector</code> is an owner of its data, so it necessarily makes a copy of its initializer.</p>",
       "preview": "We can’t optimize copies 1 and 3 at all. We need a std::vector to pass to the fu",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopie 1 a 3 nemůžeme optimalizovat vůbec. Potřebujeme <code>std::vector</code> k předání do funkce a potřebujeme <code>std::vector</code> k vrácení – tyto objekty musí být zkonstruovány. <code>std::vector</code> je vlastníkem svých dat, takže nutně vytváří kopii svého inicializátoru.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b42",
       "type": "paragraph",
       "html": "<p>What we can affect is copies 2 and 4.</p>",
       "preview": "What we can affect is copies 2 and 4.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To, co můžeme ovlivnit, jsou kopie 2 a 4.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b43",
       "type": "paragraph",
       "html": "<p>Copy 2 is made because we’re passing by value from the caller to the called function. What other options do we have?</p>",
       "preview": "Copy 2 is made because we’re passing by value from the caller to the called func",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopie 2 vzniká proto, že předáváme hodnotou od volajícího do volané funkce. Jaké máme další možnosti?</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b44",
       "type": "list",
       "html": "<ul><li>Can we pass by reference or address? Yes. We are guaranteed that the argument will exist for the entire function call -- the caller does not have to worry about the passed object unexpectedly going out of scope.</li><li>Can this copy be elided? No. Elision only works when we’re making a redundant copy or move. There’s no redundant copy or move here.</li><li>Can we use an out parameter here? No. We’re passing a value to the function, not getting a value back.</li><li>Can we use move semantics here? No. The argument is an lvalue. If we moved data from <code>v1</code> to <code>v2</code>, <code>v1</code> would become an empty vector, and subsequently printing <code>v1[0]</code> would lead to undefined behavior.</li></ul>",
       "preview": "Can we pass by reference or address? Yes. We are guaranteed that the argument wi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Můžeme předávat referencí nebo adresou? Ano. Máme zaručeno, že argument bude existovat po celou dobu volání funkce – volající se nemusí obávat, že by předaný objekt neočekávaně opustil rozsah platnosti.</li><li>Lze tuto kopii elidovat? Ne. Elize (vynechání kopírování) funguje pouze tehdy, když vytváříme redundantní kopii nebo přesun. Zde žádná redundantní kopie ani přesun není.</li><li>Můžeme zde použít výstupní parametr? Ne. Do funkce hodnotu předáváme, nezískáváme ji zpět.</li><li>Můžeme zde použít sémantiku přesunu? Ne. Argument je l-hodnota (lvalue). Pokud bychom data z <code>v1</code> přesunuli do <code>v2</code>, <code>v1</code> by se stal prázdným vektorem a následný výpis <code>v1[0]</code> by vedl k nedefinovanému chování.</li></ul>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b45",
       "type": "paragraph",
       "html": "<p>Clearly pass by const reference is our best option here, as it avoids the copy, avoids null pointer issues, and works with both lvalue and rvalue arguments.</p>",
       "preview": "Clearly pass by const reference is our best option here, as it avoids the copy, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Předání konstantní referencí je zde jednoznačně nejlepší možností, protože se vyhne kopírování, předejde problémům s nulovými ukazateli a funguje jak s argumenty typu lvalue, tak rvalue.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b46",
       "type": "paragraph",
       "html": "<p>Copy 4 is made because we’re passing by value from the called function back to the caller. What other options do we have here?</p>",
       "preview": "Copy 4 is made because we’re passing by value from the called function back to t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kopie 4 vzniká proto, že vracíme hodnotou z volané funkce zpět volajícímu. Jaké další možnosti zde máme?</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b47",
       "type": "list",
       "html": "<ul><li>Can we return by reference or address? No. The object we’re returning is created as a local variable inside the function, and will be destroyed when the function returns. Returning a reference or pointer will result in the caller receiving a dangling pointer or reference.</li><li>Can this copy be elided? Yes, possibly. If the compiler is smart, it will realize that we’re constructing an object in the scope of the called function and returning it. By rewriting the code (under the as-if rule) so that <code>v3</code> is constructed in the scope of the caller instead, we can avoid the copy that would otherwise be made when returning. However, we are reliant upon the compiler realizing it can do this, so it is not guaranteed.</li><li>Can we use an out parameter here? Yes. Instead of constructing <code>v3</code> as a local variable, we can construct an empty <code>std::vector</code> object in the scope of the caller, and pass it to the function by non-const reference. The function can then fill this parameter with data. When the function returns, this object will still exist. This avoids the copy, but also has some significant downsides and constraints: ugly calling semantics, doesn’t work with objects that don’t support assignment, and it is challenging to write such functions that can work with both lvalue and rvalue arguments.</li><li>Can we use move semantics here? Yes. <code>v3</code> is going to be destroyed when the function returns, so instead of copying <code>v3</code> back to the caller, we can use move semantics to move its data to the caller, avoiding the copy.</li></ul>",
       "preview": "Can we return by reference or address? No. The object we’re returning is created",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Můžeme vracet referencí nebo adresou? Ne. Objekt, který vracíme, je vytvořen jako lokální proměnná uvnitř funkce a bude zničen při návratu z funkce. Vrácení reference nebo ukazatele by vedlo k tomu, že volající obdrží visící ukazatel (dangling pointer) nebo referenci.</li><li>Lze tuto kopii elidovat? Ano, potenciálně. Pokud je překladač dostatečně chytrý, uvědomí si, že vytváříme objekt v rozsahu platnosti volané funkce a vracíme jej. Přepsáním kódu (podle pravidla „as-if“) tak, aby byl <code>v3</code> vytvořen přímo v rozsahu platnosti volajícího, se můžeme vyhnout kopírování, ke kterému by jinak při návratu došlo. Spoléháme se však na to, že překladač tuto možnost rozpozná, takže to není zaručeno.</li><li>Můžeme zde použít výstupní parametr? Ano. Místo vytváření <code>v3</code> jako lokální proměnné můžeme vytvořit prázdný objekt <code>std::vector</code> v rozsahu platnosti volajícího a předat jej do funkce nekonstantní referencí. Funkce pak může tento parametr naplnit daty. Po návratu z funkce bude tento objekt stále existovat. Tím se vyhneme kopírování, ale nese to s sebou i některé významné nevýhody a omezení: nevzhledná sémantika volání, nefunguje s objekty, které nepodporují přiřazení, a je obtížné psát takové funkce tak, aby fungovaly jak s argumenty typu lvalue, tak rvalue.</li><li>Můžeme zde použít sémantiku přesunu? Ano. <code>v3</code> bude při návratu z funkce zničen, takže místo kopírování <code>v3</code> zpět volajícímu můžeme využít sémantiku přesunu a přesunout jeho data volajícímu, čímž se vyhneme kopírování.</li></ul>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b48",
       "type": "paragraph",
       "html": "<p>Elision is the best option here, but whether it happens is out of our control. The next best option for move-capable types is move semantics, which can be used in cases where the compiler doesn’t elide the copy. And for move-capable types, move semantics is invoked automatically when returning by value.</p>",
       "preview": "Elision is the best option here, but whether it happens is out of our control. T",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Elize je zde nejlepší možností, ale to, zda k ní dojde, nemáme pod kontrolou. Další nejlepší volbou pro přesunutelné typy (move-capable) je sémantika přesunu, kterou lze použít v případech, kdy překladač kopii neeliduje. A u přesunutelných typů se sémantika přesunu při vracení hodnotou uplatní automaticky.</p>"
     },
     {
       "id": "returning-stdvector-and-an-introduction-to-move-semantics_b49",
       "type": "paragraph",
       "html": "<p>To summarize, for move-capable types, we prefer to pass by const reference, and return by value.</p>",
       "preview": "To summarize, for move-capable types, we prefer to pass by const reference, and ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Abychom to shrnuli: u typů podporujících přesun dáváme přednost předávání konstantní referencí a vracení hodnotou.</p>"
     }
-  ]
+  ],
+  "title_cs": "16.5 — Vracení std::vector a úvod do sémantiky přesunu"
 }

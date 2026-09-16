@@ -14,14 +14,16 @@
       "type": "paragraph",
       "html": "<p><strong>Exceptions and member functions</strong></p>",
       "preview": "Exceptions and member functions",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Výjimky a členské funkce</strong></p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b1",
       "type": "paragraph",
       "html": "<p>Up to this point in the tutorial, you’ve only seen exceptions used in non-member functions. However, exceptions are equally useful in member functions, and even more so in overloaded operators. Consider the following overloaded [] operator as part of a simple integer array class:</p>",
       "preview": "Up to this point in the tutorial, you’ve only seen exceptions used in non-member",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Až do tohoto okamžiku jste ve výukovém programu viděli výjimky používané pouze v nečlenských funkcích. Výjimky jsou však stejně užitečné v členských funkcích a ještě více v přetížených operátorech. Zvažte následující přetížený operátor [] jako součást jednoduché třídy celočíselného pole:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b2",
@@ -29,14 +31,16 @@
       "language": "cpp",
       "code": "int& IntArray::operator[](const int index)\n{\n    return m_data[index];\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    return m_data[index];\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int& IntArray::operator[](const int index)\n{\n    return m_data[index];\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b3",
       "type": "paragraph",
       "html": "<p>Although this function will work great as long as index is a valid array index, this function is sorely lacking in some good error checking. We could add an assert statement to ensure the index is valid:</p>",
       "preview": "Although this function will work great as long as index is a valid array index, ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Přestože tato funkce bude fungovat skvěle, pokud je index platným indexem pole, tato funkce velmi postrádá dobrou kontrolu chyb. Mohli bychom přidat příkaz statement, abychom zajistili platnost indexu:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b4",
@@ -44,14 +48,16 @@
       "language": "cpp",
       "code": "int& IntArray::operator[](const int index)\n{\n    assert (index >= 0 && index < getLength());\n    return m_data[index];\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    assert (index &gt;= 0 &amp;&amp; index &lt; getLength());\n    return m_data[index];\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int& IntArray::operator[](const int index)\n{\n    tvrdit (index >= 0 && index < getLength());\n    return m_data[index];\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b5",
       "type": "paragraph",
       "html": "<p>Now if the user passes in an invalid index, the program will cause an assertion error. Unfortunately, because overloaded operators have specific requirements as to the number and type of parameter(s) they can take and return, there is no flexibility for passing back error codes or Boolean values to the caller to handle. However, since exceptions do not change the signature of a function, they can be put to great use here. Here’s an example:</p>",
       "preview": "Now if the user passes in an invalid index, the program will cause an assertion ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud nyní uživatel zadá neplatný index, program způsobí chybu tvrzení. Bohužel, protože přetížení operátoři mají specifické požadavky na počet a typ parametrů, které mohou převzít a vrátit, neexistuje žádná flexibilita pro předávání chybových kódů nebo booleovských hodnot volajícímu, aby je mohl zpracovat. Protože však výjimky nemění signaturu funkce, lze je zde skvěle využít. Zde je příklad:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b6",
@@ -59,56 +65,65 @@
       "language": "cpp",
       "code": "int& IntArray::operator[](const int index)\n{\n    if (index < 0 || index >= getLength())\n        throw index;\n\n    return m_data[index];\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int&amp; IntArray::operator[](const int index)\n{\n    if (index &lt; 0 || index &gt;= getLength())\n        throw index;\n\n    return m_data[index];\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int& IntArray::operator[](const int index)\n{\n    if (index < 0 || index >= getLength())\n        index hodu;\n\n    return m_data[index];\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b7",
       "type": "paragraph",
       "html": "<p>Now, if the user passes in an invalid index, operator[] will throw an int exception.</p>",
       "preview": "Now, if the user passes in an invalid index, operator[] will throw an int except",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud nyní uživatel zadá neplatný index, operátor[] vyvolá výjimku int.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b8",
       "type": "section",
       "title": "When constructors fail",
       "html": "<h3 class=\"cpp-section-heading\">When constructors fail</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Když konstruktory selžou</h3>",
+      "title_cs": "Když konstruktory selžou"
     },
     {
       "id": "exceptions-classes-and-inheritance_b9",
       "type": "paragraph",
       "html": "<p>Constructors are another area of classes in which exceptions can be very useful. If a constructor must fail for some reason (e.g. the user passed in invalid input), simply throw an exception to indicate the object failed to create. In such a case, the object’s construction is aborted, and all class members (which have already been created and initialized prior to the body of the constructor executing) are destructed as per usual.</p>",
       "preview": "Constructors are another area of classes in which exceptions can be very useful.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Konstruktory jsou další oblastí tříd, ve které mohou být výjimky velmi užitečné. Pokud musí konstruktor z nějakého důvodu selhat (např. uživatel zadal neplatný vstup), jednoduše vyvoláte výjimku, která označí, že se nepodařilo vytvořit objekt. V takovém případě je konstrukce objektu přerušena a všechny členy třídy (které již byly vytvořeny a inicializovány před spuštěním těla konstruktoru) jsou zničeny jako obvykle.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b10",
       "type": "paragraph",
       "html": "<p>However, the class’s destructor is never called (because the object never finished construction). Because the destructor never executes, you can’t rely on said destructor to clean up any resources that have already been allocated.</p>",
       "preview": "However, the class’s destructor is never called (because the object never finish",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nikdy se však nezavolá destruktor třídy (protože objekt nikdy nedokončil stavbu). Protože se destruktor nikdy nespustí, nemůžete se spolehnout na to, že destruktor vyčistí všechny prostředky, které již byly přiděleny.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b11",
       "type": "paragraph",
       "html": "<p>This leads to the question of what we should do if we’ve allocated resources in our constructor and then an exception occurs prior to the constructor finishing. How do we ensure the resources that we’ve already allocated get cleaned up properly? One way would be to wrap any code that can fail in a try block, use a corresponding catch block to catch the exception and do any necessary cleanup, and then rethrow the exception (a topic we’ll discuss in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/rethrowing-exceptions/\">27.6 -- Rethrowing exceptions</a>). However, this adds a lot of clutter, and it’s easy to get wrong, particularly if your class allocates multiple resources.</p>",
       "preview": "This leads to the question of what we should do if we’ve allocated resources in ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To vede k otázce, co bychom měli dělat, pokud jsme v našem konstruktoru alokovali zdroje a pak před dokončením konstruktoru dojde k výjimce. Jak zajistíme řádné vyčištění zdrojů, které jsme již alokovali? Jedním ze způsobů by bylo zabalit jakýkoli kód, který může selhat, do bloku try, použít odpovídající blok catch k zachycení výjimky a provedení potřebného vyčištění a poté výjimku znovu vyvolat (téma, o kterém budeme diskutovat v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/rethrowing-exceptions/\">27.6 – Obnovení výjimek</a>). To však přidává spoustu nepořádku a je snadné se mýlit, zvláště pokud vaše třída přiděluje více zdrojů.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b12",
       "type": "paragraph",
       "html": "<p>Fortunately, there is a better way. Taking advantage of the fact that class members are destructed even if the constructor fails, if you do the resource allocations inside the members of the class (rather than in the constructor itself), then those members can clean up after themselves when they are destructed.</p>",
       "preview": "Fortunately, there is a better way. Taking advantage of the fact that class memb",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naštěstí existuje lepší způsob. Využitím skutečnosti, že členové třídy jsou zničeni, i když konstruktor selže, a pokud provedete alokace zdrojů uvnitř členů třídy (spíše než v konstruktoru samotném), mohou se tito členové po zničení po sobě uklidit.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b13",
       "type": "paragraph",
       "html": "<p>Here’s an example:</p>",
       "preview": "Here’s an example:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b14",
@@ -116,49 +131,56 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Member\n{\npublic:\n\tMember()\n\t{\n\t\tstd::cerr << \"Member allocated some resources\\n\";\n\t}\n\n\t~Member()\n\t{\n\t\tstd::cerr << \"Member cleaned up\\n\";\n\t}\n};\n\nclass A\n{\nprivate:\n\tint m_x {};\n\tMember m_member;\n\npublic:\n\tA(int x) : m_x{x}\n\t{\n\t\tif (x <= 0)\n\t\t\tthrow 1;\n\t}\n\t\n\t~A()\n\t{\n\t\tstd::cerr << \"~A\\n\"; // should not be called\n\t}\n};\n\n\nint main()\n{\n\ttry\n\t{\n\t\tA a{0};\n\t}\n\tcatch (int)\n\t{\n\t\tstd::cerr << \"Oops\\n\";\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Member\n{\npublic:\n\tMember()\n\t{\n\t\tstd::cerr &lt;&lt; \"Member allocated some resources\\n\";\n\t}\n\n\t~Member()\n\t{\n\t\tstd::cerr &lt;&lt; \"Member cleaned up\\n\";\n\t}\n};\n\nclass A\n{\nprivate:\n\tint m_x {};\n\tMember m_member;\n\npublic:\n\tA(int x) : m_x{x}\n\t{\n\t\tif (x &lt;= 0)\n\t\t\tthrow 1;\n\t}\n\t\n\t~A()\n\t{\n\t\tstd::cerr &lt;&lt; \"~A\\n\"; // should not be called\n\t}\n};\n\n\nint main()\n{\n\ttry\n\t{\n\t\tA a{0};\n\t}\n\tcatch (int)\n\t{\n\t\tstd::cerr &lt;&lt; \"Oops\\n\";\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nčlen třídy\n{\nveřejnost:\n\tčlen()\n\t{\n\t\tstd::cerr << \"Člen alokoval nějaké zdroje\\n\";\n\t}\n\n\t~Člen()\n\t{\n\t\tstd::cerr << \"Člen vyčištěn\\n\";\n\t}\n};\n\ntřída A\n{\nsoukromé:\n\tint m_x {};\n\tČlen m_člen;\n\nveřejnost:\n\tA(int x): m_x{x}\n\t{\n\t\tif (x <= 0)\n\t\t\thodit 1;\n\t}\n\t\n\t~A()\n\t{\n\t\tstd::cerr << \"~A\\n\"; // by se nemělo volat\n\t}\n};\n\n\nint main()\n{\n\tzkusit\n\t{\n\t\tA a{0};\n\t}\n\tchytit (int)\n\t{\n\t\tstd::cerr << \"Jejda\\n\";\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b15",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto se vytiskne:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b16",
       "type": "output",
       "text": "Member allocated some resources\nMember cleaned up\nOops\n",
       "html": "<pre>Member allocated some resources\nMember cleaned up\nOops\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Člen přidělil nějaké zdroje\nČlen vyčištěn\nJejda\n</pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b17",
       "type": "paragraph",
       "html": "<p>In the above program, when class A throws an exception, all of the members of A are destructed. m_member’s destructor is called, providing an opportunity to clean up any resources that it allocated.</p>",
       "preview": "In the above program, when class A throws an exception, all of the members of A ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když ve výše uvedeném programu třída A vyvolá výjimku, všechny členy A budou zničeny. Zavolá se destruktor m_member’s, který poskytuje příležitost vyčistit všechny zdroje, které alokoval.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b18",
       "type": "paragraph",
       "html": "<p>This is part of the reason that RAII (covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 -- Destructors</a>) is advocated so highly -- even in exceptional circumstances, classes that implement RAII are able to clean up after themselves.</p>",
       "preview": "This is part of the reason that RAII (covered in lesson 19.3 -- Destructors) is ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To je jeden z důvodů, proč je RAII (popsané v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/destructors/\">19.3 – Destruktory</a>) tak vysoce obhajováno – i za výjimečných okolností jsou třídy, které implementují RAII, schopny po sobě uklidit.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b19",
       "type": "paragraph",
       "html": "<p>However, creating a custom class like Member to manage a resource allocation isn’t efficient. Fortunately, the C++ standard library comes with RAII-compliant classes to manage common resource types, such as files (std::fstream, covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/basic-file-io/\">28.6 -- Basic file I/O</a>) and dynamic memory (std::unique_ptr and the other smart pointers, covered in <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/\">22.1 -- Introduction to smart pointers and move semantics</a>).</p>",
       "preview": "However, creating a custom class like Member to manage a resource allocation isn",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Vytvoření vlastní třídy jako Member pro správu alokace zdrojů však není efektivní. Naštěstí standardní knihovna C++ přichází s třídami kompatibilními s RAII pro správu běžných typů prostředků, jako jsou soubory (std::fstream, probrané v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/basic-file-io/\">28.6 -- Základní souborový I/O</a>) a dynamickou paměť (std::unique_ptr v <a inteligentních ukazatelích, pokrytých href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/\">22.1 – Úvod do chytrých ukazatelů a sémantiky pohybu</a>).</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b20",
       "type": "paragraph",
       "html": "<p>For example, instead of this:</p>",
       "preview": "For example, instead of this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Například místo tohoto:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b21",
@@ -166,14 +188,16 @@
       "language": "cpp",
       "code": "class Foo\nprivate:\n    int* ptr; // Foo will handle allocation/deallocation",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nprivate:\n    int* ptr; // Foo will handle allocation/deallocation</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nsoukromé:\n    int* ptr; // Foo se postará o alokaci/dealokaci</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b22",
       "type": "paragraph",
       "html": "<p>Do this:</p>",
       "preview": "Do this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Proveďte toto:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b23",
@@ -181,28 +205,33 @@
       "language": "cpp",
       "code": "class Foo\nprivate:\n    std::unique_ptr<int> ptr; // std::unique_ptr will handle allocation/deallocation",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nprivate:\n    std::unique_ptr&lt;int&gt; ptr; // std::unique_ptr will handle allocation/deallocation</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">class Foo\nsoukromé:\n    std::unique_ptr<int> ptr; // std::unique_ptr zpracuje alokaci/dealokaci</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b24",
       "type": "paragraph",
       "html": "<p>In the former case, if Foo’s constructor were to fail after ptr had allocated its dynamic memory, Foo would be responsible for cleanup, which can be challenging. In the latter case, if Foo’s constructor were to fail after ptr has allocated its dynamic memory, ptr’s destructor would execute and return that memory to the system. Foo doesn’t have to do any explicit cleanup when resource handling is delegated to RAII-compliant members!</p>",
       "preview": "In the former case, if Foo’s constructor were to fail after ptr had allocated it",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V prvním případě, pokud by konstruktor Foo selhal poté, co ptr alokoval svou dynamickou paměť, Foo by byl zodpovědný za vyčištění, což může být náročné. V druhém případě, pokud by Fooův konstruktor selhal poté, co ptr alokoval svou dynamickou paměť, destruktor ptr by provedl a vrátil tuto paměť do systému. Foo nemusí provádět žádné explicitní čištění, když je zpracování zdrojů delegováno na členy kompatibilní s RAII!</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b25",
       "type": "section",
       "title": "Exception classes",
       "html": "<h3 class=\"cpp-section-heading\">Exception classes</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Třídy výjimek</h3>",
+      "title_cs": "Výjimečné třídy"
     },
     {
       "id": "exceptions-classes-and-inheritance_b26",
       "type": "paragraph",
       "html": "<p>One of the major problems with using basic data types (such as int) as exception types is that they are inherently vague. An even bigger problem is disambiguation of what an exception means when there are multiple statements or function calls within a try block.</p>",
       "preview": "One of the major problems with using basic data types (such as int) as exception",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním z hlavních problémů při používání základních datových typů (jako je int) jako typů výjimek je to, že jsou ze své podstaty vágní. Ještě větším problémem je jednoznačnost toho, co výjimka znamená, když je v bloku try více příkazů nebo volání funkcí.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b27",
@@ -210,21 +239,24 @@
       "language": "cpp",
       "code": "// Using the IntArray overloaded operator[] above\n\ntry\n{\n    int* value{ new int{ array[index1] + array[index2]} };\n}\ncatch (int value)\n{\n    // What are we catching here?\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Using the IntArray overloaded operator[] above\n\ntry\n{\n    int* value{ new int{ array[index1] + array[index2]} };\n}\ncatch (int value)\n{\n    // What are we catching here?\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">// Použití výše uvedeného operátoru přetížení IntArray[]\n\nzkusit\n{\n    int* hodnota{ new int{ pole[index1] + pole[index2]} };\n}\ncatch (int value)\n{\n    // Co to tu chytáme?\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b28",
       "type": "paragraph",
       "html": "<p>In this example, if we were to catch an int exception, what does that really tell us? Was one of the array indexes out of bounds? Did operator+ cause integer overflow? Did operator new fail because it ran out of memory? Unfortunately, in this case, there’s just no easy way to disambiguate. While we can throw const char* exceptions to solve the problem of identifying WHAT went wrong, this still does not provide us the ability to handle exceptions from various sources differently.</p>",
       "preview": "In this example, if we were to catch an int exception, what does that really tel",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud bychom v tomto příkladu zachytili výjimku typu int, co nám to skutečně říká? Byl jeden z indexů pole mimo meze? Způsobil operátor+ přetečení celého čísla? Selhal operátor new, protože mu došla paměť? Bohužel v tomto případě neexistuje žádný snadný způsob, jak to rozdělit. I když můžeme vyvolat výjimky const char*, abychom vyřešili problém identifikace CO se pokazilo, stále nám to neposkytuje možnost zacházet s výjimkami z různých zdrojů odlišně.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b29",
       "type": "paragraph",
       "html": "<p>One way to solve this problem is to use exception classes. An <strong>exception class</strong> is just a normal class that is designed specifically to be thrown as an exception. Let’s design a simple exception class to be used with our IntArray class:</p>",
       "preview": "One way to solve this problem is to use exception classes. An exception class is",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jedním ze způsobů, jak tento problém vyřešit, je použití tříd výjimek. <strong>Třída výjimky</strong> je jen normální třída, která je speciálně navržena tak, aby byla vyvolána jako výjimka. Pojďme navrhnout jednoduchou třídu výjimky pro použití s ​​naší třídou IntArray:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b30",
@@ -232,14 +264,16 @@
       "language": "cpp",
       "code": "#include <string>\n#include <string_view>\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string&amp; getError() const { return m_error; }\n};</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n#include <string_view>\n\ntřídy ArrayException\n{\nsoukromé:\n\tstd::string m_error;\n\nveřejnost:\n\tArrayException (chyba std::string_view)\n\t\t: m_error{ chyba }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b31",
       "type": "paragraph",
       "html": "<p>Here’s a full program using this class:</p>",
       "preview": "Here’s a full program using this class:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je úplný program využívající tuto třídu:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b32",
@@ -247,21 +281,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n#include <string>\n#include <string_view>\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException{ \"Invalid index\" };\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] }; // out of range subscript\n\t}\n\tcatch (const ArrayException& exception)\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.getError() << \")\\n\";\n\t}\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException\n{\nprivate:\n\tstd::string m_error;\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{ error }\n\t{\n\t}\n\n\tconst std::string&amp; getError() const { return m_error; }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException{ \"Invalid index\" };\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] }; // out of range subscript\n\t}\n\tcatch (const ArrayException&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.getError() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n#include <řetězec>\n#include <string_view>\n\ntřídy ArrayException\n{\nsoukromé:\n\tstd::string m_error;\n\nveřejnost:\n\tArrayException (chyba std::string_view)\n\t\t: m_error{ chyba }\n\t{\n\t}\n\n\tconst std::string& getError() const { return m_error; }\n};\n\ntřídy IntArray\n{\nsoukromé:\n\tint m_data[3]{}; // předpokládejme, že pole má pro jednoduchost délku 3\n\nveřejnost:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException{ \"Neplatný index\" };\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tPole IntArray;\n\n\tzkusit\n\t{\n\t\tint hodnota{ pole[5] }; // mimo rozsah dolní index\n\t}\n\tcatch (const ArrayException & výjimka)\n\t{\n\t\tstd::cerr << \"Došlo k výjimce pole (\" << výjimka.getError() << \")\\n\";\n\t}\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b33",
       "type": "paragraph",
       "html": "<p>Using such a class, we can have the exception return a description of the problem that occurred, which provides context for what went wrong. And since ArrayException is its own unique type, we can specifically catch exceptions thrown by the array class and treat them differently from other exceptions if we wish.</p>",
       "preview": "Using such a class, we can have the exception return a description of the proble",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pomocí takové třídy můžeme nechat výjimku vrátit popis problému, který nastal, což poskytuje kontext pro to, co se pokazilo. A protože ArrayException je vlastní jedinečný typ, můžeme specificky zachytit výjimky vyvolané třídou pole a zacházet s nimi jinak než s ostatními výjimkami, pokud si to přejeme.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b34",
       "type": "paragraph",
       "html": "<p>Note that exception handlers should catch class exception objects by reference instead of by value. This prevents the compiler from making a copy of the exception at the point where it is caught, which can be expensive when the exception is a class object, and prevents object slicing when dealing with derived exception classes (which we’ll talk about in a moment). Catching exceptions by pointer should generally be avoided unless you have a specific reason to do so.</p>",
       "preview": "Note that exception handlers should catch class exception objects by reference i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že obslužné rutiny výjimek by měly zachytit objekty výjimek třídy podle odkazu, nikoli podle hodnoty. To zabraňuje kompilátoru vytvořit kopii výjimky v místě, kde je zachycena, což může být drahé, pokud je výjimkou objekt třídy, a zabraňuje dělení objektů při práci s odvozenými třídami výjimek (o kterých budeme hovořit za chvíli). Zachycování výjimek pomocí ukazatele byste se měli obecně vyvarovat, pokud k tomu nemáte konkrétní důvod.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b35",
@@ -269,21 +306,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Exceptions of a fundamental type can be caught by value since they are cheap to copy.<br>Exceptions of a class type should be caught by (const) reference to prevent expensive copying and slicing.</p></div>",
       "preview": "Best practiceExceptions of a fundamental type can be caught by value since they are cheap to copy.Ex",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Osvědčený postup</p><p>Výjimky základního typu lze zachytit podle hodnoty, protože jejich kopírování je levné.<br>Výjimky typu třídy by měly být označeny odkazem (const), aby se zabránilo drahému kopírování a krájení.</p></div>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b36",
       "type": "section",
       "title": "Exceptions and inheritance",
       "html": "<h3 class=\"cpp-section-heading\">Exceptions and inheritance</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Výjimky a dědičnost</h3>",
+      "title_cs": "Výjimky a dědictví"
     },
     {
       "id": "exceptions-classes-and-inheritance_b37",
       "type": "paragraph",
       "html": "<p>Since it’s possible to throw classes as exceptions, and classes can be derived from other classes, we need to consider what happens when we use inherited classes as exceptions. As it turns out, exception handlers will not only match classes of a specific type, they’ll also match classes derived from that specific type as well! Consider the following example:</p>",
       "preview": "Since it’s possible to throw classes as exceptions, and classes can be derived f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože je možné vyvolat třídy jako výjimky a třídy lze odvodit z jiných tříd, musíme zvážit, co se stane, když použijeme zděděné třídy jako výjimky. Jak se ukázalo, obslužné rutiny výjimek nebudou odpovídat pouze třídám konkrétního typu, ale také třídám odvozeným od tohoto konkrétního typu! Zvažte následující příklad:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b38",
@@ -291,42 +332,48 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n\n    return 0;\n}\t",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n\n    return 0;\n}\t</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    základ() {}\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno() {}\n};\n\nint main()\n{\n    zkusit\n    {\n        throw Derived();\n    }\n    catch (const Base & base)\n    {\n        std::cerr << \"chycen Base\";\n    }\n    chytit (const Odvozeno a odvozeno)\n    {\n        std::cerr << \"chyceno Odvozeno\";\n    }\n\n    návrat 0;\n} </code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b39",
       "type": "paragraph",
       "html": "<p>In the above example we throw an exception of type Derived. However, the output of this program is:</p>",
       "preview": "In the above example we throw an exception of type Derived. However, the output ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu vyvoláme výjimku typu Derived. Výstup tohoto programu je však:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b40",
       "type": "output",
       "text": "caught Base\n",
       "html": "<pre>caught Base\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<před>chycen Base\n</pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b41",
       "type": "paragraph",
       "html": "<p>What happened?</p>",
       "preview": "What happened?",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co se stalo?</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b42",
       "type": "paragraph",
       "html": "<p>First, as mentioned above, derived classes will be caught by handlers for the base type. Because Derived is derived from Base, Derived is-a Base (they have an is-a relationship). Second, when C++ is attempting to find a handler for a raised exception, it does so sequentially. Consequently, the first thing C++ does is check whether the exception handler for Base matches the Derived exception. Because Derived is-a Base, the answer is yes, and it executes the catch block for type Base! The catch block for Derived is never even tested in this case.</p>",
       "preview": "First, as mentioned above, derived classes will be caught by handlers for the ba",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejprve, jak je uvedeno výše, budou odvozené třídy zachyceny obslužnými rutinami pro základní typ. Protože odvozené je odvozeno od báze, odvozené je-základ (mají vztah je-a). Za druhé, když se C++ pokouší najít handler pro vyvolanou výjimku, dělá to postupně. V důsledku toho první věc, kterou C++ udělá, je zkontrolovat, zda handler výjimky pro Base odpovídá odvozené výjimce. Protože Derived is-a Base, odpověď je ano a provede blok catch pro typ Base! Blok catch pro Derived není v tomto případě nikdy testován.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b43",
       "type": "paragraph",
       "html": "<p>In order to make this example work as expected, we need to flip the order of the catch blocks:</p>",
       "preview": "In order to make this example work as expected, we need to flip the order of the",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Aby tento příklad fungoval podle očekávání, musíme otočit pořadí bloků catch:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b44",
@@ -334,14 +381,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n\n    return 0;\n}\t",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived: public Base\n{\npublic:\n    Derived() {}\n};\n\nint main()\n{\n    try\n    {\n        throw Derived();\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n\n    return 0;\n}\t</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    základ() {}\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno() {}\n};\n\nint main()\n{\n    zkusit\n    {\n        throw Derived();\n    }\n    chytit (const Odvozeno a odvozeno)\n    {\n        std::cerr << \"chyceno Odvozeno\";\n    }\n    catch (const Base & base)\n    {\n        std::cerr << \"chycen Base\";\n    }\n\n    návrat 0;\n} </code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b45",
       "type": "paragraph",
       "html": "<p>This way, the Derived handler will get first shot at catching objects of type Derived (before the handler for Base can). Objects of type Base will not match the Derived handler (Derived is-a Base, but Base is not a Derived), and thus will “fall through” to the Base handler.</p>",
       "preview": "This way, the Derived handler will get first shot at catching objects of type De",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Tímto způsobem dostane Derived handler první ránu při chycení objektů typu Derived (dříve než handler pro Base může). Objekty typu Base se nebudou shodovat s Derived handlerem (Derived is-a Base, but Base is not Derived), a proto „propadnou“ do Base handleru.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b46",
@@ -349,42 +398,49 @@
       "calloutType": "rule",
       "html": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Rule</p><p>Handlers for derived exception classes should be listed before those for base classes.</p></div>",
       "preview": "RuleHandlers for derived exception classes should be listed before those for base classes.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightpurplebackground\"><p class=\"cpp-note-title cpp-bottomline\">Pravidlo</p><p>Obslužné rutiny pro odvozené třídy výjimek by měly být uvedeny před obslužnými rutinami pro základní třídy.</p></div>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b47",
       "type": "paragraph",
       "html": "<p>The ability to use a handler to catch exceptions of derived types using a handler for the base class turns out to be exceedingly useful.</p>",
       "preview": "The ability to use a handler to catch exceptions of derived types using a handle",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možnost použít handler k zachycení výjimek odvozených typů pomocí handleru pro základní třídu se ukazuje jako mimořádně užitečná.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b48",
       "type": "section",
       "title": "std::exception",
       "html": "<h3 class=\"cpp-section-heading\">std::exception</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">std::exception</h3>",
+      "title_cs": "std::exception"
     },
     {
       "id": "exceptions-classes-and-inheritance_b49",
       "type": "paragraph",
       "html": "<p>Many of the classes and operators in the standard library throw exception classes on failure. For example, operator new can throw std::bad_alloc if it is unable to allocate enough memory. A failed dynamic_cast will throw std::bad_cast. And so on. As of C++20, there are 28 different exception classes that can be thrown, with more being added in each subsequent language standard.</p>",
       "preview": "Many of the classes and operators in the standard library throw exception classe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mnoho tříd a operátorů ve standardní knihovně vyvolá při selhání třídy výjimek. Například operátor new může vyvolat std::bad_alloc, pokud není schopen alokovat dostatek paměti. Selhání dynamic_cast vyvolá std::bad_cast. A tak dále. Od C++20 existuje 28 různých tříd výjimek, které lze vyvolat, přičemž další jsou přidány v každém následujícím jazykovém standardu.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b50",
       "type": "paragraph",
       "html": "<p>The good news is that all of these exception classes are derived from a single class called <strong>std::exception</strong> (defined in the &lt;exception&gt; header). std::exception is a small interface class designed to serve as a base class to any exception thrown by the C++ standard library.</p>",
       "preview": "The good news is that all of these exception classes are derived from a single c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Dobrou zprávou je, že všechny tyto třídy výjimek jsou odvozeny z jediné třídy nazvané <strong>std::exception</strong> (definované v záhlaví <exception>). std::exception je malá třída rozhraní navržená tak, aby sloužila jako základní třída pro jakoukoli výjimku vyvolanou standardní knihovnou C++.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b51",
       "type": "paragraph",
       "html": "<p>Much of the time, when an exception is thrown by the standard library, we won’t care whether it’s a bad allocation, a bad cast, or something else. We just care that something catastrophic went wrong and now our program is exploding. Thanks to std::exception, we can set up an exception handler to catch exceptions of type std::exception, and we’ll end up catching std::exception and all of the derived exceptions together in one place. Easy!</p>",
       "preview": "Much of the time, when an exception is thrown by the standard library, we won’t ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Většinu času, kdy standardní knihovna vyvolá výjimku, nás nezajímá, zda jde o špatnou alokaci, špatné obsazení nebo něco jiného. Jen nám záleží na tom, aby se něco katastrofálního pokazilo, a teď náš program exploduje. Díky std::exception můžeme nastavit handler výjimky pro zachycení výjimek typu std::exception a skončíme tak, že std::exception a všechny odvozené výjimky zachytíme společně na jednom místě. Snadno!</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b52",
@@ -392,35 +448,40 @@
       "language": "cpp",
       "code": "#include <cstddef> // for std::size_t\n#include <exception> // for std::exception\n#include <iostream>\n#include <limits>\n#include <string> // for this example\n\nint main()\n{\n    try\n    {\n        // Your code using standard library goes here\n        // We'll trigger one of these exceptions intentionally for the sake of the example\n        std::string s;\n        s.resize(std::numeric_limits<std::size_t>::max()); // will trigger a std::length_error or allocation exception\n    }\n    // This handler will catch std::exception and all the derived exceptions too\n    catch (const std::exception& exception)\n    {\n        std::cerr << \"Standard exception: \" << exception.what() << '\\n';\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;cstddef&gt; // for std::size_t\n#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;limits&gt;\n#include &lt;string&gt; // for this example\n\nint main()\n{\n    try\n    {\n        // Your code using standard library goes here\n        // We'll trigger one of these exceptions intentionally for the sake of the example\n        std::string s;\n        s.resize(std::numeric_limits&lt;std::size_t&gt;::max()); // will trigger a std::length_error or allocation exception\n    }\n    // This handler will catch std::exception and all the derived exceptions too\n    catch (const std::exception&amp; exception)\n    {\n        std::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <cstddef> // pro std::size_t\n#include <exception> // pro std::exception\n#include <iostream>\n#include <limity>\n#include <řetězec> // pro tento příklad\n\nint main()\n{\n    zkusit\n    {\n        // Váš kód používající standardní knihovnu jde sem\n        // Záměrně spustíme jednu z těchto výjimek kvůli příkladu\n        std::string s;\n        s.resize(std::numerické_limity<std::velikost_t>::max()); // spustí std::length_error nebo alokační výjimku\n    }\n    // Tento handler zachytí std::exception a také všechny odvozené výjimky\n    catch (const std::exception & výjimka)\n    {\n        std::cerr << \"Standardní výjimka: \" << výjimka.what() << '\\n';\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b53",
       "type": "paragraph",
       "html": "<p>On the author’s machine, the above program prints:</p>",
       "preview": "On the author’s machine, the above program prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na autorově počítači výše uvedený program vytiskne:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b54",
       "type": "output",
       "text": "Standard exception: string too long\n",
       "html": "<pre>Standard exception: string too long\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Standardní výjimka: řetězec je příliš dlouhý\n</pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b55",
       "type": "paragraph",
       "html": "<p>The above example should be pretty straightforward. The one thing worth noting is that std::exception has a virtual member function named <strong>what()</strong> that returns a C-style string description of the exception. Most derived classes override the what() function to change the message. Note that this string is meant to be used for descriptive text only -- do not use it for comparisons, as it is not guaranteed to be the same across compilers.</p>",
       "preview": "The above example should be pretty straightforward. The one thing worth noting i",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Výše uvedený příklad by měl být docela jednoduchý. Jedna věc, která stojí za zmínku, je, že std::exception má virtuální členskou funkci s názvem <strong>what()</strong>, která vrací popis řetězce ve stylu C pro výjimku. Většina odvozených tříd přepíše funkci what() za účelem změny zprávy. Všimněte si, že tento řetězec je určen pouze k použití pro popisný text -- nepoužívejte jej pro porovnávání, protože není zaručeno, že bude mezi kompilátory stejný.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b56",
       "type": "paragraph",
       "html": "<p>Sometimes we’ll want to handle a specific type of exception differently. In this case, we can add a handler for that specific type, and let all the others “fall through” to the base handler. Consider:</p>",
       "preview": "Sometimes we’ll want to handle a specific type of exception differently. In this",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Někdy budeme chtít s konkrétním typem výjimky zacházet jinak. V tomto případě můžeme přidat handler pro tento konkrétní typ a nechat všechny ostatní „propadnout“ do základního handleru. Zvažte:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b57",
@@ -428,42 +489,49 @@
       "language": "cpp",
       "code": "try\n{\n     // code using standard library goes here\n}\n// This handler will catch std::length_error (and any exceptions derived from it) here\ncatch (const std::length_error& exception)\n{\n    std::cerr << \"You ran out of memory!\" << '\\n';\n}\n// This handler will catch std::exception (and any exception derived from it) that fall\n// through here\ncatch (const std::exception& exception)\n{\n    std::cerr << \"Standard exception: \" << exception.what() << '\\n';\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">try\n{\n     // code using standard library goes here\n}\n// This handler will catch std::length_error (and any exceptions derived from it) here\ncatch (const std::length_error&amp; exception)\n{\n    std::cerr &lt;&lt; \"You ran out of memory!\" &lt;&lt; '\\n';\n}\n// This handler will catch std::exception (and any exception derived from it) that fall\n// through here\ncatch (const std::exception&amp; exception)\n{\n    std::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">zkusit\n{\n     // kód pomocí standardní knihovny jde sem\n}\n// Tento handler zde zachytí std::length_error (a všechny výjimky z něj odvozené).\ncatch (const std::length_error& výjimka)\n{\n    std::cerr << \"Došla vám paměť!\" << '\\n';\n}\n// Tento handler zachytí std::exception (a všechny z ní odvozené výjimky), které padnou\n// zde\ncatch (const std::exception & výjimka)\n{\n    std::cerr << \"Standardní výjimka: \" << výjimka.what() << '\\n';\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b58",
       "type": "paragraph",
       "html": "<p>In this example, exceptions of type std::length_error will be caught by the first handler and handled there. Exceptions of type std::exception and all of the other derived classes will be caught by the second handler.</p>",
       "preview": "In this example, exceptions of type std::length_error will be caught by the firs",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V tomto příkladu budou výjimky typu std::length_error zachyceny prvním handlerem a zpracovány tam. Výjimky typu std::exception a všechny ostatní odvozené třídy budou zachyceny druhým handlerem.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b59",
       "type": "paragraph",
       "html": "<p>Such inheritance hierarchies allow us to use specific handlers to target specific derived exception classes, or to use base class handlers to catch the whole hierarchy of exceptions. This allows us a fine degree of control over what kind of exceptions we want to handle while ensuring we don’t have to do too much work to catch “everything else” in a hierarchy.</p>",
       "preview": "Such inheritance hierarchies allow us to use specific handlers to target specifi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Takové hierarchie dědičnosti nám umožňují používat specifické obslužné rutiny k cílení na konkrétní odvozené třídy výjimek nebo používat obslužné rutiny základní třídy k zachycení celé hierarchie výjimek. To nám umožňuje jemný stupeň kontroly nad tím, jaké výjimky chceme zpracovat, a zároveň zajistit, že nebudeme muset dělat příliš mnoho práce, abychom zachytili „vše ostatní“ v hierarchii.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b60",
       "type": "section",
       "title": "Using the standard exceptions directly",
       "html": "<h3 class=\"cpp-section-heading\">Using the standard exceptions directly</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Přímé použití standardních výjimek</h3>",
+      "title_cs": "Přímé použití standardních výjimek"
     },
     {
       "id": "exceptions-classes-and-inheritance_b61",
       "type": "paragraph",
       "html": "<p>Nothing throws a std::exception directly, and neither should you. However, you should feel free to throw the other standard exception classes in the standard library if they adequately represent your needs. You can find a list of all the standard exceptions on <a href=\"http://en.cppreference.com/w/cpp/error/exception\">cppreference</a>.</p>",
       "preview": "Nothing throws a std::exception directly, and neither should you. However, you s",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nic nevyhazuje výjimku std:: přímo a neměli byste to ani vy. Ostatní třídy standardních výjimek byste však měli bez obav hodit do standardní knihovny, pokud adekvátně odpovídají vašim potřebám. Seznam všech standardních výjimek naleznete na <a href=\"http://en.cppreference.com/w/cpp/error/exception\">cppreference</a>.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b62",
       "type": "paragraph",
       "html": "<p>std::runtime_error (included as part of the stdexcept header) is a popular choice, because it has a generic name, and its constructor takes a customizable message:</p>",
       "preview": "std::runtime_error (included as part of the stdexcept header) is a popular choic",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>std::runtime_error (zahrnuto jako součást hlavičky stdexcept) je oblíbená volba, protože má obecný název a jeho konstruktor přijímá přizpůsobitelnou zprávu:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b63",
@@ -471,35 +539,41 @@
       "language": "cpp",
       "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <stdexcept> // for std::runtime_error\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow std::runtime_error(\"Bad things happened\");\n\t}\n\t// This handler will catch std::exception and all the derived exceptions too\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Standard exception: \" << exception.what() << '\\n';\n\t}\n\n\treturn 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;stdexcept&gt; // for std::runtime_error\n\nint main()\n{\n\ttry\n\t{\n\t\tthrow std::runtime_error(\"Bad things happened\");\n\t}\n\t// This handler will catch std::exception and all the derived exceptions too\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Standard exception: \" &lt;&lt; exception.what() &lt;&lt; '\\n';\n\t}\n\n\treturn 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <exception> // pro std::exception\n#include <iostream>\n#include <stdexcept> // pro std::runtime_error\n\nint main()\n{\n\tzkusit\n\t{\n\t\tthrow std::runtime_error(\"Staly se špatné věci\");\n\t}\n\t// Tento handler zachytí std::exception a také všechny odvozené výjimky\n\tcatch (const std::exception & výjimka)\n\t{\n\t\tstd::cerr << \"Standardní výjimka: \" << výjimka.what() << '\\n';\n\t}\n\n\tnávrat 0;\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b64",
       "type": "paragraph",
       "html": "<p>This prints:</p>",
       "preview": "This prints:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Toto vytiskne:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b65",
       "type": "output",
       "text": "Standard exception: Bad things happened\n",
       "html": "<pre>Standard exception: Bad things happened\n</pre>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<pre>Standardní výjimka: Staly se špatné věci\n</pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b66",
       "type": "section",
       "title": "Deriving your own classes from std::exception or std::runtime_error",
       "html": "<h3 class=\"cpp-section-heading\">Deriving your own classes from std::exception or std::runtime_error</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Odvození vlastních tříd ze std::exception nebo std::runtime_error</h3>",
+      "title_cs": "Odvození vlastních tříd z std::exception nebo std::runtime_error"
     },
     {
       "id": "exceptions-classes-and-inheritance_b67",
       "type": "paragraph",
       "html": "<p>You can, of course, derive your own classes from std::exception, and override the virtual what() const member function. Here’s the same program as above, with ArrayException derived from std::exception:</p>",
       "preview": "You can, of course, derive your own classes from std::exception, and override th",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžete samozřejmě odvodit své vlastní třídy z výjimky std::exception a přepsat členskou funkci virtuální what() const. Zde je stejný program jako výše, s ArrayException odvozenou z std::exception:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b68",
@@ -507,28 +581,32 @@
       "language": "cpp",
       "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <string>\n#include <string_view>\n\nclass ArrayException : public std::exception\n{\nprivate:\n\tstd::string m_error{}; // handle our own string\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{error}\n\t{\n\t}\n\n\t// std::exception::what() returns a const char*, so we must as well\n\tconst char* what() const noexcept override { return m_error.c_str(); }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3] {}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\t\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException& exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.what() << \")\\n\";\n\t}\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Some other std::exception occurred (\" << exception.what() << \")\\n\";\n\t}\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;string&gt;\n#include &lt;string_view&gt;\n\nclass ArrayException : public std::exception\n{\nprivate:\n\tstd::string m_error{}; // handle our own string\n\npublic:\n\tArrayException(std::string_view error)\n\t\t: m_error{error}\n\t{\n\t}\n\n\t// std::exception::what() returns a const char*, so we must as well\n\tconst char* what() const noexcept override { return m_error.c_str(); }\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3] {}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\t\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException&amp; exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Some other std::exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <exception> // pro std::exception\n#include <iostream>\n#include <řetězec>\n#include <string_view>\n\nclass ArrayException : public std::exception\n{\nsoukromé:\n\tstd::string m_error{}; // zpracovává náš vlastní řetězec\n\nveřejnost:\n\tArrayException (chyba std::string_view)\n\t\t: m_error{error}\n\t{\n\t}\n\n\t// std::exception::what() vrací const char*, takže musíme také\n\tconst char* what() const noexcept override { return m_error.c_str(); }\n};\n\ntřídy IntArray\n{\nsoukromé:\n\tint m_data[3] {}; // předpokládejme, že pole má pro jednoduchost délku 3\n\nveřejnost:\n\tIntArray() {}\n\t\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Neplatný index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tPole IntArray;\n\n\tzkusit\n\t{\n\t\tint hodnota{ pole[5] };\n\t}\n\tcatch (const ArrayException& výjimka) // odvozené catch bloky jdou jako první\n\t{\n\t\tstd::cerr << \"Došlo k výjimce pole (\" << výjimka.what() << \")\\n\";\n\t}\n\tcatch (const std::exception & výjimka)\n\t{\n\t\tstd::cerr << \"Došlo k nějaké další std::výjimce (\" << výjimka.what() << \")\\n\";\n\t}\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b69",
       "type": "paragraph",
       "html": "<p>Note that virtual function what() has specifier noexcept (which means the function promises not to throw exceptions itself). Therefore, our override should also have specifier noexcept.</p>",
       "preview": "Note that virtual function what() has specifier noexcept (which means the functi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že virtuální funkce what() má specifikátor noexcept (což znamená, že funkce slibuje, že nebude vyvolávat výjimky sama). Proto by naše přepsání mělo mít také specifikátor noexcept.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b70",
       "type": "paragraph",
       "html": "<p>Because std::runtime_error already has string handling capabilities, it’s also a popular base class for derived exception classes. std::runtime_error can take a C-style string parameter, or a <code>const std::string&amp;</code> parameter.</p>",
       "preview": "Because std::runtime_error already has string handling capabilities, it’s also a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože std::runtime_error již má možnosti zpracování řetězců, je to také oblíbená základní třída pro odvozené třídy výjimek. std::runtime_error může převzít parametr řetězce ve stylu C nebo parametr <code>const std::string&</code>.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b71",
       "type": "paragraph",
       "html": "<p>Here’s the same example derived from std::runtime_error instead:</p>",
       "preview": "Here’s the same example derived from std::runtime_error instead:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je místo toho stejný příklad odvozený od std::runtime_error:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b72",
@@ -536,42 +614,49 @@
       "language": "cpp",
       "code": "#include <exception> // for std::exception\n#include <iostream>\n#include <stdexcept> // for std::runtime_error\n#include <string>\n\nclass ArrayException : public std::runtime_error\n{\npublic:\n\t// std::runtime_error takes either a null-terminated const char* or a const std::string&.\n\t// We will follow their lead and take a const std::string&\n\tArrayException(const std::string& error)\n\t\t: std::runtime_error{ error } // std::runtime_error will handle the string\n\t{\n\t}\n\n\n        // no need to override what() since we can just use std::runtime_error::what()\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException& exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr << \"An array exception occurred (\" << exception.what() << \")\\n\";\n\t}\n\tcatch (const std::exception& exception)\n\t{\n\t\tstd::cerr << \"Some other std::exception occurred (\" << exception.what() << \")\\n\";\n\t}\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;exception&gt; // for std::exception\n#include &lt;iostream&gt;\n#include &lt;stdexcept&gt; // for std::runtime_error\n#include &lt;string&gt;\n\nclass ArrayException : public std::runtime_error\n{\npublic:\n\t// std::runtime_error takes either a null-terminated const char* or a const std::string&amp;.\n\t// We will follow their lead and take a const std::string&amp;\n\tArrayException(const std::string&amp; error)\n\t\t: std::runtime_error{ error } // std::runtime_error will handle the string\n\t{\n\t}\n\n\n        // no need to override what() since we can just use std::runtime_error::what()\n};\n\nclass IntArray\n{\nprivate:\n\tint m_data[3]{}; // assume array is length 3 for simplicity\n\npublic:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint&amp; operator[](const int index)\n\t{\n\t\tif (index &lt; 0 || index &gt;= getLength())\n\t\t\tthrow ArrayException(\"Invalid index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tIntArray array;\n\n\ttry\n\t{\n\t\tint value{ array[5] };\n\t}\n\tcatch (const ArrayException&amp; exception) // derived catch blocks go first\n\t{\n\t\tstd::cerr &lt;&lt; \"An array exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n\tcatch (const std::exception&amp; exception)\n\t{\n\t\tstd::cerr &lt;&lt; \"Some other std::exception occurred (\" &lt;&lt; exception.what() &lt;&lt; \")\\n\";\n\t}\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <exception> // pro std::exception\n#include <iostream>\n#include <stdexcept> // pro std::runtime_error\n#include <řetězec>\n\nclass ArrayException: public std::runtime_error\n{\nveřejnost:\n\t// std::runtime_error přebírá buď const char* ukončený nulou, nebo const std::string&.\n\t// Budeme je následovat a vezmeme si const std::string&\n\tArrayException(const std::string& error)\n\t\t: std::runtime_error{ error } // std::runtime_error zpracuje řetězec\n\t{\n\t}\n\n\n        // není třeba přepisovat what(), protože můžeme použít pouze std::runtime_error::what()\n};\n\ntřídy IntArray\n{\nsoukromé:\n\tint m_data[3]{}; // předpokládejme, že pole má pro jednoduchost délku 3\n\nveřejnost:\n\tIntArray() {}\n\n\tint getLength() const { return 3; }\n\n\tint& operator[](const int index)\n\t{\n\t\tif (index < 0 || index >= getLength())\n\t\t\tthrow ArrayException(\"Neplatný index\");\n\n\t\treturn m_data[index];\n\t}\n\n};\n\nint main()\n{\n\tPole IntArray;\n\n\tzkusit\n\t{\n\t\tint hodnota{ pole[5] };\n\t}\n\tcatch (const ArrayException& výjimka) // odvozené catch bloky jdou jako první\n\t{\n\t\tstd::cerr << \"Došlo k výjimce pole (\" << výjimka.what() << \")\\n\";\n\t}\n\tcatch (const std::exception & výjimka)\n\t{\n\t\tstd::cerr << \"Došlo k nějaké další std::výjimce (\" << výjimka.what() << \")\\n\";\n\t}\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b73",
       "type": "paragraph",
       "html": "<p>It’s up to you whether you want create your own standalone exception classes, use the standard exception classes, or derive your own exception classes from std::exception or std::runtime_error. All are valid approaches depending on your aims.</p>",
       "preview": "It’s up to you whether you want create your own standalone exception classes, us",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Je na vás, zda chcete vytvořit své vlastní samostatné třídy výjimek, použít standardní třídy výjimek nebo odvodit vlastní třídy výjimek ze std::exception nebo std::runtime_error. Všechny jsou platné přístupy v závislosti na vašich cílech.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b74",
       "type": "section",
       "title": "The lifetime of exceptions",
       "html": "<h3 class=\"cpp-section-heading\">The lifetime of exceptions</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Doba trvání výjimek</h3>",
+      "title_cs": "Životnost výjimek"
     },
     {
       "id": "exceptions-classes-and-inheritance_b75",
       "type": "paragraph",
       "html": "<p>When an exception is thrown, the object being thrown is typically a temporary or local variable that has been allocated on the stack. However, the process of exception handling may unwind the function, causing all variables local to the function to be destroyed. So how does the exception object being thrown survive stack unwinding?</p>",
       "preview": "When an exception is thrown, the object being thrown is typically a temporary or",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vyvolána výjimka, je vyvolávaným objektem obvykle dočasná nebo lokální proměnná, která byla přidělena v zásobníku. Proces zpracování výjimek však může funkci rozvinout a způsobit zničení všech místních proměnných funkce. Jak tedy vržený objekt výjimky přežije odvíjení zásobníku?</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b76",
       "type": "paragraph",
       "html": "<p>When an exception is thrown, the compiler makes a copy of the exception object to some piece of unspecified memory (outside of the call stack) reserved for handling exceptions. That way, the exception object is persisted regardless of whether or how many times the stack is unwound. The exception is guaranteed to exist until the exception has been handled.</p>",
       "preview": "When an exception is thrown, the compiler makes a copy of the exception object t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je vyvolána výjimka, kompilátor vytvoří kopii objektu výjimky do nějaké části nespecifikované paměti (mimo zásobník volání) vyhrazené pro zpracování výjimek. Tímto způsobem je objekt výjimky zachován bez ohledu na to, zda nebo kolikrát je zásobník odvíjen. Výjimka bude zaručeně existovat, dokud nebude zpracována.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b77",
       "type": "paragraph",
       "html": "<p>This means that the objects being thrown generally need to be copyable (even if the stack is not actually unwound). Smart compilers may be able to perform a move instead, or elide the copy altogether in specific circumstances.</p>",
       "preview": "This means that the objects being thrown generally need to be copyable (even if ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To znamená, že házené objekty musí být obecně kopírovatelné (i když se zásobník ve skutečnosti neodvíjí). Inteligentní kompilátory mohou být schopny místo toho provést přesun nebo za určitých okolností kopii úplně odstranit.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b78",
@@ -579,14 +664,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Exception objects need to be copyable.</p></div>",
       "preview": "TipException objects need to be copyable.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Objekty výjimek musí být kopírovatelné.</p></div>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b79",
       "type": "paragraph",
       "html": "<p>Here’s an example showing what happens when we try to throw a Derived object that is not copyable:</p>",
       "preview": "Here’s an example showing what happens when we try to throw a Derived object tha",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad ukazující, co se stane, když se pokusíme hodit odvozený objekt, který nelze kopírovat:</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b80",
@@ -594,21 +681,25 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived() {}\n\n    Derived(const Derived&) = delete; // not copyable\n};\n\nint main()\n{\n    Derived d{};\n\n    try\n    {\n        throw d; // compile error: Derived copy constructor was deleted\n    }\n    catch (const Derived& derived)\n    {\n        std::cerr << \"caught Derived\";\n    }\n    catch (const Base& base)\n    {\n        std::cerr << \"caught Base\";\n    }\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nclass Base\n{\npublic:\n    Base() {}\n};\n\nclass Derived : public Base\n{\npublic:\n    Derived() {}\n\n    Derived(const Derived&amp;) = delete; // not copyable\n};\n\nint main()\n{\n    Derived d{};\n\n    try\n    {\n        throw d; // compile error: Derived copy constructor was deleted\n    }\n    catch (const Derived&amp; derived)\n    {\n        std::cerr &lt;&lt; \"caught Derived\";\n    }\n    catch (const Base&amp; base)\n    {\n        std::cerr &lt;&lt; \"caught Base\";\n    }\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\ntřída Základní\n{\nveřejnost:\n    základ() {}\n};\n\ntřída Odvozeno: veřejná Základna\n{\nveřejnost:\n    Odvozeno() {}\n\n    Derived(const Derived&) = delete; // nelze kopírovat\n};\n\nint main()\n{\n    Odvozené d{};\n\n    zkusit\n    {\n        hodit d; // chyba kompilace: Konstruktor odvozené kopie byl smazán\n    }\n    chytit (const Odvozeno a odvozeno)\n    {\n        std::cerr << \"chyceno Odvozeno\";\n    }\n    catch (const Base & base)\n    {\n        std::cerr << \"chycen Base\";\n    }\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b81",
       "type": "paragraph",
       "html": "<p>When this program is compiled, the compiler will complain that the Derived copy constructor is not available, and halt compilation.</p>",
       "preview": "When this program is compiled, the compiler will complain that the Derived copy ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když je tento program zkompilován, kompilátor si bude stěžovat, že konstruktor Derived copy není dostupný, a zastaví kompilaci.</p>"
     },
     {
       "id": "exceptions-classes-and-inheritance_b82",
       "type": "paragraph",
       "html": "<p>Exception objects should not keep pointers or references to stack-allocated objects. If a thrown exception results in stack unwinding (causing the destruction of stack-allocated objects), these pointers or references may be left dangling.</p>",
       "preview": "Exception objects should not keep pointers or references to stack-allocated obje",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Objekty výjimek by neměly uchovávat ukazatele nebo odkazy na objekty alokované v zásobníku. Pokud vyvolaná výjimka způsobí odvíjení zásobníku (způsobující zničení objektů alokovaných v zásobníku), mohou tyto ukazatele nebo odkazy zůstat viset.</p>"
     }
-  ]
+  ],
+  "title_cs": "27.5 — Exceptions, classes, and inheritance"
 }

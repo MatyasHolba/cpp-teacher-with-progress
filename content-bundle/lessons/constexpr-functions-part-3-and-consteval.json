@@ -14,28 +14,33 @@
       "type": "section",
       "title": "Forcing a constexpr function to be evaluated at compile-time",
       "html": "<h3 class=\"cpp-section-heading\">Forcing a constexpr function to be evaluated at compile-time</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Vynucení vyhodnocení constexpr funkce v době překladu</h3>",
+      "title_cs": "Vynucení vyhodnocení funkce constexpr v době kompilace"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b1",
       "type": "paragraph",
       "html": "<p>There is no way to tell the compiler that a constexpr function should prefer to evaluate at compile-time whenever it can (e.g. in cases where the return value of a constexpr function is used in a non-constant expression).</p>",
       "preview": "There is no way to tell the compiler that a constexpr function should prefer to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Neexistuje žádný způsob, jak kompilátoru říct, aby constexpr funkci vyhodnocoval v době překladu přednostně kdykoli je to možné (např. v případech, kdy je návratová hodnota constexpr funkce použita v nekonstantním výrazu).</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b2",
       "type": "paragraph",
       "html": "<p>However, we can force a constexpr function that is eligible to be evaluated at compile-time to actually evaluate at compile-time by ensuring the return value is used where a constant expression is required. This needs to be done on a per-call basis.</p>",
       "preview": "However, we can force a constexpr function that is eligible to be evaluated at c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme však constexpr funkci, která je způsobilá k vyhodnocení v době překladu, k tomuto vyhodnocení donutit tím, že zajistíme použití její návratové hodnoty tam, kde je vyžadován konstantní výraz. To je nutné provést pro každé volání zvlášť.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b3",
       "type": "paragraph",
       "html": "<p>The most common way to do this is to use the return value to initialize a constexpr variable (this is why we’ve been using variable ‘g’ in prior examples). Unfortunately, this requires introducing a new variable into our program just to ensure compile-time evaluation, which is ugly and reduces code readability.</p>",
       "preview": "The most common way to do this is to use the return value to initialize a conste",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nejběžnějším způsobem, jak toho dosáhnout, je použít návratovou hodnotu k inicializaci constexpr proměnné (proto jsme v předchozích příkladech používali proměnnou 'g'). Bohužel to vyžaduje zavedení nové proměnné do našeho programu jen kvůli zajištění vyhodnocení v době překladu, což je nevzhledné a snižuje čitelnost kódu.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b4",
@@ -43,28 +48,33 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>There are several hacky ways that people have tried to work around the problem of having to introduce a new constexpr variable each time we want to force compile-time evaluation. See <a href=\"https://quuxplusone.github.io/blog/2018/08/07/force-constexpr/\">here</a> and <a href=\"https://artificial-mind.net/blog/2020/11/14/cpp17-consteval\">here</a>.</p></div>",
       "preview": "For advanced readersThere are several hacky ways that people have tried to work around the problem o",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Existuje několik krkolomných způsobů (hacků), kterými se lidé pokoušeli obejít nutnost zavádět novou constexpr proměnnou pokaždé, když chceme vynutit vyhodnocení v době překladu. Podívejte se <a href=\"https://quuxplusone.github.io/blog/2018/08/07/force-constexpr/\">zde</a> a <a href=\"https://artificial-mind.net/blog/2020/11/14/cpp17-consteval\">zde</a>.</p></div>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b5",
       "type": "paragraph",
       "html": "<p>However, in C++20, there is a better workaround to this issue, which we’ll present in a moment.</p>",
       "preview": "However, in C++20, there is a better workaround to this issue, which we’ll prese",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V C++20 však existuje lepší řešení tohoto problému, které si za chvíli představíme.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b6",
       "type": "section",
       "title": "Consteval C++20",
       "html": "<h3 class=\"cpp-section-heading\">Consteval <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Consteval <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
+      "title_cs": "Consteval C++20"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b7",
       "type": "paragraph",
       "html": "<p>C++20 introduces the keyword <strong>consteval</strong>, which is used to indicate that a function <em>must</em> evaluate at compile-time, otherwise a compile error will result. Such functions are called <strong>immediate functions</strong>.</p>",
       "preview": "C++20 introduces the keyword consteval, which is used to indicate that a functio",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++20 zavádí klíčové slovo <strong>consteval</strong>, které se používá k označení, že se funkce <em>musí</em> vyhodnotit v době překladu, jinak dojde k chybě při překladu. Takové funkce se nazývají <strong>immediate functions</strong> (okamžité funkce).</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b8",
@@ -72,14 +82,16 @@
       "language": "cpp",
       "code": "#include <iostream>\n\nconsteval int greater(int x, int y) // function is now consteval\n{\n    return (x > y ? x : y);\n}\n\nint main()\n{\n    constexpr int g { greater(5, 6) };              // ok: will evaluate at compile-time\n    std::cout << g << '\\n';\n\n    std::cout << greater(5, 6) << \" is greater!\\n\"; // ok: will evaluate at compile-time\n\n    int x{ 5 }; // not constexpr\n    std::cout << greater(x, 6) << \" is greater!\\n\"; // error: consteval functions must evaluate at compile-time\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\nconsteval int greater(int x, int y) // function is now consteval\n{\n    return (x &gt; y ? x : y);\n}\n\nint main()\n{\n    constexpr int g { greater(5, 6) };              // ok: will evaluate at compile-time\n    std::cout &lt;&lt; g &lt;&lt; '\\n';\n\n    std::cout &lt;&lt; greater(5, 6) &lt;&lt; \" is greater!\\n\"; // ok: will evaluate at compile-time\n\n    int x{ 5 }; // not constexpr\n    std::cout &lt;&lt; greater(x, 6) &lt;&lt; \" is greater!\\n\"; // error: consteval functions must evaluate at compile-time\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\nconsteval int větší(int x, int y) // funkce je nyní consteval\n{\n    návrat (x > y ? x : y);\n}\n\nint main()\n{\n    constexpr int g { větší(5, 6) };              // ok: vyhodnotí se v době kompilace\n    std::cout << g << '\\n';\n\n    std::cout << větší(5, 6) << \"je větší!\\n\"; // ok: vyhodnotí se v době kompilace\n\n    int x{5}; // ne constexpr\n    std::cout << větší(x, 6) << \"je větší!\\n\"; // chyba: funkce consteval se musí vyhodnotit při kompilaci\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b9",
       "type": "paragraph",
       "html": "<p>In the above example, the first two calls to <code>greater()</code> will evaluate at compile-time. The call to <code>greater(x, 6)</code> cannot be evaluated at compile-time, so a compile error will result.</p>",
       "preview": "In the above example, the first two calls to greater() will evaluate at compile-",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu se první dvě volání <code>greater()</code> vyhodnotí v době kompilace. Volání <code>greater(x, 6)</code> nelze v době kompilace vyhodnotit, což povede k chybě při kompilaci.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b10",
@@ -87,56 +99,66 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>Use <code>consteval</code> if you have a function that must evaluate at compile-time for some reason (e.g. because it does something that can only be done at compile time).</p></div>",
       "preview": "Best practiceUse consteval if you have a function that must evaluate at compile-time for some reason",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Použijte <code>consteval</code>, pokud máte funkci, která se z nějakého důvodu musí vyhodnotit v době kompilace (např. proto, že dělá něco, co lze provést pouze v době kompilace).</p></div>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b11",
       "type": "paragraph",
       "html": "<p>Perhaps surprisingly, the parameters of a consteval function are not constexpr (even though consteval functions can only be evaluated at compile-time). This decision was made for the sake of consistency.</p>",
       "preview": "Perhaps surprisingly, the parameters of a consteval function are not constexpr (",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Možná poněkud překvapivě nejsou parametry funkce <code>consteval</code> samy o sobě <code>constexpr</code> (přestože funkce <code>consteval</code> lze vyhodnotit pouze v době kompilace). Toto rozhodnutí bylo učiněno kvůli zachování konzistence.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b12",
       "type": "section",
       "title": "Determining if a constexpr function call is evaluating at compile-time or runtime",
       "html": "<h3 class=\"cpp-section-heading\">Determining if a constexpr function call is evaluating at compile-time or runtime</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Zjištění, zda se volání funkce constexpr vyhodnocuje v době kompilace, nebo za běhu</h3>",
+      "title_cs": "Určení, zda se volání funkce constexpr vyhodnocuje při kompilaci nebo za běhu"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b13",
       "type": "paragraph",
       "html": "<p>C++ does not currently provide any reliable mechanisms to do this.</p>",
       "preview": "C++ does not currently provide any reliable mechanisms to do this.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>C++ v současné době neposkytuje žádné spolehlivé mechanismy, jak to zjistit.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b14",
       "type": "section",
       "title": "What about std::is_constant_evaluated or if consteval? Advanced",
       "html": "<h3 class=\"cpp-section-heading\">What about <code>std::is_constant_evaluated</code> or <code>if consteval</code>? <span class=\"cpp-section-pill cpp-section-advanced\">Advanced</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">A co <code>std::is_constant_evaluated</code> nebo <code>if consteval</code>? <span class=\"cpp-section-pill cpp-section-advanced\">Pokročilé</span></h3>",
+      "title_cs": "A co std::is_constant_evaluated nebo if consteval? Pokročilé"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b15",
       "type": "paragraph",
       "html": "<p>Neither of these capabilities tell you whether a function call is evaluating at compile-time or runtime.</p>",
       "preview": "Neither of these capabilities tell you whether a function call is evaluating at ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ani jedna z těchto možností vám neřekne, zda se volání funkce vyhodnocuje v době kompilace, nebo za běhu programu.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b16",
       "type": "paragraph",
       "html": "<p><code>std::is_constant_evaluated()</code> (defined in the &lt;type_traits&gt; header) returns a <code>bool</code> indicating whether the current function is executing in a constant-evaluated context. A <strong>constant-evaluated context</strong> (also called a <strong>constant context</strong>) is defined as one in which a constant expression is required (such as the initialization of a constexpr variable). So in cases where the compiler is required to evaluate a constant expression at compile-time <code>std::is_constant_evaluated()</code> will <code>true</code> as expected.</p>",
       "preview": "std::is_constant_evaluated() (defined in the <type_traits> header) returns a boo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><code>std::is_constant_evaluated()</code> (definovaná v hlavičkovém souboru &lt;type_traits&gt;) vrací <code>bool</code> určující, zda se aktuální funkce vykonává v konstantně vyhodnocovaném kontextu (constant-evaluated context). <strong>Konstantně vyhodnocovaný kontext</strong> (nazývaný také <strong>konstantní kontext</strong>) je definován jako takový, ve kterém je vyžadován konstantní výraz (například inicializace proměnné constexpr). V případech, kdy je kompilátor povinen vyhodnotit konstantní výraz v době kompilace, vrátí <code>std::is_constant_evaluated()</code> podle očekávání <code>true</code>.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b17",
       "type": "paragraph",
       "html": "<p>This is intended to allow you to do something like this:</p>",
       "preview": "This is intended to allow you to do something like this:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Záměrem je umožnit vám provést něco takového:</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b18",
@@ -144,14 +166,16 @@
       "language": "cpp",
       "code": "#include <type_traits> // for std::is_constant_evaluated()\n\nconstexpr int someFunction()\n{\n    if (std::is_constant_evaluated()) // if evaluating in constant context\n        doSomething();\n    else\n        doSomethingElse();\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;type_traits&gt; // for std::is_constant_evaluated()\n\nconstexpr int someFunction()\n{\n    if (std::is_constant_evaluated()) // if evaluating in constant context\n        doSomething();\n    else\n        doSomethingElse();\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <type_traits> // pro std::is_constant_evaluated()\n\nconstexpr int someFunction()\n{\n    if (std::is_constant_evaluated()) // pokud se vyhodnocuje v konstantním kontextu\n        doSomething();\n    jinak\n        doSomethingElse();\n}</code></pre>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b19",
       "type": "paragraph",
       "html": "<p>However, the compiler may also choose to evaluate a constexpr function at compile-time in a context that does not require a constant expression. In such cases, <code>std::is_constant_evaluated()</code> will return <code>false</code> even though the function did evaluate at compile-time. So <code>std::is_constant_evaluated()</code> really means “the compiler is being forced to evaluate this at compile-time”, not “this is evaluating at compile-time”.</p>",
       "preview": "However, the compiler may also choose to evaluate a constexpr function at compil",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kompilátor se však může rozhodnout vyhodnotit constexpr funkci v době překladu i v kontextu, který konstantní výraz nevyžaduje. V takových případech vrátí <code>std::is_constant_evaluated()</code> hodnotu <code>false</code>, přestože se funkce v době překladu skutečně vyhodnotila. <code>std::is_constant_evaluated()</code> tedy ve skutečnosti znamená „kompilátor je nucen toto vyhodnotit v době překladu“, nikoli „toto se právě vyhodnocuje v době překladu“.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b20",
@@ -159,35 +183,41 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>While this may seem strange, there are several reasons for this:</p><ol start=\"1\"><li>As <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0595r2.html\">the paper that proposed this feature</a> indicates, the standard doesn’t actually make a distinction between “compile time” and “runtime”. Defining behavior involving that distinction would have been a larger change.</li><li>Optimizations should not change the observable behavior of a program (unless explicitly allowed by the standard). If <code>std::is_constant_evaluated()</code> were to return <code>true</code> when the function was evaluated at compile-time for any reason, then the optimizer deciding to evaluate a function at compile-time instead of runtime could potentially change the observable behavior of the function. As a result, your program might behave very differently depending on what optimization level it was compiled with!</li></ol><p>While this could be addressed in various ways, those involve adding additional complexity to the optimizer and/or limiting its ability to optimize certain cases.</p></div>",
       "preview": "Key insightWhile this may seem strange, there are several reasons for this:As the paper that propose",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Ačkoli se to může zdát zvláštní, má to několik důvodů:</p><ol start=\"1\"><li>Jak uvádí <a href=\"https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0595r2.html\">návrh, který tuto funkci představil</a>, standard ve skutečnosti nerozlišuje mezi „dobou překladu“ a „dobou běhu“. Definování chování zahrnujícího toto rozlišení by představovalo mnohem větší změnu.</li><li>Optimalizace by neměly měnit pozorovatelné chování programu (pokud to standard výslovně nepovoluje). Pokud by <code>std::is_constant_evaluated()</code> vracelo <code>true</code> pokaždé, když byla funkce z jakéhokoli důvodu vyhodnocena v době překladu, pak by rozhodnutí optimalizátoru vyhodnotit funkci v době překladu namísto doby běhu mohlo potenciálně změnit pozorovatelné chování této funkce. V důsledku toho by se váš program mohl chovat velmi odlišně v závislosti na tom, s jakou úrovní optimalizace byl zkompilován!</li></ol><p>Ačkoli by se to dalo řešit různými způsoby, tyto přístupy by znamenaly zvýšení složitosti optimalizátoru a/nebo omezení jeho schopnosti optimalizovat určité případy.</p></div>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b21",
       "type": "paragraph",
       "html": "<p>Introduced in C++23, <code>if consteval</code> is a replacement for <code>if (std::is_constant_evaluated())</code> that provides a nicer syntax and fixes some other issues. However, it evaluates the same way.</p>",
       "preview": "Introduced in C++23, if consteval is a replacement for if (std::is_constant_eval",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Příkaz <code>if consteval</code>, představený v C++23, je náhradou za <code>if (std::is_constant_evaluated())</code>, která poskytuje přehlednější syntaxi a řeší některé další problémy. Vyhodnocuje se však stejným způsobem.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b22",
       "type": "section",
       "title": "Using consteval to make constexpr execute at compile-time C++20",
       "html": "<h3 class=\"cpp-section-heading\">Using consteval to make constexpr execute at compile-time <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Použití consteval k vynucení vykonání constexpr v době překladu <span class=\"cpp-section-pill cpp-section-standard\">C++20</span></h3>",
+      "title_cs": "Použití consteval ke spuštění constexpru v době kompilace C++20"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b23",
       "type": "paragraph",
       "html": "<p>The downside of consteval functions is that such functions can’t evaluate at runtime, making them less flexible than constexpr functions, which can do either. Therefore, it would still be useful to have a convenient way to force constexpr functions to evaluate at compile-time (even when the return value is being used where a constant expression is not required), so that we can explicitly force compile-time evaluation when possible, and runtime evaluation when we can’t.</p>",
       "preview": "The downside of consteval functions is that such functions can’t evaluate at run",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nevýhodou consteval funkcí je, že se nemohou vyhodnocovat za běhu programu, což je činí méně flexibilními než constexpr funkce, které zvládnou obojí. Proto by stále bylo užitečné mít pohodlný způsob, jak vynutit vyhodnocení constexpr funkcí v době překladu (i když je návratová hodnota použita tam, kde není konstantní výraz vyžadován), abychom mohli explicitně vynutit vyhodnocení v době překladu, kdykoli je to možné, a vyhodnocení za běhu, když to možné není.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b24",
       "type": "paragraph",
       "html": "<p>Here’s an example that shows how this is possible:</p>",
       "preview": "Here’s an example that shows how this is possible:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Zde je příklad, který ukazuje, jak je to možné:</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b25",
@@ -195,7 +225,8 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n#define CONSTEVAL(...) [] consteval { return __VA_ARGS__; }()               // C++20 version per Jan Scultke (https://stackoverflow.com/a/77107431/460250)\n#define CONSTEVAL11(...) [] { constexpr auto _ = __VA_ARGS__; return _; }() // C++11 version per Justin (https://stackoverflow.com/a/63637573/460250)\n\n// This function returns the greater of the two numbers if executing in a constant context\n// and the lesser of the two numbers otherwise\nconstexpr int compare(int x, int y) // function is constexpr\n{\n    if (std::is_constant_evaluated())\n        return (x > y ? x : y);\n    else\n        return (x < y ? x : y);\n}\n\nint main()\n{\n    int x { 5 };\n    std::cout << compare(x, 6) << '\\n';                  // will execute at runtime and return 5\n\n    std::cout << compare(5, 6) << '\\n';                  // may or may not execute at compile-time, but will always return 5\n    std::cout << CONSTEVAL(compare(5, 6)) << '\\n';       // will always execute at compile-time and return 6\n    \n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n#define CONSTEVAL(...) [] consteval { return __VA_ARGS__; }()               // C++20 version per Jan Scultke (https://stackoverflow.com/a/77107431/460250)\n#define CONSTEVAL11(...) [] { constexpr auto _ = __VA_ARGS__; return _; }() // C++11 version per Justin (https://stackoverflow.com/a/63637573/460250)\n\n// This function returns the greater of the two numbers if executing in a constant context\n// and the lesser of the two numbers otherwise\nconstexpr int compare(int x, int y) // function is constexpr\n{\n    if (std::is_constant_evaluated())\n        return (x &gt; y ? x : y);\n    else\n        return (x &lt; y ? x : y);\n}\n\nint main()\n{\n    int x { 5 };\n    std::cout &lt;&lt; compare(x, 6) &lt;&lt; '\\n';                  // will execute at runtime and return 5\n\n    std::cout &lt;&lt; compare(5, 6) &lt;&lt; '\\n';                  // may or may not execute at compile-time, but will always return 5\n    std::cout &lt;&lt; CONSTEVAL(compare(5, 6)) &lt;&lt; '\\n';       // will always execute at compile-time and return 6\n    \n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n#define CONSTEVAL(...) [] consteval { return __VA_ARGS__; }() // Verze C++20 od Jana Scultkeho (https://stackoverflow.com/a/77107431/460250)\n#define CONSTEVAL11(...) [] { constexpr auto _ = __VA_ARGS__; návrat _; }() // Verze C++11 na Justina (https://stackoverflow.com/a/63637573/460250)\n\n// Tato funkce vrací větší z těchto dvou čísel, pokud se provádí v konstantním kontextu\n// a menší z těchto dvou čísel jinak\nconstexpr int Compare(int x, int y) // funkce je constexpr\n{\n    if (std::is_constant_evaluated())\n        návrat (x > y ? x : y);\n    jinak\n        návrat (x < y ? x : y);\n}\n\nint main()\n{\n    int x { 5 };\n    std::cout << Compare(x, 6) << '\\n';                  // se spustí za běhu a vrátí 5\n\n    std::cout << porovnání(5, 6) << '\\n';                  // se může nebo nemusí spustit v době kompilace, ale vždy vrátí 5\n    std::cout << CONSTEVAL(compare(5, 6)) << '\\n';       // se vždy spustí v době kompilace a vrátí 6\n    \n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b26",
@@ -203,14 +234,16 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>This uses a variadic preprocessor macro (the #define, <code>...</code>, and <code>__VA_ARGS__</code>) to define an consteval lambda that is immediately invoked (by the trailing parentheses).<br>You can find information on variadic macros at <a href=\"https://en.cppreference.com/w/cpp/preprocessor/replace\">https://en.cppreference.com/w/cpp/preprocessor/replace</a>.<br>We cover lambdas in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/\">20.6 -- Introduction to lambdas (anonymous functions)</a>.</p></div>",
       "preview": "For advanced readersThis uses a variadic preprocessor macro (the #define, ..., and __VA_ARGS__) to d",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Toto řešení používá variadické makro preprocesoru (pomocí #define, <code>...</code> a <code>__VA_ARGS__</code>) k definování consteval lambda funkce, která je okamžitě zavolána (pomocí koncových závorek).<br>Informace o variadických makrech najdete na adrese <a href=\"https://en.cppreference.com/w/cpp/preprocessor/replace\">https://en.cppreference.com/w/cpp/preprocessor/replace</a>.<br>Lambda funkcím se věnujeme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/introduction-to-lambdas-anonymous-functions/\">20.6 – Úvod do lambda funkcí (anonymní funkce)</a>.</p></div>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b27",
       "type": "paragraph",
       "html": "<p>The following should also work (and is a bit cleaner since it doesn’t use preprocessor macros):</p>",
       "preview": "The following should also work (and is a bit cleaner since it doesn’t use prepro",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Následující zápis by měl také fungovat (a je o něco čistší, protože nepoužívá makra preprocesoru):</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b28",
@@ -218,7 +251,8 @@
       "calloutType": "tip",
       "html": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">For gcc users</p><p>There is a bug in GCC 14 onward that causes the following example to produce the wrong answer when any level of optimization is enabled.</p></div>",
       "preview": "For gcc usersThere is a bug in GCC 14 onward that causes the following example to produce the wrong ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightyellowbackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro uživatele GCC</p><p>V GCC od verze 14 existuje chyba, která způsobuje, že následující příklad dává nesprávný výsledek, pokud je zapnuta jakákoli úroveň optimalizace.</p></div>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b29",
@@ -226,21 +260,24 @@
       "language": "cpp",
       "code": "#include <iostream>\n\n// Uses abbreviated function template (C++20) and `auto` return type to make this function work with any type of value\n// See 'related content' box below for more info (you don't need to know how these work to use this function)\n// We've opted to use an uppercase name here for consistency with the prior example, but it also makes it easier to see the call\nconsteval auto CONSTEVAL(auto value)\n{\n    return value;\n}\n\n// This function returns the greater of the two numbers if executing in a constant context\n// and the lesser of the two numbers otherwise\nconstexpr int compare(int x, int y) // function is constexpr\n{\n    if (std::is_constant_evaluated())\n        return (x > y ? x : y);\n    else\n        return (x < y ? x : y);\n}\n\nint main()\n{\n    std::cout << CONSTEVAL(compare(5, 6)) << '\\n';       // will execute at compile-time\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;iostream&gt;\n\n// Uses abbreviated function template (C++20) and `auto` return type to make this function work with any type of value\n// See 'related content' box below for more info (you don't need to know how these work to use this function)\n// We've opted to use an uppercase name here for consistency with the prior example, but it also makes it easier to see the call\nconsteval auto CONSTEVAL(auto value)\n{\n    return value;\n}\n\n// This function returns the greater of the two numbers if executing in a constant context\n// and the lesser of the two numbers otherwise\nconstexpr int compare(int x, int y) // function is constexpr\n{\n    if (std::is_constant_evaluated())\n        return (x &gt; y ? x : y);\n    else\n        return (x &lt; y ? x : y);\n}\n\nint main()\n{\n    std::cout &lt;&lt; CONSTEVAL(compare(5, 6)) &lt;&lt; '\\n';       // will execute at compile-time\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <iostream>\n\n// Používá zkrácenou šablonu funkce (C++20) a návratový typ `auto`, aby tato funkce fungovala s libovolným typem hodnoty\n// Další informace naleznete v níže uvedeném poli „související obsah“ (k použití této funkce nepotřebujete vědět, jak fungují)\n// Z důvodu souladu s předchozím příkladem jsme se zde rozhodli použít název velkými písmeny, ale také to usnadňuje zobrazení hovoru\nconsteval auto CONSTEVAL(automatická hodnota)\n{\n    návratová hodnota;\n}\n\n// Tato funkce vrací větší z těchto dvou čísel, pokud se provádí v konstantním kontextu\n// a menší z těchto dvou čísel jinak\nconstexpr int Compare(int x, int y) // funkce je constexpr\n{\n    if (std::is_constant_evaluated())\n        návrat (x > y ? x : y);\n    jinak\n        návrat (x < y ? x : y);\n}\n\nint main()\n{\n    std::cout << CONSTEVAL(compare(5, 6)) << '\\n';       // se spustí v době kompilace\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b30",
       "type": "paragraph",
       "html": "<p>Because the arguments of consteval functions are always manifestly constant evaluated, if we call a constexpr function as an argument to a consteval function, that constexpr function must be evaluated at compile-time! The consteval function then returns the result of the constexpr function as its own return value, so the caller can use it.</p>",
       "preview": "Because the arguments of consteval functions are always manifestly constant eval",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Protože argumenty consteval funkcí jsou vždy zjevně konstantně vyhodnocovány (manifestly constant evaluated), pokud zavoláme constexpr funkci jako argument consteval funkce, musí být tato constexpr funkce vyhodnocena v době překladu! Consteval funkce pak vrátí výsledek constexpr funkce jako svou vlastní návratovou hodnotu, takže ji volající může použít.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b31",
       "type": "paragraph",
       "html": "<p>Note that the consteval function returns by value. While this might be inefficient to do at runtime (if the value was some type that is expensive to copy, e.g. <code>std::string</code>), in a compile-time context, it doesn’t matter because the entire call to the consteval function will simply be replaced with the calculated return value.</p>",
       "preview": "Note that the consteval function returns by value. While this might be inefficie",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Všimněte si, že consteval funkce vrací hodnotou. I když by to za běhu programu (runtime) mohlo být neefektivní (pokud by hodnota byla typu, jehož kopírování je náročné, např. <code>std::string</code>), v kontextu doby překladu na tom nezáleží, protože celé volání consteval funkce bude jednoduše nahrazeno vypočtenou návratovou hodnotou.</p>"
     },
     {
       "id": "constexpr-functions-part-3-and-consteval_b32",
@@ -248,7 +285,9 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">For advanced readers</p><p>We cover auto return types in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/type-deduction-for-functions/\">10.9 -- Type deduction for functions</a>.<br>We cover abbreviated function templates (auto parameters) in lesson 11.8 -- Function templates with multiple template types <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates-with-multiple-template-types/\">11.8 -- Function templates with multiple template types</a>.</p></div>",
       "preview": "For advanced readersWe cover auto return types in lesson 10.9 -- Type deduction for functions.We cov",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Pro pokročilé čtenáře</p><p>Automatické odvozování návratových typů (auto) probíráme v lekci <a href=\"https://www.learncpp.com/cpp-tutorial/type-deduction-for-functions/\">10.9 – Dedukce typů pro funkce</a>.<br>Zkrácené šablony funkcí (parametry auto) probíráme v lekci 11.8 – Šablony funkcí s více typovými parametry <a href=\"https://www.learncpp.com/cpp-tutorial/function-templates-with-multiple-template-types/\">11.8 – Šablony funkcí s více typovými parametry</a>.</p></div>"
     }
-  ]
+  ],
+  "title_cs": "F.3 — Constexpr funkce (3. část) a consteval"
 }

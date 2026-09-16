@@ -14,7 +14,8 @@
       "type": "paragraph",
       "html": "<p>In lesson <a href=\"https://www.learncpp.com/cpp-tutorial/type-deduction-for-objects-using-the-auto-keyword/\">10.8 -- Type deduction for objects using the auto keyword</a>, we discussed how the <code>auto</code> keyword can be used to have the compiler deduce the type of a variable from the initializer:</p>",
       "preview": "In lesson 10.8 -- Type deduction for objects using the auto keyword, we discusse",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V lekci <a href=\"https://www.learncpp.com/cpp-tutorial/type-deduction-for-objects-using-the-auto-keyword/\">10.8 – Typová dedukce pro objekty pomocí klíčového slova auto</a> jsme probírali, jak lze klíčové slovo <code>auto</code> použít k tomu, aby kompilátor odvodil typ proměnné z inicializátoru:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b1",
@@ -22,14 +23,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    int a { 5 };\n    auto b { a }; // b deduced as an int\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int a { 5 };\n    auto b { a }; // b deduced as an int\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    int a { 5 };\n    auto b { a }; // b dedukováno jako int\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b2",
       "type": "paragraph",
       "html": "<p>We also noted that by default, type deduction will drop <code>const</code> from types:</p>",
       "preview": "We also noted that by default, type deduction will drop const from types:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Také jsme zmínili, že typová dedukce ve výchozím stavu z typů zahazuje <code>const</code>:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b3",
@@ -37,14 +40,16 @@
       "language": "cpp",
       "code": "int main()\n{\n    const double a { 7.8 }; // a has type const double\n    auto b { a };           // b has type double (const dropped)\n\n    constexpr double c { 7.8 }; // c has type const double (constexpr implicitly applies const)\n    auto d { c };               // d has type double (const dropped)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const double a { 7.8 }; // a has type const double\n    auto b { a };           // b has type double (const dropped)\n\n    constexpr double c { 7.8 }; // c has type const double (constexpr implicitly applies const)\n    auto d { c };               // d has type double (const dropped)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    const double a { 7,8 }; // a má typ const double\n    auto b { a };           // b má typ double (const zrušen)\n\n    constexpr double c { 7,8 }; // c má typ const double (constexpr implicitně aplikuje const)\n    auto d { c };               // d má typ double (const zrušen)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b4",
       "type": "paragraph",
       "html": "<p>Const (or constexpr) can be reapplied by adding the <code>const</code> (or <code>constexpr</code>) qualifier to the definition of the deduced type:</p>",
       "preview": "Const (or constexpr) can be reapplied by adding the const (or constexpr) qualifi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Const (nebo constexpr) lze znovu aplikovat přidáním kvalifikátoru <code>const</code> (nebo <code>constexpr</code>) k definici odvozovaného typu:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b5",
@@ -52,21 +57,25 @@
       "language": "cpp",
       "code": "int main()\n{\n    double a { 7.8 };    // a has type double\n    const auto b { a };  // b has type const double (const applied)\n\n    constexpr double c { 7.8 }; // c has type const double (constexpr implicitly applies const)\n    const auto d { c };         // d is const double (const dropped, const reapplied)\n    constexpr auto e { c };     // e is constexpr double (const dropped, constexpr reapplied)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    double a { 7.8 };    // a has type double\n    const auto b { a };  // b has type const double (const applied)\n\n    constexpr double c { 7.8 }; // c has type const double (constexpr implicitly applies const)\n    const auto d { c };         // d is const double (const dropped, const reapplied)\n    constexpr auto e { c };     // e is constexpr double (const dropped, constexpr reapplied)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">int main()\n{\n    dvojité a { 7,8 };    // a má typ double\n    const auto b { a };  // b má typ const double (použito const)\n\n    constexpr double c { 7,8 }; // c má typ const double (constexpr implicitně aplikuje const)\n    const auto d { c };         // d je const double (const zrušena, const znovu použita)\n    constexpr auto e { c };     // e je constexpr double (const zrušen, constexpr znovu použit)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b6",
       "type": "section",
       "title": "Type deduction drops references",
       "html": "<h3 class=\"cpp-section-heading\">Type deduction drops references</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Typová dedukce zahazuje reference</h3>",
+      "title_cs": "Odpočet typu spadne odkazy"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b7",
       "type": "paragraph",
       "html": "<p>In addition to dropping const, type deduction will also drop references:</p>",
       "preview": "In addition to dropping const, type deduction will also drop references:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Kromě zahazování const typová dedukce zahazuje také reference:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b8",
@@ -74,21 +83,24 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string& getRef(); // some function that returns a reference\n\nint main()\n{\n    auto ref { getRef() }; // type deduced as std::string (not std::string&)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string&amp; getRef(); // some function that returns a reference\n\nint main()\n{\n    auto ref { getRef() }; // type deduced as std::string (not std::string&amp;)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string& getRef(); // nějaká funkce, která vrací odkaz\n\nint main()\n{\n    auto ref { getRef() }; // typ odvozený jako std::string (nikoli std::string&)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b9",
       "type": "paragraph",
       "html": "<p>In the above example, variable <code>ref</code> is using type deduction. Although function <code>getRef()</code> returns a <code>std::string&amp;</code>, the reference qualifier is dropped, so the type of <code>ref</code> is deduced as <code>std::string</code>.</p>",
       "preview": "In the above example, variable ref is using type deduction. Although function ge",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu proměnná <code>ref</code> využívá typovou dedukci. Přestože funkce <code>getRef()</code> vrací <code>std::string&amp;</code>, kvalifikátor reference je zahozen, takže typ proměnné <code>ref</code> je odvozen jako <code>std::string</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b10",
       "type": "paragraph",
       "html": "<p>Just like with dropped <code>const</code>, if you want the deduced type to be a reference, you can reapply the reference at the point of definition:</p>",
       "preview": "Just like with dropped const, if you want the deduced type to be a reference, yo",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Stejně jako u zahozeného <code>const</code>, pokud chcete, aby byl odvozený typ referencí, můžete referenci znovu připojit v místě definice:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b11",
@@ -96,21 +108,25 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string& getRef(); // some function that returns a reference\n\nint main()\n{\n    auto ref1 { getRef() };  // std::string (reference dropped)\n    auto& ref2 { getRef() }; // std::string& (reference dropped, reference reapplied)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string&amp; getRef(); // some function that returns a reference\n\nint main()\n{\n    auto ref1 { getRef() };  // std::string (reference dropped)\n    auto&amp; ref2 { getRef() }; // std::string&amp; (reference dropped, reference reapplied)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string& getRef(); // nějaká funkce, která vrací odkaz\n\nint main()\n{\n    auto ref1 { getRef() };  // std::string (odkaz zrušen)\n    auto& ref2 { getRef() }; // std::string& (odkaz zrušen, odkaz znovu použit)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b12",
       "type": "section",
       "title": "Top-level const and low-level const",
       "html": "<h3 class=\"cpp-section-heading\">Top-level const and low-level const</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Top-level const a low-level const</h3>",
+      "title_cs": "Konst nejvyšší úrovně a konst nízké úrovně"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b13",
       "type": "paragraph",
       "html": "<p>A <strong>top-level const</strong> is a const qualifier that applies to an object itself. For example:</p>",
       "preview": "A top-level const is a const qualifier that applies to an object itself. For exa",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p><strong>Top-level const</strong> je modifikátor const, který se vztahuje na samotný objekt. Například:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b14",
@@ -118,14 +134,16 @@
       "language": "cpp",
       "code": "const int x;    // this const applies to x, so it is top-level\nint* const ptr; // this const applies to ptr, so it is top-level\n// references don't have a top-level const syntax, as they are implicitly top-level const",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int x;    // this const applies to x, so it is top-level\nint* const ptr; // this const applies to ptr, so it is top-level\n// references don't have a top-level const syntax, as they are implicitly top-level const</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int x;    // tato konst platí pro x, takže je nejvyšší úrovně\nint* const ptr; // tato konst platí pro ptr, takže je nejvyšší úrovně\n// odkazy nemají syntaxi const nejvyšší úrovně, protože jsou implicitně nejvyšší úrovní const</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b15",
       "type": "paragraph",
       "html": "<p>In contrast, a <strong>low-level const</strong> is a const qualifier that applies to the object being referenced or pointed to:</p>",
       "preview": "In contrast, a low-level const is a const qualifier that applies to the object b",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Naproti tomu <strong>low-level const</strong> je modifikátor const, který se vztahuje na objekt, na který je odkazováno nebo na který se ukazuje:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b16",
@@ -133,14 +151,16 @@
       "language": "cpp",
       "code": "const int& ref; // this const applies to the object being referenced, so it is low-level\nconst int* ptr; // this const applies to the object being pointed to, so it is low-level",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int&amp; ref; // this const applies to the object being referenced, so it is low-level\nconst int* ptr; // this const applies to the object being pointed to, so it is low-level</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int& ref; // tato konst se vztahuje na odkazovaný objekt, takže je nízkoúrovňová\nconst int* ptr; // tato konst se vztahuje na objekt, na který se ukazuje, takže je nízkoúrovňový</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b17",
       "type": "paragraph",
       "html": "<p>A reference to a const value is always a low-level const. A pointer can have a top-level, low-level, or both kinds of const:</p>",
       "preview": "A reference to a const value is always a low-level const. A pointer can have a t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Reference na konstantní hodnotu je vždy low-level const. Ukazatel může mít top-level const, low-level const, nebo oba tyto druhy současně:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b18",
@@ -148,28 +168,33 @@
       "language": "cpp",
       "code": "const int* const ptr; // the left const is low-level, the right const is top-level",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int* const ptr; // the left const is low-level, the right const is top-level</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">const int* const ptr; // levý const je na nízké úrovni, pravý const je na nejvyšší úrovni</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b19",
       "type": "paragraph",
       "html": "<p>When we say that type deduction drops const qualifiers, it only drops top-level consts. Low-level consts are not dropped. We’ll see examples of this in just a moment.</p>",
       "preview": "When we say that type deduction drops const qualifiers, it only drops top-level ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když říkáme, že dedukce typů zahazuje modifikátory const, zahazuje pouze top-level const. Low-level const zahazovány nejsou. Příklady uvidíme za malý okamžik.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b20",
       "type": "section",
       "title": "Type deduction and const references",
       "html": "<h3 class=\"cpp-section-heading\">Type deduction and const references</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Dedukce typů a konstantní reference</h3>",
+      "title_cs": "Typ dedukce a konst odkazů"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b21",
       "type": "paragraph",
       "html": "<p>If the initializer is a reference to const, the reference is dropped first (and then reapplied if applicable), and then any top-level const is dropped from the result.</p>",
       "preview": "If the initializer is a reference to const, the reference is dropped first (and ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Pokud je inicializátor referencí na const, nejprve se zahodí reference (a poté se případně znovu aplikuje) a následně se z výsledku zahodí jakýkoli top-level const.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b22",
@@ -177,14 +202,16 @@
       "language": "cpp",
       "code": "#include <string>\n\nconst std::string& getConstRef(); // some function that returns a reference to const\n\nint main()\n{\n    auto ref1{ getConstRef() }; // std::string (reference dropped, then top-level const dropped from result)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nconst std::string&amp; getConstRef(); // some function that returns a reference to const\n\nint main()\n{\n    auto ref1{ getConstRef() }; // std::string (reference dropped, then top-level const dropped from result)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nconst std::string& getConstRef(); // nějaká funkce, která vrací odkaz na const\n\nint main()\n{\n    auto ref1{ getConstRef() }; // std::string (odkaz vynechán, pak nejvyšší úroveň const vyřazena z výsledku)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b23",
       "type": "paragraph",
       "html": "<p>In the above example, since <code>getConstRef()</code> returns a <code>const std::string&amp;</code>, the reference is dropped first, leaving us with a <code>const std::string</code>. This const is now a top-level const, so it is also dropped, leaving the deduced type as <code>std::string</code>.</p>",
       "preview": "In the above example, since getConstRef() returns a const std::string&, the refe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve výše uvedeném příkladu, jelikož <code>getConstRef()</code> vrací <code>const std::string&amp;</code>, se nejprve zahodí reference, což nám zanechá <code>const std::string</code>. Tento const je nyní top-level const, takže se také zahodí, a odvozeným typem tak zůstane <code>std::string</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b24",
@@ -192,14 +219,16 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>Dropping a reference may change a low-level const to a top-level const: <code>const std::string&amp;</code> is a low-level const, but dropping the reference yields <code>const std::string</code>, which is a top-level const.</p></div>",
       "preview": "Key insightDropping a reference may change a low-level const to a top-level const: const std::string",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Zahození reference může změnit low-level const na top-level const: <code>const std::string&amp;</code> je low-level const, ale zahozením reference vznikne <code>const std::string</code>, což je top-level const.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b25",
       "type": "paragraph",
       "html": "<p>We can reapply a reference and/or const:</p>",
       "preview": "We can reapply a reference and/or const:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme znovu aplikovat referenci a/nebo const:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b26",
@@ -207,28 +236,32 @@
       "language": "cpp",
       "code": "#include <string>\n\nconst std::string& getConstRef(); // some function that returns a const reference\n\nint main()\n{\n    auto ref1{ getConstRef() };        // std::string (reference and top-level const dropped)\n    const auto ref2{ getConstRef() };  // const std::string (reference dropped, const dropped, const reapplied)\n\n    auto& ref3{ getConstRef() };       // const std::string& (reference dropped and reapplied, low-level const not dropped)\n    const auto& ref4{ getConstRef() }; // const std::string& (reference dropped and reapplied, low-level const not dropped)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nconst std::string&amp; getConstRef(); // some function that returns a const reference\n\nint main()\n{\n    auto ref1{ getConstRef() };        // std::string (reference and top-level const dropped)\n    const auto ref2{ getConstRef() };  // const std::string (reference dropped, const dropped, const reapplied)\n\n    auto&amp; ref3{ getConstRef() };       // const std::string&amp; (reference dropped and reapplied, low-level const not dropped)\n    const auto&amp; ref4{ getConstRef() }; // const std::string&amp; (reference dropped and reapplied, low-level const not dropped)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nconst std::string& getConstRef(); // nějaká funkce, která vrací odkaz const\n\nint main()\n{\n    auto ref1{ getConstRef() };        // std::string (odkaz a konst nejvyšší úrovně zrušeny)\n    const auto ref2{ getConstRef() };  // const std::string (odkaz zahozen, const zahozen, const znovu použit)\n\n    auto& ref3{ getConstRef() };       // const std::string& (odkaz zrušen a znovu použit, nízkoúrovňový const nebyl odstraněn)\n    const auto& ref4{ getConstRef() }; // const std::string& (odkaz zrušen a znovu použit, nízkoúrovňový const nebyl odstraněn)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b27",
       "type": "paragraph",
       "html": "<p>We covered the case for <code>ref1</code> in the prior example. For <code>ref2</code>, this is similar to the <code>ref1</code> case, except we’re reapplying the <code>const</code> qualifier, so the deduced type is <code>const std::string</code>.</p>",
       "preview": "We covered the case for ref1 in the prior example. For ref2, this is similar to ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případ pro <code>ref1</code> jsme probrali v předchozím příkladu. U <code>ref2</code> je to podobné jako u <code>ref1</code>, až na to, že znovu aplikujeme kvalifikátor <code>const</code>, takže odvozený typ je <code>const std::string</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b28",
       "type": "paragraph",
       "html": "<p>Things get more interesting with <code>ref3</code>. Normally the reference would be dropped first, but since we’ve reapplied the reference, it is not dropped. That means the type is still <code>const std::string&amp;</code>. And since this const is a low-level const, it is not dropped. Thus the deduced type is <code>const std::string&amp;</code>.</p>",
       "preview": "Things get more interesting with ref3. Normally the reference would be dropped f",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>U <code>ref3</code> se věci stávají zajímavějšími. Za normálních okolností by byla reference nejprve odstraněna, ale jelikož jsme referenci znovu aplikovali, odstraněna není. To znamená, že typ je stále <code>const std::string&amp;</code>. A protože tento const je nízkoúrovňový (low-level const), neodstraní se. Výsledný odvozený typ je tedy <code>const std::string&amp;</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b29",
       "type": "paragraph",
       "html": "<p>The <code>ref4</code> case works similarly to <code>ref3</code>, except we’ve reapplied the <code>const</code> qualifier as well. Since the type is already deduced as a reference to const, us reapplying <code>const</code> here is redundant. That said, using <code>const</code> here makes it explicitly clear that our result will be const (whereas in the <code>ref3</code> case, the constness of the result is implicit and not obvious).</p>",
       "preview": "The ref4 case works similarly to ref3, except we’ve reapplied the const qualifie",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případ <code>ref4</code> funguje podobně jako <code>ref3</code>, kromě toho, že jsme navíc znovu aplikovali i kvalifikátor <code>const</code>. Protože je typ již odvozen jako reference na const, je opětovné použití <code>const</code> na tomto místě redundantní. Nicméně použití <code>const</code> zde explicitně vyjasňuje, že náš výsledek bude const (zatímco v případě <code>ref3</code> je konstantnost výsledku implicitní a méně zjevná).</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b30",
@@ -236,21 +269,25 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you want a const reference, reapply the <code>const</code> qualifier even when it’s not strictly necessary, as it makes your intent clear and helps prevent mistakes.</p></div>",
       "preview": "Best practiceIf you want a const reference, reapply the const qualifier even when it’s not strictly ",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud chcete const referenci, uveďte kvalifikátor <code>const</code> i tehdy, když to není striktně nutné – vyjadřuje to jasně váš záměr a pomáhá předcházet chybám.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b31",
       "type": "section",
       "title": "What about constexpr references?",
       "html": "<h3 class=\"cpp-section-heading\">What about constexpr references?</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">A co constexpr reference?</h3>",
+      "title_cs": "A co reference constexpr?"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b32",
       "type": "paragraph",
       "html": "<p>Constexpr is not part of an expression’s type, so it is not deduced by <code>auto</code>.</p>",
       "preview": "Constexpr is not part of an expression’s type, so it is not deduced by auto.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Constexpr není součástí typu výrazu, takže jej <code>auto</code> neodvozuje.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b33",
@@ -258,7 +295,8 @@
       "calloutType": "advanced",
       "html": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">A reminder</p><p>When defining a const reference (e.g. <code>const int&amp;</code>), the const applies to the object being referenced, not the reference itself.</p><p>When defining a constexpr reference to a const variable (e.g. <code>constexpr const int&amp;</code>), we need to apply both <code>constexpr</code> (which applies to the reference) and <code>const</code> (which applies to the type being referenced).</p><p>This is covered in lesson <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references-to-const/\">12.4 -- Lvalue references to const</a>.</p></div>",
       "preview": "A reminderWhen defining a const reference (e.g. const int&), the const applies to the object being r",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgraybackground\"><p class=\"cpp-note-title cpp-bottomline\">Připomenutí</p><p>Při definování const reference (např. <code>const int&amp;</code>) se const vztahuje na odkazovaný objekt, nikoli na samotnou referenci.</p><p>Při definování constexpr reference na const proměnnou (např. <code>constexpr const int&amp;</code>) musíme použít jak <code>constexpr</code> (které se vztahuje na referenci), tak <code>const</code> (které se vztahuje na odkazovaný typ).</p><p>Tomuto tématu se věnuje lekce <a href=\"https://www.learncpp.com/cpp-tutorial/lvalue-references-to-const/\">12.4 -- Lvalue reference na const</a>.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b34",
@@ -266,21 +304,25 @@
       "language": "cpp",
       "code": "#include <string_view>\n#include <iostream>\n\nconstexpr std::string_view hello { \"Hello\" };   // implicitly const\n\nconstexpr const std::string_view& getConstRef() // function is constexpr, returns a const std::string_view&\n{\n    return hello;\n}\n\nint main()\n{\n    auto ref1{ getConstRef() };                  // std::string_view (reference dropped and top-level const dropped)\n    constexpr auto ref2{ getConstRef() };        // constexpr const std::string_view (reference dropped and top-level const dropped, constexpr applied, implicitly const)\n\n    auto& ref3{ getConstRef() };                 // const std::string_view& (reference reapplied, low-level const not dropped)\n    constexpr const auto& ref4{ getConstRef() }; // constexpr const std::string_view& (reference reapplied, low-level const not dropped, constexpr applied)\n    \n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string_view&gt;\n#include &lt;iostream&gt;\n\nconstexpr std::string_view hello { \"Hello\" };   // implicitly const\n\nconstexpr const std::string_view&amp; getConstRef() // function is constexpr, returns a const std::string_view&amp;\n{\n    return hello;\n}\n\nint main()\n{\n    auto ref1{ getConstRef() };                  // std::string_view (reference dropped and top-level const dropped)\n    constexpr auto ref2{ getConstRef() };        // constexpr const std::string_view (reference dropped and top-level const dropped, constexpr applied, implicitly const)\n\n    auto&amp; ref3{ getConstRef() };                 // const std::string_view&amp; (reference reapplied, low-level const not dropped)\n    constexpr const auto&amp; ref4{ getConstRef() }; // constexpr const std::string_view&amp; (reference reapplied, low-level const not dropped, constexpr applied)\n    \n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string_view>\n#include <iostream>\n\nconstexpr std::string_view ahoj { \"Ahoj\" };   // implicitně konst\n\nconstexpr const std::string_view& getConstRef() // funkce je constexpr, vrací const std::string_view&\n{\n    vrať se ahoj;\n}\n\nint main()\n{\n    auto ref1{ getConstRef() };                  // std::string_view (odkaz vynechán a konst nejvyšší úrovně zrušen)\n    constexpr auto ref2{ getConstRef() };        // constexpr const std::string_view (odkaz zrušen a nejvyšší úroveň const zrušena, constexpr použito, implicitně const)\n\n    auto& ref3{ getConstRef() };                 // const std::string_view& (reference byla znovu použita, nízkoúrovňová const nebyla odstraněna)\n    constexpr const auto& ref4{ getConstRef() }; // constexpr const std::string_view& (reference znovu použita, nízkoúrovňová const nebyla odstraněna, constexpr použit)\n    \n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b35",
       "type": "section",
       "title": "Type deduction and pointers",
       "html": "<h3 class=\"cpp-section-heading\">Type deduction and pointers</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Typová dedukce a ukazatele</h3>",
+      "title_cs": "Zadejte odpočet a ukazatele"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b36",
       "type": "paragraph",
       "html": "<p>Unlike references, type deduction does not drop pointers:</p>",
       "preview": "Unlike references, type deduction does not drop pointers:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Na rozdíl od referencí typová dedukce nezahazuje ukazatele:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b37",
@@ -288,14 +330,16 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr1{ getPtr() }; // std::string*\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr1{ getPtr() }; // std::string*\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string* getPtr(); // nějaká funkce, která vrací ukazatel\n\nint main()\n{\n    auto ptr1{ getPtr() }; // std::string*\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b38",
       "type": "paragraph",
       "html": "<p>We can also use an asterisk in conjunction with pointer type deduction (<code>auto*</code>) to make it clearer that the deduced type is a pointer:</p>",
       "preview": "We can also use an asterisk in conjunction with pointer type deduction (auto*) t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Můžeme také použít hvězdičku ve spojení s dedukcí typu ukazatele (<code>auto*</code>), aby bylo jasnější, že odvozený typ je ukazatel:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b39",
@@ -303,7 +347,8 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr1{ getPtr() };  // std::string*\n    auto* ptr2{ getPtr() }; // std::string*\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr1{ getPtr() };  // std::string*\n    auto* ptr2{ getPtr() }; // std::string*\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string* getPtr(); // nějaká funkce, která vrací ukazatel\n\nint main()\n{\n    auto ptr1{ getPtr() };  // std::string*\n    auto* ptr2{ getPtr() }; // std::string*\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b40",
@@ -311,42 +356,49 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Key insight</p><p>The reason that references are dropped during type deduction but pointers are not dropped is because references and pointers have different semantics.</p><p>When we evaluate a reference, we’re really evaluating the object being referenced. Therefore, when deducing a type, it makes sense that we should deduce the type of the thing being referenced, not the reference itself. Also, since we deduce a non-reference, it’s really easy to make it a reference by using <code>auto&amp;</code>. If type deduction were to deduce a reference instead, the syntax for removing a reference if we didn’t want it is much more complicated.</p><p>On the other hand, pointers hold the address of an object. When we evaluate a pointer, we are evaluating the pointer, not the object being pointed to (if we want that, we can dereference the pointer). Therefore, it makes sense that we should deduce the type of the pointer, not the thing being pointed to.</p></div>",
       "preview": "Key insightThe reason that references are dropped during type deduction but pointers are not dropped",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Klíčový poznatek</p><p>Důvodem, proč jsou reference při dedukci typu zahazovány, ale ukazatele nikoli, je to, že reference a ukazatele mají odlišnou sémantiku.</p><p>Když vyhodnocujeme referenci, ve skutečnosti vyhodnocujeme odkazovaný objekt. Proto při dedukci typu dává smysl, abychom odvodili typ odkazované věci, nikoli referenci samotnou. Navíc, jelikož odvodíme nereferenční typ, je velmi snadné z něj udělat referenci pomocí <code>auto&amp;</code>. Pokud by typová dedukce místo toho odvodila referenci, syntaxe pro odstranění reference (pokud bychom ji nechtěli) by byla mnohem komplikovanější.</p><p>Na druhou stranu ukazatele uchovávají adresu objektu. Když vyhodnocujeme ukazatel, vyhodnocujeme samotný ukazatel, nikoli objekt, na který ukazuje (pokud to chceme, můžeme ukazatel dereferencovat). Dává tedy smysl, že bychom měli odvodit typ ukazatele, nikoli věci, na kterou ukazuje.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b41",
       "type": "section",
       "title": "The difference between auto and auto* Optional",
       "html": "<h3 class=\"cpp-section-heading\">The difference between auto and auto* <span class=\"cpp-section-pill cpp-section-optional\">Optional</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Rozdíl mezi auto a auto* <span class=\"cpp-section-pill cpp-section-optional\">Nepovinné</span></h3>",
+      "title_cs": "Rozdíl mezi automatickým a automatickým režimem* Volitelné"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b42",
       "type": "paragraph",
       "html": "<p>When we use <code>auto</code> with a pointer type initializer, the type deduced for <code>auto</code> includes the pointer. So for <code>ptr1</code> above, the type substituted for <code>auto</code> is <code>std::string*</code>.</p>",
       "preview": "When we use auto with a pointer type initializer, the type deduced for auto incl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když použijeme <code>auto</code> s inicializátorem typu ukazatel, typ odvozený pro <code>auto</code> zahrnuje i ukazatel. Takže pro <code>ptr1</code> výše je typ dosazený za <code>auto</code> <code>std::string*</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b43",
       "type": "paragraph",
       "html": "<p>When we use <code>auto*</code> with a pointer type initializer, the type deduced for auto does <em>not</em> include the pointer -- the pointer is reapplied afterward after the type is deduced. So for <code>ptr2</code> above, the type substituted for <code>auto</code> is <code>std::string</code>, and then the pointer is reapplied.</p>",
       "preview": "When we use auto* with a pointer type initializer, the type deduced for auto doe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když použijeme <code>auto*</code> s inicializátorem typu ukazatel, typ odvozený pro auto ukazatel <em>nezahrnuje</em> – ukazatel je znovu aplikován až poté, co je typ odvozen. Takže pro <code>ptr2</code> výše je typ dosazený za <code>auto</code> <code>std::string</code> a ukazatel je poté znovu aplikován.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b44",
       "type": "paragraph",
       "html": "<p>In most cases, the practical effect is the same (<code>ptr1</code> and <code>ptr2</code> both deduce to <code>std::string*</code> in the above example).</p>",
       "preview": "In most cases, the practical effect is the same (ptr1 and ptr2 both deduce to st",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Ve většině případů je praktický výsledek stejný (ve výše uvedeném příkladu se <code>ptr1</code> i <code>ptr2</code> odvodí jako <code>std::string*</code>).</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b45",
       "type": "paragraph",
       "html": "<p>However, there are a couple of difference between <code>auto</code> and <code>auto*</code> in practice. First, <code>auto*</code> must resolve to a pointer initializer, otherwise a compile error will result:</p>",
       "preview": "However, there are a couple of difference between auto and auto* in practice. Fi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V praxi však mezi <code>auto</code> a <code>auto*</code> existuje několik rozdílů. Za prvé, <code>auto*</code> se musí vyhodnotit na inicializátor typu ukazatel, jinak dojde k chybě při překladu:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b46",
@@ -354,42 +406,49 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr3{ *getPtr() };      // std::string (because we dereferenced getPtr())\n    auto* ptr4{ *getPtr() };     // does not compile (initializer not a pointer)\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    auto ptr3{ *getPtr() };      // std::string (because we dereferenced getPtr())\n    auto* ptr4{ *getPtr() };     // does not compile (initializer not a pointer)\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string* getPtr(); // nějaká funkce, která vrací ukazatel\n\nint main()\n{\n    auto ptr3{ *getPtr() };      // std::string (protože jsme dereferencovali getPtr())\n    auto* ptr4{ *getPtr() };     // se nezkompiluje (inicializátor není ukazatel)\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b47",
       "type": "paragraph",
       "html": "<p>This makes sense: in the <code>ptr4</code> case, <code>auto</code> deduces to <code>std::string</code>, then the pointer is reapplied. Thus <code>ptr4</code> has type <code>std::string*</code>, and we can’t initialize a <code>std::string*</code> with an initializer that is not a pointer.</p>",
       "preview": "This makes sense: in the ptr4 case, auto deduces to std::string, then the pointe",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>To dává smysl: v případě <code>ptr4</code> se <code>auto</code> odvodí jako <code>std::string</code> a následně se znovu aplikuje ukazatel. Tím pádem má <code>ptr4</code> typ <code>std::string*</code> a my nemůžeme inicializovat <code>std::string*</code> inicializátorem, který není ukazatelem.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b48",
       "type": "paragraph",
       "html": "<p>Second, there are differences in how <code>auto</code> and <code>auto*</code> behave when we introduce <code>const</code> into the equation. We’ll cover this below.</p>",
       "preview": "Second, there are differences in how auto and auto* behave when we introduce con",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Za druhé, existují rozdíly v tom, jak se <code>auto</code> a <code>auto*</code> chovají, když do hry zapojíme <code>const</code>. Tomu se budeme věnovat níže.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b49",
       "type": "section",
       "title": "Type deduction and const pointers Optional",
       "html": "<h3 class=\"cpp-section-heading\">Type deduction and const pointers <span class=\"cpp-section-pill cpp-section-optional\">Optional</span></h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Odvozování typů a konstantní ukazatele <span class=\"cpp-section-pill cpp-section-optional\">Nepovinné</span></h3>",
+      "title_cs": "Typ srážky a ukazatele konst Nepovinné"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b50",
       "type": "paragraph",
       "html": "<p>Since pointers aren’t dropped, we don’t have to worry about that. But with pointers, we have both the const pointer and the pointer to const cases to think about, and we also have <code>auto</code> vs <code>auto*</code>. Just like with references, only top-level const is dropped during pointer type deduction.</p>",
       "preview": "Since pointers aren’t dropped, we don’t have to worry about that. But with point",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Jelikož ukazatele nejsou zahazovány, nemusíme si s tím dělat starosti. U ukazatelů však musíme brát v úvahu jak konstantní ukazatele (const pointer), tak ukazatele na konstantní hodnotu (pointer to const), a také máme volbu mezi <code>auto</code> a <code>auto*</code>. Stejně jako u referencí se i při odvozování typů ukazatelů zahazuje pouze vrcholový (top-level) const.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b51",
       "type": "paragraph",
       "html": "<p>Let’s start with a simple case:</p>",
       "preview": "Let’s start with a simple case:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Začněme jednoduchým případem:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b52",
@@ -397,28 +456,32 @@
       "language": "cpp",
       "code": "#include <string>\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    const auto ptr1{ getPtr() };  // std::string* const\n    auto const ptr2 { getPtr() }; // std::string* const\n\n    const auto* ptr3{ getPtr() }; // const std::string*\n    auto* const ptr4{ getPtr() }; // std::string* const\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nstd::string* getPtr(); // some function that returns a pointer\n\nint main()\n{\n    const auto ptr1{ getPtr() };  // std::string* const\n    auto const ptr2 { getPtr() }; // std::string* const\n\n    const auto* ptr3{ getPtr() }; // const std::string*\n    auto* const ptr4{ getPtr() }; // std::string* const\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nstd::string* getPtr(); // nějaká funkce, která vrací ukazatel\n\nint main()\n{\n    const auto ptr1{ getPtr() };  // std::string* konst\n    auto const ptr2 { getPtr() }; // std::string* konst\n\n    const auto* ptr3{ getPtr() }; // const std::string*\n    auto* const ptr4{ getPtr() }; // std::string* konst\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b53",
       "type": "paragraph",
       "html": "<p>When we use either <code>auto const</code> or <code>const auto</code>, we’re saying, “make the deduced pointer a const pointer”. So in the case of <code>ptr1</code> and <code>ptr2</code>, the deduced type is <code>std::string*</code>, and then const is applied, making the final type <code>std::string* const</code>. This is similar to how <code>const int</code> and <code>int const</code> mean the same thing.</p>",
       "preview": "When we use either auto const or const auto, we’re saying, “make the deduced poi",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když použijeme buď <code>auto const</code>, nebo <code>const auto</code>, říkáme tím: „udělej z odvozeného ukazatele konstantní ukazatel“. V případě <code>ptr1</code> a <code>ptr2</code> je tedy odvozený typ <code>std::string*</code> a následně se aplikuje const, takže výsledný typ je <code>std::string* const</code>. To je podobné tomu, jako když <code>const int</code> a <code>int const</code> znamenají totéž.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b54",
       "type": "paragraph",
       "html": "<p>However, when we use <code>auto*</code>, the order of the const qualifier matters. A <code>const</code> on the left means “make the deduced pointer a pointer to const”, whereas a <code>const</code> on the right means “make the deduced pointer type a const pointer”. Thus <code>ptr3</code> ends up as a pointer to const, and <code>ptr4</code> ends up as a const pointer.</p>",
       "preview": "However, when we use auto*, the order of the const qualifier matters. A const on",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Když však použijeme <code>auto*</code>, na pořadí kvalifikátoru const záleží. <code>const</code> vlevo znamená „udělej z odvozeného ukazatele ukazatel na konstantu“, zatímco <code>const</code> vpravo znamená „udělej z odvozeného typu ukazatele konstantní ukazatel“. <code>ptr3</code> tedy skončí jako ukazatel na konstantu a <code>ptr4</code> jako konstantní ukazatel.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b55",
       "type": "paragraph",
       "html": "<p>Now let’s look at an example where the initializer is a const pointer to const.</p>",
       "preview": "Now let’s look at an example where the initializer is a const pointer to const.",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Nyní se podívejme na příklad, kde inicializátorem je konstantní ukazatel na konstantní hodnotu (const pointer to const).</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b56",
@@ -426,42 +489,48 @@
       "language": "cpp",
       "code": "#include <string>\n\nint main()\n{\n    std::string s{};\n    const std::string* const ptr { &s };\n\n    auto ptr1{ ptr };  // const std::string*\n    auto* ptr2{ ptr }; // const std::string*\n\n    auto const ptr3{ ptr };  // const std::string* const\n    const auto ptr4{ ptr };  // const std::string* const\n\n    auto* const ptr5{ ptr }; // const std::string* const\n    const auto* ptr6{ ptr }; // const std::string*\n\n    const auto const ptr7{ ptr };  // error: const qualifer can not be applied twice\n    const auto* const ptr8{ ptr }; // const std::string* const\n\n    return 0;\n}",
       "html": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include &lt;string&gt;\n\nint main()\n{\n    std::string s{};\n    const std::string* const ptr { &amp;s };\n\n    auto ptr1{ ptr };  // const std::string*\n    auto* ptr2{ ptr }; // const std::string*\n\n    auto const ptr3{ ptr };  // const std::string* const\n    const auto ptr4{ ptr };  // const std::string* const\n\n    auto* const ptr5{ ptr }; // const std::string* const\n    const auto* ptr6{ ptr }; // const std::string*\n\n    const auto const ptr7{ ptr };  // error: const qualifer can not be applied twice\n    const auto* const ptr8{ ptr }; // const std::string* const\n\n    return 0;\n}</code></pre>",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<pre class=\"language-cpp line-numbers\"><code class=\"language-cpp match-braces\">#include <string>\n\nint main()\n{\n    std::string s{};\n    const std::string* const ptr { &s };\n\n    auto ptr1{ ptr };  // const std::string*\n    auto* ptr2{ ptr }; // const std::string*\n\n    auto const ptr3{ ptr };  // const std::string* const\n    const auto ptr4{ ptr };  // const std::string* const\n\n    auto* const ptr5{ ptr }; // const std::string* const\n    const auto* ptr6{ ptr }; // const std::string*\n\n    const auto const ptr7{ ptr };  // chyba: const qualifer nelze použít dvakrát\n    const auto* const ptr8{ ptr }; // const std::string* const\n\n    návrat 0;\n}</code></pre>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b57",
       "type": "paragraph",
       "html": "<p>The <code>ptr1</code> and <code>ptr2</code> cases are straightforward. The top-level const (the const on the pointer itself) is dropped. The low-level const on the object being pointed to is not dropped. So in both cases, the final type is <code>const std::string*</code>.</p>",
       "preview": "The ptr1 and ptr2 cases are straightforward. The top-level const (the const on t",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případy <code>ptr1</code> a <code>ptr2</code> jsou přímočaré. Nejvyšší úroveň const (top-level const na samotném ukazateli) je zahozena. Nízká úroveň const (low-level const na odkazovaném objektu) zahozena není. V obou případech je tedy výsledný typ <code>const std::string*</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b58",
       "type": "paragraph",
       "html": "<p>The <code>ptr3</code> and <code>ptr4</code> cases are also straightforward. The top-level const is dropped, but we’re reapplying it. The low-level const on the object being pointed to is not dropped. So in both cases, the final type is <code>const std::string* const</code>.</p>",
       "preview": "The ptr3 and ptr4 cases are also straightforward. The top-level const is dropped",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případy <code>ptr3</code> a <code>ptr4</code> jsou také přímočaré. Nejvyšší úroveň const je zahozena, ale my ji znovu aplikujeme. Nízká úroveň const na odkazovaném objektu zahozena není. V obou případech je tedy výsledný typ <code>const std::string* const</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b59",
       "type": "paragraph",
       "html": "<p>The <code>ptr5</code> and <code>ptr6</code> cases are analogous to the cases we showed in the prior example. In both cases, the top-level const is dropped. For <code>ptr5</code>, the <code>auto* const</code> reapplies the top-level const, so the final type is <code>const std::string* const</code>. For <code>ptr6</code>, the <code>const auto*</code> applies const to the type being pointed to (which in this case was already const), so the final type is <code>const std::string*</code>.</p>",
       "preview": "The ptr5 and ptr6 cases are analogous to the cases we showed in the prior exampl",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Případy <code>ptr5</code> a <code>ptr6</code> jsou analogické k případům, které jsme si ukázali v předchozím příkladu. V obou případech je top-level const zahozen. U <code>ptr5</code> zápis <code>auto* const</code> znovu aplikuje top-level const, takže výsledný typ je <code>const std::string* const</code>. U <code>ptr6</code> zápis <code>const auto*</code> aplikuje const na odkazovaný typ (který v tomto případě již const byl), takže výsledný typ je <code>const std::string*</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b60",
       "type": "paragraph",
       "html": "<p>In the <code>ptr7</code> case, we’re applying the const qualifier twice, which is disallowed, and will cause a compile error.</p>",
       "preview": "In the ptr7 case, we’re applying the const qualifier twice, which is disallowed,",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>V případě <code>ptr7</code> aplikujeme kvalifikátor const dvakrát, což není povoleno a způsobí chybu při překladu.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b61",
       "type": "paragraph",
       "html": "<p>And finally, in the <code>ptr8</code> case, we’re applying const on both sides of the pointer (which is allowed since <code>auto*</code> must be a pointer type), so the resulting types is <code>const std::string* const</code>.</p>",
       "preview": "And finally, in the ptr8 case, we’re applying const on both sides of the pointer",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>A nakonec v případě <code>ptr8</code> aplikujeme const na obou stranách ukazatele (což je povoleno, protože <code>auto*</code> musí být ukazatelový typ), takže výsledný typ je <code>const std::string* const</code>.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b62",
@@ -469,7 +538,8 @@
       "calloutType": "best-practice",
       "html": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Best practice</p><p>If you want a const pointer, pointer to const, or const pointer to const, reapply the <code>const</code> qualifier(s) even when it’s not strictly necessary, as it makes your intent clear and helps prevent mistakes.</p></div>",
       "preview": "Best practiceIf you want a const pointer, pointer to const, or const pointer to const, reapply the c",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightgreenbackground\"><p class=\"cpp-note-title cpp-bottomline\">Doporučený postup</p><p>Pokud chcete konstantní ukazatel, ukazatel na konstantu nebo konstantní ukazatel na konstantu, uveďte kvalifikátor(y) <code>const</code> explicitně znovu, i když to není striktně nutné. Zpřehledníte tím svůj záměr a předejdete chybám.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b63",
@@ -477,63 +547,74 @@
       "calloutType": "insight",
       "html": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Consider using <code>auto*</code> when deducing a pointer type. Using <code>auto*</code> in this case makes it clearer that we are deducing a pointer type, enlists the compiler’s help to ensure we don’t deduce a non-pointer type, and gives you more control over const.</p></div>",
       "preview": "TipConsider using auto* when deducing a pointer type. Using auto* in this case makes it clearer that",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<div class=\"cpp-note cpp-lightbluebackground\"><p class=\"cpp-note-title cpp-bottomline\">Tip</p><p>Při dedukci ukazatelového typu zvažte použití <code>auto*</code>. Použití <code>auto*</code> v tomto případě jasněji vyjadřuje, že odvozujeme typ ukazatele, zapojuje kompilátor do kontroly, abychom neodvodili neukazatelový typ, a dává vám větší kontrolu nad const.</p></div>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b64",
       "type": "section",
       "title": "Summary",
       "html": "<h3 class=\"cpp-section-heading\">Summary</h3>",
-      "canCheck": false
+      "canCheck": false,
+      "html_cs": "<h3 class=\"cpp-section-heading\">Shrnutí</h3>",
+      "title_cs": "Shrnutí"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b65",
       "type": "paragraph",
       "html": "<p>Sorry to hear about your headache. Let’s recap the most important points quickly.</p>",
       "preview": "Sorry to hear about your headache. Let’s recap the most important points quickly",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Mrzí nás vaše bolest hlavy. Pojďme si ty nejdůležitější body rychle zopakovat.</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b66",
       "type": "paragraph",
       "html": "<p>Top-level vs low-level const:</p>",
       "preview": "Top-level vs low-level const:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Top-level const vs. low-level const:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b67",
       "type": "list",
       "html": "<ul><li>A top-level const applies to the object itself (e.g. <code>const int x</code> or <code>int* const ptr</code>).</li><li>A low-level const applies to the object accessed through a reference or pointer (e.g. <code>const int&amp; ref</code>, <code>const int* ptr</code>).</li></ul>",
       "preview": "A top-level const applies to the object itself (e.g. const int x or int* const p",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Top-level const se vztahuje na samotný objekt (např. <code>const int x</code> nebo <code>int* const ptr</code>).</li><li>Low-level const se vztahuje na objekt přistupovaný přes referenci nebo ukazatel (např. <code>const int&amp; ref</code>, <code>const int* ptr</code>).</li></ul>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b68",
       "type": "paragraph",
       "html": "<p>What type deduction deduces:</p>",
       "preview": "What type deduction deduces:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Co odvozování typů odvodí:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b69",
       "type": "list",
       "html": "<ul><li>Type deduction first drops any references (unless the deduced type is defined as a reference). For a const reference, dropping the reference will cause the (low-level) const to become a top-level const.</li><li>Type deduction then drops any top-level const (unless the deduced type is defined as <code>const</code> or <code>constexpr</code>).</li><li>Constexpr is not part of the type system, so is never deduced. It must always be explicitly applied to the deduced type.</li><li>Type deduction does not drop pointers.</li><li>Always explicitly define the deduced type as a reference, <code>const</code>, or <code>constexpr</code> (as applicable), and even if these qualifiers are redundant because they would be deduced. This helps prevent errors and makes it clear what your intent is.</li></ul>",
       "preview": "Type deduction first drops any references (unless the deduced type is defined as",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Odvozování typů nejprve zahodí veškeré reference (pokud odvozovaný typ není sám definován jako reference). U const reference způsobí zahození reference to, že se (low-level) const stane top-level constem.</li><li>Odvozování typů poté zahodí jakýkoli top-level const (pokud odvozovaný typ není definován jako <code>const</code> nebo <code>constexpr</code>).</li><li>Constexpr není součástí typového systému, takže se nikdy neodvozuje. Musí být vždy explicitně aplikován na odvozovaný typ.</li><li>Odvozování typů nezahazuje ukazatele.</li><li>Vždy explicitně definujte odvozovaný typ jako referenci, <code>const</code> nebo <code>constexpr</code> (podle potřeby), a to i v případě, že jsou tyto kvalifikátory redundantní, protože by byly odvozeny. Pomáhá to předcházet chybám a jasně vyjadřuje váš záměr.</li></ul>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b70",
       "type": "paragraph",
       "html": "<p>Type deduction and pointers:</p>",
       "preview": "Type deduction and pointers:",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<p>Odvozování typů a ukazatele:</p>"
     },
     {
       "id": "type-deduction-with-pointers-references-and-const_b71",
       "type": "list",
       "html": "<ul><li>When using <code>auto</code>, the deduced type will be a pointer only if the initializer is a pointer. When using <code>auto*</code>, the deduced type is always a pointer, even if the initializer is not a pointer.</li><li><code>auto const</code> and <code>const auto</code> both make the deduced pointer a const pointer. There is no way to explicitly specify a low-level const (pointer-to-const) using <code>auto</code>.</li><li><code>auto* const</code> also makes the deduced pointer a const pointer. <code>const auto*</code> makes the deduced pointer a pointer-to-const. If these are hard to remember, <code>int* const</code> is a const pointer (to int), so <code>auto* const</code> must be a const pointer. <code>const int*</code> is a pointer-to-const (int), so <code>const auto*</code> must be a pointer-to-const)</li><li>Consider using <code>auto*</code> over <code>auto</code> when deducing a pointer type, as it allows you to explicitly reapply both the top-level and low-level const, and will error if a pointer type is not deduced.</li></ul>",
       "preview": "When using auto, the deduced type will be a pointer only if the initializer is a",
-      "canCheck": true
+      "canCheck": true,
+      "html_cs": "<ul><li>Při použití <code>auto</code> bude odvozený typ ukazatelem pouze tehdy, pokud je inicializátor ukazatel. Při použití <code>auto*</code> je odvozený typ vždy ukazatelem, i když inicializátor ukazatelem není.</li><li><code>auto const</code> i <code>const auto</code> udělají z odvozeného ukazatele konstantní ukazatel (const pointer). Pomocí samotného <code>auto</code> nelze explicitně specifikovat low-level const (ukazatel na const).</li><li><code>auto* const</code> také udělá z odvozeného ukazatele konstantní ukazatel. <code>const auto*</code> udělá z odvozeného ukazatele ukazatel na const. Pokud se vám to špatně pamatuje: <code>int* const</code> je konstantní ukazatel (na int), takže <code>auto* const</code> musí být konstantní ukazatel. <code>const int*</code> je ukazatel na const (int), takže <code>const auto*</code> musí být ukazatel na const.</li><li>Zvažte upřednostnění <code>auto*</code> před <code>auto</code> při odvozování typu ukazatele, protože vám umožňuje explicitně znovu aplikovat jak top-level, tak low-level const, a navíc skončí chybou, pokud není odvozen typ ukazatele.</li></ul>"
     }
-  ]
+  ],
+  "title_cs": "12.14 — Odvozování typů s ukazateli, referencemi a const"
 }
