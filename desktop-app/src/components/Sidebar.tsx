@@ -247,9 +247,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                 className="text-blue-400 flex items-center gap-0.5"
                                 title={uiLanguage === 'en' ? 'Reading time' : 'Čas čtení'}
                               >
-                                {lessonReadCS > 0 && lessonReadEN === 0 && <span className="text-[8px] font-bold opacity-60">CS</span>}
-                                {lessonReadEN > 0 && lessonReadCS === 0 && <span className="text-[8px] font-bold opacity-60">EN</span>}
-                                {lessonReadCS > 0 && lessonReadEN > 0 && <span className="text-[8px] font-bold opacity-60">+</span>}
                                 {formatDuration(lessonRead)}
                               </span>
                             )}
