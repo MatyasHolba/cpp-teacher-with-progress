@@ -5,7 +5,7 @@ import { LessonView } from './components/LessonView';
 import { SettingsModal } from './components/SettingsModal';
 import { loadProgress, saveProgress, loadSettings, saveSettings } from './services/storage';
 import { useTimeTracker } from './hooks/useTimeTracker';
-import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages } from 'lucide-react';
+import { Sparkles, Loader2, PanelLeft, PanelLeftClose, Languages, Settings } from 'lucide-react';
 import { GithubIcon } from './components/GithubIcon';
 import { HighlightTranslator } from './components/HighlightTranslator';
 import { FirstBootModal } from './components/FirstBootModal';
@@ -247,8 +247,8 @@ export function App() {
                 onClick={() => setIsSettingsOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-800 hover:bg-[var(--bg-hover)] text-gray-200 border border-gray-700 text-xs font-medium transition-colors"
               >
-                <GithubIcon className="w-3.5 h-3.5 text-blue-400" />
-                <span>{t('githubSync')}</span>
+                <Settings className="w-3.5 h-3.5 text-blue-400" />
+                <span>{t('navSettings')}</span>
                 {settings.lastSyncAt && (
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 ml-0.5" title={settings.uiLanguage === 'en' ? 'Synchronized' : 'Synchronizováno'} />
                 )}
