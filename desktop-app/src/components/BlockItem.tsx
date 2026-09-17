@@ -83,30 +83,30 @@ export const BlockItem: React.FC<BlockItemProps> = ({
           <button
             onClick={(e) => { e.stopPropagation(); setForceTranslation(!forceTranslation); }}
             className={`lc-action-btn ${forceTranslation ? 'lc-checked' : ''}`}
-            title="Translate toggle"
+            title={currentLang === 'cs' ? 'Show English original' : 'Zobrazit český překlad'}
           >
-            <Globe className="w-3 h-3 flex-shrink-0 text-blue-500" />
-            <span className="text-blue-500">{currentLang === 'cs' ? 'EN' : 'CS'}</span>
+            <Globe className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="font-bold">{currentLang === 'cs' ? 'EN' : 'CS'}</span>
           </button>
         )}
         {block.canCheck && (
           <button
             onClick={() => onToggleCheck(block.id)}
             className={`lc-action-btn ${isChecked ? 'lc-checked' : ''}`}
+            title={labelText}
           >
-            <Check className="w-3 h-3 flex-shrink-0" />
-            <span>{labelText}</span>
+            <Check className="w-4 h-4 flex-shrink-0" />
           </button>
         )}
         <button
           onClick={() => setIsAddingNote(!isAddingNote)}
           className={`lc-action-btn ${notes.length > 0 ? 'lc-note-active' : ''}`}
-          title={t('addNoteHint')}
+          title={notes.length > 0 ? `${notes.length} ${t('notes')}` : t('addNoteHint')}
         >
           {notes.length > 0 ? (
-            <><MessageSquare className="w-3 h-3 flex-shrink-0" /><span>({notes.length})</span></>
+            <div className="flex items-center gap-1"><MessageSquare className="w-3.5 h-3.5 flex-shrink-0" /><span className="font-bold">{notes.length}</span></div>
           ) : (
-            <><MessageSquarePlus className="w-3 h-3 flex-shrink-0" /><span>{t('addNote')}</span></>
+            <MessageSquarePlus className="w-4 h-4 flex-shrink-0" />
           )}
         </button>
       </div>

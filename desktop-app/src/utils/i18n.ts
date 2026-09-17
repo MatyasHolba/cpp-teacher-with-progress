@@ -6,7 +6,8 @@ export const cs = {
   codingTime: "💻 Psaní kódu (praxe):",
   completedTasks: "Počet úkolů splněných:",
   notesCount: "Vlastních poznámek:",
-  showDetailsHint: "Klikněte pro zobrazení detailních statistik",
+  notes: "poznámek",
+  showDetailsHint: "Zobrazit/Skrýt detailní statistiky",
   tasksSuffix: "úkolů",
   
   // App/Nav
@@ -110,10 +111,11 @@ export const en = {
   readingTime: "Reading theory:",
   codingTime: "Coding & practice:",
   completedTasks: "Total tasks completed:",
-  showDetailsHint: "Click to show detailed statistics",
+  notesCount: "Personal notes:",
+  notes: "notes",
+  showDetailsHint: "Toggle detailed statistics",
   tasksSuffix: "tasks",
   tasks: "tasks",
-  notesCount: "Personal notes:",
   
   // App/Nav
   toggleSidebar: "Show Sidebar",
