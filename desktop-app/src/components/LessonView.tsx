@@ -186,7 +186,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
       {/* Reading area: card centered with right margin for floating action buttons */}
       <main
-        className="flex-1 overflow-y-auto light-scrollbar py-6 pr-36 relative"
+        className="flex-1 overflow-y-auto light-scrollbar py-6 px-4 relative"
         style={{ background: getOuterBackground() }}
       >
         {/* Sleek Minimalist Pause & Coding Overlay */}
